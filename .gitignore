@@ -1,0 +1,5 @@
+libs/
+vendor/
+!packages/web/vendor/
+.Rhistory
+.DS_Store
