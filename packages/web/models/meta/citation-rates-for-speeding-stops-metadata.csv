@@ -1,0 +1,2 @@
+"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
+"7-charts-1-correlation-8-scatter-jitter-citation-rates-for-speeding-stops","7-charts","1-correlation","8-scatter-jitter","","citation rates for speeding stops","7-charts/1-correlation/8-scatter-jitter/citation-rates-for-speeding-stops.html","police citation rates speeding stops race","geom_point scale_shape_manual facet_grid","Stanford Open Policing Project TidyTuesday","citation-rates-for-speeding-stops-icon.svg",2021-10-20

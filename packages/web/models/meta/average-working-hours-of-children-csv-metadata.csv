@@ -1,0 +1,2 @@
+"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
+"3-ingest-1-tabular-1-delimited-data-file-average-working-hours-of-children-csv","3-ingest","1-tabular","1-delimited-data-file","CSV","average working hours of children csv","3-ingest/1-tabular/1-delimited-data-file/average-working-hours-of-children-csv.html","comma separated delimited","read.csv","Our World in Data","average-working-hours-of-children-csv-icon.svg",2021-10-26

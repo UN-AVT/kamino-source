@@ -1,0 +1,220 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(readr)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+INGEST  
+</div>
+
+# Country names
+## Ingest a csv file with language character encoding
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Marjan Blan on Unsplash"}
+
+masthead <- "assets/marjan-blan-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> If you talk to a man in a language he understands, that goes to his head. If you talk to him in his own language, that goes to his heart...\
+--- Nelson Mandela\
+
+***
+
+A character set is a collection of characters that represent the letters and symbols used for languages. Most of the world's languages use non-Latin alphabets or diacritics added to the standard Latin script. Consider the differences you would find with typewriters and keyboards used for Arabic, Chinese, English, French, Russian, or Spanish for example. The same is true for digital representation where the letters and symbols are encoding for the unique qualities of the language.  The proper reading and rendering of the encoding may require using specific parameters during the ingest process.
+
+The example we'll use to demonstrate the treatment needed for different languages comes from Natural Earth as the data attributes associated with the world map geometry.  The country names are stored for several languages, in their native form:
+
+* AR: __Arabic__
+* BN: Bengali
+* DE: German
+* ES: __Spanish__
+* FR: __French__
+* EL: Greek
+* HI: Hindi
+* HU: Hungarian
+* ID: Indonesian
+* IT: Italian
+* JA: Japanese
+* KO: Korean
+* NL: Dutch
+* PL: Polish
+* PT: Portuguese 
+* RU: __Russian__
+* SV: Swedish
+* TR: Turkish
+* VI: Vietnamese
+* ZH: __Chinese__
+
+Let's take a closer look at a few to understand the specific parameters needed to work with the data.
+
+### Ingest
+#### without encoding
+
+This is the full dataset without attention to encoding.  Take notice of how the characters are represented for the various languages.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source = 'fold-show'}
+
+# Load csv data file
+df_no_encoding <- read.csv("archetypes/ne-countries/ne-countries.csv", header = TRUE, stringsAsFactors = FALSE)
+df_no_encoding
+
+```
+
+
+### Detect encoding
+#### UTF-8, Big5, GB18030, windows-1252
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# your current session encoding
+getOption("encoding")
+
+# encoding detected in data file
+guess_encoding("archetypes/ne-countries/ne-countries.csv", n_max = 1000)
+
+```
+
+
+### Set Locale
+#### with UTF-8 encoding
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+Sys.setlocale(category="LC_ALL", locale = "UTF-8")
+Sys.getlocale(category="LC_ALL")
+
+df_utf8_encoding <- read.csv("archetypes/ne-countries/ne-countries.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df_utf8_encoding <- df_utf8_encoding%>% select(FORMAL_EN, NAME_ES, NAME_FR, NAME_AR, NAME_ZH, NAME_RU)
+df_utf8_encoding
+
+```
+
+
+### Encoding by column
+#### for UTF-8 languages
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+data.frame(FRENCH = df_no_encoding$NAME_FR)
+Encoding(df_no_encoding$NAME_FR) <- "UTF-8"
+data.frame(FRENCH_ENC = df_no_encoding$NAME_FR)
+
+```
+
+### Non-Latin Scripts
+#### Arabic
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# en_US.UTF-8
+Sys.setlocale("LC_CTYPE", "arabic")
+Sys.getlocale(category="LC_ALL")
+
+df_utf8_ar <- read.csv("archetypes/ne-countries/ne-countries.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df_utf8_ar <- df_utf8_ar %>% select(FORMAL_EN, NAME_AR)
+df_utf8_ar
+
+```
+
+### Non-Latin Scripts
+#### Chinese
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+Sys.setlocale("LC_CTYPE", "chinese")
+Sys.getlocale(category="LC_ALL")
+
+df_utf8_zh <- read.csv("archetypes/ne-countries/ne-countries.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df_utf8_zh <- df_utf8_zh %>% select(FORMAL_EN, NAME_ZH)
+df_utf8_zh
+
+```
+
+### Non-Latin Scripts
+#### Russian
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+Sys.setlocale("LC_CTYPE", "russian")
+Sys.getlocale(category="LC_ALL")
+
+df_utf8_encoding_ru <- read_csv("archetypes/ne-countries/ne-countries-ru.csv")
+df_utf8_encoding_ru <- df_utf8_encoding_ru %>% select(FORMAL_EN, NAME_RU)
+df_utf8_encoding_ru
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Data Source: Natural Earth, https://www.naturalearthdata.com/downloads/110m-cultural-vectors/
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "CSV" # mostly used in wranglers and analytics
+keywords <- 'character language encoding UTF'
+commands <- 'read.csv Sys.setlocale'
+sources <- 'Natural Earth'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

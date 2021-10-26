@@ -1,0 +1,91 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    #code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+
+```
+
+<div class="activity">
+WRANGLERS 
+</div>
+
+# Format String
+## Normalize, Convert Case, Combine, Split, Truncate, Detect, Remove non-numeric, and Remove non-alpha-numeric
+
+
+```{r, out.width="20%", fig.align="center"}
+
+masthead <- "assets/noun_code formatting_2665697.svg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+Single text characters like the alphabet (__A-Z__), numeral digits (__0-9__), punctuation (__. ! ? ; :__), single/double quote marks (__' "__) form a string-type data. Therefore you will encounter many, if not most, data sources which contain string-type data. The text characters can be combined in ways that are misleading and illegible. In order to make it easier to read, write and maintain a string-type data, formatting it properly is necessary for further analysis.
+
+* Normalize: Some Unicode characters have the same appearance but multiple representations. For example, "â" can be represented as one code point for "â", or two decomposed code points for "a" and "^". Normalize method will convert strings to __NFC, NFKC, NFD, NFKD, or NFKC_Casefold Unicode Normalization Form__ or check whether strings are normalized. Basically, Unicode normalization is the decomposition or composition of characters.
+* Convert Case: convert the string into opposite case.
+* Combine: connect multiple strings with separators.
+* Split: break a string into multiple subsets.
+* Truncate: remove characters based on its position.
+* Detect: detect patterns, similar to wrangler-find methods.
+* Remove non-numeric: remove digits [0-9].
+* Remove non-alpha-numeric: remove alphanumeric characters [A-z0-9].
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "format-string detect-alpha combine detect-special-character lowercase normalize remove-non-alpha-numeric remove-non-numeric split format-title truncate uppercase" # mostly used in wranglers and analytics
+keywords <- ''
+commands <- ''
+sources <- ''
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

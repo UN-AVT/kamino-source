@@ -1,0 +1,166 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+
+library(tidyverse)
+library(reshape2)
+library(purrr)
+library(kableExtra)
+
+library(knitcitations)
+library(bibtex)
+library(tidyr)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Prison Population
+## Transform: Long to Wide
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Emiliano Bar on Unsplash"}
+
+masthead <- "assets/emiliano-bar-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Alcatraz Prison</div>
+
+
+> In my country we go to prison first and then become President...\
+--- Nelson Mandela\
+
+***
+
+
+#### Wide and Long Data are two terms used to represent different presentations of tabular data. In the wide format, each response variable is in a separate column. Data stored in long form has a single column for each variable in the system.
+
+#### Wheter the wide or long format is appropriate is dependent on the model or analytics you're trying to process. The long format seems to be the popular choice in most cases because you want each unit of observation to be its own row. However, in most survey research or social sciences, the wide format seems to be a popular choice. Thus, it is necessary for us to learn how to transform between the two tabular formats.
+
+### Load data
+
+#### Here we have a long data format.
+
+
+```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df<-read.csv('./archetypes/Regional_estimate_Full_Data_data.csv', header = TRUE, stringsAsFactors = FALSE)
+
+df1 <- df[1:120,] %>% 
+  select(Region, Year, Regional.Estimate) 
+
+df1
+
+```
+
+
+
+
+
+#### There are several methods to transform from long to wide. Let's test a few libraries.
+
+### Let's try pivot_wider from library(tidyr). This returns a data frame. 
+
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+
+data_wide <- pivot_wider(data = df1, names_from = Year, values_from = Regional.Estimate)
+data_wide
+```
+#### Next we have the function spread().
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+
+data_wide2 <- spread(data = df1, key = Year, value = Regional.Estimate)
+data_wide2
+```
+
+
+#### Let's try another popular packaage called reshape2. Function acast() will return a matrix while dcast() will return a dataframe. 
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+
+data_wide3 <- dcast(df1, Region ~ Year, value.var="Regional.Estimate")
+data_wide3
+
+```
+
+
+#### There are tons of other functions such as plyr::daply(), base::xtabs(), base::reshape, base::unstack
+
+
+### References
+#### The citations and data sources used for this case can be found on the United Nations Office on Drugs and Crime  <a href="https://dataunodc.un.org/" target="_blank">data repository</a> 
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# options("citation_format" = "pandoc")
+# read.bibtex(file = "./citations/diamonds.bib")
+```
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "long-to-wide" # mostly used in wranglers and analytics
+keywords <- 'prison'
+commands <- 'pivot_wider spread decast'
+sources <- 'UNODC'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

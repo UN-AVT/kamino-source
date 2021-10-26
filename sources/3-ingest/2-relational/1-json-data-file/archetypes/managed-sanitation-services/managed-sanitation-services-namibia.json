@@ -1,0 +1,1164 @@
+{
+  "dimension": [
+                 {
+                   "label": "GHO",
+                   "display": "Indicator"
+                 },
+                 {
+                   "label": "PUBLISHSTATE",
+                   "display": "PUBLISH STATES"
+                 },
+                 {
+                   "label": "YEAR",
+                   "display": "Year"
+                 },
+                 {
+                   "label": "REGION",
+                   "display": "WHO region"
+                 },
+                 {
+                   "label": "COUNTRY",
+                   "display": "Country"
+                 },
+                 {
+                   "label": "RESIDENCEAREATYPE",
+                   "display": "Residence Area Type"
+                 }
+               ],
+    "fact": [
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2020",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "35"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2020",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "50"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2020",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "20"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2020",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2020",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2020",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2019",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "35"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2019",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "50"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2019",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "20"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2019",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2019",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2019",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2018",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "35"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2018",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "50"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2018",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "19"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2018",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2018",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2018",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2017",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "34"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2017",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "51"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2017",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "19"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2017",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2017",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2017",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2016",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "34"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2016",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "51"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2016",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "19"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2016",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2016",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2016",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2015",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "34"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2015",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "52"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2015",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "18"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2015",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2015",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2015",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2014",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "34"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2014",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "52"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2014",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "18"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2014",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2014",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2014",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2013",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "33"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2013",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "53"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2013",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "17"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2013",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2013",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2013",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2012",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "33"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2012",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "53"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2012",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "17"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2012",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2012",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2012",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2011",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "33"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2011",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "54"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2011",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "17"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2011",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2011",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2011",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2010",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "32"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2010",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "54"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2010",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "16"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2010",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2010",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2010",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2009",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "32"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2009",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "55"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2009",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "16"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2009",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2009",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2009",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2008",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "31"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2008",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "55"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2008",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "16"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2008",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2008",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2008",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2007",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "31"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2007",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "56"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2007",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "15"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2007",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2007",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2007",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2006",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "31"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2006",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "56"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2006",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "15"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2006",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2006",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2006",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2005",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "30"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2005",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "57"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2005",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "15"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2005",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2005",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2005",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2004",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "30"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2004",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "57"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2004",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "14"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2004",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2004",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2004",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2003",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "29"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2003",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "58"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2003",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "14"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2003",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2003",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2003",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2002",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "29"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2002",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "58"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2002",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "14"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2002",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2002",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2002",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2001",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "28"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2001",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "59"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2001",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "13"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2001",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2001",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2001",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2000",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": "28"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2000",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": "59"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2000",
+                          "GHO": "Population using at least basic sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": "13"
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2000",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Total"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2000",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Urban"
+                        },
+                "Value": ""
+              },
+              {
+                "dims": {
+                          "COUNTRY": "Namibia",
+                          "YEAR": "2000",
+                          "GHO": "Population using safely managed sanitation services (%)",
+                          "RESIDENCEAREATYPE": "Rural"
+                        },
+                "Value": ""
+              }
+      ]
+}

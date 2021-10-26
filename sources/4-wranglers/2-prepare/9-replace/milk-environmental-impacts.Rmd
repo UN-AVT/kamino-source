@@ -1,0 +1,205 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+# needed to include bib references
+library(knitcitations)
+library(bibtex)
+library(dplyr)
+library(purrr)
+library(knitr)
+library(kableExtra)
+library(stringr)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS 
+</div>
+
+# Which vegan milk is the best for climate change?
+## Replace
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by dhanya purohit on Unsplash"}
+
+masthead <- "assets/dhanya-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Vegan Milk</div>
+
+
+> Environment is no one’s property to destroy; it’s everyone’s responsibility to protect...\
+--- Mohith Agadi\
+
+***
+
+### Load the data
+
+
+```{r Load raw data, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df<-read.csv('archetypes/milk-environmental-impacts.csv', header = TRUE, stringsAsFactors = FALSE)
+
+```
+
+```{r Styling Data Set, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp<-df
+df_tmp <-df_tmp%>%
+mutate(MEASURE = cell_spec(MEASURE, color= if_else(MEASURE == "Water Use (L)", "#0000FF","#000000")))%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")
+
+
+df_tmp 
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+### In MEASURE, let's replace/substitute <span style="color: #0000FF;font-weight:bold">Water User (L)</span> to <span style="color: #fc7f03;font-weight:bold">Water Use in Liter</span>. 
+
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+df_1<-df
+df_1$MEASURE<-gsub("\\(L)", "in Liter", df$MEASURE)
+
+
+```
+
+
+```{r Styling Data Set 1, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+
+df_tmp<-df_1
+df_tmp <-df_tmp%>%
+mutate( MEASURE = cell_spec(MEASURE, color= if_else(MEASURE == "Water Use in Liter", "#fc7f03","#000000")))%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")
+
+df_tmp 
+
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+# Calculate max values for bar background fill
+msr_max <- df %>%
+    group_by(MEASURE) %>%
+    summarize(MAX = max(VALUE), MILK=MILK)
+#msr_max
+# Make the plot
+v1 <- ggplot(df, aes(x=VALUE, y=MILK)) + 
+  geom_col(data = msr_max, aes(x=MAX, y=MILK), stat="identity", fill="#cccccb", alpha=0.3) +
+  geom_col(aes(fill=MEASURE, alpha=MILK)) +
+  geom_text(aes(label=VALUE, 
+        # match value with max to determine label placement
+        x=ifelse(VALUE %in% unlist(msr_max[msr_max$MEASURE == MEASURE & msr_max$MILK == MILK, "MAX"]), VALUE/2, VALUE),
+        hjust=ifelse(VALUE %in% unlist(msr_max[msr_max$MEASURE == MEASURE & msr_max$MILK == MILK, "MAX"]), 0, -0.35),
+        color=ifelse(VALUE %in% unlist(msr_max[msr_max$MEASURE == MEASURE & msr_max$MILK == MILK, "MAX"]), "white", "black" )), size=3) +
+  scale_y_discrete(limits=c("Almond milk", "Oat milk", "Soy milk", "Rice milk","Cow's milk")) +
+  scale_fill_manual(values=c("Carbon Emissions (kg CO2eq)" = "#364e5d", "Land Use (m2)" = "#597e4e", "Water Use (L)" = "#587f89")) +
+  scale_color_manual(values=c("white" = "#ffffff", "black" = "#000000")) +
+  scale_alpha_manual(values=c("Almond milk" = 0.3, "Oat milk" = 0.3, "Soy milk" = 0.3, "Rice milk" = 0.3, "Cow's milk" = 1)) +
+  coord_cartesian(clip="off") +
+  facet_wrap(~ MEASURE, ncol=3, scales='free_x') +
+  labs(title = "Milk has higher environmental impact than vegan substitutes") +
+  theme(plot.margin = margin(.25, 1, .25, .25, "cm"),
+    plot.background = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none",
+    axis.title.x=element_blank(),
+    axis.title.y=element_blank(),
+    axis.ticks.y=element_blank(),
+    axis.ticks.x=element_blank(),
+    axis.text.x=element_blank()) +
+  theme(strip.placement = "outside",                      # Place facet labels outside x axis labels.
+        strip.background = element_rect(fill = "white"),  # Make facet label background white.
+        axis.title = element_blank())                     # Remove x and y axis titles.
+
+# Print the plot
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+# References
+## The citations and data sources used for this case
+
+Source: <a href="https://www.bbc.com/news/science-environment-46654042" target="_blank">Climate change: Which vegan milk is best?</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/milk-environmental-impact.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "replace-string" # mostly used in wranglers and analytics
+keywords <- 'milk vegan climate-change'
+commands <- 'gsub'
+sources <- 'BBC'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

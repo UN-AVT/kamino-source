@@ -1,0 +1,218 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(DBI)
+library(RSQLite)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+INGEST  
+</div>
+
+# Mental Health Survey
+## Ingest a SQLite database
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Dan Meyers on Unsplash"}
+
+masthead <- "assets/dan-meyers-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Mental health affects every aspect of your life. It's not just this neat little issue you can put into a box....\
+--- Shannon Purser\
+
+***
+
+
+### Accessing the database
+#### db_connection
+
+In order to explore the data within the Mental Health database, we can first open a db connection and list all its tables. 
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+db <- dbDriver("SQLite")
+conn <- dbConnect(db,'archetypes/mental-health/mental_health.sqlite')
+df <- as.data.frame(dbListTables(conn))
+
+```
+
+
+```{r, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = TRUE, bootstrap_options = c("striped", "hover"))
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+Now that we know this database presents the tables __Answer__, __Question__ and __Survey__, we can access each one of them separately.
+
+Since this is a survey, we will read __Question__ table first. Then, __Answer__ and __Survey__ tables will follow.
+
+### Explore
+#### Question table
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df1 <- dbReadTable(conn, 'Question')
+
+```
+
+```{r, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df1[1:100,]
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = TRUE, bootstrap_options = c("striped", "hover"))%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+### Explore
+#### Answer table
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source='fold-hide'}
+
+df2 <- dbReadTable(conn, 'Answer')
+
+```
+
+
+```{r, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df2[c(1:"22000"), ]
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = TRUE, bootstrap_options = c("striped", "hover"))%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Explore
+#### Survey table
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df3 <- dbReadTable(conn, 'Survey')
+
+```
+
+
+```{r, echo=FALSE}
+
+# NOT TO BE USED AS SOLUTION
+df_tmp <- df3[1:5,]
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = TRUE, bootstrap_options = c("striped", "hover"))
+# NOT TO BE USED AS SOLUTION 
+
+```
+
+
+### Close
+#### the database connection.
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+dbDisconnect(conn)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+
+* Data: Open Sourcing Mental Illness Ltd., OSMI Mental Health in Tech, https://osmihelp.org/research
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/mental_health.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "database" # mostly used in wranglers and analytics
+keywords <- 'mental health'
+commands <- 'dbConnect dbReadTable'
+sources <- 'Open Sourcing Mental Illness Ltd.'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

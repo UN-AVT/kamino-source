@@ -1,0 +1,119 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+INGEST  
+</div>
+
+# World Electricity Production
+## Ingest a csv file with BOM encoding
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Michael Dziedzic on Unsplash"}
+
+masthead <- "assets/michael-dziedzic-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Every decoding is another encoding...\
+--- David Lodge\
+
+***
+
+The first character is a magical character, invisible to the human eye, but readible by a computer. It is the byte order mark (or BOM) and it’s telling the computer that the characters that follow are encoded in Unicode. This issue will often arise when saving to a CSV file from a spreadsheet.
+
+### Ingest
+#### without considering BOM
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+df_no_bom <- read.csv("archetypes/world-electricity-production/world-electricity-production-bom.csv", header = TRUE, stringsAsFactors = FALSE)
+df_no_bom
+
+names(df_no_bom)
+
+```
+
+
+### Ingest
+#### recognizing BOM encoding
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+df_bom <- read.csv("archetypes/world-electricity-production/world-electricity-production-bom.csv", header = TRUE, stringsAsFactors = FALSE, fileEncoding = 'UTF-8-BOM')
+df_bom
+
+names(df_bom)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Data Source: Our World in Data, Electricity Mix, https://ourworldindata.org/electricity-mix
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "CSV" # mostly used in wranglers and analytics
+keywords <- 'BOM byte order mark'
+commands <- 'read.csv fileEncoding'
+sources <- 'Our World in Data'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

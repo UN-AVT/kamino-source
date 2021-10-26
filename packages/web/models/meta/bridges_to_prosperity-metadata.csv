@@ -1,0 +1,2 @@
+"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
+"4-wranglers-9-preserve-1-data-file-bridges_to_prosperity","4-wranglers","9-preserve","1-data-file","save-last-image save-image write-csv","bridges_to_prosperity","4-wranglers/9-preserve/1-data-file/bridges_to_prosperity.html","Prosperity Bridge growth","write.csv ggsave","Bridges-to-Prosperity","bridges_to_prosperity-icon.svg",2021-10-26

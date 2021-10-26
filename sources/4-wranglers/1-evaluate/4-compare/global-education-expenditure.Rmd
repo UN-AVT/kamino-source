@@ -1,0 +1,204 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(purrr)
+library(kableExtra)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Global Education Expenditure
+## Compare
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Element5 Digital on Unsplash"}
+
+masthead <- "assets/element5-digital-OyCl7Y4y0Bk-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Books and Education</div>
+
+
+> Education is not preparation for life; education is life itself....\
+--- John Dewey\
+
+
+***
+
+### Load the data
+#### Real-life case: Global education expenditure.
+
+```{r Load raw data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'} 
+
+df <- read.csv('./archetypes/share-edu-spending-gdp-vs-share-edu-total-spending.csv', header = TRUE, stringsAsFactors = FALSE)
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <-df
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = TRUE, bootstrap_options = c("striped", "hover"))%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+### The Side Set 
+#### The following <span style="color: #01DFD7;font-weight:bold">Continent list</span>  will be used to compare with the above data file records.
+
+
+```{r reference list, echo=FALSE, message=FALSE}
+
+list<-c('Africa','Asia','Europe')
+
+list%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(1, bold = TRUE, color = "#000000", background = "#A9F5F2")
+
+```
+
+
+### Intersect
+
+#### This method helps you view the relevant information of education expenditure of only those countries from the same <span style="color: #F78181;font-weight:bold">Continents</span> as the <span style="color: #01DFD7;font-weight:bold">Continents</span> listed in the side set.
+
+
+```{r Method: intersect, echo=TRUE, message=FALSE}
+
+df_1 <-df[df$Continent %in% list,]
+row.names(df_1)<-NULL
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 1, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_1
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#F78181")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(3, bold = TRUE, color = "#000000", background = "#F5ECCE")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+```
+
+
+### Difference
+
+#### Whereas this method helps you view the opposite scenario: only the relevant information of education expenditure of those countries that are not located in the <span style="color: #01DFD7;font-weight:bold">Continents</span> listed in the side set.
+
+
+```{r Method: difference, echo=TRUE, message=FALSE}
+df_2 <-subset(df, !(Continent %in% list))
+row.names(df_2)<-NULL
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 2, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <-df_2
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#F78181")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(3, bold = TRUE, color = "#000000", background = "#F5ECCE")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+```
+
+
+### References
+#### The citations and data sources used for this case 
+
+The data source used by this wrangler task is one of the baseline data used by the "Our World in Data" article called <a href="https://ourworldindata.org/financing-education" target="_blank">Financing Education</a>.
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/share-edu-spending-gdp-vs-share-edu-total-spending.bib")
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "compare difference intersect" # mostly used in wranglers and analytics
+keywords <- 'education expenditure global'
+commands <- 'subset'
+sources <- 'Financing-Education'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,93 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    #code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(knitcitations)
+library(bibtex)
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+INGEST  
+</div>
+
+# Ingest database
+
+```{r, out.width="40%", fig.align="center", fig.cap="Photo by iconixar"}
+# image of an icon to represent the activity or any method (visit for icon https://thenounproject.com/search/?q=attribute&i=4326168)
+masthead <- "assets/sql.png"
+knitr::include_graphics(masthead, dpi=72)
+```
+
+You can think of a traditional database as an electronic filing system where data is organized by one or more tables which are connected/related to one another via specfic keys. Each table is much like a regular data file structured by fields (columns) and records (rows).
+
+* Table Employee
+
+```
+{  "Id", "Name", "Phone", "Dept_Id" }
+```
+* Table Department
+
+```
+{  "Dept_Id", "Title", "Location", "City" }
+```
+
+* __Relationship Employee and Department__ : Every employee in __Employee table__ works in a department whose information is shown in the __Department table__.
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "sqlite" # mostly used in wranglers and analytics
+keywords <- 'database'
+commands <- ''
+sources <- ''
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

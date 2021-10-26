@@ -1,0 +1,227 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(rJava)
+library(tabulizer)
+library(pdftools)
+library(purrr)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+```
+
+
+<div class="activity">
+INGEST  
+</div>
+
+# The Global Peace Index (GPI)
+## Ingest a table from pdf
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Vasilios Muselimis on Unsplash"}
+
+masthead <- "assets/vasilios-muselimis-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> When the power of love overcomes the love of power the world will know peace...\
+--- Jimi Hendrix\
+
+The Global Peace Index (GPI) is a report produced and published by the Vision of Humanity and Institute for Economics & Peace (IEP) to measure _peacefulness_ and provide _insight and rankings for 163 countries_.  The 2020 report is provided in pdf form as the source for narrative analysis and data.  We'll use several different pages and table configurations in the report to extract the data for further analysis.
+
+***
+
+### Global Peace Index Report, 2020
+#### full-page, multi-column
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# STEP 1:  GENERATE LOCAL AREA COORDINATES
+# ++++++++++++++++++++++++++++++++++++++++
+# To define specific coordinates for table on page
+# f <- locate_areas("archetypes/global-peace-index/global-peace-index-2020.pdf", pages = 98)
+
+#      top     left   bottom    right
+c1 <- c(213.68093, 39.03915, 788.63020, 199.46027)
+c2 <- c(209.8308, 208.4439, 788.6302, 372.7151)
+c3 <- c(208.5475, 381.6987, 779.6466, 548.5366)
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+gpi_table_c1 <- extract_tables("archetypes/global-peace-index/global-peace-index-2020.pdf",
+             output = "data.frame",
+             pages = c(98,98,98), 
+             area = list( c1, c2, c3),
+             guess = FALSE
+             )
+
+# gpi_table_c1
+
+gpi_table_c1_all <- reduce(gpi_table_c1, bind_rows)
+
+gpi_table_c1_all
+
+```
+
+
+#### Complex, partial page, multi-column, multi-page
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# STEP 1a:  GENERATE LOCAL AREA COORDINATES
+# +++++++++++++++++++++++++++++++++++++++++
+# Page 10
+# f <- locate_areas("archetypes/global-peace-index/global-peace-index-2020.pdf", pages = 10)
+
+c1p10 <- c(496, 38, 786, 169)
+c2p10 <- c(496, 212, 786, 341)
+c3p10 <- c(496, 380, 786, 508)
+
+# STEP 1b:  GENERATE LOCAL AREA COORDINATES
+# +++++++++++++++++++++++++++++++++++++++++
+# Page 11
+# f <- locate_areas("archetypes/global-peace-index/global-peace-index-2020.pdf", pages = 11)
+
+c1p11 <- c(496, 392, 738, 521)
+c2p11 <- c(496, 225, 788, 353)
+c3p11 <- c(496, 38, 786, 169)
+
+```
+
+
+#### Run extraction
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# STEP 2a:  EXTRACT DATA
+# +++++++++++++++++++++
+# Extracting data from page 10 and 11
+# extract_text("archetypes/global-peace-index/global-peace-index-2020.pdf")
+gpi_table <- extract_tables("archetypes/global-peace-index/global-peace-index-2020.pdf",
+             output = "data.frame",
+             pages = c(10,10,10,11,11,11), 
+             area = list(c1p10, c2p10, c3p10, c1p11, c2p11, c3p11),
+             guess = FALSE
+             )
+
+gpi_table
+
+# STEP 2b:  EXTRACT TEXT
+# ++++++++++++++++++++++
+# Fallback if table method fails
+gpi_table_text <- extract_text("archetypes/global-peace-index/global-peace-index-2020.pdf",
+             pages = c(10,10,10,11,11,11), 
+             area = list(c1p10, c2p10, c3p10, c1p11, c2p11, c3p11),
+             )
+
+as.data.frame(gpi_table_text)
+
+
+```
+
+
+### Clean up the results
+#### creating the final output
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# STEP 3:  Combine results and clean
+# ++++++++++++++++++++++++++++++++++
+# Bring all columns and pages together
+gpi_table_clean <- reduce(gpi_table, bind_rows)
+
+#rename the columns
+names(gpi_table_clean)[1] <- 'gpi_rank'
+names(gpi_table_clean)[2] <- 'gpi_country'
+names(gpi_table_clean)[3] <- 'gpi_score'
+
+gp_table_final <- gpi_table_clean
+
+gp_table_final
+
+```
+
+
+### pdftools option
+#### Full pdf extraction
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+test <- pdf_data("archetypes/global-peace-index/global-peace-index-2020.pdf")
+# test
+
+txt_test <- pdf_text("archetypes/global-peace-index/global-peace-index-2020.pdf")
+# txt_test
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+
+* Source: Vision of Humanity and Institute for Economics & Peace, Global Peace Index Report, 2020
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "pdf" # mostly used in wranglers and analytics
+keywords <- 'global peace index'
+commands <- 'extract_tables extract_text pdf_data pdf_text'
+sources <- 'Vision of Humanity and Institute for Economics & Peace'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

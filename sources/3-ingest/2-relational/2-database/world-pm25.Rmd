@@ -1,0 +1,139 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(DBI)
+library(RSQLite)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+INGEST  
+</div>
+
+# World PM25 Levels
+## ingest a SQLite database
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Dominik Dancs on Unsplash"}
+
+masthead <- "assets/dominik-dancs-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> There's so much pollution in the air now that if it weren't for our lungs there'd be no place to put it all...\
+--- Robert Orben\
+
+***
+
+
+### Accessing the database
+#### via db_connection
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+db <- dbDriver("SQLite")
+conn <- dbConnect(db,'archetypes/world-pm25/world-pm25.db')
+
+df <- as.data.frame(dbListTables(conn))
+df
+
+```
+
+
+### Explore
+#### the pm25 table
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+df_table <- dbReadTable(conn, 'pm25')
+df_table
+
+```
+
+
+### Close
+#### the database connection.
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+dbDisconnect(conn)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Data Source:
+  * World Health Organization, 
+  * SDG Indicator 11.6.2 Concentrations of fine particulate matter (PM2.5)
+  * https://www.who.int/data/gho/data/indicators/indicator-details/GHO/concentrations-of-fine-particulate-matter-(pm2-5)
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "database sqlite" # mostly used in wranglers and analytics
+keywords <- 'concentration particulate matter PM2.5'
+commands <- 'dbConnect dbReadTable'
+sources <- 'World Health Organization'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

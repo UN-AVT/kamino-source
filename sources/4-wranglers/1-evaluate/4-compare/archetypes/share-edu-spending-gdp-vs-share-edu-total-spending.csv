@@ -1,0 +1,183 @@
+"Country","Code","Continent","Education_Expenditure_Percent","Total_Population"
+"Afghanistan","AFG","Asia",32.14,38042000
+"Albania","ALB","Europe",52.53,3286000
+"Algeria","DZA","Africa",18.119999999999997,43053000
+"Andorra","AND","Europe",37.03,84000
+"Angola","AGO","Africa",31.11,31825000
+"Antigua and Barbuda","ATG","North America",8.66,97000
+"Argentina","ARG","South America",118.49999999999997,44781000
+"Armenia","ARM","Asia",51.19,3538000
+"Aruba","ABW","South America",87.01,106000
+"Australia","AUS","Oceania",143.91999999999996,25203000
+"Austria","AUT","Europe",225.54999999999998,8955000
+"Azerbaijan","AZE","Asia",66.78999999999999,10048000
+"Bahamas","BHS","North America",2.85,389000
+"Bahrain","BHR","Asia",20.88,1641000
+"Bangladesh","BGD","Asia",48.3,163046000
+"Barbados","BRB","North America",88.11,287000
+"Belarus","BLR","Europe",73.99000000000001,10161000
+"Belgium","BEL","Europe",154.18999999999997,11539000
+"Belize","BLZ","North America",71.99999999999999,390000
+"Benin","BEN","Africa",62.58999999999999,11801000
+"Bermuda","BMU","North America",38.15,66000
+"Bhutan","BTN","Asia",61.70999999999999,763000
+"Bolivia","BOL","South America",106.11000000000001,11513000
+"Botswana","BWA","Europe",125.85,2304000
+"Brazil","BRA","South America",82.63,211050000
+"British Virgin Islands","VGB","Caribbean",18.490000000000002,30000
+"Brunei","BRN","Asia",99.99999999999997,433000
+"Bulgaria","BGR","Europe",85.06,8975000
+"Burkina Faso","BFA","Africa",52.74000000000001,20321000
+"Burundi","BDI","Africa",85.35,11531000
+"Cambodia","KHM","Asia",19.869999999999997,16487000
+"Cameroon","CMR","Africa",72.52999999999999,25876000
+"Canada","CAN","North America",223.07,37411000
+"Cape Verde","CPV","Africa",82.66999999999999,550000
+"Central African Republic","CAF","Africa",29.81,4745000
+"Chad","TCD","Africa",27.120000000000005,15947000
+"Chile","CHL","South America",103.64999999999999,18952000
+"China","CHN","Asia",46.11,1433784064
+"Colombia","COL","South America",95.62,50339000
+"Comoros","COM","Africa",38.69,851000
+"Congo","COG","Africa",77.82000000000001,5381000
+"Costa Rica","CRI","Central America",131.26999999999998,5048000
+"Cote d'Ivoire","CIV","Africa",167.69000000000005,25717000
+"Croatia","HRV","Europe",37.13000000000001,4781000
+"Cuba","CUB","North America",158.52,11339000
+"Curacao","CUW","South America",4.93,163000
+"Cyprus","CYP","Europe",163.96000000000004,1199000
+"Czech Republic","CZE","Europe",88.80999999999999,10689000
+"Democratic Republic of Congo","COD","Africa",18.96,86791000
+"Denmark","DNK","Europe",258.25,5772000
+"Djibouti","DJI","Europe",81.24999999999999,974000
+"Dominican Republic","DOM","Caribbean",22.31,10739000
+"Ecuador","ECU","South America",62.98,17374000
+"Egypt","EGY","Asia",106.69000000000001,100388000
+"El Salvador","SLV","Central America",54.31000000000001,6454000
+"Equatorial Guinea","GNQ","Africa",2.19,1356000
+"Eritrea","ERI","Africa",24.369999999999997,3497000
+"Estonia","EST","Europe",104.42,1570000
+"Ethiopia","ETH","Africa",71.02000000000001,112079000
+"Fiji","FJI","Oceania",90.25999999999999,890000
+"Finland","FIN","Europe",236.32999999999998,5532000
+"France","FRA","Europe",216.63,65130000
+"Gabon","GAB","Africa",27.92,2173000
+"Gambia","GMB","Africa",56.91000000000001,2348000
+"Georgia","GEO","Asia",45.51,5412000
+"Germany","DEU","Europe",64.51000000000002,83517000
+"Ghana","GHA","Africa",128.17000000000002,30418000
+"Greece","GRC","Europe",56.78999999999999,11235000
+"Grenada","GRD","Caribbean",14.219999999999999,112000
+"Guatemala","GTM","Central America",41.24,17581000
+"Guinea","GIN","Africa",37.75000000000001,12771000
+"Guinea-Bissau","GNB","Africa",13.100000000000001,1921000
+"Guyana","GUY","South America",120.84000000000002,783000
+"Haiti","HTI","Caribbean",1.07,11263000
+"Honduras","HND","Central America",22.250000000000004,9746000
+"Hong Kong","HKG","Asia",103.99000000000002,7436000
+"Hungary","HUN","Europe",111.86,10754000
+"Iceland","ISL","Europe",138.70000000000002,339000
+"India","IND","Asia",47.64999999999999,1366418048
+"Indonesia","IDN","Asia",48.96999999999999,270625984
+"Iran","IRN","Asia",150.9,82914000
+"Iraq","IRQ","Asia",9.829999999999998,39310000
+"Ireland","IRL","Europe",207.93999999999997,5796123
+"Israel","ISR","Asia",236.8799999999999,8519000
+"Italy","ITA","Europe",136.96,60674000
+"Jamaica","JAM","Caribbean",170.89000000000001,2948000
+"Japan","JPN","Asia",143.31999999999996,128555000
+"Jordan","JOR","Asia",95.18,10102000
+"Kazakhstan","KAZ","Asia",43.89999999999999,18551000
+"Kenya","KEN","Africa",191.97000000000003,52574000
+"Kuwait","KWT","Asia",111.08,4207000
+"Kyrgyzstan","KGZ","Asia",113.88999999999999,6416000
+"Laos","LAO","Asia",39.50999999999999,7169000
+"Latvia","LVA","Europe",97.59,2664000
+"Lebanon","LBN","Asia",35.809999999999995,6859000
+"Lesotho","LSO","Asia",192.05,2125000
+"Liberia","LBR","Africa",19.17,4937000
+"Liechtenstein","LIE","Europe",13.47,38000
+"Lithuania","LTU","Europe",92.05999999999999,3697000
+"Luxembourg","LUX","Europe",80.13000000000001,616000
+"Macao","MAC","Asia",47.76,640000
+"Macedonia","MKD","Europe",26.930000000000003,2083000
+"Madagascar","MDG","Africa",91.01,26969000
+"Malawi","MWI","Africa",91.34000000000002,18629000
+"Malaysia","MYS","Asia",178.77,31950000
+"Maldives","MDV","Asia",67.48999999999998,531000
+"Mali","MLI","Africa",69.37999999999998,19658000
+"Malta","MLT","Europe",146.04000000000002,440000
+"Mauritania","MRT","Africa",37.36000000000001,4526000
+"Mauritius","MUS","Africa",125.96,1270000
+"Mexico","MEX","North America",98.07,127576000
+"Moldova","MDA","Europe",122.47999999999998,4377000
+"Monaco","MCO","Europe",20.75,39000
+"Mongolia","MNG","Asia",74.97999999999999,3225000
+"Morocco","MAR","Africa",131.14000000000001,36472000
+"Mozambique","MOZ","Africa",30.16,30366000
+"Myanmar","MMR","Asia",17.300000000000004,54045000
+"Namibia","NAM","Africa",54.87,2495000
+"Nepal","NPL","Asia",63.25,28609000
+"Netherlands","NLD","Europe",230.28,17097000
+"New Zealand","NZL","Oceania",198.16999999999996,4783000
+"Nicaragua","NIC","Cenral America",46.150000000000006,6546000
+"Niger","NER","Africa",81.81,23311000
+"Norway","NOR","Europe",274.0400000000001,5379000
+"Oman","OMN","Asia",89.95999999999998,4975000
+"Pakistan","PAK","Asia",98.45000000000002,216564992
+"Palau","PLW","Oceania",23.18,20000
+"Palestine","PSE","Asia",33.730000000000004,4981000
+"Panama","PAN","Central America",114.34,4246000
+"Papua New Guinea","PNG","Oceania",12.64,8776000
+"Paraguay","PRY","South America",53.449999999999996,7045000
+"Peru","PER","South America",65.57999999999998,32510000
+"Philippines","PHL","Asia",48.75,108117000
+"Poland","POL","Europe",108.91999999999999,38568000
+"Portugal","PRT","Europe",160.93000000000004,10604000
+"Puerto Rico","PRI","North America",67.21,3670000
+"Qatar","QAT","Asia",71.95,2832000
+"Romania","ROU","Europe",43.900000000000006,23489000
+"Russia","RUS","Europe",32.65,148374000
+"Rwanda","RWA","Africa",69.53999999999999,12627000
+"Saint Kitts and Nevis","KNA","Caribbean",60.029999999999994,53000
+"Saint Lucia","LCA","North America",94.93,183000
+"Samoa","WSM","Oceania",24.490000000000002,197000
+"San Marino","SMR","Europe",4.6899999999999995,34000
+"Sao Tome and Principe","STP","Africa",67.97,215000
+"Saudi Arabia","SAU","Africa",131.12,34269000
+"Senegal","SEN","Africa",84.95,16296000
+"Serbia","SRB","Europe",35.699999999999996,9884000
+"Seychelles","SYC","Africa",129.07000000000002,98000
+"Sierra Leone","SLE","Africa",45.03,7813000
+"Singapore","SGP","Asia",84.51999999999998,5804000
+"Slovakia","SVK","Europe",94.18,5457000
+"Slovenia","SVN","Europe",82.13000000000001,2079000
+"Somalia","SOM","Africa",2.46,15443000
+"South Africa","ZAF","Africa",136.20000000000002,58558000
+"South Korea","KOR","Asia",145.16000000000003,51225000
+"South Sudan","SSD","Africa",7.050000000000001,11062000
+"Spain","ESP","Europe",128.74,47084000
+"Sri Lanka","LKA","Asia",68.66,21324000
+"Sudan","SDN","Africa",12.010000000000002,42813000
+"Swaziland","SWZ","Africa",153.95000000000005,1148000
+"Sweden","SWE","Europe",171.65000000000003,10036000
+"Switzerland","CHE","Europe",158.54,8591000
+"Tajikistan","TJK","Europe",64.67,9321000
+"Tanzania","TZA","Africa",44.51999999999999,58005000
+"Thailand","THA","Asia",137.52999999999997,69626000
+"Togo","TGO","Africa",115.33,8082000
+"Tonga","TON","Europe",42.730000000000004,104000
+"Trinidad and Tobago","TTO","Caribbean",65.77,1395000
+"Tunisia","TUN","Africa",176.21,11695000
+"Turkey","TUR","Asia",60.82000000000001,83430000
+"Uganda","UGA","Africa",50.75,44270000
+"Ukraine","UKR","Europe",100.84000000000002,51463000
+"United Kingdom","GBR","Europe",197.81999999999996,67530000
+"United States","USA","North America",25.760000000000005,329064992
+"Uruguay","URY","South America",49.04,3462000
+"Vanuatu","VUT","Oceania",71.96,300000
+"Venezuela","VEN","South America",84.94000000000001,30082000
+"Vietnam","VNM","Asia",30.840000000000003,96462000
+"Yemen","YEM","Asia",24.049999999999997,29162000
+"Zambia","ZMB","Africa",110.08999999999999,17861000
+"Zimbabwe","ZWE","Africa",164.99,14645000

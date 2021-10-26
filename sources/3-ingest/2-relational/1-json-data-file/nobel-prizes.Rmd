@@ -1,0 +1,140 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+#library(rjson)
+library(jsonlite)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+INGEST  
+</div>
+
+# Nobel Prizes
+## Ingest a JSON file
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo from Wroclaw University Museum"}
+
+masthead <- "assets/Nobel_Prize_Diploma_Fritz_Haber_1918.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Nobel Prize diploma in Chemistry awarded to Fritz Haber in 1918</div>
+
+> His name was Jason...\
+--- Mrs. Voorhees, Friday the 13th\
+
+
+***
+
+### Accessing a JSON file
+#### Nobel Prizes' information
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+js1 <- fromJSON("archetypes/nobel-prizes/nobel-prizes.json", flatten = FALSE)
+
+df <- as.data.frame(js1)
+df
+
+```
+
+
+Getting information of all Laureates of Economics Nobel Prize in 2019 by selecting the prizes.laureates column of the 2nd row of this data file. As you can see the prizes.laureates column is in fact composed by the fields: id, firstname, surname, motivation and share.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+list1 <- df$prizes.laureates[2]
+df1 <- as.data.frame(list1)
+df1
+
+```
+
+Let's make this output a little more "table friendly"
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+df2 <- df %>% unnest(prizes.laureates)
+df2
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Nobel Prizes information published by the Nobel Prize official website, https://www.nobelprize.org/
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/nobel_prize.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'nobel prizes'
+commands <- 'fromJSON'
+sources <- 'THE NOBEL PRIZE'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,92 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(knitcitations)
+library(bibtex)
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+INGEST  
+</div>
+
+# Ingest a text file
+## Workbooks, worksheets, and spreadsheets
+
+```{r, out.width="40%", fig.align="center", fig.cap="Photo by The Icon Z, ID"}
+# image of an icon to represent the activity or any method (visit for icon https://thenounproject.com/search/?q=attribute&i=4326168)
+masthead <- "assets/twitter.png"
+knitr::include_graphics(masthead, dpi=72)
+```
+
+> If I had a spreadsheet on my computer, it looked like I was busy...\
+--- Nate Silver\
+
+This task refers to the ingest of __unstructured text__, meaning text in a file that does not have a delimiter or discernible data structure.  A common form would be __narrative__ text such as documents, messages, and other forms of written language.
+
+To illustrate the methods, this case contains several text files for Ghana's state of the nation addresses. The state of the nation address is an annual address to parliament given by the president. It typically summarizes the government's agenda and the progress made in the past year as seen by the administration in power.
+
+The case provides various methods to ingest the files and make them available for subsequent processing.
+
+***
+
+# Case(s)
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "twitter table" # mostly used in wranglers and analytics
+keywords <- ''
+commands <- ''
+sources <- ''
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

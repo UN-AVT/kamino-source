@@ -1,0 +1,251 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Pandas housed in zoos outside China
+## Clean Data
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Michael Payne on Unsplash"}
+
+masthead <- "assets/michael-payne-jkBvXKwr4MY-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">It's time for lunch</div>
+
+> Never give up on your dreams... Keep Sleeping!...\
+--- Probably a Panda\
+
+***
+
+### Load "dirty" data
+
+#### An example with <span style="color: #FE9A2E;font-weight:bold">missing</span>, <span style="background: #E0E0F8;font-weight:bold">duplicate</span>, and <span style="color:  #0000FF;font-weight:bold">other values</span> that need to be cleaned.
+
+```{r load-data, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+df <- read_csv('./archetypes/panda-list.csv')
+
+
+#creating sample data to better illustrate all solutions
+df <- df[,c(1:4,6,13)]
+
+```
+
+
+```{r Styling Data Set 1, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df
+
+df_tmp%>%
+#mutate(Name_in_Chinese = cell_spec(Name_in_Chinese, color = ifelse(Name_in_Chinese == "##","#0000FF", "#000000"))) %>%
+mutate(Name_in_English = cell_spec(Name_in_English, color = ifelse(Name_in_English == "##","#0000FF", "#000000"))) %>%
+mutate(Birth_Place = cell_spec(Birth_Place, color = ifelse(is.na(Birth_Place),"#FE9A2E", "#000000"))) %>%
+mutate(Loan_Expire_Date = cell_spec(Loan_Expire_Date, color = ifelse(is.na(Loan_Expire_Date),"#FE9A2E", "#000000"))) %>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = TRUE, bootstrap_options = c("striped", "hover"))%>%
+row_spec(c(3,4,6,7,10,11,28,29), background  = "#E0E0F8")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+```
+
+### Replace <span style="color: #0000FF;font-weight:bold">'##'</span>
+
+#### with <span style="color: #74DF00;font-weight:bold">'Not Applicable'</span> for any column
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_1 <- df
+df_1 <- replace(df_1, df_1=='##', "Not Applicable" )
+
+
+```
+
+
+```{r Styling Data Set 2, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_1
+
+
+df_tmp%>%
+mutate(Name_in_English = cell_spec(Name_in_English, color = ifelse(Name_in_English == "Not Applicable","#74DF00", "#000000"))) %>%
+mutate(Birth_Place = cell_spec(Birth_Place, color = ifelse(is.na(Birth_Place),"#FE9A2E", "#000000"))) %>%
+mutate(Loan_Expire_Date = cell_spec(Loan_Expire_Date, color = ifelse(is.na(Loan_Expire_Date),"#FE9A2E", "#000000"))) %>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = TRUE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(5, color = "#74DF00")%>%
+row_spec(c(3,4,6,7,10,11,28,29), background  = "#E0E0F8")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Remove <span style="color: #FE9A2E;font-weight:bold">missing</span> values
+#### This will remove an entire row if __Birth_Place__ contains missing value
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_2 <- df_1
+
+df_2 <- df_1[!is.na(df_1$Birth_Place), ]                
+
+```
+
+```{r Styling Data Set 3, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_2
+
+
+df_tmp%>%
+mutate(Birth_Place = cell_spec(Birth_Place, color = ifelse(is.na(Birth_Place),"#FE9A2E", "#000000"))) %>%
+mutate(Loan_Expire_Date = cell_spec(Loan_Expire_Date, color = ifelse(is.na(Loan_Expire_Date),"#FE9A2E", "#000000"))) %>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = TRUE, bootstrap_options = c("striped", "hover"))%>%
+row_spec(c(2,3,5,6,8,9,22,23), background  = "#E0E0F8")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Replace <span style="color: #FE9A2E;font-weight:bold">missing</span> values 
+#### with <span style="color: #DF7401;font-weight:bold">01/01/2030</span> for __Loan_Expire_Date__ column
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_3 <- df_2
+df_3[is.na(df_3$Loan_Expire_Date),]$Loan_Expire_Date <- "01/01/2030" 
+
+```
+
+
+```{r Styling Data Set 4, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_3
+
+df_tmp%>%
+mutate(Loan_Expire_Date = cell_spec(Loan_Expire_Date, color = ifelse(Loan_Expire_Date == "01/01/2030","#DF7401", "#000000"))) %>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = TRUE, bootstrap_options = c("striped", "hover"))%>%
+row_spec(c(2,3,5,6,8,9,22,23), background  = "#E0E0F8")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Remove <span style="background: #E0E0F8;font-weight:bold">duplicates</span>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_4 <- unique( df_3 )
+
+
+```
+
+```{r Styling Data Set 5, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_4
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = TRUE, bootstrap_options = c("striped", "hover"))%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+### References
+#### The citations and data sources used for this case
+
+The original data file used in this wrangler task was captured from the <a href="https://www.giantpandaglobal.com/" target="_blank">Giant Panda Global</a> source which was published by  Giant Panda Global website. The post-clean data file along with other sources helped data scientists plot <a href="https://public.tableau.com/profile/wendy.shijia#!/vizhome/giantpandasoverseas/Bamboo" target="_blank">this chart</a> available at Tableau Public.
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/panda-list.bib")
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "clean remove-duplicate remove-missing replace-missing replace-value" # mostly used in wranglers and analytics
+keywords <- 'panda zoo china'
+commands <- 'replace !is.na is.na unique'
+sources <- 'Giant-Panda-Global'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

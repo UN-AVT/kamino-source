@@ -1,0 +1,95 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    #code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+INGEST  
+</div>
+
+# Ingest a delimited data file
+## Comma, tabs, and other
+
+```{r, out.width="40%", fig.align="center", fig.cap="Photo by JunGSa, ID"}
+# image of an icon to represent the activity or any method (visit for icon https://thenounproject.com/search/?q=attribute&i=4326168)
+masthead <- "assets/csv.png"
+knitr::include_graphics(masthead, dpi=72)
+```
+
+Delimiter-separated data files are widely supported for data exchange between databases and most data analysis applications. Any character may be used to separate the values, but the most common delimiters are the comma (\*.csv) and tab (.tsv).
+
+* A delimited file stores __tabular__ data (numbers and strings) in plain text
+* Column __headers__ are often included as the first line
+* Each subsequent line is a __row__ or record of data
+* Each record consists of one or more __fields__, separated by the delimiter
+* Each line will have the same __number__ of fields and __order__ as indicated by the column headers
+* A double quote is often used to __"escape"__ a field entry that contains the delimiter, e.g. a comma
+* Character __encoding__ may have an impact on the representation of international characters.
+
+### Example cases and code
+#### Standard ingest
+
+* Average working hours of children (csv)
+* Teacher salaries (tsv)
+
+#### Special character ingest
+
+* ne-countries (cvs)
+* world-electricity-production-bom (cvs)
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "CSV TSV" # mostly used in wranglers and analytics
+keywords <- 'comma tab separated delimited'
+commands <- 'read.csv read.table'
+sources <- ''
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

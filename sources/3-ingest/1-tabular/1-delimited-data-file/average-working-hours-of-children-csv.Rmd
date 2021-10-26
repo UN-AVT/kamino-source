@@ -1,0 +1,113 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+INGEST  
+</div>
+
+# Child labor, average working hours of children
+## ingest a csv file
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Zeyn Afuang on Unsplash"}
+
+masthead <- "assets/zeyn-afuang-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> All the problems of the world - child labor, corruption - are symptoms of a spiritual disease: lack of compassion...\
+--- Bill Vaughan\
+
+***
+
+### Ingest
+#### comma-separated-values
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# Load csv data file
+df <- read.csv("archetypes/child-labor/average-working-hours-of-children.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Child Labor, Our World in Data, https://ourworldindata.org/child-labor
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/average-working-hours-of-children.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "CSV" # mostly used in wranglers and analytics
+keywords <- 'comma separated delimited'
+commands <- 'read.csv'
+sources <- 'Our World in Data'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

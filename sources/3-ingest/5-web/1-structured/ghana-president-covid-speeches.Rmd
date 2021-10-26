@@ -1,0 +1,689 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+
+library(rvest)
+library(tidyverse)
+library(lubridate)
+library(stringr)
+library(spacyr)
+library(tidytext)
+library(plotly)
+library(widyr)
+library(igraph)
+library(ggraph)
+library(showtext)
+library(ggtext)
+library(kableExtra)
+library(data.table)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+INGEST  
+</div>
+
+# Speeches to the nation on the COVID-19 situation in Ghana
+## Web scraping
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo from the official website of the presidency"}
+
+masthead <- "assets/ghana-president-speeches-on-covid.png"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Just living is not enough... One must have sunshine, freedom, and a little flower...\
+--- Hans Christian Andersen\
+
+Ever since COVID-19 reached the shores of Ghana, the president of Ghana (Nana Addo Dankwa Akufo-Addo) has been giving speeches to the nation on the COVID-19 situation in Ghana the Government’s response to this. Most, but not all, of these speeches are available transcribed on the official website of the presidency (http://www.presidency.gov.gh).
+
+
+***
+
+### Let the scraping begin...
+#### Load list of links reference
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+covid_speeches <- read.csv('./archetypes/ghana-president-speeches-on-coronavirus/ghana-president-speeches-on-coronavirus.csv')
+
+# covid_speeches
+
+links <- covid_speeches$link
+links
+
+```
+
+### Scrape content from each link
+#### Save results to a data source
+
+```{r}
+
+# create an empty list to store results
+list_pages <- list()
+
+# function to scrape text from each link
+get_speeches <- function(link){
+    link %>%
+      read_html() %>%
+      html_nodes(xpath = '//*[@itemprop="articleBody"]') %>%
+      html_text()
+}
+
+# iterate over each link
+for (i in 1:length(links)){
+    list_pages[[i]] <-  links[i] %>% get_speeches
+}
+
+# combine the list of pages into one dataframe
+list_pages_df <- do.call( "rbind", list_pages)
+
+  
+```
+
+
+```{r}
+
+# as.data.frame(list_pages_df)
+
+```
+
+
+
+```{r}
+
+# This is only needed the first time you use spacy
+# spacy_install()
+
+spacy_initialize(model = "en_core_web_sm")
+
+```
+
+
+```{r}
+
+# title, link, date, text
+
+# get the title of the different speeches
+speech_titles <- covid_speeches$title
+
+# create an empty list
+list_speeches <- list()
+
+# loop over the different speeches
+for(i in 1:length(speech_titles)){
+
+  # use tidytext sentencizer to separate text into sentences.
+  sentences <- covid_speeches %>%
+    filter(title == speech_titles[i]) %>%
+    unnest_tokens(sentence,             # this is the name of the output
+                  text,                 # this is the name of the input
+                  token = "sentences",  # this indicates that I want to have sentences as my output
+                  drop  = T,            # I want to drop the original text
+                  to_lower = F)         # I do not, yet, want to transform to lowercase letters
+
+  # Now save the different sentences in one vector and numerically name it
+  speeches <- sentences$sentence
+  names(speeches) <- 1:length(speeches)
+
+  # Now I use SpacyR to parse the sentences
+  list_speeches[[i]] <- spacy_parse(speeches,          # input file
+                                    lemma = TRUE,      # yes, I want the lemmas
+                                    entity = TRUE,    
+                                    nounphrase = TRUE, #Yes, I want to separate the text into nounphrases
+
+                                    # some additional attributes that spacyr can return
+                                    # include whether a token is punctuation
+                                    # or a stop word
+                                    additional_attributes = c("is_punct",
+                                                              "is_stop")) %>%
+    # Now I can just save the output as a tibble
+    as_tibble() %>%
+    # Delete the sentence ID
+    select(-sentence_id) %>%
+    # spacyR has named the input as doc_id, but in this case the output ids are sentences
+    dplyr::rename(sentence_nr = doc_id) %>%
+    # I want to add the name of the speech as a column
+    mutate(speech =  speech_titles[i])
+}
+
+
+```
+
+```{r}
+
+# parsedtxt <- do.call("rbind", list_speeches)
+
+# I now have a list with the data for 11 speeches, so I can bind those together in 1 dataframe
+parsedtxt <- do.call("rbind", list_speeches) %>%
+  as_tibble() %>%
+  # make sure the sentence number is numeric
+  mutate(sentence_nr = as.numeric(sentence_nr))
+
+parsedtxt
+
+```
+
+### Zipf’s Law
+
+```{r}
+
+parsedtxt_clean <- parsedtxt %>%
+  filter(!c(pos %in% c("PUNCT", "SPACE", "NUM"))) %>%
+  filter(!token %in% c("%", "&", "-")) %>%
+  # normalize most words to be lower case  with 4 exceptions.
+  mutate(token = ifelse((grepl("^Ghana", token) |
+                           grepl("^Accra", token)|
+                           grepl("COVID-19", token)|
+                           grepl("Coronavirus", token)),  token, tolower(token))) %>%
+  count(token ) %>%
+  arrange(desc(n)) %>%
+  # I need this data.table frank() function to do a proper ranking
+  mutate(rank = frank(desc(n),  ties.method = "dense")) %>%
+  mutate(expected = n[1] / rank) %>%
+  mutate(prop = n / sum(n),
+         prop_cum = cumsum(prop),
+         expected_prop = expected / sum(expected)) %>%
+  # I only want to keep the words that are used more than 3 times
+  filter(n > 3) %>%
+  group_by(rank) %>%
+  # This part is only added for the vizualization
+  # This way words with the same frequency do not overlap
+  mutate(n_words = n()) %>%
+  mutate(group_id = row_number()-1) %>%
+  mutate(n_stacked = n + group_id*2.5 ) %>%
+  ungroup()
+
+```
+
+```{r, fig.height=10.5, fig.width=10.5}
+
+# I want to annotate some words in the plot.
+annotationed_words <- parsedtxt_clean %>%
+  filter(token %in% c("COVID-19", "Coronavirus", "Ghana", "virus"))
+
+
+fig1 <- plot_ly(data = parsedtxt_clean,  # data
+                type = 'scatter',        # type of plot
+                mode = 'markers',
+                width = 1200, height = 500) %>%    
+  add_trace(
+    x = ~rank,             # x-axis     
+    y = ~n_stacked,        # y-axis
+    text = ~paste("<b>",   # text that is show when hovering over point
+                  token,
+                  "</b>",
+                  '<br>n times mentioned:',
+                  "<b>",
+                  n ,
+                  "</b>"),
+    hoverinfo = 'text', # make sure only the text is shown an nothing else
+    marker = list(color='#006B3F',  # format look of points
+                  opacity = 0.5,
+                  size = 7,
+                  line = list(
+                    color = '#006B3F',
+                    opacity = 0.9,
+                    width = 3)),
+    name = 'observed', # give it a legend title
+    showlegend = T
+  ) %>%
+  # add a line for the observed values
+  add_lines(y = ~n,
+            x = ~rank,
+            line = list(shape = "spline",
+                        color='#006B3F',
+                        size = 5),
+            name = 'observed curve',
+            mode = 'lines',
+            type = 'scatter',
+            hoverinfo = "none") %>%
+  # add a line for the expected values in red
+  add_lines(y = ~expected,
+            x = ~rank,
+            line = list(shape = "spline",
+                        color = '#CE1126',
+                        size = 5),
+            name = "expected using Zipf's law",
+            mode = 'lines',
+            type = 'scatter',
+            hoverinfo = "none")  %>%
+  # format layout
+  layout(title = list(text = "Word Count COVID-19 Speeches by President of Ghana", y = .99),
+         # add annotations
+         annotations = list(
+           x = annotationed_words$rank,
+           y = annotationed_words$n_stacked,
+           text = annotationed_words$token,
+           xref = "x",
+           yref = "y",
+           # Manually make sure labels do not overlap
+           # for Coronavirus and COVID-19
+           ax = c(-20, -20, -20, 20),
+           ay = c(-40, -40, -30, -40),
+           font = list(color = '#706f6f',
+                       family = 'Raleway',
+                       size = 14),
+           showarrow = TRUE,
+           arrowhead = 1),
+         # add green rectangle
+         shapes = list(type = 'rect',
+                       xref = 'x',
+                       x0 = 80,
+                       x1 = as.numeric(max(parsedtxt_clean$rank) + 1),
+                       yref = 'y',
+                       y0 = 0,
+                       y1 = as.numeric(parsedtxt_clean[which.max(parsedtxt_clean$group_id), "n_stacked"] + 20),
+                       fillcolor = '#006B3F',
+                       line = list(color = '#006B3F'),
+                       opacity = 0.2),
+         # change font
+         font = list(color = '#706f6f',
+                     family = 'Raleway',
+                     size = 14),
+         # format axis
+         xaxis = list(title = "rank of word use",
+                      showline = TRUE,
+                      showgrid = FALSE,
+                      showticklabels = TRUE,
+                      linecolor = '#706f6f',
+                      linewidth = 2,
+                      autotick = TRUE,
+                      ticks = 'outside',
+                      tickcolor = '#706f6f',
+                      tickwidth = 2,
+                      ticklen = 5,
+                      tickfont = list(family = 'Raleway',
+                                      size = 12,
+                                      color = '#706f6f')),
+         yaxis = list(title = "word count",
+                      showline = TRUE,
+                      showgrid = FALSE,
+                      showticklabels = TRUE,
+                      linecolor = '#706f6f',
+                      linewidth = 2,
+                      autotick = TRUE,
+                      ticks = 'outside',
+                      tickcolor = '#706f6f',
+                      tickwidth = 2,
+                      ticklen = 5,
+                      tickfont = list(family = 'Raleway',
+                                      size = 12,
+                                      color = '#706f6f')),
+         showlegend = TRUE,
+         legend = list(x = 0.65, y = .95)) %>%
+  # add extra annotation
+  add_annotations( x = 80,
+                   y = as.numeric(parsedtxt_clean[which.max(parsedtxt_clean$group_id), "n_stacked"] + 20),
+                   text= "Words with the same frequency<br>are stacked alphabetically",
+                   arrow = list(color="#006B3F")) %>%
+  # omit control panel
+  config(displayModeBar = FALSE)
+
+fig1
+
+```
+
+```{r}
+
+parsedtxt %>%
+  filter(!c(pos %in% c("PUNCT", "SPACE", "NUM"))) %>%
+  filter(!token %in% c("%", "&", "-")) %>%
+  # normalize most words to be lower case  with 4 exceptions.
+  mutate(token = ifelse((grepl("^Ghana", token) |
+                           grepl("^Accra", token)|
+                           grepl("COVID-19", token)|
+                           grepl("Coronavirus", token)),  token, tolower(token))) %>%
+  count(token ) %>%
+  arrange(desc(n)) %>%
+  mutate(prop = n / sum(n),
+         prop_cum = cumsum(prop)) %>%
+  summarise(number_of_words = n(), # counts total number of unique words
+            # This check which is the first word (ordered by frequency)
+            # that has a cumulative proportion higher than 0.5 (50%)
+            nearest_to_50pc = which.max(prop_cum -0.5 > 0 & !duplicated(prop_cum -0.5 > 0)))
+
+```
+
+
+```{r}
+covid_speeches %>%
+  # get bi-grams
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+  # separate bi0grams into different columns
+  separate(bigram, c("word1", "word2"), sep = " ") %>%
+  # use tidytext stop word lexicon to filter stop words (the, a, etc.)
+  filter(!word1 %in% stop_words$word) %>%
+  filter(!word2 %in% stop_words$word) %>%
+  # count the stop words
+  count(word1, word2, sort = TRUE) %>%
+  # only show top-15
+  slice(1:15) %>%
+  kable() %>%
+  kable_styling(c("striped", "hover", "condensed"))
+```
+
+```{r, fig.height=10.5, fig.width=10.5}
+covid_speeches %>%
+  # split text into sentences
+  unnest_tokens(sentence, text,
+                token = "sentences",
+                drop  = T,
+                to_lower = F) %>%
+  # create different sections (per speech) of 3 sentences
+  group_by(title) %>%
+  mutate(section = (row_number() %/% 3) + 1) %>%
+  ungroup() %>%
+  # split text into actual tokens
+  unnest_tokens(word, sentence) %>%
+  # filter out stop words
+  filter(!word %in% stop_words$word) %>%
+  group_by(word) %>%
+  # omit words that are uncommon
+  filter(n() >= 22) %>%
+  # calculate correlations
+  pairwise_cor(word, section, sort = TRUE) %>%
+  # omit combinations with a low correlation
+  # otherwise the plot clutters
+  filter(correlation > .5) %>%
+  # create a graph data frame  using igraph
+  graph_from_data_frame() %>%
+  # create graph visualization
+  ggraph(layout = "fr") + #, algorithm = 'kk') +
+  # beautify plot a bit
+  geom_edge_link(aes(edge_alpha = correlation, edge_width = correlation), edge_colour = "grey", show.legend = FALSE) +
+  # green colour of the Ghanaian flag
+  geom_node_point(color = "#006B3F", size = 5) +
+  geom_node_text(aes(label = name), repel = TRUE, size = 10, family = "Raleway") +
+  theme_void() +
+  labs(title = "Correlations Between Most Common Words in Speeches") +
+  theme(plot.title  = element_text(family = "Raleway", size =30))
+```
+
+
+```{r, fig.height=10.5, fig.width=10.5}
+
+# the latest version of the dictionary can be found here
+Afinn <- read.delim("https://raw.githubusercontent.com/fnielsen/afinn/master/afinn/data/AFINN-en-165.txt",
+                    header = F) %>% as_tibble() %>% dplyr::rename(word = 1, sentiment = 2)
+
+Afinn %>%
+tail() %>%
+  kable() %>%
+  kable_styling(c("striped", "hover", "condensed"))
+
+sentence_length <- parsedtxt %>%
+  filter(!c(pos %in% c("PUNCT", "SPACE", "NUM"))) %>%
+  filter(!token %in% c("%", "&", "-")) %>%
+  group_by(speech, sentence_nr ) %>%
+  summarise(n_words = n(), .groups = "drop") %>%
+  group_by(speech) %>%
+  summarise(mean_sentence_length = mean(n_words),
+            n_sentences = n()) %>%
+  left_join(covid_speeches %>% select(title, date),
+            by = c("speech" = "title"))
+
+parsedtxt %>%
+  # join sentiments
+  left_join(Afinn, by = c("lemma"= "word")) %>%
+  group_by(speech,  sentence_nr) %>%
+  # if there is no sentiment in the sentence, I make the sentiment 0.
+  mutate(sentiment = ifelse(is.na(sentiment), 0, sentiment)) %>%
+  # calculate the mean sentiment per sentence
+  summarise(sentiment_mean = mean(sentiment, na.rm =T), .groups = "drop") %>%
+  group_by(speech) %>%
+  # split text into quintiles
+  arrange(speech,  sentence_nr) %>%
+  mutate(section = ntile( sentence_nr , 5)) %>%
+  # calculate the mean sentiment per quintiles
+  group_by(speech, section) %>%
+  summarise(mean_Sep = mean(sentiment_mean)) %>%
+  # spread the results from a long to a wide format
+  pivot_wider(values_from  = mean_Sep,
+              names_from = section,
+              names_prefix = "section_") %>%
+  # compare the mean of the first 4 section to the last section
+  mutate(diff_sec_sec1_4 = section_5 - mean(c(section_1,section_2, section_3, section_4) )) %>%
+  ungroup() %>%
+  # add sentence length statistics
+  right_join(sentence_length, by = "speech") %>%
+  arrange(date) %>%
+  # select columns
+  select(speech, date, n_sentences, mean_sentence_length, section_1:diff_sec_sec1_4) %>%
+  # round values
+  mutate(across(where(is.numeric),  ~round(., 4))) %>%
+  kable() %>%
+  kable_styling(c("striped", "hover", "condensed"))
+
+colfunc_red <- colorRampPalette(c("#ff5252","#a70000"))
+colfunc_green <- colorRampPalette(c("#A3D12D","#086D44"))
+
+
+# get text data and use html tags to colour words green or red
+text <- parsedtxt %>%
+  left_join(Afinn, by = c("lemma"= "word")) %>%
+  mutate(sentiment = ifelse(is.na(sentiment), 0, sentiment)) %>%
+  mutate(token_colour = ifelse(sentiment < 0,
+                         paste0('<span style="color:',
+                                colfunc_red(abs(min(sentiment)))[abs(sentiment)],
+                                ';"><b>',  token,'</b></span>'),
+                         ifelse(sentiment > 0,
+                                paste0('<span style="color:',
+                                       colfunc_green(abs(max(sentiment)))[abs(sentiment)],
+                                       ';"><b>', token,'</b></span>'),
+                                token))) %>%
+  mutate(nchar_token = nchar(token)) %>%
+  group_by(speech, sentence_nr) %>%
+  arrange(sentence_nr) %>%
+  # I also want to break up long sentences
+  mutate(nchar_token_cum = cumsum(nchar_token)) %>%
+  mutate(split = which.min(abs(nchar_token_cum - 60))) %>%
+  mutate(split2 = which.min(abs(nchar_token_cum - 120))) %>%
+  mutate(split3 = which.min(abs(nchar_token_cum - 180))) %>%
+  mutate(split4 = which.min(abs(nchar_token_cum - 240))) %>%
+  mutate(token_colour = ifelse(token_id == split & max(nchar_token_cum) >=120 ,
+                               paste0(token_colour, "<br>"),
+                               token_colour)) %>%
+  mutate(token_colour = ifelse(token_id == split2 & max(nchar_token_cum) >=120 ,
+                               paste0(token_colour, "<br>"),
+                               token_colour)) %>%
+  mutate(token_colour = ifelse(token_id == split3 & max(nchar_token_cum) >=180 ,
+                               paste0(token_colour, "<br>"),
+                               token_colour)) %>%
+  mutate(token_colour = ifelse(token_id == split4 & max(nchar_token_cum) >=240 ,
+                               paste0(token_colour, "<br>"),
+                               token_colour)) %>%
+  # Now I have added the colours to the words I can collapse them back into sentences
+  summarise(collapsed_sentence = paste0(token_colour, collapse=" ")) %>%
+  mutate(# delete space before comma
+         collapsed_sentence = gsub(" ,", ",", collapsed_sentence),
+         # delete space before full stop
+         collapsed_sentence = gsub(" \\.", ".", collapsed_sentence),
+         # delete space before exclamation point
+         collapsed_sentence = gsub(" !", "!", collapsed_sentence),
+         # delete space around hyphens
+         collapsed_sentence = gsub(" - ", "-", collapsed_sentence),
+         # delete space around brackets
+         collapsed_sentence = gsub("\\( ", "(", collapsed_sentence),
+         # delete space around brackets
+         collapsed_sentence = gsub(" \\)", ")", collapsed_sentence)) %>%
+  ungroup() %>%
+  # Now I just add the dates to the speeches
+  left_join(sentence_length %>% select(speech, date), by = "speech")
+
+dat <- parsedtxt %>%
+   filter(!c(pos %in% c("PUNCT", "SPACE", "NUM"))) %>%
+  filter(!token %in% c("%", "&", "-"))  %>%
+  left_join(Afinn, by = c("lemma"= "word")) %>%
+  group_by(speech,  sentence_nr) %>%
+  mutate(sentiment = ifelse(is.na(sentiment), 0, sentiment)) %>%
+  summarise(sentiment_mean = mean(sentiment, na.rm = T), .groups = "drop") %>%
+  group_by(speech) %>%
+  group_by(speech,  sentence_nr) %>%
+  nest(data = -speech) %>%
+  # use combination of map and augment to get the fitted values of the Loess regression
+  mutate(
+    fit = map(data, ~ loess(sentiment_mean ~ sentence_nr,
+                            data = .x,
+                            span = 0.5)),
+    augmented = map(fit, augment)) %>%
+  # unnest the datasets per speech into one big dataset
+  unnest(augmented)  %>%
+  select(-data, - fit, - .resid) %>%
+  ungroup()
+
+# combine the text and speech data
+dat2 <- left_join(dat, text, by = c("sentence_nr", "speech" )) %>%
+  mutate(speech = paste0(speech, " (", date, ")")) %>%
+  # order speeches
+  mutate(speech = fct_reorder(speech, date))
+
+# create a color palette from the colours of the Ghanaian coat of arms
+colfunc <- colorRampPalette(c("#CE1126","#FCD116","#006B3F", "#0193DD", "#000000"))
+
+# now all of this can be combined into a plotly plot
+fig3 <- plot_ly(data = dat2,
+        type = 'scatter',
+        mode = "lines",
+        color = ~speech,
+        sort = FALSE,
+        colors = colfunc(11)) %>%
+  add_trace(
+    y = ~.fitted,
+    x = ~sentence_nr,
+    text = ~collapsed_sentence,
+    hoverinfo = 'text',
+    hoverlabel = list(  bgcolor = "white",
+                        opacity = 0.5,
+                        size = 7,
+                        font= list(family = 'Raleway'),
+                        align = "left",
+                        line = list(
+                          opacity = 0.9,
+                          width = 3)),
+    showlegend = T)  %>%
+  layout(title = list(text = "<b>Sentiment of COVID-19 Speeches by the President of Ghana</b><br><sup>Speeches vary in length, but all end on a positive note.</sup>",
+                      x =0.05,
+                      xanchor = "left",
+                      automargin = TRUE),
+         font = list(color = '#706f6f',
+                     family = 'Raleway',
+                     size = 14),
+         xaxis = list(title = "Sentence number",
+                      showspikes = TRUE,
+                      spikemode  = 'toaxis',
+                      spikesnap = 'data',
+                      showline = TRUE,
+                      showgrid = FALSE,
+                      showticklabels = TRUE,
+                      linecolor = '#706f6f',
+                      linewidth = 2,
+                      autotick = TRUE,
+                      ticks = 'outside',
+                      tickcolor = '#706f6f',
+                      tickwidth = 2,
+                      ticklen = 5,
+                      tickfont = list(family = 'Raleway',
+                                      size = 12,
+                                      color = '#706f6f')),
+         yaxis = list(title = "Average sentence sentiment (smoothed)",
+                      showline = TRUE,
+                      showgrid = FALSE,
+                      showticklabels = TRUE,
+                      linecolor = '#706f6f',
+                      linewidth = 2,
+                      autotick = TRUE,
+                      ticks = 'outside',
+                      tickcolor = '#706f6f',
+                      tickwidth = 2,
+                      ticklen = 5,
+                      tickfont = list(family = 'Raleway',
+                                      size = 12,
+                                      color = '#706f6f')),
+         legend = list(title = list(text = "<b>Speeches</b><br><sup>(double click on a speech to isolate it and hover over lines to see text)</sup>"),
+                       x = 0, y = -.8,
+                       xanchor = "left"),
+         autosize = T,
+         margin = list(t = 100),
+         showlegend = TRUE) %>%
+  add_annotations( x = 1,
+                   y = -0.05,
+                   xanchor = "left",
+                   showarrow = F,
+                   align = "left",
+                   text=  '<span style="color:#a70000;"><b>Negative values signify<br>negative sentiment</b></span>') %>%
+  add_annotations( x = 1,
+                   y = 0.3,
+                   xanchor = "left",
+                   showarrow = F,
+                   align = "left",
+                   text=  '<span style="color:#A3D12D;"><b>Positive values signify<br>positive sentiment</b></span>') %>%
+  config(displayModeBar = FALSE)
+
+fig3
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: https://ghanadatastuff.com/post/text_analysis_covid/
+* Data Sources: https://www.presidency.gov.gh/index.php/briefing-room/speeches
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'ghana president covid speech'
+commands <- 'read_html html_node html_table'
+sources <- 'ghanadatastuff
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

@@ -1,0 +1,94 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    #code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Group
+## Aggregate individual observations into groups
+
+```{r, out.width="20%", fig.align="center", fig.cap="Photo by Creative Commons"}
+# image of an icon to represent the activity or any method (visit for icon https://thenounproject.com/search/?q=attribute&i=4326168)
+masthead <- "assets/4-wranglers-4-extend.svg"
+knitr::include_graphics(masthead, dpi=72)
+```
+
+Group Methods  
+
+* Group __one_variable__ with __one_calculation__
+* Group __multiple_variables__ with __one_calculation__
+* Group __multiple_variables__ with __multiple_calculations__
+
+Common aggregations functions:  
+
+* __Count__: quatity of records per group
+* __Sum__: Summation of a value per group
+* __Min__, __Max__, find the minimum or maximum value per group
+* Measure of __central tendency__: mean, median, mode per group
+
+Other useful methods:
+
+* __Pivot__, turning “Long data format” to "Wide data format"
+* __Unpivot__, turning "Wide data format" to “Long data format”
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "group-by group-by-summarise pivot unpivot" # mostly used in wranglers and analytics
+keywords <- ''
+commands <- ''
+sources <- ''
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

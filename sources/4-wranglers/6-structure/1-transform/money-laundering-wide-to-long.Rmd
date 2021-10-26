@@ -1,0 +1,165 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(purrr)
+library(tidyr)
+library(readxl)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Money Laundering
+## Transform: Wide to Long
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Sasun Bughdaryan on Unsplash"}
+
+masthead <- "assets/sasun-bughdaryanunsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> The focus now is on citizen activism, where citizens express themselves in a peaceful and nonviolent way....\
+--- Promise Mkwananzi\
+
+***
+
+
+Wide and Long Data are two terms used to represent different presentations of tabular data. In the wide format, each response variable is in a separate column. Data stored in long form has a single column for each variable in the system.
+
+Wheter the wide or long format is appropriate is dependent on the model or analytics you're trying to process. The long format seems to be the popular choice in most cases because you want each unit of observation to be its own row. However, in most survey research or social sciences, the wide format seems to be a popular choice. Thus, it is necessary for us to learn how to transform between the two tabular formats.
+
+### Load data
+#### Here we have a wide data format.
+
+
+```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read_excel('./archetypes/money_laundering.xlsx')
+
+```
+
+
+By looking at the dataframe we can see that there are two header rows. The first rows encompasses the data across the year. The second header row encompasses the three category: Clear, Count, Rate.
+
+Normally we can jump straing to pivotting the data frame but it might be imperative to convert it to a 1-header data frame first. 
+
+
+```{r, message=FALSE, echo=FALSE}
+
+# Start by renaming your columns to include both the year and variable
+# The use of '-' to separate the parts is for convenience in the regex below
+names(df)[4:ncol(df)] <- paste(df[1, 4:ncol(df)],
+                                 gsub("\\..*","",names(df)[4:ncol(df)]),
+                                 sep = "-")
+
+names(df)[1:3] <- df[1, 1:3]
+
+df <- df[2:nrow(df), ] # We will remove the 2nd row now
+
+
+df
+```
+
+Now that we've transformed the headers, we can now pivot it using dplyr. 
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df1 <- df %>%
+  gather(key, value, -c(Region, `Sub-region`, Country)) %>%
+  separate(key, into = c("measure", "year")) %>%
+  spread(key = measure, value)
+
+df1
+
+```
+
+
+Notice the columns containg the years have been reduced to three columns: Clear, Count and Rate. We can even go a step further to make the data longer. We'll try another method from the tidyr library.
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_longer <- gather(data= df1,
+      key =   Category,
+      value =  Value,
+      `Clear`:`Rate`, # Names of source columns that contain values
+      factor_key=FALSE) # Treat the new key column as a factor (instead of character vector)
+
+df_longer <- na.omit(df_longer)
+
+df_longer
+```
+
+
+### References
+#### The citations and data sources
+
+* United Nations Office on Drugs and Crime  <a href="https://dataunodc.un.org/" target="_blank">data repository</a> 
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "wide-to-long" # mostly used in wranglers and analytics
+keywords <- 'money-laundering'
+commands <- 'gather seperate spread'
+sources <- 'UNODC'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

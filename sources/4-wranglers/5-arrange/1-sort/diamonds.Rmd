@@ -1,0 +1,302 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(purrr)
+library(ggiraph)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Diamonds
+## Sort
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Edgar Soto on Unsplash"}
+
+masthead <- "assets/edgar-soto-gb0BZGae1Nk-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Diamonds</div>
+
+
+> The focus now is on citizen activism, where citizens express themselves in a peaceful and nonviolent way....\
+--- Promise Mkwananzi\
+
+***
+
+### Load data
+
+
+```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df<-read.csv('./archetypes/diamonds.csv', header = TRUE, stringsAsFactors = FALSE)
+set.seed(123)
+index <- sample(1:nrow(df), 100)
+df_1<-df[index,]%>%
+  select(carat, cut, color,clarity,price)
+row.names(df_1)<-NULL
+
+
+```
+
+
+
+```{r Styling Data Set, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+
+
+df_tmp <- df_1%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Sort a dataset from a given reference with set order
+#### Here is a reference list for "clarity" based on the <a href = "https://en.wikipedia.org/wiki/Diamond_clarity" target="_blank"> modern GIA grading system </a>.
+
+```{r, message=FALSE, echo=FALSE}
+
+reference<-c('IF','VVS1','VVS2','VS1','VS2','SI1','SI2','I1')
+
+reference
+
+```
+
+#### Sort the order following the reference list.
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+
+df_2<-df_1%>% arrange(factor(clarity, levels = reference))
+
+
+```
+
+
+```{r Styling Data Set1, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_2%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(4, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Sort a dataset by column ascending
+
+#### Sort a number column "carat".
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_3<-df_1%>%arrange(carat)
+
+```
+
+```{r Styling Data Set2, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_3%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(1, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+#### Sort a string column "cut".
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_4 <- df_1 %>% arrange(cut)
+
+```
+
+
+```{r Styling Data Set3, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_4%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(2, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+### Sort a dataset by column descending
+
+#### Sort a number column "price".
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_5<-df_1%>%arrange(desc(price))
+
+
+```
+
+```{r Styling Data Set4, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_5%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(5, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+#### Sort a string column "color".
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_6<-df_1%>%arrange(desc(color))
+
+
+```
+
+```{r Styling Data Set5, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_6%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(3, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+## Sort by several columns
+
+#### Let's sort by ascending "price" and descending "carat".
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+df_7<-df_1%>%arrange(price,desc(carat))
+
+
+```
+
+```{r Styling Data Set6, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_7%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(c(1,5), bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+v1 <- ggplot( data=df, aes(carat, price, colour=clarity)) +
+    geom_point(alpha = 0.5, size = .75, position="jitter") +
+    scale_colour_brewer(
+        guide = guide_legend(title = NULL, reverse=T,
+            override.aes = list(alpha = 1))) +
+    theme_minimal()
+
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+
+### References
+#### The citations and data sources used for this case
+
+#### The data source was built in R. Use function data() in the console to view available datasets.
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/diamonds.bib")
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "sort-ascending sort-descending sort-multiple-column sort-set-order" # mostly used in wranglers and analytics
+keywords <- 'diamonds'
+commands <- 'arrange'
+sources <- 'Wikipedia'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

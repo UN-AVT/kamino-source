@@ -1,0 +1,518 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+
+library(purrr)
+library(kableExtra)
+
+library(knitcitations)
+library(bibtex)
+library(ggiraph)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Google Trending Searches on "Data Science"
+## Format Date
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Luke Chesser on Unsplash"}
+
+masthead <- "assets/trend-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text"> Trends Visualization</div>
+
+> To be a consistent winner means preparing not just one day, one month or even one year - but for a lifetime...\
+--- Bill Rodgers\
+
+***
+
+### Load data
+
+
+```{r load-data, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'} 
+
+df <- read.csv('archetypes/google-trend-on-data-science.csv')
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION
+
+```
+
+
+### Convert character format into date format 
+
+#### Let's focus on the <span style="color: #8000FF;font-weight:bold">Time</span> column. 
+
+#### If only the __date__ (not the time) portion of the data is needed, then use as.Date to convert the characters into date format.
+
+```{r convert date, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_1 <- df
+df_1$date <- as.Date(df$Time)
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set1, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_1
+
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#8000FF")
+      
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(3, bold = TRUE, color = "#000000", background = "#E3CEF6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+#### On the other hand, if __time__ is important to us, then add the time into the date format as <span style="font-weight:bold">%Y-%m-%dT%H:%M:%S</span>. You may set the default system time zone to convert the date and time. In our case, it only records in hours.
+
+```{r method: convert time, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_2 <- df
+df_2$Time <-as.POSIXct(df_2$Time, format = "%Y-%m-%dT%H",tz=Sys.timezone())
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set2, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_2
+
+names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
+      
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(1, bold = TRUE, color = "#000000", background = "#E3CEF6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION
+
+```
+
+
+
+### Quarter
+
+#### Use this method to create a <span style="color: #2E2EFE;font-weight:bold">Quarter</span> column which categorizes each record into each quarter as per <span style="color: #8000FF;font-weight:bold">Time</span>.
+
+```{r method: qtr,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_3 <- df
+df_3$Quarter <-quarters(df_2$Time)
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set3, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_3
+names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#2E2EFE")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(3, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Year
+
+#### Use this method to create a <span style="color: #2E2EFE;font-weight:bold">Year</span> column which captures the year of <span style="color: #8000FF;font-weight:bold">Time</span>.
+
+
+```{r method: yr, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_4 <- df_2
+df_4$Year <- format(df_2$Time,format="%Y")
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set4, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_4
+
+names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#2E2EFE")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(3, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+### Year_Month
+
+#### Use this method to create a <span style="color: #2E2EFE;font-weight:bold">Year_Month</span> column which captures only the combination year and month of <span style="color: #8000FF;font-weight:bold">Time</span>.
+
+```{r method: ym, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_5 <- df_2
+df_5$Year_Month <-format(df_2$Time,format="%Y-%m")
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set5, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_5
+
+names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#2E2EFE")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(3, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+
+### Month
+#### Use this method to create a <span style="color: #2E2EFE;font-weight:bold">Month</span> column (Numeric or Abbreviation format) which captures only the month of <span style="color: #8000FF;font-weight:bold">Time</span>.
+
+
+```{r method: m, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_6 <- df_2
+df_6$Month_Num <-format(df_2$Time,format="%m")
+df_6$Month_ABR <-format(df_2$Time,format="%b")
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set6, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_6
+
+names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#2E2EFE")
+names(df_tmp)[4] <- cell_spec(names(df_tmp)[4], color = "#2E2EFE")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(3:4, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+### Month_Day
+#### Likewise, use this method to create a <span style="color: #2E2EFE;font-weight:bold">Month_Day</span> column (Numeric or Name format) which captures the month-and-day (or day-and-month) combination of <span style="color: #8000FF;font-weight:bold">Time</span>.
+
+
+```{r method: md, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_7 <- df_2
+df_7$MM_DD_Num <- format(df_2$Time,format="%m-%d")
+df_7$DD_MM_Name <- format(df_2$Time,format="%d %B")
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set7, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_7
+
+names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#2E2EFE")
+names(df_tmp)[4] <- cell_spec(names(df_tmp)[4], color = "#2E2EFE")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(3:4, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION
+
+```
+
+
+### Plot an example
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+df <- read.csv('archetypes/historical-trend-on-data-science.csv')
+df_1 <- add_column(df,date=paste0(df$Month,'-01'))
+df_1$quarter<-quarters(as.Date(df_1$date))
+df_1$year<-format(as.Date(df_1$date),format="%Y")
+
+df_2 <- df_1 %>% group_by(quarter,year) %>% summarise(sum_number=sum(data.science...Worldwide.))%>% filter(between(year, as.numeric("2013"), as.numeric("2020")))
+rownames(df_2) <- NULL
+df_3 <- df_1 %>% group_by(year) %>% summarise(sum_number=sum(data.science...Worldwide.))%>%filter(year!=2021)
+rownames(df_3) <- NULL
+v1<-ggplot(data=df_3, aes(x=year, y=sum_number, group=1))+
+  geom_line(color='#2E2EFE',size=1.5,alpha=0.3)+
+  geom_point(color='#2E2EFE',size=1.8)+
+  theme_minimal()+labs(
+    x='Year',
+    y='Search Frequency'
+  )
+v2<-ggplot(data=df_2, aes(x=quarter, y=sum_number, group=year)) +
+  geom_step(aes(color=year))+
+  geom_point(aes(color=year))+
+  theme_minimal()+labs(
+    x='Quarter',
+    y='Search Frequency'
+  )
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+### As reusable solution
+```{r eval=FALSE, echo=TRUE, message=FALSE, include=TRUE}
+
+####################################################################################
+# Required libraries
+# Not Required
+####################################################################################
+
+
+####################################################################################
+# Convert Character Format to Date Format
+f_chardate <- function(df_chardate) {
+  as.Date(df_chardate)
+}
+
+# Call the function with your values to the parameters
+df$Time2 <- f_chardate(df$Time)
+####################################################################################
+
+ 
+####################################################################################
+# Convert to Date-Time Format
+f_dateTime <- function(df_dateTime) {
+  as.POSIXct(df_dateTime, format = "%Y-%m-%dT%H",tz=Sys.timezone())
+}
+
+# Call the function with your values to the parameters
+df$Time2 <- f_dateTime(df$Time)
+####################################################################################
+
+
+####################################################################################
+# Crete Quarter Column from Date Data
+f_quarter <- function(df_quarter) {
+  temp <<- as.Date(df_quarter) #if not in Date Format
+  quarters(temp)
+}
+
+# Call the function with your values to the parameters
+df$Time2 <- f_quarter(df$Time)
+####################################################################################
+
+
+####################################################################################
+# Extract Year from Date Data
+f_year <- function(df_year) {
+  temp <<- as.Date(df_year) #if not in Date Format
+  format(temp,format="%Y")
+}
+
+# Call the function with your values to the parameters
+df$Time2 <-f_year(df$Time)
+####################################################################################
+
+
+####################################################################################
+# Extract Year-Month from Date Data
+f_yearMonth <- function(df_yearMonth) {
+  temp <<- as.Date(df_yearMonth) #if not in Date Format
+  format(temp,format="%Y-%m")
+}
+
+# Call the function with your values to the parameters
+df$Time2 <- f_yearMonth(df$Time)
+####################################################################################
+
+
+
+####################################################################################
+# Extract Month (numerical) from Date Data
+f_monthNum <- function(df_monthNum) {
+  temp <<- as.Date(df_monthNum) #if not in Date Format
+  format(temp,format="%m")
+}
+
+# Call the function with your values to the parameters
+df$Time2 <- f_monthNum(df$Time)
+####################################################################################
+
+
+####################################################################################
+# Extract Month (Alphabetical) from Date Data
+f_monthAlpha <- function(df_monthAlpha) {
+  temp <- as.Date(df_monthAlpha) #if not in Date Format
+  format(temp,format="%b")
+}
+
+# Call the function with your values to the parameters
+df$Month <- f_monthAlpha(df$Time)
+####################################################################################
+
+
+####################################################################################
+# Extract Month-Day (Alphabetical) from Date Data
+f_monthDay <- function(df_monthDay) {
+  temp <<- as.Date(df_monthDay) #if not in Date Format
+  format(temp,format="%d %B")
+}
+
+# Call the function with your values to the parameters
+df$Time2 <- f_monthDay(df$Time)
+####################################################################################
+
+
+
+####################################################################################
+# Extract Several Date Formats by substituting "type"
+f_dateType <- function(df_dateType, type) {
+  temp <<- as.Date(df_dateType) #if not in Date Format
+  format(temp,format=type)
+}
+
+# Call the function with your values to the parameters
+df$Time2 <- f_dateType(df$Time, "%d %B")
+####################################################################################
+```
+
+
+
+# References
+## The citations and data sources used for this case
+
+The data source was from <a href="https://trends.google.com/trends/trendingsearches/daily?geo=US" target="_blank">Google Trending Searches on "Data Science"</a>.
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/google-trend-on-data-science.bib")
+
+```
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "Format-Date character-to-date date-month-alphabetical date-month-numerical date-quarters date-year date-day-month date-to-datetime date-year-month date-extract-all" # mostly used in wranglers and analytics
+keywords <- 'google data-science'
+commands <- 'as.Daate as.POSIXct quarters format mutate'
+sources <- 'Google'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

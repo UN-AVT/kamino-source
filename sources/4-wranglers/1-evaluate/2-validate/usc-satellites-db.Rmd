@@ -1,0 +1,483 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+
+library(tidyverse)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(schoolmath)
+library(countrycode)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# USC Satellites
+## Validate
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nasa on Unsplash"}
+
+masthead <- "assets/photo-satellite.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Satellite in Orbit</div>
+
+
+> If I had a spreadsheet on my computer, it looked like I was busy...\
+--- Nate Silver\
+
+***
+
+
+
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv('./archetypes/usc-satellites-db/usc-satellites-db.csv', header = TRUE, stringsAsFactors = FALSE)
+df<-df[1:20,]
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Raw Data Set, echo=FALSE}
+
+# NOT TO BE USED AS SOLUTION
+
+# df_tmp <-df%>%
+# kable(escape = FALSE)%>%
+# kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+# scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+# df_tmp
+
+# NOT TO BE USED AS SOLUTION 
+df
+```
+
+### Is alpha
+#### Checking if the cells in the first column contain letters, and only letters (a-zA-Z).
+
+```{r is.alpha, echo=TRUE, message=FALSE}
+a <- df$Name.of.Satellite..Alternate.Names
+
+df_1 <- grepl("^[A-Za-z]+$", a, perl = T)
+
+```
+
+```{r, echo=FALSE}
+df_1
+```
+
+#### As you can see, only cell 18 contains only letters, the other cells contain numbers or other characters.
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Raw Data Set 1, echo=FALSE}
+
+# NOT TO BE USED AS SOLUTION
+list <- list(a, df_1)
+df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(Country.Org.of.UN.Registry=V1,is_alpha=V2)
+
+
+df_tmp <-df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+row_spec(18, bold = T, color = "white", background = "#76b5c5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Is alphanumeric
+#### Checking if the cells in the second column contain only letters or numbers.
+
+```{r is.alphanumeric, echo=TRUE, message=FALSE}
+
+a <- df$Country.Org.of.UN.Registry
+df_2 <- grepl("^[0-9A-Za-z]+$", a, perl = T)
+
+```
+
+```{r, echo=FALSE}
+df_2
+```
+
+#### As you can see, some rows contain other characters than just letters and numbers.
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Raw Data Set 2, echo=FALSE}
+
+# NOT TO BE USED AS SOLUTION
+list<-list(a,df_2)
+df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(Country.Org.of.UN.Registry=V1,is_alpha=V2)
+
+
+df_tmp <-df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+row_spec(c(1:2,4,9,15), bold = T, color = "white", background = "#E2B9B3")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Is numeric
+#### Check if the column "Eccentricity" is numeric.
+
+```{r is.numeric, echo=TRUE, message=FALSE}
+
+is.numeric(df$Eccentricity)
+
+```
+
+
+### Is decimal
+#### Now we know "Eccentricity" is numeric, but is it decimal?
+
+
+```{r is.decimal, echo=TRUE, message=FALSE}
+
+e<-df$Eccentricity
+
+df_3<-is.decimal(e)
+
+```
+
+```{r}
+df_3
+```
+
+#### As you can see, 0 is not decimal. 
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Raw Data Set 3, echo=FALSE}
+
+# NOT TO BE USED AS SOLUTION
+list<-list(e,df_3)
+
+df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(Eccentricity=V1,is_decimal=V2)
+
+df_tmp <-df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+row_spec(c(4,13), bold = T, color = "white", background = "#E2B9B3")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Is integer
+#### Checking if the cells of column "xfield" are integers.
+
+
+```{r is.integer, echo=TRUE, message=FALSE}
+
+is.integer(df$xfield)
+
+```
+
+### Is divisible by
+
+#### Checking if an integer is divisible by another. We know 'xfield' is made of integers, let's check if all these cells are divisible by 3.
+
+```{r is_divisible_by, echo=TRUE, message=FALSE}
+
+d<-df$xfield%%3==0
+
+```
+
+```{r, echo=FALSE}
+d
+```
+
+#### As you can see, not all rows can divide by 3.
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Raw Data Set 5, echo=FALSE}
+
+# NOT TO BE USED AS SOLUTION
+list<-list(d,df$xfield)
+
+df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(xfield=V1,is_divisible_by_3=V2)
+
+
+df_tmp <-df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+row_spec(c(1,5,10:12,17), bold = T, color = "white", background = "#76b5c5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Is date
+#### Checking if the column "Date.of.Launch" is of date type.
+
+```{r is.date, echo=TRUE, message=FALSE}
+
+c <- df$Date.of.Launch
+
+class(c)=='Date'
+
+```
+
+#### If not, we can use as.Date to change the type and check again.
+
+```{r is.date2, echo=TRUE, message=FALSE}
+
+d <- as.Date(c)
+class(d) == 'Date'
+
+```
+
+
+### Is length
+
+#### Checking if the column "COSPAR.Number" has the same length for each cell, that they are they all equal to 9?
+
+```{r is.length, echo=TRUE, message=FALSE}
+
+nchar(df$COSPAR.Number)==9
+
+```
+
+### Is empty
+
+#### Checking if the column "Detailed.Purpose" column has any cells with lenght zero.
+
+```{r is.empty, echo=TRUE, message=FALSE}
+
+df_4 <- nchar(df$Detailed.Purpose)==0
+
+
+```
+
+```{r, echo=FALSE}
+list <- list(df$Detailed.Purpose,df_4)
+df_4
+
+```
+
+#### As you can see, there are many empty rows.
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Raw Data Set 4, echo=FALSE}
+
+# NOT TO BE USED AS SOLUTION
+
+df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(Detailed.Purpose=V1,is_empty=V2)
+
+
+df_tmp <-df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+row_spec(c(2,10:15), bold = T, color = "white", background = "#E2B9B3")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+### Is LatLong
+
+#### Check if the string is a valid latitude-longitude coordinate in the format lat,long or lat, long.
+
+#### The latitude of the location. May range from -90.0 to 90.0. The longitude of the location. May range from -180.0 to 180.0.
+
+#### Let's check if "Longitude.of.GEO..degrees." column fit the requirement. 
+
+```{r is.latlong, echo=TRUE, message=FALSE}
+
+df$Longitude.of.GEO..degrees.<180.0 |df$Longitude.of.GEO..degrees.>-180.0
+
+```
+
+#### As you can see, except one NA value, the rest fit the longitude requirement. 
+
+### Is logical
+
+#### Check if the column "Type.of.Orbit" is logical. 
+
+```{r is.logical, echo=TRUE, message=FALSE}
+
+is.logical(df$Type.of.Orbit)
+
+```
+
+#### Let's check another dataset.
+
+```{r Load raw datasets2, echo=TRUE, message=FALSE}
+
+df_11 <- read.csv('./archetypes/economic-growth-happiness/economic-growth-does-not-guarantee-rising-happiness.csv')
+df_11 <- df_11[1:20,]
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Raw Data Set11, echo=FALSE}
+
+# NOT TO BE USED AS SOLUTION
+
+df_tmp <-df_11%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(9, bold = T, color = "white", background = "#76b5c5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+
+# NOT TO BE USED AS SOLUTION 
+
+```
+
+#### Check if the column "paradox" is logical.
+
+```{r is.logical2, echo=FALSE, message=FALSE}
+
+is.logical(df_11$paradox)
+
+```
+
+### Country code
+
+#### R is a very popular tool in particular because there is an army of dedicated and talented people creating and maintaining packages. The following package is one of them, and is very useful to us as we deal with country data,   <a href="https://cran.r-project.org/web/packages/countrycode/countrycode.pdf" target="_blank" rel="noopener noreferrer">[country code library]</a>
+
+#### This package includes a set of functions that we can apply to convert, guess and/or validate country code.
+
+#### For example, the second column in the last dataset we loaded, called "iso", seems to contain ISO-2 characters. Using the package, we can confirm that these code are all valid. If some of them are not valid, it will return NA.
+
+#### Let's enter "iso2c" as origin first (meaning we guess it is ISO-2). For each cell, it will return the country name if the code is recognised.
+
+```{r is.country, echo=TRUE, message=FALSE}
+
+df_5 <- countrycode(df_11$iso, origin = 'iso2c', destination = 'country.name')
+df_5
+
+```
+
+#### Notice that the third entry is NA, meaning the code was not recognized as a valid ISO2 code. 
+
+<!-- We can also use the guess function, enter similarity of 100, means we want exact match.  -->
+
+
+```{r is.country3, echo=FALSE, message=FALSE}
+
+# df_7 <- guess_field(df_11$name, min_similarity=10)
+
+```
+
+
+<!-- You can see the column "iso2c" matches so many codes, and iso2c is just one of them. -->
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Raw Data Set 7, echo=FALSE}
+
+# NOT TO BE USED AS SOLUTION
+
+# df_tmp <-df_7%>%
+# kable(escape = FALSE)%>%
+# kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+# row_spec(4, bold = T, color = "white", background = "#76b5c5")%>%
+# scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+# df_tmp
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+### References
+#### The citations and data sources used for this case:
+
+This case is based on a dataset that comes from the following report by <a href="https://www.ucsusa.org/resources/satellite-database" target="_blank" rel="noopener noreferrer"> Union of Concerned Scientists.</a>
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/usc-satellites-db.bib")
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "Validate change-date country-code is-alpha is-alphanumeric is-date is-decimal is-divisible is-empty is-integer is-length is-logical is-longitude is-numeric" # mostly used in wranglers and analytics
+keywords <- 'USC satellite orbit'
+commands <- 'grepl is.numeric is.decimal is.integer class as.Date nchar is.logical countrycode'
+sources <- 'USC-Satellite-Database'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

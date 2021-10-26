@@ -1,0 +1,514 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+
+library(tidyverse)
+library(dplyr)
+library(ggiraph)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+
+
+# Global Access to Water and Sanitation 
+## Filter
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Gallery DS on Unsplash"}
+
+masthead <- "assets/gallery-ds-X_tEarX6svc-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Water and Sanitation</div>
+
+
+> Obviously, we all look at things through the filter of our own experiences....\
+--- Malcolm-Jamal Warner\
+
+***
+
+### Load the data
+```{r load-data, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+df <- read_csv('./archetypes/access-to-water-and-sanitation.csv')
+df
+
+```
+
+### By __position__ of __rows__ and/or __columns__
+
+```{r method: by row/column position, echo=TRUE, message=FALSE}
+#creating sample data of the first 1500 rows
+df <- df[c(1:1500),]
+write.csv(df, './archetypes/access-to-water-and-sanitation-sample.csv')
+
+df
+
+```
+
+
+### Where equal
+
+#### Filter dataset where rows equal to <span style="font-weight:bold">Africa</span> in the <span style="background: #E0ECF8;font-weight:bold">Continent</span> column. 
+
+```{r method: where equal, echo=TRUE, message=FALSE}
+
+df_1 <- df%>% filter(Continent=="Africa")
+
+
+```
+
+```{r Styling Data Set1, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+#df_tmp <- mutate(df_1, Country = cell_spec(Country, color=if_else(Country == "Angola", "#0000FF","#000000")))
+df_tmp <- df_1
+names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], background="#E0ECF8")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(1, bold = TRUE, color = "#000000", background = "#E0ECF8")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION
+```
+
+### Where not equal
+
+#### Taking only African countries into consideration, let's say we want to eliminate, for some reason, <span style="font-weight:bold">Angola</span> from <span style="background: #E0F8EC;font-weight:bold">Country</span> from this data
+
+```{r method: where not equal, message=FALSE, echo=TRUE,warning=FALSE}
+
+df_2 <- df %>% filter((Continent=="Africa") & !(Country=="Angola"))
+row.names(df_2)<-NULL
+
+```
+
+
+
+```{r Styling Data Set2, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_2
+names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], background="#E0F8EC")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(2, bold = TRUE, color = "#000000", background ="#E0F8EC")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION
+
+```
+
+
+
+
+### Where greater than 
+
+#### Filter dataset where <span style="background: #D0A9F5;font-weight:bold">Population</span> is greater than <span style="font-weight:bold">50,000</span>.
+
+```{r method: where greater than, message=FALSE, echo=TRUE,warning=FALSE}
+df_6 <- df_2%>%  filter(Population > 50000)
+row.names(df_6)<-NULL
+
+```
+
+
+
+```{r Styling Data Set6, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_6
+names(df_tmp)[9] <- cell_spec(names(df_tmp)[9], background="#D0A9F5")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(9, bold = TRUE, color = "#000000", background = "#D0A9F5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+```
+
+### Where less than  
+
+#### Filter dataset where <span style="background: #D0A9F5;font-weight:bold">Population</span> is less than <span style="font-weight:bold">50,000</span>.
+
+
+```{r method: where less than, message=FALSE, echo=TRUE,warning=FALSE}
+df_8 <- df_2%>%  filter(Population < 50000)
+row.names(df_8)<-NULL
+
+```
+
+
+
+```{r Styling Data Set8, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_8
+names(df_tmp)[9] <- cell_spec(names(df_tmp)[9], background="#D0A9F5")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(9, bold = TRUE, color = "#000000", background = "#D0A9F5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+```
+
+
+### Where between date
+
+#### First, let's convert the column <span style="background: #F78181;font-weight:bold">Date</span> into date format.
+
+
+```{r convert date, message=FALSE, echo=TRUE,warning=FALSE}
+df_9 <- df
+
+df_9$Date<-as.Date(df_9$Date, tryFormats = c("%Y-%m-%d"),optional = FALSE)
+
+```
+
+
+
+```{r Styling Data Set9, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_9
+names(df_tmp)[7] <- cell_spec(names(df_tmp)[7], background = "#F78181")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(7, bold = TRUE, color = "#000000", background = "#F78181")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+```
+
+
+#### Filter dataset where <span style="background: #F78181;font-weight:bold">Date</span> is between  <span style="font-weight:bold">2010-2015</span>:
+
+
+```{r method: where between date, echo=TRUE, message=FALSE, warning=FALSE}
+
+df_10 <- df_9%>% filter(between(Date, as.Date("2010-01-01"), as.Date("2015-01-01")))
+
+```
+
+
+
+```{r Styling Data Set10, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_10
+names(df_tmp)[7] <- cell_spec(names(df_tmp)[7], background = "#F78181")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(7, bold = TRUE, color = "#000000", background = "#F78181")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+```
+
+
+### Where before date
+
+#### Filter rows where <span style="background: #F78181;font-weight:bold">Date</span> is before <span style="font-weight:bold">2000</span>.
+
+
+```{r method: where before date, message=FALSE, echo=TRUE,warning=FALSE}
+
+df_11 <- df_9%>% filter(Date < as.Date("2000-01-01"))
+
+```
+
+
+
+```{r Styling Data Set11, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_11
+names(df_tmp)[7] <- cell_spec(names(df_tmp)[7], color = "#F78181")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(7, bold = TRUE, color = "#000000", background = "#F78181")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+```
+
+
+### Where after date
+
+#### Filter rows where <span style="background: #F78181;font-weight:bold">Date</span> is after <span style="font-weight:bold">2010</span> for the countries with <span style="background: #A9F5F2;font-weight:bold">No access to water</span> for a population that is bigger than <span style="background: #F5D0A9;font-weight:bold">75,000</span>.
+
+
+```{r method: where after date, message=FALSE, echo=TRUE,warning=FALSE}
+
+df_12 <- df_9%>% filter(Date > as.Date("2010-01-01") & (Metric=="No access to water") & (Population > 75000))
+
+```
+
+
+
+```{r Styling Data Set12, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_12
+names(df_tmp)[7] <- cell_spec(names(df_tmp)[7], background = "#F78181")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(5, bold = TRUE, color = "#000000", background = "#A9F5F2")%>%
+column_spec(7, bold = TRUE, color = "#000000", background = "#F78181")%>%
+column_spec(9, bold = TRUE, color = "#000000", background = "#F5D0A9")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+```
+
+
+### Based on regular expression (regex)
+
+#### Filter the dataset where <span style="background: #FE9A2E;font-weight:bold">Continent</span> name starts with <span style="font-weight:bold">S</span>:
+
+
+```{r method: regex, message=FALSE, echo=TRUE,warning=FALSE}
+df_13 <- df %>% 
+filter(str_detect(Continent, "^S"))
+
+```
+
+
+
+```{r Styling Data Set13, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_13
+names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], background = "#FE9A2E")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(1, bold = TRUE, color = "#000000", background = "#FE9A2E" )%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+```
+
+### As reusable solution
+```{r eval=FALSE, echo=TRUE, message=FALSE, include=TRUE}
+####################################################################################
+# Required libraries
+library(tidyverse)
+library(dplyr)
+
+####################################################################################
+# Load data
+load_data <- function(data_source){
+  read_csv(paste(getwd(),data_source,sep="/"))
+}
+
+#Call the function to load the data
+load_data("./archetypes/access-to-water-and-sanitation.csv")
+####################################################################################
+
+
+####################################################################################
+# Filtering by position of rows and/or columns 
+filter_position <- function(df_position,row_var,column_var) {
+  df_position[row_var,column_var]
+}
+
+# Call the function to filter the data set 
+filter_position(df,c(4,10,100:600), c(1,3:5))
+####################################################################################
+
+
+####################################################################################
+# Filtering by value to be compared with a row_value within a column 
+# Method Where equal 
+filter_where_equal <- function(df_where_equal,column_name,value) {
+ df_where_equal %>% filter(column_name == value)
+}
+
+# Call the function to filter the data set 
+filter_where_equal(df,df$Continent,"Africa")
+####################################################################################
+
+
+####################################################################################
+# Method Where not equal  
+filter_where_not_equal <- function(df_where_not_equal,column_name,value) {
+ df_where_not_equal %>% filter(column_name != value)
+}
+
+
+# Call the function to filter the data set 
+filter_where_not_equal(df,df$Continent,"Africa")
+####################################################################################
+
+
+####################################################################################
+# Method Where between (value types: numeric, date)
+filter_where_between <- function(df_where_between,column_name,value1,value2) {
+ df_where_between %>% filter(between(column_name,value1,value2))
+}
+
+# Call the function to filter the data set 
+filter_where_between(df,df$Population,"10000", "50000")
+####################################################################################
+
+
+####################################################################################
+# Method Where not between (value types: numeric, date)
+filter_where_not_between <- function(df,column_name,value1,value2) {
+ df%>% filter(!between(column_name,value1,value2))
+}
+
+# Call the function to filter the data set
+filter_where_not_between(df,df$Population,"10000", "50000")
+####################################################################################
+
+
+####################################################################################
+# Method Where greater than (value types: numeric, date)
+filter_greater_than <- function(df,column_name,value) {
+ df%>% filter(column_name > value)
+}
+
+# Call the function to filter the data set
+filter_greater_than(df,df$Population,"50000")
+####################################################################################
+
+
+####################################################################################
+# Method Where greater than equal (value types: numeric, date)
+filter_greater_than_equal <- function(df,column_name,value) {
+ df%>% filter(column_name >= value)
+}
+
+# Call the function to filter the data set
+filter_greater_than_equal(df,df$Population,"50000")
+####################################################################################
+
+
+####################################################################################
+# Method Where less than (value types: numeric, date)
+filter_less_than <- function(df,column_name,value) {
+ df%>% filter(column_name < value)
+}
+
+# Call the function to filter the data set
+filter_less_than(df,df$Population,"50000")
+####################################################################################
+
+
+####################################################################################
+# Method Where less than equal (value types: numeric, date)
+filter_less_than_equal <- function(df,column_name,value) {
+ df%>% filter(column_name <= value)
+}
+
+# Call the function to filter the data set
+filter_less_than_equal(df,df$Population,"50000")
+####################################################################################
+
+
+####################################################################################
+# Method Where Regular Expression 
+filter_where_regex <- function(df,column_name,value) {
+ df%>% filter(str_detect(column_name, value))
+}
+
+# Call the function to filter the data set
+filter_where_regex(df,df$Country,"^A")
+####################################################################################
+
+
+```
+
+### References
+#### The citations and data sources used for this case
+
+#### The data source used as an example was obtained from the article <a href="https://data.unicef.org/sdgs/goal-6-clean-water-sanitation/#:~:text=Goal%206%20aims%20to%20ensure%20availability%20and%20sustainable,the%20quality%20and%20sustainability%20of%20water%20resources%20worldwide" target="_blank">Global Clean Water and Sanitation</a> published by Unicef and <a href="https://public.tableau.com/profile/tam.s.varga#!/vizhome/Accesstowaterandsantitation/Accesstowaterandsanitation"  target="_blank">plotted</a> by Tableau Public.
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "filter filter-between filter-by-position filter-equal-to filter-greater-than filter-less-than filter-not-between filter-not-equal-to filter-regex" # mostly used in wranglers and analytics
+keywords <- 'water global sanitation'
+commands <- 'filter'
+sources <- 'Unicef'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/access-to-water-and-sanitation.bib")
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,253 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(reshape2)
+library(knitr)
+library(kableExtra)
+library(magick)
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Normalize
+## Pick a number from x to y
+
+> Normal is nothing more than a cycle on a washing machine...\
+--- Whoopi Goldberg\
+
+Normalization is used to standardize and scale values so they fit in a specific range. This pattern is useful when you need for example to run an analytical model on your data (like regression, classification, clustering, PCA, etc). Some models need the data to be "scaled" or normalized first before they can run. In situations where we have a lot of different (numerical variables) in very different ranges and levels of accuracy, we need to apply statistical methods or machine learning to classify or predict a process.  Normalization recalculates the values, to always be in the same range e.g. values between 0 and 1 or a Z-score which can be useful where we assume that values are normal distributed.
+
+* __z_transformation__
+* __range_transformation__
+* __proportion_transformation__
+* __iqr_transformation__
+
+## z Transformation
+
+Also called statistical normalization. This normalization subtracts the mean of the data from all values and then divides them by the standard deviation. The distribution of the data has a mean of zero and a variance of one. This is a common and very useful normalization technique. It preserves the original distribution of the data and is less influenced by outliers.
+
+## Range Transformation
+
+Range transformation normalizes all column values to a specified value range. Largest value is set to 'max' and the smallest value is set to 'min'. All other values are scaled. Method can be influenced by outliers, because the bounds move towards them. Method keeps the original distribution of the data points, so it can also be used for data anonymization to obfuscate the true range of observations.
+
+## Proportion Transformation
+
+This normalization is based on the proportion each column value has on the complete column. This means each value is divided by the total sum of that column values. The sum is only formed from finite values, ignoring NaN/missing values as well as positive and negative infinity. When this method is selected, another parameter (allow negative values) appears in the Parameters panel. If checked, negative values will be treated as absolute values, otherwise they will produce an error when executed.
+
+## IQR Transformation
+
+Normalization is performed using the interquartile range. The interquartile range is the distance between the 25th and 75th percentile, which are also called lower and upper quartile, or Q1 and Q3. They are calculated by first sorting the data and then taking the data value that separates the first (or the last) 25 values could be found, the corresponding Attribute will be ignored.
+
+Let's illustrate this pattern with the following case study.
+
+***
+
+## Loading the data
+
+Let's assume we want to build a model that predicts the value of Life Expectancy based on other measures. Here we have (Fertility, GDP_per_capita, Healthcare_spending and BMI (Body Mass Index))  
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+
+df<-read.csv('./archetypes/gap_life_expectancy_other_other_param_2010.csv')
+
+```
+
+```{r, echo=FALSE}
+
+df_tmp <-df[1:10,]%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")
+
+df_tmp 
+
+```
+
+
+Let's take a look at the summary statistics for the 4 measures we will use:
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+summary(df[3:6])
+
+```
+
+Notice that these measures are in different scales. Fertility is in the range [1.19, 7.49], while GDP_per_capita's range is [233, 88,700]
+
+## To illustrate why this may be an issue, let's plot
+
+
+```{r, message=FALSE, echo=FALSE,warning=FALSE}
+
+
+dat.m <- melt(df,id.vars='country', measure.vars=c('Fertility','GDP_per_capita','Healthcare_spending','BMI'))
+p <- ggplot(dat.m) +
+  geom_boxplot(aes(y=value, color=variable)) +
+  theme_bw() +
+  theme(
+    panel.border = element_blank(),
+    legend.position = 'top',
+    axis.text.x=element_blank()
+  )
+p
+```
+
+Because each measure is on a different scale, in some models the measure with the most amplitude (here GPD_per_capita) may be crowding out and cancel the effects of the other measures on Life Expectancy.
+
+## Z (statistical) Normalization
+
+This normalization subtracts the mean of the data from all values and then divides them by the standard deviation. The distribution of the data has a __mean of zero__ 
+and __a variance of one__. This is a common and very useful normalization technique. It preserves the original distribution of the data and is less influenced by outliers.
+
+Let's apply z normalization on columns "happy", "gdp.pc" and "pop".
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+
+df_1 <- df %>% mutate_each_(list(~scale(.) %>% as.vector),
+                                  vars = c('Fertility','GDP_per_capita','Healthcare_spending','BMI'))
+
+```
+
+```{r, echo=FALSE}
+df_tmp <-df_1[1:10,]%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(3:6, bold = TRUE, color = "#000000", background = "#CEE3F6")
+
+df_tmp 
+```
+
+After z normalization, let's check to make sure the mean is 0.
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+summary(df_1[3:6])
+
+```
+
+And standard deviation is 1.
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+
+apply(df_1, 2, sd)
+
+```
+
+## let's plot again. Notice that all measures are on similar scale.
+
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+
+dat.m <- melt(df_1,id.vars='country', measure.vars=c('Fertility','GDP_per_capita','Healthcare_spending','BMI'))
+p <- ggplot(dat.m) +
+      geom_boxplot(aes(y=value, color=variable)) +
+  theme_bw() +
+  theme(
+    panel.border = element_blank(),
+    legend.position = 'top',
+    axis.text.x=element_blank()
+  )
+p
+```
+
+
+## Range Min-Max Normalization
+
+Range transformation normalizes all column values to a specified  value range. Largest value is set to 'max' and the smallest value is set to 'min'. All other values are scaled. Method can be influenced by outliers, because the bounds move towards them. Method keeps the original distribution of the data points, so it can also be used for data anonymization to obfuscate the true range of observations.
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+
+df_2 <- bind_cols(df[,1:2],as.data.frame(apply(df[, 3:6], 2, function(x) (x - min(x))/(max(x)-min(x)))))
+df_2$name <- df$name
+
+```
+
+
+```{r, echo=FALSE}
+
+df_tmp <-df_2[1:10,]%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(3:6, bold = TRUE, color = "#000000", background = "#CEE3F6")
+
+df_tmp
+
+
+```
+
+
+Let's check to make sure the min and max are normalized.
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+summary(df_2[3:6])
+
+```
+
+
+## let's plot again. 
+
+Notice again that all measures are now on similar scale. Although the values are different, the "shape" of each measure (mean, median, outliers) remains constant.
+
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+
+dat.m <- melt(df_2,id.vars='country', measure.vars=c('Fertility','GDP_per_capita','Healthcare_spending','BMI'))
+p <- ggplot(dat.m) +
+      geom_boxplot(aes(y=value, color=variable)) +
+  theme_bw() +
+  theme(
+    panel.border = element_blank(),
+    legend.position = 'top',
+    axis.text.x=element_blank()
+  )
+p
+```
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

@@ -1,0 +1,340 @@
+country,level_1_government,level_2_government,bridge_name,project_code,b2p_fiscal_year,stage,individuals_directly_served,gps_latitude,gps_longitude,bridge_type,span_m,project_type
+Uganda,Eastern Region,Mbale,Kama,UG101,2018,Complete,5280,1.11633,34.25246,Suspended Bridge,90,B2P Built
+Swaziland,,,Mbluzi-Myendle,GO108,2017,Complete,4000,-26.29412,31.27124,Suspended Bridge,73,B2P Supported
+Panama,Ngäbe-Buglé,,Llano Bonito,PA122,2017,Complete,1500,8.446314,-81.365675,Suspended Bridge,79,B2P Supported
+Nicaragua,Jinotega,Santa María de Pantasma,Puente San Vicente N°1,1008677,2018,Complete,4000,13.435012,-85.7838,Suspension Bridge,67.8,B2P Built
+Nicaragua,Matagalpa,Río Blanco,La Guitarrilla,1008691,2018,Complete,4000,13.122785,-85.236833,Suspension Bridge,77.5,B2P Built
+Panama,Ngäbe-Buglé,Müna District,Alto Saldaña,1008543,2018,Complete,,8.339315,-81.674108,Suspended Bridge,72,B2P Supported
+Panama,Coclé,Penonomé District,Banacito,1008489,2018,Complete,,8.809012,-80.338959,Suspension Bridge,106,B2P Built
+Panama,Ngäbe-Buglé,Ñürüm District,El Paredón,1008531,2018,Complete,1400,8.448444,-81.198556,Suspension Bridge,35,B2P Built
+Bolivia,Cochabamba,Chapare,Espíritu Santo,1009257,2019,Complete,1400,-17.01330278,-65.54801389,Suspended Bridge,132,B2P Built
+Nicaragua,Jinotega,Jinotega,"Los Cerrones #4",1009328,2018,Complete,5000,13.30401,-85.78777,Suspension Bridge,52,B2P Built
+Rwanda,Southern Province,Nyaruguru,Ruharazi,1009311,2019,Complete,4959,-2.77676167,29.62627167,Suspended Bridge,45,B2P Built
+Bolivia,Cochabamba,Tapacarí,Machacamarca,1009318,2018,Complete,2400,-17.54093889,-66.80262778,Suspended Bridge,53,B2P Built
+Rwanda,Southern Province,Muhanga,Rukurazo,1009445,2020,Under Construction,1210,-2.114778,29.700594,Suspension Bridge,49,B2P Built
+Bolivia,Cochabamba,Narciso Campero,Pabellon,BO130,2017,Complete,210,-18.296267,-65.25315,Suspended Bridge,35,B2P Built
+Bolivia,Cochabamba,Chapare,Misión Mayu,1007320,2018,Complete,700,-17.03405,-65.98568333,Suspended Bridge,90,B2P Built
+Bolivia,La Paz,Abel Iturralde,Capaina,1007321,2018,Complete,175,-14.40317,-67.564314,Suspended Bridge,40,B2P Built
+Nicaragua,Región Autónoma de la Costa Caribe Norte,Waslala,El Naranjo,1002669,2018,Complete,5235,13.58125,-85.19765,Suspended Bridge,90,B2P Built
+Uganda,Eastern Region,Sironko,Kibembe,1008734,2019,Complete,1791,1.2043,34.28912,Suspension Bridge,75,B2P Built
+Uganda,Eastern Region,Manafwa,Tongole,1008762,2019,Complete,,1.937883,34.2691,Suspension Bridge,74.8,B2P Built
+Uganda,Eastern Region,Bududa,Namakhokolo,1008776,2018,Complete,,0.978583,34.280483,Suspended Bridge,90,B2P Built
+Uganda,Eastern Region,Bududa,Namawukulu,1008780,2018,Complete,,1.004485,34.4016731,Suspended Bridge,70,B2P Built
+Rwanda,Southern Province,Nyaruguru,Kucyaruseke,RW127,2018,Complete,,-2.711764,29.557267,Suspended Bridge,79,B2P Built
+Panama,Veraguas,Santa Fe District,El Macho,1007928,2018,Complete,253,8.003004,-81.438333,Suspension Bridge,30,B2P Built
+Panama,Veraguas,San Francisco District,Los Cruces - Palmarito,1007945,2018,Complete,,8.292049,-81.102752,Suspension Bridge,88,B2P Built
+Haiti,Grand'Anse,Jérémie,Chambellan,HT109,2017,Complete,30000,18.550083,-74.299444,Suspension Bridge,83.5,B2P Built
+Bolivia,Chuquisaca,Azurduy,Tarvita,1009063,2018,Complete,600,-19.92513611,-64.48539167,Suspended Bridge,40.5,B2P Built
+Haiti,Grand'Anse,Jérémie,Chameau,HT110,2017,Complete,45000,18.547792,-74.2586,Suspension Bridge,107,B2P Built
+Rwanda,Southern Province,Nyamagabe,Rugeti,1007466,2020,Under Construction,4363,-2.473144,29.424983,Suspension Bridge,68,B2P Built
+Rwanda,Southern Province,Huye,Karambi,1007374,2019,Complete,12500,-2.513333,29.612778,Suspension Bridge,50,B2P Built
+Rwanda,Southern Province,Nyanza,Rugwa,1007525,2019,Complete,2015,-2.33,29.668889,Suspended Bridge,48,B2P Built
+Rwanda,Kigali,Nyarugenge,Gatare,1007530,2019,Complete,2704,-1.94222222,30.03388889,Suspended Bridge,37,B2P Built
+Rwanda,Southern Province,Nyaruguru,Rukarakara,1007535,2019,Complete,11283,-2.7761,29.464528,Suspended Bridge,58,B2P Built
+Rwanda,Southern Province,Nyaruguru,Kabere,1007539,2019,Complete,6335,-2.697944,29.446917,Suspended Bridge,63,B2P Built
+Rwanda,Southern Province,Nyanza,Uwarukara,1007506,2019,Complete,7000,-2.308722,29.604778,Suspension Bridge,70,B2P Built
+Rwanda,Southern Province,Nyaruguru,Mutovu,1007569,2018,Complete,6000,-2.682306,29.481194,Suspension Bridge,45,B2P Built
+Rwanda,Western Province,Nyamasheke,Kagarama,1007325,2018,Complete,,-2.322534,29.141944,Suspension Bridge,48,B2P Built
+Rwanda,Southern Province,Ruhango,Gasyogogo,1007609,2019,Complete,2685,-2.161944,29.665556,Suspended Bridge,31,B2P Built
+Nicaragua,Matagalpa,Matiguás,La Patriota - El Guabo,1009264,2018,Complete,2800,12.980534,-85.360809,Suspension Bridge,73,B2P Built
+Bolivia,Chuquisaca,Azurduy,Duraznal,1009297,2018,Complete,550,-20.419044444,-64.40885556,Suspended Bridge,54,B2P Built
+Nicaragua,Jinotega,San Sebastián de Yalí,Santa Maria,1009531,2018,Complete,10000,13.37444,-86.08694,Suspension Bridge,82.9,B2P Built
+Nicaragua,Matagalpa,Matiguás,San Rafael,1009521,2018,Complete,1300,12.98279,-85.53758,Suspended Bridge,74,B2P Built
+Bolivia,Cochabamba,Tapacarí,Tunas Vinto,1009522,2020,Under Construction,600,-17.529275,-66.547356,Suspension Bridge,85,B2P Built
+Bolivia,Chuquisaca,Azurduy,Pampa Huasi,1009486,2018,Complete,1195,-19.689,-64.674894,Suspended Bridge,86,B2P Built
+Nicaragua,Jinotega,Jinotega,Divino Niño,1009538,2018,Complete,9000,13.15866,-86.05991,Suspension Bridge,38,B2P Built
+Rwanda,Western Province,Rubavu,Minigo,1009064,2018,Complete,,-1.692028,29.294444,Suspension Bridge,36,B2P Built
+Rwanda,Western Province,Rubavu,Rukore,1009067,2018,Complete,,-1.746972,29.370611,Suspended Bridge,61.5,B2P Built
+Rwanda,Western Province,Rubavu,Kazabe,1009068,2019,Complete,4100,-1.723639,29.366194,Suspension Bridge,46,B2P Built
+Panama,Coclé,Penonomé District,Boca de Lura,1009730,2018,Complete,1177,8.787056,-80.343832,Suspended Bridge,51,B2P Built
+Rwanda,Western Province,Ngororero,Nkuri,RW125,2018,Complete,5000,-1.922667,29.575833,Suspended Bridge,79,B2P Built
+Rwanda,Western Province,Ngororero,Karehe,RW126,2018,Complete,8000,-1.971333,29.602778,Suspended Bridge,70,B2P Built
+Bolivia,Potosí,,Quesimpuco,BO904,2008,Complete,5000,-18.540611,-66.034056,Suspended Bridge,107,B2P Supported
+Bolivia,Cochabamba,Punata,Harrera Cancha,BO905,2012,Complete,500,-17.681989,-65.752938,Suspended Bridge,35,B2P Built
+Bolivia,Cochabamba,Punata,Jardin Rancho,BO902,2012,Complete,3000,-17.526778,-65.843389,Suspended Bridge,35,B2P Built
+Bolivia,Cochabamba,Quillacollo,Entre Rios,BO901,2012,Complete,700,-17.005472,-66.148444,Suspended Bridge,45,B2P Built
+Bolivia,Cochabamba,Tiraque,Chaqui Cocha,BO906,2012,Complete,700,-17.390221,-65.794884,Suspended Bridge,67,B2P Built
+Bolivia,Cochabamba,Narciso Campero,Chari Chari,BO903,2012,Complete,6100,-18.030694,-65.020306,Suspended Bridge,158,B2P Built
+Bolivia,Cochabamba,Carrasco,Chullpas,BO101,2013,Complete,140,-17.705806,-65.014056,Suspended Bridge,30,B2P Built
+Bolivia,Cochabamba,Carrasco,Palca,1002445,2013,Complete,2400,-17.703278,-64.977417,Suspended Bridge,30,B2P Built
+Bolivia,Cochabamba,Carrasco,Copachunchu,1002446,2013,Complete,1000,-17.745889,-65.097278,Suspended Bridge,56,B2P Built
+Bolivia,Cochabamba,Chapare,Avispas,BO107,2014,Complete,650,-17.029772,-65.549974,Suspended Bridge,30,B2P Built
+Bolivia,Cochabamba,Quillacollo,Totolima,BO104,2014,Complete,600,-16.970222,-66.184167,Suspended Bridge,30,B2P Built
+Bolivia,Cochabamba,Tapacarí,Challuma,BO101,2014,Complete,150,-17.716111,-66.579167,Suspended Bridge,36,B2P Built
+Bolivia,La Paz,Bautista Saavedra,Quillavalla Charzani,BO102,2014,Complete,600,-15.198066,-69.008198,Suspended Bridge,45,B2P Built
+Bolivia,La Paz,Inquisivi,Chungara,BO103,2014,Complete,650,-17.147134,-67.177541,Suspended Bridge,85,B2P Built
+Bolivia,Cochabamba,Chapare,Chimore,BO110,2015,Complete,1500,-17.077778,-65.0625,Suspended Bridge,89,B2P Built
+Bolivia,La Paz,Loayza,Samaca,BO112,2015,Complete,658,-16.916389,-67.693889,Suspended Bridge,95,B2P Built
+Bolivia,La Paz,,Llapallapani,BO105,2015,Complete,350,-17.148333,-67.570278,Suspension Bridge,127,B2P Built
+Bolivia,Cochabamba,Bolívar,Arco,BO114,2016,Complete,107,-17.984722,-66.718506,Suspended Bridge,24,B2P Built
+Bolivia,Potosí,Nor Chichas,Calcha,BO118,2016,Complete,220,-20.368587,-65.460909,Suspended Bridge,50,B2P Supported
+Bolivia,Cochabamba,Tiraque,Churo Alto,BO115,2016,Complete,200,-17.375464,-65.79117,Suspended Bridge,56,B2P Built
+Bolivia,Cochabamba,Arque,Siquipampa,BO109,2016,Complete,150,-17.757111,-66.674222,Suspended Bridge,75,B2P Built
+Bolivia,La Paz,Loayza,Yunguyo,BO106,2016,Complete,2000,-17.138528,-67.394028,Suspended Bridge,78,B2P Built
+Bolivia,La Paz,Loayza,Chiaraque,BO117,2016,Complete,220,-17.198444,-67.355789,Suspended Bridge,96,B2P Built
+Bolivia,Cochabamba,Chapare,10 de Julio,BO125,2017,Complete,3500,-16.846317,-65.34655,Suspended Bridge,35,B2P Built
+Bolivia,Cochabamba,Chapare,11 de Noviembre,BO123,2017,Complete,47,-16.91637,-65.60368,Suspended Bridge,50,B2P Built
+Bolivia,Cochabamba,Bolívar,Coiyuma,BO113,2017,Complete,60,-18.089697,-66.745031,Suspended Bridge,75,B2P Built
+Bolivia,La Paz,Loayza,Challoma Chico,BO127,2017,Complete,455,-17.172917,-67.482083,Suspended Bridge,48,B2P Built
+Colombia,,,La Guaya,GO107,2016,Complete,120,5.073583,-73.396222,Suspension Bridge,58,B2P Built
+El Salvador,,,Cuisnahuat (Las Montes),SV903,2009,Complete,500,13.608222,-89.648194,Simple Span Bridge,9,B2P Built
+El Salvador,,,Corinto,SV902,2009,Complete,500,13.689444,-89.715361,Suspended Bridge,40,B2P Built
+El Salvador,,,Trincheras,SV901,2009,Complete,200,13.719,-89.604139,Suspended Bridge,48,B2P Built
+El Salvador,,,El Charcon,SV905,2011,Complete,700,13.494472,-89.3495,Suspended Bridge,35,B2P Built
+El Salvador,,,El Porvenir,1002470,2011,Complete,780,13.550139,-89.291417,Suspended Bridge,44,B2P Built
+El Salvador,,,El Bosque,SV906,2011,Complete,2000,13.494472,-89.373528,Suspension Bridge,48,B2P Built
+El Salvador,,,Melara,SV907,2011,Complete,780,13.487417,-89.207056,Suspension Bridge,58,B2P Built
+Ethiopia,,,Dessie,ET905,2003,Complete,14000,11.154665,39.630628,Suspended Bridge,45,B2P Built
+Ethiopia,,,Keranyo,ET903,2003,Complete,14000,9.012797,38.704628,Suspended Bridge,50,B2P Built
+Ethiopia,,,Jorogeta,ET907,2004,Complete,12000,11.385825,39.589215,Suspended Bridge,65,B2P Built
+Ethiopia,,,Moletis,ET910,2005,Complete,8000,11.287703,39.655416,Suspended Bridge,50,B2P Built
+Ethiopia,,,Legambo,ET908,2005,Complete,40000,10.829356,39.194267,Suspended Bridge,65,B2P Built
+Ethiopia,,,Arba,ET909,2005,Complete,10000,8.864306,39.954778,Suspended Bridge,77,B2P Built
+Ethiopia,,,Berga,ET914,2006,Complete,20000,9.056111,38.401889,Suspended Bridge,36,B2P Supported
+Ethiopia,,,Wadecha,ET921,2006,Complete,20000,8.91118,39.013246,Suspended Bridge,36,B2P Supported
+Ethiopia,,,Keleta,ET912,2006,Complete,5500,8.209929,39.398904,Suspended Bridge,74,B2P Supported
+Ethiopia,,,Batu,ET911,2006,Complete,13000,7.9265,38.994778,Suspended Bridge,80,B2P Supported
+Ethiopia,,,Kulla,ET916,2007,Complete,50000,6.601753,38.423328,Suspended Bridge,20,B2P Supported
+Ethiopia,,,Duber,ET915,2007,Complete,1700,9.209122,38.807496,Suspended Bridge,65,B2P Supported
+Ethiopia,,,Bale,ET918,2007,Complete,2000,0,0,Suspended Bridge,0,B2P Supported
+Ethiopia,,,Welkessa,ET917,2007,Complete,60,0,0,Suspended Bridge,0,B2P Supported
+Ethiopia,,,Sebara Dildiy,ET920,2009,Complete,10000,11.217583,37.876917,Suspended Bridge,90,B2P Built
+Guatemala,,,San Lucas,GT912,2010,Complete,500,15.339889,-90.868167,Suspended Bridge,28,B2P Built
+Guatemala,,,San Andreas,1002489,2010,Complete,780,15.242917,-91.985694,Suspended Bridge,33,B2P Supported
+Guatemala,,,Pavolaj,GT904,2010,Complete,1680,15.198535,-91.932301,Suspended Bridge,35,B2P Supported
+Guatemala,,,Palqui,GT903,2010,Complete,160,15.276175,-90.881886,Suspended Bridge,47,B2P Built
+Guatemala,,,La Taña,GT901,2010,Complete,1600,15.580552,-90.824211,Suspension Bridge,40,B2P Built
+Guatemala,,,Cuatro Cayos,GT913,2010,Complete,1000,15.727373,-88.987758,Suspension Bridge,53,B2P Built
+Guatemala,,,El Ritiros Los Canoas,GT907,2011,Complete,800,14.863517,-90.882665,Suspended Bridge,55,B2P Supported
+Guatemala,,,Puente Gomez,1002495,2011,Complete,500,14.9225,-90.801944,Suspended Bridge,63,B2P Built
+Guatemala,,,Las Lomas,GT905,2012,Complete,1000,14.846916,-91.041894,Suspended Bridge,35,B2P Supported
+Guatemala,,,Casario Sacbochol Water Crossing,GT909,2012,Complete,3000,14.850444,-91.140861,Other,50,B2P Supported
+Guatemala,,,Heilo (Canajal),1002498,2012,Complete,3000,14.926306,-90.83725,Suspended Bridge,70,B2P Supported
+Guatemala,,,Xechpup,GT910,2012,Complete,5000,14.940407,-90.715824,Suspended Bridge,70,B2P Supported
+Guatemala,,,Nueva Providencia,GT906,2012,Complete,500,14.557115,-91.128731,Suspended Bridge,85,B2P Supported
+Guatemala,,,Chiquijate,1002501,2013,Complete,700,15.013265,-90.739723,Suspended Bridge,21,B2P Supported
+Guatemala,,,Las Vegas San Antonio,1002502,2013,Complete,2500,14.982222,-90.658056,Suspended Bridge,35,B2P Supported
+Guatemala,,,El Arco,1002503,2013,Complete,3000,14.909105,-90.703473,Suspended Bridge,58,B2P Supported
+Guatemala,,,Santa Elena,1002504,2013,Complete,3000,14.908795,-90.703885,Suspension Bridge,80,B2P Supported
+Guatemala,,,Las Violetes,1002505,2014,Complete,2000,15.409947,-91.143547,Suspended Bridge,20,B2P Supported
+Guatemala,,,Patio Bol,GT101,2015,Complete,2000,15.01575,-90.7,Suspended Bridge,37,B2P Supported
+Guatemala,,,Coton,GT102,2015,Complete,1000,14.95,-90.645324,Suspended Bridge,62,B2P Supported
+Guatemala,,,El Salitre,GT103,2015,Complete,4000,14.983056,-90.799472,Suspended Bridge,71,B2P Supported
+Guatemala,,,Chuwitza?q,GT106,2016,Complete,400,15.083889,-90.797778,Suspended Bridge,18.5,B2P Supported
+Guatemala,,,Trapachitos,GT105,2016,Complete,250,14.913889,-90.685833,Suspended Bridge,19,B2P Supported
+Guatemala,,,Patzula,GT108,2016,Complete,1000,15.045278,-90.787778,Suspended Bridge,31,B2P Built
+Guatemala,,,El Bosque,GT107,2016,Complete,600,14.991111,-90.835,Suspended Bridge,40,B2P Supported
+Haiti,,,Ti Peligre,HT901,2011,Complete,1000,18.938396,-71.911644,Suspended Bridge,60,B2P Supported
+Haiti,,,La Chambre,1002514,2012,Complete,10000,19.195566,-72.068458,Suspended Bridge,76,B2P Built
+Haiti,,,Lougou,1002515,2013,Complete,5000,18.369519,-73.857231,Suspended Bridge,54,B2P Built
+Haiti,,,Tierra Muskady,1002516,2013,Complete,5000,18.988286,-71.909631,Suspended Bridge,54,B2P Built
+Haiti,,,Moron,1002517,2013,Complete,30000,18.574442,-74.228169,Suspended Bridge,110,B2P Built
+Haiti,,,Garrate,HT101,2014,Complete,10000,18.358225,-73.826883,Suspended Bridge,59,B2P Built
+Haiti,,,La Belle Mere,1002519,2014,Complete,12000,19.29397,-72.118959,Suspended Bridge,60,B2P Built
+Haiti,Centre,Cerca-la-Source,Cerca la Source,HT103,2016,Complete,5400,19.168081,-71.798531,Suspended Bridge,75,B2P Built
+Haiti,Grand'Anse,Jérémie,Gelin,HT105,2016,Complete,20000,18.595722,-74.170389,Suspended Bridge,95,B2P Built
+Honduras,,,Nueva Esperanza,HN905,2008,Complete,700,14.49223,-88.61082,Suspended Bridge,31,B2P Built
+Honduras,,,Piedra Gorda,HN904,2008,Complete,800,15.229811,-87.192563,Suspended Bridge,32,B2P Built
+Honduras,,,Mezcalillo,HN906,2008,Complete,216,14.455994,-88.539351,Suspended Bridge,45,B2P Built
+Honduras,,,Las Vegas,HN901,2008,Complete,2000,15.00177,-87.43373,Suspended Bridge,68,B2P Built
+Honduras,,,La Borrera,HN903,2008,Complete,300,13.570412,-87.047617,Suspension Bridge,51,B2P Built
+Honduras,,,Bocuire,1002529,2009,Complete,991,13.544401,-87.066483,Suspended Bridge,25,B2P Supported
+Honduras,,,La Hacienda,HN907,2009,Complete,800,14.69209,-87.708193,Suspended Bridge,32,B2P Built
+Honduras,,,Pena Blanca,HN910,2009,Complete,100,14.456419,-88.589616,Suspended Bridge,34,B2P Built
+Honduras,,,Puente Fuego,HN909,2009,Complete,991,13.504695,-87.116784,Suspended Bridge,35,B2P Built
+Honduras,,,Jack S. Kenyon Memorial,HN908,2009,Complete,3000,14.505062,-88.524949,Suspended Bridge,85,B2P Supported
+Honduras,,,Agua Caliente,1002534,2010,Complete,1000,14.861594,-89.119769,Suspension Bridge,40,B2P Built
+Kenya,,,Segera Mission,KE901,2011,Complete,250,0.147877,36.888612,Suspended Bridge,30,B2P Supported
+Kenya,,,Galana River Community,KE902,2011,Complete,5000,-3.087904,39.480739,Suspension Bridge,112,B2P Supported
+Mozambique,,,Nchmekah/Bandar,1002537,2014,Complete,5000,-13.152083,38.905778,Suspended Bridge,33,B2P Supported
+Nepal,,,Marsyangdi Khola,NP902,2002,Complete,1000,28.237992,84.379656,Suspended Bridge,110,B2P Supported
+Nepal,,,Kamro Khola,NP901,2002,Complete,500,28.304605,84.253743,Suspended Bridge,75,B2P Supported
+Nicaragua,Matagalpa,Matagalpa,Guadalupe Dos,NI902,2011,Complete,2500,12.8923,-85.8548,Simple Span Bridge,10,B2P Built
+Nicaragua,Carazo,Jinotepe,El Panama,1002541,2011,Complete,250,11.769355,-86.243324,Suspended Bridge,36,B2P Supported
+Nicaragua,Matagalpa,San Ramón,Guadalupe,NI912,2011,Complete,2500,12.884767,-85.857633,Suspended Bridge,37,B2P Built
+Nicaragua,Matagalpa,Matagalpa,Barrio Lucidia Mantilla,NI901,2011,Complete,5000,12.91515,-85.939183,Suspended Bridge,45,B2P Supported
+Nicaragua,Matagalpa,Matiguás,Gavilan Patastule,NI909,2011,Complete,220,12.783431,-85.468587,Suspended Bridge,67,B2P Built
+Nicaragua,Managua,Villa El Carmen,San Diego,NI910,2011,Complete,1000,11.920383,-86.548583,Suspended Bridge,124,B2P Built
+Nicaragua,Matagalpa,Matagalpa,Samulali,NI906,2012,Complete,700,12.860967,-85.876767,Suspended Bridge,25,B2P Built
+Nicaragua,Estelí,,San Francisco,NI904,2012,Complete,2500,13.177793,-86.427462,Suspended Bridge,40,B2P Built
+Nicaragua,Matagalpa,,Jucuapa Occidental,NI913,2012,Complete,4339,12.868665,-85.95843,Suspension Bridge,40,B2P Built
+Nicaragua,Estelí,Condega,Santa Lucia,NI914,2012,Complete,2000,13.347247,-86.41514,Suspension Bridge,40,B2P Built
+Nicaragua,Estelí,Condega,El Rodeo,NI903,2012,Complete,1000,13.285863,-86.440208,Suspension Bridge,53,B2P Built
+Nicaragua,Matagalpa,Matagalpa,El Trentino,1002553,2013,Complete,483,12.908276,-85.827921,Suspended Bridge,40,B2P Built
+Nicaragua,Estelí,Condega,Santa Teresa,1002554,2013,Complete,800,13.309461,-86.437182,Suspended Bridge,40,B2P Supported
+Nicaragua,Carazo,La Conquista,El Sol,1002555,2013,Complete,1500,11.716448,-86.132616,Suspended Bridge,42,B2P Supported
+Nicaragua,Carazo,Santa Teresa,Ochomogo,1002556,2013,Complete,800,11.690833,-86.1551,Suspended Bridge,42,B2P Supported
+Nicaragua,Matagalpa,Esquipulas,Jicaro,NI907,2013,Complete,1200,12.634938,-85.870172,Suspended Bridge,64,B2P Built
+Nicaragua,Estelí,,El Dorado,1002558,2013,Complete,1200,13.166582,-86.373158,Suspension Bridge,50,B2P Built
+Nicaragua,Estelí,Condega,San Jose de Pire,1002559,2013,Complete,2000,13.286319,-86.448056,Suspension Bridge,57,B2P Built
+Nicaragua,Estelí,Condega,Ducuale Grande,1002560,2013,Complete,1000,13.384172,-86.410594,Suspension Bridge,67,B2P Built
+Nicaragua,Matagalpa,Rancho Grande,Las Carpas,NI103,2014,Complete,500,13.277395,-85.543963,Suspended Bridge,30,B2P Built
+Nicaragua,Carazo,La Conquista,Las Trancas,NI106,2014,Complete,2000,11.727089,-86.209208,Suspended Bridge,30,B2P Supported
+Nicaragua,Matagalpa,San Ramón,Corner of Love,NI102,2014,Complete,300,12.923182,-85.828756,Suspended Bridge,40,B2P Built
+Nicaragua,Carazo,,Mata de Tules,NI105,2014,Complete,500,11.712794,-86.13355,Suspended Bridge,41,B2P Supported
+Timor-Leste,,,Emera 1,GO103,2015,Complete,1000,-8.860278,125.321389,Suspended Bridge,53,B2P Supported
+Timor-Leste,,,Emera 2,GO104,2015,Complete,,-8.864167,125.322778,Suspended Bridge,102,B2P Supported
+United States,,,Foxfire Mountain,1002662,2011,Complete,0,35.8296429,-83.3925274,Suspended Bridge,95,B2P Supported
+Nicaragua,Matagalpa,Ciudad Darío,Las Pencas,NI132,2017,Complete,1078,12.669167,-86.2807,Suspended Bridge,119.3,B2P Built
+Panama,Ngäbe-Buglé,,Bajo Maiz,PA119,2017,Complete,,8.345612,-81.832723,Suspended Bridge,76,B2P Built
+Rwanda,Southern Province,Muhanga,Budende,RW120,2017,Complete,8520,-1.87583,29.80681,Suspension Bridge,58,B2P Built
+Bolivia,Cochabamba,Esteban Arce,Chilcani,BO121,2017,Complete,45,-17.815053,-66.013833,Suspended Bridge,38,B2P Built
+Bolivia,Cochabamba,Ayopaya,Tetillas,BO116,2017,Complete,875,-16.79589,-66.666221,Suspended Bridge,101,B2P Built
+Nicaragua,León,San José de Achuapa,Monte Frio,NI133,2017,Complete,1855,13.050516,-86.656911,Suspension Bridge,81,B2P Built
+Nicaragua,Matagalpa,El Tuma-La Dalia,Quililon,NI131,2017,Complete,2000,13.083617,-85.582783,Suspension Bridge,87.1,B2P Built
+Nicaragua,Madriz,Palacagüina,Monte Verde,NI129,2017,Complete,167,13.4262,-86.3864,Suspension Bridge,97,B2P Built
+Panama,Veraguas,Cañazas District,Bajo Cobre,PA118,2017,Complete,400,8.356306,-81.481472,Suspension Bridge,63,B2P Built
+Rwanda,Southern Province,Muhanga,Kumusenyi,RW119,2017,Complete,8500,-1.827389,29.67125,Suspended Bridge,62,B2P Built
+Rwanda,Kigali,Gasabo,Nyirakibehe,RW124,2017,Complete,10000,-1.848167,30.097,Suspension Bridge,60,B2P Built
+Rwanda,Southern Province,Muhanga,Rutaka,RW118,2017,Complete,10000,-2.041333,29.69886,Suspended Bridge,40,B2P Built
+Rwanda,Southern Province,Nyaruguru,Uwimpfizi,RW123,2017,Complete,2000,-2.621,29.4405,Suspended Bridge,64,B2P Built
+Nicaragua,Matagalpa,Esquipulas,Cinta Verde,NI104,2014,Complete,300,12.664636,-85.759522,Suspended Bridge,50,B2P Built
+Nicaragua,Madriz,Somoto,Las Papayas,NI101,2014,Complete,5000,13.458166,-86.719899,Suspended Bridge,90,B2P Built
+Nicaragua,Matagalpa,Esquipulas,El Limon,1002567,2014,Complete,300,12.663856,-85.758397,Suspension Bridge,35,B2P Built
+Nicaragua,Estelí,Condega,Paso Real,NI107,2014,Complete,19000,13.381258,-86.38179,Suspension Bridge,105.1,B2P Built
+Nicaragua,Estelí,Pueblo Nuevo,Mata Palo,NI115,2015,Complete,600,13.376861,-86.525694,Suspended Bridge,36,B2P Built
+Nicaragua,Carazo,,Amayito,NI119,2015,Complete,1000,11.718618,-86.32842,Suspended Bridge,42,B2P Built
+Nicaragua,Estelí,La Trinidad,Oyanca,NI113,2015,Complete,1650,12.928833333,-86.2613,Suspended Bridge,57,B2P Built
+Nicaragua,Boaco,Boaco,El Pueblito,NI111,2015,Complete,850,12.606944,-85.549444,Suspended Bridge,100,B2P Built
+Nicaragua,Estelí,Condega,Jocote Arriba,NI108,2015,Complete,620,13.359572,-86.261927,Suspension Bridge,41,B2P Built
+Nicaragua,Matagalpa,Muy Muy,Rancheria,NI114,2015,Complete,350,12.772057,-85.569327,Suspension Bridge,53,B2P Built
+Nicaragua,Matagalpa,Esquipulas,Las Calderas,NI110,2015,Complete,780,12.654567,-85.645633,Suspension Bridge,64,B2P Built
+Nicaragua,Estelí,Pueblo Nuevo,Rio Abajo,NI109,2015,Complete,3000,13.371667,-86.45906,Suspension Bridge,81,B2P Built
+Nicaragua,Nueva Segovia,El Jícaro,Terrero Sur,NI121,2016,Complete,710,13.668067,-86.193133,Suspended Bridge,51.7,B2P Built
+Nicaragua,Carazo,La Conquista,Los Encuentros,NI118,2016,Complete,800,11.709885,-86.24231,Suspended Bridge,68,B2P Built
+Nicaragua,Nueva Segovia,El Jícaro,San Albino,NI123,2016,Complete,1150,13.695472,-86.097222,Suspended Bridge,82.5,B2P Built
+Nicaragua,Matagalpa,San Dionisio,El Corozo,NI125,2016,Complete,2100,12.79225,-85.855083,Suspension Bridge,43,B2P Built
+Nicaragua,Matagalpa,El Tuma-La Dalia,El Triangulo,NI120,2016,Complete,4500,13.178417,-85.602083,Suspension Bridge,48,B2P Built
+Nicaragua,Estelí,San Juan de Limay,La Brisa,NI126,2016,Complete,640,13.182472,-86.560056,Suspension Bridge,56,B2P Built
+Nicaragua,Matagalpa,San Dionisio,El Zarzal,NI122,2016,Complete,630,12.787806,-85.879472,Suspension Bridge,58,B2P Built
+Nicaragua,Estelí,Condega,Arenales,NI127,2017,Complete,3300,13.31865,-86.36002,Suspension Bridge,129.5,B2P Built
+Nicaragua,Matagalpa,San Ramón,El Libico,NI128,2017,Complete,588,13.00545,-85.78975,Suspension Bridge,61,B2P Built
+Nicaragua,Matagalpa,Matiguás,El Jobo,NI130,2017,Complete,2178,12.894667,-85.61118,Suspension Bridge,36,B2P Built
+Panama,Veraguas,,Río Grande,PA121,2017,Complete,200,7.714056,-81.334556,Suspension Bridge,47,B2P Built
+Panama,Veraguas,Las Palmas District,Seguidules,PA120,2017,Complete,200,8.078,-81.390694,Suspension Bridge,41,B2P Built
+Panama,Bocas del Toro,,Filo Verde,1002588,2013,Complete,1372,9.013478,-82.334532,Suspended Bridge,46,B2P Supported
+Panama,Coclé,Penonomé District,Caimital,PA101,2014,Complete,1000,8.573796,-80.365607,Suspended Bridge,76.2,B2P Built
+Panama,,,Vallecito,PA102,2014,Complete,4000,8.930656,-80.150094,Suspended Bridge,40,B2P Built
+Panama,Colón,,Boqueron,1002591,2014,Complete,300,9.380841,-79.562076,Suspended Bridge,90,B2P Built
+Panama,Panamá Ouest,,Ciricito,PA104,2014,Complete,375,8.785356,-80.084469,Suspension Bridge,32,B2P Built
+Panama,Panamá Ouest,,La Conga,PA103,2014,Complete,200,8.847319,-79.996544,Suspension Bridge,40,B2P Built
+Panama,Coclé,Penonomé District,Tocúecito,PA107,2015,Complete,500,8.6903,-80.3415,Suspended Bridge,29.9,B2P Built
+Panama,Coclé,Penonomé District,Vaquilla,PA105,2015,Complete,2000,8.695247,-80.195014,Suspended Bridge,35,B2P Built
+Panama,Coclé,La Pintada District,Calabase,PA108,2015,Complete,200,8.591218,-80.627362,Suspended Bridge,43,B2P Built
+Panama,Veraguas,Mariato District,La Gigi,PA110,2015,Complete,350,7.639633,-80.891291,Suspended Bridge,74,B2P Supported
+Panama,Panamá Ouest,,Los Cañones,PA106,2015,Complete,1200,8.932058,-80.065136,Suspension Bridge,50,B2P Built
+Panama,Coclé,Penonomé District,Candelaria,PA113,2016,Complete,300,8.628306,-80.318556,Suspended Bridge,54,B2P Built
+Panama,Veraguas,Mariato District,Bajo Grande,PA111,2016,Complete,400,7.638333,-80.880833,Suspended Bridge,80,B2P Built
+Panama,Panamá Ouest,Capira District,Dos Aguas,PA115,2016,Complete,380,8.957097,-80.098831,Suspension Bridge,37.3,B2P Built
+Panama,Coclé,Penonomé District,Lura,PA112,2016,Complete,500,8.757278,-80.360053,Suspension Bridge,51,B2P Built
+Panama,Coclé,Penonomé District,Chiguiri Arriba,PA116,2016,Complete,600,8.678111,-80.195306,Suspension Bridge,68,B2P Built
+Panama,Veraguas,Cañazas District,Guabal Saliente,PA117,2017,Complete,300,8.309083,-81.163333,Suspension Bridge,55,B2P Built
+Peru,,,Collpatomaico,PE902,2006,Complete,900,-14.370122,-72.090965,Suspended Bridge,67,B2P Built
+Peru,,,Huambramayo,PE905,2006,Complete,600,-11.838679,-74.698531,Suspended Bridge,70,B2P Built
+Peru,,,Chaypara (Manatro River),PE901,2006,Complete,3000,-12.837285,-74.345033,Suspended Bridge,138,B2P Built
+Peru,,,Yabina y Colpa,PE909,2007,Complete,500,-14.572559,-72.208116,Suspended Bridge,15,B2P Built
+Peru,,,Mezapata,PE907,2007,Complete,600,-10.746016,-75.362751,Suspended Bridge,55,B2P Built
+Peru,,,Tres Unidos,PE906,2007,Complete,2000,-6.807594,-76.234556,Suspended Bridge,65,B2P Supported
+Peru,,,Aguas Blancas,PE904,2008,Complete,800,-6.595903,-78.64711,Suspended Bridge,38,B2P Built
+Peru,,,Cuatro Esquinas,PE911,2008,Complete,100,-14.657134,-72.252152,Suspended Bridge,42,B2P Supported
+Peru,,,Chancay Banos,PE910,2008,Complete,2500,-6.580171,-78.866357,Suspended Bridge,46,B2P Built
+Philippines,,,Taupac,1002614,2013,Complete,120,15.550943,119.965322,Suspended Bridge,60,B2P Supported
+Rwanda,Western Province,Ngororero,Kamasiga Kibrira,RW902,2012,Complete,10000,-1.92738,29.629086,Suspended Bridge,30,B2P Built
+Rwanda,Eastern Province,Gatsibo,Mayange Nyamabare,RW903,2012,Complete,12000,-1.555918,30.211844,Suspended Bridge,85,B2P Built
+Rwanda,Western Province,Karongi,Cyamtunda,1002619,2013,Complete,2400,-2.222701,29.529556,Suspended Bridge,68,B2P Built
+Rwanda,Southern Province,Kamonyi,Bakokwe,1002620,2013,Complete,3000,-1.90272,29.79132,Suspended Bridge,68,B2P Built
+Rwanda,Western Province,Karongi,Muregeya,1002621,2013,Complete,10000,-2.024871,29.380443,Suspension Bridge,50,B2P Built
+Rwanda,Northern Province,Gakenke,Taba,1002622,2014,Complete,6500,-1.700583,29.831933,Suspended Bridge,32,B2P Built
+Rwanda,Western Province,Ngororero,Rugogwe,RW103,2014,Complete,1000,-1.920847,29.631467,Suspended Bridge,54,B2P Built
+Rwanda,Kigali,Gasabo,Sha,RW101,2014,Complete,3000,-1.813833,30.098779,Suspended Bridge,55,B2P Built
+Rwanda,Northern Province,Gakenke,Rutenderi,RW102,2014,Complete,6500,-1.660639,29.873889,Suspended Bridge,63,B2P Built
+Rwanda,Northern Province,Rulindo,Rwamahwa,RW107,2015,Complete,5000,-1.634806,29.896667,Suspended Bridge,47,B2P Built
+Rwanda,Northern Province,Rulindo,Shagasha,RW106,2015,Complete,1000,-1.710694,30.048972,Suspended Bridge,57,B2P Built
+Rwanda,Kigali,Gasabo,Gasura,RW104,2015,Complete,7000,-1.820833,30.113889,Suspension Bridge,44,B2P Built
+Rwanda,Northern Province,Gicumbi,Gaseke,RW105,2015,Complete,4300,-1.765778,30.127389,Suspension Bridge,51,B2P Built
+Rwanda,Southern Province,Nyaruguru,Coko,RW112,2016,Complete,1510,-2.747417,29.575389,Suspended Bridge,38,B2P Built
+Rwanda,Southern Province,Muhanga,Kanyarira,RW111,2016,Complete,8000,-2.11375,29.705778,Suspended Bridge,45,B2P Built
+Rwanda,Southern Province,Nyaruguru,Cyumba,RW109,2016,Complete,4000,-2.793167,29.699444,Suspended Bridge,48,B2P Built
+Rwanda,Southern Province,Muhanga,Mubuga,RW108,2016,Complete,12000,-2.143889,29.783333,Suspended Bridge,70,B2P Built
+Rwanda,Southern Province,Muhanga,Butare,RW110,2016,Complete,8000,-1.942167,29.773667,Suspended Bridge,97,B2P Built
+Rwanda,Southern Province,Nyanza,Kigohe,RW116,2016,Complete,6500,-2.311972,29.630944,Suspension Bridge,29.4,B2P Built
+Rwanda,Western Province,Nyabihu,Kukibuye,RW114,2016,Complete,12000,-1.602056,29.636083,Suspension Bridge,42,B2P Built
+Rwanda,Western Province,Nyabihu,Tubungo,RW113,2016,Complete,10000,-1.65225,29.634444,Suspension Bridge,48,B2P Built
+Rwanda,Western Province,Nyabihu,Mariba,RW115,2017,Complete,5780,-1.688611,29.542583,Suspended Bridge,40,B2P Built
+Rwanda,Northern Province,Gakenke,Gasiza,RW117,2017,Complete,6700,-1.813111,29.875111,Suspended Bridge,58,B2P Built
+Rwanda,Southern Province,Nyaruguru,Rugusa,RW122,2017,Complete,4000,-2.593389,29.474611,Suspended Bridge,60,B2P Built
+Rwanda,Southern Province,Nyaruguru,Rwimvubu,RW121,2017,Complete,2500,-2.755667,29.536444,Suspended Bridge,60,B2P Built
+Sudan,,,Yabus,SD901,2010,Complete,15000,9.939442,34.170558,Suspended Bridge,75,B2P Supported
+Timor-Leste,,,Tatarima,TL901,2010,Complete,750,-8.754667,125.531316,Suspended Bridge,68,B2P Built
+Timor-Leste,,,Soibada,TL903,2012,Complete,3700,-8.862475,125.957756,Suspended Bridge,85.5,B2P Built
+Timor-Leste,,,Tutuluru (Same),TL902,2012,Complete,4000,-8.994597,125.689706,Suspension Bridge,79,B2P Built
+Zambia,,,Lusaka Mazyopa,ZM909,2008,Complete,20000,-15.35866,28.309049,Suspended Bridge,27,B2P Built
+Zambia,,,Fupashi,ZM904,2010,Complete,3600,-13.245803,28.432809,Suspended Bridge,30,B2P Built
+Zambia,,,Linda Libuyu,ZM903,2010,Complete,5000,-17.857008,25.875819,Suspended Bridge,45,B2P Built
+Zambia,,,Shamiyoyo,ZM901,2010,Complete,1000,-14.666479,24.50259,Suspended Bridge,65,B2P Built
+Zambia,,,Malobe Louyando,ZM905,2010,Complete,500,-16.696547,27.844031,Suspended Bridge,105,B2P Built
+Zambia,,,Munyumbwe,ZM902,2011,Complete,1000,-16.643535,27.780231,Suspended Bridge,80,B2P Built
+Zambia,,,Msanzala,ZM907,2012,Complete,900,-14.062829,31.311532,Suspended Bridge,59,B2P Built
+Zambia,,,Mtilizisa,ZM906,2013,Complete,860,-14.3846,30.86045,Suspension Bridge,50,B2P Built
+Indonesia,,,Way Sekampung,ID901,2001,Complete,10000,-5.333297,104.967408,Suspension Bridge,65,B2P Supported
+Peru,,,Sencico Demonstration Bridge,PE908,2011,Complete,0,-12.084876,-77.006709,Suspended Bridge,5,B2P Built
+Philippines,,,San Pasqual,GO102,2015,Complete,100,15.021561,120.083424,Suspended Bridge,58,B2P Supported
+Nicaragua,Nueva Segovia,Mozonte,Los Encuentros,NI134,2017,Complete,750,13.626972,-86.397,Suspension Bridge,77,B2P Built
+Bolivia,Cochabamba,Tiraque,Palmar Pampa B,BO128,2017,Complete,86,-17.072033,-65.413117,Suspended Bridge,51,B2P Built
+Rwanda,Kigali,Kicukiro,IPRC Demonstration Bridge,1007322,2018,Complete,,-1.98025,30.108917,Suspended Bridge,14,B2P Built
+Bolivia,Cochabamba,Chapare,Gonchu Mayu,1007323,2018,Complete,700,-17.0406333,-65.98275,Suspended Bridge,64,B2P Built
+Bolivia,Potosí,Nor Chichas,Chosco,1002667,2018,Complete,440,-20.48772,-65.48441,Suspended Bridge,73,B2P Supported
+Panama,Veraguas,Santa Fe District,Caloveborita,1009107,2018,Complete,,8.670431,-81.184365,Suspension Bridge,65,B2P Built
+Uganda,Eastern Region,Kween,Banyal,1011118,2020,Under Construction,1498,1.423756,34.549231,Suspended Bridge,51,B2P Built
+Nicaragua,Madriz,Palacagüina,El Riito,1009821,2018,Complete,9000,13.463,-86.406611,Suspension Bridge,74,B2P Built
+Bolivia,Chuquisaca,Azurduy,Santa Rosa,1009908,2018,Complete,830,-19.88227778,-64.397175,Suspended Bridge,84,B2P Built
+Swaziland,Hhohho,Piggs Peak,Ndlembeni,1010339,2018,Complete,5000,-26.02403,31.25254,Suspended Bridge,75.6,B2P Supported
+Bolivia,Cochabamba,Tapacarí,Yauri Totora,1010340,2019,Complete,150,-17.63,-66.82555,Suspended Bridge,51,B2P Built
+Haiti,Artibonite,,Pina,1012176,2018,Complete,5000,19.41823,-72.40353,Suspended Bridge,40,B2P Built
+Uganda,Eastern Region,Kween,Kapchemelei,1011290,2020,Confirmed,3550,1.359521,34.522313,,,B2P Built
+Rwanda,Western Province,Rutsiro,Nkuna,1011309,2019,Complete,2699,-1.763,29.37679,Suspended Bridge,78,B2P Built
+Rwanda,Western Province,Rutsiro,Kazo,1011307,2019,Complete,12145,-1.77286,29.37514,Suspended Bridge,58,B2P Built
+Swaziland,,,Kontshingila,1010081,2018,Complete,2215,-27.04298,31.37351,Suspended Bridge,67.6,B2P Supported
+Uganda,Eastern Region,Bukwo,Lulwo,1011066,2019,Complete,1626,1.304767,34.811307,Suspended Bridge,64,B2P Built
+Rwanda,Western Province,Ngororero,Rwamamara,1010941,2019,Complete,4200,-1.83113,29.62303,Suspended Bridge,58,B2P Built
+Uganda,Eastern Region,Kapchorwa,Kapkwomboloi,1011592,2019,Complete,693,1.3947033,34.3742902,Suspended Bridge,40,B2P Built
+Bolivia,Chuquisaca,Azurduy,La Marca,1012406,2019,Complete,550,-20.11359444,-64.40594722,Suspension Bridge,110,B2P Built
+Bolivia,Cochabamba,Chapare,Kayarani,1011797,2018,Complete,300,-17.2685,-65.88512,Suspended Bridge,39,B2P Built
+Nicaragua,Matagalpa,El Tuma-La Dalia,"Yayule #2",1010448,2018,Complete,2000,13.021555,-85.740133,Suspension Bridge,46,B2P Built
+Bolivia,Chuquisaca,Tomina,Chavarría,1010470,2018,Complete,450,-19.36176389,-64.59399167,Suspended Bridge,39,B2P Built
+Uganda,Eastern Region,Kapchorwa,Sanzara,1010460,2020,Under Construction,1730,1.373657,34.3343225,Suspended Bridge,60,B2P Built
+Bolivia,Chuquisaca,Jaime Zudáñez,Mojocoya,1015713,2019,Complete,656,-18.763449,-64.617235,Suspended Bridge,75,B2P Built
+Uganda,Eastern Region,Bukwa,Kawuswo,1011085,2020,Complete,1374,1.419135,34.72236,Suspension Bridge,42,B2P Built
+Uganda,Eastern Region,Bukwa,Tuyobei,1011084,2020,Complete,1709,1.439188,34.726114,Suspension Bridge,48,B2P Built
+Uganda,Eastern Region,Kween,Posha,1011154,2021,Confirmed,3380,1.372294,34.566279,Suspension Bridge,48,B2P Built
+Uganda,Eastern Region,Bulambuli,Mbigi,1011582,2020,Confirmed,2700,1.314375,34.312385,Suspension Bridge,38,B2P Built
+Rwanda,Western Province,Rutsiro,Mugeri,1012457,2019,Complete,2890,-2.02408333,29.41472222,Suspended Bridge,63,B2P Built
+Bolivia,La Paz,Pacajes,Mallkuchusi,1012377,2019,Complete,63,-17.683972,-68.764886,Suspended Bridge,93,B2P Supported
+Rwanda,Southern Province,Huye,Gahororo,1012501,2019,Complete,7000,-2.62148611,29.64888889,Suspended Bridge,72.3,B2P Built
+Bolivia,Chuquisaca,Tarvita,Puka Mayu,1012507,2019,Complete,600,-19.92729167,-64.48491944,Suspended Bridge,30,B2P Built
+Rwanda,Southern Province,Ruhango,Serugeme,1012480,2019,Complete,4111,-2.2280555556,29.5733333333,Suspended Bridge,87,B2P Built
+Rwanda,Western Province,Rutsiro,Kagogo,1013662,2020,Under Construction,1468,-1.903292,29.369892,Suspension Bridge,49,B2P Built
+Rwanda,Southern Province,Nyamagabe,Rweru,1013218,2020,Under Construction,2670,-2.52613,29.56947,Suspension Bridge,46,B2P Built
+Rwanda,Western Province,Rutsiro,Kiruri,1012813,2020,Under Construction,3290,-1.986389,29.409167,Suspended Bridge,50,B2P Built
+Bolivia,Cochabamba,Quillacollo,Chaupi Mayu,1012694,2019,Complete,7025,-17.373129,-66.333433,Suspended Bridge,65,B2P Built
+Bolivia,Cochabamba,Chapare,Miguelito,1012692,2019,Complete,725,-17.15314,-65.768406,Suspended Bridge,45,B2P Built
+Bolivia,Cochabamba,Quillacollo,Uchu Uchu,1012693,2019,Complete,2000,-17.37605278,-66.46990556,Suspended Bridge,67,B2P Built
+Rwanda,Southern Province,Nyamagabe,Gitikirema-kigarama,1012817,2020,Under Construction,2805,-2.304674,29.472585,Suspended Bridge,68,B2P Built
+Uganda,Eastern Region,Bukwo,Aryowet,1021288,2019,Confirmed,1666,1.390363,34.700049,Suspension Bridge,,B2P Built
+Uganda,Eastern Region,Bukwo,Chemuron,1021307,2019,Confirmed,1211,1.416775,34.748919,,,B2P Built
+Rwanda,Southern Province,Nyaruguru,Tugogo,1007901,2018,Complete,3500,-2.554167,29.507278,Suspended Bridge,56,B2P Built
+Rwanda,Western Province,Ngororero,Kivugiza,1013457,2020,Under Construction,2656,-1.9496,29.568055,Suspended Bridge,53,B2P Built
+Rwanda,Western Province,Ngororero,Buhito,1013541,2020,Under Construction,2335,-1.817908,29.544044,Suspended Bridge,33,B2P Built
+Rwanda,Western Province,Rutsiro,Nkora,1013658,2020,Under Construction,1348,-1.8675,29.324166,Suspended Bridge,40,B2P Built
+Bolivia,Potosí,Charcas,Challwiri,1014453,2019,Complete,5000,-18.268516,-65.979936,Suspended Bridge,90,B2P Built
+Rwanda,Western Province,Rutsiro,Kirumbi,1012986,2020,Under Construction,3294,-1.940958,29.514561,Suspension Bridge,56,B2P Built
+Rwanda,Western Province,Ngororero,Kivomo,1013353,2019,Complete,1768,-2.026616,29.57632,Suspension Bridge,86,B2P Built
+Rwanda,Southern Province,Muhanga,Gashyushya,1012953,2020,Under Construction,2200,-2.01211492,29.76212259,Suspension Bridge,42,B2P Built
+Rwanda,Western Province,Rutsiro,Rwinyoni,1013641,2020,Under Construction,1641,-1.80169,29.29776,Suspended Bridge,45,B2P Built
+Uganda,Eastern Region,Kween,Tabagon,1017617,2020,Under Construction,1245,1.421969,34.546568,Suspended Bridge,55.5,B2P Built
+Bolivia,Chuquisaca,Azurduy,Kuñuri Pampa,1018541,2020,Confirmed,296,-19.755422,-64.471566,Suspended Bridge,50,B2P Built
+Bolivia,Potosí,Charcas,Río San Pedro,1017675,2020,Under Construction,970,-18.292978,-65.972312,Suspended Bridge,130,B2P Built
+Uganda,Eastern Region,Bukwo,Rwanda,1015528,2019,Complete,1742,1.283832,34.726981,Suspension Bridge,49,B2P Built
+Bolivia,Potosí,Charcas,Quioma,1016673,2020,Under Construction,285,-18.210034,-65.585277,Suspended Bridge,138,B2P Built
+Rwanda,Southern Province,Muhanga,Rufuha,1017673,2020,Under Construction,1000,-2.012167,29.763889,Suspension Bridge,33.7,B2P Built
+Bolivia,Chuquisaca,Hernando Siles,Ñacamiri,1018652,2020,Confirmed,560,-20.71548,-64.027244,Suspended Bridge,82,B2P Built

@@ -1,0 +1,1501 @@
+"","Continent","Country","ISO_Code","Country_Code","Metric","Region","Date","Year","Population"
+"1","Asia","Afghanistan","AFG",4,"Rural with sanitation","Southern Asia",1990-01-01,1990,12067.57
+"2","Europe","Albania","ALB",8,"Rural with sanitation","Southern Europe",1990-01-01,1990,3281.453
+"3","Africa","Algeria","DZA",12,"Rural with sanitation","Northern Africa",1990-01-01,1990,25912.364
+"4","Europe","Andorra","AND",20,"Rural with sanitation","Southern Europe",1990-01-01,1990,54.511
+"5","Africa","Angola","AGO",24,"Rural with sanitation","Middle Africa",1990-01-01,1990,11127.87
+"6","North America","Anguilla","AIA",660,"Rural with sanitation","Caribbean",1990-01-01,1990,8.334
+"7","North America","Antigua and Barbuda","ATG",28,"Rural with sanitation","Caribbean",1990-01-01,1990,61.906
+"8","South America","Argentina","ARG",32,"Rural with sanitation","South America",1990-01-01,1990,32729.74
+"9","Asia","Armenia","ARM",51,"Rural with sanitation","Western Asia",1990-01-01,1990,3544.695
+"10","North America","Aruba","ABW",533,"Rural with sanitation","Caribbean",1990-01-01,1990,62.148
+"11","Oceania","Australia","AUS",36,"Rural with sanitation","Australia and New Zealand",1990-01-01,1990,17096.869
+"12","Europe","Austria","AUT",40,"Rural with sanitation","Western Europe",1990-01-01,1990,7706.571
+"13","Asia","Azerbaijan","AZE",31,"Rural with sanitation","Western Asia",1990-01-01,1990,7216.503
+"14","North America","Bahamas","BHS",44,"Rural with sanitation","Caribbean",1990-01-01,1990,256.338
+"15","Asia","Bahrain","BHR",48,"Rural with sanitation","Western Asia",1990-01-01,1990,495.944
+"16","Asia","Bangladesh","BGD",50,"Rural with sanitation","Southern Asia",1990-01-01,1990,105983.136
+"17","North America","Barbados","BRB",52,"Rural with sanitation","Caribbean",1990-01-01,1990,260.374
+"18","Europe","Belarus","BLR",112,"Rural with sanitation","Eastern Europe",1990-01-01,1990,10231.983
+"19","Europe","Belgium","BEL",56,"Rural with sanitation","Western Europe",1990-01-01,1990,9978.241
+"20","North America","Belize","BLZ",84,"Rural with sanitation","Central America",1990-01-01,1990,187.552
+"21","Africa","Benin","BEN",204,"Rural with sanitation","Western Africa",1990-01-01,1990,5001.271
+"22","North America","Bermuda","BMU",60,"Rural with sanitation","Northern America",1990-01-01,1990,60.931
+"23","Asia","Bhutan","BTN",64,"Rural with sanitation","Southern Asia",1990-01-01,1990,535.505
+"24","South America","Bolivia","BOL",68,"Rural with sanitation","South America",1990-01-01,1990,6856.246
+"25","Europe","Bosnia and Herzegovina","BIH",70,"Rural with sanitation","Southern Europe",1990-01-01,1990,4526.996
+"26","Africa","Botswana","BWA",72,"Rural with sanitation","Southern Africa",1990-01-01,1990,1379.814
+"27","South America","Brazil","BRA",76,"Rural with sanitation","South America",1990-01-01,1990,150393.143
+"28","North America","British Virgin Islands","VGB",92,"Rural with sanitation","Caribbean",1990-01-01,1990,16.459
+"29","Asia","Brunei Darussalam","BRN",96,"Rural with sanitation","South-eastern Asia",1990-01-01,1990,256.939
+"30","Europe","Bulgaria","BGR",100,"Rural with sanitation","Eastern Europe",1990-01-01,1990,8821.111
+"31","Africa","Burkina Faso","BFA",854,"Rural with sanitation","Western Africa",1990-01-01,1990,8811.033
+"32","Africa","Burundi","BDI",108,"Rural with sanitation","Eastern Africa",1990-01-01,1990,5613.141
+"33","Asia","Cambodia","KHM",116,"Rural with sanitation","South-eastern Asia",1990-01-01,1990,9008.856
+"34","Africa","Cameroon","CMR",120,"Rural with sanitation","Middle Africa",1990-01-01,1990,12070.359
+"35","North America","Canada","CAN",124,"Rural with sanitation","Northern America",1990-01-01,1990,27662.44
+"36","Africa","Cape Verde","CPV",132,"Rural with sanitation","Western Africa",1990-01-01,1990,341.256
+"37","Africa","Central African Republic","CAF",140,"Rural with sanitation","Middle Africa",1990-01-01,1990,2937.832
+"38","Africa","Chad","TCD",148,"Rural with sanitation","Middle Africa",1990-01-01,1990,5958.022
+"39","South America","Chile","CHL",152,"Rural with sanitation","South America",1990-01-01,1990,13141.202
+"40","Asia","China","CHN",156,"Rural with sanitation","Eastern Asia",1990-01-01,1990,1154605.773
+"41","South America","Colombia","COL",170,"Rural with sanitation","South America",1990-01-01,1990,34271.563
+"42","Africa","Comoros","COM",174,"Rural with sanitation","Eastern Africa",1990-01-01,1990,415.144
+"43","Africa","Congo","COG",178,"Rural with sanitation","Middle Africa",1990-01-01,1990,2386.467
+"44","Oceania","Cook Islands","COK",184,"Rural with sanitation","Polynesia",1990-01-01,1990,17.613
+"45","North America","Costa Rica","CRI",188,"Rural with sanitation","Central America",1990-01-01,1990,3095.994
+"46","Africa","Cote d'Ivoire","CIV",384,"Rural with sanitation","Western Africa",1990-01-01,1990,12165.909
+"47","Europe","Croatia","HRV",191,"Rural with sanitation","Southern Europe",1990-01-01,1990,4776.374
+"48","North America","Cuba","CUB",192,"Rural with sanitation","Caribbean",1990-01-01,1990,10582.082
+"49","Asia","Cyprus","CYP",196,"Rural with sanitation","Western Asia",1990-01-01,1990,766.611
+"50","Europe","Czech Republic","CZE",203,"Rural with sanitation","Eastern Europe",1990-01-01,1990,10323.701
+"51","Africa","Democratic Republic of the Congo","COD",180,"Rural with sanitation","Middle Africa",1990-01-01,1990,34962.676
+"52","Europe","Denmark","DNK",208,"Rural with sanitation","Northern Europe",1990-01-01,1990,5140.332
+"53","Africa","Djibouti","DJI",262,"Rural with sanitation","Eastern Africa",1990-01-01,1990,588.356
+"54","North America","Dominica","DMA",212,"Rural with sanitation","Caribbean",1990-01-01,1990,70.928
+"55","North America","Dominican Republic","DOM",214,"Rural with sanitation","Caribbean",1990-01-01,1990,7183.646
+"56","South America","Ecuador","ECU",218,"Rural with sanitation","South America",1990-01-01,1990,10218.085
+"57","Africa","Egypt","EGY",818,"Rural with sanitation","Northern Africa",1990-01-01,1990,56397.273
+"58","North America","El Salvador","SLV",222,"Rural with sanitation","Central America",1990-01-01,1990,5252.082
+"59","Africa","Equatorial Guinea","GNQ",226,"Rural with sanitation","Middle Africa",1990-01-01,1990,377.363
+"60","Africa","Eritrea","ERI",232,"Rural with sanitation","Eastern Africa",1990-01-01,1990,3139.083
+"61","Europe","Estonia","EST",233,"Rural with sanitation","Northern Europe",1990-01-01,1990,1565.32
+"62","Africa","Ethiopia","ETH",231,"Rural with sanitation","Eastern Africa",1990-01-01,1990,48057.094
+"63","Oceania","Fiji","FJI",242,"Rural with sanitation","Melanesia",1990-01-01,1990,728.626
+"64","Europe","Finland","FIN",246,"Rural with sanitation","Northern Europe",1990-01-01,1990,4986.705
+"65","Europe","France","FRA",250,"Rural with sanitation","Western Europe",1990-01-01,1990,56943.299
+"66","Oceania","French Polynesia","PYF",258,"Rural with sanitation","Polynesia",1990-01-01,1990,198.37
+"67","Africa","Gabon","GAB",266,"Rural with sanitation","Middle Africa",1990-01-01,1990,952.269
+"68","Africa","Gambia","GMB",270,"Rural with sanitation","Western Africa",1990-01-01,1990,916.811
+"69","Asia","Georgia","GEO",268,"Rural with sanitation","Western Asia",1990-01-01,1990,5460.309
+"70","Europe","Germany","DEU",276,"Rural with sanitation","Western Europe",1990-01-01,1990,78958.237
+"71","Africa","Ghana","GHA",288,"Rural with sanitation","Western Africa",1990-01-01,1990,14628.26
+"72","Europe","Gibraltar","GIB",292,"Rural with sanitation","Southern Europe",1990-01-01,1990,26.833
+"73","Europe","Greece","GRC",300,"Rural with sanitation","Southern Europe",1990-01-01,1990,10131.737
+"74","North America","Grenada","GRD",308,"Rural with sanitation","Caribbean",1990-01-01,1990,96.286
+"75","North America","Guadeloupe","GLP",312,"Rural with sanitation","Caribbean",1990-01-01,1990,389.907
+"76","Oceania","Guam","GUM",316,"Rural with sanitation","Micronesia",1990-01-01,1990,130.482
+"77","North America","Guatemala","GTM",320,"Rural with sanitation","Central America",1990-01-01,1990,9158.547
+"78","Africa","Guinea-Bissau","GNB",624,"Rural with sanitation","Western Africa",1990-01-01,1990,1056.208
+"79","Africa","Guinea-Conakry","GIN",324,"Rural with sanitation","Western Africa",1990-01-01,1990,6034.082
+"80","South America","Guyana","GUY",328,"Rural with sanitation","South America",1990-01-01,1990,720.282
+"81","North America","Haiti","HTI",332,"Rural with sanitation","Caribbean",1990-01-01,1990,7099.733
+"82","North America","Honduras","HND",340,"Rural with sanitation","Central America",1990-01-01,1990,4903.363
+"83","Europe","Hungary","HUN",348,"Rural with sanitation","Eastern Europe",1990-01-01,1990,10385.061
+"84","Europe","Iceland","ISL",352,"Rural with sanitation","Northern Europe",1990-01-01,1990,254.83
+"85","Asia","India","IND",356,"Rural with sanitation","Southern Asia",1990-01-01,1990,870601.776
+"86","Asia","Indonesia","IDN",360,"Rural with sanitation","South-eastern Asia",1990-01-01,1990,181436.821
+"87","Asia","Iran","IRN",364,"Rural with sanitation","Southern Asia",1990-01-01,1990,56169.196
+"88","Asia","Iraq","IRQ",368,"Rural with sanitation","Western Asia",1990-01-01,1990,17478.455
+"89","Europe","Ireland","IRL",372,"Rural with sanitation","Northern Europe",1990-01-01,1990,3563.106
+"90","Asia","Israel","ISR",376,"Rural with sanitation","Western Asia",1990-01-01,1990,4499.161
+"91","Europe","Italy","ITA",380,"Rural with sanitation","Southern Europe",1990-01-01,1990,57007.577
+"92","North America","Jamaica","JAM",388,"Rural with sanitation","Caribbean",1990-01-01,1990,2385.806
+"93","Asia","Japan","JPN",392,"Rural with sanitation","Eastern Asia",1990-01-01,1990,122249.285
+"94","Asia","Jordan","JOR",400,"Rural with sanitation","Western Asia",1990-01-01,1990,3358.453
+"95","Asia","Kazakhstan","KAZ",398,"Rural with sanitation","Central Asia",1990-01-01,1990,16530.027
+"96","Africa","Kenya","KEN",404,"Rural with sanitation","Eastern Africa",1990-01-01,1990,23446.229
+"97","Oceania","Kiribati","KIR",296,"Rural with sanitation","Micronesia",1990-01-01,1990,72.411
+"98","Asia","Kuwait","KWT",414,"Rural with sanitation","Western Asia",1990-01-01,1990,2058.832
+"99","Asia","Kyrgyzstan","KGZ",417,"Rural with sanitation","Central Asia",1990-01-01,1990,4394.502
+"100","Asia","Laos","LAO",418,"Rural with sanitation","South-eastern Asia",1990-01-01,1990,4247.839
+"101","Europe","Latvia","LVA",428,"Rural with sanitation","Northern Europe",1990-01-01,1990,2663.985
+"102","Asia","Lebanon","LBN",422,"Rural with sanitation","Western Asia",1990-01-01,1990,2703.019
+"103","Africa","Lesotho","LSO",426,"Rural with sanitation","Southern Africa",1990-01-01,1990,1597.534
+"104","Africa","Liberia","LBR",430,"Rural with sanitation","Western Africa",1990-01-01,1990,2102.877
+"105","Africa","Libya","LBY",434,"Rural with sanitation","Northern Africa",1990-01-01,1990,4398.419
+"106","Europe","Lithuania","LTU",440,"Rural with sanitation","Northern Europe",1990-01-01,1990,3697.393
+"107","Europe","Luxembourg","LUX",442,"Rural with sanitation","Western Europe",1990-01-01,1990,381.787
+"108","Europe","Macedonia","MKD",807,"Rural with sanitation","Southern Europe",1990-01-01,1990,1996.227
+"109","Africa","Madagascar","MDG",450,"Rural with sanitation","Eastern Africa",1990-01-01,1990,11545.782
+"110","Africa","Malawi","MWI",454,"Rural with sanitation","Eastern Africa",1990-01-01,1990,9408.998
+"111","Asia","Malaysia","MYS",458,"Rural with sanitation","South-eastern Asia",1990-01-01,1990,18211.097
+"112","Asia","Maldives","MDV",462,"Rural with sanitation","Southern Asia",1990-01-01,1990,223.179
+"113","Africa","Mali","MLI",466,"Rural with sanitation","Western Africa",1990-01-01,1990,8482.075
+"114","Europe","Malta","MLT",470,"Rural with sanitation","Southern Europe",1990-01-01,1990,355.707
+"115","Oceania","Marshall Islands","MHL",584,"Rural with sanitation","Micronesia",1990-01-01,1990,47.3
+"116","Africa","Mauritania","MRT",478,"Rural with sanitation","Western Africa",1990-01-01,1990,2023.665
+"117","Africa","Mauritius","MUS",480,"Rural with sanitation","Eastern Africa",1990-01-01,1990,1055.865
+"118","North America","Mexico","MEX",484,"Rural with sanitation","Central America",1990-01-01,1990,85609.404
+"119","Oceania","Micronesia","FSM",583,"Rural with sanitation","Micronesia",1990-01-01,1990,96.331
+"120","Europe","Moldova","MDA",498,"Rural with sanitation","Eastern Europe",1990-01-01,1990,4364.114
+"121","Europe","Monaco","MCO",492,"Rural with sanitation","Western Europe",1990-01-01,1990,29.438
+"122","Asia","Mongolia","MNG",496,"Rural with sanitation","Eastern Asia",1990-01-01,1990,2184.145
+"123","Europe","Montenegro","MNE",499,"Rural with sanitation","Southern Europe",1990-01-01,1990,614.999
+"124","Africa","Morocco","MAR",504,"Rural with sanitation","Northern Africa",1990-01-01,1990,24950.128
+"125","Africa","Mozambique","MOZ",508,"Rural with sanitation","Eastern Africa",1990-01-01,1990,13371.971
+"126","Asia","Myanmar","MMR",104,"Rural with sanitation","South-eastern Asia",1990-01-01,1990,42007.309
+"127","Africa","Namibia","NAM",516,"Rural with sanitation","Southern Africa",1990-01-01,1990,1415.447
+"128","Oceania","Nauru","NRU",520,"Rural with sanitation","Micronesia",1990-01-01,1990,9.157
+"129","Asia","Nepal","NPL",524,"Rural with sanitation","Southern Asia",1990-01-01,1990,18741.688
+"130","Europe","Netherlands","NLD",528,"Rural with sanitation","Western Europe",1990-01-01,1990,14915.139
+"131","Oceania","New Zealand","NZL",554,"Rural with sanitation","Australia and New Zealand",1990-01-01,1990,3397.534
+"132","North America","Nicaragua","NIC",558,"Rural with sanitation","Central America",1990-01-01,1990,4144.564
+"133","Africa","Niger","NER",562,"Rural with sanitation","Western Africa",1990-01-01,1990,7911.884
+"134","Africa","Nigeria","NGA",566,"Rural with sanitation","Western Africa",1990-01-01,1990,95617.345
+"135","Oceania","Niue","NIU",570,"Rural with sanitation","Polynesia",1990-01-01,1990,2.332
+"136","Asia","North Korea","PRK",408,"Rural with sanitation","Eastern Asia",1990-01-01,1990,20194.354
+"137","Oceania","Northern Mariana Islands","MNP",580,"Rural with sanitation","Micronesia",1990-01-01,1990,43.972
+"138","Europe","Norway","NOR",578,"Rural with sanitation","Northern Europe",1990-01-01,1990,4240.375
+"139","Asia","Occupied Palestinian Territory","PSE",275,"Rural with sanitation","Western Asia",1990-01-01,1990,2101.156
+"140","Asia","Oman","OMN",512,"Rural with sanitation","Western Asia",1990-01-01,1990,1812.159
+"141","Asia","Pakistan","PAK",586,"Rural with sanitation","Southern Asia",1990-01-01,1990,107607.639
+"142","Oceania","Palau","PLW",585,"Rural with sanitation","Micronesia",1990-01-01,1990,15.089
+"143","North America","Panama","PAN",591,"Rural with sanitation","Central America",1990-01-01,1990,2471.01
+"144","Oceania","Papua New Guinea","PNG",598,"Rural with sanitation","Melanesia",1990-01-01,1990,4157.903
+"145","South America","Paraguay","PRY",600,"Rural with sanitation","South America",1990-01-01,1990,4213.74
+"146","South America","Peru","PER",604,"Rural with sanitation","South America",1990-01-01,1990,21826.658
+"147","Asia","Philippines","PHL",608,"Rural with sanitation","South-eastern Asia",1990-01-01,1990,61947.34
+"148","Europe","Poland","POL",616,"Rural with sanitation","Eastern Europe",1990-01-01,1990,38195.258
+"149","Europe","Portugal","PRT",620,"Rural with sanitation","Southern Europe",1990-01-01,1990,9890.319
+"150","North America","Puerto Rico","PRI",630,"Rural with sanitation","Caribbean",1990-01-01,1990,3517.984
+"151","Asia","Qatar","QAT",634,"Rural with sanitation","Western Asia",1990-01-01,1990,476.478
+"152","Europe","Romania","ROU",642,"Rural with sanitation","Eastern Europe",1990-01-01,1990,23489.361
+"153","Europe","Russia","RUS",643,"Rural with sanitation","Eastern Europe",1990-01-01,1990,147568.552
+"154","Africa","Rwanda","RWA",646,"Rural with sanitation","Eastern Africa",1990-01-01,1990,7259.74
+"155","North America","Saint Kitts and Nevis","KNA",659,"Rural with sanitation","Caribbean",1990-01-01,1990,40.833
+"156","North America","Saint Lucia","LCA",662,"Rural with sanitation","Caribbean",1990-01-01,1990,138.18
+"157","North America","Saint Vincent and the Grenadines","VCT",670,"Rural with sanitation","Caribbean",1990-01-01,1990,107.509
+"158","Oceania","Samoa","WSM",882,"Rural with sanitation","Polynesia",1990-01-01,1990,162.865
+"159","Europe","San Marino","SMR",674,"Rural with sanitation","Southern Europe",1990-01-01,1990,24.045
+"160","Africa","Sao Tome and Principe","STP",678,"Rural with sanitation","Middle Africa",1990-01-01,1990,113.575
+"161","Asia","Saudi Arabia","SAU",682,"Rural with sanitation","Western Asia",1990-01-01,1990,16361.453
+"162","Africa","Senegal","SEN",686,"Rural with sanitation","Western Africa",1990-01-01,1990,7514.201
+"163","Europe","Serbia","SRB",688,"Rural with sanitation","Southern Europe",1990-01-01,1990,9517.67
+"164","Africa","Seychelles","SYC",690,"Rural with sanitation","Eastern Africa",1990-01-01,1990,70.627
+"165","Africa","Sierra Leone","SLE",694,"Rural with sanitation","Western Africa",1990-01-01,1990,3931.208
+"166","Asia","Singapore","SGP",702,"Rural with sanitation","South-eastern Asia",1990-01-01,1990,3016.4
+"167","Europe","Slovakia","SVK",703,"Rural with sanitation","Eastern Europe",1990-01-01,1990,5277.709
+"168","Europe","Slovenia","SVN",705,"Rural with sanitation","Southern Europe",1990-01-01,1990,2006.52
+"169","Oceania","Solomon Islands","SLB",90,"Rural with sanitation","Melanesia",1990-01-01,1990,311.849
+"170","Africa","Somalia","SOM",706,"Rural with sanitation","Eastern Africa",1990-01-01,1990,6321.615
+"171","Africa","South Africa","ZAF",710,"Rural with sanitation","Southern Africa",1990-01-01,1990,36793.49
+"172","Asia","South Korea","KOR",410,"Rural with sanitation","Eastern Asia",1990-01-01,1990,42972.254
+"173","Africa","South Sudan","SSD",728,"Rural with sanitation","Eastern Africa",1990-01-01,1990,5762.19
+"174","Europe","Spain","ESP",724,"Rural with sanitation","Southern Europe",1990-01-01,1990,39192.055
+"175","Asia","Sri Lanka","LKA",144,"Rural with sanitation","Southern Asia",1990-01-01,1990,17330.817
+"176","Africa","Sudan","SDN",729,"Rural with sanitation","Northern Africa",1990-01-01,1990,20008.804
+"177","South America","Suriname","SUR",740,"Rural with sanitation","South America",1990-01-01,1990,408.276
+"178","Europe","Sweden","SWE",752,"Rural with sanitation","Northern Europe",1990-01-01,1990,8559.107
+"179","Europe","Switzerland","CHE",756,"Rural with sanitation","Western Europe",1990-01-01,1990,6673.92
+"180","Asia","Syria","SYR",760,"Rural with sanitation","Western Asia",1990-01-01,1990,12451.539
+"181","Asia","Tajikistan","TJK",762,"Rural with sanitation","Central Asia",1990-01-01,1990,5297.286
+"182","Africa","Tanzania","TZA",834,"Rural with sanitation","Eastern Africa",1990-01-01,1990,25458.208
+"183","Asia","Thailand","THA",764,"Rural with sanitation","South-eastern Asia",1990-01-01,1990,56582.824
+"184","Asia","Timor-Leste","TLS",626,"Rural with sanitation","South-eastern Asia",1990-01-01,1990,740.231
+"185","Africa","Togo","TGO",768,"Rural with sanitation","Western Africa",1990-01-01,1990,3786.942
+"186","Oceania","Tokelau","TKL",772,"Rural with sanitation","Polynesia",1990-01-01,1990,1.609
+"187","Oceania","Tonga","TON",776,"Rural with sanitation","Polynesia",1990-01-01,1990,95.152
+"188","North America","Trinidad and Tobago","TTO",780,"Rural with sanitation","Caribbean",1990-01-01,1990,1221.904
+"189","Africa","Tunisia","TUN",788,"Rural with sanitation","Northern Africa",1990-01-01,1990,8232.797
+"190","Asia","Turkey","TUR",792,"Rural with sanitation","Western Asia",1990-01-01,1990,53994.605
+"191","Asia","Turkmenistan","TKM",795,"Rural with sanitation","Central Asia",1990-01-01,1990,3668
+"192","North America","Turks and Caicos Islands","TCA",796,"Rural with sanitation","Caribbean",1990-01-01,1990,11.55
+"193","Oceania","Tuvalu","TUV",798,"Rural with sanitation","Polynesia",1990-01-01,1990,9.004
+"194","Africa","Uganda","UGA",800,"Rural with sanitation","Eastern Africa",1990-01-01,1990,17384.369
+"195","Europe","Ukraine","UKR",804,"Rural with sanitation","Eastern Europe",1990-01-01,1990,51370.009
+"196","Asia","United Arab Emirates","ARE",784,"Rural with sanitation","Western Asia",1990-01-01,1990,1811.458
+"197","Europe","United Kingdom","GBR",826,"Rural with sanitation","Northern Europe",1990-01-01,1990,57110.117
+"198","North America","United States of America","USA",840,"Rural with sanitation","Northern America",1990-01-01,1990,252847.81
+"199","South America","Uruguay","URY",858,"Rural with sanitation","South America",1990-01-01,1990,3109.987
+"200","Asia","Uzbekistan","UZB",860,"Rural with sanitation","Central Asia",1990-01-01,1990,20515.248
+"201","Oceania","Vanuatu","VUT",548,"Rural with sanitation","Melanesia",1990-01-01,1990,146.633
+"202","South America","Venezuela","VEN",862,"Rural with sanitation","South America",1990-01-01,1990,19861.959
+"203","Asia","Viet Nam","VNM",704,"Rural with sanitation","South-eastern Asia",1990-01-01,1990,68209.604
+"204","Oceania","Wallis and Futuna Islands","WLF",876,"Rural with sanitation","Polynesia",1990-01-01,1990,13.88
+"205","Africa","Western Sahara","ESH",732,"Rural with sanitation","Northern Africa",1990-01-01,1990,216.828
+"206","Asia","Yemen","YEM",887,"Rural with sanitation","Western Asia",1990-01-01,1990,11961.099
+"207","Africa","Zambia","ZMB",894,"Rural with sanitation","Eastern Africa",1990-01-01,1990,8143.142
+"208","Africa","Zimbabwe","ZWE",716,"Rural with sanitation","Eastern Africa",1990-01-01,1990,10484.771
+"209","Asia","Afghanistan","AFG",4,"Urban with water","Southern Asia",1990-01-01,1990,12067.57
+"210","Europe","Albania","ALB",8,"Urban with water","Southern Europe",1990-01-01,1990,3281.453
+"211","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",1990-01-01,1990,25912.364
+"212","Europe","Andorra","AND",20,"Urban with water","Southern Europe",1990-01-01,1990,54.511
+"213","Africa","Angola","AGO",24,"Urban with water","Middle Africa",1990-01-01,1990,11127.87
+"214","North America","Anguilla","AIA",660,"Urban with water","Caribbean",1990-01-01,1990,8.334
+"215","North America","Antigua and Barbuda","ATG",28,"Urban with water","Caribbean",1990-01-01,1990,61.906
+"216","South America","Argentina","ARG",32,"Urban with water","South America",1990-01-01,1990,32729.74
+"217","Asia","Armenia","ARM",51,"Urban with water","Western Asia",1990-01-01,1990,3544.695
+"218","North America","Aruba","ABW",533,"Urban with water","Caribbean",1990-01-01,1990,62.148
+"219","Oceania","Australia","AUS",36,"Urban with water","Australia and New Zealand",1990-01-01,1990,17096.869
+"220","Europe","Austria","AUT",40,"Urban with water","Western Europe",1990-01-01,1990,7706.571
+"221","Asia","Azerbaijan","AZE",31,"Urban with water","Western Asia",1990-01-01,1990,7216.503
+"222","North America","Bahamas","BHS",44,"Urban with water","Caribbean",1990-01-01,1990,256.338
+"223","Asia","Bahrain","BHR",48,"Urban with water","Western Asia",1990-01-01,1990,495.944
+"224","Asia","Bangladesh","BGD",50,"Urban with water","Southern Asia",1990-01-01,1990,105983.136
+"225","North America","Barbados","BRB",52,"Urban with water","Caribbean",1990-01-01,1990,260.374
+"226","Europe","Belarus","BLR",112,"Urban with water","Eastern Europe",1990-01-01,1990,10231.983
+"227","Europe","Belgium","BEL",56,"Urban with water","Western Europe",1990-01-01,1990,9978.241
+"228","North America","Belize","BLZ",84,"Urban with water","Central America",1990-01-01,1990,187.552
+"229","Africa","Benin","BEN",204,"Urban with water","Western Africa",1990-01-01,1990,5001.271
+"230","North America","Bermuda","BMU",60,"Urban with water","Northern America",1990-01-01,1990,60.931
+"231","Asia","Bhutan","BTN",64,"Urban with water","Southern Asia",1990-01-01,1990,535.505
+"232","South America","Bolivia","BOL",68,"Urban with water","South America",1990-01-01,1990,6856.246
+"233","Europe","Bosnia and Herzegovina","BIH",70,"Urban with water","Southern Europe",1990-01-01,1990,4526.996
+"234","Africa","Botswana","BWA",72,"Urban with water","Southern Africa",1990-01-01,1990,1379.814
+"235","South America","Brazil","BRA",76,"Urban with water","South America",1990-01-01,1990,150393.143
+"236","North America","British Virgin Islands","VGB",92,"Urban with water","Caribbean",1990-01-01,1990,16.459
+"237","Asia","Brunei Darussalam","BRN",96,"Urban with water","South-eastern Asia",1990-01-01,1990,256.939
+"238","Europe","Bulgaria","BGR",100,"Urban with water","Eastern Europe",1990-01-01,1990,8821.111
+"239","Africa","Burkina Faso","BFA",854,"Urban with water","Western Africa",1990-01-01,1990,8811.033
+"240","Africa","Burundi","BDI",108,"Urban with water","Eastern Africa",1990-01-01,1990,5613.141
+"241","Asia","Cambodia","KHM",116,"Urban with water","South-eastern Asia",1990-01-01,1990,9008.856
+"242","Africa","Cameroon","CMR",120,"Urban with water","Middle Africa",1990-01-01,1990,12070.359
+"243","North America","Canada","CAN",124,"Urban with water","Northern America",1990-01-01,1990,27662.44
+"244","Africa","Cape Verde","CPV",132,"Urban with water","Western Africa",1990-01-01,1990,341.256
+"245","Africa","Central African Republic","CAF",140,"Urban with water","Middle Africa",1990-01-01,1990,2937.832
+"246","Africa","Chad","TCD",148,"Urban with water","Middle Africa",1990-01-01,1990,5958.022
+"247","South America","Chile","CHL",152,"Urban with water","South America",1990-01-01,1990,13141.202
+"248","Asia","China","CHN",156,"Urban with water","Eastern Asia",1990-01-01,1990,1154605.773
+"249","South America","Colombia","COL",170,"Urban with water","South America",1990-01-01,1990,34271.563
+"250","Africa","Comoros","COM",174,"Urban with water","Eastern Africa",1990-01-01,1990,415.144
+"251","Africa","Congo","COG",178,"Urban with water","Middle Africa",1990-01-01,1990,2386.467
+"252","Oceania","Cook Islands","COK",184,"Urban with water","Polynesia",1990-01-01,1990,17.613
+"253","North America","Costa Rica","CRI",188,"Urban with water","Central America",1990-01-01,1990,3095.994
+"254","Africa","Cote d'Ivoire","CIV",384,"Urban with water","Western Africa",1990-01-01,1990,12165.909
+"255","Europe","Croatia","HRV",191,"Urban with water","Southern Europe",1990-01-01,1990,4776.374
+"256","North America","Cuba","CUB",192,"Urban with water","Caribbean",1990-01-01,1990,10582.082
+"257","Asia","Cyprus","CYP",196,"Urban with water","Western Asia",1990-01-01,1990,766.611
+"258","Europe","Czech Republic","CZE",203,"Urban with water","Eastern Europe",1990-01-01,1990,10323.701
+"259","Africa","Democratic Republic of the Congo","COD",180,"Urban with water","Middle Africa",1990-01-01,1990,34962.676
+"260","Europe","Denmark","DNK",208,"Urban with water","Northern Europe",1990-01-01,1990,5140.332
+"261","Africa","Djibouti","DJI",262,"Urban with water","Eastern Africa",1990-01-01,1990,588.356
+"262","North America","Dominica","DMA",212,"Urban with water","Caribbean",1990-01-01,1990,70.928
+"263","North America","Dominican Republic","DOM",214,"Urban with water","Caribbean",1990-01-01,1990,7183.646
+"264","South America","Ecuador","ECU",218,"Urban with water","South America",1990-01-01,1990,10218.085
+"265","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",1990-01-01,1990,56397.273
+"266","North America","El Salvador","SLV",222,"Urban with water","Central America",1990-01-01,1990,5252.082
+"267","Africa","Equatorial Guinea","GNQ",226,"Urban with water","Middle Africa",1990-01-01,1990,377.363
+"268","Africa","Eritrea","ERI",232,"Urban with water","Eastern Africa",1990-01-01,1990,3139.083
+"269","Europe","Estonia","EST",233,"Urban with water","Northern Europe",1990-01-01,1990,1565.32
+"270","Africa","Ethiopia","ETH",231,"Urban with water","Eastern Africa",1990-01-01,1990,48057.094
+"271","Oceania","Fiji","FJI",242,"Urban with water","Melanesia",1990-01-01,1990,728.626
+"272","Europe","Finland","FIN",246,"Urban with water","Northern Europe",1990-01-01,1990,4986.705
+"273","Europe","France","FRA",250,"Urban with water","Western Europe",1990-01-01,1990,56943.299
+"274","Oceania","French Polynesia","PYF",258,"Urban with water","Polynesia",1990-01-01,1990,198.37
+"275","Africa","Gabon","GAB",266,"Urban with water","Middle Africa",1990-01-01,1990,952.269
+"276","Africa","Gambia","GMB",270,"Urban with water","Western Africa",1990-01-01,1990,916.811
+"277","Asia","Georgia","GEO",268,"Urban with water","Western Asia",1990-01-01,1990,5460.309
+"278","Europe","Germany","DEU",276,"Urban with water","Western Europe",1990-01-01,1990,78958.237
+"279","Africa","Ghana","GHA",288,"Urban with water","Western Africa",1990-01-01,1990,14628.26
+"280","Europe","Gibraltar","GIB",292,"Urban with water","Southern Europe",1990-01-01,1990,26.833
+"281","Europe","Greece","GRC",300,"Urban with water","Southern Europe",1990-01-01,1990,10131.737
+"282","North America","Grenada","GRD",308,"Urban with water","Caribbean",1990-01-01,1990,96.286
+"283","North America","Guadeloupe","GLP",312,"Urban with water","Caribbean",1990-01-01,1990,389.907
+"284","Oceania","Guam","GUM",316,"Urban with water","Micronesia",1990-01-01,1990,130.482
+"285","North America","Guatemala","GTM",320,"Urban with water","Central America",1990-01-01,1990,9158.547
+"286","Africa","Guinea-Bissau","GNB",624,"Urban with water","Western Africa",1990-01-01,1990,1056.208
+"287","Africa","Guinea-Conakry","GIN",324,"Urban with water","Western Africa",1990-01-01,1990,6034.082
+"288","South America","Guyana","GUY",328,"Urban with water","South America",1990-01-01,1990,720.282
+"289","North America","Haiti","HTI",332,"Urban with water","Caribbean",1990-01-01,1990,7099.733
+"290","North America","Honduras","HND",340,"Urban with water","Central America",1990-01-01,1990,4903.363
+"291","Europe","Hungary","HUN",348,"Urban with water","Eastern Europe",1990-01-01,1990,10385.061
+"292","Europe","Iceland","ISL",352,"Urban with water","Northern Europe",1990-01-01,1990,254.83
+"293","Asia","India","IND",356,"Urban with water","Southern Asia",1990-01-01,1990,870601.776
+"294","Asia","Indonesia","IDN",360,"Urban with water","South-eastern Asia",1990-01-01,1990,181436.821
+"295","Asia","Iran","IRN",364,"Urban with water","Southern Asia",1990-01-01,1990,56169.196
+"296","Asia","Iraq","IRQ",368,"Urban with water","Western Asia",1990-01-01,1990,17478.455
+"297","Europe","Ireland","IRL",372,"Urban with water","Northern Europe",1990-01-01,1990,3563.106
+"298","Asia","Israel","ISR",376,"Urban with water","Western Asia",1990-01-01,1990,4499.161
+"299","Europe","Italy","ITA",380,"Urban with water","Southern Europe",1990-01-01,1990,57007.577
+"300","North America","Jamaica","JAM",388,"Urban with water","Caribbean",1990-01-01,1990,2385.806
+"301","Asia","Japan","JPN",392,"Urban with water","Eastern Asia",1990-01-01,1990,122249.285
+"302","Asia","Jordan","JOR",400,"Urban with water","Western Asia",1990-01-01,1990,3358.453
+"303","Asia","Kazakhstan","KAZ",398,"Urban with water","Central Asia",1990-01-01,1990,16530.027
+"304","Africa","Kenya","KEN",404,"Urban with water","Eastern Africa",1990-01-01,1990,23446.229
+"305","Oceania","Kiribati","KIR",296,"Urban with water","Micronesia",1990-01-01,1990,72.411
+"306","Asia","Kuwait","KWT",414,"Urban with water","Western Asia",1990-01-01,1990,2058.832
+"307","Asia","Kyrgyzstan","KGZ",417,"Urban with water","Central Asia",1990-01-01,1990,4394.502
+"308","Asia","Laos","LAO",418,"Urban with water","South-eastern Asia",1990-01-01,1990,4247.839
+"309","Europe","Latvia","LVA",428,"Urban with water","Northern Europe",1990-01-01,1990,2663.985
+"310","Asia","Lebanon","LBN",422,"Urban with water","Western Asia",1990-01-01,1990,2703.019
+"311","Africa","Lesotho","LSO",426,"Urban with water","Southern Africa",1990-01-01,1990,1597.534
+"312","Africa","Liberia","LBR",430,"Urban with water","Western Africa",1990-01-01,1990,2102.877
+"313","Africa","Libya","LBY",434,"Urban with water","Northern Africa",1990-01-01,1990,4398.419
+"314","Europe","Lithuania","LTU",440,"Urban with water","Northern Europe",1990-01-01,1990,3697.393
+"315","Europe","Luxembourg","LUX",442,"Urban with water","Western Europe",1990-01-01,1990,381.787
+"316","Europe","Macedonia","MKD",807,"Urban with water","Southern Europe",1990-01-01,1990,1996.227
+"317","Africa","Madagascar","MDG",450,"Urban with water","Eastern Africa",1990-01-01,1990,11545.782
+"318","Africa","Malawi","MWI",454,"Urban with water","Eastern Africa",1990-01-01,1990,9408.998
+"319","Asia","Malaysia","MYS",458,"Urban with water","South-eastern Asia",1990-01-01,1990,18211.097
+"320","Asia","Maldives","MDV",462,"Urban with water","Southern Asia",1990-01-01,1990,223.179
+"321","Africa","Mali","MLI",466,"Urban with water","Western Africa",1990-01-01,1990,8482.075
+"322","Europe","Malta","MLT",470,"Urban with water","Southern Europe",1990-01-01,1990,355.707
+"323","Oceania","Marshall Islands","MHL",584,"Urban with water","Micronesia",1990-01-01,1990,47.3
+"324","Africa","Mauritania","MRT",478,"Urban with water","Western Africa",1990-01-01,1990,2023.665
+"325","Africa","Mauritius","MUS",480,"Urban with water","Eastern Africa",1990-01-01,1990,1055.865
+"326","North America","Mexico","MEX",484,"Urban with water","Central America",1990-01-01,1990,85609.404
+"327","Oceania","Micronesia","FSM",583,"Urban with water","Micronesia",1990-01-01,1990,96.331
+"328","Europe","Moldova","MDA",498,"Urban with water","Eastern Europe",1990-01-01,1990,4364.114
+"329","Europe","Monaco","MCO",492,"Urban with water","Western Europe",1990-01-01,1990,29.438
+"330","Asia","Mongolia","MNG",496,"Urban with water","Eastern Asia",1990-01-01,1990,2184.145
+"331","Europe","Montenegro","MNE",499,"Urban with water","Southern Europe",1990-01-01,1990,614.999
+"332","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",1990-01-01,1990,24950.128
+"333","Africa","Mozambique","MOZ",508,"Urban with water","Eastern Africa",1990-01-01,1990,13371.971
+"334","Asia","Myanmar","MMR",104,"Urban with water","South-eastern Asia",1990-01-01,1990,42007.309
+"335","Africa","Namibia","NAM",516,"Urban with water","Southern Africa",1990-01-01,1990,1415.447
+"336","Oceania","Nauru","NRU",520,"Urban with water","Micronesia",1990-01-01,1990,9.157
+"337","Asia","Nepal","NPL",524,"Urban with water","Southern Asia",1990-01-01,1990,18741.688
+"338","Europe","Netherlands","NLD",528,"Urban with water","Western Europe",1990-01-01,1990,14915.139
+"339","Oceania","New Zealand","NZL",554,"Urban with water","Australia and New Zealand",1990-01-01,1990,3397.534
+"340","North America","Nicaragua","NIC",558,"Urban with water","Central America",1990-01-01,1990,4144.564
+"341","Africa","Niger","NER",562,"Urban with water","Western Africa",1990-01-01,1990,7911.884
+"342","Africa","Nigeria","NGA",566,"Urban with water","Western Africa",1990-01-01,1990,95617.345
+"343","Oceania","Niue","NIU",570,"Urban with water","Polynesia",1990-01-01,1990,2.332
+"344","Asia","North Korea","PRK",408,"Urban with water","Eastern Asia",1990-01-01,1990,20194.354
+"345","Oceania","Northern Mariana Islands","MNP",580,"Urban with water","Micronesia",1990-01-01,1990,43.972
+"346","Europe","Norway","NOR",578,"Urban with water","Northern Europe",1990-01-01,1990,4240.375
+"347","Asia","Occupied Palestinian Territory","PSE",275,"Urban with water","Western Asia",1990-01-01,1990,2101.156
+"348","Asia","Oman","OMN",512,"Urban with water","Western Asia",1990-01-01,1990,1812.159
+"349","Asia","Pakistan","PAK",586,"Urban with water","Southern Asia",1990-01-01,1990,107607.639
+"350","Oceania","Palau","PLW",585,"Urban with water","Micronesia",1990-01-01,1990,15.089
+"351","North America","Panama","PAN",591,"Urban with water","Central America",1990-01-01,1990,2471.01
+"352","Oceania","Papua New Guinea","PNG",598,"Urban with water","Melanesia",1990-01-01,1990,4157.903
+"353","South America","Paraguay","PRY",600,"Urban with water","South America",1990-01-01,1990,4213.74
+"354","South America","Peru","PER",604,"Urban with water","South America",1990-01-01,1990,21826.658
+"355","Asia","Philippines","PHL",608,"Urban with water","South-eastern Asia",1990-01-01,1990,61947.34
+"356","Europe","Poland","POL",616,"Urban with water","Eastern Europe",1990-01-01,1990,38195.258
+"357","Europe","Portugal","PRT",620,"Urban with water","Southern Europe",1990-01-01,1990,9890.319
+"358","North America","Puerto Rico","PRI",630,"Urban with water","Caribbean",1990-01-01,1990,3517.984
+"359","Asia","Qatar","QAT",634,"Urban with water","Western Asia",1990-01-01,1990,476.478
+"360","Europe","Romania","ROU",642,"Urban with water","Eastern Europe",1990-01-01,1990,23489.361
+"361","Europe","Russia","RUS",643,"Urban with water","Eastern Europe",1990-01-01,1990,147568.552
+"362","Africa","Rwanda","RWA",646,"Urban with water","Eastern Africa",1990-01-01,1990,7259.74
+"363","North America","Saint Kitts and Nevis","KNA",659,"Urban with water","Caribbean",1990-01-01,1990,40.833
+"364","North America","Saint Lucia","LCA",662,"Urban with water","Caribbean",1990-01-01,1990,138.18
+"365","North America","Saint Vincent and the Grenadines","VCT",670,"Urban with water","Caribbean",1990-01-01,1990,107.509
+"366","Oceania","Samoa","WSM",882,"Urban with water","Polynesia",1990-01-01,1990,162.865
+"367","Europe","San Marino","SMR",674,"Urban with water","Southern Europe",1990-01-01,1990,24.045
+"368","Africa","Sao Tome and Principe","STP",678,"Urban with water","Middle Africa",1990-01-01,1990,113.575
+"369","Asia","Saudi Arabia","SAU",682,"Urban with water","Western Asia",1990-01-01,1990,16361.453
+"370","Africa","Senegal","SEN",686,"Urban with water","Western Africa",1990-01-01,1990,7514.201
+"371","Europe","Serbia","SRB",688,"Urban with water","Southern Europe",1990-01-01,1990,9517.67
+"372","Africa","Seychelles","SYC",690,"Urban with water","Eastern Africa",1990-01-01,1990,70.627
+"373","Africa","Sierra Leone","SLE",694,"Urban with water","Western Africa",1990-01-01,1990,3931.208
+"374","Asia","Singapore","SGP",702,"Urban with water","South-eastern Asia",1990-01-01,1990,3016.4
+"375","Europe","Slovakia","SVK",703,"Urban with water","Eastern Europe",1990-01-01,1990,5277.709
+"376","Europe","Slovenia","SVN",705,"Urban with water","Southern Europe",1990-01-01,1990,2006.52
+"377","Oceania","Solomon Islands","SLB",90,"Urban with water","Melanesia",1990-01-01,1990,311.849
+"378","Africa","Somalia","SOM",706,"Urban with water","Eastern Africa",1990-01-01,1990,6321.615
+"379","Africa","South Africa","ZAF",710,"Urban with water","Southern Africa",1990-01-01,1990,36793.49
+"380","Asia","South Korea","KOR",410,"Urban with water","Eastern Asia",1990-01-01,1990,42972.254
+"381","Africa","South Sudan","SSD",728,"Urban with water","Eastern Africa",1990-01-01,1990,5762.19
+"382","Europe","Spain","ESP",724,"Urban with water","Southern Europe",1990-01-01,1990,39192.055
+"383","Asia","Sri Lanka","LKA",144,"Urban with water","Southern Asia",1990-01-01,1990,17330.817
+"384","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",1990-01-01,1990,20008.804
+"385","South America","Suriname","SUR",740,"Urban with water","South America",1990-01-01,1990,408.276
+"386","Europe","Sweden","SWE",752,"Urban with water","Northern Europe",1990-01-01,1990,8559.107
+"387","Europe","Switzerland","CHE",756,"Urban with water","Western Europe",1990-01-01,1990,6673.92
+"388","Asia","Syria","SYR",760,"Urban with water","Western Asia",1990-01-01,1990,12451.539
+"389","Asia","Tajikistan","TJK",762,"Urban with water","Central Asia",1990-01-01,1990,5297.286
+"390","Africa","Tanzania","TZA",834,"Urban with water","Eastern Africa",1990-01-01,1990,25458.208
+"391","Asia","Thailand","THA",764,"Urban with water","South-eastern Asia",1990-01-01,1990,56582.824
+"392","Asia","Timor-Leste","TLS",626,"Urban with water","South-eastern Asia",1990-01-01,1990,740.231
+"393","Africa","Togo","TGO",768,"Urban with water","Western Africa",1990-01-01,1990,3786.942
+"394","Oceania","Tokelau","TKL",772,"Urban with water","Polynesia",1990-01-01,1990,1.609
+"395","Oceania","Tonga","TON",776,"Urban with water","Polynesia",1990-01-01,1990,95.152
+"396","North America","Trinidad and Tobago","TTO",780,"Urban with water","Caribbean",1990-01-01,1990,1221.904
+"397","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",1990-01-01,1990,8232.797
+"398","Asia","Turkey","TUR",792,"Urban with water","Western Asia",1990-01-01,1990,53994.605
+"399","Asia","Turkmenistan","TKM",795,"Urban with water","Central Asia",1990-01-01,1990,3668
+"400","North America","Turks and Caicos Islands","TCA",796,"Urban with water","Caribbean",1990-01-01,1990,11.55
+"401","Oceania","Tuvalu","TUV",798,"Urban with water","Polynesia",1990-01-01,1990,9.004
+"402","Africa","Uganda","UGA",800,"Urban with water","Eastern Africa",1990-01-01,1990,17384.369
+"403","Europe","Ukraine","UKR",804,"Urban with water","Eastern Europe",1990-01-01,1990,51370.009
+"404","Asia","United Arab Emirates","ARE",784,"Urban with water","Western Asia",1990-01-01,1990,1811.458
+"405","Europe","United Kingdom","GBR",826,"Urban with water","Northern Europe",1990-01-01,1990,57110.117
+"406","North America","United States of America","USA",840,"Urban with water","Northern America",1990-01-01,1990,252847.81
+"407","South America","Uruguay","URY",858,"Urban with water","South America",1990-01-01,1990,3109.987
+"408","Asia","Uzbekistan","UZB",860,"Urban with water","Central Asia",1990-01-01,1990,20515.248
+"409","Oceania","Vanuatu","VUT",548,"Urban with water","Melanesia",1990-01-01,1990,146.633
+"410","South America","Venezuela","VEN",862,"Urban with water","South America",1990-01-01,1990,19861.959
+"411","Asia","Viet Nam","VNM",704,"Urban with water","South-eastern Asia",1990-01-01,1990,68209.604
+"412","Oceania","Wallis and Futuna Islands","WLF",876,"Urban with water","Polynesia",1990-01-01,1990,13.88
+"413","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",1990-01-01,1990,216.828
+"414","Asia","Yemen","YEM",887,"Urban with water","Western Asia",1990-01-01,1990,11961.099
+"415","Africa","Zambia","ZMB",894,"Urban with water","Eastern Africa",1990-01-01,1990,8143.142
+"416","Africa","Zimbabwe","ZWE",716,"Urban with water","Eastern Africa",1990-01-01,1990,10484.771
+"417","Asia","Afghanistan","AFG",4,"Urban with sanitation","Southern Asia",1990-01-01,1990,12067.57
+"418","Europe","Albania","ALB",8,"Urban with sanitation","Southern Europe",1990-01-01,1990,3281.453
+"419","Africa","Algeria","DZA",12,"Urban with sanitation","Northern Africa",1990-01-01,1990,25912.364
+"420","Europe","Andorra","AND",20,"Urban with sanitation","Southern Europe",1990-01-01,1990,54.511
+"421","Africa","Angola","AGO",24,"Urban with sanitation","Middle Africa",1990-01-01,1990,11127.87
+"422","North America","Anguilla","AIA",660,"Urban with sanitation","Caribbean",1990-01-01,1990,8.334
+"423","North America","Antigua and Barbuda","ATG",28,"Urban with sanitation","Caribbean",1990-01-01,1990,61.906
+"424","South America","Argentina","ARG",32,"Urban with sanitation","South America",1990-01-01,1990,32729.74
+"425","Asia","Armenia","ARM",51,"Urban with sanitation","Western Asia",1990-01-01,1990,3544.695
+"426","North America","Aruba","ABW",533,"Urban with sanitation","Caribbean",1990-01-01,1990,62.148
+"427","Oceania","Australia","AUS",36,"Urban with sanitation","Australia and New Zealand",1990-01-01,1990,17096.869
+"428","Europe","Austria","AUT",40,"Urban with sanitation","Western Europe",1990-01-01,1990,7706.571
+"429","Asia","Azerbaijan","AZE",31,"Urban with sanitation","Western Asia",1990-01-01,1990,7216.503
+"430","North America","Bahamas","BHS",44,"Urban with sanitation","Caribbean",1990-01-01,1990,256.338
+"431","Asia","Bahrain","BHR",48,"Urban with sanitation","Western Asia",1990-01-01,1990,495.944
+"432","Asia","Bangladesh","BGD",50,"Urban with sanitation","Southern Asia",1990-01-01,1990,105983.136
+"433","North America","Barbados","BRB",52,"Urban with sanitation","Caribbean",1990-01-01,1990,260.374
+"434","Europe","Belarus","BLR",112,"Urban with sanitation","Eastern Europe",1990-01-01,1990,10231.983
+"435","Europe","Belgium","BEL",56,"Urban with sanitation","Western Europe",1990-01-01,1990,9978.241
+"436","North America","Belize","BLZ",84,"Urban with sanitation","Central America",1990-01-01,1990,187.552
+"437","Africa","Benin","BEN",204,"Urban with sanitation","Western Africa",1990-01-01,1990,5001.271
+"438","North America","Bermuda","BMU",60,"Urban with sanitation","Northern America",1990-01-01,1990,60.931
+"439","Asia","Bhutan","BTN",64,"Urban with sanitation","Southern Asia",1990-01-01,1990,535.505
+"440","South America","Bolivia","BOL",68,"Urban with sanitation","South America",1990-01-01,1990,6856.246
+"441","Europe","Bosnia and Herzegovina","BIH",70,"Urban with sanitation","Southern Europe",1990-01-01,1990,4526.996
+"442","Africa","Botswana","BWA",72,"Urban with sanitation","Southern Africa",1990-01-01,1990,1379.814
+"443","South America","Brazil","BRA",76,"Urban with sanitation","South America",1990-01-01,1990,150393.143
+"444","North America","British Virgin Islands","VGB",92,"Urban with sanitation","Caribbean",1990-01-01,1990,16.459
+"445","Asia","Brunei Darussalam","BRN",96,"Urban with sanitation","South-eastern Asia",1990-01-01,1990,256.939
+"446","Europe","Bulgaria","BGR",100,"Urban with sanitation","Eastern Europe",1990-01-01,1990,8821.111
+"447","Africa","Burkina Faso","BFA",854,"Urban with sanitation","Western Africa",1990-01-01,1990,8811.033
+"448","Africa","Burundi","BDI",108,"Urban with sanitation","Eastern Africa",1990-01-01,1990,5613.141
+"449","Asia","Cambodia","KHM",116,"Urban with sanitation","South-eastern Asia",1990-01-01,1990,9008.856
+"450","Africa","Cameroon","CMR",120,"Urban with sanitation","Middle Africa",1990-01-01,1990,12070.359
+"451","North America","Canada","CAN",124,"Urban with sanitation","Northern America",1990-01-01,1990,27662.44
+"452","Africa","Cape Verde","CPV",132,"Urban with sanitation","Western Africa",1990-01-01,1990,341.256
+"453","Africa","Central African Republic","CAF",140,"Urban with sanitation","Middle Africa",1990-01-01,1990,2937.832
+"454","Africa","Chad","TCD",148,"Urban with sanitation","Middle Africa",1990-01-01,1990,5958.022
+"455","South America","Chile","CHL",152,"Urban with sanitation","South America",1990-01-01,1990,13141.202
+"456","Asia","China","CHN",156,"Urban with sanitation","Eastern Asia",1990-01-01,1990,1154605.773
+"457","South America","Colombia","COL",170,"Urban with sanitation","South America",1990-01-01,1990,34271.563
+"458","Africa","Comoros","COM",174,"Urban with sanitation","Eastern Africa",1990-01-01,1990,415.144
+"459","Africa","Congo","COG",178,"Urban with sanitation","Middle Africa",1990-01-01,1990,2386.467
+"460","Oceania","Cook Islands","COK",184,"Urban with sanitation","Polynesia",1990-01-01,1990,17.613
+"461","North America","Costa Rica","CRI",188,"Urban with sanitation","Central America",1990-01-01,1990,3095.994
+"462","Africa","Cote d'Ivoire","CIV",384,"Urban with sanitation","Western Africa",1990-01-01,1990,12165.909
+"463","Europe","Croatia","HRV",191,"Urban with sanitation","Southern Europe",1990-01-01,1990,4776.374
+"464","North America","Cuba","CUB",192,"Urban with sanitation","Caribbean",1990-01-01,1990,10582.082
+"465","Asia","Cyprus","CYP",196,"Urban with sanitation","Western Asia",1990-01-01,1990,766.611
+"466","Europe","Czech Republic","CZE",203,"Urban with sanitation","Eastern Europe",1990-01-01,1990,10323.701
+"467","Africa","Democratic Republic of the Congo","COD",180,"Urban with sanitation","Middle Africa",1990-01-01,1990,34962.676
+"468","Europe","Denmark","DNK",208,"Urban with sanitation","Northern Europe",1990-01-01,1990,5140.332
+"469","Africa","Djibouti","DJI",262,"Urban with sanitation","Eastern Africa",1990-01-01,1990,588.356
+"470","North America","Dominica","DMA",212,"Urban with sanitation","Caribbean",1990-01-01,1990,70.928
+"471","North America","Dominican Republic","DOM",214,"Urban with sanitation","Caribbean",1990-01-01,1990,7183.646
+"472","South America","Ecuador","ECU",218,"Urban with sanitation","South America",1990-01-01,1990,10218.085
+"473","Africa","Egypt","EGY",818,"Urban with sanitation","Northern Africa",1990-01-01,1990,56397.273
+"474","North America","El Salvador","SLV",222,"Urban with sanitation","Central America",1990-01-01,1990,5252.082
+"475","Africa","Equatorial Guinea","GNQ",226,"Urban with sanitation","Middle Africa",1990-01-01,1990,377.363
+"476","Africa","Eritrea","ERI",232,"Urban with sanitation","Eastern Africa",1990-01-01,1990,3139.083
+"477","Europe","Estonia","EST",233,"Urban with sanitation","Northern Europe",1990-01-01,1990,1565.32
+"478","Africa","Ethiopia","ETH",231,"Urban with sanitation","Eastern Africa",1990-01-01,1990,48057.094
+"479","Oceania","Fiji","FJI",242,"Urban with sanitation","Melanesia",1990-01-01,1990,728.626
+"480","Europe","Finland","FIN",246,"Urban with sanitation","Northern Europe",1990-01-01,1990,4986.705
+"481","Europe","France","FRA",250,"Urban with sanitation","Western Europe",1990-01-01,1990,56943.299
+"482","Oceania","French Polynesia","PYF",258,"Urban with sanitation","Polynesia",1990-01-01,1990,198.37
+"483","Africa","Gabon","GAB",266,"Urban with sanitation","Middle Africa",1990-01-01,1990,952.269
+"484","Africa","Gambia","GMB",270,"Urban with sanitation","Western Africa",1990-01-01,1990,916.811
+"485","Asia","Georgia","GEO",268,"Urban with sanitation","Western Asia",1990-01-01,1990,5460.309
+"486","Europe","Germany","DEU",276,"Urban with sanitation","Western Europe",1990-01-01,1990,78958.237
+"487","Africa","Ghana","GHA",288,"Urban with sanitation","Western Africa",1990-01-01,1990,14628.26
+"488","Europe","Gibraltar","GIB",292,"Urban with sanitation","Southern Europe",1990-01-01,1990,26.833
+"489","Europe","Greece","GRC",300,"Urban with sanitation","Southern Europe",1990-01-01,1990,10131.737
+"490","North America","Grenada","GRD",308,"Urban with sanitation","Caribbean",1990-01-01,1990,96.286
+"491","North America","Guadeloupe","GLP",312,"Urban with sanitation","Caribbean",1990-01-01,1990,389.907
+"492","Oceania","Guam","GUM",316,"Urban with sanitation","Micronesia",1990-01-01,1990,130.482
+"493","North America","Guatemala","GTM",320,"Urban with sanitation","Central America",1990-01-01,1990,9158.547
+"494","Africa","Guinea-Bissau","GNB",624,"Urban with sanitation","Western Africa",1990-01-01,1990,1056.208
+"495","Africa","Guinea-Conakry","GIN",324,"Urban with sanitation","Western Africa",1990-01-01,1990,6034.082
+"496","South America","Guyana","GUY",328,"Urban with sanitation","South America",1990-01-01,1990,720.282
+"497","North America","Haiti","HTI",332,"Urban with sanitation","Caribbean",1990-01-01,1990,7099.733
+"498","North America","Honduras","HND",340,"Urban with sanitation","Central America",1990-01-01,1990,4903.363
+"499","Europe","Hungary","HUN",348,"Urban with sanitation","Eastern Europe",1990-01-01,1990,10385.061
+"500","Europe","Iceland","ISL",352,"Urban with sanitation","Northern Europe",1990-01-01,1990,254.83
+"501","Asia","India","IND",356,"Urban with sanitation","Southern Asia",1990-01-01,1990,870601.776
+"502","Asia","Indonesia","IDN",360,"Urban with sanitation","South-eastern Asia",1990-01-01,1990,181436.821
+"503","Asia","Iran","IRN",364,"Urban with sanitation","Southern Asia",1990-01-01,1990,56169.196
+"504","Asia","Iraq","IRQ",368,"Urban with sanitation","Western Asia",1990-01-01,1990,17478.455
+"505","Europe","Ireland","IRL",372,"Urban with sanitation","Northern Europe",1990-01-01,1990,3563.106
+"506","Asia","Israel","ISR",376,"Urban with sanitation","Western Asia",1990-01-01,1990,4499.161
+"507","Europe","Italy","ITA",380,"Urban with sanitation","Southern Europe",1990-01-01,1990,57007.577
+"508","North America","Jamaica","JAM",388,"Urban with sanitation","Caribbean",1990-01-01,1990,2385.806
+"509","Asia","Japan","JPN",392,"Urban with sanitation","Eastern Asia",1990-01-01,1990,122249.285
+"510","Asia","Jordan","JOR",400,"Urban with sanitation","Western Asia",1990-01-01,1990,3358.453
+"511","Asia","Kazakhstan","KAZ",398,"Urban with sanitation","Central Asia",1990-01-01,1990,16530.027
+"512","Africa","Kenya","KEN",404,"Urban with sanitation","Eastern Africa",1990-01-01,1990,23446.229
+"513","Oceania","Kiribati","KIR",296,"Urban with sanitation","Micronesia",1990-01-01,1990,72.411
+"514","Asia","Kuwait","KWT",414,"Urban with sanitation","Western Asia",1990-01-01,1990,2058.832
+"515","Asia","Kyrgyzstan","KGZ",417,"Urban with sanitation","Central Asia",1990-01-01,1990,4394.502
+"516","Asia","Laos","LAO",418,"Urban with sanitation","South-eastern Asia",1990-01-01,1990,4247.839
+"517","Europe","Latvia","LVA",428,"Urban with sanitation","Northern Europe",1990-01-01,1990,2663.985
+"518","Asia","Lebanon","LBN",422,"Urban with sanitation","Western Asia",1990-01-01,1990,2703.019
+"519","Africa","Lesotho","LSO",426,"Urban with sanitation","Southern Africa",1990-01-01,1990,1597.534
+"520","Africa","Liberia","LBR",430,"Urban with sanitation","Western Africa",1990-01-01,1990,2102.877
+"521","Africa","Libya","LBY",434,"Urban with sanitation","Northern Africa",1990-01-01,1990,4398.419
+"522","Europe","Lithuania","LTU",440,"Urban with sanitation","Northern Europe",1990-01-01,1990,3697.393
+"523","Europe","Luxembourg","LUX",442,"Urban with sanitation","Western Europe",1990-01-01,1990,381.787
+"524","Europe","Macedonia","MKD",807,"Urban with sanitation","Southern Europe",1990-01-01,1990,1996.227
+"525","Africa","Madagascar","MDG",450,"Urban with sanitation","Eastern Africa",1990-01-01,1990,11545.782
+"526","Africa","Malawi","MWI",454,"Urban with sanitation","Eastern Africa",1990-01-01,1990,9408.998
+"527","Asia","Malaysia","MYS",458,"Urban with sanitation","South-eastern Asia",1990-01-01,1990,18211.097
+"528","Asia","Maldives","MDV",462,"Urban with sanitation","Southern Asia",1990-01-01,1990,223.179
+"529","Africa","Mali","MLI",466,"Urban with sanitation","Western Africa",1990-01-01,1990,8482.075
+"530","Europe","Malta","MLT",470,"Urban with sanitation","Southern Europe",1990-01-01,1990,355.707
+"531","Oceania","Marshall Islands","MHL",584,"Urban with sanitation","Micronesia",1990-01-01,1990,47.3
+"532","Africa","Mauritania","MRT",478,"Urban with sanitation","Western Africa",1990-01-01,1990,2023.665
+"533","Africa","Mauritius","MUS",480,"Urban with sanitation","Eastern Africa",1990-01-01,1990,1055.865
+"534","North America","Mexico","MEX",484,"Urban with sanitation","Central America",1990-01-01,1990,85609.404
+"535","Oceania","Micronesia","FSM",583,"Urban with sanitation","Micronesia",1990-01-01,1990,96.331
+"536","Europe","Moldova","MDA",498,"Urban with sanitation","Eastern Europe",1990-01-01,1990,4364.114
+"537","Europe","Monaco","MCO",492,"Urban with sanitation","Western Europe",1990-01-01,1990,29.438
+"538","Asia","Mongolia","MNG",496,"Urban with sanitation","Eastern Asia",1990-01-01,1990,2184.145
+"539","Europe","Montenegro","MNE",499,"Urban with sanitation","Southern Europe",1990-01-01,1990,614.999
+"540","Africa","Morocco","MAR",504,"Urban with sanitation","Northern Africa",1990-01-01,1990,24950.128
+"541","Africa","Mozambique","MOZ",508,"Urban with sanitation","Eastern Africa",1990-01-01,1990,13371.971
+"542","Asia","Myanmar","MMR",104,"Urban with sanitation","South-eastern Asia",1990-01-01,1990,42007.309
+"543","Africa","Namibia","NAM",516,"Urban with sanitation","Southern Africa",1990-01-01,1990,1415.447
+"544","Oceania","Nauru","NRU",520,"Urban with sanitation","Micronesia",1990-01-01,1990,9.157
+"545","Asia","Nepal","NPL",524,"Urban with sanitation","Southern Asia",1990-01-01,1990,18741.688
+"546","Europe","Netherlands","NLD",528,"Urban with sanitation","Western Europe",1990-01-01,1990,14915.139
+"547","Oceania","New Zealand","NZL",554,"Urban with sanitation","Australia and New Zealand",1990-01-01,1990,3397.534
+"548","North America","Nicaragua","NIC",558,"Urban with sanitation","Central America",1990-01-01,1990,4144.564
+"549","Africa","Niger","NER",562,"Urban with sanitation","Western Africa",1990-01-01,1990,7911.884
+"550","Africa","Nigeria","NGA",566,"Urban with sanitation","Western Africa",1990-01-01,1990,95617.345
+"551","Oceania","Niue","NIU",570,"Urban with sanitation","Polynesia",1990-01-01,1990,2.332
+"552","Asia","North Korea","PRK",408,"Urban with sanitation","Eastern Asia",1990-01-01,1990,20194.354
+"553","Oceania","Northern Mariana Islands","MNP",580,"Urban with sanitation","Micronesia",1990-01-01,1990,43.972
+"554","Europe","Norway","NOR",578,"Urban with sanitation","Northern Europe",1990-01-01,1990,4240.375
+"555","Asia","Occupied Palestinian Territory","PSE",275,"Urban with sanitation","Western Asia",1990-01-01,1990,2101.156
+"556","Asia","Oman","OMN",512,"Urban with sanitation","Western Asia",1990-01-01,1990,1812.159
+"557","Asia","Pakistan","PAK",586,"Urban with sanitation","Southern Asia",1990-01-01,1990,107607.639
+"558","Oceania","Palau","PLW",585,"Urban with sanitation","Micronesia",1990-01-01,1990,15.089
+"559","North America","Panama","PAN",591,"Urban with sanitation","Central America",1990-01-01,1990,2471.01
+"560","Oceania","Papua New Guinea","PNG",598,"Urban with sanitation","Melanesia",1990-01-01,1990,4157.903
+"561","South America","Paraguay","PRY",600,"Urban with sanitation","South America",1990-01-01,1990,4213.74
+"562","South America","Peru","PER",604,"Urban with sanitation","South America",1990-01-01,1990,21826.658
+"563","Asia","Philippines","PHL",608,"Urban with sanitation","South-eastern Asia",1990-01-01,1990,61947.34
+"564","Europe","Poland","POL",616,"Urban with sanitation","Eastern Europe",1990-01-01,1990,38195.258
+"565","Europe","Portugal","PRT",620,"Urban with sanitation","Southern Europe",1990-01-01,1990,9890.319
+"566","North America","Puerto Rico","PRI",630,"Urban with sanitation","Caribbean",1990-01-01,1990,3517.984
+"567","Asia","Qatar","QAT",634,"Urban with sanitation","Western Asia",1990-01-01,1990,476.478
+"568","Europe","Romania","ROU",642,"Urban with sanitation","Eastern Europe",1990-01-01,1990,23489.361
+"569","Europe","Russia","RUS",643,"Urban with sanitation","Eastern Europe",1990-01-01,1990,147568.552
+"570","Africa","Rwanda","RWA",646,"Urban with sanitation","Eastern Africa",1990-01-01,1990,7259.74
+"571","North America","Saint Kitts and Nevis","KNA",659,"Urban with sanitation","Caribbean",1990-01-01,1990,40.833
+"572","North America","Saint Lucia","LCA",662,"Urban with sanitation","Caribbean",1990-01-01,1990,138.18
+"573","North America","Saint Vincent and the Grenadines","VCT",670,"Urban with sanitation","Caribbean",1990-01-01,1990,107.509
+"574","Oceania","Samoa","WSM",882,"Urban with sanitation","Polynesia",1990-01-01,1990,162.865
+"575","Europe","San Marino","SMR",674,"Urban with sanitation","Southern Europe",1990-01-01,1990,24.045
+"576","Africa","Sao Tome and Principe","STP",678,"Urban with sanitation","Middle Africa",1990-01-01,1990,113.575
+"577","Asia","Saudi Arabia","SAU",682,"Urban with sanitation","Western Asia",1990-01-01,1990,16361.453
+"578","Africa","Senegal","SEN",686,"Urban with sanitation","Western Africa",1990-01-01,1990,7514.201
+"579","Europe","Serbia","SRB",688,"Urban with sanitation","Southern Europe",1990-01-01,1990,9517.67
+"580","Africa","Seychelles","SYC",690,"Urban with sanitation","Eastern Africa",1990-01-01,1990,70.627
+"581","Africa","Sierra Leone","SLE",694,"Urban with sanitation","Western Africa",1990-01-01,1990,3931.208
+"582","Asia","Singapore","SGP",702,"Urban with sanitation","South-eastern Asia",1990-01-01,1990,3016.4
+"583","Europe","Slovakia","SVK",703,"Urban with sanitation","Eastern Europe",1990-01-01,1990,5277.709
+"584","Europe","Slovenia","SVN",705,"Urban with sanitation","Southern Europe",1990-01-01,1990,2006.52
+"585","Oceania","Solomon Islands","SLB",90,"Urban with sanitation","Melanesia",1990-01-01,1990,311.849
+"586","Africa","Somalia","SOM",706,"Urban with sanitation","Eastern Africa",1990-01-01,1990,6321.615
+"587","Africa","South Africa","ZAF",710,"Urban with sanitation","Southern Africa",1990-01-01,1990,36793.49
+"588","Asia","South Korea","KOR",410,"Urban with sanitation","Eastern Asia",1990-01-01,1990,42972.254
+"589","Africa","South Sudan","SSD",728,"Urban with sanitation","Eastern Africa",1990-01-01,1990,5762.19
+"590","Europe","Spain","ESP",724,"Urban with sanitation","Southern Europe",1990-01-01,1990,39192.055
+"591","Asia","Sri Lanka","LKA",144,"Urban with sanitation","Southern Asia",1990-01-01,1990,17330.817
+"592","Africa","Sudan","SDN",729,"Urban with sanitation","Northern Africa",1990-01-01,1990,20008.804
+"593","South America","Suriname","SUR",740,"Urban with sanitation","South America",1990-01-01,1990,408.276
+"594","Europe","Sweden","SWE",752,"Urban with sanitation","Northern Europe",1990-01-01,1990,8559.107
+"595","Europe","Switzerland","CHE",756,"Urban with sanitation","Western Europe",1990-01-01,1990,6673.92
+"596","Asia","Syria","SYR",760,"Urban with sanitation","Western Asia",1990-01-01,1990,12451.539
+"597","Asia","Tajikistan","TJK",762,"Urban with sanitation","Central Asia",1990-01-01,1990,5297.286
+"598","Africa","Tanzania","TZA",834,"Urban with sanitation","Eastern Africa",1990-01-01,1990,25458.208
+"599","Asia","Thailand","THA",764,"Urban with sanitation","South-eastern Asia",1990-01-01,1990,56582.824
+"600","Asia","Timor-Leste","TLS",626,"Urban with sanitation","South-eastern Asia",1990-01-01,1990,740.231
+"601","Africa","Togo","TGO",768,"Urban with sanitation","Western Africa",1990-01-01,1990,3786.942
+"602","Oceania","Tokelau","TKL",772,"Urban with sanitation","Polynesia",1990-01-01,1990,1.609
+"603","Oceania","Tonga","TON",776,"Urban with sanitation","Polynesia",1990-01-01,1990,95.152
+"604","North America","Trinidad and Tobago","TTO",780,"Urban with sanitation","Caribbean",1990-01-01,1990,1221.904
+"605","Africa","Tunisia","TUN",788,"Urban with sanitation","Northern Africa",1990-01-01,1990,8232.797
+"606","Asia","Turkey","TUR",792,"Urban with sanitation","Western Asia",1990-01-01,1990,53994.605
+"607","Asia","Turkmenistan","TKM",795,"Urban with sanitation","Central Asia",1990-01-01,1990,3668
+"608","North America","Turks and Caicos Islands","TCA",796,"Urban with sanitation","Caribbean",1990-01-01,1990,11.55
+"609","Oceania","Tuvalu","TUV",798,"Urban with sanitation","Polynesia",1990-01-01,1990,9.004
+"610","Africa","Uganda","UGA",800,"Urban with sanitation","Eastern Africa",1990-01-01,1990,17384.369
+"611","Europe","Ukraine","UKR",804,"Urban with sanitation","Eastern Europe",1990-01-01,1990,51370.009
+"612","Asia","United Arab Emirates","ARE",784,"Urban with sanitation","Western Asia",1990-01-01,1990,1811.458
+"613","Europe","United Kingdom","GBR",826,"Urban with sanitation","Northern Europe",1990-01-01,1990,57110.117
+"614","North America","United States of America","USA",840,"Urban with sanitation","Northern America",1990-01-01,1990,252847.81
+"615","South America","Uruguay","URY",858,"Urban with sanitation","South America",1990-01-01,1990,3109.987
+"616","Asia","Uzbekistan","UZB",860,"Urban with sanitation","Central Asia",1990-01-01,1990,20515.248
+"617","Oceania","Vanuatu","VUT",548,"Urban with sanitation","Melanesia",1990-01-01,1990,146.633
+"618","South America","Venezuela","VEN",862,"Urban with sanitation","South America",1990-01-01,1990,19861.959
+"619","Asia","Viet Nam","VNM",704,"Urban with sanitation","South-eastern Asia",1990-01-01,1990,68209.604
+"620","Oceania","Wallis and Futuna Islands","WLF",876,"Urban with sanitation","Polynesia",1990-01-01,1990,13.88
+"621","Africa","Western Sahara","ESH",732,"Urban with sanitation","Northern Africa",1990-01-01,1990,216.828
+"622","Asia","Yemen","YEM",887,"Urban with sanitation","Western Asia",1990-01-01,1990,11961.099
+"623","Africa","Zambia","ZMB",894,"Urban with sanitation","Eastern Africa",1990-01-01,1990,8143.142
+"624","Africa","Zimbabwe","ZWE",716,"Urban with sanitation","Eastern Africa",1990-01-01,1990,10484.771
+"625","Asia","Afghanistan","AFG",4,"No access to water","Southern Asia",1990-01-01,1990,12067.57
+"626","Europe","Albania","ALB",8,"No access to water","Southern Europe",1990-01-01,1990,3281.453
+"627","Africa","Algeria","DZA",12,"No access to water","Northern Africa",1990-01-01,1990,25912.364
+"628","Europe","Andorra","AND",20,"No access to water","Southern Europe",1990-01-01,1990,54.511
+"629","Africa","Angola","AGO",24,"No access to water","Middle Africa",1990-01-01,1990,11127.87
+"630","North America","Anguilla","AIA",660,"No access to water","Caribbean",1990-01-01,1990,8.334
+"631","North America","Antigua and Barbuda","ATG",28,"No access to water","Caribbean",1990-01-01,1990,61.906
+"632","South America","Argentina","ARG",32,"No access to water","South America",1990-01-01,1990,32729.74
+"633","Asia","Armenia","ARM",51,"No access to water","Western Asia",1990-01-01,1990,3544.695
+"634","North America","Aruba","ABW",533,"No access to water","Caribbean",1990-01-01,1990,62.148
+"635","Oceania","Australia","AUS",36,"No access to water","Australia and New Zealand",1990-01-01,1990,17096.869
+"636","Europe","Austria","AUT",40,"No access to water","Western Europe",1990-01-01,1990,7706.571
+"637","Asia","Azerbaijan","AZE",31,"No access to water","Western Asia",1990-01-01,1990,7216.503
+"638","North America","Bahamas","BHS",44,"No access to water","Caribbean",1990-01-01,1990,256.338
+"639","Asia","Bahrain","BHR",48,"No access to water","Western Asia",1990-01-01,1990,495.944
+"640","Asia","Bangladesh","BGD",50,"No access to water","Southern Asia",1990-01-01,1990,105983.136
+"641","North America","Barbados","BRB",52,"No access to water","Caribbean",1990-01-01,1990,260.374
+"642","Europe","Belarus","BLR",112,"No access to water","Eastern Europe",1990-01-01,1990,10231.983
+"643","Europe","Belgium","BEL",56,"No access to water","Western Europe",1990-01-01,1990,9978.241
+"644","North America","Belize","BLZ",84,"No access to water","Central America",1990-01-01,1990,187.552
+"645","Africa","Benin","BEN",204,"No access to water","Western Africa",1990-01-01,1990,5001.271
+"646","North America","Bermuda","BMU",60,"No access to water","Northern America",1990-01-01,1990,60.931
+"647","Asia","Bhutan","BTN",64,"No access to water","Southern Asia",1990-01-01,1990,535.505
+"648","South America","Bolivia","BOL",68,"No access to water","South America",1990-01-01,1990,6856.246
+"649","Europe","Bosnia and Herzegovina","BIH",70,"No access to water","Southern Europe",1990-01-01,1990,4526.996
+"650","Africa","Botswana","BWA",72,"No access to water","Southern Africa",1990-01-01,1990,1379.814
+"651","South America","Brazil","BRA",76,"No access to water","South America",1990-01-01,1990,150393.143
+"652","North America","British Virgin Islands","VGB",92,"No access to water","Caribbean",1990-01-01,1990,16.459
+"653","Asia","Brunei Darussalam","BRN",96,"No access to water","South-eastern Asia",1990-01-01,1990,256.939
+"654","Europe","Bulgaria","BGR",100,"No access to water","Eastern Europe",1990-01-01,1990,8821.111
+"655","Africa","Burkina Faso","BFA",854,"No access to water","Western Africa",1990-01-01,1990,8811.033
+"656","Africa","Burundi","BDI",108,"No access to water","Eastern Africa",1990-01-01,1990,5613.141
+"657","Asia","Cambodia","KHM",116,"No access to water","South-eastern Asia",1990-01-01,1990,9008.856
+"658","Africa","Cameroon","CMR",120,"No access to water","Middle Africa",1990-01-01,1990,12070.359
+"659","North America","Canada","CAN",124,"No access to water","Northern America",1990-01-01,1990,27662.44
+"660","Africa","Cape Verde","CPV",132,"No access to water","Western Africa",1990-01-01,1990,341.256
+"661","Africa","Central African Republic","CAF",140,"No access to water","Middle Africa",1990-01-01,1990,2937.832
+"662","Africa","Chad","TCD",148,"No access to water","Middle Africa",1990-01-01,1990,5958.022
+"663","South America","Chile","CHL",152,"No access to water","South America",1990-01-01,1990,13141.202
+"664","Asia","China","CHN",156,"No access to water","Eastern Asia",1990-01-01,1990,1154605.773
+"665","South America","Colombia","COL",170,"No access to water","South America",1990-01-01,1990,34271.563
+"666","Africa","Comoros","COM",174,"No access to water","Eastern Africa",1990-01-01,1990,415.144
+"667","Africa","Congo","COG",178,"No access to water","Middle Africa",1990-01-01,1990,2386.467
+"668","Oceania","Cook Islands","COK",184,"No access to water","Polynesia",1990-01-01,1990,17.613
+"669","North America","Costa Rica","CRI",188,"No access to water","Central America",1990-01-01,1990,3095.994
+"670","Africa","Cote d'Ivoire","CIV",384,"No access to water","Western Africa",1990-01-01,1990,12165.909
+"671","Europe","Croatia","HRV",191,"No access to water","Southern Europe",1990-01-01,1990,4776.374
+"672","North America","Cuba","CUB",192,"No access to water","Caribbean",1990-01-01,1990,10582.082
+"673","Asia","Cyprus","CYP",196,"No access to water","Western Asia",1990-01-01,1990,766.611
+"674","Europe","Czech Republic","CZE",203,"No access to water","Eastern Europe",1990-01-01,1990,10323.701
+"675","Africa","Democratic Republic of the Congo","COD",180,"No access to water","Middle Africa",1990-01-01,1990,34962.676
+"676","Europe","Denmark","DNK",208,"No access to water","Northern Europe",1990-01-01,1990,5140.332
+"677","Africa","Djibouti","DJI",262,"No access to water","Eastern Africa",1990-01-01,1990,588.356
+"678","North America","Dominica","DMA",212,"No access to water","Caribbean",1990-01-01,1990,70.928
+"679","North America","Dominican Republic","DOM",214,"No access to water","Caribbean",1990-01-01,1990,7183.646
+"680","South America","Ecuador","ECU",218,"No access to water","South America",1990-01-01,1990,10218.085
+"681","Africa","Egypt","EGY",818,"No access to water","Northern Africa",1990-01-01,1990,56397.273
+"682","North America","El Salvador","SLV",222,"No access to water","Central America",1990-01-01,1990,5252.082
+"683","Africa","Equatorial Guinea","GNQ",226,"No access to water","Middle Africa",1990-01-01,1990,377.363
+"684","Africa","Eritrea","ERI",232,"No access to water","Eastern Africa",1990-01-01,1990,3139.083
+"685","Europe","Estonia","EST",233,"No access to water","Northern Europe",1990-01-01,1990,1565.32
+"686","Africa","Ethiopia","ETH",231,"No access to water","Eastern Africa",1990-01-01,1990,48057.094
+"687","Oceania","Fiji","FJI",242,"No access to water","Melanesia",1990-01-01,1990,728.626
+"688","Europe","Finland","FIN",246,"No access to water","Northern Europe",1990-01-01,1990,4986.705
+"689","Europe","France","FRA",250,"No access to water","Western Europe",1990-01-01,1990,56943.299
+"690","Oceania","French Polynesia","PYF",258,"No access to water","Polynesia",1990-01-01,1990,198.37
+"691","Africa","Gabon","GAB",266,"No access to water","Middle Africa",1990-01-01,1990,952.269
+"692","Africa","Gambia","GMB",270,"No access to water","Western Africa",1990-01-01,1990,916.811
+"693","Asia","Georgia","GEO",268,"No access to water","Western Asia",1990-01-01,1990,5460.309
+"694","Europe","Germany","DEU",276,"No access to water","Western Europe",1990-01-01,1990,78958.237
+"695","Africa","Ghana","GHA",288,"No access to water","Western Africa",1990-01-01,1990,14628.26
+"696","Europe","Gibraltar","GIB",292,"No access to water","Southern Europe",1990-01-01,1990,26.833
+"697","Europe","Greece","GRC",300,"No access to water","Southern Europe",1990-01-01,1990,10131.737
+"698","North America","Grenada","GRD",308,"No access to water","Caribbean",1990-01-01,1990,96.286
+"699","North America","Guadeloupe","GLP",312,"No access to water","Caribbean",1990-01-01,1990,389.907
+"700","Oceania","Guam","GUM",316,"No access to water","Micronesia",1990-01-01,1990,130.482
+"701","North America","Guatemala","GTM",320,"No access to water","Central America",1990-01-01,1990,9158.547
+"702","Africa","Guinea-Bissau","GNB",624,"No access to water","Western Africa",1990-01-01,1990,1056.208
+"703","Africa","Guinea-Conakry","GIN",324,"No access to water","Western Africa",1990-01-01,1990,6034.082
+"704","South America","Guyana","GUY",328,"No access to water","South America",1990-01-01,1990,720.282
+"705","North America","Haiti","HTI",332,"No access to water","Caribbean",1990-01-01,1990,7099.733
+"706","North America","Honduras","HND",340,"No access to water","Central America",1990-01-01,1990,4903.363
+"707","Europe","Hungary","HUN",348,"No access to water","Eastern Europe",1990-01-01,1990,10385.061
+"708","Europe","Iceland","ISL",352,"No access to water","Northern Europe",1990-01-01,1990,254.83
+"709","Asia","India","IND",356,"No access to water","Southern Asia",1990-01-01,1990,870601.776
+"710","Asia","Indonesia","IDN",360,"No access to water","South-eastern Asia",1990-01-01,1990,181436.821
+"711","Asia","Iran","IRN",364,"No access to water","Southern Asia",1990-01-01,1990,56169.196
+"712","Asia","Iraq","IRQ",368,"No access to water","Western Asia",1990-01-01,1990,17478.455
+"713","Europe","Ireland","IRL",372,"No access to water","Northern Europe",1990-01-01,1990,3563.106
+"714","Asia","Israel","ISR",376,"No access to water","Western Asia",1990-01-01,1990,4499.161
+"715","Europe","Italy","ITA",380,"No access to water","Southern Europe",1990-01-01,1990,57007.577
+"716","North America","Jamaica","JAM",388,"No access to water","Caribbean",1990-01-01,1990,2385.806
+"717","Asia","Japan","JPN",392,"No access to water","Eastern Asia",1990-01-01,1990,122249.285
+"718","Asia","Jordan","JOR",400,"No access to water","Western Asia",1990-01-01,1990,3358.453
+"719","Asia","Kazakhstan","KAZ",398,"No access to water","Central Asia",1990-01-01,1990,16530.027
+"720","Africa","Kenya","KEN",404,"No access to water","Eastern Africa",1990-01-01,1990,23446.229
+"721","Oceania","Kiribati","KIR",296,"No access to water","Micronesia",1990-01-01,1990,72.411
+"722","Asia","Kuwait","KWT",414,"No access to water","Western Asia",1990-01-01,1990,2058.832
+"723","Asia","Kyrgyzstan","KGZ",417,"No access to water","Central Asia",1990-01-01,1990,4394.502
+"724","Asia","Laos","LAO",418,"No access to water","South-eastern Asia",1990-01-01,1990,4247.839
+"725","Europe","Latvia","LVA",428,"No access to water","Northern Europe",1990-01-01,1990,2663.985
+"726","Asia","Lebanon","LBN",422,"No access to water","Western Asia",1990-01-01,1990,2703.019
+"727","Africa","Lesotho","LSO",426,"No access to water","Southern Africa",1990-01-01,1990,1597.534
+"728","Africa","Liberia","LBR",430,"No access to water","Western Africa",1990-01-01,1990,2102.877
+"729","Africa","Libya","LBY",434,"No access to water","Northern Africa",1990-01-01,1990,4398.419
+"730","Europe","Lithuania","LTU",440,"No access to water","Northern Europe",1990-01-01,1990,3697.393
+"731","Europe","Luxembourg","LUX",442,"No access to water","Western Europe",1990-01-01,1990,381.787
+"732","Europe","Macedonia","MKD",807,"No access to water","Southern Europe",1990-01-01,1990,1996.227
+"733","Africa","Madagascar","MDG",450,"No access to water","Eastern Africa",1990-01-01,1990,11545.782
+"734","Africa","Malawi","MWI",454,"No access to water","Eastern Africa",1990-01-01,1990,9408.998
+"735","Asia","Malaysia","MYS",458,"No access to water","South-eastern Asia",1990-01-01,1990,18211.097
+"736","Asia","Maldives","MDV",462,"No access to water","Southern Asia",1990-01-01,1990,223.179
+"737","Africa","Mali","MLI",466,"No access to water","Western Africa",1990-01-01,1990,8482.075
+"738","Europe","Malta","MLT",470,"No access to water","Southern Europe",1990-01-01,1990,355.707
+"739","Oceania","Marshall Islands","MHL",584,"No access to water","Micronesia",1990-01-01,1990,47.3
+"740","Africa","Mauritania","MRT",478,"No access to water","Western Africa",1990-01-01,1990,2023.665
+"741","Africa","Mauritius","MUS",480,"No access to water","Eastern Africa",1990-01-01,1990,1055.865
+"742","North America","Mexico","MEX",484,"No access to water","Central America",1990-01-01,1990,85609.404
+"743","Oceania","Micronesia","FSM",583,"No access to water","Micronesia",1990-01-01,1990,96.331
+"744","Europe","Moldova","MDA",498,"No access to water","Eastern Europe",1990-01-01,1990,4364.114
+"745","Europe","Monaco","MCO",492,"No access to water","Western Europe",1990-01-01,1990,29.438
+"746","Asia","Mongolia","MNG",496,"No access to water","Eastern Asia",1990-01-01,1990,2184.145
+"747","Europe","Montenegro","MNE",499,"No access to water","Southern Europe",1990-01-01,1990,614.999
+"748","Africa","Morocco","MAR",504,"No access to water","Northern Africa",1990-01-01,1990,24950.128
+"749","Africa","Mozambique","MOZ",508,"No access to water","Eastern Africa",1990-01-01,1990,13371.971
+"750","Asia","Myanmar","MMR",104,"No access to water","South-eastern Asia",1990-01-01,1990,42007.309
+"751","Africa","Namibia","NAM",516,"No access to water","Southern Africa",1990-01-01,1990,1415.447
+"752","Oceania","Nauru","NRU",520,"No access to water","Micronesia",1990-01-01,1990,9.157
+"753","Asia","Nepal","NPL",524,"No access to water","Southern Asia",1990-01-01,1990,18741.688
+"754","Europe","Netherlands","NLD",528,"No access to water","Western Europe",1990-01-01,1990,14915.139
+"755","Oceania","New Zealand","NZL",554,"No access to water","Australia and New Zealand",1990-01-01,1990,3397.534
+"756","North America","Nicaragua","NIC",558,"No access to water","Central America",1990-01-01,1990,4144.564
+"757","Africa","Niger","NER",562,"No access to water","Western Africa",1990-01-01,1990,7911.884
+"758","Africa","Nigeria","NGA",566,"No access to water","Western Africa",1990-01-01,1990,95617.345
+"759","Oceania","Niue","NIU",570,"No access to water","Polynesia",1990-01-01,1990,2.332
+"760","Asia","North Korea","PRK",408,"No access to water","Eastern Asia",1990-01-01,1990,20194.354
+"761","Oceania","Northern Mariana Islands","MNP",580,"No access to water","Micronesia",1990-01-01,1990,43.972
+"762","Europe","Norway","NOR",578,"No access to water","Northern Europe",1990-01-01,1990,4240.375
+"763","Asia","Occupied Palestinian Territory","PSE",275,"No access to water","Western Asia",1990-01-01,1990,2101.156
+"764","Asia","Oman","OMN",512,"No access to water","Western Asia",1990-01-01,1990,1812.159
+"765","Asia","Pakistan","PAK",586,"No access to water","Southern Asia",1990-01-01,1990,107607.639
+"766","Oceania","Palau","PLW",585,"No access to water","Micronesia",1990-01-01,1990,15.089
+"767","North America","Panama","PAN",591,"No access to water","Central America",1990-01-01,1990,2471.01
+"768","Oceania","Papua New Guinea","PNG",598,"No access to water","Melanesia",1990-01-01,1990,4157.903
+"769","South America","Paraguay","PRY",600,"No access to water","South America",1990-01-01,1990,4213.74
+"770","South America","Peru","PER",604,"No access to water","South America",1990-01-01,1990,21826.658
+"771","Asia","Philippines","PHL",608,"No access to water","South-eastern Asia",1990-01-01,1990,61947.34
+"772","Europe","Poland","POL",616,"No access to water","Eastern Europe",1990-01-01,1990,38195.258
+"773","Europe","Portugal","PRT",620,"No access to water","Southern Europe",1990-01-01,1990,9890.319
+"774","North America","Puerto Rico","PRI",630,"No access to water","Caribbean",1990-01-01,1990,3517.984
+"775","Asia","Qatar","QAT",634,"No access to water","Western Asia",1990-01-01,1990,476.478
+"776","Europe","Romania","ROU",642,"No access to water","Eastern Europe",1990-01-01,1990,23489.361
+"777","Europe","Russia","RUS",643,"No access to water","Eastern Europe",1990-01-01,1990,147568.552
+"778","Africa","Rwanda","RWA",646,"No access to water","Eastern Africa",1990-01-01,1990,7259.74
+"779","North America","Saint Kitts and Nevis","KNA",659,"No access to water","Caribbean",1990-01-01,1990,40.833
+"780","North America","Saint Lucia","LCA",662,"No access to water","Caribbean",1990-01-01,1990,138.18
+"781","North America","Saint Vincent and the Grenadines","VCT",670,"No access to water","Caribbean",1990-01-01,1990,107.509
+"782","Oceania","Samoa","WSM",882,"No access to water","Polynesia",1990-01-01,1990,162.865
+"783","Europe","San Marino","SMR",674,"No access to water","Southern Europe",1990-01-01,1990,24.045
+"784","Africa","Sao Tome and Principe","STP",678,"No access to water","Middle Africa",1990-01-01,1990,113.575
+"785","Asia","Saudi Arabia","SAU",682,"No access to water","Western Asia",1990-01-01,1990,16361.453
+"786","Africa","Senegal","SEN",686,"No access to water","Western Africa",1990-01-01,1990,7514.201
+"787","Europe","Serbia","SRB",688,"No access to water","Southern Europe",1990-01-01,1990,9517.67
+"788","Africa","Seychelles","SYC",690,"No access to water","Eastern Africa",1990-01-01,1990,70.627
+"789","Africa","Sierra Leone","SLE",694,"No access to water","Western Africa",1990-01-01,1990,3931.208
+"790","Asia","Singapore","SGP",702,"No access to water","South-eastern Asia",1990-01-01,1990,3016.4
+"791","Europe","Slovakia","SVK",703,"No access to water","Eastern Europe",1990-01-01,1990,5277.709
+"792","Europe","Slovenia","SVN",705,"No access to water","Southern Europe",1990-01-01,1990,2006.52
+"793","Oceania","Solomon Islands","SLB",90,"No access to water","Melanesia",1990-01-01,1990,311.849
+"794","Africa","Somalia","SOM",706,"No access to water","Eastern Africa",1990-01-01,1990,6321.615
+"795","Africa","South Africa","ZAF",710,"No access to water","Southern Africa",1990-01-01,1990,36793.49
+"796","Asia","South Korea","KOR",410,"No access to water","Eastern Asia",1990-01-01,1990,42972.254
+"797","Africa","South Sudan","SSD",728,"No access to water","Eastern Africa",1990-01-01,1990,5762.19
+"798","Europe","Spain","ESP",724,"No access to water","Southern Europe",1990-01-01,1990,39192.055
+"799","Asia","Sri Lanka","LKA",144,"No access to water","Southern Asia",1990-01-01,1990,17330.817
+"800","Africa","Sudan","SDN",729,"No access to water","Northern Africa",1990-01-01,1990,20008.804
+"801","South America","Suriname","SUR",740,"No access to water","South America",1990-01-01,1990,408.276
+"802","Europe","Sweden","SWE",752,"No access to water","Northern Europe",1990-01-01,1990,8559.107
+"803","Europe","Switzerland","CHE",756,"No access to water","Western Europe",1990-01-01,1990,6673.92
+"804","Asia","Syria","SYR",760,"No access to water","Western Asia",1990-01-01,1990,12451.539
+"805","Asia","Tajikistan","TJK",762,"No access to water","Central Asia",1990-01-01,1990,5297.286
+"806","Africa","Tanzania","TZA",834,"No access to water","Eastern Africa",1990-01-01,1990,25458.208
+"807","Asia","Thailand","THA",764,"No access to water","South-eastern Asia",1990-01-01,1990,56582.824
+"808","Asia","Timor-Leste","TLS",626,"No access to water","South-eastern Asia",1990-01-01,1990,740.231
+"809","Africa","Togo","TGO",768,"No access to water","Western Africa",1990-01-01,1990,3786.942
+"810","Oceania","Tokelau","TKL",772,"No access to water","Polynesia",1990-01-01,1990,1.609
+"811","Oceania","Tonga","TON",776,"No access to water","Polynesia",1990-01-01,1990,95.152
+"812","North America","Trinidad and Tobago","TTO",780,"No access to water","Caribbean",1990-01-01,1990,1221.904
+"813","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",1990-01-01,1990,8232.797
+"814","Asia","Turkey","TUR",792,"No access to water","Western Asia",1990-01-01,1990,53994.605
+"815","Asia","Turkmenistan","TKM",795,"No access to water","Central Asia",1990-01-01,1990,3668
+"816","North America","Turks and Caicos Islands","TCA",796,"No access to water","Caribbean",1990-01-01,1990,11.55
+"817","Oceania","Tuvalu","TUV",798,"No access to water","Polynesia",1990-01-01,1990,9.004
+"818","Africa","Uganda","UGA",800,"No access to water","Eastern Africa",1990-01-01,1990,17384.369
+"819","Europe","Ukraine","UKR",804,"No access to water","Eastern Europe",1990-01-01,1990,51370.009
+"820","Asia","United Arab Emirates","ARE",784,"No access to water","Western Asia",1990-01-01,1990,1811.458
+"821","Europe","United Kingdom","GBR",826,"No access to water","Northern Europe",1990-01-01,1990,57110.117
+"822","North America","United States of America","USA",840,"No access to water","Northern America",1990-01-01,1990,252847.81
+"823","South America","Uruguay","URY",858,"No access to water","South America",1990-01-01,1990,3109.987
+"824","Asia","Uzbekistan","UZB",860,"No access to water","Central Asia",1990-01-01,1990,20515.248
+"825","Oceania","Vanuatu","VUT",548,"No access to water","Melanesia",1990-01-01,1990,146.633
+"826","South America","Venezuela","VEN",862,"No access to water","South America",1990-01-01,1990,19861.959
+"827","Asia","Viet Nam","VNM",704,"No access to water","South-eastern Asia",1990-01-01,1990,68209.604
+"828","Oceania","Wallis and Futuna Islands","WLF",876,"No access to water","Polynesia",1990-01-01,1990,13.88
+"829","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",1990-01-01,1990,216.828
+"830","Asia","Yemen","YEM",887,"No access to water","Western Asia",1990-01-01,1990,11961.099
+"831","Africa","Zambia","ZMB",894,"No access to water","Eastern Africa",1990-01-01,1990,8143.142
+"832","Africa","Zimbabwe","ZWE",716,"No access to water","Eastern Africa",1990-01-01,1990,10484.771
+"833","Asia","Afghanistan","AFG",4,"No access to sanitation","Southern Asia",1990-01-01,1990,12067.57
+"834","Europe","Albania","ALB",8,"No access to sanitation","Southern Europe",1990-01-01,1990,3281.453
+"835","Africa","Algeria","DZA",12,"No access to sanitation","Northern Africa",1990-01-01,1990,25912.364
+"836","Europe","Andorra","AND",20,"No access to sanitation","Southern Europe",1990-01-01,1990,54.511
+"837","Africa","Angola","AGO",24,"No access to sanitation","Middle Africa",1990-01-01,1990,11127.87
+"838","North America","Anguilla","AIA",660,"No access to sanitation","Caribbean",1990-01-01,1990,8.334
+"839","North America","Antigua and Barbuda","ATG",28,"No access to sanitation","Caribbean",1990-01-01,1990,61.906
+"840","South America","Argentina","ARG",32,"No access to sanitation","South America",1990-01-01,1990,32729.74
+"841","Asia","Armenia","ARM",51,"No access to sanitation","Western Asia",1990-01-01,1990,3544.695
+"842","North America","Aruba","ABW",533,"No access to sanitation","Caribbean",1990-01-01,1990,62.148
+"843","Oceania","Australia","AUS",36,"No access to sanitation","Australia and New Zealand",1990-01-01,1990,17096.869
+"844","Europe","Austria","AUT",40,"No access to sanitation","Western Europe",1990-01-01,1990,7706.571
+"845","Asia","Azerbaijan","AZE",31,"No access to sanitation","Western Asia",1990-01-01,1990,7216.503
+"846","North America","Bahamas","BHS",44,"No access to sanitation","Caribbean",1990-01-01,1990,256.338
+"847","Asia","Bahrain","BHR",48,"No access to sanitation","Western Asia",1990-01-01,1990,495.944
+"848","Asia","Bangladesh","BGD",50,"No access to sanitation","Southern Asia",1990-01-01,1990,105983.136
+"849","North America","Barbados","BRB",52,"No access to sanitation","Caribbean",1990-01-01,1990,260.374
+"850","Europe","Belarus","BLR",112,"No access to sanitation","Eastern Europe",1990-01-01,1990,10231.983
+"851","Europe","Belgium","BEL",56,"No access to sanitation","Western Europe",1990-01-01,1990,9978.241
+"852","North America","Belize","BLZ",84,"No access to sanitation","Central America",1990-01-01,1990,187.552
+"853","Africa","Benin","BEN",204,"No access to sanitation","Western Africa",1990-01-01,1990,5001.271
+"854","North America","Bermuda","BMU",60,"No access to sanitation","Northern America",1990-01-01,1990,60.931
+"855","Asia","Bhutan","BTN",64,"No access to sanitation","Southern Asia",1990-01-01,1990,535.505
+"856","South America","Bolivia","BOL",68,"No access to sanitation","South America",1990-01-01,1990,6856.246
+"857","Europe","Bosnia and Herzegovina","BIH",70,"No access to sanitation","Southern Europe",1990-01-01,1990,4526.996
+"858","Africa","Botswana","BWA",72,"No access to sanitation","Southern Africa",1990-01-01,1990,1379.814
+"859","South America","Brazil","BRA",76,"No access to sanitation","South America",1990-01-01,1990,150393.143
+"860","North America","British Virgin Islands","VGB",92,"No access to sanitation","Caribbean",1990-01-01,1990,16.459
+"861","Asia","Brunei Darussalam","BRN",96,"No access to sanitation","South-eastern Asia",1990-01-01,1990,256.939
+"862","Europe","Bulgaria","BGR",100,"No access to sanitation","Eastern Europe",1990-01-01,1990,8821.111
+"863","Africa","Burkina Faso","BFA",854,"No access to sanitation","Western Africa",1990-01-01,1990,8811.033
+"864","Africa","Burundi","BDI",108,"No access to sanitation","Eastern Africa",1990-01-01,1990,5613.141
+"865","Asia","Cambodia","KHM",116,"No access to sanitation","South-eastern Asia",1990-01-01,1990,9008.856
+"866","Africa","Cameroon","CMR",120,"No access to sanitation","Middle Africa",1990-01-01,1990,12070.359
+"867","North America","Canada","CAN",124,"No access to sanitation","Northern America",1990-01-01,1990,27662.44
+"868","Africa","Cape Verde","CPV",132,"No access to sanitation","Western Africa",1990-01-01,1990,341.256
+"869","Africa","Central African Republic","CAF",140,"No access to sanitation","Middle Africa",1990-01-01,1990,2937.832
+"870","Africa","Chad","TCD",148,"No access to sanitation","Middle Africa",1990-01-01,1990,5958.022
+"871","South America","Chile","CHL",152,"No access to sanitation","South America",1990-01-01,1990,13141.202
+"872","Asia","China","CHN",156,"No access to sanitation","Eastern Asia",1990-01-01,1990,1154605.773
+"873","South America","Colombia","COL",170,"No access to sanitation","South America",1990-01-01,1990,34271.563
+"874","Africa","Comoros","COM",174,"No access to sanitation","Eastern Africa",1990-01-01,1990,415.144
+"875","Africa","Congo","COG",178,"No access to sanitation","Middle Africa",1990-01-01,1990,2386.467
+"876","Oceania","Cook Islands","COK",184,"No access to sanitation","Polynesia",1990-01-01,1990,17.613
+"877","North America","Costa Rica","CRI",188,"No access to sanitation","Central America",1990-01-01,1990,3095.994
+"878","Africa","Cote d'Ivoire","CIV",384,"No access to sanitation","Western Africa",1990-01-01,1990,12165.909
+"879","Europe","Croatia","HRV",191,"No access to sanitation","Southern Europe",1990-01-01,1990,4776.374
+"880","North America","Cuba","CUB",192,"No access to sanitation","Caribbean",1990-01-01,1990,10582.082
+"881","Asia","Cyprus","CYP",196,"No access to sanitation","Western Asia",1990-01-01,1990,766.611
+"882","Europe","Czech Republic","CZE",203,"No access to sanitation","Eastern Europe",1990-01-01,1990,10323.701
+"883","Africa","Democratic Republic of the Congo","COD",180,"No access to sanitation","Middle Africa",1990-01-01,1990,34962.676
+"884","Europe","Denmark","DNK",208,"No access to sanitation","Northern Europe",1990-01-01,1990,5140.332
+"885","Africa","Djibouti","DJI",262,"No access to sanitation","Eastern Africa",1990-01-01,1990,588.356
+"886","North America","Dominica","DMA",212,"No access to sanitation","Caribbean",1990-01-01,1990,70.928
+"887","North America","Dominican Republic","DOM",214,"No access to sanitation","Caribbean",1990-01-01,1990,7183.646
+"888","South America","Ecuador","ECU",218,"No access to sanitation","South America",1990-01-01,1990,10218.085
+"889","Africa","Egypt","EGY",818,"No access to sanitation","Northern Africa",1990-01-01,1990,56397.273
+"890","North America","El Salvador","SLV",222,"No access to sanitation","Central America",1990-01-01,1990,5252.082
+"891","Africa","Equatorial Guinea","GNQ",226,"No access to sanitation","Middle Africa",1990-01-01,1990,377.363
+"892","Africa","Eritrea","ERI",232,"No access to sanitation","Eastern Africa",1990-01-01,1990,3139.083
+"893","Europe","Estonia","EST",233,"No access to sanitation","Northern Europe",1990-01-01,1990,1565.32
+"894","Africa","Ethiopia","ETH",231,"No access to sanitation","Eastern Africa",1990-01-01,1990,48057.094
+"895","Oceania","Fiji","FJI",242,"No access to sanitation","Melanesia",1990-01-01,1990,728.626
+"896","Europe","Finland","FIN",246,"No access to sanitation","Northern Europe",1990-01-01,1990,4986.705
+"897","Europe","France","FRA",250,"No access to sanitation","Western Europe",1990-01-01,1990,56943.299
+"898","Oceania","French Polynesia","PYF",258,"No access to sanitation","Polynesia",1990-01-01,1990,198.37
+"899","Africa","Gabon","GAB",266,"No access to sanitation","Middle Africa",1990-01-01,1990,952.269
+"900","Africa","Gambia","GMB",270,"No access to sanitation","Western Africa",1990-01-01,1990,916.811
+"901","Asia","Georgia","GEO",268,"No access to sanitation","Western Asia",1990-01-01,1990,5460.309
+"902","Europe","Germany","DEU",276,"No access to sanitation","Western Europe",1990-01-01,1990,78958.237
+"903","Africa","Ghana","GHA",288,"No access to sanitation","Western Africa",1990-01-01,1990,14628.26
+"904","Europe","Gibraltar","GIB",292,"No access to sanitation","Southern Europe",1990-01-01,1990,26.833
+"905","Europe","Greece","GRC",300,"No access to sanitation","Southern Europe",1990-01-01,1990,10131.737
+"906","North America","Grenada","GRD",308,"No access to sanitation","Caribbean",1990-01-01,1990,96.286
+"907","North America","Guadeloupe","GLP",312,"No access to sanitation","Caribbean",1990-01-01,1990,389.907
+"908","Oceania","Guam","GUM",316,"No access to sanitation","Micronesia",1990-01-01,1990,130.482
+"909","North America","Guatemala","GTM",320,"No access to sanitation","Central America",1990-01-01,1990,9158.547
+"910","Africa","Guinea-Bissau","GNB",624,"No access to sanitation","Western Africa",1990-01-01,1990,1056.208
+"911","Africa","Guinea-Conakry","GIN",324,"No access to sanitation","Western Africa",1990-01-01,1990,6034.082
+"912","South America","Guyana","GUY",328,"No access to sanitation","South America",1990-01-01,1990,720.282
+"913","North America","Haiti","HTI",332,"No access to sanitation","Caribbean",1990-01-01,1990,7099.733
+"914","North America","Honduras","HND",340,"No access to sanitation","Central America",1990-01-01,1990,4903.363
+"915","Europe","Hungary","HUN",348,"No access to sanitation","Eastern Europe",1990-01-01,1990,10385.061
+"916","Europe","Iceland","ISL",352,"No access to sanitation","Northern Europe",1990-01-01,1990,254.83
+"917","Asia","India","IND",356,"No access to sanitation","Southern Asia",1990-01-01,1990,870601.776
+"918","Asia","Indonesia","IDN",360,"No access to sanitation","South-eastern Asia",1990-01-01,1990,181436.821
+"919","Asia","Iran","IRN",364,"No access to sanitation","Southern Asia",1990-01-01,1990,56169.196
+"920","Asia","Iraq","IRQ",368,"No access to sanitation","Western Asia",1990-01-01,1990,17478.455
+"921","Europe","Ireland","IRL",372,"No access to sanitation","Northern Europe",1990-01-01,1990,3563.106
+"922","Asia","Israel","ISR",376,"No access to sanitation","Western Asia",1990-01-01,1990,4499.161
+"923","Europe","Italy","ITA",380,"No access to sanitation","Southern Europe",1990-01-01,1990,57007.577
+"924","North America","Jamaica","JAM",388,"No access to sanitation","Caribbean",1990-01-01,1990,2385.806
+"925","Asia","Japan","JPN",392,"No access to sanitation","Eastern Asia",1990-01-01,1990,122249.285
+"926","Asia","Jordan","JOR",400,"No access to sanitation","Western Asia",1990-01-01,1990,3358.453
+"927","Asia","Kazakhstan","KAZ",398,"No access to sanitation","Central Asia",1990-01-01,1990,16530.027
+"928","Africa","Kenya","KEN",404,"No access to sanitation","Eastern Africa",1990-01-01,1990,23446.229
+"929","Oceania","Kiribati","KIR",296,"No access to sanitation","Micronesia",1990-01-01,1990,72.411
+"930","Asia","Kuwait","KWT",414,"No access to sanitation","Western Asia",1990-01-01,1990,2058.832
+"931","Asia","Kyrgyzstan","KGZ",417,"No access to sanitation","Central Asia",1990-01-01,1990,4394.502
+"932","Asia","Laos","LAO",418,"No access to sanitation","South-eastern Asia",1990-01-01,1990,4247.839
+"933","Europe","Latvia","LVA",428,"No access to sanitation","Northern Europe",1990-01-01,1990,2663.985
+"934","Asia","Lebanon","LBN",422,"No access to sanitation","Western Asia",1990-01-01,1990,2703.019
+"935","Africa","Lesotho","LSO",426,"No access to sanitation","Southern Africa",1990-01-01,1990,1597.534
+"936","Africa","Liberia","LBR",430,"No access to sanitation","Western Africa",1990-01-01,1990,2102.877
+"937","Africa","Libya","LBY",434,"No access to sanitation","Northern Africa",1990-01-01,1990,4398.419
+"938","Europe","Lithuania","LTU",440,"No access to sanitation","Northern Europe",1990-01-01,1990,3697.393
+"939","Europe","Luxembourg","LUX",442,"No access to sanitation","Western Europe",1990-01-01,1990,381.787
+"940","Europe","Macedonia","MKD",807,"No access to sanitation","Southern Europe",1990-01-01,1990,1996.227
+"941","Africa","Madagascar","MDG",450,"No access to sanitation","Eastern Africa",1990-01-01,1990,11545.782
+"942","Africa","Malawi","MWI",454,"No access to sanitation","Eastern Africa",1990-01-01,1990,9408.998
+"943","Asia","Malaysia","MYS",458,"No access to sanitation","South-eastern Asia",1990-01-01,1990,18211.097
+"944","Asia","Maldives","MDV",462,"No access to sanitation","Southern Asia",1990-01-01,1990,223.179
+"945","Africa","Mali","MLI",466,"No access to sanitation","Western Africa",1990-01-01,1990,8482.075
+"946","Europe","Malta","MLT",470,"No access to sanitation","Southern Europe",1990-01-01,1990,355.707
+"947","Oceania","Marshall Islands","MHL",584,"No access to sanitation","Micronesia",1990-01-01,1990,47.3
+"948","Africa","Mauritania","MRT",478,"No access to sanitation","Western Africa",1990-01-01,1990,2023.665
+"949","Africa","Mauritius","MUS",480,"No access to sanitation","Eastern Africa",1990-01-01,1990,1055.865
+"950","North America","Mexico","MEX",484,"No access to sanitation","Central America",1990-01-01,1990,85609.404
+"951","Oceania","Micronesia","FSM",583,"No access to sanitation","Micronesia",1990-01-01,1990,96.331
+"952","Europe","Moldova","MDA",498,"No access to sanitation","Eastern Europe",1990-01-01,1990,4364.114
+"953","Europe","Monaco","MCO",492,"No access to sanitation","Western Europe",1990-01-01,1990,29.438
+"954","Asia","Mongolia","MNG",496,"No access to sanitation","Eastern Asia",1990-01-01,1990,2184.145
+"955","Europe","Montenegro","MNE",499,"No access to sanitation","Southern Europe",1990-01-01,1990,614.999
+"956","Africa","Morocco","MAR",504,"No access to sanitation","Northern Africa",1990-01-01,1990,24950.128
+"957","Africa","Mozambique","MOZ",508,"No access to sanitation","Eastern Africa",1990-01-01,1990,13371.971
+"958","Asia","Myanmar","MMR",104,"No access to sanitation","South-eastern Asia",1990-01-01,1990,42007.309
+"959","Africa","Namibia","NAM",516,"No access to sanitation","Southern Africa",1990-01-01,1990,1415.447
+"960","Oceania","Nauru","NRU",520,"No access to sanitation","Micronesia",1990-01-01,1990,9.157
+"961","Asia","Nepal","NPL",524,"No access to sanitation","Southern Asia",1990-01-01,1990,18741.688
+"962","Europe","Netherlands","NLD",528,"No access to sanitation","Western Europe",1990-01-01,1990,14915.139
+"963","Oceania","New Zealand","NZL",554,"No access to sanitation","Australia and New Zealand",1990-01-01,1990,3397.534
+"964","North America","Nicaragua","NIC",558,"No access to sanitation","Central America",1990-01-01,1990,4144.564
+"965","Africa","Niger","NER",562,"No access to sanitation","Western Africa",1990-01-01,1990,7911.884
+"966","Africa","Nigeria","NGA",566,"No access to sanitation","Western Africa",1990-01-01,1990,95617.345
+"967","Oceania","Niue","NIU",570,"No access to sanitation","Polynesia",1990-01-01,1990,2.332
+"968","Asia","North Korea","PRK",408,"No access to sanitation","Eastern Asia",1990-01-01,1990,20194.354
+"969","Oceania","Northern Mariana Islands","MNP",580,"No access to sanitation","Micronesia",1990-01-01,1990,43.972
+"970","Europe","Norway","NOR",578,"No access to sanitation","Northern Europe",1990-01-01,1990,4240.375
+"971","Asia","Occupied Palestinian Territory","PSE",275,"No access to sanitation","Western Asia",1990-01-01,1990,2101.156
+"972","Asia","Oman","OMN",512,"No access to sanitation","Western Asia",1990-01-01,1990,1812.159
+"973","Asia","Pakistan","PAK",586,"No access to sanitation","Southern Asia",1990-01-01,1990,107607.639
+"974","Oceania","Palau","PLW",585,"No access to sanitation","Micronesia",1990-01-01,1990,15.089
+"975","North America","Panama","PAN",591,"No access to sanitation","Central America",1990-01-01,1990,2471.01
+"976","Oceania","Papua New Guinea","PNG",598,"No access to sanitation","Melanesia",1990-01-01,1990,4157.903
+"977","South America","Paraguay","PRY",600,"No access to sanitation","South America",1990-01-01,1990,4213.74
+"978","South America","Peru","PER",604,"No access to sanitation","South America",1990-01-01,1990,21826.658
+"979","Asia","Philippines","PHL",608,"No access to sanitation","South-eastern Asia",1990-01-01,1990,61947.34
+"980","Europe","Poland","POL",616,"No access to sanitation","Eastern Europe",1990-01-01,1990,38195.258
+"981","Europe","Portugal","PRT",620,"No access to sanitation","Southern Europe",1990-01-01,1990,9890.319
+"982","North America","Puerto Rico","PRI",630,"No access to sanitation","Caribbean",1990-01-01,1990,3517.984
+"983","Asia","Qatar","QAT",634,"No access to sanitation","Western Asia",1990-01-01,1990,476.478
+"984","Europe","Romania","ROU",642,"No access to sanitation","Eastern Europe",1990-01-01,1990,23489.361
+"985","Europe","Russia","RUS",643,"No access to sanitation","Eastern Europe",1990-01-01,1990,147568.552
+"986","Africa","Rwanda","RWA",646,"No access to sanitation","Eastern Africa",1990-01-01,1990,7259.74
+"987","North America","Saint Kitts and Nevis","KNA",659,"No access to sanitation","Caribbean",1990-01-01,1990,40.833
+"988","North America","Saint Lucia","LCA",662,"No access to sanitation","Caribbean",1990-01-01,1990,138.18
+"989","North America","Saint Vincent and the Grenadines","VCT",670,"No access to sanitation","Caribbean",1990-01-01,1990,107.509
+"990","Oceania","Samoa","WSM",882,"No access to sanitation","Polynesia",1990-01-01,1990,162.865
+"991","Europe","San Marino","SMR",674,"No access to sanitation","Southern Europe",1990-01-01,1990,24.045
+"992","Africa","Sao Tome and Principe","STP",678,"No access to sanitation","Middle Africa",1990-01-01,1990,113.575
+"993","Asia","Saudi Arabia","SAU",682,"No access to sanitation","Western Asia",1990-01-01,1990,16361.453
+"994","Africa","Senegal","SEN",686,"No access to sanitation","Western Africa",1990-01-01,1990,7514.201
+"995","Europe","Serbia","SRB",688,"No access to sanitation","Southern Europe",1990-01-01,1990,9517.67
+"996","Africa","Seychelles","SYC",690,"No access to sanitation","Eastern Africa",1990-01-01,1990,70.627
+"997","Africa","Sierra Leone","SLE",694,"No access to sanitation","Western Africa",1990-01-01,1990,3931.208
+"998","Asia","Singapore","SGP",702,"No access to sanitation","South-eastern Asia",1990-01-01,1990,3016.4
+"999","Europe","Slovakia","SVK",703,"No access to sanitation","Eastern Europe",1990-01-01,1990,5277.709
+"1000","Europe","Slovenia","SVN",705,"No access to sanitation","Southern Europe",1990-01-01,1990,2006.52
+"1001","Africa","Algeria","DZA",12,"Access to water","Northern Africa",1990-01-01,1990,25912.364
+"1002","Africa","Egypt","EGY",818,"Access to water","Northern Africa",1990-01-01,1990,56397.273
+"1003","Africa","Libya","LBY",434,"Access to water","Northern Africa",1990-01-01,1990,4398.419
+"1004","Africa","Morocco","MAR",504,"Access to water","Northern Africa",1990-01-01,1990,24950.128
+"1005","Africa","Sudan","SDN",729,"Access to water","Northern Africa",1990-01-01,1990,20008.804
+"1006","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",1990-01-01,1990,8232.797
+"1007","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",1990-01-01,1990,216.828
+"1008","Africa","Algeria","DZA",12,"Access to water","Northern Africa",1991-01-01,1991,26554.277
+"1009","Africa","Egypt","EGY",818,"Access to water","Northern Africa",1991-01-01,1991,57689.828
+"1010","Africa","Libya","LBY",434,"Access to water","Northern Africa",1991-01-01,1991,4499.21
+"1011","Africa","Morocco","MAR",504,"Access to water","Northern Africa",1991-01-01,1991,25410.178
+"1012","Africa","Sudan","SDN",729,"Access to water","Northern Africa",1991-01-01,1991,20861.117
+"1013","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",1991-01-01,1991,8417.689
+"1014","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",1991-01-01,1991,223.795
+"1015","Africa","Algeria","DZA",12,"Access to water","Northern Africa",1992-01-01,1992,27180.921
+"1016","Africa","Egypt","EGY",818,"Access to water","Northern Africa",1992-01-01,1992,58922.018
+"1017","Africa","Libya","LBY",434,"Access to water","Northern Africa",1992-01-01,1992,4596.811
+"1018","Africa","Morocco","MAR",504,"Access to water","Northern Africa",1992-01-01,1992,25866.445
+"1019","Africa","Sudan","SDN",729,"Access to water","Northern Africa",1992-01-01,1992,21820.588
+"1020","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",1992-01-01,1992,8603.226
+"1021","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",1992-01-01,1992,230.948
+"1022","Africa","Algeria","DZA",12,"Access to water","Northern Africa",1993-01-01,1993,27785.977
+"1023","Africa","Egypt","EGY",818,"Access to water","Northern Africa",1993-01-01,1993,60108.373
+"1024","Africa","Libya","LBY",434,"Access to water","Northern Africa",1993-01-01,1993,4691.934
+"1025","Africa","Morocco","MAR",504,"Access to water","Northern Africa",1993-01-01,1993,26314.339
+"1026","Africa","Sudan","SDN",729,"Access to water","Northern Africa",1993-01-01,1993,22829.227
+"1027","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",1993-01-01,1993,8784.888
+"1028","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",1993-01-01,1993,238.261
+"1029","Africa","Algeria","DZA",12,"Access to water","Northern Africa",1994-01-01,1994,28362.015
+"1030","Africa","Egypt","EGY",818,"Access to water","Northern Africa",1994-01-01,1994,61272.847
+"1031","Africa","Libya","LBY",434,"Access to water","Northern Africa",1994-01-01,1994,4785.488
+"1032","Africa","Morocco","MAR",504,"Access to water","Northern Africa",1994-01-01,1994,26747.66
+"1033","Africa","Sudan","SDN",729,"Access to water","Northern Africa",1994-01-01,1994,23805.536
+"1034","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",1994-01-01,1994,8956.59
+"1035","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",1994-01-01,1994,245.691
+"1036","Africa","Algeria","DZA",12,"Access to water","Northern Africa",1995-01-01,1995,29411.839
+"1037","Africa","Egypt","EGY",818,"Access to water","Northern Africa",1995-01-01,1995,63595.629
+"1038","Africa","Libya","LBY",434,"Access to water","Northern Africa",1995-01-01,1995,4970.391
+"1039","Africa","Morocco","MAR",504,"Access to water","Northern Africa",1995-01-01,1995,27556.892
+"1040","Africa","Sudan","SDN",729,"Access to water","Northern Africa",1995-01-01,1995,25466.387
+"1041","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",1995-01-01,1995,9256.036
+"1042","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",1995-01-01,1995,260.803
+"1043","Africa","Algeria","DZA",12,"Access to water","Northern Africa",1996-01-01,1996,28904.3
+"1044","Africa","Egypt","EGY",818,"Access to water","Northern Africa",1996-01-01,1996,62434.527
+"1045","Africa","Libya","LBY",434,"Access to water","Northern Africa",1996-01-01,1996,4878.202
+"1046","Africa","Morocco","MAR",504,"Access to water","Northern Africa",1996-01-01,1996,27161.889
+"1047","Africa","Sudan","SDN",729,"Access to water","Northern Africa",1996-01-01,1996,24691.97
+"1048","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",1996-01-01,1996,9113.972
+"1049","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",1996-01-01,1996,253.302
+"1050","Africa","Algeria","DZA",12,"Access to water","Northern Africa",1997-01-01,1997,29887.717
+"1051","Africa","Egypt","EGY",818,"Access to water","Northern Africa",1997-01-01,1997,64754.566
+"1052","Africa","Libya","LBY",434,"Access to water","Northern Africa",1997-01-01,1997,5062.16
+"1053","Africa","Morocco","MAR",504,"Access to water","Northern Africa",1997-01-01,1997,27934.014
+"1054","Africa","Sudan","SDN",729,"Access to water","Northern Africa",1997-01-01,1997,26149.124
+"1055","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",1997-01-01,1997,9384.151
+"1056","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",1997-01-01,1997,268.445
+"1057","Africa","Algeria","DZA",12,"Access to water","Northern Africa",1998-01-01,1998,30336.88
+"1058","Africa","Egypt","EGY",818,"Access to water","Northern Africa",1998-01-01,1998,65922.626
+"1059","Africa","Libya","LBY",434,"Access to water","Northern Africa",1998-01-01,1998,5153.764
+"1060","Africa","Morocco","MAR",504,"Access to water","Northern Africa",1998-01-01,1998,28292.299
+"1061","Africa","Sudan","SDN",729,"Access to water","Northern Africa",1998-01-01,1998,26777.059
+"1062","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",1998-01-01,1998,9499.387
+"1063","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",1998-01-01,1998,277.466
+"1064","Africa","Algeria","DZA",12,"Access to water","Northern Africa",1999-01-01,1999,30766.551
+"1065","Africa","Egypt","EGY",818,"Access to water","Northern Africa",1999-01-01,1999,67112.877
+"1066","Africa","Libya","LBY",434,"Access to water","Northern Africa",1999-01-01,1999,5245.414
+"1067","Africa","Morocco","MAR",504,"Access to water","Northern Africa",1999-01-01,1999,28630.973
+"1068","Africa","Sudan","SDN",729,"Access to water","Northern Africa",1999-01-01,1999,27406.808
+"1069","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",1999-01-01,1999,9603.733
+"1070","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",1999-01-01,1999,289.509
+"1071","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2000-01-01,2000,31183.658
+"1072","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2000-01-01,2000,68334.905
+"1073","Africa","Libya","LBY",434,"Access to water","Northern Africa",2000-01-01,2000,5337.264
+"1074","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2000-01-01,2000,28950.553
+"1075","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2000-01-01,2000,28079.664
+"1076","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2000-01-01,2000,9699.192
+"1077","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2000-01-01,2000,305.615
+"1078","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2001-01-01,2001,31590.32
+"1079","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2001-01-01,2001,69599.945
+"1080","Africa","Libya","LBY",434,"Access to water","Northern Africa",2001-01-01,2001,5428.303
+"1081","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2001-01-01,2001,29250.983
+"1082","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2001-01-01,2001,28805.142
+"1083","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2001-01-01,2001,9785.665
+"1084","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2001-01-01,2001,326.344
+"1085","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2002-01-01,2002,31990.387
+"1086","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2002-01-01,2002,70908.71
+"1087","Africa","Libya","LBY",434,"Access to water","Northern Africa",2002-01-01,2002,5518.341
+"1088","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2002-01-01,2002,29535.591
+"1089","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2002-01-01,2002,29569.978
+"1090","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2002-01-01,2002,9864.207
+"1091","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2002-01-01,2002,350.976
+"1092","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2003-01-01,2003,32394.886
+"1093","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2003-01-01,2003,72247.626
+"1094","Africa","Libya","LBY",434,"Access to water","Northern Africa",2003-01-01,2003,5609.166
+"1095","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2003-01-01,2003,29812.685
+"1096","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2003-01-01,2003,30365.586
+"1097","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2003-01-01,2003,9939.478
+"1098","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2003-01-01,2003,377.69
+"1099","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2004-01-01,2004,32817.225
+"1100","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2004-01-01,2004,73596.068
+"1101","Africa","Libya","LBY",434,"Access to water","Northern Africa",2004-01-01,2004,5703.224
+"1102","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2004-01-01,2004,30093.109
+"1103","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2004-01-01,2004,31176.209
+"1104","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2004-01-01,2004,10017.439
+"1105","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2004-01-01,2004,403.92
+"1106","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2005-01-01,2005,33267.887
+"1107","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2005-01-01,2005,74942.115
+"1108","Africa","Libya","LBY",434,"Access to water","Northern Africa",2005-01-01,2005,5801.543
+"1109","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2005-01-01,2005,30385.479
+"1110","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2005-01-01,2005,31990.003
+"1111","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2005-01-01,2005,10102.477
+"1112","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2005-01-01,2005,427.782
+"1113","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2006-01-01,2006,33749.328
+"1114","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2006-01-01,2006,76274.285
+"1115","Africa","Libya","LBY",434,"Access to water","Northern Africa",2006-01-01,2006,5907.149
+"1116","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2006-01-01,2006,30691.434
+"1117","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2006-01-01,2006,32809.056
+"1118","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2006-01-01,2006,10196.441
+"1119","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2006-01-01,2006,448.666
+"1120","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2007-01-01,2007,34261.971
+"1121","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2007-01-01,2007,77605.327
+"1122","Africa","Libya","LBY",434,"Access to water","Northern Africa",2007-01-01,2007,6017.794
+"1123","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2007-01-01,2007,31011.322
+"1124","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2007-01-01,2007,33637.96
+"1125","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2007-01-01,2007,10298.717
+"1126","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2007-01-01,2007,466.991
+"1127","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2008-01-01,2008,34811.059
+"1128","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2008-01-01,2008,78976.122
+"1129","Africa","Libya","LBY",434,"Access to water","Northern Africa",2008-01-01,2008,6123.022
+"1130","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2008-01-01,2008,31350.544
+"1131","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2008-01-01,2008,34470.138
+"1132","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2008-01-01,2008,10408.091
+"1133","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2008-01-01,2008,483.167
+"1134","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2009-01-01,2009,35401.79
+"1135","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2009-01-01,2009,80442.443
+"1136","Africa","Libya","LBY",434,"Access to water","Northern Africa",2009-01-01,2009,6208.68
+"1137","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2009-01-01,2009,31714.958
+"1138","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2009-01-01,2009,35297.298
+"1139","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2009-01-01,2009,10522.214
+"1140","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2009-01-01,2009,497.986
+"1141","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2010-01-01,2010,36036.159
+"1142","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2010-01-01,2010,82040.994
+"1143","Africa","Libya","LBY",434,"Access to water","Northern Africa",2010-01-01,2010,6265.697
+"1144","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2010-01-01,2010,32107.739
+"1145","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2010-01-01,2010,36114.885
+"1146","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2010-01-01,2010,10639.194
+"1147","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2010-01-01,2010,512.065
+"1148","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2011-01-01,2011,36717.132
+"1149","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2011-01-01,2011,83787.634
+"1150","Africa","Libya","LBY",434,"Access to water","Northern Africa",2011-01-01,2011,6288.652
+"1151","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2011-01-01,2011,32531.964
+"1152","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2011-01-01,2011,36918.193
+"1153","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2011-01-01,2011,10758.87
+"1154","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2011-01-01,2011,525.388
+"1155","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2012-01-01,2012,37439.427
+"1156","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2012-01-01,2012,85660.902
+"1157","Africa","Libya","LBY",434,"Access to water","Northern Africa",2012-01-01,2012,6283.403
+"1158","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2012-01-01,2012,32984.19
+"1159","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2012-01-01,2012,37712.42
+"1160","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2012-01-01,2012,10881.45
+"1161","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2012-01-01,2012,537.779
+"1162","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2013-01-01,2013,38186.135
+"1163","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2013-01-01,2013,87613.909
+"1164","Africa","Libya","LBY",434,"Access to water","Northern Africa",2013-01-01,2013,6265.987
+"1165","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2013-01-01,2013,33452.686
+"1166","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2013-01-01,2013,38515.095
+"1167","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2013-01-01,2013,11005.706
+"1168","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2013-01-01,2013,549.538
+"1169","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2014-01-01,2014,38934.334
+"1170","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2014-01-01,2014,89579.67
+"1171","Africa","Libya","LBY",434,"Access to water","Northern Africa",2014-01-01,2014,6258.984
+"1172","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2014-01-01,2014,33921.203
+"1173","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2014-01-01,2014,39350.274
+"1174","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2014-01-01,2014,11130.154
+"1175","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2014-01-01,2014,561.034
+"1176","Africa","Algeria","DZA",12,"Access to water","Northern Africa",2015-01-01,2015,39666.519
+"1177","Africa","Egypt","EGY",818,"Access to water","Northern Africa",2015-01-01,2015,91508.084
+"1178","Africa","Libya","LBY",434,"Access to water","Northern Africa",2015-01-01,2015,6278.438
+"1179","Africa","Morocco","MAR",504,"Access to water","Northern Africa",2015-01-01,2015,34377.511
+"1180","Africa","Sudan","SDN",729,"Access to water","Northern Africa",2015-01-01,2015,40234.882
+"1181","Africa","Tunisia","TUN",788,"Access to water","Northern Africa",2015-01-01,2015,11253.554
+"1182","Africa","Western Sahara","ESH",732,"Access to water","Northern Africa",2015-01-01,2015,572.54
+"1183","Africa","Algeria","DZA",12,"No access to water","Northern Africa",1991-01-01,1991,26554.277
+"1184","Africa","Egypt","EGY",818,"No access to water","Northern Africa",1991-01-01,1991,57689.828
+"1185","Africa","Libya","LBY",434,"No access to water","Northern Africa",1991-01-01,1991,4499.21
+"1186","Africa","Morocco","MAR",504,"No access to water","Northern Africa",1991-01-01,1991,25410.178
+"1187","Africa","Sudan","SDN",729,"No access to water","Northern Africa",1991-01-01,1991,20861.117
+"1188","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",1991-01-01,1991,8417.689
+"1189","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",1991-01-01,1991,223.795
+"1190","Africa","Algeria","DZA",12,"No access to water","Northern Africa",1992-01-01,1992,27180.921
+"1191","Africa","Egypt","EGY",818,"No access to water","Northern Africa",1992-01-01,1992,58922.018
+"1192","Africa","Libya","LBY",434,"No access to water","Northern Africa",1992-01-01,1992,4596.811
+"1193","Africa","Morocco","MAR",504,"No access to water","Northern Africa",1992-01-01,1992,25866.445
+"1194","Africa","Sudan","SDN",729,"No access to water","Northern Africa",1992-01-01,1992,21820.588
+"1195","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",1992-01-01,1992,8603.226
+"1196","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",1992-01-01,1992,230.948
+"1197","Africa","Algeria","DZA",12,"No access to water","Northern Africa",1993-01-01,1993,27785.977
+"1198","Africa","Egypt","EGY",818,"No access to water","Northern Africa",1993-01-01,1993,60108.373
+"1199","Africa","Libya","LBY",434,"No access to water","Northern Africa",1993-01-01,1993,4691.934
+"1200","Africa","Morocco","MAR",504,"No access to water","Northern Africa",1993-01-01,1993,26314.339
+"1201","Africa","Sudan","SDN",729,"No access to water","Northern Africa",1993-01-01,1993,22829.227
+"1202","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",1993-01-01,1993,8784.888
+"1203","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",1993-01-01,1993,238.261
+"1204","Africa","Algeria","DZA",12,"No access to water","Northern Africa",1994-01-01,1994,28362.015
+"1205","Africa","Egypt","EGY",818,"No access to water","Northern Africa",1994-01-01,1994,61272.847
+"1206","Africa","Libya","LBY",434,"No access to water","Northern Africa",1994-01-01,1994,4785.488
+"1207","Africa","Morocco","MAR",504,"No access to water","Northern Africa",1994-01-01,1994,26747.66
+"1208","Africa","Sudan","SDN",729,"No access to water","Northern Africa",1994-01-01,1994,23805.536
+"1209","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",1994-01-01,1994,8956.59
+"1210","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",1994-01-01,1994,245.691
+"1211","Africa","Algeria","DZA",12,"No access to water","Northern Africa",1995-01-01,1995,29411.839
+"1212","Africa","Egypt","EGY",818,"No access to water","Northern Africa",1995-01-01,1995,63595.629
+"1213","Africa","Libya","LBY",434,"No access to water","Northern Africa",1995-01-01,1995,4970.391
+"1214","Africa","Morocco","MAR",504,"No access to water","Northern Africa",1995-01-01,1995,27556.892
+"1215","Africa","Sudan","SDN",729,"No access to water","Northern Africa",1995-01-01,1995,25466.387
+"1216","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",1995-01-01,1995,9256.036
+"1217","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",1995-01-01,1995,260.803
+"1218","Africa","Algeria","DZA",12,"No access to water","Northern Africa",1996-01-01,1996,28904.3
+"1219","Africa","Egypt","EGY",818,"No access to water","Northern Africa",1996-01-01,1996,62434.527
+"1220","Africa","Libya","LBY",434,"No access to water","Northern Africa",1996-01-01,1996,4878.202
+"1221","Africa","Morocco","MAR",504,"No access to water","Northern Africa",1996-01-01,1996,27161.889
+"1222","Africa","Sudan","SDN",729,"No access to water","Northern Africa",1996-01-01,1996,24691.97
+"1223","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",1996-01-01,1996,9113.972
+"1224","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",1996-01-01,1996,253.302
+"1225","Africa","Algeria","DZA",12,"No access to water","Northern Africa",1997-01-01,1997,29887.717
+"1226","Africa","Egypt","EGY",818,"No access to water","Northern Africa",1997-01-01,1997,64754.566
+"1227","Africa","Libya","LBY",434,"No access to water","Northern Africa",1997-01-01,1997,5062.16
+"1228","Africa","Morocco","MAR",504,"No access to water","Northern Africa",1997-01-01,1997,27934.014
+"1229","Africa","Sudan","SDN",729,"No access to water","Northern Africa",1997-01-01,1997,26149.124
+"1230","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",1997-01-01,1997,9384.151
+"1231","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",1997-01-01,1997,268.445
+"1232","Africa","Algeria","DZA",12,"No access to water","Northern Africa",1998-01-01,1998,30336.88
+"1233","Africa","Egypt","EGY",818,"No access to water","Northern Africa",1998-01-01,1998,65922.626
+"1234","Africa","Libya","LBY",434,"No access to water","Northern Africa",1998-01-01,1998,5153.764
+"1235","Africa","Morocco","MAR",504,"No access to water","Northern Africa",1998-01-01,1998,28292.299
+"1236","Africa","Sudan","SDN",729,"No access to water","Northern Africa",1998-01-01,1998,26777.059
+"1237","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",1998-01-01,1998,9499.387
+"1238","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",1998-01-01,1998,277.466
+"1239","Africa","Algeria","DZA",12,"No access to water","Northern Africa",1999-01-01,1999,30766.551
+"1240","Africa","Egypt","EGY",818,"No access to water","Northern Africa",1999-01-01,1999,67112.877
+"1241","Africa","Libya","LBY",434,"No access to water","Northern Africa",1999-01-01,1999,5245.414
+"1242","Africa","Morocco","MAR",504,"No access to water","Northern Africa",1999-01-01,1999,28630.973
+"1243","Africa","Sudan","SDN",729,"No access to water","Northern Africa",1999-01-01,1999,27406.808
+"1244","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",1999-01-01,1999,9603.733
+"1245","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",1999-01-01,1999,289.509
+"1246","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2000-01-01,2000,31183.658
+"1247","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2000-01-01,2000,68334.905
+"1248","Africa","Libya","LBY",434,"No access to water","Northern Africa",2000-01-01,2000,5337.264
+"1249","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2000-01-01,2000,28950.553
+"1250","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2000-01-01,2000,28079.664
+"1251","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2000-01-01,2000,9699.192
+"1252","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2000-01-01,2000,305.615
+"1253","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2001-01-01,2001,31590.32
+"1254","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2001-01-01,2001,69599.945
+"1255","Africa","Libya","LBY",434,"No access to water","Northern Africa",2001-01-01,2001,5428.303
+"1256","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2001-01-01,2001,29250.983
+"1257","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2001-01-01,2001,28805.142
+"1258","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2001-01-01,2001,9785.665
+"1259","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2001-01-01,2001,326.344
+"1260","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2002-01-01,2002,31990.387
+"1261","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2002-01-01,2002,70908.71
+"1262","Africa","Libya","LBY",434,"No access to water","Northern Africa",2002-01-01,2002,5518.341
+"1263","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2002-01-01,2002,29535.591
+"1264","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2002-01-01,2002,29569.978
+"1265","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2002-01-01,2002,9864.207
+"1266","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2002-01-01,2002,350.976
+"1267","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2003-01-01,2003,32394.886
+"1268","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2003-01-01,2003,72247.626
+"1269","Africa","Libya","LBY",434,"No access to water","Northern Africa",2003-01-01,2003,5609.166
+"1270","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2003-01-01,2003,29812.685
+"1271","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2003-01-01,2003,30365.586
+"1272","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2003-01-01,2003,9939.478
+"1273","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2003-01-01,2003,377.69
+"1274","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2004-01-01,2004,32817.225
+"1275","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2004-01-01,2004,73596.068
+"1276","Africa","Libya","LBY",434,"No access to water","Northern Africa",2004-01-01,2004,5703.224
+"1277","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2004-01-01,2004,30093.109
+"1278","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2004-01-01,2004,31176.209
+"1279","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2004-01-01,2004,10017.439
+"1280","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2004-01-01,2004,403.92
+"1281","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2005-01-01,2005,33267.887
+"1282","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2005-01-01,2005,74942.115
+"1283","Africa","Libya","LBY",434,"No access to water","Northern Africa",2005-01-01,2005,5801.543
+"1284","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2005-01-01,2005,30385.479
+"1285","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2005-01-01,2005,31990.003
+"1286","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2005-01-01,2005,10102.477
+"1287","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2005-01-01,2005,427.782
+"1288","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2006-01-01,2006,33749.328
+"1289","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2006-01-01,2006,76274.285
+"1290","Africa","Libya","LBY",434,"No access to water","Northern Africa",2006-01-01,2006,5907.149
+"1291","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2006-01-01,2006,30691.434
+"1292","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2006-01-01,2006,32809.056
+"1293","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2006-01-01,2006,10196.441
+"1294","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2006-01-01,2006,448.666
+"1295","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2007-01-01,2007,34261.971
+"1296","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2007-01-01,2007,77605.327
+"1297","Africa","Libya","LBY",434,"No access to water","Northern Africa",2007-01-01,2007,6017.794
+"1298","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2007-01-01,2007,31011.322
+"1299","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2007-01-01,2007,33637.96
+"1300","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2007-01-01,2007,10298.717
+"1301","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2007-01-01,2007,466.991
+"1302","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2008-01-01,2008,34811.059
+"1303","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2008-01-01,2008,78976.122
+"1304","Africa","Libya","LBY",434,"No access to water","Northern Africa",2008-01-01,2008,6123.022
+"1305","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2008-01-01,2008,31350.544
+"1306","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2008-01-01,2008,34470.138
+"1307","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2008-01-01,2008,10408.091
+"1308","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2008-01-01,2008,483.167
+"1309","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2009-01-01,2009,35401.79
+"1310","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2009-01-01,2009,80442.443
+"1311","Africa","Libya","LBY",434,"No access to water","Northern Africa",2009-01-01,2009,6208.68
+"1312","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2009-01-01,2009,31714.958
+"1313","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2009-01-01,2009,35297.298
+"1314","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2009-01-01,2009,10522.214
+"1315","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2009-01-01,2009,497.986
+"1316","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2010-01-01,2010,36036.159
+"1317","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2010-01-01,2010,82040.994
+"1318","Africa","Libya","LBY",434,"No access to water","Northern Africa",2010-01-01,2010,6265.697
+"1319","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2010-01-01,2010,32107.739
+"1320","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2010-01-01,2010,36114.885
+"1321","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2010-01-01,2010,10639.194
+"1322","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2010-01-01,2010,512.065
+"1323","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2011-01-01,2011,36717.132
+"1324","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2011-01-01,2011,83787.634
+"1325","Africa","Libya","LBY",434,"No access to water","Northern Africa",2011-01-01,2011,6288.652
+"1326","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2011-01-01,2011,32531.964
+"1327","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2011-01-01,2011,36918.193
+"1328","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2011-01-01,2011,10758.87
+"1329","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2011-01-01,2011,525.388
+"1330","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2012-01-01,2012,37439.427
+"1331","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2012-01-01,2012,85660.902
+"1332","Africa","Libya","LBY",434,"No access to water","Northern Africa",2012-01-01,2012,6283.403
+"1333","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2012-01-01,2012,32984.19
+"1334","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2012-01-01,2012,37712.42
+"1335","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2012-01-01,2012,10881.45
+"1336","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2012-01-01,2012,537.779
+"1337","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2013-01-01,2013,38186.135
+"1338","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2013-01-01,2013,87613.909
+"1339","Africa","Libya","LBY",434,"No access to water","Northern Africa",2013-01-01,2013,6265.987
+"1340","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2013-01-01,2013,33452.686
+"1341","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2013-01-01,2013,38515.095
+"1342","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2013-01-01,2013,11005.706
+"1343","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2013-01-01,2013,549.538
+"1344","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2014-01-01,2014,38934.334
+"1345","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2014-01-01,2014,89579.67
+"1346","Africa","Libya","LBY",434,"No access to water","Northern Africa",2014-01-01,2014,6258.984
+"1347","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2014-01-01,2014,33921.203
+"1348","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2014-01-01,2014,39350.274
+"1349","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2014-01-01,2014,11130.154
+"1350","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2014-01-01,2014,561.034
+"1351","Africa","Algeria","DZA",12,"No access to water","Northern Africa",2015-01-01,2015,39666.519
+"1352","Africa","Egypt","EGY",818,"No access to water","Northern Africa",2015-01-01,2015,91508.084
+"1353","Africa","Libya","LBY",434,"No access to water","Northern Africa",2015-01-01,2015,6278.438
+"1354","Africa","Morocco","MAR",504,"No access to water","Northern Africa",2015-01-01,2015,34377.511
+"1355","Africa","Sudan","SDN",729,"No access to water","Northern Africa",2015-01-01,2015,40234.882
+"1356","Africa","Tunisia","TUN",788,"No access to water","Northern Africa",2015-01-01,2015,11253.554
+"1357","Africa","Western Sahara","ESH",732,"No access to water","Northern Africa",2015-01-01,2015,572.54
+"1358","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",1991-01-01,1991,26554.277
+"1359","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",1991-01-01,1991,57689.828
+"1360","Africa","Libya","LBY",434,"Urban with water","Northern Africa",1991-01-01,1991,4499.21
+"1361","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",1991-01-01,1991,25410.178
+"1362","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",1991-01-01,1991,20861.117
+"1363","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",1991-01-01,1991,8417.689
+"1364","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",1991-01-01,1991,223.795
+"1365","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",1992-01-01,1992,27180.921
+"1366","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",1992-01-01,1992,58922.018
+"1367","Africa","Libya","LBY",434,"Urban with water","Northern Africa",1992-01-01,1992,4596.811
+"1368","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",1992-01-01,1992,25866.445
+"1369","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",1992-01-01,1992,21820.588
+"1370","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",1992-01-01,1992,8603.226
+"1371","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",1992-01-01,1992,230.948
+"1372","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",1993-01-01,1993,27785.977
+"1373","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",1993-01-01,1993,60108.373
+"1374","Africa","Libya","LBY",434,"Urban with water","Northern Africa",1993-01-01,1993,4691.934
+"1375","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",1993-01-01,1993,26314.339
+"1376","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",1993-01-01,1993,22829.227
+"1377","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",1993-01-01,1993,8784.888
+"1378","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",1993-01-01,1993,238.261
+"1379","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",1994-01-01,1994,28362.015
+"1380","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",1994-01-01,1994,61272.847
+"1381","Africa","Libya","LBY",434,"Urban with water","Northern Africa",1994-01-01,1994,4785.488
+"1382","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",1994-01-01,1994,26747.66
+"1383","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",1994-01-01,1994,23805.536
+"1384","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",1994-01-01,1994,8956.59
+"1385","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",1994-01-01,1994,245.691
+"1386","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",1995-01-01,1995,29411.839
+"1387","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",1995-01-01,1995,63595.629
+"1388","Africa","Libya","LBY",434,"Urban with water","Northern Africa",1995-01-01,1995,4970.391
+"1389","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",1995-01-01,1995,27556.892
+"1390","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",1995-01-01,1995,25466.387
+"1391","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",1995-01-01,1995,9256.036
+"1392","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",1995-01-01,1995,260.803
+"1393","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",1996-01-01,1996,28904.3
+"1394","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",1996-01-01,1996,62434.527
+"1395","Africa","Libya","LBY",434,"Urban with water","Northern Africa",1996-01-01,1996,4878.202
+"1396","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",1996-01-01,1996,27161.889
+"1397","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",1996-01-01,1996,24691.97
+"1398","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",1996-01-01,1996,9113.972
+"1399","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",1996-01-01,1996,253.302
+"1400","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",1997-01-01,1997,29887.717
+"1401","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",1997-01-01,1997,64754.566
+"1402","Africa","Libya","LBY",434,"Urban with water","Northern Africa",1997-01-01,1997,5062.16
+"1403","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",1997-01-01,1997,27934.014
+"1404","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",1997-01-01,1997,26149.124
+"1405","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",1997-01-01,1997,9384.151
+"1406","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",1997-01-01,1997,268.445
+"1407","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",1998-01-01,1998,30336.88
+"1408","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",1998-01-01,1998,65922.626
+"1409","Africa","Libya","LBY",434,"Urban with water","Northern Africa",1998-01-01,1998,5153.764
+"1410","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",1998-01-01,1998,28292.299
+"1411","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",1998-01-01,1998,26777.059
+"1412","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",1998-01-01,1998,9499.387
+"1413","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",1998-01-01,1998,277.466
+"1414","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",1999-01-01,1999,30766.551
+"1415","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",1999-01-01,1999,67112.877
+"1416","Africa","Libya","LBY",434,"Urban with water","Northern Africa",1999-01-01,1999,5245.414
+"1417","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",1999-01-01,1999,28630.973
+"1418","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",1999-01-01,1999,27406.808
+"1419","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",1999-01-01,1999,9603.733
+"1420","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",1999-01-01,1999,289.509
+"1421","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2000-01-01,2000,31183.658
+"1422","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2000-01-01,2000,68334.905
+"1423","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2000-01-01,2000,5337.264
+"1424","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",2000-01-01,2000,28950.553
+"1425","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",2000-01-01,2000,28079.664
+"1426","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",2000-01-01,2000,9699.192
+"1427","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",2000-01-01,2000,305.615
+"1428","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2001-01-01,2001,31590.32
+"1429","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2001-01-01,2001,69599.945
+"1430","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2001-01-01,2001,5428.303
+"1431","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",2001-01-01,2001,29250.983
+"1432","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",2001-01-01,2001,28805.142
+"1433","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",2001-01-01,2001,9785.665
+"1434","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",2001-01-01,2001,326.344
+"1435","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2002-01-01,2002,31990.387
+"1436","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2002-01-01,2002,70908.71
+"1437","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2002-01-01,2002,5518.341
+"1438","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",2002-01-01,2002,29535.591
+"1439","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",2002-01-01,2002,29569.978
+"1440","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",2002-01-01,2002,9864.207
+"1441","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",2002-01-01,2002,350.976
+"1442","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2003-01-01,2003,32394.886
+"1443","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2003-01-01,2003,72247.626
+"1444","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2003-01-01,2003,5609.166
+"1445","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",2003-01-01,2003,29812.685
+"1446","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",2003-01-01,2003,30365.586
+"1447","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",2003-01-01,2003,9939.478
+"1448","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",2003-01-01,2003,377.69
+"1449","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2004-01-01,2004,32817.225
+"1450","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2004-01-01,2004,73596.068
+"1451","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2004-01-01,2004,5703.224
+"1452","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",2004-01-01,2004,30093.109
+"1453","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",2004-01-01,2004,31176.209
+"1454","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",2004-01-01,2004,10017.439
+"1455","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",2004-01-01,2004,403.92
+"1456","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2005-01-01,2005,33267.887
+"1457","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2005-01-01,2005,74942.115
+"1458","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2005-01-01,2005,5801.543
+"1459","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",2005-01-01,2005,30385.479
+"1460","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",2005-01-01,2005,31990.003
+"1461","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",2005-01-01,2005,10102.477
+"1462","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",2005-01-01,2005,427.782
+"1463","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2006-01-01,2006,33749.328
+"1464","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2006-01-01,2006,76274.285
+"1465","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2006-01-01,2006,5907.149
+"1466","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",2006-01-01,2006,30691.434
+"1467","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",2006-01-01,2006,32809.056
+"1468","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",2006-01-01,2006,10196.441
+"1469","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",2006-01-01,2006,448.666
+"1470","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2007-01-01,2007,34261.971
+"1471","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2007-01-01,2007,77605.327
+"1472","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2007-01-01,2007,6017.794
+"1473","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",2007-01-01,2007,31011.322
+"1474","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",2007-01-01,2007,33637.96
+"1475","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",2007-01-01,2007,10298.717
+"1476","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",2007-01-01,2007,466.991
+"1477","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2008-01-01,2008,34811.059
+"1478","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2008-01-01,2008,78976.122
+"1479","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2008-01-01,2008,6123.022
+"1480","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",2008-01-01,2008,31350.544
+"1481","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",2008-01-01,2008,34470.138
+"1482","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",2008-01-01,2008,10408.091
+"1483","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",2008-01-01,2008,483.167
+"1484","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2009-01-01,2009,35401.79
+"1485","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2009-01-01,2009,80442.443
+"1486","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2009-01-01,2009,6208.68
+"1487","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",2009-01-01,2009,31714.958
+"1488","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",2009-01-01,2009,35297.298
+"1489","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",2009-01-01,2009,10522.214
+"1490","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",2009-01-01,2009,497.986
+"1491","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2010-01-01,2010,36036.159
+"1492","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2010-01-01,2010,82040.994
+"1493","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2010-01-01,2010,6265.697
+"1494","Africa","Morocco","MAR",504,"Urban with water","Northern Africa",2010-01-01,2010,32107.739
+"1495","Africa","Sudan","SDN",729,"Urban with water","Northern Africa",2010-01-01,2010,36114.885
+"1496","Africa","Tunisia","TUN",788,"Urban with water","Northern Africa",2010-01-01,2010,10639.194
+"1497","Africa","Western Sahara","ESH",732,"Urban with water","Northern Africa",2010-01-01,2010,512.065
+"1498","Africa","Algeria","DZA",12,"Urban with water","Northern Africa",2011-01-01,2011,36717.132
+"1499","Africa","Egypt","EGY",818,"Urban with water","Northern Africa",2011-01-01,2011,83787.634
+"1500","Africa","Libya","LBY",434,"Urban with water","Northern Africa",2011-01-01,2011,6288.652

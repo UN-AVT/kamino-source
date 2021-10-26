@@ -1,0 +1,415 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(dplyr)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Case: Member States of the United Nations
+## Manage Column
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Mathias P.R. Reding on Unsplash"}
+
+masthead <- "assets/un-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">UN Headquarters Geneva</div>
+
+> Consider the momentous event in architecture when the wall parted and the column became...\
+--- Louis Kahn\
+
+***
+
+### Load the data
+
+```{r Load raw data, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read_csv('./archetypes/UN-Member-State-admission-dates.csv')
+df
+```
+
+
+
+### Rename One or More Columns
+#### <span style="color: #0000FF;font-weight:bold">Member</span> and <span style="color: #FE9A2E;font-weight:bold"> StateDate.of.Admission</span> 
+
+```{r {r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_1 <- df %>% rename(MEMBER_STATE='Member', ADMISSION_DATE='StateDate of Admission')
+
+```
+
+
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 2, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_1
+
+names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#0000FF")
+names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color = "#FE9A2E")
+col_tmp <- cell_spec(substr(names(df_tmp)[3],1,3), color = "#40FF00")
+names(df_tmp)[3] <- paste(col_tmp, substr(names(df_tmp)[3],4,1000000L), sep = " ", collapse=NULL)
+names(df_tmp)[4] <- paste(col_tmp, substr(names(df_tmp)[4],4,1000000L), sep = " ", collapse=NULL)
+names(df_tmp)[5] <- paste(col_tmp, substr(names(df_tmp)[5],4,1000000L), sep = " ", collapse=NULL)
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Rename Multiple Columns
+#### Based on a rule remove <span style="color: #40FF00;font-weight:bold">UN_</span> prefix from columns names
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+# ".": Matches any single character except new line
+df_2 <- df_1 %>% set_names(~stringr::str_replace_all(., "UN_", ""))
+ 
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 3, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_2
+
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#40FF00")
+names(df_tmp)[4] <- cell_spec(names(df_tmp)[4], color = "#40FF00")
+names(df_tmp)[5] <- cell_spec(names(df_tmp)[5], color = "#40FF00")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Rename All
+#### convert all column names to <span style="background: #E3CEF6;font-weight:bold">lowercase</span>
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_3 <- df_2
+names(df_3) <- tolower(names(df_2))
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 4, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_3
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+row_spec(0, background  = "#E3CEF6")
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Constant Value Column
+#### Add <span style="color: #FF00BF;font-weight:bold">new_col</span> 
+
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_4 <- add_column(df_3,new_col=('I am new'))
+#df_4 <- add_column(df_3,geo_location=paste0("( ",df_3$centroid_lat," ,",df_3$centroid_long, " )"))
+
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 5, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_4
+
+names(df_tmp)[6] <- cell_spec(names(df_tmp)[6], color = "#FF00BF")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(6, bold = TRUE, color = "#000000", background = "#F5A9E1")
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+#### Filter/Select First <span style="background: #CEE3F6;font-weight:bold">3 columns</span> 
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_5 <- df_4 %>% select(member_state,admission_date,region_name)
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 6, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_5
+
+names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color = "#CC2EFA")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+row_spec(0, background  = "#CEE3F6")
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Separate a Column
+#### <span style="color: #CC2EFA;font-weight:bold">admission_date</span> into <span style="color: #3104B4;font-weight:bold">day, month, year</span>
+
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_6 <- df_5%>%separate(admission_date, c('day','month','year'),"/")
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 7, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_6
+
+names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#FF0040")
+names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color = "#3104B4")
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#3104B4")
+names(df_tmp)[4] <- cell_spec(names(df_tmp)[4], color = "#3104B4")
+names(df_tmp)[5] <- cell_spec(names(df_tmp)[5], color = "#FF0040")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))
+
+#NOT TO BE USED AS SOLUTION
+
+```
+
+### Combine Columns
+#### <span style="color: #FF0040;font-weight:bold">member_state</span> and <span style="color: #FF0040;font-weight:bold">region_name</span> into <span style="color: #FFBF00;font-weight:bold">member_region</span>
+
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_7 <- df_6 %>% unite('member_region',member_state, region_name, sep = "_", remove = TRUE, na.rm = FALSE)
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 8, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp <- df_7
+
+names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#FFBF00")
+
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### As reusable solution
+```{r eval=FALSE, echo=TRUE, message=FALSE, include=TRUE}
+####################################################################################
+# Required libraries
+library(tidyverse)
+library(dplyr)
+
+
+####################################################################################
+# Load data
+df <- read_csv(paste(getwd(),"/data_source_file.csv",sep="/"))
+df
+
+#Call the function to load the data
+load_data("./archetypes/UN-Member-State-admission-dates.csv")
+####################################################################################
+
+####################################################################################
+# Rename one or more columns 
+f_rename_column <- function(df_rename,...) {
+ rename(df_rename,...)
+}
+
+# Call the function with value to the parameters
+f_rename_column(df,c(MEMBER_STATE='Member', ADMISSION_DATE='StateDate of Admission'))
+####################################################################################
+
+####################################################################################
+# Rename multiple columns with the same rule 
+f_rename_replace <- function(df_rename_replace,value) {
+   set_names(df_rename_replace,~stringr::str_replace_all(.,value, ""))
+}
+
+# Call the function with value to the parameters
+f_rename_replace(df,"UN_")
+####################################################################################
+
+####################################################################################
+# Rename all columns 
+f_rename_all <- function(df_rename_all) {
+  #names(df_rename_all) <- toupper(names(df_rename_all))
+  names(df_rename_all) <- tolower(names(df_rename_all))
+  df_rename_all
+}
+
+# Call the function with value to the parameters
+f_rename_all(df)
+####################################################################################
+
+####################################################################################
+# Add a column with a constant value 
+f_column_const <- function(df_column_const,...) {
+  add_column(df_column_const,...)
+}
+
+# Call the function with value to the parameters
+f_column_const(df,new_col=('I am new'))
+####################################################################################
+
+####################################################################################
+# Select columns
+f_column_select <- function(df_column_select,...) {
+  df_column_select %>% select(...)
+}
+
+# Call the function with value to the parameters
+f_column_select(df,c(Member,'StateDate of Admission',UN_REGION_NAME))
+####################################################################################
+
+####################################################################################
+# Separate columns
+f_column_separate <- function(df_column_separate,column_name,...) {
+  df_column_separate %>% separate(column_name, ...,"/")
+  
+}
+
+# Call the function with value to the parameters
+f_column_separate(df,'StateDate of Admission',c('day','month','year'))
+####################################################################################
+
+####################################################################################
+# Combine columns
+f_column_combine <- function(df_column_combine,...) {
+  df_column_combine %>% unite( ..., sep = "_", remove = TRUE, na.rm = FALSE)
+}
+
+# Call the function with value to the parameters
+f_column_combine(df,"member_region",Member,UN_REGION_NAME)
+####################################################################################
+
+```
+
+### References
+#### The citations and data sources used for this case
+
+#### The data file used in this wrangler task was retrieved from <a href="https://www.un.org/press/en/2006/org1469.doc.htm" target="_blank">UN Member State Admission Dates</a> source which was published by the United Nations Meetings Coverages and Press Releases website.
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/UN-Member-State-admission-dates.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "column add-constant combine rename rename-all rename-replace select seperate" # mostly used in wranglers and analytics
+keywords <- 'UN member-state United-Nations'
+commands <- 'rename sset_names tolower add_column select seperate unite'
+sources <- 'United-Nations'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,271 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(mice)
+library(ggiraph)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# What's the temperature in Rio?
+## Imputing
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Krys Amon on Unsplash"}
+
+masthead <- "assets/krys-amon-8tTh9isJoos-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">World Happiness Report</div>
+
+> A New World...\
+--- 2016 Rio Olympics
+
+***
+
+### Load the data
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv('./archetypes/station_rio.csv', header = TRUE, stringsAsFactors = FALSE)
+df
+```
+
+#### Looking at the data, it seems like there are some values that are '999.90'. These can be considred as missing data as there is almost zero possibility that the temperature is 999.90$^\circ$C in Rio. 
+
+#### Data may be missing due to test design, failure in the observations or failure in recording observations. Whenever this happens, you can recode the value to NA (which is a symbol for Missing Values): 
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+df <- replace(df, df == 999.90, NA)
+
+summary(df)
+
+```
+
+#### By using the summary() function in R, we can see how many missing values there are plus some helpful statisitcs such as mean,maximum and minimum values. 
+
+#### Some other helpful methods to view missing data would be:
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+is.na(df$JAN) #returns a logical vector indicating which cases are missing
+
+mean(df$JAN, na.rm=TRUE) #na.rm=TRUE will remove missing values from R operations
+
+table(is.na(df)) #Find the total number of complete cases and missing values
+
+```
+
+#### Now that we know how to identify the missing values, we have to ask ourselves: What do we do with these missing values? 
+
+####  There are two general kinds of missing data: Missing Completely at Random (MCAR) or Missing Not at Random (MNAR). MNAR is a more serious issue in this case and might need to reevaluate our data collection methods. When dealing with missing data at Random, data scientists can use two primary methods to solve the error: imputation or the removal of data. 
+
+### Removing Missing Data
+
+#### There are two methods on deleting Missing Data: row-wise deletion (simply, deleting the entire row with missing data) and pair-wise deletion (removing a cell with the missing value in column-wise operations). An important assumption to utilize these two methods is that the data is missing completely at random(MCAR). There are however some disadvantages: you may be missing out on valuable data or creating a bias.
+
+#### Let's remove the missing data and compare it to when we are imputing it. We will be using mean of December to compare
+
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+df2 <- na.omit(df) #na.omit is row-wise deletion
+mean(df2$DEC)
+
+mean(df$DEC, na.rm=TRUE) #this is pair-wise deletion since we are deleting only the NAs in the column
+
+
+```
+
+### Imputing Missing Values
+
+#### Imputing missing values is an art by itself. There are a lot of nuances behind it and it is based on the experience and expertise of the data scientist. One of the most simplest ways is to impute the missing value with the column's mean, median or mode. 
+
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+data <- df
+for(i in 1:ncol(data)){
+  data[is.na(data[,i]), i] <- mean(data[,i], na.rm = TRUE) #imputing with mean
+}
+
+
+data1 <- df
+for(i in 1:ncol(data1)){
+  data1[is.na(data1[,i]), i] <- median(data1[,i], na.rm = TRUE) #imputing with median
+}
+
+
+# For getting the statistical mode, there is no base R function, thus we'll write our own.
+
+getmode <- function(v) {
+   v <- na.omit(v)
+   uniqv <- unique(v)
+   uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+data2 <- df
+for(i in 1:ncol(data2)){
+  data2[is.na(data2[,i]), i] <- getmode(data2[,i]) #imputing with mode
+}
+
+
+```
+
+### Multiple Imputations and Imputation Packages
+
+#### Now that we've covered basic mean/median/mode imputations, let's cover some of the R packages that allows Multiple imputations or a more advanced level of imputation. One of the mose popular package is called $mice$ which stands for Multivariate Imputation by Chained Equations. Using multiple imputations helps in resolving the uncertainty for the missingness.
+
+#### There are four methods to impute values using mice: Predictive Mean Matching, Logistic Regression, Bayesian polytomous regression, and Proportional odds model.
+
+
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+md.pattern(df, plot = FALSE) #function to analyze the number of missing values.
+
+```
+
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, results='hide', class.source = 'fold-show'}
+
+miceData <- mice(df,m=5,maxit=50,meth='pmm',seed=500)
+```
+
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+summary(miceData)
+```
+
+
+#### md.pattern() gives us information about missing values before the imputation. In our case we have 36 missing values. The mice() function takes care of the missing data imputation. More details about the parameters can be found with ?mice. Here we are using predicive mean matching(pmm). We will now fill out the missing values in our dataset with the imputations.
+
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+imputedData <- complete(miceData,1)
+
+```
+
+
+#### Let's now analyze the variety in missing values by calculating the mean for each imputation that we've done. We'll then graph it out. 
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+plotdf <- data.frame(matrix(ncol = 17))
+colnames(plotdf) <- colnames(df)[2:18]
+
+for(i in 2:ncol(data2)){
+  plotdf['original', i-1] <- mean(df[,i], na.rm = TRUE)
+  plotdf['mean', i-1] <- mean(data[,i])
+  plotdf['median', i-1] <- mean(data1[,i])
+  plotdf['mode', i-1] <- mean(data2[,i])
+  plotdf['mice', i-1] <- mean(imputedData[,i])
+}
+
+plotdf <- plotdf[2:6,]
+library(reshape2) 
+test <- melt(plotdf)
+
+library(ggplot2)
+
+v1 <- ggplot(test, aes(x = variable, y = value)) + geom_point()
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+#### We can see that the discrepancies between the methods are not that big, but they are still significant. 
+
+### Save plot
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/imputation.svg", plot = v1, width=1280/72, height=720/72)
+
+```
+
+### References
+#### The citations and data sources used for this case
+
+#### This case is based on a dataset from Kaggle
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "./citations/world-happiness-report.bib")
+
+```
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "Impute" # mostly used in wranglers and analytics
+keywords <- 'rio rio-de-janeiro air-quality air'
+commands <- 'mice na.omit na.rm'
+sources <- 'Rio-Air-quality'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

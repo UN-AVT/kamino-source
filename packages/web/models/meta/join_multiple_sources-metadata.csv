@@ -1,0 +1,2 @@
+"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
+"4-wranglers-4-extend-1-enrich-join_multiple_sources","4-wranglers","4-extend","1-enrich","enrich anti-join concantenate inner-join left-join outer-join right-join","join_multiple_sources","4-wranglers/4-extend/1-enrich/join_multiple_sources.html","life-expectancy population","inner_join left_join right_join full_join anti_join bind_rows","Gapminder","join_multiple_sources-icon.svg",2021-10-26

@@ -1,0 +1,340 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+
+library(tidyverse)
+
+library(dplyr)
+library(purrr)
+library(knitr)
+library(stringr)
+library(magick)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+
+```
+
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+
+# Which educational institutions are the most expensive?
+## Find String
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Pang Yuhao on Unsplash"}
+
+masthead <- "assets/pang-yuhao-_kd5cxwZOK4-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">World Happiness Report</div>
+
+
+> All truths are easy to understand once they are discovered; the point is to discover them.....\
+--- Galileo Galilei\
+
+***
+
+### Load data
+
+
+
+
+```{r Load raw data, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+df<-read.csv('./archetypes/times-higher-education-world-university-ranking.csv')
+
+df
+```
+
+
+### Exact String
+
+#### Let's find the exact word <span style="color: #fc7f03;font-weight:bold">USA</span> in the <span style="color: #FE9A2E;font-weight:bold">country</span> field. 
+
+```{r method: exact string, echo=TRUE, message=FALSE}
+df_1 <- df %>% filter(str_detect(country, "USA"))
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 1, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_1
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color="#FE9A2E")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(3, bold = TRUE, background = "#F5ECCE")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Ends with
+#### Or let's find all rows where <span style="color: #FE9A2E;font-weight:bold">country</span> ends with <span style="font-weight:bold">a</span>. 
+
+```{r method: ends with, echo=TRUE, message=FALSE}
+df_2<-df%>%filter(str_detect(country, "a$"))
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 2, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+
+df_tmp<-df_2
+names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color="#FE9A2E")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(3, bold = TRUE, background = "#F5ECCE")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Starts with
+#### Let's find all the rows where column <span style="color: #0000FF;font-weight:bold">institution</span> starts with <span style="font-weight:bold">A</span>. 
+```{r method: starts with, echo=TRUE, message=FALSE}
+
+df_3 <- df %>% filter(str_detect(institution, "^A"))
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 3, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+
+df_tmp<-df_3
+names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color="#0000FF")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(2, bold = TRUE, background = "#A9D0F5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+
+
+### Contains
+
+#### Let's find all the rows where column <span style="color: #0000FF;font-weight:bold">institution</span> contains the word <span style="font-weight:bold">Technology</span>. 
+
+```{r method: contains,  echo=TRUE, message=FALSE}
+df_4<-df%>%filter(str_detect(institution, "Technology"))
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 4, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+
+df_tmp<-df_4
+names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color="#0000FF")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(2, bold = TRUE, background = "#A9D0F5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Contains digits
+
+#### Let's find all the rows where column <span style="color: #0000FF;font-weight:bold">institution</span> contains any <span style="font-weight:bold">digits</span>. 
+
+```{r method: contains digit,  echo=TRUE, message=FALSE}
+df_5<-df%>%filter(str_detect(institution, "\\d"))
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 5, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+
+df_tmp<-df_5
+names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color="#0000FF")
+
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(2, bold = TRUE, background = "#A9D0F5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Contains Either/Or
+
+#### Let's find all the rows where column <span style="color: #0000FF;font-weight:bold">institution</span> contains the words <span style="font-weight:bold">University</span> OR <span style="font-weight:bold">College</span>. 
+
+```{r method: contains either or,  echo=TRUE, message=FALSE}
+df_6<-df%>%filter(str_detect(institution, "University|College"))
+
+```
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 6, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+
+df_tmp<-df_6
+names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color="#0000FF")
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(2, bold = TRUE, background = "#A9D0F5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+### Does NOT Contain
+
+#### Let's find all the rows where column <span style="color: #0000FF;font-weight:bold">institution</span> does __NOT__ contain the word  <span style="font-weight:bold">University</span>. 
+
+```{r method: does NOT contain,  echo=TRUE, message=FALSE}
+
+df_7 <- df %>% filter(!str_detect(institution, "University"))
+
+```
+
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r Styling Data Set 7, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp<-df_7
+names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color="#0000FF")
+
+
+df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
+column_spec(2, bold = TRUE, background = "#A9D0F5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+
+
+### References
+#### The citations and data sources used for this case 
+
+The data source used by this wrangler task is one of the baseline data used by the "Our World in Data" article called <a href="https://ourworldindata.org/financing-education" target="_blank" rel="noopener noreferrer">Financing Education</a>.
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/times-higher-education-world-university-ranking.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "contains-digits ends-with exact-string not-contain starts-with" # mostly used in wranglers and analytics
+keywords <- 'education expensive university'
+commands <- 'filter str_detect'
+sources <- 'Our World in Data'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

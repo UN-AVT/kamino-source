@@ -1,0 +1,2 @@
+"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
+"3-ingest-5-web-1-structured-cities-by-sunshine-duration","3-ingest","5-web","1-structured","web scraping","cities by sunshine duration","3-ingest/5-web/1-structured/cities-by-sunshine-duration.html","cities sunshine","read_html html_node html_table","Wikipedia","cities-by-sunshine-duration-icon.svg",2021-10-26

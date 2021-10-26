@@ -1,0 +1,71 @@
+---
+title: "Generate Content Index"
+author: "Kamino"
+date: "8/29/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+library(rmarkdown)
+library(tidyverse)
+library(stringr)
+library(digest)
+
+```
+
+
+# Create platform ToC used for navigation and search
+
+
+```{r}
+
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+getwd()
+
+# collect metadata csv files
+list_of_metas <- as.data.frame(dir(path = "../../packages/web/models/meta/", pattern = "\\-metadata.csv$", full.names = TRUE, recursive = TRUE))
+colnames(list_of_metas) <- c("file_path")
+list_of_metas
+
+# a list of collect data frames
+meta_data_list <- list()
+
+# loop through list and load each csv
+for(i in 1:nrow(list_of_metas)) {
+    df_file_path <- list_of_metas[i,]
+    print(df_file_path)
+    df <- read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE)
+    # print(df)
+    meta_data_list[[i]] <- df
+}
+
+# concatenate all data frames into one
+meta_data = do.call(rbind, meta_data_list)
+meta_data
+
+# sort results
+# to best sort, we need to treat the number strings
+toc <- meta_data[ order( as.integer(gsub("-.*$","",meta_data$activity)), as.integer(gsub("-.*$","",meta_data$subactivity)), as.integer(gsub("-.*$","",meta_data$task)), meta_data$title ), ]
+
+# upper case to make field recognition in code easier
+colnames(toc) <- c("id", "ACTIVITY", "SUBACTIVITY", "TASK", "METHODS", "TITLE", "URL", "KEYWORDS", "SYNTAX", "SOURCES", "ICON", "LAST_UPDATE")
+
+toc
+
+```
+
+
+# Save results as csv
+
+
+```{r}
+
+write.csv(toc,"../../packages/web/models/kamino-content-index.csv", row.names = FALSE)
+
+```
+
+
+

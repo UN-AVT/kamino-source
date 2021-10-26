@@ -1,0 +1,298 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(dplyr)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+library(ggiraph)
+library(reshape2)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Case: How cheap are Electric Cars
+## Normalize
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by CHUTTERSNAP on Unsplash"}
+
+masthead <- "assets/chuttersnap-xfaYAsMV1p8-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Electric Cars</div>
+
+> The time is right for electric cars - in fact the time is critical...\
+--- Carlos Ghosn\
+
+***
+
+#### Normalization is used to standardize and scale values so they fit in a specific range. This pattern is useful when you need to run analytical models on your data (regression, classification, clustering, PCA, etc). Some models need the data to be "scaled" or normalized first before they can run. In situations where we have a lot of different (numerical variables) in very different ranges and levels of accuracy, we need to apply normalization processes.  Normalization recalculates the values, to always be in the same range.
+
+### Load the data
+
+```{r Load raw data, warning=FALSE, echo=TRUE, warning=FALSE,class.source = 'fold-hide'}
+
+df <- read.csv('./archetypes/Cheapestelectriccars-EVDatabase.csv', header = TRUE, stringsAsFactors = FALSE)
+df
+```
+
+#### Let's look at the data types to observe what we'll need to wrangle.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+str(df)
+
+```
+
+#### Most of our data are in Character formats. We will now wrangle the Data in a way that the columns will be in numerical values.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+colnames(df) <- c("Name", "Usable_Battery_kWh", "Acceleration_sec", "TopSpeed_kmh", "Range_km", "Efficiency_Whkm", "FastChargeSpeed_kmh", "Drive", "NumberOfSeats", "PriceInGermany_EUR", "PriceInUK_GBP")
+
+
+df$`Usable_Battery_kWh` <- as.numeric(gsub("[^0-9.-]", "", df$`Usable_Battery_kWh`))
+df$`Acceleration_sec` <- as.numeric(gsub("[^0-9.-]", "", df$`Acceleration_sec`))
+df$`TopSpeed_kmh` <- as.numeric(gsub("[^0-9.-]", "", df$`TopSpeed_kmh`))
+df$`Range_km` <- as.numeric(gsub("[^0-9.-]", "", df$`Range_km`))
+df$`Efficiency_Whkm` <- as.numeric(gsub("[^0-9.-]", "", df$`Efficiency_Whkm`))
+df$`FastChargeSpeed_kmh` <- as.numeric(gsub("[^0-9.-]", "", df$`FastChargeSpeed_kmh`))
+df$`PriceInGermany_EUR` <- as.numeric(gsub("[^0-9.-]", "", df$`PriceInGermany_EUR`))
+df$`PriceInUK_GBP` <- as.numeric(gsub("[^0-9.-]", "", df$`PriceInUK_GBP`))
+
+
+```
+
+
+#### Now that we've converted the data type to numerical. We'll look at missing values. There are some missing values in both the Price(EUR) and Price(GBP) columns. We'll go ahead and impute them by converting them with today's exchange rate. 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df <- df[rowSums(is.na(df[,10:11]))!=2,] #weed out the rows with missing values in both EUR and GBP
+
+df[is.na(df[,10]), 10] <- df[is.na(df[,10]), 11]*1.18 #Impute missing values in EUR from conversion of GBP
+
+df[is.na(df[,11]), 11] <- df[is.na(df[,11]), 10]*0.85 #Impute missing values in EUR from conversion of GBP
+
+
+```
+
+
+#### Let's take a look at the summary statistics for the selected numerical measures:
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+summary(df[c(2:4,10)])
+
+```
+
+#### Notice that these measures are in different scales. To illustrate why this may be an issue, let's plot:
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+
+dat.m <- melt(df,id.vars='Name', measure.vars=c('Usable_Battery_kWh','Acceleration_sec','TopSpeed_kmh','PriceInGermany_EUR'))
+v1 <- ggplot(dat.m) +
+  geom_boxplot(aes(y=value, color=variable)) +
+  theme_bw() +
+  theme(
+    panel.border = element_blank(),
+    legend.position = 'top',
+    axis.text.x=element_blank()
+  )
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+#### Because each measure is on a different scale, Price(EUR) is crowding out the plot and canceling the effects of other 3 variables. Thus, it is imperative to normalize the Data.
+
+***
+
+### Z (statistical) Normalization
+
+#### This normalization subtracts the mean of the data from all values and then divides them by the standard deviation. The distribution of the data has a __mean of zero__ and __a variance of one__. This is a common and very useful normalization technique. It preserves the original distribution of the data and is less influenced by outliers.
+
+Let's apply z normalization on the four columns from above:
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+
+df1 <- df %>% mutate_each_(list(~scale(.) %>% as.vector), vars = c('Usable_Battery_kWh','Acceleration_sec','TopSpeed_kmh','PriceInGermany_EUR'))
+                                  
+
+
+```
+
+```{r, echo=FALSE}
+df_tmp <-df1[1:10,]%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(c(2:4,10), bold = TRUE, color = "#000000", background = "#CEE3F6")
+
+df_tmp 
+```
+
+#### After z normalization, let's check to make sure the mean is 0.
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+summary(df1[c(2:4,10)])
+
+```
+
+#### Let's plot again. Notice that all measures are on similar scale.
+
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+
+dat.m <- melt(df1,id.vars='Name', measure.vars=c('Usable_Battery_kWh','Acceleration_sec','TopSpeed_kmh','PriceInGermany_EUR'))
+v2 <- ggplot(dat.m) +
+  geom_boxplot(aes(y=value, color=variable)) +
+  theme_bw() +
+  theme(
+    panel.border = element_blank(),
+    legend.position = 'top',
+    axis.text.x=element_blank()
+  )
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+***
+
+### Min-Max Normalization
+
+#### Range transformation normalizes all column values to a specified  value range. Largest value is set to 'max' and the smallest value is set to 'min'. All other values are scaled. Method can be influenced by outliers, because the bounds move towards them. Method keeps the original distribution of the data points, so it can also be used for data anonymization to obfuscate the true range of observations.
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+
+df_2 <- bind_cols(df[,1],as.data.frame(apply(df[, c(2:4, 10)], 2, function(x) (x - min(x))/(max(x)-min(x)))))
+
+colnames(df_2)[1] <- "Name" 
+
+
+```
+
+
+```{r, echo=FALSE}
+
+df_tmp <-df_2[1:10,]%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(2:5, bold = TRUE, color = "#000000", background = "#CEE3F6")
+
+df_tmp
+
+
+```
+
+
+#### Let's check to make sure the min and max are normalized.
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+summary(df_2[2:5])
+
+```
+
+
+#### let's plot again. 
+
+#### Notice again that all measures are now on similar scale. Although the values are different, the "shape" of each measure (mean, median, outliers) remains constant.
+
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+
+dat.m <- melt(df_2,id.vars='Name', measure.vars=c('Usable_Battery_kWh','Acceleration_sec','TopSpeed_kmh','PriceInGermany_EUR'))
+v3 <- ggplot(dat.m) +
+  geom_boxplot(aes(y=value, color=variable)) +
+  theme_bw() +
+  theme(
+    panel.border = element_blank(),
+    legend.position = 'top',
+    axis.text.x=element_blank()
+  )
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+#### Other forms of Normalization includes Log Transformation and IQR Transformation which are used in specific cases such as time-series data. 
+
+### References
+#### The data file used in this wrangler task was retrieved from <a href="https://www.kaggle.com/kkhandekar/cheapest-electric-cars" target="_blank" rel="noopener noreferrer"> Kaggle </a> source in which data was scraped <a href="https://ev-database.org/" target="_blank" rel="noopener noreferrer"> Electric Vehicle Database </a> 
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# options("citation_format" = "pandoc")
+# read.bibtex(file = "./citations/UN-Member-State-admission-dates.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "Normalize" # mostly used in wranglers and analytics
+keywords <- 'Electric-cars cars'
+commands <- 'scale'
+sources <- 'Electric-Vehicle-Database'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

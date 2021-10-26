@@ -1,0 +1,104 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+INGEST  
+</div>
+
+# Teacher Salaries
+## ingest a tab-separated file (tsv)
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Jerry Wang on Unsplash"}
+
+masthead <- "assets/jerry-wang-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> We gotta figure out a way to pay our teachers more.\
+  They're like surrogate parents away from home.\
+  They have such a huge responsibility and they're underappreciated and underpaid...\
+--- Justin Timberlake\
+
+***
+
+### Ingest
+#### with tab separator
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+df <- read.table('archetypes/teacher-salaries/oecd-teacher-salaries.tsv', sep="\t", header=TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Data Source: OECD, Teacher Salaries, https://data.oecd.org/teachers/teachers-salaries.htm
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "TSV" # mostly used in wranglers and analytics
+keywords <- 'tab tsv separated delimited'
+commands <- 'read.table sep'
+sources <- 'OECD'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

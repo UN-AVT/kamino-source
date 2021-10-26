@@ -1,0 +1,2 @@
+"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
+"3-ingest-3-unstructured-1-text-ghana-state-of-the-nation-addresses","3-ingest","3-unstructured","1-text","","ghana state of the nation addresses","3-ingest/3-unstructured/1-text/ghana-state-of-the-nation-addresses.html","Ghana parliament president","readtext read_file readLines","Kaggle","ghana-state-of-the-nation-addresses-icon.svg",2021-10-26

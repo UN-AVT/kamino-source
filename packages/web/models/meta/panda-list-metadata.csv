@@ -1,0 +1,2 @@
+"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
+"4-wranglers-1-evaluate-3-clean-panda-list","4-wranglers","1-evaluate","3-clean","clean remove-duplicate remove-missing replace-missing replace-value","panda list","4-wranglers/1-evaluate/3-clean/panda-list.html","panda zoo china","replace !is.na is.na unique","Giant-Panda-Global","panda-list-icon.svg",2021-10-26

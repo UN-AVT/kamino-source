@@ -1,0 +1,178 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+library(ggiraph)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Case: Air Quality in Paris
+## Parse Date
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Ella Ivanescu on Unsplash"}
+
+masthead <- "assets/ella-ivanescu-JbfhNrpQ_dw-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Electric Cars</div>
+
+> Clear skies and clean air must become the new normal. We must re-design our cities, reclaiming the streets for cycling and walking, allowing people to walk along streets unpolluted by traffic....\
+--- Caroline Lucas\
+
+***
+
+### Load the data
+
+```{r Load raw data, warning=FALSE, echo=TRUE, warning=FALSE,class.source = 'fold-hide'}
+
+df <- read.csv('./archetypes/paris-air-quality.csv', header = TRUE, stringsAsFactors = FALSE)
+df
+```
+
+#### Let's take a look at the datatypes we have for the date column. 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+class(df$date)
+
+```
+
+#### We'l convert this to the date format and recheck its data type
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df$date <- as.Date(df$date)
+class(df$date)
+
+```
+
+
+#### Parsing the date can help us transform the date into a format that is suitable for our use case. Lets explore a few useful things we can do. 
+
+#### Firstly, we can seperate the column 'Date' into three different columns for month, day and year.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+parsed_date <- data.frame(date = df$date, 
+       month = month(df$date),
+       day = day(df$date),
+       year = year(df$date))
+
+parsed_date
+
+```
+
+
+#### We can also convert month to thier alphabetical format. 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+parsed_date2 <- data.frame(date = df$date, 
+       month = month(df$date, label=TRUE),
+       day = day(df$date),
+       year = year(df$date))
+
+parsed_date2
+
+```
+
+The library 'lubridate' can also help us parse dates from strings.
+
+#### We can also convert month to thier alphabetical format. The library will examine the entire vector of dates will help you determine what format it is by process of elimination. For example:
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+x <- "04/01/05"
+
+ymd(x) #the library will interpret the first entity as year, then month, then day
+
+myd(x)
+
+dmy(x)
+
+dym(x)
+```
+
+
+
+### References
+#### The data file used in this wrangler task was retrieved from <a href="https://www.kaggle.com/kkhandekar/cheapest-electric-cars" target="_blank" rel="noopener noreferrer"> Kaggle </a> source in which data was scraped <a href="https://ev-database.org/" target="_blank" rel="noopener noreferrer"> Electric Vehicle Database </a> 
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# options("citation_format" = "pandoc")
+# read.bibtex(file = "./citations/UN-Member-State-admission-dates.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "parse-date" # mostly used in wranglers and analytics
+keywords <- 'Paris Air-Quality'
+commands <- 'date month year'
+sources <- 'Kaggle'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

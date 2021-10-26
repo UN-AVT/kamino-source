@@ -1,0 +1,430 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+
+library(tidyverse)
+
+library(purrr)
+library(kableExtra)
+
+library(knitcitations)
+library(bibtex)
+library(ggiraph)
+
+library(dplyr)
+library(magick)
+library(MASS)
+
+library(sitools)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Average Hourly Earnings of Employees
+## Format Numbers
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Leon on Unsplash"}
+
+masthead <- "assets/leon-MUZFKa_mttU-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Work Place</div>
+
+
+> To be a consistent winner means preparing not just one day, one month or even one year - but for a lifetime...\
+--- Bill Rodgers\
+
+***
+
+### Load data
+
+#### First of all, let's remove all "NA" values, do you remember how we did in __Clean__? 
+
+
+```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+df <- read.csv('archetypes/hourly-earnings-male-vs-female.csv', header = TRUE, stringsAsFactors = FALSE)
+df_1 <- na.omit(df)
+
+rownames(df_1) <- NULL
+
+```
+
+
+
+
+
+```{r Styling Data Set, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_1%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Convert double format into other formats 
+
+#### When the number is large, such as population we can try the use of scientific format.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+df_2<-df_1
+df_2$population<-format(df_1$population,scientific = TRUE)
+ 
+```
+
+```{r Styling Data Set2, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_2%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(3, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Use the comma separators
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+df_3<-df_1
+df_3$population <-format(df_1$population, big.mark=",") 
+
+
+```
+
+
+```{r Styling Data Set3, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_3%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(3, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Long to readable
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_8<-df_1
+df_8$population_readable<-f2si(df_8$population)
+
+```
+
+```{r Styling Data Set8, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_8%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(6, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```  
+
+### Currency Format
+#### If there are currencies, let's add dollar sign "$" for the wage columns.
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+df_4<-df_1
+df_4$avg_hourly_wage_men<-paste0("$ ", df_4$avg_hourly_wage_men)
+df_4$avg_hourly_wage_women<-paste0("$ ", df_4$avg_hourly_wage_women)
+
+```
+
+```{r Styling Data Set4, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_4%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(4:5, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```
+### Decimal format
+#### We can round numbers to specified decimals as well, let's round __avg_hourly_wage_men__ to 1 decimal, and round __avg_hourly_wage_women__ to 3 decimals.
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+df_5<-df_1
+df_5$avg_hourly_wage_men<-format(round(df_5$avg_hourly_wage_men,1), nsmall=1)
+df_5$avg_hourly_wage_women<-format(round(df_5$avg_hourly_wage_women,3), nsmall=3)
+
+```
+
+```{r Styling Data Set5, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_5%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(4:5, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### Percentage format
+#### Let's use following steps to calculate the percentage of increase/decrease for each year.
+
+* Calculate the difference of average hourly wage between each year for men and women;
+* Use the difference to divide the previous average hourly wage of that year then times 100;
+* Round the result and add "%" sign in the end.
+
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_6<-df_1%>%
+  group_by(Entity)%>%
+  mutate(avg_hourly_wage_diff_men=(avg_hourly_wage_men/lag(avg_hourly_wage_men) - 1)*100)%>%
+  mutate(avg_hourly_wage_diff_women=(avg_hourly_wage_women/lag(avg_hourly_wage_women) - 1)*100)%>%
+  dplyr::select(Entity,Year,avg_hourly_wage_diff_men,avg_hourly_wage_diff_women)
+
+df_6 <- na.omit(df_6)
+
+  df_6$avg_hourly_wage_diff_men<-format(round(df_6$avg_hourly_wage_diff_men,1), nsmall=1)
+  df_6$avg_hourly_wage_diff_men<-paste0(df_6$avg_hourly_wage_diff_men," %")
+  
+  df_6$avg_hourly_wage_diff_women<-format(round(df_6$avg_hourly_wage_diff_women,1), nsmall=1)
+  df_6$avg_hourly_wage_diff_women<-paste0(df_6$avg_hourly_wage_diff_women," %")
+  
+
+ 
+
+```
+
+
+```{r Styling Data Set6, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_6%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(3:4, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```        
+
+### Fraction format
+#### If we want to calulate the ratio of average hourly wage women to men, use following steps, and display as a fraction format:
+
+* Calculate avg_hourly_wage_women / avg_hourly_wage_men
+* Decimal to fraction
+* Output as character
+
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
+
+df_7<-df_1%>%
+  mutate(avg_hourly_wage_women_men_ratio=avg_hourly_wage_women/avg_hourly_wage_men)%>%
+  mutate(fraction=as.character(fractions(avg_hourly_wage_women_men_ratio)))%>%
+  dplyr::select(Entity,Year,avg_hourly_wage_women_men_ratio,fraction)
+
+```
+
+```{r Styling Data Set7, echo=FALSE}
+#NOT TO BE USED AS SOLUTION
+df_tmp <- df_7%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(4, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
+scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+#NOT TO BE USED AS SOLUTION 
+
+```  
+
+
+### As reusable solution
+```{r eval=FALSE, echo=TRUE, message=FALSE, include=TRUE}
+
+####################################################################################
+# Required libraries
+library(sitools)
+library(dplyr)
+####################################################################################
+
+
+####################################################################################
+# Convert Double Format to Scientific Format
+f_scientific <- function(df_scientific) {
+  df_scientific<<-format(df_scientific,scientific = TRUE)
+}
+
+# Call the function with your values to the parameters
+df_1$population <- f_scientific(df_1$population)
+####################################################################################
+
+
+####################################################################################
+# Use comma seperators for numerical data
+f_commasep<- function(df_commasep) {
+  df_commasep<<-format(df_commasep, big.mark=",")
+}
+
+# Call the function with your values to the parameters
+df_1$population <- f_commasep(df_1$population)
+####################################################################################
+
+
+####################################################################################
+# Convert from Long to Readable Format
+f_readable<- function(df_readable) {
+  df_readable<<-f2si(df_readable)
+}
+
+# Call the function with your values to the parameters
+df_1$population <- f_readable(df_1$population)
+####################################################################################
+
+
+####################################################################################
+# Change numerical Data to Currency Format
+f_currency <- function(df_currency) {
+  df_currency <- paste0("$ ", df_currency)
+}
+
+# Call the function with your values to the parameters
+df_1$avg_hourly_wage_men <-  f_currency(df_1$avg_hourly_wage_men)
+####################################################################################
+
+
+####################################################################################
+# Change numerical Data to Decimal Format
+f_decimal <- function(df_decimal, num) {
+  df_decimal <- format(round(df_decimal,num), nsmall=num)
+}
+
+# Call the function with your values to the parameters
+df_1$avg_hourly_wage_men <-  f_decimal(df_1$avg_hourly_wage_men,3)
+####################################################################################
+
+
+####################################################################################
+# Calculate the percentage increase/decrease for each yeaar
+f_percentage<- function(df_percentage){
+  
+  data <- df_percentage%>%
+    group_by(Entity)%>%
+    mutate(avg_hourly_wage_diff_men=(avg_hourly_wage_men/lag(avg_hourly_wage_men) - 1)*100)%>%
+    mutate(avg_hourly_wage_diff_women=(avg_hourly_wage_women/lag(avg_hourly_wage_women) - 1)*100)%>%
+    dplyr::select(Entity,Year,avg_hourly_wage_diff_men,avg_hourly_wage_diff_women)
+  
+  data <- na.omit(data)
+  
+  data$avg_hourly_wage_diff_men<-format(round(data$avg_hourly_wage_diff_men,1), nsmall=1)
+  data$avg_hourly_wage_diff_men<-paste0(data$avg_hourly_wage_diff_men," %")
+  
+  data$avg_hourly_wage_diff_women<-format(round(data$avg_hourly_wage_diff_women,1), nsmall=1)
+  data$avg_hourly_wage_diff_women<-paste0(data$avg_hourly_wage_diff_women," %")
+  return(data)
+}
+
+# Call the function with your values to the parameters
+df_2 <- f_percentage(df_1)
+####################################################################################
+
+
+####################################################################################
+# Convert Double Format to Scientific Format
+f_fraction <- function(df_fraction){
+  df_fraction%>%
+    mutate(avg_hourly_wage_women_men_ratio=avg_hourly_wage_women/avg_hourly_wage_men)%>%
+    mutate(fraction=as.character(fractions(avg_hourly_wage_women_men_ratio)))%>%
+    dplyr::select(Entity,Year,avg_hourly_wage_women_men_ratio,fraction)
+}
+
+# Call the function with your values to the parameters
+df_2 <- f_fraction(df_1)
+####################################################################################
+
+```
+
+# References
+## The citations and data sources used for this case
+
+
+The data source was from <a href="https://ilostat.ilo.org/" target="_blank">ILOSTAT</a>. ILOSTAT relies on multiple sources. The list of sources for each indicator, country by country, can be found in the ILOSTAT documentation under the bulk download facility, available <a href="http://www.ilo.org/ilostat/faces/oracle/webcenter/portalapp/pagehierarchy/Page30.jspx" target="_blank">here</a>
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/hourly-earnings-male-vs-female.bib")
+
+```
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "format-number comma-seperator format-currency format-decimal format-fraction percentage-increase format-readable format-scientific" # mostly used in wranglers and analytics
+keywords <- 'earnings salary employee'
+commands <- 'format f2si'
+sources <- 'ILOSTAT'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

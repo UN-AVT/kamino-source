@@ -1,0 +1,3 @@
+https://www.statology.org/how-to-normalize-data-in-r/
+
+https://www.journaldev.com/47850/normalize-data-in-r
