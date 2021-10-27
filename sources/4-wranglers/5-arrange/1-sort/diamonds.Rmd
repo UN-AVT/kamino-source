@@ -263,12 +263,17 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 #### The data source was built in R. Use function data() in the console to view available datasets.
 
 
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
-
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/diamonds.bib")
-```
+<pre>
+@misc{wikipedia_2021_diamond,
+  author = {Wikipedia},
+  month = {04},
+  title = {Diamond clarity},
+  url = {https://en.wikipedia.org/wiki/Diamond_clarity},
+  urldate = {2021-06-05},
+  year = {2021},
+  organization = {Wikipedia}
+}
+</pre>
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

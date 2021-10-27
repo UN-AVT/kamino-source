@@ -23,15 +23,11 @@ options(scipen=999)  # turn-off scientific notation like 1e+48
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
-library(htmltools) # needed to include html snippets
 library(tidyverse)
+library(ggiraph)
 
-library(purrr)
 library(kableExtra)
 
-library(knitcitations)
-library(bibtex)
-library(ggiraph)
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -92,7 +88,7 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 
 #### Let's focus on the <span style="color: #8000FF;font-weight:bold">Time</span> column. 
 
-#### If only the __date__ (not the time) portion of the data is needed, then use as.Date to convert the characters into date format.
+If only the __date__ (not the time) portion of the data is needed, then use as.Date to convert the characters into date format.
 
 ```{r convert date, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
 
@@ -151,10 +147,9 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 ```
 
 
-
 ### Quarter
-
 #### Use this method to create a <span style="color: #2E2EFE;font-weight:bold">Quarter</span> column which categorizes each record into each quarter as per <span style="color: #8000FF;font-weight:bold">Time</span>.
+
 
 ```{r method: qtr,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
 
@@ -184,7 +179,6 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 ```
 
 ### Year
-
 #### Use this method to create a <span style="color: #2E2EFE;font-weight:bold">Year</span> column which captures the year of <span style="color: #8000FF;font-weight:bold">Time</span>.
 
 
@@ -322,7 +316,9 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 
 
 ### Plot an example
+
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+
 df <- read.csv('archetypes/historical-trend-on-data-science.csv')
 df_1 <- add_column(df,date=paste0(df$Month,'-01'))
 df_1$quarter<-quarters(as.Date(df_1$date))
@@ -339,6 +335,7 @@ v1<-ggplot(data=df_3, aes(x=year, y=sum_number, group=1))+
     x='Year',
     y='Search Frequency'
   )
+
 v2<-ggplot(data=df_2, aes(x=quarter, y=sum_number, group=year)) +
   geom_step(aes(color=year))+
   geom_point(aes(color=year))+
@@ -347,130 +344,15 @@ v2<-ggplot(data=df_2, aes(x=quarter, y=sum_number, group=year)) +
     y='Search Frequency'
   )
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
-list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72, options =
-list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
 ```
-
-### As reusable solution
-```{r eval=FALSE, echo=TRUE, message=FALSE, include=TRUE}
-
-####################################################################################
-# Required libraries
-# Not Required
-####################################################################################
-
-
-####################################################################################
-# Convert Character Format to Date Format
-f_chardate <- function(df_chardate) {
-  as.Date(df_chardate)
-}
-
-# Call the function with your values to the parameters
-df$Time2 <- f_chardate(df$Time)
-####################################################################################
-
- 
-####################################################################################
-# Convert to Date-Time Format
-f_dateTime <- function(df_dateTime) {
-  as.POSIXct(df_dateTime, format = "%Y-%m-%dT%H",tz=Sys.timezone())
-}
-
-# Call the function with your values to the parameters
-df$Time2 <- f_dateTime(df$Time)
-####################################################################################
-
-
-####################################################################################
-# Crete Quarter Column from Date Data
-f_quarter <- function(df_quarter) {
-  temp <<- as.Date(df_quarter) #if not in Date Format
-  quarters(temp)
-}
-
-# Call the function with your values to the parameters
-df$Time2 <- f_quarter(df$Time)
-####################################################################################
-
-
-####################################################################################
-# Extract Year from Date Data
-f_year <- function(df_year) {
-  temp <<- as.Date(df_year) #if not in Date Format
-  format(temp,format="%Y")
-}
-
-# Call the function with your values to the parameters
-df$Time2 <-f_year(df$Time)
-####################################################################################
-
-
-####################################################################################
-# Extract Year-Month from Date Data
-f_yearMonth <- function(df_yearMonth) {
-  temp <<- as.Date(df_yearMonth) #if not in Date Format
-  format(temp,format="%Y-%m")
-}
-
-# Call the function with your values to the parameters
-df$Time2 <- f_yearMonth(df$Time)
-####################################################################################
-
-
-
-####################################################################################
-# Extract Month (numerical) from Date Data
-f_monthNum <- function(df_monthNum) {
-  temp <<- as.Date(df_monthNum) #if not in Date Format
-  format(temp,format="%m")
-}
-
-# Call the function with your values to the parameters
-df$Time2 <- f_monthNum(df$Time)
-####################################################################################
-
-
-####################################################################################
-# Extract Month (Alphabetical) from Date Data
-f_monthAlpha <- function(df_monthAlpha) {
-  temp <- as.Date(df_monthAlpha) #if not in Date Format
-  format(temp,format="%b")
-}
-
-# Call the function with your values to the parameters
-df$Month <- f_monthAlpha(df$Time)
-####################################################################################
-
-
-####################################################################################
-# Extract Month-Day (Alphabetical) from Date Data
-f_monthDay <- function(df_monthDay) {
-  temp <<- as.Date(df_monthDay) #if not in Date Format
-  format(temp,format="%d %B")
-}
-
-# Call the function with your values to the parameters
-df$Time2 <- f_monthDay(df$Time)
-####################################################################################
-
-
-
-####################################################################################
-# Extract Several Date Formats by substituting "type"
-f_dateType <- function(df_dateType, type) {
-  temp <<- as.Date(df_dateType) #if not in Date Format
-  format(temp,format=type)
-}
-
-# Call the function with your values to the parameters
-df$Time2 <- f_dateType(df$Time, "%d %B")
-####################################################################################
-```
-
 
 
 # References
@@ -478,13 +360,16 @@ df$Time2 <- f_dateType(df$Time, "%d %B")
 
 The data source was from <a href="https://trends.google.com/trends/trendingsearches/daily?geo=US" target="_blank">Google Trending Searches on "Data Science"</a>.
 
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+<pre>
+@misc{googletrends_google,
+  author = {Google Trends},
+  title = {Google Trends},
+  url = {https://trends.google.com/trends/explore?date=today%201-m&q=Data%20Science},
+  urldate = {2021-05-28},
+  organization = {Google Trends}
+}
+</pre>
 
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/google-trend-on-data-science.bib")
-
-```
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 

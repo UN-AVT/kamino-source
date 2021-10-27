@@ -25,13 +25,10 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(dplyr)
 library(readxl)
 library(ggiraph)
 
 library(kableExtra)
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -64,27 +61,28 @@ looking to better understand what makes people happy...\
 
 ***
 
-### Load the data
+### Ingest
+
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 df <- read_xls('./archetypes/happiness-report/happiness-report-2020.xls')
 df
 ```
 
-#### Looks like there is a lot of information collected in this data. Let's go step by step:
-
-#### Find the dimensions of our data: number of columns and rows
+### Dimensions
+#### number of columns and rows
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
 dim(df)
 
 ```
 
-#### The above results tell us that the data contains 1704 rows, and 26 columns.
+The output tells us that the data contains 1704 rows, and 26 columns.
 
-### List keys and column types
 
-#### Let's learn more about what is included in each column, and what type data is recorded.
+### Type Detection
+#### List keys and column types
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 glimpse(df)
@@ -94,20 +92,23 @@ glimpse(df)
 The above provides a little more information. For example, we see that 'Country name' is a column of characters __char__, and that all other columns are numbers __dbl__. This is useful because we can already guess that 'Year' does not have the right type. It should not be treated as a number. We will fix it with the next command. Also notice the beginning values of each column; this is useful to get familiar with the data on hand. Some columns display a lot of NA, which indicates the absence of data.
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
 df <- df %>% mutate(Year = as.factor(Year))
 str(df$Year)
+
 ```
 
 #### Column 'Year' is now a datatype called factor, which is a type of categorical variables in R. Levels are the possible values in the factor.
 
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
 glimpse(df)
+
 ```
 
-### Value missing
-
-#### For each column, we now list the number of missing values.
+### Check for Missing Values
+#### for each column, check from NAs
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -115,15 +116,15 @@ missing_stats <- purrr::map_df(df, ~ sum(is.na(.))) %>%
   gather('Column name', 'Count of missing values')
 
 missing_stats
+
 ```
 
-#### We now know that the first 3 Columns are not missing any value, but 'Log GDP per capita' has 28 missing values.
+We now know that the first 3 Columns are not missing any value, but 'Log GDP per capita' has 28 missing values.
 
-### Value distinct
+### Distinct Values
+#### by Country and Years
 
-#### It will also be interesting to check how many distinct Countries, and how many distinct Years are present in this dataset. The numerical columns are not of much interest here.
-
-#### Firstly, for Country Name:
+For Country Name:
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -133,7 +134,8 @@ distinct_df
 ```
 
 
-#### Then Year:
+For Year:
+
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 distinct_df <- distinct(df, Year) %>% arrange(Year)
@@ -141,25 +143,27 @@ distinct_df
 ```
 
 
-### Frequency
-#### Let's count the absolute frequency for a categorical variable: "Year", and the relative frequency as well.
+### Value Frequency
+#### absolute and relative frequency for Year
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
 df_1= table(df$Year)
 df_2 <- as.data.frame(df_1) %>% 
   dplyr::rename(Year = Var1, Freq_absolute = Freq) %>% 
   mutate(Freq_relative=paste0(round(100*Freq_absolute/sum(Freq_absolute),digits=2),"%"))
 df_2
+
 ```
 
 
-#### So for example, for year 2008, we have 110 records, which represents about 6.5% of the entire dataset.
+For the year 2008, we have 110 records, which represents about 6.5% of the entire dataset.
 
-### Value positive, negative and zero
-
-#### For all the numerical columns in the dataset, let's find out how many positive, negative and zero values they have.
+### Positive, Negative and Zero Values
+#### for all the numerical columns
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
 df1 <- df[,3:ncol(df)]
 
 nRows <- dim(df1)[1]
@@ -174,13 +178,13 @@ calcStats <- function(x) {
   
 result <- as.data.frame(Map(calcStats, colnames(df1)))
 result
+
 ```
 
 
 
-### Review Histograms of numerical variable
-
-#### Lastly, it is a good idea to review the range of values for each numerical variable in our dataset. Histograms come handy:
+### Histograms
+#### for all numerical variables
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
 
@@ -193,152 +197,40 @@ df_long <- df %>%
 
 v1 <- ggplot(df_long, aes(x=value)) +
   geom_histogram(fill = "#79B8E5") +
- facet_wrap(~ measure, scales="free")+
+  facet_wrap(~ measure, scales="free")+
   theme(panel.grid = element_blank(), 
         strip.background = element_blank(),
-       panel.background = element_blank()
+        panel.background = element_blank()
  ) 
 
 girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
-list(opts_sizing(rescale = TRUE, width = 1.0)))
+  list(opts_sizing(rescale = TRUE, width = 1.0))
+)
 
  
 ```
 
 
-### Save plot
-#### as vector or raster image
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/world_hapiness.svg", plot = v1, width=1280/72, height=720/72)
-
-```
-
-#### As we will see later in the course, the two variables of interest will be "Life Ladder" and "Log GDP per capita". Just looking at the graph, we see that the "Life Ladder" varies from 0 to 8, with the majority of values between 4 and 6. "Log GDP per capita" varies from about 5 to 12. So the GDP per person would vary in this dataset from $150 to $160k.
-
-### As reusable solution
-```{r eval=FALSE, echo=TRUE, message=FALSE, include=TRUE}
-####################################################################################
-# Required libraries
-library(tidyverse)
-library(readxl)
-
-
-####################################################################################
-# Load data
-load_data <- function(data_source){
-  read_xls(paste(getwd(),data_source,sep="/"))
-}
-
-#Call the function to load the data
-load_data("./archetypes/happiness-report-2020.xls")
-####################################################################################
-
-####################################################################################
-# Find dimensions
-f_dimensions <- function(df_dimensions) {
-  dim(df_dimensions)
-}
-
-# Call the function with your values to the parameters
-f_dimensions(df)
-####################################################################################
-
-####################################################################################
-# Find structure: column name, column type and first rows
-f_structure <- function(df_structure) {
-  #glimpse(df_structure)
-  str(df_structure)
-}
-
-# Call the function with your values to the parameters
-f_structure(df)
-####################################################################################
-
-####################################################################################
-# Count missing values 
-f_missing_values <- function(df_missing_values) {
-   purrr::map_df(df_missing_values, ~ sum(is.na(.))) %>%
-   gather('Column name', 'Count of missing values')
-}
-
-# Call the function with your values to the parameters
-f_missing_values(df)
-####################################################################################
-
-####################################################################################
-# Display distinct values of a column
-f_distinct_values <- function(df_distinct_values,...) {
- distinct(df_distinct_values,...) %>% arrange(...)
-}
-
-# Call the function with your values to the parameters
-f_distinct_values(df,`Country name`)
-####################################################################################
-
-#########################################################################################
-# Display frequency of the values of a column
-f_frequency <- function(df_frequency,column) {
-
-  df_tmp = table(column)
-  as.data.frame(df_tmp) %>% 
-   rename(Frequency_column=column ,Freq_absolute=Freq)  %>%
-   mutate(Freq_relative=paste0(round(100*Freq_absolute/sum(Freq_absolute),digits=2),"%"))
-
-}
-
-# Call the function with your values to the parameters
-f_frequency (df,df$Year)
-#########################################################################################
-
-#########################################################################################
-# Display histograms of numerical variable
-f_histogram <- function(df_histogram,column_1,column_2) {
-
-  column_name1=deparse(substitute(column_1))
-  column_name2=deparse(substitute(column_2))    
-  
-  df_long <- df_histogram %>%
-  pivot_longer(
-    column_name1:column_name2,
-    names_to = "measure",
-    values_to = "value"
-  )
-
-  ggplot(df_long, aes(x=value)) +
-  geom_histogram(fill = "#79B8E5") +
-  facet_wrap(~ measure, scales="free")+
-  theme(panel.grid = element_blank(), 
-        strip.background = element_blank(),
-        panel.background = element_blank()
-  ) 
-
-  
-}
-
-# Call the function with your values to the parameters
-f_histogram (df,`Life Ladder`,`Most people can be trusted, WVS round 2010-2014`)
-#########################################################################################
-```
+As we will see later in the course, the two variables of interest will be "Life Ladder" and "Log GDP per capita". Just looking at the graph, we see that the "Life Ladder" varies from 0 to 8, with the majority of values between 4 and 6. "Log GDP per capita" varies from about 5 to 12. So the GDP per person would vary in this dataset from $150 to $160k.
 
 
 ### References
 #### The citations and data sources used for this case
 
-#### This case is based on a dataset that comes as an appendix of the following report <a href="https://worldhappiness.report/ed/2019/" target="_blank" rel="noopener noreferrer">7th World Happiness Report</a>. We will use this dataset in various patterns. (as a teaser, we will use this data to produce the graph in this article: <a href="https://www.economist.com/graphic-detail/2019/03/21/economic-growth-does-not-guarantee-rising-happiness" target="_blank" rel="noopener noreferrer">The Economist - Happiness and growth</a>). 
+* Data: The 7th World Happiness Report, https://worldhappiness.report/ed/2019/
 
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+<pre>
+@misc{helliwell_2019_world,
+  author = {  Helliwell,  John F. Helliwell and Layard, Richard  and Sachs, Jeffrey D. },
+  title = {World Happiness Report 2019},
+  url = {https://worldhappiness.report/ed/2019/},
+  urldate = {2021-05-18},
+  year = {2019},
+  organization = {Worldhappiness.report}
+}
+</pre>
 
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/world-happiness-report.bib")
 
-```
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 

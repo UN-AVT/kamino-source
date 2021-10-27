@@ -25,13 +25,11 @@ gc() #free up memory and report the memory usage.
 
 
 library(tidyverse)
-library(dplyr)
-library(knitr)
-library(kableExtra)
 library(schoolmath)
 library(countrycode)
-library(knitcitations)
-library(bibtex)
+
+library(knitr)
+library(kableExtra)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -442,13 +440,17 @@ df_5
 
 This case is based on a dataset that comes from the following report by <a href="https://www.ucsusa.org/resources/satellite-database" target="_blank" rel="noopener noreferrer"> Union of Concerned Scientists.</a>
 
-
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
-
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/usc-satellites-db.bib")
-```
+<pre>
+@misc{unionofconcernedscientists_2005_ucs,
+  author = {Union of ConcernedScientists},
+  month = {12},
+  title = {UCS Satellite Database},
+  url = {https://www.ucsusa.org/resources/satellite-database},
+  urldate = {2021-05-25},
+  year = {2005},
+  organization = {Union of Concerned Scientists}
+}
+</pre>
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

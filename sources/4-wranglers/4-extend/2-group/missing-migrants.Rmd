@@ -24,15 +24,11 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(dplyr)
 library(ggthemes)
 library(ggiraph)
 
-library(knitr)
 library(kableExtra)
-library(knitcitations)
 
-library(bibtex)
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -250,62 +246,24 @@ df_4 <- df_3  %>%
 df_4
 ```
 
-### As reusable solution
 
-```{r eval=FALSE, echo=TRUE, message=FALSE, include=TRUE}
-####################################################################################
-# Required libraries
-library(dplyr)
-library(lazyeval)
-####################################################################################
-# Group More than One variable and Perform Calculation
-f_groupby_sum <- function(data,column1_gr, column2_gr, column_sum) {
-  data %>%
-    group_by_(as.name(column1_gr), as.name(column2_gr)) %>%
-    summarise_(SUM_COLUMN = interp(~sum(var, na.rm=T), var = as.name(column_sum)))
-}
-# Call the function passing your own arguments
-f_groupby_sum(df, "Reported Year","Reported Month","Total Dead and Missing")
-####################################################################################
-
-
-####################################################################################
-# Unpivot a table
-f_pivot <- function(data, cole, ...) {
-  
-  data %>% 
-    pivot_wider(names_from = cole, values_from = sum_number) %>% 
-    relocate(all_of(...),Jan , Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
-}
-
-# Call the function 
-f_pivot(df_2, 'Reported Month', 'Reported Year')
-####################################################################################
-
-
-####################################################################################
-# Unpivot a table
-f_unpivot <- function(data,...) {
-  
-  data %>% 
-    pivot_longer(!all_of(...),names_to = "MONTH", values_to = "TOTAL_DEAD")
-}
-
-# Call the function 
-f_unpivot(df_3, 'Reported Year')
-####################################################################################
-```
 
 ### References
 #### The citations and data sources used for this case is based on a report from <a href="https://missingmigrants.iom.int/" target="_blank" rel="noopener noreferrer"> IOM </a>.
 
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+<pre>
+@misc{missingmigrants_2001_missing,
+  author = {MissingMigrants},
+  month = {06},
+  title = {Missing Migrants Project},
+  url = {https://missingmigrants.iom.int/},
+  urldate = {2021-06-08},
+  year = {2001},
+  organization = {Iom.int}
+}
+</pre>
 
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/MissingMigrants-Global-2020-10-18T06-37-33.bib")
 
-```
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 

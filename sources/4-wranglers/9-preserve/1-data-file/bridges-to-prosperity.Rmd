@@ -1,0 +1,221 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(rgeos)
+library(ggspatial)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Bridges to Prosperity
+## Store  
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Bridges to Prosperity"}
+
+masthead <- "assets/bridge.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Bridges to Prosperity</div>
+
+> We build too many walls and not enough bridges...\
+--- Isaac Newton\
+
+
+***
+
+### Load the data
+
+
+```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv('./archetypes/bridges_to_prosperity.csv', fileEncoding="UTF-8-BOM")
+#added fileEncoding to remove any BOM in the columns names if present in the file (common for files generated from Microsoft applications: Excel, SQL server)
+
+
+df
+```
+
+### Applying __Wranglers Tasks__ to change this data set:
+
+### Evaluate - Clean
+#### Remove all records where __individuals_directly_served__ is missing.
+
+```{r method: clean, message=FALSE, echo=TRUE,warning=FALSE}
+
+df_1 <- df
+  
+df_1 <- df[!is.na(df$individuals_directly_served), ]    
+ 
+df_1
+```
+
+
+### Prepare - Column
+#### Convert all column names to __uppercase__
+
+```{r method: column uppercase, message=FALSE, echo=TRUE,warning=FALSE}
+df_2 <- df_1
+names(df_2) <- toupper(names(df_2))
+
+df_2
+```
+
+#### Remove columns that are not relevant
+
+```{r method: remove column, message=FALSE, echo=TRUE,warning=FALSE}
+df_3 <- df_2[,c(1,4,6:8,11)]
+
+df_3
+```
+
+### Reduce - Filter
+#### Filter only records from __Bolivia__, __Uganda__ and __Rwanda__ in the  __COUNTRY__ column and the __STAGE__ is __Complete__
+
+```{r method: filter, message=FALSE, echo=TRUE,warning=FALSE}
+
+df_4 <- df_3 %>% filter((COUNTRY=="Bolivia") | (COUNTRY=="Uganda") | (COUNTRY=="Rwanda"))
+
+df_4 <- df_4 %>% filter(STAGE=="Complete")
+
+df_4
+
+```
+
+
+### Extend - Group
+#### Let's find out how many individuals the bridges have served in each country per year
+
+```{r method: group, message=FALSE, echo=TRUE,warning=FALSE}
+df_5 <- df_4 %>% group_by(`COUNTRY`, `B2P_FISCAL_YEAR`) %>% summarise(TOTAL_PEOPLE_SERVED=sum(`INDIVIDUALS_DIRECTLY_SERVED`))
+
+
+df_5
+```
+
+
+### Write to a CSV file
+#### Let's say this final data is enough for us to do further analysis and plot a graph. For the moment, let's save all the changes made to the original data file into a new data file (.csv).
+
+
+```{r method: store into a csv file, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+#write the amended data set into a .csv file
+
+write.csv(df_5, './output/bridges_to_prosperity_summary_output.csv')
+
+
+```
+
+### Map the data
+#### Let's look at the bridges in Bolivia as an example
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# Map and bridges datasets
+world <- ne_countries(scale = "medium", returnclass = "sf")
+bridges <- st_as_sf(df, coords = c("gps_longitude", "gps_latitude"), crs = 4326, agr = "constant")
+
+# Plot and theme the map
+v1 <- ggplot(data = world) +
+    geom_sf(color = "gray91", fill = "palegreen", alpha = 0.5) +
+    xlab("Longitude") + ylab("Latitude") +
+    ggtitle("Bridges in Bolivia") +
+    geom_sf(data = bridges, size = 2, shape = 23, fill = "peachpuff4") +
+    annotation_north_arrow(location = "bl", which_north = "true", 
+        pad_x = unit(0.2, "in"), pad_y = unit(0.2, "in"),
+        style = north_arrow_fancy_orienteering) +
+    annotate(geom = "text", x = -63, y = -15, label = "Bolivia", color = "grey22", size = 6) +
+    coord_sf(xlim = c(-75, -55), ylim = c(-25, -7))
+
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### References
+#### The data source used here is in reference to bridges built in remote areas in developing countries as mentioned by <a href="https://www.bridgestoprosperity.org/who-we-are/team/" target="_blank" rel="noopener noreferrer"> Bridges to Prosperity</a>.
+
+
+<pre>
+@misc{bridgetoprosperity_2018_bridges,
+  author = {Bridge to Prosperity},
+  title = {Bridges to Prosperity: The global leader in rural infrastructure development},
+  url = {https://www.bridgestoprosperity.org/},
+  urldate = {2021-04-13},
+  year = {2018},
+  organization = {Bridges to Prosperity}
+}
+</pre>
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "save-last-image save-image write-csv" # mostly used in wranglers and analytics
+keywords <- 'Prosperity Bridge growth'
+commands <- 'write.csv ggsave'
+sources <- 'Bridges-to-Prosperity'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -24,18 +24,11 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-
 library(tidytext)
 library(readtext)
-library(stringr)
-library(readr)
-library(purrr)
-library(ggplot2)
 library(ggiraph)
 
 library(kableExtra)
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -224,13 +217,16 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 
 To illustrate the methods, this case contains several text files for Ghana's state of the nation addresses. The state of the nation address is an annual address to parliament given by the president. It typically summarizes the government's agenda and the progress made in the past year as seen by the administration in power.
   
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
 
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/ghana-state-of-the-nation-addresses.bib")
-
-```
+<pre>
+@misc{ghanaimmigrationservice_state,
+  author = {Ghana Immigration Service},
+  title = {State of the Nation Address (SONA 2021) – Ghana Immigration Service},
+  url = {https://home.gis.gov.gh/2021/03/12/state-of-the-nation-address-sona-2021/},
+  urldate = {2021-06-05},
+  organization = {State of the Nation Address (SONA 2021)}
+}
+</pre>
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

@@ -25,8 +25,6 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(dplyr)
-library(purrr)
 library(reshape2)
 
 # Special purpose packages
@@ -35,16 +33,15 @@ library(reshape2)
 library(skimr)
 library(Hmisc)
 library(pastecs)
- library(psych)
+library(psych)
 library(summarytools)
- library(tableone)
+library(tableone)
 library(desctable)
 library(GGally)
 library(descriptr)
 library(janitor)
 
 # For frequencies
-#library(janitor)
 library(epiDisplay)
 library(gmodels)
 library(questionr)
@@ -54,9 +51,6 @@ library(lubridate)
 library(anytime)
 library(broom)
 library(ggiraph)
-
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -567,24 +561,21 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 ```
 
 
-
-# As reusable solution
-
-
-
-
 # References
 ## The citations and data sources used for this case
+
 This case is based on a dataset of <a href="https://www.kaggle.com/willcanniford/animal-bites-analysis" target="_blank" rel="noopener noreferrer">animal bite incidents</a> reported to and investigated by Louisville Metro Department of Public Health and Wellness.  The dataset includes information on over __9,000__ animal bites which occurred near Louisville, Kentucky from __1985 to 2017__ and includes information on whether the animal was quarantined after the bite occurred and whether that animal was rabid.  
 
-
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/animal-bites.bib")
-
-```
+<pre>
+@misc{canniford_2020_animal,
+  author = {Canniford, Will},
+  title = {Animal bites analysis},
+  url = {https://www.kaggle.com/willcanniford/animal-bites-analysis},
+  urldate = {2021-05-18},
+  year = {2020},
+  organization = {kaggle.com}
+}
+</pre>
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

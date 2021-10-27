@@ -15,24 +15,18 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen = 999) # turn-off scientific notation like 1e+48
-
-library(tidyverse)
 
 # Clear environment and memory
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
-# needed to include bib references
-library(knitcitations)
-library(bibtex)
-library(dplyr)
-library(purrr)
-library(knitr)
-library(kableExtra)
-library(stringr)
+library(tidyverse)
 library(ggiraph)
+
+library(kableExtra)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -165,13 +159,18 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 Source: <a href="https://www.bbc.com/news/science-environment-46654042" target="_blank">Climate change: Which vegan milk is best?</a>
 
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "citations/milk-environmental-impact.bib")
-
-```
+<pre>
+@article{guibourg_2019_climate,
+  author = {Guibourg, Clara and Briggs, Helen},
+  month = {02},
+  title = {Climate change: Which vegan milk is best?},
+  url = {https://www.bbc.com/news/science-environment-46654042},
+  urldate = {2021-06-02},
+  year = {2019},
+  organization = {BBC News},
+  journal = {BBC News}
+}
+</pre>
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

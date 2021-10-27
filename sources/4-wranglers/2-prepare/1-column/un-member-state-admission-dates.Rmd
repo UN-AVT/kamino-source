@@ -24,11 +24,8 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(dplyr)
 
 library(kableExtra)
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -277,110 +274,22 @@ kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("st
 
 ```
 
-### As reusable solution
-```{r eval=FALSE, echo=TRUE, message=FALSE, include=TRUE}
-####################################################################################
-# Required libraries
-library(tidyverse)
-library(dplyr)
-
-
-####################################################################################
-# Load data
-df <- read_csv(paste(getwd(),"/data_source_file.csv",sep="/"))
-df
-
-#Call the function to load the data
-load_data("./archetypes/UN-Member-State-admission-dates.csv")
-####################################################################################
-
-####################################################################################
-# Rename one or more columns 
-f_rename_column <- function(df_rename,...) {
- rename(df_rename,...)
-}
-
-# Call the function with value to the parameters
-f_rename_column(df,c(MEMBER_STATE='Member', ADMISSION_DATE='StateDate of Admission'))
-####################################################################################
-
-####################################################################################
-# Rename multiple columns with the same rule 
-f_rename_replace <- function(df_rename_replace,value) {
-   set_names(df_rename_replace,~stringr::str_replace_all(.,value, ""))
-}
-
-# Call the function with value to the parameters
-f_rename_replace(df,"UN_")
-####################################################################################
-
-####################################################################################
-# Rename all columns 
-f_rename_all <- function(df_rename_all) {
-  #names(df_rename_all) <- toupper(names(df_rename_all))
-  names(df_rename_all) <- tolower(names(df_rename_all))
-  df_rename_all
-}
-
-# Call the function with value to the parameters
-f_rename_all(df)
-####################################################################################
-
-####################################################################################
-# Add a column with a constant value 
-f_column_const <- function(df_column_const,...) {
-  add_column(df_column_const,...)
-}
-
-# Call the function with value to the parameters
-f_column_const(df,new_col=('I am new'))
-####################################################################################
-
-####################################################################################
-# Select columns
-f_column_select <- function(df_column_select,...) {
-  df_column_select %>% select(...)
-}
-
-# Call the function with value to the parameters
-f_column_select(df,c(Member,'StateDate of Admission',UN_REGION_NAME))
-####################################################################################
-
-####################################################################################
-# Separate columns
-f_column_separate <- function(df_column_separate,column_name,...) {
-  df_column_separate %>% separate(column_name, ...,"/")
-  
-}
-
-# Call the function with value to the parameters
-f_column_separate(df,'StateDate of Admission',c('day','month','year'))
-####################################################################################
-
-####################################################################################
-# Combine columns
-f_column_combine <- function(df_column_combine,...) {
-  df_column_combine %>% unite( ..., sep = "_", remove = TRUE, na.rm = FALSE)
-}
-
-# Call the function with value to the parameters
-f_column_combine(df,"member_region",Member,UN_REGION_NAME)
-####################################################################################
-
-```
 
 ### References
 #### The citations and data sources used for this case
 
-#### The data file used in this wrangler task was retrieved from <a href="https://www.un.org/press/en/2006/org1469.doc.htm" target="_blank">UN Member State Admission Dates</a> source which was published by the United Nations Meetings Coverages and Press Releases website.
+The data file used in this wrangler task was retrieved from <a href="https://www.un.org/press/en/2006/org1469.doc.htm" target="_blank">UN Member State Admission Dates</a> source which was published by the United Nations Meetings Coverages and Press Releases website.
 
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
-
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/UN-Member-State-admission-dates.bib")
-
-```
+<pre>
+@misc{unitednations_2019_united,
+  author = {United Nations},
+  title = {UNITED NATIONS MEMBER STATES | Meetings Coverage and Press Releases},
+  url = {https://www.un.org/press/en/2006/org1469.doc.htm},
+  urldate = {2021-02-13},
+  year = {2019},
+  organization = {Un.org}
+}
+</pre>
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

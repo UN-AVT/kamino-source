@@ -26,8 +26,6 @@ gc() #free up memory and report the memory usage.
 library(tidyverse)
 
 library(kableExtra)
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -137,6 +135,7 @@ df_2 <- df_1[!is.na(df_1$Birth_Place), ]
 ```
 
 ```{r Styling Data Set 3, echo=FALSE}
+
 #NOT TO BE USED AS SOLUTION
 df_tmp <- df_2
 
@@ -166,6 +165,7 @@ df_3[is.na(df_3$Loan_Expire_Date),]$Loan_Expire_Date <- "01/01/2030"
 
 
 ```{r Styling Data Set 4, echo=FALSE}
+
 #NOT TO BE USED AS SOLUTION
 df_tmp <- df_3
 
@@ -186,7 +186,6 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 
 df_4 <- unique( df_3 )
 
-
 ```
 
 ```{r Styling Data Set 5, echo=FALSE}
@@ -206,16 +205,18 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 ### References
 #### The citations and data sources used for this case
 
-The original data file used in this wrangler task was captured from the <a href="https://www.giantpandaglobal.com/" target="_blank">Giant Panda Global</a> source which was published by  Giant Panda Global website. The post-clean data file along with other sources helped data scientists plot <a href="https://public.tableau.com/profile/wendy.shijia#!/vizhome/giantpandasoverseas/Bamboo" target="_blank">this chart</a> available at Tableau Public.
+The original data file used in this wrangler task was captured from the <a href="https://www.giantpandaglobal.com/" target="_blank">Giant Panda Global</a> source which was published by Giant Panda Global website. 
 
-
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/panda-list.bib")
-```
-
+<pre>
+@misc{jeroen_2000_giantpandaglobalcom,
+  author = {Jeroen, Jacobs},
+  month = {10},
+  title = {GiantPandaGlobal.com},
+  url = {https://www.giantpandaglobal.com/},
+  year = {2000},
+  organization = {GiantPandaGlobal.com}
+}
+</pre>
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

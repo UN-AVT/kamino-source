@@ -26,9 +26,6 @@ gc() #free up memory and report the memory usage.
 library(tidyverse)
 library(readxl)
 
-library(knitcitations)
-library(bibtex)
-
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -86,13 +83,27 @@ df2
 * Narrative and Data Source: Global Health Data Repository, World Health Organization, https://apps.who.int/gho/data/node.main-euro.A1039?lang=en&showonly=GISAH
 
 
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+<pre>
+@misc{murray_2019_week,
+  author = {Murray, Eva},
+  month = {06},
+  title = {Week 26: Alcohol Consumption by Country | Makeover Monday},
+  url = {https://www.makeovermonday.co.uk/week-26-2019/},
+  urldate = {2021-03-02},
+  year = {2019},
+  organization = {MakeoverMonday}
+}
 
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/alcohol-consumption-by-country.bib")
-
-```
+@misc{worldhealthorganization_2020_gho,
+  author = {World Health Organization},
+  month = {05},
+  title = {GHO | Global Health Observatory Data Repository (European Region) | Recorded alcohol per capita consumption, from 2010 - Updated May 2020},
+  url = {https://apps.who.int/gho/data/node.main-euro.A1039?lang=en&showonly=GISAH},
+  urldate = {2021-03-25},
+  year = {2020},
+  organization = {WHO}
+}
+</pre>
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

@@ -24,7 +24,6 @@ rm(list = ls(all.names = TRUE)) # will clear all objects including hidden object
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(readr)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)

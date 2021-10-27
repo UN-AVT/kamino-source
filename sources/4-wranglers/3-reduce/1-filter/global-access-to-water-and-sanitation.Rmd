@@ -23,14 +23,10 @@ options(scipen=999)  # turn-off scientific notation like 1e+48
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
-
 library(tidyverse)
-library(dplyr)
 library(ggiraph)
 
 library(kableExtra)
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -336,142 +332,23 @@ scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
 #NOT TO BE USED AS SOLUTION 
 ```
 
-### As reusable solution
-```{r eval=FALSE, echo=TRUE, message=FALSE, include=TRUE}
-####################################################################################
-# Required libraries
-library(tidyverse)
-library(dplyr)
 
-####################################################################################
-# Load data
-load_data <- function(data_source){
-  read_csv(paste(getwd(),data_source,sep="/"))
-}
-
-#Call the function to load the data
-load_data("./archetypes/access-to-water-and-sanitation.csv")
-####################################################################################
-
-
-####################################################################################
-# Filtering by position of rows and/or columns 
-filter_position <- function(df_position,row_var,column_var) {
-  df_position[row_var,column_var]
-}
-
-# Call the function to filter the data set 
-filter_position(df,c(4,10,100:600), c(1,3:5))
-####################################################################################
-
-
-####################################################################################
-# Filtering by value to be compared with a row_value within a column 
-# Method Where equal 
-filter_where_equal <- function(df_where_equal,column_name,value) {
- df_where_equal %>% filter(column_name == value)
-}
-
-# Call the function to filter the data set 
-filter_where_equal(df,df$Continent,"Africa")
-####################################################################################
-
-
-####################################################################################
-# Method Where not equal  
-filter_where_not_equal <- function(df_where_not_equal,column_name,value) {
- df_where_not_equal %>% filter(column_name != value)
-}
-
-
-# Call the function to filter the data set 
-filter_where_not_equal(df,df$Continent,"Africa")
-####################################################################################
-
-
-####################################################################################
-# Method Where between (value types: numeric, date)
-filter_where_between <- function(df_where_between,column_name,value1,value2) {
- df_where_between %>% filter(between(column_name,value1,value2))
-}
-
-# Call the function to filter the data set 
-filter_where_between(df,df$Population,"10000", "50000")
-####################################################################################
-
-
-####################################################################################
-# Method Where not between (value types: numeric, date)
-filter_where_not_between <- function(df,column_name,value1,value2) {
- df%>% filter(!between(column_name,value1,value2))
-}
-
-# Call the function to filter the data set
-filter_where_not_between(df,df$Population,"10000", "50000")
-####################################################################################
-
-
-####################################################################################
-# Method Where greater than (value types: numeric, date)
-filter_greater_than <- function(df,column_name,value) {
- df%>% filter(column_name > value)
-}
-
-# Call the function to filter the data set
-filter_greater_than(df,df$Population,"50000")
-####################################################################################
-
-
-####################################################################################
-# Method Where greater than equal (value types: numeric, date)
-filter_greater_than_equal <- function(df,column_name,value) {
- df%>% filter(column_name >= value)
-}
-
-# Call the function to filter the data set
-filter_greater_than_equal(df,df$Population,"50000")
-####################################################################################
-
-
-####################################################################################
-# Method Where less than (value types: numeric, date)
-filter_less_than <- function(df,column_name,value) {
- df%>% filter(column_name < value)
-}
-
-# Call the function to filter the data set
-filter_less_than(df,df$Population,"50000")
-####################################################################################
-
-
-####################################################################################
-# Method Where less than equal (value types: numeric, date)
-filter_less_than_equal <- function(df,column_name,value) {
- df%>% filter(column_name <= value)
-}
-
-# Call the function to filter the data set
-filter_less_than_equal(df,df$Population,"50000")
-####################################################################################
-
-
-####################################################################################
-# Method Where Regular Expression 
-filter_where_regex <- function(df,column_name,value) {
- df%>% filter(str_detect(column_name, value))
-}
-
-# Call the function to filter the data set
-filter_where_regex(df,df$Country,"^A")
-####################################################################################
-
-
-```
 
 ### References
 #### The citations and data sources used for this case
 
-#### The data source used as an example was obtained from the article <a href="https://data.unicef.org/sdgs/goal-6-clean-water-sanitation/#:~:text=Goal%206%20aims%20to%20ensure%20availability%20and%20sustainable,the%20quality%20and%20sustainability%20of%20water%20resources%20worldwide" target="_blank">Global Clean Water and Sanitation</a> published by Unicef and <a href="https://public.tableau.com/profile/tam.s.varga#!/vizhome/Accesstowaterandsantitation/Accesstowaterandsanitation"  target="_blank">plotted</a> by Tableau Public.
+The data source used as an example was obtained from the article <a href="https://data.unicef.org/sdgs/goal-6-clean-water-sanitation/#:~:text=Goal%206%20aims%20to%20ensure%20availability%20and%20sustainable,the%20quality%20and%20sustainability%20of%20water%20resources%20worldwide" target="_blank">Global Clean Water and Sanitation</a> published by Unicef.
+
+<pre>
+@misc{unicef_sdg,
+  author = {UNICEF},
+  title = {SDG Goal 6: Clean Water and Sanitation},
+  url = {https://data.unicef.org/sdgs/goal-6-clean-water-sanitation/#:~:text=Goal%206%20aims%20to%20ensure%20availability%20and%20sustainable},
+  urldate = {2021-03-18},
+  organization = {UNICEF DATA}
+}
+</pre>
+
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 

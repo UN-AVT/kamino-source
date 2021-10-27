@@ -24,11 +24,8 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(purrr)
-library(kableExtra)
 
-library(knitcitations)
-library(bibtex)
+library(kableExtra)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -161,14 +158,16 @@ scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
 
 The data source used by this wrangler task is one of the baseline data used by the "Our World in Data" article called <a href="https://ourworldindata.org/financing-education" target="_blank">Financing Education</a>.
 
-
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/share-edu-spending-gdp-vs-share-edu-total-spending.bib")
-
-```
-
+<pre>
+@misc{roser_2013_financing,
+  author = {Roser, Max and Ortiz-Ospina, Esteban},
+  title = {Financing Education},
+  url = {https://ourworldindata.org/financing-education},
+  urldate = {2021-03-04},
+  year = {2013},
+  organization = {Our World in Data}
+}
+</pre>
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

@@ -25,9 +25,6 @@ gc() #free up memory and report the memory usage.
 
 library(tidyverse)
 
-library(knitcitations)
-library(bibtex)
-
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -72,13 +69,16 @@ df
 
 * Narrative and Data Source: Child Labor, Our World in Data, https://ourworldindata.org/child-labor
 
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
-
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "citations/average-working-hours-of-children.bib")
-
-```
+<pre>
+@misc{ortizospina_2013_child,
+  author = {Ortiz-Ospina, Esteban and Roser, Max},
+  title = {Child Labor},
+  url = {https://ourworldindata.org/child-labor},
+  urldate = {2021-02-24},
+  year = {2013},
+  organization = {Our World in Data}
+}
+</pre>
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

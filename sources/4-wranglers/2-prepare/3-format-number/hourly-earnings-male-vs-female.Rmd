@@ -279,110 +279,7 @@ df_tmp
 ```  
 
 
-### As reusable solution
-```{r eval=FALSE, echo=TRUE, message=FALSE, include=TRUE}
 
-####################################################################################
-# Required libraries
-library(sitools)
-library(dplyr)
-####################################################################################
-
-
-####################################################################################
-# Convert Double Format to Scientific Format
-f_scientific <- function(df_scientific) {
-  df_scientific<<-format(df_scientific,scientific = TRUE)
-}
-
-# Call the function with your values to the parameters
-df_1$population <- f_scientific(df_1$population)
-####################################################################################
-
-
-####################################################################################
-# Use comma seperators for numerical data
-f_commasep<- function(df_commasep) {
-  df_commasep<<-format(df_commasep, big.mark=",")
-}
-
-# Call the function with your values to the parameters
-df_1$population <- f_commasep(df_1$population)
-####################################################################################
-
-
-####################################################################################
-# Convert from Long to Readable Format
-f_readable<- function(df_readable) {
-  df_readable<<-f2si(df_readable)
-}
-
-# Call the function with your values to the parameters
-df_1$population <- f_readable(df_1$population)
-####################################################################################
-
-
-####################################################################################
-# Change numerical Data to Currency Format
-f_currency <- function(df_currency) {
-  df_currency <- paste0("$ ", df_currency)
-}
-
-# Call the function with your values to the parameters
-df_1$avg_hourly_wage_men <-  f_currency(df_1$avg_hourly_wage_men)
-####################################################################################
-
-
-####################################################################################
-# Change numerical Data to Decimal Format
-f_decimal <- function(df_decimal, num) {
-  df_decimal <- format(round(df_decimal,num), nsmall=num)
-}
-
-# Call the function with your values to the parameters
-df_1$avg_hourly_wage_men <-  f_decimal(df_1$avg_hourly_wage_men,3)
-####################################################################################
-
-
-####################################################################################
-# Calculate the percentage increase/decrease for each yeaar
-f_percentage<- function(df_percentage){
-  
-  data <- df_percentage%>%
-    group_by(Entity)%>%
-    mutate(avg_hourly_wage_diff_men=(avg_hourly_wage_men/lag(avg_hourly_wage_men) - 1)*100)%>%
-    mutate(avg_hourly_wage_diff_women=(avg_hourly_wage_women/lag(avg_hourly_wage_women) - 1)*100)%>%
-    dplyr::select(Entity,Year,avg_hourly_wage_diff_men,avg_hourly_wage_diff_women)
-  
-  data <- na.omit(data)
-  
-  data$avg_hourly_wage_diff_men<-format(round(data$avg_hourly_wage_diff_men,1), nsmall=1)
-  data$avg_hourly_wage_diff_men<-paste0(data$avg_hourly_wage_diff_men," %")
-  
-  data$avg_hourly_wage_diff_women<-format(round(data$avg_hourly_wage_diff_women,1), nsmall=1)
-  data$avg_hourly_wage_diff_women<-paste0(data$avg_hourly_wage_diff_women," %")
-  return(data)
-}
-
-# Call the function with your values to the parameters
-df_2 <- f_percentage(df_1)
-####################################################################################
-
-
-####################################################################################
-# Convert Double Format to Scientific Format
-f_fraction <- function(df_fraction){
-  df_fraction%>%
-    mutate(avg_hourly_wage_women_men_ratio=avg_hourly_wage_women/avg_hourly_wage_men)%>%
-    mutate(fraction=as.character(fractions(avg_hourly_wage_women_men_ratio)))%>%
-    dplyr::select(Entity,Year,avg_hourly_wage_women_men_ratio,fraction)
-}
-
-# Call the function with your values to the parameters
-df_2 <- f_fraction(df_1)
-####################################################################################
-
-```
 
 # References
 ## The citations and data sources used for this case
@@ -390,14 +287,17 @@ df_2 <- f_fraction(df_1)
 
 The data source was from <a href="https://ilostat.ilo.org/" target="_blank">ILOSTAT</a>. ILOSTAT relies on multiple sources. The list of sources for each indicator, country by country, can be found in the ILOSTAT documentation under the bulk download facility, available <a href="http://www.ilo.org/ilostat/faces/oracle/webcenter/portalapp/pagehierarchy/Page30.jspx" target="_blank">here</a>
 
+<pre>
+@misc{internationallabourorganization_2018_ilostat,
+  author = {International Labour Organization},
+  title = {ILOSTAT},
+  url = {https://ilostat.ilo.org/},
+  urldate = {2021-05-28},
+  year = {2018},
+  organization = {ILOSTAT}
+}
+</pre>
 
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
-
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "./citations/hourly-earnings-male-vs-female.bib")
-
-```
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
