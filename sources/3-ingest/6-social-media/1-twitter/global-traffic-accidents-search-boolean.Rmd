@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -27,8 +27,6 @@ library(tidygeocoder)
 # register_google(key = gmaps, write = TRUE)
 # register_google(key = gmaps)
 
-library(knitcitations)
-library(bibtex)
 
 ```
 

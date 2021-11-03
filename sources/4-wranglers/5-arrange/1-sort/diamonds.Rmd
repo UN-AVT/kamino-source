@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -25,12 +25,9 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(purrr)
 library(ggiraph)
 
 library(kableExtra)
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -54,8 +51,6 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">Diamonds</div>
-
 
 > The focus now is on citizen activism, where citizens express themselves in a peaceful and nonviolent way....\
 --- Promise Mkwananzi\
@@ -67,7 +62,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df<-read.csv('./archetypes/diamonds.csv', header = TRUE, stringsAsFactors = FALSE)
+df<-read.csv('./archetypes/diamonds/diamonds.csv', header = TRUE, stringsAsFactors = FALSE)
 set.seed(123)
 index <- sample(1:nrow(df), 100)
 df_1<-df[index,]%>%

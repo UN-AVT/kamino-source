@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Paris Air Quality"
 output: 
   html_document:
     theme: lumen
@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -24,19 +24,17 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(dplyr)
 library(lubridate)
 library(ggiraph)
 
 library(kableExtra)
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
 showtext_auto()
+
 ```
 
 <div class="activity">
@@ -53,8 +51,6 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">Electric Cars</div>
-
 > Clear skies and clean air must become the new normal. We must re-design our cities, reclaiming the streets for cycling and walking, allowing people to walk along streets unpolluted by traffic....\
 --- Caroline Lucas\
 
@@ -64,7 +60,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r Load raw data, warning=FALSE, echo=TRUE, warning=FALSE,class.source = 'fold-hide'}
 
-df <- read.csv('./archetypes/paris-air-quality.csv', header = TRUE, stringsAsFactors = FALSE)
+df <- read.csv('./archetypes/paris-air-quality/paris-air-quality.csv', header = TRUE, stringsAsFactors = FALSE)
 df
 ```
 
@@ -130,20 +126,12 @@ myd(x)
 dmy(x)
 
 dym(x)
-```
 
+```
 
 
 ### References
 #### The data file used in this wrangler task was retrieved from <a href="https://www.kaggle.com/kkhandekar/cheapest-electric-cars" target="_blank" rel="noopener noreferrer"> Kaggle </a> source in which data was scraped <a href="https://ev-database.org/" target="_blank" rel="noopener noreferrer"> Electric Vehicle Database </a> 
-
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# options("citation_format" = "pandoc")
-# read.bibtex(file = "./citations/UN-Member-State-admission-dates.bib")
-
-```
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

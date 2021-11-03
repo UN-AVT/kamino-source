@@ -1,5 +1,5 @@
 ---
-pagetitle: "Average SAT Scores for NYC Public Schools"
+pagetitle: "Electric Cars"
 output: 
   html_document:
     theme: lumen
@@ -40,20 +40,20 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# Average SAT Scores for NYC Public Schools
+# Electric Cars
 ## Parse Numbers
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Andre Hunter on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by CHUTTERSNAP on Unsplash"}
 
-masthead <- "assets/andre-hunter-AQ908FfdAMw-unsplash.jpg"
+masthead <- "assets/chuttersnap-xfaYAsMV1p8-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">The Graduation</div>
+<div class="figure-text">Electric Cars</div>
 
-> What I remember most about high school are the memories I created with my friends....\
---- J.J. Watt\
+> The time is right for electric cars - in fact the time is critical...\
+--- Carlos Ghosn\
 
 ***
 
@@ -61,37 +61,44 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r Load raw data, warning=FALSE, echo=TRUE, warning=FALSE,class.source = 'fold-hide'}
 
-df <- read.csv('./archetypes/scores.csv', header = TRUE, stringsAsFactors = FALSE)
+df <- read.csv('./archetypes/Cheapestelectriccars-EVDatabase.csv', header = TRUE, stringsAsFactors = FALSE)
 df
 ```
 
-#### Let's take a look at the column Street.Address. Both the Street Name and Building number are in the column. Perhaps, we'll like to sepearate them. 
+#### Let's take a look at the datatypes we have on our dataset. 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
-head(df$Street.Address)
+str(df)
+
+```
+
+#### Most of our data are in Character formats where it should be numerical. Having numerical data-points will allow us to do computations as well as plot the data efficiently. It's imperative that we get rid of the strings in the data point and convert it to numerical. 
+
+#### We'll use the help of the function parse_number from library(readr)
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+df$Acceleration <- parse_number(df$Acceleration)
+df$TopSpeed <- parse_number(df$TopSpeed)
+df$Range <- parse_number(df$Range)
+df$Efficiency <- parse_number(df$Efficiency)
+
 ```
 
 
+#### Now we can observe the columns that've been parsed and converted to numerical 
+
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
-df2 <- data.frame(Building_Number = rep(1,435))
-df2$Building_Number <- parse_number(df$Street.Address)
-df2$Street_Name <- gsub('[[:digit:]]+', '', df$Street.Address)
-df2
+
+str(df)
 
 ```
 
 
 ### References
-#### The data file used in this wrangler task was retrieved from <a href="https://www.kaggle.com/nycopendata/high-schools" target="_blank" rel="noopener noreferrer"> Kaggle </a>
-
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# options("citation_format" = "pandoc")
-# read.bibtex(file = "./citations/UN-Member-State-admission-dates.bib")
-
-```
+#### The data file used in this wrangler task was retrieved from <a href="https://www.kaggle.com/kkhandekar/cheapest-electric-cars" target="_blank" rel="noopener noreferrer"> Kaggle </a> source in which data was scraped <a href="https://ev-database.org/" target="_blank" rel="noopener noreferrer"> Electric Vehicle Database </a> 
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
@@ -100,10 +107,10 @@ df2
 
 # ENTER METADATA
 # Use space to separate keywords or "-" for phrases
-methods <- "parse-string" # mostly used in wranglers and analytics
-keywords <- 'NYC public-school'
-commands <- 'gsub'
-sources <- 'Kaggle'
+methods <- "parse-number" # mostly used in wranglers and analytics
+keywords <- 'Electric-Car cars'
+commands <- 'parse_number'
+sources <- 'Electric-Vehicle-Database'
 
 # CREATE METADATA
 source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())

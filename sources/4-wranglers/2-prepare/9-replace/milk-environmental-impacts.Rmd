@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Environmental Impact of Milk"
 output: 
   html_document:
     theme: lumen
@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -40,7 +40,7 @@ showtext_auto()
 WRANGLERS 
 </div>
 
-# Which vegan milk is the best for climate change?
+# Environmental Impact of Milk
 ## Replace
 
 

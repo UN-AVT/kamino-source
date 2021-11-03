@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -29,15 +29,12 @@ library(mice)
 library(ggiraph)
 
 library(kableExtra)
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
 showtext_auto()
-
 
 ```
 
@@ -229,15 +226,6 @@ ggsave(filename = "outputs/imputation.svg", plot = v1, width=1280/72, height=720
 ### References
 #### The citations and data sources used for this case
 
-#### This case is based on a dataset from Kaggle
-
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
-
-#cleanbib()
-#options("citation_format" = "pandoc")
-#read.bibtex(file = "./citations/world-happiness-report.bib")
-
-```
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 

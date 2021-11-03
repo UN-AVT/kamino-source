@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     #code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -18,10 +18,6 @@ output:
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen=999)  # turn-off scientific notation like 1e+48
-
-library(htmltools) # needed to include html snippets
-library(knitcitations)
-library(bibtex)
 
 # Clear environment and memory
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
@@ -63,64 +59,7 @@ The case provides various methods to ingest the files and make them available fo
 
 * ...
 
-# Exercises and practice
-## Knime and R practice solutions
 
-
-# Solution
-
-```{r, eval=FALSE, message=FALSE, include=TRUE, echo=TRUE}
-
-# Required libraries
-library(tidyverse)
-library(readtext)
-library(readr)
-
-setwd("C:/GitHub/Perso/kamino/solutions/b-ingest/text-file/r")
-file_path <- '../archetypes/ghana-state-of-the-nation-addresses/sona_2008.txt'
-
-### Reading a single text file
-# First Method
-txt_1 <- readtext(file_path)
-df_1 <- as.data.frame(txt_1)
-
-# Alternative
-txt_2 <- read_file(file_path)
-df_2 <- as.data.frame(txt_2)
-
-# Alternative - Each line as a row
-con <- file(file_path, blocking = FALSE)
-txt_3 <- readLines(con)
-close(con)
-df_3 <- as.data.frame(txt_3)
-
-### Reading several text files
-base_url <- "../archetypes/ghana-state-of-the-nation-addresses/"
-txt_files <- list.files(base_url, pattern="^sona_.*\\.txt$", full.names=TRUE, recursive=FALSE)
-txt_files
-
-# Frist method:
-txt_set_1 <- c()
-for (f in txt_files) {
-  txt_set_1 <- c(txt_set_1, paste(readtext(f)))
-}
-txt_set_1_df <- as.data.frame(txt_set_1)
-
-# Alternative
-txt_set_2 <- c()
-for (f in txt_files) {
-  txt_set_2 <- c(txt_set_2, paste(read_file(f)))
-}
-txt_set_2_df <- as.data.frame(txt_set_2)
-
-# Alternative - Each line as a row
-txt_set_3 <- c()
-for (f in txt_files) {
-  txt_set_3 <- c(txt_set_3, paste(read_lines(f)))
-}
-txt_set_3_df <- as.data.frame(txt_set_3)
-
-```
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
