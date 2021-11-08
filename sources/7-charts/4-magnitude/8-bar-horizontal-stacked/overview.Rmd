@@ -1,0 +1,56 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    #code_folding: show
+    include:
+     in_header: "../../../z-assemblers/fragments/header.html"
+     after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Stacked Bar Chart
+## Elevating the Bar Chart
+
+
+The main purpose of a bar chart is to compare individual data points with each other. It's simple, easy to read and shows the approximity of the value of the datapoint. Stacked bar charts extends the standard bar chart from looking a numerical values across one categorical variable to two. It help you simultaneously compare totals and notice sharp changes at the item level that are likely to have the most influence on  category totals.
+
+
+Some characteristics of a Stacked Bar Chart are:
+
+* The stacked bar can either be horizontal or vertical
+* Each bar displays a total amount, broken down into sub-amounts
+* Equivalent subsections should be in the same color in each bar
+* Each subsection should be stacked in the same order in each bar
+* Annotations can be added to each subsection indicating its size
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

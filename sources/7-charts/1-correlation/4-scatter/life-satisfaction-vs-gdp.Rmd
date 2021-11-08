@@ -1,0 +1,214 @@
+---
+pagetitle: "Life Satisfaction vs GDP"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(knitr)
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Life Satisfaction vs GDP
+## Scatter plot
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Larm Rmah on Unsplash"}
+
+masthead <- "assets/larm-rmah-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Chư Păh District, Vietnam</div>
+
+> Happiness is a warm puppy...\
+--- Charles M. Schulz\
+
+***
+
+Based on the reporting of Our World in Data, if we compare life satisfaction reports from around the world at any given point in time, we immediately see that countries with higher average national incomes tend to have higher average life satisfaction scores. In other words: People in richer countries tend to report higher life satisfaction than people in poorer countries. 
+
+
+### Ingest the data
+#### life satisfaction, gdp, and population by country and year
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df <- read.csv("archetypes/life-satisfaction-vs-gdp/life-satisfaction-vs-gdp.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+
+```
+
+
+### Wrangle the data
+#### filter and remove incomplete cases
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df %>% filter(Year == 2020)
+df_wrangle <- df_wrangle[complete.cases(df_wrangle), ]
+df_wrangle
+
+```
+
+
+### Analyze the data
+#### apply a clustering method
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+set.seed(20)
+clusters <- kmeans(df_wrangle[,c(4,5)], centers=3)
+clusters
+
+df_clustered <- df_wrangle
+df_clustered$Clusters <- as.factor(clusters$cluster)
+df_clustered
+
+```
+
+
+### Plot
+#### data only
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    # panel.grid.minor = element_blank(),
+    # panel.grid.major = element_blank(),
+    legend.position='none'
+  )
+
+# 1 - least
+# 2 - better
+# 3 - rosy
+cluster_palette <- c("1" = "#F48FB1", "2" = "#81C784", "3" = "#00ACC1")
+
+# Plot
+v1 <- ggplot(df_clustered, aes(x = GDP_per_Capita_PPP, y = Life_Satisfaction, fill = Clusters, color = Clusters)) + 
+  geom_point(size = 4, shape = 21) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_fill_manual(values = cluster_palette) +
+  scale_color_manual(values = cluster_palette) +
+  labs( title = "Self-reported Life Satisfaction vs GDP per capita, 2020",
+        subtitle = "Showing national average of the self-reported life satisfaction vs. GDP per capita adjusted for inflation and cross-country price differences.",
+        caption = "Source: Our World in Data") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+### Plot with annotations
+#### some narrative to help tell the story
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v2 <- ggplot(df_clustered, aes(x = GDP_per_Capita_PPP, y = Life_Satisfaction, fill = Clusters, color = Clusters)) + 
+  geom_point(size = 4, shape = 21) +
+  scale_x_log10() +
+  scale_y_continuous() +
+  scale_fill_manual(values = cluster_palette) +
+  scale_color_manual(values = cluster_palette) +
+  labs( title = "Self-reported Life Satisfaction vs GDP per capita, 2020",
+        subtitle = "Showing national average of the self-reported life satisfaction vs. GDP per capita adjusted for inflation and cross-country price differences.",
+        caption = "Source: Our World in Data") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+  
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/life-satisfaction-vs-gdp-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/life-satisfaction-vs-gdp-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Our World in Data, Self-reported Life Satisfaction vs GDP per capita, 2020, [GO](https://ourworldindata.org/happiness-and-life-satisfaction){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

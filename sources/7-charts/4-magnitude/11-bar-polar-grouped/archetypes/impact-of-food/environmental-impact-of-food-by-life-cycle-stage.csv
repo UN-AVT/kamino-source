@@ -1,0 +1,302 @@
+"FOOD_PRODUCT","SUPPLY_CHAIN","EMISSION"
+"Wheat & Rye (Bread)","Land use change",0.1
+"Wheat & Rye (Bread)","Animal Feed",0
+"Wheat & Rye (Bread)","Farm",0.8
+"Wheat & Rye (Bread)","Processing",0.2
+"Wheat & Rye (Bread)","Transport",0.1
+"Wheat & Rye (Bread)","Packging",0.1
+"Wheat & Rye (Bread)","Retail",0.1
+"Maize (Meal)","Land use change",0.3
+"Maize (Meal)","Animal Feed",0
+"Maize (Meal)","Farm",0.5
+"Maize (Meal)","Processing",0.1
+"Maize (Meal)","Transport",0.1
+"Maize (Meal)","Packging",0.1
+"Maize (Meal)","Retail",0
+"Barley (Beer)","Land use change",0
+"Barley (Beer)","Animal Feed",0
+"Barley (Beer)","Farm",0.2
+"Barley (Beer)","Processing",0.1
+"Barley (Beer)","Transport",0
+"Barley (Beer)","Packging",0.5
+"Barley (Beer)","Retail",0.3
+"Oatmeal","Land use change",0
+"Oatmeal","Animal Feed",0
+"Oatmeal","Farm",1.4
+"Oatmeal","Processing",0
+"Oatmeal","Transport",0.1
+"Oatmeal","Packging",0.1
+"Oatmeal","Retail",0
+"Rice","Land use change",0
+"Rice","Animal Feed",0
+"Rice","Farm",3.6
+"Rice","Processing",0.1
+"Rice","Transport",0.1
+"Rice","Packging",0.1
+"Rice","Retail",0.1
+"Potatoes","Land use change",0
+"Potatoes","Animal Feed",0
+"Potatoes","Farm",0.2
+"Potatoes","Processing",0
+"Potatoes","Transport",0.1
+"Potatoes","Packging",0
+"Potatoes","Retail",0
+"Cassava","Land use change",0.6
+"Cassava","Animal Feed",0
+"Cassava","Farm",0.2
+"Cassava","Processing",0
+"Cassava","Transport",0.1
+"Cassava","Packging",0
+"Cassava","Retail",0
+"Cane Sugar","Land use change",1.2
+"Cane Sugar","Animal Feed",0
+"Cane Sugar","Farm",0.5
+"Cane Sugar","Processing",0
+"Cane Sugar","Transport",0.8
+"Cane Sugar","Packging",0.1
+"Cane Sugar","Retail",0
+"Beet Sugar","Land use change",0
+"Beet Sugar","Animal Feed",0
+"Beet Sugar","Farm",0.5
+"Beet Sugar","Processing",0.2
+"Beet Sugar","Transport",0.6
+"Beet Sugar","Packging",0.1
+"Beet Sugar","Retail",0
+"Other Pulses","Land use change",0
+"Other Pulses","Animal Feed",0
+"Other Pulses","Farm",1.1
+"Other Pulses","Processing",0
+"Other Pulses","Transport",0.1
+"Other Pulses","Packging",0.4
+"Other Pulses","Retail",0
+"Peas","Land use change",0
+"Peas","Animal Feed",0
+"Peas","Farm",0.7
+"Peas","Processing",0
+"Peas","Transport",0.1
+"Peas","Packging",0
+"Peas","Retail",0
+"Nuts","Land use change",-2.1
+"Nuts","Animal Feed",0
+"Nuts","Farm",2.1
+"Nuts","Processing",0
+"Nuts","Transport",0.1
+"Nuts","Packging",0.1
+"Nuts","Retail",0
+"Groundnuts","Land use change",0.4
+"Groundnuts","Animal Feed",0
+"Groundnuts","Farm",1.4
+"Groundnuts","Processing",0.4
+"Groundnuts","Transport",0.1
+"Groundnuts","Packging",0.1
+"Groundnuts","Retail",0
+"Soymilk","Land use change",0.2
+"Soymilk","Animal Feed",0
+"Soymilk","Farm",0.1
+"Soymilk","Processing",0.2
+"Soymilk","Transport",0.1
+"Soymilk","Packging",0.1
+"Soymilk","Retail",0.3
+"Tofu","Land use change",1
+"Tofu","Animal Feed",0
+"Tofu","Farm",0.5
+"Tofu","Processing",0.8
+"Tofu","Transport",0.2
+"Tofu","Packging",0.2
+"Tofu","Retail",0.3
+"Soybean Oil","Land use change",3.1
+"Soybean Oil","Animal Feed",0
+"Soybean Oil","Farm",1.5
+"Soybean Oil","Processing",0.3
+"Soybean Oil","Transport",0.3
+"Soybean Oil","Packging",0.8
+"Soybean Oil","Retail",0
+"Palm Oil","Land use change",3.1
+"Palm Oil","Animal Feed",0
+"Palm Oil","Farm",2.1
+"Palm Oil","Processing",1.3
+"Palm Oil","Transport",0.2
+"Palm Oil","Packging",0.9
+"Palm Oil","Retail",0
+"Sunflower Oil","Land use change",0.1
+"Sunflower Oil","Animal Feed",0
+"Sunflower Oil","Farm",2.1
+"Sunflower Oil","Processing",0.2
+"Sunflower Oil","Transport",0.2
+"Sunflower Oil","Packging",0.9
+"Sunflower Oil","Retail",0
+"Rapeseed Oil","Land use change",0.2
+"Rapeseed Oil","Animal Feed",0
+"Rapeseed Oil","Farm",2.3
+"Rapeseed Oil","Processing",0.2
+"Rapeseed Oil","Transport",0.2
+"Rapeseed Oil","Packging",0.8
+"Rapeseed Oil","Retail",0
+"Olive Oil","Land use change",-0.4
+"Olive Oil","Animal Feed",0
+"Olive Oil","Farm",4.3
+"Olive Oil","Processing",0.7
+"Olive Oil","Transport",0.5
+"Olive Oil","Packging",0.9
+"Olive Oil","Retail",0
+"Tomatoes","Land use change",0.4
+"Tomatoes","Animal Feed",0
+"Tomatoes","Farm",0.7
+"Tomatoes","Processing",0
+"Tomatoes","Transport",0.2
+"Tomatoes","Packging",0.1
+"Tomatoes","Retail",0
+"Onions & Leeks","Land use change",0
+"Onions & Leeks","Animal Feed",0
+"Onions & Leeks","Farm",0.2
+"Onions & Leeks","Processing",0
+"Onions & Leeks","Transport",0.1
+"Onions & Leeks","Packging",0
+"Onions & Leeks","Retail",0
+"Root Vegetables","Land use change",0
+"Root Vegetables","Animal Feed",0
+"Root Vegetables","Farm",0.2
+"Root Vegetables","Processing",0
+"Root Vegetables","Transport",0.1
+"Root Vegetables","Packging",0
+"Root Vegetables","Retail",0
+"Brassicas","Land use change",0
+"Brassicas","Animal Feed",0
+"Brassicas","Farm",0.3
+"Brassicas","Processing",0
+"Brassicas","Transport",0.1
+"Brassicas","Packging",0
+"Brassicas","Retail",0
+"Other Vegetables","Land use change",0
+"Other Vegetables","Animal Feed",0
+"Other Vegetables","Farm",0.2
+"Other Vegetables","Processing",0.1
+"Other Vegetables","Transport",0.2
+"Other Vegetables","Packging",0
+"Other Vegetables","Retail",0
+"Citrus Fruit","Land use change",-0.1
+"Citrus Fruit","Animal Feed",0
+"Citrus Fruit","Farm",0.3
+"Citrus Fruit","Processing",0
+"Citrus Fruit","Transport",0.1
+"Citrus Fruit","Packging",0
+"Citrus Fruit","Retail",0
+"Bananas","Land use change",0
+"Bananas","Animal Feed",0
+"Bananas","Farm",0.3
+"Bananas","Processing",0.1
+"Bananas","Transport",0.3
+"Bananas","Packging",0.1
+"Bananas","Retail",0
+"Apples","Land use change",0
+"Apples","Animal Feed",0
+"Apples","Farm",0.2
+"Apples","Processing",0
+"Apples","Transport",0.1
+"Apples","Packging",0
+"Apples","Retail",0
+"Berries & Grapes","Land use change",0
+"Berries & Grapes","Animal Feed",0
+"Berries & Grapes","Farm",0.7
+"Berries & Grapes","Processing",0
+"Berries & Grapes","Transport",0.2
+"Berries & Grapes","Packging",0.2
+"Berries & Grapes","Retail",0
+"Wine","Land use change",-0.1
+"Wine","Animal Feed",0
+"Wine","Farm",0.6
+"Wine","Processing",0.1
+"Wine","Transport",0.1
+"Wine","Packging",0.7
+"Wine","Retail",0
+"Other Fruit","Land use change",0.1
+"Other Fruit","Animal Feed",0
+"Other Fruit","Farm",0.4
+"Other Fruit","Processing",0
+"Other Fruit","Transport",0.2
+"Other Fruit","Packging",0
+"Other Fruit","Retail",0
+"Coffee","Land use change",3.7
+"Coffee","Animal Feed",0
+"Coffee","Farm",10.4
+"Coffee","Processing",0.6
+"Coffee","Transport",0.1
+"Coffee","Packging",1.6
+"Coffee","Retail",0.1
+"Dark Chocolate","Land use change",14.3
+"Dark Chocolate","Animal Feed",0
+"Dark Chocolate","Farm",3.7
+"Dark Chocolate","Processing",0.2
+"Dark Chocolate","Transport",0.1
+"Dark Chocolate","Packging",0.4
+"Dark Chocolate","Retail",0
+"Beef (beef herd)","Land use change",16.3
+"Beef (beef herd)","Animal Feed",1.9
+"Beef (beef herd)","Farm",39.4
+"Beef (beef herd)","Processing",1.3
+"Beef (beef herd)","Transport",0.3
+"Beef (beef herd)","Packging",0.2
+"Beef (beef herd)","Retail",0.2
+"Beef (dairy herd)","Land use change",0.9
+"Beef (dairy herd)","Animal Feed",2.5
+"Beef (dairy herd)","Farm",15.7
+"Beef (dairy herd)","Processing",1.1
+"Beef (dairy herd)","Transport",0.4
+"Beef (dairy herd)","Packging",0.3
+"Beef (dairy herd)","Retail",0.2
+"Lamb & Mutton","Land use change",0.5
+"Lamb & Mutton","Animal Feed",2.4
+"Lamb & Mutton","Farm",19.5
+"Lamb & Mutton","Processing",1.1
+"Lamb & Mutton","Transport",0.5
+"Lamb & Mutton","Packging",0.3
+"Lamb & Mutton","Retail",0.2
+"Pig Meat","Land use change",1.5
+"Pig Meat","Animal Feed",2.9
+"Pig Meat","Farm",1.7
+"Pig Meat","Processing",0.3
+"Pig Meat","Transport",0.3
+"Pig Meat","Packging",0.3
+"Pig Meat","Retail",0.2
+"Poultry Meat","Land use change",2.5
+"Poultry Meat","Animal Feed",1.8
+"Poultry Meat","Farm",0.7
+"Poultry Meat","Processing",0.4
+"Poultry Meat","Transport",0.3
+"Poultry Meat","Packging",0.2
+"Poultry Meat","Retail",0.2
+"Milk","Land use change",0.5
+"Milk","Animal Feed",0.2
+"Milk","Farm",1.5
+"Milk","Processing",0.1
+"Milk","Transport",0.1
+"Milk","Packging",0.1
+"Milk","Retail",0.3
+"Cheese","Land use change",4.5
+"Cheese","Animal Feed",2.3
+"Cheese","Farm",13.1
+"Cheese","Processing",0.7
+"Cheese","Transport",0.1
+"Cheese","Packging",0.2
+"Cheese","Retail",0.3
+"Eggs","Land use change",0.7
+"Eggs","Animal Feed",2.2
+"Eggs","Farm",1.3
+"Eggs","Processing",0
+"Eggs","Transport",0.1
+"Eggs","Packging",0.2
+"Eggs","Retail",0
+"Fish (farmed)","Land use change",0.5
+"Fish (farmed)","Animal Feed",0.8
+"Fish (farmed)","Farm",3.6
+"Fish (farmed)","Processing",0
+"Fish (farmed)","Transport",0.1
+"Fish (farmed)","Packging",0.1
+"Fish (farmed)","Retail",0
+"Shrimps (farmed)","Land use change",0.2
+"Shrimps (farmed)","Animal Feed",2.5
+"Shrimps (farmed)","Farm",8.4
+"Shrimps (farmed)","Processing",0
+"Shrimps (farmed)","Transport",0.2
+"Shrimps (farmed)","Packging",0.3
+"Shrimps (farmed)","Retail",0.2

@@ -1,0 +1,266 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+library(magrittr)
+library(hrbrthemes)
+library(ggplot2)
+library(dplyr)
+library(waffle)
+# devtools::install_github("hrbrmstr/waffle")
+library(extrafont)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Waffle
+## Subsection
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+A waffle chart shows progress towards a target or a completion percentage. There is a grid of small cells, of which coloured cells represent the data.  A chart can consist of one category or several categories. Multiple waffle charts can be put together to show a comparison between different charts.
+
+https://github.com/hrbrmstr/waffle
+
+***
+
+# Section
+## Subsection
+
+_Load data set: mpg$class_
+
+```{r, echo=FALSE}
+
+
+
+```
+
+# Section
+## Subsection
+_Prep data_
+
+```{r, echo=FALSE}
+
+data.frame(
+  parts = factor(rep(month.abb[1:3], 3), levels=month.abb[1:3]),
+  vals = c(10, 20, 30, 6, 14, 40, 30, 20, 10),
+  col = rep(c("blue", "black", "red"), 3),
+  fct = c(rep("Thing 1", 3),
+          rep("Thing 2", 3),
+          rep("Thing 3", 3))
+) -> xdf
+
+xdf %>%
+  count(parts, wt = vals) %>%
+  ggplot(aes(fill = parts, values = n)) +
+  geom_waffle(n_rows = 20, size = 0.33, colour = "white", flip = TRUE) +
+  scale_fill_manual(
+    name = NULL,
+    values = c("#a40000", "#c68958", "#ae6056"),
+    labels = c("Fruit", "Sammich", "Pizza")
+  ) +
+  coord_equal() +
+  theme_ipsum_rc(grid="") +
+  theme_enhance_waffle()
+
+```
+
+# Section
+## Subsection
+_Make the plot_
+
+```{r, echo=FALSE, fig.width=13, fig.height=7}
+
+tibble(
+  parts = factor(rep(month.abb[1:3], 3), levels=month.abb[1:3]),
+  values = c(10, 20, 30, 6, 14, 40, 30, 20, 10),
+  fct = c(rep("Thing 1", 3), rep("Thing 2", 3), rep("Thing 3", 3))
+) -> xdf
+
+ggplot(xdf, aes(fill=parts, values=values)) +
+  geom_waffle(color = "white", size=1.125, n_rows = 6) +
+  facet_wrap(~fct, ncol=1) +
+  scale_x_discrete(expand=c(0,0)) +
+  scale_y_discrete(expand=c(0,0)) +
+  ggthemes::scale_fill_tableau(name=NULL) +
+  coord_equal() +
+  labs(
+    title = "Faceted Waffle Geoms"
+  ) +
+  theme_ipsum_rc(grid="") +
+  theme_enhance_waffle()
+
+
+```
+
+# Section
+## Subsection
+
+```{r, echo=FALSE}
+
+storms %>% 
+  filter(year >= 2010) %>% 
+  count(year, status) -> storms_df
+
+ggplot(storms_df, aes(fill = status, values = n)) +
+  geom_waffle(color = "white", size = .25, n_rows = 10, flip = TRUE) +
+  facet_wrap(~year, nrow = 1, strip.position = "bottom") +
+  scale_x_discrete() + 
+  scale_y_continuous(labels = function(x) x * 10, # make this multiplyer the same as n_rows
+                     expand = c(0,0)) +
+  ggthemes::scale_fill_tableau(name=NULL) +
+  coord_equal() +
+  labs(
+    title = "Faceted Waffle Bar Chart",
+    subtitle = "{dplyr} storms data",
+    x = "Year",
+    y = "Count"
+  ) +
+  theme_minimal(base_family = "Roboto Condensed") +
+  theme(panel.grid = element_blank(), axis.ticks.y = element_line()) +
+  guides(fill = guide_legend(reverse = TRUE))
+
+```
+
+```{r}
+
+parts <- c(`Un-breached\nUS Population` = (318 - 11 - 79), `Premera` = 11, `Anthem` = 79)
+
+waffle(parts, rows = 8)
+
+```
+
+
+
+```{r}
+
+waffle(
+  parts / 10, rows = 3, colors = c("#969696", "#1879bf", "#009bda"),
+  use_glyph = "medkit", size = 8
+) + exp
+
+```
+
+
+```{r}
+
+savings <- c(
+  `Mortgage\n($84,911)` = 84911, `Auto and\ntuition loans\n($14,414)` = 14414,
+  `Home equity loans\n($10,062)` = 10062, `Credit Cards\n($8,565)` = 8565
+)
+
+waffle(
+  savings / 392, rows = 7, size = 0.5, legend_pos = "bottom",
+  colors = c("#c7d4b6", "#a3aabd", "#a0d0de", "#97b5cf")
+)
+
+```
+
+
+```{r}
+
+professional <- c(`Male` = 44, `Female (56%)` = 56)
+
+waffle(
+  professional, rows = 10, size = 0.5,
+  colors = c("#af9139", "#544616")
+)
+
+iron(
+  waffle(c(thing1 = 0, thing2 = 100), rows = 5),
+  waffle(c(thing1 = 25, thing2 = 75), rows = 5)
+)
+
+
+```
+
+
+```{r}
+
+pain.adult.1997 <- c(`YOY (406)` = 406, `Adult (24)` = 24)
+
+waffle(
+  pain.adult.1997 / 2, rows = 7, size = 0.5,
+  colors = c("#c7d4b6", "#a3aabd"),
+  title = "Paine Run Brook Trout Abundance (1997)",
+  xlab = "1 square = 2 fish", pad = 3
+) -> A
+
+pine.adult.1997 <- c(`YOY (221)` = 221, `Adult (143)` = 143)
+
+waffle(
+  pine.adult.1997 / 2, rows = 7, size = 0.5,
+  colors = c("#c7d4b6", "#a3aabd"),
+  title = "Piney River Brook Trout Abundance (1997)",
+  xlab = "1 square = 2 fish", pad = 8
+) -> B
+
+stan.adult.1997 <- c(`YOY (270)` = 270, `Adult (197)` = 197)
+
+waffle(
+  stan.adult.1997 / 2, rows = 7, size = 0.5,
+  colors = c("#c7d4b6", "#a3aabd"),
+  title = "Staunton River Trout Abundance (1997)",
+  xlab = "1 square = 2 fish"
+) -> C
+
+iron(A, B, C)
+
+```
+
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

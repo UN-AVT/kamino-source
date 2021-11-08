@@ -1,0 +1,158 @@
+---
+pagetitle: "Tourism Density Index"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Tourism Density Index
+## a range plot showing over-and-undertourism by country
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Tommaso Cantelli on Unsplash"}
+
+masthead <- "assets/tommaso-cantelli-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> To travel is to live...\
+--- Hans Christian Andersen\
+
+
+***
+
+### Ingest
+#### category, country, tourists, and locals
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df = read.csv("archetypes/tourism-density-index/over-and-undertourism.csv", header = TRUE, stringsAsFactors = TRUE)
+df
+
+```
+
+
+### Wrangle
+#### filter for over and under
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_over <- filter(df, category == "Overtourism")
+df_under <- filter(df, category == "Undertourism")
+
+```
+
+
+### Plot
+#### tourism density, over / under
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+
+theme_opts <- theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.ticks = element_line(),
+    legend.position = "none"
+)
+
+category_palette <- c(
+  "Overtourism" = "#9C27B0",
+  "Undertourism" = "#3F51B5"
+)
+
+v1 = ggplot(df) + 
+  geom_segment(aes(x=number_of_tourists, y=country, xend=number_of_locals, yend=country, color=category), 
+               lineend = "round", linejoin = "round", size=1) + 
+  geom_point(aes(x=number_of_tourists, y=country), shape=21, alpha=1.0, size=2, color="#FFFFFF", fill="#9C27B0") +
+  geom_point(aes(x=number_of_locals, y=country), shape=21, alpha=1.0, size=2, color="#FFFFFF", fill="#3F51B5") +
+  scale_x_continuous() +
+  scale_y_discrete() +
+  scale_color_manual(values = category_palette) +
+  labs(title = "Tourism density, over / under") +
+  theme_minimal() +
+  theme_opts +
+  xlab(NULL) +
+  ylab(NULL)
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/tourism-density-index-fs.svg", plot = v1, width=720/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/tourism-density-index-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+Narrative: Intrepid Travel, Intrepid Adventure Index 2018
+Data Source: MakeOverMonday, [GO](https://data.world/makeovermonday/2018w24-tourism-density-index){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

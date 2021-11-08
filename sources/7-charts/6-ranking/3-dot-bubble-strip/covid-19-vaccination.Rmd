@@ -1,0 +1,231 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggiraph)
+library(countrycode)
+library(wbstats)
+library(ggrepel)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Dot bubble strip
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Kaja Reichardt on Unsplash"}
+
+masthead <- "assets/kaja-reichardt-WB1m8zefmEQ-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> We are in this together, and we will get throught this, together...\
+--- UN Secretary-General António Guterres\
+
+***
+
+# Global herd immunity is still out of reach
+
+This case study aims to reproduce a graph from <a href = "https://www.economist.com/graphic-detail/2021/05/06/global-herd-immunity-is-still-out-of-reach">this article</a> published on May 6th 2021 in the Economist.
+
+### Ingest the data
+#### Covid 19 vaccination survey
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df <- read_csv("archetypes/covid-19-vaccination_survey.csv")
+df
+
+
+```
+
+
+### Wrangle the data
+#### filter, merge, enrich, select, clean, rename... the good stuff!
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df$percent_yes <- as.numeric(str_remove(df$Yes, "[%]"))
+
+df$iso3c <- countrycode(df$Country, 'country.name', 'iso3c')
+
+df$region <- countrycode(df$Country, 'country.name', 'un.regionsub.name')
+
+pop <- wb_data("SP.POP.TOTL", start_date = 2020, end_date = 2020) %>%
+  select(iso3c, population = SP.POP.TOTL)
+
+df_final <- inner_join(df, pop) %>%
+  select(Country, percent_yes, population, region) %>%
+  mutate(region_display = case_when(
+  region == "Western Europe" ~ "Europe",
+  region == "Eastern Europe" ~ "Europe",
+  region == "Northern Europe" ~ "Europe",
+  region == "Southern Europe" ~ "Europe",
+  region == "Australia and New Zealand" ~ "Asia & Oceania",
+  region == "Central Asia" ~ "Asia & Oceania",
+  region == "Eastern Asia" ~ "Asia & Oceania",
+  region == "Southern Asia" ~ "Asia & Oceania",
+  region == "South-eastern Asia" ~ "Asia & Oceania",
+  region == "Latin America and the Caribbean" ~ "Latin America & Caribbean",
+  region == "Northern America" ~ "North America",
+  region == "Sub-Saharan Africa" ~ "Sub-Saharan Africa",
+  region == "Northern Africa" ~ "Middle East and North Africa",
+  region == "Western Asia" ~ "Middle East and North Africa"
+  )) %>%
+  mutate(region_factor = factor(region_display, 
+                                 levels=c("Europe","North America","Sub-Saharan Africa", 
+                                          "Middle East and North Africa",
+                                          "Latin America & Caribbean",
+                                          "Asia & Oceania"
+                                          ))) %>%
+  group_by(region_factor) %>%
+  mutate(group_min = min(percent_yes), 
+         group_max = max(percent_yes),
+         group_average = mean(percent_yes)) %>%
+  ungroup()
+
+```
+### Plot
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+countries_displayed <- c("Kazakhstan", "Pakistan", "India", "Myanmar", "Jamaica", "Brazil", "Mexico",
+                         "Nicaragua", "Jordan", "Egypt", "Gabon", "Nigeria", "Ethiopia", "United States",
+                         "Canada", "Hungary", "Russia", "France", "Germany", "Britain", "Iceland")
+
+theme_opts <- theme(
+  plot.title = element_text(size=25, face="bold", hjust = 0),
+  plot.subtitle = element_text(size=20, hjust = 0),
+    plot.margin = margin(.25, 1, .25, .25, "cm"),
+    text = element_text(size = 25),
+    #plot.title = element_text(color = "black", size = 16, face = "bold"),
+    #plot.subtitle = element_text(color = "black", size = 12),
+    #plot.caption = element_text(color = "#555555", size = 10),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.y = element_text(hjust=0),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    # panel.grid.minor = element_blank(),
+    # panel.grid.major = element_blank(),
+    legend.position=''
+  )
+
+# Plot
+v1 <- ggplot(df_final,aes(x=region_factor, y=percent_yes)) +
+  geom_point(aes(size=population), shape=21, color = "#6983AE", alpha = 5/10, fill = "#AFCDDD", stroke = 3) +
+  scale_size_continuous(range = c(1, 50)) +
+  geom_vline(xintercept = 1) +
+  geom_vline(xintercept = 2) +
+  geom_vline(xintercept = 3) +
+  geom_vline(xintercept = 4) +
+  geom_vline(xintercept = 5) +
+  geom_vline(xintercept = 6) +
+  geom_hline(yintercept = 20) +
+  geom_hline(yintercept = 30) +
+  geom_hline(yintercept = 40) +
+  geom_hline(yintercept = 50) +
+  geom_hline(yintercept = 60) +
+  geom_hline(yintercept = 70) +
+  geom_hline(yintercept = 80) +
+  geom_hline(yintercept = 90) +
+  geom_hline(yintercept = 100) +
+  geom_segment(aes(x = region_factor, xend = region_factor,
+                   y = group_min, yend = group_max),
+               colour = "#AFCDDD", size = 3) +
+  stat_summary(fun.y="mean", colour = "#B27F75", geom = "crossbar", width = 0.3, fatten = 10) +
+  geom_text_repel(data = df_final[df_final$Country %in% countries_displayed,],
+            aes(x=region_factor, y=percent_yes, label = Country),
+            nudge_x = 0.2, size = 8) +
+  annotate("text", x=3.75, y=57, label= "Regional Average", size = 8, 
+           colour = "#B27F75", face = "bold") +
+  scale_y_continuous(position = "right", breaks=seq(20, 100, 10)) +
+  scale_x_discrete(breaks = c("Europe","North America","Sub-Saharan Africa", 
+                                          "Middle East and North Africa",
+                                          "Latin America & Caribbean",
+                                          "Asia & Oceania"
+                                          ), 
+                     labels = c("Europe", "North America","Sub-Saharan \nAfrica", 
+                                          "Middle East \nand North Africa",
+                                          "Latin America & \nCaribbean",
+                                          "Asia & Oceania"))+
+  coord_flip() +
+  theme_opts +
+  labs(title = "Would you grab the jab?",
+       subtitle = "\"If a vaccine to prevent coronavirus were available right now at no cost, would \nyou agree to be vaccinated?\", percent responded yes, Aug 2020-Feb 2021")
+
+ girafe(ggobj = v1, width_svg = 17, height_svg = 10)
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Data Source: Gallup Survey, may 2021, https://news.gallup.com/poll/348719/billion-unwilling-covid-vaccine.aspx
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'innovation GII'
+commands <- 'countrycode geom_smooth scale_y_reverse'
+sources <- 'Economist Cornell INSEAD WIPO'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

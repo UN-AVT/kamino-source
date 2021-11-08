@@ -1,0 +1,241 @@
+---
+pagetitle: "Vietnam Organic Market"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+library(reshape2)
+library(ggiraph)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Vietnam Organic Market
+## Bar Horizontal Grouped
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by René DeAnda on Unsplash"}
+
+masthead <- "assets/rene-deanda-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> When eating fruit, remember who planted the tree; when drinking clear water, remember who dug the well...\
+--- Vietnamese Proverb\
+
+***
+
+Vietnam imports a diverse number of organic food and beverage products to meet consumer demand for items that cannot be grown or produced locally, a majority of which are fresh fruits and vegetables and processed products.  A recent report of the USDA Foreign Agriculture Service analyzed export trends and foresee Vietnam as a potential growth market for imported organic food and beverage products.  Let's take a closer look at the and use a horizontal grouped bar chart to visualize the results.
+
+### Ingest
+#### U.S. Organic Agricultural Exports to Vietnam in 2015-2020
+
+List of Products
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+products <- read.csv("archetypes/organic-exports/usda-gats-product-group-organics.csv", header = TRUE, stringsAsFactors = FALSE)
+products
+
+```
+
+Exports to Vietnam
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df <- read.csv("archetypes/organic-exports/usda-gats-organics-vietnam-data.csv", header = TRUE, stringsAsFactors = FALSE)
+
+df$X2017 <- as.integer(df$X2017)
+df$X2019 <- as.integer(df$X2019)
+df$X2020 <- as.integer(df$X2020)
+
+df
+
+```
+
+### Wrangle
+#### convert from wide to long form
+
+The year columns become a factored column that we can use for grouping or as a visual variable.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Convert wide to long
+df_long <- melt(df, id.vars=c("Partner", "HS.Code", "Product"))
+df_long
+
+# Note: value is in thousands of dollars
+
+```
+
+
+### Plot
+#### group by product
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# Theme parameters
+theme_opts <- theme(
+  legend.position="top",
+  legend.title = element_blank(),
+  text = element_text(size=16),                       # Set font size for plot text (axes labels, legend labels, plot title, etc.)
+  axis.title = element_blank(),                       # Remove x and y axes titles
+  axis.ticks.y = element_blank(),
+  axis.ticks.x = element_blank(),
+  panel.background = element_blank(),
+  plot.title = element_text(size=18),                 # Increase font size of plot title text
+  plot.background = element_blank()
+)
+
+# Make the plot
+v1 <- ggplot(df_long, aes(x = value, y = Product, fill = variable)) +
+  geom_bar(stat = "identity", position = position_dodge(0.7), width = 0.8) +
+  scale_x_continuous() +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+      options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+### Plot
+#### removing zero values
+
+Let's remove the zero values and see how it effects the chart.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Remove zero values
+df_long <- filter(df_long, value > 0)
+df_long
+
+```
+
+Notice the difference?
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# Theme parameters
+theme_opts <- theme(
+  legend.position="top",
+  legend.title = element_blank(),
+  text = element_text(size=16),                       # Set font size for plot text (axes labels, legend labels, plot title, etc.)
+  axis.title = element_blank(),                       # Remove x and y axes titles
+  axis.ticks.y = element_blank(),
+  axis.ticks.x = element_blank(),
+  panel.background = element_blank(),
+  plot.title = element_text(size=18),                 # Increase font size of plot title text
+  plot.background = element_blank()
+)
+
+# Make the plot
+v2 <- ggplot(df_long, aes(x = value, y = Product, fill = variable)) +
+  geom_bar(stat = "identity", position = position_dodge(0.7), width = 0.8) +
+  scale_x_continuous() +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+      options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+### Plot
+#### group by year
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# Make the plot
+v3 <- ggplot(df_long, aes(x = value, y = variable, fill = Product)) +
+  geom_bar(stat = "identity", position = position_dodge(0.7), width = 0.8) +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+      options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+Comparison against a stacked bar
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# Make the plot
+v4 <- ggplot(df_long, aes(x = value, y = variable, fill = Product)) +
+  geom_bar(stat = "identity", position = "stack", width = 0.5) +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v4, width_svg = 1280/72, height_svg = 720/72,
+      options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/vietnam-organic-market-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/vietnam-organic-market-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative sources: Vietnam: Vietnam Organic Market, [GO](https://www.fas.usda.gov/data/vietnam-vietnam-organic-market){target="_blank"}
+* Data sources: USDA, Foreign Agricultural Service, Global Agriculture Trade System (gats), [GO](https://apps.fas.usda.gov/gats/ExpressQuery1.aspx){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

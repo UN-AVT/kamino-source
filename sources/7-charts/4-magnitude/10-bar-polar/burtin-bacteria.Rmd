@@ -1,0 +1,153 @@
+---
+pagetitle: "Burting bacteria"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Antibiotic Effectiveness Charting
+## Bar Polar
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Cdc Qeu on Unsplash"}
+
+masthead <- "assets/cdc-QEU-QgIOJKA-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Gentlement, it is the microbes who will have the last word ...\
+--- Louis Pasteur\
+
+***
+
+### Load the data
+#### Load the antibiotic effectiveness data table
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df = read.csv("./archetypes/burtin-bacteria/burtin-bacteria.csv", header = TRUE, stringsAsFactors = TRUE)
+df<-df %>% select(name,streptomycin)
+df_tmp<-add_column(df,.before = 'name', id=(seq_len(nrow(df))))
+df <- df_tmp
+df
+
+```
+
+### Prepare the data
+#### Prepare the dataset for labels
+
+```{r data-prep, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Get the name and the y position of each label
+label_data <- df
+
+# Calculate the ANGLE of the labels
+number_of_bar <- nrow(label_data)
+angle <- 90 - 360 * (label_data$id-0.5) / number_of_bar     # Substract 0.5 because the letter must have the angle of the center of the bars. Not extreme right (1) or extreme left (0)
+
+# Calculate the alignment of labels: right or left
+# If I am on the left part of the plot, my labels have currently an angle < -90
+label_data$hjust <- ifelse(angle < -90, 1, 0)
+
+# Flip angle to make them readable
+label_data$angle<-ifelse(angle < -90, angle+180, angle)
+
+label_data
+
+```
+
+### Plot the chart
+#### Looks cool but is it an effective communication visualization?
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', fig.width=10.5, fig.height=10.5}
+
+p <- ggplot(df, aes(x=as.factor(id), y=streptomycin)) +       # Note that id is a factor. If x is numeric, there is some space between the first bar
+  
+  # This adds the bars with a blue color
+  geom_bar(stat="identity", fill=alpha("skyblue", 0.7)) +
+  
+  # Limits of the plot = very important. The negative value controls the size of the inner circle, the positive one is useful to add size over each bar
+  ylim(-100,120) +
+  
+  # Custom the theme: no axis title and no cartesian grid
+  theme_minimal() +
+  theme(
+    axis.text = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    plot.margin = unit(rep(-1,4), "cm")      # Adjust the margin to make sure labels are not truncated
+  ) +
+  
+  # This makes the coordinate polar instead of cartesian
+  coord_polar(start = 0) +
+  
+  # Add the labels, using the label_data dataframe that we have created before
+  geom_text(data=label_data, aes(x=id, y=streptomycin+10, label=name, hjust=hjust), color="black", fontface="bold", alpha=0.6, size=2.5, angle=label_data$angle, inherit.aes=FALSE) 
+
+p
+
+```
+
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative sources: Antibiotic Effectiveness Charting, [GO](https://peltiertech.com/antibiotic-effectiveness-charting-revisited/){target="_blank"}
+
+<pre>
+@misc{peltiertechexcelchartsandprogrammingblog_2009_antibiotic,
+  author = {Peltier Tech Excel Charts and Programming Blog},
+  month = {01},
+  title = {Antibiotic Effectiveness Charting - Revisited - Peltier Tech Blog},
+  url = {https://peltiertech.com/antibiotic-effectiveness-charting-revisited/},
+  year = {2009},
+  organization = {Peltier Tech Blog}
+}
+</pre>
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

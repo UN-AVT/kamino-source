@@ -1,0 +1,240 @@
+---
+pagetitle: "More Money More Time"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggthemes)
+library(readr)
+library(ggrepel)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# More Money More Time
+## Scatter Quadrant
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Annie Spratt on Unsplash"}
+
+masthead <- "assets/annie-spratt-2-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> I am issuing a call to action for countries, companies and institutions globally\
+  to step-up and become champions for paid parental leave...\
+--- UN Women Goodwill Ambassador Anne Hathaway\
+
+***
+
+Investing in __family friendly policies__ is good for families, businesses and economies. But for too many parents around the world, policies, such as __paid parental leave__, breastfeeding breaks, childcare and child grants, are not a reality. Family-friendly policies matter because they help children to get a better start in life and help parents to find the right balance between their commitments at work and at home. Yet even some of the world’s richest countries fail to offer comprehensive solutions to all families.
+
+Let's take a closer look at the situation.
+
+### Ingest the source
+#### maternity leave, payment rate
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df = read.csv("archetypes/more-money-more-time/more-money-more-time.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle
+#### select, clean, and factor
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Select only the needed
+df_complete <- select(df, c("Country", "Paid_maternity_leave_avg_payment_rate_percent", "Paid_maternity_leave_in_months", "difference_from_OECD_average"))
+
+# Make sure we don't factor empty strings
+df_complete <- filter(df_complete, nchar(Country) > 0)
+# Factor the string fields
+df_complete$Country <- as.factor(df_complete$Country)
+
+# Remove incomplete cases
+df_complete <- df_complete[complete.cases(df_complete), ]
+
+df_complete
+
+```
+
+
+### Base Scatter Plot
+#### position, shape, labels
+
+
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  #axis.line = element_blank(),
+  #axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  #panel.grid = element_blank(),
+  panel.grid.major = element_line(linetype = "dotted"),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill="white", colour="white"),
+  #panel.border = element_blank(),
+  plot.background = element_rect(fill="white", colour="white"),
+  plot.title = element_text(vjust = 5.0),
+  plot.subtitle = element_text(vjust = 5.0),
+  plot.margin = unit(c(0.5,0.5,0.5,0.5), "in")
+)
+
+rate_average <- mean(df_complete$Paid_maternity_leave_avg_payment_rate_percent)
+leave_average <- mean(df_complete$Paid_maternity_leave_in_months)
+
+v1 <- ggplot(df_complete) +
+      annotate("rect", xmin = 0, xmax = leave_average, ymin = rate_average, ymax = 110, fill = "#f5f2d2", alpha = 0.8) +
+      annotate("rect", xmin = leave_average, xmax = 14.5, ymin = rate_average, ymax = 110, fill = "#e4edcc", alpha = 0.8) +
+      annotate("rect", xmin = 0, xmax = leave_average, ymin = 0, ymax = rate_average, fill = "#eeddc2", alpha = 0.8) +
+      annotate("rect", xmin = leave_average, xmax = 14.5, ymin = 0, ymax = rate_average, fill = "#f5f2d2", alpha = 0.8) +
+      geom_point_interactive(aes(x = Paid_maternity_leave_in_months, 
+                 y = Paid_maternity_leave_avg_payment_rate_percent, 
+                 tooltip = paste0("Country: ", Country, "\n", 
+                                  "Paid_maternity_leave_avg_payment_rate_percent: ", Paid_maternity_leave_avg_payment_rate_percent, "%\n", 
+                                  "Payment_Rate: ", Paid_maternity_leave_in_months, "\n", 
+                                  "difference_from_OECD_average: ", difference_from_OECD_average),
+                 data_id = row.names(df_complete)), 
+                 color='#111111', size = 3.0, alpha = 1.0 ) +
+      geom_text_repel(aes(x = Paid_maternity_leave_in_months, 
+                 y = Paid_maternity_leave_avg_payment_rate_percent, 
+                 label = Country), family = 'inconsolata', size = 4, force = 0.5, nudge_x = 0.25, segment.size  = 0.2, segment.color = "grey50", direction = "y", hjust = 0) +
+      scale_x_continuous(limits = c(0, 15), breaks = seq(0, 15, 2), labels = seq(0, 15, 2), expand = c(0,0)) +
+      scale_y_continuous(limits = c(0, 110), breaks = seq(0, 110, 20), labels = seq(0, 110, 20), expand = c(0,0)) +
+      coord_cartesian(clip = 'off') +
+      labs(x="Paid Maternity Leave in Months",
+         y="Payment Rate",
+         title = "Maternity Leave & Pay",
+         caption = "source: OECD, DataWrapper") +
+      theme_minimal(base_family = "inconsolata", base_size = 16) +
+      theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(
+         opts_sizing(rescale = TRUE, width = 1.0), 
+         opts_hover_inv(css = "opacity:0.2;"), 
+         opts_hover(css = "fill:black;")
+         )
+      )
+
+```
+
+
+### The Quadrant
+#### with annotations...
+
+
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+v2 <- v1 + geom_hline(yintercept = rate_average, linetype = "dashed", color = "#bbbbbb") +
+  geom_vline(xintercept = leave_average, linetype = "dashed", color = "#bbbbbb") +
+  annotate("text", x = leave_average, y = 110, 
+           label = "OECD Leave Avg", 
+           hjust = 0.5, vjust = -1.0, size = 5, color = "#aaaaaa", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 14.6, y = rate_average, 
+           label = "OECD\nRate\nAvg", 
+           hjust = 0, vjust = 1.2, size = 5, color = "#aaaaaa", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 2, y = 20, 
+           label = "less money\n& less time", 
+           hjust = 0.5, vjust = 0, size = 5, color = "#c67e63", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 9, y = 20, 
+           label = "less money\nbut more time", 
+           hjust = 0.5, vjust = 0, size = 5, color = "#c1a04f", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 2, y = 90, 
+           label = "more money\nbut less time", 
+           hjust = 0.5, vjust = 0, size = 5, color = "#c1a04f", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 9, y = 90, 
+           label = "more money\nand more time", 
+           hjust = 0.5, vjust = 0, size = 5, color = "#5b7e47", family = "inconsolata", fontface = 1)
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# full version
+ggsave(filename = "assets/more-money-more-time-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# without annotations
+ggsave(filename = "assets/more-money-more-time-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### Citations and data sources
+
+* Inspiration: DataWrapper, [GO](https://blog.datawrapper.de/weekly37/){target="_blank"}
+* Data source: OECD, Parental Leave Systems, [GO](https://www.oecd.org/els/soc/PF2_1_Parental_leave_systems.pdf){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,148 @@
+---
+pagetitle: "Red, Green, and Blue"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggtern)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Red, Green, and Blue
+## Ternary Plot
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Ronald Cuyan on Unsplash"}
+
+masthead <- "assets/ronald-cuyan-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Try to be a rainbow in someone's cloud...\
+--- Maya Angelou\
+
+***
+
+### Ingest the data
+#### red, green, blue
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/red-green-blue/red-green-blue.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Plot
+#### position, shape, color, size
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"),
+  legend.position = "none",
+  legend.title = element_blank(),
+  tern.axis.title.L = element_text(hjust = 0.5),
+  tern.axis.title.R = element_text(hjust = 0.5),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0.25, 0.25, 0.25, 0.25), "in")
+)
+
+v1 <- ggtern(data=df, aes(b, r, g)) + 
+  geom_point(aes(color = hex), size = 2, alpha=1.0) + 
+  scale_color_identity() +
+  coord_tern() +
+  theme_minimal() +
+  theme_nomask() +
+  theme_opts +
+  labs(title = "Named Colors", 
+           subtitle = "by RGB values") +
+           xlab("Blue") + 
+           ylab("Red") +
+           zlab("Green")
+
+# v1
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/red-green-blue-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# without annotations
+ggsave(filename = "assets/red-green-blue-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+### References
+#### citations for narrative and data sources
+
+Data Source:  List of RGB colors, [GO](https://github.com/codebrainz/color-names/blob/master/output/colors.csv){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

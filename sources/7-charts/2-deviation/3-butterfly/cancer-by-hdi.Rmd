@@ -1,0 +1,169 @@
+---
+pagetitle: "Cancer Incidence Rates and Mortality"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+library(magrittr)
+library(plyr)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Cancer Incidence Rates and Mortality
+## Stacked Butterfly Chart
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Angiola Harry on Unsplash"}
+
+masthead <- "assets/angiola-harry-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Cancer cannot cripple love, it cannot shatter hope, it cannot conquer the spirit...\
+---Unknown\
+
+***
+
+The Butterfly plot is a graphical representation for comparing two treatment responses for the same subject across different categories. They are also called tornado plots or pyramid plots.
+
+### Ingest data 
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/global-cancer-data/cancer-hdi.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+### Wrangle data
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_wrangle <- df %>%
+  dplyr::rename(Cancer = Cancer.Type, Low_Incidence = Low_HDI_Incidence, High_Incidence = High_HDI_Incidence, Low_Mortality = Low_HDI_Mortality, High_Mortality = High_HDI_Mortality) %>%
+  gather(key, value, -c(Cancer))%>%
+  separate(key, into = c("HDI", "Type"))
+
+# Order countries by overall percent overweight/obese
+cancer.order = ddply(df_wrangle, .(Cancer), summarise, sum=sum(value))
+cancer.order = cancer.order$Cancer[order(cancer.order$sum)]
+df_wrangle$Cancer = factor(df_wrangle$Cancer, levels=cancer.order)
+df_wrangle
+
+```
+
+
+### Plot Butterfly
+#### Cancer Incidence and Mortality Rate between Low and High HDIs
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(text = element_text(color = "#3A3F4A"),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(linetype = "dotted", size = 0.3, color = "#3A3F4A"),
+    axis.title = element_blank(),
+    plot.title = element_text(face = "bold", size = 36, margin = margin(b = 10), hjust = 0.5),
+    plot.subtitle = element_text(size = 26, margin = margin(b = 10), hjust = 0.5),
+    plot.caption = element_text(size = 14, margin = margin(b = 10, t = 50), color = "#5D646F"),
+    axis.text.x = element_text(size = 12, color = "#5D646F"),
+    axis.text.y = element_blank(),
+    strip.text = element_text(color = "#5D646F", size = 18, face = "bold", hjust = 0.030),
+    plot.background = element_rect(fill = "#EFF2F4"),
+    plot.margin = unit(c(2, 2, 2, 2), "cm"),
+    legend.position = "top",
+    legend.margin  = unit(0.1, "lines"),
+    legend.text  = element_text(family = "Ubuntu Condensed", size = 20),
+    legend.text.align = 0)
+
+v1 <- ggplot(df_wrangle, aes(x=Cancer)) +
+  geom_bar(data=df_wrangle[df_wrangle$Type=="Mortality",], aes(y=value, fill=HDI), stat="identity") +
+  geom_bar(data=df_wrangle[df_wrangle$Type=="Incidence",], aes(y=-value, fill=HDI), stat="identity") +
+  geom_label(aes(x = Cancer, y = 0, label = Cancer, family = "Ubuntu Condensed"),
+         inherit.aes = F,
+         size = 8, label.padding = unit(0.1, "lines"), label.size = 0,
+         label.r = unit(0.0, "lines"), fill = "#EFF2F4", alpha = 0.5, color = "#5D646F")+
+  geom_hline(yintercept=0, colour="white", lwd=0.1) +
+  coord_flip(ylim=c(-75,75)) + 
+  labs(x = "Type of Cancer", y = "Value", 
+       title = "Cancer Incidence and Mortality Rates by HDI",
+       subtitle = "        Incidence                                                  Mortality")+
+  scale_fill_manual(values = c(High = "#ADD8E6", Low = "#ffb6c1"))+
+  theme_minimal(base_family = "Ubuntu Condensed")+
+  theme_opts
+
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# full version
+ggsave(filename = "assets/globalcan-stacked-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/globalcan-stacked-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: World Health Organization, Globocan, [GO](https://gco.iarc.fr/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

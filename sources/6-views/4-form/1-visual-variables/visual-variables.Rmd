@@ -1,0 +1,268 @@
+---
+pagetitle: "Visual Variables"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(gapminder)
+library(countrycode)
+library(magick)
+library(tidyverse)
+library(ggrepel)
+library(ggpubr)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+VIEWS  
+</div>
+
+# Visual Variables
+## mapping data features to visual representations
+
+```{r, out.width="60%", fig.align="center", fig.cap="View by Gapminder"}
+
+masthead <- "assets/countries-health-wealth-2019.svg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> When you visualize, then you materialize...\
+--- Denis Waitley\
+
+***
+
+The process of mapping data to __visual variables__ is called visual mapping.  The mapping process represents your decisions to encode a data feature to a set of visual characteristics.
+
+### Grammar of Graphics
+#### the language for descibing visual representations
+
+
+If we consider a data representation as an instrument for communication, it leads us to consider the language we can use to maximize understanding. The language for information visualization is referred to as the __Grammar of Graphics__.  This grammar provides a form of describing the visual architecture, structure, marks, and properties of a view. Analogous to a painters canvas, we can use the language to describe a graphic frame and layers of visual features that will form the painting.
+
+Visual Variables are a specified set of modifications that can be applied to objects in order to encode information. Although there are varying schools of thought for the concept, we will focus on four simple characteristics that can be used to describe and define virtually any visualization:
+
+* position : where is it located within a coordinate space
+* shape : what form does it have
+* size : how small or big is it
+* color : what color is it
+
+The primary objective of visualization mapping is to identify a set of visualization primitives that can effectively convey the informational content of data. The choice of the variable, which would be most appropriate to represent each aspect of information depends on its characteristics.
+
+Knowing the characteristics of data relevant for visualization mapping is the fi rst important step in designing an eff ective data visualization technique. The most primlnve components of visualization techniques are the marks (graphical symbols) which constitute the graphics. I
+
+
+### Gap Minder
+#### Let's make some bubbles
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# file path parameter
+gapminder_file_path <- "./archetypes/gapminder/gapminder.csv"
+gapminder <- read_csv(gapminder_file_path)
+
+# Get continent reference
+gapminder$continent <- countrycode(gapminder$country_code, origin = 'iso3c', destination = 'continent')
+gapminder
+
+```
+
+
+### Visual Mapping
+#### Location, income by life expectancy
+
+```{r, fig.width=16.17, fig.height=11.44, out.width = "85%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata")
+)
+
+v1 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy)) +
+     # Coordinate parameters
+     ylim(50, 90) +
+     scale_x_log10(limits = range(gapminder$gdp)) +
+     ggtitle("World Health Chart 2019 by Gapminder") + 
+     theme_classic() +
+     theme(legend.position = "none") +
+     theme_opts
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+#### Shape, circle, country
+
+```{r, fig.width=16.17, fig.height=11.44, out.width = "85%"}
+
+v2 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy)) +
+     # Shape visual variable
+     geom_point() + ylim(50, 90) +
+     scale_x_log10(limits = range(gapminder$gdp)) +
+     ggtitle("World Health Chart 2019 by Gapminder") + 
+     theme_classic() +
+     theme(legend.position = "none") +
+     theme_opts
+
+girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+```
+
+
+#### Size, population
+
+```{r, fig.width=16.17, fig.height=11.44, out.width = "85%"}
+
+v3 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy, size = pop)) +
+     geom_point() + 
+     ylim(50, 90) +
+     # Size visual variable
+     scale_size("population", range = c(2, 40)) +
+     scale_x_log10(limits = range(gapminder$gdp)) +
+     ggtitle("World Health Chart 2019 by Gapminder") + 
+     theme_classic() +
+     theme(legend.position = "none") +
+     theme_opts
+
+girafe(ggobj = v3, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+```
+
+
+#### Color, continent
+
+```{r, fig.width=16.17, fig.height=11.44, out.width = "85%"}
+
+# Manual palette to match colors
+continent_palette <- c("Africa" = "#77dff7", "Americas" = "#b5ea32", "Asia" = "#ff5973", "Europe" = "#ffe800", "Oceania" = "#ff5973")
+
+v4 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy, size = pop, fill = continent)) +
+     geom_point(shape = 21, color = "#ffffff") + ylim(50, 90) +
+     scale_size("population", range = c(2, 40)) +
+     scale_x_log10(limits = range(gapminder$gdp)) +
+     # Color mapping
+     scale_fill_manual(values = continent_palette) +
+     ggtitle("World Health Chart 2019 by Gapminder") + 
+     theme_bw() +
+     theme(legend.position = "none") +
+     theme_opts
+
+girafe(ggobj = v4, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+#### Labels
+
+```{r, fig.width=16.17, fig.height=11.44, out.width = "85%"}
+
+v5 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy, fill = continent, label = country )) +
+     geom_point(aes(size = pop), shape = 21, color = "#ffffff") +
+     # Label mapping
+     # geom_text() +
+     # geom_text(hjust = 1, size = 2) +
+     # geom_text_repel(aes(size = pop/2)) +
+     geom_text_repel(data=filter(gapminder, pop<mean(pop)), aes(size = pop/2, label=country), family = "inconsolata") +
+     scale_size("population", range = c(2, 40)) +
+     scale_x_log10(limits = range(gapminder$gdp)) +
+     ylim(50, 90) +
+     # Color mapping
+     scale_fill_manual(values = continent_palette) +
+     ggtitle("World Health Chart 2019 by Gapminder") + 
+     theme_bw() +
+     theme(legend.position = "none") +
+     theme_opts
+
+girafe(ggobj = v5, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+#### Final Result
+
+
+```{r, fig.width=16.17, fig.height=11.44, out.width = "85%"}
+
+gapminder <- gapminder[order(gapminder$pop, decreasing = TRUE),]
+
+v6 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy, fill = continent, label = country )) +
+     # Shape mapping
+     geom_point(aes(size = pop), shape = 21, color = "#ffffff") +
+     # Label mapping
+     geom_text_repel(aes(size = pop/2), family = "inconsolata") +
+     # Size mapping
+     scale_size("population", range = c(2, 40)) +
+     # Location mapping
+     scale_x_log10(limits = range(gapminder$gdp)) +
+     ylim(50, 90) +
+     # Color mapping
+     scale_fill_manual(values = continent_palette) +
+     ggtitle("World Health Chart 2019 by Gapminder") +
+     ylab("Lifespan, Life Expectancy") +
+     xlab("Income, Gdp per Capita") +
+     theme_bw() +
+     theme(legend.position = "none") +
+     theme_opts
+
+girafe(ggobj = v6, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: Free material from www.gapminder.org
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,253 @@
+---
+pagetitle: "Environmental impact of food"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+library(ggiraph)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# The carbon footprint of your food
+## Bar Vertical Grouped
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Thought Catalog on Unsplash"}
+
+masthead <- "assets/thought-catalog-fnztlIb52gU-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Focus on what you eat, not whether your food is local...\
+--- Hannah Ritchie, Our World in Data\
+
+***
+
+### Load the data
+#### Where do the emissions from our food come from?
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df <- read_csv("archetypes/environmental-impact-of-food-by-life-cycle-stage.csv", col_names=TRUE)
+
+# To order the group categories (for chart display) by stage of supply chain
+df$SUPPLY_CHAIN <- factor(df$SUPPLY_CHAIN, levels=c("Land use change", 
+                          "Farm", 
+                          "Animal Feed", 
+                          "Processing", 
+                          "Transport", 
+                          "Retail", 
+                          "Packging"))
+
+df
+
+# Determine max emission value
+max_val <- max(df$EMISSION)
+#max_val
+
+```
+
+### Plot the chart
+#### Focus on what you eat, not whether your food is local
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=9, class.source = 'fold-hide'}
+
+# Theme parameters
+theme_opts <- theme(
+  legend.position="top",
+  legend.title = element_blank(),
+  text = element_text(size=14),                        # Set font size for plot text (axes labels, legend labels, plot title, etc.)
+  axis.ticks = element_blank(),
+  panel.grid.major.y = element_line(color="gray", size = 0.1, linetype="longdash"),
+  panel.background = element_blank(),
+  plot.title = element_text(size=18),                  # Increase font size of plot title text
+  plot.background = element_blank(),
+  plot.margin = margin(.25, .25, .25, .25, "cm")
+)
+
+# Define palette
+supply_chain_palette <- c("Land use change" = "#1ea349", 
+                          "Farm" = "#a3745e", 
+                          "Animal Feed" = "#f36e32", 
+                          "Processing" = "#417aac", 
+                          "Transport" = "#f04b54", 
+                          "Retail" = "#f3ca19", 
+                          "Packging" = "#bcb0ac")
+
+# Reorder to sort by Food Product and Emission
+v1 <- ggplot(data=df, aes(y=EMISSION, x=reorder(FOOD_PRODUCT,EMISSION), fill=SUPPLY_CHAIN)) + 
+  geom_col(position="dodge", stat="identity") +
+  scale_fill_manual(values=supply_chain_palette,
+                    breaks=c("Land use change", "Farm", "Animal Feed", "Processing", "Transport", "Retail", "Packging")) +
+  scale_y_continuous(expand = c(0,0), breaks=seq(0,max_val,5), limits=c(0,max_val+5)) + 
+  scale_x_discrete(limits=c("Beef (beef herd)", "Lamb & Mutton", "Cheese", "Beef (dairy herd)", "Dark Chocolate", "Coffee", "Shrimps (farmed)")) + # limit the food products to the top 7
+  geom_text(aes(label=EMISSION),
+            angle=90,
+            hjust=0,
+            vjust=ifelse(df$SUPPLY_CHAIN == "Land use change", -4.7, 
+                         ifelse(df$SUPPLY_CHAIN == "Farm", -3,
+                                ifelse(df$SUPPLY_CHAIN == "Animal Feed", -1.4,
+                                       ifelse(df$SUPPLY_CHAIN == "Processing", 0.3,
+                                              ifelse(df$SUPPLY_CHAIN == "Transport", 2,
+                                                     ifelse(df$SUPPLY_CHAIN == "Retail", 3.7,
+                                                            5.4))))))) + 
+  coord_cartesian(clip="off") + 
+  labs(title = "Food: greenhouse gas emissions across the supply chain", caption = "Source: Our World in Data") +
+  theme_opts +
+  guides(fill = guide_legend(nrow = 1)) +
+  xlab("") + 
+  ylab("Greenhouse gas emissions per kilogram of food product\n(kg CO2-equivalents per kg product)")
+
+girafe(ggobj = v1, width_svg = 17, height_svg = 10)
+
+```
+
+### Step by step
+#### Draw the base bar chart
+
+```{r step_one, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=9, class.source = 'fold-hide'}
+
+v1 <- ggplot(data=df, aes(y=EMISSION, x=reorder(FOOD_PRODUCT,EMISSION), fill=SUPPLY_CHAIN)) +
+  geom_col(position="dodge", stat="identity")
+
+girafe(ggobj = v1, width_svg = 17, height_svg = 10)
+
+
+```
+
+#### Add bar custom colours and order and limit discrete values
+
+```{r step_two, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=9, class.source = 'fold-hide'}
+
+v1 <- ggplot(data=df, aes(y=EMISSION, x=reorder(FOOD_PRODUCT,EMISSION), fill=SUPPLY_CHAIN)) +
+  geom_col(position="dodge", stat="identity") +
+  scale_fill_manual(values=supply_chain_palette,
+                    breaks=c("Land use change", "Farm", "Animal Feed", "Processing", "Transport", "Retail", "Packging")) +
+  scale_y_continuous(expand = c(0,0), breaks=seq(0,max_val,5), limits=c(0,max_val+5)) +
+  scale_x_discrete(limits=c("Beef (beef herd)", "Lamb & Mutton", "Cheese", "Beef (dairy herd)", "Dark Chocolate", "Coffee", "Shrimps (farmed)"))
+
+girafe(ggobj = v1, width_svg = 17, height_svg = 10)
+
+
+```
+
+#### Add data labels
+
+```{r step_three, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=9, class.source = 'fold-hide'}
+
+v1 <- ggplot(data=df, aes(y=EMISSION, x=reorder(FOOD_PRODUCT,EMISSION), fill=SUPPLY_CHAIN)) +
+  geom_col(position="dodge", stat="identity") +
+  scale_fill_manual(values=supply_chain_palette,
+                    breaks=c("Land use change", "Farm", "Animal Feed", "Processing", "Transport", "Retail", "Packging")) +
+  scale_y_continuous(expand = c(0,0), breaks=seq(0,max_val,5), limits=c(0,max_val+5)) +
+  scale_x_discrete(limits=c("Beef (beef herd)", "Lamb & Mutton", "Cheese", "Beef (dairy herd)", "Dark Chocolate", "Coffee", "Shrimps (farmed)")) +
+  geom_text(aes(label=EMISSION),
+            angle=90,
+            hjust=0,
+            vjust=ifelse(df$SUPPLY_CHAIN == "Land use change", -4.7,
+                         ifelse(df$SUPPLY_CHAIN == "Farm", -3,
+                                ifelse(df$SUPPLY_CHAIN == "Animal Feed", -1.4,
+                                       ifelse(df$SUPPLY_CHAIN == "Processing", 0.3,
+                                              ifelse(df$SUPPLY_CHAIN == "Transport", 2,
+                                                     ifelse(df$SUPPLY_CHAIN == "Retail", 3.7,
+                                                            5.4))))))) +
+  coord_cartesian(clip="off")
+
+girafe(ggobj = v1, width_svg = 17, height_svg = 10)
+
+
+```
+
+#### Beautify by adding theme options
+
+```{r step_four, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=9, class.source = 'fold-hide'}
+
+v1 <- ggplot(data=df, aes(y=EMISSION, x=reorder(FOOD_PRODUCT,EMISSION), fill=SUPPLY_CHAIN)) +
+  geom_col(position="dodge", stat="identity") +
+  scale_fill_manual(values=supply_chain_palette,
+                    breaks=c("Land use change", "Farm", "Animal Feed", "Processing", "Transport", "Retail", "Packging")) +
+  scale_y_continuous(expand = c(0,0), breaks=seq(0,max_val,5), limits=c(0,max_val+5)) +
+  scale_x_discrete(limits=c("Beef (beef herd)", "Lamb & Mutton", "Cheese", "Beef (dairy herd)", "Dark Chocolate", "Coffee", "Shrimps (farmed)")) +
+  geom_text(aes(label=EMISSION),
+            angle=90,
+            hjust=0,
+            vjust=ifelse(df$SUPPLY_CHAIN == "Land use change", -4.7,
+                         ifelse(df$SUPPLY_CHAIN == "Farm", -3,
+                                ifelse(df$SUPPLY_CHAIN == "Animal Feed", -1.4,
+                                       ifelse(df$SUPPLY_CHAIN == "Processing", 0.3,
+                                              ifelse(df$SUPPLY_CHAIN == "Transport", 2,
+                                                     ifelse(df$SUPPLY_CHAIN == "Retail", 3.7,
+                                                            5.4))))))) +
+  coord_cartesian(clip="off") +
+  labs(title = "Food: greenhouse gas emissions across the supply chain", caption = "Source: Our World in Data") +
+  theme_opts +
+  guides(fill = guide_legend(nrow = 1)) +
+  xlab("") +
+  ylab("Greenhouse gas emissions per kilogram of food product\n(kg CO2-equivalents per kg product)")
+
+girafe(ggobj = v1, width_svg = 17, height_svg = 10)
+
+
+```
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative sources: Our World in Data, _You want to reduce the carbon footprint of your food? Focus on what you eat, not whether your food is local_, [GO](https://ourworldindata.org/food-choice-vs-eating-local){target="_blank"}
+
+<pre>
+@misc{ritchie_2020_you,
+  author = {Ritchie, Hannah},
+  month = {01},
+  title = {You want to reduce the carbon footprint of your food? Focus on what you eat, not whether your food is local},
+  url = {https://ourworldindata.org/food-choice-vs-eating-local},
+  urldate = {2021-02-15},
+  year = {2020},
+  organization = {Our World in Data}
+}
+</pre>
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

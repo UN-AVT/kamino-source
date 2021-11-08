@@ -1,0 +1,107 @@
+---
+pagetitle: "Family policy scores by country"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Family Policy Scores by Country
+## Bar Vertical
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo from Wikipedia based on original oil painting by Jerry Barrett"}
+
+masthead <- "assets/sandy-millar-KhStXRVhfog-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> We Are Family!...\
+--- Sister Sledge\
+
+***
+
+### Load the data
+#### Family Integration Policy Average Scores by Country, 2014
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df = read.csv("./archetypes/family-policy-scores-by-country/figure-7-3.csv", header = TRUE, stringsAsFactors = TRUE, fileEncoding="UTF-8-BOM")
+df
+
+```
+
+### Plot the chart
+#### Family Integration Policy Average Scores by Country, 2014 - Figure 7.3
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=7.5}
+
+# Make the plot
+v1 <- ggplot(df, aes(x=reorder(Country, -Family.Integration.Policy.Average.Scores), y=Family.Integration.Policy.Average.Scores)) +
+  geom_bar(stat="identity", width=0.6, fill="darkseagreen3") +
+  scale_y_continuous(breaks=seq(10, 100, 10), limits=c(0, 100)) +
+  labs(title="Family Integration Policy Average Scores by Country, 2014 - Figure 7.3",
+       caption="Source: UN Women calculations from CIDOB and the MPG 2015") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.2),
+        plot.caption = element_text(hjust = 0),
+        panel.grid.major.x = element_blank()) +
+  xlab("") + # for the x axis label
+  ylab("Family integration policy average scores") + # for the y axis label
+  coord_cartesian(ylim=c(0, 100))
+
+# Print the plot
+v1
+
+```
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative sources: UN Women, [GO](https://www.unwomen.org/en){target="_blank"}
+* Data sources: UN Women, [GO](https://www.unwomen.org/en){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

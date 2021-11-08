@@ -1,0 +1,219 @@
+---
+pagetitle: "Unpaid Care And Domestic Work By Region"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Unpaid Care And Domestic Work By Region
+## Box Whisker
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Sebastian Santacruz on Unsplash"}
+
+masthead <- "assets/sebastian-santacruz-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Everybody wants to save the earth; no one wants to help mom do the dishes...\
+--- P.J. O'Rourke\
+
+***
+
+### Load the data
+#### Have women’s and men’s unpaid care and domestic work converged in high-income countries?
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df = read.csv("archetypes/unpaid-care-and-domestic-work-by-region/unpaid-care-and-domestic-work-by-region.csv", header = TRUE, stringsAsFactors = TRUE, encoding="UTF-8")
+df
+
+```
+
+
+### Wrangle
+#### clean column names
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Clean column name
+df_wrangle <- df %>% dplyr::rename(Country=Country, Region=SDG.Region, Ratio=Ratio..W.M.)
+df_wrangle
+
+```
+
+
+### Wrangle
+#### calculate and filter by regional ratios to create labels
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Calculate Max and Min ratio for each Region
+regionRatio <- df_wrangle %>%
+  group_by(Region) %>%
+  dplyr::mutate(
+    MaxByR = max(Ratio, na.rm = T),
+    MinByR = min(Ratio, na.rm = T)
+  ) %>%
+  dplyr::arrange(Region)
+
+regionRatio
+
+# Filter the Max and Min value only, below countries will be our labels
+country_label_max <- filter(regionRatio, MaxByR == Ratio)
+country_label_min <- filter(regionRatio, MinByR == Ratio & Country != "Norway")
+
+```
+
+
+### Plot
+#### region and ratio
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 11),
+    axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, face = "bold"),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    #panel.grid.major.y = element_blank(),
+    legend.position='none'
+)
+
+region_labels <- c("Australia and\nNew Zealand",
+                   "Central and\nSouthern Asia",
+                   "Eastern and\nSouth-Eastern Asia",
+                   "Europe and\nNorth America", 
+                   "Latin America and\nthe Caribbean", 
+                   "Northern Africa and\nWestern Asia", 
+                   "Oceania excl.\nAustralia and\nNew Zealand",
+                   "Sub-Saharan Africa"
+                   )
+
+v1 <- ggplot(df_wrangle, aes(x = Region, y = Ratio)) + 
+  geom_boxplot(fill = "#ACC8ED", colour = "black") +
+  geom_dotplot(binaxis='y', stackdir='center', dotsize = 0.3, fill="#A6609C", color="#A6609C") +
+  scale_x_discrete(labels = region_labels) +
+  scale_y_continuous(breaks = seq(0,11,1), labels = seq(0,11,1)) +
+  labs( 
+       title = "Ratio of female-to-male time spent",
+       subtitle = "on unpaid care and domestic work by region",
+       x = "", 
+       y = "ratio of female-to-male") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+### Plot
+#### with country labels
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+v2 <- v1 +
+  geom_text(data = country_label_max, aes(label = Country, y = (Ratio + 0.2)), vjust = 0.0, hjust = 0.5) +
+  geom_text(data = country_label_min, aes(label = Country, y = (Ratio - 0.2)), vjust = 1.0, hjust = 0.5)
+
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/unpaid-care-and-domestic-work-by-region-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/unpaid-care-and-domestic-work-by-region-sm.png", plot = v1, width=4, height=2.25)
+
+
+```
+
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative and Data Source: UN Women, Progress of the Worlds Women, [GO](https://www.unwomen.org/-/media/headquarters/attachments/sections/library/publications/2019/progress-of-the-worlds-women-2019-2020-en.pdf){target="_blank"}
+
+<pre>
+@misc{unwomen_2018_making,
+  author = {UN Women},
+  title = {MAKING EVERY WOMAN AND GIRL COUNT 2018 ANNUAL REPORT IMPLEMENTATION PHASE},
+  url = {https://data.unwomen.org/sites/default/files/documents/women%20count%202018%20annual%20report.pdf},
+  urldate = {2021-06-22},
+  year = {2018}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

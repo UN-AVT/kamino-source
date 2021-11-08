@@ -1,0 +1,119 @@
+---
+pagetitle: "Pattern Recognition"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+```
+
+<div class="activity">
+VIEWS  
+</div>
+
+# Pattern Recognition
+## Gestalt Principles
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Manuel on Unsplash"}
+
+masthead <- "assets/manuel-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> I am interested in what I term gestalts;\
+picture circumstances which bring together disparate\
+images or ideas so as to form new meanings and new configurations...\
+--- Robert Heinecken\
+
+***
+
+Gestalt principles are rules of the **organization** of perceptual scenes. Gestalt is a psychology term which means “unified whole”. It refers to theories of visual perception developed by German psychologists in the 1920s. These theories attempt to describe how people tend to organize visual elements into **groups** or **unified wholes** when certain principles are applied.
+
+### Gestalt Principles
+#### je ne sais quoi
+
+Gestalt principles are rules of the organization of perceptual scenes. When we look at the world, we usually perceive complex scenes composed of many groups of objects on some background, with the objects themselves consisting of parts, which may be composed of smaller parts, etc.
+
+> The basic thesis of gestalt theory might be formulated thus:\
+there are contexts in which what is happening in the whole cannot be deduced from the characteristics of the separate pieces,\
+but conversely; what happens to a part of the whole is, in clearcut cases, determined by the laws of the inner structure of its whole.\
+--- Max Wertheimer, Gestalt theory
+
+When you see something, as a whole and in parts, your mind will develop interpretations, connections, and feelings based on past experiences and natural tendencies. Understanding and effectively employing these concepts during the design process can help to ensure that the consumer of your work will see the work as you intended it to be seen and understood.
+
+There is no definitive list of Gestalt principles, but the subject has been a focus of study specifically for information visualization resulting in seven patterns that may be useful as design guidance:
+
+
+```{r, out.width = "800px"}
+
+knitr::include_graphics("assets/gestalt-principles.svg", dpi=300)
+
+```
+
+
+### Application
+#### Guiding principles
+
+Let's take a closer look at the principles to explore their application to a design:
+
+* __Closure__ :  if enough of a shape is apparent, the viewer may perceive the whole by filling in the missing pieces.
+* __Continuation__ : a viewers focus will naturally follow a line, curve or any other mark that creates a path.
+* __Figure and Ground__ : a viewer will often group elements of a scene that are similar in appearance.
+* __Proximity__ : if elements are arranged close together, they may be perceived as a group.
+* __Similarity__ : if objects look alike, they may be perceived as a group or pattern.
+* __Symmetry__ : describes the instance where the whole of a figure is perceived rather than the individual parts which make up the figure.
+
+This example highlights the use of symmetry.
+
+```{r, out.width = "800px"}
+
+knitr::include_graphics("assets/gestalt-example.svg", dpi=300)
+
+```
+
+This example from the **UNEP/GRID Arendal Maps and Graphics Library** shows **Market concentration** to explain how: 
+
+> Agricultural trade is increasingly organized in global chains, dominated by a few large transnational buyers (trading companies, agrifood processors and companies involved in production of commodities). In these globalized chains primary producers often capture only a fraction of the international price of a trade commodity, so the poverty reduction and rural development effects of integration in global supply chains have been far less than optimal.
+
+See the original here: <https://www.grida.no/resources/6342>.
+
+Generally, Gestalt describes our tendency to **infer relationships** between the objects we are looking at in a way that goes beyond what is explicitly visible and how a certain layout will influence a viewer to **identify groupings**, **classifications**, or **similarity**.
+
+### References
+#### citations for narrative and data sources
+
+* TBD
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

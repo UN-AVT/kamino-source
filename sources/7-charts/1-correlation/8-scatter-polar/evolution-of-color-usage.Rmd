@@ -1,0 +1,214 @@
+---
+pagetitle: "Evolution of Color Usage"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(colorspace)
+library(scales)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# The Evolution of Color Usage
+## Scatter Polar
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Steve Johnson on Unsplash"}
+
+masthead <- "assets/steve-johnson-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> When one is painting, one does not think...\
+--- Raphael\
+
+***
+
+This case illustrates the usage of color over time, by artistic movement, based on the Metropolitan Museum of Art's European paintings collection.
+
+* Medieval Gothic (1200-1430)
+* Italian Renaissance (1430-1510)
+* Northern Renaissance (1510-1550)
+* Mannerism (1550-1600)
+* Baroque (1600-1705)
+* Rococo (1705-1750)
+* Neoclassicism (1750-1805)
+* Romanticism (1805-1850)
+* Realism (1850-1899)
+* Modern Art (1899-1920)
+
+
+### Ingest the data
+#### series, values, and dates
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df <- read.csv("archetypes/evolution-of-color-usage/evolution-of-color-usage.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle the data
+#### Transform color values to useful forms
+
+The original dataset color field is based on RGB.  We'll convert the values to the HSV (hue, saturation, and value) color model. This will enrich our dataset with features that describe the colors (hue or tint) in terms of their shade (saturation or amount of gray) and their brightness value.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df$color <- str_remove(df$color, "\\[")
+df$color <- str_remove(df$color, "\\]")
+
+for (row in 1:nrow(df)) {
+  
+  color <- df[row, "color"]
+  
+  r <- as.numeric(unlist(strsplit(color, ","))[[1]])
+  g <- as.numeric(unlist(strsplit(color, ","))[[2]])
+  b <- as.numeric(unlist(strsplit(color, ","))[[3]])
+  
+  df[row, "hex"] <- rgb(r, g, b, maxColorValue = 255)
+  hex <- df[row, "hex"]
+  
+  h <- as.numeric(unlist(rgb2hsv(col2rgb(hex, alpha = FALSE)))[[1]])
+  s <- as.numeric(unlist(rgb2hsv(col2rgb(hex, alpha = FALSE)))[[2]])
+  v <- as.numeric(unlist(rgb2hsv(col2rgb(hex, alpha = FALSE)))[[3]])
+  
+  df[row, "h"] <- round(h, digits = 3)
+  df[row, "s"] <- round(s, digits = 3)
+  df[row, "v"] <- round(v, digits = 3)
+  
+  l <- (2 - s) * v / 2;
+
+  if (l != 0) {
+        if (l == 1) {
+            s = 0
+        } else if (l < 0.5) {
+            s = s * v / (l * 2)
+        } else {
+            s = s * v / (2 - l * 2)
+        }
+  }
+  
+  df[row, "l"] <- round(l, digits = 3)
+  
+}
+
+df
+
+```
+
+
+### Plot
+#### hsl and hex
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  #axis.line = element_blank(),
+  #axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  #panel.grid = element_blank(),
+  #panel.grid.major = element_blank(),
+  #panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0, 0, 0, 0), "in")
+)
+
+v1 <- ggplot(data = df)  +
+    geom_point(aes(x = h, y = l, size = s), color = df$hex, alpha = 0.6) +
+    scale_x_continuous() +
+    # possible values for trans : 'log2', 'log10','sqrt', i.e. trans='log2'
+    scale_y_continuous() +
+    scale_size_continuous(range = c(1,5)) +
+    coord_polar() +
+    theme_minimal() +
+    xlab("") +
+    ylab("") +
+    theme_opts
+
+# Square output
+girafe(ggobj = v1, width_svg = 1080/72, height_svg = 1080/72,
+       options = list(opts_sizing(rescale = FALSE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/evolution-of-color-usage-fs.svg", plot = v1, width=720/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/evolution-of-color-usage-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Inspired by The Rich History of Color in Europe, https://nourzein.github.io/Major-Studio1/mobile/, based on a color analysis of the MET's European Paintings Collection by artistic movement (from 1200-1900).
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

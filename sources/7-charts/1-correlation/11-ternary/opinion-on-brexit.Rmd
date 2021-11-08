@@ -1,0 +1,172 @@
+---
+pagetitle: "Opinion on Brexit"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggtern)
+library(ggiraph)
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Opinion on Brexit
+## Ternary Plot
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Jannes Van Den Wouwer on Unsplash"}
+
+masthead <- "assets/jannes-van-den-wouwer-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> It is time for the British people to have their say. It is time for us to settle this question about Britain and Europe...\
+--- David Cameron, January 2013
+
+***
+
+The "ternary plot" (a triangular scatter chart) presents 2,500 individual profiles of the British electorate (representing 25% of the total). The profiles are generated from a statistical model built by __The Economist__ using microdata from YouGov, a pollster, from the following survey question asked of 90,000 British adults between November 27th and December 9th 2018.
+
+The UK is currently scheduled to leave the EU on 29 March 2019. UK and EU negotiators recently completed an agreement on the terms of the UK’s exit from the EU, but this proposed deal has yet to be confirmed by the UK House of Commons.  From most preferred to least preferred, how would you rank the following three options?
+
+* __No Deal__: leave the EU without a withdrawal agreement.
+* __Proposed Deal__: leave the EU under the terms of the negotiated agreement.
+* __Remain__: stop the exit process and remain in the EU.
+
+
+### Ingest data
+#### profiles generated from statistical model
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df <- read.csv("archetypes/opinion-on-brexit/economist-opinion-on-brexit.csv", header = TRUE, stringsAsFactors = TRUE)
+df
+
+```
+
+### Analytics
+#### determine which is max prediction
+
+```{r data-prep, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Write function to determine which is max prediction
+brexit.pref <- function(x) { 
+  pref <- apply(X = x[, 12:14], 1, function(x) which.max(x)) 
+  x <- colnames(x)[11+pref] %>% gsub("pred_", "", .) }
+df$pred_choice <- brexit.pref(df)
+
+df
+
+```
+
+### Plot
+#### position, shape, color
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  tern.axis.title.L = element_text(hjust = 0.5),
+  tern.axis.title.R = element_text(hjust = 0.5),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0.25, 0.25, 0.25, 0.25), "in")
+)
+
+choice_palette <- c("remain" = "#66BB6A",
+                    "deal" = "#26A69A",
+                    "no_deal" = "#FFA726")
+
+v1 <- ggtern(data=df, aes(pred_no_deal, pred_deal, pred_remain)) + 
+  geom_point(aes(colour=pred_choice), alpha=.6) + 
+  scale_color_manual(values = choice_palette) +
+  coord_tern() +
+  theme_minimal() +
+  theme_rotate(degrees = 180) +
+  theme_nomask() +
+  theme_opts +
+  labs(title = "Hypothetical Brexit choices based on modelled population", 
+           subtitle = "The Economist, Graphic Detail, Opinion on Brexit") +
+           xlab("No Deal") + 
+           ylab("Deal") +
+           zlab("Remain")
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/opinion-on-brexit-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# without annotations
+ggsave(filename = "assets/opinion-on-brexit-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Economist, Graphic Detail, [GO](https://github.com/TheEconomist/graphic-detail-data/tree/master/data/2019-02-23_opinion-on-brexit){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

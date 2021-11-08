@@ -1,0 +1,83 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    #code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden 
+gc() #free up memory and report the memory usage.
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Bubble Charts
+## Story-Telling with Bubbles
+
+```{r, fig.align="center", out.width="50%"}
+masthead <- "assets/gapminder-fs.svg"
+knitr::include_graphics(masthead, dpi=72)
+```
+
+
+
+A bubble chart is an extension of the scatter plot used to look at relationships between three numeric variables (x,y,z). Each dot in a bubble chart corresponds with a single data point. The first two dimensions (x, y) are visualized as coordinates on the x-axis and y-axis.The third dimension (z) is represented by size. A fourth dimension (categorical or numerical) can also be added through the color of the bubbles. The bubbles are oftentimes labelled.
+
+Features that can be interpreted from a Bubble Chart:
+
+* __Outliers__ : Data that doesn't fit the others in the dataset or its patterns.
+* __Gaps__ : intervals that contains no data.
+* __Clusters__ : isolated groups of data bubbles which follows the same characteristics.
+* __Relationships__ : show relationships between three or four variables but not their exact values.
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "bubble" # mostly used in wranglers and analytics
+keywords <- ''
+commands <- ''
+sources <- ''
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

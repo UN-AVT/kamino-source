@@ -1,0 +1,197 @@
+---
+pagetitle: "Road deaths by country"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(stringr)
+library(countrycode)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Road deaths by country
+## Scatter plot
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Yannis H on Unsplash"}
+
+masthead <- "assets/yannis-h-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Some car accidents are caused by the ignorance or disbelief of the fact\ that a driver’s eyes and mind can be thousands of kilometres apart...\
+--- Mokokoma Mokhonoana\
+
+***
+
+
+### Ingest the data
+#### gdp and road traffic accidents
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df_gdp <- read.csv("archetypes/road-deaths-by-country/gdp.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df_gdp
+
+df_rd <- read.csv("archetypes/road-deaths-by-country/road-deaths.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df_rd
+
+
+```
+
+
+### Wrangle the data
+#### bracket removal and more
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_rd_wrangle <- df_rd %>% mutate(road_deaths = as.integer(str_replace(est_road_traffic_death_rate_per_100k_population_both_sexes, "\\[.+?\\]", "")))
+df_rd_wrangle <- df_rd_wrangle %>% filter(year == 2017)
+df_rd_wrangle <- df_rd_wrangle %>% select(c(country, road_deaths))
+df_rd_wrangle$iso3 <- countrycode(df_rd_wrangle$country, origin='country.name', destination='iso3c')
+# df_rd_wrangle
+
+df_combined <- merge(df_rd_wrangle, df_gdp, by.x='iso3', by.y='Country_Code')
+df_combined$region <- countrycode(df_combined$iso3, origin='iso3c', destination='un.region.name')
+df_combined <- df_combined %>% select(c(iso3, country, road_deaths, X2017, region))
+df_combined <- df_combined[complete.cases(df_combined), ]
+# df_combined
+
+df_final <- df_combined %>% rename(gdp = X2017)
+df_final <- df_final %>% rename_with(toupper)
+df_final <- df_final %>% filter(ROAD_DEATHS > 0)
+df_final
+
+```
+
+
+### Plot
+#### data points with smoothing
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    # axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    # panel.grid.minor = element_blank(),
+    # panel.grid.major = element_blank(),
+    legend.position='top'
+  )
+
+# Plot
+v1 <- ggplot(df_final, aes(x = GDP, y = ROAD_DEATHS)) + 
+  geom_point(aes( fill = REGION, color = REGION), size = 4, shape = 21) +
+  geom_smooth(method="loess", se = FALSE, linetype = 'solid', size = 2, color = '#82A0C2') + # "lm", "glm", "gam", "loess" 
+  geom_text_repel(aes(label = COUNTRY)) + 
+  scale_x_log10() +
+  scale_y_continuous() +
+  labs( title = "Driving lessons",
+        subtitle = NULL,
+        caption = "Source: World Bank, IHME",
+        x = "GDP per capita, PPP (constant 2017 international $)",
+        y = "Est road traffic death rate per 100k population both sexes, 2017") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+### Plot with annotations
+#### some narrative to help tell the story
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+
+
+  
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/road-deaths-by-country-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/road-deaths-by-country-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative Inspiration: The Economist, Driving lession
+* Data Source: World Health Organization, [GO](https://apps.who.int/gho/data/node.main.A997){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

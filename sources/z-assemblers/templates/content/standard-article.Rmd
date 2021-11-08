@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Standard Article"
 output: 
   html_document:
     theme: lumen
@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: vendor
@@ -27,9 +27,6 @@ library(tidyverse)
 library(ggiraph)
 
 library(DiagrammeR)
-
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -198,11 +195,8 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ```
 
 
-### Save plot
-#### as vector or raster image
 
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-show'}
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
 
 # eval = FALSE as default; set to TRUE for production outputs
 
@@ -218,36 +212,26 @@ ggsave(filename = "outputs/thumbnail.png", plot = v1, width=4, height=2.25)
 ### References
 #### citations for narrative and data sources
 
-* Narrative sources
-* Data sources
+* Narrative sources: The Narrative Source, [GO](https://github.com/UN-AVT/kamino-source){target="_blank"}
+* Data sources: The Data Source, [GO](https://github.com/UN-AVT/kamino-source){target="_blank"}
 
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+<!-- or -->
 
-# cleanbib()
-# read.bibtex(file = "citations/citations.bib")
+<pre>
+@misc{ortizospina_2013_child,
+  author = {Ortiz-Ospina, Esteban and Roser, Max},
+  title = {Child Labor},
+  url = {https://ourworldindata.org/child-labor},
+  urldate = {2021-02-24},
+  year = {2013},
+  organization = {Our World in Data}
+}
+</pre>
 
-```
-
-
-### Metadata
-#### keywords, commands, sources
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "" # mostly used in wranglers and analytics
-keywords <- 'space launches satellite military civil private'
-commands <- 'geom_bar'
-sources <- 'Reuters DataWrapper'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```

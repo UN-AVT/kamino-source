@@ -1,0 +1,111 @@
+---
+pagetitle: "Lollipop Chart for mpg Data"
+output: 
+  html_document:
+    theme: flatly
+    code_folding: show
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+
+options(scipen=999)  # turn-off scientific notation like 1e+48
+library(ggplot2)
+theme_set(theme_bw())
+
+```
+
+
+### Lollipop: mpg 
+
+#### Load Data
+***
+
+```{r, echo=FALSE}
+
+# Data set is provided by R natively
+data <- mpg
+# Show first few records
+data
+
+```
+
+#### Process Data 1
+***
+
+_Aggregate city miles per gallon column by manufacturer name, change column names to make and mileage, and sort by mileage_
+```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.width=10.5, fig.height=7.5}
+
+cty_mpg <- aggregate(mpg$cty, by=list(mpg$manufacturer), FUN=mean)  # aggregate
+colnames(cty_mpg) <- c("make", "mileage")  # change column names
+cty_mpg <- cty_mpg[order(cty_mpg$mileage), ]  # sort
+cty_mpg$make <- factor(cty_mpg$make, levels = cty_mpg$make)  # to retain the order in plot.
+cty_mpg
+
+```
+
+
+
+#### Render Vertical View 
+***
+##### Make Vs Avg. City Mileage
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.width=10.5, fig.height=7.5}
+
+# Plot
+
+view1<- ggplot(cty_mpg, aes(x=make, y=mileage)) + 
+  geom_point(size=3, color="#69b3a2") + 
+  geom_segment(aes(x=make, 
+                   xend=make, 
+                   y=0, 
+                   yend=mileage)) + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6))
+
+print(view1)
+
+```
+
+
+#### Process Data 2
+***
+
+_Aggregate highway miles per gallon column by manufacturer name, change column names to make and mileage, and sort by mileage_
+```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.width=10.5, fig.height=7.5}
+
+hwy_mpg <- aggregate(mpg$hwy, by=list(mpg$manufacturer), FUN=mean)  # aggregate
+colnames(hwy_mpg) <- c("make", "mileage")  # change column names
+hwy_mpg <- hwy_mpg[order(hwy_mpg$mileage), ]  # sort
+hwy_mpg$make <- factor(hwy_mpg$make, levels = hwy_mpg$make)  # to retain the order in plot.
+hwy_mpg
+
+```
+
+
+
+#### Render horizontal View 
+***
+##### Make Vs Avg. Highway Mileage
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.width=10.5, fig.height=7.5}
+
+# Plot
+
+view2<- ggplot(hwy_mpg, aes(y=make, x=mileage)) + 
+  geom_point(size=3, color="#69b3a2") + 
+  geom_segment(aes(y=make, 
+                   yend=make, 
+                   x=0, 
+                   xend=mileage)) + 
+  theme(axis.text.y = element_text( vjust=0.6))
+
+print(view2)
+
+```
+```{r, echo=FALSE}
+
+ggsave(filename = "lollipop vertical.svg", plot = view1, width=24.5, height=6.5)
+ggsave(filename = "lollipop horizontal.svg", plot = view2, width=24.5, height=6.5)
+```

@@ -1,0 +1,83 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    #code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden 
+gc() #free up memory and report the memory usage.
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Scatter Jitter
+## Story-Telling with Scatter Jitter
+
+```{r, out.height="50%", out.width="50%", fig.align="center", fig.cap=""}
+#masthead <- ""
+#knitr::include_graphics(masthead, dpi=72)
+```
+
+
+A jitter plot is a variant of the strip plot with a better view of overlapping data points, used to visualise the distribution of many individual one-dimensional values. Mainly it allows you to separate marks or dots into different columns. Scatterplots are one of the best ways to understand a bivariate relationship.  They are excellent for visualizing the relationship between two continuous variables. However, on some occasions we may want to visualize the relationship between one continuous variable and another variable that is almost continuous.  From the scatterplot, it’s a bit hard to see the individual points in the plot because so many of them might overlap with each other. In these situations, we might want to rely on a scatterplot, but we need to pre-process the data in order to clearly visualize it. With the help of Jitter, we can add a bit of “noise” to the x-axis variable so that we can see the individual points on the plot more clearly.
+
+Advantages of using Jitter:
+
+* __Jitter provides a better view of data__ : particularly useful when one of the levels of the discrete variable has far more values than the other levels.
+* __Jitter for visualization only__ : we can get a better picture of the true underlying relationship between two variables in a dataset. It adds some random noise to data, which can be beneficial when we want to visualize data in a scatterplot. 
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "Scatter" # mostly used in wranglers and analytics
+keywords <- ''
+commands <- ''
+sources <- ''
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

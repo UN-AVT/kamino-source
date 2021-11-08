@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Kamino</title>
+
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/navigation-1.1/codefolding.js"></script>
+<link href="libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+<script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+<script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+<link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet" />
+<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script>
+<script src="libs/girafe-binding-0.7.10/girafe.js"></script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../z-assemblers/assets/logo/logo.svg" alt="" width="42">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../z-assemblers/assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../z-assemblers/assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="C:/GitHub/Perso/kamino-dev/sources/z-assemblers/assets/styles/content/kamino.css" type="text/css" />
+<link rel="stylesheet" href="C:/GitHub/Perso/kamino-dev/sources/z-assemblers/assets/icons/line-awesome/css/line-awesome.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>CHARTS</p>
+</div>
+<div id="marimekko" class="section level1">
+<h1>Marimekko</h1>
+</div>
+<div id="case-airline-passenger-traffic" class="section level1">
+<h1>Case: Airline passenger traffic</h1>
+<blockquote>
+<p>Sometimes, the world from above seems too beautiful, too wonderful, too distant for human eyes to see….<br />
+— Charles A. Lindbergh</p>
+</blockquote>
+<hr />
+</div>
+<div id="load-the-data" class="section level1">
+<h1>Load the data</h1>
+<div id="projected-growth-in-airline-passenger-traffic-by-region" class="section level2">
+<h2>Projected growth in airline passenger traffic by region</h2>
+<pre class="r fold-hide"><code># Create dataset
+df = read.csv(&quot;archetypes/airline-passenger-traffic/projected-growth-in-airline-passenger-traffic-by-region.csv&quot;, header = TRUE)
+
+# Prepare the data
+df$xmax &lt;- cumsum(df$RPK)
+df$xmin &lt;- df$xmax - df$RPK
+df$xlabel &lt;- (df$xmax + df$xmin)/2
+df$label &lt;- paste(as.character(df$Growth),&quot;%&quot;)
+data&lt;-df %&gt;% rename(Regions=Region)
+data</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Regions"],"name":[1],"type":["chr"],"align":["left"]},{"label":["RPK"],"name":[2],"type":["int"],"align":["right"]},{"label":["Growth"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["xmax"],"name":[4],"type":["int"],"align":["right"]},{"label":["xmin"],"name":[5],"type":["int"],"align":["right"]},{"label":["xlabel"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["label"],"name":[7],"type":["chr"],"align":["left"]}],"data":[{"1":"Within South Asia","2":"488","3":"9.5","4":"488","5":"0","6":"244.0","7":"9.5 %"},{"1":"Within Southeast Asia","2":"848","3":"7.7","4":"1336","5":"488","6":"912.0","7":"7.7 %"},{"1":"Middle East-South Asia","2":"486","3":"7.5","4":"1822","5":"1336","6":"1579.0","7":"7.5 %"},{"1":"Within China","2":"1897","3":"6.2","4":"3719","5":"1822","6":"2770.5","7":"6.2 %"},{"1":"Within South America","2":"510","3":"6.0","4":"4229","5":"3719","6":"3974.0","7":"6 %"},{"1":"Europe-Middle East","2":"690","3":"5.4","4":"4919","5":"4229","6":"4574.0","7":"5.4 %"},{"1":"Central America-North America","2":"478","3":"5.3","4":"5397","5":"4919","6":"5158.0","7":"5.3 %"},{"1":"Within Europe","2":"1482","3":"3.2","4":"6879","5":"5397","6":"6138.0","7":"3.2 %"},{"1":"Europe-North America","2":"840","3":"2.9","4":"7719","5":"6879","6":"7299.0","7":"2.9 %"},{"1":"Within North America","2":"1809","3":"2.6","4":"9528","5":"7719","6":"8623.5","7":"2.6 %"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="plot-the-chart" class="section level1">
+<h1>Plot the chart</h1>
+<div id="projected-growth-in-airline-passenger-traffic-by-region-1" class="section level2">
+<h2>Projected growth in airline passenger traffic by region</h2>
+<pre class="r fold-show"><code>theme_opts &lt;- theme(
+  legend.position = &quot;none&quot;,
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill=&quot;white&quot;, colour=&quot;white&quot;),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0, 0, 1.25, 0), &quot;in&quot;)
+)
+
+v1 &lt;-ggplot(data) +
+    geom_rect(aes(ymin = 0, ymax = Growth, xmin = xmin, xmax = xmax, fill = Regions), color = &quot;white&quot;, alpha = 0.5 ) + 
+    geom_text(aes(x = xlabel, y = Growth, label = label, vjust = -1), position = &quot;identity&quot;, color = &quot;black&quot;, size = 3 ) +
+    geom_text(aes(x = xlabel, y = 0.2, label = format(RPK, big.mark = &quot;,&quot;, scientific = FALSE), vjust = 0), position = &quot;identity&quot;, color = &quot;black&quot;, size = 3 ) +
+      geom_text(aes(x = 9500, y = 0.2, label = &quot;Estimated\nRPK (B)\nin 2035&quot;), vjust = 0.4) +
+    geom_text(aes(x = xlabel, y = 0, label = Regions), hjust = &quot;right&quot;, vjust = 1.5, position = &quot;identity&quot;, color = &quot;black&quot;, size = 3.5, angle = 45 ) +
+    geom_hline(yintercept = 4.8, linetype = &quot;dashed&quot;) + geom_text(aes(0, 4.8, label = &quot;World Traffic\nGrowth 4.8%&quot;)) +
+    geom_hline(yintercept = 2.9, linetype = &quot;dashed&quot;) + geom_text(aes(0, 2.9, label = &quot;World GDP\nGrowth 2.9%&quot;)) +
+    coord_cartesian(clip=&quot;off&quot;) +
+    theme(plot.title = element_text(size = rel(1.5)), panel.background = element_rect(fill = &quot;white&quot;, colour = &quot;grey50&quot;)) +
+    theme_opts + 
+    labs(title = &quot;Projected Annual Growth in Revenue Passenger Kilometers (RPK) 2015-2035 (top 10 regional flows)&quot;)
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))</code></pre>
+<div id="htmlwidget-e6d927de6a7167cb439b" style="width:85%;height:768px;" class="girafe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e6d927de6a7167cb439b">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d' viewBox='0 0 936.00 504.00'>\n  <g>\n    <defs>\n      <clipPath id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_1'>\n        <rect x='0.00' y='0.00' width='936.00' height='504.00'/>\n      <\/clipPath>\n    <\/defs>\n    <rect x='0.00' y='0.00' width='936.00' height='504.00' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_1' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_1)' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round'/>\n    <defs>\n      <clipPath id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2'>\n        <rect x='0.00' y='0.00' width='936.00' height='504.00'/>\n      <\/clipPath>\n    <\/defs>\n    <rect x='2.74' y='20.77' width='933.26' height='390.49' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_2' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n    <rect x='45.16' y='38.52' width='43.45' height='354.99' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_3' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' fill='#E76BF3' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='88.61' y='105.78' width='75.51' height='287.73' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_4' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' fill='#FF62BC' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='164.12' y='113.26' width='43.28' height='280.25' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_5' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' fill='#39B600' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='207.40' y='161.83' width='168.92' height='231.68' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_6' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' fill='#00BF7D' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='376.32' y='169.31' width='45.41' height='224.20' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_7' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' fill='#9590FF' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='421.73' y='191.73' width='61.44' height='201.78' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_8' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' fill='#D89000' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='483.17' y='195.46' width='42.56' height='198.05' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_9' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' fill='#F8766D' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='525.74' y='273.94' width='131.96' height='119.58' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_10' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' fill='#00BFC4' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='657.70' y='285.15' width='74.80' height='108.37' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_11' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' fill='#A3A500' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='732.50' y='296.36' width='161.08' height='97.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_12' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' fill='#00B0F6' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='55.98' y='32.41' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_13' font-size='6.40pt' font-family='Arial'>9.5 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='115.46' y='99.67' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_14' font-size='6.40pt' font-family='Arial'>7.7 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='174.85' y='107.14' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_15' font-size='6.40pt' font-family='Arial'>7.5 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='280.95' y='155.72' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_16' font-size='6.40pt' font-family='Arial'>6.2 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='391.67' y='163.19' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_17' font-size='6.40pt' font-family='Arial'>6 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='441.54' y='185.61' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_18' font-size='6.40pt' font-family='Arial'>5.4 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='493.55' y='189.35' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_19' font-size='6.40pt' font-family='Arial'>5.3 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='580.81' y='267.82' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_20' font-size='6.40pt' font-family='Arial'>3.2 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='684.19' y='279.03' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_21' font-size='6.40pt' font-family='Arial'>2.9 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='802.13' y='290.24' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_22' font-size='6.40pt' font-family='Arial'>2.6 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='57.40' y='386.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_23' font-size='6.40pt' font-family='Arial'>  488<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='116.88' y='386.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_24' font-size='6.40pt' font-family='Arial'>  848<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='176.28' y='386.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_25' font-size='6.40pt' font-family='Arial'>  486<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='281.19' y='386.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_26' font-size='6.40pt' font-family='Arial'>1,897<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='389.54' y='386.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_27' font-size='6.40pt' font-family='Arial'>  510<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='442.97' y='386.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_28' font-size='6.40pt' font-family='Arial'>  690<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='494.97' y='386.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_29' font-size='6.40pt' font-family='Arial'>  478<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='581.04' y='386.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_30' font-size='6.40pt' font-family='Arial'>1,482<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='685.61' y='386.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_31' font-size='6.40pt' font-family='Arial'>  840<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='802.36' y='386.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_32' font-size='6.40pt' font-family='Arial'>1,809<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='866.56' y='370.12' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_33' font-size='8.28pt' font-family='Arial'>Estimated<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='870.86' y='386.02' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_34' font-size='8.28pt' font-family='Arial'>RPK (B)<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='872.99' y='401.91' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_35' font-size='8.28pt' font-family='Arial'>in 2035<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='866.56' y='370.12' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_36' font-size='8.28pt' font-family='Arial'>Estimated<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='870.86' y='386.02' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_37' font-size='8.28pt' font-family='Arial'>RPK (B)<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='872.99' y='401.91' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_38' font-size='8.28pt' font-family='Arial'>in 2035<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='866.56' y='370.12' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_39' font-size='8.28pt' font-family='Arial'>Estimated<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='870.86' y='386.02' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_40' font-size='8.28pt' font-family='Arial'>RPK (B)<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='872.99' y='401.91' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_41' font-size='8.28pt' font-family='Arial'>in 2035<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='866.56' y='370.12' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_42' font-size='8.28pt' font-family='Arial'>Estimated<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='870.86' y='386.02' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_43' font-size='8.28pt' font-family='Arial'>RPK (B)<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='872.99' y='401.91' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_44' font-size='8.28pt' font-family='Arial'>in 2035<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='866.56' y='370.12' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_45' font-size='8.28pt' font-family='Arial'>Estimated<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='870.86' y='386.02' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_46' font-size='8.28pt' font-family='Arial'>RPK (B)<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='872.99' y='401.91' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_47' font-size='8.28pt' font-family='Arial'>in 2035<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='866.56' y='370.12' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_48' font-size='8.28pt' font-family='Arial'>Estimated<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='870.86' y='386.02' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_49' font-size='8.28pt' font-family='Arial'>RPK (B)<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='872.99' y='401.91' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_50' font-size='8.28pt' font-family='Arial'>in 2035<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='866.56' y='370.12' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_51' font-size='8.28pt' font-family='Arial'>Estimated<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='870.86' y='386.02' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_52' font-size='8.28pt' font-family='Arial'>RPK (B)<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='872.99' y='401.91' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_53' font-size='8.28pt' font-family='Arial'>in 2035<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='866.56' y='370.12' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_54' font-size='8.28pt' font-family='Arial'>Estimated<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='870.86' y='386.02' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_55' font-size='8.28pt' font-family='Arial'>RPK (B)<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='872.99' y='401.91' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_56' font-size='8.28pt' font-family='Arial'>in 2035<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='866.56' y='370.12' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_57' font-size='8.28pt' font-family='Arial'>Estimated<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='870.86' y='386.02' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_58' font-size='8.28pt' font-family='Arial'>RPK (B)<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='872.99' y='401.91' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_59' font-size='8.28pt' font-family='Arial'>in 2035<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='866.56' y='370.12' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_60' font-size='8.28pt' font-family='Arial'>Estimated<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='870.86' y='386.02' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_61' font-size='8.28pt' font-family='Arial'>RPK (B)<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='872.99' y='401.91' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_62' font-size='8.28pt' font-family='Arial'>in 2035<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text transform='translate(19.29,456.23) rotate(-45.00)' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_63' font-size='7.47pt' font-family='Arial'>Within South Asia<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text transform='translate(65.47,469.53) rotate(-45.00)' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_64' font-size='7.47pt' font-family='Arial'>Within Southeast Asia<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text transform='translate(120.56,473.83) rotate(-45.00)' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_65' font-size='7.47pt' font-family='Arial'>Middle East-South Asia<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text transform='translate(259.53,440.97) rotate(-45.00)' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_66' font-size='7.47pt' font-family='Arial'>Within China<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text transform='translate(339.31,468.35) rotate(-45.00)' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_67' font-size='7.47pt' font-family='Arial'>Within South America<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text transform='translate(398.20,462.88) rotate(-45.00)' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_68' font-size='7.47pt' font-family='Arial'>Europe-Middle East<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text transform='translate(415.03,498.06) rotate(-45.00)' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_69' font-size='7.47pt' font-family='Arial'>Central America-North America<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text transform='translate(555.08,445.27) rotate(-45.00)' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_70' font-size='7.47pt' font-family='Arial'>Within Europe<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text transform='translate(633.04,470.69) rotate(-45.00)' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_71' font-size='7.47pt' font-family='Arial'>Europe-North America<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text transform='translate(754.51,467.16) rotate(-45.00)' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_72' font-size='7.47pt' font-family='Arial'>Within North America<\/text>\n    <\/g>\n    <line x1='2.74' y1='214.15' x2='936.00' y2='214.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_73' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-dasharray='4,4' stroke-linejoin='round' stroke-linecap='butt' fill='#000000' fill-opacity='1'/>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='14.41' y='210.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_74' font-size='8.28pt' font-family='Arial'>World Traffic<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='226.05' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_75' font-size='8.28pt' font-family='Arial'>Growth 4.8%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='14.41' y='210.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_76' font-size='8.28pt' font-family='Arial'>World Traffic<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='226.05' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_77' font-size='8.28pt' font-family='Arial'>Growth 4.8%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='14.41' y='210.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_78' font-size='8.28pt' font-family='Arial'>World Traffic<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='226.05' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_79' font-size='8.28pt' font-family='Arial'>Growth 4.8%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='14.41' y='210.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_80' font-size='8.28pt' font-family='Arial'>World Traffic<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='226.05' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_81' font-size='8.28pt' font-family='Arial'>Growth 4.8%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='14.41' y='210.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_82' font-size='8.28pt' font-family='Arial'>World Traffic<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='226.05' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_83' font-size='8.28pt' font-family='Arial'>Growth 4.8%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='14.41' y='210.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_84' font-size='8.28pt' font-family='Arial'>World Traffic<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='226.05' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_85' font-size='8.28pt' font-family='Arial'>Growth 4.8%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='14.41' y='210.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_86' font-size='8.28pt' font-family='Arial'>World Traffic<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='226.05' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_87' font-size='8.28pt' font-family='Arial'>Growth 4.8%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='14.41' y='210.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_88' font-size='8.28pt' font-family='Arial'>World Traffic<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='226.05' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_89' font-size='8.28pt' font-family='Arial'>Growth 4.8%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='14.41' y='210.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_90' font-size='8.28pt' font-family='Arial'>World Traffic<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='226.05' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_91' font-size='8.28pt' font-family='Arial'>Growth 4.8%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='14.41' y='210.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_92' font-size='8.28pt' font-family='Arial'>World Traffic<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='226.05' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_93' font-size='8.28pt' font-family='Arial'>Growth 4.8%<\/text>\n    <\/g>\n    <line x1='2.74' y1='285.15' x2='936.00' y2='285.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_94' clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-dasharray='4,4' stroke-linejoin='round' stroke-linecap='butt' fill='#000000' fill-opacity='1'/>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='17.38' y='281.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_95' font-size='8.28pt' font-family='Arial'>World GDP<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='297.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_96' font-size='8.28pt' font-family='Arial'>Growth 2.9%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='17.38' y='281.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_97' font-size='8.28pt' font-family='Arial'>World GDP<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='297.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_98' font-size='8.28pt' font-family='Arial'>Growth 2.9%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='17.38' y='281.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_99' font-size='8.28pt' font-family='Arial'>World GDP<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='297.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_100' font-size='8.28pt' font-family='Arial'>Growth 2.9%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='17.38' y='281.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_101' font-size='8.28pt' font-family='Arial'>World GDP<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='297.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_102' font-size='8.28pt' font-family='Arial'>Growth 2.9%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='17.38' y='281.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_103' font-size='8.28pt' font-family='Arial'>World GDP<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='297.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_104' font-size='8.28pt' font-family='Arial'>Growth 2.9%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='17.38' y='281.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_105' font-size='8.28pt' font-family='Arial'>World GDP<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='297.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_106' font-size='8.28pt' font-family='Arial'>Growth 2.9%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='17.38' y='281.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_107' font-size='8.28pt' font-family='Arial'>World GDP<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='297.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_108' font-size='8.28pt' font-family='Arial'>Growth 2.9%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='17.38' y='281.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_109' font-size='8.28pt' font-family='Arial'>World GDP<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='297.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_110' font-size='8.28pt' font-family='Arial'>Growth 2.9%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='17.38' y='281.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_111' font-size='8.28pt' font-family='Arial'>World GDP<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='297.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_112' font-size='8.28pt' font-family='Arial'>Growth 2.9%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='17.38' y='281.15' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_113' font-size='8.28pt' font-family='Arial'>World GDP<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='13.28' y='297.04' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_114' font-size='8.28pt' font-family='Arial'>Growth 2.9%<\/text>\n    <\/g>\n    <g clip-path='url(#svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_cl_2)'>\n      <text x='2.74' y='11.82' id='svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d_el_115' font-size='12.38pt' font-family='Arial'>Projected Annual Growth in Revenue Passenger Kilometers (RPK) 2015-2035 (top 10 regional flows)<\/text>\n    <\/g>\n  <\/g>\n<\/svg>","js":null,"uid":"svg_c0b1a023-eb70-4368-b4ff-13faf9866b7d","ratio":1.85714285714286,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px 2px 2px 2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}\n","placement":"doc","offx":10,"offy":0,"use_cursor_pos":true,"opacity":0.9,"usefill":false,"usestroke":false,"delay":{"over":200,"out":500}},"hover":{"css":".hover_SVGID_ { fill:orange;stroke:gray; }","reactive":false},"hoverkey":{"css":".hover_key_SVGID_ { stroke:red; }","reactive":false},"hovertheme":{"css":".hover_theme_SVGID_ { fill:green; }","reactive":false},"hoverinv":{"css":""},"zoom":{"min":1,"max":1},"capture":{"css":".selected_SVGID_ { fill:red;stroke:gray; }","type":"multiple","only_shiny":true,"selected":[]},"capturekey":{"css":".selected_key_SVGID_ { stroke:gray; }","type":"single","only_shiny":true,"selected":[]},"capturetheme":{"css":".selected_theme_SVGID_ { stroke:gray; }","type":"single","only_shiny":true,"selected":[]},"toolbar":{"position":"topright","saveaspng":true,"pngname":"diagram"},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<div id="the-citations-and-data-sources-used-for-this-case-is-available-at-the-source-projected-growth-in-airline-passenger-traffic-by-region" class="section level2">
+<h2>The citations and data sources used for this case is available at the source: <a href="https://www.boeing.com/resources/boeingdotcom/commercial/about-our-market/assets/downloads/cmo_print_2016_final_updated.pdf" target="_blank" rel="noopener noreferrer">Projected growth in airline passenger traffic by region</a></h2>
+<pre><code>## [1] B. C. M. Outlook. _Current Market Outlook 2016-2035_. Boeing CMO,
+## 2016. &lt;URL:
+## https://www.boeing.com/resources/boeingdotcom/commercial/about-our-market/assets/downloads/cmo_print_2016_final_updated.pdf&gt;
+## (visited on 02/02/2021).</code></pre>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>

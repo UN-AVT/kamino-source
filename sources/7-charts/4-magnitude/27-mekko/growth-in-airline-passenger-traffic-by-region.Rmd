@@ -1,0 +1,124 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+# needed to include bib references
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Marimekko
+# Case: Airline passenger traffic
+
+> Sometimes, the world from above seems too beautiful, too wonderful, too distant for human eyes to see....\
+--- Charles A. Lindbergh  
+
+***
+
+# Load the data
+## Projected growth in airline passenger traffic by region
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Create dataset
+df = read.csv("archetypes/airline-passenger-traffic/projected-growth-in-airline-passenger-traffic-by-region.csv", header = TRUE)
+
+# Prepare the data
+df$xmax <- cumsum(df$RPK)
+df$xmin <- df$xmax - df$RPK
+df$xlabel <- (df$xmax + df$xmin)/2
+df$label <- paste(as.character(df$Growth),"%")
+data<-df %>% rename(Regions=Region)
+data
+
+```
+
+# Plot the chart
+## Projected growth in airline passenger traffic by region
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', fig.width=12, fig.height=8, out.width = "85%"}
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0, 0, 1.25, 0), "in")
+)
+
+v1 <-ggplot(data) +
+    geom_rect(aes(ymin = 0, ymax = Growth, xmin = xmin, xmax = xmax, fill = Regions), color = "white", alpha = 0.5 ) + 
+    geom_text(aes(x = xlabel, y = Growth, label = label, vjust = -1), position = "identity", color = "black", size = 3 ) +
+    geom_text(aes(x = xlabel, y = 0.2, label = format(RPK, big.mark = ",", scientific = FALSE), vjust = 0), position = "identity", color = "black", size = 3 ) +
+      geom_text(aes(x = 9500, y = 0.2, label = "Estimated\nRPK (B)\nin 2035"), vjust = 0.4) +
+    geom_text(aes(x = xlabel, y = 0, label = Regions), hjust = "right", vjust = 1.5, position = "identity", color = "black", size = 3.5, angle = 45 ) +
+    geom_hline(yintercept = 4.8, linetype = "dashed") + geom_text(aes(0, 4.8, label = "World Traffic\nGrowth 4.8%")) +
+    geom_hline(yintercept = 2.9, linetype = "dashed") + geom_text(aes(0, 2.9, label = "World GDP\nGrowth 2.9%")) +
+    coord_cartesian(clip="off") +
+    theme(plot.title = element_text(size = rel(1.5)), panel.background = element_rect(fill = "white", colour = "grey50")) +
+    theme_opts + 
+    labs(title = "Projected Annual Growth in Revenue Passenger Kilometers (RPK) 2015-2035 (top 10 regional flows)")
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# References
+## The citations and data sources used for this case is available at the source: <a href="https://www.boeing.com/resources/boeingdotcom/commercial/about-our-market/assets/downloads/cmo_print_2016_final_updated.pdf" target="_blank" rel="noopener noreferrer">Projected growth in airline passenger traffic by region</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/projected-growth-in-airline-passenger-traffic-by-region.bib")
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

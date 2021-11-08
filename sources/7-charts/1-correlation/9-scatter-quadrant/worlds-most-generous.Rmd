@@ -1,0 +1,270 @@
+---
+pagetitle: "Most Generous Nations"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggthemes)
+library(readr)
+library(ggrepel)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Most Generous Nations
+## Scatter Quadrant
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Matt Collamer on Unsplash"}
+
+masthead <- "assets/matt-collamer-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Generosity is the most natural outward expression of an inner attitude of compassion and loving-kindness...\
+--- The Dalai Lama XIV\
+
+***
+
+We have a natural instinct to help others. Wealth doesn’t come into it. Citizens of relatively poor countries such as Myanmar and Indonesia are some of the most generous. They __help__ strangers. They __donate__ money. They __volunteer__ time. The top 20 includes countries that have suffered massive instability. Haiti. Liberia. Sierra Leone. Shared human values, shining through.
+
+Let's take a closer look at the situation.
+
+### Ingest the source
+#### giving score, GDP, population
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df = read.csv("archetypes/worlds-most-generous/worlds-most-generous.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle
+#### select, clean, and cast data types
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Select only the needed
+df_complete <- select(df, c("Country", "Overall_CAF_Giving_Index_Score_Percent", "GDP_per_capita_current_USD", "population"))
+
+# Make sure all visual variables are proper data types
+df_complete$Overall_CAF_Giving_Index_Score_Percent <- parse_number(df_complete$Overall_CAF_Giving_Index_Score_Percent)
+df_complete$GDP_per_capita_current_USD <- parse_number(df_complete$GDP_per_capita_current_USD)
+df_complete$population <- parse_number(df_complete$population)
+
+# Make sure we don't factor empty strings
+df_complete <- filter(df_complete, nchar(Country) > 0)
+# Factor the string fields
+df_complete$Country <- as.factor(df_complete$Country)
+
+# Remove incomplete cases
+df_complete <- df_complete[complete.cases(df_complete), ]
+
+df_complete
+
+```
+
+
+### Quadrant Measures
+#### min, max, mean, and conditional logic
+
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# measures to use for quadrant placement
+gdp_average <- mean(df_complete$GDP_per_capita_current_USD)
+gdp_min <- min(df_complete$GDP_per_capita_current_USD)
+gdp_max <- max(df_complete$GDP_per_capita_current_USD)
+
+generosity_average <- mean(df_complete$Overall_CAF_Giving_Index_Score_Percent)
+generosity_min <- min(df_complete$Overall_CAF_Giving_Index_Score_Percent)
+generosity_max <- max(df_complete$Overall_CAF_Giving_Index_Score_Percent)
+
+# Create a color variable for a manual scale
+df_complete <- df_complete %>% mutate(color = ifelse( GDP_per_capita_current_USD < gdp_average & Overall_CAF_Giving_Index_Score_Percent > generosity_average, 'R', 'B'))
+df_complete
+
+```
+
+
+
+### Base Scatter Plot
+#### position, shape, color, and labels
+
+
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  # panel.grid.major = element_line(linetype = "dotted"),
+  # panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill="#B3E5FC", colour="#B3E5FC"),
+  panel.border = element_blank(),
+  plot.background = element_rect(fill="#B3E5FC", colour="white"),
+  plot.title = element_text(vjust = 3.0),
+  plot.subtitle = element_text(vjust = 3.0),
+  plot.margin = unit(c(0.5,0.5,0.5,0.5), "in")
+)
+
+color_palette <- c("B" = "#111111", "R" = "#f15a24")
+
+v1 <- ggplot(df_complete) +
+      geom_point_interactive(aes(x = GDP_per_capita_current_USD, 
+                 y = Overall_CAF_Giving_Index_Score_Percent, 
+                 size = population,
+                 color = color,
+                 tooltip = paste0("Country: ", Country, "\n", 
+                                  "Overall_CAF_Giving_Index_Score_Percent: ", Overall_CAF_Giving_Index_Score_Percent, "%\n", 
+                                  "GDP_per_capita_current_USD: ", GDP_per_capita_current_USD, "\n", 
+                                  "population: ", population),
+                 data_id = row.names(df_complete)), 
+                 shape = 21, fill = "#E1F5FE", alpha = 1.0 ) + # or fill = "NA"
+      geom_text_repel(data=filter(df_complete, population>mean(population)),
+                      aes(x = GDP_per_capita_current_USD, y = Overall_CAF_Giving_Index_Score_Percent, label = Country, color = color),
+                      family = 'inconsolata', size = 4, force = 0.5, nudge_x = 0.25, segment.size  = 0.2, segment.color = "grey50", direction = "both", hjust = 0) +
+      scale_x_continuous(trans = "log2") +
+      scale_y_continuous() +
+      scale_size("population", range = c(2, 40)) +
+      scale_color_manual(guide = FALSE, values = color_palette) +
+      coord_cartesian(clip = 'off') +
+      labs(x="GDP",
+         y="Generosity",
+         title = "Some of the World's Poorest Nations\nare also the Most Generous",
+         caption = "source: Charities Aid Foundation, Information is Beautiful") +
+      theme_minimal(base_family = "inconsolata", base_size = 16) +
+      theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(
+         opts_sizing(rescale = TRUE, width = 1.0), 
+         opts_hover(css = "fill:#81D4FA;")
+         )
+      )
+
+```
+
+
+### The Quadrant
+#### with annotations...
+
+
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+v2 <- v1 + geom_hline(yintercept = generosity_average, linetype = "dashed", color = "#f15a24") +
+  geom_vline(xintercept = gdp_average, linetype = "dashed", color = "#f15a24") +
+  annotate("text", x = gdp_min, y = generosity_max, 
+           label = "poor & generous countries", 
+           hjust = 0.3, vjust = 0.5, size = 5, color = "#f15a24", family = "inconsolata", fontface = 2) +
+  annotate("text", x = gdp_max, y = generosity_max, 
+           label = "rich & generous", 
+           hjust = 0.55, vjust = 0.5, size = 5, color = "#111111", family = "inconsolata", fontface = 2) +
+  annotate("text", x = gdp_min, y = generosity_min, 
+           label = "poor & less generous", 
+           hjust = 0.3, vjust = 0, size = 5, color = "#111111", family = "inconsolata", fontface = 2) +
+  annotate("text", x = gdp_max, y = generosity_min, 
+           label = "rich & less generous", 
+           hjust = 0.7, vjust = 0, size = 5, color = "#111111", family = "inconsolata", fontface = 2) +
+  annotate("text", x = gdp_average, y = generosity_max, 
+           label = "HIGH GENEROSITY", 
+           hjust = 0.5, vjust = -4.0, size = 5, color = "#f15a24", family = "inconsolata", fontface = 1) +
+  annotate("text", x = gdp_average, y = generosity_min, 
+           label = "LOW GENEROSITY", 
+           hjust = 0.5, vjust = 5.0, size = 5, color = "#f15a24", family = "inconsolata", fontface = 1) +
+  annotate("text", x = gdp_min, y = generosity_average, 
+           label = "LOW WEALTH", 
+           hjust = 0.8, vjust = 1.5, size = 5, color = "#f15a24", family = "inconsolata", fontface = 1) +
+  annotate("text", x = gdp_max, y = generosity_average, 
+           label = "HIGH WEALTH", 
+           hjust = 0.3, vjust = 1.5, size = 5, color = "#f15a24", family = "inconsolata", fontface = 1)
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(
+         opts_sizing(rescale = TRUE, width = 1.0), 
+         opts_hover(css = "fill:#81D4FA;")
+         )
+      )
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# full version
+ggsave(filename = "assets/worlds-most-generous-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# without annotations
+ggsave(filename = "assets/worlds-most-generous-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### Citations and data sources
+
+* Inspiration and data: Information is Beautiful, [GO](https://informationisbeautiful.net/beautifulnews/1025-generous-countries/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

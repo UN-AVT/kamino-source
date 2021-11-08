@@ -1,0 +1,173 @@
+---
+pagetitle: "Environmental Impact of Milk"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Environmental Impact of Milk
+## Bar Horizontal Facet
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Karim Manjra on Unsplash"}
+
+masthead <- "assets/robert-bye-dOElUitX2Do-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Not your mother, not your milk...\
+--- Author unknown\
+
+***
+
+Which vegan milk is best?
+
+
+### Ingest
+#### Which milk should I choose?
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df = read.csv("archetypes/milk-environmental-impact/milk-environmental-impacts.csv", header = TRUE, stringsAsFactors = TRUE)
+df
+
+```
+
+
+### Wrangle
+#### calculate max values for bar background fill
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+msr_max <- df %>%
+    group_by(MEASURE) %>%
+    summarize(MAX = max(VALUE), MILK=MILK)
+msr_max
+
+```
+
+
+### Plot
+#### facet by impact area
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 540/72, out.width = "100%"}
+
+# Make the plot
+v1 <- ggplot(df, aes(x=VALUE, y=MILK)) + 
+  geom_col(data = msr_max, aes(x=MAX, y=MILK), stat="identity", fill="#cccccb", alpha=0.3) +
+  geom_col(aes(fill=MEASURE, alpha=MILK)) +
+  geom_text(aes(label=VALUE, 
+        # match value with max to determine label placement
+        x=ifelse(VALUE %in% unlist(msr_max[msr_max$MEASURE == MEASURE & msr_max$MILK == MILK, "MAX"]), VALUE/2, VALUE),
+        hjust=ifelse(VALUE %in% unlist(msr_max[msr_max$MEASURE == MEASURE & msr_max$MILK == MILK, "MAX"]), 0, -0.35),
+        color=ifelse(VALUE %in% unlist(msr_max[msr_max$MEASURE == MEASURE & msr_max$MILK == MILK, "MAX"]), "white", "black" )), size=3) +
+  scale_y_discrete(limits=c("Almond milk", "Oat milk", "Soy milk", "Rice milk","Cow's milk")) +
+  scale_fill_manual(values=c("Carbon Emissions (kg CO2eq)" = "#364e5d", "Land Use (m2)" = "#597e4e", "Water Use (L)" = "#587f89")) +
+  scale_color_manual(values=c("white" = "#ffffff", "black" = "#000000")) +
+  scale_alpha_manual(values=c("Almond milk" = 0.3, "Oat milk" = 0.3, "Soy milk" = 0.3, "Rice milk" = 0.3, "Cow's milk" = 1)) +
+  coord_cartesian(clip="off") +
+  facet_wrap(~ MEASURE, ncol=3, scales='free_x') +
+  labs(title = "Milk has higher environmental impact than vegan substitutes") +
+  theme(plot.margin = margin(.25, 1, .25, .25, "cm"),
+    plot.background = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none",
+    axis.title.x=element_blank(),
+    axis.title.y=element_blank(),
+    axis.ticks.y=element_blank(),
+    axis.ticks.x=element_blank(),
+    axis.text.x=element_blank()) +
+  theme(strip.placement = "outside",                      # Place facet labels outside x axis labels.
+        strip.background = element_rect(fill = "white"),  # Make facet label background white.
+        axis.title = element_blank())                     # Remove x and y axis titles.
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 420/72,
+      options = list(opts_sizing(rescale = TRUE, width = 0.9)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/milk-environmental-impact-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/milk-environmental-impact-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative sources: Climate change: Which vegan milk is best?, [GO](https://www.bbc.com/news/science-environment-46654042){target="_blank"}
+
+
+<pre>
+@misc{gmbh_2019_which,
+  author = {GmbH, Datawrapper},
+  month = {09},
+  title = {Which milk has the smallest impact on the planet?},
+  url = {https://blog.datawrapper.de/cow-milk-and-vegan-milk-alternatives/},
+  year = {2019},
+  organization = {Chartable}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,191 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHART  
+</div>
+
+# Scatter Contour
+## Old Faithful, Yellow Stone's Famous Geyser
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Emily Campbell on Unsplash"}
+
+masthead <- "assets/emily-campbell-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Cancer cannot cripple love, it cannot shatter hope, it cannot conquer the spirit...\
+---Unknown\
+
+***
+
+#### Butterfly plot is a graphical representation for comparing two treatment responses for the same subject across different categories. They are also called tornado plots or pyramid plots.
+
+### Load Data
+
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+
+df <- read_tsv('./archetypes/old-faithful-density-contours.tsv')
+df
+
+
+```
+
+### 2D Scatter Contour
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 40, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 20),
+    plot.caption = element_text(color = "#555555", size = 20, face = "bold"),
+    axis.text = element_text(color = "#555555", size = 20, face = "bold"),
+    axis.title=element_text(size=20,face="bold"),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    legend.text = element_text(color = "black", size = 20),
+    legend.position = "right",
+    legend.text.align = 0)
+
+v1 <- df %>%
+  ggplot(aes(x = waiting, y = eruptions))+
+  geom_point(size=3) +
+  geom_density_2d(aes(color = ..level..), size = 1)+
+  scale_color_viridis_c()+
+  labs(title = "Eruption and Waiting Times of Old Faithful",
+       subtitle = "2D Scatter Contour")+
+  theme_bw()+
+  theme_opts
+
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+```
+
+### 2D Scatter Contour Filled
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+v2 <- df %>%
+  ggplot(aes(x = waiting, y = eruptions))+
+  geom_point(size=3) +
+  geom_density_2d_filled(alpha = 0.5) +
+  geom_density_2d(size = 0.5, colour = "black")+
+  scale_color_viridis_c()+
+  labs(title = "Eruption and Waiting Times of Old Faithful",
+       subtitle = "2D Scatter Contour")+
+  theme_bw()+
+  theme_opts
+
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+```
+
+
+### Save plot
+#### as vector or raster image
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# full version
+ggsave(filename = "assets/scatter-contour.svg", plot = v1, width=1280/72, height=720/72)
+ggsave(filename = "assets/scatter-contour-filled.svg", plot = v2, width=1280/72, height=720/72)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Carnegie Melon University, https://www.stat.cmu.edu/~larry/all-of-statistics/=data/faithful.dat
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+ cleanbib()
+ options("citation_format" = "pandoc")
+read.bibtex(file = "./archetypes/old-faithful-density-contours.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "Butterfly-Chart" # mostly used in wranglers and analytics
+keywords <- 'WHO Cancer'
+commands <- ''
+sources <- 'GLOBOCAN'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

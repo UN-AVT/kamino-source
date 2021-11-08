@@ -1,0 +1,175 @@
+---
+pagetitle: "Gender Pay Gap"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggrepel)
+library(ggiraph)
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Gender Pay Gap
+## the dumbbell chart
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Tommy Lisbin on Unsplash"}
+
+masthead <- "assets/tommy-lisbin-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> As a single mum you’ll discover inner strengths and capabilities you never knew you had...\
+--- Emma-Louise Smith 
+
+***
+
+### Ingest
+#### Occupation, Type, Women_average_annual_salary, Men_average_annual_salary, Pay_gap, Pay_gap_as_a_percentage
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df = read.csv("archetypes/gender-pay-gap/uk-gender-pay-gap.csv", header = TRUE, stringsAsFactors = FALSE) # read text file
+df
+
+```
+
+### Wrangle
+#### factor category for facet
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df
+df_wrangle$Type <- as.factor(df_wrangle$Type)
+
+head(df_wrangle)
+
+```
+
+
+
+### View, chart
+#### segment and points 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 14, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10, hjust = 1.0, vjust = 1.0),
+    axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_text(size = 12, hjust = 1.0, vjust = 0.5),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    #panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    panel.grid.minor.x = element_blank(), # remove x (vertical) gridlines
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 10),
+    legend.position='bottom',
+    plot.margin = unit(c(0.5, 0.25, 0.5, 0.5), "in")
+  )
+
+offset <- 500
+
+v1<-ggplot(df_wrangle) +  
+  geom_segment( aes(x = Women_average_annual_salary, xend = Men_average_annual_salary, y = Occupation, yend = Occupation), lineend = "butt", linejoin = "round", size=1.0, color="black" ) +
+  geom_point( aes(x = Women_average_annual_salary, y = Occupation), shape = 21, size = 3, fill = "#5AC085", color = "#5AC085", alpha = 0.9) +
+  geom_text( aes(x = Women_average_annual_salary - (ifelse(Pay_gap > 0, offset, -offset)), y = Occupation, label=Women_average_annual_salary), 
+             size=4, color="black", 
+             hjust = ifelse(df_wrangle$Pay_gap > 0, 1.0, 0.0), 
+             vjust = 0.5, family = "inconsolata" ) +
+  geom_point( aes(x = Men_average_annual_salary, y = Occupation), shape = 21, size = 3, fill = "#474B52", color = "#474B52", alpha = 0.9) +
+  geom_text( aes(x = Men_average_annual_salary + (ifelse(Pay_gap > 0, offset, -offset)), y = Occupation, label=Men_average_annual_salary), 
+             size=4, color="black", 
+             hjust = ifelse(df_wrangle$Pay_gap > 0, 0.0, 1.0), 
+             vjust = 0.5, family = "inconsolata" ) + 
+  scale_x_continuous() +
+  coord_cartesian(clip = "off") +
+  facet_wrap(~Type, scales = "free", ncol = 1) +
+  labs(title = "GENDER PAY GAP",
+       subtitle = "UK, by salary and job category",
+       caption = "Source: UK Office for National Statistics",
+       x = NULL,
+       y = NULL) +
+  theme_minimal() + 
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1080/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.95)))
+
+```
+
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/gender-pay-gap-fs.svg", plot = v1, width=720/72, height=1080/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/gender-pay-gap-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+# References
+## The citations and data sources used for this case
+
+* Narrative and Data: Information is Beautiful, UK Gender Pay Gap, 2021, 
+[GO](https://informationisbeautiful.net/visualizations/gender-pay-gap/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

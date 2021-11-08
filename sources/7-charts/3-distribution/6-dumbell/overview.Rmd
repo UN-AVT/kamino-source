@@ -1,0 +1,47 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Dumbbell Chart
+## Illustrates Change between Two Data-points.
+
+
+Tableau dumbbell chart, also known as DNA charts, is a visualization choice for illustrating the change between two data points. Dumbbell charts make it easy to see the distribution and the difference in the change of the specific measure. We are able multiple dimensions and values that we'd like to distinguish in a dumbbell chart.
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

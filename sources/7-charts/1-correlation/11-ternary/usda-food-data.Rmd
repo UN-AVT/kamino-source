@@ -1,0 +1,224 @@
+---
+pagetitle: "Greenhouse Gas (GHG) emissions by country"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(scales)
+library(ggtern)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# USDA National Nutrient Database
+## Ternary Plot
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Kelly Sikkema on Unsplash"}
+
+masthead <- "assets/kelly-sikkema-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The existence of broccoli does not in any way affect the taste of chocolate...\
+--- John Green 
+
+***
+
+### Ingest the data
+#### USDA National Nutrient Database
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df_ingest <- read.csv("archetypes/usda-food-data/usda-food-data-src.csv", header = TRUE, stringsAsFactors = TRUE)
+df_ingest
+
+```
+
+### Wrangle the data
+#### filter on food group
+
+```{r data-prep, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+#0: "American Indian/Alaska Native Foods"
+#1: "Baby Foods"
+#2: "Baked Products"
+#3: "Beef Products"
+#4: "Beverages"
+#5: "Breakfast Cereals"
+#6: "Cereal Grains and Pasta"
+#7: "Dairy and Egg Products"
+#8: "Fast Foods"
+#9: "Fats and Oils"
+#10: "Finfish and Shellfish Products"
+#11: "Fruits and Fruit Juices"
+#12: "Lamb, Veal, and Game Products"
+#13: "Legumes and Legume Products"
+#14: "Meals, Entrees, and Side Dishes"
+#15: "Nut and Seed Products"
+#16: "Pork Products"
+#17: "Poultry Products"
+#18: "Restaurant Foods"
+#19: "Sausages and Luncheon Meats"
+#20: "Snacks"
+#21: "Soups, Sauces, and Gravies"
+#22: "Spices and Herbs"
+#23: "Sweets"
+#24: "Vegetables and Vegetable Products"
+
+df <- within(df_ingest, rm(ndb))
+df_wrangle <- filter(df_ingest, food_group == "Vegetables and Vegetable Products")
+
+# Reorder to avoid overlap
+df_wrangle <- df_wrangle[order(df_wrangle$calories, decreasing = FALSE),]
+
+df_wrangle
+
+```
+
+
+### Plot
+#### position, shape, color, size
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "none",
+  legend.text = element_text(color = "black", size = 8),
+  legend.title = element_blank(),
+  tern.axis.title.L = element_text(hjust = 0.5),
+  tern.axis.title.R = element_text(hjust = 0.5),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0.25, 0.25, 0.25, 0.25), "in")
+)
+
+v1 <- ggtern(data=df_wrangle, aes(x=protein, y=carbohydrates, z=fat)) + 
+  geom_point(aes(fill = calories, size = calories), shape = 21, color = "#ffffff", alpha = 0.7) + 
+  scale_fill_gradient(low = "#DCEDC8", high = "#558B2F") +
+  scale_size("calories", range = c(1, 10)) +
+  coord_tern() +
+  theme_minimal() +
+  theme_nomask() +
+  theme_opts +
+  labs(title = "USDA National Nutrient Database", 
+           subtitle = "by food group, calories (color and size)") +
+           xlab("Protein") + 
+           ylab("Carbohydrates") +
+           zlab("Fat")
+
+# v1
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot
+#### with range rescaling
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# Rescale 0 to 100
+df_rescale <- df_wrangle
+df_rescale$protein <- rescale(df_rescale$protein, to=c(0,100))
+df_rescale$carbohydrates <- rescale(df_rescale$carbohydrates, to=c(0,100))
+df_rescale$fat <- rescale(df_rescale$fat, to=c(0,100))
+
+v2 <- ggtern(data=df_rescale, aes(x=protein, y=carbohydrates, z=fat)) + 
+  geom_point(aes(fill = calories, size = calories), shape = 21, color = "#ffffff", alpha = 0.7) + 
+  scale_fill_gradient(low = "#DCEDC8", high = "#558B2F") +
+  scale_size("calories", range = c(1, 10)) +
+  coord_tern() +
+  theme_minimal() +
+  theme_nomask() +
+  theme_opts +
+  labs(title = "USDA National Nutrient Database", 
+           subtitle = "by food group, calories (color and size)") +
+           xlab("Protein") + 
+           ylab("Carbohydrates") +
+           zlab("Fat")
+
+# v2
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/usda-food-data-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# without annotations
+ggsave(filename = "assets/usda-food-data-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: U.S. Department of Agriculture FoodData Central Data, [GO](https://fdc.nal.usda.gov/download-datasets.html){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

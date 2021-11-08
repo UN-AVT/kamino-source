@@ -1,0 +1,196 @@
+---
+pagetitle: "Transit Costs"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Transit Costs
+## Bubble Chart
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Ricardo Gomez Angel on Unsplash"}
+
+masthead <- "assets/ricardo-gomez-angel-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> It's not where you start but where you finish...\
+--- April Heinrichs\
+
+***
+
+This example is based on the work of the __Transit Project__ using their database that spans more than 50 countries and totals more than 11,000 km of urban rail built since the late 1990s.
+
+### Ingest data
+#### country, city, line, start_year, end_year, time_comp, length, cost, etc.
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# file path parameter
+df_file_path <- "archetypes/transit-costs/transit-costs.csv"
+df <- read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+### Wrangle data
+#### mutate, filter, and enrich
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_wrangle <- 
+    df %>% 
+    mutate(real_cost_n = as.double(real_cost),
+        time_comp = as.numeric(end_year)-as.numeric(start_year)) %>% 
+    filter(!is.na(city) | real_cost_n > 0) %>% 
+    rename(iso2c=country)
+
+df_wrangle <- df_wrangle %>% 
+    left_join(countrycode::codelist %>% select(iso2c, country.name.en), by='iso2c') %>% 
+    rename(country=country.name.en)
+
+df_wrangle$continent <- countrycode(df_wrangle$iso2c, "iso2c", "continent")
+df_wrangle <- df_wrangle %>% select(continent, country, city, line, start_year, end_year, time_comp, length, real_cost_n)
+
+df_wrangle
+
+```
+
+### Bubble Chart
+#### with loess smoothing (hover over points for additional details)
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 14, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 8),
+    # axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    # panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    # panel.grid.major.y = element_blank(), # remove y (horizontal) gridlines
+    legend.title = element_blank(), # remove legend title
+    # legend.text = element_text(color = "black", size = 8),
+    legend.position='none'
+)
+
+continent_palette <- c(
+  "Africa" = "#0F894A",
+  "Americas" = "#3499CC",
+  "Asia" = "#F15A63",
+  "Europe" = "#173552",
+  "Oceania" = "#FFC53E",
+  "NA" = "#999999"
+)
+
+v1 <- ggplot(data = df_wrangle, aes(y = real_cost_n, x = length)) +
+    geom_smooth(method = 'loess', formula = 'y ~ x', color='#F0F0F0', fill="#F0F0F0") +  
+    geom_point_interactive(aes(size = time_comp, fill = continent, 
+                           tooltip = paste0("Continent: ", continent, "\n", 
+                                            "Country: ", country, "\n", 
+                                            "City: ", city, "\n", 
+                                            "Line: ", line, "\n", 
+                                            "Start year: ", start_year, "\n", 
+                                            "End year: ", end_year, "\n", 
+                                            "Time Comp: ", time_comp, "\n", 
+                                            "Length: ", length, "\n",
+                                            "Real cost: ", real_cost_n), data_id = row.names(df_wrangle)), 
+                           shape = 21, color = "#FFFFFF", stroke = 1.0, alpha = 0.6) +
+    scale_x_continuous(labels = scales::unit_format(suffix = 'km')) +
+    scale_y_log10(labels = scales::dollar) +
+    scale_fill_manual(values = continent_palette) +
+    annotation_logticks(sides = 'l') +
+    scale_size_area(max_size = 10) +
+    labs(title = "Transit Costs",
+        subtitle = "color by continent, size by time to complete",
+        x = 'Length',
+        y = 'Real Cost in Millions of USD',
+        caption = "Source:Transit Costs Project")+
+    theme_minimal() +
+    theme_opts
+
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/transit-costs-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/transit-costs-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: John Mutiso, TidyTuesday, [GO](https://github.com/johnmutiso/-TidyTuesday/tree/master/2021/week%202){target="_blank"}
+* Data sources: Transit Costs Project, [GO]( https://transitcosts.com/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

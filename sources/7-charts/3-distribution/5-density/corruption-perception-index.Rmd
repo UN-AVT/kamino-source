@@ -1,0 +1,177 @@
+---
+pagetitle: "Corruption Perception Index"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(janitor)
+library(ggtext)
+library(ggdist)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Corruption Perception Index
+## Density
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nathaniel Tetteh on Unsplash"}
+
+masthead <- "assets/nathaniel-tetteh-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Corruption is paid by the poor...\
+--- Pope Francis\
+
+***
+
+### Ingest
+#### country, region, CPI score, standard error
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df <- read.csv("archetypes/corruption-perception-index/corruption-perception-index-2020.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+```
+
+
+### Wrangle
+#### clean column names and remove missing values
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_wrangle <- df %>% dplyr::select(1:4, 6) %>% janitor::clean_names()
+df_wrangle <- df_wrangle %>% filter(!is.na(cpi_score_2020))
+df_wrangle
+
+```
+
+
+### View / Chart
+#### with stat_halfeye and stat_dotsinterval
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1280/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 10),
+    plot.caption = element_text(color = "#555555", size = 9),
+    panel.background = element_rect(fill = '#F5F5F5', color = NA),
+    panel.border = element_blank(),
+    plot.background = element_rect(fill = '#F5F5F5', color = NA),
+    panel.grid.major.x = element_line(color = "#999999", size = 1.0, linetype = "dotted"),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    legend.position = "top",
+    # plot.margin = unit(c(0.5, 0.5, 0.5, 0.25), "in")
+    plot.margin = unit(c(0,0,0,0),"line")
+)
+
+
+region_scale <- c(
+  'Sub-Saharan\nAfrica', 
+  'Europe and\nCentral Asia', 
+  'America', 
+  'Asia-Pacific', 
+  'Middle East and\nNorth Africa', 
+  'European Union'
+)
+
+
+v1 <- ggplot(df_wrangle, aes(fct_reorder(region, cpi_score_2020), cpi_score_2020)) +
+  stat_halfeye(side = 'left', scale = .5, alpha = 0.6, aes(fill = stat(cut_cdf_qi( cdf, .width = c(.5, .8, .95), labels = scales::percent_format() )))) +
+  stat_dotsinterval(scale = 0.3, point_size = 1, fill = '#999999') +
+  scale_colour_gradient(low = "#00ACC1", high = "#FDD835") +
+  scale_x_discrete(labels = region_scale) +
+  scale_y_continuous(breaks = seq(0, 80, 20)) +
+  labs(title = "Corruption Perception Index (2020)",
+       subtitle = "Index scores by region",
+       caption = 'Source: Transparency International',
+       x = NULL,
+       y = 'CPI Score',
+       fill = "Interval") +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1080/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/corruption-perception-index-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/corruption-perception-index-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Luis Freites, [GO](https://github.com/luisfrein/R_Tidytuesday){target="_blank"}
+* Data sources: Transparency International, [GO](https://www.transparency.org/en){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

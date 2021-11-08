@@ -1,0 +1,212 @@
+---
+pagetitle: "Access to water and sanitation"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggiraph)
+library(ggrepel)
+library(ggdark)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Access to water and sanitation
+## Bubble Chart Facet
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Bradford Zak on Unsplash"}
+
+masthead <- "assets/bradford-zak-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> We shall not defeat any of the infectious diseases that plague the developing world\
+  until we have also won the battle for safe drinking water, sanitation, and basic health care...\
+--- Kofi Annan\
+
+***
+
+Lack access to safely managed drinking water and sanitation services has a significant effect on people’s health. The impact on child mortality rates is devastating, causing death from diseases due to poor sanitation, poor hygiene, or unsafe drinking water.  The bubble chart is a perfect candidate to compare the services, so if we facet by year will we see any progress?
+
+### Ingest the data
+#### safely managed drinking water and sanitation services
+
+* Proportion of population using safely managed drinking water services
+* Proportion of population using safely managed sanitation services
+* Total population
+* Years 2000 to 2020
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# file path parameter
+df_file_path <- "archetypes/access-to water-and-sanitation/access-to water-and-sanitation-data.csv"
+df <- read.csv(df_file_path)
+df
+
+```
+
+### Wrangle the data
+#### select, separate, enrich, clean...
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Select only the fields we need
+dfs <- select(df, c("REF_AREA.Geographic.area", "INDICATOR.Indicator", "TIME_PERIOD.Time.period", "OBS_VALUE.Observation.Value")) # , "UNIT_MEASURE.Unit.of.measure"
+dfs <- dfs %>% separate(REF_AREA.Geographic.area, c("ISO", "GEOAREA"), sep = ': ')
+#dfs
+
+# Enrich with continent field
+dfs$continent <- countrycode(dfs$ISO, origin = 'iso3c', destination = 'continent')
+# dfs$region <- countrycode(dfs$ISO, origin = 'iso3c', destination = 'un.region.name')
+# dfs$subregion <- countrycode(dfs$ISO, origin = 'iso3c', destination = 'un.regionintermediate.name')
+#dfs
+
+# Transform from long to wide
+dfs_wide <- spread(dfs, INDICATOR.Indicator, OBS_VALUE.Observation.Value)
+#dfs_wide
+
+# Remove incomplete cases
+df_complete <- dfs_wide[complete.cases(dfs_wide), ]
+
+# Simplify the column names
+df_complete <- rename(df_complete, 
+                      YEAR = TIME_PERIOD.Time.period, 
+                      POPULATION = "DM_POP_TOT: Total population", 
+                      SANITATION = "WS_PPL_S-SM: Proportion of population using safely managed sanitation services", 
+                      WATER = "WS_PPL_W-SM: Proportion of population using safely managed drinking water services")
+
+# Make sure visual variables are numeric
+df_complete$POPULATION <- as.integer(df_complete$POPULATION)
+df_complete$SANITATION <- as.numeric(df_complete$SANITATION)
+df_complete$WATER <- as.numeric(df_complete$WATER)
+df_complete
+
+# Check entries for color palette
+#unique(df_complete$continent)
+
+```
+
+
+### Visual Mapping
+#### year, water, sanitation, population, continent
+
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=18, fig.height=18, out.width = "85%"}
+
+# Sort so largest bubbles will be on bottom
+df_sorted <- df_complete[order(df_complete$POPULATION, decreasing = TRUE),]
+
+# theme parameters
+theme_dark_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "none",
+  legend.title = element_blank(),
+  # axis.text = element_blank(),
+  axis.line = element_blank(),
+  # axis.ticks = element_blank(),
+  # axis.title = element_blank(),
+  # panel.grid = element_blank(),
+  # panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  strip.text.x = element_text(size=14, face="bold"),
+  # strip.text.y = element_text(size=12, face="bold"),
+  strip.background = element_blank()
+)
+
+continent_palette <- c("Europe" = "#ffe330", "Asia" = "#ff7d7b", "Americas" = "#c5ff2d", "Africa" = "#21cccc", "Oceania" = "#ff9dee")
+
+v1 <- ggplot(df_sorted) +
+    expand_limits(x = 0, y = 0) +
+    geom_point_interactive(aes(x = WATER, 
+                 y = SANITATION, 
+                 size = POPULATION, 
+                 fill = continent,
+                 tooltip = paste0("Country: ", GEOAREA, "\n", "Population: ", POPULATION, "\n", "Water: ", WATER, "%\n", "Sanitation: ", SANITATION, "%"), data_id = row.names(df_complete)), 
+                 shape = 21, color='#ffffff', alpha = 0.8 ) +
+    scale_size(range = c(0, 15)) +
+    scale_fill_manual(values = continent_palette) +
+    labs(x="WATER",
+         y="SANITATION",
+         title = "CLEAN WATER AND SANITATION", 
+         subtitle="Access to water and sanitation 2000-2020") +
+    facet_wrap(~ YEAR, ncol=3, scales="fixed" ) +
+    dark_theme_bw() +
+    theme_dark_opts
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 24,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/access-to-water-and-sanitation-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# without annotations
+ggsave(filename = "assets/access-to-water-and-sanitation-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### The citations and data sources used for this case
+
+Data Source: Unicef, [GO](https://data.unicef.org/topic/water-and-sanitation/drinking-water/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,124 @@
+---
+pagetitle: "Global homicide rates"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Global Homicide Rates
+## Bar Vertical Negative 
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo from Wikipedia based on original oil painting by Jerry Barrett"}
+
+masthead <- "assets/lacie-slezak-gHwOUe9OLwE-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Murder is always a mistake, One should never do anything that one cannot talk about after dinner...\
+--- Oscar Wilde\
+
+***
+
+### Load the data
+#### Homicides are falling around the world, 1995-2015
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df <- read_csv("archetypes/global-homicide-rates/homicides-falling.csv", col_names=TRUE)
+df
+
+```
+
+### Plot
+#### Eastern Europe in particular has seen steep drops, by as much as 75%
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    axis.text.x = element_text(angle=90, hjust=1, vjust=0.2),
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.background = element_rect(fill = alpha("#1db4b3", 0.4))
+)
+
+v1 <- ggplot(df, aes(x=country, y=change)) +
+  geom_bar(stat="identity", width=0.6, fill="white", alpha=0.8) +
+  geom_point(shape=25, fill="white", color="white", alpha=0.7, size=2.1) +
+  geom_text(aes(y = (change - 0.05), label = paste(change * 100, "%")), hjust = 0.0, angle=90, size=3, family = "inconsolata") +
+  labs(title="Homicides Are Falling Around the World",
+       subtitle="% decrease 1995-2015",
+       caption="Source: World Bank",
+       x = NULL, y = NULL) +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative sources: Homicides Are Falling Around the World, [GO](https://informationisbeautiful.net/beautifulnews/695-homicides-falling/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

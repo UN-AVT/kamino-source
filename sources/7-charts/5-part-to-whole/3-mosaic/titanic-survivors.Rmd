@@ -1,0 +1,217 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+library(ggmosaic)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Mosaic
+## Titanic Survivors
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Annie Spratt  on Unsplash"}
+
+masthead <- "assets/annie-spratt-nsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Boat Beside IceBerg</div>
+
+> I was thoroughly familiar with pretty well every type of ship afloat but it took me 14 days before I could, with confidence, find my way from one part of that ship to another...\
+--- Charles Lightoller, Titanic Second Officer\
+
+***
+
+# Load the data
+## Titanic survivors
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df <- read.csv("archetypes/titanic.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+
+```
+
+
+### Wrangle the data
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+survived <- df %>% 
+  rename("Age_Sex"=Sex)%>%
+  filter(Survived=="Yes") %>%
+  select(-c(X, Age, Survived))
+
+x <- survived[1:8,] %>%
+  group_by(Class) %>%
+  summarize(Freq = sum(Freq)) %>%
+  mutate(Age_Sex = rep("Child"))%>%
+  relocate(Class, Age_Sex, Freq)
+
+survived <- rbind(survived[9:16,], x)
+
+
+n_survived <- df %>% 
+  rename("Age_Sex"=Sex)%>%
+  filter(Survived=="No") %>%
+  select(-c(X, Age, Survived))
+
+x <- n_survived[1:8,] %>%
+  group_by(Class) %>%
+  summarize(Freq = sum(Freq)) %>%
+  mutate(Age_Sex = rep("Child"))%>%
+  relocate(Class, Age_Sex, Freq)
+
+n_survived <- rbind(n_survived[9:16,], x)
+
+```
+
+
+### Plot
+### Survivors of Titanic Wreck
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 20), 
+    plot.title = element_text(color = "black",  size = 36, face = 'bold', hjust = 0.5 ),
+    plot.subtitle = element_text(color = "black", size = 20, hjust = 0.5, margin=margin(0,0,40,0)),
+    plot.caption = element_text(color = "#555555", size = 20),
+    # axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    
+    # panel.grid.minor = element_blank(),
+    # panel.grid.major = element_blank(),
+    legend.position='right'
+  )
+
+# Plot
+
+
+v1 <-  ggplot(survived) + 
+    geom_mosaic(aes(x = product(Class), fill = Age_Sex, weight = Freq),
+                divider = mosaic("v")) +
+    scale_fill_brewer(palette = "Set2") +
+  labs(title="Survivors of Titanic Disaster") +
+    theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+### Victims of Titanic Wreck
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v1 <-  ggplot(n_survived) + 
+    geom_mosaic(aes(x = product(Class), fill = Age_Sex, weight = Freq),
+                divider = mosaic("v")) +
+    scale_fill_brewer(palette = "Set2") +
+  labs(title="Victims of Titanic Disaster") +
+    theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+### Save plot
+#### as vector or raster image
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/survivors-titanic.svg", plot = v1, width=1280/72, height=720/72)
+
+ggsave(filename = "assets/victimes-titanic.svg", plot = v1, width=1280/72, height=720/72)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative Inspiration: The Economist, Ideas Factories, Global innovation and GDP
+* Data Source: Global Innovation Index (GII) 2021, https://www.globalinnovationindex.org/analysis-indicator
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "donut" # mostly used in wranglers and analytics
+keywords <- 'country-size'
+commands <- 'coor_polar'
+sources <- 'UN'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

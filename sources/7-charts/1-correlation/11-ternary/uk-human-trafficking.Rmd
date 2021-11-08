@@ -1,0 +1,201 @@
+---
+pagetitle: "UK Human Trafficking"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggtern)
+library(gridExtra)
+library(scales)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# UK Human Trafficking
+## Ternary Plot
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Zach Guinta on Unsplash"}
+
+masthead <- "assets/zach-guinta-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> When we look at human trafficking, we always think that it's far away from us...\
+--- Du Yun\
+
+***
+
+This example is based on data obtained from UK National Crime Agency, National Referral Mechanism Statistics end of year summary reports (2013 - 2016). The National Referral Mechanism (NRM) is a framework for identifying __victims__ of human trafficking and ensuring they receive the appropriate __protection__ and support. The NRM is also the mechanism through which the UKHTC collects data about victims. This information contributes to building a clearer picture about the scope of human trafficking in the UK. The NRM was introduced in 2009 to meet the UK’s obligations under the Council of European Convention on Action against Trafficking in Human Beings. At the core of every country’s NRM is the process of locating and identifying potential victims of trafficking.
+
+### Ingest the data
+#### countries and exploitation types
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load csv data file
+df <- read.csv("archetypes/uk-human-trafficking/2016-referrals-all.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+
+```
+
+
+### Wrangle the data
+#### rename, select, enrich, clean, and rescale
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Simplify the column names
+df_wrangle <- dplyr::rename(df, COUNTRY_OF_ORIGIN = "Nationality.Country.of.Origin", 
+                      DOMESTIC_SERVITUDE = "Domestic.Servitude",
+                      LABOUR_EXP = "Labour.Exploitation",
+                      ORGAN_HARVESTING = "Organ.Harvesting", 
+                      SEXUAL_EXP = "Sexual.Exploitation",
+                      UNKNOWN_EXP = "Unknown.Exploitation",
+                      TOTAL_2016 = "X2016.Total")
+
+# Select only the needed
+df_wrangle <- select(df_wrangle, c("COUNTRY_OF_ORIGIN", "DOMESTIC_SERVITUDE", "LABOUR_EXP", "ORGAN_HARVESTING", "SEXUAL_EXP", "UNKNOWN_EXP", "TOTAL_2016"))
+
+# Refactor to set stack sort order
+df_wrangle$CONTINENT <- countryname(df_wrangle$COUNTRY_OF_ORIGIN, destination = 'continent')
+
+# Remove total to not skew size scaling
+df_wrangle <- filter(df_wrangle, COUNTRY_OF_ORIGIN != "Total")
+
+# Remove entries with only one category
+df_wrangle <- filter(df_wrangle, ( DOMESTIC_SERVITUDE + UNKNOWN_EXP ) != TOTAL_2016 )
+df_wrangle <- filter(df_wrangle, ( LABOUR_EXP + UNKNOWN_EXP ) != TOTAL_2016 )
+df_wrangle <- filter(df_wrangle, ( SEXUAL_EXP + UNKNOWN_EXP ) != TOTAL_2016 )
+
+# Rescale 0 to 100
+df_wrangle$DOMESTIC_SERVITUDE <- rescale(df_wrangle$DOMESTIC_SERVITUDE, to=c(0,100))
+df_wrangle$LABOUR_EXP <- rescale(df_wrangle$LABOUR_EXP, to=c(0,100))
+df_wrangle$SEXUAL_EXP <- rescale(df_wrangle$SEXUAL_EXP, to=c(0,100))
+
+# Reorder to avoid overlap
+df_wrangle <- df_wrangle[order(df_wrangle$TOTAL_2016, decreasing = TRUE),]
+
+df_wrangle
+
+
+```
+
+
+### Plot
+#### position, shape, size, color, label
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# unique(df_wrangle$CONTINENT)
+# "Europe"   "Asia"     "Africa"   "Americas" "Kosovo"   NA         "Oceania" 
+continent_palette <- c("Africa" = "#77dff7", "Americas" = "#b5ea32", "Asia" = "#ff5973", "Europe" = "#ffe800", "Oceania" = "#ff5973", "Kosovo" = "#ffe800", "NA" = "#CCCCCC")
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  tern.axis.title.L = element_text(hjust = 0.5),
+  tern.axis.title.R = element_text(hjust = 0.5),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0.25, 0.25, 0.25, 0.25), "in")
+)
+
+v1 <- ggtern(data=df_wrangle, aes(DOMESTIC_SERVITUDE, LABOUR_EXP, SEXUAL_EXP)) + 
+  geom_point(aes(size = TOTAL_2016, fill = CONTINENT), shape = 21, color = "white", alpha= 0.8) + 
+  geom_text(data=filter(df_wrangle, TOTAL_2016>mean(TOTAL_2016)), aes(label = COUNTRY_OF_ORIGIN), family = 'inconsolata', size = 4, hjust = 0.4, vjust = 0.5) +
+  scale_fill_manual(values = continent_palette) +
+  scale_size(guide = "none", range = c(2, 20)) +
+  coord_tern() +
+  theme_minimal() +
+  theme_nomask() +
+  theme_opts +
+  labs(title = "UK HUMAN TRAFFICKING", 
+           subtitle = "All Referrals, 2016") +
+           xlab("DOMESTIC\nSERVITUDE") + 
+           ylab("LABOUR\nEXP") +
+           zlab("SEXUAL\nEXP")
+
+# v1
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/uk-human-trafficking-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# without annotations
+ggsave(filename = "assets/uk-human-trafficking-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Kaggle, [GO](https://www.kaggle.com/algosforgood/uk-human-trafficking-data){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

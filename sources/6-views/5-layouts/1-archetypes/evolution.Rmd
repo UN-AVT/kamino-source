@@ -1,0 +1,188 @@
+---
+pagetitle: "Visual Variables"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+
+```
+
+<div class="activity">
+VIEWS  
+</div>
+
+# Layouts and Archetypes
+## Past, present, & future
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+From caves to computers, information visualizations have helped to convey complex subjects for hundreds of years. This history offers a wealth of proven solutions which continue to find application and high value as a means of promoting understanding and knowledge discovery. Our experience with information visualization has proven how we gain insight and make sense of highly complex issues with specialized visual representations. Learning from the past and evolving from the centuries of progress in information visualization, our goal is to learn, reuse, improve on these valuable lessons of the past ... to inspire new opportunities to invent, innovate to discover new approaches.
+
+***
+
+### Before Computers (BC)
+#### Playfair, 1821
+
+```{r, echo=FALSE, figures-side, fig.show="hold", out.width="55%", fig.align='center'}
+
+# fig.show='hold', 
+knitr::include_graphics(c("assets/playfair-1.png","assets/playfair-2.png"), dpi=300)
+
+``` 
+
+#### Snow, 1854
+
+
+```{r, echo=FALSE,out.width="65%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics("assets/snow.png", dpi=300)
+
+```
+
+#### Nightingale, 1858
+
+```{r, echo=FALSE,out.width="65%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics("assets/nightingale.png", dpi=300)
+
+```
+
+#### Minard, 1869
+
+```{r, echo=FALSE,out.width="80%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics("assets/minard.png", dpi=300)
+
+```
+
+#### Perozzo, 1880
+
+```{r, echo=FALSE,out.width="65%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics("assets/perozzo.png", dpi=300)
+
+```
+
+### Jump 100 years
+#### After Computers (AC)
+
+#### Lotus 1-2-3, 1982
+
+```{r, echo=FALSE, out.width="55%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics("assets/lotus-1-2-3.png", dpi=300)
+
+```
+
+#### GRID-Arendal, 1989
+
+GRID-Arendal is a centre collaborating with the United Nations Environment Programme (UN Environment), located in Arendal, Norway. The centre was established in 1989 by the Norwegian Government as a non-profit foundation to support the United Nations in the field of environmental information management and assessment, capacity-building and communications and outreach.
+
+```{r, echo=FALSE, out.width="55%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics("assets/grid-arendal.png", dpi=300)
+
+```
+
+#### OCHA ReliefWeb, 1996
+
+ReliefWeb is the largest humanitarian information portal in the world. Founded in 1996, the portal now hosts more than 720,000 humanitarian situation reports, press releases, evaluations, guidelines, assessments, maps and infographics.
+
+```{r, echo=FALSE, out.width="65%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics("assets/ocha-relief-web.png", dpi=300)
+
+```
+
+#### Gapminder, 2006
+
+Gapminder Foundation is a non-profit venture registered in Stockholm, Sweden, that promotes sustainable global development and achievement of the United Nations Millennium Development Goals by increased use and understanding of statistics and other information about social, economic and environmental development at local, national and global levels. The Foundation initially developed the Trendalyzer software, which produced the famous animated bubble graph.
+
+```{r, echo=FALSE,out.width="70%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics("assets/rosling.png", dpi=300)
+
+```
+
+#### Our World In Data, 2011
+
+Our World in Data (OWID) is a scientific online publication that focuses on large global problems such as poverty, disease, hunger, climate change, war, existential risks, and inequality.
+
+```{r, echo=FALSE, out.width="55%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics("assets/our-world-in-data.png", dpi=300)
+
+```
+
+#### New York Time, The Upshot, 2014
+
+The Upshot is a website published by The New York Times which spreads articles combining data visualization with conventional journalistic analysis of news.
+
+```{r, echo=FALSE,out.width="55%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics("assets/nyt-theupshot.png", dpi=300)
+
+```
+
+#### Economist, Graphic Detail, 2018
+
+In October 2018, The Economist introduced their "Graphic Detail" feature in both their print and digital editions.
+
+```{r, echo=FALSE,out.width="55%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics("assets/economist-graphic-detail.png", dpi=300)
+
+```
+
+#### And now, You!
+
+* Charts
+* Diagrams
+* Graphs
+* Maps
+* Semiographics
+* Tables
+* Temporals
+* Trees
+* Composition
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: TBD
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

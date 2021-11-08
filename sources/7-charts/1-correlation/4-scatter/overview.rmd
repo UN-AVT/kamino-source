@@ -1,0 +1,87 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    #code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden 
+gc() #free up memory and report the memory usage.
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+<div class="activity">
+CHARTS  
+</div>
+
+# Scatter plot
+## Story-Telling with Scatter plot
+
+```{r, out.height="50%", out.width="50%", fig.align="center", fig.cap="GHG emissions (million tons CO2 per year)"}
+#masthead <- "assets/ghg-emission-by-country.png"
+#knitr::include_graphics(masthead, dpi=72)
+```
+
+A Scatter plot uses dots to represent values for two different numeric variables. The position of each dot on the horizontal and vertical axis indicates values for an individual data point. Scatter plots are used to observe relationships between variables, the relationships can be described in many ways: positive or negative, strong or weak, linear or nonlinear.
+
+Scatter plots can also show if there are any unexpected gaps in the data and if there are any outlier points. Identification of correlational relationships are common with scatter plots. Correlations have two properties, direction and strength. The direction is determined by whether the correlation is positive or negative and the numeric value is determined by the strength of a correlation.
+
+Features required to retrieve the scatter plot:
+
+* __Form__ : Is the association linear or nonlinear?
+* __Direction__ : Is the association positive or negative?
+* __Strength__ : Does the association appear to be strong, moderately strong, or weak?
+* __Outliers__ : Do there appear to be any data points that are unusually far away from the general pattern?
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "Scatter" # mostly used in wranglers and analytics
+keywords <- ''
+commands <- ''
+sources <- ''
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

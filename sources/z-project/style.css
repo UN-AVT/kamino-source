@@ -1,0 +1,11 @@
+body {
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+}
+
+.main-container {
+    max-width: calc(100vw - 100px) !important;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,210 @@
+---
+pagetitle: "Milk Environmental Impact"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+library(ggiraph)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Environmental Impact of Dairy Milk Compared to Vegan Milk Substitutes
+## Bar Vertical Grouped
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Karim Manjra on Unsplash"}
+
+masthead <- "assets/robert-bye-dOElUitX2Do-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Not your mother, not your milk...\
+--- Author unknown\
+
+***
+### Load the data
+#### which milk has the smallest impact on the planet?
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df <- read_csv("archetypes/milk-environmental-impacts.csv", col_names=TRUE)
+
+df$MEASURE <- factor(df$MEASURE, levels = c("Water Use (L)", "Land Use (m2)", "Carbon Emissions (kg CO2eq)")) # order the group categories (for chart display)
+
+df
+
+```
+
+### Plot the chart
+#### Climate change: Which vegan milk is best?
+
+```{r draw-plot, echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# Theme parameters
+theme_opts <- theme(
+  legend.position="top",
+  legend.title = element_blank(),
+  text = element_text(size=16),                       # Set font size for plot text (axes labels, legend labels, plot title, etc.)
+  axis.title = element_blank(),                       # Remove x and y axes titles
+  axis.ticks.y = element_blank(),
+  axis.ticks.x = element_blank(),
+  panel.background = element_blank(),
+  plot.title = element_text(size=18),                 # Increase font size of plot title text
+  plot.background = element_blank(),
+  plot.margin = margin(.25, 1, .25, .25, "cm"),
+  strip.placement = "outside",                        # Place facet labels outside x axis labels
+  strip.background = element_rect(fill = "white")     # Make facet label background white
+)
+
+# Create plot
+v1 <- ggplot(data=df, aes(y=VALUE, x=MILK, fill=MEASURE)) +
+  geom_col(position="dodge", stat="identity") +
+  scale_fill_manual(values=alpha(c("Carbon Emissions (kg CO2eq)" = "#364e5d", "Land Use (m2)" = "#597e4e", "Water Use (L)" = "#587f89"), 0.7),
+                    breaks=c("Water Use (L)", "Land Use (m2)", "Carbon Emissions (kg CO2eq)")) +
+  scale_x_discrete(limits=c("Cow's milk", "Almond milk", "Oat milk", "Rice milk", "Soy milk")) +
+  geom_text(aes(label=paste(VALUE,""),
+                vjust=0,
+                hjust=ifelse(MEASURE == "Carbon Emissions (kg CO2eq)", -2, ifelse(MEASURE == "Land Use (m2)", 0.5, 3)))) + 
+  labs(title = "Milk has higher environmental impact than vegan substitutes", caption = "Source: BBC News", size=15) + 
+  theme_opts
+
+# Print the plot
+girafe(ggobj = v1, width_svg = 13, height_svg = 3,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+### Step by step
+#### Draw the base bar chart
+
+```{r step_one, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=6, class.source = 'fold-hide'}
+
+v1 <- ggplot(data=df, aes(y=VALUE, x=MILK, fill=MEASURE)) +
+  geom_col(position="dodge", stat="identity")
+
+# Print the plot
+girafe(ggobj = v1, width_svg = 13, height_svg = 3,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+#### Add bar custom colours and order discrete values
+
+```{r step_two, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=6, class.source = 'fold-hide'}
+
+v1 <- ggplot(data=df, aes(y=VALUE, x=MILK, fill=MEASURE)) +
+  geom_col(position="dodge", stat="identity") +
+  scale_fill_manual(values=alpha(c("Carbon Emissions (kg CO2eq)" = "#364e5d", "Land Use (m2)" = "#597e4e", "Water Use (L)" = "#587f89"), 0.7),
+                    breaks=c("Water Use (L)", "Land Use (m2)", "Carbon Emissions (kg CO2eq)")) +
+  scale_x_discrete(limits=c("Cow's milk", "Almond milk", "Oat milk", "Rice milk", "Soy milk"))
+
+# Print the plot
+girafe(ggobj = v1, width_svg = 13, height_svg = 3,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+#### Add data labels
+
+```{r step_three, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=6}
+
+v1 <- ggplot(data=df, aes(y=VALUE, x=MILK, fill=MEASURE)) + # base plot
+  geom_col(position="dodge", stat="identity") +
+  scale_fill_manual(values=alpha(c("Carbon Emissions (kg CO2eq)" = "#364e5d", "Land Use (m2)" = "#597e4e", "Water Use (L)" = "#587f89"), 0.7),
+                    breaks=c("Carbon Emissions (kg CO2eq)", "Land Use (m2)", "Water Use (L)")) +
+  scale_x_discrete(limits=c("Cow's milk", "Almond milk", "Oat milk", "Rice milk", "Soy milk")) +
+  geom_text(aes(label=paste(VALUE,""),
+                vjust=0,
+                hjust=ifelse(MEASURE == "Carbon Emissions (kg CO2eq)", -2, ifelse(MEASURE == "Land Use (m2)", 0.5, 3))))
+
+# Print the plot
+girafe(ggobj = v1, width_svg = 13, height_svg = 3,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+### Beautify by adding theme options
+
+```{r step_four, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=6, class.source = 'fold-hide'}
+
+v1 <- ggplot(data=df, aes(y=VALUE, x=MILK, fill=MEASURE)) + # base plot
+  geom_col(position="dodge", stat="identity") +
+  scale_fill_manual(values=alpha(c("Carbon Emissions (kg CO2eq)" = "#364e5d", "Land Use (m2)" = "#597e4e", "Water Use (L)" = "#587f89"), 0.7),
+                    breaks=c("Carbon Emissions (kg CO2eq)", "Land Use (m2)", "Water Use (L)")) +
+  scale_x_discrete(limits=c("Cow's milk", "Almond milk", "Oat milk", "Rice milk", "Soy milk")) +
+  geom_text(aes(label=paste(VALUE,""),
+                vjust=0,
+                hjust=ifelse(MEASURE == "Carbon Emissions (kg CO2eq)", -2, ifelse(MEASURE == "Land Use (m2)", 0.5, 3)))) +
+  labs(title = "Milk has higher environmental impact than vegan substitutes", caption = "Source: BBC News", size=15) +
+  theme_opts
+
+# Print the plot
+girafe(ggobj = v1, width_svg = 13, height_svg = 3,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Exercises and practice
+## Knime and R practice solutions
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative sources: Climate change: Which vegan milk is best?, [GO](https://www.bbc.com/news/science-environment-46654042){target="_blank"}
+
+
+<pre>
+@misc{gmbh_2019_which,
+  author = {GmbH, Datawrapper},
+  month = {09},
+  title = {Which milk has the smallest impact on the planet?},
+  url = {https://blog.datawrapper.de/cow-milk-and-vegan-milk-alternatives/},
+  year = {2019},
+  organization = {Chartable}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

@@ -1,0 +1,157 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: hide
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(tidyr)
+library(scales)
+
+# needed to include bib references
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Bar Horizontal Segmented
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Marcelo Silva on Unsplash"}
+
+masthead <- "assets/marcelo-silva-uKxGOwwALuU-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Being a single parent is twice the work, but also twice the hugs...\
+--- Unknown\
+
+***
+
+# Real-life case: Lone-parent Households
+
+# Load the data
+## Lone-parent households by age and sex of parent, age of child and region, latest available year
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE}
+
+# Load data
+df <- read_csv("archetypes/figure-2-11.csv", col_names=TRUE)
+
+# Transpose columns
+long <- gather(df, type, Percentage, "Lone father (all ages)":"Lone mother 60+ and all children 18 and over", factor_key=FALSE)
+
+# Format x-axis labels
+long$Regionwrap = str_wrap(long$Region, width = 17)
+
+# Order by category
+long$type <- factor(long$type, levels=c("Lone mother 0-17 and at least one child below 18",
+                                        "Lone mother 18-24 and at least one child below 18",
+                                        "Lone mother 25-34 and at least one child below 18",
+                                        "Lone mother 35-59 and at least one child below 18",
+                                        "Lone mother 60+ and at least one child below 18",
+                                        "Lone mother 25-34 and all children 18 and over",
+                                        "Lone mother 35-59 and all children 18 and over",
+                                        "Lone mother 60+ and all children 18 and over",
+                                        "Lone father (all ages)"))
+
+long
+
+```
+
+# Plot the chart
+## One-parent households: mostly lone mothers - Figure 2.11
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, fig.width=10, fig.height=6}
+
+# Define palette
+segment_palette <- c("Lone mother 0-17 and at least one child below 18" = "#6b9e7e",
+                "Lone mother 18-24 and at least one child below 18" = "#88b88a",
+                "Lone mother 25-34 and at least one child below 18" = "#a6609c",
+                "Lone mother 35-59 and at least one child below 18" = "#692c7d",
+                "Lone mother 60+ and at least one child below 18" = "#acc8ed",
+                "Lone mother 25-34 and all children 18 and over" = "#678bb3",
+                "Lone mother 35-59 and all children 18 and over" = "#406993",
+                "Lone mother 60+ and all children 18 and over" = "#bec068",
+                "Lone father (all ages)" = "#2b4662")
+
+# Make the plot
+v1<-ggplot(long, aes(y = Percentage, x = Regionwrap)) + 
+  geom_col(aes(fill = type), position = "fill", width = 0.55) +
+  scale_y_continuous(labels = percent_format(accuracy=1), breaks=seq(0,1,0.1)) +
+  scale_fill_manual(values = segment_palette) +
+  scale_x_discrete(limits=c("Sub-Saharan\nAfrica",
+                            "Central and\nSouthern Asia",
+                            "Northern Africa\nand Western Asia",
+                            "Latin America and\nthe Caribbean",
+                            "Europe and\nNorthern America",
+                            "World")) +
+  labs(
+    title = "Figure 2.11: Lone-parent households by age and sex of parent, age of child and region, latest available year",
+    caption = "Source: UN Women Progress of the World's Women 2019-2020 - Families in a Changing World") +
+  theme( panel.background = element_rect(fill = "white"), 
+         panel.grid.major.x = element_line(color="gray", size=0.1), 
+         axis.title.y = element_blank(), 
+         axis.ticks = element_blank(), 
+         legend.position = "bottom", 
+         legend.title = element_blank()) +
+  guides(fill = guide_legend(ncol=2)) +
+  geom_text(aes(fill = type, label = Percentage), position = position_fill(vjust = 0.5), check_overlap = TRUE, color="white", size = 3) +
+  coord_flip()
+ 
+v1
+
+```
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+# References
+## The citations and data sources used for this case
+
+Source: <a href="https://www.unwomen.org/en/digital-library/progress-of-the-worlds-women">UN Women Progress of the world’s women 2019-2020 Report</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/figure-2-11.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

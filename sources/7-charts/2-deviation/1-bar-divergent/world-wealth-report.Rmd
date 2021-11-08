@@ -1,0 +1,284 @@
+---
+pagetitle: "World Weath Report"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(scales)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# World Weath Report
+## Bar divergent 
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Jorge Zapata on Unsplash"}
+
+masthead <- "assets/jorge-zapata-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> If your mother cooks Italian food, why should you go to a restaurant?\
+--- Martin Scorsese, Director\
+
+***
+
+A study published in the the Journal of Cultural Economics, *Dining out as cultural trade*, used data from TripAdvisor to examine restaurant cuisines, combined with Euromonitor data on overall and fast-food expenditure. The paper calculated the implicit trade patterns in global cuisines for 52 destination countries.  The research was presented in a Daily Chart segment of the Economist using a bar chart with divergent values.  The chart is designed to reveal how domestic and foreign food consumption profiles can identify which countries have the greatest influence on the world’s cuisine preferences.
+
+* Domestic consumption of foreign cuisine is treated as an __import__
+* Foreign consumption of domestic cuisine is treated as an __export__
+
+### Ingest the data
+#### Cuisine net exports _excluding_ and _including_ fast food
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df_exports <- read.csv("archetypes/world-cuisine-preferences/table-6-cuisine-net-exports-excluding-fast-food.csv", header = TRUE, stringsAsFactors = FALSE)
+df_exports
+
+df_fast_food <- read.csv("archetypes/world-cuisine-preferences/table-6-cuisine-net-exports-including-fast-food.csv", header = TRUE, stringsAsFactors = FALSE)
+df_fast_food
+
+```
+
+
+### Wrangle and analyze
+#### Refactor to set stack sort order
+
+* Cast numeric types
+* Calculate Net.Exports
+* Ordering Country in descending order by their Net.Exports
+* Create a column "Color" to color code the Importers and Exporters
+* Separate the Importers and Exporters to support labeling
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Cast column type
+df_exports$Exports <- as.numeric(gsub(",", "", df_exports$Exports))
+df_exports$Imports <- as.numeric(gsub(",", "", df_exports$Imports))
+
+# Cast column type
+df_fast_food$Exports <- as.numeric(gsub(",", "", df_fast_food$Exports))
+df_fast_food$Imports <- as.numeric(gsub(",", "", df_fast_food$Imports))
+
+# Calculate the net exports and fill in the fourth column
+df_exports$Net.exports <- df_exports$Exports-df_exports$Imports
+
+df_fast_food$Net.exports <- df_fast_food$Exports-df_fast_food$Imports
+
+# Remove all missing data
+df_exports <- df_exports %>% filter(Net.exports!='NA')
+
+df_fast_food <-df_fast_food %>% filter(Net.exports!='NA')
+
+# Change order of factors to sort from highest to lowest
+df_exports <- df_exports %>% mutate(Country = factor(Country))
+df_exports$Country <- fct_reorder(df_exports$Country, df_exports$Net.exports, max)
+
+df_fast_food <- df_fast_food %>% mutate(Country = factor(Country))
+df_fast_food$Country <- fct_reorder(df_fast_food$Country, df_fast_food$Net.exports, max)
+
+# Make colors based on value threshold
+df_exports$Color <- ifelse(df_exports$Net.exports > 0, "Exporter", "Importer")
+df_exports <- df_exports %>% mutate(Color = factor(Color))
+
+df_fast_food$Color <- ifelse(df_fast_food$Net.exports > 0, "Exporter", "Importer")
+df_fast_food <- df_fast_food %>% mutate(Color = factor(Color))
+
+# Filter df into two parts for labels later
+df_exports_l <- df_exports %>% filter( df_exports$Net.exports > 0 )
+df_exports_r <- df_exports %>% filter( df_exports$Net.exports < 0 )
+
+df_fast_food_l <- df_fast_food %>% filter( df_fast_food$Net.exports > 0 )
+df_fast_food_r <- df_fast_food %>% filter( df_fast_food$Net.exports < 0 )
+
+df_exports
+df_fast_food
+
+```
+
+
+### Plot
+#### shared theme and palette
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Common theme for both charts
+theme_opts <- theme(
+    legend.position='none', 
+    panel.background = element_rect(fill = "white", colour = "white"), 
+    #axis.text.x=element_blank(), 
+    #axis.ticks.x=element_blank(), 
+    axis.title.x = element_blank(),
+    axis.text.y=element_blank(), 
+    axis.ticks.y=element_blank(),   
+    axis.title.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    panel.grid.major.x = element_line(size = 0.5, linetype = 'solid', colour = "#b0bfc8"),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank()
+    )
+
+color_palette <- c("Exporter" = "#076fa1", "Importer" = "#2fc1d3")
+
+```
+
+#### excluding fast food
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Make the plot
+v1 <- ggplot( df_exports, aes( x = Net.exports, y = Country, fill = Color ) ) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = color_palette) +
+  # Country Label
+  geom_text( data = df_exports_l, size = 4, label = df_exports_l$Country, x = -110, y = df_exports_l$Country, hjust = 1, color = 'gray30' ) +
+  geom_text( data = df_exports_r, size = 4, label = df_exports_r$Country, x = 200, y = df_exports_r$Country, hjust = 0, color= 'gray30' ) +
+  # Value Label
+  geom_text( data = df_exports_l, size = 4, label = df_exports_l$Net.exports, hjust = 0, position = position_nudge(x = 125), color = 'gray30') +
+  geom_text( data = df_exports_r, size = 4, label = df_exports_r$Net.exports, hjust = 1, position = position_nudge(x = -125), color = 'gray30') +
+  # Manual Annotations
+  annotate( geom = "text", x = 51000, y = 'Turkey', label = 'Net\nExporters', color = "#076fa1", size = 6, hjust = 0) +
+  annotate( geom = "text", x = -51000, y = 'Australia' , label = 'Net\nImporters', color = "#2fc1d3", size = 6, hjust = 1) +
+  # Red Line
+  geom_vline( xintercept = 0, colour = "red", linetype = "solid", size = 1.1 ) +
+  # Top Axis
+  scale_x_continuous(limits = c(-150000, 175000), breaks=seq(-150000,175000, 25000), sec.axis = dup_axis()) +
+  # Title and Caption
+  labs(title = "Unbalanced diets", subtitle = "Cuisine Net Exports Excluding Fast Food") +
+  #labs()+
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+#### including fast food
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Make the plot
+v2 <- ggplot( df_fast_food, aes( x = Net.exports, y = Country, fill = Color ) ) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = color_palette) +
+  # Country Label
+  geom_text( data = df_fast_food_l, size = 4, label = df_fast_food_l$Country, x = -110, y = df_fast_food_l$Country, hjust = 1, color = 'gray30' ) +
+  geom_text( data = df_fast_food_r, size = 4, label = df_fast_food_r$Country, x = 200, y = df_fast_food_r$Country, hjust = 0, color= 'gray30' ) +
+  # Value Label
+  geom_text( data = df_fast_food_l, size = 4, label = df_fast_food_l$Net.exports, x = df_fast_food_l$Net.exports,  y = df_fast_food_l$Country, hjust = 0, position = position_nudge(x = 125), color = 'gray30') +
+  geom_text( data = df_fast_food_r, size = 4, label = df_fast_food_r$Net.exports, x = df_fast_food_r$Net.exports,  y = df_fast_food_r$Country, hjust = 1, position = position_nudge(x = -125), color = 'gray30') +
+  # Manual Annotations
+  annotate( geom = "text", x = 51000, y = 'France', label = 'Net\nExporters', color = "#076fa1", size = 6, hjust = 0) +
+  annotate( geom = "text", x = -51000, y = 'Australia' , label = 'Net\nImporters', color = "#2fc1d3", size = 6, hjust = 1) +
+  # Red Line
+  geom_vline( xintercept = 0, colour = "red", linetype = "solid", size = 1.1 ) +
+  # Top Axis
+  scale_x_continuous(limits = c(-75000, 175000), breaks=seq(-75000,175000, 25000), sec.axis = dup_axis()) +
+  # Title and Caption
+  labs(title = "Unbalanced diets", subtitle = "Cuisine Net Exports Including Fast Food ($bn)") +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/world-cuisine-preferences-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/world-cuisine-preferences-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: The Economist, Which countries dominate the world’s dinner tables?, https://www.economist.com/graphic-detail/2019/08/23/which-countries-dominate-the-worlds-dinner-tables
+* Data: Journal of Cultural Economics, Dining out as cultural trade
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/economist-unbalanced-diets.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'cuisine diet fast food'
+commands <- 'gsub ifelse geom_vline'
+sources <- 'Economist Journal of Cultural Economics'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

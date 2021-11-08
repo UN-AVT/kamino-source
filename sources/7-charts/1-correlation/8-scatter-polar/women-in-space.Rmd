@@ -1,0 +1,252 @@
+---
+pagetitle: "Women in space"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, encoding = "utf-8")
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggforce)
+library(colorspace)
+library(ggiraph)
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Women in space
+## Scatter Polar
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Greg Rakozy on Unsplash"}
+
+masthead <- "assets/greg-rakozy-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Weightlessness is a great equalizer...\
+--- Sally Ride\
+
+***
+
+### Ingest data 
+#### series, values, and dates
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df <- read.csv("archetypes/women-in-space/astronaut-data.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+```
+
+
+### Wrangle data
+#### female astronauts
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+pal <- c(
+  "#343854",
+  "#8C384D",
+  "#CF2438",
+  "#D95E31",
+  "#F0C742",
+  "#F8F0E5"
+)
+
+# Female astronauts
+hrs_mission <- df %>% 
+  filter(sex == "female") %>% 
+  distinct(name, total_hrs_sum)
+
+hrs_mission
+
+hrs_mission <- hrs_mission %>%  mutate(
+    a = seq(pi/12, pi - pi/12, length.out = nrow(hrs_mission)),
+		offset = 2000,                # make space for the Earth
+		x = (total_hrs_sum + offset) * cos(a),  # convert to polar
+		y = (total_hrs_sum + offset) * sin(a)
+)
+
+hrs_mission
+
+```
+
+
+### View
+#### earth gridlines
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+gridlines <- data.frame(
+  r = c(seq(0, 8000, by = 2000), 15000),
+  offset = 2000
+  ) %>% 
+  mutate(label = case_when(
+    r == 0 ~ "",
+    r == 15000 ~ paste0(r, " hours"),
+    TRUE ~ as.character(r)
+  ),
+  x = c(rep(0, 5), 500)
+  )
+
+stars = data.frame(
+  x = runif(150, min = -11000, max = 11000),
+	y = runif(150, min = 9000, max = 28000)
+)
+
+```
+
+
+### View / Chart
+#### earth, stars, and astronauts
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1280/72, out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "white", size = 12, face = "bold"),
+  plot.subtitle = element_text(color = "white", size = 11),
+  plot.caption = element_text(color = "white", size = 9),
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  #axis.line = element_blank(),
+  #axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  #panel.grid.major = element_blank(),
+  #panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="#182122", colour="NA"),
+  panel.border = element_blank(),
+  plot.background = element_rect(fill="#182122", colour="NA"),
+  plot.margin = unit(c(0.5, 0.25, 0, 0.25), "in")
+)
+
+v1 <- ggplot(hrs_mission) +
+  # Earth
+  geom_arc(aes(x0 = 0, y0 = 0, r = offset - 100, start = -pi/2, end = pi/2)) +
+  # Stars
+	geom_point(data = stars, aes(x = x, y = y, alpha = y), size = 0.25, colour = "white", stroke = 0) +
+  # Astronauts
+	geom_point(aes(x, y, size = y, colour = total_hrs_sum, alpha = y)) +
+  # Gridlines
+  geom_arc(data = gridlines, aes(x0 = 0, y0 = 0, r = r + offset, start = -pi/2, end = pi/2), colour = "#CCCCCC", size = 0.1) +
+  geom_text(data = gridlines, aes(x = x, y = r + offset + 400, label = label), size = 3, colour = "#EEEEEE", hjust = 1.0) +
+  scale_color_gradientn(colors = c("#FFB300", "#7E57C2", "#03A9F4"), na.value = NA) +
+  scale_fill_gradientn(colors = c("#FFB300", "#7E57C2", "#03A9F4"), na.value = NA) +
+  scale_size_continuous(range = c(1, 10)) +
+	scale_alpha(range = c(0.9, 0.6 )) + # for stars
+  scale_x_continuous(limits = c(-11000, 11000), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 28000), expand = c(0, 0)) +
+  labs( title = "Women in Space",
+        subtitle = "total duration of all missions, 1961-2019",
+        caption = "") +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1080/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9))
+)
+
+```
+
+
+### View / Chart
+#### with annotations
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1280/72, out.width="100%"}
+
+peggy <- hrs_mission %>% filter(str_detect(name, "Whitson"))
+sunita <- hrs_mission %>% filter(str_detect(name, "Sunita"))
+rubins <- hrs_mission %>% filter(str_detect(name, "Rubins"))
+koch <- hrs_mission %>% filter(str_detect(name, "Koch"))
+tereshkova <- hrs_mission %>% filter(str_detect(name, "Tereshkova"))
+
+v2 <- v1 +
+  geom_text(data = peggy, aes(x, y+800, label = paste0(name, "\n", total_hrs_sum)), color = "white", size = 3, vjust = 0.0) +
+  geom_point(data = peggy, aes(x, y, size = y + 500), shape = 21, fill="NA", color = "#FFFFFF") +
+  geom_text(data = sunita, aes(x, y+800, label = paste0(name, "\n", total_hrs_sum)), color = "white", size = 3, vjust = 0.0) +
+  geom_point(data = sunita, aes(x, y, size = y + 500), shape = 21, fill="NA", color = "#FFFFFF") +
+  geom_text(data = rubins, aes(x, y+800, label = paste0(name, "\n", total_hrs_sum)), color = "white", size = 3, vjust = 0.0) +
+  geom_point(data = rubins, aes(x, y, size = y + 500), shape = 21, fill="NA", color = "#FFFFFF") +
+  geom_text(data = koch, aes(x, y+800, label = paste0(name, "\n", total_hrs_sum)), color = "white", size = 3, vjust = 0.0) +
+  geom_point(data = koch, aes(x, y, size = y + 500), shape = 21, fill="NA", color = "#FFFFFF") +
+  geom_text(data = tereshkova, aes(x+800, y, label = paste0(name, "\n", total_hrs_sum)), color = "white", size = 3, hjust = 0.0) +
+  geom_point(data = tereshkova, aes(x, y, size = y + 500), shape = 21, fill="NA", color = "#FFFFFF")
+
+girafe(ggobj = v2, width_svg = 1080/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/women-in-space-fs.svg", plot = v1, width=1720/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/women-in-space-sm.png", plot = v1, width=2.25, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Data sources: M. Stavnichuk & T. Corlett, [GO](https://doi.org/10.1016/j.lssr.2020.06.003){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

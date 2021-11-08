@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Kamino</title>
+
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/navigation-1.1/codefolding.js"></script>
+<link href="libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+<script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+<script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+<link href="libs/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet" />
+<script src="libs/ggiraphjs-0.4.1/ggiraphjs.min.js"></script>
+<script src="libs/girafe-binding-0.7.10/girafe.js"></script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../z-assemblers/assets/logo/logo.svg" alt="" width="42">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../z-assemblers/assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../z-assemblers/assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="C:/GitHub/Perso/kamino-dev/sources/z-assemblers/assets/styles/content/kamino.css" type="text/css" />
+<link rel="stylesheet" href="C:/GitHub/Perso/kamino-dev/sources/z-assemblers/assets/icons/line-awesome/css/line-awesome.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>CHARTS</p>
+</div>
+<div id="marimekko" class="section level1">
+<h1>Marimekko</h1>
+<div id="internet-penetration-by-region" class="section level2">
+<h2>Internet Penetration by Region</h2>
+<hr />
+</div>
+</div>
+<div id="load-data" class="section level1">
+<h1>Load data</h1>
+<pre class="r"><code># Create dataset
+df = read.csv(&quot;archetypes/internet-penetration-by-region/internet-penetration-by-region.csv&quot;, header = TRUE)
+df</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["World_Regions"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Population_2020"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Population_Percent_of_World"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Internet_Users_2020"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Penetration_Rate"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Growth_2000_2020"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Internet_World_Percent"],"name":[7],"type":["chr"],"align":["left"]}],"data":[{"1":"Africa","2":"1,340,598,447","3":"0.17","4":"631,940,772","5":"0.47","6":"13898%","7":"12.80%"},{"1":"Asia","2":"4,294,516,659","3":"0.55","4":"2,555,636,255","5":"0.60","6":"2136%","7":"51.80%"},{"1":"Europe","2":"834,995,197","3":"0.11","4":"727,848,547","5":"0.87","6":"593%","7":"14.80%"},{"1":"Latin America / Caribbean","2":"654,287,232","3":"0.08","4":"467,817,332","5":"0.72","6":"2489%","7":"9.50%"},{"1":"Middle East","2":"260,991,690","3":"0.03","4":"184,856,813","5":"0.71","6":"5527%","7":"3.70%"},{"1":"North America","2":"368,869,647","3":"0.05","4":"332,908,868","5":"0.90","6":"208%","7":"6.80%"},{"1":"Oceania / Australia","2":"42,690,838","3":"0.01","4":"28,917,600","5":"0.68","6":"279%","7":"0.60%"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="prepare-data" class="section level1">
+<h1>Prepare data</h1>
+<pre class="r"><code>df$xmax &lt;- cumsum(df$Population_Percent_of_World)
+df$xmin &lt;- df$xmax - df$Population_Percent_of_World
+df$xlabel &lt;- (df$xmax + df$xmin)/2
+df$label &lt;- paste(as.character(df$Penetration_Rate*100),&quot;%&quot;)
+data&lt;-df %&gt;% rename(Regions=World_Regions)
+data</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Regions"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Population_2020"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Population_Percent_of_World"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Internet_Users_2020"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Penetration_Rate"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Growth_2000_2020"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Internet_World_Percent"],"name":[7],"type":["chr"],"align":["left"]},{"label":["xmax"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["xmin"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["xlabel"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["label"],"name":[11],"type":["chr"],"align":["left"]}],"data":[{"1":"Africa","2":"1,340,598,447","3":"0.17","4":"631,940,772","5":"0.47","6":"13898%","7":"12.80%","8":"0.17","9":"0.00","10":"0.085","11":"47 %"},{"1":"Asia","2":"4,294,516,659","3":"0.55","4":"2,555,636,255","5":"0.60","6":"2136%","7":"51.80%","8":"0.72","9":"0.17","10":"0.445","11":"60 %"},{"1":"Europe","2":"834,995,197","3":"0.11","4":"727,848,547","5":"0.87","6":"593%","7":"14.80%","8":"0.83","9":"0.72","10":"0.775","11":"87 %"},{"1":"Latin America / Caribbean","2":"654,287,232","3":"0.08","4":"467,817,332","5":"0.72","6":"2489%","7":"9.50%","8":"0.91","9":"0.83","10":"0.870","11":"72 %"},{"1":"Middle East","2":"260,991,690","3":"0.03","4":"184,856,813","5":"0.71","6":"5527%","7":"3.70%","8":"0.94","9":"0.91","10":"0.925","11":"71 %"},{"1":"North America","2":"368,869,647","3":"0.05","4":"332,908,868","5":"0.90","6":"208%","7":"6.80%","8":"0.99","9":"0.94","10":"0.965","11":"90 %"},{"1":"Oceania / Australia","2":"42,690,838","3":"0.01","4":"28,917,600","5":"0.68","6":"279%","7":"0.60%","8":"1.00","9":"0.99","10":"0.995","11":"68 %"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="plot" class="section level1">
+<h1>Plot</h1>
+<pre class="r"><code>theme_opts &lt;- theme(
+  legend.position = &quot;none&quot;,
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill=&quot;white&quot;, colour=&quot;white&quot;),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0, 0, 1, 0), &quot;in&quot;)
+)
+
+v1 &lt;-ggplot(data) +
+    geom_rect(aes(ymin = 0, ymax = Penetration_Rate, xmin = xmin, xmax = xmax, fill = Regions), color = &quot;white&quot;, alpha = 0.5) + 
+    geom_text(aes(x = xlabel, y = Penetration_Rate, label = label, vjust = -1), position = &quot;identity&quot;, color = &quot;black&quot;, size = 3 ) +
+    geom_text(aes(x = xlabel, y = 0, label = Regions), hjust = &quot;right&quot;, vjust = 0.5, position = &quot;identity&quot;, color = &quot;black&quot;, size = 3.5, angle = 45 ) +
+    geom_hline(yintercept = 0.6) +
+    coord_cartesian(clip=&quot;off&quot;) +
+    theme(plot.title = element_text(size = rel(2)), panel.background = element_rect(fill = &quot;white&quot;, colour = &quot;grey50&quot;)) +
+    theme_opts
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))</code></pre>
+<div id="htmlwidget-d05297b284ae873e33b3" style="width:85%;height:768px;" class="girafe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d05297b284ae873e33b3">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757' viewBox='0 0 936.00 504.00'>\n  <g>\n    <defs>\n      <clipPath id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_1'>\n        <rect x='0.00' y='0.00' width='936.00' height='504.00'/>\n      <\/clipPath>\n    <\/defs>\n    <rect x='0.00' y='0.00' width='936.00' height='504.00' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_1' clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_1)' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round'/>\n    <defs>\n      <clipPath id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2'>\n        <rect x='0.00' y='0.00' width='936.00' height='504.00'/>\n      <\/clipPath>\n    <\/defs>\n    <rect x='2.74' y='-0.00' width='933.26' height='429.26' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_2' clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n    <rect x='45.16' y='205.96' width='144.23' height='203.79' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_3' clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)' fill='#F8766D' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='189.39' y='149.59' width='466.63' height='260.16' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_4' clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)' fill='#C49A00' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='656.02' y='32.52' width='93.33' height='377.23' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_5' clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)' fill='#53B400' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='749.35' y='97.56' width='67.87' height='312.19' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_6' clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)' fill='#00C094' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='817.22' y='101.90' width='25.45' height='307.85' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_7' clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)' fill='#00B6EB' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='842.67' y='19.51' width='42.42' height='390.24' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_8' clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)' fill='#A58AFF' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <rect x='885.09' y='114.90' width='8.48' height='294.85' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_9' clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)' fill='#FB61D7' fill-opacity='0.5' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='miter' stroke-linecap='square'/>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text x='107.55' y='199.85' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_10' font-size='6.40pt' font-family='Arial'>47 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text x='412.98' y='143.48' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_11' font-size='6.40pt' font-family='Arial'>60 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text x='692.96' y='26.41' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_12' font-size='6.40pt' font-family='Arial'>87 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text x='773.56' y='91.45' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_13' font-size='6.40pt' font-family='Arial'>72 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text x='820.22' y='95.78' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_14' font-size='6.40pt' font-family='Arial'>71 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text x='854.16' y='13.40' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_15' font-size='6.40pt' font-family='Arial'>90 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text x='879.61' y='108.79' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_16' font-size='6.40pt' font-family='Arial'>68 %<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text transform='translate(101.81,430.26) rotate(-45.00)' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_17' font-size='7.47pt' font-family='Arial'>Africa<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text transform='translate(411.54,425.96) rotate(-45.00)' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_18' font-size='7.47pt' font-family='Arial'>Asia<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text transform='translate(682.51,434.97) rotate(-45.00)' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_19' font-size='7.47pt' font-family='Arial'>Europe<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text transform='translate(704.82,493.25) rotate(-45.00)' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_20' font-size='7.47pt' font-family='Arial'>Latin America / Caribbean<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text transform='translate(795.70,449.04) rotate(-45.00)' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_21' font-size='7.47pt' font-family='Arial'>Middle East<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text transform='translate(821.82,456.85) rotate(-45.00)' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_22' font-size='7.47pt' font-family='Arial'>North America<\/text>\n    <\/g>\n    <g clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)'>\n      <text transform='translate(832.78,471.34) rotate(-45.00)' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_23' font-size='7.47pt' font-family='Arial'>Oceania / Australia<\/text>\n    <\/g>\n    <line x1='2.74' y1='149.59' x2='936.00' y2='149.59' id='svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_el_24' clip-path='url(#svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757_cl_2)' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt' fill='#000000' fill-opacity='1'/>\n  <\/g>\n<\/svg>","js":null,"uid":"svg_7dc22a3f-8a62-40cf-8e0e-4cc39709d757","ratio":1.85714285714286,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px 2px 2px 2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}\n","placement":"doc","offx":10,"offy":0,"use_cursor_pos":true,"opacity":0.9,"usefill":false,"usestroke":false,"delay":{"over":200,"out":500}},"hover":{"css":".hover_SVGID_ { fill:orange;stroke:gray; }","reactive":false},"hoverkey":{"css":".hover_key_SVGID_ { stroke:red; }","reactive":false},"hovertheme":{"css":".hover_theme_SVGID_ { fill:green; }","reactive":false},"hoverinv":{"css":""},"zoom":{"min":1,"max":1},"capture":{"css":".selected_SVGID_ { fill:red;stroke:gray; }","type":"multiple","only_shiny":true,"selected":[]},"capturekey":{"css":".selected_key_SVGID_ { stroke:gray; }","type":"single","only_shiny":true,"selected":[]},"capturetheme":{"css":".selected_theme_SVGID_ { stroke:gray; }","type":"single","only_shiny":true,"selected":[]},"toolbar":{"position":"topright","saveaspng":true,"pngname":"diagram"},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="save-plot" class="section level1">
+<h1>Save plot</h1>
+<pre class="r"><code># ggsave(filename = &quot;internet-penetration-by-region.svg&quot;, plot = v1, width=12, height=8)</code></pre>
+</div>
+<div id="exercises-and-practice" class="section level1">
+<h1>Exercises and practice</h1>
+<div id="knime-and-r-practice-solutions" class="section level2">
+<h2>Knime and R practice solutions</h2>
+</div>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<div id="the-citations-and-data-sources-used-for-this-case" class="section level2">
+<h2>The citations and data sources used for this case</h2>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+</body>
+</html>

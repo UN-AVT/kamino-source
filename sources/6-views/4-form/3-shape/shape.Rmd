@@ -1,0 +1,112 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/styles/content/views.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+library(ggpubr)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+VIEWS  
+</div>
+
+# Shape
+## I want to fix irregularities in my dataset
+
+> The artist is a receptacle for emotions that come from all over the place:\
+from the sky, from the earth, from a scrap of paper, from a passing *shape*, from a spider's web...\
+--- Pablo Picasso\
+
+The process of mapping data to visual variables is called visual mapping. Choosing diff erent marks, forms, and styles for representing and expressing information can greatly infl uence the perception and understanding of the presented information. It is therefore important to know and appropriately use the characteristics of visual variables when creating any visual data representation.
+
+***
+
+# Design Choice
+## Primitives and Geometric
+
+* arc
+* circle
+* line
+* polygon
+* rectangle
+* symbol, sprite, or glyph
+* text
+* triangle - Spike Map
+
+# Resemblence
+## It looks like the thing
+
+Chart - waffle ( primitives forming a whole )
+Geospatial - borders ( polygon )
+Semiographic - symbol
+Tree - bottom up
+Temporal - calendar view
+
+# Section
+## Subsection
+
+
+
+
+### Result
+
+```{r, out.width = "100%"}
+
+# knitr::include_graphics("assets/design-considerations.svg", dpi=300)
+
+```
+
+
+# Section
+## Subsection
+
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

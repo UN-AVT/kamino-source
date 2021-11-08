@@ -1,0 +1,202 @@
+---
+pagetitle: "Nightingale's Rose Diagram"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+library(magrittr)
+library(grid)
+library(gridExtra)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Florence Nightingale's Rose Diagram
+## Coxcomb
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo from Wikipedia based on original oil painting by Jerry Barrett"}
+
+masthead <- "assets/nightingale-receiving-the-wounded-at-scutari.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">The Mission of Mercy: Florence Nightingale receiving the Wounded at Scutari</div>
+
+> It is only the dead who have seen the end of war...\
+--- Plato\
+
+***
+
+### Load the data
+#### Causes of Mortality in the Army in the East
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+nightingale_df <- read.csv("archetypes/nightingale/nightingale-rose.csv", header = TRUE, stringsAsFactors = TRUE)
+nightingale_df
+
+```
+
+### Plot the chart
+#### disease, wounds, and other
+
+1854-1855
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
+  plot.subtitle = element_text(size = 14, face = "bold", hjust = 0.5),
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text.y = element_blank(),
+  axis.line.y = element_blank(),
+  axis.ticks.y = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  strip.text.x = element_text( size = 12, color = "black", face = "bold"),
+  strip.background = element_rect(color="white", fill="white", size=0)
+)
+
+rose_pal <- c("Disease" = "#8fa3aa",
+              "Other" = "#746b66",
+              "Wounds" = "#ef9a9a")
+
+v1 <- ggplot(data = nightingale_df %>% subset(Regime == "Before"), aes(x = Month, y = Deaths, fill = Cause, color = Cause)) +
+  geom_bar(width = 1, stat = "identity", position = "stack", alpha = 0.8) +
+  scale_fill_manual(values = rose_pal) +
+  scale_color_manual(values = rose_pal) +
+  scale_y_sqrt() +
+  coord_polar(start = 3 * pi / 2) +
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "DIAGRAM of the CAUSES of MORTALITY", 
+       subtitle="in the ARMY in the EAST",
+       caption = "APRIL 1954 to MARCH 1855") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+1855-1856
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+v2 <- ggplot(data = nightingale_df %>% subset(Regime == "After"), aes(x = Month, y = Deaths, fill = Cause, color = Cause)) +
+  geom_bar(width = 1, stat = "identity", position = "stack", alpha = 0.8) +
+  scale_fill_manual(values = rose_pal) +
+  scale_color_manual(values = rose_pal) +
+  scale_y_sqrt() +
+  coord_polar(start = 3 * pi / 2) +
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "DIAGRAM of the CAUSES of MORTALITY", 
+       subtitle="in the ARMY in the EAST",
+       caption = "APRIL 1855 to MARCH 1856") +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+combined as a facet
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+Regime_lab <- c("APRIL 1954 to MARCH 1855", "APRIL 1855 to MARCH 1856")
+names(Regime_lab) <- c("Before", "After")
+
+v3 <- ggplot(data = nightingale_df,
+                aes(x = Month, y = Deaths, fill = Cause, color = Cause)) +
+  geom_bar(width = 1, stat = "identity", position = "stack", alpha = 0.8) +
+  scale_y_sqrt() +
+  scale_fill_manual(values = rose_pal) +
+  scale_color_manual(values = rose_pal) +
+  facet_grid(. ~ Regime, scales = "fixed", labeller = labeller(Regime = Regime_lab)) +
+  coord_polar(start = 3 * pi / 2) +
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "DIAGRAM of the CAUSES of MORTALITY", 
+       subtitle="in the ARMY in the EAST",) +
+  theme_opts
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Florence Nightingale's Rose Diagram, [GO](https://www.historyofinformation.com/detail.php?entryid=3815){target="_blank"}
+
+<pre>
+Nightingale, F., 
+Notes on Matters Affecting the Health, Efficiency, and Hospital Administration of the British Army. 
+Founded Chiefly on the Experience of the Late War. 
+Presented by Request to the Secretary of State for War. 
+Privately printed for Miss Nightingale, Harrison and Sons, 1858.
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

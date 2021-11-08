@@ -1,0 +1,233 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+     in_header: "../../../z-assemblers/fragments/header.html"
+     after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+
+# needed to include bib references
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Bar Horizontal Ordered
+## Case: Family Policy Scores by Country
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+
+
+***
+
+# Load the data
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df = read.csv("archetypes/family-policy-scores-by-country/family-policy-scores-by-country.csv", header = TRUE, stringsAsFactors = TRUE)
+df
+
+
+```
+
+# Plot the chart 
+## Chart will plot as the original index in the dataframe 
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=10.5, out.width="100%"}
+
+theme_opts <- theme(
+    plot.margin = margin(.25, 1, .25, .25, "cm"),
+    plot.background = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none",
+    axis.title.x=element_blank(),
+    axis.title.y=element_blank(),
+    axis.ticks.y=element_blank(),
+    axis.ticks.x=element_blank(),
+    axis.text.x=element_blank(),
+    strip.placement = "outside",                      # Place facet labels outside x axis labels.
+    strip.background = element_rect(fill = "white"),  # Make facet label background white.
+    axis.title = element_blank()                     # Remove x and y axis titles.
+)
+
+# Make the plot
+v1 <- ggplot(df, aes(x=Family.Integration.Policy.Average.Scores, y=Country)) + 
+  geom_bar(stat="identity", fill="#88b88a") +
+  # scale_y_discrete(limits=c("Almond milk", "Oat milk", "Soy milk", "Rice milk","Cow's milk")) +
+  #scale_fill_manual(values=c("Carbon Emissions (kg CO2eq)" = "#364e5d", "Land Use (m2)" = "#597e4e", "Water Use (L)" = "#587f89")) +
+  #scale_color_manual(values=c("white" = "#ffffff", "black" = "#000000")) +
+  coord_cartesian(clip="off") +
+  labs(title = "FAMILY INTEGRATION POLICY AVERAGE SCORES BY COUNTRY, 2014") +
+  theme_opts
+
+# Print the plot
+v1
+
+```
+
+
+# Rank From Highest to Lowest
+## As it is a horizontal Bar Chart, we reorder the y-axis.
+## Note: In the case of vertical Bar Charts, we will reorder the x-axis.
+
+```{r drawa, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=10.5, out.width="100%"}
+
+theme_opts <- theme(
+    plot.margin = margin(.25, 1, .25, .25, "cm"),
+    plot.background = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none",
+    axis.title.x=element_blank(),
+    axis.title.y=element_blank(),
+    axis.ticks.y=element_blank(),
+    axis.ticks.x=element_blank(),
+    axis.text.x=element_blank(),
+    strip.placement = "outside",                      # Place facet labels outside x axis labels.
+    strip.background = element_rect(fill = "white"),  # Make facet label background white.
+    axis.title = element_blank()                     # Remove x and y axis titles.
+)
+
+# Make the plot
+v2 <- ggplot(df, aes(x=Family.Integration.Policy.Average.Scores, y=reorder(Country,Family.Integration.Policy.Average.Scores))) + 
+  geom_bar(stat="identity", fill="#88b88a") +
+  # scale_y_discrete(limits=c("Almond milk", "Oat milk", "Soy milk", "Rice milk","Cow's milk")) +
+  #scale_fill_manual(values=c("Carbon Emissions (kg CO2eq)" = "#364e5d", "Land Use (m2)" = "#597e4e", "Water Use (L)" = "#587f89")) +
+  #scale_color_manual(values=c("white" = "#ffffff", "black" = "#000000")) +
+  coord_cartesian(clip="off") +
+  labs(title = "FAMILY INTEGRATION POLICY AVERAGE SCORES BY COUNTRY, 2014") +
+  theme_opts
+
+# Print the plot
+v2
+
+```
+
+
+# Rank from Lowest to Highest
+## The only change is putting a "-" sign infront of the axis we're reordering.
+
+
+
+```{r drawb, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=10.5, out.width="100%"}
+
+theme_opts <- theme(
+    plot.margin = margin(.25, 1, .25, .25, "cm"),
+    plot.background = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none",
+    axis.title.x=element_blank(),
+    axis.title.y=element_blank(),
+    axis.ticks.y=element_blank(),
+    axis.ticks.x=element_blank(),
+    axis.text.x=element_blank(),
+    strip.placement = "outside",                      # Place facet labels outside x axis labels.
+    strip.background = element_rect(fill = "white"),  # Make facet label background white.
+    axis.title = element_blank()                     # Remove x and y axis titles.
+)
+
+# Make the plot
+v3 <- ggplot(df, aes(x=Family.Integration.Policy.Average.Scores, y=reorder(Country,-Family.Integration.Policy.Average.Scores))) + 
+  geom_bar(stat="identity", fill="#88b88a") +
+  # scale_y_discrete(limits=c("Almond milk", "Oat milk", "Soy milk", "Rice milk","Cow's milk")) +
+  #scale_fill_manual(values=c("Carbon Emissions (kg CO2eq)" = "#364e5d", "Land Use (m2)" = "#597e4e", "Water Use (L)" = "#587f89")) +
+  #scale_color_manual(values=c("white" = "#ffffff", "black" = "#000000")) +
+  coord_cartesian(clip="off") +
+  labs(title = "FAMILY INTEGRATION POLICY AVERAGE SCORES BY COUNTRY, 2014") +
+  theme_opts
+
+# Print the plot
+v3
+
+```
+
+# As reusable function
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=10.5, out.width="100%",  fig.show='hide'}
+
+theme_opts <- theme(
+    plot.margin = margin(.25, 1, .25, .25, "cm"),
+    plot.background = element_blank(),
+    panel.background = element_blank(),
+    legend.position = "none",
+    axis.title.x=element_blank(),
+    axis.title.y=element_blank(),
+    axis.ticks.y=element_blank(),
+    axis.ticks.x=element_blank(),
+    axis.text.x=element_blank(),
+    strip.placement = "outside",                      # Place facet labels outside x axis labels.
+    strip.background = element_rect(fill = "white"),  # Make facet label background white.
+    axis.title = element_blank()                     # Remove x and y axis titles.
+)
+
+# Make the plot
+
+make_hbar <- function(df, x_field, y_field, fill_str, title_str) {
+
+x_var <- c(x_field)
+y_var <- c(y_field)
+
+ggplot(df, aes(x=get(x_var), y=get(y_var))) + 
+  geom_bar(stat="identity", fill=fill_str) +
+  coord_cartesian(clip="off") +
+  labs(title = title_str) +
+  theme_opts
+
+}
+
+# Print the plot
+v1 <- make_hbar(df, "Family.Integration.Policy.Average.Scores", "Country", "#88b88a", "FAMILY INTEGRATION POLICY AVERAGE SCORES BY COUNTRY, 2014")
+v1
+
+```
+
+
+# References
+## The citations and data sources used for this case can be found on the <a href="https://www.un.org/en/development/desa/population/publications/policy/international-migration-policies-report-2013.asp"target="_blank" rel="noopener noreferrer">United Nations Report</a> on International Migration Policies: Government View and Priorities.  
+
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/family-policy-scores-by-country.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

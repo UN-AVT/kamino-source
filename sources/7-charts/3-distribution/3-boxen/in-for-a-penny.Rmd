@@ -1,0 +1,135 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE,
+   dev = "svg"
+)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+#loading required R libraries 
+
+library(reticulate) #the superpower bridges python and R
+library(MASS)
+#specifying which version of python to use
+
+use_python('C:\\PROGRA~1\\Python35\\python.exe')
+
+#importing required Python libraries/modules
+
+sns <- import('seaborn')
+plt <- import('matplotlib.pyplot')
+pd <- import('pandas')
+
+matplotlib <- import("matplotlib")
+matplotlib$use("Agg", force = TRUE)
+```
+
+# Boxen Plot
+
+
+# Load data: diamonds
+
+```{r, echo=FALSE}
+
+# Load data
+df <- read.csv("archetypes/diamonds.csv", header = TRUE, stringsAsFactors = FALSE)
+clarity_ranking <-c("I1", "SI2", "SI1", "VVS2", "VVS1", "IF", "VS2", "VS1")  
+df
+```
+
+# Use python package 'seaborn' to show a boxen plot carat among diamonds clarity
+
+```{r, echo=FALSE, fig.width=13, fig.height=7}
+
+sns$set(style="whitegrid")  
+ 
+  
+p1<-sns$boxenplot(x="clarity", y="carat",  
+              color="b",  order=clarity_ranking,
+              scale="linear", data=df) 
+
+plt$show()
+plt$savefig("diamonds.svg")
+```
+
+```{r, out.width="100%", fig.align="center"}
+
+plt <- "diamonds.svg"
+knitr::include_graphics(plt, dpi=72)
+
+```
+
+ 
+# References
+## The citations and data sources used for this case
+
+* [Seaborn tutorial](https://www.c-sharpcorner.com/article/a-complete-python-seaborn-tutorial/)
+* Diamond is a dataset in R
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "citations/average-working-hours-of-children.bib")
+
+```
+
+
+
+
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "Boxen" 
+keywords <- 'boxen diamonds'
+commands <- 'boxen'
+sources <- 'United Nations'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

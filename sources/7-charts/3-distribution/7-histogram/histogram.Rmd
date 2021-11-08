@@ -1,0 +1,77 @@
+---
+title: "Histogram Chart"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(tidyr)
+theme_set(theme_classic())
+```
+
+### Histogram on a Continuous (Numeric) Variable
+
+##### Load dataset: mpg
+```{r, echo=FALSE}
+
+# Load data
+df = mpg
+df
+
+
+```
+
+
+##### Make the plot
+```{r, echo=FALSE, fig.width=13, fig.height=7}
+
+gg1 <- ggplot(mpg, aes(displ)) + scale_fill_brewer(palette = "Spectral")
+
+gg1 + geom_histogram(aes(fill=class), 
+                   binwidth = .1, 
+                   col="black", 
+                   size=.1) +  # change binwidth
+  labs(title="Histogram with Auto Binning", 
+       subtitle="Engine Displacement across Vehicle Classes")  
+
+
+```
+
+
+```{r, echo=FALSE, fig.width=13, fig.height=7}
+
+gg2<-gg1 + geom_histogram(aes(fill=class), 
+                   bins=5, 
+                   col="black", 
+                   size=.1) +   # change number of bins
+  labs(title="Histogram with Fixed Bins", 
+       subtitle="Engine Displacement across Vehicle Classes") 
+gg2
+```
+
+### Histogram on a Categorical variable
+
+```{r, echo=FALSE, fig.width=13, fig.height=7}
+
+gg3 <- ggplot(mpg, aes(manufacturer))+
+geom_bar(aes(fill=class), width = 0.5) + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6)) + 
+  labs(title="Histogram on Categorical Variable", 
+       subtitle="Manufacturer across Vehicle Classes") 
+gg3
+```
+
+
+```{r, echo=FALSE}
+
+#ggsave(filename = "histogram1.svg", plot = gg1, width=24.5, height=6.5)
+#ggsave(filename = "histogram2.svg", plot = gg2, width=24.5, height=6.5)
+#ggsave(filename = "histogram3.svg", plot = gg3, width=24.5, height=6.5)
+```

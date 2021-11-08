@@ -1,0 +1,173 @@
+---
+pagetitle: "Australia Population Pyramid"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE,
+   dev = "svg"
+)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(ggplot2)
+library(ggiraph)
+library(ggthemes)
+library(plotrix)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+
+# Population Pyramid
+## Real-life case: Australian Population
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Dan Freeman on Unsplash"}
+
+masthead <- "assets/dan-freeman-7Zb7kUyQg1E-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Australia is about as far away as you can get. I like that...\
+--- Andre Benjamin\
+
+***
+
+### First look at an alternate case
+#### Email Campaign Funnel
+#### pyramid.plot is principally intended for population pyramids, although it can display other types of opposed bar charts.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+
+# Read data
+email_campaign_funnel <- read.csv("https://raw.githubusercontent.com/selva86/datasets/master/email_campaign_funnel.csv")
+
+# X Axis Breaks and Labels
+brks <- seq(-15000000, 15000000, 5000000)
+lbls = paste0(as.character(c(seq(15, 0, -5), seq(5, 15, 5))), "m")
+
+# Plot
+v1 <- ggplot(email_campaign_funnel, aes(x = Stage, y = Users, fill = Gender)) +   # Fill column
+  geom_bar(stat = "identity", width = .6) +   # Draw the bars
+  scale_y_continuous(breaks = brks,   # Breaks
+                     labels = lbls) + # Labels
+  coord_flip() +  # Flip axes
+  labs(title="Email Campaign Funnel") +
+  theme_tufte() +  # Tufte theme from ggfortify
+  theme(plot.title = element_text(hjust = .5),
+        axis.ticks = element_blank()) +   # Centre plot title
+  scale_fill_brewer(palette = "Dark2")  # Color palette
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Make the plot
+## Australian Population by Age and Sex, 2002
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+
+ # data
+ xy.pop <- c(3.2,3.5,3.6,3.6,3.5,3.5,3.9,3.7,3.9,3.5,3.2,2.8,2.2,1.8,1.5,1.3,0.7,0.4)
+ xx.pop <- c(3.2,3.4,3.5,3.5,3.5,3.7,4,3.8,3.9,3.6,3.2,2.5,2,1.7,1.5,1.3,1,0.8)
+ 
+ # labels
+ agelabels <- c("0-4","5-9","10-14","15-19","20-24","25-29","30-34",
+  "35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74",
+  "75-79","80-44","85+")
+ 
+ # colours
+ mcol <- color.gradient(c(0,0,0.5,1),c(0,0,0.5,1),c(1,1,0.5,1),18)
+ fcol <- color.gradient(c(1,1,0.5,1),c(0.5,0.5,0.5,1),c(0.5,0.5,0.5,1),18)
+ 
+ # plot
+ par(mar=pyramid.plot(xy.pop,xx.pop,labels=agelabels,
+  main="Australian population pyramid 2002",lxcol=mcol,rxcol=fcol,
+  gap=0.5,show.values=TRUE))
+ 
+```
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+
+# three column matrices
+avtemp<-c(seq(11,2,by=-1),rep(2:6,each=2),seq(11,2,by=-1))
+malecook<-matrix(avtemp+sample(-2:2,30,TRUE),ncol=3)
+femalecook<-matrix(avtemp+sample(-2:2,30,TRUE),ncol=3)
+# group by age
+agegrps<-c("0-10","11-20","21-30","31-40","41-50","51-60",
+ "61-70","71-80","81-90","91+")
+oldmar<-pyramid.plot(malecook,femalecook,labels=agegrps,
+ unit="Bowls per month",lxcol=c("#ff0000","#eeee88","#0000ff"),
+ rxcol=c("#ff0000","#eeee88","#0000ff"),laxlab=c(0,10,20,30),
+ raxlab=c(0,10,20,30),top.labels=c("Males","Age","Females"),gap=4,
+ do.first="plot_bg(\"#eedd55\")")
+# put a box around it
+box()
+# give it a title
+mtext("Porridge temperature by age and sex of bear",3,2,cex=1.5)
+# stick in a legend
+legend(par("usr")[1],11,c("Too hot","Just right","Too cold"),
+ fill=c("#ff0000","#eeee88","#0000ff"))
+# don't forget to restore the margins and background
+par(mar=oldmar,bg="transparent")
+
+```
+
+
+
+
+### References
+#### The citations and data sources used for this case
+
+
+* Narrative and Data Source, Australian Bureau of Statistics: [GO](https://www.abs.gov.au/AUSSTATS/abs@.nsf/allprimarymainfeatures/093DE2D848E3A319CA256E0000757AFB?opendocument){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,185 @@
+---
+pagetitle: "Fastest Growing Brands"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Fastest Growing Brands
+## the dumbell chart
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Marvin Meyer on Unsplash"}
+
+masthead <- "assets/marvin-meyer-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Great companies are built on great products...\
+--- Elon Musk\ 
+
+***
+
+### Ingest
+#### rank, brand, percent growth, category, etc.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df = read.csv("archetypes/fastest-growing-brands/fastest-growing-brands.csv", header = TRUE, stringsAsFactors = FALSE) # read text file
+df
+
+```
+
+
+### Wrangle
+#### factor category to use for color
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df
+df_wrangle$Category <- as.factor(df_wrangle$Category)
+
+head(df_wrangle)
+
+```
+
+
+### View, chart
+#### segment and points 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 14, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10, hjust = 0.0, vjust = 1.0),
+    axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_text(size = 14, face = "bold"),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    #panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    panel.grid.minor.x = element_blank(), # remove x (vertical) gridlines
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 10),
+    legend.position='top',
+    plot.margin = unit(c(0.5, 0.25, 1.0, 0.5), "in")
+  )
+
+category_palette <- c(
+                "Cars & Transportation" = "#84FF57",
+                "Media & Entertainment" = "#1D74BC",
+                "Consumer Goods & Retail" = "#ED297B",
+                "Technology" = "#652D90",
+                "Food & Beverages" = "#C3986B",
+                "Retail" = "#FAEC31"
+)
+
+# create dumbbell plot
+v1<-ggplot(df_wrangle) +  
+  geom_segment( aes(x = Rank, xend = Rank, y = 0, yend = Brand_Value_Percent_Growth), lineend = "butt", linejoin = "round", size=1.0, color="black" ) +
+  geom_point( aes(x = Rank, y = 0, size = X2020), shape = 21, fill = "white", color = "white", alpha = 1.0) +
+  geom_point( aes(x = Rank, y = 0, size = X2020, fill = Category), shape = 21, color = "black", alpha = 0.6) +
+  geom_text( aes(x = Rank, y = 0, label=X2020), size=6, color="black", hjust = 0.5, vjust = 0.5, family = "inconsolata", fontface = "bold" ) +
+  geom_point( aes(x = Rank, y = Brand_Value_Percent_Growth, size = X2021), shape = 21, fill = "white", color = "white", alpha = 1.0) +
+  geom_point( aes(x = Rank, y = Brand_Value_Percent_Growth, size = X2021, fill = Category), shape = 21, color = "black", alpha = 0.6) +
+  geom_text( aes(x = Rank, y = Brand_Value_Percent_Growth, label=X2021), size=6, color="black", hjust = 0.5, vjust = 1.0, family = "inconsolata", fontface = "bold" ) + 
+  geom_text( aes(x = Rank, y = Brand_Value_Percent_Growth, label=Brand), size=4, color="black", hjust = 0.5, family = "inconsolata", fontface = "bold", nudge_y = 10) + 
+  scale_x_continuous(breaks = seq(1, 10, 1), labels = seq(1, 10, 1)) +
+  scale_y_continuous(limits = c(0,300), breaks = c(0, 100, 200, 300), labels = c("0%", "100%", "200%", "300%")) +
+  scale_size_continuous(range = c(15, 75), guide = "none") +
+  scale_fill_manual(values = category_palette) +
+  coord_cartesian(clip = "off") +
+  labs(title = "THE FASTEST GROWING BRANDS in 2021 ",
+       subtitle = "SELECTED COUNTRIES, LATEST AVAILABLE YEAR",
+       caption = "Source:\nKantar BrandZ\nvia Visual Capitalist",
+       x = "",
+       y = "percent growth in brand value") +
+  theme_minimal() + 
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/fastest-growing-brands-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/fastest-growing-brands-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+# References
+## The citations and data sources used for this case
+
+* Narrative and Data: Visual Capitalist, Ranked: The World’s Fastest Growing Brands, 2021,
+[GO](https://www.visualcapitalist.com/fastest-growing-brands-2021/){target="_blank"}
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

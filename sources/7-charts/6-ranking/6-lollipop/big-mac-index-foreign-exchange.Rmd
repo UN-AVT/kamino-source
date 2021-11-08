@@ -1,0 +1,159 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(dplyr)
+library(janitor)
+library(ggtext)
+library(ggdist)
+library(ggiraph)
+library(forcats)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+# Lollipop
+<div class="activity">
+CHARTS  
+</div>
+
+
+***
+
+### Ingest
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df <- read.csv("archetypes/big-mac-index-foreign-exchange/big-mac-full-index.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+```
+
+
+### Wrangle
+#### Filter rows, select columns, calculate values...
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+df_wrangle <- df %>% filter(date=='2021-07-01') %>% select(3,4,15)%>%mutate(index=USD_adjusted*100)%>% unite('country_currency',name, currency_code, sep = "_", remove = TRUE, na.rm = FALSE)%>%mutate(color=ifelse(index>0,'1','2'))
+df_wrangle
+
+```
+
+
+### View / Chart
+#### Vertical Lollipop
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1280/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 10),
+    plot.caption = element_text(color = "#555555", size = 9),
+    panel.background = element_rect(fill = '#F5F5F5', color = NA),
+    panel.border = element_blank(),
+    plot.background = element_rect(fill = '#F5F5F5', color = NA),
+    plot.margin = unit(c(0.5, 0.5, 0.5, 0.25), "in"),
+    #panel.grid.major.x = element_line(color = "#999999", size = 1.0, linetype = "dotted"),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.x = element_blank(),
+    legend.position = 'none'
+)
+
+```
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1280/72, out.width="100%"}
+
+v1 <- df_wrangle %>%
+  mutate(country_currency = fct_reorder(country_currency, index)) %>%
+ggplot( aes(x=country_currency,y=index,color=color)) +
+  geom_point_interactive(aes(tooltip = paste0(country_currency,': ',index), data_id = country_currency),size=3)+
+  geom_hline(yintercept=0)+
+  geom_segment(aes(xend=country_currency,yend=0),color=gray(.50))+
+  labs(title = "The Big Mac index",
+       subtitle = "Local currency under-/over-valuation against the $, % July 2021",
+       x = NULL,
+       y = 'Index value',
+       fill = "Interval") +
+   annotate("text", x = 45, y = 25, label = "Overvalued",size=5)+
+  annotate("text", x = 10, y = -35, label = "Undervalued",size=5)+
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1080/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9))
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* [Data Source](https://github.com/TheEconomist/big-mac-data)
+* [Chart Reference](https://www.economist.com/big-mac-index)
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+#methods <- "" # mostly used in wranglers and analytics
+keywords <- 'big mac index'
+commands <- 'geom_point geom_hline geom_segment'
+sources <- 'The Economist'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

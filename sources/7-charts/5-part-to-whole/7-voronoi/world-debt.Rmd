@@ -1,0 +1,220 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(readxl)
+library(ggiraph)
+library(ggrepel)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Countries by Share of Earth Surface
+## Donut Chart
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Brett Zeck on Unsplash"}
+
+masthead <- "assets/brett-zeck-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Bourscheid castle in the north of Luxembourg</div>
+
+> The earth is what we all have in common...\
+--- Wendell Berry\
+
+***
+
+
+### Ingest the data
+#### Country's size and their percentages 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df <- read_excel("archetypes/imf-dm-export-20210816 (1).xls")
+df <- df %>%
+  select(`General government gross debt (Percent of GDP)`, `2025`) %>%
+  rename( Debt = `General government gross debt (Percent of GDP)`,
+          y = `2025`) %>%
+  na.omit() %>%
+  mutate(y = as.numeric(y)) %>%
+  arrange(desc(y))%>%
+  slice(1:20)%>%
+  mutate(x = y*100/sum(y))
+
+
+
+df$y <- as.numeric(df$y)
+
+iris
+
+library(ggvoronoi)
+library(ggforce)
+
+ggplot(df) +
+    geom_voronoi(aes(x=x,y=y/10,fill=Debt))
+
+
+ggplot(df) +
+  geom_voronoi( aes(x=y, y=y), geom = "path")
+
+?geom_voronoi
+
+ggplot(df, aes(y, y, group = -1L)) +
+  geom_voronoi_tile(aes(fill = Debt)) +
+  geom_voronoi_segment() +
+  geom_text(aes(label = stat(nsides), size = stat(vorarea)),
+    stat = 'delvor_summary', switch.centroid = TRUE
+  )
+```
+
+
+### Wrangle the data
+#### We'll convert the data in numeric and then some simple indexing to create an 'Other' row since the dataset is large. We will also have to create coordinates to where our labels will be place.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+colnames(df) <- c("Country", "Total", "Percentage" )
+df$Total <- parse_number(df$Total)
+df$Percentage <- parse_number(df$Percentage)
+df <- df[1:13,]
+
+df2 <- df %>%  ## for labelling purposes
+  mutate(csum = rev(cumsum(rev(Percentage))), 
+         pos = Percentage/2 + lead(csum, 1),
+         pos = if_else(is.na(pos), Percentage/2, pos))
+  
+
+```
+
+
+### Plot
+#### Donut Chart
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black",  size = 36, face = 'bold', hjust = 0.5 ),
+    plot.subtitle = element_text(color = "black", size = 20, hjust = 0.5, margin=margin(0,0,40,0)),
+    plot.caption = element_text(color = "#555555", size = 10),
+    # axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    
+    # panel.grid.minor = element_blank(),
+    # panel.grid.major = element_blank(),
+    legend.position='none'
+  )
+
+# Plot
+v1 <- ggplot(df, aes(x = 2 , y = Percentage, fill = fct_inorder(Country))) +
+  geom_col(width = 1, position = "stack") +
+  coord_polar(theta = "y") +
+  scale_fill_brewer(palette = "Set3") +
+  geom_label_repel(data = df2,
+                   aes(y = pos, label = paste0(Country, " ", Percentage, "%")),
+                   size = 4.5, nudge_x = 1, show.legend = FALSE) +
+  guides(fill = guide_legend(title = "Group")) +
+  labs(title="Share of earth surface for top 13 countries", subtitle = "Percentage relative to global share")+
+  xlim(0.5, 2.5)+
+  theme_void() + theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+
+### Save plot
+#### as vector or raster image
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/size-of-countries.svg", plot = v1, width=1280/72, height=720/72)
+
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative Inspiration: The Economist, Ideas Factories, Global innovation and GDP
+* Data Source: Global Innovation Index (GII) 2021, https://www.globalinnovationindex.org/analysis-indicator
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "donut" # mostly used in wranglers and analytics
+keywords <- 'country-size'
+commands <- 'coor_polar'
+sources <- 'UN'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

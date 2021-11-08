@@ -1,0 +1,303 @@
+---
+pagetitle: "Infectious Diseases in Context"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggthemes)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Infectious Diseases in Context
+## Scatter Quadrant
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Aaron Blanco Tejedor on Unsplash"}
+
+masthead <- "assets/aaron-blanco-tejedor-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Be safe, be smart, be kind...\
+--- Dr. Tedros Adhanom Ghebreyesus, WHO Director General\
+
+***
+
+Infectious diseases are diseases that are caused by germs.  As we'll see with the data, these germs can be passed on in several different ways from direct and indirect contact, insect or animal bites, or through contaminated food, water, soil, or plants.  The data will also indicate the type of pathogen such as bacteria, virus, or parasite.  For this case we'll explore the many different germs and two key areas of interest: how __contagious__ they are and the __fatality__ rate if infected.
+
+### Ingest data
+#### Disease, R0, Fatality Rate, and Mode of Transmission
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df = read.csv("archetypes/infectious-disease/infectious-disease.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle data
+#### Rename, select, clean, and cast data types
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Simplify the column names
+df_complete <- rename(df, 
+                      DISEASE = "Disease_Name", 
+                      PATHOGEN = "Pathogen.type",
+                      CONTAGIOUSNESS = "R0", 
+                      DEADLINESS = "Case_Fatality_Rate_Percent", 
+                      TRANSMISSION = "Primary_Mode_of_Transmission")
+
+# Select only the needed
+df_complete <- select(df_complete, c("N", "DISEASE", "PATHOGEN", "CONTAGIOUSNESS", "DEADLINESS", "TRANSMISSION"))
+
+# Make sure all visual variables are proper data types
+df_complete$CONTAGIOUSNESS <- as.numeric(df_complete$CONTAGIOUSNESS)
+df_complete$DEADLINESS <- parse_number(df_complete$DEADLINESS)
+
+# Make sure we don't factor empty strings
+df_complete <- filter(df_complete, nchar(PATHOGEN) > 0)
+df_complete <- filter(df_complete, nchar(TRANSMISSION) > 0)
+# Factor the string fields
+df_complete$PATHOGEN <- as.factor(df_complete$PATHOGEN)
+df_complete$TRANSMISSION <- as.factor(df_complete$TRANSMISSION)
+
+# Remove incomplete cases
+df_complete <- df_complete[complete.cases(df_complete), ]
+df_complete <- filter(df_complete, is.na(DEADLINESS) == FALSE)
+
+df_complete
+
+```
+
+
+### Base Scatter Plot
+#### Position, Shape, Color
+
+
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  #axis.line = element_blank(),
+  #axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  #panel.grid = element_blank(),
+  panel.grid.major = element_line(linetype = "dotted"),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill="white", colour="white"),
+  #panel.border = element_blank(),
+  plot.background = element_rect(fill="white", colour="white"),
+  plot.margin = unit(c(0.5,2,1,0.5), "in")
+)
+
+# Print values needed for mapping
+# as.data.frame(unique(df_complete$PATHOGEN))
+shape_mapping <- c("bacterium" = 23, "virus" = 21, "parasite" = 24, "prion" = 22)
+
+# Print values needed for palette
+# as.data.frame(unique(df_complete$TRANSMISSION))
+transmission_palette <- c("airborne" = "#c62828", 
+                          "bite" = "#ad1457", 
+                          "fecal-oral" = "#6a1b9a", 
+                          "food" = "#4527a0", 
+                          "body fluids" = "#4527a0",
+                          "parasite" = "#1565c0",
+                          "waterborne" = "#0277bd",
+                          "airborne, fecal-oral" = "#00838f",
+                          "sexual contact" = "#00695c",
+                          "airborne, body fluids" = "#558b2f",
+                          "fecal-oral, surfaces" = "#f9a825",
+                          "bite, sexual contact" = "#ef6c00")
+
+v1 <- ggplot(df_complete) +
+      annotate("rect", xmin = 0, xmax = 17, ymin = 0, ymax = 1, fill = "#f0f0f0", alpha = 0.2) +
+      annotate("rect", xmin = 0, xmax = 17, ymin = 20, ymax = 50, fill = "#f0f0f0", alpha = 0.2) +
+      geom_point_interactive(aes(x = CONTAGIOUSNESS, 
+                 y = DEADLINESS, 
+                 shape = PATHOGEN,
+                 fill = TRANSMISSION,
+                 tooltip = paste0("Disease: ", DISEASE, "\n", "Deadliness: ", DEADLINESS, "%\n", "Contagiousness: ", CONTAGIOUSNESS, "\n", "Transmission: ", TRANSMISSION),
+                 data_id = N), 
+                 color='#ffffff', size = 3.0, alpha = 1.0 ) +
+      geom_text_repel(aes(x = CONTAGIOUSNESS, 
+                 y = DEADLINESS, 
+                 label = DISEASE, color = TRANSMISSION), family = 'inconsolata', size = 4, force = 0.5, nudge_x = 0.25, segment.size  = 0.2, segment.color = "grey50", direction = "y", hjust = 0) +
+      #expand_limits(x = 0.1, y = 0.1) +
+      scale_x_continuous(limits = c(0,17), breaks = seq(0, 17, 1), labels = seq(0, 17, 1)) +
+      scale_y_continuous(trans = "log2", 
+                         breaks = c(0, 0.1, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100), 
+                         labels = c(0, 0.1, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100),
+                         expand = c(0, 0)) +
+      scale_shape_manual(values = shape_mapping) +
+      scale_fill_manual(values = transmission_palette) +
+      scale_color_manual(values = transmission_palette) +
+      coord_cartesian(clip = 'off') +
+      labs(x="CONTAGIOUSNESS",
+         y="DEADLINESS",
+         title = NULL) +
+      theme_minimal(base_family = "inconsolata", base_size = 16) +
+      theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(
+         opts_sizing(rescale = TRUE, width = 1.0), 
+         opts_hover_inv(css = "opacity:0.2;"), 
+         opts_hover(css = "fill:black;")
+         )
+      )
+
+```
+
+
+### The Quadrant
+#### and annotations...
+
+
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+v2 <- v1 + geom_vline(xintercept = 1) +
+  geom_vline(xintercept = 5) +
+  geom_vline(xintercept = 7) +
+  geom_vline(xintercept = 12) +
+  geom_vline(xintercept = 17) +
+  # X axis quadrants
+  annotate("text", x = 0, y = 100, 
+           label = "not very", 
+           hjust = 0.5, vjust=-2.0, size = 5, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 3, y = 100, 
+           label = "quite contagious", 
+           hjust = 0.5, vjust=-2.0, size = 5, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 6, y = 100, 
+           label = "very", 
+           hjust = 0.5, vjust=-2.0, size = 5, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 9.5, y = 100, 
+           label = "extremely", 
+           hjust = 0.5, vjust=-2.0, size = 5, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 14.5, y = 100, 
+           label = "hide", 
+           hjust = 0.5, vjust=-2.0, size = 5, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  # Y axis quadrants
+  annotate("text", x = 17, y = 80, 
+           label = "  extremely deadly", 
+           hjust=0, vjust=0.5, size = 5, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 17, y = 80, 
+           label = "   death likely", 
+           hjust=0, vjust=2.5, size = 4, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 17, y = 35, 
+           label = "  deadly", 
+           hjust=0, vjust=0.5, size = 5, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 17, y = 35, 
+           label = "   high chance of death", 
+           hjust=0, vjust=2.5, size = 4, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 17, y = 5, 
+           label = "  quite deadly", 
+           hjust=0, vjust=0.5, size = 5, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 17, y = 5, 
+           label = "   unlucky or unhealthy", 
+           hjust=0, vjust=2.5, size = 4, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 17, y = 0.35, 
+           label = "  not too deadly", 
+           hjust=0, vjust=0.5, size = 5, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  annotate("text", x = 17, y = 0.35, 
+           label = "   high risk groups\n   (i.e. infants, elderly)", 
+           hjust=0, vjust=1.5, size = 4, color = "#bbbbbb", family = "inconsolata", fontface = 1) +
+  # Axis annotation
+  annotate("text", x = 1, y = 0, 
+           label = "Ro = 1\nDisease not\nlikely to spread)",
+           hjust=0, vjust=1.5, size = 4, color = "#bbbbbb", family = "inconsolata", fontface = 1)
+  # Quadrant rectangles
+  # But this will place as a top layer
+  # So we move it to the bottom of the layer build up
+  # annotate("rect", xmin = 0, xmax = 17, ymin = 0, ymax = 1, fill = "#f0f0f0", alpha = 0.2) +
+  # annotate("rect", xmin = 0, xmax = 17, ymin = 20, ymax = 50, fill = "#f0f0f0", alpha = 0.2)
+
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+      )
+
+```
+
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/infectious-disease-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# without annotations
+ggsave(filename = "assets/infectious-disease-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative inspiration and data sources: The MicrobeScope Infectious Diseases in Context, [GO](https://informationisbeautiful.net/visualizations/the-microbescope-infectious-diseases-in-context/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

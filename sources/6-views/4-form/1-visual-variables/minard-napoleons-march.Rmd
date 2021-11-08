@@ -1,0 +1,363 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/styles/content/views.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+
+library(gapminder)
+library(countrycode)
+library(ggplot2)
+library(magick)
+
+library(ggpubr)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+VIEWS  
+</div>
+
+# Visual Mapping Process
+## I want to fix irregularities in my dataset
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+The process of mapping data to visual variables is called visual mapping. Choosing different marks, forms, and styles for representing and expressing information can greatly infl uence the perception and understanding of the presented information. It is therefore important to know and appropriately use the characteristics of visual variables when creating any visual data representation.
+
+We’ll explore the visual mapping process and the use of visual strokes, fills, and patterns that when mastered and skillfully applied, can convey sense and story to the most complicated subjects.
+
+***
+
+# Section
+## Subsection
+
+Purpose: Basic Functions of Data Display
+Visualizing categorical data, Michael Friendly, SAS Institute (page 9)
+
+There are many views of graphs, of graphical perception, and of the roles of data visualization in discovering and communicating information. On the one hand, a graphical display may be regarded as a “stimulus”—a package of information to be conveyed to an idealized observer. From this perspective, certain questions are of interest: Which form or graphic aspect promotes greater accuracy or speed of judgment (for a specifi c task or question)? What aspects lead to greatest memorability or impact? (Friendly, 8)
+
+An alternative view regards a graphical display as an act of communication—like a narrative, or even a poetic text or work of art. This perspective places the greatest emphasis on the selected communication goal to be achieved, and judges the effectiveness of a graphical display in how well it meets that goal.
+
+In this view, an effective graphical display, like good writing, requires an understanding of its purpose—what aspects of the data are to be communicated to the viewer. In writing,
+we communicate most effectively when we know our audience and tailor the message appropriately.
+
+for whom is the representation intended? relates to who the intended audience will be; for example, yourself or other analysts as an input for the interpretation process, or for the decision maker as an input to the presentation process. The analysis process (knowledge discovery, insight, hypothesis testing) and the presentation process (decide/act). Exploratory Analysis Support: Will the graphic answer my question? The choice and construction of a graphic is a critical success factor to its value in the interpretation and reasoning process. Dissemination and Presentation: Will the graphic explain my answer to the viewer? Representation choice and design will weigh heavily on its impact in the presentation process.
+
+The first distinction identifies Analysis or Presentation as the primary use of a data graphic. In The Value of Information, Professor Jarke J. van Wijk presented an idea of an information visualization model. Beginning with the basics, . In terms of the model proposed, visualization can be observed from the point of view of the data to be visualized, the various solutions proposed, from the knowledge sought, the graphic produced, or from aspects such as perception or exploration. Given this basic model as a start point, we can see that developing good visualization solutions is intrinsically a design challenge with a clear goal:
+
+“given data and visualization such that knowledge is optimal”.
+
+given some data, a description of that data, and a description of goals for the use of the data, create a graphic display encoding the data and facilitating the completion of the goals.
+
+# A Closer Look
+
+Visualizations are basically made from Structure, (1) Marks, (2) their Graphical Properties, and (3) elements requiring human Controlled Processing. Human visual processing works on two levels: automatic and controlled processing[8]. Automatic processing, which works on visual properties such as position and color, is highly parallel, but limited in power; controlled processing, which works on for example text, has powerful operations, but is limited in capacity. The distinction between these two types of capacity is important for visual design.
+
+The architecture of a graphic is based on a foundation of two concepts: a graphic frame and layers. A frame... Layers. William S. Cleveland and Robert McGill, Elementary Codes and an Order, Graphical Perception: The Visual Decoding of Quantitative Information on Graphical Displays of Data described the use of positions, kengths, angles, slopes, areas, volumes, densities, and colors. With a fi rm graph of these concepts, the Visual Analyst is ... 
+
+Properties Of The 10 Attributes of the Eye, All Concerned in Painting.
+
+Painting is concerned with all the 10 attributes of sight; which are:--Darkness, Light, Solidity and Colour, Form and Position, Distance and Propinquity, Motion and Rest. This little work of mine will be a tissue [of the studies] of these attributes, reminding the painter of the rules and methods by which he should use his art to imitate all the works of Nature which adorn the world.
+
+Visual Variables are a specified set of modifi cations that can be applied to objects in order to encode information. The question is, if there are basic visual symbols that, arranged in a particular way, can be used to convey information in a similar manner. Jaques Bertin [Bertin, 1967] described marks as these basic units and also developed a given number of methods these units can be modifi ed, such as position, size, shape, or color. These predefi ned modifi cations are called visual variables. Each of these variables can have certain charactaristics. Sometimes visual variables are also called visual attributes. All of those developments were primarily made for cartographic purposes and only later adapted and used for information visualisation. Jaques Bertin defi ned seven Visual Variables [Bertin, 1967] consisting of position, size, shape, value, color, orientation, and texture. Mackinlay’s ranking for elementary perceptual tasks:
+
+The choice of the variable, which would be most appropriate to represent each aspect of information depends
+on its characteristics.
+• Selective: If a mark changes in this variable and as an eff ect can be selected from the other marks easily the visual variable is said to be selective.
+• Associative: Several marks can be grouped across changes in other visual variables.
+• Quantitative: If the diff erence between two marks in this variable can be interpreted numerically, the visual variable is quantitative.
+• Order: If the variable supports ordered reading it is an ordered visual variable. This means that a change could be read as more or less (e.g. in size you can order marks according to their area).
+• Length: The length defi nes how many values the variable features. For example how many shades of grey can be recognised.
+
+The primary objective of visualization mapping is to identify a set of visualization primitives that can effectively convey the informational content of data.
+
+Knowing the characteristics of data relevant for visualization map.p!ng is the fi rst important step in designing an eff ective data visualization technique. The most primlnve components of visualization techniques are the marks (graphical symbols) which constitute the graphics. In general, a visualization technique can be viewed as a collection of marks which collectively encodes a particular data subset...Knowledge about various graphical primitives as well as composition rules is essential for data visualization ...Since graphical primitives, rather than the data itself, are presented to convey the data content, it is important that the graphical primitives used in visualization precisely express only the data. (Senay, pg 3)
+
+Aesthetics, integrity, acuity, visual literacy, etc., Literacy, Controls and Infotecture
+
+# Master
+## Subsection
+
+Let’s look at a detailed example before we continue in applying these concepts. A master class is a class given to students of a particular discipline by an expert of that discipline. For this expertise we call upon Charles Joseph Minard (1781 – 1870), a French civil engineer noted for his inventions in the field of information graphics, among the most famous known as Carte figurative des pertes successives en hommes de l’Armée Française dans la campagne de Russie 1812-1813 - or simply, Napoleon’s March.
+
+
+```{r, out.width = "85%"}
+
+# ![](assets/insights-of-the-roundtable.svg){ width=900px }
+knitr::include_graphics("assets/build-representation.svg", dpi=300)
+
+```
+
+
+The test of this assertion is that a properly designed process can draw his graphic from the data and a properly structured specifi cation. Of all the attempts to convey the futility of Napoleon’s attempt to invade Russia and the utter destruction of his Grande Armee in the last months of 1812, no written work or painting presents such a compelling picture as does Minard’s graphic. The devastating loss of Napoleon’s army in the fi elds of Russia during the winter of 1812-13. Here he uses the same proportional line to track Napoleon’s Grand Armeé as it made its was across the Russian plains toward Moscow.
+
+690,000 soldiers marched into Russia, 10,000 returned to France. What could explain such a disaster? “to judge by eye the diminution of the army.” Minard’s graph pairs three factors: The army’s size, geographical movement and the temperature. The graph tells the story of a steadily decreasing army, bowed down by Russian ambushes, icy rivers and winter.
+
+Thus, it is easier to see that the battles at Smolensk and Borodino did reduce troop size as shown by the drop in height between the two bars in each pair), but the one at Trautino had no effect. Of course, it is also clear that battles had relatively little responsibility for the loss of troops throughout the campaign.
+
+# Section
+## Subsection
+
+## Troops
+
+```{r}
+# file path parameter
+troops_file_path <- "archetypes/minard/minard-troops.csv"
+
+df_troops <- read_csv(troops_file_path)
+
+# Show results
+df_troops
+
+```
+
+
+## Temperature
+
+```{r}
+
+# file path parameter
+temp_file_path <- "archetypes/minard/minard-temp.csv"
+
+df_temp <- read_csv(temp_file_path)
+
+# Show results
+df_temp
+
+```
+
+
+## Cities
+
+```{r}
+
+# file path parameter
+cities_file_path <- "archetypes/minard/minard-cities.csv"
+
+df_cities <- read_csv(cities_file_path)
+
+# Show results
+df_cities
+
+```
+
+
+Tufte says, “Six variables are plotted: the size of the army, its location on a two-dimensional surface, direction of the army’s movement, and temperature on various dates during the retreat from Moscow.” Tufte’s statement refers to variable sets or dimensions in the specifi cation, because there is a blending. The six dimensions are survivors, longitude (a blend of lonp, lonc, lont), latitude (a blend of latp, latc), direction, temp, and date. In fact, there are seven dimensions in this plot. The seventh is group.
+
+Edward Tufte, in his praise of Minard’s map, identified six separate variables that were captured within it. First, the line width continuously marked the size of the army. Second and third, the line itself showed the latitude and longitude of the army as it moved. Fourth, the lines themselves showed the direction that the army was traveling, both in advance and retreat. Fifth, the location of the army with respect to certain dates was marked. Finally, the temperature along the path of retreat was displayed. Few, if any, maps before or since have been able to coherently and so compellingly weave so many variables into a captivating whole.
+
+Following Mackinlay’s ordering of these attributes for quantitative tasks we can see that Minard. line color portrays temperature. names and locations of battles are shown with labeled points. While the eastward advance began in extreme heat, the temperatures dropped as the army approached Moscow (bright red at the left fading to pink towards the right) and dropped below freezing as they retraced their route toward the west during the retreat. The army veered south upon reaching Krasnyj and ended the march in sub-zero weather with less than 3% of the original troops (indicated by the thin blue line on the left).
+
+# Nightingale
+## Subsection
+
+```{r, out.width = "65%"}
+
+# ![](assets/insights-of-the-roundtable.svg){ width=900px }
+knitr::include_graphics("assets/nightingale-rose.svg", dpi=300)
+
+```
+
+### Data
+
+```{r}
+
+df_one_cols <- c("Jon", "Bill", "Maria")
+df_one_records <- c(23, 41, 32)
+
+df_one <- data.frame(df_one_cols, df_one_records)
+df_one
+
+```
+
+### Visual Mapping
+
+```{r}
+
+vm_one_cols <- c("Pos_X", "Pos_Y", "Pos_Z", "Shape", "Size", "Color")
+vm_one_fields <- c(23, 41, 32, 23, 41, 32)
+
+vm_one <- data.frame(vm_one_cols, vm_one_fields)
+vm_one
+
+# "default", "blank", "classic", "minimal", "light", "lBlack", "lBlue", "lRed", "lGreen", "lViolet", "lCyan", "lOrange", "lBlackWhite", "lBlueWhite", "lRedWhite", "lGreenWhite",
+# "lVioletWhite", "lCyanWhite", "lOrangeWhite", "mBlack", "mBlue", "mRed", "mGreen", "mViolet", "mCyan", "mOrange", "mBlackWhite", "mBlueWhite", "mRedWhite", "mGreenWhite",
+# "mVioletWhite", "mCyanWhite", "mOrangeWhite"
+# :::::::::::::::::::::::::::::::::::::::::::::::::::
+# Table theme
+in_tab <- ggtexttable(vm_one, theme = ttheme( base_style = "classic", base_size = 6, base_colour = "black"), rows = NULL )
+in_tab
+
+# Save plot to svg file
+# ggsave(filename = paste("vm_one.svg", sep = "" ), plot = in_tab, width=10, height=3)
+
+
+```
+
+
+
+### Result
+
+```{r, out.width = "100%"}
+
+# knitr::include_graphics("assets/design-considerations.svg", dpi=300)
+
+```
+
+
+# Gap Minder
+## Subsection
+
+```{r, out.width = "85%"}
+
+# ![](assets/insights-of-the-roundtable.svg){ width=900px }
+knitr::include_graphics("assets/countries-health-wealth-2019.svg", dpi=300)
+
+```
+
+## Data
+
+```{r}
+
+# file path parameter
+gapminder_file_path <- "./archetypes/gapminder/gapminder.csv"
+gapminder <- read_csv(gapminder_file_path)
+# gapminder
+# Get continent reference
+gapminder$continent <- countrycode(gapminder$country_code, origin = 'iso3c', destination = 'continent')
+gapminder
+
+```
+
+
+## Visual Mapping
+
+### Location, income by life expectancy
+
+```{r, fig.width=16.17, fig.height=11.44, out.width = "85%"}
+
+p <- ggplot(gapminder, aes(x = gdp, y = life_expectancy)) +
+     ylim(50, 90) +
+     scale_x_log10(limits = range(gapminder$gdp)) +
+     ggtitle("World Health Chart 2019 by Gapminder") + 
+     theme_classic() +
+     theme(legend.position = "none")
+p
+
+```
+
+
+### Shape, circle, country
+
+```{r, fig.width=16.17, fig.height=11.44, out.width = "85%"}
+
+p <- ggplot(gapminder, aes(x = gdp, y = life_expectancy)) +
+     geom_point() + ylim(50, 90) +
+     scale_x_log10(limits = range(gapminder$gdp)) +
+     ggtitle("World Health Chart 2019 by Gapminder") + 
+     theme_classic() +
+     theme(legend.position = "none")
+p
+
+
+```
+
+
+### Size, population
+
+```{r, fig.width=16.17, fig.height=11.44, out.width = "85%"}
+
+p <- ggplot(gapminder, aes(x = gdp, y = life_expectancy, size = pop)) +
+     geom_point() + 
+     ylim(50, 90) +
+     scale_size("population", range = c(2, 40)) +
+     scale_x_log10(limits = range(gapminder$gdp)) +
+     ggtitle("World Health Chart 2019 by Gapminder") + 
+     theme_classic() +
+     theme(legend.position = "none")
+p
+
+
+```
+
+
+### Color, continent
+
+```{r, fig.width=16.17, fig.height=11.44, out.width = "85%"}
+
+# The palette with black:
+continent_palette <- c("Africa" = "#77dff7", "Americas" = "#b5ea32", "Asia" = "#ff5973", "Europe" = "#ffe800", "Oceania" = "#ff5973")
+
+p <- ggplot(gapminder, aes(x = gdp, y = life_expectancy, size = pop, color = continent)) +
+     geom_point() + ylim(50, 90) +
+     scale_size("population", range = c(2, 40)) +
+     scale_x_log10(limits = range(gapminder$gdp)) +
+     scale_color_manual(values = continent_palette) +
+     ggtitle("World Health Chart 2019 by Gapminder") + 
+     theme_bw() +
+     theme(legend.position = "bottom")
+p
+
+```
+
+
+## Final Result
+
+
+```{r}
+
+
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+”free data from www.gapminder.org/data”
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

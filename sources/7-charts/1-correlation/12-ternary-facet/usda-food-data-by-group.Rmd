@@ -1,0 +1,186 @@
+---
+pagetitle: "USDA National Nutrient Database"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggtern)
+library(wesanderson)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# USDA National Nutrient Database
+## Ternary-facet
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nico Smit on Unsplash"}
+
+masthead <- "assets/nico-smit-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> You don't need a silver fork to eat good food....\
+--- Paul Prudhomme\
+
+***
+
+### Load data
+#### USDA food data
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df <- read.csv("archetypes/usda-food-data/usda-food-data-src.csv", header = TRUE, stringsAsFactors = TRUE)
+df <- within(df, rm(ndb))
+df
+
+```
+
+### Wrangle data
+#### Filter on food products
+
+```{r data-prep, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+#0: "American Indian/Alaska Native Foods"
+#1: "Baby Foods"
+#2: "Baked Products"
+#3: "Beef Products"
+#4: "Beverages"
+#5: "Breakfast Cereals"
+#6: "Cereal Grains and Pasta"
+#7: "Dairy and Egg Products"
+#8: "Fast Foods"
+#9: "Fats and Oils"
+#10: "Finfish and Shellfish Products"
+#11: "Fruits and Fruit Juices"
+#12: "Lamb, Veal, and Game Products"
+#13: "Legumes and Legume Products"
+#14: "Meals, Entrees, and Side Dishes"
+#15: "Nut and Seed Products"
+#16: "Pork Products"
+#17: "Poultry Products"
+#18: "Restaurant Foods"
+#19: "Sausages and Luncheon Meats"
+#20: "Snacks"
+#21: "Soups, Sauces, and Gravies"
+#22: "Spices and Herbs"
+#23: "Sweets"
+#24: "Vegetables and Vegetable Products"
+
+group_filter <- c("Snacks", "Sweets")
+
+df_wrangle <- filter(df, food_group %in% group_filter)
+df_wrangle
+
+```
+
+### Plot Ternary-facet
+#### USDA National Nutrient Database
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata", size = 16), 
+  plot.title = element_text(color = "black", size = 16, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 10),
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  tern.axis.title.L = element_text(size = 16, hjust = 0.5),
+  tern.axis.title.R = element_text(size = 16, hjust = 0.5),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0, 0, 0, 0), "in")
+)
+
+pal <- wes_palette("Zissou1", 10, type = "continuous")
+
+v1 <- ggtern(data=df_wrangle, aes(protein, carbohydrates, fat)) + 
+  geom_point(aes(color = calories, size = calories), alpha = 0.6) + 
+  scale_color_gradientn(colours = pal) + 
+  scale_size_continuous(guide = FALSE) +
+  coord_tern() +
+  theme_minimal() +
+  theme_nomask() +
+  theme_opts +
+  labs(title = "USDA National Nutrient Database", 
+           subtitle = "by food group") +
+           xlab("Protein") + 
+           ylab("Carbohydrates") +
+           zlab("Fat") +
+  facet_wrap(~ food_group, nrow = 1)
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# Full Size
+ggsave(filename = "assets/usda-food-data-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# Small
+ggsave(filename = "assets/usda-food-data-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Data sources: U.S. Department of Agriculture FoodData Central Data, [GO](https://github.com/UN-AVT/kamino-sourcehttps://fdc.nal.usda.gov/download-datasets.html){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

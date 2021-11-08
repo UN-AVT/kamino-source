@@ -1,0 +1,51 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    #code_folding: show
+    include:
+     in_header: "../../../z-assemblers/fragments/header.html"
+     after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Merimekko 
+## Utilizing The Width of Bars
+
+
+A Merimekko Chart (in short Mekko Chart) consists of two versions: A stacked Marimekko Chart and Bar Mekko Chart. Each version is similar to the Stacked Chart and Bar Chart respectively. However, the Marimekko Chart utilizes a variable width bar which is typically a measure of size, like revenue or profitability. To preserve the visual relationship between widths of different columns, there are no gaps between columns in a Mekko chart.  The height of the Mekko Chart can support various values such as absolute values, percentages or both.
+
+
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

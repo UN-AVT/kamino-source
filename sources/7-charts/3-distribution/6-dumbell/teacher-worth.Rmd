@@ -1,0 +1,173 @@
+---
+pagetitle: "Teacher Worth"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Teacher Worth
+## the dumbbell chart
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Yogendra Singh on Unsplash"}
+
+masthead <- "assets/yogendra-singh-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> When we become a really mature, grown-up, wise society,\
+  we will put teachers at the center of the community, where they belong.\
+  We don't honor them enough, we don't pay them enough...\
+--- Charles Kuralt\ 
+
+***
+
+### Ingest
+#### location, indicator, measure, time, and value
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df = read.csv("archetypes/teacher-worth/oecd-teacher-salaries.csv", header = TRUE, stringsAsFactors = FALSE) # read text file
+df
+
+```
+
+
+### Wrangle
+#### filter, from long to wide, enrich
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- filter(df, TIME == 2020)
+df_wrangle <- filter(df_wrangle, SUBJECT %in% c("PRY_START", "PRY15YREXP", "PRY_TOP"))
+df_wrangle <- filter(df_wrangle, MEASURE == "USD")
+df_wrangle <- spread(df_wrangle, SUBJECT, Value)
+df_wrangle <- df_wrangle %>% select(LOCATION, PRY_START, PRY15YREXP, PRY_TOP)
+df_wrangle$COUNTRY <- countrycode(df_wrangle$LOCATION, origin = 'iso3c', destination = 'country.name' )
+df_wrangle$REGION <- countrycode(df_wrangle$LOCATION, origin = 'iso3c', destination = 'region' )
+df_wrangle
+
+```
+
+
+### View, chart
+#### segment and points
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 14, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10, hjust = 1.0, vjust = 1.0),
+    axis.title.x = element_blank(),
+    axis.text.x = element_text(size = 12, hjust = 0.5, vjust = 0.5),
+    axis.text.y = element_text(size = 12, hjust = 1.0, vjust = 0.5),
+    panel.border = element_blank(),
+    panel.background=element_rect(fill="#ECE3CB", colour="NA"),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major = element_line(size = 0.5, linetype = 'dotted', colour = "#BDAC81"),
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 10),
+    legend.position='bottom',
+    plot.background = element_rect(fill="#ECE3CB", colour="NA"),
+    plot.margin = unit(c(0.5, 0.5, 0.5, 0.25), "in")
+  )
+
+shape_map <- c("PRY_START" = 21, "PRY15YREXP" = 5, "PRY_TOP" = 4)
+
+v1 <- ggplot(df_wrangle) +  
+  geom_segment( aes(x = PRY_START, xend = PRY_TOP, y = COUNTRY, yend = COUNTRY), lineend = "butt", linejoin = "round", size=1.0, color="#293835" ) +
+  geom_point( aes(x = PRY_START, y = COUNTRY, shape = "PRY_START" ), size = 5, fill = "#B50810", color = "#B50810", alpha = 0.9) +
+  geom_point( aes(x = PRY15YREXP, y = COUNTRY, shape = "PRY15YREXP"), size = 3, color = "#293835", stroke = 1.5, alpha = 1.0) +
+  geom_point( aes(x = PRY_TOP, y = COUNTRY, shape = "PRY_TOP"), size = 3, color = "#293835", stroke = 1.5, alpha = 1.0) +
+  scale_x_continuous(labels=scales::dollar_format(), sec.axis = dup_axis()) +
+  scale_shape_manual(values = shape_map, labels = c("START", "15YR", "TOP")) +
+  coord_cartesian(clip = "off") +
+  labs(title = "TEACHERS' SALARIES",
+       subtitle = "Upper Secondary, starting, 15 yr, and top pay (USD)",
+       caption = "Source: OECD",
+       x = NULL,
+       y = NULL) +
+  theme_minimal() + 
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1080/72,
+       options = list(opts_sizing(rescale = FALSE, width = 0.95)))
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/teacher-worth-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/teacher-worth-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+* Narrative and Data: OECD, Teacher Salaries, [OECD](https://data.oecd.org/eduresource/teachers-salaries.html){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,213 @@
+---
+pagetitle: "The World Above Us"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(stringr)
+library(scales)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# The World Above Us
+## Scatter Polar
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by SpaceX on Unsplash"}
+
+masthead <- "assets/spacex-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Listen now for the sound that forevermore separates the old from the new...\
+--- Introducing the beep-beep chirp transmitted by the Sputnik satellite, NBC Radio\
+
+***
+
+This case is based on the Union of Concerned Scientists database providing details on the 3,372 satellites currently orbiting Earth, including their country of origin, purpose, and other operational details. The database contains 28 types of data for each satellite, including technical information about each satellite (mass, power, launch date, expected lifetime) and its orbit (apogee, perigee, inclination, and period), as well as information on what the satellite is used for, and who owns, operates, and built the satellite.
+
+### Ingest
+#### the satellite database
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df <- read.csv("archetypes/ucs-satellite-database/ucs-satellite-database-original.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+```
+
+
+### Wrangle
+#### filter by orbit class
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# LEO
+leo <- filter(df, Class_of_Orbit == "LEO")
+leo_seq <- seq(from = 0, to = 360, length.out = nrow(leo))
+for (row in 1:nrow(leo)) {
+  leo[row, "xfield"] <- leo_seq[[row]]
+}
+#leo
+
+# GEO
+geo <- filter(df, Class_of_Orbit == "GEO")
+geo_seq <- seq(from = 0, to = 360, length.out = nrow(geo))
+for (row in 1:nrow(geo)) {
+  geo[row, "xfield"] <- geo_seq[[row]]
+}
+#geo
+
+# MEO
+meo <- filter(df, Class_of_Orbit == "MEO")
+meo_seq <- seq(from = 0, to = 360, length.out = nrow(meo))
+for (row in 1:nrow(meo)) {
+  meo[row, "xfield"] <- meo_seq[[row]]
+}
+#meo
+
+# Elliptical
+ell <- filter(df, Class_of_Orbit == "Elliptical")
+ell_seq <- seq(from = 0, to = 360, length.out = nrow(ell))
+for (row in 1:nrow(ell)) {
+  ell[row, "xfield"] <- ell_seq[[row]]
+}
+#ell
+
+dfm <- rbind(leo, geo, meo, ell)
+dfm$xfield <- round(as.double(dfm$xfield), digits = 3)
+#dfm
+
+v <- dfm %>% select(xfield, Apogee_Km, Class_of_Orbit, Country_of_Operator_Owner, Launch_Mass_in_Kg)
+v <- v[complete.cases(v), ]
+v
+
+```
+
+
+### Plot
+#### color by Country_of_Operator_Owner
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+color_palette <- c("US" = "#0091EA", 
+                   "Russia" = "#3949AB", 
+                   "China" = "#D50000", 
+                   "Japan" = "#E53935", 
+                   "India" = "#FF6D00", 
+                   "European" = "#00C853", 
+                   "Multinational" = "#666666", 
+                   "Other" = "#999999")
+
+theme_opts <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.title = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0, 0, 0, 0), "in")
+)
+
+# x is angle
+# y is radius (distance from center)
+
+min_value <- min(v$Apogee_Km)
+max_value <- max(v$Apogee_Km)
+
+v1 <- ggplot(data = v) +
+    geom_point(aes(x = xfield, y = Apogee_Km, fill = Country_of_Operator_Owner, size = Launch_Mass_in_Kg), shape = 21, color = '#ffffff', alpha = 0.6) +
+    scale_x_continuous(limits = c(0,360)) +
+    # possible values for trans : 'log2', 'log10', 'sqrt'
+    scale_y_continuous(limits = c(min_value, max_value), breaks = c(0, 100, 705, 2000, 20200, 35780, 330000), trans='log10') +
+    scale_size_continuous(range = c(2,10), guide = FALSE) +
+    scale_fill_manual(values = color_palette) +
+    coord_polar() + # theta = "y"
+    theme_minimal(base_size = 14) +
+    xlab("") +
+    ylab("") +
+    theme_opts
+
+girafe(ggobj = v1, width_svg = 1080/72, height_svg = 1080/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/ucs-satellite-database-fs.svg", plot = v1, width=1280/72, height=1280/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/ucs-satellite-database-sm.svg", plot = v1, width=4, height=4)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: UCS Satellite Database, Union of Concerned Scientists, [GO](https://www.ucsusa.org/resources/satellite-database){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

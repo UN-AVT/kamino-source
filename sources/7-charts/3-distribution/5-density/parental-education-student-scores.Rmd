@@ -1,0 +1,172 @@
+---
+pagetitle: "Parental Education Student Scores"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(janitor)
+library(ggtext)
+library(ggdist)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Parental Education Student Scores
+## Density
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Sofatutor on Unsplash"}
+
+masthead <- "assets/sofatutor-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> My parents always stressed the importance of education, working hard in school and learning as much as possible.\
+  They also encouraged me to value myself and believe in myself and do what I thought was right for me...\
+--- Hillary Clinton\
+
+***
+
+### Ingest
+#### parental level of education, math score
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df <- read.csv("archetypes/parental-education-student-scores/parental-education-student-scores.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+```
+
+
+### Wrangle
+#### clean column names and factor education levels
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_wrangle <- df %>% janitor::clean_names()
+df_wrangle <- df_wrangle %>%
+  mutate(parental_level_of_education = factor(parental_level_of_education, 
+                                              levels = c('some high school',
+                                                         'high school',
+                                                         'some college',
+                                                         "associate's degree",
+                                                         "bachelor's degree",
+                                                         "master's degree")))
+df_wrangle
+
+```
+
+
+### View / Chart
+#### with stat_slab and stat_dotsinterval
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1280/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 10),
+    plot.caption = element_text(color = "#555555", size = 9),
+    panel.background = element_rect(fill = '#F5F5F5', color = NA),
+    panel.border = element_blank(),
+    plot.background = element_rect(fill = '#F5F5F5', color = NA),
+    plot.margin = unit(c(0.5, 0.5, 0.5, 0.25), "in"),
+    panel.grid.major.x = element_line(color = "#999999", size = 1.0, linetype = "dotted"),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    legend.position = "top"
+)
+
+v1 <- ggplot(df_wrangle, aes(parental_level_of_education, math_score)) +
+  stat_slab(side = "left",scale = 0.5, fill = '#F06292') +
+  stat_dotsinterval(scale = 0.6, fill = '#F48FB1', color = '#ffffff') +
+  labs(title = "Parental Levels of Education and Students Scores",
+       y = 'Students Math Scores',
+       x = NULL,
+       caption = 'Source: Kaggle') +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1080/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9))
+)
+
+```
+
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/parental-education-student-scores-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/parental-education-student-scores-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+
+* Narrative: Luis Freites, 30DayChartChallenge [GO](https://github.com/luisfrein/-30DayChartChallenge/tree/master/D27.Educational){target="_blank"}
+* Data Source: Kaggle, Students Performance in Exams, [GO](https://www.kaggle.com/spscientist/students-performance-in-exams){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

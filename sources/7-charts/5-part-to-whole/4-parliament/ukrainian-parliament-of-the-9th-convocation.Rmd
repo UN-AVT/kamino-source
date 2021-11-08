@@ -1,0 +1,459 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggpol) # ggplot2 extension for drawing parliament charts
+library(ggparliament)
+library(ggiraph)
+
+# needed to include bib references
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Parliament
+## Case: Election Results
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+***
+
+# Semicircle Parliament
+## German election results, 2017
+## Visualize election results as points in the architectural layout of the legislative chamber.
+
+```{r draw-plot1, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', fig.width=9, fig.height=6.5, out.width = "75%"}
+
+# data preparation
+germany <- election_data %>%
+  filter(year == 2017 & country == "Germany") 
+
+germany <- parliament_data(election_data = germany, 
+                           parl_rows = 10,
+                           type = 'semicircle',
+                           party_seats = germany$seats)
+
+# make plot
+bundestag <- ggplot(germany, aes(x, y, colour = party_short)) +
+  geom_parliament_seats(size = 3) +
+  labs(colour="Party") +
+  theme_ggparliament(legend = TRUE) +
+  scale_colour_manual(values = germany$colour, 
+                      limits = germany$party_short)
+
+girafe(ggobj = bundestag, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Opposing Benches Parliament
+## British election results, 2017
+
+```{r draw-plot2, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', fig.width=9, fig.height=6.5, out.width = "75%"}
+
+# data preparation
+uk_17 <- election_data %>% 
+  filter(country == "UK" & year == "2017") %>% 
+  parliament_data(election_data = .,
+                  party_seats = .$seats,
+                  parl_rows = 12,
+                  type = "opposing_benches",
+                  group = .$government)
+
+# make plot
+commons <- ggplot(uk_17, aes(x, y, colour = party_short)) +
+  geom_parliament_seats(size = 3) + 
+  theme_ggparliament() + 
+  coord_flip() + 
+  labs(colour = NULL, 
+       title = "UK parliament in 2017") +
+  scale_colour_manual(values = uk_17$colour, 
+                      limits = uk_17$party_short)
+
+girafe(ggobj = commons, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Classroom Parliament
+## Russian election results, 2016
+
+```{r draw-plot3, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', fig.width=9, fig.height=6.5, out.width = "75%"}
+
+# data preparation
+russia_classroom <- election_data %>%
+  filter(country == "Russia" &
+    house == "Duma" &
+    year == 2016) %>% 
+  parliament_data(election_data = .,
+                  party_seats = .$seats,
+                  parl_rows = 11,
+                  type = "classroom")
+
+# make plot
+rus <- ggplot(russia_classroom, aes(x, y, colour = party_short)) +
+  geom_parliament_seats() +
+  theme_ggparliament() +
+  labs(
+    colour = NULL,
+    title = "Russian Duma") +
+  scale_colour_manual(
+    values = russia_classroom$colour,
+    limits = russia_classroom$party_short) +
+  theme(legend.position = "bottom")
+
+girafe(ggobj = rus, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Circle Parliament
+## Russian election results, 2016
+
+```{r draw-plot4, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', fig.width=9, fig.height=6.5, out.width = "75%"}
+
+# data preparation
+russia_circle <- election_data %>%
+  filter(country == "Russia" &
+    house == "Duma" &
+    year == 2016) %>% 
+  parliament_data(election_data = .,
+    party_seats = .$seats,
+    parl_rows = 11,
+    type = "circle")
+
+# make plot
+russia_circle_example <- ggplot(russia_circle, aes(x, y, colour = party_short)) +
+  geom_parliament_seats() +
+  theme_ggparliament() +
+  scale_colour_manual(
+    values = russia_circle$colour,
+    limits = russia_circle$party_short) +
+  labs(colour = NULL) +
+  theme(legend.position = "bottom")
+
+girafe(ggobj = russia_circle_example, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Horseshoe Parliament
+## Australian election results, 2016
+
+```{r draw-plot5, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=9, fig.height=6.5, out.width = "75%"}
+
+# data preparation
+australia <- election_data %>%
+    filter(country == "Australia" &
+               house == "Representatives" &
+               year == 2016) 
+
+australia_horseshoe <- parliament_data(election_data = australia,
+                                       party_seats = australia$seats,
+                                       parl_rows = 4,
+                                       type = "horseshoe")
+
+# make plot
+au <- ggplot(australia_horseshoe, aes(x, y, colour = party_short)) +
+    geom_parliament_seats() + 
+    theme_ggparliament() +
+    labs(colour = NULL, 
+         title = "Australian Parliament") +
+    scale_colour_manual(values = australia$colour, 
+                        limits = australia$party_short) + 
+    theme(legend.position = 'bottom')
+
+girafe(ggobj = au, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Semicircle Parliament
+## Women in the 115th American Congress, 2016
+
+```{r draw-plot6, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=9, fig.height=6.5, out.width = "75%"}
+
+# Take preliminary data as provided in ggparliament
+data <- election_data %>% 
+  filter(year == "2016" & country == "USA" & house == "Representatives")
+usa_data <- parliament_data(election_data = data, type = "semicircle", party_seats = data$seats, parl_rows = 8)
+
+# The Center for American Women and Politics provides statistics concerning women in U.S. politics
+# See http://www.cawp.rutgers.edu/women-us-congress-2018 for more information.
+# We create a binary variable -- women are 1, men are 0 -- for each party. Remember, the plot starts from the left hand side and finishes at the right hand side of the legislature. Given that we want to compare the two parties, it makes sense for them to be roughly parallel. 
+women_in_congress <- c(1, 0, 0, 1) 
+# The number of women in US congress - 23 Reps, 61 Dems. The two middle numbers are the remainder (i.e., number of men).
+number_of_women <- c(23, 218, 133, 61)
+# Use rep and mutate to append the binary female variable to the long data set. 
+usa_data <- usa_data %>% mutate(women = rep(women_in_congress, number_of_women))
+
+# Plot the US congress as normal using geom_parliament_seats
+women_in_congress <- ggplot(usa_data, aes(x, y, color=party_long)) + 
+    geom_parliament_seats() + 
+    # emphasize the women in each political party -- this must be specified in order for it to work!
+    geom_emphasize_parliamentarians(women == 1) +  
+    draw_majoritythreshold(n = 218, label = FALSE, linecolour = "black", type = 'semicircle') + 
+    draw_partylabels(type = 'semicircle', party_seats = seats, party_names = party_short, party_colours = colour) + 
+    theme_void() + 
+    theme(plot.title = element_text(hjust = 0.5),
+          legend.position = "none") + 
+    scale_colour_manual(values = usa_data$colour, limits = usa_data$party_long) + 
+    annotate(geom = "text", x = 0, y = 0.2, label = "61 Democrats in Congress\n are women. Only 23\nelected Republicans are women.") + 
+    labs(title = "Women in 115th U.S. Congress") 
+
+girafe(ggobj = women_in_congress, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Facet Opposing Benches Parliament
+## UK Parliament
+
+```{r draw-plot7, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=9, fig.height=6.5, out.width = "75%"}
+
+# data preparation
+uk <- election_data %>%
+  filter(country == "UK") %>%
+  split(.$year) %>%
+  map(~parliament_data(election_data = .,
+  party_seats = .$seats,
+  group = .$government,
+  type = "opposing_benches")) %>%
+  bind_rows()
+
+# make plot
+uk_opposing_benches <- ggplot(data = uk, 
+       aes(x = x,
+           y = y,
+           color = party_long)) +
+  geom_parliament_seats(size = 1.5) +  
+  coord_flip() + 
+  facet_wrap(~year, ncol = 2) + 
+  scale_color_manual(values = uk$colour, 
+                     limits = uk$party_long) +
+  theme_ggparliament()
+
+girafe(ggobj = uk_opposing_benches, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Ukrainian Parliament of the 9th Convocation
+## The number and distribution of seats in the Verkhovna Rada of Ukraine
+
+```{r draw-plot8, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=9, fig.height=6.5, out.width = "75%"}
+
+# load data
+df <- read.csv('archetypes/ukrainian-parliament-of-the-9th-convocation.csv')
+
+df1 <- df%>%group_by(Party)%>%summarise(Seats=sum(Seats))%>%arrange(Seats)
+
+df1$legend <- paste0(df1$Party," (", df1$Seats,")")
+ 
+# set colors manually
+colors <- c("#cdd41f","#55a8ce","#c4ba7b","#d2044d","#f75914","#c3537f","#92b6be","#b3a3fa","#26aa5e")
+ 
+# draw a parliament diagram 
+ukrainian_parliament <- ggplot(df1) + 
+  geom_parliament(aes(seats = Seats, fill =  Party), color = "white") + 
+  scale_fill_manual(values = colors , labels = df1$legend) +
+  coord_fixed() + 
+  theme_void() +
+  labs(title = "Ukrainian Parliament of the 9th convocation",
+       subtitle = "The number and distribution of seats in the Verkhovna Rada of Ukraine",
+       caption = "Source: https://rada.gov.ua  |  DataVizStory, 2020") +
+  theme(title = element_text(size = 18),
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        plot.caption = element_text(vjust = -3, hjust = 0.9),    
+        legend.position = 'bottom',
+        legend.direction = "horizontal",
+        legend.spacing.y = unit(0.1, "cm"),
+        legend.spacing.x = unit(0.1, "cm"),
+        legend.key.size = unit(0.8, 'lines'),
+        legend.text = element_text(margin = margin(r = 1, unit = 'cm')),
+        legend.text.align = 0) +
+  annotate("text", x = 0, y = 0.4, label = "Seats in the Parliament :\n 423 occupied \n 27 vacant", colour = "black",size=6) +
+  guides(fill=guide_legend(nrow=3, byrow=TRUE, reverse=TRUE, title=NULL))
+ 
+girafe(ggobj = ukrainian_parliament, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+```{r draw-plot9, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=9, fig.height=6.5, out.width = "75%"}
+
+# data preparation
+df1 <- df%>%group_by(Party)%>%summarise(Seats=sum(Seats))%>%arrange(Seats)
+df1$legend <- paste0(df1$Party, " (", df1$Seats, ")")
+
+colors <- c("Trust group" = "#eb4570",
+          "Voice" = "#ed6327",
+          "Non-affiliated" = "#c8d0ac",
+          "For the Future group" = "#6a079a",
+          "Batkivshchyna" = "#d02b44",
+          "European Solidarity" = "#4a9dcc",
+          "Vacant seats" = "#bca7b5",
+          "Opposition Platform - For Life" = "#1170c7",
+          "Servant of the People" = "#25ad40")
+
+# make plot
+p2 <- ggplot(df1) + 
+  geom_arcbar(aes(shares = Seats, r0 = 5, r1 = 10, fill = Party), color = "white", sep = 0.05) + 
+  scale_fill_manual(values = colors) +
+  annotate("text", 
+           label=paste0(round(248/450*100)," %"), x=-5.5, y=6, size=5, colour="white") +
+  annotate("text", 
+           label=paste0(round(44/450*100)," %"), x=2, y=7.5, size=5, colour="white") +
+  annotate("text", 
+           label=paste0(round(27/450*100)," %"), x=3.9, y=6.8, size=5, colour="white") +
+  annotate("text", 
+           label=paste0(round(27/450*100)," %"), x=5.2, y=6, size=5, colour="white") +
+  annotate("text", 
+           label=paste0(round(24/450*100)," %"), x=6.2, y=4.9, size=5, colour="white") +
+  annotate("text", 
+           label=paste0(round(22/450*100)," %"), x=7.1, y=3.9, size=5, colour="white") +
+  annotate("text", 
+           label=paste0(round(21/450*100)," %"), x=7.7, y=2.7, size=5, colour="white") +
+  annotate("text", 
+           label=paste0(round(17/450*100)," %"), x=8, y=1.5, size=5, colour="white") +
+  annotate("text", 
+           label=paste0(round(17/450*100)," %"), x=8.2, y=0.5, size=5, colour="white") +
+  coord_fixed() +
+  theme_void() +
+  labs(title = "Ukrainian Parliament of the 9th convocation",
+       subtitle = "The number and distribution of seats in the Verkhovna Rada of Ukraine",
+       caption = "Source: https://rada.gov.ua  |  DataVizStory, 2020") +
+  theme(title = element_text(size = 18),
+        plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        plot.caption = element_text(vjust = -3, hjust = 0.9),    
+        legend.position = 'bottom',
+        legend.direction = "horizontal",
+        legend.spacing.y = unit(0.1, "cm"),
+        legend.spacing.x = unit(0.1, "cm"),
+        legend.key.size = unit(0.8, 'lines'),
+        legend.text = element_text(margin = margin(r = 1, unit = 'cm')),
+        legend.text.align = 0) +
+  annotate("text", x = 0, y = 1, label = paste0("Seats in the Parliament :\n 423 (",423/450*100, "%) occupied \n 27 (",27/450*100,"%) vacant"), colour = "black", size = 6) +
+  guides(fill=guide_legend(nrow=3, byrow=TRUE, reverse=TRUE, title=NULL))
+ 
+girafe(ggobj = p2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Germany 2013 election
+## What are “overhang seats” and why do they matter?
+
+Various democratic countries use different processes to elect politicians. A few places use Mixed-member proportional (MMP) representation (Germany, New Zealand, Lesotho and Bolivia). In a MMP electoral system, voters have two votes: one for a representative for their electoral constituency and the other for a nation-wide political party. Seats are filled first by the constituency votes and then by political party. A party wins a certain number of seats based on the total vote percentage (a combination of both constituency votes and party votes). Sometimes a party does not win the number of constituencies needed to fill the total number of seats (i.e., they win 6 seats in total but are only elected to 4 constituencies). The remaining seats are known as overhang seats.
+
+In 2017, the Bloomberg visual graphics team created an excellent data visualization of the German Bundestag prior to the 2017 German election. They represented the overhang seats by adding hollow seats to each party. We have decided to recreate the idea of hollow seats in ggparliament with geom_overhang_seats().
+
+```{r draw-plot10, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=9, fig.height=6.5, out.width = "75%"}
+
+# Ref:  https://cran.r-project.org/web/packages/ggparliament/vignettes/hanging_seats_7.html
+# Ref:  https://www.bloomberg.com/graphics/2017-how-germany-forms-government/
+
+# data preparation
+data <- election_data %>%
+  filter(country == "Germany" & year == "2013") %>% # on the federal level, CSU is a part of CDU
+  mutate(seats = gsub("255", "311", seats)) %>% # add the 56 CSU seats to CDU
+  mutate(seats = as.numeric(as.character(seats))) %>%
+  filter_all(all_vars(!grepl('Christian Social Union in Bavaria',.)))
+
+# binary variable for overhang seat
+overhangseats <- c(1, 0, 1, 0, 1, 0, 1, 0)
+# number of overhang seats and remainder for each party
+number_overhangseats <- c(3, 61, 3, 60,16, 295, 11, 182)
+# expand data
+german_data <- parliament_data(
+  election_data = data,
+  parl_rows = 11,
+  party_seats = data$seats,
+  type = "semicircle"
+)
+german_data <- german_data %>% mutate(overhang_seats = rep(overhangseats, number_overhangseats))
+
+# make plot
+german_parliament <- ggplot(german_data, aes(x,
+  y,
+  colour = party_short
+)) +
+  geom_parliament_seats() +
+  # hollow the overhang seats as follows:
+  geom_overhang_seats(overhang_seats == 1) +
+  labs(
+    colour = "Party",
+    title = "German Bundestag - 2013 election",
+    subtitle = "Overhang seats are hollow."
+  ) +
+  theme_void() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5),
+    legend.position = "none"
+  ) +
+  draw_partylabels(type = "semicircle",
+                   party_colours = colour,
+                   party_names = party_short,
+                   party_seats = seats) +
+  scale_colour_manual(
+    values = german_data$colour,
+    limits = german_data$party_short
+  )
+
+girafe(ggobj = german_parliament, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+# References
+## The citations and data sources used for this case can be found on <a href="https://datavizstory.com/a-parliament-diagram-in-r/" target="_blank" rel="noopener noreferrer">A Parliament Diagram in R</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/ukrainian-parliament-of-the-9th-convocation.bib")
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

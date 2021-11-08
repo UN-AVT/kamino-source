@@ -1,0 +1,462 @@
+---
+pagetitle: "Visual Variables"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+library(ggpubr)
+library(colorspace)
+library(colortools)
+library(colorfindr)
+library(ImaginR)
+library(RImagePalette)
+library(magick)
+
+
+```
+
+<div class="activity">
+VIEWS  
+</div>
+
+# Color
+## the art and science of creating palettes
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Frank Holleman on Unsplash"}
+
+masthead <- "assets/frank-holleman-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The best color in the whole world, is the one that looks good, on you...\
+--- COCO CHANEL\
+
+***
+
+### Color Theory 
+
+A set of guiding principles that be used to create harmonious color combinations using relationships between colors.
+
+Hue
+Lightness
+Saturation
+
+Contrast
+
+
+### Color Harmony
+
+* Complementary
+* Split Complementary
+* Double Complementary
+* Analogous
+* Triadic
+* Monochromatic
+
+> All colors are the friends of their neighbors and the lovers of their opposites
+--- Marc Chagall
+
+### Color Meaning
+
+Color is experienced on many levels with influences coming from culture, emotion, physical, and other associations.  The meaning we give to color may come from our unique experiences and identity.  It is important to be aware of these social and cultural connotations when selecting a palette to convey meaning.
+
+> Colors are the mother tongue of the subconscious\
+--- Carl Jung
+
+Let's look at a few examples:
+
+Red
+
+```{r, out.width="600px", fig.align="center", fig.cap="Red Meanings"}
+
+# masthead <- "assets/red-meanings.svg"
+# knitr::include_graphics(masthead, dpi=72)
+
+```
+
+Yellow
+
+```{r, out.width="600px", fig.align="center", fig.cap="Yellow Meanings"}
+
+# masthead <- "assets/yellow-meanings.svg"
+# knitr::include_graphics(masthead, dpi=72)
+
+```
+
+Blue
+
+```{r, out.width="600px", fig.align="center", fig.cap="Blue Meanings"}
+
+# masthead <- "assets/blue-meanings.svg"
+# knitr::include_graphics(masthead, dpi=72)
+
+```
+
+Green
+
+```{r, out.width="600px", fig.align="center", fig.cap="Green Meanings"}
+
+# masthead <- "assets/green-meanings.svg"
+# knitr::include_graphics(masthead, dpi=72)
+
+```
+
+Purple
+
+```{r, out.width="600px", fig.align="center", fig.cap="Purple Meanings"}
+
+# masthead <- "assets/purple-meanings.svg"
+# knitr::include_graphics(masthead, dpi=72)
+
+```
+
+Orange
+
+```{r, out.width="600px", fig.align="center", fig.cap="Orange Meanings"}
+
+# masthead <- "assets/orange-meanings.svg"
+# knitr::include_graphics(masthead, dpi=72)
+
+```
+
+### Composition
+
+Forms of mixing
+* The Transparency Effect.
+
+Figure and Ground
+
+Symmetrical Balance
+
+Radial Balance
+
+
+Color Systems
+
+### Designing a Palette
+
+* Color Meaning
+  * Association
+  * Symbolism
+  * Temperature
+
+* Color Blindness
+
+
+### Characteristics
+#### Subsection
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+color_wheel <- wheel("darkblue", num = 12)
+color_wheel
+
+#girafe(ggobj = color_wheel, width_svg = 1280/72, height_svg = 720/72,
+#       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+# define some colors
+some_colors = setColors("#3D6DCC", 15)
+
+# pizza plot
+pizza(some_colors)
+
+# analagous scheme for color "#3D6DCC"
+p_analogous <- analogous("#3D6DCC", plot=FALSE)
+as.data.frame(p_analogous)
+
+# complementary scheme for color "#3D6DCC"
+complementary("#3D6DCC", plot=FALSE)
+
+# split complementary scheme for color "#3D6DCC"
+splitComp("#3D6DCC", plot=FALSE)
+
+# triadic scheme for color "#3D6DCC"
+triadic("#3D6DCC", plot=FALSE)
+
+# tetradic scheme for color "#3D6DCC"
+tetradic("#3D6DCC", plot=FALSE)
+
+# square scheme for color "#3D6DCC"
+square("#3D6DCC", plot=FALSE)
+
+# sequential colors for "#3D6DCC"
+sequential("#3D6DCC", plot=FALSE)
+
+```
+
+
+Hue: A "hue" is the color itself - so green, blue, red, purple, etc.
+Tint: A "tint" is when *white* is added to a hue, making that hue lighter.
+Shade: A "shade" is when you instead add *black* to a hue, making it darker.
+Tone: A tone is created when *grey* is added to a hue.
+
+HUE: this distinguishes one color family from another. It can also be called the parent or source color, and is interchangeably used with the word ‘color.’
+VALUE:  the lightness or darkness of a color. All colors can be described as being light, medium or dark in tone, such as a pale blue sky or a dark blue sea.
+CHROMA: refers to a color’s purity or its brightness or dullness of a color. For example, the stronger or brighter a color is, the higher its chroma.  Every color can be identified by how bright/intense/saturated it is or how dull/de-saturated/less intense it is. You can alter the chroma of a color by adding white, grey, another color, its color complement or black. Chroma is also called saturation and intensity.
+
+These are hue, saturation, and intensity or brightness.
+
+### Modifiers
+#### Subsection
+
+
+
+## Mix
+
+
+### Theory
+#### Subsection
+
+## Schemes
+
+Monochromatic : use one hue (such as blue) and then use various tints or shades of that original color.
+
+
+Analogous : created by choosing hues that are next to each other on the color wheel. So, for example, blue-green, green and yellow-green.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+analogous("darkblue")
+
+```
+
+
+Complementary : created by choosing two colors that are opposites on the color wheel. Because of these colors being exact opposites, they offer high contrast and have a high impact.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+complementary("steelblue")
+
+```
+
+
+Split Complementary : created by taking one color and then taking the two colors that are either side of what would be the first colors complementary.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+splitComp("steelblue")
+
+```
+
+
+Square color scheme
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+square("steelblue")
+
+```
+
+
+Triadic : use three colors that are evenly spaced around the color wheel, for example purple, orange and green.
+
+```{r}
+
+# triadic colors of 'tomato'
+triadic("tomato")
+
+```
+
+
+Tetradic :  work by pairing up two sets of complementary color schemes. It almost works by almost creating a rectangle around the color wheel.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+tetradic("steelblue")
+
+```
+
+
+### Functions of Color
+#### variable
+
+* Distinguish between different categorical groups
+* Distinguish between the levels of continuous values
+* Highlight some graphical elements ( remember the pop-out effect? )
+
+These three functions roughly correspond to different types of color palettes.
+
+### Palettes
+#### Subsection
+
+Discrete variables
+Use qualitative color palettes to distinguish between different kinds of a categorical variable;
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+```
+
+
+Tip: the chosen palette depends on the number of unique categorical variables.  A dataset with more than 8 categories can create some confusion in distinguishing identities as the differences between colors becomes more difficult to easily detect.
+
+Continuous variables
+Use __sequential__ or __diverging__ color palettes to distinguish between the levels of a continuous variable;
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+```
+
+
+Use hybrid color palettes for conveying more complex messages. For instance, __paired__ color palettes combine qualitative and sequential aspects. Similarly, __sequential color scales with accent colors__ emphasize both continuity and contrasts to highlight some elements.
+
+
+### Associations
+#### Cultural, reality, emmotion, etc...
+
+
+
+### Design Experiments
+#### From image
+
+http://colorlisa.com/
+
+### India
+
+```{r, out.width = "50%"}
+
+knitr::include_graphics("assets/images/india-holi-festival-colors-1.png", dpi=150)
+knitr::include_graphics("assets/images/india-holi-festival-colors-1.jpg", dpi=300)
+
+```
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Extract all colors
+india_file <- "assets/images/india-holi-festival-colors-1.jpg"
+# india_all <- get_colors(india_file)
+
+# Extract three most frequent colors
+# india_top <- get_colors(india_file, top_n = 50)
+
+# Extract colors that fill over 20% of the area
+# get_colors(india_file, min_share = 0.2)
+
+# Extract all colors except white
+# get_colors(india_file, exclude_col = "white")
+
+# plot_colors(india_top)
+
+# india_palette <- make_palette(india_all)
+# india_palette
+
+india_image <- load.image(india_file)
+india_highest <- threshold(india_image,"98%") %>% plot(main="Determinant: 1% highest values")
+
+display_palette(image_palette(india_image, n=10))
+scales::show_col(image_pal(india_image)(10))
+
+#Discrete scale example
+p <- ggplot(mtcars, aes(wt, mpg))
+p + geom_point(size=4, aes(colour = factor(cyl))) +
+scale_color_image(image = india_image) +
+theme_bw()
+
+#Continuous scale example
+dsub <- subset(diamonds, x > 5 & x < 6 & y > 5 & y < 6)
+dsub$diff <- with(dsub, sqrt(abs(x-y))* sign(x-y))
+d <- ggplot(dsub, aes(x, y, colour=diff)) + geom_point()
+d + scale_color_image(image = india_image, discrete=FALSE) + theme_bw()
+
+
+```
+
+### Artist
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Extract all colors
+haring_file <- "assets/images/artist-keith-haring.jpg"
+# haring_all <- get_colors(haring_file)
+
+# Extract three most frequent colors
+# haring_top <- get_colors(haring_file, top_n = 10)
+
+# Extract colors that fill over 20% of the area
+# get_colors(haring_file, min_share = 0.15)
+
+# Extract all colors except white
+# get_colors(haring_file, exclude_col = "black")
+
+# plot_colors(haring_top)
+
+# haring_palette <- make_palette(haring_all)
+# haring_palette
+
+haring_image <- load.image(haring_file)
+haring_highest <- threshold(india_image,"98%") %>% plot(main="Determinant: 1% highest values")
+haring_highest
+
+display_palette(image_palette(haring_image, n=10))
+scales::show_col(image_pal(haring_image)(10))
+
+#Discrete scale example
+p <- ggplot(mtcars, aes(wt, mpg))
+p + geom_point(size=4, aes(colour = factor(cyl))) +
+scale_color_image(image = haring_image) +
+theme_bw()
+
+#Continuous scale example
+dsub <- subset(diamonds, x > 5 & x < 6 & y > 5 & y < 6)
+dsub$diff <- with(dsub, sqrt(abs(x-y))* sign(x-y))
+d <- ggplot(dsub, aes(x, y, colour=diff)) + geom_point()
+d + scale_color_image(image = haring_image, discrete=FALSE) + theme_bw()
+
+```
+
+
+### Color Encoding
+#### RGB, CMYK, Hex
+
+RGB (red, green, blue): The default intensity scale in R ranges from 0-1; but another commonly used scale is 0- 255. This is obtained in R using maxColorValue=255. alpha is an optional argument for transparency, with the same intensity scale
+
+CMYK
+
+HSV (hue, saturation, value): values range from 0-1, with optional alpha argument
+
+HCL (hue, chroma, luminance): hue describes the color and ranges from 0-360; 0 = red, 120 = green, blue = 240, etc. Range of chroma and luminance depend on hue and each other
+
+HEX
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: tbd
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

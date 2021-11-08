@@ -1,0 +1,187 @@
+---
+pagetitle: "Public Support for Free Speech"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Public Support for Free Speech
+## Scatter plot
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Kristina Flour on Unsplash"}
+
+masthead <- "assets/kristina-flour-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> What is freedom of expression? Without the freedom to offend, it ceases to exist...\
+--- Salman Rushdie\
+
+***
+
+
+### Ingest the data
+#### life satisfaction, gdp, and population by country and year
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df_vdem <- read.csv("archetypes/public-support-for-free-speech/vdem-v2x_freexp.csv", header = TRUE, stringsAsFactors = FALSE)
+df_vdem
+
+df_justitia <- read.csv("archetypes/public-support-for-free-speech/justitia-free-speech-index.csv", header = TRUE, stringsAsFactors = FALSE)
+df_justitia
+
+```
+
+
+### Wrangle the data
+#### country codes and join
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_justitia$ISO3 <- countrycode(df_justitia$COUNTRY_DATA, origin='country.name', destination='iso3c')
+df_justitia
+
+df_combined <- merge(df_justitia, df_vdem, by.x='ISO3', by.y='country_text_id')
+df_combined
+df_combined$Region <- countrycode(df_combined$ISO3, origin='iso3c', destination='un.region.name')
+
+df_final <- df_combined %>% select(c(ISO3, country_name, v2x_freexp, Free_Speech_Index, Region))
+df_final
+
+```
+
+
+### Plot
+#### data points with smoothing
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    # axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    # panel.grid.minor = element_blank(),
+    # panel.grid.major = element_blank(),
+    legend.position='none'
+  )
+
+# Plot
+v1 <- ggplot(df_final, aes(x = Free_Speech_Index, y = v2x_freexp)) + 
+  geom_point(size = 4, shape = 21, fill = '#95A7C8', color = '#95A7C8' ) +
+  geom_smooth(method="lm", se = FALSE, linetype = 'dashed', size = 2, color = '#82A0C2') + # "lm", "glm", "gam", "loess" 
+  scale_x_continuous(breaks=seq(35,90, 5)) +
+  scale_y_continuous(breaks=seq(0, 1, 0.2)) +
+  labs( title = "You can't always get what you want",
+        subtitle = "Desired v actual freedom of speech",
+        caption = "Source: V-Dem Institute, Justitia",
+        x = "Less <- Public support for speech, 2020 -> More",
+        y = "Amount of permitted free speech, 2020") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+### Plot with annotations
+#### some narrative to help tell the story
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+
+
+  
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/public-support-for-free-speech-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/public-support-for-free-speech-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative Inspiration: The Economist, In some countries, people think they have too much freedom of speech.
+* Data Source: Justitia, Who Cares about Free Speech?, [GO](http://justitia-int.org/en/report-who-cares-about-free-speech-findings-from-a-global-survey-of-free-speech/){target="_blank"}
+* Data Source: V-Dem Institute, Varieties of Democracy Project, [GO](https://www.v-dem.net/en/data/data/v-dem-dataset-v111/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

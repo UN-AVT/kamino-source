@@ -1,0 +1,209 @@
+---
+pagetitle: "Ideas Factories"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Ideas Factories
+## Scatter plot
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Johny Goerend on Unsplash"}
+
+masthead <- "assets/johny-goerend-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Bourscheid castle in the north of Luxembourg</div>
+
+> A pile of rocks ceases to be a rock pile when somebody contemplates it with the idea of a cathedral in mind...\
+--- Antoine Saint-Exupéry\
+
+***
+
+
+### Ingest data 
+#### gdp and innovation rank by country and year
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df_gdp <- read.csv("archetypes/ideas-factories/gdp-per-person-employed-constant-ppp.csv", header = TRUE, stringsAsFactors = FALSE)
+df_gdp
+
+df_gii <- read.csv("archetypes/ideas-factories/global-innovation-index.csv", header = TRUE, stringsAsFactors = FALSE)
+df_gii
+
+```
+
+
+### Wrangle data
+#### filter, merge, enrich, select, clean, rename, wow!
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_gdp_filtered <- df_gdp %>% filter(Year == 2020)
+
+df_gii_filtered <- df_gii %>% filter(Indicator == 'Global Innovation Index')
+df_gii_filtered <- df_gii_filtered %>% filter(Subindicator.Type == 'Rank')
+df_gii_filtered <- df_gii_filtered %>% select(c(Country.ISO3, Country.Name, X2020))
+
+df_combined <- merge(df_gdp_filtered, df_gii_filtered, by.x='Code', by.y='Country.ISO3')
+
+df_combined$REGION <- countrycode(df_combined$Code, origin='iso3c', destination='un.region.name')
+
+df_combined <- df_combined %>% select(c(Code, Entity, GDP.per.person.employed..constant.2017.PPP..., X2020, REGION))
+
+df_combined <- df_combined[complete.cases(df_combined), ]
+
+df_final <- df_combined %>%
+  rename(ISO3 = Code,
+         COUNTRY = Entity,
+         GDP = GDP.per.person.employed..constant.2017.PPP...,
+         GII = X2020)
+
+df_final <- df_final %>% rename_with(toupper)
+df_final
+
+
+```
+
+
+### Plot Scatter
+#### data points with smoothing
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    # axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    # panel.grid.minor = element_blank(),
+    # panel.grid.major = element_blank(),
+    legend.position='top'
+)
+
+# Plot
+v1 <- ggplot(df_final, aes(x = GDP, y = GII)) + 
+  geom_point(aes( fill = REGION, color = REGION), size = 4, shape = 21) +
+  geom_smooth(formula = y ~ x, method="loess", se = FALSE, linetype = 'solid', size = 2, color = '#82A0C2') + # "lm", "glm", "gam", "loess" 
+  scale_x_continuous() +
+  scale_y_continuous() +
+  scale_y_reverse() +
+  labs( title = "Ideas Factories",
+        subtitle = "Global Innovation and GDP",
+        caption = "Source: Cornell INSEAD WIPO",
+        x = "GDP per Person Employed, constant PPP, 2020",
+        y = "Global Innovation Index, 2020") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+### Plot with annotations
+#### some narrative to help tell the story
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v2 <- v1 + 
+      annotate("text", x = 200000, y = 30, 
+              label = "European countries presented high GDP\ndespite the low Global Innovation Index", 
+              hjust = "left", vjust = 1, color = "#333333", size = 4, fontface = 1) +
+      annotate("text", x = 45000, y = 110, 
+               label = "African countries presented low GDP despite\nthe high Global Innovation Index",
+               hjust = "left", vjust = 1, color = "#333333", size = 4, fontface = 1) 
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/ideas-factories-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/ideas-factories-sm.png", plot = v2, width=4, height=2.25)
+
+```
+
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative Inspiration: The Economist, Ideas Factories, Global innovation and GDP
+* Data sources: Global Innovation Index, [GO](https://www.globalinnovationindex.org/analysis-indicator){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

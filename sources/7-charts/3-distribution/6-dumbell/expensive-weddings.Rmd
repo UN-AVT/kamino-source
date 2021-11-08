@@ -1,0 +1,210 @@
+---
+pagetitle: "Expensive Weddings"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(emojifont)
+library(ggiraph)
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Expensive Weddings
+## The dumbell chart
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Khadija Yousaf on Unsplash"}
+
+masthead <- "assets/khadija-yousaf-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> A wedding gown entails multilayering of expensive specialty fabrics for an outfit\
+  whose useful lifespan may come and go in a single afternoon...\
+--- Mary Roach\
+
+***
+
+Millions of weddings take place every month, and couples across the world find themselves with more and more choices for when, where and how to celebrate their love. The Knot, WeddingWire and Bodas.net teamed up to gather feedback from 20,000 couples in 14 countries to understand how today’s couples are planning their wedding.  Let's explore using a dumbbell chart to illustrate some of the findings.
+
+### Ingest
+#### country, vendor, percent
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/expensive-weddings/expensive-weddings.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+# to make emoji map
+# unique(df$Vendor)
+
+```
+
+### Wrangle
+#### enrich with emoji map
+
+```{r}
+
+emoji_df <- data.frame(
+  Vendor = c("Photo", "Hair / makeup", "Dress", "Serve alcohol", "Hair", "Music", "Suits", "Décor", "Caterer", "Rings", "Cake", "Invites", "Flowers", "Makeup"), 
+  Emoji =  c("camera", "lipstick", "bride_with_veil", "tropical_drink", "haircut_woman", "musical_note", "man_in_tuxedo", "confetti_ball", "fork_and_knife", "ring", "cake", "envelope", "rose", "lipstick")
+)
+
+df_wrangle <- merge(df, emoji_df, by=c("Vendor","Vendor"))
+
+# Order for overlap
+df_wrangle <- df_wrangle[order(df_wrangle$Percent),]
+
+df_wrangle
+
+```
+
+
+### Analyze
+#### summarize for min and max (to use as segment points)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_wo_alcohol <- filter(df, Vendor != "Serve alcohol")
+
+df_segment <- df_wo_alcohol %>%
+  dplyr::select(Country, Percent) %>%
+  group_by(Country) %>%
+  summarise(
+    min_pt = min(Percent, na.rm = T),
+    max_pt = max(Percent, na.rm = T)
+)
+
+df_segment
+
+```
+
+
+### View, chart
+#### emoji wedding expenses
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 14, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10, hjust = 1.0, vjust = 1.0),
+    axis.title.x = element_blank(),
+    axis.text.x = element_text(size = 12, hjust = 0.5, vjust = 0.5),
+    axis.text.y = element_text(size = 12, hjust = 1.0, vjust = 0.5),
+    panel.border = element_blank(),
+    panel.background=element_rect(fill="#FDFDFD", colour="NA"),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major = element_line(size = 0.5, linetype = 'dotted', colour = "#999999"),
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 10),
+    legend.position='bottom',
+    plot.background = element_rect(fill="#FDFDFD", colour="NA"),
+    plot.margin = unit(c(0.5, 0.5, 0.5, 0.25), "in")
+  )
+
+v1 <- ggplot() +  
+  geom_segment(data = df_segment, aes(x = min_pt, xend = max_pt, y = Country, yend = Country), lineend = "butt", linejoin = "round", size=1.0, color="#F44336" ) +
+  geom_point(data = df_wrangle, aes(x = Percent, y = Country), shape = 21, size = 16, color="black", fill="white", alpha = 0.9 ) +
+  geom_text(data = df_wrangle, aes(x = Percent, y = Country, label = emoji(Emoji)), size = 9, vjust = 0.25, family="EmojiOne") +
+  scale_x_continuous(labels=scales::percent_format(scale = 1), sec.axis = dup_axis()) +
+  coord_cartesian(clip = "off") +
+  labs(title = "GLOBAL WEDDING REPORT",
+       subtitle = "percentage reporting, category of expense and serving alcohol",
+       caption = "Source: the knot, weddingwire, bodas.net",
+       x = NULL,
+       y = NULL) +
+  theme_minimal() + 
+  theme_opts  
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/expensive-weddings-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/expensive-weddings-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: The Economist, Why expensive weddings are a bad idea, [GO](https://www.economist.com/graphic-detail/2018/05/19/why-expensive-weddings-are-a-bad-idea){target="_blank"}
+* Data sources: World Wedding Report 2019, [GO](https://cdn1.weddingwire.com/assets/docs/GlobalWeddingReport/TKWW_Global_Wedding_Report_2019_us_F4.pdf){target="_blank"}
+
+<pre>
+@misc{theeconomist_2018_why,
+  author = {The Economist},
+  month = {05},
+  title = {Why expensive weddings are a bad idea},
+  url = {https://www.economist.com/graphic-detail/2018/05/19/why-expensive-weddings-are-a-bad-idea},
+  urldate = {2021-02-02},
+  year = {2018},
+  organization = {The Economist}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

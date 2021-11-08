@@ -1,0 +1,203 @@
+---
+pagetitle: "Bulging waistlines"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(janitor)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Bulging waistlines
+## a range plot showing BMI by gender
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Towfiqu Barbhuiya on Unsplash"}
+
+masthead <- "assets/towfiqu-barbhuiya-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> I'm in good shape.  That shape is round...\
+--- Jarod Kintz\
+
+***
+
+### Ingest
+#### country, year, bmi
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_males <- read.csv("archetypes/bulging-waistlines/mean-body-mass-index-bmi-in-adult-males.csv", header = TRUE, stringsAsFactors = TRUE)
+df_males
+
+df_females <- read.csv("archetypes/bulging-waistlines/mean-body-mass-index-bmi-in-adult-women.csv", header = TRUE, stringsAsFactors = TRUE)
+df_females
+
+```
+
+
+### Wrangle
+#### join the data sets, filter, clean field names, sort
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# full join by all common fields
+df_wrangle <- full_join(df_males, df_females, by = c("Entity", "Code", "Year"))
+
+# take latest year
+df_wrangle <- filter(df_wrangle, Year == 2016)
+
+# take only countries
+df_wrangle <- filter(df_wrangle, nchar(as.character(Code)) > 1)
+
+# clean names with spaces
+df_wrangle <- df_wrangle %>% janitor::clean_names()
+
+# calculate the mean for sorting, using rowwise operation
+df_wrangle <- df_wrangle %>% rowwise() %>% mutate(MEAN = mean(c(mean_bmi_male, mean_bmi_female), na.rm=T))
+
+# sort by mean
+df_wrangle <- df_wrangle[order(df_wrangle$MEAN),]
+
+# retain order using row numbers
+df_wrangle$ORDER <- seq.int(nrow(df_wrangle))
+
+df_wrangle
+
+```
+
+
+### Plot
+#### country bmi values for male and female
+
+
+* less than 18.5, it falls within the underweight range
+* 18.5 to <25, it falls within the healthy weight range
+* 25.0 to <30, it falls within the overweight range
+* 30.0 or higher, it falls within the obesity range
+* class 1 obesity: BMI of 30 to < 35
+* class 2 obesity: BMI of 35 to < 40
+* class 3 obesity: BMI of 40 or higher. Class 3 obesity is sometimes categorized as “severe” obesity.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=2800/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.y = element_text(size = 12),
+    axis.ticks = element_line(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    legend.position='bottom',
+    plot.margin = unit(c(0.5,0.25,0.25,0.1), "in")
+)
+
+# entity, code, year, mean_bmi_male, mean_bmi_female
+# use reorder to retain sort
+v1 = ggplot(df_wrangle) + 
+  geom_vline(xintercept = 18.5, color = "red", linetype = "dashed") +
+  geom_vline(xintercept = 25, linetype = "dashed") +
+  geom_vline(xintercept = 30, color = "orange", linetype = "dashed") +
+  geom_vline(xintercept = 35, color = "red", linetype = "dashed") +
+  geom_vline(xintercept = 40, color = "red", linetype = "dashed") +
+  geom_segment(aes(x=mean_bmi_male, y=reorder(entity,ORDER), xend=mean_bmi_female, yend=entity), 
+               lineend = "round", linejoin = "round", size=2, color="#cccccc") + 
+  geom_point(aes(x=mean_bmi_male, y=entity), shape=22, alpha=1.0, size=2, color="#555555", fill="#555555") +
+  geom_point(aes(x=mean_bmi_female, y=entity), shape=22, alpha=1.0, size=2, color="#00E5FF", fill="#00E5FF") +
+  scale_x_continuous() +
+  scale_y_discrete() +
+  labs(title = "Mean BMI Values by Gender", x = NULL, y = NULL) +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1920/72, height_svg = 2800/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.95)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/bulging-waistlines-fs.svg", plot = v1, width=720/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/bulging-waistlines-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+Inspiration: Economist  
+Data Source: Our World in Data
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

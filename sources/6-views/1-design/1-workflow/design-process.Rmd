@@ -1,0 +1,113 @@
+---
+pagetitle: "Designing Views"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+```
+
+<div class="activity">
+VIEWS  
+</div>
+
+# Designing Views
+## Guiding principles and workflow
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Annie Spratt on Unsplash"}
+
+masthead <- "assets/annie-spratt-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Close your eyes and visualize...\
+--- Alfred Hithcock\
+
+***
+
+The objective of this task is to provide the __art__ and __science__ for __constructing__ accurate, meaningful, and expressive visual representations of data. This task focuses on the design process based on a foundation of principles established from decades of research and practice.  These are the key areas we'll focus on addressing:
+
+* What makes a __good__ visual representation?
+* How do I __design__ a visual representation?
+
+### The Pursuit of Graphical Excellence
+#### What makes a good visual representation?
+
+This leading question is the focus of this task. The question underscores the importance of striving for the knowledge, skill, and experience in designing representations following best practices, guiding principles, and learning from the feedback of your audience. This skill is like any other master craft. Take for example the notebooks of Leonardo da Vinci, 13,000 pages of notes and drawings reinforcing the importance that he placed on knowledge and technique. Similarly, we will learn from artists and scientists who have shared their experiences and advice on good design practices.
+
+```{r, out.width = "95%"}
+
+knitr::include_graphics("assets/insights-of-the-roundtable.svg", dpi=300)
+
+```
+
+We can see a few common themes that emphasize core principles, but this is only a preamble for the extensive body of knowledge that provides more detailed advice on a wide variety of design considerations such as perception, cognition, aesthetics, style, construction, and composition.  Before we climb that mountain, let's establish a minimum and uncompromising set of principles as a departure point for the broader design process:
+
+* __Integrity__ : designed with honesty, truthfulness and accuracy.
+* __Quality__ : pursued with rigorous standards, following scientific method, and reproducible for verification.
+* __Critique__ : received, understood, and confirmed to have precisely served the purpose for the intended audience and goal.
+
+If we adhere these core principles, we can explore, experiment, innovate, and create based on a foundation of credibility and high standards. You will be faced with endless design options and decisions that will not have a set of clear rules or prescriptions. This is a welcome freedom --- to enhance your work with creative expression, originality, and vision.
+
+### The Design Workflow
+#### From concept to construction
+
+The workflow is based on a process which leads you through the design, development and build sequence of a visual representation. This process is intended to guide you through the selection criteria for making choices about the approaches taken in your design.  The workflow is multifaceted to address all aspects of the final construct, most importantly the __usability__ and __usefulness__ of the final result.
+
+> It’s not just what it looks like and feels like. Design is how it works.\
+--- Steve Jobs, The New York Times, 2003
+
+Here's an overview of the ten (10) design considerations to create a __blueprint__ for your representation:
+
+
+```{r, out.width = "100%"}
+
+knitr::include_graphics("assets/design-considerations.svg", dpi=300)
+
+```
+
+Although it may seem a bit complicated, the idea is to ask yourself questions that can reveal a design choice when evaluating options.  The more you work with the process, the more natural it will feel and become a standard work practice.
+
+> There are three responses to a piece of design – yes, no, and WOW!\
+  Wow is the one to aim for.\
+--- Milton Glaser\
+
+Each of the steps will be covered in later sections of the Kamino learning path. As you gain more knowledge and experience applying these techniques to your work, you and your audience will see the difference --- the __WOW!__
+
+### References
+#### citations for narrative and data sources
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

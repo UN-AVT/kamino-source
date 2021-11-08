@@ -1,0 +1,167 @@
+---
+pagetitle: "Child marriage"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Child Marriage
+## Bar Vertical Facet
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Adrien Taylor on Unsplash"}
+
+masthead <- "assets/adrien-taylor-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> I stopped (going to) school in order to marry..\
+--- Nafissa, Niger\
+
+***
+
+### Ingest
+#### country, measure, and values
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df = read.csv("archetypes/child-marriage/child-marriage.csv", header = TRUE, stringsAsFactors = TRUE)
+
+# Remove second column
+df = select(df,-2)
+
+df
+
+```
+
+
+### Plot
+#### facet by country
+
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=15, fig.height=30}
+
+theme_opts <- theme(
+    axis.text.x = element_blank(), 
+    axis.text.y = element_blank(), 
+    axis.ticks = element_blank(),
+    text = element_text(family = "inconsolata", size = 14),
+    strip.text = element_text( size = 11, color = "white", hjust = 0.5 ),
+    strip.background = element_rect( fill = "black", color = NA, size = 1.5, linetype = "solid" ), # color = "deepskyblue4"
+    #plot.background = element_rect( fill = "black", color = NA ),
+    plot.title = element_text( color = "black", size = 20, face = "bold" ),
+    plot.subtitle = element_text( color = "black", size = 16 ),
+    plot.caption = element_text( color = "black", size = 14, hjust = 0.5, margin = margin( t=20,0,10,0 ) ),
+    panel.background = element_rect( fill = "black"), # requires theme_classic()
+    panel.spacing.x = unit( 0.1, "cm" ),
+    panel.spacing.y = unit( 0.1, "cm" ),
+    legend.position = "top",
+    legend.title = element_blank(),
+    legend.justification = "right",
+    legend.key.width = unit( 4.5, "cm"),
+    legend.text = element_text( margin = margin(0, 0, 0, -125) ),
+    legend.key = element_rect( colour = "black", size = 1, linetype = "solid" ),
+    legend.box.margin = margin( c(0,33,0,0) )
+)
+
+# Make the plot
+v1 <- ggplot( df, aes( x = Pivot.Field.Names, y = Pivot.Field.Values, fill = Pivot.Field.Names ) ) +
+      geom_bar( stat = "identity", width = 0.75, alpha = 0.5 ) +
+      scale_fill_manual( values = c( "lightblue1", "mediumaquamarine", "sandybrown" ) ) +
+      facet_wrap( ~ Country,  ncol = 8, labeller = label_wrap_gen()) +
+      labs( x = NULL, y = NULL,
+            title="Child Marriage",
+            subtitle="Percentage of underage females and males who get married across the world",
+            caption="Source: UNICEF global databses, 2020, based on DHS, MICS and other national surveys, 2013-2019") +
+      geom_text( aes( label = scales::percent(Pivot.Field.Values, accuracy = 0.1L), y = Pivot.Field.Values, color = Pivot.Field.Names ), vjust = -0.8, size = 3, family = "inconsolata" ) +
+      scale_color_manual( values = c( "lightblue1", "mediumaquamarine", "sandybrown" ) ) +
+      theme_classic() + 
+      theme_opts
+
+# Print the plot
+girafe(ggobj = v1, width_svg = 15, height_svg = 30,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/child-marriage-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/child-marriage-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Child marriage, [GO](https://data.unicef.org/topic/child-protection/child-marriage/){target="_blank"}
+
+<pre>
+@misc{_2017_child,
+  author = {, UNICEF},
+  title = {Child marriage - UNICEF DATA},
+  url = {https://data.unicef.org/topic/child-protection/child-marriage/},
+  year = {2017},
+  organization = {UNICEF DATA}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

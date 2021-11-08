@@ -1,0 +1,248 @@
+---
+pagetitle: "How Happy Are We?"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+library(ggbeeswarm)
+library(patchwork)
+library(ggpubr)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# How happy are we?
+## Beeswarm
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Parij Borgohain on Unsplash"}
+
+masthead <- "assets/parij-borgohain-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Now and then it's good to pause in our pursuit of happiness and just be happy...\
+--- Guillaume Apollinaire\
+
+***
+
+### Ingest data 
+
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv('archetypes/how-happy-are-we/how-happy-are-we.csv', encoding = "UTF-8")
+df
+
+
+```
+
+
+### Wrangle data
+
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+ 
+# Select and rename columns
+ df1  <- df[,1:10]%>% 
+   rename(Social.support = Explained.by..Social.support, 
+                    GDP.capita=Explained.by..Log.GDP.per.capita
+         ,Life.expectancy = Explained.by..Healthy.life.expectancy
+         ,Freedom= Explained.by..Freedom.to.make.life.choices
+         ,Generosity=Explained.by..Generosity
+         ,Corruption=Explained.by..Perceptions.of.corruption
+         ,Country=X.U.FEFF.Country.name
+         ,Region=Regional.indicator)
+
+```
+
+
+### Plot Beeswarm
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "#E36857", size = 20, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(color = "#ff9a55", size = 9, face = "bold"),
+    axis.text.y = element_text(color = "#4392C0", size = 10, face = "bold"),
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(color = "#4392C0", size=12,face="bold"),
+    # panel.border = element_blank(),
+    # panel.background = element_blank(),
+    # panel.grid.minor = element_blank(), # remove minor gridlines
+    legend.position = "none")
+
+v1 <- ggplot(data = df1, aes(x= factor(Region, levels=c(
+                 "Sub-Saharan Africa","South Asia","Middle East and North Africa",
+                 "Commonwealth of Independent States","Southeast Asia","East Asia",
+                 "Central & Eastern Europe","Latin America and Caribbean","Western Europe",
+                 "North America and ANZ")),
+                 y = Avg.Ladder.Score, color = Region)) +
+  geom_beeswarm(cex = 1.5, priority = "density", size = 5)+
+  labs(title="How Happy Are We?",
+        y = "Happiness Score")+ 
+  scale_x_discrete(breaks= c(
+                 "Sub-Saharan Africa","South Asia","Middle East and North Africa",
+                 "Commonwealth of Independent States","Southeast Asia","East Asia",
+                 "Central & Eastern Europe","Latin America and Caribbean","Western Europe",
+                 "North America and ANZ"), 
+    labels=c(    "Sub-Saharan\nAfrica","South Asia","Middle East\n&  North Africa",
+                 "Commonwealth of\nIndependent States","Southeast Asia","East Asia",
+                 "Central &\nEastern Europe","Latin America &\nCaribbean","Western Europe",
+                 "North America &\nANZ"))+
+  theme_bw()+
+  theme_opts
+  
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+
+
+```
+
+
+
+### Transform data for second plot
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Transform wide to long
+# Group by region and calculate the average of value for each measure/category
+df2 <- df1 %>%
+  gather(measure,value,
+         Social.support, 
+         GDP.capita,
+         Life.expectancy,
+         Freedom,
+         Generosity,
+         Corruption)%>%
+  dplyr::select(measure,value, Country,Region)%>%
+  group_by(Region,measure)%>%
+  summarise(avg=sum(value)) 
+
+# Create a list to change the facet order
+x_position = c("Social.support", "GDP.capita", "Life.expectancy", "Freedom","Generosity","Corruption")
+
+df2
+
+```
+
+### Augmenting the Bee Swarm Plot
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+
+v2 <- ggplot( transform(df2, 
+                  Region=factor(Region, 
+                  levels=c(
+                    "Sub-Saharan Africa","South Asia",
+                    "Middle East and North Africa",
+                    "Commonwealth of Independent States",
+                    "Southeast Asia","East Asia",
+                    "Central & Eastern Europe",
+                    "Latin America and Caribbean",
+                    "Western Europe",
+                    "North America and ANZ"))),
+                    aes( x = measure, y = avg ,fill=Region) ) + 
+      geom_bar( stat = "identity" ) + 
+      facet_wrap( ~ Region, scales = "free_x", ncol=10 ) + 
+      scale_x_discrete(limits = rev(x_position))+
+      coord_flip() +
+       
+      theme(
+      plot.title = element_blank(),
+      axis.title.y = element_blank(),
+      axis.title.x = element_blank(),
+      axis.text.x = element_blank(),
+      axis.ticks = element_blank(),
+      strip.text.x = element_blank(),
+      axis.text.y = element_text(size=6),
+      legend.position = "none")
+
+
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+
+v3 <- ggarrange(v1, v2, ncol=1, nrow=2, heights = c(1,0.3))
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/happiness-index.svg", plot = ggarrange(v1, v2, ncol=1, nrow=2, heights = c(1,0.3)), width=1280/72, height=720/72)
+
+```
+ 
+### References
+#### The citations and data sources used for this case
+
+* Narrative and Data Source, [GO](https://worldhappiness.report/ed/2020){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

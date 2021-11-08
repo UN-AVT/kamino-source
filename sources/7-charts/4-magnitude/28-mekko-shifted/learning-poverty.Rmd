@@ -1,0 +1,320 @@
+---
+pagetitle: "Learning poverty"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Learning poverty
+## Mekko shifted 
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Nikhita S on Unsplash"}
+
+masthead <- "assets/nikhita-s-NsPDiPFTp4c-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Education is the most powerful weapon you can use to change the world...\
+--- Nelson Mandela\
+
+***
+
+### Ingest
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Create dataset
+df = read_csv("archetypes/goal-4-quality-education.csv")
+df
+
+```
+
+### Wrangle
+
+Steps:  
+* replace cell "890k" with "0.89" in "out of school" column and convert column to numeric  
+* drop unnecessary columns  
+* calculate total students by region, for the world, and calculate percentages  
+* create a "diplay region" to help with labels on plot  
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_final <- df %>%
+  mutate(out_of_school = as.numeric(if_else(`Learning poor - out of school` == "890k", "0.89", `Learning poor - out of school`))) %>%
+  select(region = Region, learning_proficient = `Not learning poor`, 
+         learning_not_proficient = `Learning poor - students below minimum proficiency level`, out_of_school) %>%
+  group_by(region) %>%
+  mutate(total_children_by_region = learning_proficient + learning_not_proficient + out_of_school) %>%
+  ungroup() %>%
+  group_by() %>%
+  mutate(world_children_total = sum(learning_proficient) + sum(learning_not_proficient) + sum(out_of_school)) %>%
+  ungroup() %>%
+  mutate(percent_children_over_world = 100 * total_children_by_region / world_children_total,
+         percent_learning_proficient = 100 * learning_proficient / total_children_by_region,
+         percent_learning_not_proficient = 100 * learning_not_proficient / total_children_by_region,
+         percent_out_of_school = 100 * out_of_school / total_children_by_region,
+         xmax = cumsum(percent_children_over_world),
+         xmin = xmax - percent_children_over_world) %>%
+  mutate(display_region = case_when(region == "Europe & Central Asia" ~ "Europe\n & \n Central\n Asia",
+                                    region == "Latin America & Caribbean" ~ "Latin \nAmerica\n & \nCaribbean",
+                                    region == "Sub-Saharan Africa" ~ "Sub-Saharan \nAfrica",
+                                    region == "Middle East & North Africa" ~ "Middle\n East\n & \nNorth \nAfrica",
+                                    TRUE ~ region))
+
+df_final
+
+```
+
+### Plot
+#### final result
+
+```{r, echo=TRUE, fig.width=12, fig.height=10, out.width = "95%", class.source = 'fold-hide'}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    panel.border = element_blank(),
+    plot.background = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    legend.title = element_blank(),
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank(),
+    axis.title.y = element_blank(),
+    legend.position = "top"
+)
+
+fill_colors <- c("Not learning poor" = "#95AEBF", 
+                 "Learning poor - students below minimum proficiency level" = "#D7CE59", 
+                 "Learning poor - out of school" = "#96553E")
+
+
+v1 <- ggplot(df_final) +
+    geom_segment(aes(x=0, xend=100, y=20, yend=20), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=40, yend=40), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=60, yend=60), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=80, yend=80), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=100, yend=100), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=-20, yend=-20), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=-40, yend=-40), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=-60, yend=-60), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=-80, yend=-80), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=-100, yend=-100), colour = "grey") +
+    geom_rect(aes(ymin = 0, ymax = percent_learning_proficient, xmin = xmin, xmax = xmax,
+                  fill = "Not learning poor"), 
+              color = "white") +
+    geom_rect(aes(ymin = 0, ymax = -percent_learning_not_proficient, xmin = xmin, xmax = xmax,
+                  fill = "Learning poor - students below minimum proficiency level"), 
+              color = "white") +
+    geom_rect(aes(ymin = -percent_learning_not_proficient, 
+                  ymax = -(percent_learning_not_proficient +percent_out_of_school), 
+                  xmin = xmin, xmax = xmax,
+                  fill = "Learning poor - out of school"), 
+              color = "white") +
+    scale_fill_manual(values = fill_colors)+
+  geom_text(aes(x=(xmin+xmax)/2, 
+                y=-(percent_learning_not_proficient + percent_out_of_school), 
+                label=display_region),
+            vjust = "top", family = "inconsolata") +
+  geom_segment(aes(x=40, xend=60.13253, y=50, yend=50),
+    size=0.5, arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  )+
+  geom_segment(aes(x=40, xend=28.36854, y=50,yend=50),
+    size=0.5, arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  ) +
+  annotate("text", x=45, y=60, 
+           label="Width of bar represents population\nof children in each region", family = "inconsolata") +
+  geom_segment(aes(x=-1, xend=-1, y=0, yend=10),
+    size=0.5, arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  ) +
+  geom_segment(aes(x=-1, xend=-1, y=0, yend=-10),
+    size=0.5, arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  ) +
+  annotate("text", x=1, y=5,
+           label="Not learning poor",
+           hjust = 0, family = "inconsolata") +
+  annotate("text", x=1, y=-5, 
+           label="Learning poor",
+           hjust = 0, family = "inconsolata") +
+  geom_segment(aes(x=-1, xend=100, y=0, yend=0)) + 
+  scale_y_continuous(breaks = seq(-100, 100, by = 20),
+                     labels = function(x) paste0(x, "%")) +
+  scale_x_continuous(expand = c(0.01, 0)) +
+  labs(title = "Learning poverty in low- and middle-income countries varies by region",
+       subtitle = "Share of children at the end of primary school age (ages 10-14), by learning category, 2015 (%)") +
+    theme_bw() +
+    theme_opts 
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### Step-by-Step
+#### shapes
+
+```{r, echo=TRUE, fig.width=12, fig.height=10, out.width = "95%", class.source = 'fold-hide'}
+
+fill_colors <- c("Not learning poor" = "#95AEBF", 
+                 "Learning poor - students below minimum proficiency level" = "#D7CE59", 
+                 "Learning poor - out of school" = "#96553E")
+
+
+v2 <- ggplot(df_final) +
+    geom_segment(aes(x=0, xend=100, y=20, yend=20), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=40, yend=40), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=60, yend=60), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=80, yend=80), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=100, yend=100), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=-20, yend=-20), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=-40, yend=-40), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=-60, yend=-60), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=-80, yend=-80), colour = "grey") +
+    geom_segment(aes(x=0, xend=100, y=-100, yend=-100), colour = "grey") +
+    geom_rect(aes(ymin = 0, ymax = percent_learning_proficient, xmin = xmin, xmax = xmax,
+                  fill = "Not learning poor"), 
+              color = "white") +
+    geom_rect(aes(ymin = 0, ymax = -percent_learning_not_proficient, xmin = xmin, xmax = xmax,
+                  fill = "Learning poor - students below minimum proficiency level"), 
+              color = "white") +
+    geom_rect(aes(ymin = -percent_learning_not_proficient, 
+                  ymax = -(percent_learning_not_proficient +percent_out_of_school), 
+                  xmin = xmin, xmax = xmax,
+                  fill = "Learning poor - out of school"), 
+              color = "white") +
+    scale_fill_manual(values = fill_colors) +
+    theme_bw() +
+    theme_opts 
+
+girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+#### shapes, labels, and annotations
+
+
+```{r, echo=TRUE, fig.width=12, fig.height=8, out.width = "95%", class.source = 'fold-hide'}
+
+
+v3 <- v2 +
+  geom_text(aes(x=(xmin+xmax)/2, 
+                y=-(percent_learning_not_proficient + percent_out_of_school), 
+                label=display_region),
+            vjust = "top", family = "inconsolata") +
+  geom_segment(aes(x=40, xend=60.13253, y=50, yend=50),
+    size=0.5, arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  )+
+  geom_segment(aes(x=40, xend=28.36854, y=50,yend=50),
+    size=0.5, arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  ) +
+  annotate("text", x=45, y=60, 
+           label="Width of bar represents population\nof children in each region", family = "inconsolata") +
+  geom_segment(aes(x=-1, xend=-1, y=0, yend=10),
+    size=0.5, arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  ) +
+  geom_segment(aes(x=-1, xend=-1, y=0, yend=-10),
+    size=0.5, arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  ) +
+  annotate("text", x=1, y=5, 
+           label="Not learning poor",
+           hjust = 0, family = "inconsolata") +
+  annotate("text", x=1, y=-5, 
+           label="Learning poor",
+           hjust = 0, family = "inconsolata") +
+  geom_segment(aes(x=-1, xend=100, y=0, yend=0)) + 
+  scale_y_continuous(breaks = seq(-100, 100, by = 20),
+                     labels = function(x) paste0(x, "%")) +
+  scale_x_continuous(expand = c(0.01, 0)) +
+  labs(title = "Learning poverty in low- and middle-income countries varies by region",
+       subtitle = "Share of children at the end of primary school age (ages 10-14), by learning category, 2015 (%)") +
+  theme_bw() +
+  theme_opts 
+
+girafe(ggobj = v3, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/learning-poverty-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/learning-poverty-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative and Data sources: World Bank - Learning poverty: children's education in crisis, [GO](https://datatopics.worldbank.org/sdgatlas/goal-4-quality-education/){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

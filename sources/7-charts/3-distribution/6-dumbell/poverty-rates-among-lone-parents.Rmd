@@ -1,0 +1,229 @@
+---
+pagetitle: "Poverty rates among lone-parents"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Poverty rates among lone-parents
+## the dumbell chart
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Annie Spratt on Unsplash"}
+
+masthead <- "assets/annie-spratt-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> As a single mum you’ll discover inner strengths and capabilities you never knew you had...\
+--- Emma-Louise Smith 
+
+***
+
+### Ingest
+#### Progress of the World’s Women Report, 2019-2020
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df = read.csv("archetypes/worlds-women-report/figure-4-8_db.csv", header = TRUE, stringsAsFactors = FALSE) # read text file
+df
+
+```
+
+### View, chart
+#### Poverty rates among lone-parents before and after transfers 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+
+# sort values and refactor
+df <- df %>% arrange(desc(y1_axis)) %>% mutate(x_axis=factor(x_axis, levels=x_axis))
+
+# create dumbbell plot
+v1<-ggplot(df) +  
+  geom_segment( aes(x = x_axis, xend = x_axis, y = y1_axis, yend = y2_axis), lineend = "butt", linejoin = "round", size=3.5, color="#d9d9d9" ) +
+  geom_point( aes(x = x_axis, y = y2_axis), size=3, color="#5c96d6" ) +
+  geom_text( aes(x = x_axis, y = y2_axis, label=y2_axis), size=3, color="black", vjust = 2.5, fontface = "bold" ) +
+  geom_point( aes(x = x_axis, y = y1_axis), size=3, color="#692c7d" ) +
+  geom_text( aes(x = x_axis, y = y1_axis, label = y1_axis), size=3, color="black", vjust = -1.5, fontface = "bold" ) +
+  scale_y_continuous(limits = c(0,60), breaks = c(0, 20, 40, 60), labels = c(0, 20, 40, 60)) +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  theme( # remove the vertical grid lines
+           panel.grid.major.x = element_blank(),
+           # explicitly set the horizontal lines (or they will disappear too)
+           panel.grid.major.y = element_line( size=.1, color="#cccccc" ),
+           panel.grid.minor.y = element_blank()
+    ) +
+  labs(title = "POVERTY RATES AMONG LONE-PARENTS BEFORE AND AFTER TRANSFERS - Figure 4.8",
+       subtitle = "SELECTED COUNTRIES, LATEST AVAILABLE YEAR", caption = "Source: UN Women",
+       x = "",
+       y = "Percentage")
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+### Step by step
+#### Plot the min and max points
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+
+# create dumbbell plot
+v2 <- ggplot(df) +  
+  geom_point( aes(x = x_axis, y = y2_axis), size=3, color="#5c96d6" ) +
+  geom_point( aes(x = x_axis, y = y1_axis), size=3, color="#692c7d" )
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+#### Connect the points with a vertical line (geom_segment)
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+
+# create dumbbell plot
+v3 <- ggplot(df) +  
+  geom_segment( aes(x = x_axis, xend = x_axis, y = y1_axis, yend = y2_axis), lineend = "butt", linejoin = "round", size=3.5, color="#d9d9d9" ) +
+  geom_point( aes(x = x_axis, y = y2_axis), size=3, color="#5c96d6" ) +
+  geom_point( aes(x = x_axis, y = y1_axis), size=3, color="#692c7d" )
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+#### Add data labels
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+
+# create dumbbell plot
+v4 <- ggplot(df) +  
+  geom_segment( aes(x = x_axis, xend = x_axis, y = y1_axis, yend = y2_axis), lineend = "butt", linejoin = "round", size=3.5, color="#d9d9d9" ) +
+  geom_point( aes(x = x_axis, y = y2_axis), size=3, color="#5c96d6" ) +
+  geom_text( aes(x = x_axis, y = y2_axis, label=y2_axis), size=3, color="black", vjust = 2.5, fontface = "bold" ) +
+  geom_point( aes(x = x_axis, y = y1_axis), size=3, color="#692c7d" ) +
+  geom_text( aes(x = x_axis, y = y1_axis, label = y1_axis), size=3, color="black", vjust = -1.5, fontface = "bold" )
+
+girafe(ggobj = v4, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+#### Beautify by adding themes and amending axes settings
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+
+# sort values and refactor
+df <- df %>% arrange(desc(y1_axis)) %>% mutate(x_axis=factor(x_axis, levels=x_axis))
+
+# create dumbbell plot
+v5 <- ggplot(df) +  
+  geom_segment( aes(x = x_axis, xend = x_axis, y = y1_axis, yend = y2_axis), lineend = "butt", linejoin = "round", size=3.5, color="#d9d9d9" ) +
+  geom_point( aes(x = x_axis, y = y2_axis), size=3, color="#5c96d6" ) +
+  geom_text( aes(x = x_axis, y = y2_axis, label=y2_axis), size=3, color="black", vjust = 2.5, fontface = "bold" ) +
+  geom_point( aes(x = x_axis, y = y1_axis), size=3, color="#692c7d" ) +
+  geom_text( aes(x = x_axis, y = y1_axis, label = y1_axis), size=3, color="black", vjust = -1.5, fontface = "bold" ) +
+  scale_y_continuous(limits = c(0,60), breaks = c(0, 20, 40, 60), labels = c(0, 20, 40, 60)) +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  theme( # remove the vertical grid lines
+           panel.grid.major.x = element_blank(),
+           # explicitly set the horizontal lines (or they will disappear too)
+           panel.grid.major.y = element_line( size=.1, color="#cccccc" ),
+           panel.grid.minor.y = element_blank()
+    ) +
+  labs(title = "POVERTY RATES AMONG LONE-PARENTS BEFORE AND AFTER TRANSFERS - Figure 4.8",
+       subtitle = "SELECTED COUNTRIES, LATEST AVAILABLE YEAR", caption = "Source: UN Women",
+       x = "",
+       y = "Percentage")
+
+girafe(ggobj = v5, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/worlds-women-report-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/worlds-women-report-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: UN Women, Progress of The World's Women 2019-2020 Report,
+[GO](https://www.unwomen.org/en/digital-library/progress-of-the-worlds-women){target="_blank"}
+
+<pre>
+@misc{unwomen_2019_progress,
+  author = {UN Women},
+  title = {Progress of the world’s women | Digital library},
+  url = {https://www.unwomen.org/en/digital-library/progress-of-the-worlds-women},
+  urldate = {2021-06-11},
+  year = {2019},
+  organization = {UN Women}
+}
+</pre>
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,521 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    self_contained: true
+    css: ./style.css
+    # lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(googlesheets4)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Roboto Mono", "roboto_mono")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+# Kamino Project
+## content status & project management
+
+***
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# read only, authentication not needed with shared link
+gs4_deauth()
+path <- "https://docs.google.com/spreadsheets/d/150N38yVYhbGq6NzScBvXQkLCVr9owAmCafzOy2r3gV4/edit?usp=sharing"
+
+```
+
+## Activities {.tabset}
+
+### Plan & Process
+#### goals and objectives of analysis
+
+* why
+* systems
+* models
+* collections
+* methods
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_plan <- read_sheet(path, sheet = 1)
+df_plan
+
+```
+
+### Ingest
+#### acquire data sources
+
+* tabular
+* relational
+* unstructured
+* pdf
+* web
+* social media
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_ingest <- read_sheet(path, sheet = 2)
+df_ingest
+
+```
+
+### Wranglers
+#### transform data for optimal use
+
+* evaluate
+* prepare
+* reduce
+* extend
+* arrange
+* structure
+* domain
+* preserve
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_wranglers <- read_sheet(path, sheet = 3)
+df_wranglers
+
+```
+
+### Analytics
+#### reveal insights
+
+* calculate
+* discover
+* time-Series
+* measure
+* geospatial
+* graph
+* text-analytics
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_analytics <- read_sheet(path, sheet = 4)
+df_analytics
+
+```
+
+### Views
+#### design principles for visualization
+
+* design
+* perception
+* acuity
+* form
+* layouts
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_views <- read_sheet(path, sheet = 5)
+df_views
+
+```
+
+### Charts
+#### design a quantitative view
+
+* correlation
+* deviation
+* distribution
+* magnitude
+* part-to-whole
+* ranking
+* multiples
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_charts <- read_sheet(path, sheet = 6)
+df_charts
+
+```
+
+### Diagrams
+#### design a schematic view
+
+* concept
+* event
+* logic
+* structure
+* system
+* organization
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_diagrams <- read_sheet(path, sheet = 7)
+df_diagrams
+
+```
+
+### Graphs
+#### design a relational view
+
+* characteristics
+* operations
+* link analysis
+* social network analysis
+* association
+* flow
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_graphs <- read_sheet(path, sheet = 8)
+df_graphs
+
+```
+
+### Maps
+#### design a geospatial view
+
+* map making
+* area
+* point
+* abstract
+* path
+* space and time
+* perspective
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_maps <- read_sheet(path, sheet = 9)
+df_maps
+
+```
+
+### Semiographics
+#### design a symbolic view
+
+* meaning
+* representation
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_semiographics <- read_sheet(path, sheet = 10)
+df_semiographics
+
+```
+
+### Tables
+#### design a tabular view
+
+* chart table
+* periodic table
+* symbol table
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_tables <- read_sheet(path, sheet = 11)
+df_tables
+
+```
+
+### Temporals
+#### design an event view
+
+* observables
+* change
+* flow
+* resemblance
+* finance
+* chronology
+* duration
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_temporals <- read_sheet(path, sheet = 12)
+df_temporals
+
+```
+
+### Trees
+#### design a hierarchical view
+
+* space-filling
+* node-link
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_trees <- read_sheet(path, sheet = 13)
+df_trees
+
+```
+
+### Storytelling
+#### design a presentation
+
+* purpose
+* design
+* structure
+* creation
+* production
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_storytelling <- read_sheet(path, sheet = 14)
+df_storytelling
+
+```
+
+### Summit
+#### best practices and standards
+
+* impact
+* literacy
+* professional standards
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_summit <- read_sheet(path, sheet = 15)
+df_summit
+
+```
+
+### Case Studies
+#### applying lifecycle to cases
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_case_studies <- read_sheet(path, sheet = 16)
+df_case_studies
+
+```
+
+### Concatenate catalog
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_catalog <- rbind(df_plan, df_ingest, df_wranglers, df_analytics, df_views, df_charts, df_diagrams, df_graphs, df_maps, df_semiographics, df_tables, df_temporals, df_trees, df_storytelling, df_summit)
+
+df_catalog <- df_catalog %>% mutate(ACTIVITY = factor(ACTIVITY, 
+                                                         levels = c("2-plan", 
+                                                                    "3-ingest", 
+                                                                    "4-wranglers", 
+                                                                    "5-analytics", 
+                                                                    "6-views", 
+                                                                    "7-charts", 
+                                                                    "8-diagrams", 
+                                                                    "9-graphs", 
+                                                                    "10-maps", 
+                                                                    "11-semiographics", 
+                                                                    "12-tables",
+                                                                    "13-temporals",
+                                                                    "14-trees",
+                                                                    "15-storytelling",
+                                                                    "16-summit")), 
+                                    SUBACTIVITY = factor(SUBACTIVITY),
+                                    TASK = factor(TASK),
+                                    STATUS = factor(STATUS),
+                                    TEAM = factor(TEAM))
+
+df_catalog
+
+```
+
+## Generate Search Index Output
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+kamino_content_index <- df_catalog
+kamino_content_index <- filter(kamino_content_index, STATUS == "Published")
+kamino_content_index <- kamino_content_index %>% mutate(id = row_number(), TITLE = ARCHETYPE)
+kamino_content_index <- kamino_content_index %>% select(id, ACTIVITY, SUBACTIVITY, TASK, TITLE, METHOD, KEYWORDS, SYNTAX, SOURCES) 
+
+kamino_content_index <- kamino_content_index %>% mutate(URL = paste0("content/", ACTIVITY, "/", SUBACTIVITY, "/", TASK, "/", TITLE, ".html"), ICON = paste0("assets/symbols/", ACTIVITY, "/", TASK, ".svg"))
+
+kamino_content_index$LAST_UPDATE <- Sys.Date()
+
+kamino_content_index
+
+write.csv(kamino_content_index,"../../packages/web/models/kamino-content-index.csv", row.names = FALSE)
+
+```
+
+
+## Summary Content Views {.tabset}
+
+### Summary Content Views
+#### by activity 
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+theme_opts <- theme(
+    text = element_text(family = "roboto_mono", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    # axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    # panel.grid.minor = element_blank(),
+    # panel.grid.major = element_blank(),
+    legend.position='none'
+)
+
+activity_palette <- c("2-plan" = "#B71C1C", 
+                      "3-ingest" = "#880E4F", 
+                      "4-wranglers" = "#4A148C", 
+                      "5-analytics" = "#311B92", 
+                      "6-views" = "#1A237E", 
+                      "7-charts" = "#0D47A1", 
+                      "8-diagrams" = "#01579B", 
+                      "9-graphs" = "#006064", 
+                      "10-maps" = "#004D40", 
+                      "11-semiographics" = "#1B5E20", 
+                      "12-tables" = "#33691E",
+                      "13-temporals" = "#9E9D24",
+                      "14-trees" = "#F57F17",
+                      "15-storytelling" = "#FF6F00",
+                      "16-summit" = "#E65100"
+)
+
+```
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_activity_summary <- df_catalog %>% group_by(ACTIVITY) %>% count()
+df_activity_summary
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v_activity_summary <- ggplot(df_activity_summary, aes(x = n, y = ACTIVITY, fill = ACTIVITY)) + 
+  geom_bar(stat = "identity") +
+  scale_y_discrete(limits = rev) +
+  scale_fill_manual(values = activity_palette) +
+  labs( title = "Kamino Activity Summary",
+        subtitle = "Content View",
+        caption = NULL,
+        x = "count of articles",
+        y = NULL) +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v_activity_summary, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+### Summary Content Views
+#### by sub-activity 
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_sub_activity_summary <- df_catalog %>% group_by(ACTIVITY, SUB_ACTIVITY) %>% count()
+df_sub_activity_summary
+
+```
+
+
+### Summary Content Views
+#### by task 
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_task_summary <- df_catalog %>% group_by(ACTIVITY, SUB_ACTIVITY, TASK) %>% count()
+df_task_summary
+
+```
+
+
+### Summary Status Views
+#### by activity
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_activity_status_summary <- df_catalog %>% group_by(ACTIVITY, STATUS) %>% count()
+df_activity_status_summary
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v_activity_status_summary <- ggplot(df_activity_status_summary, aes(x=n, y=ACTIVITY, fill=STATUS)) + 
+  geom_bar(position="stack", stat="identity") +
+  scale_y_discrete(limits = rev) +
+  # scale_fill_manual(values = activity_palette) +
+  labs( title = "Kamino Activity Summary",
+        subtitle = "Status View",
+        caption = NULL,
+        x = "count of articles by status",
+        y = NULL) +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v_activity_status_summary, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+## Summary Status Views {.tabset}
+
+### Summary Status Views
+#### by sub-activity
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_subactivity_status_summary <- df_catalog %>% group_by(ACTIVITY, SUB_ACTIVITY, STATUS) %>% count()
+df_subactivity_status_summary
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v_subactivity_status_summary <- ggplot(df_subactivity_status_summary, aes(x=n, y=SUB_ACTIVITY, fill=STATUS)) + 
+  geom_bar(position="stack", stat="identity") +
+  scale_y_discrete(limits = rev) +
+  facet_grid(rows = vars(ACTIVITY), scales = "free_y", space = "free") +
+  labs( title = "Kamino Activity Summary",
+        subtitle = "Status View",
+        caption = NULL,
+        x = "count of articles by status",
+        y = NULL) +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v_subactivity_status_summary, width_svg = 1280/72, height_svg = 1280/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+## Summary Team Views {.tabset}
+
+### Activity
+
+### Sub-Activity
+
