@@ -23,11 +23,10 @@ options(scipen=999)  # turn-off scientific notation like 1e+48
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
+library(countrycode)
 library(tidyverse)
-library(readr)
 library(factoextra)
 library(ggiraph)
-
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -45,55 +44,87 @@ CHARTS
 ## Biplots
 
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Ismail Salad Osman Hajji on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Yogendra Singh on Unsplash"}
 
-masthead <- "assets/ismail-salad-osman-hajji-dirir-v7FT5ngIEfA-unsplash.jpg"
+masthead <- "assets/yogendra-singh-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-> Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...\
---- Lorem Ipsum\
+> You cannot predict the outcome of human development.\
+  All you can do is like a farmer create the conditions under which it will begin to flourish...\
+--- Ken Robinson\
 
 ***
 
-### Ingest and wrangle data
-
+### Ingest
+#### country, rank, and measures
 
 
 ```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-src <- read.csv('archetypes/hdi-2020.csv', encoding = "UTF-8")
-# src
-
-# The pca function can only take numeric values,
-# so we convert Country column to be rownames
-src <- column_to_rownames(src, var = "Country")
-# src
-
-# Convert string to numeric
-src$Gross.national.income..GNI..per.capita <- parse_number(src$Gross.national.income..GNI..per.capita)
-src
-
-# Remove HDI ranks to use key indicators only
-df <- src %>% select(Life.expectancy.at.birth, Expected.years.of.schooling, Mean.years.of.schooling, Gross.national.income..GNI..per.capita, )
+df <- read.csv('archetypes/hdi/hdi-2020.csv', encoding = "UTF-8")
 df
 
 ```
 
-### Fit a principal components model
+
+### Wrangle
+#### row names, numeric, and select
+
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df$REGION <- countrycode(df$Country, origin = 'country.name', destination = 'region') 
+
+df_wrangle <- df
+
+# The pca function can only take numeric values,
+# so we convert Country column to be rownames
+df_wrangle <- column_to_rownames(df_wrangle, var = "Country")
+
+# Convert string to numeric
+df_wrangle$Gross.national.income..GNI..per.capita <- parse_number(df_wrangle$Gross.national.income..GNI..per.capita)
+
+# Remove HDI ranks to use key indicators only
+df_wrangle <- df_wrangle %>% select(Life.expectancy.at.birth, Expected.years.of.schooling, Mean.years.of.schooling, Gross.national.income..GNI..per.capita, )
+df_wrangle
+
+```
+
+
+### Analytics
+#### fit a principal components model
+
 
 ```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # fit a principal components model
-df_pca <- prcomp(x = df, 
+df_pca <- prcomp(x = df_wrangle, 
               center = TRUE, 
               scale = TRUE)
 df_pca
 
+# review computed results
+# var <- get_pca_var(df_pca)
+# var
+
+# head(var$coord)
+# head(var$cor)
+# head(var$cos2)
+# head(var$contrib)
+
+# ind <- get_pca_ind(df_pca)
+# ind
+
+# head(ind$coord)
+# head(ind$cos2)
+# head(ind$contrib)
+
 ```
 
 ### Plot
+#### standard output
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
 
@@ -110,17 +141,68 @@ girafe(ggobj = v1, width_svg = 13, height_svg = 7,
 ```
  
  
+### Plot
+#### with visual variable mapping and theme
+ 
+```{r, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, class.source='fold-hide', fig.width=16, fig.height=9, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    # axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    # panel.grid.minor = element_blank(),
+    # panel.grid.major = element_blank(),
+    legend.title = element_blank(),
+    legend.position='bottom'
+)
+
+region_palette <- c(
+  "East Asia & Pacific" = "#FF3AAF",
+  "Europe & Central Asia" = "#FFD24F",
+  "Latin America & Caribbean" = "#3BD04F",
+  "North America" = "#6E9EA6",
+  "South Asia" = "#36D9E1",
+  "Sub-Saharan Africa" = "#FF8D2F"
+)
+
+# fviz_pca function produces a ggplot2 graph.
+v2 <- fviz_pca(df_pca,
+               repel = TRUE,  
+               col.var = "black",
+               labelsize = 3, family = "inconsolata",
+               pointshape = 21, 
+               fill.ind = df$REGION, palette = region_palette, 
+               col.ind = "black"
+               ) + 
+  labs(title = "Human Development Index", subtitle = "principal components model") +
+  theme_bw() +
+  theme_opts
+
+# Draw plot
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+ 
  
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
 
 # eval = FALSE as default; run manually as chunk
 
 # full version
-ggsave(v1, filename = "outputs/human-development-index.svg", plot = v1, width=1920/72, height=720/72)
+ggsave(filename = "assets/human-development-index-fs.svg", plot = v2, width=1280/72, height=720/72)
 
-#
+# thumbnail version without annotations
+ggsave(filename = "assets/human-development-index-sm.png", plot = v2, width=4, height=2.25)
 
 ```
+
  
  
 ### References
@@ -130,9 +212,11 @@ ggsave(v1, filename = "outputs/human-development-index.svg", plot = v1, width=19
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
 # eval = FALSE as default; run manually as chunk
 # PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
 ```
 
 
