@@ -1,0 +1,184 @@
+---
+pagetitle: "Family Integration Policy by Country"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Family Integration Policy by Country
+## Bar Horizontal Ordered
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Mitchel Lensink on Unsplash"}
+
+masthead <- "assets/mitchel-lensink-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> [t]he family is the natural and fundamental group unit of society\
+  and is entitled to protection by society and the State...\
+--- The Universal Declaration of Human Rights\
+
+***
+
+### Ingest
+#### country, region, and family integration policy scores
+
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df = read.csv("archetypes/family-integration-policy-by-country/family-integration-policy-by-country.csv", header = TRUE, stringsAsFactors = TRUE)
+df
+
+```
+
+### Plot 
+#### with standard alpha order
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=10.5, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 11),
+    plot.margin = margin(.25, 1, .25, .25, "in"),
+    plot.background = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    #panel.grid.major.y = element_blank(),
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, face = "bold"),
+    # axis.title.y=element_blank(),
+    # axis.ticks.y=element_blank(),
+    # axis.ticks.x=element_blank(),
+    # axis.text.x=element_blank(),
+    legend.position = "none"
+)
+
+v1 <- ggplot(df, aes(x=Country, y=Family.Integration.Policy.Average.Scores)) + 
+  geom_bar(stat="identity", fill="#88b88a") +
+  scale_y_continuous(breaks = seq(0, 100, 10), limits = c(0, 100)) +
+  coord_cartesian(clip="off") +
+  labs(title = "FAMILY INTEGRATION POLICY AVERAGE SCORES BY COUNTRY, 2014", x = NULL, y = "Family integration policy average scores") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+### Plot
+#### ordered, ascending
+
+
+```{r drawa, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+
+v2 <- ggplot(df, aes(x=reorder(Country,Family.Integration.Policy.Average.Scores), y=Family.Integration.Policy.Average.Scores)) + 
+  geom_bar(stat="identity", fill="#88b88a") +
+  scale_y_continuous(breaks = seq(0, 100, 10), limits = c(0, 100)) +
+  coord_cartesian(clip="off") +
+  labs(title = "FAMILY INTEGRATION POLICY AVERAGE SCORES BY COUNTRY, 2014", x = NULL, y = "Family integration policy average scores") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+### Plot
+#### ordered, descending
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+
+v3 <- ggplot(df, aes(x=reorder(Country,-Family.Integration.Policy.Average.Scores), y=Family.Integration.Policy.Average.Scores)) + 
+  geom_bar(stat="identity", fill="#88b88a") +
+  scale_y_continuous(breaks = seq(0, 100, 10), limits = c(0, 100)) +
+  coord_cartesian(clip="off") +
+  labs(title = "FAMILY INTEGRATION POLICY AVERAGE SCORES BY COUNTRY, 2014", x = NULL, y = "Family integration policy average scores") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v3, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/family-integration-policy-by-country-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/family-integration-policy-by-country-sm.png", plot = v2, width=4, height=2.25)
+
+```
+
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative and Data Source, UN Women, Progress of the world’s women, [GO](https://www.unwomen.org/en/digital-library/progress-of-the-worlds-women){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

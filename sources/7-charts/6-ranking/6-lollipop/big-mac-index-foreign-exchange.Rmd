@@ -1,6 +1,6 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "Big Mac Index Foreign Exchange"
+output:
   html_document:
     theme: lumen
     css: "../../../z-assemblers/assets/styles/content.css"
@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -24,14 +24,11 @@ rm(list = ls(all.names = TRUE)) # will clear all objects including hidden object
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(dplyr)
 library(janitor)
 library(ggtext)
 library(ggdist)
 library(ggiraph)
 library(forcats)
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -41,10 +38,24 @@ showtext_auto()
 
 ```
 
-# Lollipop
+
 <div class="activity">
 CHARTS  
 </div>
+
+# Big Mac Index Foreign Exchange
+## Lollipop
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by amirali mirhashemian on Unsplash"}
+
+masthead <- "assets/amirali-mirhashemian-pjGnlZTtQ-Y-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> I am the literary equivalent of a Big Mac and fries...\
+--- Stephen King\
 
 
 ***
@@ -123,26 +134,15 @@ girafe(ggobj = v1, width_svg = 1080/72, height_svg = 720/72,
 ### References
 #### citations for narrative and data sources
 
-* [Data Source](https://github.com/TheEconomist/big-mac-data)
-* [Chart Reference](https://www.economist.com/big-mac-index)
+
+* Narrative source: The Economist, [GO](https://www.economist.com/big-mac-index){target="_blank"}
+* Data source: The Economist, [GO](https://github.com/TheEconomist/big-mac-data){target="_blank"}
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-#methods <- "" # mostly used in wranglers and analytics
-keywords <- 'big mac index'
-commands <- 'geom_point geom_hline geom_segment'
-sources <- 'The Economist'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

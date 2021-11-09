@@ -1,6 +1,6 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "Glass Ceiling Index"
+output:
   html_document:
     theme: lumen
     css: "../../../z-assemblers/assets/styles/content.css"
@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -24,7 +24,6 @@ rm(list = ls(all.names = TRUE)) # will clear all objects including hidden object
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(countrycode)
 library(ggiraph)
 
 library(showtext)
@@ -39,129 +38,200 @@ showtext_auto()
 CHARTS  
 </div>
 
-# Ideas Factories
-## Scatter plot
+# Glass Ceiling Index
+## Bar Vertical Ordered
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Johny Goerend on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by CDoncel on Unsplash"}
 
-masthead <- "assets/johny-goerend-unsplash.jpg"
+masthead <- "assets/cdoncel-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">Bourscheid castle in the north of Luxembourg</div>
 
-> A pile of rocks ceases to be a rock pile when somebody contemplates it with the idea of a cathedral in mind...\
---- Antoine Saint-Exupéry\
+> The glass ceiling doesn't apply when you're building your own house...\
+--- Heidi Roizen\
 
 ***
 
+### Ingest
+#### country, score, and measures
 
-### Ingest the data
-#### gdp and innovation rank by country and year
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Load csv data file
-df_gdp <- read.csv("archetypes/ideas-factories/gdp-per-person-employed-constant-ppp.csv", header = TRUE, stringsAsFactors = FALSE)
-df_gdp
-
-df_gii <- read.csv("archetypes/ideas-factories/global-innovation-index.csv", header = TRUE, stringsAsFactors = FALSE)
-df_gii
+df = read.csv("archetypes/glass-ceiling-index/glass-ceiling-index.csv", header = TRUE, stringsAsFactors = FALSE)
+df
 
 ```
 
 
-### Wrangle the data
-#### filter, merge, enrich, select, clean, rename, wow!
+### Wrangle
+#### convert strings to numeric
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_gdp_filtered <- df_gdp %>% filter(Year == 2020)
+df_wrangle <- df
 
-df_gii_filtered <- df_gii %>% filter(Indicator == 'Global Innovation Index')
-df_gii_filtered <- df_gii_filtered %>% filter(Subindicator.Type == 'Rank')
-df_gii_filtered <- df_gii_filtered %>% select(c(Country.ISO3, Country.Name, X2020))
+# multi-column replacement
+pc_txt <- c("Women.in.senior.managerial.positions", "Women.on.company.boards", "GMAT.exam.taken.by.women", "Women.in.parliament") 
+df_wrangle[pc_txt] <- lapply(df_wrangle[pc_txt], gsub, pattern = "% of total", replacement = "")
 
-df_combined <- merge(df_gdp_filtered, df_gii_filtered, by.x='Code', by.y='Country.ISO3')
+# single column replacements
+df_wrangle$Population.with.tertiary.deducation <- gsub(pattern = " % points", replacement = "", df_wrangle$Population.with.tertiary.deducation)
+df_wrangle$Labour.force.participation.rate <- gsub(pattern = "% points", replacement = "", df_wrangle$Labour.force.participation.rate)
+df_wrangle$Gender.wage.gap <- gsub(pattern = "%", replacement = "", df_wrangle$Gender.wage.gap)
+df_wrangle$Net.child.care.cost <- gsub(pattern = "% of average wage", replacement = "", df_wrangle$Net.child.care.cost)
+df_wrangle$paid.maternity.leave <- gsub(pattern = " weeks at 100", replacement = "", df_wrangle$paid.maternity.leave)
+df_wrangle$paid.maternity.leave <- gsub(pattern = "% of last earnings", replacement = "", df_wrangle$paid.maternity.leave)
 
-df_combined$REGION <- countrycode(df_combined$Code, origin='iso3c', destination='un.region.name')
+# convert to factor for next operation
+df_wrangle$Country <- as.factor(df_wrangle$Country)
 
-df_combined <- df_combined %>% select(c(Code, Entity, GDP.per.person.employed..constant.2017.PPP..., X2020, REGION))
+# convert to numeric
+df_wrangle <- df_wrangle %>% mutate_if(is.character,as.numeric)
 
-df_combined <- df_combined[complete.cases(df_combined), ]
-
-df_final <- df_combined %>%
-  rename(ISO3 = Code,
-         COUNTRY = Entity,
-         GDP = GDP.per.person.employed..constant.2017.PPP...,
-         GII = X2020)
-
-df_final <- df_final %>% rename_with(toupper)
-df_final
-
+# done
+df_wrangle
 
 ```
 
 
-### Plot
-#### data points with smoothing
+### Wrangle
+#### conditional colors
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# standard color: 7ABAD2
+# OECD color: 6088C2
+# Rank 1 color: D7B133
+# Rank text box color: 46778D
+
+df_wrangle <- df_wrangle %>% 
+  mutate( TYPE = case_when(
+  Country == "Finland" ~ "#D7B133",
+  Country == "OECD avg" ~ "#6088C2",
+  Country != "OECD avg" | Country != "Finland" ~ "#7ABAD2"
+  )
+)
+
+df_show_color <- df_wrangle %>% select(Country, TYPE) %>% head(n=10)
+df_show_color
+
+```
+
+
+### Analytics
+#### create a rank column
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# order to make sure we have descending sort
+df_ranked <- df_wrangle[order(-df_wrangle$Overall.score),]
+# use row numbers as rankn
+df_ranked <- df_ranked %>% mutate(RANK = row_number())
+
+df_show_ranked <- df_ranked %>% select(Country, RANK) %>% head(n=10)
+df_show_ranked
+
+```
+
+
+### Plot 
+#### by overall rank and score, with conditional fill color, and a comparative marker
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
     plot.title = element_text(color = "black", size = 16, face = "bold"),
     plot.subtitle = element_text(color = "black", size = 12),
-    plot.caption = element_text(color = "#555555", size = 10),
-    # axis.title.x = element_blank(),
-    # axis.title.y = element_blank(),
-    # axis.text.x = element_text(vjust = 12),
+    plot.caption = element_text(color = "#555555", size = 11),
+    plot.margin = margin(.25, 1, .25, .25, "in"),
+    plot.background = element_blank(),
     panel.border = element_blank(),
     panel.background = element_blank(),
-    # panel.grid.minor = element_blank(),
-    # panel.grid.major = element_blank(),
-    legend.position='top'
-  )
-
-# Plot
-v1 <- ggplot(df_final, aes(x = GDP, y = GII)) + 
-  geom_point(aes( fill = REGION, color = REGION), size = 4, shape = 21) +
-  geom_smooth(method="loess", se = FALSE, linetype = 'solid', size = 2, color = '#82A0C2') + # "lm", "glm", "gam", "loess" 
-  scale_x_continuous() +
-  scale_y_continuous() +
-  scale_y_reverse() +
-  labs( title = "Ideas Factories",
-        subtitle = "Global Innovation and GDP",
-        caption = "Source: Cornell INSEAD WIPO",
-        x = "GDP per Person Employed, constant PPP, 2020",
-        y = "Global Innovation Index, 2020") +
-  theme_bw() +
-  theme_opts
-
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
-       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    #panel.grid.major.y = element_blank(),
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, face = "bold", margin = margin(t = 8.5)),
+    # axis.title.y = element_blank(),
+    # axis.ticks.y = element_blank(),
+    axis.ticks.x = element_blank(),
+    # axis.ticks.x = element_line(),
+    # axis.ticks.length.x = unit(.35, "cm"),
+    # axis.text.x=element_blank(),
+    legend.position = "none"
 )
 
+v1 <- ggplot(df_ranked, aes(x=reorder(Country, -RANK), y=Overall.score)) + 
+      geom_bar(aes(fill=TYPE), stat="identity") +
+      geom_label(aes(label = RANK, y = 0), fill = "#46778D", colour = "white", fontface = "bold", vjust = 1.35) +
+      geom_point(data=subset(df_ranked, Country == "Israel"), aes(x = Country, y = Overall.score + 5), shape = 25, size = 3, color = "black", fill = "black") +
+      scale_fill_identity() +
+      scale_y_continuous(breaks = seq(0, 100, 20), limits = c(0, 100)) +
+      scale_x_discrete(labels = function(x) paste0(x, " —")) + 
+      coord_cartesian(clip="off") +
+      labs(title = "The glass-ceiling index", subtitle = "Environment for working women", x = NULL, y = NULL) +
+      theme_bw() +
+      theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 6,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
 ```
 
 
-### Plot with annotations
-#### some narrative to help tell the story
+### Plot 
+#### using a different indicator, for comparison
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
 
+v2 <- ggplot(df_ranked, aes(x=reorder(Country, Women.in.senior.managerial.positions), y=Women.in.senior.managerial.positions)) + 
+      geom_bar(aes(fill=TYPE), stat="identity") +
+      geom_label(aes(label = RANK, y = 0), fill = "#46778D", colour = "white", fontface = "bold", vjust = 1.35) +
+      geom_point(data=subset(df_ranked, Country == "Israel"), aes(x = Country, y = Women.in.senior.managerial.positions + 5), shape = 25, size = 3, color = "black", fill = "black") +
+      scale_fill_identity() +
+      scale_y_continuous(breaks = seq(0, 100, 20), limits = c(0, 100)) +
+      scale_x_discrete(labels = function(x) paste0(x, " —")) + 
+      coord_cartesian(clip="off") +
+      labs(title = "The glass-ceiling index", subtitle = "Women in senior managerial positions", x = NULL, y = NULL) +
+      theme_bw() +
+      theme_opts
 
+girafe(ggobj = v2, width_svg = 16, height_svg = 6,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
-  
 ```
 
 
-### Save plot
-#### as vector or raster image
+### Plot 
+#### another indicator
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+
+v3 <- ggplot(df_ranked, aes(x=reorder(Country, Gender.wage.gap), y=Gender.wage.gap)) + 
+      geom_bar(aes(fill=TYPE), stat="identity") +
+      geom_label(aes(label = RANK, y = 0), fill = "#46778D", colour = "white", fontface = "bold", vjust = 1.35) +
+      geom_point(data=subset(df_ranked, Country == "Israel"), aes(x = Country, y = Gender.wage.gap + 5), shape = 25, size = 3, color = "black", fill = "black") +
+      scale_fill_identity() +
+      scale_y_continuous(breaks = seq(0, 100, 20), limits = c(0, 100)) +
+      scale_x_discrete(labels = function(x) paste0(x, " —")) + 
+      coord_cartesian(clip="off") +
+      labs(title = "The glass-ceiling index", subtitle = "Gender wage gap", x = NULL, y = NULL) +
+      theme_bw() +
+      theme_opts
+
+girafe(ggobj = v3, width_svg = 16, height_svg = 6,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
@@ -169,38 +239,25 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 # eval = FALSE as default; run manually as chunk
 
 # full version
-ggsave(filename = "outputs/ideas-factories-fs.svg", plot = v1, width=1280/72, height=720/72)
+ggsave(filename = "assets/glass-ceiling-index-fs.svg", plot = v2, width=1280/72, height=720/72)
 
 # thumbnail version without annotations
-ggsave(filename = "outputs/ideas-factories-sm.svg", plot = v1, width=4, height=2.25)
+ggsave(filename = "assets/glass-ceiling-index-sm.png", plot = v2, width=4, height=2.25)
 
 ```
 
 
 ### References
-#### citations for narrative and data sources
+#### The citations and data sources used for this case
 
-* Narrative Inspiration: The Economist, Ideas Factories, Global innovation and GDP
-* Data Source: Global Innovation Index (GII) 2021, https://www.globalinnovationindex.org/analysis-indicator
+* Narrative and Data Source, The Economist, The glass-ceiling index, [GO](https://www.economist.com/graphic-detail/2019/03/08/the-glass-ceiling-index){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "" # mostly used in wranglers and analytics
-keywords <- 'innovation GII'
-commands <- 'countrycode geom_smooth scale_y_reverse'
-sources <- 'Economist Cornell INSEAD WIPO'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 
