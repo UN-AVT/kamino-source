@@ -201,7 +201,7 @@ ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
             position = position_nudge(x = 125), 
             size = 4, hjust = 0, color = 'gray30') +
   geom_text(data = df_right, 
-            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            aes(label = net_exports, x = net_exports, y =country), 
             position = position_nudge(x = -125), 
             size = 4, hjust = 1, color = 'gray30') +
   # Red Line
@@ -233,7 +233,7 @@ ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
             position = position_nudge(x = 125), 
             size = 4, hjust = 0, color = 'gray30') +
   geom_text(data = df_right, 
-            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            aes(label = net_exports, x = net_exports, y =country), 
             position = position_nudge(x = -125), 
             size = 4, hjust = 1, color = 'gray30') +
   geom_vline(xintercept = 0, colour = "red", linetype = "solid", size = 1.1 )+
@@ -275,7 +275,7 @@ ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
             position = position_nudge(x = 125), 
             size = 4, hjust = 0, color = 'gray30') +
   geom_text(data = df_right, 
-            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            aes(label = net_exports, x = net_exports, y =country), 
             position = position_nudge(x = -125), 
             size = 4, hjust = 1, color = 'gray30') +
   geom_vline(xintercept = 0, colour = "red", linetype = "solid", size = 1.1 )+
@@ -307,7 +307,7 @@ ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
             position = position_nudge(x = 125), 
             size = 4, hjust = 0, color = 'gray30') +
   geom_text(data = df_right, 
-            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            aes(label = net_exports, x = net_exports, y =country), 
             position = position_nudge(x = -125), 
             size = 4, hjust = 1, color = 'gray30') +
   geom_vline(xintercept = 0, colour = "red", linetype = "solid", size = 1.1 )+
@@ -358,7 +358,7 @@ ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
             position = position_nudge(x = 125), 
             size = 4, hjust = 0, color = 'gray30') +
   geom_text(data = df_right, 
-            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            aes(label = net_exports, x = net_exports, y =country), 
             position = position_nudge(x = -125), 
             size = 4, hjust = 1, color = 'gray30') +
   geom_vline(xintercept = 0, colour = "red", linetype = "solid", size = 1.1 )+
@@ -405,7 +405,7 @@ ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
             position = position_nudge(x = 125), 
             size = 4, hjust = 0, color = 'gray30') +
   geom_text(data = df_right, 
-            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            aes(label = net_exports, x = net_exports, y =country), 
             position = position_nudge(x = -125), 
             size = 4, hjust = 1, color = 'gray30') +
   geom_vline(xintercept = 0, colour = "red", linetype = "solid", size = 1.1 )+
@@ -456,7 +456,7 @@ v1 <- ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
             position = position_nudge(x = 125), 
             size = 4, hjust = 0, color = 'gray30') +
   geom_text(data = df_right, 
-            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            aes(label = net_exports, x = net_exports, y =country), 
             position = position_nudge(x = -125), 
             size = 4, hjust = 1, color = 'gray30') +
   geom_vline(xintercept = 0, colour = "red", linetype = "solid", size = 1.1 )+
