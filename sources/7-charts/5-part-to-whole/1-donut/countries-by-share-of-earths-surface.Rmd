@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Countries by Share of Earth Surface"
 output: 
   html_document:
     theme: lumen
@@ -8,10 +8,10 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
 
 ```{r setup, include=FALSE}
@@ -134,17 +134,17 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 
 
 
-### Save plot
-#### as vector or raster image
-
-
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+# Save plot
+# as vector or raster image
 
 # eval = FALSE as default; run manually as chunk
 
 # full version
-ggsave(filename = "outputs/size-of-countries.svg", plot = v1, width=1280/72, height=720/72)
+ggsave(filename = "assets/size-of-countries-sm.svg", plot = v1, width=1280/72, height=720/72)
 
+# thumbnail version without annotations
+ggsave(filename = "assets/size-of-countries-fs.png", plot = v1, width=4, height=2.25)
 
 ```
 
@@ -153,29 +153,16 @@ ggsave(filename = "outputs/size-of-countries.svg", plot = v1, width=1280/72, hei
 #### citations for narrative and data sources
 
 * Narrative Inspiration: The Economist, Ideas Factories, Global innovation and GDP
-* Data Source: Global Innovation Index (GII) 2021, https://www.globalinnovationindex.org/analysis-indicator
+* Data Source: Global Innovation Index (GII) 2021,[GO](https://www.globalinnovationindex.org/analysis-indicator){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "donut" # mostly used in wranglers and analytics
-keywords <- 'country-size'
-commands <- 'coor_polar'
-sources <- 'UN'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
-
 ```
-
 
 
 ```{js, message=FALSE, warning=FALSE, echo=FALSE}
@@ -186,4 +173,6 @@ $(function() {
 })
 
 ```
+
+
 
