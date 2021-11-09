@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Which countries dominate the world’s dinner tables?</title>
+
+<script src="vendor/header-attrs-2.10/header-attrs.js"></script>
+<script src="vendor/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="vendor/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="vendor/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="vendor/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="vendor/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="vendor/navigation-1.1/tabsets.js"></script>
+<script src="vendor/navigation-1.1/codefolding.js"></script>
+<link href="vendor/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="vendor/highlightjs-9.12.0/highlight.js"></script>
+<link href="vendor/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="vendor/pagedtable-1.1/js/pagedtable.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHLBJTGCKN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GHLBJTGCKN');
+  </script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../z-assemblers/assets/logo/logo.svg" alt="" height="36">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../z-assemblers/assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../z-assemblers/assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="C:/GitHub/Perso/kamino-source/sources/z-assemblers/assets/styles/content.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>CHARTS</p>
+</div>
+<div id="which-countries-dominate-the-worlds-dinner-tables" class="section level1">
+<h1>Which countries dominate the world’s dinner tables?</h1>
+<div id="bar-divergent" class="section level2">
+<h2>Bar divergent</h2>
+<p>A study published in the the Journal of Cultural Economics, <em>Dining out as cultural trade</em>, used data from TripAdvisor to examine restaurant cuisines, combined with Euromonitor data on overall and fast-food expenditure. The paper calculated the implicit trade patterns in global cuisines for 52 destination countries. The research was presented in a Daily Chart segment of the Economist using a bar chart with divergent values. The chart is designed to reveal how domestic and foreign food consumption profiles can identify which countries have the greatest influence on the world’s cuisine preferences.</p>
+<ul>
+<li>Domestic consumption of foreign cuisine is treated as an <strong>import</strong></li>
+<li>Foreign consumption of domestic cuisine is treated as an <strong>export</strong></li>
+</ul>
+<div id="ingest-data" class="section level3">
+<h3>Ingest data</h3>
+<pre class="r fold-hide"><code># Load data
+df &lt;- read_csv(&quot;archetypes/world-cuisine-preferences/table-6-cuisine-net-exports-excluding-fast-food.csv&quot;)
+df</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Exports"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Imports"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Net_exports"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Argentina","2":"4206","3":"6119","4":"- 1913"},{"1":"Australia","2":"1394","3":"16463","4":"- 15,069"},{"1":"Austria","2":"1392","3":"8304","4":"- 6912"},{"1":"Belgium","2":"1922","3":"5715","4":"- 3793"},{"1":"Brazil","2":"7243","3":"46138","4":"- 38,895"},{"1":"Canada","2":"295","3":"15510","4":"- 15,215"},{"1":"Chile","2":"1241","3":"1396","4":"- 155"},{"1":"China","2":"114822","3":"110351","4":"4471"},{"1":"Colombia","2":"2127","3":"5038","4":"- 2911"},{"1":"Czech Republic","2":"3467","3":"3070","4":"397"},{"1":"Denmark","2":"1265","3":"3417","4":"- 2152"},{"1":"Egypt","2":"7971","3":"1934","4":"6038"},{"1":"France","2":"40353","3":"21391","4":"18,962"},{"1":"Germany","2":"12208","3":"22483","4":"- 10,276"},{"1":"Greece","2":"9772","3":"4096","4":"5676"},{"1":"Hungary","2":"2614","3":"1619","4":"995"},{"1":"India","2":"46607","3":"50841","4":"- 4233"},{"1":"Indonesia","2":"8335","3":"18462","4":"- 10,127"},{"1":"Ireland","2":"2035","3":"3703","4":"- 1669"},{"1":"Israel","2":"3337","3":"2038","4":"1300"},{"1":"Italy","2":"176219","3":"17945","4":"158,274"},{"1":"Japan","2":"91447","3":"47564","4":"43,883"},{"1":"Malaysia","2":"2990","3":"4855","4":"- 1865"},{"1":"Mexico","2":"29251","3":"12276","4":"16,975"},{"1":"Morocco","2":"2561","3":"1419","4":"1143"},{"1":"New Zealand","2":"172","3":"3653","4":"- 3481"},{"1":"Norway","2":"1869","3":"3444","4":"- 1575"},{"1":"Peru","2":"2202","3":"2322","4":"- 119"},{"1":"Poland","2":"2852","3":"4057","4":"- 1204"},{"1":"Portugal","2":"3131","3":"4043","4":"- 912"},{"1":"Russia","2":"11740","3":"6292","4":"5448"},{"1":"South Korea","2":"18048","3":"32739","4":"- 14,691"},{"1":"Spain","2":"21358","3":"41649","4":"- 20,290"},{"1":"Sweden","2":"1926","3":"7754","4":"- 5828"},{"1":"Switzerland","2":"1739","3":"7978","4":"- 6239"},{"1":"Taiwan","2":"5287","3":"9551","4":"- 4264"},{"1":"Thailand","2":"21409","3":"10309","4":"11,101"},{"1":"The Netherlands","2":"2498","3":"5688","4":"- 3190"},{"1":"Turkey","2":"18676","3":"2021","4":"16,655"},{"1":"Ukraine","2":"1398","3":"1716","4":"- 319"},{"1":"UK","2":"9928","3":"30064","4":"- 20,137"},{"1":"USA","2":"26919","3":"160698","4":"- 133,778"},{"1":"Venezuela","2":"1785","3":"236","4":"1549"},{"1":"Vietnam","2":"10282","3":"8957","4":"1325"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="wrangle" class="section level3">
+<h3>Wrangle</h3>
+<ul>
+<li>Recalculate net_exports</li>
+<li>Ordering Country in descending order by their net_exports</li>
+<li>Create a column “net_export_type” to color code the Importers and Exporters</li>
+<li>Separate the Importers and Exporters to support labeling</li>
+</ul>
+<pre class="r fold-hide"><code>df_1 &lt;- df %&gt;%
+  select(country = Country, exports = Exports, imports = Imports) %&gt;%
+  # Calculate the net exports and fill in the fourth column
+  mutate(net_exports = exports - imports)%&gt;% 
+  # Remove all missing data
+  filter(net_exports!=&#39;NA&#39;)%&gt;% 
+  # Change order of factors to sort from highest to lowest
+  mutate(country = factor(country),
+         country = fct_reorder(country, net_exports, max)) %&gt;%
+  # Make colors based on value threshold
+  mutate(net_export_type = if_else(net_exports &gt; 0, &quot;Exporter&quot;, &quot;Importer&quot;),
+         net_export_type = factor(net_export_type))
+      
+
+# Filter dataframe into two parts (countries with positive, or negative next exports) 
+# We will use these two dataframes for labels later
+
+df_left &lt;- df_1 %&gt;% 
+  filter(net_exports &gt; 0 )
+
+df_right &lt;- df_1 %&gt;% 
+  filter(net_exports &lt; 0 )
+
+df_1</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["country"],"name":[1],"type":["fct"],"align":["left"]},{"label":["exports"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["imports"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["net_exports"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["net_export_type"],"name":[5],"type":["fct"],"align":["left"]}],"data":[{"1":"Argentina","2":"4206","3":"6119","4":"-1913","5":"Importer"},{"1":"Australia","2":"1394","3":"16463","4":"-15069","5":"Importer"},{"1":"Austria","2":"1392","3":"8304","4":"-6912","5":"Importer"},{"1":"Belgium","2":"1922","3":"5715","4":"-3793","5":"Importer"},{"1":"Brazil","2":"7243","3":"46138","4":"-38895","5":"Importer"},{"1":"Canada","2":"295","3":"15510","4":"-15215","5":"Importer"},{"1":"Chile","2":"1241","3":"1396","4":"-155","5":"Importer"},{"1":"China","2":"114822","3":"110351","4":"4471","5":"Exporter"},{"1":"Colombia","2":"2127","3":"5038","4":"-2911","5":"Importer"},{"1":"Czech Republic","2":"3467","3":"3070","4":"397","5":"Exporter"},{"1":"Denmark","2":"1265","3":"3417","4":"-2152","5":"Importer"},{"1":"Egypt","2":"7971","3":"1934","4":"6037","5":"Exporter"},{"1":"France","2":"40353","3":"21391","4":"18962","5":"Exporter"},{"1":"Germany","2":"12208","3":"22483","4":"-10275","5":"Importer"},{"1":"Greece","2":"9772","3":"4096","4":"5676","5":"Exporter"},{"1":"Hungary","2":"2614","3":"1619","4":"995","5":"Exporter"},{"1":"India","2":"46607","3":"50841","4":"-4234","5":"Importer"},{"1":"Indonesia","2":"8335","3":"18462","4":"-10127","5":"Importer"},{"1":"Ireland","2":"2035","3":"3703","4":"-1668","5":"Importer"},{"1":"Israel","2":"3337","3":"2038","4":"1299","5":"Exporter"},{"1":"Italy","2":"176219","3":"17945","4":"158274","5":"Exporter"},{"1":"Japan","2":"91447","3":"47564","4":"43883","5":"Exporter"},{"1":"Malaysia","2":"2990","3":"4855","4":"-1865","5":"Importer"},{"1":"Mexico","2":"29251","3":"12276","4":"16975","5":"Exporter"},{"1":"Morocco","2":"2561","3":"1419","4":"1142","5":"Exporter"},{"1":"New Zealand","2":"172","3":"3653","4":"-3481","5":"Importer"},{"1":"Norway","2":"1869","3":"3444","4":"-1575","5":"Importer"},{"1":"Peru","2":"2202","3":"2322","4":"-120","5":"Importer"},{"1":"Poland","2":"2852","3":"4057","4":"-1205","5":"Importer"},{"1":"Portugal","2":"3131","3":"4043","4":"-912","5":"Importer"},{"1":"Russia","2":"11740","3":"6292","4":"5448","5":"Exporter"},{"1":"South Korea","2":"18048","3":"32739","4":"-14691","5":"Importer"},{"1":"Spain","2":"21358","3":"41649","4":"-20291","5":"Importer"},{"1":"Sweden","2":"1926","3":"7754","4":"-5828","5":"Importer"},{"1":"Switzerland","2":"1739","3":"7978","4":"-6239","5":"Importer"},{"1":"Taiwan","2":"5287","3":"9551","4":"-4264","5":"Importer"},{"1":"Thailand","2":"21409","3":"10309","4":"11100","5":"Exporter"},{"1":"The Netherlands","2":"2498","3":"5688","4":"-3190","5":"Importer"},{"1":"Turkey","2":"18676","3":"2021","4":"16655","5":"Exporter"},{"1":"Ukraine","2":"1398","3":"1716","4":"-318","5":"Importer"},{"1":"UK","2":"9928","3":"30064","4":"-20136","5":"Importer"},{"1":"USA","2":"26919","3":"160698","4":"-133779","5":"Importer"},{"1":"Venezuela","2":"1785","3":"236","4":"1549","5":"Exporter"},{"1":"Vietnam","2":"10282","3":"8957","4":"1325","5":"Exporter"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="map-bars" class="section level3">
+<h3>Map bars</h3>
+<ul>
+<li>x-axis: net_exports<br />
+</li>
+<li>y-axis: country</li>
+</ul>
+<pre class="r fold-hide"><code>ggplot(df_1, aes(x = net_exports, y =country)) +
+  geom_col()</code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r fold-hide"><code>  #geom_bar(stat = &quot;identity&quot;)</code></pre>
+</div>
+<div id="adding-colors" class="section level3">
+<h3>Adding colors</h3>
+<div id="step-1---map-color" class="section level4">
+<h4>Step 1 - Map color</h4>
+<ul>
+<li>color bars based on value of “net_export_type”</li>
+</ul>
+<pre class="r fold-hide"><code>ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
+  geom_col()</code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="step-2---control-colors" class="section level4">
+<h4>Step 2 - Control colors</h4>
+<ul>
+<li>Use a manual palette to control colors</li>
+</ul>
+<pre class="r fold-hide"><code>color_palette &lt;- c(&quot;Exporter&quot; = &quot;#076fa1&quot;, &quot;Importer&quot; = &quot;#2fc1d3&quot;)
+
+ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
+  geom_col()+
+  scale_fill_manual(values = color_palette)</code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+</div>
+<div id="adding-labels" class="section level3">
+<h3>Adding labels</h3>
+<div id="step-1---map-country-name-labels" class="section level4">
+<h4>Step 1 - Map country name labels</h4>
+<ul>
+<li>Add country names</li>
+</ul>
+<pre class="r fold-hide"><code>color_palette &lt;- c(&quot;Exporter&quot; = &quot;#076fa1&quot;, &quot;Importer&quot; = &quot;#2fc1d3&quot;)
+
+ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
+  geom_col() +
+  scale_fill_manual(values = color_palette) +
+  # Add country name Label for &quot;Exporters&quot;
+  # x is &quot;fixed&quot;
+  # note for hjust: 1 means right-justified
+  geom_text(data = df_left, 
+            aes(label = country,x = -110, y = country), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;)  +
+  # Add country name Label for &quot;Importers&quot;
+  geom_text(data = df_right,
+            aes(label = country, x = 200, y = country),
+            size = 4, hjust = 0, color= &#39;gray30&#39; )</code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="step-2---map-net_export-values-labels" class="section level4">
+<h4>Step 2 - Map net_export values labels</h4>
+<ul>
+<li>Add country names</li>
+</ul>
+<pre class="r fold-hide"><code>color_palette &lt;- c(&quot;Exporter&quot; = &quot;#076fa1&quot;, &quot;Importer&quot; = &quot;#2fc1d3&quot;)
+
+ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
+  geom_col() +
+  scale_fill_manual(values = color_palette) +
+  geom_text(data = df_left, 
+            aes(label = country,x = -110, y = country), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_text(data = df_right,
+            aes(label = country, x = 200, y = country),
+            size = 4, hjust = 0, color= &#39;gray30&#39; ) +
+  # Add values label for &quot;Exporters&quot;
+  # x is &quot;fixed&quot;
+  # note for hjust: 0 means left-justified
+  geom_text(data = df_left,
+            aes(label = net_exports, x = net_exports, y =country),
+            position = position_nudge(x = 125),
+            size = 4, hjust = 0, color = &#39;gray30&#39;) +
+  # Add country name Label for &quot;Importers&quot;
+  geom_text(data = df_right,
+            aes(label = net_exports, x = net_exports, y =country),
+            position = position_nudge(x = -125),
+            size = 4, hjust = 1, color = &#39;gray30&#39;)</code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+</div>
+<div id="cleaning-up-beautifying-the-graph" class="section level3">
+<h3>Cleaning up, “beautifying” the graph</h3>
+<div id="step-1---add-vertical-red-line" class="section level4">
+<h4>Step 1 - Add vertical red line</h4>
+<pre class="r fold-hide"><code>color_palette &lt;- c(&quot;Exporter&quot; = &quot;#076fa1&quot;, &quot;Importer&quot; = &quot;#2fc1d3&quot;)
+
+ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
+  geom_col() +
+  scale_fill_manual(values = color_palette) +
+  geom_text(data = df_left, 
+            aes(label = country,x = -110, y = country), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = country, x = 200, y = country),
+            size = 4, hjust = 0, color= &#39;gray30&#39; ) +
+  geom_text(data = df_left, 
+            aes(label = net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = 125), 
+            size = 4, hjust = 0, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = -125), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  # Red Line
+  geom_vline(xintercept = 0, colour = &quot;red&quot;, linetype = &quot;solid&quot;, size = 1.1 )+
+  # Manual Annotations
+  annotate(geom = &quot;text&quot;, x = 51000, y = &#39;Turkey&#39;, label = &#39;Net\nExporters&#39;, color = &quot;#076fa1&quot;, size = 6, hjust = 0) +
+  annotate(geom = &quot;text&quot;, x = -51000, y = &#39;Australia&#39; , label = &#39;Net\nImporters&#39;, color = &quot;#2fc1d3&quot;, size = 6, hjust = 1)</code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="step-2---add-annotations" class="section level4">
+<h4>Step 2 - Add annotations</h4>
+<pre class="r fold-hide"><code>color_palette &lt;- c(&quot;Exporter&quot; = &quot;#076fa1&quot;, &quot;Importer&quot; = &quot;#2fc1d3&quot;)
+
+ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
+  geom_col() +
+  scale_fill_manual(values = color_palette) +
+  geom_text(data = df_left, 
+            aes(label = country,x = -110, y = country), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = country, x = 200, y = country),
+            size = 4, hjust = 0, color= &#39;gray30&#39; ) +
+  geom_text(data = df_left, 
+            aes(label = net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = 125), 
+            size = 4, hjust = 0, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = -125), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_vline(xintercept = 0, colour = &quot;red&quot;, linetype = &quot;solid&quot;, size = 1.1 )+
+  # Manual Annotations
+  # Note: use &quot;\n&quot; within the text to create &quot;multi-lines&quot;
+  # use x and y to control where the anntotation will be displayed on the graph
+  annotate(geom = &quot;text&quot;, 
+           x = 51000, 
+           y = &#39;Turkey&#39;, 
+           label = &#39;Net\nExporters&#39;, 
+           color = &quot;#076fa1&quot;, size = 6, hjust = 0) +
+  annotate(geom = &quot;text&quot;, 
+           x = -51000, 
+           y = &#39;Australia&#39; , 
+           label = &#39;Net\nImporters&#39;, 
+           color = &quot;#2fc1d3&quot;, size = 6, hjust = 1)</code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="step-3---choose-a-theme" class="section level4">
+<h4>Step 3 - Choose a theme</h4>
+<ul>
+<li>Choose minimal theme</li>
+</ul>
+<pre class="r fold-hide"><code>color_palette &lt;- c(&quot;Exporter&quot; = &quot;#076fa1&quot;, &quot;Importer&quot; = &quot;#2fc1d3&quot;)
+
+ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
+  geom_col() +
+  scale_fill_manual(values = color_palette) +
+  geom_text(data = df_left, 
+            aes(label = country,x = -110, y = country), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = country, x = 200, y = country),
+            size = 4, hjust = 0, color= &#39;gray30&#39; ) +
+  geom_text(data = df_left, 
+            aes(label = net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = 125), 
+            size = 4, hjust = 0, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = -125), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_vline(xintercept = 0, colour = &quot;red&quot;, linetype = &quot;solid&quot;, size = 1.1 )+
+  annotate(geom = &quot;text&quot;, x = 51000, y = &#39;Turkey&#39;, 
+           label = &#39;Net\nExporters&#39;, color = &quot;#076fa1&quot;, size = 6, hjust = 0) +
+  annotate(geom = &quot;text&quot;, x = -51000, y = &#39;Australia&#39; , 
+           label = &#39;Net\nImporters&#39;, color = &quot;#2fc1d3&quot;, size = 6, hjust = 1) +
+  theme_minimal() </code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="step-4---further-customize-theme" class="section level4">
+<h4>Step 4 - Further customize theme</h4>
+<pre class="r fold-hide"><code>color_palette &lt;- c(&quot;Exporter&quot; = &quot;#076fa1&quot;, &quot;Importer&quot; = &quot;#2fc1d3&quot;)
+
+ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
+  geom_col() +
+  scale_fill_manual(values = color_palette) +
+  geom_text(data = df_left, 
+            aes(label = country,x = -110, y = country), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = country, x = 200, y = country),
+            size = 4, hjust = 0, color= &#39;gray30&#39; ) +
+  geom_text(data = df_left, 
+            aes(label = net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = 125), 
+            size = 4, hjust = 0, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = -125), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_vline(xintercept = 0, colour = &quot;red&quot;, linetype = &quot;solid&quot;, size = 1.1 )+
+  annotate(geom = &quot;text&quot;, x = 51000, y = &#39;Turkey&#39;, 
+           label = &#39;Net\nExporters&#39;, color = &quot;#076fa1&quot;, size = 6, hjust = 0) +
+  annotate(geom = &quot;text&quot;, x = -51000, y = &#39;Australia&#39; , 
+           label = &#39;Net\nImporters&#39;, color = &quot;#2fc1d3&quot;, size = 6, hjust = 1) +
+  theme_minimal()  + 
+  theme(
+    # remove legend
+    legend.position=&#39;none&#39;, 
+    # remove automatic x and y axis titles
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    # remove y-axis labels and ticks
+    axis.text.y=element_blank(), 
+    axis.ticks.y=element_blank(),
+    # Remove &quot;minor&quot; gridlines (both on x and y axis)
+    panel.grid.minor = element_blank(),
+    # Control characterics of &quot;major&quot; x gridline
+    panel.grid.major.x = element_line(size = 0.5, linetype = &#39;solid&#39;, colour = &quot;#b0bfc8&quot;),
+    # Remove &quot;major&quot; y gridline
+    panel.grid.major.y = element_blank()
+    )</code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="step-5---control-x-axis" class="section level4">
+<h4>Step 5 - Control x axis</h4>
+<ul>
+<li>Dublicate x axis to top<br />
+</li>
+<li>Control the number of ticks</li>
+</ul>
+<pre class="r fold-hide"><code>color_palette &lt;- c(&quot;Exporter&quot; = &quot;#076fa1&quot;, &quot;Importer&quot; = &quot;#2fc1d3&quot;)
+
+ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
+  geom_col() +
+  scale_fill_manual(values = color_palette) +
+  geom_text(data = df_left, 
+            aes(label = country,x = -110, y = country), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = country, x = 200, y = country),
+            size = 4, hjust = 0, color= &#39;gray30&#39; ) +
+  geom_text(data = df_left, 
+            aes(label = net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = 125), 
+            size = 4, hjust = 0, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = -125), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_vline(xintercept = 0, colour = &quot;red&quot;, linetype = &quot;solid&quot;, size = 1.1 )+
+  annotate(geom = &quot;text&quot;, x = 51000, y = &#39;Turkey&#39;, 
+           label = &#39;Net\nExporters&#39;, color = &quot;#076fa1&quot;, size = 6, hjust = 0) +
+  annotate(geom = &quot;text&quot;, x = -51000, y = &#39;Australia&#39; , 
+           label = &#39;Net\nImporters&#39;, color = &quot;#2fc1d3&quot;, size = 6, hjust = 1) +
+  theme_minimal()  + 
+  theme(
+    legend.position=&#39;none&#39;, 
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.y=element_blank(), 
+    axis.ticks.y=element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(size = 0.5, linetype = &#39;solid&#39;, colour = &quot;#b0bfc8&quot;),
+    panel.grid.major.y = element_blank()
+    )+
+  # Top Axis
+  scale_x_continuous(limits = c(-150000, 175000), 
+                     breaks=seq(-150000,175000, 25000), 
+                     sec.axis = dup_axis())</code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-12-1.png" width="672" /> #### Step 6 - Add titles * Add title and subtitle</p>
+<pre class="r fold-hide"><code>color_palette &lt;- c(&quot;Exporter&quot; = &quot;#076fa1&quot;, &quot;Importer&quot; = &quot;#2fc1d3&quot;)
+
+ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
+  geom_col() +
+  scale_fill_manual(values = color_palette) +
+  geom_text(data = df_left, 
+            aes(label = country,x = -110, y = country), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = country, x = 200, y = country),
+            size = 4, hjust = 0, color= &#39;gray30&#39; ) +
+  geom_text(data = df_left, 
+            aes(label = net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = 125), 
+            size = 4, hjust = 0, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = -125), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_vline(xintercept = 0, colour = &quot;red&quot;, linetype = &quot;solid&quot;, size = 1.1 )+
+  annotate(geom = &quot;text&quot;, x = 51000, y = &#39;Turkey&#39;, 
+           label = &#39;Net\nExporters&#39;, color = &quot;#076fa1&quot;, size = 6, hjust = 0) +
+  annotate(geom = &quot;text&quot;, x = -51000, y = &#39;Australia&#39; , 
+           label = &#39;Net\nImporters&#39;, color = &quot;#2fc1d3&quot;, size = 6, hjust = 1) +
+  theme_minimal()  + 
+  theme(
+    legend.position=&#39;none&#39;, 
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.y=element_blank(), 
+    axis.ticks.y=element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(size = 0.5, linetype = &#39;solid&#39;, colour = &quot;#b0bfc8&quot;),
+    panel.grid.major.y = element_blank()
+    )+
+  scale_x_continuous(limits = c(-150000, 175000), 
+                     breaks=seq(-150000,175000, 25000), 
+                     sec.axis = dup_axis()) +
+  # Title and Caption
+  labs(title = &quot;Unbalanced diets&quot;, 
+       subtitle = &quot;Cuisine Net Exports Excluding Fast Food&quot;)</code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+</div>
+<div id="final-version" class="section level3">
+<h3>Final version</h3>
+<ul>
+<li>Adjust chart size from chunk properties<br />
+</li>
+<li>Save chart into object “v1”</li>
+</ul>
+<pre class="r fold-hide"><code>color_palette &lt;- c(&quot;Exporter&quot; = &quot;#076fa1&quot;, &quot;Importer&quot; = &quot;#2fc1d3&quot;)
+
+v1 &lt;- ggplot(df_1, aes(x = net_exports, y =country, fill = net_export_type)) +
+  geom_col() +
+  scale_fill_manual(values = color_palette) +
+  geom_text(data = df_left, 
+            aes(label = country,x = -110, y = country), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = country, x = 200, y = country),
+            size = 4, hjust = 0, color= &#39;gray30&#39; ) +
+  geom_text(data = df_left, 
+            aes(label = net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = 125), 
+            size = 4, hjust = 0, color = &#39;gray30&#39;) +
+  geom_text(data = df_right, 
+            aes(label = df_right$net_exports, x = net_exports, y =country), 
+            position = position_nudge(x = -125), 
+            size = 4, hjust = 1, color = &#39;gray30&#39;) +
+  geom_vline(xintercept = 0, colour = &quot;red&quot;, linetype = &quot;solid&quot;, size = 1.1 )+
+  annotate(geom = &quot;text&quot;, x = 51000, y = &#39;Turkey&#39;, 
+           label = &#39;Net\nExporters&#39;, color = &quot;#076fa1&quot;, size = 6, hjust = 0) +
+  annotate(geom = &quot;text&quot;, x = -51000, y = &#39;Australia&#39; , 
+           label = &#39;Net\nImporters&#39;, color = &quot;#2fc1d3&quot;, size = 6, hjust = 1) +
+  theme_minimal()  + 
+  theme(
+    legend.position=&#39;none&#39;, 
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.y=element_blank(), 
+    axis.ticks.y=element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_line(size = 0.5, linetype = &#39;solid&#39;, colour = &quot;#b0bfc8&quot;),
+    panel.grid.major.y = element_blank()
+    )+
+  scale_x_continuous(limits = c(-150000, 175000), 
+                     breaks=seq(-150000,175000, 25000), 
+                     sec.axis = dup_axis()) +
+  # Title and Caption
+  labs(title = &quot;Unbalanced diets&quot;, 
+       subtitle = &quot;Cuisine Net Exports Excluding Fast Food&quot;)
+
+v1</code></pre>
+<p><img src="world-cuisine-preferences_step_by_step_files/figure-html/unnamed-chunk-14-1.png" width="100%" /></p>
+</div>
+<div id="save-plot" class="section level3">
+<h3>Save plot</h3>
+<div id="as-vector-or-raster-image" class="section level4">
+<h4>as vector or raster image</h4>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>

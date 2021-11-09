@@ -1,0 +1,350 @@
+---
+pagetitle: "How Does Income Relate to Life Expectancy"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(countrycode)
+library(ggrepel)
+
+```
+
+<div class="activity">
+CHART  
+</div>
+
+# How Does Income Relate to Life Expectancy
+## Bubble Chart
+
+This epic chart was presented by __Hans Rosling__ to illustrate that income and health go hand in hand. People live longer in richer countries. Or the other way around. Countries are richer where people live longer. There are no high income countries with a short life expectancy, and no low income countries with a long life expectancy. Still, there’s a huge difference in life expectancy between countries on the same income level, depending on how the money is distributed and how it is used.
+
+The __y-axis__ shows a continuum from healthy to sick, the __x-axis__ from rich to poor. The bubbles are __sized__ by population and __colored__ by continent.
+
+### Ingest the data
+* Life expectancy, income and populaction of 188 nations in year 2019  
+
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read_csv("archetypes/gapminder/gapminder.csv")
+df
+
+```
+
+### Wrangle the data
+* Enrich data frame with the continent name  
+* Only keep required columns  
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_1 <- df %>%
+  mutate(continent = countrycode(df$country_code, origin = 'iso3c', destination = 'continent')) %>%
+  select(-country_code, population = pop)
+
+df_1
+
+```
+
+### Scatter plot
+
+#### Step 1 - Map x and y axis
+* First, simple scatter plot of countries with 
+  * x-axis: GDP  
+  * y-axis: life expectancy   
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  geom_point()
+
+```
+
+#### Step 2 - Transform the x axis to spread points across the chart
+* Use the log of x to spread the countries more evenly by GPD  
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  geom_point() +
+  # Transform the scale of the x axis to "log"
+  scale_x_log10(limits = range(df_1$gdp))
+
+```
+
+### Sizing bubbles
+
+#### Step 1 - Map bubble size
+* Use population for the size of the bubble
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  scale_x_log10(limits = range(df_1$gdp)) +
+  geom_point(aes(size = population))
+
+
+```
+
+#### Step 2 - control size of bubbles
+* Use a manual range to control the size the bubbles 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  scale_x_log10(limits = range(df_1$gdp)) +
+  geom_point(aes(size = population)) +
+  # Size mapping
+  scale_size("population", range = c(2, 40))
+
+
+```
+
+### Adding colors
+
+#### Step 1 - Map color
+* color bubbles based on continent value 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  scale_x_log10(limits = range(df_1$gdp)) +
+  geom_point(aes(size = population, color = continent)) +
+  scale_size("population", range = c(2, 40))
+
+```
+#### Step 2 - Control colors
+* Use a manual palette to control colors  
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Manual palette to match colors
+continent_palette <- c("Africa" = "#A3DDF7", "Americas" = "#AAE828", "Asia" = "#DB616F", "Europe" = "#F6E71D", "Oceania" = "#DB616F")
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  scale_x_log10(limits = range(df_1$gdp)) +
+  geom_point(aes(size = population, color = continent)) +
+  scale_size("population", range = c(2, 40)) +
+  # Color mapping
+  scale_color_manual(values = continent_palette)
+
+```
+
+### Adding labels
+
+#### Step 1 - Map labels
+* Add country names
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Manual palette to match colors
+continent_palette <- c("Africa" = "#A3DDF7", "Americas" = "#AAE828", "Asia" = "#DB616F", "Europe" = "#F6E71D", "Oceania" = "#DB616F")
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  scale_x_log10(limits = range(df_1$gdp)) +
+  geom_point(aes(size = population, color = continent)) +
+  scale_size("population", range = c(2, 40)) +
+  scale_color_manual(values = continent_palette) +
+  # Use geom_text to map country names
+  geom_text(aes(label=country))
+```
+
+#### Step 2 - Reduce labels displayed
+* Filter out "small" countries, where population is less than the mean of all countries's populations.  
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Manual palette to match colors
+continent_palette <- c("Africa" = "#A3DDF7", "Americas" = "#AAE828", "Asia" = "#DB616F", "Europe" = "#F6E71D", "Oceania" = "#DB616F")
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  scale_x_log10(limits = range(df_1$gdp)) +
+  geom_point(aes(size = population, color = continent)) +
+  scale_size("population", range = c(2, 40)) +
+  scale_color_manual(values = continent_palette) +
+  geom_text(data=filter(df_1, population > mean(population)),
+                  aes(label = country, size = population / 2),
+                   family = "inconsolata")
+
+```
+
+#### Step 3 - repel labels
+* use "geom_text__repel__" to repel countries so they do not overlap (function available from package __ggrepel__)  
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Manual palette to match colors
+continent_palette <- c("Africa" = "#A3DDF7", "Americas" = "#AAE828", "Asia" = "#DB616F", "Europe" = "#F6E71D", "Oceania" = "#DB616F")
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  scale_x_log10(limits = range(df_1$gdp)) +
+  geom_point(aes(size = population, color = continent)) +
+  scale_size("population", range = c(2, 40)) +
+  scale_color_manual(values = continent_palette) +
+  geom_text_repel(data=filter(df_1, population > mean(population)),
+                  aes(label = country, size = population / 2),
+                  family = "inconsolata")
+
+```
+
+### Cleaning up, "beautifying" the graph
+
+#### Step 1 - Labels and legends
+* Turn-off scientific notation  
+* Add chart title  
+* Overwrite x and y axis titles  
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# turn-off scientific notation like 1e+48
+options(scipen=999)  
+
+# Manual palette to match colors
+continent_palette <- c("Africa" = "#A3DDF7", "Americas" = "#AAE828", "Asia" = "#DB616F", "Europe" = "#F6E71D", "Oceania" = "#DB616F")
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  scale_x_log10(limits = range(df_1$gdp)) +
+  geom_point(aes(size = population, color = continent)) +
+  scale_size("population", range = c(2, 40)) +
+  scale_color_manual(values = continent_palette) +
+  geom_text_repel(data=filter(df_1, population > mean(population)),
+                  aes(label = country, size = population / 2), 
+                  family = "inconsolata") +
+  # Adding title
+  ggtitle("World Health Chart 2019 by Gapminder") +
+  # Overwriting x and y axis labels
+  ylab("Lifespan, Life Expectancy") +
+  xlab("Income, GDP per Capita") 
+
+```
+
+#### Step 2 - Choose a theme
+* Choose white background with grid lines  
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Manual palette to match colors
+continent_palette <- c("Africa" = "#A3DDF7", "Americas" = "#AAE828", "Asia" = "#DB616F", "Europe" = "#F6E71D", "Oceania" = "#DB616F")
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  scale_x_log10(limits = range(df_1$gdp)) +
+  geom_point(aes(size = population, color = continent)) +
+  scale_size("population", range = c(2, 40)) +
+  scale_color_manual(values = continent_palette) +
+  geom_text_repel(data=filter(df_1, population > mean(population)),
+                  aes(label = country, size = population / 2), 
+                  family = "inconsolata") +
+  ggtitle("World Health Chart 2019 by Gapminder") +
+  ylab("Lifespan, Life Expectancy") +
+  xlab("Income, GDP per Capita") +
+  theme_bw() 
+
+```
+
+#### Step 3 - Further customize theme
+* Control title text font, size...  
+* Add line to delimit x and y axis  
+* Remove borders and "minor" gridlines  
+* remove legend  
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Manual palette to match colors
+continent_palette <- c("Africa" = "#A3DDF7", "Americas" = "#AAE828", "Asia" = "#DB616F", "Europe" = "#F6E71D", "Oceania" = "#DB616F")
+
+ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  scale_x_log10(limits = range(df_1$gdp)) +
+  geom_point(aes(size = population, color = continent)) +
+  scale_size("population", range = c(2, 40)) +
+  scale_color_manual(values = continent_palette) +
+  geom_text_repel(data=filter(df_1, population > mean(population)),
+                  aes(label = country, size = population / 2), 
+                  family = "inconsolata") +
+  ggtitle("World Health Chart 2019 by Gapminder") +
+  ylab("Lifespan, Life Expectancy") +
+  xlab("Income, GDP per Capita") +
+  theme_bw() +
+  theme(
+    # Control title text font, size...
+    plot.title = element_text(color = "black", size = 14, face = "bold"),
+    # Add line to delimit x and y axis
+    axis.line.x = element_line(color="black", size = 1),
+    axis.line.y = element_line(color="black", size = 1),
+    # Remove borders and "minor" gridlines
+    panel.border = element_blank(),
+    panel.grid.minor = element_blank(),
+    # remove legend
+    legend.position='none'
+  )
+
+```
+
+### Final version
+* Adjust chart size from chunk properties  
+* Save chart into object "v1" 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Manual palette to match colors
+continent_palette <- c("Africa" = "#A3DDF7", "Americas" = "#AAE828", "Asia" = "#DB616F", "Europe" = "#F6E71D", "Oceania" = "#DB616F")
+
+v1 <- ggplot(df_1, aes(x = gdp, y = life_expectancy)) +
+  scale_x_log10(limits = range(df_1$gdp)) +
+  geom_point(aes(size = population, color = continent)) +
+  scale_size("population", range = c(2, 40)) +
+  scale_color_manual(values = continent_palette) +
+  geom_text_repel(data=filter(df_1, population > mean(population)),
+                  aes(label = country, size = population / 2), 
+                  family = "inconsolata") +
+  ggtitle("World Health Chart 2019 by Gapminder") +
+  ylab("Lifespan, Life Expectancy") +
+  xlab("Income, GDP per Capita") +
+  theme_bw() +
+  theme(
+    plot.title = element_text(color = "black", size = 14, face = "bold"),
+    axis.line.x = element_line(color="black", size = 1),
+    axis.line.y = element_line(color="black", size = 1),
+    panel.border = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.position='none'
+  )
+
+v1
+
+```
+
+### Save plot
+#### as vector or raster image
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# As vector
+ggsave(filename = "assets/gapminder.svg", plot = v1, width=1280/72, height=720/72)
+
+# As raster
+ggsave(filename = "assets/gapminder-sm.png", plot = v1, width=4, height=2.25)
+
+
+```
+
