@@ -28,7 +28,6 @@ library(janitor)
 library(ggtext)
 library(ggdist)
 library(ggiraph)
-library(forcats)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -129,6 +128,20 @@ girafe(ggobj = v1, width_svg = 1080/72, height_svg = 720/72,
 )
 
 ```
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/big-mac-index-foreign-exchange.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/big-mac-index-foreign-exchange.png", plot = v1, width=4, height=2.25)
+
+
+```
+ 
 
 
 ### References

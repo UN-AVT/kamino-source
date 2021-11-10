@@ -24,7 +24,6 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
-library(forcats)
 library(ggridges)
 library(ggiraph)
 library(wesanderson)
@@ -152,10 +151,10 @@ girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
 # eval = FALSE as default; run manually as chunk
 
 # full version
-ggsave(filename = "outputs/food_consumption-by-co2-emissions-fs.svg", plot = v1, width=720/72, height=720/72)
+ggsave(filename = "assets/food_consumption-by-co2-emissions-fs.svg", plot = v2, width=1280/72, height=720/72)
 
 # thumbnail version without annotations
-ggsave(filename = "outputs/food_consumption-by-co2-emissions-sm.svg", plot = v1, width=2.25, height=2.25)
+ggsave(filename = "assets/food_consumption-by-co2-emissions-sm.png", plot = v2, width=4, height=2.25)
 
 ```
 

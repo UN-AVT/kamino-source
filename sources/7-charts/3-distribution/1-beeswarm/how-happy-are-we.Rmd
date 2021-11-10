@@ -218,7 +218,10 @@ girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
 # eval = FALSE as default; run manually as chunk
 
 # full version
-ggsave(filename = "assets/happiness-index.svg", plot = ggarrange(v1, v2, ncol=1, nrow=2, heights = c(1,0.3)), width=1280/72, height=720/72)
+ggsave(filename = "assets/happiness-index.svg", plot = v3, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/happiness-index-sm.png", plot = v3, width=4, height=2.25)
 
 ```
  

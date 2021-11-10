@@ -24,7 +24,6 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
-library(forcats)
 library(ggridges)
 library(ggiraph)
 

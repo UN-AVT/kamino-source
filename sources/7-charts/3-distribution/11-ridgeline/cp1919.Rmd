@@ -127,7 +127,7 @@ ggsave(filename = "assets/cp1919-sm.png", plot = v1, width=4, height=2.25)
 ### References
 #### citations for narrative and data sources
 
-* Narrative: From "The Nature of Pulsars," by Jeremiah P. Ostriker, Scientific American, January 1971.
+* Narrative and Data Source: From "The Nature of Pulsars," by Jeremiah P. Ostriker, Scientific American, January 1971.
   * [GO](https://blogs.scientificamerican.com/sa-visual/pop-culture-pulsar-origin-story-of-joy-division-s-unknown-pleasures-album-cover-video/){target="_blank"}
 
 
