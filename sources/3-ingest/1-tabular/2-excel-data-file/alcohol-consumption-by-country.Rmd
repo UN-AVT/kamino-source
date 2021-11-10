@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Alcohol Comsumption by Country"
 output: 
   html_document:
     theme: lumen
@@ -80,7 +80,7 @@ df2
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data Source: Global Health Data Repository, World Health Organization, https://apps.who.int/gho/data/node.main-euro.A1039?lang=en&showonly=GISAH
+* Narrative and Data Source: Global Health Data Repository, World Health Organization, [GO](https://apps.who.int/gho/data/node.main-euro.A1039?lang=en&showonly=GISAH){target="_blank"}
 
 
 <pre>
@@ -109,20 +109,8 @@ df2
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "Excel" # mostly used in wranglers and analytics
-keywords <- 'alcohol consumption'
-commands <- 'read_excel'
-sources <- 'World Health Organization'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

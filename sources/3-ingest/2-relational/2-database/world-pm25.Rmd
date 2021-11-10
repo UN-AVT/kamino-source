@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "World PM25 Levels"
 output: 
   html_document:
     theme: lumen
@@ -106,20 +106,8 @@ dbDisconnect(conn)
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "database sqlite" # mostly used in wranglers and analytics
-keywords <- 'concentration particulate matter PM2.5'
-commands <- 'dbConnect dbReadTable'
-sources <- 'World Health Organization'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

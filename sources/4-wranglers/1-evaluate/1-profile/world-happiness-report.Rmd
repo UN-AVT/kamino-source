@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "World Happiness Report"
 output: 
   html_document:
     theme: lumen
@@ -185,7 +185,7 @@ result
 ### Histograms
 #### for all numerical variables
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 df_long <- df %>%
   pivot_longer(
@@ -202,7 +202,7 @@ v1 <- ggplot(df_long, aes(x=value)) +
         panel.background = element_blank()
  ) 
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
+girafe(ggobj = v1, width_svg = 19, height_svg = 12, options =
   list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
@@ -234,20 +234,8 @@ As we will see later in the course, the two variables of interest will be "Life 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "profile dimension distinct-values frenquency-values missing-values structure" # mostly used in wranglers and analytics
-keywords <- 'happiness growth economics'
-commands <- 'str dim distinct map_df mutate'
-sources <- 'The-Economist'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

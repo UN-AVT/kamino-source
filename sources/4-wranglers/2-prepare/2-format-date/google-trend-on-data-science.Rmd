@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Google Trending Searches on Data Science"
 output: 
   html_document:
     theme: lumen
@@ -374,20 +374,8 @@ The data source was from <a href="https://trends.google.com/trends/trendingsearc
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "Format-Date character-to-date date-month-alphabetical date-month-numerical date-quarters date-year date-day-month date-to-datetime date-year-month date-extract-all" # mostly used in wranglers and analytics
-keywords <- 'google data-science'
-commands <- 'as.Daate as.POSIXct quarters format mutate'
-sources <- 'Google'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

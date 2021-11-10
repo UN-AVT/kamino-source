@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Temperature in Rio"
 output: 
   html_document:
     theme: lumen
@@ -208,20 +208,8 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 ```
 
 
-#### We can see that the discrepancies between the methods are not that big, but they are still significant. 
+We can see that the discrepancies between the methods are not that big, but they are still significant. 
 
-### Save plot
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/imputation.svg", plot = v1, width=1280/72, height=720/72)
-
-```
 
 ### References
 #### The citations and data sources used for this case
@@ -230,20 +218,8 @@ ggsave(filename = "outputs/imputation.svg", plot = v1, width=1280/72, height=720
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "Impute" # mostly used in wranglers and analytics
-keywords <- 'rio rio-de-janeiro air-quality air'
-commands <- 'mice na.omit na.rm'
-sources <- 'Rio-Air-quality'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

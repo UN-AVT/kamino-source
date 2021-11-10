@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Child labor"
 output: 
   html_document:
     theme: lumen

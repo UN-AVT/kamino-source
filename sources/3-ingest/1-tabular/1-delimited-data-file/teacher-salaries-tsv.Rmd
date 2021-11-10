@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Teacher Salaries"
 output: 
   html_document:
     theme: lumen
@@ -69,26 +69,14 @@ df
 ### References
 #### citations for narrative and data sources
 
-* Data Source: OECD, Teacher Salaries, https://data.oecd.org/teachers/teachers-salaries.htm
+* Data Source: OECD, Teacher Salaries, [GO](https://data.oecd.org/teachers/teachers-salaries.htm){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "TSV" # mostly used in wranglers and analytics
-keywords <- 'tab tsv separated delimited'
-commands <- 'read.table sep'
-sources <- 'OECD'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

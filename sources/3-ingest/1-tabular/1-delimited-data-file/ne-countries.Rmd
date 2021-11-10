@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Country names"
 output: 
   html_document:
     theme: lumen
@@ -184,26 +184,14 @@ df_utf8_encoding_ru
 ### References
 #### citations for narrative and data sources
 
-* Data Source: Natural Earth, https://www.naturalearthdata.com/downloads/110m-cultural-vectors/
+* Data Source: Natural Earth, [GO](https://www.naturalearthdata.com/downloads/110m-cultural-vectors/){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "CSV" # mostly used in wranglers and analytics
-keywords <- 'character language encoding UTF'
-commands <- 'read.csv Sys.setlocale'
-sources <- 'Natural Earth'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

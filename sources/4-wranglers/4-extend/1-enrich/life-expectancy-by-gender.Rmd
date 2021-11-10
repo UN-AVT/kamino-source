@@ -1,0 +1,330 @@
+---
+pagetitle: "life Expectancy by Gender"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(data.table)
+library(tidyverse)
+library(ggrepel)
+library(ggthemes)
+library(ggiraph)
+
+library(scales)
+library(magick)
+library(kableExtra)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+
+# life Expectancy by Gender
+## Enrich
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Ravi Roshan on Unsplash"}
+
+masthead <- "assets/ravi-roshan-_AdUs32i0jc-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> There will come an age when our average life expectancy will reach 200 years.\
+--- Masayoshi Son\
+
+
+***
+
+### Ingest
+#### Left table
+
+We first load life expectancy at birth, by country for Male and Female populations for the year 2020 (by age).
+
+```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_left_table <- read.csv('./archetypes/life-expectancy-by-gender/life_expectancy_by_gender_year2020.csv', header = TRUE, stringsAsFactors = FALSE)
+df_left_table
+
+```
+
+Notice that we have 9 rows, one row by country.
+
+### Ingest
+#### Right table
+
+We now bring total population by country, for the same year 2020 (in million).
+
+```{r load right data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_right_table <- read.csv('./archetypes/life-expectancy-by-gender/population_top20countries_year2020.csv', header = TRUE, stringsAsFactors = FALSE)
+df_right_table
+
+```
+
+
+Notice that here we have 10 rows representing 10 countries. Comparing these results from the previous table, we can see that a record for <span style="color: #FE9A2E;font-weight:bold">Germany</span> is missing, and we have two additional countries present: <span style="color: #FE9A2E;font-weight:bold">Indonesia</span> and <span style="color: #FE9A2E;font-weight:bold">Russia</span>.
+
+### Wrangle
+#### Types of Join
+
+In the various scenarios below, we will join the Left table (life expectancy at birth) with the Right table (total population). We will use the common element "Country" as our index to join the two tables together.
+
+### Inner join
+#### only matching rows from both input tables will show up in the output table
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+df_inner <- inner_join(df_left_table,df_right_table,by=c('Country'='Country'))
+df_inner
+
+```
+
+
+Because only countries that are present in both tables are kept, notice that records for <span style="color: #FE9A2E;font-weight:bold">Germany</span>, <span style="color: #FE9A2E;font-weight:bold">Indonesia</span> and <span style="color: #FE9A2E;font-weight:bold">Russia</span> are dropped.
+
+### Left outer join
+#### keep all the records from the right table
+
+
+Let's assume that we want to keep all the records from the Right table (Life Expectancy), even if no record exists in the left table (total population). This is what a left outer join returns. A left join will fill up the columns that come from the Left table with missing values if no matching row exists in the Right table.
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+df_left <- left_join(df_left_table,df_right_table,by=c('Country'='Country'))
+df_left
+
+```
+
+All records from the left table were kept. Since <span style="color: #FE9A2E;font-weight:bold">Germany</span> has no record in the Population table, the record in "Pop_2020_in_million" column is empty. Also, notice that records for <span style="color: #FE9A2E;font-weight:bold">Indonesia</span> and <span style="color: #FE9A2E;font-weight:bold">Russia</span> are dropped since these countries do not exist in the Left table.
+
+### Right outer join
+#### will keep all records from right table
+
+By symmetry, a Right outer join will keep all the records from the Right table (total population), and skip records from the Left table (Life Expectancy) if there is no match:
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+df_right <- right_join(df_left_table,df_right_table,by=c('Country'='Country'))
+df_right
+
+```
+
+
+Notice that <span style="color: #FE9A2E;font-weight:bold">Germany</span> is dropped, records for <span style="color: #FE9A2E;font-weight:bold">Indonesia</span> and <span style="color: #FE9A2E;font-weight:bold">Russia</span> are kept, with empty <span style="color:#39a364">"NA"</span> in both "Male_2020" and "Female_2020" columns.
+
+### Full outer join
+#### keep all the records from both tables
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+df_full <- full_join(df_left_table,df_right_table,by=c('Country'='Country'))
+df_full
+
+```
+
+
+In this case, notice that no records are dropped, <span style="color: #FE9A2E;font-weight:bold">Germany</span>, <span style="color: #FE9A2E;font-weight:bold">Indonesia</span> and <span style="color: #FE9A2E;font-weight:bold">Russia</span> are present, with empty "NA" cells.
+
+### Time to plot
+#### output from the inner join
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+df_inner <- df_inner %>% mutate(Diff_years = Female_2020 - Male_2020)
+
+v1 <- ggplot(df_inner, aes(x=Male_2020,y=Female_2020)) +
+  geom_point(aes(size=Pop_2020_in_million, colour=Diff_years)) +
+  geom_text_repel(aes(label=ifelse((Country !="China" & Country !="India" ),Country, "")),nudge_x = .15,
+                  box.padding = 0.5,
+                  nudge_y = 1) +
+  geom_text(aes(label=ifelse((Country == "China" | Country =="India" ),Country, "")), colour="white") +
+  geom_abline(linetype="dashed") + 
+  scale_size(range = c(2, 20)) + 
+  scale_y_continuous(position = "right", breaks = c(50, 55, 60, 65, 70, 75, 80, 85, 90))+ 
+  scale_x_continuous(breaks = c(50, 55, 60, 65, 70, 75, 80, 85, 90), labels = comma)+
+  #xlim(55, 90) +
+  #ylim(55, 90) +
+  annotate("text",x = 75,y = 74.5, angle = 26, label = "Gender Parity") +
+  scale_color_continuous(trans = 'reverse')+ 
+  ggtitle("Life expectancy at birth, by sex and country") +
+  xlab("Male, years") + ylab("Female, years")+ labs(color='Gap between the sexes') + labs(size='Population (million)') +
+  theme_bw() +
+  theme(
+    panel.border = element_blank(),
+    legend.position = 'none'
+  )
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
+  list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### Anti join
+#### return non matches
+
+It may be useful sometimes to just return only the rows from the Left table that have no match on the Right table, this is what anti-join does. 
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+df_anti <- anti_join(df_left_table, df_right_table, by=c('Country'='Country'))
+df_anti
+
+```
+
+
+As expected, only <span style="color: #FE9A2E;font-weight:bold">Germany</span> is returned, since this is the only record that exists on the Left table but have no match on the Right table.
+
+### Concatenate Rows
+#### combine records of the same structure
+
+So far, we have been joining tables together based on a common element (column “Country” in this example), and remaining Columns get glued together on the right (Male_2020, Female_2020, Pop_2020_in_million). But sometimes we may just need to combined two tables that we know contain the same information, basically the two tables get stacked.  
+
+
+```{r, message=FALSE, echo=TRUE}
+
+df_part1 <- df_full[1:5,]
+df_part2 <- df_full[6:11,]
+
+```
+
+Let's assume we need to combined the following two tables. The first table contains 5 rows:
+
+```{r, message=FALSE, echo=FALSE}
+
+df_part1
+
+```
+
+The second table contains 6 rows:
+
+```{r, message=FALSE, echo=FALSE}
+
+df_part2
+
+```
+
+Notice that both tables include the same information (same number of columns, and column names).
+
+We can now Concatenate the two tables
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+df_concat <- bind_rows(df_part1, df_part2)
+
+```
+
+The output table looks like this:
+
+```{r, message=FALSE, echo=FALSE}
+
+df_concat
+
+```
+
+As expected, we got the full dataset back
+
+### Copy Column
+#### a duplicate to be used for manipulation
+
+It may also be important to copy columns in a dataframe. We will be copying the column "Country" into the same data frame. 
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+df <- df_right_table
+df$Country_Copy <- df$Country
+row.names(df)<-NULL
+
+```
+
+
+```{r Styling dataset 8, echo=FALSE}
+
+#NOT TO BE USED AS SOLUTION
+
+df_tmp<-df[1:10,]
+df_tmp <- df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(3, bold = TRUE, color = "#000000", background = "#CEE3F6")
+df_tmp
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+The two data source used by this wrangler task is available on <a href="https://www.gapminder.org/data/" target="_blank" rel="noopener noreferrer">Gapminder</a>.
+
+<pre>
+@misc{gapminder_2016_gd004,
+  author = {GapMinder},
+  title = {GD004},
+  url = {https://www.gapminder.org/data/documentation/gd004/},
+  urldate = {2021-06-08},
+  year = {2016},
+  organization = {Gapminder.org}
+}
+
+@misc{gapminder_gd003,
+  author = {GapMinder},
+  title = {GD003},
+  url = {https://www.gapminder.org/data/documentation/gd003/},
+  urldate = {2021-06-08},
+  organization = {GapMinder}
+}
+</pre>
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

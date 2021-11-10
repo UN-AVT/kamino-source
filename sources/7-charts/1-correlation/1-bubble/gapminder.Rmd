@@ -87,7 +87,7 @@ gapminder
 ### Visual Mapping, position
 #### life expectancy as y-axis and GDP as x-axis
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -117,7 +117,7 @@ v1 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy)) +
      theme_bw() +
      theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
@@ -126,7 +126,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ### Shape
 #### dots as countries
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 v2 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy)) +
      # Shape visual variable
@@ -136,7 +136,7 @@ v2 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy)) +
      theme_bw() +
      theme_opts
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 
@@ -146,7 +146,7 @@ girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
 ### Size
 #### bubbles as population
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 v3 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy, size = pop)) +
      geom_point() + 
@@ -168,7 +168,7 @@ girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
 ### Color
 #### representing continent
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 # Manual palette to match colors
 continent_palette <- c("Africa" = "#77dff7", "Americas" = "#b5ea32", "Asia" = "#ff5973", "Europe" = "#ffe800", "Oceania" = "#ff5973")
@@ -183,7 +183,7 @@ v4 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy, size = pop, fill = con
      theme_bw() +
      theme_opts
 
-girafe(ggobj = v4, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v4, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
@@ -193,7 +193,7 @@ girafe(ggobj = v4, width_svg = 1280/72, height_svg = 720/72,
 #### repelling countries
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 v5 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy, fill = continent, label = country )) +
      geom_point(aes(size = pop), shape = 21, color = "#ffffff") +
@@ -211,7 +211,7 @@ v5 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy, fill = continent, labe
      theme_bw() +
      theme_opts
 
-girafe(ggobj = v5, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v5, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
@@ -221,7 +221,7 @@ girafe(ggobj = v5, width_svg = 1280/72, height_svg = 720/72,
 #### Reorder to control overlap
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 gapminder <- gapminder[order(gapminder$pop, decreasing = TRUE),]
 
@@ -243,7 +243,7 @@ v6 <- ggplot(gapminder, aes(x = gdp, y = life_expectancy, fill = continent, labe
      theme_bw() +
      theme_opts
 
-girafe(ggobj = v6, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v6, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 
@@ -253,7 +253,7 @@ girafe(ggobj = v6, width_svg = 1280/72, height_svg = 720/72,
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 # full version
-ggsave(filename = "assets/gapminder-fs.svg", plot = v6, width=1280/72, height=720/72)
+ggsave(filename = "assets/gapminder-fs.svg", plot = v6, width=16, height=9)
 
 # without annotations
 ggsave(filename = "assets/gapminder-sm.png", plot = v4, width=4, height=2.25)
@@ -262,6 +262,7 @@ ggsave(filename = "assets/gapminder-sm.png", plot = v4, width=4, height=2.25)
 
 
 ### References
+#### citations for narrative and data sources
 
 * Narratives and data sources: How Does Income Relate to Life Expectancy, Gapminder, [GO](https://www.gapminder.org/answers/how-does-income-relate-to-life-expectancy){target="_blank"}
 

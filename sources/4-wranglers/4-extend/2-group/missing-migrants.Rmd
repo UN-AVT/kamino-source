@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Missing Migrants"
 output: 
   html_document:
     theme: lumen
@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -45,56 +45,38 @@ WRANGLERS
 # Missing Migrants
 ## Group
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Imre Tömösvári on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nikko Macaspac on Unsplash"}
 
-masthead <- "assets/imre-tomosvari-FbhuN53_330-unsplash.jpg"
+masthead <- "assets/nikko-macaspac-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
-
-<div class="figure-text"> Migration</div>
-
 
 > Man is not the sum of what he has already, but rather the sum of what he does not yet have, of what he could have....\
 --- Jean-Paul Sartre  
 
 ***
 
-
 ### Load Data
 
-#### We will group this data into different parts, and apply function/s to each of them, such as sum, mean, median, max and min. Since we have some missing valueS, let's also replace "NA" data with 0 first (we will revisit this pattern later in the course).
+We will group this data into different parts, and apply function/s to each of them, such as sum, mean, median, max and min. Since we have some missing valueS, let's also replace "NA" data with 0 first (we will revisit this pattern later in the course).
 
 
 ```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df <- read_csv('./archetypes/MissingMigrants-Global-2020-10-18T06-37-33.csv')
+df <- read_csv('./archetypes/missing-migrants/MissingMigrants-Global-2020-10-18T06-37-33.csv')
 
 df <- df %>% 
   mutate_if(is.numeric, ~replace(., is.na(.), 0))
 
-```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-# df_tmp <- df[1:3,] %>%
-# kable(escape = FALSE) %>%
-# kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped") %>%
-#   scroll_box(width = "100%", height = "400px")
-# df_tmp
-
-#NOT TO BE USED AS SOLUTION 
 df
+
 ```
 
 
 ### Group one variable with one calculation
 
-#### First, lets create a simle Group by on "Reported Year" and calculate the sum of the "Total Dead and Missing" persons.
+First, lets create a simle Group by on "Reported Year" and calculate the sum of the "Total Dead and Missing" persons.
 
 ```{r, message=FALSE, echo=TRUE, warning=FALSE}
 
@@ -102,56 +84,33 @@ df_1 <- df %>%
   group_by(`Reported Year`) %>% 
   summarise(sum_number=sum(`Total Dead and Missing`))
 
-```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set1, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-# df_tmp <- df_1 %>%
-# kable(escape = FALSE)%>%
-# kable_styling(full_width = FALSE, bootstrap_options = "striped")
-# df_tmp
-
-#NOT TO BE USED AS SOLUTION 
 df_1
+
 ```
 
 
 ### Group more than one variable with one calculation
 
-#### Let's now group by "Reported Year" and "Reported Month", calculating the sum of the "Total Dead and Missing".
+Let's now group by "Reported Year" and "Reported Month", calculating the sum of the "Total Dead and Missing".
+
 
 ```{r method: group more, message=FALSE, echo=TRUE,warning=FALSE}
 
-df_2<- df %>% 
+df_2 <- df %>% 
   group_by(`Reported Year`, `Reported Month`) %>% 
   summarise(sum_number=sum(`Total Dead and Missing`))
 
-```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r, echo=FALSE}
-
-# NOT TO BE USED AS SOLUTION
-
-# df_tmp <- df_2[1:10,]%>%
-# kable(escape = FALSE)%>%
-# kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped") 
-# df_tmp
-
-#NOT TO BE USED AS SOLUTION 
 df_2
+
 ```
-#### Notice that the data is presented vertically, with only 3 columns, and each row representing one observation (here the sum for a specific year and month. This is called the "Long data format". This is the best format to run the chart below.
+
+
+Notice that the data is presented vertically, with only 3 columns, and each row representing one observation (here the sum for a specific year and month. This is called the "Long data format". This is the best format to run the chart below.
 
 
 ### Time to plot
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide',out.width = "100%"}
 
 df_2$`Reported Month` <- factor(df_2$`Reported Month`, levels=c('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'))
 df_2$`Reported Year` <- factor(df_2$`Reported Year`, levels=c('2014','2015','2016','2017','2018','2019','2020'))
@@ -165,7 +124,7 @@ v1 <- ggplot(df_2,aes(x=`Reported Month`, y=sum_number, fill=`Reported Year`)) +
   geom_hline(yintercept = 1000, size=0.1, color = "grey") +
   geom_hline(yintercept = 1500, size=0.1, color = "grey") +
   geom_bar(stat="identity", position=position_dodge()) +
-  scale_fill_manual(values=year_palette, , name = "YEAR") +
+  scale_fill_manual(values=year_palette, name = "YEAR") +
   geom_text(aes(label = sum_number), hjust=-0.1, size = 3, angle=90,
             position = position_dodge(0.9)) +
   theme_tufte(base_size = 15) +
@@ -183,16 +142,16 @@ v1 <- ggplot(df_2,aes(x=`Reported Month`, y=sum_number, fill=`Reported Year`)) +
   guides(colour = guide_legend(nrow = 1))
 
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
+girafe(ggobj = v1, width_svg = 16, height_svg = 9, options =
 list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
-#### Although the "Long format" is needed to use with visual library, it is not really user friendly. Let's use the "Wide format" to make it easier for users to review the data. We can do this by 
+Although the "Long format" is needed to use with visual library, it is not really user friendly. Let's use the "Wide format" to make it easier for users to review the data. We can do this by 
 
 ### Pivot
 
-#### The above "Long data format" may be good for running a chart, but it is not the most human-friendly presentation. Let's see how we can transform this.
+The above "Long data format" may be good for running a chart, but it is not the most human-friendly presentation. Let's see how we can transform this.
 
 
 ```{r method: one cal, message=FALSE, echo=TRUE,warning=FALSE}
@@ -201,55 +160,29 @@ df_3 <- df_2 %>%
   pivot_wider(names_from = `Reported Month`, values_from = sum_number) %>% 
   relocate(`Reported Year`,Jan , Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
 
-```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set3, echo=FALSE}
-
-# NOT TO BE USED AS SOLUTION
-
-# df_tmp <- df_3%>%
-# kable(escape = FALSE)%>%
-# kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")
-# df_tmp
-
-#NOT TO BE USED AS SOLUTION 
 df_3
+
 ```
+
 
 ### Unpivot
 
-#### Just for the hang of it, let's unpivot this data to return to "Long data format".
+Let's unpivot this data to return to "Long data format".
 
 
 ```{r, message=FALSE, echo=TRUE,warning=FALSE}
 
 df_4 <- df_3  %>%
   pivot_longer(!`Reported Year`,names_to = "MONTH", values_to = "TOTAL_DEAD")
-
-
-```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r, echo=FALSE}
-
-# NOT TO BE USED AS SOLUTION
-
-# df_tmp <- df_4[1:10,]%>%
-# kable(escape = FALSE)%>%
-# kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")
-# df_tmp
-
-#NOT TO BE USED AS SOLUTION 
 df_4
-```
 
+```
 
 
 ### References
-#### The citations and data sources used for this case is based on a report from <a href="https://missingmigrants.iom.int/" target="_blank" rel="noopener noreferrer"> IOM </a>.
+#### citations for narrative and data sources
+
+IOM, Missing Migrants, [GO](https://missingmigrants.iom.int/){target="_blank"}
 
 <pre>
 @misc{missingmigrants_2001_missing,
@@ -268,20 +201,8 @@ df_4
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "group-by group-by-summarise pivot unpivot" # mostly used in wranglers and analytics
-keywords <- 'migrants missing'
-commands <- 'group_by summarise pivot_wider pivot_longer'
-sources <- 'Missing Migrants Project'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

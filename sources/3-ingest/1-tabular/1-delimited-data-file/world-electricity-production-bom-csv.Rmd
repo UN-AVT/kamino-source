@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "World Electricity Production"
 output: 
   html_document:
     theme: lumen
@@ -84,26 +84,14 @@ names(df_bom)
 ### References
 #### citations for narrative and data sources
 
-* Data Source: Our World in Data, Electricity Mix, https://ourworldindata.org/electricity-mix
+* Data Source: Our World in Data, Electricity Mix, [GO](https://ourworldindata.org/electricity-mix){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "CSV" # mostly used in wranglers and analytics
-keywords <- 'BOM byte order mark'
-commands <- 'read.csv fileEncoding'
-sources <- 'Our World in Data'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

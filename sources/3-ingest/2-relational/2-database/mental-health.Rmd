@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Mental Health Survey"
 output: 
   html_document:
     theme: lumen
@@ -188,20 +188,8 @@ dbDisconnect(conn)
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "database" # mostly used in wranglers and analytics
-keywords <- 'mental health'
-commands <- 'dbConnect dbReadTable'
-sources <- 'Open Sourcing Mental Illness Ltd.'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

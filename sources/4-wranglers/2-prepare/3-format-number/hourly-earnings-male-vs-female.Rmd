@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Hourly Earnings Male vs Female"
 output: 
   html_document:
     theme: lumen
@@ -41,12 +41,12 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# Average Hourly Earnings of Employees
+# Hourly Earnings Male vs Female
 ## Format Numbers
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Leon on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Felix Koutchinski on Unsplash"}
 
-masthead <- "assets/leon-MUZFKa_mttU-unsplash.jpg"
+masthead <- "assets/felix-koutchinski-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -270,8 +270,6 @@ df_tmp
 ```  
 
 
-
-
 # References
 ## The citations and data sources used for this case
 
@@ -293,20 +291,8 @@ The data source was from <a href="https://ilostat.ilo.org/" target="_blank">ILOS
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "format-number comma-seperator format-currency format-decimal format-fraction percentage-increase format-readable format-scientific" # mostly used in wranglers and analytics
-keywords <- 'earnings salary employee'
-commands <- 'format f2si'
-sources <- 'ILOSTAT'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

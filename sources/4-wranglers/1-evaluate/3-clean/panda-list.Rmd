@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Pandas in Zoos"
 output: 
   html_document:
     theme: lumen
@@ -39,7 +39,7 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# Pandas housed in zoos outside China
+# Pandas in Zoos
 ## Clean Data
 
 
@@ -221,20 +221,8 @@ The original data file used in this wrangler task was captured from the <a href=
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "clean remove-duplicate remove-missing replace-missing replace-value" # mostly used in wranglers and analytics
-keywords <- 'panda zoo china'
-commands <- 'replace !is.na is.na unique'
-sources <- 'Giant-Panda-Global'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

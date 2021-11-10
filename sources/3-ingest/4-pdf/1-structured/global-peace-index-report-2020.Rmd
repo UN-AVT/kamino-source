@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "The Global Peace Index (GPI)"
 output: 
   html_document:
     theme: lumen
@@ -194,20 +194,8 @@ txt_test <- pdf_text("archetypes/global-peace-index/global-peace-index-2020.pdf"
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "pdf" # mostly used in wranglers and analytics
-keywords <- 'global peace index'
-commands <- 'extract_tables extract_text pdf_data pdf_text'
-sources <- 'Vision of Humanity and Institute for Economics & Peace'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

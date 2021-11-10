@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Kamino Project"
 output: 
   html_document:
     theme: lumen
@@ -322,26 +322,14 @@ df_case_studies
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data Source: Kamino, https://github.com/UN-AVT/kamino-source
+* Narrative and Data Source: Kamino, [GO](https://github.com/UN-AVT/kamino-source){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "ingest google sheet" # mostly used in wranglers and analytics
-keywords <- 'google sheets'
-commands <- 'read_sheet sheet'
-sources <- 'Kamino'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

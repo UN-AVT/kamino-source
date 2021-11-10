@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Cities by Sunshine Duration"
 output: 
   html_document:
     theme: lumen
@@ -36,7 +36,7 @@ library(ggiraph)
 INGEST  
 </div>
 
-# What are the sunniest cities in the world, by continent
+# Cities by Sunshine Duration
 ## Web scraping
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Jason Wong on Unsplash"}
@@ -311,20 +311,8 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "web scraping" # mostly used in wranglers and analytics
-keywords <- 'cities sunshine'
-commands <- 'read_html html_node html_table'
-sources <- 'Wikipedia'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

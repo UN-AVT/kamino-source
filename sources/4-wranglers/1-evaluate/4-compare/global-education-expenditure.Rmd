@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Global Education Expenditure"
 output: 
   html_document:
     theme: lumen
@@ -42,9 +42,9 @@ WRANGLERS
 # Global Education Expenditure
 ## Compare
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Element5 Digital on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Annie Spratt on Unsplash"}
 
-masthead <- "assets/element5-digital-OyCl7Y4y0Bk-unsplash.jpg"
+masthead <- "assets/annie-spratt-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -64,24 +64,9 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r Load raw data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'} 
 
 df <- read.csv('./archetypes/share-edu-spending-gdp-vs-share-edu-total-spending.csv', header = TRUE, stringsAsFactors = FALSE)
+df
 
 ```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <-df
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = TRUE, bootstrap_options = c("striped", "hover"))%>%
-scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION 
-
-```
-
 
 ### The Side Set 
 #### The following <span style="color: #01DFD7;font-weight:bold">Continent list</span>  will be used to compare with the above data file records.
@@ -173,20 +158,8 @@ The data source used by this wrangler task is one of the baseline data used by t
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "compare difference intersect" # mostly used in wranglers and analytics
-keywords <- 'education expenditure global'
-commands <- 'subset'
-sources <- 'Financing-Education'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

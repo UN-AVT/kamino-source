@@ -476,23 +476,12 @@ The original data file used in this wrangler task was captured from the <a href=
 }
 </pre>
 
+
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "format-string detect-alpha combine detect-special-character lowercase normalize remove-non-alpha-numeric remove-non-numeric split format-title truncate uppercase" # mostly used in wranglers and analytics
-keywords <- 'Netflix TV movies'
-commands <- 'stri_trans_nfd str_detect str_sub str_replace_all str_split str_to_upper str_to_lower str_to_sentence str_to_title'
-sources <- 'FLIXABLE'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

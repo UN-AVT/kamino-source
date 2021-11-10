@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "UN Member State admission dates"
 output: 
   html_document:
     theme: lumen
@@ -39,7 +39,7 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# Case: Member States of the United Nations
+# UN Member State admission dates
 ## Manage Column
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Mathias P.R. Reding on Unsplash"}
@@ -296,20 +296,8 @@ The data file used in this wrangler task was retrieved from <a href="https://www
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "column add-constant combine rename rename-all rename-replace select seperate" # mostly used in wranglers and analytics
-keywords <- 'UN member-state United-Nations'
-commands <- 'rename sset_names tolower add_column select seperate unite'
-sources <- 'United-Nations'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 
