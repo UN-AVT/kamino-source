@@ -83,7 +83,7 @@ probly_df
 ### Plot
 #### standard
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 y_axis <- c( "Almost Certainly",
   "Highly Likely",
@@ -114,7 +114,7 @@ v1 <- ggplot(probly_df, aes(y=text, x=value,  fill=text)) +
     xlab("") +
     ylab("")
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
@@ -123,7 +123,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ### Plot
 #### as binlines
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 v2 <- ggplot(probly_df, aes(y=text, x=value,  fill=text)) +
     geom_density_ridges(alpha=0.6, stat="binline", bins=20) +
@@ -136,7 +136,7 @@ v2 <- ggplot(probly_df, aes(y=text, x=value,  fill=text)) +
     xlab("") +
     ylab("")
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
