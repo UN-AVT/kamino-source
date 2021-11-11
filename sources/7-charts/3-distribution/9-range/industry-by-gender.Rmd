@@ -95,7 +95,7 @@ df_wrangle
 #### Do industries employ more men or women?
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1280/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -131,7 +131,7 @@ v1 = ggplot(df_wrangle) +
   xlab(NULL) +
   ylab(NULL)
 
-girafe(ggobj = v1, width_svg = 1080/72, height_svg = 1080/72,
+girafe(ggobj = v1, width_svg = 12, height_svg = 16,
        options = list(opts_sizing(rescale = FALSE, width = 1.0)))
 
 ```
@@ -141,7 +141,7 @@ girafe(ggobj = v1, width_svg = 1080/72, height_svg = 1080/72,
 #### with center labels
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1280/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 industry_df <- data.frame( industry = unique(df_wrangle$industry))
 
@@ -160,7 +160,7 @@ v2 = ggplot(df_wrangle) +
   xlab(NULL) +
   ylab(NULL)
 
-girafe(ggobj = v2, width_svg = 1080/72, height_svg = 1280/72,
+girafe(ggobj = v2, width_svg = 12, height_svg = 16,
        options = list(opts_sizing(rescale = FALSE, width = 1.0)))
 
 ```

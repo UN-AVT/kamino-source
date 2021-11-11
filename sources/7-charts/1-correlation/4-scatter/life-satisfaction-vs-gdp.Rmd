@@ -23,7 +23,6 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
 gc() #free up memory and report the memory usage.
 
-library(knitr)
 library(tidyverse)
 library(ggiraph)
 
@@ -48,8 +47,6 @@ masthead <- "assets/larm-rmah-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
-
-<div class="figure-text">Chư Păh District, Vietnam</div>
 
 > Happiness is a warm puppy...\
 --- Charles M. Schulz\

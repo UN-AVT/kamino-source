@@ -23,10 +23,7 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
 gc() #free up memory and report the memory usage.
 
-# Load needed libraries
-library(knitr)
 library(tidyverse)
-library(stringr)
 library(scales)
 library(ggiraph)
 
@@ -100,7 +97,7 @@ df_recipients
 ### Plot
 #### Suppliers
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide',out.width="100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 20), 
@@ -131,8 +128,8 @@ v1 = ggplot(data=df_suppliers, aes(x=Supplier, y=X2019) ) +
   theme_bw() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1280/72,
-       options = list(opts_sizing(rescale = TRUE, width = 0.50))
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
 )
 
 ```
@@ -140,8 +137,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1280/72,
 ### Plot
 #### Recipients
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
-
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 v2 = ggplot(data=df_recipients, aes(x=Recipient, y=X2019) ) +
   geom_bar(aes(fill=Recipient), stat="identity") +
@@ -154,14 +150,12 @@ v2 = ggplot(data=df_recipients, aes(x=Recipient, y=X2019) ) +
   theme_bw() +
   theme_opts
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 1280/72,
-       options = list(opts_sizing(rescale = TRUE, width = 0.50))
+girafe(ggobj = v2, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
 )
 
 ```
 
-### Save plot
-#### as vector or raster image
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 

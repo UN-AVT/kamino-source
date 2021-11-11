@@ -25,12 +25,8 @@ gc() #free up memory and report the memory usage.
 
 library(tidyverse)
 library(ggthemes)
-library(readr)
 library(ggrepel)
 library(ggiraph)
-
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)

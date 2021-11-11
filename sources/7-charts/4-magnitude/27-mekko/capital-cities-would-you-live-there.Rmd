@@ -1,17 +1,17 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "Capital cities would you live there"
+output:
   html_document:
     theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: libs
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
@@ -24,13 +24,13 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
-library(tidyr)
-library(dplyr)
-library(ggplot2)
 library(ggiraph)
 
-library(knitcitations)
-library(bibtex)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
@@ -38,27 +38,41 @@ library(bibtex)
 CHARTS
 </div>
 
-# Marimekko
-## Capital cities would you live there
+# Capital cities: would you live there?
+## Marimekko
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Fikri Rasyid on Unsplash"}
+
+masthead <- "assets/fikri-rasyid-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Bandung City, Indonesia, Becak; Indonesia’s traditional rickshaw cycle</div>
+
+> This City is what it is because our citizens are what they are...\
+--- Plato\
 
 ***
 
 # Load data
-## capital-cities-would-you-live-there
+## city, country, group, measure, and population
 
 
-```{r, echo=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Create dataset
 df = read.csv("archetypes/capital-cities/capital-cities-would-you-live-there.csv", header = TRUE)
 df
 
 ```
 
-# Prepare data
+
+### Analytics
+#### calculate top, max, min, and labels
 
 
-```{r, echo=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 #df_top <- df %>% slice_max(Population, n = 15)
 #df_top
@@ -70,13 +84,19 @@ df_top$xmin <- df_top$xmax - df_top$Population
 df_top$xlabel <- (df_top$xmax + df_top$xmin)/2
 df_top$label <- paste(as.character(round(df_top$Measure, digits=0)),"%")
 
+df_top
+
 ```
 
-# Plot
 
-```{r, echo=FALSE, fig.width=12, fig.height=10, out.width = "95%"}
+### Plot
+#### geom rect, text, and hline
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "95%"}
 
 theme_opts <- theme(
+  text = element_text(family = "inconsolata", size = 16), 
   legend.position = "none",
   legend.title = element_blank(),
   axis.text = element_blank(),
@@ -88,49 +108,59 @@ theme_opts <- theme(
   panel.grid.minor = element_blank(),
   panel.background=element_rect(fill="white", colour="white"),
   panel.border = element_blank(),
+  plot.title = element_text(color = "black", size = 16, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 10),
   plot.background = element_blank(),
   plot.margin = unit(c(0, 0, 1.25, 0), "in")
 )
 
+group_palette <- c(
+  "0. Exceeded" = "#455A64",
+  "1. Within" = "#FB8C00"
+)
+
 v1 <-ggplot(df_top) +
-    geom_rect(aes(ymin = 0, ymax = Measure, xmin = xmin, xmax = xmax, fill = Country), color = "white", alpha = 0.5) + 
+    geom_rect(aes(ymin = 0, ymax = Measure, xmin = xmin, xmax = xmax, fill = Group), color = "white", alpha = 0.5) + 
     geom_text(aes(x = xlabel, y = Measure, label = label, vjust = -1), position = "identity", color = "black", size = 3 ) +
     geom_text(aes(x = xlabel, y = 2, label = Population, vjust = 0), position = "identity", color = "black", size = 3 ) +
     geom_text(aes(x = xlabel, y = 0, label = City), hjust = "right", vjust = 1.5, position = "identity", color = "black", size = 3.5, angle = 45 ) +
     geom_hline(yintercept = 10) +
+    scale_fill_manual(values = group_palette) +
     coord_cartesian(clip="off") +
-    theme(plot.title = element_text(size = rel(2)), panel.background = element_rect(fill = "white", colour = "grey50")) +
+    theme_bw() +
     theme_opts
 
-girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 
-## Save output
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
 
-```{r, echo=FALSE}
+# eval = FALSE as default; set to TRUE for production outputs
 
-# ggsave(filename = "capital-cities-would-you-live-there.svg", plot = v1, width=12, height=6)
+# full version
+ggsave(filename = "assets/capital-cities-would-you-live-there-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/capital-cities-would-you-live-there-sm.png", plot = v1, width=4, height=2.25)
 
 ```
 
 
-# Exercises and practice
-## Knime and R practice solutions
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: The Economist, Which countries dominate the world’s dinner tables? [GO](https://www.economist.com/graphic-detail/2019/08/23/which-countries-dominate-the-worlds-dinner-tables){target="_blank"}
 
 
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-# References
-## The citations and data sources used for this case
-
-Source: <a href="https://www.economist.com/graphic-detail/2019/08/23/which-countries-dominate-the-worlds-dinner-tables"> Which countries dominate the world’s dinner tables?</a>
-
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# read.bibtex(file = "./citations.bib")
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```
 

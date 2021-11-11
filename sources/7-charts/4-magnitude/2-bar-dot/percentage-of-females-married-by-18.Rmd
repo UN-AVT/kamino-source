@@ -23,8 +23,6 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
 gc() #free up memory and report the memory usage.
 
-# Load needed libraries
-
 library(janitor)
 library(tidyverse)
 library(ggtext)
@@ -86,7 +84,7 @@ df_wrangle
 ### Plot
 #### with female / male comparison
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 

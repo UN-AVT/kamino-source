@@ -80,8 +80,8 @@ df_wrangle
 ```
 
 
-### View / Chart
-#### Vertical Lollipop
+### Plot
+#### vertical lollipop
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1280/72, out.width="100%"}
 
@@ -105,7 +105,7 @@ theme_opts <- theme(
 
 ```
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1280/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 v1 <- df_wrangle %>%
   mutate(country_currency = fct_reorder(country_currency, index)) %>%
@@ -123,11 +123,22 @@ ggplot( aes(x=country_currency,y=index,color=color)) +
   theme_minimal() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1080/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.9))
 )
 
 ```
+
+### Plot
+#### with annotations
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+# v2 <- v1 +
+# ...
+
+```
+
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
 
@@ -143,10 +154,8 @@ ggsave(filename = "assets/big-mac-index-foreign-exchange.png", plot = v1, width=
 ```
  
 
-
 ### References
 #### citations for narrative and data sources
-
 
 * Narrative source: The Economist, [GO](https://www.economist.com/big-mac-index){target="_blank"}
 * Data source: The Economist, [GO](https://github.com/TheEconomist/big-mac-data){target="_blank"}

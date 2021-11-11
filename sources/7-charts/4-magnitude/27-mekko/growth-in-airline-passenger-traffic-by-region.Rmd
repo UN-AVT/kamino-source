@@ -1,17 +1,17 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "Airline passenger traffic"
+output:
   html_document:
     theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: libs
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
@@ -26,9 +26,11 @@ gc() #free up memrory and report the memory usage.
 library(tidyverse)
 library(ggiraph)
 
-# needed to include bib references
-library(knitcitations)
-library(bibtex)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
@@ -36,18 +38,25 @@ library(bibtex)
 CHARTS
 </div>
 
-# Marimekko
-# Case: Airline passenger traffic
+# Airline passenger traffic
+## Marimekko
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Tomas Williams on Unsplash"}
+
+masthead <- "assets/tomas-williams-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
 
 > Sometimes, the world from above seems too beautiful, too wonderful, too distant for human eyes to see....\
 --- Charles A. Lindbergh  
 
 ***
 
-# Load the data
-## Projected growth in airline passenger traffic by region
+### Load the data
+#### Projected growth in airline passenger traffic by region
 
-```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Create dataset
 df = read.csv("archetypes/airline-passenger-traffic/projected-growth-in-airline-passenger-traffic-by-region.csv", header = TRUE)
@@ -62,10 +71,10 @@ data
 
 ```
 
-# Plot the chart
-## Projected growth in airline passenger traffic by region
+### Plot the chart
+#### Projected growth in airline passenger traffic by region
 
-```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', fig.width=12, fig.height=8, out.width = "85%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "85%"}
 
 theme_opts <- theme(
   legend.position = "none",
@@ -83,11 +92,11 @@ theme_opts <- theme(
   plot.margin = unit(c(0, 0, 1.25, 0), "in")
 )
 
-v1 <-ggplot(data) +
+v1 <- ggplot(data) +
     geom_rect(aes(ymin = 0, ymax = Growth, xmin = xmin, xmax = xmax, fill = Regions), color = "white", alpha = 0.5 ) + 
     geom_text(aes(x = xlabel, y = Growth, label = label, vjust = -1), position = "identity", color = "black", size = 3 ) +
     geom_text(aes(x = xlabel, y = 0.2, label = format(RPK, big.mark = ",", scientific = FALSE), vjust = 0), position = "identity", color = "black", size = 3 ) +
-      geom_text(aes(x = 9500, y = 0.2, label = "Estimated\nRPK (B)\nin 2035"), vjust = 0.4) +
+    geom_text(aes(x = 9500, y = 0.2, label = "Estimated\nRPK (B)\nin 2035"), vjust = 0.4) +
     geom_text(aes(x = xlabel, y = 0, label = Regions), hjust = "right", vjust = 1.5, position = "identity", color = "black", size = 3.5, angle = 45 ) +
     geom_hline(yintercept = 4.8, linetype = "dashed") + geom_text(aes(0, 4.8, label = "World Traffic\nGrowth 4.8%")) +
     geom_hline(yintercept = 2.9, linetype = "dashed") + geom_text(aes(0, 2.9, label = "World GDP\nGrowth 2.9%")) +
@@ -96,21 +105,38 @@ v1 <-ggplot(data) +
     theme_opts + 
     labs(title = "Projected Annual Growth in Revenue Passenger Kilometers (RPK) 2015-2035 (top 10 regional flows)")
 
-girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
-# References
-## The citations and data sources used for this case is available at the source: <a href="https://www.boeing.com/resources/boeingdotcom/commercial/about-our-market/assets/downloads/cmo_print_2016_final_updated.pdf" target="_blank" rel="noopener noreferrer">Projected growth in airline passenger traffic by region</a>
 
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
 
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "citations/projected-growth-in-airline-passenger-traffic-by-region.bib")
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/percentage-of-females-married-by-18-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/percentage-of-females-married-by-18-sm.png", plot = v1, width=4, height=2.25)
 
 ```
+
+### References
+#### citations for narrative and data sources
+
+The citations and data sources used for this case is available at the source: <a href="https://www.boeing.com/resources/boeingdotcom/commercial/about-our-market/assets/downloads/cmo_print_2016_final_updated.pdf" target="_blank" rel="noopener noreferrer">Projected growth in airline passenger traffic by region</a>
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
 
 
 ```{js, message=FALSE, warning=FALSE, echo=FALSE}
