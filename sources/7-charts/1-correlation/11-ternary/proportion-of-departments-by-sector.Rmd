@@ -24,15 +24,10 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
-library(stringr)
 library(scales)
 library(ggtern)
 library(ggiraph)
 library(viridis)
-
-# needed to include bib references
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -99,7 +94,7 @@ df_analysis
 #### position, shape, color, size
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 theme_opts <- theme(
   text = element_text(family = "inconsolata"), 
@@ -130,9 +125,24 @@ v1 <- ggtern(data=df_analysis, aes(x=i, y=ii, z=iii)) +
 
 # v1
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
+
+```
+
+
+### Wrangle
+#### normalize with range scaling
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Rescale 0 to 100
+df_rescale <- df_analysis
+df_rescale$i <- rescale(df_rescale$i, to=c(0,100))
+df_rescale$ii <- rescale(df_rescale$ii, to=c(0,100))
+df_rescale$iii <- rescale(df_rescale$iii, to=c(0,100))
 
 ```
 
@@ -141,13 +151,8 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 #### with range rescaling
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
-# Rescale 0 to 100
-df_rescale <- df_analysis
-df_rescale$i <- rescale(df_rescale$i, to=c(0,100))
-df_rescale$ii <- rescale(df_rescale$ii, to=c(0,100))
-df_rescale$iii <- rescale(df_rescale$iii, to=c(0,100))
 
 v2 <- ggtern(data=df_rescale, aes(x=i, y=ii, z=iii)) + 
   geom_point(aes(fill = total_pop, size = total_pop), shape = 21, color = "#ffffff", alpha = 0.7) + 
@@ -163,9 +168,7 @@ v2 <- ggtern(data=df_rescale, aes(x=i, y=ii, z=iii)) +
            ylab("Services") +
            zlab("Industry")
 
-# v2
-
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 

@@ -25,6 +25,7 @@ gc() #free up memory and report the memory usage.
 
 library(tidyverse)
 library(countrycode)
+library(ggrepel)
 library(ggiraph)
 
 library(showtext)
@@ -42,9 +43,9 @@ CHARTS
 # Public Support for Free Speech
 ## Scatter plot
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Kristina Flour on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Marie S on Unsplash"}
 
-masthead <- "assets/kristina-flour-unsplash.jpg"
+masthead <- "assets/marie-s-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -78,11 +79,11 @@ df_justitia
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 df_justitia$ISO3 <- countrycode(df_justitia$COUNTRY_DATA, origin='country.name', destination='iso3c')
-df_justitia
+# df_justitia
 
 df_combined <- merge(df_justitia, df_vdem, by.x='ISO3', by.y='country_text_id')
-df_combined
 df_combined$Region <- countrycode(df_combined$ISO3, origin='iso3c', destination='un.region.name')
+# df_combined
 
 df_final <- df_combined %>% select(c(ISO3, country_name, v2x_freexp, Free_Speech_Index, Region))
 df_final
@@ -94,7 +95,7 @@ df_final
 #### data points with smoothing
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -119,14 +120,14 @@ v1 <- ggplot(df_final, aes(x = Free_Speech_Index, y = v2x_freexp)) +
   scale_y_continuous(breaks=seq(0, 1, 0.2)) +
   labs( title = "You can't always get what you want",
         subtitle = "Desired v actual freedom of speech",
-        caption = "Source: V-Dem Institute, Justitia",
+        # caption = "Source: V-Dem Institute, Justitia",
         x = "Less <- Public support for speech, 2020 -> More",
         y = "Amount of permitted free speech, 2020") +
   theme_bw() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
-       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8))
 )
 
 ```
@@ -136,9 +137,13 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 #### some narrative to help tell the story
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
 
+v2 <- v1 +
+  geom_text_repel(aes(label = country_name), direction = "y", min.segment.length = 0.0, nudge_y = 0.02, point.padding = 0.2, family = "inconsolata")
 
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
   
 ```

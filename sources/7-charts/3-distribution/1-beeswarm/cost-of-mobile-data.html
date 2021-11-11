@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Cost of Mobile Data</title>
+
+<script src="vendor/header-attrs-2.11/header-attrs.js"></script>
+<script src="vendor/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="vendor/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="vendor/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="vendor/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="vendor/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="vendor/navigation-1.1/tabsets.js"></script>
+<script src="vendor/navigation-1.1/codefolding.js"></script>
+<link href="vendor/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="vendor/highlightjs-9.12.0/highlight.js"></script>
+<link href="vendor/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="vendor/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="vendor/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="vendor/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+<script src="vendor/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+<script src="vendor/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+<link href="vendor/ggiraphjs-0.4.1/ggiraphjs.min.css" rel="stylesheet" />
+<script src="vendor/ggiraphjs-0.4.1/ggiraphjs.min.js"></script>
+<script src="vendor/girafe-binding-0.7.10/girafe.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHLBJTGCKN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GHLBJTGCKN');
+  </script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../z-assemblers/assets/logo/logo.svg" alt="" height="36">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../z-assemblers/assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../z-assemblers/assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="../../../z-assemblers/assets/styles/content.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>CHARTS</p>
+</div>
+<div id="cost-of-mobile-data" class="section level1">
+<h1>Cost of Mobile Data</h1>
+<div id="bubble-chart" class="section level2">
+<h2>Bubble Chart</h2>
+<div class="figure" style="text-align: center">
+<img src="assets/ricardo-gomez-angel-unsplash.jpg" alt="Photo by Ricardo Gomez Angel on Unsplash" width="60%" />
+<p class="caption">
+Photo by Ricardo Gomez Angel on Unsplash
+</p>
+</div>
+<blockquote>
+<p>It’s not where you start but where you finish…<br />
+— April Heinrichs<br />
+</p>
+</blockquote>
+<hr />
+<p>This example is based on the work of the <strong>Transit Project</strong> using their database that spans more than 50 countries and totals more than 11,000 km of urban rail built since the late 1990s.</p>
+<div id="ingest-data" class="section level3">
+<h3>Ingest data</h3>
+<div id="rank-country-price" class="section level4">
+<h4>rank, country, price</h4>
+<pre class="r fold-hide"><code># file path parameter
+df_file_path &lt;- &quot;archetypes/cost-of-mobile-data/cost-of-1gb-of-data.csv&quot;
+df &lt;- read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE)
+df</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Rank"],"name":[1],"type":["int"],"align":["right"]},{"label":["Country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Avg_Price_of_1GB_USD"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"India","3":"0.09"},{"1":"2","2":"Israel","3":"0.11"},{"1":"3","2":"Kyrgyzstan","3":"0.21"},{"1":"4","2":"Italy","3":"0.43"},{"1":"5","2":"Ukraine","3":"0.46"},{"1":"6","2":"Kazakhstan","3":"0.46"},{"1":"7","2":"Somalia","3":"0.50"},{"1":"8","2":"Sri Lanka","3":"0.51"},{"1":"9","2":"Russian Federation","3":"0.52"},{"1":"10","2":"Vietnam","3":"0.57"},{"1":"11","2":"China","3":"0.61"},{"1":"12","2":"Sudan","3":"0.63"},{"1":"13","2":"Indonesia","3":"0.64"},{"1":"14","2":"Algeria","3":"0.65"},{"1":"15","2":"Australia","3":"0.68"},{"1":"16","2":"Pakistan","3":"0.69"},{"1":"17","2":"Poland","3":"0.70"},{"1":"18","2":"Bangladesh","3":"0.70"},{"1":"19","2":"Chile","3":"0.71"},{"1":"20","2":"Turkey","3":"0.72"},{"1":"21","2":"Tanzania","3":"0.73"},{"1":"22","2":"Dominican Republic","3":"0.74"},{"1":"23","2":"Mongolia","3":"0.74"},{"1":"24","2":"Iran","3":"0.75"},{"1":"25","2":"Kuwait","3":"0.77"},{"1":"26","2":"Myanmar","3":"0.78"},{"1":"27","2":"Denmark","3":"0.80"},{"1":"28","2":"France","3":"0.81"},{"1":"29","2":"Nepal","3":"0.86"},{"1":"30","2":"Belarus","3":"0.89"},{"1":"31","2":"Georgia","3":"0.93"},{"1":"32","2":"Ghana","3":"0.94"},{"1":"33","2":"Monaco","3":"0.98"},{"1":"34","2":"Western Sahara","3":"0.99"},{"1":"35","2":"Morocco","3":"0.99"},{"1":"36","2":"Brazil","3":"1.01"},{"1":"37","2":"Romania","3":"1.03"},{"1":"38","2":"Jordan","3":"1.03"},{"1":"39","2":"Kenya","3":"1.05"},{"1":"40","2":"Armenia","3":"1.05"},{"1":"41","2":"Austria","3":"1.08"},{"1":"42","2":"Egypt","3":"1.09"},{"1":"43","2":"Moldova","3":"1.12"},{"1":"44","2":"Malaysia","3":"1.12"},{"1":"45","2":"Thailand","3":"1.23"},{"1":"46","2":"Estonia","3":"1.27"},{"1":"47","2":"Uzbekistan","3":"1.34"},{"1":"48","2":"Ireland","3":"1.36"},{"1":"49","2":"Zambia","3":"1.36"},{"1":"50","2":"Tunisia","3":"1.37"},{"1":"51","2":"Nigeria","3":"1.39"},{"1":"52","2":"United Kingdom","3":"1.39"},{"1":"53","2":"Philippines","3":"1.42"},{"1":"54","2":"El Salvador","3":"1.45"},{"1":"55","2":"Argentina","3":"1.45"},{"1":"56","2":"Rwanda","3":"1.48"},{"1":"57","2":"Slovenia","3":"1.48"},{"1":"58","2":"Cambodia","3":"1.50"},{"1":"59","2":"Afghanistan","3":"1.55"},{"1":"60","2":"Uruguay","3":"1.58"},{"1":"61","2":"Serbia","3":"1.60"},{"1":"62","2":"Uganda","3":"1.62"},{"1":"63","2":"Nicaragua","3":"1.71"},{"1":"64","2":"Macedonia","3":"1.75"},{"1":"65","2":"Spain","3":"1.81"},{"1":"66","2":"Lithuania","3":"1.85"},{"1":"67","2":"Azerbaijan","3":"1.86"},{"1":"68","2":"Congo","3":"1.94"},{"1":"69","2":"Sweden","3":"2.07"},{"1":"70","2":"Guinea","3":"2.08"},{"1":"71","2":"Timor-Leste","3":"2.08"},{"1":"72","2":"Saudi Arabia","3":"2.12"},{"1":"73","2":"Burundi","3":"2.12"},{"1":"74","2":"Peru","3":"2.13"},{"1":"75","2":"Lesotho","3":"2.13"},{"1":"76","2":"Finland","3":"2.14"},{"1":"77","2":"Guatemala","3":"2.17"},{"1":"78","2":"Bulgaria","3":"2.22"},{"1":"79","2":"Bahrain","3":"2.27"},{"1":"80","2":"Paraguay","3":"2.30"},{"1":"81","2":"Ethiopia","3":"2.44"},{"1":"82","2":"Singapore","3":"2.47"},{"1":"83","2":"Burkina Faso","3":"2.47"},{"1":"84","2":"Croatia","3":"2.48"},{"1":"85","2":"Mauritius","3":"2.48"},{"1":"86","2":"Hong Kong","3":"2.55"},{"1":"87","2":"Haiti","3":"2.74"},{"1":"88","2":"Costa Rica","3":"2.74"},{"1":"89","2":"Cameroon","3":"2.75"},{"1":"90","2":"Albania","3":"2.83"},{"1":"91","2":"Netherlands","3":"2.98"},{"1":"92","2":"Bosnia and Herzegovina","3":"3.04"},{"1":"93","2":"Honduras","3":"3.12"},{"1":"94","2":"CÃ´te d'Ivoire","3":"3.20"},{"1":"95","2":"Ecuador","3":"3.24"},{"1":"96","2":"Liberia","3":"3.25"},{"1":"97","2":"Palestine","3":"3.26"},{"1":"98","2":"Niger","3":"3.30"},{"1":"99","2":"Senegal","3":"3.30"},{"1":"100","2":"Mozambique","3":"3.33"},{"1":"101","2":"Colombia","3":"3.46"},{"1":"102","2":"Sierra Leone","3":"3.69"},{"1":"103","2":"United Arab Emirates","3":"3.78"},{"1":"104","2":"Latvia","3":"3.79"},{"1":"105","2":"Lebanon","3":"3.82"},{"1":"106","2":"Slovakia","3":"3.84"},{"1":"107","2":"Jamaica","3":"3.88"},{"1":"108","2":"Japan","3":"3.91"},{"1":"109","2":"Germany","3":"4.06"},{"1":"110","2":"Qatar","3":"4.12"},{"1":"111","2":"Guinea-Bissau","3":"4.12"},{"1":"112","2":"Mali","3":"4.12"},{"1":"113","2":"Lao PDR","3":"4.16"},{"1":"114","2":"Iraq","3":"4.20"},{"1":"115","2":"South Africa","3":"4.30"},{"1":"116","2":"Togo","3":"4.50"},{"1":"117","2":"Oman","3":"4.58"},{"1":"118","2":"Mauritania","3":"4.63"},{"1":"119","2":"Tajikistan","3":"4.65"},{"1":"120","2":"Libya","3":"4.73"},{"1":"121","2":"Mexico","3":"4.77"},{"1":"122","2":"Namibia","3":"4.78"},{"1":"123","2":"Belgium","3":"4.88"},{"1":"124","2":"Gabon","3":"4.89"},{"1":"125","2":"Portugal","3":"4.97"},{"1":"126","2":"Bolivia","3":"5.09"},{"1":"127","2":"Gambia","3":"5.10"},{"1":"128","2":"Norway","3":"5.28"},{"1":"129","2":"Angola","3":"5.29"},{"1":"130","2":"Hungary","3":"5.32"},{"1":"131","2":"Papua New Guinea","3":"5.40"},{"1":"132","2":"Taiwan","3":"5.91"},{"1":"133","2":"Trinidad and Tobago","3":"5.92"},{"1":"134","2":"New Zealand","3":"6.06"},{"1":"135","2":"Syria","3":"6.55"},{"1":"136","2":"Panama","3":"6.69"},{"1":"137","2":"Czech Republic","3":"7.95"},{"1":"138","2":"United States","3":"8.00"},{"1":"139","2":"Central African Republic","3":"8.25"},{"1":"140","2":"Switzerland","3":"8.38"},{"1":"141","2":"Madagascar","3":"8.81"},{"1":"142","2":"Puerto Rico","3":"9.17"},{"1":"143","2":"South Korea","3":"10.94"},{"1":"144","2":"Turkmenistan","3":"11.44"},{"1":"145","2":"Greece","3":"12.06"},{"1":"146","2":"Canada","3":"12.55"},{"1":"147","2":"Equatorial Guinea","3":"12.78"},{"1":"148","2":"Eswatini","3":"13.31"},{"1":"149","2":"Cuba","3":"13.33"},{"1":"150","2":"Cyprus","3":"13.56"},{"1":"151","2":"Botswana","3":"13.87"},{"1":"152","2":"Yemen","3":"15.98"},{"1":"153","2":"Chad","3":"23.33"},{"1":"154","2":"Benin","3":"27.22"},{"1":"155","2":"Malawi","3":"27.41"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="wrangle-data" class="section level3">
+<h3>Wrangle data</h3>
+<div id="mutate-filter-and-enrich" class="section level4">
+<h4>mutate, filter, and enrich</h4>
+<pre class="r fold-hide"><code>df_wrangle &lt;- 
+    df %&gt;% 
+    mutate(X = as.factor(&quot;C&quot;))
+
+df_wrangle</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Rank"],"name":[1],"type":["int"],"align":["right"]},{"label":["Country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Avg_Price_of_1GB_USD"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["X"],"name":[4],"type":["fct"],"align":["left"]}],"data":[{"1":"1","2":"India","3":"0.09","4":"C"},{"1":"2","2":"Israel","3":"0.11","4":"C"},{"1":"3","2":"Kyrgyzstan","3":"0.21","4":"C"},{"1":"4","2":"Italy","3":"0.43","4":"C"},{"1":"5","2":"Ukraine","3":"0.46","4":"C"},{"1":"6","2":"Kazakhstan","3":"0.46","4":"C"},{"1":"7","2":"Somalia","3":"0.50","4":"C"},{"1":"8","2":"Sri Lanka","3":"0.51","4":"C"},{"1":"9","2":"Russian Federation","3":"0.52","4":"C"},{"1":"10","2":"Vietnam","3":"0.57","4":"C"},{"1":"11","2":"China","3":"0.61","4":"C"},{"1":"12","2":"Sudan","3":"0.63","4":"C"},{"1":"13","2":"Indonesia","3":"0.64","4":"C"},{"1":"14","2":"Algeria","3":"0.65","4":"C"},{"1":"15","2":"Australia","3":"0.68","4":"C"},{"1":"16","2":"Pakistan","3":"0.69","4":"C"},{"1":"17","2":"Poland","3":"0.70","4":"C"},{"1":"18","2":"Bangladesh","3":"0.70","4":"C"},{"1":"19","2":"Chile","3":"0.71","4":"C"},{"1":"20","2":"Turkey","3":"0.72","4":"C"},{"1":"21","2":"Tanzania","3":"0.73","4":"C"},{"1":"22","2":"Dominican Republic","3":"0.74","4":"C"},{"1":"23","2":"Mongolia","3":"0.74","4":"C"},{"1":"24","2":"Iran","3":"0.75","4":"C"},{"1":"25","2":"Kuwait","3":"0.77","4":"C"},{"1":"26","2":"Myanmar","3":"0.78","4":"C"},{"1":"27","2":"Denmark","3":"0.80","4":"C"},{"1":"28","2":"France","3":"0.81","4":"C"},{"1":"29","2":"Nepal","3":"0.86","4":"C"},{"1":"30","2":"Belarus","3":"0.89","4":"C"},{"1":"31","2":"Georgia","3":"0.93","4":"C"},{"1":"32","2":"Ghana","3":"0.94","4":"C"},{"1":"33","2":"Monaco","3":"0.98","4":"C"},{"1":"34","2":"Western Sahara","3":"0.99","4":"C"},{"1":"35","2":"Morocco","3":"0.99","4":"C"},{"1":"36","2":"Brazil","3":"1.01","4":"C"},{"1":"37","2":"Romania","3":"1.03","4":"C"},{"1":"38","2":"Jordan","3":"1.03","4":"C"},{"1":"39","2":"Kenya","3":"1.05","4":"C"},{"1":"40","2":"Armenia","3":"1.05","4":"C"},{"1":"41","2":"Austria","3":"1.08","4":"C"},{"1":"42","2":"Egypt","3":"1.09","4":"C"},{"1":"43","2":"Moldova","3":"1.12","4":"C"},{"1":"44","2":"Malaysia","3":"1.12","4":"C"},{"1":"45","2":"Thailand","3":"1.23","4":"C"},{"1":"46","2":"Estonia","3":"1.27","4":"C"},{"1":"47","2":"Uzbekistan","3":"1.34","4":"C"},{"1":"48","2":"Ireland","3":"1.36","4":"C"},{"1":"49","2":"Zambia","3":"1.36","4":"C"},{"1":"50","2":"Tunisia","3":"1.37","4":"C"},{"1":"51","2":"Nigeria","3":"1.39","4":"C"},{"1":"52","2":"United Kingdom","3":"1.39","4":"C"},{"1":"53","2":"Philippines","3":"1.42","4":"C"},{"1":"54","2":"El Salvador","3":"1.45","4":"C"},{"1":"55","2":"Argentina","3":"1.45","4":"C"},{"1":"56","2":"Rwanda","3":"1.48","4":"C"},{"1":"57","2":"Slovenia","3":"1.48","4":"C"},{"1":"58","2":"Cambodia","3":"1.50","4":"C"},{"1":"59","2":"Afghanistan","3":"1.55","4":"C"},{"1":"60","2":"Uruguay","3":"1.58","4":"C"},{"1":"61","2":"Serbia","3":"1.60","4":"C"},{"1":"62","2":"Uganda","3":"1.62","4":"C"},{"1":"63","2":"Nicaragua","3":"1.71","4":"C"},{"1":"64","2":"Macedonia","3":"1.75","4":"C"},{"1":"65","2":"Spain","3":"1.81","4":"C"},{"1":"66","2":"Lithuania","3":"1.85","4":"C"},{"1":"67","2":"Azerbaijan","3":"1.86","4":"C"},{"1":"68","2":"Congo","3":"1.94","4":"C"},{"1":"69","2":"Sweden","3":"2.07","4":"C"},{"1":"70","2":"Guinea","3":"2.08","4":"C"},{"1":"71","2":"Timor-Leste","3":"2.08","4":"C"},{"1":"72","2":"Saudi Arabia","3":"2.12","4":"C"},{"1":"73","2":"Burundi","3":"2.12","4":"C"},{"1":"74","2":"Peru","3":"2.13","4":"C"},{"1":"75","2":"Lesotho","3":"2.13","4":"C"},{"1":"76","2":"Finland","3":"2.14","4":"C"},{"1":"77","2":"Guatemala","3":"2.17","4":"C"},{"1":"78","2":"Bulgaria","3":"2.22","4":"C"},{"1":"79","2":"Bahrain","3":"2.27","4":"C"},{"1":"80","2":"Paraguay","3":"2.30","4":"C"},{"1":"81","2":"Ethiopia","3":"2.44","4":"C"},{"1":"82","2":"Singapore","3":"2.47","4":"C"},{"1":"83","2":"Burkina Faso","3":"2.47","4":"C"},{"1":"84","2":"Croatia","3":"2.48","4":"C"},{"1":"85","2":"Mauritius","3":"2.48","4":"C"},{"1":"86","2":"Hong Kong","3":"2.55","4":"C"},{"1":"87","2":"Haiti","3":"2.74","4":"C"},{"1":"88","2":"Costa Rica","3":"2.74","4":"C"},{"1":"89","2":"Cameroon","3":"2.75","4":"C"},{"1":"90","2":"Albania","3":"2.83","4":"C"},{"1":"91","2":"Netherlands","3":"2.98","4":"C"},{"1":"92","2":"Bosnia and Herzegovina","3":"3.04","4":"C"},{"1":"93","2":"Honduras","3":"3.12","4":"C"},{"1":"94","2":"CÃ´te d'Ivoire","3":"3.20","4":"C"},{"1":"95","2":"Ecuador","3":"3.24","4":"C"},{"1":"96","2":"Liberia","3":"3.25","4":"C"},{"1":"97","2":"Palestine","3":"3.26","4":"C"},{"1":"98","2":"Niger","3":"3.30","4":"C"},{"1":"99","2":"Senegal","3":"3.30","4":"C"},{"1":"100","2":"Mozambique","3":"3.33","4":"C"},{"1":"101","2":"Colombia","3":"3.46","4":"C"},{"1":"102","2":"Sierra Leone","3":"3.69","4":"C"},{"1":"103","2":"United Arab Emirates","3":"3.78","4":"C"},{"1":"104","2":"Latvia","3":"3.79","4":"C"},{"1":"105","2":"Lebanon","3":"3.82","4":"C"},{"1":"106","2":"Slovakia","3":"3.84","4":"C"},{"1":"107","2":"Jamaica","3":"3.88","4":"C"},{"1":"108","2":"Japan","3":"3.91","4":"C"},{"1":"109","2":"Germany","3":"4.06","4":"C"},{"1":"110","2":"Qatar","3":"4.12","4":"C"},{"1":"111","2":"Guinea-Bissau","3":"4.12","4":"C"},{"1":"112","2":"Mali","3":"4.12","4":"C"},{"1":"113","2":"Lao PDR","3":"4.16","4":"C"},{"1":"114","2":"Iraq","3":"4.20","4":"C"},{"1":"115","2":"South Africa","3":"4.30","4":"C"},{"1":"116","2":"Togo","3":"4.50","4":"C"},{"1":"117","2":"Oman","3":"4.58","4":"C"},{"1":"118","2":"Mauritania","3":"4.63","4":"C"},{"1":"119","2":"Tajikistan","3":"4.65","4":"C"},{"1":"120","2":"Libya","3":"4.73","4":"C"},{"1":"121","2":"Mexico","3":"4.77","4":"C"},{"1":"122","2":"Namibia","3":"4.78","4":"C"},{"1":"123","2":"Belgium","3":"4.88","4":"C"},{"1":"124","2":"Gabon","3":"4.89","4":"C"},{"1":"125","2":"Portugal","3":"4.97","4":"C"},{"1":"126","2":"Bolivia","3":"5.09","4":"C"},{"1":"127","2":"Gambia","3":"5.10","4":"C"},{"1":"128","2":"Norway","3":"5.28","4":"C"},{"1":"129","2":"Angola","3":"5.29","4":"C"},{"1":"130","2":"Hungary","3":"5.32","4":"C"},{"1":"131","2":"Papua New Guinea","3":"5.40","4":"C"},{"1":"132","2":"Taiwan","3":"5.91","4":"C"},{"1":"133","2":"Trinidad and Tobago","3":"5.92","4":"C"},{"1":"134","2":"New Zealand","3":"6.06","4":"C"},{"1":"135","2":"Syria","3":"6.55","4":"C"},{"1":"136","2":"Panama","3":"6.69","4":"C"},{"1":"137","2":"Czech Republic","3":"7.95","4":"C"},{"1":"138","2":"United States","3":"8.00","4":"C"},{"1":"139","2":"Central African Republic","3":"8.25","4":"C"},{"1":"140","2":"Switzerland","3":"8.38","4":"C"},{"1":"141","2":"Madagascar","3":"8.81","4":"C"},{"1":"142","2":"Puerto Rico","3":"9.17","4":"C"},{"1":"143","2":"South Korea","3":"10.94","4":"C"},{"1":"144","2":"Turkmenistan","3":"11.44","4":"C"},{"1":"145","2":"Greece","3":"12.06","4":"C"},{"1":"146","2":"Canada","3":"12.55","4":"C"},{"1":"147","2":"Equatorial Guinea","3":"12.78","4":"C"},{"1":"148","2":"Eswatini","3":"13.31","4":"C"},{"1":"149","2":"Cuba","3":"13.33","4":"C"},{"1":"150","2":"Cyprus","3":"13.56","4":"C"},{"1":"151","2":"Botswana","3":"13.87","4":"C"},{"1":"152","2":"Yemen","3":"15.98","4":"C"},{"1":"153","2":"Chad","3":"23.33","4":"C"},{"1":"154","2":"Benin","3":"27.22","4":"C"},{"1":"155","2":"Malawi","3":"27.41","4":"C"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="bubble-chart-1" class="section level3">
+<h3>Bubble Chart</h3>
+<div id="with-loess-smoothing-hover-over-points-for-additional-details" class="section level4">
+<h4>with loess smoothing (hover over points for additional details)</h4>
+<pre class="r fold-hide"><code>theme_opts &lt;- theme(
+    text = element_text(family = &quot;inconsolata&quot;), 
+    plot.title = element_text(color = &quot;black&quot;, size = 14, face = &quot;bold&quot;),
+    plot.subtitle = element_text(color = &quot;black&quot;, size = 12),
+    plot.caption = element_text(color = &quot;#555555&quot;, size = 8),
+    axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    axis.text.x = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    # panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    # panel.grid.major.y = element_blank(), # remove y (horizontal) gridlines
+    legend.title = element_blank(), # remove legend title
+    # legend.text = element_text(color = &quot;black&quot;, size = 8),
+    legend.position=&#39;none&#39;
+)
+
+
+v1 &lt;- ggplot(data = df_wrangle) +
+    geom_jitter(aes(x = X, y = Avg_Price_of_1GB_USD, size = Rank), stat = &quot;identity&quot;, width = 0.75, height = 0.0, shape = 21, fill = &quot;#cccccc&quot;, color = &quot;#FFFFFF&quot;, stroke = 1.0, alpha = 0.9) +
+    scale_x_discrete(breaks = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;)) +
+    scale_y_continuous(labels = scales::dollar) +
+    scale_size_continuous(limits = c(2, 25)) +
+    labs(title = &quot;Transit Costs&quot;,
+        subtitle = &quot;color by continent, size by time to complete&quot;,
+        x = &#39;Length&#39;,
+        y = &#39;Real Cost in Millions of USD&#39;,
+        caption = &quot;Source:Transit Costs Project&quot;)+
+    theme_minimal() +
+    theme_opts
+
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))</code></pre>
+<div id="htmlwidget-be1568870d2f5055348e" style="width:100%;height:1440px;" class="girafe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-be1568870d2f5055348e">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc' viewBox='0 0 1280.00 720.00'>\n  <g>\n    <defs>\n      <clipPath id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_1'>\n        <rect x='0.00' y='0.00' width='1280.00' height='720.00'/>\n      <\/clipPath>\n    <\/defs>\n    <rect x='0.00' y='0.00' width='1280.00' height='720.00' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_1' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_1)' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round'/>\n    <defs>\n      <clipPath id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_2'>\n        <rect x='0.00' y='0.00' width='1280.00' height='720.00'/>\n      <\/clipPath>\n    <\/defs>\n    <defs>\n      <clipPath id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3'>\n        <rect x='36.43' y='37.15' width='1238.09' height='662.78'/>\n      <\/clipPath>\n    <\/defs>\n    <polyline points='36.43,671.78 1274.52,671.78' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_2' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='36.43,451.24 1274.52,451.24' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_3' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='36.43,230.69 1274.52,230.69' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_4' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='651.65,699.92 651.65,37.15' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_5' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <circle cx='525.62' cy='669.35' r='1.33pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_6' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='1044.42' cy='667.15' r='2.17pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_7' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='508.97' cy='662.30' r='2.51pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_8' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='75.49' cy='661.64' r='2.78pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_9' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='1068.22' cy='661.64' r='3.00pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_10' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='1028.68' cy='660.75' r='3.20pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_11' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='1208.30' cy='660.53' r='3.38pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_12' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='326.93' cy='660.31' r='3.54pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_13' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='197.53' cy='659.21' r='3.69pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_14' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='807.26' cy='658.33' r='3.83pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_15' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='1126.04' cy='657.89' r='3.97pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_16' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='1103.70' cy='657.67' r='4.10pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_17' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='806.79' cy='657.45' r='4.22pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_18' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='1106.31' cy='656.78' r='4.34pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_19' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='975.11' cy='656.56' r='4.45pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_20' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='649.45' cy='656.34' r='4.56pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_21' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='108.57' cy='656.34' r='4.67pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_22' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='386.87' cy='656.12' r='4.77pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_23' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='453.32' cy='655.90' r='4.87pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_24' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='369.67' cy='655.68' r='4.97pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_25' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='1063.46' cy='655.46' r='5.06pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_26' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='269.89' cy='655.46' r='5.15pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_27' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='740.71' cy='655.24' r='5.24pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_28' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <circle cx='929.87' cy='654.80' r='5.33pt' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_29' clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_3)' fill='#CCCCCC' fill-opacity='0.9' stroke='#FFFFFF' stroke-opacity='0.9' stroke-width='1.42' stroke-linejoin='round' stroke-linecap='round'/>\n    <defs>\n      <clipPath id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_4'>\n        <rect x='0.00' y='0.00' width='1280.00' height='720.00'/>\n      <\/clipPath>\n    <\/defs>\n    <g clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_4)'>\n      <text x='21.82' y='674.53' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_30' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='inconsolata'>$0<\/text>\n    <\/g>\n    <g clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_4)'>\n      <text x='16.98' y='453.98' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_31' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='inconsolata'>$10<\/text>\n    <\/g>\n    <g clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_4)'>\n      <text x='16.98' y='233.44' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_32' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='inconsolata'>$20<\/text>\n    <\/g>\n    <g clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_4)'>\n      <text transform='translate(12.35,453.21) rotate(-90.00)' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_33' font-size='8.25pt' font-family='inconsolata'>Real Cost in Millions of USD<\/text>\n    <\/g>\n    <g clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_4)'>\n      <text x='36.43' y='29.60' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_34' font-size='9.00pt' font-family='inconsolata'>color by continent, size by time to complete<\/text>\n    <\/g>\n    <g clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_4)'>\n      <text x='36.43' y='14.21' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_35' font-size='10.50pt' font-weight='bold' font-family='inconsolata'>Transit Costs<\/text>\n    <\/g>\n    <g clip-path='url(#svg_adaf2d71-39ce-449d-a844-5a02eea204cc_cl_4)'>\n      <text x='1151.34' y='713.14' id='svg_adaf2d71-39ce-449d-a844-5a02eea204cc_el_36' font-size='6.00pt' fill='#555555' fill-opacity='1' font-family='inconsolata'>Source:Transit Costs Project<\/text>\n    <\/g>\n  <\/g>\n<\/svg>","js":null,"uid":"svg_adaf2d71-39ce-449d-a844-5a02eea204cc","ratio":1.77777777777778,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px 2px 2px 2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}\n","placement":"doc","offx":10,"offy":0,"use_cursor_pos":true,"opacity":0.9,"usefill":false,"usestroke":false,"delay":{"over":200,"out":500}},"hover":{"css":".hover_SVGID_ { fill:orange;stroke:gray; }","reactive":false},"hoverkey":{"css":".hover_key_SVGID_ { stroke:red; }","reactive":false},"hovertheme":{"css":".hover_theme_SVGID_ { fill:green; }","reactive":false},"hoverinv":{"css":""},"zoom":{"min":1,"max":1},"capture":{"css":".selected_SVGID_ { fill:red;stroke:gray; }","type":"multiple","only_shiny":true,"selected":[]},"capturekey":{"css":".selected_key_SVGID_ { stroke:gray; }","type":"single","only_shiny":true,"selected":[]},"capturetheme":{"css":".selected_theme_SVGID_ { stroke:gray; }","type":"single","only_shiny":true,"selected":[]},"toolbar":{"position":"topright","saveaspng":true,"pngname":"diagram"},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<div id="citations-for-narrative-and-data-sources" class="section level4">
+<h4>citations for narrative and data sources</h4>
+<ul>
+<li>Narrative sources: John Mutiso, TidyTuesday, <a href="https://github.com/johnmutiso/-TidyTuesday/tree/master/2021/week%202" target="_blank">GO</a></li>
+<li>Data sources: Transit Costs Project, <a href="https://transitcosts.com/" target="_blank">GO</a></li>
+</ul>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>
