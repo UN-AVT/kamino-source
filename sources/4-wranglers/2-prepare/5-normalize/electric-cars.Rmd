@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Case: How cheap are Electric Cars"
 output: 
   html_document:
     theme: lumen
@@ -253,7 +253,9 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 #### Other forms of Normalization includes Log Transformation and IQR Transformation which are used in specific cases such as time-series data. 
 
 ### References
-#### The data file used in this wrangler task was retrieved from <a href="https://www.kaggle.com/kkhandekar/cheapest-electric-cars" target="_blank" rel="noopener noreferrer"> Kaggle </a> source in which data was scraped <a href="https://ev-database.org/" target="_blank" rel="noopener noreferrer"> Electric Vehicle Database </a> 
+#### citations for narrative and data sources
+* Narrative sources: The Narrative Source, [GO](https://www.kaggle.com/kkhandekar/cheapest-electric-cars){target="_blank"}
+* Data sources: The Data Source, [GO](https://ev-database.org/){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
