@@ -1,5 +1,5 @@
 ---
-pagetitle: "Greenhouse Gas (GHG) emissions by country"
+pagetitle: "USDA National Nutrient Database"
 output:
   html_document:
     theme: lumen
@@ -69,7 +69,7 @@ df_ingest
 ### Wrangle the data
 #### filter on food group
 
-```{r data-prep, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 #0: "American Indian/Alaska Native Foods"
 #1: "Baby Foods"
@@ -112,7 +112,7 @@ df_wrangle
 #### position, shape, color, size
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 theme_opts <- theme(
   text = element_text(family = "inconsolata"), 
@@ -143,9 +143,25 @@ v1 <- ggtern(data=df_wrangle, aes(x=protein, y=carbohydrates, z=fat)) +
 
 # v1
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
+
+```
+
+
+### Wrangle
+#### normalize with range scaling
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Rescale 0 to 100
+df_rescale <- df_wrangle
+df_rescale$protein <- rescale(df_rescale$protein, to=c(0,100))
+df_rescale$carbohydrates <- rescale(df_rescale$carbohydrates, to=c(0,100))
+df_rescale$fat <- rescale(df_rescale$fat, to=c(0,100))
+df_rescale
 
 ```
 
@@ -153,13 +169,8 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ### Plot
 #### with range rescaling
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
 
-# Rescale 0 to 100
-df_rescale <- df_wrangle
-df_rescale$protein <- rescale(df_rescale$protein, to=c(0,100))
-df_rescale$carbohydrates <- rescale(df_rescale$carbohydrates, to=c(0,100))
-df_rescale$fat <- rescale(df_rescale$fat, to=c(0,100))
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 v2 <- ggtern(data=df_rescale, aes(x=protein, y=carbohydrates, z=fat)) + 
   geom_point(aes(fill = calories, size = calories), shape = 21, color = "#ffffff", alpha = 0.7) + 
@@ -177,7 +188,7 @@ v2 <- ggtern(data=df_rescale, aes(x=protein, y=carbohydrates, z=fat)) +
 
 # v2
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 

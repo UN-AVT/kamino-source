@@ -129,16 +129,26 @@ theme_opts <- theme(
     legend.position='top'
   )
 
+region_palette <- c(
+  "Africa" = "#F57C00",
+  "Americas" = "#00ACC1",
+  "Asia" = "#90A4AE",
+  "Europe" = "#E53935",
+  "Oceania" = "#8BC34A"
+)
+
 # Plot
 v1 <- ggplot(df_final, aes(x = GDP, y = ROAD_DEATHS)) + 
+  geom_smooth(method="lm", se = FALSE, linetype = 'dashed', size = 1.5, color = '#00BCD4') + # "lm", "glm", "gam", "loess" 
   geom_point(aes( fill = REGION, color = REGION), size = 4, shape = 21) +
-  geom_smooth(method="loess", se = FALSE, linetype = 'solid', size = 2, color = '#82A0C2') + # "lm", "glm", "gam", "loess" 
-  geom_text_repel(aes(label = COUNTRY)) + 
+  # geom_text_repel(aes(label = COUNTRY)) + 
   scale_x_log10() +
   scale_y_continuous() +
+  scale_color_manual(values = region_palette) +
+  scale_fill_manual(values = region_palette) +
   labs( title = "Driving lessons",
         subtitle = NULL,
-        caption = "Source: World Bank, IHME",
+        #caption = "Source: World Bank, IHME",
         x = "GDP per capita, PPP (constant 2017 international $)",
         y = "Est road traffic death rate per 100k population both sexes, 2017") +
   theme_bw() +
@@ -151,15 +161,48 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ```
 
 
-### Plot with annotations
-#### some narrative to help tell the story
+### Wrangle
+#### create a label subset
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+label_list <- c(
+  "Burundi",
+  "Liberia",
+  "Haiti",
+  "India",
+  "Dominican Republic",
+  "Thailand",
+  "China",
+  "Saudi Arabia",
+  "Oman",
+  "United States of America",
+  "Sweden",
+  "Ireland",
+  "Singapore",
+  "Qatar"
+)
+
+df_labels <- filter(df_final, COUNTRY %in% label_list)
+df_labels
+
+```
 
 
+### Plot
+#### adding labels and annotations
 
-  
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v2 <- v1 +
+  geom_text_repel(data=df_labels, aes(label = COUNTRY), box.padding = 0.75, min.segment.length = 0.0, nudge_y = 0.75, point.padding = 0.5, family = "inconsolata") + 
+  geom_hline(yintercept = mean(df_final$ROAD_DEATHS), linetype = 'dashed', size = 1.5, color = '#E53935')
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
 ```
 
 

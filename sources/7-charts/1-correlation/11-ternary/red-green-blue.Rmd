@@ -69,7 +69,7 @@ df
 #### position, shape, color, size
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 theme_opts <- theme(
   text = element_text(family = "inconsolata"),
@@ -98,7 +98,7 @@ v1 <- ggtern(data=df, aes(b, r, g)) +
 
 # v1
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
