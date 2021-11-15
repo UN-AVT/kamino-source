@@ -235,7 +235,7 @@ girafe(ggobj = v1, width_svg = 12, height_svg = 16,
 ggsave(filename = "assets/coffee-quality-fs.svg", plot = v2, width=1280/72, height=720/72)
 
 # thumbnail version without annotations
-ggsave(filename = "assets/coffee-qualitysm.png", plot = v2, width=4, height=2.25)
+ggsave(filename = "assets/coffee-quality-sm.png", plot = v2, width=4, height=2.25)
 
 ```
 
