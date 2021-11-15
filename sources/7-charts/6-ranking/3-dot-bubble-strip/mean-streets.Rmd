@@ -1,6 +1,6 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "Mean Streets"
+output:
   html_document:
     theme: lumen
     css: "../../../z-assemblers/assets/styles/content.css"
@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -29,9 +29,9 @@ library(ggiraph)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
-font_add_google("Inconsolata", "inconsolata")
+#font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
-showtext_auto()
+#showtext_auto()
 
 ```
 
@@ -39,13 +39,13 @@ showtext_auto()
 CHARTS  
 </div>
 
-# Ideas Factories
+# Mean Streets
 ## Scatter plot
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Johny Goerend on Unsplash"}
 
-masthead <- "assets/johny-goerend-unsplash.jpg"
-knitr::include_graphics(masthead, dpi=72)
+#masthead <- "assets/johny-goerend-unsplash.jpg"
+#knitr::include_graphics(masthead, dpi=72)
 
 ```
 
@@ -63,11 +63,11 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # Load csv data file
-df_gdp <- read.csv("archetypes/ideas-factories/gdp-per-person-employed-constant-ppp.csv", header = TRUE, stringsAsFactors = FALSE)
-df_gdp
+df_country_city <- read.csv("archetypes/mean-streets/city-homicide-unodc.csv", header = TRUE, stringsAsFactors = FALSE)
+df_country_city
 
-df_gii <- read.csv("archetypes/ideas-factories/global-innovation-index.csv", header = TRUE, stringsAsFactors = FALSE)
-df_gii
+df_region_country <- read.csv("archetypes/mean-streets/homicide_total_rate_and_count-unodc.csv", header = TRUE, stringsAsFactors = FALSE)
+df_region_country
 
 ```
 
@@ -78,29 +78,24 @@ df_gii
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df_gdp_filtered <- df_gdp %>% filter(Year == 2020)
+country_list <- c(
+  "El Salvador",
+  "Mexico",
+  "Honduras",
+  "Brazil",
+  "Guatemala",
+  "South Africa",
+  "United States",
+  "Colombia",
+  "Puerto Rico",
+  "Jamaica"
+)
 
-df_gii_filtered <- df_gii %>% filter(Indicator == 'Global Innovation Index')
-df_gii_filtered <- df_gii_filtered %>% filter(Subindicator.Type == 'Rank')
-df_gii_filtered <- df_gii_filtered %>% select(c(Country.ISO3, Country.Name, X2020))
+df_filtered <- df_country_city %>% filter(Country %in% country_list) %>% filter(Unit == "Count")
+df_filtered
 
-df_combined <- merge(df_gdp_filtered, df_gii_filtered, by.x='Code', by.y='Country.ISO3')
-
-df_combined$REGION <- countrycode(df_combined$Code, origin='iso3c', destination='un.region.name')
-
-df_combined <- df_combined %>% select(c(Code, Entity, GDP.per.person.employed..constant.2017.PPP..., X2020, REGION))
-
-df_combined <- df_combined[complete.cases(df_combined), ]
-
-df_final <- df_combined %>%
-  rename(ISO3 = Code,
-         COUNTRY = Entity,
-         GDP = GDP.per.person.employed..constant.2017.PPP...,
-         GII = X2020)
-
-df_final <- df_final %>% rename_with(toupper)
-df_final
-
+df_region_country_filtered <- df_region_country %>% filter(Year == 2018)
+df_region_country_filtered
 
 ```
 
@@ -109,7 +104,7 @@ df_final
 #### data points with smoothing
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -141,7 +136,7 @@ v1 <- ggplot(df_final, aes(x = GDP, y = GII)) +
   theme_bw() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.75))
 )
 
@@ -160,19 +155,16 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ```
 
 
-### Save plot
-#### as vector or raster image
-
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
 
 # eval = FALSE as default; run manually as chunk
 
 # full version
-ggsave(filename = "outputs/ideas-factories-fs.svg", plot = v1, width=1280/72, height=720/72)
+ggsave(filename = "assets/mean-streets-fs.svg", plot = v1, width=1280/72, height=720/72)
 
 # thumbnail version without annotations
-ggsave(filename = "outputs/ideas-factories-sm.svg", plot = v1, width=4, height=2.25)
+ggsave(filename = "assets/mean-streets-sm.svg", plot = v1, width=4, height=2.25)
 
 ```
 
@@ -187,20 +179,8 @@ ggsave(filename = "outputs/ideas-factories-sm.svg", plot = v1, width=4, height=2
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "" # mostly used in wranglers and analytics
-keywords <- 'innovation GII'
-commands <- 'countrycode geom_smooth scale_y_reverse'
-sources <- 'Economist Cornell INSEAD WIPO'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

@@ -24,6 +24,7 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
+library(ggtext)
 library(ggiraph)
 
 library(showtext)
@@ -42,14 +43,14 @@ CHARTS
 ## Marimekko
 
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Fikri Rasyid on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Alisa Matthews on Unsplash"}
 
-masthead <- "assets/fikri-rasyid-unsplash.jpg"
+masthead <- "assets/alisa-matthews-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">Bandung City, Indonesia, Becak; Indonesia’s traditional rickshaw cycle</div>
+<div class="figure-text">Houston, TX, USA</div>
 
 > This City is what it is because our citizens are what they are...\
 --- Plato\
@@ -77,6 +78,8 @@ df
 #df_top <- df %>% slice_max(Population, n = 15)
 #df_top
 
+# Setting seed to repeat sample parameters
+set.seed(5)
 df_top <- sample_n(df, 15)
 
 df_top$xmax <- cumsum(df_top$Population)
@@ -108,11 +111,11 @@ theme_opts <- theme(
   panel.grid.minor = element_blank(),
   panel.background=element_rect(fill="white", colour="white"),
   panel.border = element_blank(),
-  plot.title = element_text(color = "black", size = 16, face = "bold"),
-  plot.subtitle = element_text(color = "black", size = 12),
+  plot.title = element_text(color = "black", size = 14, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 11),
   plot.caption = element_text(color = "#555555", size = 10),
   plot.background = element_blank(),
-  plot.margin = unit(c(0, 0, 1.25, 0), "in")
+  plot.margin = unit(c(0.25, 0.25, 0.25, 0.25), "in")
 )
 
 group_palette <- c(
@@ -122,12 +125,13 @@ group_palette <- c(
 
 v1 <-ggplot(df_top) +
     geom_rect(aes(ymin = 0, ymax = Measure, xmin = xmin, xmax = xmax, fill = Group), color = "white", alpha = 0.5) + 
-    geom_text(aes(x = xlabel, y = Measure, label = label, vjust = -1), position = "identity", color = "black", size = 3 ) +
-    geom_text(aes(x = xlabel, y = 2, label = Population, vjust = 0), position = "identity", color = "black", size = 3 ) +
-    geom_text(aes(x = xlabel, y = 0, label = City), hjust = "right", vjust = 1.5, position = "identity", color = "black", size = 3.5, angle = 45 ) +
-    geom_hline(yintercept = 10) +
+    geom_hline(yintercept = 10, color = "#FB8C00", linetype = "dotted") +
+    geom_text(aes(x = xlabel, y = Measure, label = label), vjust = -1, position = "identity", color = "black", size = 3, family = "inconsolata" ) +
+    geom_richtext(aes(x = xlabel, y = 2, label = paste0("\u2195 ", Population)), size = 3.0, angle = 90, alpha = 0.8, color = "black", fill = "#FFFFFF", vjust = 0.5, hjust = 0.0, family = "inconsolata") +
+    geom_text(aes(x = xlabel, y = 0, label = City), hjust = "right", vjust = 1.5, position = "identity", color = "black", size = 3.5, angle = 45, family = "inconsolata" ) +
     scale_fill_manual(values = group_palette) +
     coord_cartesian(clip="off") +
+    labs(title = "Capital Cities: Would you live there?", subtitle = "height by percent above safe limits from air pollution, width by population", x = NULL, y = NULL) +
     theme_bw() +
     theme_opts
 
@@ -153,7 +157,7 @@ ggsave(filename = "assets/capital-cities-would-you-live-there-sm.png", plot = v1
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data Source: The Economist, Which countries dominate the world’s dinner tables? [GO](https://www.economist.com/graphic-detail/2019/08/23/which-countries-dominate-the-worlds-dinner-tables){target="_blank"}
+* Narrative and Data Source: TBD
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

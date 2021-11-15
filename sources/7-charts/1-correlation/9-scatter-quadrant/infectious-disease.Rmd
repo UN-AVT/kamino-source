@@ -112,7 +112,7 @@ df_complete
 #### Position, Shape, Color
 
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 # theme parameters
 theme_opts <- theme(
@@ -180,7 +180,7 @@ v1 <- ggplot(df_complete) +
       theme_minimal(base_family = "inconsolata", base_size = 16) +
       theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
        options = list(
          opts_sizing(rescale = TRUE, width = 1.0), 
          opts_hover_inv(css = "opacity:0.2;"), 
@@ -195,7 +195,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 #### and annotations...
 
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 v2 <- v1 + geom_vline(xintercept = 1) +
   geom_vline(xintercept = 5) +
@@ -254,7 +254,7 @@ v2 <- v1 + geom_vline(xintercept = 1) +
   # annotate("rect", xmin = 0, xmax = 17, ymin = 20, ymax = 50, fill = "#f0f0f0", alpha = 0.2)
 
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 12,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
       )
 

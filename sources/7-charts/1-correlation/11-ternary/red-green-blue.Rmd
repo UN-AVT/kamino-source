@@ -42,9 +42,9 @@ CHARTS
 # Red, Green, and Blue
 ## Ternary Plot
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Ronald Cuyan on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Joey Huang on Unsplash"}
 
-masthead <- "assets/ronald-cuyan-unsplash.jpg"
+masthead <- "assets/joey-huang-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -95,8 +95,6 @@ v1 <- ggtern(data=df, aes(b, r, g)) +
            xlab("Blue") + 
            ylab("Red") +
            zlab("Green")
-
-# v1
 
 girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))

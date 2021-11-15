@@ -24,6 +24,7 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
+library(paletteer)
 library(ggiraph)
 
 library(showtext)
@@ -41,12 +42,14 @@ CHARTS
 # Internet Penetration by Region
 ## Marimekko
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Karim Manjra on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Kojo Kwarteng on Unsplash"}
 
-#masthead <- "assets/karim-manjra-unsplash.jpg"
-#knitr::include_graphics(masthead, dpi=72)
+masthead <- "assets/kojo-kwarteng-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
 
 ```
+
+<div class="figure-text">Vodafone Internet Cafe (KNUST), Kumasi, Ghana</div>
 
 ***
 
@@ -75,9 +78,15 @@ data
 
 ### Plot
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', out.width = "85%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 theme_opts <- theme(
+  text = element_text(family = "inconsolata", size = 16), 
+  plot.title = element_text(color = "black", size = 16, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 11),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0.1, 0.1, 1.75, 0.1), "in"),
   legend.position = "none",
   legend.title = element_blank(),
   axis.text = element_blank(),
@@ -88,22 +97,22 @@ theme_opts <- theme(
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(),
   panel.background=element_rect(fill="white", colour="white"),
-  panel.border = element_blank(),
-  plot.background = element_blank(),
-  plot.margin = unit(c(0, 0, 1, 0), "in")
+  panel.border = element_blank()
 )
 
-v1 <-ggplot(data) +
-    geom_rect(aes(ymin = 0, ymax = Penetration_Rate, xmin = xmin, xmax = xmax, fill = Regions), color = "white", alpha = 0.5) + 
-    geom_text(aes(x = xlabel, y = Penetration_Rate, label = label, vjust = -1), position = "identity", color = "black", size = 3 ) +
-    geom_text(aes(x = xlabel, y = 0, label = Regions), hjust = "right", vjust = 0.5, position = "identity", color = "black", size = 3.5, angle = 45 ) +
-    geom_hline(yintercept = 0.6) +
+v1 <- ggplot(data) +
+    geom_rect(aes(ymin = 0, ymax = Penetration_Rate, xmin = xmin, xmax = xmax, fill = Regions), color = "white", alpha = 0.7) + 
+    geom_text(aes(x = xlabel, y = Penetration_Rate, label = label, vjust = -1), position = "identity", color = "black", size = 3, family = "inconsolata" ) +
+    geom_text(aes(x = xlabel, y = 0, label = paste0(Regions, " — ")), hjust = 1.0, vjust = 0.5, position = "identity", color = "black", size = 3.5, angle = 90, family = "inconsolata" ) +
+    scale_fill_manual(values = paletteer_d("ghibli::PonyoMedium")) +
+    geom_hline(yintercept = 0.6, linetype = "dotted") +
     coord_cartesian(clip="off") +
-    theme(plot.title = element_text(size = rel(2)), panel.background = element_rect(fill = "white", colour = "grey50")) +
+    labs(title = "Internet Penetration by Region", subtitle = "Penetration_Rate vs Population_Percent") +
+    theme_bw() +
     theme_opts
 
 girafe(ggobj = v1, width_svg = 16, height_svg = 9,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+       options = list(opts_sizing(rescale = TRUE, width = 0.9)))
 
 ```
 

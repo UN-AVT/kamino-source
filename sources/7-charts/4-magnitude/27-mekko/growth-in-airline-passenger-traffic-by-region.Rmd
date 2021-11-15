@@ -77,6 +77,12 @@ data
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "85%"}
 
 theme_opts <- theme(
+  text = element_text(family = "inconsolata", size = 16), 
+  plot.title = element_text(color = "black", size = 16, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 11),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0, 0, 1.25, 0), "in"),
   legend.position = "none",
   legend.title = element_blank(),
   axis.text = element_blank(),
@@ -87,23 +93,24 @@ theme_opts <- theme(
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(),
   panel.background=element_rect(fill="white", colour="white"),
-  panel.border = element_blank(),
-  plot.background = element_blank(),
-  plot.margin = unit(c(0, 0, 1.25, 0), "in")
+  panel.border = element_blank()
 )
 
 v1 <- ggplot(data) +
-    geom_rect(aes(ymin = 0, ymax = Growth, xmin = xmin, xmax = xmax, fill = Regions), color = "white", alpha = 0.5 ) + 
-    geom_text(aes(x = xlabel, y = Growth, label = label, vjust = -1), position = "identity", color = "black", size = 3 ) +
-    geom_text(aes(x = xlabel, y = 0.2, label = format(RPK, big.mark = ",", scientific = FALSE), vjust = 0), position = "identity", color = "black", size = 3 ) +
-    geom_text(aes(x = 9500, y = 0.2, label = "Estimated\nRPK (B)\nin 2035"), vjust = 0.4) +
-    geom_text(aes(x = xlabel, y = 0, label = Regions), hjust = "right", vjust = 1.5, position = "identity", color = "black", size = 3.5, angle = 45 ) +
-    geom_hline(yintercept = 4.8, linetype = "dashed") + geom_text(aes(0, 4.8, label = "World Traffic\nGrowth 4.8%")) +
-    geom_hline(yintercept = 2.9, linetype = "dashed") + geom_text(aes(0, 2.9, label = "World GDP\nGrowth 2.9%")) +
+    geom_rect(aes(ymin = 0, ymax = Growth, xmin = xmin, xmax = xmax, fill = Regions), color = "white", alpha = 0.8 ) + 
+    geom_text(aes(x = xlabel, y = Growth, label = label, vjust = -1), position = "identity", color = "black", size = 3, family = "inconsolata" ) +
+    geom_text(aes(x = xlabel, y = 0.2, label = format(RPK, big.mark = ",", scientific = FALSE), vjust = 0), position = "identity", color = "black", size = 3, family = "inconsolata" ) +
+    geom_text(aes(x = max(xlabel), y = 2.0, label = "Estimated\nRPK (B)\nin 2035"), vjust = 0.5, family = "inconsolata") +
+    geom_text(aes(x = xlabel, y = 0, label = Regions), hjust = "right", vjust = 1.5, position = "identity", color = "black", size = 3.5, angle = 45, family = "inconsolata" ) +
+    geom_hline(yintercept = 4.8, linetype = "dashed") + 
+    geom_text(aes(max(xlabel), 4.9, label = "World Traffic - Growth 4.8%"), vjust = 0.0, family = "inconsolata") +
+    geom_hline(yintercept = 2.9, linetype = "dashed") + 
+    geom_text(aes(max(xlabel), 3.0, label = "World GDP -Growth 2.9%"), vjust = 0.0, family = "inconsolata") +
+    scale_fill_brewer(palette = "Spectral") +
     coord_cartesian(clip="off") +
-    theme(plot.title = element_text(size = rel(1.5)), panel.background = element_rect(fill = "white", colour = "grey50")) +
-    theme_opts + 
-    labs(title = "Projected Annual Growth in Revenue Passenger Kilometers (RPK) 2015-2035 (top 10 regional flows)")
+    labs(title = "Projected Annual Growth in Revenue Passenger Kilometers (RPK)", subtitle = "2015-2035 (top 10 regional flows)") +
+    theme_bw() +
+    theme_opts
 
 girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
@@ -116,17 +123,17 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 # eval = FALSE as default; set to TRUE for production outputs
 
 # full version
-ggsave(filename = "assets/percentage-of-females-married-by-18-fs.svg", plot = v1, width=1280/72, height=720/72)
+ggsave(filename = "assets/growth-in-airline-passenger-traffic-by-region-fs.svg", plot = v1, width=1280/72, height=720/72)
 
 # thumbnail version without annotations
-ggsave(filename = "assets/percentage-of-females-married-by-18-sm.png", plot = v1, width=4, height=2.25)
+ggsave(filename = "assets/growth-in-airline-passenger-traffic-by-region-sm.png", plot = v1, width=4, height=2.25)
 
 ```
 
 ### References
 #### citations for narrative and data sources
 
-The citations and data sources used for this case is available at the source: <a href="https://www.boeing.com/resources/boeingdotcom/commercial/about-our-market/assets/downloads/cmo_print_2016_final_updated.pdf" target="_blank" rel="noopener noreferrer">Projected growth in airline passenger traffic by region</a>
+* Narrative and Data Sources: Boeing, Projected growth in airline passenger traffic by region, [GO](https://www.boeing.com/resources/boeingdotcom/commercial/about-our-market/assets/downloads/cmo_print_2016_final_updated.pdf){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

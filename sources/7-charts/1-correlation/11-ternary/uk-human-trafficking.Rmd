@@ -45,9 +45,9 @@ CHARTS
 # UK Human Trafficking
 ## Ternary Plot
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Zach Guinta on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Mario Szzi on Unsplash"}
 
-masthead <- "assets/zach-guinta-unsplash.jpg"
+masthead <- "assets/mario-azzi-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -90,7 +90,7 @@ df_wrangle <- dplyr::rename(df, COUNTRY_OF_ORIGIN = "Nationality.Country.of.Orig
 # Select only the needed
 df_wrangle <- select(df_wrangle, c("COUNTRY_OF_ORIGIN", "DOMESTIC_SERVITUDE", "LABOUR_EXP", "ORGAN_HARVESTING", "SEXUAL_EXP", "UNKNOWN_EXP", "TOTAL_2016"))
 
-# Refactor to set stack sort order
+# Enrich with continent
 df_wrangle$CONTINENT <- countryname(df_wrangle$COUNTRY_OF_ORIGIN, destination = 'continent')
 
 # Remove total to not skew size scaling

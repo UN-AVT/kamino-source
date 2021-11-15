@@ -1,6 +1,6 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "Global Herd Immunity"
+output:
   html_document:
     theme: lumen
     css: "../../../z-assemblers/assets/styles/content.css"
@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -32,9 +32,9 @@ library(ggrepel)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
-font_add_google("Inconsolata", "inconsolata")
+#font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
-showtext_auto()
+#showtext_auto()
 
 ```
 
@@ -42,7 +42,8 @@ showtext_auto()
 CHARTS  
 </div>
 
-# Dot bubble strip
+# Global Herd Immunity
+## Dot bubble strip
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Kaja Reichardt on Unsplash"}
 
@@ -119,6 +120,7 @@ df_final <- inner_join(df, pop) %>%
   ungroup()
 
 ```
+
 ### Plot
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
@@ -130,20 +132,17 @@ countries_displayed <- c("Kazakhstan", "Pakistan", "India", "Myanmar", "Jamaica"
 theme_opts <- theme(
   plot.title = element_text(size=25, face="bold", hjust = 0),
   plot.subtitle = element_text(size=20, hjust = 0),
-    plot.margin = margin(.25, 1, .25, .25, "cm"),
-    text = element_text(size = 25),
-    #plot.title = element_text(color = "black", size = 16, face = "bold"),
-    #plot.subtitle = element_text(color = "black", size = 12),
-    #plot.caption = element_text(color = "#555555", size = 10),
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank(),
-    axis.text.y = element_text(hjust=0),
-    panel.border = element_blank(),
-    panel.background = element_blank(),
-    # panel.grid.minor = element_blank(),
-    # panel.grid.major = element_blank(),
-    legend.position=''
-  )
+  plot.margin = margin(.25, 1, .25, .25, "cm"),
+  text = element_text(size = 25),
+  axis.title.x = element_blank(),
+  axis.title.y = element_blank(),
+  axis.text.y = element_text(hjust=0),
+  panel.border = element_blank(),
+  panel.background = element_blank(),
+  # panel.grid.minor = element_blank(),
+  # panel.grid.major = element_blank(),
+  legend.position = 'none'
+)
 
 # Plot
 v1 <- ggplot(df_final,aes(x=region_factor, y=percent_yes)) +
@@ -192,6 +191,19 @@ v1 <- ggplot(df_final,aes(x=region_factor, y=percent_yes)) +
 
 ```
 
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/global-herd-immunity-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/global-herd-immunity-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
 ### References
 #### citations for narrative and data sources
 
@@ -201,20 +213,8 @@ v1 <- ggplot(df_final,aes(x=region_factor, y=percent_yes)) +
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "" # mostly used in wranglers and analytics
-keywords <- 'innovation GII'
-commands <- 'countrycode geom_smooth scale_y_reverse'
-sources <- 'Economist Cornell INSEAD WIPO'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

@@ -1,0 +1,251 @@
+---
+pagetitle: "Citation Rates for Speeding Stops"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Citation Rates for Speeding Stops
+## Scatter Jitter
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nomadsoul1 on Freepik"}
+
+masthead <- "assets/police-citation.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> If you don't want a speeding ticket, don't speed...\  
+--- Ainsley Earhardt\
+
+***
+
+From the Stanford Open Policing Project: "On a typical day in the United States, police officers make more than 50,000 traffic stops. Our team is gathering, analyzing, and releasing records from millions of traffic stops by law enforcement agencies across the country. Our goal is to help researchers, journalists, and policymakers investigate and improve interactions between police and the public."
+
+This example is based on summary data with the following fields, types, and definitions:
+
+* location:	_character_,	County/District location for each incidence
+* state:	_character_,	State for each incidence
+* driver_race:	_character_,	driver's race
+* stops_per_year:	_double_,	number of stops per year
+* stop_rate:	_double_,	as percentage
+* search_rate:	_double_,	as percentage
+* consent_search_rate:	_double_,	as percentage
+* arrest_rate:	_double_,	as percentage
+* citation_rate_speeding_stops:	_double_,	as percentage
+* hit_rate:	_double_,	the proportion of searches that successfully turn up contraband
+* inferred_threshold:	_double_,	based off the threshold test
+
+### Ingest data 
+#### summary data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df <- read.csv("archetypes/citation-rates-for-speeding-stops/citation-rates-for-speeding-stops.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle data
+#### summarize by state and race
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+byStateAndRace <- df %>%
+  group_by(location, state, driver_race) %>%
+  summarize(meanRate = mean(citation_rate_speeding_stops))
+
+byStateAndRace
+
+# unique(byStateAndRace$driver_race)
+
+```
+
+
+### Plot Scatter-Jitter
+#### facet by state, shape by race
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 10), 
+    axis.text.x = element_blank(),
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    panel.border = element_rect(colour = "black", fill=NA, size=1),
+    panel.background = element_rect(colour = NA, fill="#F9F9F9", size=1),
+    panel.spacing.x = unit(1, "lines"),
+    panel.spacing.y = unit(1, "lines"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    strip.text = element_text(size = 11, face = "bold"),
+    strip.background = element_blank(),
+    legend.position='top',
+    legend.title = element_blank()
+)
+
+v1 <- ggplot(byStateAndRace, aes(x = location, y = meanRate)) +
+  geom_point(aes(shape = factor(driver_race)), color = "black", size = 1, alpha = 0.6) +
+  scale_shape_manual(values=c(1, 3, 8)) +
+  coord_cartesian(ylim = c(0, 1), expand = TRUE) +
+  facet_grid(.~state, scales = "free") +
+  labs(title =  "Citation rates for speeding stops",
+       subtitle = "as reported by counties or districts",
+       x = NULL,
+       y = "citation rate",
+       caption = "Source: arXiv:1706.05678") +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot
+#### color with split complements palette
+
+When selecting a color palette there can be subtle biases that influence perception.  In this example, using race as a color variable, we have a factor of three categories: black, hispanic, and white.  This provides a natural fit for evaluating schemes based on color theory.  One option is Split Complements, the use a color and the two __adjacent__ tertiary colors of its complement.  But take notice that two of the colors are more similar than the third.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+byStateAndRace_complete <- byStateAndRace[complete.cases(byStateAndRace), ]
+
+race_palette_sc <- c(
+  "Black" = "#453C97",
+  "Hispanic" = "#009899",
+  "White" = "#FBAA19"
+)
+
+v2 <- ggplot(byStateAndRace_complete, aes(x = location, y = meanRate)) +
+  geom_point(aes(colour = factor(driver_race), shape = factor(driver_race)), size = 1, alpha = 0.6) +
+  coord_cartesian(ylim = c(0, 1), expand = TRUE) +
+  scale_color_manual(values = race_palette_sc) +
+  scale_shape_manual(values=c(1, 3, 8)) +
+  facet_grid(.~state, scales = "free") +
+  labs(title =  "Citation rates for speeding stops",
+       subtitle = "as reported by counties or districts",
+       x = NULL,
+       y = "citation rate",
+       caption = "Source: arXiv:1706.05678") +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot
+#### color with triadic palette
+
+In contrast to split the split complements palette, triadic color schemes use three __evenly__ spaced colors on the color wheel.  Therefore there is no bias to any assignment of color to the race factors.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+race_palette_triadic <- c(
+  "Black" = "#CF1876",
+  "Hispanic" = "#009899",
+  "White" = "#FED502"
+)
+
+v3 <- ggplot(byStateAndRace_complete, aes(x = location, y = meanRate)) +
+  geom_point(aes(colour = factor(driver_race), shape = factor(driver_race)), size = 1, alpha = 0.6) +
+  coord_cartesian(ylim = c(0, 1), expand = TRUE) +
+  scale_color_manual(values = race_palette_triadic) +
+  scale_shape_manual(values=c(1, 3, 8)) +
+  facet_grid(.~state, scales = "free") +
+  labs(title =  "Citation rates for speeding stops",
+       subtitle = "as reported by counties or districts",
+       x = NULL,
+       y = "citation rate",
+       caption = "Source: arXiv:1706.05678") +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/citation-rates-for-speeding-stops-fs.svg", plot = v3, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/citation-rates-for-speeding-stops-sm.png", plot = v3, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources:  A large-scale analysis of racial disparities in police stops across the United States, [GO](https://arxiv.org/abs/1706.05678){target="_blank"} 
+* Data sources: The Stanford Open Policing Project TidyTuesday, [GO](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-03-19){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

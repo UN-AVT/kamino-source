@@ -24,6 +24,7 @@ gc() #free up memory and report the memory usage.
 
 # Load needed libraries
 library(tidyverse)
+library(paletteer) 
 library(ggiraph)
 
 library(showtext)
@@ -41,12 +42,14 @@ CHARTS
 # Sunniest cities in the world
 ## Bar Polar Grouped
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Daoudi Aissa on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Donald Giannatti D on Unsplash"}
 
-masthead <- "assets/daoudi-aissa-absT1BNRDAI-unsplash.jpg"
+masthead <- "assets/donald-giannatti-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
+
+<div class="figure-text">Yuma, Arizona</div>
 
 
 >  You are my Sunshine...\
@@ -69,18 +72,24 @@ df
 ### Wrangle
 #### arrange, group, summarize
 
+We create 4 dataframes: label, base, grid, and measures.  Each are used with a separate geom to create the final view.  
+
+Here's the dataframe to create the bars, with the addition of the id field used for the x axis.
+
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 empty_bar <- 3
 
+df$group <- str_to_title(df$group)
 df <- df %>% arrange(group)
 df$id <- seq(1, nrow(df))
 
 label_data <- df
 number_of_bar <- nrow(label_data)
-angle <- 90 - 360 * (label_data$id-0.5) /number_of_bar     # I substract 0.5 because the letter must have the angle of the center of the bars. Not extreme right(1) or extreme left (0)
+angle <- 90 - 360 * (label_data$id-0.5) /number_of_bar     # substract 0.5 because the letter must have the angle of the center of the bars. Not extreme right(1) or extreme left (0)
 label_data$hjust <- ifelse( angle < -90, 1, 0)
 label_data$angle <- ifelse(angle < -90, angle+180, angle)
+# label_data
 
 # prepare a data frame for base lines
 base_data <- df %>% 
@@ -88,14 +97,19 @@ base_data <- df %>%
   summarize(start=min(id), end=max(id) - empty_bar) %>% 
   rowwise() %>% 
   mutate(title=mean(c(start, end)))
+# base_data
 
 grid_data <- base_data
 grid_data$end <- grid_data$end[ c( nrow(grid_data), 1:nrow(grid_data)-1)] + 1
 grid_data$start <- grid_data$start - 1
 grid_data <- grid_data[-1,]
+# grid_data
 
 # Order data:
 df = df %>% arrange(id)
+
+# we'll need this for axis labels, etc.
+xmax <- max(df$id)
 
 df$id <- as.factor(df$id)
 df
@@ -104,36 +118,51 @@ df
 
 
 ### Plot the chart
+#### bar, segment, text, and annotations using a polar coordinate system
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
-v1 <- ggplot(df, aes(x=as.factor(id), y=value, fill=group)) +       # Note that id is a factor. If x is numeric, there is some space between the first bar
-  geom_bar(aes(x=as.factor(id), y=value, fill=group), stat="identity", alpha=0.5) +
-  # Add a val=100/75/50/25 lines. I do it at the beginning to make sur barplots are OVER it.
-  #  geom_segment(data=grid_data, aes(x = 0, y = 5000, xend = 44, yend = 5000), colour = "grey", alpha=1, size=0.3 , inherit.aes = FALSE ) +
-  geom_segment(data=grid_data, aes(x = 0, y = 4000, xend = 44, yend = 4000), colour = "grey", alpha=0.1, size=0.3 , inherit.aes = FALSE ) +
-  geom_segment(data=grid_data, aes(x = 0, y = 3000, xend = 44, yend = 3000), colour = "grey", alpha=0.1, size=0.1 , inherit.aes = FALSE ) +
-  geom_segment(data=grid_data, aes(x = 0, y = 2000, xend = 44, yend = 2000), colour = "grey", alpha=0.1, size=0.1 , inherit.aes = FALSE ) +
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  # panel.grid.major = element_line(linetype = "dotted"),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.title = element_text(vjust = 5.0),
+  plot.subtitle = element_text(vjust = 5.0),
+  plot.margin = unit(c(0.25,0.25,0.25,0.25), "in")
+)
+
+# Note that id is a factor. If x is numeric, there is some space between the first bar
+v1 <- ggplot(df, aes(x=id, y=value, fill=group)) +
+  geom_bar(stat="identity", alpha=0.7) +
+  scale_fill_manual(values = paletteer_d("lisa::RupprechtGeiger")) +
+  # Add a val=100/75/50/25 lines.
+  geom_segment(data=grid_data, aes(x = 0, y = 4000, xend = xmax, yend = 4000), colour = "white", alpha=0.8, size=0.5 , inherit.aes = FALSE ) +
+  geom_segment(data=grid_data, aes(x = 0, y = 3000, xend = xmax, yend = 3000), colour = "white", alpha=0.8, size=0.5 , inherit.aes = FALSE ) +
+  geom_segment(data=grid_data, aes(x = 0, y = 2000, xend = xmax, yend = 2000), colour = "white", alpha=0.8, size=0.5 , inherit.aes = FALSE ) +
   # Add text showing the value of each 100/75/50/25 lines
-  annotate("text", x = rep(max(data$id),3), y = c(2000, 3000, 4000), label = c("2000 hours", "3000 hours", "4000 hours") , color="grey", size=3 , angle=0, fontface="bold", hjust=1) +
-  geom_bar(aes(x=as.factor(id), y=value, fill=group), stat="identity", alpha=0.5) +
-  ylim(-2500,5000) +
-  theme_minimal() +
-  theme(
-    legend.position = "none",
-    axis.text = element_blank(),
-    axis.title = element_blank(),
-    panel.grid = element_blank(),
-    plot.margin = unit(rep(-1,4), "cm") 
-  ) +
-  coord_polar() + 
+  annotate("text", x = rep(xmax,3), y = c(2000, 3000, 4000), label = c("2000 hrs", "3000 hrs", "4000 hrs") , color="black", size=3 , angle=0, fontface="bold", hjust = 0.5, family = "inconsolata") +
   # Add labels on top of each bar
-  geom_text(data=label_data, aes(x=id, y=value+100, label=paste0(individual,": ",round(value,digits=0)), hjust=hjust), color="black", fontface="bold",alpha=0.6, size=4, angle= label_data$angle, inherit.aes = FALSE ) +
+  geom_text(data=label_data, aes(x=id, y=value+100, label=paste0(individual,": ", round(value,digits=0)), hjust=hjust), 
+            color="black", fontface="bold", alpha=0.6, size=4, angle= label_data$angle, inherit.aes = FALSE, family = "inconsolata" ) +
   # Add base line information
-  #  geom_segment(data=base_data, aes(x = start, y = -2000, xend = end, yend = -2000), colour = "black", alpha=0.8, size=0.6 , inherit.aes = FALSE )  +
-  geom_text(data=base_data, aes(x = title, y = -500, label=group), colour = "black", alpha=0.8, size=4, fontface="bold", inherit.aes = FALSE)
+  # geom_segment(data=base_data, aes(x = start, y = -2000, xend = end, yend = -2000), colour = "black", alpha=0.8, size=0.6 , inherit.aes = FALSE )  +
+  geom_text(data=base_data, aes(x = title, y = -500, label=group), colour = "black", alpha=0.8, size=4, fontface="bold", inherit.aes = FALSE, family = "inconsolata") +
+  ylim(-2500,5000) +
+  coord_polar() +   
+  theme_bw() +
+  theme_opts
 
-girafe(ggobj = v1, width_svg = 1080/72, height_svg = 1080/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 16,
       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 
@@ -153,10 +182,12 @@ ggsave(filename = "assets/world-sunniest-cities-sm.png", plot = v1, width=4, hei
 
 ```
 
+
 ### References
 #### citations for narrative and data sources
 
 * Data sources: Wikipedia page - List of cities by sunshine duration, [GO](https://en.wikipedia.org/wiki/List_of_cities_by_sunshine_duration){target="_blank"}
+
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 

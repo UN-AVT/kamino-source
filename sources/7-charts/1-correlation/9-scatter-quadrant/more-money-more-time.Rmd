@@ -99,7 +99,7 @@ df_complete
 #### position, shape, labels
 
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 # theme parameters
 theme_opts <- theme(
@@ -150,7 +150,7 @@ v1 <- ggplot(df_complete) +
       theme_minimal(base_family = "inconsolata", base_size = 16) +
       theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
        options = list(
          opts_sizing(rescale = TRUE, width = 1.0), 
          opts_hover_inv(css = "opacity:0.2;"), 
@@ -165,7 +165,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 #### with annotations...
 
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 v2 <- v1 + geom_hline(yintercept = rate_average, linetype = "dashed", color = "#bbbbbb") +
   geom_vline(xintercept = leave_average, linetype = "dashed", color = "#bbbbbb") +
@@ -188,7 +188,7 @@ v2 <- v1 + geom_hline(yintercept = rate_average, linetype = "dashed", color = "#
            label = "more money\nand more time", 
            hjust = 0.5, vjust = 0, size = 5, color = "#5b7e47", family = "inconsolata", fontface = 1)
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 12,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 

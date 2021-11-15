@@ -1,0 +1,267 @@
+---
+pagetitle: "Coffee Quality"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(janitor)
+library(reshape2)
+library(patchwork)
+library(extrafont)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Coffee Quality
+## Dot Strip Facet
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Marc Babin on Unsplash"}
+
+masthead <- "assets/marc-babin-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Without my morning coffee, I’m just like a dried–up piece of goat...\
+--- J.S. Bach\
+
+***
+
+Of about 60 species of coffee trees, two dominate world trade: Coffee arabica (a.k.a Arabica), which constitutes 75% of production, and Coffee canephora (a.k.a Robusta). Coffees from the three main growing regions of Latin America, Southeast Asia, and Africa all have distinctively different flavor characteristics.
+
+The testing of coffee quality is based on ten sensory assessments known as Q-Scores.  We'll take a closer look at these scores based on a dataset containing reviews of 1312 arabica and 28 robusta coffee beans from the Coffee Quality Institute's trained reviewers.
+
+### Ingest
+#### country, score, and measures
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_arabica <- read.csv("archetypes/coffee-quality/arabica-data-cleaned.csv", header = TRUE, stringsAsFactors = FALSE)
+df_arabica
+
+df_robusta <- read.csv("archetypes/coffee-quality/robusta-data-cleaned.csv", header = TRUE, stringsAsFactors = FALSE)
+df_robusta
+
+```
+
+
+### Wrangle
+#### clean and standardize column names
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_arabica_wrangle <- df_arabica %>% janitor::clean_names()
+df_arabica_wrangle <- filter(df_arabica_wrangle, total_cup_points > 0.00 )
+df_arabica_wrangle
+
+df_robusta_wrangle <- df_robusta %>% janitor::clean_names() %>% 
+  rename( acidity = salt_acid, 
+          sweetness = bitter_sweet,
+          aroma = fragrance_aroma, 
+          body = mouthfeel, 
+          uniformity = uniform_cup)
+
+#min(df_robusta_wrangle$total_cup_points)
+
+df_robusta_wrangle
+
+```
+
+
+### Wrangle
+#### merge data sets
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+field_match <- as.data.frame(names(df_arabica_wrangle))
+field_match$robusta <- names(df_robusta_wrangle)
+field_match
+
+df_arabica_select <- df_arabica_wrangle %>% select(country_of_origin, acidity, aftertaste,aroma, balance, body, clean_cup, flavor, sweetness, uniformity)
+df_robusta_select <- df_robusta_wrangle %>% select(country_of_origin, acidity, aftertaste,aroma, balance, body, clean_cup, flavor, sweetness, uniformity)
+
+df_all <- rbind(df_arabica_select, df_robusta_select )
+df_all <- df_all[complete.cases(df_all), ]
+df_all <- filter(df_all, nchar(country_of_origin) > 0)
+df_all
+
+```
+
+
+### Analyze
+#### calculate z-scores for each measure
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+z_scores <- df_all %>% 
+  mutate(acidity_zs = (acidity - mean(acidity))/sd(acidity),
+         aftertaste_zs = (aftertaste - mean(aftertaste))/sd(aftertaste),
+         aroma_zs = (aroma - mean(aroma))/sd(aroma),
+         balance_zs = (balance - mean(balance))/sd(balance),
+         body_zs = (acidity - mean(body))/sd(body),
+         clean_cup_zs = (clean_cup - mean(clean_cup))/sd(clean_cup),
+         flavor_zs = (flavor - mean(flavor))/sd(flavor),
+         sweetness_zs = (sweetness - mean(sweetness))/sd(sweetness),
+         uniformity_zs = (uniformity - mean(uniformity))/sd(uniformity)
+  ) %>% select(country_of_origin, 
+               acidity_zs, 
+               aftertaste_zs, 
+               aroma_zs, 
+               balance_zs, 
+               body_zs, 
+               clean_cup_zs, 
+               flavor_zs, 
+               sweetness_zs, 
+               uniformity_zs )
+
+z_scores
+
+```
+
+
+### Wrangle
+#### transform from wide to long
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_long <- melt(df_all, id.vars=c("country_of_origin"))
+df_long <- filter(df_long, value > 5.0)
+
+df_long_zs <- melt(z_scores, id.vars=c("country_of_origin"))
+df_long_zs
+
+
+```
+
+
+* acidity
+* aftertaste
+* aroma
+* balance
+* body
+* clean-cup
+* flavor
+* sweetness
+* uniformity
+
+
+### Plot 
+#### by overall rank and score, with conditional fill color, and a comparative marker
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 11),
+    plot.margin = margin(.25, 1, .25, .25, "in"),
+    plot.background = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    #panel.grid.major.y = element_blank(),
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, face = "bold", margin = margin(t = 8.5)),
+    # axis.title.y = element_blank(),
+    # axis.ticks.y = element_blank(),
+    axis.ticks.x = element_blank(),
+    # axis.ticks.x = element_line(),
+    # axis.ticks.length.x = unit(.35, "cm"),
+    # axis.text.x=element_blank(),
+    legend.position = "none"
+)
+
+v1 <- ggplot(df_long, aes(x = variable, y = value, alpha = value)) + 
+      geom_point(size = 1, color = "#8D6E63") +
+      scale_alpha_continuous(range = c(0.1, 0.5)) +
+      scale_y_continuous() +
+      scale_x_discrete() + 
+      coord_cartesian(clip="off") +
+      labs(title = "Coffee Quality", subtitle = NULL, x = NULL, y = NULL) +
+      facet_wrap(~country_of_origin, ncol = 4) +
+      theme_bw() +
+      theme_opts
+
+girafe(ggobj = v1, width_svg = 12, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/coffee-quality-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/coffee-qualitysm.png", plot = v2, width=4, height=2.25)
+
+```
+
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative and Data Source, Coffee Quality Database, [GO](https://github.com/jldbc/coffee-quality-database){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
