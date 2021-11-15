@@ -58,7 +58,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
-#### Normalization is used to standardize and scale values so they fit in a specific range. This pattern is useful when you need to run analytical models on your data (regression, classification, clustering, PCA, etc). Some models need the data to be "scaled" or normalized first before they can run. In situations where we have a lot of different (numerical variables) in very different ranges and levels of accuracy, we need to apply normalization processes.  Normalization recalculates the values, to always be in the same range.
+Normalization is used to standardize and scale values so they fit in a specific range. This pattern is useful when you need to run analytical models on your data (regression, classification, clustering, PCA, etc). Some models need the data to be "scaled" or normalized first before they can run. In situations where we have a lot of different (numerical variables) in very different ranges and levels of accuracy, we need to apply normalization processes.  Normalization recalculates the values, to always be in the same range.
 
 ### Load the data
 
@@ -68,7 +68,7 @@ df <- read.csv('./archetypes/Cheapestelectriccars-EVDatabase.csv', header = TRUE
 df
 ```
 
-#### Let's look at the data types to observe what we'll need to wrangle.
+Let's look at the data types to observe what we'll need to wrangle.
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -76,7 +76,7 @@ str(df)
 
 ```
 
-#### Most of our data are in Character formats. We will now wrangle the Data in a way that the columns will be in numerical values.
+Most of our data are in Character formats. We will now wrangle the Data in a way that the columns will be in numerical values.
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -96,7 +96,7 @@ df$`PriceInUK_GBP` <- as.numeric(gsub("[^0-9.-]", "", df$`PriceInUK_GBP`))
 ```
 
 
-#### Now that we've converted the data type to numerical. We'll look at missing values. There are some missing values in both the Price(EUR) and Price(GBP) columns. We'll go ahead and impute them by converting them with today's exchange rate. 
+Now that we've converted the data type to numerical. We'll look at missing values. There are some missing values in both the Price(EUR) and Price(GBP) columns. We'll go ahead and impute them by converting them with today's exchange rate. 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -110,7 +110,7 @@ df[is.na(df[,11]), 11] <- df[is.na(df[,11]), 10]*0.85 #Impute missing values in 
 ```
 
 
-#### Let's take a look at the summary statistics for the selected numerical measures:
+Let's take a look at the summary statistics for the selected numerical measures:
 
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
@@ -119,10 +119,10 @@ summary(df[c(2:4,10)])
 
 ```
 
-#### Notice that these measures are in different scales. To illustrate why this may be an issue, let's plot:
+Notice that these measures are in different scales. To illustrate why this may be an issue, let's plot:
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 
 dat.m <- melt(df,id.vars='Name', measure.vars=c('Usable_Battery_kWh','Acceleration_sec','TopSpeed_kmh','PriceInGermany_EUR'))
@@ -135,16 +135,16 @@ v1 <- ggplot(dat.m) +
     axis.text.x=element_blank()
   )
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
+girafe(ggobj = v1, width_svg = 16, height_svg = 9, options =
 list(opts_sizing(rescale = TRUE, width = 1.0)))
 ```
-#### Because each measure is on a different scale, Price(EUR) is crowding out the plot and canceling the effects of other 3 variables. Thus, it is imperative to normalize the Data.
+Because each measure is on a different scale, Price(EUR) is crowding out the plot and canceling the effects of other 3 variables. Thus, it is imperative to normalize the Data.
 
 ***
 
 ### Z (statistical) Normalization
 
-#### This normalization subtracts the mean of the data from all values and then divides them by the standard deviation. The distribution of the data has a __mean of zero__ and __a variance of one__. This is a common and very useful normalization technique. It preserves the original distribution of the data and is less influenced by outliers.
+This normalization subtracts the mean of the data from all values and then divides them by the standard deviation. The distribution of the data has a __mean of zero__ and __a variance of one__. This is a common and very useful normalization technique. It preserves the original distribution of the data and is less influenced by outliers.
 
 Let's apply z normalization on the four columns from above:
 
@@ -165,14 +165,14 @@ column_spec(c(2:4,10), bold = TRUE, color = "#000000", background = "#CEE3F6")
 df_tmp 
 ```
 
-#### After z normalization, let's check to make sure the mean is 0.
+After z normalization, let's check to make sure the mean is 0.
 
 ```{r, echo=TRUE, message=FALSE,warning=FALSE}
 summary(df1[c(2:4,10)])
 
 ```
 
-#### Let's plot again. Notice that all measures are on similar scale.
+Let's plot again. Notice that all measures are on similar scale.
 
 
 ```{r, echo=TRUE, message=FALSE,warning=FALSE}
@@ -195,7 +195,7 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ### Min-Max Normalization
 
-#### Range transformation normalizes all column values to a specified  value range. Largest value is set to 'max' and the smallest value is set to 'min'. All other values are scaled. Method can be influenced by outliers, because the bounds move towards them. Method keeps the original distribution of the data points, so it can also be used for data anonymization to obfuscate the true range of observations.
+Range transformation normalizes all column values to a specified  value range. Largest value is set to 'max' and the smallest value is set to 'min'. All other values are scaled. Method can be influenced by outliers, because the bounds move towards them. Method keeps the original distribution of the data points, so it can also be used for data anonymization to obfuscate the true range of observations.
 
 ```{r, echo=TRUE, message=FALSE,warning=FALSE}
 
@@ -220,7 +220,7 @@ df_tmp
 ```
 
 
-#### Let's check to make sure the min and max are normalized.
+Let's check to make sure the min and max are normalized.
 
 ```{r, echo=TRUE, message=FALSE,warning=FALSE}
 summary(df_2[2:5])
@@ -228,9 +228,9 @@ summary(df_2[2:5])
 ```
 
 
-#### let's plot again. 
+let's plot again. 
 
-#### Notice again that all measures are now on similar scale. Although the values are different, the "shape" of each measure (mean, median, outliers) remains constant.
+Notice again that all measures are now on similar scale. Although the values are different, the "shape" of each measure (mean, median, outliers) remains constant.
 
 
 ```{r, echo=TRUE, message=FALSE,warning=FALSE}
@@ -250,7 +250,7 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
-#### Other forms of Normalization includes Log Transformation and IQR Transformation which are used in specific cases such as time-series data. 
+Other forms of Normalization includes Log Transformation and IQR Transformation which are used in specific cases such as time-series data. 
 
 ### References
 #### citations for narrative and data sources
@@ -261,20 +261,8 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "Normalize" # mostly used in wranglers and analytics
-keywords <- 'Electric-cars cars'
-commands <- 'scale'
-sources <- 'Electric-Vehicle-Database'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 
