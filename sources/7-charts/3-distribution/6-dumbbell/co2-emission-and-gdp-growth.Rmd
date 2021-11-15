@@ -1,0 +1,241 @@
+---
+pagetitle: "CO2 emission and GDP growth"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggrepel)
+library(ggforce) # used to add geom_link into the chart
+library(ggiraph)
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Several rich countries have decoupled GDP growth from emissions
+## The dumbell chart
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Etienne Girardet on Unsplash"}
+
+masthead <- "assets/etienne-girardet-fti002hQCCA-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> It's a collective endeavour, it's collective accountability and it may not be too late...\
+--- Christine Lagarde, ex-Managing director, IMF\
+
+***
+
+Increasing emissions have historically gone hand-in-hand with economic growth, several rich countries are now bucking this trend. In two dozen countries, including America, Britain and France, GDP per person has increased since 2010 while carbon emissions have fallen. A dumbbell chart is helpful to highlight this relation. 
+
+### Ingest
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read_csv("archetypes/co2-emission-and-gdp-growth/co2-emissions-vs-gdp.csv")
+df
+
+```
+
+### Wrangle
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+select_country_list <- c("Australia", "United States", "Estonia", "Djibouti", "Cuba", "Barbados", "Malta", 
+                         "Japan", "Germany", "United Kingdom", "Austria", "Netherlands", "Singapore", "Denmark", 
+                         "France", "Sweden", "Switzerland", "Israel", "Iceland")
+
+df_wrangle <- df %>%
+  filter(Year == 2010 | Year == 2018) %>%
+  filter(Entity %in% select_country_list) %>%
+  mutate(total_annual_co2_megatonne = round(`Annual CO2 emissions (per capita)` * 
+           `Total population (Gapminder, HYDE & UN)` / 1000000), digits = 0) %>%
+  select(country = Entity, year = Year, co2_per_capita = `Annual CO2 emissions (per capita)`,
+         gdp_per_capita = `GDP per capita`, total_annual_co2_megatonne)
+
+df_wrangle
+
+```
+
+### Analyze
+#### summarize for min and max (this data frame will be used as segment points)
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_segment <- df_wrangle %>%
+  select(country, year, co2_per_capita, gdp_per_capita) %>%
+  pivot_wider(names_from = year, values_from = c(co2_per_capita, gdp_per_capita))
+
+df_segment
+
+
+```
+
+### Plot
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 30, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 25),
+    plot.tag.position = c(0.8, 0.92),
+    plot.tag = element_text(color = "black", size = 20),
+    # axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.x = element_text(color = "black", size = 20, vjust = 6),
+    axis.text.y = element_text(color = "black", size = 20, vjust = -1),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    legend.position=""
+  )
+
+v1 <- ggplot() +
+  # Manually create the grid
+  geom_segment(aes(x=0, y=0, xend = 0, yend = 20), color = "#cbd2d6", size = 1) +
+  geom_segment(aes(x=30000, y=0, xend = 30000, yend = 20), color = "#cbd2d6", size = 1) +
+  geom_segment(aes(x=60000, y=0, xend = 60000, yend = 20), color = "#cbd2d6", size = 1) +
+  geom_segment(aes(x=90000, y=0, xend = 90000, yend = 20), color = "#cbd2d6", size = 1) +
+  geom_hline(yintercept = 0, color = "black", size = 1) +
+  geom_hline(yintercept = 5, color = "#cbd2d6", size = 1) +
+  geom_hline(yintercept = 10, color = "#cbd2d6", size = 1) +
+  geom_hline(yintercept = 15, color = "#cbd2d6", size = 1) +
+  geom_hline(yintercept = 20, color = "#cbd2d6", size = 1) +
+  # draw 2010 bubbles
+  geom_point(data = df_wrangle %>% filter(year == 2010), 
+             aes(x = gdp_per_capita, y = co2_per_capita, size = total_annual_co2_megatonne), 
+             color = "#bed2e3") +
+  # draw 2018 bubbles
+  geom_point(data = df_wrangle %>% filter(year == 2018), 
+             aes(x = gdp_per_capita, y = co2_per_capita, size = total_annual_co2_megatonne), 
+             color = "#406ba2") +
+  scale_size(range = c(2,30)) +
+  # use geom_link instead of geom_segment so 
+  geom_link(data = df_segment, 
+               aes(x = gdp_per_capita_2010, xend = gdp_per_capita_2018, 
+                   y = co2_per_capita_2010, yend = co2_per_capita_2018, 
+                   color = stat(index)), 
+                   size=1.0) +
+  scale_colour_gradient(low = "#bed2e3", high = "#406ba2") +
+  geom_text_repel(data = df_segment, 
+            aes(x = gdp_per_capita_2018, y = co2_per_capita_2018, label = country),
+            family = "inconsolata", size = 7, color = "#26231d") +
+  scale_x_continuous(limits = c(0,100000), breaks = c(0, 30000, 60000, 90000), labels = c("0", "30,000", "60,000", "90,000")) +
+  scale_y_continuous(limits = c(0,20), breaks = c(0, 5, 10, 15, 20), position = "right") +
+  labs(title = "Growing apart",
+       subtitle = "Selected countries, GDP growth and CO2 emmissions reductions",
+       # caption = "CO2 emissions per person, tonnes"
+       ) +
+  xlab("GDP per person, $") +
+  # Create manual legend
+  geom_text(aes(x=5000, y = 19, label = "2010"),
+            family = "inconsolata", size = 7, color = "#26231d") +
+  geom_point(aes(x=10000, y = 19, size = 800), color = "#bed2e3") +
+  geom_link(aes(x = 10000, xend = 15000,
+                y = 19, yend = 19,
+                color = stat(index)), 
+                   size=4.0) +
+  geom_point(aes(x=15000, y = 19, size = 800), color = "#406ba2") +
+  geom_text(aes(x=20000, y = 19, label = "2018"),
+            family = "inconsolata", size = 7, color = "#26231d") +
+  geom_text(aes(x=2500, y = 17.5, label = "Total annual CO2, megatonnes"),
+            family = "inconsolata", size = 7, color = "#26231d", hjust = 0) +
+  geom_point(aes(x=3500, y = 16, size = 100), color = "#cccccd") +
+  geom_text(aes(x=6000, y = 16, label = "100"),
+            family = "inconsolata", size = 7, color = "#26231d") +
+  geom_point(aes(x=10000, y = 16, size = 1000), color = "#cccccd") +
+  geom_text(aes(x=14500, y = 16, label = "1000"),
+            family = "inconsolata", size = 7, color = "#26231d") +
+  geom_point(aes(x=21000, y = 16, size = 5000), color = "#cccccd") +
+  geom_text(aes(x=27500, y = 16, label = "5000"),
+            family = "inconsolata", size = 7, color = "#26231d") +
+  theme_minimal() + 
+  theme_opts  +
+    labs(tag = "CO2 emissions per person, tonnes") +
+    theme()
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.6)))
+
+```
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+#ggsave(filename = "assets/expensive-weddings-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+#ggsave(filename = "outputs/expensive-weddings-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: The Economist, Daily chart - Several rich countries have decoupled GDP growth from emissions, [GO](https://www.economist.com/graphic-detail/2021/11/11/several-rich-countries-have-decoupled-gdp-growth-from-emissions){target="_blank"}
+* Data sources: Our World in data - CO₂ emissions per capita vs GDP per capita, 2010 to 2018, [GO](https://ourworldindata.org/grapher/co2-emissions-vs-gdp?time=2010..2018){target="_blank"}
+
+<pre>
+@misc{
+  author = {The Economist},
+  month = {11},
+  title = {Several rich countries have decoupled GDP growth from emissions},
+  url = {https://www.economist.com/graphic-detail/2021/11/11/several-rich-countries-have-decoupled-gdp-growth-from-emissions},
+  urldate = {2021-11-11},
+  year = {2021},
+  organization = {The Economist}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
