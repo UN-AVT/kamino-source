@@ -1,5 +1,5 @@
 ---
-pagetitle: "World Happiness Report"
+pagetitle: "Which Countries are the Happiest?"
 output: 
   html_document:
     theme: lumen
@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
 
 
@@ -97,7 +97,7 @@ str(df$Year)
 
 ```
 
-#### Column 'Year' is now a datatype called factor, which is a type of categorical variables in R. Levels are the possible values in the factor.
+Column 'Year' is now a datatype called factor, which is a type of categorical variables in R. Levels are the possible values in the factor.
 
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
@@ -202,7 +202,7 @@ v1 <- ggplot(df_long, aes(x=value)) +
         panel.background = element_blank()
  ) 
 
-girafe(ggobj = v1, width_svg = 19, height_svg = 12, options =
+girafe(ggobj = v1, width_svg = 16, height_svg = 9, options =
   list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
@@ -214,9 +214,9 @@ As we will see later in the course, the two variables of interest will be "Life 
 
 
 ### References
-#### The citations and data sources used for this case
+#### The citations for narrative and data sources used for this case
 
-* Data: The 7th World Happiness Report, https://worldhappiness.report/ed/2019/
+* Narrative and Data sources: The 7th World Happiness Report, [GO](https://worldhappiness.report/ed/2019/){target="_blank"}  
 
 <pre>
 @misc{helliwell_2019_world,
