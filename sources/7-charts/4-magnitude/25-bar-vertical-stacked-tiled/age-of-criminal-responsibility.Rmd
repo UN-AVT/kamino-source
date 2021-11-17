@@ -1,0 +1,286 @@
+---
+pagetitle: "Environmental impact of food"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+
+library(tidyverse)
+library(ggiraph)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Environmental Impact of Food by Life Cycle Stage
+## Bar Vertical Stacked
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Thought Catalog on Unsplash"}
+
+masthead <- "assets/thought-catalog-fnztlIb52gU-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Focus on what you eat, not whether your food is local...\
+--- Hannah Ritchie, Our World in Data\
+
+***
+
+
+
+### Load the data
+#### Where do the emissions from our food come from?
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load data
+df <- read_csv("archetypes/environmental-impact-of-food-by-life-cycle-stage.csv", col_names=TRUE)
+
+# To order the group categories by stage of supply chain
+df$SUPPLY_CHAIN <- factor(df$SUPPLY_CHAIN, levels=rev(c("Land use change", 
+                          "Farm", 
+                          "Animal Feed", 
+                          "Processing", 
+                          "Transport", 
+                          "Retail", 
+                          "Packging")))
+
+df
+
+# Create summary label for each stack
+total_labels <- df %>%
+    group_by(FOOD_PRODUCT) %>%
+    summarize(TOTAL = round(sum(EMISSION), digits=1))
+
+```
+
+### Plot the chart
+#### Focus on what you eat, not whether your food is local
+
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=9, class.source='fold-hide'}
+
+# Theme parameters
+theme_opts <- theme(
+  legend.position="top",
+  legend.title = element_blank(),
+  text = element_text(size=14),                        # Set font size for plot text (axes labels, legend labels, plot title, etc.)
+  axis.text.x = element_text(angle=90, vjust=0.5, hjust=1),
+  axis.ticks = element_blank(),
+  panel.grid.major.y = element_line(color="gray", size = 0.1, linetype="longdash"),
+  panel.background = element_blank(),
+  plot.title = element_text(size=18),                  # Increase font size of plot title text
+  plot.background = element_blank(),
+  plot.margin = margin(.25, .25, .25, .25, "cm")
+)
+
+# Define palette
+supply_chain_palette <- c("Land use change" = "#1ea349", 
+                          "Farm" = "#a3745e", 
+                          "Animal Feed" = "#f36e32", 
+                          "Processing" = "#417aac", 
+                          "Transport" = "#f04b54", 
+                          "Retail" = "#f3ca19",
+                          "Packging" = "#bcb0ac")
+
+# Group to maintain stack sort. Reorder to sort by Food Product and Emission
+v1 = ggplot(data=df, aes(y=EMISSION, x=reorder(FOOD_PRODUCT,-EMISSION), fill=SUPPLY_CHAIN, group=SUPPLY_CHAIN)) +
+    geom_bar(position="stack", stat="identity", width=0.8, color="#777777") +
+    scale_fill_manual(values=supply_chain_palette, breaks=c("Land use change", "Farm", "Animal Feed", "Processing", "Transport", "Retail", "Packging")) +
+    scale_y_continuous(expand = c(0,0), breaks=seq(0,60,5), limits=c(-5,65)) +
+    coord_cartesian(clip="off") +
+    labs(title = "Food: greenhouse gas emissions across the supply chain",  caption = "Source: Our World in Data") +
+    theme_opts +
+    guides(fill = guide_legend(nrow = 1)) +
+    ylab("Greenhouse gas emissions per kilogram of food product\n(kg CO2-equivalents per kg product)") +
+    xlab("") +
+    geom_text(data=total_labels, aes(y=TOTAL+1, x=FOOD_PRODUCT, label=TOTAL, fill=NULL, group=NULL), size=2.5, hjust=0.5)
+
+girafe(ggobj = v1, width_svg = 17, height_svg = 10)
+
+```
+
+```{r add-annotations, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=9, class.source='fold-hide'}
+
+# Add annotations
+v2 <- v1 + 
+  annotate("text", y=0, x="Nuts", 
+           label = "Nuts have a negative land use change figure because nut trees are currently replacing croplands; carbon is stored in the trees. - ", 
+           hjust=1.02, vjust=1, size=2.5, fontface=1, colour="darkgreen") +
+  
+  annotate("text", y=6, x="Cane Sugar",
+           label = "  CO2 emissions from most plant-based products are as much as 10-50 times lower than most animal-based products.\n  Factors such as transport distance, retail, packaging, or specific farm methods are often small compared to importance of food type.",
+           hjust="left", vjust=0.45, size=2.5, fontface=1) +
+  geom_segment(aes(y=4.5, x="Cane Sugar", yend=4.5, xend="Nuts"), size=0.2) + # Draw line
+
+  annotate("text", y=10, x="Milk",
+           label = "Methane production from cows means dairy milk has significantly higher emissions than plant-based milks.",
+           hjust="left", vjust=0.45, size=2.5, fontface=1) +
+  geom_segment(aes(y=9, x="Milk", yend=4.5, xend="Milk"), size=0.2) +
+  
+  annotate("text", y=12, x="Rice", 
+           label = "Flooded rice produces methane, which dominates on-farm emissions.", 
+           hjust="left", vjust=0.45, size=2.5, fontface=1) +
+  geom_segment(aes(y=11, x="Rice", yend=5.7, xend="Rice"), size=0.2) +
+  
+  annotate("text", y=16, x="Pig Meat", 
+           label = "    Pigs and poultry are non-ruminant livestock so do not produce methane. They have significantly lower emissions than beef and lamb.", 
+           hjust="left", vjust=0.75, size=2.5, fontface=1) +
+  geom_segment(aes(y=14.5, x=9.5, yend=8.4, xend=9.5), size=0.2, hjust=5.5) + # can use the category name or the location number for the x value
+  
+  annotate("text", y=24, x="Beef (dairy herd)", 
+           label = "Dairy co-products means beef from dairy herds has a lower carbon footprint than dedicated beef herds.", 
+           hjust="left", vjust=0.75, size=2.5, fontface=1) +
+  
+  annotate("text", y=47, x="Beef (beef herd)", 
+           label = "- Methane production from cows, and land conversion for grazing and animal feed means beef from dedicated beef herds has a very high carbon footprint.", 
+           hjust=-0.03, vjust=0.45, size=2.5, fontface=1) +
+  
+  annotate("text", y=59, x="Beef (beef herd)", 
+           label = "- Transport emissions are very small for most food products.", 
+           hjust=-0.05, vjust=0.2, size=2.5, fontface=1, colour="red")
+
+girafe(ggobj = v2, width_svg = 17, height_svg = 10)
+
+```
+
+### Step by step
+#### Draw the base bar chart
+
+```{r step_one, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=9, class.source='fold-hide'}
+
+v1 <- ggplot(data=df, aes(y=EMISSION, x=reorder(FOOD_PRODUCT,-EMISSION), fill=SUPPLY_CHAIN, group=SUPPLY_CHAIN)) +
+  geom_bar(position="stack", stat="identity", width=0.8, color="#777777")
+
+girafe(ggobj = v1, width_svg = 17, height_svg = 10)
+
+```
+
+#### Add bar custom colours and stack ordering, and set scales
+
+```{r step_two, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=9, class.source='fold-hide'}
+
+v1 <- ggplot(data=df, aes(y=EMISSION, x=reorder(FOOD_PRODUCT,-EMISSION), fill=SUPPLY_CHAIN, group=SUPPLY_CHAIN)) +
+  geom_bar(position="stack", stat="identity", width=0.8, color="#777777") +
+  scale_fill_manual(values=supply_chain_palette, breaks=c("Land use change", "Farm", "Animal Feed", "Processing", "Transport", "Retail", "Packging")) +
+  scale_y_continuous(expand = c(0,0), breaks=seq(0,60,5), limits=c(-5,65))
+
+girafe(ggobj = v1, width_svg = 17, height_svg = 10)
+
+```
+
+#### Add data labels and theme options
+
+```{r step_three, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=9, class.source='fold-hide'}
+
+v1 <- ggplot(data=df, aes(y=EMISSION, x=reorder(FOOD_PRODUCT,-EMISSION), fill=SUPPLY_CHAIN, group=SUPPLY_CHAIN)) +
+  geom_bar(position="stack", stat="identity", width=0.8, color="#777777") +
+  scale_fill_manual(values=supply_chain_palette, breaks=c("Land use change", "Farm", "Animal Feed", "Processing", "Transport", "Retail", "Packging")) +
+  scale_y_continuous(expand = c(0,0), breaks=seq(0,60,5), limits=c(-5,65)) +
+  coord_cartesian(clip="off") +
+  labs(title = "Food: greenhouse gas emissions across the supply chain",  caption = "Source: Our World in Data") +
+  theme_opts +
+  guides(fill = guide_legend(nrow = 1)) +
+  ylab("Greenhouse gas emissions per kilogram of food product\n(kg CO2-equivalents per kg product)") +
+  xlab("") +
+  geom_text(data=total_labels, aes(y=TOTAL+1, x=FOOD_PRODUCT, label=TOTAL, fill=NULL, group=NULL), size=2.5, hjust=0.5)
+
+girafe(ggobj = v1, width_svg = 17, height_svg = 10)
+
+```
+
+#### Add annotations and line segments
+
+```{r step_four, message=FALSE, warning=FALSE, echo=TRUE, fig.width=12, fig.height=9, class.source='fold-hide'}
+
+v2 <- v1 + 
+  annotate("text", y=0, x="Nuts", 
+           label = "Nuts have a negative land use change figure because nut trees are currently replacing croplands; carbon is stored in the trees. - ", 
+           hjust=1.02, vjust=1, size=2.5, fontface=1, colour="darkgreen") +
+    annotate("text", y=6, x="Cane Sugar",
+           label = "  CO2 emissions from most plant-based products are as much as 10-50 times lower than most animal-based products.\n  Factors such as transport distance, retail, packaging, or specific farm methods are often small compared to importance of food type.",
+           hjust="left", vjust=0.45, size=2.5, fontface=1) +
+  geom_segment(aes(y=4.5, x="Cane Sugar", yend=4.5, xend="Nuts"), size=0.2) +
+  annotate("text", y=10, x="Milk",
+           label = "Methane production from cows means dairy milk has significantly higher emissions than plant-based milks.",
+           hjust="left", vjust=0.45, size=2.5, fontface=1) +
+  geom_segment(aes(y=9, x="Milk", yend=4.5, xend="Milk"), size=0.2) +
+  annotate("text", y=12, x="Rice", 
+           label = "Flooded rice produces methane, which dominates on-farm emissions.", 
+           hjust="left", vjust=0.45, size=2.5, fontface=1) +
+  geom_segment(aes(y=11, x="Rice", yend=5.7, xend="Rice"), size=0.2) +
+  annotate("text", y=16, x="Pig Meat", 
+           label = "    Pigs and poultry are non-ruminant livestock so do not produce methane. They have significantly lower emissions than beef and lamb.", 
+           hjust="left", vjust=0.75, size=2.5, fontface=1) +
+  geom_segment(aes(y=14.5, x=9.5, yend=8.4, xend=9.5), size=0.2, hjust=5.5) + # can use the category name or the location number for the x value
+  annotate("text", y=24, x="Beef (dairy herd)", 
+           label = "Dairy co-products means beef from dairy herds has a lower carbon footprint than dedicated beef herds.", 
+           hjust="left", vjust=0.75, size=2.5, fontface=1) +
+  annotate("text", y=47, x="Beef (beef herd)", 
+           label = "- Methane production from cows, and land conversion for grazing and animal feed means beef from dedicated beef herds has a very high carbon footprint.", 
+           hjust=-0.03, vjust=0.45, size=2.5, fontface=1) +
+  annotate("text", y=59, x="Beef (beef herd)", 
+           label = "- Transport emissions are very small for most food products.", 
+           hjust=-0.05, vjust=0.2, size=2.5, fontface=1, colour="red")
+
+girafe(ggobj = v2, width_svg = 17, height_svg = 10)
+
+```
+
+### References
+#### The citations and data sources used for this case
+
+* Narrative sources: Our World in Data, _You want to reduce the carbon footprint of your food? Focus on what you eat, not whether your food is local_, [GO](https://ourworldindata.org/food-choice-vs-eating-local){target="_blank"}
+
+<pre>
+@misc{ritchie_2020_you,
+  author = {Ritchie, Hannah},
+  month = {01},
+  title = {You want to reduce the carbon footprint of your food? Focus on what you eat, not whether your food is local},
+  url = {https://ourworldindata.org/food-choice-vs-eating-local},
+  urldate = {2021-02-15},
+  year = {2020},
+  organization = {Our World in Data}
+}
+</pre>
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

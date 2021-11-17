@@ -1,0 +1,208 @@
+---
+pagetitle: "Arms trade database"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(scales)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Arms Trade Database
+## Bar radial view of weapons suppliers and recipients
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Toxic Player on Unsplash"}
+
+masthead <- "assets/toxic-player-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The human race has one really effective weapon, and that is laughter...\
+--- Mark Twain\
+
+***
+
+A radial bar chart is a bar chart plotted in polar coordinates.  Because the bars are plotted on a polar axis with different radii, the lengths can not be compared as precisely as other methods.
+
+### Ingest the data
+#### series, values, and dates
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_suppliers = read.csv("archetypes/arms-trade-database/TIV-Export-Top-10-2019-suppliers.csv", header = TRUE, stringsAsFactors = FALSE)
+df_suppliers
+
+df_recipients = read.csv("archetypes/arms-trade-database/TIV-Export-Top-10-2019-recipients.csv", header = TRUE, stringsAsFactors = FALSE)
+df_recipients
+
+```
+
+
+### Wrangle the data
+#### Clean, arrange, tail, and factor
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_suppliers <- df_suppliers %>%
+  filter(!is.na(X2019)) %>%
+  arrange(X2019) %>%
+  tail(6) %>%
+  mutate(Supplier=factor(Supplier, Supplier))
+df_suppliers
+
+df_recipients <- df_recipients %>%
+  filter(!is.na(X2019)) %>%
+  arrange(X2019) %>%
+  tail(6) %>%
+  mutate(Recipient=factor(Recipient, Recipient))
+df_recipients
+
+```
+
+### Plot
+#### Suppliers
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide',out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 20), 
+    plot.title = element_text(color = "black", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 8),
+    plot.caption = element_text(color = "#555555", size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    legend.title = element_blank(), # remove legend title
+    legend.position='none'
+  )
+
+palette <- c( "#e53935", "#FB8C00", "#039BE5", "#00ACC1", "#00897B", "#7CB342" )
+
+v1 = ggplot(data=df_suppliers, aes(x=Supplier, y=X2019) ) +
+  geom_bar(aes(fill=Supplier), stat="identity") +
+  geom_text(aes( y = 0, label = paste(Supplier," ")), hjust = 1, size = 6, family = "inconsolata") +
+  scale_fill_manual(values=rev(palette)) +
+  xlab("") +
+  ylab("") +
+  coord_polar(theta = "y") +
+  ylim(0,max(df_suppliers$X2019+1000)) +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+### Plot
+#### Recipients
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+v2 = ggplot(data=df_recipients, aes(x=Recipient, y=X2019) ) +
+  geom_bar(aes(fill=Recipient), stat="identity") +
+  geom_text(aes( y = 0, label = paste(Recipient," ")), hjust = 1, size = 6, family = "inconsolata" ) +
+  scale_fill_manual(values=rev(palette)) +
+  xlab("") +
+  ylab("") +
+  coord_polar(theta = "y") +
+  ylim(0,max(df_recipients$X2019+300)) +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/arms-trade-database-suppliers-fs.svg", plot = v1, width=1280/72, height=1280/72)
+ggsave(filename = "outputs/arms-trade-database-recipients-fs.svg", plot = v2, width=1280/72, height=1280/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/arms-trade-database-suppliers-sm.svg", plot = v1, width=4, height=4)
+ggsave(filename = "outputs/arms-trade-database-recipients-sm.svg", plot = v2, width=4, height=4)
+
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: International Arms Transfers, 2019, [GO](https://reliefweb.int/sites/reliefweb.int/files/resources/fs_2003_at_2019.pdf){target="_blank"}
+* Data sources: Stockholm International Peace Research Institute (SIPRI) Arms Transfers Database, [GO](https://armstrade.sipri.org/armstrade/page/toplist.php){target="_blank"}
+
+<pre>
+@misc{sipri_2005_sipri,
+  author = {Sipri},
+  title = {SIPRI Fact Sheet},
+  url = {https://reliefweb.int/sites/reliefweb.int/files/resources/fs_2003_at_2019.pdf},
+  urldate = {2021-02-19},
+  year = {2005}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
