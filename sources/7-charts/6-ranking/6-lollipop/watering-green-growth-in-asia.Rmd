@@ -1,111 +1,176 @@
 ---
-pagetitle: "Lollipop Chart for mpg Data"
-output: 
+pagetitle: "Watering green growth in asia"
+output:
   html_document:
-    theme: flatly
-    code_folding: show
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(knitr)
 
-options(scipen=999)  # turn-off scientific notation like 1e+48
-library(ggplot2)
-theme_set(theme_bw())
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(janitor)
+library(ggtext)
+library(ggdist)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
 
-### Lollipop: mpg 
+<div class="activity">
+CHARTS  
+</div>
 
-#### Load Data
+# Watering green growth in asia
+## Lollipop
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Bolatbek Gabiden on Unsplash"}
+
+masthead <- "assets/bolatbek-gabiden-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Altai mountains, Western Mongolia</div>
+
+> I am the literary equivalent of a Big Mac and fries...\
+--- Stephen King\
+
+
 ***
 
-```{r, echo=FALSE}
+### Ingest
 
-# Data set is provided by R natively
-data <- mpg
-# Show first few records
-data
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-```
-
-#### Process Data 1
-***
-
-_Aggregate city miles per gallon column by manufacturer name, change column names to make and mileage, and sort by mileage_
-```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.width=10.5, fig.height=7.5}
-
-cty_mpg <- aggregate(mpg$cty, by=list(mpg$manufacturer), FUN=mean)  # aggregate
-colnames(cty_mpg) <- c("make", "mileage")  # change column names
-cty_mpg <- cty_mpg[order(cty_mpg$mileage), ]  # sort
-cty_mpg$make <- factor(cty_mpg$make, levels = cty_mpg$make)  # to retain the order in plot.
-cty_mpg
+df <- read.csv("archetypes/big-mac-index-foreign-exchange/big-mac-full-index.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
 
 ```
 
 
+### Wrangle
+#### Filter rows, select columns, calculate values...
 
-#### Render Vertical View 
-***
-##### Make Vs Avg. City Mileage
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.width=10.5, fig.height=7.5}
+df_wrangle <- df %>% 
+  filter(date=='2021-07-01') %>% 
+  select(3,4,15)%>%
+  mutate(index=USD_adjusted*100) %>% 
+  unite('country_currency',name, currency_code, sep = "_", remove = TRUE, na.rm = FALSE) %>%
+  mutate(color=ifelse(index>0,'1','2'))
 
-# Plot
-
-view1<- ggplot(cty_mpg, aes(x=make, y=mileage)) + 
-  geom_point(size=3, color="#69b3a2") + 
-  geom_segment(aes(x=make, 
-                   xend=make, 
-                   y=0, 
-                   yend=mileage)) + 
-  theme(axis.text.x = element_text(angle=65, vjust=0.6))
-
-print(view1)
+df_wrangle
 
 ```
 
 
-#### Process Data 2
-***
+### Plot
+#### vertical lollipop
 
-_Aggregate highway miles per gallon column by manufacturer name, change column names to make and mileage, and sort by mileage_
-```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.width=10.5, fig.height=7.5}
 
-hwy_mpg <- aggregate(mpg$hwy, by=list(mpg$manufacturer), FUN=mean)  # aggregate
-colnames(hwy_mpg) <- c("make", "mileage")  # change column names
-hwy_mpg <- hwy_mpg[order(hwy_mpg$mileage), ]  # sort
-hwy_mpg$make <- factor(hwy_mpg$make, levels = hwy_mpg$make)  # to retain the order in plot.
-hwy_mpg
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 10),
+    plot.caption = element_text(color = "#555555", size = 9),
+    panel.background = element_rect(fill = '#F5F5F5', color = NA),
+    panel.border = element_blank(),
+    plot.background = element_rect(fill = '#F5F5F5', color = NA),
+    plot.margin = unit(c(0.5, 0.5, 0.5, 0.25), "in"),
+    #panel.grid.major.x = element_line(color = "#999999", size = 1.0, linetype = "dotted"),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.x = element_blank(),
+    legend.position = 'none'
+)
+
+v1 <- df_wrangle %>%
+  mutate(country_currency = fct_reorder(country_currency, index)) %>%
+ggplot( aes(x=country_currency,y=index,color=color)) +
+  geom_point_interactive(aes(tooltip = paste0(country_currency,': ',index), data_id = country_currency),size=3)+
+  geom_hline(yintercept=0)+
+  geom_segment(aes(xend=country_currency,yend=0),color=gray(.50))+
+  labs(title = "The Big Mac index",
+       subtitle = "Local currency under-/over-valuation against the $, % July 2021",
+       x = NULL,
+       y = 'Index value',
+       fill = "Interval") +
+   annotate("text", x = 45, y = 25, label = "Overvalued",size=5)+
+  annotate("text", x = 10, y = -35, label = "Undervalued",size=5)+
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9))
+)
 
 ```
 
 
 
-#### Render horizontal View 
-***
-##### Make Vs Avg. Highway Mileage
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE,fig.width=10.5, fig.height=7.5}
+# eval = FALSE as default; run manually as chunk
 
-# Plot
+# full version
+ggsave(filename = "assets/watering-green-growth-in-asia-fs.svg", plot = v1, width=1280/72, height=720/72)
 
-view2<- ggplot(hwy_mpg, aes(y=make, x=mileage)) + 
-  geom_point(size=3, color="#69b3a2") + 
-  geom_segment(aes(y=make, 
-                   yend=make, 
-                   x=0, 
-                   xend=mileage)) + 
-  theme(axis.text.y = element_text( vjust=0.6))
-
-print(view2)
+# thumbnail version without annotations
+ggsave(filename = "assets/watering-green-growth-in-asia-sm.svg", plot = v1, width=4, height=2.25)
 
 ```
-```{r, echo=FALSE}
+ 
 
-ggsave(filename = "lollipop vertical.svg", plot = view1, width=24.5, height=6.5)
-ggsave(filename = "lollipop horizontal.svg", plot = view2, width=24.5, height=6.5)
+### References
+#### citations for narrative and data sources
+
+* Narrative source: TBD
+* Data source: Global Footprint Network, National Footprint and Biocapacity Accounts 2021 Public Data Package, [GO](https://www.footprintnetwork.org/licenses/public-data-package-free/){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
 ```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

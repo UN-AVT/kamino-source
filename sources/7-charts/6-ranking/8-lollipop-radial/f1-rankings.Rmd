@@ -1,0 +1,281 @@
+---
+pagetitle: "Clean Energy"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(janitor)
+library(ggtext)
+library(ggdist)
+library(ggiraph)
+library(forcats)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Clean Energy
+## Lollipop Radial
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Irfan Alijagic on Unsplash"}
+
+masthead <- "assets/irfan-alijagic-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Sunshine, lollipops and rainbows, everything that's wonderful, Is sure to come your way...\
+--- Lesley Gore\
+
+***
+
+### Ingest
+#### energy types and country totals
+
+* Energy Type: limited to Level 1 or 2 production by type - either conventional thermal (fossil fuels), nuclear, hydro, wind, solar, geothermal, or other.
+* Country Totals: limited to total net production, along with imports, exports, energy lost, and energy supplied (net + import - export - energy absorbed by pumping).
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+energy_types <- read.csv("archetypes/clean-energy/energy-types.csv", header = TRUE, stringsAsFactors = FALSE)
+energy_types
+
+country_totals <- read.csv("archetypes/clean-energy/country-totals.csv", header = TRUE, stringsAsFactors = FALSE)
+country_totals
+
+```
+
+
+### Wrangle
+#### filter, select, group by, calculate, and arrange ...
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+df_wrangle <- 
+  energy_types %>% 
+  filter(level == "Level 1") %>% 
+  select(country, country_name, type, amount = X2018) %>% 
+  mutate(country_name = case_when(
+    country == "EL" ~ "Greece",
+    country == "UK" ~ "United Kingdom",
+    TRUE ~ country_name
+  )) %>% 
+  group_by(country) %>% 
+  mutate(total = sum(amount)) %>% 
+  filter(type != "Conventional thermal") %>% 
+  mutate(
+    clean_total = sum(amount),
+    percent_clean = clean_total/total,
+    percent_type = amount/total,
+    over50perc = ifelse(percent_clean > 0.5, "Over 50% clean energy", "NA")
+  ) %>% 
+  ungroup() %>% 
+  arrange(country_name)
+
+df_wrangle
+
+```
+
+
+### Plot
+#### radial lollipop
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata", size = 16), 
+  plot.title = element_text(color = "black", size = 16, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 11),
+  plot.margin = margin(.25, 1, .25, .25, "in"),
+  plot.background = element_blank(),
+  axis.text.y = element_blank(),
+  axis.text.x = element_text(hjust = -1, size = 7),
+  panel.border = element_blank(),
+  panel.background = element_blank(),
+  panel.grid.minor.x = element_blank(),
+  panel.grid.major.x = element_blank(),
+  panel.grid.minor.y = element_blank(),
+  # panel.grid.major.y = element_blank(),
+  # axis.title.y = element_blank(),
+  axis.ticks.y = element_blank(),
+  axis.ticks.x = element_blank(),
+  # axis.ticks.x = element_line(),
+  # axis.ticks.length.x = unit(.35, "cm"),
+  # axis.text.x=element_blank(),
+  legend.position = "none"
+  # legend.position = c(0.05, 0.925),
+  # legend.margin = margin(0, 0, 0, 0),
+  # legend.box.margin = margin(2, 8, 2, 2),
+  # legend.background = element_blank(),
+  # legend.box.background = element_rect(color = "grey65", fill = "#F0F0F0"),
+  # legend.key = element_blank()
+)
+
+v1 <- df_wrangle %>% 
+  ggplot(aes(reorder(country_name, -percent_clean), percent_clean)) +
+  geom_hline(yintercept = 1, color = "grey70") +
+  geom_hline(yintercept = 0, color = "grey70") +
+  geom_segment(aes(x = reorder(country_name, -percent_clean), xend = reorder(country_name, -percent_clean), y = 0, yend = 1.1), color = "grey75", size = 0.5, lty = 3) +
+  geom_segment(aes(x = reorder(country_name, -percent_clean), xend = reorder(country_name, -percent_clean), y = 0, yend = percent_clean), color = "grey40") +
+  geom_point(aes(size = percent_clean, fill = over50perc), shape = 21, color = "grey40", alpha = 0.8) +
+  scale_fill_manual(values = c("#f0f0f0", "grey40"), breaks = c("Over 50% clean energy"), labels = c("Over 50% clean"), name = NULL) +
+  scale_size(range = c(1, 4)) +
+  scale_y_continuous(limits = c(-0.15, 1.1)) +
+  guides(size = "none") +
+  coord_polar(clip = "off") +
+  labs(
+    title = "Clean energy in EU Countries 2018",
+    subtitle = "Clean energy = Energy not produced by conventional thermal methods",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9))
+)
+
+```
+
+
+### Plot
+#### with polar labels
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+sequence_length = length(unique(df_wrangle$country_name))
+first_sequence = c(1:(sequence_length%/%2)) 
+second_sequence = c((sequence_length%/%2+1):sequence_length) 
+first_angles = c(90 - 180/length(first_sequence) * first_sequence)
+second_angles = c(-90 - 180/length(second_sequence) * second_sequence)
+
+theme_opts_polar <- theme(
+  text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 11),
+    plot.margin = margin(.25, 1, .25, .25, "in"),
+    plot.background = element_blank(),
+    axis.text.y = element_blank(),
+    axis.text.x = element_text( angle= c(first_angles, second_angles)),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    #panel.grid.major.y = element_blank(),
+    # axis.title.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.ticks.x = element_blank(),
+    # axis.ticks.x = element_line(),
+    # axis.ticks.length.x = unit(.35, "cm"),
+    # axis.text.x=element_blank(),
+    legend.position = "none"
+    #legend.position = c(0.05, 0.925),
+    #legend.margin = margin(0, 0, 0, 0),
+    #legend.box.margin = margin(2, 8, 2, 2),
+    #legend.background = element_blank(),
+    #legend.box.background = element_rect(color = "grey65", fill = "#F0F0F0"),
+    #legend.key = element_blank()
+)
+
+v2 <- df_wrangle %>% 
+  ggplot(aes(reorder(country_name, -percent_clean), percent_clean)) +
+  geom_hline(yintercept = 1, color = "grey70") +
+  geom_hline(yintercept = 0, color = "grey70") +
+  geom_segment(aes(x = reorder(country_name, -percent_clean), xend = reorder(country_name, -percent_clean), y = 0, yend = 1.1), color = "grey75", size = 0.5, lty = 3) +
+  geom_segment(aes(x = reorder(country_name, -percent_clean), xend = reorder(country_name, -percent_clean), y = 0, yend = percent_clean), color = "grey40") +
+  geom_point(aes(size = percent_clean, fill = over50perc), shape = 21, color = "grey40", alpha = 0.8) +
+  scale_fill_manual(values = c("#f0f0f0", "grey40"), breaks = c("Over 50% clean energy"), labels = c("Over 50% clean"), name = NULL) +
+  scale_size(range = c(1, 4)) +
+  scale_y_continuous(limits = c(-0.15, 1.1)) +
+  guides(size = "none") +
+  coord_polar(clip = "off") +
+  labs(
+    title = "Clean energy in EU Countries 2018",
+    subtitle = "Clean energy = Energy not produced by conventional thermal methods",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_bw() +
+  theme_opts_polar
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9))
+)
+
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/clean-energy-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/clean-energy-sm.png", plot = v2, width=4, height=2.25)
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Eurostat, [GO](https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Main_Page)
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

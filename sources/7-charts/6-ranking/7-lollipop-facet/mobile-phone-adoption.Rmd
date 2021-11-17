@@ -1,0 +1,182 @@
+---
+pagetitle: "Mobile Phone Adoption"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(janitor)
+library(forcats)
+library(ggtext)
+library(ggdist)
+library(ggthemes)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Mobile Phone Adoption
+## Lollipop Facet
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Julian Gentilezza on Unsplash"}
+
+masthead <- "assets/julian-gentilezza-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Festival We Color, La Lonja, Argentina</div>
+
+> Today or any day that phone may ring and bring good news...\
+--- Ethel Waters\
+
+***
+
+### Ingest
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+mobile <- read.csv("archetypes/mobile-phone-adoption/mobile-phone-adoption.csv", header = TRUE, stringsAsFactors = FALSE)
+mobile
+
+```
+
+
+### Wrangle
+#### Calculate the mean of each continent
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+mean_mobile <- mobile %>% 
+  filter(year == 2017) %>% 
+  group_by(continent) %>% 
+  summarise(mobile_subs= mean(mobile_subs, na.rm = TRUE)) %>% 
+  mutate(entity = continent, year = 2017, continent = continent)
+
+mean_mobile
+
+```
+
+
+### View / Chart
+#### Horizontal Lollipop
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 10),
+    plot.caption = element_text(color = "#555555", size = 9),
+    panel.background = element_rect(fill = '#F5F5F5', color = NA),
+    panel.border = element_blank(),
+    plot.background = element_rect(fill = '#F5F5F5', color = NA),
+    plot.margin = unit(c(0.5, 0.5, 0.5, 0.25), "in"),
+    #panel.grid.major.x = element_line(color = "#999999", size = 1.0, linetype = "dotted"),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    axis.text.x = element_blank(),
+    legend.position = 'none'
+)
+
+v1<-mobile %>% 
+  select(c(continent, mobile_subs, entity, year)) %>% 
+  filter(year == 2017) %>% 
+  rbind(mean_mobile) %>% 
+  drop_na(mobile_subs) %>% 
+  mutate(entity = gsub(" and ", " & ", entity)) %>% 
+  mutate(type = ifelse(entity %in% mean_mobile$continent, 2, 1)) %>% 
+  mutate(entity = case_when(
+    entity == "Saint Vincent & the Grenadines" ~ "St. Vincent &\nthe Grenadines",
+    entity == "Saint Kitts & Nevis" ~ "St. Kitts &\nNevis",
+    entity == "Sao Tome & Principe" ~ "Sao Tome &\nPrincipe",
+    entity == "Syrian Arab Republic" ~ "Syria",
+    entity == "Bosnia & Herzegovina" ~ "Bosnia &\nHerzegovina",
+    entity == "Democratic Republic of Congo" ~ "D.R.C.",
+    entity == "Dominican Republic" ~ "Dominican\nRepublic",
+    entity == "Trinidad & Tobago" ~ "Trinidad &\nTobago",
+    entity == "United Arab Emirates" ~ "U.A.E.",
+    entity == "Solomon Islands" ~ "Solomon\nIslands",
+    TRUE ~ as.character(entity)
+  )) %>% 
+  ggplot(aes(x = reorder(entity, mobile_subs), y = mobile_subs, color = factor(type), alpha = type)) +
+  geom_segment(aes(xend = entity, y = 0, yend = mobile_subs), size = 1.5) +
+  geom_point(size = 3.5) +
+  geom_hline(yintercept = 100, linetype = "dotted") +
+  scale_y_continuous(labels = scales::comma) +
+  scale_alpha(range = c(.85, 1)) +
+  coord_flip() +
+  facet_wrap(~continent, scales = "free", nrow = 1) +
+  theme_economist() + scale_color_economist() +
+  theme(
+    legend.position = "none",
+    axis.title = element_blank(),
+    axis.text.y = element_text(hjust = 1, vjust = .5, lineheight = .7)
+    ) +
+  labs(title = "Global Mobile Phone Adoption",
+       subtitle = "Number of mobile phone subscriptions per 100 people in 2017"
+  )
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9))
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* [Data Source](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-11-10/mobile-phone-subscriptions-vs-gdp-per-capita.csv)
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

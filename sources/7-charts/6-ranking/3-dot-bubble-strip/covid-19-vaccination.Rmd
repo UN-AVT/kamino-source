@@ -25,16 +25,15 @@ gc() #free up memory and report the memory usage.
 
 library(tidyverse)
 library(countrycode)
-library(ggiraph)
-library(countrycode)
 library(wbstats)
 library(ggrepel)
+library(ggiraph)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
-#font_add_google("Inconsolata", "inconsolata")
+font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
-#showtext_auto()
+showtext_auto()
 
 ```
 
@@ -45,31 +44,28 @@ CHARTS
 # Global Herd Immunity
 ## Dot bubble strip
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Kaja Reichardt on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by the CDC on Unsplash"}
 
-masthead <- "assets/kaja-reichardt-WB1m8zefmEQ-unsplash.jpg"
+masthead <- "assets/cdc-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
+
+<div class="figure-text">Receiving the vaccination at the Maternal and Child Hospital in Vientiane, Laos</div>
+
 
 > We are in this together, and we will get throught this, together...\
 --- UN Secretary-General António Guterres\
 
 ***
 
-# Global herd immunity is still out of reach
-
-This case study aims to reproduce a graph from <a href = "https://www.economist.com/graphic-detail/2021/05/06/global-herd-immunity-is-still-out-of-reach">this article</a> published on May 6th 2021 in the Economist.
-
 ### Ingest the data
 #### Covid 19 vaccination survey
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-# Load csv data file
-df <- read_csv("archetypes/covid-19-vaccination_survey.csv")
+df <- read.csv("archetypes/global-herd-immunity/covid-19-vaccination-survey.csv", header = TRUE, stringsAsFactors = FALSE)
 df
-
 
 ```
 
@@ -122,8 +118,9 @@ df_final <- inner_join(df, pop) %>%
 ```
 
 ### Plot
+#### TBD
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 countries_displayed <- c("Kazakhstan", "Pakistan", "India", "Myanmar", "Jamaica", "Brazil", "Mexico",
                          "Nicaragua", "Jordan", "Egypt", "Gabon", "Nigeria", "Ethiopia", "United States",
@@ -144,9 +141,8 @@ theme_opts <- theme(
   legend.position = 'none'
 )
 
-# Plot
 v1 <- ggplot(df_final,aes(x=region_factor, y=percent_yes)) +
-  geom_point(aes(size=population), shape=21, color = "#6983AE", alpha = 5/10, fill = "#AFCDDD", stroke = 3) +
+  geom_point(aes(size=population), shape=21, color = "#6983AE", alpha = 5/10, fill = "#AFCDDD", stroke = 1) +
   scale_size_continuous(range = c(1, 50)) +
   geom_vline(xintercept = 1) +
   geom_vline(xintercept = 2) +
@@ -187,7 +183,9 @@ v1 <- ggplot(df_final,aes(x=region_factor, y=percent_yes)) +
   labs(title = "Would you grab the jab?",
        subtitle = "\"If a vaccine to prevent coronavirus were available right now at no cost, would \nyou agree to be vaccinated?\", percent responded yes, Aug 2020-Feb 2021")
 
- girafe(ggobj = v1, width_svg = 17, height_svg = 10)
+girafe(ggobj = v1, width_svg = 16, height_svg = 10,
+       options = list(opts_sizing(rescale = FALSE, width = 0.95))
+)
 
 ```
 
@@ -204,10 +202,12 @@ ggsave(filename = "assets/global-herd-immunity-sm.png", plot = v1, width=4, heig
 
 ```
 
+
 ### References
 #### citations for narrative and data sources
 
-* Data Source: Gallup Survey, may 2021, https://news.gallup.com/poll/348719/billion-unwilling-covid-vaccine.aspx
+* Narrative: The Economist, May 6th 2021, [GO](https://www.economist.com/graphic-detail/2021/05/06/global-herd-immunity-is-still-out-of-reach)
+* Data Source: Gallup Survey, May 2021, https://news.gallup.com/poll/348719/billion-unwilling-covid-vaccine.aspx
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
