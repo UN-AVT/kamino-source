@@ -1,0 +1,183 @@
+---
+pagetitle: "Probly"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggridges)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Probly
+## Ridgeline Plot
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Ehimetalor Akhere Unuabona on Unsplash"}
+
+masthead <- "assets/ehimetalor-akhere-unuabona-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The most important questions of life are indeed, for the most part, really only problems of probability...\
+--- Pierre-Simon Laplace\
+
+***
+
+What probability would you assign to the phrase “...” were asked. Answers between 0 and 100 were recorded with the distribution for each question.  The results shown in the view indicate how people perceive probability vocabulary.
+
+### Ingest
+#### text and value
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+probly_df = read.csv("archetypes/probly/probly.csv", header = TRUE, stringsAsFactors = TRUE)
+probly_df
+
+```
+
+
+### Wrangle
+#### factor and reorder
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+probly_df <- probly_df %>% mutate(text = fct_reorder(text, value))
+probly_df
+
+```
+
+
+### Plot
+#### standard
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+y_axis <- c( "Almost Certainly",
+  "Highly Likely",
+  "Very Good Chance",
+  "Probable",
+  "Likely",
+  "Probably",
+  "We Believe",
+  "Better Than Even",
+  "About Even",
+  "We Doubt",
+  "Improbable",
+  "Unlikely",
+  "Probably Not",
+  "Little Chance",
+  "Almost No Chance",
+  "Highly Unlikely",
+  "Chances Are Slight")
+
+v1 <- ggplot(probly_df, aes(y=text, x=value,  fill=text)) +
+    geom_density_ridges(scale = 2, alpha=0.6) +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_discrete(labels=rev(y_axis)) +
+    coord_cartesian(clip = "off") +
+    theme(
+      legend.position="none"
+    ) +
+    xlab("") +
+    ylab("")
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### Plot
+#### as binlines
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v2 <- ggplot(probly_df, aes(y=text, x=value,  fill=text)) +
+    geom_density_ridges(alpha=0.6, stat="binline", bins=20) +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_discrete(labels=rev(y_axis)) +
+    coord_cartesian(clip = "off") +
+    theme(
+      legend.position="none"
+    ) +
+    xlab("") +
+    ylab("")
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/probly-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/probly-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and data sources: TBD
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
