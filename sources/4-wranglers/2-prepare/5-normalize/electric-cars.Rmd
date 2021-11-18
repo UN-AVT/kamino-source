@@ -175,7 +175,7 @@ summary(df1[c(2:4,10)])
 Let's plot again. Notice that all measures are on similar scale.
 
 
-```{r, echo=TRUE, message=FALSE,warning=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 dat.m <- melt(df1,id.vars='Name', measure.vars=c('Usable_Battery_kWh','Acceleration_sec','TopSpeed_kmh','PriceInGermany_EUR'))
 v2 <- ggplot(dat.m) +
@@ -228,12 +228,12 @@ summary(df_2[2:5])
 ```
 
 
-let's plot again. 
+Let's plot again. 
 
 Notice again that all measures are now on similar scale. Although the values are different, the "shape" of each measure (mean, median, outliers) remains constant.
 
 
-```{r, echo=TRUE, message=FALSE,warning=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 dat.m <- melt(df_2,id.vars='Name', measure.vars=c('Usable_Battery_kWh','Acceleration_sec','TopSpeed_kmh','PriceInGermany_EUR'))
 v3 <- ggplot(dat.m) +
