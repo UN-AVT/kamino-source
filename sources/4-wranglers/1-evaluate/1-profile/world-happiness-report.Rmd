@@ -214,7 +214,7 @@ As we will see later in the course, the two variables of interest will be "Life 
 
 
 ### References
-#### The citations for narrative and data sources used for this case
+#### citations for narrative and data sources:
 
 * Narrative and Data sources: The 7th World Happiness Report, [GO](https://worldhappiness.report/ed/2019/){target="_blank"}  
 
