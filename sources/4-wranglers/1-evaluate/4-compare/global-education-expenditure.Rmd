@@ -59,7 +59,8 @@ knitr::include_graphics(masthead, dpi=72)
 ***
 
 ### Load the data
-#### Real-life case: Global education expenditure.
+
+Real-life case: Global education expenditure.
 
 ```{r Load raw data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'} 
 
@@ -69,7 +70,8 @@ df
 ```
 
 ### The Side Set 
-#### The following <span style="color: #01DFD7;font-weight:bold">Continent list</span>  will be used to compare with the above data file records.
+
+The following <span style="color: #01DFD7"> __Continent list__</span>  will be used to compare with the above data file records.
 
 
 ```{r reference list, echo=FALSE, message=FALSE}
@@ -86,7 +88,7 @@ column_spec(1, bold = TRUE, color = "#000000", background = "#A9F5F2")
 
 ### Intersect
 
-#### This method helps you view the relevant information of education expenditure of only those countries from the same <span style="color: #F78181;font-weight:bold">Continents</span> as the <span style="color: #01DFD7;font-weight:bold">Continents</span> listed in the side set.
+This method helps you view the relevant information of education expenditure of only those countries from the same <span style="color: #F78181;font-weight:bold">Continents</span> as the <span style="color: #01DFD7;font-weight:bold">Continents</span> listed in the side set.
 
 
 ```{r Method: intersect, echo=TRUE, message=FALSE}
@@ -114,7 +116,7 @@ scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
 
 ### Difference
 
-#### Whereas this method helps you view the opposite scenario: only the relevant information of education expenditure of those countries that are not located in the <span style="color: #01DFD7;font-weight:bold">Continents</span> listed in the side set.
+Whereas this method helps you view the opposite scenario: only the relevant information of education expenditure of those countries that are not located in the <span style="color: #01DFD7;font-weight:bold">Continents</span> listed in the side set.
 
 
 ```{r Method: difference, echo=TRUE, message=FALSE}
@@ -139,9 +141,11 @@ scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
 
 
 ### References
-#### The citations and data sources used for this case 
+#### citations for narrative and data sources 
 
-The data source used by this wrangler task is one of the baseline data used by the "Our World in Data" article called <a href="https://ourworldindata.org/financing-education" target="_blank">Financing Education</a>.
+* Narrative and Data sources: The data source used by this wrangler task is one of the baseline data used by the "Our World in Data" article called Financing Education, [GO](https://ourworldindata.org/financing-education){target="_blank"} 
+
+<!-- or -->
 
 <pre>
 @misc{roser_2013_financing,
