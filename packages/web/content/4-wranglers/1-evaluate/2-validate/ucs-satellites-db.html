@@ -261,17 +261,14 @@ df</code></pre>
 </div>
 <div id="is-alpha" class="section level3">
 <h3>Is alpha</h3>
-<div id="checking-if-the-cells-in-the-first-column-contain-letters-and-only-letters-a-za-z." class="section level4">
-<h4>Checking if the cells in the first column contain letters, and only letters (a-zA-Z).</h4>
+<p>Checking if the cells in the first column contain letters, and only letters (a-zA-Z).</p>
 <pre class="r"><code>a &lt;- df$Name.of.Satellite..Alternate.Names
 
 df_1 &lt;- grepl(&quot;^[A-Za-z]+$&quot;, a, perl = T)
 df_1</code></pre>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [13] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
-</div>
-<div id="as-you-can-see-only-cell-18-contains-only-letters-the-other-cells-contain-numbers-or-other-characters." class="section level4">
-<h4>As you can see, only cell 18 contains only letters, the other cells contain numbers or other characters.</h4>
+<p>As you can see, only cell 18 contains letters, the other cells contain numbers or other characters.</p>
 <!-- FOR DISPLAY ONLY -->
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:350px; ">
 <table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -450,11 +447,9 @@ FALSE
 </table>
 </div>
 </div>
-</div>
 <div id="is-alphanumeric" class="section level3">
 <h3>Is alphanumeric</h3>
-<div id="checking-if-the-cells-in-the-second-column-contain-only-letters-or-numbers." class="section level4">
-<h4>Checking if the cells in the second column contain only letters or numbers.</h4>
+<p>Checking if the cells in the second column contain only letters or numbers.</p>
 <pre class="r"><code>a &lt;- df$Country.Org.of.UN.Registry
 df_2 &lt;- grepl(&quot;^[0-9A-Za-z]+$&quot;, a, perl = T)
 df_2</code></pre>
@@ -463,19 +458,15 @@ df_2</code></pre>
 <p>As you can see, some rows contain other characters than just letters and numbers.</p>
 <!-- FOR DISPLAY ONLY -->
 </div>
-</div>
 <div id="is-numeric" class="section level3">
 <h3>Is numeric</h3>
-<div id="check-if-the-column-eccentricity-is-numeric." class="section level4">
-<h4>Check if the column “Eccentricity” is numeric.</h4>
+<p>Check if the column “Eccentricity” is numeric.</p>
 <pre class="r"><code>is.numeric(df$Eccentricity)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </div>
-</div>
 <div id="is-decimal" class="section level3">
 <h3>Is decimal</h3>
-<div id="now-we-know-eccentricity-is-numeric-but-is-it-decimal" class="section level4">
-<h4>Now we know “Eccentricity” is numeric, but is it decimal?</h4>
+<p>Now we know “Eccentricity” is numeric, but is it decimal?</p>
 <pre class="r"><code>e&lt;-df$Eccentricity
 
 df_3&lt;-is.decimal(e)
@@ -484,14 +475,11 @@ df_3</code></pre>
 ## [13] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
 <p>As you can see, 0 is not decimal.</p>
 </div>
-</div>
 <div id="is-integer" class="section level3">
 <h3>Is integer</h3>
-<div id="checking-if-the-cells-of-column-xfield-are-integers." class="section level4">
-<h4>Checking if the cells of column “xfield” are integers.</h4>
+<p>Checking if the cells of column “xfield” are integers.</p>
 <pre class="r"><code>is.integer(df$xfield)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-</div>
 </div>
 <div id="is-divisible-by" class="section level3">
 <h3>Is divisible by</h3>
@@ -504,19 +492,15 @@ d</code></pre>
 </div>
 <div id="is-date" class="section level3">
 <h3>Is date</h3>
-<div id="checking-if-the-column-date.of.launch-is-of-date-type." class="section level4">
-<h4>Checking if the column “Date.of.Launch” is of date type.</h4>
+<p>Checking if the column “Date.of.Launch” is of date type.</p>
 <pre class="r"><code>c &lt;- df$Date.of.Launch
 
 class(c)==&#39;Date&#39;</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-</div>
-<div id="if-not-we-can-use-as.date-to-change-the-type-and-check-again." class="section level4">
-<h4>If not, we can use as.Date to change the type and check again.</h4>
+<p>If not, we can use as.Date to change the type and check again.</p>
 <pre class="r"><code>d &lt;- as.Date(c)
 class(d) == &#39;Date&#39;</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-</div>
 </div>
 <div id="is-length" class="section level3">
 <h3>Is length</h3>
@@ -527,7 +511,7 @@ class(d) == &#39;Date&#39;</code></pre>
 </div>
 <div id="is-empty" class="section level3">
 <h3>Is empty</h3>
-<p>Checking if the column “Detailed.Purpose” column has any cells with lenght zero.</p>
+<p>Checking if the column “Detailed.Purpose” column has any cells with length zero.</p>
 <pre class="r"><code>df_4 &lt;- nchar(df$Detailed.Purpose)==0</code></pre>
 <pre><code>##  [1]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE
 ## [13] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
@@ -548,8 +532,7 @@ class(d) == &#39;Date&#39;</code></pre>
 <p>Check if the column “Type.of.Orbit” is logical.</p>
 <pre class="r"><code>is.logical(df$Type.of.Orbit)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
-<div id="lets-check-another-dataset." class="section level4">
-<h4>Let’s check another dataset.</h4>
+<p>Let’s check another dataset.</p>
 <pre class="r"><code>df_11 &lt;- read.csv(&#39;./archetypes/economic-growth-happiness/economic-growth-does-not-guarantee-rising-happiness.csv&#39;)
 df_11 &lt;- df_11[1:20,]</code></pre>
 <!-- FOR DISPLAY ONLY -->
@@ -1296,11 +1279,9 @@ FALSE
 </tbody>
 </table>
 </div>
-</div>
-<div id="check-if-the-column-paradox-is-logical." class="section level4">
-<h4>Check if the column “paradox” is logical.</h4>
+<p>Check if the column “paradox” is logical.</p>
+<pre class="r"><code>is.logical(df_11$paradox)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-</div>
 </div>
 <div id="country-code" class="section level3">
 <h3>Country code</h3>
@@ -1319,9 +1300,12 @@ df_5</code></pre>
 </div>
 <div id="references" class="section level3">
 <h3>References</h3>
-<div id="the-citations-and-data-sources-used-for-this-case" class="section level4">
-<h4>The citations and data sources used for this case:</h4>
-<p>This case is based on a dataset that comes from the following report by <a href="https://www.ucsusa.org/resources/satellite-database" target="_blank" rel="noopener noreferrer"> Union of Concerned Scientists.</a></p>
+<div id="citations-for-narrative-and-data-sources" class="section level4">
+<h4>citations for narrative and data sources</h4>
+<ul>
+<li>Narrative and Data sources: This case is based on a dataset that comes from the following report by Union of Concerned Scientists, <a href="https://www.ucsusa.org/resources/satellite-database" target="_blank">GO</a></li>
+</ul>
+<!-- or -->
 <pre>
 @misc{unionofconcernedscientists_2005_ucs,
   author = {Union of ConcernedScientists},
