@@ -1,114 +1,167 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "Food Consumption and CO2 Emissions"
+output:
   html_document:
     theme: lumen
-    css: ["styles/kamino.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
-options(scipen = 999) ## To disable scientific notation
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
 
 # Clear environment and memory
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
-library(dplyr)
-library(ggplot2)
-library(grid)
+library(tidyverse)
+library(ggiraph)
 
-library(knitcitations)
-library(bibtex)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
+
+
 <div class="activity">
-TEMPORAL  
+CHARTS  
 </div>
 
-# Calendar Heatmap
-# Measles Cases & Start of Vaccination in the USA
+# Food Consumption and CO2 Emissions
+## Heatmap
 
 
-<a href="http://graphics.wsj.com/infectious-diseases-and-vaccines/" target="_blank">WSJ Article</a>
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Markus Spiske on Unsplash"}
 
-<img src="assets/Measles.jpg" width="65%">
+masthead <- "assets/markus-spiske-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The Earth started to rebel when the carbon in the atmosphere began to swell...\
+--- Donna Maltz\
 
 ***
 
-## Load data [Ingest]
+In the US, each household produces 48 tons of greenhouse gases. Food produces about 8 tons of emissions per household, or about 17% of the total. Worldwide, new reports suggest that livestock agriculture produces around half of all man-made emissions. We have to change how we produce and consume food, not just for environmental reasons, but because this is an __existential__ issue for humans.
+
+Let's examine the situation.
+
+### Ingest data
+#### country, food category, consumption per country, co2 emissions per country
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-measles = read.csv("data-sources/project-tycho-level-1-v1.0.0-measles.csv", header = TRUE, stringsAsFactors = FALSE)
-measles
-
-
-```
-
-
-## Plot [ Views / Temporals ]
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=10, fig.align='center', out.width="100%"}
-
-cols<- c("#e7f0fa", #lighter than light blue
-         "#c9e2f6", #light blue
-         "#95cbee", #blue
-         "#0099dc", #darker blue
-         "#4ab04a", #green
-         "#ffd73e", #yellow
-         "#eec73a", #mustard
-         "#e29421", #dark khaki (?)
-         "#f05336", #orange red
-         "#ce472e") #red
-
-v1 <- ggplot(measles, aes(y=state, x=year, fill=incidence)) + 
-  geom_tile(colour="white",
-            width=.9, height=.9) + theme_minimal() +
-  scale_fill_gradientn(colours=cols, limits=c(0, 4000),
-                       values=c(0, 0.01, 0.02, 0.03, 0.09, 0.1, .15, .25, .4, .5, 1), 
-                       na.value=rgb(246, 246, 246, max=255),
-                       labels=c("0k", "1k", "2k", "3k", "4k"),
-                       guide=guide_colourbar(ticks=T, nbin=50,
-                                             barheight=.5, label=T, 
-                                             barwidth=10))
-
-v1 <- v1 +
-  scale_x_continuous(expand=c(0,0), 
-                     breaks=seq(1930, 2010, by=10)) +
-  geom_segment(x=1963, xend=1963, y=0, yend=51.5, size=.9) +
-  labs(x="", y="", fill="") +
-  ggtitle("Measles")
-
-v1 <- v1 +
-  theme(legend.position="bottom",
-        legend.direction="horizontal",
-        legend.text=element_text(colour="grey20"),
-        plot.margin=grid::unit(c(.5,.5,1.5,.5), "cm"),
-        axis.text.y=element_text(size=6, 
-                                 hjust=1),
-        axis.text.x=element_text(size=8),
-        axis.ticks.y=element_blank(),
-        panel.grid=element_blank(),
-        title=element_text(hjust=-.07, vjust=1),
-        text=element_text()) +
-  annotate("text", label="Vaccine introduced", x=1963, y=53, 
-           vjust=1, hjust=0, size=I(3))
-
-v1
+food_consumption <- read.csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv')
+food_consumption
 
 ```
 
-
+### Wrangle
+#### group_by, summarise, select and join
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-ggsave(filename = "assets/wsj-measles-vaccination-calendar-chart.svg", plot = v1, width=11, height=6)
+#Select the top 10 countries by co2 emissions
+country <- food_consumption %>% group_by(country)%>%summarise(total=sum(co2_emmission))%>%top_n(10)%>%select(1)
+
+#create dataframe of top 10 countries
+df <- food_consumption%>%select(1,2,4)%>% inner_join(country)
+df
 
 ```
 
+
+### The Heatmap
+#### Food consumption (kg/person/year) and co2 emissions (kg co2/person/year)
+
+
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide',out.width = "100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(margin = margin(b = 10), color = "#22222b",face = "bold",size = 17),
+    plot.subtitle = element_text(margin = margin(b = 25),color = "#22222b", size = 12),
+    plot.caption = element_text(margin = margin(t = 20),color = "#22222b", size = 10),
+    axis.text.x = element_text(color = "#22222b", margin = margin(t = 15)),
+    axis.text.y = element_text(color = "#22222b"),
+    panel.background = element_blank(),
+    panel.border = element_blank(),
+    panel.grid.major = element_blank(),
+    plot.background = element_rect(fill = "#e7e7e7"),
+    plot.margin = unit(c(1, 2, 1, 1), "cm"),
+    legend.position='none'
+)
+
+
+
+v1 <-  
+  ggplot(data=df,aes(x = country, y = fct_reorder(food_category,co2_emmission))) +
+  geom_tile(aes(fill = co2_emmission), color = "#2b2b2b") +
+  geom_text(aes(label = co2_emmission), color = "#22292F") +
+  scale_fill_gradient(low = "#20b2aa", high = "#2072b2") +
+  labs(x = "",y = "",
+       title = "Top 10 countries with the highest CO2 emissions",
+       subtitle = "On which food category do they emit the highest level of CO2?",
+       caption = "Source:Tidy Tuesday\nVisualization: JuanmaMN (Twitter @Juanma_MN)") +
+  scale_x_discrete(position = "top") +
+  guides(fill = NULL) +
+  theme_bw() +
+  theme_opts
+
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/food-consumption-co2-emissions.svg", plot = v1, width=1280/72, height=720/72)
+
+```
+
+
+### References
+#### Citation and data source
+
+* Citation and data source: R for Datascience [GO](https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-02-18){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
