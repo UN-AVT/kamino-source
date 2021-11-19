@@ -1,0 +1,173 @@
+---
+pagetitle: "Beach Volleyball"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Beach Volleyball
+## Heat Map
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Mike Cox on Unsplash"}
+
+masthead <- "assets/mike-cox-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Economic growth doesn't mean anything if it leaves people out...\
+--- Jack Kemp
+
+
+***
+
+### Load the data [Ingest]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df <- read.csv("archetypes/beach-volleyball/vb_matches.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+### Prepare the data [Wrangle]
+
+While creating a heatmap, it might make better sense to bin the continuous data into levels and represent each level as a discrete colour. The cut() function in R allows to break and label a continuous variable
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+vb <- df %>%
+  # put all player countries into one column named "player_country"
+  gather(c(w_p1_country, w_p2_country, 
+           l_p1_country, l_p2_country),
+         key="player", 
+         value="player_country") %>%
+  
+  group_by(country, player_country)  %>%
+  # count number of combos per country:player_country
+  count() 
+  
+# Continous to Discrete Conversion
+vb <- vb %>% drop_na() %>%
+  ungroup() %>%
+  mutate(ncolors=cut(n, breaks=c(0,10,25,50,75,100,125,150,175,200,1000,25000,50000,max(n)),
+                      labels=c(10,25,50,75,100,125,150,175,200,1000,25000,50000,max(n)))) %>%
+  mutate(ncolors = as.factor(ncolors))
+
+
+```
+
+### Plot the chart
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 14, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 8),
+    axis.text.x=element_text(angle=90, hjust=1),
+    axis.text = element_text(size=7.5),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.title = element_text(color = "black", size = 8, face = "bold"), # remove legend title
+    legend.text = element_text(color = "black", size = 8),
+    legend.position='right'
+)
+
+colors <- c("#6e0000","#ff001c", "#e33044", "#de5023" ,"#f46d43","#faa14b" ,"#fdae61","#fee08b","#e6f598","#abdda4", "#a1e398","#ddf1da")
+
+
+  
+v1 <- ggplot(data = vb, aes(y=reorder(country,-n), 
+           x=reorder(player_country,-n),
+           fill=ncolors))+
+  geom_tile(colour="white",size=0.15, alpha=0.8)+
+  scale_fill_manual(values= rev(colors) ,na.value = "grey90") +
+    labs(x="Player countries", y="Match location",
+       color="Number of \ncombinations",size="Number of \ncombinations",
+       title = "Where do beach volleyball players come from and where do they play?") +
+  guides(fill=guide_legend(title="Occurances")) +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9)))
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/volley_ball.svg", plot = v1, width=16, height=9)
+
+# without annotations
+#ggsave(filename = "assets/economic-growth-happiness-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Tidy Tuesday, [GO](https://github.com/rjstevick/TidyTuesday){target="_blank"}
+* Data sources: Big Time Stats, [GO](https://github.com/BigTimeStats/beach-volleyball){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
