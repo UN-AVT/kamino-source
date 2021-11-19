@@ -59,7 +59,8 @@ knitr::include_graphics(masthead, dpi=72)
 
 ### Load "dirty" data
 
-#### An example with <span style="color: #FE9A2E;font-weight:bold">missing</span>, <span style="background: #E0E0F8;font-weight:bold">duplicate</span>, and <span style="color:  #0000FF;font-weight:bold">other values</span> that need to be cleaned.
+An example with <span style="color: #FE9A2E"> __missing__</span>, <span style="background: #E0E0F8"> __duplicate__</span>, and <span style="color:  #0000FF"> __other values__</span> that need to be cleaned.
+
 
 ```{r load-data, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
 df <- read_csv('./archetypes/panda-list.csv')
@@ -88,9 +89,7 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 #NOT TO BE USED AS SOLUTION 
 ```
 
-### Replace <span style="color: #0000FF;font-weight:bold">'##'</span>
-
-#### with <span style="color: #74DF00;font-weight:bold">'Not Applicable'</span> for any column
+### Replace <span style="color: #0000FF;font-weight:bold">'##'</span>with <span style="color: #74DF00;font-weight:bold">'Not Applicable'</span> for any column
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
@@ -122,7 +121,8 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 ```
 
 ### Remove <span style="color: #FE9A2E;font-weight:bold">missing</span> values
-#### This will remove an entire row if __Birth_Place__ contains missing value
+
+This will remove an entire row if __Birth_Place__ contains missing value
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
@@ -151,8 +151,7 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 
 ```
 
-### Replace <span style="color: #FE9A2E;font-weight:bold">missing</span> values 
-#### with <span style="color: #DF7401;font-weight:bold">01/01/2030</span> for __Loan_Expire_Date__ column
+### Replace <span style="color: #FE9A2E;font-weight:bold">missing</span> values with <span style="color: #DF7401;font-weight:bold">01/01/2030</span> for __Loan_Expire_Date__ column
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
@@ -202,9 +201,11 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 
 
 ### References
-#### The citations and data sources used for this case
+#### citations for narrative and data sources
 
-The original data file used in this wrangler task was captured from the <a href="https://www.giantpandaglobal.com/" target="_blank">Giant Panda Global</a> source which was published by Giant Panda Global website. 
+* Narrative and Data sources: The original data file used in this wrangler task was captured from the Giant Panda Global source which was published by Giant Panda Global website, [GO](https://www.giantpandaglobal.com/){target="_blank"}
+
+<!-- or -->
 
 <pre>
 @misc{jeroen_2000_giantpandaglobalcom,

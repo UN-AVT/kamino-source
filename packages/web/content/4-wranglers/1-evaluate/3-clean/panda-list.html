@@ -253,8 +253,7 @@ It’s time for lunch
 <hr />
 <div id="load-dirty-data" class="section level3">
 <h3>Load “dirty” data</h3>
-<div id="an-example-with-missing-duplicate-and-other-values-that-need-to-be-cleaned." class="section level4">
-<h4>An example with <span style="color: #FE9A2E;font-weight:bold">missing</span>, <span style="background: #E0E0F8;font-weight:bold">duplicate</span>, and <span style="color:  #0000FF;font-weight:bold">other values</span> that need to be cleaned.</h4>
+<p>An example with <span style="color: #FE9A2E"> <strong>missing</strong></span>, <span style="background: #E0E0F8"> <strong>duplicate</strong></span>, and <span style="color:  #0000FF"> <strong>other values</strong></span> that need to be cleaned.</p>
 <pre class="r fold-hide"><code>df &lt;- read_csv(&#39;./archetypes/panda-list.csv&#39;)
 
 
@@ -1689,11 +1688,8 @@ Smithsonian’s National Zoo
 </table>
 </div>
 </div>
-</div>
-<div id="replace" class="section level3">
-<h3>Replace <span style="color: #0000FF;font-weight:bold">‘##’</span></h3>
-<div id="with-not-applicable-for-any-column" class="section level4">
-<h4>with <span style="color: #74DF00;font-weight:bold">‘Not Applicable’</span> for any column</h4>
+<div id="replace-with-not-applicable-for-any-column" class="section level3">
+<h3>Replace <span style="color: #0000FF;font-weight:bold">‘##’</span>with <span style="color: #74DF00;font-weight:bold">‘Not Applicable’</span> for any column</h3>
 <pre class="r fold-show"><code>df_1 &lt;- df
 df_1 &lt;- replace(df_1, df_1==&#39;##&#39;, &quot;Not Applicable&quot; )</code></pre>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:350px; overflow-x: scroll; width:NULL; ">
@@ -3125,11 +3121,9 @@ Smithsonian’s National Zoo
 </table>
 </div>
 </div>
-</div>
 <div id="remove-missing-values" class="section level3">
 <h3>Remove <span style="color: #FE9A2E;font-weight:bold">missing</span> values</h3>
-<div id="this-will-remove-an-entire-row-if-birth_place-contains-missing-value" class="section level4">
-<h4>This will remove an entire row if <strong>Birth_Place</strong> contains missing value</h4>
+<p>This will remove an entire row if <strong>Birth_Place</strong> contains missing value</p>
 <pre class="r fold-show"><code>df_2 &lt;- df_1
 
 df_2 &lt;- df_1[!is.na(df_1$Birth_Place), ]                </code></pre>
@@ -4442,11 +4436,8 @@ Smithsonian’s National Zoo
 </table>
 </div>
 </div>
-</div>
-<div id="replace-missing-values" class="section level3">
-<h3>Replace <span style="color: #FE9A2E;font-weight:bold">missing</span> values</h3>
-<div id="with-01012030-for-loan_expire_date-column" class="section level4">
-<h4>with <span style="color: #DF7401;font-weight:bold">01/01/2030</span> for <strong>Loan_Expire_Date</strong> column</h4>
+<div id="replace-missing-values-with-01012030-for-loan_expire_date-column" class="section level3">
+<h3>Replace <span style="color: #FE9A2E;font-weight:bold">missing</span> values with <span style="color: #DF7401;font-weight:bold">01/01/2030</span> for <strong>Loan_Expire_Date</strong> column</h3>
 <pre class="r fold-show"><code>df_3 &lt;- df_2
 df_3[is.na(df_3$Loan_Expire_Date),]$Loan_Expire_Date &lt;- &quot;01/01/2030&quot; </code></pre>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:350px; overflow-x: scroll; width:NULL; ">
@@ -5758,7 +5749,6 @@ Smithsonian’s National Zoo
 </table>
 </div>
 </div>
-</div>
 <div id="remove-duplicates" class="section level3">
 <h3>Remove <span style="background: #E0E0F8;font-weight:bold">duplicates</span></h3>
 <pre class="r fold-show"><code>df_4 &lt;- unique( df_3 )</code></pre>
@@ -6993,9 +6983,12 @@ Smithsonian’s National Zoo
 </div>
 <div id="references" class="section level3">
 <h3>References</h3>
-<div id="the-citations-and-data-sources-used-for-this-case" class="section level4">
-<h4>The citations and data sources used for this case</h4>
-<p>The original data file used in this wrangler task was captured from the <a href="https://www.giantpandaglobal.com/" target="_blank">Giant Panda Global</a> source which was published by Giant Panda Global website.</p>
+<div id="citations-for-narrative-and-data-sources" class="section level4">
+<h4>citations for narrative and data sources</h4>
+<ul>
+<li>Narrative and Data sources: The original data file used in this wrangler task was captured from the Giant Panda Global source which was published by Giant Panda Global website, <a href="https://www.giantpandaglobal.com/" target="_blank">GO</a></li>
+</ul>
+<!-- or -->
 <pre>
 @misc{jeroen_2000_giantpandaglobalcom,
   author = {Jeroen, Jacobs},
