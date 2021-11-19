@@ -136,7 +136,7 @@ v1 <- ggplot(dat.m) +
   )
 
 girafe(ggobj = v1, width_svg = 16, height_svg = 9, options =
-list(opts_sizing(rescale = TRUE, width = 1.0)))
+list(opts_sizing(rescale = TRUE, width = 0.8)))
 ```
 Because each measure is on a different scale, Price(EUR) is crowding out the plot and canceling the effects of other 3 variables. Thus, it is imperative to normalize the Data.
 
@@ -187,8 +187,8 @@ v2 <- ggplot(dat.m) +
     axis.text.x=element_blank()
   )
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72, options =
-list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = v2, width_svg = 16, height_svg = 9, options =
+list(opts_sizing(rescale = TRUE, width = 0.8)))
 ```
 
 ***
@@ -245,8 +245,8 @@ v3 <- ggplot(dat.m) +
     axis.text.x=element_blank()
   )
 
-girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72, options =
-list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = v3, width_svg = 16, height_svg = 9, options =
+list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
 
