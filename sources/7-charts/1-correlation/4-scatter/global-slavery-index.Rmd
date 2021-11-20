@@ -1,0 +1,179 @@
+---
+pagetitle: "Global Slavery Index"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS  
+</div>
+
+# Global Slavery Index
+## Scatter plot
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Yannis H on Unsplash"}
+
+masthead <- "assets/tasha-jolley-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> If slavery is not wrong, nothing is wrong...\
+--- Abraham Lincoln\
+
+***
+
+Depriving someone of their freedom is a terrible violation. Modern slavery is a destructive, personal crime and an abuse of human rights. It is a widespread and profitable criminal industry but despite this it is largely invisible, in part because it disproportionately affects the most marginalised. This is why measuring this problem is so crucial in exposing and ultimately resolving it. 
+
+
+### Ingest the data
+#### country, gdp per capita based on PPP, and government response score
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_slavery <- read.csv("archetypes/global-slavery-index/data.csv",header=TRUE, stringsAsFactors = FALSE)
+df_slavery
+
+```
+
+
+### Wrangle the data
+#### rename, filter, and remove incomplete cases
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+#Renaming column names
+colnames(df_slavery) <- c("Country", "GDP_PPP_percapita","Government_Response_Score")
+#df_slavery
+
+#Removing incomplete cases
+df <- df_slavery[complete.cases(df_slavery), ]
+#df
+
+#Filtering dataset based on action taken and response by countries for plot
+most_action <- filter(df, Government_Response_Score >= 63.9)
+least_action <- filter(df,Government_Response_Score <= 15.5)
+
+strong_response_countries <- c('Georgia', 'Mozambique', 'Senegal','Sierra Leone','Moldova')
+strong_response <- df[df$Country %in% strong_response_countries,]
+weak_response_countries <- c('Brunei Darussalam','Hong Kong, China','Kuwait','Qatar','Singapore')
+weak_response <- df[df$Country %in% weak_response_countries,]
+
+
+
+```
+
+
+### Plot
+#### data points with smoothing
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 20), 
+    plot.title = element_text(color = "black", size = 20, face = "bold"),
+    axis.title.x = element_text(face='bold',size=16),
+    axis.title.y = element_text(face='bold',size=16),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.major.x = element_line(color="#AAAAAA"),
+    panel.grid.major.y = element_line(color="#AAAAAA"),
+    panel.grid.minor.x = element_line(color="#AAAAAA"),
+    panel.grid.minor.y = element_line(color="#AAAAAA"),
+    
+  )
+
+plot_data <- data.frame('Countries' = c(most_action$Country,least_action$Country,strong_response_countries,weak_response_countries),'Response Scores' = c(most_action$Government_Response_Score,least_action$Government_Response_Score,strong_response$Government_Response_Score,weak_response$Government_Response_Score),'GDP' = c(most_action$GDP_PPP_percapita,least_action$GDP_PPP_percapita,strong_response$GDP_PPP_percapita,weak_response$GDP_PPP_percapita))
+
+# Plot
+v1 <- ggplot(df, aes(x = GDP_PPP_percapita, y = Government_Response_Score)) + 
+  geom_smooth(method="lm", se = FALSE, size = 1.5, color = '#EA8040') +  
+  geom_point(color='black',size=3) +
+  geom_text_repel(data=plot_data, aes(x=GDP,y=Response.Scores,label=Countries)) + 
+  scale_x_continuous(trans = "log10",breaks = c(1000,2000,5000,10000,20000,50000),labels=c(1000,2000,5000,10000,20000,50000)) +
+  scale_y_continuous() +
+  labs( title = "Correlation between GDP (PPP) per capita and Government Responses Index",
+        subtitle = NULL,
+        x = "GDP PPP per capita",
+        y = "Government Response Score") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# full version
+ggsave(filename = "assets/global-slavery-index-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+```
+
+
+### References
+#### Citations and data sources
+
+* Narration and data: Walk Free, [GO](https://www.globalslaveryindex.org/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
