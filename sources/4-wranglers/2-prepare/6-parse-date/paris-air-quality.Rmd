@@ -1,5 +1,5 @@
 ---
-pagetitle: "Case: Air Quality in Paris"
+pagetitle: "Air Quality in Paris"
 output: 
   html_document:
     theme: lumen
@@ -41,7 +41,7 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# Case: Air Quality in Paris
+# Air Quality in Paris
 ## Parse Date
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Ella Ivanescu on Unsplash"}

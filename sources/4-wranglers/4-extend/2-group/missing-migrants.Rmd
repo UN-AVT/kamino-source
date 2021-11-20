@@ -178,11 +178,10 @@ df_4
 
 ```
 
-
 ### References
 #### citations for narrative and data sources
 
-IOM, Missing Migrants, [GO](https://missingmigrants.iom.int/){target="_blank"}
+* Narrative and data sources: Missing Migrants, [GO](https://missingmigrants.iom.int/){target="_blank"}
 
 <pre>
 @misc{missingmigrants_2001_missing,
