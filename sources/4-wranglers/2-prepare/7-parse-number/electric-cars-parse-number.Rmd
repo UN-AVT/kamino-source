@@ -65,7 +65,7 @@ df <- read.csv('./archetypes/Cheapestelectriccars-EVDatabase.csv', header = TRUE
 df
 ```
 
-#### Let's take a look at the datatypes we have on our dataset. 
+Let's take a look at the datatypes we have on our dataset. 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -73,14 +73,14 @@ str(df)
 
 ```
 
-#### Most of our data are in Character formats where it should be numerical. Having numerical data-points will allow us to do computations as well as plot the data efficiently. It's imperative that we get rid of the strings in the data point and convert it to numerical. 
+Most of our data are in Character formats where it should be numerical. Having numerical data-points will allow us to do computations as well as plot the data efficiently. It's imperative that we get rid of the strings in the data point and convert it to numerical. 
 
-#### We'll use the help of the function parse_number from library(readr)
+We'll use the help of the function parse_number from library(readr)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 
-df$Acceleration <- parse_number(df$Acceleration)
+df$Acceleration <- readr::parse_number(df$Acceleration)
 df$TopSpeed <- parse_number(df$TopSpeed)
 df$Range <- parse_number(df$Range)
 df$Efficiency <- parse_number(df$Efficiency)
@@ -88,7 +88,7 @@ df$Efficiency <- parse_number(df$Efficiency)
 ```
 
 
-#### Now we can observe the columns that've been parsed and converted to numerical 
+Now we can observe the columns that've been parsed and converted to numerical 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -98,26 +98,16 @@ str(df)
 
 
 ### References
-#### The data file used in this wrangler task was retrieved from <a href="https://www.kaggle.com/kkhandekar/cheapest-electric-cars" target="_blank" rel="noopener noreferrer"> Kaggle </a> source in which data was scraped <a href="https://ev-database.org/" target="_blank" rel="noopener noreferrer"> Electric Vehicle Database </a> 
+#### citations for narrative and data sources
+* Narrative sources: Cheapest Electric Cars, [GO](https://www.kaggle.com/kkhandekar/cheapest-electric-cars){target="_blank"}
+* Data sources: Electric Vehicle Database, [GO](https://ev-database.org/){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "parse-number" # mostly used in wranglers and analytics
-keywords <- 'Electric-Car cars'
-commands <- 'parse_number'
-sources <- 'Electric-Vehicle-Database'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

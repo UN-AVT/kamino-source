@@ -1,5 +1,5 @@
 ---
-pagetitle: "Case: How cheap are Electric Cars"
+pagetitle: "How cheap are Electric Cars"
 output: 
   html_document:
     theme: lumen
@@ -41,7 +41,7 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# Case: How cheap are Electric Cars
+# How cheap are Electric Cars
 ## Normalize
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by CHUTTERSNAP on Unsplash"}

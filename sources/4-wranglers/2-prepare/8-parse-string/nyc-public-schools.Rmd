@@ -65,7 +65,7 @@ df <- read.csv('./archetypes/scores.csv', header = TRUE, stringsAsFactors = FALS
 df
 ```
 
-#### Let's take a look at the column Street.Address. Both the Street Name and Building number are in the column. Perhaps, we'll like to sepearate them. 
+Let's take a look at the column Street.Address. Both the Street Name and Building number are in the column. Perhaps, we'll like to sepearate them. 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -81,9 +81,9 @@ df2
 
 ```
 
-
 ### References
-#### The data file used in this wrangler task was retrieved from <a href="https://www.kaggle.com/nycopendata/high-schools" target="_blank" rel="noopener noreferrer"> Kaggle </a>
+#### citations for narrative and data sources
+* Narrative and data sources: Average SAT Scores for NYC Public Schools, [GO](https://www.kaggle.com/nycopendata/high-schools){target="_blank"}
 
 ```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -97,20 +97,8 @@ df2
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "parse-string" # mostly used in wranglers and analytics
-keywords <- 'NYC public-school'
-commands <- 'gsub'
-sources <- 'Kaggle'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

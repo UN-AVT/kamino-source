@@ -1,5 +1,5 @@
 ---
-pagetitle: "Paris Air Quality"
+pagetitle: "Case: Air Quality in Paris"
 output: 
   html_document:
     theme: lumen
@@ -64,7 +64,7 @@ df <- read.csv('./archetypes/paris-air-quality/paris-air-quality.csv', header = 
 df
 ```
 
-#### Let's take a look at the datatypes we have for the date column. 
+Let's take a look at the datatypes we have for the date column. 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -72,7 +72,7 @@ class(df$date)
 
 ```
 
-#### We'l convert this to the date format and recheck its data type
+We'l convert this to the date format and recheck its data type
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -82,9 +82,9 @@ class(df$date)
 ```
 
 
-#### Parsing the date can help us transform the date into a format that is suitable for our use case. Lets explore a few useful things we can do. 
+Parsing the date can help us transform the date into a format that is suitable for our use case. Lets explore a few useful things we can do. 
 
-#### Firstly, we can seperate the column 'Date' into three different columns for month, day and year.
+Firstly, we can seperate the column 'Date' into three different columns for month, day and year.
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -98,7 +98,7 @@ parsed_date
 ```
 
 
-#### We can also convert month to thier alphabetical format. 
+We can also convert month to thier alphabetical format. 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -113,7 +113,7 @@ parsed_date2
 
 The library 'lubridate' can also help us parse dates from strings.
 
-#### We can also convert month to thier alphabetical format. The library will examine the entire vector of dates will help you determine what format it is by process of elimination. For example:
+We can also convert month to thier alphabetical format. The library will examine the entire vector of dates will help you determine what format it is by process of elimination. For example:
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -129,28 +129,17 @@ dym(x)
 
 ```
 
-
 ### References
-#### The data file used in this wrangler task was retrieved from <a href="https://www.kaggle.com/kkhandekar/cheapest-electric-cars" target="_blank" rel="noopener noreferrer"> Kaggle </a> source in which data was scraped <a href="https://ev-database.org/" target="_blank" rel="noopener noreferrer"> Electric Vehicle Database </a> 
+#### citations for narrative and data sources
+* Narrative sources: Cheapest Electric Cars, [GO](https://www.kaggle.com/kkhandekar/cheapest-electric-cars){target="_blank"}
+* Data sources: Electric Vehicle Database, [GO](https://ev-database.org/){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "parse-date" # mostly used in wranglers and analytics
-keywords <- 'Paris Air-Quality'
-commands <- 'date month year'
-sources <- 'Kaggle'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

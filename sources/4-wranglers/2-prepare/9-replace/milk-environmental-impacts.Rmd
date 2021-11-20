@@ -84,7 +84,7 @@ df_tmp
 ```
 
 
-### In MEASURE, let's replace/substitute <span style="color: #0000FF;font-weight:bold">Water User (L)</span> to <span style="color: #fc7f03;font-weight:bold">Water Use in Liter</span>. 
+In MEASURE, let's replace/substitute <span style="color: #0000FF;font-weight:bold">Water User (L)</span> to <span style="color: #fc7f03;font-weight:bold">Water Use in Liter</span>. 
 
 
 ```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
@@ -111,7 +111,7 @@ df_tmp
 
 ```
 
-```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 # Calculate max values for bar background fill
 msr_max <- df %>%
     group_by(MEASURE) %>%
@@ -147,49 +147,22 @@ v1 <- ggplot(df, aes(x=VALUE, y=MILK)) +
         axis.title = element_blank())                     # Remove x and y axis titles.
 
 # Print the plot
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
+girafe(ggobj = v1, width_svg = 16, height_svg = 9, options =
 list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 
-
-# References
-## The citations and data sources used for this case
-
-Source: <a href="https://www.bbc.com/news/science-environment-46654042" target="_blank">Climate change: Which vegan milk is best?</a>
-
-<pre>
-@article{guibourg_2019_climate,
-  author = {Guibourg, Clara and Briggs, Helen},
-  month = {02},
-  title = {Climate change: Which vegan milk is best?},
-  url = {https://www.bbc.com/news/science-environment-46654042},
-  urldate = {2021-06-02},
-  year = {2019},
-  organization = {BBC News},
-  journal = {BBC News}
-}
-</pre>
+### References
+#### citations for narrative and data sources
+* Narrative and data sources: Which vegan milk is best?, [GO](https://www.bbc.com/news/science-environment-46654042){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "replace-string" # mostly used in wranglers and analytics
-keywords <- 'milk vegan climate-change'
-commands <- 'gsub'
-sources <- 'BBC'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 
