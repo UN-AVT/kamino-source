@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Prison Population"
 output: 
   html_document:
     theme: lumen
@@ -65,13 +65,13 @@ knitr::include_graphics(masthead, dpi=72)
 ***
 
 
-#### Wide and Long Data are two terms used to represent different presentations of tabular data. In the wide format, each response variable is in a separate column. Data stored in long form has a single column for each variable in the system.
+Wide and Long Data are two terms used to represent different presentations of tabular data. In the wide format, each response variable is in a separate column. Data stored in long form has a single column for each variable in the system.
 
-#### Wheter the wide or long format is appropriate is dependent on the model or analytics you're trying to process. The long format seems to be the popular choice in most cases because you want each unit of observation to be its own row. However, in most survey research or social sciences, the wide format seems to be a popular choice. Thus, it is necessary for us to learn how to transform between the two tabular formats.
+Whether the wide or long format is appropriate is dependent on the model or analytics you're trying to process. The long format seems to be the popular choice in most cases because you want each unit of observation to be its own row. However, in most survey research or social sciences, the wide format seems to be a popular choice. Thus, it is necessary for us to learn how to transform between the two tabular formats.
 
 ### Load data
 
-#### Here we have a long data format.
+Here we have a long data format.
 
 
 ```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
@@ -89,9 +89,9 @@ df1
 
 
 
-#### There are several methods to transform from long to wide. Let's test a few libraries.
+There are several methods to transform from long to wide. Let's test a few libraries.
 
-### Let's try pivot_wider from library(tidyr). This returns a data frame. 
+Let's try pivot_wider from library(tidyr). This returns a data frame. 
 
 
 ```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
@@ -100,7 +100,7 @@ df1
 data_wide <- pivot_wider(data = df1, names_from = Year, values_from = Regional.Estimate)
 data_wide
 ```
-#### Next we have the function spread().
+Next we have the function spread().
 
 ```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
 
@@ -110,7 +110,7 @@ data_wide2
 ```
 
 
-#### Let's try another popular packaage called reshape2. Function acast() will return a matrix while dcast() will return a dataframe. 
+Let's try another popular packaage called reshape2. Function acast() will return a matrix while dcast() will return a dataframe. 
 
 ```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
 
@@ -121,11 +121,12 @@ data_wide3
 ```
 
 
-#### There are tons of other functions such as plyr::daply(), base::xtabs(), base::reshape, base::unstack
-
+There are tons of other functions such as plyr::daply(), base::xtabs(), base::reshape, base::unstack
 
 ### References
-#### The citations and data sources used for this case can be found on the United Nations Office on Drugs and Crime  <a href="https://dataunodc.un.org/" target="_blank">data repository</a> 
+#### citations for narrative and data sources
+
+* Narrative sources and data: United Nations Office on Drugs and Crime, [GO](https://dataunodc.un.org/){target="_blank"}
 
 
 ```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
@@ -138,18 +139,7 @@ data_wide3
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "long-to-wide" # mostly used in wranglers and analytics
-keywords <- 'prison'
-commands <- 'pivot_wider spread decast'
-sources <- 'UNODC'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```

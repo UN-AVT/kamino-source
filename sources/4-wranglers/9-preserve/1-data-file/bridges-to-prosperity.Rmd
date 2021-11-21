@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Bridges to Prosperity"
 output: 
   html_document:
     theme: lumen
@@ -78,7 +78,7 @@ df
 ### Applying __Wranglers Tasks__ to change this data set:
 
 ### Evaluate - Clean
-#### Remove all records where __individuals_directly_served__ is missing.
+Remove all records where __individuals_directly_served__ is missing.
 
 ```{r method: clean, message=FALSE, echo=TRUE,warning=FALSE}
 
@@ -91,7 +91,7 @@ df_1
 
 
 ### Prepare - Column
-#### Convert all column names to __uppercase__
+Convert all column names to __uppercase__
 
 ```{r method: column uppercase, message=FALSE, echo=TRUE,warning=FALSE}
 df_2 <- df_1
@@ -100,7 +100,7 @@ names(df_2) <- toupper(names(df_2))
 df_2
 ```
 
-#### Remove columns that are not relevant
+Remove columns that are not relevant
 
 ```{r method: remove column, message=FALSE, echo=TRUE,warning=FALSE}
 df_3 <- df_2[,c(1,4,6:8,11)]
@@ -109,7 +109,7 @@ df_3
 ```
 
 ### Reduce - Filter
-#### Filter only records from __Bolivia__, __Uganda__ and __Rwanda__ in the  __COUNTRY__ column and the __STAGE__ is __Complete__
+Filter only records from __Bolivia__, __Uganda__ and __Rwanda__ in the  __COUNTRY__ column and the __STAGE__ is __Complete__
 
 ```{r method: filter, message=FALSE, echo=TRUE,warning=FALSE}
 
@@ -123,7 +123,7 @@ df_4
 
 
 ### Extend - Group
-#### Let's find out how many individuals the bridges have served in each country per year
+Let's find out how many individuals the bridges have served in each country per year
 
 ```{r method: group, message=FALSE, echo=TRUE,warning=FALSE}
 df_5 <- df_4 %>% group_by(`COUNTRY`, `B2P_FISCAL_YEAR`) %>% summarise(TOTAL_PEOPLE_SERVED=sum(`INDIVIDUALS_DIRECTLY_SERVED`))
@@ -134,7 +134,7 @@ df_5
 
 
 ### Write to a CSV file
-#### Let's say this final data is enough for us to do further analysis and plot a graph. For the moment, let's save all the changes made to the original data file into a new data file (.csv).
+Let's say this final data is enough for us to do further analysis and plot a graph. For the moment, let's save all the changes made to the original data file into a new data file (.csv).
 
 
 ```{r method: store into a csv file, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
@@ -146,9 +146,9 @@ write.csv(df_5, './output/bridges_to_prosperity_summary_output.csv')
 ```
 
 ### Map the data
-#### Let's look at the bridges in Bolivia as an example
+Let's look at the bridges in Bolivia as an example
 
-```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 # Map and bridges datasets
 world <- ne_countries(scale = "medium", returnclass = "sf")
@@ -167,14 +167,15 @@ v1 <- ggplot(data = world) +
     coord_sf(xlim = c(-75, -55), ylim = c(-25, -7))
 
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
-list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = v1, width_svg = 16, height_svg = 9, options =
+list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
 
-
 ### References
-#### The data source used here is in reference to bridges built in remote areas in developing countries as mentioned by <a href="https://www.bridgestoprosperity.org/who-we-are/team/" target="_blank" rel="noopener noreferrer"> Bridges to Prosperity</a>.
+#### citations for narrative and data sources
+
+* Narrative and data sources: bridges built in remote areas in developing countries, [GO](https://www.bridgestoprosperity.org/who-we-are/team/){target="_blank"}
 
 
 <pre>
@@ -192,20 +193,8 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "save-last-image save-image write-csv" # mostly used in wranglers and analytics
-keywords <- 'Prosperity Bridge growth'
-commands <- 'write.csv ggsave'
-sources <- 'Bridges-to-Prosperity'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

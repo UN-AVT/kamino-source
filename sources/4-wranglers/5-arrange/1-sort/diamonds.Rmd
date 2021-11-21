@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Diamonds"
 output: 
   html_document:
     theme: lumen
@@ -87,8 +87,9 @@ df_tmp
 
 ```
 
-### Sort a dataset from a given reference with set order
-#### Here is a reference list for "clarity" based on the <a href = "https://en.wikipedia.org/wiki/Diamond_clarity" target="_blank"> modern GIA grading system </a>.
+Sort a dataset from a given reference with set order
+
+Here is a reference list for "clarity" based on the <a href = "https://en.wikipedia.org/wiki/Diamond_clarity" target="_blank"> modern GIA grading system </a>.
 
 ```{r, message=FALSE, echo=FALSE}
 
@@ -98,7 +99,7 @@ reference
 
 ```
 
-#### Sort the order following the reference list.
+Sort the order following the reference list.
 
 ```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
 
@@ -123,7 +124,7 @@ df_tmp
 
 ### Sort a dataset by column ascending
 
-#### Sort a number column "carat".
+Sort a number column "carat".
 
 ```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
 
@@ -143,7 +144,7 @@ df_tmp
 
 ```
 
-#### Sort a string column "cut".
+Sort a string column "cut".
 
 ```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
 
@@ -170,7 +171,7 @@ df_tmp
 
 ### Sort a dataset by column descending
 
-#### Sort a number column "price".
+Sort a number column "price".
 
 ```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
 
@@ -192,7 +193,7 @@ df_tmp
 ```
 
 
-#### Sort a string column "color".
+Sort a string column "color".
 
 ```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
 
@@ -215,7 +216,7 @@ df_tmp
 
 ## Sort by several columns
 
-#### Let's sort by ascending "price" and descending "carat".
+Let's sort by ascending "price" and descending "carat".
 
 ```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
 df_7<-df_1%>%arrange(price,desc(carat))
@@ -253,7 +254,9 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 
 ### References
-#### The citations and data sources used for this case
+#### citations for narrative and data sources
+
+* Narrative sources: Diamond Clarity, [GO](https://en.wikipedia.org/wiki/Diamond_clarity){target="_blank"}
 
 #### The data source was built in R. Use function data() in the console to view available datasets.
 
@@ -274,18 +277,7 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "sort-ascending sort-descending sort-multiple-column sort-set-order" # mostly used in wranglers and analytics
-keywords <- 'diamonds'
-commands <- 'arrange'
-sources <- 'Wikipedia'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```
