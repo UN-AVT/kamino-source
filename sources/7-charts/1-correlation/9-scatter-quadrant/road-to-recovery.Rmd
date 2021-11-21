@@ -1,5 +1,5 @@
 ---
-pagetitle: "Most Generous Nations"
+pagetitle: "Road to Recovery"
 output:
   html_document:
     theme: lumen
@@ -24,9 +24,11 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(ggthemes)
 library(ggrepel)
 library(ggiraph)
+library(ggflags)
+#remotes::install_github('rensa/ggflags')
+library(countrycode)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -40,33 +42,27 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# Most Generous Nations
+# Road to Recovery
 ## Scatter Quadrant
 
 
 ```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Matt Collamer on Unsplash"}
 
-masthead <- "assets/matt-collamer-unsplash.jpg"
+masthead <- "assets/julian-wan-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-> Generosity is the most natural outward expression of an inner attitude of compassion and loving-kindness...\
---- The Dalai Lama XIV\
+> Everything will be okay in the end. If it’s not okay, it’s not the end...\
+--- John Lennon\
 
 ***
 
-We have a natural instinct to help others. Wealth doesn’t come into it. Citizens of relatively poor countries such as Myanmar and Indonesia are some of the most generous. They __help__ strangers. They __donate__ money. They __volunteer__ time. The top 20 includes countries that have suffered massive instability. Haiti. Liberia. Sierra Leone. Shared human values, shining through.
-
-Let's take a closer look at the situation.
-
 ### Ingest the source
-#### giving score, GDP, population
-
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/worlds-most-generous/worlds-most-generous.csv", header = TRUE, stringsAsFactors = FALSE)
+df = read.csv("archetypes/road-to-recovery/road-to-recovery.csv", header = TRUE, stringsAsFactors = FALSE)
 df
 
 ```
@@ -78,152 +74,70 @@ df
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Select only the needed
-df_complete <- select(df, c("Country", "Overall_CAF_Giving_Index_Score_Percent", "GDP_per_capita_current_USD", "population"))
+df <- df[-12,]
 
-# Make sure all visual variables are proper data types
-df_complete$Overall_CAF_Giving_Index_Score_Percent <- parse_number(df_complete$Overall_CAF_Giving_Index_Score_Percent)
-df_complete$GDP_per_capita_current_USD <- parse_number(df_complete$GDP_per_capita_current_USD)
-df_complete$population <- parse_number(df_complete$population)
-
-# Make sure we don't factor empty strings
-df_complete <- filter(df_complete, nchar(Country) > 0)
-# Factor the string fields
-df_complete$Country <- as.factor(df_complete$Country)
-
-# Remove incomplete cases
-df_complete <- df_complete[complete.cases(df_complete), ]
-
-df_complete
-
-```
+colnames(df)[1] <- "country" # Changing Column Name
 
 
-### Quadrant Measures
-#### min, max, mean, and conditional logic
+df$Mobility.Rate<-as.numeric(gsub("\\%","",df$Mobility.Rate)) # Removin percent sign
+df$Recovery.Rate<-as.numeric(gsub("\\%","",df$Recovery.Rate))
+df$Total.Cases<-as.numeric(gsub("\\,","",df$Total.Cases))
+df$Total.Recovered<-as.numeric(gsub("\\,","",df$Total.Recovered))
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+library(countrycode)
+df$iso <- tolower(countrycode(sourcevar = df[, "country"],
+                            origin = "country.name",
+                            destination = "iso2c"))
 
-# measures to use for quadrant placement
-gdp_average <- mean(df_complete$GDP_per_capita_current_USD)
-gdp_min <- min(df_complete$GDP_per_capita_current_USD)
-gdp_max <- max(df_complete$GDP_per_capita_current_USD)
-
-generosity_average <- mean(df_complete$Overall_CAF_Giving_Index_Score_Percent)
-generosity_min <- min(df_complete$Overall_CAF_Giving_Index_Score_Percent)
-generosity_max <- max(df_complete$Overall_CAF_Giving_Index_Score_Percent)
-
-# Create a color variable for a manual scale
-df_complete <- df_complete %>% mutate(color = ifelse( GDP_per_capita_current_USD < gdp_average & Overall_CAF_Giving_Index_Score_Percent > generosity_average, 'R', 'B'))
-df_complete
+df
 
 ```
 
 
+### Scatter Quadrant Plot
 
-### Base Scatter Plot
-#### position, shape, color, and labels
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide',out.width = "100%"}
 
-
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
-
-# theme parameters
 theme_opts <- theme(
-  text = element_text(family = "inconsolata"), 
-  legend.position = "none",
-  legend.title = element_blank(),
-  axis.text = element_blank(),
-  axis.line = element_blank(),
-  axis.ticks = element_blank(),
-  #axis.title = element_blank(),
-  panel.grid = element_blank(),
-  # panel.grid.major = element_line(linetype = "dotted"),
-  # panel.grid.minor = element_blank(),
-  panel.background = element_rect(fill="#B3E5FC", colour="#B3E5FC"),
-  panel.border = element_blank(),
-  plot.background = element_rect(fill="#B3E5FC", colour="white"),
-  plot.title = element_text(vjust = 3.0),
-  plot.subtitle = element_text(vjust = 3.0),
-  plot.margin = unit(c(0.5,0.5,0.5,0.5), "in")
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 20, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 15),
+    plot.caption = element_text(color = "#555555", size = 8),
+    axis.text = element_text(size=10),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.title = element_text(color = "black", size = 8, face = "bold"), 
+    legend.text = element_text(color = "black", size = 8),
+    legend.position = "none"
 )
 
-color_palette <- c("B" = "#111111", "R" = "#f15a24")
 
-v1 <- ggplot(df_complete) +
-      geom_point_interactive(aes(x = GDP_per_capita_current_USD, 
-                 y = Overall_CAF_Giving_Index_Score_Percent, 
-                 size = population,
-                 color = color,
-                 tooltip = paste0("Country: ", Country, "\n", 
-                                  "Overall_CAF_Giving_Index_Score_Percent: ", Overall_CAF_Giving_Index_Score_Percent, "%\n", 
-                                  "GDP_per_capita_current_USD: ", GDP_per_capita_current_USD, "\n", 
-                                  "population: ", population),
-                 data_id = row.names(df_complete)), 
-                 shape = 21, fill = "#E1F5FE", alpha = 1.0 ) + # or fill = "NA"
-      geom_text_repel(data=filter(df_complete, population>mean(population)),
-                      aes(x = GDP_per_capita_current_USD, y = Overall_CAF_Giving_Index_Score_Percent, label = Country, color = color),
-                      family = 'inconsolata', size = 4, force = 0.5, nudge_x = 0.25, segment.size  = 0.2, segment.color = "grey50", direction = "both", hjust = 0) +
-      scale_x_continuous(trans = "log2") +
-      scale_y_continuous() +
-      scale_size("population", range = c(2, 40)) +
-      scale_color_manual(guide = FALSE, values = color_palette) +
-      coord_cartesian(clip = 'off') +
-      labs(x="GDP",
-         y="Generosity",
-         title = "Some of the World's Poorest Nations\nare also the Most Generous",
-         caption = "source: Charities Aid Foundation, Information is Beautiful") +
-      theme_minimal(base_family = "inconsolata", base_size = 16) +
-      theme_opts
-
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
-       options = list(
-         opts_sizing(rescale = TRUE, width = 1.0), 
-         opts_hover(css = "fill:#81D4FA;")
-         )
-      )
-
-```
+v1 <- ggplot(df, aes(x=Recovery.Rate, y=Mobility.Rate, country = iso, label=country)) +
+  annotate("rect", xmin = 0, xmax = 50, ymin = -50, ymax = 20, fill= "white", color = "white")  + 
+  annotate("rect", xmin = 50, xmax = 100, ymin = -50, ymax = 20, fill= "#c3e8ee", color = "white") + 
+  annotate("rect", xmin = 0, xmax = 50, ymin = -120, ymax = -50, fill= "#f3d4d9", color = "white") + 
+  annotate("rect", xmin = 50, xmax = 100, ymin = -120, ymax = -50, fill= "white", color = "white")+
+  annotate("text", x = 60, y=15, label= "High Mobility, High recovery\nLifted Restrictions &\nPeople going back to work")+
+  annotate("text", x = 10, y=-60, label= "Low Mobility, Low recovery\nRemaining Indoors") +
+  annotate("text", x = 10, y=15, label= "High Mobility, Low recovery\nAllowing activity\nPossible surge in Future") +
+  annotate("text", x = 60, y=-115, label= "Low Mobility, High recovery\nPlaying it Safe") +
+  geom_point() +
+  geom_flag()+
+  geom_text_repel() +
+  scale_y_continuous(breaks=c(20, 0, -40, -80, -120),
+                  labels=c('20%', '0', '-40%', '-80%', '-12%')) +
+  scale_x_continuous(breaks=c(0, 25, 50, 75, 100),
+                  labels=c('0', '25%', '50%', '75%', '100%'))+
+      labs(y="Mobility Rate",
+           x = "Recovery Rate",
+       title = "The Road to Recovery",
+       subtitle = "Which Economies are Reopening? \nThe higher the mobility rate, the more activity this signifies")+
+  theme_opts
 
 
-### The Quadrant
-#### with annotations...
+girafe(ggobj = v1, width_svg = 16, height_svg = 15,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
-
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
-
-v2 <- v1 + geom_hline(yintercept = generosity_average, linetype = "dashed", color = "#f15a24") +
-  geom_vline(xintercept = gdp_average, linetype = "dashed", color = "#f15a24") +
-  annotate("text", x = gdp_min, y = generosity_max, 
-           label = "poor & generous countries", 
-           hjust = 0.3, vjust = 0.5, size = 5, color = "#f15a24", family = "inconsolata", fontface = 2) +
-  annotate("text", x = gdp_max, y = generosity_max, 
-           label = "rich & generous", 
-           hjust = 0.55, vjust = 0.5, size = 5, color = "#111111", family = "inconsolata", fontface = 2) +
-  annotate("text", x = gdp_min, y = generosity_min, 
-           label = "poor & less generous", 
-           hjust = 0.3, vjust = 0, size = 5, color = "#111111", family = "inconsolata", fontface = 2) +
-  annotate("text", x = gdp_max, y = generosity_min, 
-           label = "rich & less generous", 
-           hjust = 0.7, vjust = 0, size = 5, color = "#111111", family = "inconsolata", fontface = 2) +
-  annotate("text", x = gdp_average, y = generosity_max, 
-           label = "HIGH GENEROSITY", 
-           hjust = 0.5, vjust = -4.0, size = 5, color = "#f15a24", family = "inconsolata", fontface = 1) +
-  annotate("text", x = gdp_average, y = generosity_min, 
-           label = "LOW GENEROSITY", 
-           hjust = 0.5, vjust = 5.0, size = 5, color = "#f15a24", family = "inconsolata", fontface = 1) +
-  annotate("text", x = gdp_min, y = generosity_average, 
-           label = "LOW WEALTH", 
-           hjust = 0.8, vjust = 1.5, size = 5, color = "#f15a24", family = "inconsolata", fontface = 1) +
-  annotate("text", x = gdp_max, y = generosity_average, 
-           label = "HIGH WEALTH", 
-           hjust = 0.3, vjust = 1.5, size = 5, color = "#f15a24", family = "inconsolata", fontface = 1)
-
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
-       options = list(
-         opts_sizing(rescale = TRUE, width = 1.0), 
-         opts_hover(css = "fill:#81D4FA;")
-         )
-      )
 
 ```
 
@@ -232,10 +146,10 @@ girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
 
 # full version
-ggsave(filename = "assets/worlds-most-generous-fs.svg", plot = v2, width=1280/72, height=720/72)
+ggsave(filename = "assets/road-to-recovery-fs.svg", plot = v1, width=16, height=15)
 
 # without annotations
-ggsave(filename = "assets/worlds-most-generous-sm.svg", plot = v1, width=4, height=2.25)
+# ggsave(filename = "assets/worlds-most-generous-sm.svg", plot = v1, width=4, height=2.25)
 
 ```
 
@@ -243,7 +157,7 @@ ggsave(filename = "assets/worlds-most-generous-sm.svg", plot = v1, width=4, heig
 ### References
 #### Citations and data sources
 
-* Inspiration and data: Information is Beautiful, [GO](https://informationisbeautiful.net/beautifulnews/1025-generous-countries/){target="_blank"}
+* Inspiration and data: The Visual Capitalist, [GO](https://www.visualcapitalist.com/the-road-to-recovery-which-economies-are-reopening-covid-19/){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

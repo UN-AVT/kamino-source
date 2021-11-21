@@ -1,0 +1,195 @@
+---
+pagetitle: "Which Electric Vehicle to Choose"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+library(ggvoronoi)
+library(scales)
+library(ggrepel)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Which Electric Vehicle to Choose
+## Scatter Voronoi
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Michael Marais on Unsplash"}
+
+masthead <- "assets/michael-marais-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Economic growth doesn't mean anything if it leaves people out...\
+--- Jack Kemp
+
+
+***
+
+### Load the data [Ingest]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df <- read.csv("./archetypes/Cheapestelectriccars-EVDatabase.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+### Prepare the data [Wrangle]
+
+While creating a heatmap, it might make better sense to bin the continuous data into levels and represent each level as a discrete colour. The cut() function in R allows to break and label a continuous variable
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df$Acceleration <- parse_number(df$Acceleration)
+df$TopSpeed <- parse_number(df$TopSpeed)
+df$Range <- parse_number(df$Range)
+df$Price.UK <- parse_number(df$Price.UK)
+
+df$Name <- sub("(\\w+\\s+\\w+).*", "\\1", df$Name)
+
+df <- df %>%  mutate(zero2sixty=cut(Acceleration, breaks=c(0,4,6,8,10,12),
+                      labels=c('3-4','4-6','6-8','8-10','12+'))) %>%
+  mutate(zero2sixty = as.factor(zero2sixty))
+
+```
+
+### Plot 
+#### Top Speed and Price
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "green", size = 14, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 8),
+    axis.text = element_text(size=7.5),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.title = element_text(color = "black", size = 8, face = "bold"), # remove legend title
+    legend.text = element_text(color = "black", size = 8),
+    legend.position='right'
+)
+
+
+v1 <- ggplot(data = df, aes(y= TopSpeed,
+                      x= rescale(Price.UK, to=c(135,250)),
+                      label = Name))+
+  stat_voronoi(geom="path", colour = 'green') +
+  geom_point(aes(color=zero2sixty)) +
+  geom_text_repel(size=4, aes(color=zero2sixty)) +
+  scale_x_continuous(breaks=c(140, 160, 200, 240),
+                  labels=c(10000, 20000,30000, 64111)) +
+      labs(y="Top Speed",
+           x = "Price",
+       title = "Which EV to Choose?",
+       subtitle = "Pinpoint your desired Top Speed and Price",
+       caption = "refer to data frame for full car name")+
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+### Plot
+#### Range and Price
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v2 <- ggplot(data = df, aes(y= Range,
+                      x= rescale(Price.UK, to=c(200,640)),
+                      label = Name))+
+  stat_voronoi(geom="path", colour = 'green') +
+  geom_point(aes(color=zero2sixty)) +
+  geom_text_repel(size=4, aes(color=zero2sixty))+
+  scale_x_continuous(breaks=c(200, 300, 400, 500, 600),
+                  labels=c(30000, 45000,65000, 85000, 105000)) +
+   labs(y="Range",
+        x = "Price",
+       title = "Which EV to Choose?",
+       subtitle = "Pinpoint your desired Range and Price",
+       caption = "refer to data frame for full car name") +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/electric-voronoi.svg", plot = v1, width=16, height=9)
+
+# without annotations
+#ggsave(filename = "assets/economic-growth-happiness-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: EV Database, [GO](https://ev-database.org){target="_blank"}
+* Data sources: Kaggle, [GO](https://www.kaggle.com/kkhandekar/cheapest-electric-cars){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
