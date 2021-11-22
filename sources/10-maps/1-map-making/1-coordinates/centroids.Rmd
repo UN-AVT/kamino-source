@@ -1,0 +1,66 @@
+---
+pagetitle: "Raster Map"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+
+# Libraries
+library(tidyverse)
+library(jpeg)
+library(maps)
+library(geosphere)
+library(grid)
+
+```
+
+## R Markdown
+
+```{r cars}
+
+lights = read.csv("../archetypes/cities-top-10000-world.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# Load picture and render
+earth <- readJPEG("../archetypes/black-marble-map.jpg", native = TRUE)
+earth <- rasterGrob(earth, interpolate = TRUE)
+
+```
+
+
+
+```{r, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+# Corners to force full size render
+xlong <- c(-180, 180, -180, 180)
+ylat <- c(-60, 80, 60, -80) # removes Antarctica
+corners <- data.frame(xlong, ylat)
+
+v1 <- ggplot() +
+  geom_point( data = corners, aes(x=xlong, y=ylat), size=0.5, color="#000000" ) +
+  annotation_custom(earth, xmin = -180, xmax = 180, ymin = -90, ymax = 90) +
+  geom_point( data = lights, aes(x=lng, y=lat, alpha=Population), size=0.5, color="#f9e6ba" ) +
+  theme_void() +
+  theme(
+    legend.position="none",
+    panel.background = element_rect(fill = "black", colour = "black"), 
+    panel.spacing=unit(c(0,0,0,0), "null"),
+    plot.margin=grid::unit(c(0,0,0,0), "cm"),
+  ) +
+  xlim(-180,180) +
+  ylim(-60,80) + # removes Antarctica
+  scale_x_continuous(expand = c(0.006, 0.006)) +
+  coord_equal() 
+
+v1
+```
+
+```{r}
+
+ggsave(filename = "black-marble-lights-raster.svg", plot = v1, width=11, height=6)
+
+```
+

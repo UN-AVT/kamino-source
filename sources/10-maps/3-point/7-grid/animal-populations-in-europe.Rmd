@@ -1,0 +1,246 @@
+---
+pagetitle: "Animal Populations in Europe"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE, dev="svg"}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(dplyr) # tidy data transformation
+library(colorspace)
+library(sf)        # simple features GIS
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS
+</div>
+
+# Animal Populations in Europe
+## point grid map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Krzysztof Kowalik on Unsplash"}
+
+masthead <- "assets/krzysztof-kowalik-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> He who lets the goat be laid on his shoulders is soon after forced to carry the cow...\
+--- PROVERBS\
+
+***
+
+
+### Ingest
+#### base and dot maps
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+# Europe Base map
+nuts <- st_read("archetypes/animal-populations-in-europe/nuts.geojson", quiet = TRUE)
+
+# Dot maps by animal
+cow <- st_read("archetypes/animal-populations-in-europe/nutsdots-cow-75.geojson", quiet = TRUE)
+buffalo <- st_read("archetypes/animal-populations-in-europe/nutsdots-buffalo-75.geojson", quiet = TRUE)
+pig <- st_read("archetypes/animal-populations-in-europe/nutsdots-pig-75.geojson", quiet = TRUE)
+sheep <- st_read("archetypes/animal-populations-in-europe/nutsdots-sheep-75.geojson", quiet = TRUE)
+goat <- st_read("archetypes/animal-populations-in-europe/nutsdots-goat-75.geojson", quiet = TRUE)
+
+```
+
+
+### Plot
+#### Cow
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+# draw a dot at each grid cell and scale its area
+v1 <-  ggplot(data = nuts) +
+  #faint land silhouettes in the back of the map
+  geom_sf(fill = "grey98", color = lighten("#37474F", amount = 0.8)) +
+  geom_sf(data = cow, aes(size = values), shape = 21, color = 'white', fill = "#37474F", show.legend = FALSE) +
+  #geom_point(data = nutsdots, aes(x = X, y = Y, size = values), shape = 21, color = 'white', fill = '#E3D556', show.legend = FALSE) +
+  #Equal area projection for Europe, and map boundaries
+  coord_sf(xlim = c(2000000, 6000000), ylim =c(950000, 5000000), crs = 3035) +
+  #Ensures circles are sized by area
+  scale_size_area(max_size = 8) +
+  theme_minimal() +
+  theme(axis.text = element_blank(), panel.grid = element_line(size = 0))
+
+girafe(ggobj = v1, width_svg = 12, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot
+#### Buffalo
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+# draw a dot at each grid cell and scale its area
+v2 <-  ggplot(data = nuts) +
+  #faint land silhouettes in the back of the map
+  geom_sf(fill = "grey98", color = lighten("#5D4037", amount = 0.8)) +
+  geom_sf(data = buffalo, aes(size = values), shape = 21, color = 'white', fill = "#5D4037", show.legend = FALSE) +
+  #Equal area projection for Europe, and map boundaries
+  coord_sf(xlim = c(2000000, 6000000), ylim =c(950000, 5000000), crs = 3035) +
+  #Ensures circles are sized by area
+  scale_size_area(max_size = 8) +
+  theme_minimal() +
+  theme(axis.text = element_blank(), panel.grid = element_line(size = 0))
+
+girafe(ggobj = v2, width_svg = 12, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot
+#### Pig
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+# draw a dot at each grid cell and scale its area
+v3 <-  ggplot(data = nuts) +
+  #faint land silhouettes in the back of the map
+  geom_sf(fill = "grey98", color = lighten("#D81B60", amount = 0.8)) +
+  geom_sf(data = pig, aes(size = values), shape = 21, color = 'white', fill = "#D81B60", show.legend = FALSE) +
+  #Equal area projection for Europe, and map boundaries
+  coord_sf(xlim = c(2000000, 6000000), ylim =c(950000, 5000000), crs = 3035) +
+  #Ensures circles are sized by area
+  scale_size_area(max_size = 8) +
+  theme_minimal() +
+  theme(axis.text = element_blank(), panel.grid = element_line(size = 0))
+
+girafe(ggobj = v3, width_svg = 12, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot
+#### Sheep
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+
+# draw a dot at each grid cell and scale its area
+v4 <-  ggplot(data = nuts) +
+  #faint land silhouettes in the back of the map
+  geom_sf(fill = "grey98", color = lighten("#D84315", amount = 0.8)) +
+  geom_sf(data = sheep, aes(size = values), shape = 21, color = 'white', fill = "#D84315", show.legend = FALSE) +
+  #Equal area projection for Europe, and map boundaries
+  coord_sf(xlim = c(2000000, 6000000), ylim =c(950000, 5000000), crs = 3035) +
+  #Ensures circles are sized by area
+  scale_size_area(max_size = 8) +
+  theme_minimal() +
+  theme(axis.text = element_blank(), panel.grid = element_line(size = 0))
+
+girafe(ggobj = v4, width_svg = 12, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot
+#### Goat
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+# draw a dot at each grid cell and scale its area
+v5 <-  ggplot(data = nuts) +
+  #faint land silhouettes in the back of the map
+  geom_sf(fill = "grey98", color = lighten("#00695C", amount = 0.8)) +
+  geom_sf(data = goat, aes(size = values), shape = 21, color = 'white', fill = "#00695C", show.legend = FALSE) +
+  #Equal area projection for Europe, and map boundaries
+  coord_sf(xlim = c(2000000, 6000000), ylim =c(950000, 5000000), crs = 3035) +
+  #Ensures circles are sized by area
+  scale_size_area(max_size = 8) +
+  theme_minimal() +
+  theme(axis.text = element_blank(), panel.grid = element_line(size = 0))
+
+girafe(ggobj = v5, width_svg = 12, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/animal-populations-in-europe-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/animal-populations-in-europe-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: Maarten Lambrechts, The Herds of Europe, https://www.maartenlambrechts.com/2018/07/31/beasts-of-europe.html
+* Data: Eurostat, Animal populations by NUTS 2 regions, http://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=agr_r_animal&lang=en
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+
+

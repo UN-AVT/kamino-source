@@ -1,0 +1,191 @@
+---
+pagetitle: "Cannabis legalisation"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(countrycode)
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Cannabis legalisation
+## Choropleth Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Ryan Lange on Unsplash"}
+
+masthead <- "assets/ryan-lange-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Legalize marijuana and take all that money and invest it in teachers and in education...\
+--- Carlos Santana\
+
+***
+
+### Ingest
+#### find unique values of the "Recreational" column
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/cannabis-legalisation/cannabis-legal-status.csv", header = TRUE)
+df
+
+# unique(df$Recreational)
+
+```
+
+
+### Wrangle
+#### enrich with ISO3C
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df
+df_wrangle$ISO3 <- countrycode(df_wrangle$Country_Territory, origin = 'country.name', destination = 'iso3c') 
+df_wrangle
+
+```
+
+
+### World map
+#### merge attributes by ISO3C
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# natural earth base map
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
+# combine data with map based on ISO3 codes
+ne_world_df <- merge(ne_world, df_wrangle, by.x = "iso_a3", by.y = "ISO3", all = TRUE)
+
+```
+
+
+### Plot
+#### fill by legal status
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
+
+# theme parameters
+theme_opts <- theme(
+  text = element_text(family = "inconsolata", size = 16), 
+  plot.title = element_text(color = "black", size = 16, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 11),
+  plot.background = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  legend.position = "bottom",
+  legend.title = element_blank(),
+)
+
+# color palette to use
+status_palette <- c(
+  "Illegal" = "#D8D9CF",
+  "Decriminalized" = "#9AC4B8",
+  "Legal" = "#335855",
+  "Unknown" = "#CCCCCC"
+)
+
+v1 <- ggplot(data = ne_world_df) +
+  # map feature styling
+  geom_sf(aes(fill=Recreational), color="#FFFFFF", stroke=0.5) +
+  scale_fill_manual(values = status_palette) + 
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Choropleth Map", 
+       subtitle="Legality of cannabis") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/cannabis-legalisation-fs.svg", plot = v1, width=16, height=9)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data: Wikipedia, Legality of cannabis, [GO](https://en.wikipedia.org/wiki/Legality_of_cannabis){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

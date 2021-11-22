@@ -1,0 +1,186 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(sf)
+library(geojsonio)
+library(ggplot2)
+library(ggiraph)
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Vector Map
+## Using UN sources
+
+> A map says to you. Read me carefully, follow me closely, doubt me not...\
+I am the earth in the palm of your hand...\
+--- Beryl Markham\
+
+***
+
+# Load sources
+## Regions, continents, admin levels, infrastructure, living places
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# REGIONS
+
+#esri_world_regions <- topojson_read("archetypes/regions/esri_world_regions.topojson")
+#ne_110m_geography_regions <- topojson_read("archetypes/regions/ne_110m_geography_regions.topojson")
+
+# CONTINTENTS
+
+#africa <- topojson_read("archetypes/continents/africa.topojson")
+#asia <- topojson_read("archetypes/continents/asia.topojson")
+#europe <- topojson_read("archetypes/continents/europe.topojson")
+#north_america <- topojson_read("archetypes/continents/north-america.topojson")
+#oceania <- topojson_read("archetypes/continents/oceania.topojson")
+#south_america <- topojson_read("archetypes/continents/south-america.topojson")
+
+# BASE MAP
+# Simplification levels: 09, 07, 05, 03, 01, 009, 008, 007, 005, 001
+land <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-03.topojson")
+borders <- topojson_read("archetypes/un-default/BNDL50-BORDERS-no-ATA-03.topojson")
+type_3 <- topojson_read("archetypes/un-default/BNDL50-BORDERS-TYPE-3.topojson")
+type_4 <- topojson_read("archetypes/un-default/BNDL50-BORDERS-TYPE-4.topojson")
+
+# ADMIN LEVEL 1
+
+#admin <- topojson_read("archetypes/admin/ne_10m_admin_1.topojson")
+
+# INFRASTRUCTURE
+
+#ne_10m_railroads <- topojson_read("archetypes/poi/ne_10m_railroads.topojson")
+#ne_10m_roads <- topojson_read("archetypes/poi/ne_10m_roads.topojson")
+
+# LIVING PLACES
+
+ne_10m_urban_areas <- topojson_read("archetypes/poi/ne_10m_urban_areas.topojson")
+
+```
+
+# Plot
+## Layer by layer
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6, out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+# In order of layer placement top -> down
+v1 = ggplot() +
+  geom_sf(data = land, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  # geom_sf(data = borders, color="#CCCCCC") +
+  geom_sf(data = type_3, color="red", size=0.5) +
+  geom_sf(data = type_4, color="blue", size=0.5) +
+  # REGIONS
+  # geom_sf(data = esri_world_regions, color="blue") +
+  # geom_sf(data = ne_110m_geography_regions, color="green") +
+  # CONTINENTS
+  # geom_sf(data = africa, color="orange", fill="#FFFFFF") +
+  # geom_sf(data = asia, color="red", fill="#FFFFFF") +
+  # geom_sf(data = europe, color="green", fill="#FFFFFF") +
+  # geom_sf(data = north_america, color="blue", fill="#FFFFFF") +
+  # geom_sf(data = oceania, color="purple", fill="#FFFFFF") +
+  # geom_sf(data = south_america, color="pink", fill="#FFFFFF") +
+  # ADMIN
+  # geom_sf(data = admin, color="#cccccb", size=0.5) +
+  # POI
+  # geom_sf(data = ne_10m_railroads, color="#cccccb", size=0.5) +
+  # geom_sf(data = ne_10m_roads, color="#cccccb", size=0.5) +
+  geom_sf(data = ne_10m_urban_areas, color="#aaaaaa", fill="#aaaaaa", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Topojson Vector Map", 
+       subtitle="Land and Borders") +
+  theme_opts
+
+# v1
+
+girafe( ggobj = v1, width_svg = 12, height_svg = 6,
+  options = list( opts_sizing(rescale = TRUE) )
+)
+
+```
+
+
+## Save output to file
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggsave(filename = "assets/world-topojson.svg", plot = v1, width=12, height=6)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

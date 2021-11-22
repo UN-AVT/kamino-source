@@ -1,0 +1,216 @@
+---
+pagetitle: "Subdivided Africa"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(ggtext)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Subdivided Africa
+## Choropleth Facet Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Damian Patkowski on Unsplash"}
+
+masthead <- "assets/damian-patkowski-T-LfvX-7IVg-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The day will come when history will speak... africa will write its own history... it will be a history of glory and dignity...\
+--- Patrice Lumumba\
+
+***
+
+### Ingest
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Data source must have an ISO3 field
+df <- read.csv("archetypes/subdivided-africa/holidays.csv", header = TRUE, encoding = "UTF-8")
+df
+
+```
+
+### Wrangle
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+independences_adjusted <- df %>% 
+  separate_rows(independence_from, sep = " and ") %>% 
+  mutate(country = case_when(country == "Central African Republic" ~ "Central African Rep.",
+                             country == "Congo, Republic of the" ~ "Congo (Brazzaville)",
+                             country == "Congo, Democratic Republic of the" ~ "Congo (Kinshasa)",
+                             country == "Congo, Democratic Republic of the" ~ "Congo (Kinshasa)",
+                             country == "Gambia, The" ~ "Gambia",
+                             country == "Equatorial Guinea" ~ "Eq. Guinea",
+                             country == "Central African Republic" ~ "Central African Rep.",
+                             country == "Guinea-Bissau" ~ "Guinea Bissau",
+                             country == "South Sudan" ~ "S. Sudan",
+                             country == "Eswatini" ~ "Swaziland",
+                             country == "São Tomé and Príncipe" ~ "Sao Tome and Principe",
+                             TRUE ~ country),
+         independence_from = case_when(country == "Cameroon" ~ "United Kingdom",
+                                       independence_from == "Egypt and the United Kingdom" ~ "United Kingdom",
+                                       independence_from == "the United Kingdom" ~ "United Kingdom",
+                                       independence_from == "South Africa" ~ "United Kingdom",
+                                       is.na(independence_from) ~ "Independents countries",
+                                       TRUE ~ independence_from)
+         )
+
+independences_adjusted
+
+```
+
+### African map
+#### merge attributes by country name
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Read world Map and corvert it to SF
+sf_world <- st_as_sf(rworldmap::getMap(resolution = "low")) %>%
+  st_transform(crs = "+proj=sinu +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84 +units=m +no_defs") %>%
+  dplyr::select(ISO_A3, NAME,continent)
+
+# Filter and keep only african countries
+african_countries <- sf_world %>%
+  filter(continent == "Africa")
+
+# Join with the holidays dataset
+african_countries_sf <- african_countries %>% 
+  inner_join(independences_adjusted, by =c("NAME" = "country")) %>% 
+  mutate(independence_from =  case_when(NAME == "W. Sahara" ~ "France",
+                                        NAME == "Somaliland" ~ "United Kingdom",
+                                        TRUE ~ independence_from),
+         independence_from = fct_relevel(str_to_upper(independence_from), 
+                                         str_to_upper("Independents countries"), 
+                                         after = 0)
+         )
+
+```
+
+#### Create subtitle text
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+subtitle <- "Despite having experienced brief periods of dependency, <b style = 'color: #2A363BFF;'>Egypt</b> and <b  style = 'color: #2A363BFF'>Ethiopia</b> are among the rare countries of the continent never to have known a total dependence vis-a-vis foreign powers.<br>
+The <b style = 'color: #FF0000FF;'>American Colonization Society (ACS)</b> formed in 1817 to send free African-Americans to Africa as an alternative to emancipation in the United States, gave his independency to Liberia in 1847.<br>
+<b style = 'color: #92D050FF;'>France</b> and the <b style = 'color: #7030A0FF'>United Kingdom</b> were the main colonizers. Some countries obtained their independence after armed struggles, this is notably the case of Algeria, whose independence was acquired <br>
+following an armed struggle between the National Liberation Front and France.<br>
+Other countries have built it through negotiation. This is particularly the case with Nigeria, which obtained it in 1960. However, most countries obtained it following grants from settlers.<br>
+We can cite as an example the Republic of Benin (formerly Kingdom of DanhomÃ¨) which, like some of its neighbors of West Africa obtained it from the grant by France."
+
+```
+
+### Plot
+#### fill by "independence from" status
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
+
+v1 <- ggplot(african_countries_sf) + 
+  geom_sf(data = african_countries, color = "black") + 
+  geom_sf(aes(fill = independence_from), color = "black") + 
+  facet_wrap(vars(independence_from)) + 
+  labs(
+    title = str_to_upper("How did the powers subdivide Africa during the colonial period ?"),
+    subtitle = subtitle,
+    caption = "Data from ***Wikipedia*** by the way of  ***Isabella Velasquez***.<br>
+      Tidytuesday Week-28 2021 &bull; <span style='font-family: \"Font Awesome 5 Brands\"'>&#xf099;</span>**@issa_madjid**" 
+    ) + 
+  scale_fill_manual(
+    name = NULL,
+    values = c("#2A363BFF", as.character(paletteer::paletteer_d(palette = "Redmonder::qMSOStd"))), 
+    # "#2A363BFF" for independent countries
+    guide = "none"
+    ) + 
+  theme_minimal(base_family = "Lato Medium") + 
+  theme(
+    axis.text = element_blank(),
+    strip.text = element_text(face = "bold", size = rel(.9)),
+    plot.title = element_text(color = "black",  family = "Lato Black", size = rel(1.5), 
+                              hjust = .5, margin = margin(t = 15,b = 15)),
+    plot.subtitle = element_markdown(color = "grey25", family = "Lato", face = "bold.italic", 
+                                     size = rel(.85), lineheight = 1.15, linewidth = 80),
+    plot.caption = element_markdown(color = "grey15", size = rel(0.8), margin = margin(t = 10,b = 10)),
+    plot.margin = margin(r = 10, l = 0)
+    )
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/subdivided-africa-fs.svg", plot = v1, width=1152/72, height=1152/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/subdivided-africa-sm.svg", plot = v1, width=16, height=16)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: This is a reproduction of an original idea from Georgios Karamanis, [GO](https://triasbogor.com/geokaramanis){target="_blank"}
+* Data sources: TidyTuesday - Independence Days, [GO](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-07-06){target="_blank"}
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

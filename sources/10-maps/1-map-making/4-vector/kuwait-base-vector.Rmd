@@ -1,0 +1,175 @@
+---
+pagetitle: "Base Vector Map of Kuwait"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(Rcpp)
+library(tidyverse)
+library(sf)
+library(geojsonio)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS 
+</div>
+
+# Base Vector Map of Kuwait
+## Vector Map
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Abdelrahman Wael on Unsplash"}
+
+masthead <- "assets/abdelrahman-wael-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Al Shaheed Park, Kuwait City, Kuwait</div>
+
+> We believe that Kuwait is for all its citizens and not for one party or sect,\
+  all live on its earth and ally themselves to its identity...\
+--- His Highness Sheikh Sabah Al Ahmad Al Jaber Al Sabar\
+
+***
+
+### Ingest
+#### border geometry for admin levels
+
+Administrative boundaries at __adm0__ and __adm1__ levels
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load map sources
+# ++++++++++++++++++++
+# using the same map sources up to adm1 which refers to Governorates in Kuwait
+adm0 <- st_read("archetypes/kuwait/kuwait-adm0.geojson")
+adm1 <- st_read("archetypes/kuwait/kuwait-adm1.geojson")
+
+head(as.data.frame(adm0))
+head(as.data.frame(adm1))
+
+```
+
+### Plot
+#### __adm0__ borders
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+# In order of layer placement top -> down
+# using adm0 map sources which contains info of area of the country
+v1 <- ggplot() +
+  geom_sf(data = adm0, color="#333333", fill = transparent_fill, size=1.0) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+      y = NULL, # Latitude
+      title = NULL, 
+      subtitle = NULL) +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 14,
+       options = list(opts_sizing(rescale = TRUE, width = 0.6)))
+
+```
+
+
+#### __adm0__, and __adm1__ borders
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v2 <-  v1 + geom_sf(data = adm1, color="#333333", fill = transparent_fill, size=0.5)
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 14,
+       options = list(opts_sizing(rescale = TRUE, width = 0.6)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+ggsave(filename = "outputs/kuwait-base-vector-map-fs.svg", plot = v2, width=16, height=14)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data sources: HDX, [GO](https://data.humdata.org/search?groups=kwt&res_format=GeoJSON&res_format=SHP&q=&ext_page_size=25){target=blank}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

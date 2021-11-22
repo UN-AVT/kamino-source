@@ -1,0 +1,213 @@
+---
+pagetitle: "Animal Rescues Bivariate"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(biscale)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Animal Rescues Bivariate
+## Choropleth Facet Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Sara Scarpa on Unsplash"}
+
+masthead <- "assets/sara-scarpa-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Help! I'm stuck!</div>
+
+> Well, it may be humorous to you, but it’s a very serious matter to the squirrels...\
+--- Lisa Kleypas\
+
+***
+
+### Ingest
+#### animal group and ward_code (to match with map geometry)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df <- read.csv("archetypes/animal-rescues/animal-rescues.csv", header = TRUE, encoding = "UTF-8")
+df
+
+```
+
+
+### Wrangle & Analyze
+#### summarize by spatial unit (ward) and animal group
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+animal_by_boroughs <- df %>% 
+  mutate(animal_group_parent = str_to_title(animal_group_parent)) %>% 
+  count(borough_code, animal_group_parent, sort = TRUE) %>% 
+  filter(animal_group_parent %in% c("Horse", "Cow", "Hamster", "Squirrel", "Lamb", "Sheep", "Snake", "Lizard", "Hedgehog", "Rabbit", "Ferret", "Fish", "Goat", "Pigeon", "Bull", "Tortoise")) %>% 
+  ungroup() 
+
+as.data.frame(unique(animal_by_boroughs$animal_group_parent))
+
+animal_by_boroughs
+
+```
+
+
+
+### Load maps
+#### wards and regions
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+ltla_map <- st_read("archetypes/animal-rescues/local-authorities-lowertier-4-ltla-2019.geojson")
+ltla_map
+
+```
+
+
+### Wrangle
+#### enrich and filter map geometry, calculate centroid
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# to focus on london boroughs
+# london_bk <- filter(background_map, RegionNation == "London")
+london <- filter(ltla_map, RegionNation == "London")
+
+# enrich spatial data with quantitative data for choropleth
+london_animals <- london %>%
+  left_join(animal_by_boroughs, by = c("Lacode" = "borough_code")) %>% 
+  # by filtering out, background will show
+  filter(!is.na(animal_group_parent))
+head(london_animals, n = 10)
+
+# this is used to plot an aesthetic background
+center <- st_coordinates(st_centroid(london$geometry))
+
+```
+
+
+### Plot
+#### color by bins, facet by animal group
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata", size = 16), 
+  plot.title = element_text(color = "black", size = 16, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 11),
+  plot.background = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  legend.position = "bottom",
+  legend.title = element_blank(),
+)
+
+fill_pallete <- c("#3B454A", "#31739C", "#21B3CD", "#FFD349", "#E85E26")
+
+v1 <- ggplot(london_animals) + 
+  # bottom layer as a cirle background
+  # geom_point(aes(x = center[1], y = center[2]), size = 150, shape = 21, fill = "#007EA7", stroke = 2) +
+  # border outline
+  geom_sf(data = london, aes(geometry = geometry), fill = "grey50", color = "white", size = 0.1) + 
+  # the choropleth
+  geom_sf(data = london_animals, aes(geometry = geometry, fill = n), color = "white", size = 0.1) +
+  # color by bins from rescue count
+  scale_fill_stepsn(colors = fill_pallete, n.breaks = 5) +
+  # facet by animal group
+  facet_wrap(~animal_group_parent, ncol = 4) + 
+  labs(
+    title = "Frequency of Rescues of Birds, Cats and Dogs in London from 2009-2021",
+    subtitle = NULL,
+    caption = NULL,
+    x = NULL,
+    y = NULL
+  ) + 
+  theme_minimal() + 
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 13,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+ggsave(filename = "assets/animal-rescues-bivariate-fs.svg", plot = v1, width=1152/72, height=1152/72)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: This is a reproduction of an original idea from @jakekaupp, [GO](https://github.com/jkaupp/tidytuesdays/tree/master/2021/week27){target="_blank"}
+* Data sources: london.gov.uk, [GO](https://london.gov.uk){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

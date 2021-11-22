@@ -1,0 +1,261 @@
+---
+pagetitle: "Map Projections"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Map Projections
+## From sphere to plane
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Valentin Lacoste on Unsplash"}
+
+masthead <- "assets/valentin-lacoste-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Hole, Yunnan, China</div>
+
+> You mean to tell me that China is under us? China is under us?\
+It's not. The world is flat.\
+--- Shaquille O'Neal\
+
+***
+
+In cartography, a map projection is a way to __flatten a globe's__ surface into a plane in order to make a map. This requires a systematic transformation of the latitudes and longitudes of locations from the surface of the globe into locations on a plane. All projections of a sphere on a plane necessarily __distort__ the surface in some way and to some extent. Depending on the purpose of the map, some distortions are acceptable and others are not; therefore, different map projections exist in order to __preserve__ some properties of the sphere-like body at the expense of other properties such as angle or size.
+
+### Load Map
+#### Natural Earth
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+
+```
+
+
+### Coordinate Reference System
+#### Set crs
+
+
+A coordinate reference system (CRS) refers to the way in which spatial data that represent the earth’s surface are flattened so that you can represent them on a 2-dimensional surface.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+ne_world <- ne_world %>% st_as_sf() %>% st_set_crs(4326)
+
+```
+
+
+### Reprojected
+#### Orthographic
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  #axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  #panel.grid = element_blank(),
+  #panel.grid.major = element_blank(),
+  #panel.grid.minor = element_blank(),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+v1 = ggplot() +
+  geom_sf(data = ne_world, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf(crs = "+proj=ortho") +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Natural Earth", 
+       subtitle="Orthographic") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Reprojected
+#### Robinson
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v2 = ggplot() +
+  geom_sf(data = ne_world, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf(crs = "+proj=robin") +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Natural Earth", 
+       subtitle="Robinson") +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Reprojected
+#### Gall Stereographic
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v3 = ggplot() +
+  geom_sf(data = ne_world, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf(crs = "+proj=gall") +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Natural Earth", 
+       subtitle="Gall Stereographic") +
+  theme_opts
+
+girafe(ggobj = v3, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Reprojected
+#### Mollweide
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v4 = ggplot() +
+  geom_sf(data = ne_world, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf(crs = "+proj=moll") +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Natural Earth", 
+       subtitle="Mollweide") +
+  theme_opts
+
+girafe(ggobj = v4, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Reprojected
+#### Wagner VII
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v5 = ggplot() +
+  geom_sf(data = ne_world, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf(crs = "+proj=wag7") +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Natural Earth", 
+       subtitle="Wagner VII") +
+  theme_opts
+
+girafe(ggobj = v5, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/map-projections-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data: Proj.org, Projections, [GO](https://proj.org/operations/projections/index.html){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

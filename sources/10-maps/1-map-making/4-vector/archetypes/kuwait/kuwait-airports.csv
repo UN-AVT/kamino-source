@@ -1,0 +1,9 @@
+id,ident,type_,name,latitude_d,longitude_,elevation_,continent,iso_countr,iso_region,municipali,scheduled_,gps_code,iata_code,local_code,home_link,wikipedia_,keywords,Name_1
+"5220",OKBK,large_airport,Kuwait International Airport,29.22660064700,47.96889877320,"206",AS,KW,KW-FA,Kuwait City,"1",OKBK,,http://www.kuwait-airport.com.kw/Index_e.htm,http://en.wikipedia.org/wiki/Kuwait_International_Airport,Al Mubarak Air Base,,Kuwait International
+"5219",OKAS,medium_airport,Ali Al Salem Air Base,29.34670066830,47.52080154420,"472",AS,KW,KW-JA,,"0",OKAS,,,http://en.wikipedia.org/wiki/Ali_Al_Salem_Air_Base,The Rock,,Ali Al Salem
+"32108",OKAJ,medium_airport,Ahmed Al Jaber Air Base,28.93479919430,47.79190063480,"409",AS,KW,KW-AH,Ahmed Al Jaber AB,"0",OKAJ,,,http://en.wikipedia.org/wiki/Ahmed_Al_Jaber_Air_Base,,,Ahmed Al Jaber
+"42771",Z19M,small_airport,Al Abdaliyah Highway Strip,29.04529953000,47.79079818730,"330",AS,KW,KW-AH,Al Abdaliyah,"0",Z19M,,,,,,
+"5221",OKDI,small_airport,Udairi Army Air Field,29.69759941100,47.43600082400,"430",AS,KW,KW-JA,Camp Buehring,"0",OKDI,,,http://en.wikipedia.org/wiki/Camp_Buehring,,,
+"42770",OKNB,heliport,Ras al-Qulayah Naval Base Heliport,28.86450004580,48.27280044560,"30",AS,KW,KW-AH,Ras al-Qulayah Naval Base,"0",OKNB,,,http://en.wikipedia.org/wiki/Kuwaiti_Navy#Present_Fleet,,,
+"300347",OK2A,heliport,Patton Army Heliport,28.86361111110,48.15111111110,"168",AS,KW,KW-AH,Camp Arifjan,"0",OK2A,OK2A,,http://en.wikipedia.org/wiki/Camp_Arifjan,,,
+"300348",KW-0001,heliport,Patton Army Heliport,28.86361111110,48.15111111110,"168",AS,KW,KW-AH,Camp Arifjan,"0",OK2A,OK2A,,http://en.wikipedia.org/wiki/Camp_Arifjan,,,

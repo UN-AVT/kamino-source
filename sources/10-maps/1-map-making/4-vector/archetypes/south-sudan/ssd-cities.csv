@@ -1,0 +1,17 @@
+city,lat,lng,country,iso2,admin_name,capital,population,population_proper
+Juba,4.8500,31.6000,South Sudan,SS,Central Equatoria,primary,372410,372410
+Bor,6.2167,31.5500,South Sudan,SS,Jonglei,admin,315351,315351
+Yei,4.0904,30.6800,South Sudan,SS,Central Equatoria,,185000,40382
+Wau,7.7000,27.9833,South Sudan,SS,Western Bahr el Ghazal,admin,163442,163442
+Malakal,9.5333,31.6500,South Sudan,SS,Upper Nile,admin,147450,147450
+Gogrial,8.5337,28.1167,South Sudan,SS,Warrap,,50065,38572
+Aweil,8.7666,27.4000,South Sudan,SS,Northern Bahr el Ghazal,admin,46705,38745
+Yambio,4.5705,28.4163,South Sudan,SS,Western Equatoria,admin,40382,8459
+Rumbek,6.8000,29.6833,South Sudan,SS,Lakes,admin,32083,3462
+Torit,4.4167,32.5667,South Sudan,SS,Eastern Equatoria,admin,17957,17957
+Maridi,4.9151,29.4769,South Sudan,SS,Western Equatoria,,14224,1291
+Bentiu,9.2500,29.8000,South Sudan,SS,Unity,admin,7781,7781
+Kapoeta,4.7721,33.5902,South Sudan,SS,Eastern Equatoria,,7042,3000
+Melut,10.4404,32.2015,South Sudan,SS,Upper Nile,,6407,6407
+Nasir,8.6004,33.0666,South Sudan,SS,Upper Nile,,1741,1741
+Kuacjok,8.3100,27.9900,South Sudan,SS,Warrap,admin,,

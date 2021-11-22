@@ -1,0 +1,61 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+# Header
+## Subheader
+
+```{r echo = FALSE, message = FALSE, fig.height= 15, fig.width = 30}
+
+library(HistData)
+library(lubridate)
+library(sp)
+library(sf)
+
+```
+
+
+```{r}
+
+deaths <- Snow.deaths
+pumps <- Snow.pumps
+streets <- Snow.streets
+polygons <- Snow.polygons
+
+deaths
+pumps
+streets
+polygons
+
+```
+
+```{r}
+
+## Plot deaths over time
+clr <- ifelse(Snow.dates$date < mdy("09/08/1854"), "red", "darkgreen")
+plot(deaths ~ date, data=Snow.dates, type="h", lwd=2, col=clr)
+points(deaths ~ date, data=Snow.dates, cex=0.5, pch=16, col=clr)
+text( mdy("09/08/1854"), 40, "Pump handle\nremoved Sept. 8", pos=4)
+
+```
+
+
+```{r}
+
+
+
+```
+
+

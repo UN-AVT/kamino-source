@@ -1,0 +1,201 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(ggplot2)
+library(maptools)
+library(cartogram)
+library(rgdal)
+library(sf)
+library(ggiraph)
+
+library(wesanderson)
+
+data(wrld_simpl)
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Cartogram
+## Dorling
+
+A cartogram is a map in which the geometry of regions is distorted in order to convey the information of an alternate variable. The region area will be inflated or deflated according to its numeric value.
+
+***
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Remove uninhabited regions
+wrld <- spTransform(wrld_simpl[wrld_simpl$POP2005 > 0,], CRS("+init=epsg:3395"))
+
+# afr <- spTransform(wrld_simpl[wrld_simpl$REGION==2 & wrld_simpl$POP2005 > 0,], CRS("+init=epsg:3395"))
+
+# Create cartogram
+wrld_carto <- cartogram_dorling(wrld, "POP2005")
+
+wrld_sf = st_as_sf(wrld)
+wrld_sf_carto <- cartogram_dorling(wrld_sf, "POP2005")
+
+
+```
+
+# Plots
+## Original
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+v1 <- ggplot(data = wrld_sf) +
+  # map feature styling
+  geom_sf(fill="white", color="#666666", stroke=0.5) + 
+  coord_sf() +
+  theme_bw() +
+  labs(x="Longitude",
+       y="Latitude",
+       title = "Dorling Cartogram", 
+       subtitle="Scale by Population") +
+  theme_opts
+
+# v1
+
+girafe( ggobj = v1, width_svg = 12, height_svg = 6,
+  options = list( opts_sizing(rescale = TRUE) )
+)
+
+```
+
+
+## Distorted
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6}
+
+v2 <- ggplot(data = wrld_sf_carto) +
+  # map feature styling
+  geom_sf(fill="white", color="#666666", stroke=0.5) +
+  coord_sf() +
+  theme_bw() +
+  labs(x="Longitude",
+       y="Latitude",
+       title = "Dorling Cartogram", 
+       subtitle="Scale by Population") +
+  theme_opts
+
+# v2
+
+girafe( ggobj = v2, width_svg = 12, height_svg = 6,
+  options = list( opts_sizing(rescale = TRUE) )
+)
+
+```
+
+
+## Compared
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6}
+
+# color palette to use
+pal <- wes_palette("Zissou1", 10, type = "continuous")
+
+v3 <- ggplot() +
+  # map feature styling
+  geom_sf(data = wrld_sf, fill="white", color="#666666", stroke=0.5) + 
+  geom_sf(data = wrld_sf_carto, aes(fill=POP2005, color=POP2005), stroke=0.5) +
+  scale_color_gradientn(colours = rev(pal)) + 
+  scale_fill_gradientn(colours = rev(pal)) + 
+  coord_sf() +
+  theme_bw() +
+  labs(x="Longitude",
+       y="Latitude",
+       title = "Dorling Cartogram", 
+       subtitle="Scale by Population") +
+  theme_opts
+
+# v3
+
+girafe( ggobj = v3, width_svg = 12, height_svg = 6,
+  options = list( opts_sizing(rescale = TRUE) )
+)
+
+```
+
+
+## Save output to file
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggsave(filename = "assets/dorling-cartogram.svg", plot = v3, width=12, height=6)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

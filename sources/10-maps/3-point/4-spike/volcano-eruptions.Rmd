@@ -1,0 +1,222 @@
+---
+pagetitle: "Covid"
+output: 
+  html_document:
+    theme: flatly
+    code_folding: show
+    df_print: paged
+---
+
+<h2 style="text-align:center;">Tracking the coronavirus across Europe</h2>
+inspired by this <a href="https://www.economist.com/graphic-detail/tracking-coronavirus-across-europe">article</a> published in The Economist
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(tidyr)
+library(sf)
+library(ggiraph)
+
+# Essentials
+library(tidyverse)
+library(dplyr)
+library(tidyr)
+# Utility
+library(scales) # for rescaling
+# Map tools
+library(rgdal)
+library(raster)
+library(maptools)
+library(sp)
+library(sf) # Core
+library(rgeos)
+# Plot tools
+library(ggExtra) # Rug
+library(ggthemes) # Tufte
+library(ggiraph) # Interactivity
+library(pals) # bivariate color palettes
+library(biscale)
+library(jcolors)
+library(ggpubr)
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+
+# world <- st_read("ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp")
+# 
+# eu_iso3 = c("AUT","BEL", "BGR", "HRV", "CYP", "CZE", "DNK", "EST", "FIN", "DEU", "GRC", "HUN", "IRL", "ITA", "LVA", "LTU", "LUX", 
+#             "MLT", "NLD", "POL", "PRT", "ROU", "SVK", "SVN", "ESP", "SWE", "GBR", "ISL")
+# 
+# europe <- filter(world, ADM0_A3 %in% eu_iso3)
+#europe <- st_read("europe.geojson")
+
+# Get Data
+df = read_csv("archetypes/covid_by_european_regions.csv")
+
+# Prepare map
+
+# level0 <- st_read("map/NUTS_RG_60M_2021_4326_LEVL_0.geojson")
+# level1 <- st_read("map/NUTS_RG_60M_2021_4326_LEVL_1.geojson")
+# level2 <- st_read("map/NUTS_RG_60M_2021_4326_LEVL_2.geojson")
+# level3 <- st_read("map/NUTS_RG_60M_2021_4326_LEVL_3.geojson")
+
+level0 <- st_read("archetypes/NUTS_RG_20M_2021_4326_LEVL_0.geojson")
+level1 <- st_read("archetypes/NUTS_RG_20M_2021_4326_LEVL_1.geojson")
+level2 <- st_read("archetypes/NUTS_RG_20M_2021_4326_LEVL_2.geojson")
+level3 <- st_read("archetypes/NUTS_RG_20M_2021_4326_LEVL_3.geojson")
+# world <- st_read("ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp")  %>% dplyr::select(5:5) %>%
+#   mutate (id = "BLA", LEVL_CODE = 1, CNTR_CODE = "BE", NAME_LATN = "Region", NUTS_NAME = "Nuts", 
+#           MOUNT_TYPE = "MOUNT", URBN_TYPE = "USA", COAST_TYPE = "coast", FID = "fid") %>% rename(NUTS_ID = SOV_A3)
+
+df_level0 <- df %>% filter(LEVEL == "level0")
+df_level1 <- df %>% filter(LEVEL == "level1")
+df_level2 <- df %>% filter(LEVEL == "level2")
+df_level3 <- df %>% filter(LEVEL == "level3")
+#df_level4 <- df %>% filter(LEVEL == "missed")
+
+map0 <- inner_join(level0, df_level0, by = "NUTS_ID")
+map1 <- inner_join(level1, df_level1, by = "NUTS_ID")
+map2 <- inner_join(level2, df_level2, by = "NUTS_ID")
+map3 <- inner_join(level3, df_level3, by = "NUTS_ID")
+#map4 <- inner_join(world, df_level4, by = c("NUTS_ID" = "NUTS_ID"))
+
+europe <- rbind(map0, map1, map2, map3)
+
+
+#---------------
+story_data <- df
+
+# DATA REQUIRES FIELD PARAMETERS:
+spike_min_height <- 1
+spike_max_height <- 5
+# WIDTH RANGE OF SPIKE (VARIABLE)
+spike_min_width <- 0.5
+spike_max_width <- 1
+
+spike_pnts <- story_data
+# REMOVE NA & ZEROS
+spike_pnts <- spike_pnts[!is.na(spike_pnts$COUNT),]
+spike_pnts <- spike_pnts[spike_pnts$COUNT != 0, ]
+
+# NORMALIZE VALUE RANGE
+spike_pnts <- spike_pnts %>% mutate( HEIGHT = round(rescale(spike_pnts$COUNT, to = c(spike_min_height, spike_max_height)), digits = 3)) # round(x, digits = 0)
+spike_pnts <- spike_pnts %>% mutate( WIDTH = round(rescale(spike_pnts$COUNT, to = c(spike_min_width, spike_max_width)), digits = 3)) # round(x, digits = 0)
+
+# GENERATE SPIKE POINTS
+spike_pnts$x1 <- spike_pnts$LONGITUDE
+spike_pnts$y1 <- spike_pnts$LATITUDE
+
+spike_pnts$x2 <- spike_pnts$LONGITUDE - spike_pnts$WIDTH
+spike_pnts$y2 <- spike_pnts$LATITUDE
+
+spike_pnts$x3 <- spike_pnts$LONGITUDE
+spike_pnts$y3 <- spike_pnts$LATITUDE + spike_pnts$HEIGHT
+
+spike_pnts$x4 <- spike_pnts$LONGITUDE + spike_pnts$WIDTH
+spike_pnts$y4 <- spike_pnts$LATITUDE
+
+spike_pnts$x5 <- spike_pnts$LONGITUDE
+spike_pnts$y5 <- spike_pnts$LATITUDE
+
+
+# CREATE SF POLYGON GEOMETRY
+spike_dfs <- lapply(1:nrow(spike_pnts), function(x) {
+  x1 <- spike_pnts[[x,"x1"]]
+  x2 <- spike_pnts[[x,"x2"]]
+  x3 <- spike_pnts[[x,"x3"]]
+  x4 <- spike_pnts[[x,"x4"]]
+  x5 <- spike_pnts[[x,"x5"]]
+  
+  y1 <- spike_pnts[[x,"y1"]]
+  y2 <- spike_pnts[[x,"y2"]]
+  y3 <- spike_pnts[[x,"y3"]]
+  y4 <- spike_pnts[[x,"y4"]]
+  y5 <- spike_pnts[[x,"y5"]]
+    # polygon as closed shape
+    polygon_list = list(rbind(c(x1, y1), c(x2, y2), c(x3, y3), c(x4, y4), c(x5, y5)))
+    poly_sfc <- st_sfc(st_polygon(polygon_list))
+    
+    # line as open shape
+    l_line = st_linestring(x = matrix(c(x2, x3, x4, y2, y3, y4), ncol = 2))
+    line_sfc <- st_sfc(l_line)
+    
+    # carry over all attributes
+    lnd_attrib = data.frame(spike_pnts[x,])
+    
+    # add polygon
+    g1 <- as.data.frame(st_sf(lnd_attrib, geometry = poly_sfc ))
+    
+    # rename
+    g1 <- g1 %>% rename( polygon = geometry )
+    # g1 <- g1 %>% mutate( polygon = geometry)
+    
+    # add line
+    g2 <- as.data.frame(st_sf(g1, geometry = line_sfc ))
+    
+    # rename
+    g2 <- g2 %>% rename( line = geometry )
+    # g2 <- g2 %>% mutate( line = geometry)
+    
+    # result
+    as.data.frame(g2)
+
+})
+
+
+# Bind results
+spiky_polys_df <- do.call(rbind, spike_dfs)
+# Sort for proper overlap
+spiky_polys_df <- spiky_polys_df[order(spiky_polys_df$LATITUDE, decreasing = TRUE),]
+
+
+```
+
+
+```{r, message=FALSE, echo=FALSE}
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="#ffffff", colour="#ffffff"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+#spiky_polys_df = eu
+
+spike_map <- ggplot() +
+  geom_sf_interactive(data = europe, aes(tooltip = 
+                                           paste0(Region,"\n",Country,"\n",
+                                           "Case per 100k, last 7 days: ", COUNT,"\n",
+                                           "Death per 100k, last 7 days: ",DEATH), data_id = NUTS_ID, fill = COUNT)) + 
+  #geom_sf_interactive(data = elsd_sf, aes(tooltip = paste0("District: ", NAME20), data_id = GEOID), size = 0.5, color = "black", fill = NA) + 
+  #geom_sf_interactive(data = scsd_sf, aes(tooltip = paste0("District: ", NAME20), data_id = GEOID), size = 0.5, color = "black", fill = NA) + 
+  # spike poly fill
+  geom_sf_interactive(data = spiky_polys_df, 
+                      aes(geometry = polygon,
+                          tooltip = paste0(Region,"\n",Country,"\n",
+                                           "Case per 100k, last 7 days: ", COUNT,"\n",
+                                           "Death per 100k, last 7 days: ",DEATH)), 
+                      size = 0.5, color = NA, fill = "#CCCCCC", alpha = 1.0) +
+  # spike line
+  geom_sf(data = spiky_polys_df, aes(geometry = line), size = 0.5, color = "blue", fill = NA, alpha = 1.0) +
+  scale_fill_gradient(low = "#F0F0F0", high = "#3EBCD2") +
+  #coord_sf() +
+  coord_sf(xlim = c(-24, 45), ylim = c(30, 73), expand = FALSE) +
+  theme_map() +
+	theme_opts
+
+girafe(ggobj = spike_map, width_svg = 10, height_svg = 10,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+```

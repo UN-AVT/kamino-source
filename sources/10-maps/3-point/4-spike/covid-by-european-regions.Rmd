@@ -1,0 +1,266 @@
+---
+pagetitle: "Covid by European regions"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(scales) 
+library(ggthemes) 
+library(ggiraph)
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Tracking the coronavirus across Europe
+## Point Spike Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nick Fewings on Unsplash"}
+
+masthead <- "assets/nick-fewings-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Bournemouth, UK</div>
+
+> Greenhouse gases, just like viruses, do not respect national boundaries...\
+--- António Guterres - Secretary-General, United Nations\
+
+***
+
+### Ingest
+#### Data points
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read_csv("archetypes/covid-by-european-regions/covid-by-european-regions.csv")
+df
+
+```
+#### Maps
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, include=FALSE, class.source = 'fold-hide'}
+
+level0 <- st_read("archetypes/covid-by-european-regions/NUTS_RG_20M_2021_4326_LEVL_0.geojson")
+level1 <- st_read("archetypes/covid-by-european-regions/NUTS_RG_20M_2021_4326_LEVL_1.geojson")
+level2 <- st_read("archetypes/covid-by-european-regions/NUTS_RG_20M_2021_4326_LEVL_2.geojson")
+level3 <- st_read("archetypes/covid-by-european-regions/NUTS_RG_20M_2021_4326_LEVL_3.geojson")
+
+```
+
+### Wrangling
+#### Prepare map
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source = 'fold-show'}
+
+df_level0 <- df %>% 
+  filter(LEVEL == "level0")
+
+df_level1 <- df %>% 
+  filter(LEVEL == "level1")
+
+df_level2 <- df %>% 
+  filter(LEVEL == "level2")
+
+df_level3 <- df %>% 
+  filter(LEVEL == "level3")
+
+map0 <- inner_join(level0, df_level0, by = "NUTS_ID")
+map1 <- inner_join(level1, df_level1, by = "NUTS_ID")
+map2 <- inner_join(level2, df_level2, by = "NUTS_ID")
+map3 <- inner_join(level3, df_level3, by = "NUTS_ID")
+
+europe <- rbind(map0, map1, map2, map3)
+
+# remove unnecessary objects from workspace
+rm(map0, map1, map2, map3, df_level0, df_level1, df_level2, df_level3, level0, level1, level2, level3)
+
+```
+
+
+### View
+#### a spike maker
+
+This is a function to create the spike geometry so that it can be rendered using geom_sf.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+#---------------
+# story_data <- df
+
+# DATA REQUIRES FIELD PARAMETERS:
+spike_min_height <- 1
+spike_max_height <- 5
+
+# WIDTH RANGE OF SPIKE (VARIABLE)
+spike_min_width <- 0.5
+spike_max_width <- 1
+
+spike_pnts <- df %>%
+  # REMOVE NA & ZEROS
+  filter(!is.na(COUNT)) %>%
+  filter(COUNT != 0) %>% 
+  # NORMALIZE VALUE RANGE
+  mutate(HEIGHT = round(rescale(COUNT, 
+                                to = c(spike_min_height, 
+                                       spike_max_height)), 
+                        digits = 3)) %>% 
+  mutate(WIDTH = round(rescale(COUNT,
+                                to = c(spike_min_width, spike_max_width)),
+                       digits = 3)) %>%
+  # GENERATE SPIKE POINTS
+  mutate(x1 = LONGITUDE,
+         y1 = LATITUDE,
+         x2 = LONGITUDE - WIDTH,
+         y2 = LATITUDE,
+         x3 = LONGITUDE,
+         y3 = LATITUDE + HEIGHT,
+         x4 = LONGITUDE + WIDTH,
+         y4 = LATITUDE,
+         x5 = LONGITUDE,
+         y5 = LATITUDE)
+
+
+# CREATE SF POLYGON GEOMETRY
+spike_dfs <- lapply(1:nrow(spike_pnts), function(x) {
+  x1 <- spike_pnts[[x,"x1"]]
+  x2 <- spike_pnts[[x,"x2"]]
+  x3 <- spike_pnts[[x,"x3"]]
+  x4 <- spike_pnts[[x,"x4"]]
+  x5 <- spike_pnts[[x,"x5"]]
+  
+  y1 <- spike_pnts[[x,"y1"]]
+  y2 <- spike_pnts[[x,"y2"]]
+  y3 <- spike_pnts[[x,"y3"]]
+  y4 <- spike_pnts[[x,"y4"]]
+  y5 <- spike_pnts[[x,"y5"]]
+  
+  # polygon as closed shape
+  polygon_list = list(rbind(c(x1, y1), c(x2, y2), c(x3, y3), c(x4, y4), c(x5, y5)))
+  poly_sfc <- st_sfc(st_polygon(polygon_list))
+    
+  # line as open shape
+  l_line = st_linestring(x = matrix(c(x2, x3, x4, y2, y3, y4), ncol = 2))
+  line_sfc <- st_sfc(l_line)
+    
+  # carry over all attributes
+  lnd_attrib = data.frame(spike_pnts[x,])
+    
+  # add polygon
+  g1 <- as.data.frame(st_sf(lnd_attrib, geometry = poly_sfc ))
+    
+  # rename
+  g1 <- g1 %>% rename( polygon = geometry )
+
+  # add line
+  g2 <- as.data.frame(st_sf(g1, geometry = line_sfc ))
+    
+  # rename
+  g2 <- g2 %>% rename( line = geometry )
+
+  # result
+  as.data.frame(g2)
+
+})
+
+# Bind results
+spiky_polys_df <- do.call(rbind, spike_dfs)
+
+# Sort for proper overlap
+spiky_polys_df <- spiky_polys_df[order(spiky_polys_df$LATITUDE, decreasing = TRUE),]
+
+```
+
+### Plot
+#### with interactivity (hover over countries for additional details)
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="#ffffff", colour="#ffffff"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+v1 <- ggplot() +
+  geom_sf_interactive(data = europe, aes(tooltip = 
+                                           paste0(Region,"\n",Country,"\n",
+                                           "Case per 100k, last 7 days: ", COUNT,"\n",
+                                           "Death per 100k, last 7 days: ",DEATH), data_id = NUTS_ID, fill = COUNT)) +   # spike poly fill
+  geom_sf_interactive(data = spiky_polys_df, 
+                      aes(geometry = polygon,
+                          tooltip = paste0(Region,"\n",Country,"\n",
+                                           "Case per 100k, last 7 days: ", COUNT,"\n",
+                                           "Death per 100k, last 7 days: ",DEATH)), 
+                      size = 0.5, color = NA, fill = "#CCCCCC", alpha = 1.0) +
+  # spike line
+  geom_sf(data = spiky_polys_df, aes(geometry = line), size = 0.5, color = "blue", fill = NA, alpha = 1.0) +
+  scale_fill_gradient(low = "#F0F0F0", high = "#3EBCD2") +
+  coord_sf(xlim = c(-24, 45), ylim = c(30, 73), expand = FALSE) +
+  theme_map() +
+	theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 16,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 0.65) )
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: This is a reproduction of an article published in The Economist, Tracking the coronavirus across Europe [GO](https://www.economist.com/graphic-detail/tracking-coronavirus-across-europe){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

@@ -1,0 +1,217 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["styles/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: hide
+---
+
+```{r setup, include = FALSE, results = "hide"}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(scales) # for rescaling
+library(sf)
+library(geojsonio)
+library(ggplot2)
+library(ggiraph)
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, results="hide", class.source = 'fold-hide'}
+
+# Load map sources
+# Shape files and data
+# ++++++++++++++++++++
+# borders, adm0
+# borders, adm1
+# borders, adm2
+# ++++++++++++++++++++
+
+# Borders
+state_boundaries <- st_read("map-sources/geojson/ss-state.geojson")
+county <- st_read("map-sources/geojson/ss-county.geojson")
+abeyi <- st_read("map-sources/geojson/ss-abeyi.geojson")
+
+```
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = "hide"}
+
+# DATA SOURCES
+human_rights_incidents = read.csv("data-sources/confidential/human-rights-incident-dataset.csv", header = TRUE, stringsAsFactors = FALSE)
+human_rights_incidents
+
+```
+
+
+
+```{r}
+
+# DATA REQUIRES FIELD PARAMETERS:
+spike_min_height <- 0.1
+spike_max_height <- 5
+# WIDTH RANGE OF SPIKE (VARIABLE)
+spike_min_width <- 0.05
+spike_max_width <- 0.1
+
+spike_pnts <- human_rights_incidents
+
+# REMOVE NA & ZEROS
+spike_pnts <- spike_pnts[!is.na(spike_pnts$Number.of.victims),]
+spike_pnts <- spike_pnts[spike_pnts$Number.of.victims != 0, ]
+spike_pnts <- spike_pnts[!is.na(spike_pnts$Lat),]
+spike_pnts <- spike_pnts[!is.na(spike_pnts$Long),]
+
+# NORMALIZE VALUE RANGE
+spike_pnts <- spike_pnts %>% mutate( HEIGHT = round(rescale(spike_pnts$Number.of.victims, to = c(spike_min_height, spike_max_height)), digits = 3)) # round(x, digits = 0)
+spike_pnts <- spike_pnts %>% mutate( WIDTH = round(rescale(spike_pnts$Number.of.victims, to = c(spike_min_width, spike_max_width)), digits = 3)) # round(x, digits = 0)
+
+# GENERATE SPIKE POINTS
+spike_pnts$x1 <- spike_pnts$Long
+spike_pnts$y1 <- spike_pnts$Lat
+
+spike_pnts$x2 <- spike_pnts$Long - spike_pnts$WIDTH
+spike_pnts$y2 <- spike_pnts$Lat
+
+spike_pnts$x3 <- spike_pnts$Long
+spike_pnts$y3 <- spike_pnts$Lat + spike_pnts$HEIGHT
+
+spike_pnts$x4 <- spike_pnts$Long + spike_pnts$WIDTH
+spike_pnts$y4 <- spike_pnts$Lat
+
+spike_pnts$x5 <- spike_pnts$Long
+spike_pnts$y5 <- spike_pnts$Lat
+
+
+# CREATE SF POLYGON GEOMETRY
+spike_dfs <- lapply(1:nrow(spike_pnts), function(x) {
+  x1 <- spike_pnts[[x,"x1"]]
+  x2 <- spike_pnts[[x,"x2"]]
+  x3 <- spike_pnts[[x,"x3"]]
+  x4 <- spike_pnts[[x,"x4"]]
+  x5 <- spike_pnts[[x,"x5"]]
+  
+  y1 <- spike_pnts[[x,"y1"]]
+  y2 <- spike_pnts[[x,"y2"]]
+  y3 <- spike_pnts[[x,"y3"]]
+  y4 <- spike_pnts[[x,"y4"]]
+  y5 <- spike_pnts[[x,"y5"]]
+    
+    # polygon as closed shape
+    polygon_list = list(rbind(c(x1, y1), c(x2, y2), c(x3, y3), c(x4, y4), c(x5, y5)))
+    poly_sfc <- st_sfc(st_polygon(polygon_list))
+    
+    # line as open shape
+    l_line = st_linestring(x = matrix(c(x2, x3, x4, y2, y3, y4), ncol = 2))
+    line_sfc <- st_sfc(l_line)
+    
+    # carry over all attributes
+    lnd_attrib = data.frame(spike_pnts[x,])
+    
+    # add polygon
+    g1 <- as.data.frame(st_sf(lnd_attrib, geometry = poly_sfc ))
+    
+    # rename
+    g1 <- g1 %>% rename( polygon = geometry )
+    # g1 <- g1 %>% mutate( polygon = geometry)
+    
+    # add line
+    g2 <- as.data.frame(st_sf(g1, geometry = line_sfc ))
+    
+    # rename
+    g2 <- g2 %>% rename( line = geometry )
+    # g2 <- g2 %>% mutate( line = geometry)
+    
+    # result
+    as.data.frame(g2)
+
+})
+
+
+# Bind results
+spiky_polys_df <- do.call(rbind, spike_dfs)
+# Sort for proper overlap
+spiky_polys_df <- spiky_polys_df[order(spiky_polys_df$Lat, decreasing = TRUE),]
+
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=12, out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+# In order of layer placement top -> down
+v1 = ggplot() +
+  geom_sf(data = state_boundaries, color="#333333", fill = transparent_fill, size=1.0) +
+  geom_sf(data = county, color="#333333", fill = transparent_fill, size=0.5) +
+  geom_sf(data = abeyi, color="#333333", fill = transparent_fill, size=0.5, linetype = "dashed") +
+  # spike poly fill
+  geom_sf_interactive(data = spiky_polys_df, 
+                      aes(geometry = polygon, fill = Number.of.victims, 
+                          tooltip = paste0("Number of victims: ", Number.of.victims, "\n",
+                                               "Violation type: ", Types.of.violation, "\n",
+                                               "Remarks: ", Remarks)), 
+                      size = 0.75, color = "#FFFFFF", alpha = 0.3) +
+  # spike line
+  geom_sf(data = spiky_polys_df, aes(geometry = line, color = Number.of.victims), size = 0.5, fill = NA, alpha = 1.0) +
+  scale_color_gradient2(low = "yellow", mid = "orange", high = "red", midpoint = mean(spiky_polys_df$Number.of.victims)) +
+  scale_fill_gradient2(low = "yellow", mid = "orange", high = "red", midpoint = mean(spiky_polys_df$Number.of.victims)) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+       y = NULL, # Latitude
+       title = NULL, 
+       subtitle = NULL) +
+  theme_opts
+
+# v1
+
+girafe( ggobj = v1, width_svg = 12, height_svg = 8, options = list( opts_sizing(rescale = TRUE, width = 0.9) ))
+
+```
+
+
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+
+ggsave(filename = "assets/8-ssd-spike.svg", plot = v1, width=12, height=12)
+
+```
+
+
+

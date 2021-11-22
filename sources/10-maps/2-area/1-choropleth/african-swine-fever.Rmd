@@ -1,0 +1,188 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(dplyr)
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(wesanderson)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Freedom of Association Indicators
+## Choropleth Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Manuel on Unsplash"}
+
+masthead <- "assets/manuel-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Freedom of association includes the freedom not to associate...\
+--- Ayn Rand\
+
+***
+
+### Ingest
+#### with filter by indicator
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Data source must have an ISO3 field
+df <- read.csv("archetypes/freedom-of-association.csv", header = TRUE)
+df <- filter(df, Indicator_Id == 41797)
+df # after filter
+
+```
+
+
+### World map
+#### from natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# natural earth base map
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
+# combine data with map based on ISO3 codes
+ne_world_df <- merge(ne_world, df, by.x = "iso_a3", by.y = "ISO3", all = TRUE)
+
+```
+
+
+### Plot
+#### Access to justice for women
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+# color palette to use
+pal <- wes_palette("Zissou1", 10, type = "continuous")
+
+v1 <- ggplot(data = ne_world_df) +
+  # map feature styling
+  geom_sf(aes(fill=X2018), color="#FFFFFF", stroke=0.5) +
+  scale_fill_gradientn(colours = rev(pal)) + 
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Choropleth Map", 
+       subtitle="Freedom of Association Indicators - Access to justice for women") +
+  theme_opts
+
+# v1
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/freedom-of-association-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/freedom-of-association-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+<a href="https://govdata360-backend.worldbank.org/api/v1/datasets/4034/dump.csv">Source</a>
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'space launches satellite military civil private'
+commands <- 'geom_bar'
+sources <- 'Reuters DataWrapper'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

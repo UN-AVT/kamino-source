@@ -1,0 +1,168 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(geojsonio)
+library(ggplot2)
+library(ggiraph)
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Vector Map
+## Using UN sources
+
+> The Geospatial Strategy for the United Nations aims to contribute to the data ecosystem\
+by enabling location information for the Organization. The vision is to build synergy\
+on activities and investments on geospatial information management in the\
+United Nations, “Delivering as One” by bringing geospatial data to\
+innovate and to act for a better world...\
+--- Mr. Patrick Carey, GEOSPATIAL STRATEGY FOR THE UN\
+
+General maps provide a common and practical way of sharing basic information on the geography of a country or an area. General maps are both a contextualization and an artistic rendering of a geospatial reality. General maps are produced by the United Nations to make readily available the international setting of Member States and territories including major populated places, administrative units, general infrastructure, and hydrology. The maps can be included in publications as a reference to facilitate the understanding of the role the United Nations plays following specific mandates or resolutions. 
+
+```{r, out.width = "85%"}
+
+knitr::include_graphics("assets/world_map_4170_r19_oct20.jpg", dpi=300)
+
+```
+
+Take note of the disclaimer text:
+
+* The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the United Nations.
+* Final boundary between the Republic of Sudan and the Republic of South Sudan has not yet been determined.
+* Dotted line represents approximately the Line of Control in Jammu and Kashmir agreed upon by India and Pakistan.
+* The final status of Jammu and Kashmir has not yet been agreed upon by the parties.
+* A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern Ireland concerning sovereignty over the Falkland Islands (Malvinas).
+* The initials in parentheses refer to the administering Power or the Power involved in a special treaty relationship.
+
+***
+
+# Load map sources
+## topojson world maps
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# BASE MAP
+# Simplification levels: 09, 07, 05, 03, 01, 009, 008, 007, 005, 001
+land <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-03.topojson")
+borders <- topojson_read("archetypes/un-default/BNDL50-BORDERS-no-ATA-03.topojson")
+type_3 <- topojson_read("archetypes/un-default/BNDL50-BORDERS-TYPE-3.topojson")
+type_4 <- topojson_read("archetypes/un-default/BNDL50-BORDERS-TYPE-4.topojson")
+
+```
+
+# Plot
+## with Robinson projection and border styles
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6, out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+# Set CRS to enable projection transform
+land <- land %>% st_as_sf() %>% st_set_crs(4326)
+type_3 <- type_3 %>% st_as_sf() %>% st_set_crs(4326)
+type_4 <- type_4 %>% st_as_sf() %>% st_set_crs(4326)
+# point <- st_as_sf(point, coords = c("long", "lat"), crs = 4326)
+
+# In order of layer placement top -> down
+v1 = ggplot() +
+  geom_sf(data = land, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  # geom_sf(data = borders, color="#CCCCCC") +
+  geom_sf(data = type_3,linetype = "dotted", color="red", size=0.5) +
+  geom_sf(data = type_4,linetype = "dashed", color="blue", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf(crs = "+proj=robin") +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Topojson Vector Map", 
+       subtitle="Borders, Type 3, and Type 4") +
+  theme_opts
+
+# v1
+
+girafe( ggobj = v1, width_svg = 12, height_svg = 6,
+  options = list( opts_sizing(rescale = TRUE) )
+)
+
+```
+
+## Save output to file
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggsave(filename = "assets/un-defauly-topojson.svg", plot = v1, width=12, height=6)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

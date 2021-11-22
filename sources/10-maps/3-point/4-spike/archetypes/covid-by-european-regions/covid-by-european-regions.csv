@@ -1,0 +1,200 @@
+Region_orig,Region,Country,Population,COUNT,DEATH,LATITUDE,LONGITUDE,LEVEL,NUTS_ID
+—,Albania,Albania,"2,862",158,4,41,20,level0,AL
+—,Andorra,Andorra,86,165,0,42.5,1.516667,level0,
+Burgenland,Burgenland,Austria,293,208,3,47.5,16.416667,level2,AT11
+Carinthia,Carinthia,Austria,561,231,2,46.761,13.819,level2,AT21
+Lower Austria,Lower Austria,Austria,"1,678",261,2,48.333333,15.75,level2,AT12
+Salzburg,Salzburg,Austria,555,285,2,47.8,13.033333,level2,AT32
+Styria,Styria,Austria,"1,243",206,3,47.25,15.166667,level2,AT22
+Tyrol,Tyrol,Austria,755,156,1,47.27,11.4,level2,AT34
+Upper Austria,Upper Austria,Austria,"1,482",192,1,48.3,14.283333,level2,AT31
+Vienna,Vienna,Austria,"1,897",267,2,48.2,16.366667,level2,AT13
+Vorarlberg,Vorarlberg,Austria,394,92,1,47.243611,9.893889,level2,AT34
+Brussels,Brussels,Belgium,"1,215",125,2,50.85,4.35,level1,BE1
+Flanders,Flanders,Belgium,"6,596",98,1,51,4.5,level1,BE2
+Wallonia,Wallonia,Belgium,"3,644",104,1,50.5,4.75,level1,BE3
+—,Bosnia,Bosnia,"3,856",118,4,44,18,missed,BIH
+East of England,East of England,Britain,"6,235",48,2,52.24,0.41,level1,UKH
+London,London,Britain,"8,982",40,1,51.507222,-0.1275,level1,UKI
+Midlands,Midlands,Britain,"10,719",79,2,52.48,-1.9025,level1,UKF
+North East & Yorkshire,North East & Yorkshire,Britain,"8,143",93,2,55,-1.8667,level1,UKC
+North West,North West,Britain,"7,300",75,2,54.0167,-2.6333,level1,UKD
+Northern Ireland,Northern Ireland,Britain,"1,885",64,1,54.666667,-6.666667,level1,UKN
+Scotland,Scotland,Britain,"5,454",64,1,55.953,-3.189,level1,UKM
+South East,South East,Britain,"9,175",37,1,51.3167,-0.5,level1,UKJ
+South West,South West,Britain,"5,616",33,1,50.96,-3.22,level1,UKK
+Wales,Wales,Britain,"3,136",43,1,52.3,-3.6,level1,UKL
+—,Bulgaria,Bulgaria,"7,000",195,7,42.683333,23.316667,level0,BG
+—,Croatia,Croatia,"4,076",71,2,45.166667,15.5,level0,HR
+—,Czech Republic,Czech Republic,"10,650",771,14,49.75,15.5,level0,CZ
+Hovedstaden,Hovedstaden,Denmark,"1,836",85,0,55.939833,12.3,level2,DK01
+Midtjylland,Midtjylland,Denmark,"1,321",34,0,56.166667,9.5,level2,DK04
+Nordjylland,Nordjylland,Denmark,590,24,0,57,10,level2,DK05
+Sjaelland,Sjaelland,Denmark,837,65,0,55.5,11.75,level2,DK02
+Syddanmark,Syddanmark,Denmark,"1,223",68,0,55.333333,9.666667,level2,DK03
+—,Estonia,Estonia,"1,325",738,5,59,26,level0,EE
+—,Finland,Finland,"5,518",66,0,64,26,level0,FI
+Alsace,Alsace,France,"5,550",186,3,48.5,7.5,level1,FRF
+Auvergne-Rhône-Alpes,Auvergne-Rhone-Alpes,France,"7,948",183,2,45.76,4.84,level1,FRK
+Bourgogne-Franche-Comté,Bourgogne-Franche-Comte,France,"2,811",149,3,47.316667,5.016667,level1,FRC
+Brittany,Brittany,France,"3,319",113,1,48,-3,level1,FRH
+Corsica,Corsica,France,335,156,1,42,9,level1,FRM
+Hauts-de-France,Hauts-de-France,France,"6,004",328,4,49.9206,2.703,level1,FRE
+Ile de France,Ile de France,France,"12,175",353,3,48.5,2.5,level1,FR1
+Midi-Pyrénées,Midi-Pyrenees,France,"5,845",156,2,43.5,1.333333,level1,FRJ
+Normandy,Normandy,France,"3,330",188,2,48.88,0.17,level1,FRD
+Nouvelle-Aquitaine,Nouvelle-Aquitaine,France,"5,957",107,2,44.84,-0.58,level1,FRI
+Pays de la Loire,Pays de la Loire,France,"3,758",152,2,47.466667,-0.833333,level1,FRG
+Provence-Alpes-Côte d'Azur,Provence-Alpes-Cote d'Azur,France,"5,031",331,5,44,6,level1,FRL
+Val de Loire,Val de Loire,France,"2,576",165,2,47.5,1.75,level1,FRB
+Baden-Wurttemberg,Baden-Wurttemberg,Germany,"11,070",61,0,48.537778,9.041111,level1,DE1
+Bavaria,Bavaria,Germany,"13,077",71,0,48.133333,11.566667,,
+Berlin,Berlin,Germany,"3,645",54,0,52.52,13.405,level1,DE3
+Brandenburg,Brandenburg,Germany,"2,512",61,0,52.361944,13.008056,level1,DE4
+Bremen,Bremen,Germany,683,57,0,53.083333,8.8,level1,DE5
+Hamburg,Hamburg,Germany,"1,841",72,0,53.565278,10.001389,level1,DE6
+Hesse,Hesse,Germany,"6,266",69,0,50.116667,8.683333,level1,DE7
+Lower Saxony,Lower Saxony,Germany,"7,982",60,0,53.083333,8.8,level1,DE2
+Mecklenburg-Vorpommern,Mecklenburg-Vorpommern,Germany,"1,610",63,0,53.616667,12.7,level1,DE8
+Northrhine-Westphalia,Northrhine-Westphalia,Germany,"17,933",65,0,51.233333,6.783333,level1,DEA
+Rhineland-Palatinate,Rhineland-Palatinate,Germany,"4,085",46,0,49.913056,7.45,level1,DEB
+Sarland,Sarland,Germany,991,56,0,49.233333,7,level1,DEC
+Saxony,Saxony,Germany,"4,078",75,0,51.05,13.74,level1,DED
+Saxony-Anhalt,Saxony-Anhalt,Germany,"2,208",82,0,51.971111,11.47,level1,DEE
+Schleswig-Holstein,Schleswig-Holstein,Germany,"2,897",46,0,54.323333,10.139444,level1,DEF
+Thuringia,Thuringia,Germany,"2,143",133,0,50.983333,11.033333,level1,DEG
+—,Greece,Greece,"10,725",114,2,39,22,level0,EL
+—,Hungary,Hungary,"9,773",419,10,47,20,level0,HU
+—,Iceland,Iceland,357,3,0,65,-18,level0,IS
+—,Ireland,Ireland,"4,830",57,2,53.416667,-8,level0,IE
+Abruzzo,Abruzzo,Italy,"1,312",232,8,42.366111,12.394444,level2,ITF1
+Aoste Valley,Aoste Valley,Italy,126,76,2,45.746944,7.439167,level2,ITC2
+Basilicata,Basilicata,Italy,563,167,1,40.633333,15.8,level2,ITF5
+Bolzano,Bolzano,Italy,531,269,5,46.5,11.35,level2,ITH1
+Calabria,Calabria,Italy,"1,947",76,1,38.916667,16.6,level2,ITF6
+Campania,Campania,Italy,"5,802",310,4,40.826111,14.256389,level2,ITF3
+Emilia-Romagna,Emilia-Romagna,Italy,"4,459",444,6,44.510556,10.956944,level2,ITH5
+Friuli-Venezia Giulia,Friuli-Venezia Giulia,Italy,"1,215",354,7,45.636111,13.804167,level2,ITH4
+Lazio,Lazio,Italy,"5,879",175,3,41.9,12.716667,level2,ITI4
+Liguria,Liguria,Italy,"1,551",144,3,44.45,8.766667,level2,ITC3
+Lombardy,Lombardy,Italy,"10,061",312,4,45.585556,9.930278,level2,ITC4
+Marche,Marche,Italy,"1,525",339,5,43.616667,13.516667,level2,ITI3
+Molise,Molise,Italy,306,158,8,41.65,14.266667,level2,ITF2
+Piemonte,Piemonte,Italy,"4,356",288,3,45.066667,7.7,level2,ITC1
+Puglia,Puglia,Italy,"4,029",214,4,41.008611,16.512778,level2,ITF4
+Sardinia,Sardinia,Italy,"1,640",40,1,40,9,level2,ITG2
+Sicilly,Sicilly,Italy,"5,000",78,2,37.5,14,level2,ITG1
+Trento,Trento,Italy,541,349,3,46.066667,11.116667,level2,ITH2
+Tuscany,Tuscany,Italy,"3,730",222,4,43.771389,11.254167,level2,ITI1
+Umbria,Umbria,Italy,882,188,6,43.1121,12.3888,level2,ITI2
+Veneto,Veneto,Italy,"4,906",192,3,45.733333,11.85,level2,ITH3
+—,Kosovo,Kosovo,"1,895",152,2,42.583333,21,missed,KOS
+—,Latvia,Latvia,"1,920",155,3,57,25,level0,LV
+—,Liechtenstein,Liechtenstein,38,44,3,47.14,9.55,level0,LI
+—,Lithuania,Lithuania,"2,794",109,3,55,24,level0,LT
+—,Luxembourg,Luxembourg,614,150,4,49.814444,6.131667,level0,LU
+—,Malta,Malta,494,328,3,35.9,14.516667,level0,MT
+—,Moldova,Moldova,"3,474",204,4,47,29,missed,MDA
+—,Montenegro,Montenegro,622,532,10,42.5,19.3,level0,ME
+Drenthe,Drenthe,Netherlands,492,139,2,52.916667,6.583333,level2,NL13
+Flevoland,Flevoland,Netherlands,417,119,0,52.533333,5.666667,level2,NL23
+Friesland,Friesland,Netherlands,648,149,2,53.133333,5.816667,level2,NL12
+Gelderland,Gelderland,Netherlands,"2,072",128,1,52.06,5.95,level2,NL22
+Groningen,Groningen,Netherlands,584,130,1,53.216667,6.566667,level2,NL11
+Limburg,Limburg,Netherlands,"1,116",141,3,51.216667,5.933333,level2,NL42
+Noord-Brabant,Noord-Brabant,Netherlands,"2,545",165,1,51.666667,5,level2,NL41
+Noord-Holland,Noord-Holland,Netherlands,"2,853",197,1,52.666667,4.833333,level2,NL32
+Overijssel,Overijssel,Netherlands,"1,156",125,0,52.516667,6.1,level2,NL21
+Utrecht,Utrecht,Netherlands,"1,307",137,1,52.083333,5.116667,level2,NL31
+Zeeland,Zeeland,Netherlands,383,150,2,51.566667,3.75,level2,NL34
+Zuid-Holland,Zuid-Holland,Netherlands,"3,709",162,1,52,4.666667,level2,NL33
+—,North Macedonia,North Macedonia,"2,077",183,3,41.6,21.7,missed,MKD
+—,Norway,Norway,"5,328",67,0,61,8,level0,NO
+Dolnoslaskie,Dolnoslaskie,Poland,"2,865",230,4,51.083333,16.4,level2,PL51
+Kujawsko-pomorskie,Kujawsko-pomorskie,Poland,"2,055",269,5,53.078333,18.493611,level2,PL61
+Lódzkie,Lodzkie,Poland,"2,453",191,3,51.776944,19.454722,level2,PL71
+Lubelskie,Lubelskie,Poland,"2,097",144,5,51.222778,22.902778,level2,PL81
+Lubuskie,Lubuskie,Poland,"1,003",314,6,52.195278,15.3475,level2,PL43
+Malopolskie,Malopolskie,Poland,"3,361",197,3,49.859444,20.274722,level2,PL21
+Mazowieckie,Mazowieckie,Poland,"5,380",306,5,52.216667,21,level2,PL92
+Opolskie,Opolskie,Poland,946,151,3,50.648333,17.900556,level2,PL52
+Podkarpackie,Podkarpackie,Poland,"2,086",257,5,49.956667,22.172778,level2,PL82
+Podlaskie,Podlaskie,Poland,"1,152",213,6,53.116667,23.166667,level2,PL84
+Pomorskie,Pomorskie,Poland,"2,305",329,5,54.195278,18.016389,level2,PL63
+Slaskie,Slaskie,Poland,"4,489",237,5,50.333333,19.000278,level2,PL22
+Swietokrzyskie,Swietokrzyskie,Poland,"1,226",158,4,50.765556,20.773611,level2,PL72
+Warminsko-mazurskie,Warminsko-mazurskie,Poland,"1,404",431,7,53.85,20.833333,level2,PL62
+Wielkopolskie,Wielkopolskie,Poland,"3,473",201,4,52.333889,17.247222,level2,PL41
+Zachodniopomorskie,Zachodniopomorskie,Poland,"1,676",164,3,53.416667,14.583333,level2,PL42
+Alentejo,Alentejo,Portugal,"1,627",10,1,38.566667,-7.9,level2,PT18
+Algarve,Algarve,Portugal,439,30,1,37.033333,-7.916667,level2,PT15
+Central,Central,Portugal,468,140,7,40.211111,-8.429167,level2,PT16
+Lisbon,Lisbon,Portugal,"3,673",60,3,38.725267,-9.150019,level2,PT17
+Porto,Porto,Portugal,"3,573",35,1,41.162142,-8.621953,level3,PT30
+—,Romania,Romania,"19,414",120,2,46,25,level0,RO
+—,Serbia,Serbia,"6,964",333,2,44,21,level0,RS
+—,Slovakia,Slovakia,"5,450",213,10,48.666667,19.5,level0,SK
+—,Slovenia,Slovenia,"2,081",200,1,46.116667,14.816667,level0,SI
+Andalusia,Andalusia,Spain,"8,427",70,4,37.383333,-5.983333,level2,ES61
+Aragon,Aragon,Spain,"1,321",75,1,41,-1,level2,ES24
+Asturias,Asturias,Spain,"1,022",100,2,43.333333,-6,level2,ES12
+Balearic Islands,Balearic Islands,Spain,"1,188",24,0,39.5,3,level2,ES53
+Basque Country,Basque Country,Spain,"2,178",96,2,42.833333,-2.683333,level2,ES21
+Cantabria,Cantabria,Spain,582,47,3,43.333333,-4,level2,ES13
+Castile and León,Castile and Leon,Spain,"2,408",53,0,41.383333,-4.45,level2,ES41
+Castile-La Mancha,Castile-La Mancha,Spain,"2,035",63,3,39.866667,-4.016667,level2,ES42
+Catalonia,Catalonia,Spain,"7,566",0,2,41.816667,1.466667,level2,ES51
+Extremadura,Extremadura,Spain,"1,065",28,3,39,-6,level2,ES43
+Galicia,Galicia,Spain,"2,700",41,1,42.5,-8.1,level2,ES11
+La Rioja,La Rioja,Spain,314,41,2,42.25,-2.5,level2,ES23
+Madrid,Madrid,Spain,"6,642",139,3,40.416667,-3.716667,level2,ES30
+Murcia,Murcia,Spain,"1,488",40,3,37.986111,-1.130278,level2,ES62
+Navarre,Navarre,Spain,650,64,2,42.816667,-1.65,level2,ES22
+Valencia,Valencia,Spain,"4,975",48,3,39.47,-0.376389,level2,ES52
+Blekinge,Blekinge,Sweden,160,105,2,56.333333,15.333333,level3,SE221
+Dalarna,Dalarna,Sweden,287,199,0,60.866667,14.733333,level3,SE312
+Gävleborg,Gavleborg,Sweden,287,477,2,60.780619,16.655273,level3,SE313
+Gotland,Gotland,Sweden,59,111,0,57.5,18.5,level3,SE214
+Halland,Halland,Sweden,329,442,1,56.716566,12.821045,level3,SE231
+Jämtland,Jamtland,Sweden,130,283,0,63,14.666667,level3,SE322
+Jönköping,Jonkoping,Sweden,361,316,2,57.782778,14.160556,level3,SE211
+Kalmar,Kalmar,Sweden,245,237,0,56.661389,16.362778,level3,SE213
+Kronoberg,Kronoberg,Sweden,200,154,2,56.876944,14.809167,level3,SE212
+Norrbotten,Norrbotten,Sweden,250,413,2,67.135829,18.500977,level3,SE332
+Örebro,orebro,Sweden,302,225,2,59.273889,15.2075,level3,SE124
+Östergötland,ostergotland,Sweden,462,208,2,58.416667,15.75,level3,SE123
+Skåne,Skane,Sweden,"1,362",198,2,55.995309,13.441772,level3,SE224
+Södermanland,Sodermanland,Sweden,295,255,1,59.25,16.666667,level3,SE122
+Stockholm,Stockholm,Sweden,"2,344",278,1,59.329444,18.068611,level3,SE110
+Uppsala,Uppsala,Sweden,376,221,1,59.858056,17.644722,level3,SE121
+Värmland,Varmland,Sweden,281,199,1,59.75,13.25,level3,SE311
+Västerbotten,Vasterbotten,Sweden,270,395,2,65,17.5,level3,SE331
+Västernorrland,Vasternorrland,Sweden,245,175,5,62.739633,16.929932,level3,SE321
+Västmanland,Vastmanland,Sweden,274,153,0,59.75,16.333333,level3,SE125
+Västra Götaland,Vastra Gotaland,Sweden,"1,710",289,2,58.217025,11.733398,level3,SE232
+Aargau,Aargau,Switzerland,678,50,0,47.083333,8,level3,CH033
+Appenzell Ausserrhoden,Appenzell Ausserrhoden,Switzerland,55,0,0,47.05,9.016667,level3,CH053
+Appenzell Innerrhoden,Appenzell Innerrhoden,Switzerland,16,43,0,47.3,9.4,level3,CH054
+Basel-Landschaft,Basel-Landschaft,Switzerland,288,77,1,47.116667,7.733333,level3,CH032
+Basel-Stadt,Basel-Stadt,Switzerland,195,56,1,47.566667,7.6,level3,CH031
+Bern,Bern,Switzerland,"1,035",48,0,46.948056,7.4475,level3,CH021
+Freiburg,Freiburg,Switzerland,319,95,1,46.8,7.15,level3,CH022
+Geneva,Geneva,Switzerland,499,106,0,46.2,6.15,level3,CH013
+Glarus,Glarus,Switzerland,40,47,2,47.033333,9.066667,level3,CH051
+Graubünden,Graubunden,Switzerland,198,79,1,46.75,9.5,level3,CH056
+Jura,Jura,Switzerland,73,68,0,47.366667,7.15,level3,CH025
+Luzern,Luzern,Switzerland,410,62,0,47.05,8.3,level3,CH061
+Neuchâtel,Neuchatel,Switzerland,177,79,0,47,6.933333,level3,CH024
+Nidwalden,Nidwalden,Switzerland,43,62,0,46.933333,8.066667,level3,CH065
+Obwalden,Obwalden,Switzerland,38,77,0,46.866667,8.033333,level3,CH064
+Schaffhausen,Schaffhausen,Switzerland,82,66,4,47.7,8.633333,level3,CH052
+Schwyz,Schwyz,Switzerland,159,72,0,47.016667,8.65,level3,CH063
+Solothurn,Solothurn,Switzerland,273,95,1,47.216667,7.533333,level3,CH023
+St. Gallen,St. Gallen,Switzerland,508,58,0,47.424167,9.370833,level3,CH055
+Thurgau,Thurgau,Switzerland,276,51,0,47.583333,9.066667,level3,CH057
+Ticino,Ticino,Switzerland,353,112,2,46.316667,8.816667,level3,CH070
+Uri,Uri,Switzerland,36,110,0,46.783333,8.616667,level3,CH062
+Valais,Valais,Switzerland,344,87,0,46.066667,7.6,level3,CH012
+Vaud,Vaud,Switzerland,799,88,1,46.616667,6.55,level3,CH011
+Zug,Zug,Switzerland,127,88,1,47.168056,8.516944,level3,CH066
+Zurich,Zurich,Switzerland,"1,521",73,0,47.366667,8.55,level3,CH040

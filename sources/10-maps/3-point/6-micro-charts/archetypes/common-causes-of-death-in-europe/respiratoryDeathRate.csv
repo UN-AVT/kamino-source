@@ -1,0 +1,123 @@
+id,value,name,respiratory
+PT3,288.33,Região Autónoma da Madeira (PT),288.33
+PT2,200.41,Região Autónoma dos Açores (PT),200.41
+TR7,189.92,Orta Anadolu,189.92
+TRA,174.29,Kuzeydogu Anadolu,174.29
+TR3,164.82,Ege,164.82
+TR8,163.03,Bati Karadeniz,163.03
+UKD,161.82,North West (UK),161.82
+UKL,161.32,Wales,161.32
+TR1,161,Istanbul,161
+UKC,160.11,North East (UK),160.11
+TR4,155.58,Dogu Marmara,155.58
+TRB,150.75,Ortadogu Anadolu,150.75
+UKM,148.95,Scotland,148.95
+TR2,146.45,Bati Marmara,146.45
+UKE,145.74,Yorkshire and The Humber,145.74
+TRC,144.58,Güneydogu Anadolu,144.58
+TR6,139.97,Akdeniz,139.97
+TR5,139.32,Bati Anadolu,139.32
+TR9,137.67,Dogu Karadeniz,137.67
+UKF,136.04,East Midlands (UK),136.04
+UKN,135.93,Northern Ireland (UK),135.93
+UKG,134.82,West Midlands (UK),134.82
+IE0,133.58,Éire/Ireland,133.58
+UKH,125.59,East of England,125.59
+EL3,122.42,Attiki,122.42
+UKI,119.69,London,119.69
+UKJ,119.19,South East (UK),119.19
+PT1,118.72,Continente,118.72
+UKK,117.32,South West (UK),117.32
+DK0,116.8,Danmark,116.8
+BE3,116.53,Région wallonne,116.53
+ES7,115.38,Canarias,115.38
+LI0,113.61,Liechtenstein,113.61
+EL4,110.9,"Nisia Aigaiou, Kriti",110.9
+EL6,109.6,Kentriki Ellada,109.6
+BE1,104.27,Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest,104.27
+ES6,102.27,Sur (ES),102.27
+ES3,101.34,Comunidad de Madrid,101.34
+ES4,98.81,Centro (ES),98.81
+NO0,98.71,Norge,98.71
+CY0,95.64,Kypros,95.64
+MT0,95.07,Malta,95.07
+DE5,94.29,Bremen,94.29
+PL9,93.88,Makroregion Województwo Mazowieckie,93.88
+EL5,91.87,Voreia Ellada,91.87
+BE2,91.38,Vlaams Gewest,91.38
+RO2,88.91,Macroregiunea doi,88.91
+ES1,88.3,Noroeste (ES),88.3
+NL2,86.36,Oost-Nederland,86.36
+PL5,86.05,Makroregion Poludniowo-Zachodni,86.05
+DE3,86,Berlin,86
+HU3,85.59,Alföld és Észak,85.59
+DEA,85.47,Nordrhein-Westfalen,85.47
+PL6,85.01,Makroregion Pólnocny,85.01
+ES5,84.41,Este (ES),84.41
+RO1,83.65,Macroregiunea unu,83.65
+NL4,83.12,Zuid-Nederland,83.12
+HU1,82.23,Közép-Magyarország,82.23
+EU28,82.21,European Union - 28 countries (2013-2020),82.21
+RO4,81.03,Macroregiunea patru,81.03
+CZ0,80.4,Cesko,80.4
+IS0,78.46,Ísland,78.46
+DE9,78.24,Niedersachsen,78.24
+SK0,78.13,Slovensko,78.13
+PL4,77.39,Makroregion Pólnocno-Zachodni,77.39
+NL3,77.27,West-Nederland,77.27
+NL1,76.95,Noord-Nederland,76.95
+FRE,76.35,Hauts-de-France,76.35
+ES2,76.29,Noreste (ES),76.29
+BG4,75.68,Yugozapadna i yuzhna tsentralna Bulgaria,75.68
+PL7,75.63,Makroregion Centralny,75.63
+DEG,75.16,Thüringen,75.16
+EU27_2020,74.91,European Union - 27 countries (from 2020),74.91
+RO3,73.68,Macroregiunea trei,73.68
+LU0,71.41,Luxembourg,71.41
+DEF,71.15,Schleswig-Holstein,71.15
+DEB,70.73,Rheinland-Pfalz,70.73
+DE7,70.41,Hessen,70.41
+DE4,70.29,Brandenburg,70.29
+SI0,67.53,Slovenija,67.53
+HU2,67.5,Dunántúl,67.5
+DE2,67.35,Bayern,67.35
+FRH,66.78,Bretagne,66.78
+SE2,65.1,Södra Sverige,65.1
+FRF,64.91,Grand Est,64.91
+HR0,64.71,Hrvatska,64.71
+DE8,64.15,Mecklenburg-Vorpommern,64.15
+ITF,63.58,Sud,63.58
+ITI,62.18,Centro (IT),62.18
+ITC,62.11,Nord-Ovest,62.11
+ITG,61.46,Isole,61.46
+SE1,61.08,Östra Sverige,61.08
+SE3,60.72,Norra Sverige,60.72
+ITH,59.65,Nord-Est,59.65
+DE1,58.74,Baden-Württemberg,58.74
+FRY,58.41,RUP FR - Régions ultrapériphériques françaises,58.41
+PL8,57.43,Makroregion Wschodni,57.43
+DE6,56.7,Hamburg,56.7
+AT3,56.55,Westösterreich,56.55
+DEC,56.46,Saarland,56.46
+FRD,55.21,Normandie,55.21
+FRL,55.02,Provence-Alpes-Côte d'Azur,55.02
+FRJ,54.58,Occitanie,54.58
+DEE,54.15,Sachsen-Anhalt,54.15
+BG3,54.11,Severna i yugoiztochna Bulgaria,54.11
+FRC,53.35,Bourgogne - Franche-Comté,53.35
+FRK,52.85,Auvergne - Rhône-Alpes,52.85
+PL2,52.01,Makroregion Poludniowy,52.01
+CH0,51.84,Schweiz/Suisse/Svizzera,51.84
+FRI,51.71,Nouvelle-Aquitaine,51.71
+FR1,51.49,Île de France,51.49
+FRB,50.56,Centre - Val de Loire,50.56
+FRG,50,Pays-de-la-Loire,50
+DED,49.62,Sachsen,49.62
+AT2,49.23,Südösterreich,49.23
+AT1,48.95,Ostösterreich,48.95
+FRM,46.96,Corse,46.96
+LT0,45.08,Lietuva,45.08
+EE0,43.17,Eesti,43.17
+LV0,41.54,Latvija,41.54
+FI1,38.14,Manner-Suomi,38.14
+FI2,31.87,Åland,31.87

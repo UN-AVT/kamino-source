@@ -1,0 +1,178 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+# library
+library(tidyverse)
+library(geojsonio)
+library(sf)
+library(rgdal)
+library(cartogram)
+library(broom) # for the tidy function
+library(rgeos) # for the gcentroid function
+
+library(viridis)
+library(RColorBrewer)
+library(ggsci)
+library(wesanderson)
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Cartogram
+## Contiguous Hexbin
+
+A cartogram is a map in which the geometry of regions is distorted in order to convey the information of an alternate variable. The region area will be inflated or deflated according to its numeric value.
+
+```{r, echo=FALSE}
+
+# Hexagones boundaries at geojson format were found here, and stored on my github https://team.carto.com/u/andrew/tables/andrew.us_states_hexgrid/public/map.
+# Load this file.
+spdf <- geojson_read("../archetypes/us_states_hexgrid.geojson.json",  what = "sp")
+
+# Bit of reformating
+spdf@data = spdf@data %>% mutate(google_name = gsub(" \\(United States\\)", "", google_name))
+
+# Show it
+plot(spdf)
+
+```
+
+
+```{r}
+
+# Load the population per states (source: https://www.census.gov/data/tables/2017/demo/popest/nation-total.html)
+pop <- read.csv("archetypes/pop_US.csv", header = TRUE)
+pop$pop <- pop$pop / 1000000
+
+# merge both
+spdf@data <- spdf@data %>% left_join(., pop, by=c("google_name"="state"))
+
+sfno = st_as_sf(spdf)
+sfnoproj = st_transform(sfno, coords = c("lon", "lat"), 
+    crs = 5070, agr = "constant") # specific to US based map
+
+# Compute the cartogram, using this population information
+cartogram <- cartogram(sfnoproj, 'pop')
+ 
+# First look!
+plot(cartogram)
+
+```
+
+# Section
+## Subsection
+
+```{r, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+# Calculate centroids for label placement
+# using rgeos
+sp_cent <- gCentroid(as(cartogram, "Spatial"), byid = TRUE)
+# sp_cent
+
+# using sf
+sf_cent <- st_centroid(cartogram)
+# sf_cent
+
+# Calculate the position of state labels
+centers <- cbind.data.frame(data.frame(sp_cent, id=cartogram$iso3166_2))
+# centers
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+# color palette to use
+pal <- wes_palette("Zissou1", 10, type = "continuous")
+
+# plot
+v1 = ggplot() +
+  geom_sf(data = cartogram, aes(fill = pop), size=0.5, alpha=1.0, color="white") +
+  geom_point(data = centers, aes(x=x, y=y), color = 'white', alpha=0.9, size=6 ) +
+  geom_text(data= centers, aes(x=x, y=y, label=id), color="black", size=2, alpha=1) +
+  # scale_fill_gradientn(colours=brewer.pal(7,"BuPu")) +
+  scale_fill_gradientn(colours = pal) + 
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Contiguous-Hexbin Cartogram", 
+       subtitle="Population") +
+  theme_opts +
+  coord_sf()
+
+v1
+
+```
+
+
+```{r, echo=FALSE}
+
+ggsave(filename = "assets/contiguous-hexbin-cartogram.svg", plot = v1, width=11, height=6)
+
+```
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

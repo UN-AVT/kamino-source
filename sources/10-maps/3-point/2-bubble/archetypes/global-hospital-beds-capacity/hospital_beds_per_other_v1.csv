@@ -1,0 +1,10 @@
+country,state,county,lat,lng,type,measure,beds,population,year,source,source_url
+US,,,38.0,-97.0,PSYCHIATRIC,1000HAB,0.21975,328004407,2019,argis,https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Hospitals_1/FeatureServer/0
+US,,,38.0,-97.0,OTHER,1000HAB,0.242003,328004407,2019,argis,https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Hospitals_1/FeatureServer/0
+US,,,38.0,-97.0,ICU,1000HAB,0.302904,328004407,2019,argis,https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Hospitals_1/FeatureServer/0
+US,,,38.0,-97.0,ACUTE,1000HAB,2.48764,328004407,2019,argis,https://services1.arcgis.com/Hp6G80Pky0om7QvQ/arcgis/rest/services/Hospitals_1/FeatureServer/0
+DE,,,51.0,9.0,ICU,1000HAB,0.431843,82175684,2017,kaggle,https://www.kaggle.com/manuelblechschmidt/icu-beds-in-germany
+IT,,,42.83,12.83,ICU,1000HAB,0.084324,60480876,2020,gelocal.it,https://lanuovaferrara.gelocal.it/italia-mondo/cronaca/2020/03/19/news/dietro-la-corsa-a-nuovi-posti-in-terapia-intensiva-gli-errori-del-passato-1.38611596
+SG,,,1.3521,103.8198,TOTAL,1000HAB,2.6766,5700000,2019,data.gov.sg,https://data.gov.sg/dataset/health-facilities?view_id=91b4feed-dcb9-4720-8cb0-ac2f04b7efd0&resource_id=dee5ccce-4dfb-467f-bcb4-dc025b56b977
+SG,,,1.3521,103.8198,ACUTE,1000HAB,1.9861,5700000,2019,data.gov.sg,https://data.gov.sg/dataset/health-facilities?view_id=91b4feed-dcb9-4720-8cb0-ac2f04b7efd0&resource_id=dee5ccce-4dfb-467f-bcb4-dc025b56b977
+SG,,,1.3521,103.8198,PSYCHIATRIC,1000HAB,34.21,5700000,2019,data.gov.sg,https://data.gov.sg/dataset/health-facilities?view_id=91b4feed-dcb9-4720-8cb0-ac2f04b7efd0&resource_id=dee5ccce-4dfb-467f-bcb4-dc025b56b977

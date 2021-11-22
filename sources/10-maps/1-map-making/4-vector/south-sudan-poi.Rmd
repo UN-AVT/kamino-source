@@ -1,0 +1,165 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["styles/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: hide
+---
+
+```{r setup, include = FALSE, results = "hide"}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(geojsonio)
+library(ggplot2)
+library(ggiraph)
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, results="hide", class.source = 'fold-hide'}
+
+# Load map sources
+# Shape files and data
+# ++++++++++++++++++++
+# borders, adm0
+# borders, adm1
+# borders, adm2
+# ++++++++++++++++++++
+# final_southern_sudan_towns_version01
+# hotosm_ssd_buildings_polygons_shp
+# hotosm_ssd_financial_services_points_shp
+# hotosm_ssd_financial_services_polygons_shp
+# hotosm_ssd_health_facilities_points_shp
+# hotosm_ssd_health_facilities_polygons_shp
+# hotosm_ssd_points_of_interest_points_shp
+# hotosm_ssd_points_of_interest_polygons_shp
+# hotosm_ssd_populated_places_points_shp
+# hotosm_ssd_populated_places_polygons_shp
+# ssd_health_facilities_moh-wb_2009
+# ++++++++++++++++++++
+
+# Borders
+state_boundaries <- st_read("map-sources/geojson/ss-state.geojson")
+county <- st_read("map-sources/geojson/ss-county.geojson")
+abeyi <- st_read("map-sources/geojson/ss-abeyi.geojson")
+
+towns <- st_read("map-sources/poi/final_southern_sudan_towns_version01/Final_Southern_Sudan_Towns_Version01.shp")
+#buildings_polygons <- st_read("map-sources/poi/hotosm_ssd_buildings_polygons_shp/hotosm_ssd_buildings_polygons.shp")
+financial_services_points <- st_read("map-sources/poi/hotosm_ssd_financial_services_points_shp/hotosm_ssd_financial_services_points.shp")
+#financial_services_polygons <- st_read("map-sources/poi/hotosm_ssd_financial_services_polygons_shp/hotosm_ssd_financial_services_polygons.shp")
+health_facilities_points <- st_read("map-sources/poi/hotosm_ssd_health_facilities_points_shp/hotosm_ssd_health_facilities_points.shp")
+#health_facilities_polygons <- st_read("map-sources/poi/hotosm_ssd_health_facilities_polygons_shp/hotosm_ssd_health_facilities_polygons.shp")
+points_of_interest_points <- st_read("map-sources/poi/hotosm_ssd_points_of_interest_points_shp/hotosm_ssd_points_of_interest_points.shp")
+#points_of_interest_polygons <- st_read("map-sources/poi/hotosm_ssd_points_of_interest_polygons_shp/hotosm_ssd_points_of_interest_polygons.shp")
+populated_places_points <- st_read("map-sources/poi/hotosm_ssd_populated_places_points_shp/hotosm_ssd_populated_places_points.shp")
+#populated_places_polygons <- st_read("map-sources/poi/hotosm_ssd_populated_places_polygons_shp/hotosm_ssd_populated_places_polygons.shp")
+health_facilities <- st_read("map-sources/poi/ssd_health_facilities_moh-wb_2009/ssd_health_facilities_MOH-WB_2009.shp")
+
+head(as.data.frame(towns))
+#head(as.data.frame(buildings_polygons))
+head(as.data.frame(financial_services_points))
+#head(as.data.frame(financial_services_polygons))
+head(as.data.frame(health_facilities_points))
+#head(as.data.frame(health_facilities_polygons))
+head(as.data.frame(points_of_interest_points))
+#head(as.data.frame(points_of_interest_polygons))
+head(as.data.frame(populated_places_points))
+#head(as.data.frame(populated_places_polygons))
+head(as.data.frame(health_facilities))
+
+fsp <- as.data.frame(unique(financial_services_points$amenity))
+fsp
+banks <- financial_services_points %>% filter(amenity %in% "bank")
+as.data.frame(banks)
+
+hfp <- as.data.frame(unique(health_facilities_points$amenity))
+hfp
+hospitals <- health_facilities_points %>% filter(amenity %in% "hospital")
+as.data.frame(hospitals)
+
+poi <- as.data.frame(unique(points_of_interest_points$amenity))
+poi
+police <- points_of_interest_points %>% filter(amenity %in% "police")
+as.data.frame(police)
+
+
+ppp <- as.data.frame(unique(populated_places_points$place))
+ppp
+cities <- populated_places_points %>% filter(place %in% "city")
+as.data.frame(cities)
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=12, out.width = "100%"}
+
+# Plot by layer
+# adm0, adm1, adm2
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+# In order of layer placement top -> down
+v1 = ggplot() + 
+  geom_sf( data = towns, color = "#dddddd", fill = "#CAD0D8", size = 0.3, alpha = 0.7 ) +
+  geom_sf( data = cities, aes(size = population), color = "black", fill = "black", alpha = 0.7 ) +
+  geom_sf( data = banks, color = "#CAD0D8", fill = "#CAD0D8", size = 0.3, alpha = 0.7 ) +
+  geom_sf( data = hospitals, color = "red", fill = "red", size = 1.5, alpha = 0.7 ) +
+  geom_sf( data = police, color = "blue", fill = "blue", size = 1.5, alpha = 0.7 ) +
+  geom_sf(data = state_boundaries, color="#333333", fill = transparent_fill, size=1.0) +
+  geom_sf(data = county, color="#333333", fill = transparent_fill, size=0.5) +
+  geom_sf(data = abeyi, color="#333333", fill = transparent_fill, size=0.5, linetype = "dashed") +
+  # scale_x_continuous(limits = c(30.0, 33.0)) +
+  # scale_y_continuous(limits = c(3.5, 5.5)) +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+       y = NULL, # Latitude
+       title = NULL, 
+       subtitle = NULL) +
+  theme_opts
+
+# v1
+
+girafe( ggobj = v1, width_svg = 12, height_svg = 8, options = list( opts_sizing(rescale = TRUE, width = 0.9) ))
+
+```
+
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+
+ggsave(filename = "assets/4-ssd-poi.svg", plot = v1, width=12, height=12)
+
+```
+
+

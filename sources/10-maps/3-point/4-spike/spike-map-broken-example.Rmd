@@ -1,0 +1,277 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/kamino.css", "../../../z-assemblers/maps.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/header.html"
+      after_body: "../../../z-assemblers/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+library(tidyverse)
+library(ggplot2)
+library(reshape2)
+library(ggthemes)
+library(ggiraph) # Interactivity
+
+# Utility
+library(scales) # for rescaling
+
+library(maps)
+library(geojsonio)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(viridis)
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Spike Map
+## Population peaks
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+***
+
+# Section
+## Subsection
+
+```{r}
+
+cities_pop_df = read.csv("archetypes/cities-top-10000-world.csv", header = TRUE, stringsAsFactors = FALSE)
+cities_pop_df
+
+```
+
+# Section
+## Subsection
+
+```{r, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+theme_set(theme_bw())
+
+ne_world <- ne_countries(scale = "medium", returnclass = "sf")
+# class(ne_world)
+
+v1 <- ggplot() +
+  geom_sf(data = ne_world) +
+  geom_point( data = cities_pop_df, aes(x=lng, y=lat, size=Population, color=Population), alpha=0.1) +
+  scale_size_continuous(range=c(1,12)) +
+  scale_color_viridis(trans="log") +
+  xlab("Longitude") + ylab("Latitude") +
+  ggtitle("World map")
+
+v1
+
+```
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6}
+
+# City
+# Population
+# lat
+# lng
+
+# SPIKE MAP
+# +++++++++
+
+# DATA REQUIRES FIELD PARAMETERS:
+# LONGITUDE
+# LATITUDE
+# VALUE
+
+# MANUAL PARAMETERS
+# HEIGHT RANGE OF SPIKE
+spike_min_height <- 0.01
+spike_max_height <- 0.5
+# WIDTH RANGE OF SPIKE (VARIABLE)
+spike_min_width <- 0.008
+spike_max_width <- 0.015
+
+spike_pnts <- cities_pop_df
+# REMOVE NA & ZEROS
+spike_pnts <- spike_pnts[!is.na(spike_pnts$Population),]
+spike_pnts <- spike_pnts[spike_pnts$Population != 0, ]
+
+# NORMALIZE VALUE RANGE
+spike_pnts <- spike_pnts %>% mutate( HEIGHT = round(rescale(spike_pnts$Population, to = c(spike_min_height, spike_max_height)), digits = 3)) # round(x, digits = 0)
+spike_pnts <- spike_pnts %>% mutate( WIDTH = round(rescale(spike_pnts$Population, to = c(spike_min_width, spike_max_width)), digits = 3)) # round(x, digits = 0)
+
+# GENERATE SPIKE POINTS
+spike_pnts$x1 <- spike_pnts$lng
+spike_pnts$y1 <- spike_pnts$lat
+
+spike_pnts$x2 <- spike_pnts$lng - spike_pnts$WIDTH
+spike_pnts$y2 <- spike_pnts$lat
+
+spike_pnts$x3 <- spike_pnts$lng
+spike_pnts$y3 <- spike_pnts$lat + spike_pnts$HEIGHT
+
+spike_pnts$x4 <- spike_pnts$lng + spike_pnts$WIDTH
+spike_pnts$y4 <- spike_pnts$lat
+
+spike_pnts$x5 <- spike_pnts$lng
+spike_pnts$y5 <- spike_pnts$lat
+
+# CREATE SF POLYGON GEOMETRY
+spike_dfs <- lapply(1:nrow(spike_pnts), function(x) {
+    
+    x1 <- spike_pnts[x,"x1"]
+    x2 <- spike_pnts[x,"x2"]
+    x3 <- spike_pnts[x,"x3"]
+    x4 <- spike_pnts[x,"x4"]
+    x5 <- spike_pnts[x,"x5"]
+  
+    y1 <- spike_pnts[x,"y1"]
+    y2 <- spike_pnts[x,"y2"]
+    y3 <- spike_pnts[x,"y3"]
+    y4 <- spike_pnts[x,"y4"]
+    y5 <- spike_pnts[x,"y5"]
+    
+    # polygon as closed shape
+    polygon_list = list(rbind(c(x1, y1), c(x2, y2), c(x3, y3), c(x4, y4), c(x5, y5)))
+    poly_sfc <- st_sfc(st_polygon(polygon_list))
+    
+    # line as open shape
+    l_line = st_linestring(x = matrix(c(x2, x3, x4, y2, y3, y4), ncol = 2))
+    line_sfc <- st_sfc(l_line)
+    
+    # carry over all attributes
+    lnd_attrib = data.frame(spike_pnts[x,])
+    
+    # add polygon
+    g1 <- as.data.frame(st_sf(lnd_attrib, geometry = poly_sfc ))
+    
+    # rename
+    g1 <- g1 %>% rename( polygon = geometry )
+    # g1 <- g1 %>% mutate( polygon = geometry)
+    
+    # add line
+    g2 <- as.data.frame(st_sf(g1, geometry = line_sfc ))
+    
+    # rename
+    g2 <- g2 %>% rename( line = geometry )
+    # g2 <- g2 %>% mutate( line = geometry)
+    
+    # result
+    as.data.frame(g2)
+
+})
+
+
+# Bind results
+spiky_polys_df <- do.call(rbind, spike_dfs)
+
+
+```
+
+```{r}
+
+# Sort for proper overlap
+spiky_polys_df <- spiky_polys_df[order(spiky_polys_df$lat, decreasing = TRUE),]
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="#ffffff", colour="#ffffff"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+spike_map <- ggplot() +
+  geom_sf(data = ne_world, size = 0.5, color = "black", fill = NA) +
+  # geom_sf_interactive(data = unsd_sf, aes(tooltip = paste0("District: ", NAME20), data_id = GEOID), size = 0.5, color = "black", fill = NA) + 
+  # spike poly fill
+  geom_sf(data = spiky_polys_df, aes(geometry = polygon, fill = Population), size = 0.5, color = NA, alpha = 1.0) +
+  # spike line
+  geom_sf(data = spiky_polys_df, aes(geometry = line), color = "#111111" , size = 0.5, fill = NA, alpha = 1.0) +
+  scale_fill_gradient(low = "#f0f0f0", high = "#3ebcd2") +
+  # scale_color_gradient(low = "grey", high = "black") +
+  # scale_fill_gradient(low="blue", high="red") +
+  # scale_fill_jcolors_contin("pal3", reverse = FALSE, bias = 1.25) +
+  # scale_color_gradient(low = "grey", high = "black") +
+  coord_sf() +
+  theme_map() +
+	theme_opts
+
+girafe(ggobj = spike_map, width_svg = 10, height_svg = 7,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+
+# echo=FALSE will exclude block from code folding
+# Example for including external html content when needed
+htmltools::includeHTML("mark-complete-button.html")
+
+```
+
+
+
+```{r, child='mark-complete-click.Rmd'}
+
+# JS event handler for button click
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

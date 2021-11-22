@@ -1,0 +1,212 @@
+---
+pagetitle: "Global City Populations"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Global City Populations
+## Map Projection
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Steven Diaz on Unsplash"}
+
+masthead <- "assets/steven-diaz-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Seaside Top: World Trade Center Tokyo Observation Deck, Minato Ku, Japan</div>
+
+> Any city, however small, is in fact divided into two.\
+  One the city of the poor, the other of the rich.\
+  These are at war with one another...\
+--- Plato\
+
+***
+
+### Ingest
+#### world cities with coordinates and population
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+world_cities <- read.csv("archetypes/capital-cities-population/world-cities.csv", header = TRUE, encoding = "UTF-8")
+world_cities <- filter(world_cities, population > 0 )
+world_cities
+
+```
+
+
+### Load Map
+#### Natural Earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
+
+```
+
+
+### Set crs
+#### for map and data set
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ne_world <- ne_world %>% st_as_sf() %>% st_set_crs(4326)
+
+world_cities_sf <- world_cities %>% st_as_sf(coords = c("lng", "lat"), crs = 4326)
+
+```
+
+
+### Plot
+#### showing map and data projected as Tissot
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  #axis.line = element_blank(),
+  #axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  #panel.grid = element_blank(),
+  #panel.grid.major = element_blank(),
+  #panel.grid.minor = element_blank(),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+v1 = ggplot() +
+  geom_sf(data = ne_world, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  geom_sf(data = world_cities_sf, aes(size = population, alpha = population), color="#C2185B") +
+  #scale_x_continuous(name = NULL, breaks = seq(-120, 120, by = 60)) +
+  #scale_y_continuous(name = NULL, breaks = seq(-60, 60, by = 30)) +
+  scale_size_continuous(name = "",
+                        range = c(0.5, 10), 
+                        breaks = c(1000000, 5000000, 10000000, 30000000),
+                        labels = c("1M", "5M", "10M", "30M")) +
+  scale_alpha_continuous(range = c(0.1, 0.6), guide = "none") +
+  coord_sf(crs = "+proj=tissot +lat_1=60 +lat_2=65") +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Global City Populations", 
+       subtitle="Tissot Projection") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot
+#### showing map and data projected as Murdoch I
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v2 = ggplot() +
+  geom_sf(data = ne_world, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  geom_sf(data = world_cities_sf, aes(size = population, alpha = population), color="#C2185B") +
+  #scale_x_continuous(name = NULL, breaks = seq(-120, 120, by = 60)) +
+  #scale_y_continuous(name = NULL, breaks = seq(-60, 60, by = 30)) +
+  scale_size_continuous(name = "",
+                        range = c(0.5, 10), 
+                        breaks = c(1000000, 5000000, 10000000, 30000000),
+                        labels = c("1M", "5M", "10M", "30M")) +
+  scale_alpha_continuous(range = c(0.1, 0.6), guide = "none") +
+  coord_sf(crs = "+proj=murd1 +lat_1=30 +lat_2=50") +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Global City Populations", 
+       subtitle="Murdoch I") +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+ggsave(filename = "assets/global-city-populations-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: Proj.org, Projections, [GO](https://proj.org/operations/projections/index.html){target="_blank"}
+* Data: simplemaps, [GO](https://simplemaps.com/data/world-cities){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

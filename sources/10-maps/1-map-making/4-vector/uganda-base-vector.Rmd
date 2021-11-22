@@ -1,0 +1,215 @@
+---
+pagetitle: "Base Vector Map of Uganda"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(geojsonio)
+library(ggiraph)
+library(Rcpp)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS 
+</div>
+
+# Base Vector Map of Uganda
+## Base Vector Map
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Sam Balye on Unsplash"}
+
+masthead <- "assets/sam-balye-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> All you need is the plan, the road map, and the courage to press on to your destination...\
+--- Earl Nightingale\
+
+***
+
+### Ingest
+#### st-read geojson map-source data
+
+Administrative boundaries at levels __adm0__, __adm1__, __adm2__, __adm3__, __adm4__
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load map sources
+# ++++++++++++++++++++
+# using the same map sources up to adm2 which contains info of area of district in each region in Uganda
+adm0 <- st_read("archetypes/uganda/uganda-adm0.geojson")
+adm1 <- st_read("archetypes/uganda/uganda-adm1.geojson")
+adm2 <- st_read("archetypes/uganda/uganda-adm2.geojson")
+adm3 <- st_read("archetypes/uganda/uganda-adm3.geojson")
+adm4 <- st_read("archetypes/uganda/uganda-adm4.geojson")
+
+head(as.data.frame(adm0))
+head(as.data.frame(adm1))
+head(as.data.frame(adm2))
+head(as.data.frame(adm3))
+head(as.data.frame(adm4))
+
+```
+
+### Plot the boundaries of the map
+#### Use geom_sf on __adm0__ border lines
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+# In order of layer placement top -> down
+# using adm0 map sources which contains info of area of the country
+v1 <- ggplot() +
+  geom_sf(data = adm0, color="#333333", fill = transparent_fill, size=2.0) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+      y = NULL, # Latitude
+      title = NULL, 
+      subtitle = NULL) +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+#### Use geom_sf on  __adm0__ and __adm1__ border lines
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v2 <- v1 + geom_sf(data = adm1, color="#333333", fill = transparent_fill, size=1.5)
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+#### Use geom_sf on  __adm0__, __adm1__ and __adm2__ border lines
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v3 <- v2 + geom_sf(data = adm2, color="#333333", fill = transparent_fill, size=1.0)
+
+girafe(ggobj = v3, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+#### Use geom_sf on  __adm0__, __adm1__, __adm2__, and __adm3__ border lines
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v4 <- v3 + geom_sf(data = adm3, color="#333333", fill = transparent_fill, size=0.5)
+
+girafe(ggobj = v4, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+#### Use geom_sf on  __adm0__, __adm1__, __adm2__, __adm3__, and __adm4__ border lines
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v5 <- v4 + geom_sf(data = adm4, color="#333333", fill = transparent_fill, size=0.25)
+
+girafe(ggobj = v5, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+ggsave(filename = "outputs/uganda-base-vector-map-fs.svg", plot = v3, width=16, height=9)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data sources: HDX, [GO](https://data.humdata.org/search?groups=uga&res_format=GeoJSON&res_format=SHP&q=&ext_page_size=25&page=1){target=blank}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

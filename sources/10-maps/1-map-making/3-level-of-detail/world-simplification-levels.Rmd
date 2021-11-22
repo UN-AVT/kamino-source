@@ -1,0 +1,307 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(geojsonio)
+library(ggplot2)
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+***
+
+# Load map sources
+## with simplification
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE, results=FALSE}
+
+# BASE MAP
+# Simplification levels: 09, 07, 05, 03, 01, 009, 008, 007, 005, 001
+land_09 <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-09.topojson")
+land_07 <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-07.topojson")
+land_05 <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-05.topojson")
+land_03 <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-03.topojson")
+land_01 <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-01.topojson")
+land_009 <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-009.topojson")
+land_008 <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-008.topojson")
+land_007 <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-007.topojson")
+land_005 <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-005.topojson")
+land_001 <- topojson_read("archetypes/un-default/BNDA50-LAND-no-ATA-001.topojson")
+
+```
+
+
+## Shared Theme
+
+
+```{r}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+```
+
+# Plots
+
+## 09
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, out.width = "85%"}
+
+v1 = ggplot() +
+  geom_sf(data = land_09, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Topojson Vector Map", 
+       subtitle="Simplification 09") +
+  theme_opts
+
+v1
+
+```
+
+
+## 07
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, out.width = "85%"}
+
+v2 = ggplot() +
+  geom_sf(data = land_07, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Topojson Vector Map", 
+       subtitle="Simplification 07") +
+  theme_opts
+
+v2
+
+```
+
+
+## 05
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, out.width = "85%"}
+
+v3 = ggplot() +
+  geom_sf(data = land_05, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Topojson Vector Map", 
+       subtitle="Simplification 05") +
+  theme_opts
+
+v3
+
+```
+
+
+## 03
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, out.width = "85%"}
+
+v4 = ggplot() +
+  geom_sf(data = land_03, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Topojson Vector Map", 
+       subtitle="Simplification 03") +
+  theme_opts
+
+v4
+
+```
+
+
+## 01
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, out.width = "85%"}
+
+v5 = ggplot() +
+  geom_sf(data = land_01, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Topojson Vector Map", 
+       subtitle="Simplification 01") +
+  theme_opts
+
+v5
+
+```
+
+
+## 009
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, out.width = "85%"}
+
+v6 = ggplot() +
+  geom_sf(data = land_009, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Topojson Vector Map", 
+       subtitle="Simplification 09") +
+  theme_opts
+
+v6
+
+```
+
+
+## 007
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, out.width = "85%"}
+
+v7 = ggplot() +
+  geom_sf(data = land_007, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Topojson Vector Map", 
+       subtitle="Simplification 07") +
+  theme_opts
+
+v7
+
+```
+
+
+## 005
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, out.width = "85%"}
+
+v8 = ggplot() +
+  geom_sf(data = land_005, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Topojson Vector Map", 
+       subtitle="Simplification 05") +
+  theme_opts
+
+v8
+
+```
+
+
+## 001
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, out.width = "85%"}
+
+v10 = ggplot() +
+  geom_sf(data = land_001, color="#AAAAAA", fill="#FFFFFF", size=0.5) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Topojson Vector Map", 
+       subtitle="Simplification 01") +
+  theme_opts
+
+v10
+
+```
+
+
+
+```{r, echo=FALSE}
+
+# ggsave(filename = "vector-topojson-map.svg", plot = v1, width=11, height=6)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

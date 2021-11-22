@@ -1,0 +1,190 @@
+---
+pagetitle: "Water sources in Africa"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(spData)
+library(sf)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Water sources in Africa
+## Point Dot Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Adebayo Alabi on Unsplash"}
+
+masthead <- "assets/adebayo-alabi-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Access to safe water is a fundamental human need and therefore a basic human right...\
+--- Kofi Annan\
+
+***
+
+### Ingest
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Data source must have an ISO3 field
+df <- read.csv("archetypes/water-sources-in-africa/water.csv", header = TRUE)
+df
+
+```
+
+### Wrangle
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangled <- df %>%
+  # Delete dots not within the latitude/longitude of africa
+  filter(lon_deg>=-20 & lon_deg<=50 & lat_deg>=-30 & lat_deg<=40) %>%
+  # Further delete dots in the upper-top, which does not belong to africa
+  filter(!(lon_deg>=40 & lat_deg>=20)) %>%
+  replace_na(list(water_source="Unknown")) %>%
+  mutate(water_source = case_when(
+    str_detect(water_source, "Spring") ~ "Spring",
+    str_detect(water_source, "Shallow Well") ~ "Shallow Well",
+    str_detect(water_source, "Surface Water") ~ "Surface Water",
+    TRUE ~ water_source)) %>%
+  select(latitude = lat_deg, longitude = lon_deg, water_source)
+
+df_wrangled
+
+```
+
+### African map
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Filter and keep only african countries
+african_countries <- world %>% 
+  filter(continent == "Africa", !is.na(iso_a2))
+
+
+```
+
+### Plot - Rebecca's version
+#### fill by "water source" status
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
+
+v1 <- ggplot(df_wrangled) +
+  geom_sf(data = african_countries,
+          aes(geometry=geom), fill = "grey90", color="white") +
+  geom_hex(aes(x = longitude, y = latitude, fill = water_source),
+           bins = 80, alpha = 0.6)+
+  theme_void() +
+  scale_fill_brewer(palette = "Set3") +
+  theme(legend.position = c(0.15, 0.25),
+        title = element_text(family = "Baloo"),
+        plot.title = element_text(size = 26)) +
+   # add those labels
+  labs(title = "Water sources in Africa installed since 1900", fill = "Water Source",
+       caption = "data from Water Point Data Exchange | plot by @rjstevick for #TidyTuesday")
+
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot - My own version
+#### fill by "water source" status
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
+
+v1 <- ggplot(df_wrangled) +
+  geom_sf(data = african_countries,
+          aes(geometry=geom), fill = "grey90", color="white") +
+  geom_hex(aes(x = longitude, y = latitude),
+           bins = 150, alpha = 0.6)+
+  theme_void() +
+  # scale_fill_brewer(palette = "Set3") +
+  theme(legend.position = c(0.9, 0.9),
+        title = element_text(family = "Baloo"),
+        plot.title = element_text(size = 26)) +
+   # add those labels
+  labs(title = "Water sources in Africa installed since 1900", fill = "Water Source")
+
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/water-sources-in-africa-fs.svg", plot = v1, width=1152/72, height=1152/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/water-sources-in-africa-sm.svg", plot = v1, width=16, height=16)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: This is a reproduction of an original plot by Rebecca Stevick for #TidyTuesday, [GO](https://github.com/rjstevick){target="_blank"}
+* Data sources: TidyTuesday 2021 week 19 - Water Point Data Exchange, [GO](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-05-04){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

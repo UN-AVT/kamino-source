@@ -1,0 +1,165 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(sf)
+library(geojsonio)
+library(ggplot2)
+library(ggiraph)
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# South Sudan Vector Map
+## Shape file
+
+> This is the first time I’m able to come all the way to Bor to sell my\
+cows and goats, and the road was secure and open for all...\
+--- John Korok, Murle trader who travelled with his cattle from Pibor\
+
+```{r, out.width = "65%"}
+
+knitr::include_graphics("assets/unmiss-road-building.jpg", dpi=300)
+
+```
+
+***
+
+# Load map sources
+## Shape files and data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, results="hide", class.source = 'fold-hide'}
+
+# MAP SOURCES
+
+ssd_admbnda_adm0 <- st_read("archetypes/countries/south-sudan/ssd_admbnda_adm0_imwg_nbs_20180817/ssd_admbnda_adm0_imwg_nbs_20180817.shp")
+ssd_admbnda_adm1 <- st_read("archetypes/countries/south-sudan/ssd_admbnda_adm1_imwg_nbs_20180817/ssd_admbnda_adm1_imwg_nbs_20180817.shp")
+ssd_admbnda_adm2 <- st_read("archetypes/countries/south-sudan/ssd_admbnda_adm2_imwg_nbs_20180817/ssd_admbnda_adm2_imwg_nbs_20180817.shp")
+
+ssd_roads <- st_read("archetypes/countries/south-sudan/final_southern_sudan_roads_version01/Final_Southern_Sudan_Roads_Version01.shp")
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# DATA SOURCES
+df = read.csv("archetypes/countries/south-sudan/ssd-cities.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+# Plot by layer
+## adm0, adm1, adm2, roads, and cities
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6, out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+# In order of layer placement top -> down
+v1 = ggplot() +
+  geom_sf(data = ssd_admbnda_adm0, color="#333333", fill = transparent_fill, size=2.0) +
+  geom_sf(data = ssd_admbnda_adm1, color="#555555", fill = transparent_fill, size=1.0) +
+  geom_sf(data = ssd_admbnda_adm2, color="#888888", fill = transparent_fill, size=0.5) +
+  geom_sf(data = ssd_roads, color="red", fill = "red", size=0.3) +
+  geom_point( data = df, aes(x=lng, y=lat, size=population), color = "red", alpha=0.8) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Shape File Vector Map", 
+       subtitle="Admin Layers, Roads, and Settlements") +
+  theme_opts
+
+# v1
+
+girafe( ggobj = v1, width_svg = 12, height_svg = 6,
+  options = list( opts_sizing(rescale = TRUE) )
+)
+
+```
+
+
+## Save output to file
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggsave(filename = "assets/south-sudan-shp.svg", plot = v1, width=12, height=6)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+https://unmiss.unmissions.org/unmiss-engineering-work-helps-connect-jonglei-communities-new-bor-juba-road
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

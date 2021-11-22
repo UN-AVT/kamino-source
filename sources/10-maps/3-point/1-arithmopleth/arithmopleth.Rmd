@@ -1,0 +1,42 @@
+---
+title: "Arithmopleth"
+author: "kamino"
+date: "11/13/2020"
+output: html_document
+---
+
+# Arithmopleth
+
+## Visualizing Unemployment data
+
+```{r echo = FALSE, message = FALSE, fig.height= 15, fig.width = 30}
+library(readr)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+
+
+# Get FIPS census tracts info
+ref_census <- read_tsv("2019_Gaz_tracts_national.txt") %>% mutate(fips = str_sub(GEOID,1,5)) 
+
+# Create FIPS geoencoder FIPS -> LATITUDE/LONGITUDE
+ref_xwalk <-ref_census %>% group_by(fips) %>% summarize( lat = mean(INTPTLAT), lng = mean(INTPTLONG)) 
+
+# Get Unemployment Data
+dat <- read_tsv("../archetypes/unemployment.tsv") 
+
+# Enrich unemployment data with geolocation
+df <-merge(dat, ref_xwalk, by = "fips") %>% select (unemployment_rate, lat, lng, fips)
+
+df %>%
+  filter(lng < 0 & lng > -130 & lat >20) %>% # filter out Hawaii, Alaska, etc. for cosmetic reasons
+  mutate(values = round(unemployment_rate)) %>% # round to full integer numbers
+ggplot(aes(x= lng, y = lat, label = values)) +
+  geom_text(aes(col = values)) +
+  scale_color_gradientn(colors =c("#51127C","#F1605D","#FCFDBF"), na.value = "black") + 
+  theme_light() 
+  
+
+
+```
+

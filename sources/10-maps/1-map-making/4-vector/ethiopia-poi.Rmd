@@ -1,0 +1,126 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["styles/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: hide
+---
+
+```{r setup, include = FALSE, results = "hide"}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(geojsonio)
+library(ggplot2)
+library(ggiraph)
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, results="hide", class.source = 'fold-hide'}
+
+# Load map sources
+# ++++++++++++++++++++
+
+adm0 <- st_read("map-sources/eth_admbnda_adm0_csa_bofed_20201008.geojson")
+adm1 <- st_read("map-sources/eth_admbnda_adm1_csa_bofed_20201008.geojson")
+adm2 <- st_read("map-sources/eth_admbnda_adm2_csa_bofed_20201008.geojson")
+
+education_facilities = read.csv("map-sources/hotosm_eth_education_facilities_points.csv", header = TRUE, stringsAsFactors = FALSE)
+financial_services = read.csv("map-sources/hotosm_eth_financial_services_points.csv", header = TRUE, stringsAsFactors = FALSE)
+health_facilities = read.csv("map-sources/hotosm_eth_health_facilities_points.csv", header = TRUE, stringsAsFactors = FALSE)
+points_of_interest = read.csv("map-sources/hotosm_eth_points_of_interest_points.csv", header = TRUE, stringsAsFactors = FALSE)
+populated_places = read.csv("map-sources/hotosm_eth_populated_places_points.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+
+head(education_facilities)
+head(financial_services)
+head(health_facilities)
+head(points_of_interest)
+head(populated_places)
+
+ef <- as.data.frame(unique(education_facilities$amenity))
+ef
+
+fs <- as.data.frame(unique(financial_services$amenity))
+fs
+
+hf <- as.data.frame(unique(health_facilities$amenity))
+hf
+
+poi <- as.data.frame(unique(points_of_interest$amenity))
+poi
+
+pp <- as.data.frame(unique(populated_places$place))
+pp
+
+cities <- populated_places %>% filter(place %in% "city")
+as.data.frame(cities)
+
+```
+
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=12, out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+v1 = ggplot() + 
+  geom_sf(data = adm0, color="#333333", fill = transparent_fill, size=2.0) +
+  geom_sf(data = adm1, color="#333333", fill = transparent_fill, size=1.0) +
+  geom_sf(data = adm2, color="#333333", fill = transparent_fill, size=0.5) +
+  geom_point( data = cities, aes(x = X, y = Y), size = 2 , color = "red", alpha = 0.8 ) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+       y = NULL, # Latitude
+       title = NULL, 
+       subtitle = NULL) +
+  theme_opts
+
+# v1
+
+girafe( ggobj = v1, width_svg = 12, height_svg = 8, options = list( opts_sizing(rescale = TRUE, width = 0.9) ))
+
+```
+
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+
+ggsave(filename = "assets/24-eth-poi.svg", plot = v1, width=12, height=12)
+
+```
+
+

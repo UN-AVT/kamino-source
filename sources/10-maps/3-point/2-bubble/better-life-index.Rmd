@@ -1,0 +1,182 @@
+---
+pagetitle: "Better Life Index"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(maps)
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Better Life Index
+## Bubble Map
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by  Jeremy Bishop l on Unsplash"}
+
+masthead <- "assets/jeremy-bishop-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> To have a better life we must keep choosing how we are living...\
+--- Albert Einstein\
+
+***
+
+### Ingest
+#### Both better life index file and country centroids file as coordinates reference
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df <- read_csv("archetypes/better-life-index/data/better-life-index.csv")
+df_centroids<-read_csv("archetypes/better-life-index/data/country-centroids.csv")
+df
+df_centroids
+```
+
+### Wrangle
+#### Filter Life Satisfaction as the indicator, select necessary columns, merge with the coordinates and remove NAs
+
+```{r}
+
+df_wrangle<-df%>%filter(Inequality=='Total'& Indicator %in% c('Life satisfaction'))%>%select(LOCATION,Country, Value)
+
+df_combined<-merge(df_centroids,df_wrangle,by.x='iso3c',by.y='LOCATION', all = TRUE)
+
+na.omit(df_combined)
+
+
+```
+
+### World map
+#### merge attributes by ISO3C
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# natural earth base map
+ne_world <- ne_countries(scale = "medium", returnclass = "sf")
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
+# combine data with map based on ISO3 codes
+ne_world_df <- merge(ne_world, df_wrangle, by.x = "iso_a3", by.y = "LOCATION", all = TRUE)
+
+
+```
+
+
+### Plot
+#### Bubble map
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide',  out.width="100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = 'none',
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+
+v1 <- ggplot(data = ne_world_df) +
+  # map feature styling
+  geom_sf(fill="#cbd5e2", color="gray", stroke=1) +
+  # bubble parameters
+  geom_point_interactive(data=df_combined, aes(x=longitude,y=latitude,size=Value,stroke=1,color='#6497bf',
+    tooltip = paste0(Country,": ",Value), data_id = iso3c),alpha=.5) +
+  # size scaling applied to bubbles
+  scale_size_continuous(range=c(5,15)) +
+  theme_bw() +
+  labs(x="Longitude",
+       y="Latitude",
+       title = "Bubble Map", 
+       subtitle="Better Life Index") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 7.5,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+ggsave(filename = "outputs/better-life-index-fs.svg", plot = v2, width=16, height=7.5)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data: OECD Better Life Index, [GO](https://stats.oecd.org/Index.aspx?DataSetCode=BLI){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

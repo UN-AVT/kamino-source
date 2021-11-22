@@ -1,0 +1,223 @@
+---
+pagetitle: "The Happy Planet Index 2020"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(wesanderson)
+library(ggiraph)
+library(xlsx)
+library(countrycode)
+library(janitor)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# The Happy Planet Index 2020
+## Choropleth Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Sippakorn Yamkasikorn on Unsplash"}
+
+masthead <- "assets/sippakorn-yamkasikorn-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Happiness is a journey, not a destination...\
+--- Alfred D. Souza\
+
+***
+
+Some suggested revisions:
+
+* Convert excel to csv and remove BOM
+* Use janitor to clean column names (janitor::clean_names)
+* Generate a quantile or similar statistic of the Rank to apply the palette (scale_file_manual)
+* Match the palette as shown in the graphic (see image in archetypes)
+
+
+
+### Ingest
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Data source must have an ISO3 field
+df <- read.xlsx("archetypes/happy-planet-index/happy-planet-index-2020.xlsx", "1. All countries", rowIndex = 9:161)
+df
+
+```
+
+
+### Wrangle
+#### select columns and remove NAs
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Only select columns :Country, ISO and HPI for the map
+df_wrangle <-df[,c(2,3,10)]
+df_wrangle$HPI<-as.numeric(df$HPI)
+na.omit(df_wrangle)
+
+
+```
+
+
+### World map
+#### from natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# natural earth base map
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
+
+```
+
+
+### Wrangle
+#### merge data and map geometry
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# combine data with map based on ISO3 codes
+ne_world_df <- merge(ne_world, df_wrangle, by.x = "iso_a3", by.y = "ISO", all = TRUE)
+
+```
+
+
+
+### Plot
+#### The Happy Planet Index 2020
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide',  out.width="100%"}
+
+# theme parameters
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 14, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 8),
+  plot.background = element_blank(),
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank()
+)
+
+# color palette matching publication
+pal <- c(
+  "#388E3C",
+  "#00C853",
+  "#9CCC65",
+  "#FFEB3B",
+  "#FBC02D",
+  "#FF8F00",
+  "#FF7043",
+  "#F44336",
+  "#C62828"
+)
+
+v1 <- ggplot(data = ne_world_df) +
+  # map feature styling
+  geom_sf(aes(fill=HPI), color="#FFFFFF", stroke=0.5) +
+  scale_fill_gradientn(colours = rev(pal)) + 
+  coord_sf() +
+  theme_bw() +
+  labs(x="", # Longitude
+       y="", # Latitude
+       title = "Choropleth Map", 
+       subtitle="The Happy Planet Index 2020") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/hpi-data-2020-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/hpi-data-2020-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Data sources: The Data Source,  [GO](https://happyplanetindex.org/countries/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

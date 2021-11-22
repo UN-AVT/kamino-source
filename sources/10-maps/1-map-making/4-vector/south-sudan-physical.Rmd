@@ -1,0 +1,142 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["styles/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: hide
+---
+
+```{r setup, include = FALSE, results = "hide"}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(geojsonio)
+library(ggplot2)
+library(ggiraph)
+
+```
+
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = "hide"}
+
+# Load map sources
+# Shape files and data
+# ++++++++++++++++++++
+# state_boundaries
+# county
+# abeyi
+# ++++++++++++++++++++
+# hotosm_ssd_waterways_lines_shp
+# hotosm_ssd_waterways_polygons_shp
+# ssd_lakes_and_marshland_fao_500k
+# ssd_main_rivers_fao_250k
+# ssd_waterpoints_wims_2012
+# ++++++++++++++++++++
+
+# Borders
+state_boundaries <- st_read("map-sources/geojson/ss-state.geojson")
+county <- st_read("map-sources/geojson/ss-county.geojson")
+abeyi <- st_read("map-sources/geojson/ss-abeyi.geojson")
+
+
+# hotosm_ssd_waterways_lines_shp
+waterways_lines <- st_read("map-sources/physical/hotosm_ssd_waterways_lines_shp/hotosm_ssd_waterways_lines.shp")
+
+# hotosm_ssd_waterways_polygons_shp
+waterways_polygons <- st_read("map-sources/physical/hotosm_ssd_waterways_polygons_shp/hotosm_ssd_waterways_polygons.shp")
+
+# ssd_lakes_and_marshland_fao_500k
+lakes_and_marshland <- st_read("map-sources/physical/ssd_lakes_and_marshland_fao_500k/ssd_Lakes_and_marshland_fao_500k.shp")
+
+# ssd_main_rivers_fao_250k
+main_rivers <- st_read("map-sources/physical/ssd_main_rivers_fao_250k/ssd_main_rivers_fao_250k.shp")
+
+# ssd_waterpoints_wims_2012
+waterpoints <- st_read("map-sources/physical/ssd_waterpoints_wims_2012/SSd_Waterpoints_WIMS_2012.shp")
+
+head(as.data.frame(waterways_lines))
+head(as.data.frame(waterways_polygons))
+head(as.data.frame(lakes_and_marshland))
+head(as.data.frame(main_rivers))
+head(as.data.frame(waterpoints))
+
+wpts <- as.data.frame(unique(waterpoints$Source_Typ))
+wpts
+borehole <- waterpoints %>% filter(Source_Typ=="Borehole")
+as.data.frame(borehole)
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=12, out.width = "100%"}
+
+# Plot by layer
+# adm0, adm1, adm2
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+# In order of layer placement top -> down
+v1 = ggplot() + 
+  geom_sf(data = waterpoints, color="#CAD0D8", fill = "#CAD0D8", size=0.3) +
+  geom_sf(data = lakes_and_marshland, color="#aad0a7", fill = "#aad0a7", size=0.3) +
+  geom_sf(data = main_rivers, color="#d4f1f9", fill = "#d4f1f9", size=0.3) +
+  geom_sf(data = waterways_polygons, color="#d4f1f9", fill = "#d4f1f9", size=0.3) +
+  geom_sf(data = waterways_lines, color="#d4f1f9", fill = "#d4f1f9", size=0.3) +
+  geom_sf(data = state_boundaries, color="#333333", fill = transparent_fill, size=1.0) +
+  geom_sf(data = county, color="#333333", fill = transparent_fill, size=0.5) +
+  geom_sf(data = abeyi, color="#333333", fill = transparent_fill, size=0.5, linetype = "dashed") +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+       y = NULL, # Latitude
+       title = NULL, 
+       subtitle = NULL) +
+  theme_opts
+
+# v1
+
+girafe( ggobj = v1, width_svg = 12, height_svg = 8, options = list( opts_sizing(rescale = TRUE, width = 0.9) ))
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggsave(filename = "assets/2-ssd-physical.svg", plot = v1, width=12, height=12)
+
+```
+
+

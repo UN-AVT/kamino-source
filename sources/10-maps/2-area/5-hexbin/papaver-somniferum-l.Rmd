@@ -1,0 +1,235 @@
+---
+pagetitle: "Papaver Somniferum L"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(janitor)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(viridis)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Papaver Somniferum L (Opium poppy)
+## hexbin
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nick Fewings Unsplash"}
+
+masthead <- "assets/nick-fewings-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Poppies grown under licence for use in the pharmaceutical industry, Dorset, UK</div>
+
+> Optimism is the opium of the people...\
+--- Milan Kundera\
+
+
+***
+
+Papaver somniferum L. the opium poppy originated in Sumer, a region in ancient Mesopotamia (modern day Iraq and Kuwait) around 5000 BC. Much has been written with respect to the opium poppy and many relate not only to the cultivation and harvest of this crop but to the investigations of the chemistry of the plant and its medicinal uses as well as the wars that have been fought over opium. In the 21st century, the two main legitimate uses of the opium poppy are as a source of alkaloid compounds for the __pharmaceutical industry__ and as a source of poppy seeds for the __food industry__. 
+
+Papaver somniferum L. is an annual crop __cultivated worldwide__ but is legitimately grown in Australia, Canada, Central and Southern America, the Czech Republic, France, Holland, Hungary, India, Iran, Poland, Romania, Slovakia, Spain, Turkey, and (the former) Yugoslavia. Papaver somniferum L. is an herbaceous plant which is harvested for its latex 5–10 days after the flowering petals fall from the plant. The dried latex product is called __opium__ from which morphine and other alkaloid compounds can be extracted. However, if left to fully mature, the plant will form poppy seeds within the capsule which can be mechanically harvested and collected by a sieving process.
+
+The data used for this case comes from GBIF — __the Global Biodiversity Information Facility__ — an international network and data infrastructure funded by the world's governments and aimed at providing anyone, anywhere, open access to data about all types of life on Earth.
+
+### Ingest
+#### taxonomy, country code, latitude, and longitude (of observations)
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/papaver-somniferum-l/papaver-somniferum-l-occurrences-simple.csv", header = TRUE, stringsAsFactors = FALSE)
+head(df, n = 10)
+
+```
+
+
+### Wrangle
+#### select and rename (taking only the fields needed for the view)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_wrangle <- df %>% select(countryCode, decimalLatitude, decimalLongitude) %>% rename( iso2c = countryCode, latitude = decimalLatitude, longitude = decimalLongitude)
+head(df_wrangle, n = 10)
+
+```
+
+
+### Base Map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# natural earth base map
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
+
+```
+
+
+### Plot
+#### as hexbin
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata", size = 12), 
+  plot.title = element_text(color = "black", size = 16, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 11),
+  plot.background = element_rect(fill = "#dce2e6", color = NA),
+  plot.margin = margin(.25, .25, .25, .25, "cm"),
+  axis.title.x = element_blank(),
+  axis.title.y = element_blank(),
+  axis.text.x = element_blank(),
+  axis.text.y = element_blank(),
+  panel.border = element_blank(),
+  panel.background = element_rect(fill = "#dce2e6", color = NA),
+  # panel.grid.minor = element_blank(),
+  # panel.grid.major = element_blank(),
+  legend.position = 'bottom',
+  legend.key.size = unit(1, 'cm'), #change legend key size
+  legend.key.height = unit(0.5, 'cm'), #change legend key height
+  legend.key.width = unit(3, 'cm'), #change legend key width
+  legend.title = element_blank(), #change legend title font size
+  legend.text = element_text(size=10)
+)
+
+hex_palette <- c(
+  "#194266",
+  "#355c7d",
+  "#64617f",
+  "#916681",
+  "#bf6c84",
+  "#d28389",
+  "#e59a8f",
+  "#f8b195"
+)
+
+v1 = ggplot(data = ne_world) + 
+  geom_sf(fill="#ebf0f0", color="#e6e9e8", stroke=0.5) +
+  geom_hex(data=df_wrangle, aes(x=longitude, y=latitude), color = "#ffffff", alpha = 0.7, size=0.15, bins=200) +
+  scale_fill_stepsn( trans = "log", colours = hex_palette, breaks = c(1, 25, 50, 100, 250, 500, 1000, 1500, 1750) ) +
+  coord_sf() +
+  ggtitle( "Papaver Somniferum L (Opium poppy)" ) +
+  theme_void() +
+  theme_opts
+
+girafe( ggobj = v1, width_svg = 16, height_svg = 7.5,
+  options = list( opts_sizing(rescale = TRUE, width = 0.95) )
+)
+
+```
+
+### Plot
+#### as bin2d
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v2 = ggplot(data = ne_world) + 
+  geom_sf(fill="#ebf0f0", color="#e6e9e8", stroke=0.5) +
+  geom_bin2d(data=df_wrangle, aes(x=longitude, y=latitude), color="#ffffff", size=0.25, bins=200) +
+  scale_fill_stepsn( trans = "log", colours = hex_palette, breaks = c(1, 25, 50, 100, 250, 500, 1000, 1500, 1750) ) +
+  coord_sf() +
+  ggtitle( "Papaver Somniferum L (Opium poppy)" ) +
+  theme_void() +
+  theme_opts 
+
+girafe( ggobj = v2, width_svg = 16, height_svg = 7.5,
+  options = list( opts_sizing(rescale = TRUE, width = 0.95) )
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/papaver-somniferum-l-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/papaver-somniferum-l-sm.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: TBD
+* Data Source: GBIF.org (30 October 2021) GBIF Occurrence Download,  [GO](https://doi.org/10.15468/dl.u98zvg){target="_blank"}
+
+<pre>
+@misc{https://doi.org/10.15468/dl.u98zvg,
+  doi = {10.15468/DL.U98ZVG},
+  url = {https://www.gbif.org/occurrence/download/0039846-210914110416597},
+  author = {{Occdownload Gbif.Org}},
+  keywords = {GBIF, biodiversity, species occurrences},
+  title = {Occurrence Download},
+  publisher = {The Global Biodiversity Information Facility},
+  year = {2021},
+  copyright = {Creative Commons Attribution Non Commercial 4.0 International}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

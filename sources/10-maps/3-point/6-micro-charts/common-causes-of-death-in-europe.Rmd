@@ -1,0 +1,192 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(maptools)
+library(sp)
+library(sf)
+library(rgdal)
+library(tidyverse)
+library(broom)
+library(scales)
+library(scatterpie)
+library(ggiraph)
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+## Proportional Symbol Map
+
+Source:  Minard Meat Map
+
+***
+
+# Load data
+## Production
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/dpt_production.csv", header = TRUE, stringsAsFactors = TRUE)
+df
+
+
+
+```
+
+
+## Departments
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+dep_colormap <- read.csv("archetypes/departments-colormap.csv", header = TRUE, stringsAsFactors = TRUE)
+dep_colormap
+
+```
+
+
+## France, base map
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+fr_map <- st_read("archetypes/minard-meat-map/departements-20140306-100m.shp")
+# glimpse(fr_map)
+
+```
+
+
+# Wrangle
+## Rescale and merge
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# rescale / normalize value to size pies
+df$r <- rescale(df$prod_tot, to=c(0.1,0.25))
+
+# merge colormap to map data
+fr_df <- merge(fr_map, dep_colormap, by.x = "code_insee", by.y = "code_insee_c", all = TRUE)
+# fr_df
+
+```
+
+
+# Plot
+## Theme
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+```
+
+
+## Symbol / Chart Map
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=13, fig.height=13, out.width = "100%"}
+
+pie_pal <- c("noir" = "#1e1e1b",
+         "rouge" = "#d4315f",
+         "vert" = "#49916e")
+
+v1 = ggplot() +
+  geom_sf(data = fr_df, fill = fr_df$color, color = "#1e1e1b", size = 0.25 ) +
+  # geom_text(data = df, aes(X, Y, label = code_insee), color = "#1e1e1b", size = 2) +
+  geom_scatterpie(data = df, 
+                    aes(X, Y, r = r, group=code_insee),
+                    cols = c("noir", "rouge", "vert"), 
+                    #color=NA,
+                    alpha = 0.8) +
+  scale_fill_manual(values = pie_pal) +
+  coord_sf(xlim = c(-7, 10),  ylim = c(41, 51)) +
+  labs(title = "CARTE FIGURATIVE et approximative des quantitiés de\nViandes de Boucherie envoyées sur pied par les Départments et\nconsommées a Paris.",
+         subtitle = "Dresée par Mr. MINARD, Inspecteur Général des Ponts et Chaussées en retraite.",
+         caption = "figures approximated from original",
+         fill = NULL) +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 13,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+## Save output to file
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# ggsave(filename = "assets/minard-meat-map.svg", plot = v1, width=12, height=6)
+# ggsave(filename="assets/minard-meat-map.png", plot=v1, device="png", width=12, height=6, units="in", dpi=500)
+
+```
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

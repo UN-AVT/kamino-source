@@ -1,0 +1,136 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(maptools)
+library(sp)
+library(sf)
+library(rgdal)
+library(raster)
+library(rgeos)
+
+library(tidyverse)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggthemes)
+library(ggiraph)
+
+```
+
+## Dot Density Map - The Economist, Pigging Out
+
+Source: <a href="https://livestock.geo-wiki.org/Application/index.php">Livestock Geo Wiki</a>
+
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
+
+cattle_livestock_df <- read.csv("archetypes/livestock-cattle-normalized.csv", header = TRUE)
+
+cattle_livestock_df$x <- round(cattle_livestock_df$x, digits=4)
+cattle_livestock_df$y <- round(cattle_livestock_df$y, digits=4)
+
+cattle_livestock_df
+
+```
+
+
+
+```{r, echo=FALSE, fig.width=12, fig.height=6}
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+# PLOT NATURAL EARTH BORDERS
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# class(ne_world)
+
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
+
+v1 <- ggplot(data = ne_world) +
+  geom_sf(fill="#d5d8d0", color="#a7aeb2", stroke=0.25) +
+  geom_raster(data = cattle_livestock_df,
+              aes(x = x, y = y, fill = BIN, alpha = BIN) ) + 
+  scale_fill_manual(values =  c("#b3d9de", "#89c5cb", "#4eaaac", "#06a6ab", "#009aa0", "#03646b", "#073b3a"), guide = "none") +
+  scale_alpha_manual(values =  c(0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9), guide = "none") +
+  coord_sf() +
+  theme_opts +
+  labs(title = "Where's the beef?",
+         subtitle = "Cattle per KM^2",
+         caption = "Livestock Geo-Wiki"
+       )
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, echo=FALSE}
+
+# ggsave(filename = "livestock-cattle.svg", plot = v1, width=12, height=6)
+# ggsave(filename="livestock-cattle.png", plot=v1, device="png", width=12, height=6, units="in", dpi=500)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
