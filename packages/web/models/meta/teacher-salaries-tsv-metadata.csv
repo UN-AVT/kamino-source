@@ -1,2 +1,0 @@
-"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
-"3-ingest-1-tabular-1-delimited-data-file-teacher-salaries-tsv","3-ingest","1-tabular","1-delimited-data-file","TSV","teacher salaries tsv","3-ingest/1-tabular/1-delimited-data-file/teacher-salaries-tsv.html","tab tsv separated delimited","read.table sep","OECD","teacher-salaries-tsv-icon.svg",2021-10-26

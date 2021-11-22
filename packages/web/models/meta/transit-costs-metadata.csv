@@ -1,2 +1,0 @@
-"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
-"7-charts-1-correlation-1-bubble-transit-costs","7-charts","1-correlation","1-bubble","Bubble","transit costs","7-charts/1-correlation/1-bubble/transit-costs.html","transit costs","geom_point_interactive geom_smooth scale_y_log10","TidyTuesday Transit Costs Project","transit-costs-icon.svg",2021-10-20

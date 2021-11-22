@@ -1,2 +1,0 @@
-"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
-"7-charts-1-correlation-4-scatter-road-deaths-by-country","7-charts","1-correlation","4-scatter","","road deaths by country","7-charts/1-correlation/4-scatter/road-deaths-by-country.html","road traffic deaths","str_replace countrycode geom_smooth geom_text_repel","Economist World Bank WHO IHME","road-deaths-by-country-icon.svg",2021-09-14

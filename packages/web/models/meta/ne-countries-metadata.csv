@@ -1,2 +1,0 @@
-"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
-"3-ingest-1-tabular-1-delimited-data-file-ne-countries","3-ingest","1-tabular","1-delimited-data-file","CSV","ne countries","3-ingest/1-tabular/1-delimited-data-file/ne-countries.html","character language encoding UTF","read.csv Sys.setlocale","Natural Earth","ne-countries-icon.svg",2021-10-26

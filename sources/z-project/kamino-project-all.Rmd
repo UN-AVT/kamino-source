@@ -340,7 +340,17 @@ df_catalog
 
 kamino_content_index <- df_catalog
 kamino_content_index <- filter(kamino_content_index, STATUS == "Published")
+<<<<<<< HEAD
+kamino_content_index <- kamino_content_index %>% mutate(
+  id = row_number(), 
+  ACTIVITY = paste0(ACTIVITY_SORT, "-", ACTIVITY),
+  SUBACTIVITY = paste0(SUBACTIVITY_SORT, "-", SUBACTIVITY),
+  TASK = paste0(TASK_SORT, "-", TASK),
+  TITLE = ARCHETYPE)
+
+=======
 kamino_content_index <- kamino_content_index %>% mutate(id = row_number(), TITLE = ARCHETYPE)
+>>>>>>> parent of bb67a36 (initial maps commit)
 kamino_content_index <- kamino_content_index %>% select(id, ACTIVITY, SUBACTIVITY, TASK, TITLE, ARCHETYPE, METHODS, KEYWORDS, SYNTAX, SOURCES) 
 
 kamino_content_index <- kamino_content_index %>% mutate(URL = paste0("content/", ACTIVITY, "/", SUBACTIVITY, "/", TASK, "/", TITLE, ".html"), ICON = paste0("assets/symbols/", ACTIVITY, "/", TASK, ".svg"))

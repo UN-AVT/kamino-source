@@ -1,2 +1,0 @@
-"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
-"3-ingest-1-tabular-1-delimited-data-file-world-electricity-production-bom-csv","3-ingest","1-tabular","1-delimited-data-file","CSV","world electricity production bom csv","3-ingest/1-tabular/1-delimited-data-file/world-electricity-production-bom-csv.html","BOM byte order mark","read.csv fileEncoding","Our World in Data","world-electricity-production-bom-csv-icon.svg",2021-10-26

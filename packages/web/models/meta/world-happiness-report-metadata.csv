@@ -1,2 +1,0 @@
-"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
-"4-wranglers-1-evaluate-1-profile-world-happiness-report","4-wranglers","1-evaluate","1-profile","profile dimension distinct-values frenquency-values missing-values structure","world happiness report","4-wranglers/1-evaluate/1-profile/world-happiness-report.html","happiness growth economics","str dim distinct map_df mutate","The-Economist","world-happiness-report-icon.svg",2021-10-26

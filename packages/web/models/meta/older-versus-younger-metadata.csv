@@ -1,2 +1,0 @@
-"id","activity","subactivity","task","methods","title","url","keywords","commands","sources","icon","last_update"
-"7-charts-3-distribution-8-population-pyramid-older-versus-younger","7-charts","3-distribution","8-population-pyramid","pyramid","older versus younger","7-charts/3-distribution/8-population-pyramid/older-versus-younger.html","pyramid population age gender","str_detect ifelse unique geom_step coord_flip","healthdata.org Global Burden of Disease","older-versus-younger-icon.svg",2021-10-22

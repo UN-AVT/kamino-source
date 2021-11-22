@@ -79,6 +79,11 @@ tx  <- readLines(destination_file)
 tx1  <- gsub(pattern = "../../../z-assemblers/", replace = "../../../../", x = tx)
 tx2  <- gsub(pattern = "vendor/", replace = "../../../../vendor/knitr/", x = tx1)
 tx3  <- gsub(pattern = masthead, replace = sub(".*assets/", "", masthead), x = tx2)
+<<<<<<< HEAD
+
+print("rewriting html file...")
+=======
+>>>>>>> parent of bb67a36 (initial maps commit)
 writeLines(tx3, con=destination_file)
 
 
