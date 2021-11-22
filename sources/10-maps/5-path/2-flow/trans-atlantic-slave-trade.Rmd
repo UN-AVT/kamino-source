@@ -1,0 +1,245 @@
+---
+pagetitle: "Trans-Atlantic Slave Trade"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(geojsonio)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+# library(scales)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Trans-Atlantic Slave Trade
+## Flow Map
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by the British Library on Unsplash"}
+
+masthead <- "assets/british-library-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The forced movement of West Africans across the Atlantic happened on an unprecedented scale of brutality and inhumanity, killings and massive abuses.\  
+  Millions died without a burial, without a trace...\
+--- UN Secretary-General Ban Ki-moon\
+
+***
+
+### Ingest
+#### Flows and points
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_flows <- read.csv("archetypes/trans-atlantic-slave-trade/all-voyages.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+df_points <- read.csv("archetypes/trans-atlantic-slave-trade/points.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+
+head(df_flows)
+head(df_points)
+
+```
+
+
+### Analytics
+#### aggregate points and flows
+
+
+```{r}
+
+min_lat <- min(df_points$lat, na.rm=T)
+#min_lat
+max_lat <- max(df_points$lat, na.rm=T)
+#max_lat
+min_lon <- min(df_points$lon, na.rm=T)
+#min_lon
+max_lon <- max(df_points$lon, na.rm=T)
+#max_lon
+
+df_flows_sum <- df_flows %>% 
+  group_by(dest, origin) %>% 
+  summarise(Total = sum(count, na.rm = TRUE))
+
+df_flows_sum
+
+df_origin_sum <- df_flows %>% 
+  group_by(origin) %>% 
+  summarise(Total = sum(count, na.rm = TRUE))
+
+# head(df_origin_sum)
+
+df_dest_sum <- df_flows %>% 
+  group_by(dest) %>% 
+  summarise(Total = sum(count, na.rm = TRUE))
+
+# head(df_dest_sum)
+
+```
+
+
+### Wrangle
+#### enrich points (count) and flows (coordinates)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_flows_wrangle <- filter(df_flows_sum, dest != origin)
+
+df_flows_wrangle <- merge(df_flows_wrangle, df_points, by.x="origin", by.y="id" )
+df_flows_wrangle <- df_flows_wrangle %>% rename(origin_name = name, origin_lat = lat, origin_lon = lon)
+
+df_flows_wrangle <- merge(df_flows_wrangle, df_points, by.x="dest", by.y="id" )
+df_flows_wrangle <- df_flows_wrangle %>% rename(dest_name = name, dest_lat = lat, dest_lon = lon)
+# put largest on top
+df_flows_wrangle <- df_flows_wrangle[order(df_flows_wrangle$Total),]
+df_flows_wrangle
+
+df_origin_wrangle <- merge(df_origin_sum, df_points, by.x="origin", by.y="id" )
+# put smallest points on top so they are not obscured
+df_origin_wrangle <- df_origin_wrangle[order(df_origin_wrangle$Total, decreasing=TRUE),]
+# df_origin_wrangle
+
+df_dest_wrangle <- merge(df_dest_sum, df_points, by.x="dest", by.y="id" )
+# put smallest points on top so they are not obscured
+df_dest_wrangle <- df_dest_wrangle[order(df_dest_wrangle$Total, decreasing=TRUE),]
+# df_dest_wrangle
+
+
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+# PLOT NATURAL EARTH BORDERS
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# class(ne_world)
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
+
+ne_coastline <- ne_coastline(scale = "small", returnclass = "sf")
+
+```
+
+
+### Flow Map
+#### origins, destinations, and flows
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill = "#988373"),
+  panel.border = element_blank(),
+  plot.background = element_rect(fill = "#988373")
+)
+
+v1 <- ggplot() +
+  geom_sf(data = ne_coastline, fill=NA, color="#8E796A", size=8) +
+  geom_sf(data = ne_coastline, fill=NA, color="#837063", size=4) +
+  geom_sf(data = ne_world, fill="#988373", color="#574C40", size=0.5) +
+  geom_segment( data = df_flows_wrangle, aes( x=origin_lon, y=origin_lat, xend=dest_lon, yend=dest_lat, size=Total, color=Total, alpha=Total  ), lineend="round", linejoin="round" ) +
+  geom_point( data = df_origin_wrangle, aes(x=lon, y=lat, size=Total), shape=21, color="white", fill="white", stroke=1, alpha=0.6) +
+  geom_point( data = df_dest_wrangle, aes(x=lon, y=lat, size=Total), shape=21, color="white", fill="white", stroke=1, alpha=0.6) +
+  scale_size_continuous(range=c(0.5,10), guide="none") +
+  scale_alpha_continuous(range=c(0.4, 0.8), guide="none") +
+  scale_fill_gradient(low = "#BF8490", high = "#FFFFFF", guide="none") + 
+  scale_color_gradient(low = "#BF8490", high = "#FFFFFF", guide="none") + 
+  coord_sf(xlim = c(min_lon, max_lon), ylim = c(min_lat, max_lat)) +
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "Trans-Atlantic Slave Trade", 
+       subtitle=NULL) +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+ggsave(filename = "outputs/trans-atlantic-slave-trade-fs.svg", plot = v1, width=16, height=9)
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Trans-atlantic slave trade, [GO](https://wandabodnar.github.io/flowmap/transatlantic.html){target="_blank"}
+* Data sources:
+  + [Port info data](https://github.com/sctyner/slave-trade-data/blob/master/port_info.csv){target="_blank"}
+  + [Voyages](https://slavevoyages.org/voyage/database){target="_blank"}
+  + [RPubs](https://rpubs.com/WandaBodnar/644116){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

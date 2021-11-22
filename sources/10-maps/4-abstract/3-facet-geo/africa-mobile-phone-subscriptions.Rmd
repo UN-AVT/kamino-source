@@ -1,0 +1,186 @@
+---
+pagetitle: "Africa Mobile Phone Subscriptions"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(geofacet)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Africa mobile phone subscriptions
+## Facet Geo Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Muhammadtaha Ibrahim Ma'aji on Unsplash"}
+
+masthead <- "assets/muhammadtaha-ibrahim-ma-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Ahmadu Bello University, Zaria, Kaduna, Nigeria</div>
+
+> When you get a mobile phone it is almost like having a card to get out of poverty in a couple of years...\
+--- Muhammad Yunus, 2006 Nobel peace prize\
+
+***
+
+### Ingest
+#### continent, country, year, mobile subscriptions
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/mobile.csv", header = TRUE, encoding="UTF-8")
+df
+
+```
+
+### Wrangle
+#### enrich with ISO2 code
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df %>% 
+  filter(continent == "Africa", year >= 2000) %>%
+  # Using countrycode function (from contrycode library) to enrich the dataset with country's ISO2 code
+  mutate(iso2 = countrycode(code,
+                            origin = "iso3c",
+                            destination = "iso2c")) %>%
+  select(entity, year, mobile_subs, iso2) %>%
+  filter(!is.na(iso2))
+
+df_wrangle
+
+```
+
+
+### Wrangle
+#### create country grid
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# df_countries_grid1 comes from geofacet library
+df_grid <- africa_countries_grid1 %>%
+  mutate(name = case_when(name == "Central African Republic" ~ "CAF",
+                          name == "Republic of the Congo" ~ "COG",
+                          name == "Democratic Republic of the Congo" ~ "COD",
+                          name == "Equatorial Guinea" ~ "GNQ",
+                          name == "São Tomé and Principe" ~ "STP",
+                          TRUE ~ name)) %>%
+  mutate(code = case_when(name == "Namibia" ~ "NA",
+                          TRUE ~ code))
+
+df_grid
+
+```
+
+
+### Plot
+#### facet geo using ISO2C
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "#E8EADC", size = 24, face = "bold", hjust=0.5, 
+                                  margin=margin(30,0,10,0)),
+    plot.subtitle = element_text(color = "#E8EADC", size = 20, face = "bold", hjust=0.5, 
+                                  margin=margin(0,0,60,0)),
+    plot.caption = element_text(color = "#E8EADC", size = 10, face = "bold", hjust=0.5, 
+                                  margin=margin(30,0,30,0)),
+    plot.background = element_rect(fill = "#1E1D23"),
+    strip.background = element_blank(),
+    strip.text = element_text(color = "#E8EADC", size = 14, face = "bold"),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    axis.text = element_text(size = 7, color = "#E8EADC"),
+    axis.title.x = element_blank()
+)
+
+v1 <- ggplot(df_wrangle) +
+  geom_rect(aes(xmin = 2000, ymin = 0, xmax = 2017, ymax = 200), fill = "#26262E") +
+  geom_area(aes(year, mobile_subs), fill = "#008080") +
+  # Map code with iso2 column in main dataframe to create the facet grid
+  facet_geo( ~ iso2, grid = df_grid, label = "name") +
+  scale_x_continuous(breaks = seq(2000, 2015, by = 5), labels = c("'00", "'05", "'10", "'15")) +
+  labs(title = "African Mobile Phone Subscriptions, 2000-2017",
+       subtitle = "Mobile subscriptions per 100 people",
+       caption = NULL) +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 12, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 0.7))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+ggsave(filename = "outputs/africa-mobile-phone-subscriptions-fs.svg", plot = v1, width=12, height=16)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: reproduction of an original plot by Yobanny Samano
+* Data sources: Our World in Data, Technology Adoption, [GO](https://ourworldindata.org/technology-adoption){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

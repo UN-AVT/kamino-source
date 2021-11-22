@@ -1,0 +1,73 @@
+"type","name","area_km2","density_km2","sex_ratio","pop_type","value"
+"state","Uttar Pradesh",240928,828,908,"Rural",155111022
+"state","Maharashtra",307713,365,946,"Rural",61545441
+"state","Bihar",94163,1102,916,"Rural",92075028
+"state","West Bengal",88752,1029,947,"Rural",62213676
+"state","Madhya Pradesh",308245,236,931,"Rural",52537899
+"state","Tamil Nadu",130058,555,995,"Rural",37189229
+"state","Rajasthan",342239,201,926,"Rural",51540236
+"state","Karnataka",191791,319,968,"Rural",37552529
+"state","Gujarat",196024,308,918,"Rural",34670817
+"state","Andhra Pradesh",162968,303,993,"Rural",34776389
+"state","Odisha",155707,269,978,"Rural",34951234
+"state","Telangana",114840,307,988,"Rural",21585313
+"state","Kerala",38863,859,1084,"Rural",17445506
+"state","Jharkhand",79714,414,947,"Rural",25036946
+"state","Assam",78438,397,954,"Rural",26780526
+"state","Punjab",50362,550,893,"Rural",17316800
+"state","Chhattisgarh",135191,189,991,"Rural",19603658
+"state","Haryana",44212,573,877,"Rural",16531493
+"state","Jammu and Kashmir",222236,124,883,"Rural",9134820
+"state","Uttarakhand",53483,189,963,"Rural",7025583
+"state","Himachal Pradesh",55673,123,974,"Rural",6167805
+"state","Tripura",10486,350,961,"Rural",2710051
+"state","Meghalaya",22429,132,986,"Rural",2368971
+"state","Manipur",22327,122,987,"Rural",1899624
+"state","Nagaland",16579,119,931,"Rural",1406861
+"state","Goa",3702,394,968,"Rural",551414
+"state","Arunachal Pradesh",83743,17,920,"Rural",1069165
+"state","Mizoram",21081,52,975,"Rural",529037
+"state","Sikkim",7096,86,889,"Rural",455962
+"territory","Delhi",1484,11297,866,"Rural",419319
+"territory","Puducherry",479,2598,1038,"Rural",394341
+"territory","Chandigarh",114,952,818,"Rural",29004
+"territory","Andaman and Nicobar Islands",8249,46,878,"Rural",244411
+"territory","Dadra and Nagar Haveli",491,698,775,"Rural",183024
+"territory","Daman and Diu",112,2169,618,"Rural",60331
+"territory","Lakshadweep",32,2013,946,"Rural",14121
+"state","Uttar Pradesh",240928,828,908,"Urban",44470455
+"state","Maharashtra",307713,365,946,"Urban",50827531
+"state","Bihar",94163,1102,916,"Urban",11729609
+"state","West Bengal",88752,1029,947,"Urban",29134060
+"state","Madhya Pradesh",308245,236,931,"Urban",20059666
+"state","Tamil Nadu",130058,555,995,"Urban",34949729
+"state","Rajasthan",342239,201,926,"Urban",17080776
+"state","Karnataka",191791,319,968,"Urban",23578175
+"state","Gujarat",196024,308,918,"Urban",25712811
+"state","Andhra Pradesh",162968,303,993,"Urban",14610410
+"state","Odisha",155707,269,978,"Urban",6996124
+"state","Telangana",114840,307,988,"Urban",13608665
+"state","Kerala",38863,859,1084,"Urban",15932171
+"state","Jharkhand",79714,414,947,"Urban",7929292
+"state","Assam",78438,397,954,"Urban",4388756
+"state","Punjab",50362,550,893,"Urban",10387436
+"state","Chhattisgarh",135191,189,991,"Urban",5936538
+"state","Haryana",44212,573,877,"Urban",8821588
+"state","Jammu and Kashmir",222236,124,883,"Urban",3414106
+"state","Uttarakhand",53483,189,963,"Urban",3091169
+"state","Himachal Pradesh",55673,123,974,"Urban",688704
+"state","Tripura",10486,350,961,"Urban",960981
+"state","Meghalaya",22429,132,986,"Urban",595036
+"state","Manipur",22327,122,987,"Urban",822132
+"state","Nagaland",16579,119,931,"Urban",573741
+"state","Goa",3702,394,968,"Urban",906309
+"state","Arunachal Pradesh",83743,17,920,"Urban",313446
+"state","Mizoram",21081,52,975,"Urban",561997
+"state","Sikkim",7096,86,889,"Urban",151726
+"territory","Delhi",1484,11297,866,"Urban",16333916
+"territory","Puducherry",479,2598,1038,"Urban",850123
+"territory","Chandigarh",114,952,818,"Urban",1025682
+"territory","Andaman and Nicobar Islands",8249,46,878,"Urban",135533
+"territory","Dadra and Nagar Haveli",491,698,775,"Urban",159829
+"territory","Daman and Diu",112,2169,618,"Urban",182580
+"territory","Lakshadweep",32,2013,946,"Urban",50308

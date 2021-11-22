@@ -1,0 +1,133 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(ggplot2)
+library(geofacet)
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Geographical Facets
+## Case: Affordable Housing in London
+## Faceting clean up and segment the visualization so you can rapidly compare patterns in different parts of the data.
+
+***
+
+# Load data
+## Subsection
+
+```{r}
+
+london_afford_df <- read.csv('archetypes/london_afford.csv')
+london_afford_df
+
+# as.data.frame(get_grid_names())
+
+```
+
+
+# Plot
+## Theme
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+```
+
+## Geo-Facet
+## Question: What are the changes in the number of affordable housings in London Boroughs between 2015 and 2016.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6}
+
+v1 = ggplot(london_afford_df, aes(x = year, y = starts, fill = year)) +
+  geom_col(position = position_dodge()) +
+  facet_geo(~ code, grid = "gb_london_boroughs_grid", label = "name") +
+  labs(title = "Affordable Housing Starts in London",
+    subtitle = "Each Borough, 2015-16 to 2016-17",
+    caption = "Source: London Datastore", x = "", y = "")
+
+v1
+
+```
+
+
+## Save output to file
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggsave(filename = "assets/affordable-housing-starts-in-london.svg", plot = v1, width=12, height=6)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

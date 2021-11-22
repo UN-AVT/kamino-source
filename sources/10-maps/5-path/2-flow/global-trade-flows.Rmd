@@ -1,0 +1,244 @@
+---
+pagetitle: "Global Trade Flows"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(scales)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Global Trade Flows
+## Flow Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Ian Taylor on Unsplash"}
+
+masthead <- "assets/ian-taylor-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> If your personal brand were at a trade show alongside several thousand others, how would you fare? \
+  Now scale that to the global economy...\
+--- Ryan Lilly\
+
+***
+
+### Ingest
+#### Flows and points
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_flows = read.csv("archetypes/global-trade-flows/global-trade-flows.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+df_points = read.csv("archetypes/global-trade-flows/global-trade-flows-points.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+
+head(df_flows)
+
+```
+
+
+### Wrangle
+#### filter exporter and importer
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# change the filter to experiment with other exporters or importers
+df_flows_exp <- filter( df_flows, expISO3 == "IRN" )
+df_flows_exp <- filter( df_flows_exp, tot_val_usd > 0 )
+
+df_flows_exp
+
+df_flows_imp <- filter( df_flows, impISO3 == "IRN" )
+df_flows_imp <- filter( df_flows_imp, tot_val_usd > 0 )
+
+df_flows_imp
+
+```
+
+
+
+### Analyze
+#### calculations for exporter and importer
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_flows_exporter <- df_flows_exp %>% 
+  group_by(exporter, expISO3, slongitude, slatitude) %>% 
+  summarise(Total = sum(tot_val_usd))
+
+df_flows_exporter
+
+df_flows_importer <- df_flows_imp %>% 
+  group_by(importer, impISO3, tlongitude, tlatitude) %>% 
+  summarise(Total = sum(tot_val_usd))
+
+df_flows_importer
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+# PLOT NATURAL EARTH BORDERS
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# class(ne_world)
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
+
+```
+
+
+### Flow Map
+#### exports, by total value USD
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width = "100%" }
+
+# theme parameters
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "top",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank()
+)
+
+
+v1 <- ggplot(data = ne_world) +
+  geom_sf(fill="#ffffff", color="#cccccc", size=0.75) +
+  geom_point( data = df_flows_exp, aes(x=tlongitude, y=tlatitude, size=tot_val_usd, fill=tot_val_usd), shape=21, color="white", stroke=1, alpha=1.0) +
+  geom_curve( data = df_flows_exp, aes( x=slongitude, y=slatitude, xend=tlongitude, yend=tlatitude, size=tot_val_usd, color=tot_val_usd, alpha=tot_val_usd ), curvature=0.2, lineend="round", linejoin="round" ) +
+  geom_point( data = df_flows_exporter, aes(x=slongitude, y=slatitude), shape=21, size=14, fill='black', color="black", stroke=1, alpha=1.0) +
+  geom_text( data = df_flows_exporter, aes(x=slongitude, y=slatitude, label = expISO3), color="white", alpha=1.0) +
+  scale_size_continuous(range=c(1,10), guide="none") +
+  scale_alpha_continuous(range=c(0.2,0.6), guide="none") +
+  scale_fill_gradient(low = "#E53935", high = "#388E3C", guide="none") + 
+  scale_color_gradient(low = "#E53935", high = "#388E3C", guide="none") + 
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "Global Trade Flows", 
+       subtitle="Iran Exports") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Flow Map
+#### imports, by total value USD
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
+
+v2 <- ggplot(data = ne_world) +
+  geom_sf(fill="#ffffff", color="#cccccc", size=0.75) +
+  geom_point( data = df_flows_imp, aes(x=slongitude, y=slatitude, size=tot_val_usd, fill=tot_val_usd), shape=21, color="white", stroke=1, alpha=1.0) +
+  geom_text_repel( data = df_flows_imp, aes(x=slongitude, y=slatitude, label=expISO3), size=3 , color="black", alpha=1.0, family = "inconsolata") +
+  geom_curve( data = df_flows_imp, aes( x=slongitude, y=slatitude, xend=tlongitude, yend=tlatitude, size=tot_val_usd, color=tot_val_usd, alpha=tot_val_usd ), curvature=0.2, lineend="round", linejoin="round" ) +
+  geom_point( data = df_flows_importer, aes(x=tlongitude, y=tlatitude), shape=21, size=14, fill='black', color="black", stroke=1, alpha=1.0) +
+  geom_text( data = df_flows_importer, aes(x=tlongitude, y=tlatitude, label = impISO3), color="white", alpha=1.0, family = "inconsolata") +
+  scale_size_continuous(range=c(1,10), guide="none") +
+  scale_alpha_continuous(range=c(0.2,0.6), guide="none") +
+  scale_fill_gradient(low = "#E53935", high = "#388E3C", guide="none") + 
+  scale_color_gradient(low = "#E53935", high = "#388E3C", guide="none") + 
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "Global Trade Flows", 
+       subtitle="Iran Imports") +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+ggsave(filename = "outputs/global-trade-flows-fs.svg", plot = v1, width=16, height=7)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data sources: UN Comtrade Database, [GO](https://comtrade.un.org/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

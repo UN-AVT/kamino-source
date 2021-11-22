@@ -1,0 +1,215 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(maptools)
+library(sp)
+library(sf)
+library(rgdal)
+library(raster)
+library(reshape)
+library(tidyverse)
+library(ggplot2)
+library(maptools)
+library(rgeos) #create a range standardisation function
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggthemes)
+
+library(data.table)
+
+```
+
+
+<div class="activity">
+MAPS  
+</div>
+
+***
+
+# Section
+## Subsection
+
+
+```{r, echo=FALSE}
+
+# this is process intensive; run garbage collection to free memory
+gc()
+
+range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+
+# load in a population grid - in this case it's population density from NASA's SEDAC (see link above). It's spatial data if you haven't seen this before in R.
+raster <- raster("../archetypes/gpw-v4-population-count-2020/gpw-v4-population-count_2020.tif")
+
+# apply projection
+proj4string(raster) = CRS("+init=epsg:4326")
+
+# plot(raster)
+
+the_raster_agg <- aggregate(raster, fact = 10, fun = sum)
+
+```
+
+
+```{r}
+
+# Convert the raster file to a points file
+points <- rasterToPoints(raster)
+
+rm(raster)
+
+# Concert points to data table
+input <- as.data.table(points)
+setnames(input, c("x", "y", "population"))
+
+rm(points)
+
+input
+
+summary(input)
+
+```
+
+
+
+```{r, echo=FALSE}
+
+input_f <- filter(input, population > 10)
+input_f
+summary(input_f)
+input_f[,.N]
+
+```
+
+```{r, echo=FALSE}
+
+input_r <- input_f
+
+#Rescale the values. This is to ensure that you can see the variation in the data
+input_r$x<-round(input_r$x, digits = 3)
+input_r$y<-round(input_r$y, digits = 0)
+
+input_sum <- input_r %>%
+  group_by(y, x) %>%
+  summarise(population = sum(population))
+
+input_sum$population<-range01(input_sum$population)*0.20
+input_sum$x<-range01(input_sum$x)
+input_sum$y<-range01(input_sum$y)
+
+input_sum
+
+```
+
+
+## Including Plots
+
+
+```{r, echo=FALSE}
+
+#Switch off various ggplot things
+xquiet <- scale_x_continuous("", breaks=NULL)
+yquiet <-scale_y_continuous("", breaks=NULL)
+quiet <-list(xquiet, yquiet)
+
+#Add 180 to the latitude to remove negatives in southern hemisphere, then order them.
+input_sum$ord <- input_sum$y
+values_s <- input_sum[order(-input_sum$ord),]
+
+#write.csv(input_s,"../archetypes/world-population-ridgeline.csv", row.names = FALSE)
+
+#rm(input)
+#rm(input_s)
+
+unique(values_s$ord)
+
+```
+
+
+```{r, echo=FALSE, fig.width=18, fig.height=12}
+
+write.csv(values_s,"../archetypes/world-population-ridgeline.csv", row.names = FALSE)
+rm(values_s)
+
+gc()
+
+color_condition <- function(x) { ifelse(x==0, "#ffffff", "#666666")  }
+
+values_s <- read.csv("../archetypes/world-population-ridgeline.csv", header = TRUE)
+
+#Create an empty plot called p
+p <- ggplot()
+
+# This loops through each line of latitude and produced a filled polygon that will mask out the lines beneath and then plots the paths on top.
+# The p object becomes a big ggplot2 plot.
+for (i in unique(values_s$ord))
+{
+p <- p +
+  geom_polygon(data = values_s[values_s$ord==i,], aes(x, population+y, group = y ), size=0.2, fill="white", col="white") + 
+  geom_path(data = values_s[values_s$ord==i,], aes(x, population+y, group = y ), size = 0.2, lineend = "round")
+}
+
+#show plot!
+p +
+  theme_bw() +
+  theme(panel.background = element_rect(fill='white',colour='white'))
+
+```
+
+
+
+```{r}
+
+ggsave(filename = "world-population-ridgeline.svg", plot = p, width=18, height=12)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

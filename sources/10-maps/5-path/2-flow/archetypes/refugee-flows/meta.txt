@@ -1,0 +1,16 @@
+Meta:
+
+Extracted:	United Nations High Commissioner for Refugees									
+Date extracted:	14/12/2020 07:29									
+Last updated:	14/12/2020 07:29									
+Last Some data presented may differ from statistics published previously due to retroactive changes or the inclusion of previously unavailable data.										
+										
+Data table contains the following:	Population figures									
+Content type	End year stock population totals									
+Data quick link	https://www.unhcr.org/refugee-statistics/download/?url=l9X0ri									
+Data definitions	https://www.unhcr.org/refugee-statistics-2/methodology/									
+Usage licence	https://creativecommons.org/licenses/by/4.0/									
+Population types included	REF,ROC,ASY,IDP,IOC,VDA,OOC,STA									
+Years:										
+Origin:										
+Country of asylum::										

@@ -1,0 +1,182 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(geojsonio)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(scales)
+library(wesanderson)
+
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Latin America and the Caribbean 1km Internal Migration Flows
+## Flow Map 
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by L'Odyssee Belle on Unsplash"}
+
+masthead <- "assets/l-odyssee-belle-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Migration has been politicized before it has been analyzed...\
+--- Paul Collier\
+
+***
+
+### Ingest
+#### Flows
+
+```{r, echo = FALSE}
+
+df_flows <- read.csv("archetypes/internal-migration-flows/latin-america-and-caribbean-1km-internal-migration-flows.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+head(df_flows)
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# include only countries included in data
+ne_world <- filter(ne_world, iso_a3 %in% unique(df_flows$ISO))
+
+
+```
+
+
+### Flow Map
+#### origins, destinations, and flows
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank()
+)
+
+# color palette to use
+cluster_pal <- wes_palette("Zissou1", 4, type = "continuous")
+
+v1 <- ggplot(data = ne_world) +
+  geom_sf(fill="#f5f5f5", color="#d5d5d5", stroke=0.5) +
+  geom_segment( data = df_flows, aes( x = LONFR, y = LATFR, xend = LONTO, yend = LATTO, color = BIN, alpha = BIN, group = ISO ), size=0.5 ) +
+  # geom_curve( data = df_flows, aes( x = LONFR, y = LATFR, xend = LONTO, yend = LATTO, color = BIN, alpha = BIN, group = ISO ), size=0.5, curvature=0.2) +
+  scale_color_manual(values = cluster_pal, guide = FALSE) + 
+  scale_alpha_manual(values = c(0.6, 0.4, 0.3, 0.2), guide = FALSE) +
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "Latin America and the Caribbean 1km Internal Migration Flows", 
+       subtitle="Estimated internal human migration flows between\nsubnational administrative units for malaria endemic countries",
+       caption="World Pop; WHO, 2015; http://www.who.int/malaria/publications/country-profiles/en/") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 720/72, height_svg = 1080/72,
+       options = list(opts_sizing(rescale = FALSE, width = 1.0))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/latin-america-and-caribbean-internal-migration-flows-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/latin-america-and-caribbean-internal-migration-flows-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Sources: WorldPop, https://www.worldpop.org/geodata/summary?id=1283
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'latin america caribbean internal migration flows'
+commands <- 'group_by summarise merge geom_sf geom_curve'
+sources <- 'WorldPop'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

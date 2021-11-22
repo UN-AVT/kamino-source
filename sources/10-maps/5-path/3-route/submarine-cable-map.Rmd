@@ -1,0 +1,165 @@
+---
+pagetitle: "Submarine Cable Map"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggsci)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS
+</div>
+
+# Submarine Cable Map
+## Route Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo from Wikipedia Commons"}
+
+masthead <- "assets/seekabelverlegung-wikipedia.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> No cord or cable can draw so forcibly, or bind so fast, as love can do with a single thread...\
+--- Robert Burton\
+
+***
+
+Route map of the world's major operating and planned submarine cable systems and landing stations.
+
+### Ingest
+#### the routes
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+cables <- read.csv("archetypes/fusion-cables/fusion-cables.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+cables
+
+```
+
+
+### Ingest
+#### The landing points
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+landing_points = read.csv("archetypes/fusion-cables/fusion-landing-points.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+landing_points
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+# PLOT NATURAL EARTH BORDERS
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# class(ne_world)
+
+```
+
+
+### Route map
+#### with path and points
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+      legend.position="none",
+      plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.background=element_rect(fill="white", colour="white"),
+      panel.border = element_blank()
+)
+
+v1 <- ggplot(data = ne_world) +
+  geom_path( data = cables, aes(x=longitude, y=latitude, group=factor(id)), color=cables$color, size=0.5) +
+  geom_sf(fill="#f0f0f0", color="#888888", stroke=0.5) +
+  geom_point( data = landing_points, aes(x=lon, y=lat ), shape=21, size=1, fill="#ffffff", color="#111111", stroke=0.5 ) +
+  scale_color_tron() +
+  scale_fill_tron() +
+  ylim(-53,80) + # removes Antarctica
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "Routes Map", 
+       subtitle="Submarine Cable Map") +
+  theme_opts
+  
+girafe(ggobj = v1, width_svg = 16, height_svg = 8,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+ggsave(filename = "outputs/submarine-cable-map-fs.svg", plot = v1, width=16, height=8)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data source: Telegeography, [GO](https://github.com/telegeography/www.submarinecablemap.com){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

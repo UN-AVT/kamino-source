@@ -1,0 +1,39 @@
+function getMatrix(data, columNumber, value, longitude, latitude, proj) {
+  let xBounds = d3.extent(
+    data,
+    d => proj([parseFloat(longitude(d)), parseFloat(latitude(d))])[0]
+  );
+
+  let yBounds = d3.extent(
+    data,
+    d => proj([parseFloat(longitude(d)), parseFloat(latitude(d))])[1]
+  );
+
+  let ratioY = (yBounds[1] - yBounds[0]) / (xBounds[1] - xBounds[0]);
+
+  let lineNumber = Math.floor(ratioY * columNumber);
+
+  let scalex = d3
+    .scaleLinear()
+    .domain(xBounds)
+    .rangeRound(d3.range(columNumber - 1))
+    .range([0, columNumber - 1]);
+
+  let scaley = d3
+    .scaleLinear()
+    .domain(yBounds)
+    .rangeRound(d3.range(lineNumber - 1))
+    .range([0, lineNumber - 1]);
+
+  let arr = d3.range(lineNumber).map(() => d3.range(columNumber).map(() => 0));
+
+  data.forEach(d => {
+    if (longitude(d) !== false && latitude(d) !== false && value(d) !== false) {
+      let coor = proj([parseFloat(longitude(d)), parseFloat(latitude(d))]);
+
+      arr[scaley(coor[1])][scalex(coor[0])] += parseInt(value(d));
+    }
+  });
+
+  return arr;
+}

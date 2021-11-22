@@ -1,0 +1,241 @@
+---
+pagetitle: "Where does your medicine come from?"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(rnaturalearth)
+library(rgdal)
+library(sf)
+# install.packages("remotes")
+# library(remotes)
+# install_github("rCarto/popcircle")
+library(popcircle) # Not in CRAN (Comprehensive R Archive Network)
+library(cartography)
+library(ggthemes)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Where does your medicine come from?
+## Geo Circle Packing
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Benjamin Lehman on Unsplash"}
+
+masthead <- "assets/benjamin-lehman-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Always laugh when you can. It is cheap medicine....\
+--- Lord Byron\
+
+***
+
+Geo Circle Packing is a visualization where area of circles represents a numerical data value and within each circle, a representation of the associated geographical geometry.
+
+### Ingest
+#### exporter, year, usd value
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/where-does-your-medicine-come-from/data/drug_medicine_exports.csv", header = TRUE)
+df
+
+```
+
+
+### Wrangler
+#### profile & filter
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# filter for latest year
+# distinct(df,year) %>% arrange(desc(year))
+
+df_1 <- df %>% filter(year=="2017")
+df_1
+
+```
+
+
+### Wrangler
+#### clean (remove missing values)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_2 <- df_1[!is.na(df_1$exports_usd),]
+df_2 
+
+```
+
+
+### Wrangler
+#### arrange by exports
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_3 <- df_2 %>% arrange(desc(exports_usd))
+df_3 
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# Get countries, simplified resolution
+ctry <- ne_countries(scale = "small", returnclass = "sf")
+
+ctry <- st_transform(ctry, 3857)
+
+# Only keep the largest polygons of multipart polygons for a few countries
+frag_ctry <- c("CH", "FR", "GB", "US", "IE", "CA", "JP")
+largest_ring = function(x) {
+  x$ids <- 1:nrow(x)
+  pols = st_cast(x, "POLYGON", warn = FALSE)
+  spl = split(x = pols, f = pols$ids)
+  do.call(rbind, (lapply(spl, function(y) y[which.max(st_area(y)),])))
+}
+
+st_geometry(ctry[ctry$iso_a2 %in% frag_ctry,]) <-
+st_geometry(largest_ring(ctry[ctry$iso_a2 %in% frag_ctry,]))
+
+```
+
+
+### Wrangle
+#### merge data and circle geometry
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# merge data
+ctry_med <- merge(ctry[,"name_sort"], df_3, by.x = "name_sort", by.y = "exporter" )
+ctry_med
+
+# Computes circles and polygons
+res_med <- popcircle(x = ctry_med, var = "exports_usd")
+circles_med <- res_med$circles
+circles_med$lab <- paste0(circles_med$name_sort, '\n', round(circles_med$exports_usd/100000000))
+circles_med_sf = st_as_sf(circles_med)
+
+shapes_med <- res_med$shapes
+shapes_med_sf = st_as_sf(shapes_med)
+
+```
+
+
+### Plot
+#### Which countries have the highest medicine exportation value (in USD)?
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata", size = 16), 
+  plot.title = element_text(color = "black", size = 16, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 11),
+  plot.background = element_blank(),
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank()
+)
+
+v1 <- ggplot() +
+  geom_sf(data = circles_med_sf, aes(fill = exports_usd), color = "#ffffff", stroke = 0.5 ) +
+  geom_sf(data = shapes_med_sf, fill = "#ffffff", color = "#ffffff", stroke = 0.25 ) +
+  geom_sf_text(data = circles_med_sf, aes( label = ifelse((exports_usd>1200000000),name_sort, "")), size=3, color = 'black', family = "inconsolata") +
+  scale_fill_gradient2_tableau() +
+  theme_bw() +
+  labs(title = "Medicine Exportation Value", 
+       subtitle="in 2017") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 14,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+ggsave(filename = "outputs/where-does-your-medicine-come-from-fs.svg", plot = v1, width=16, height=14)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Makeover Monday, [GO](https://data.world/makeovermonday/2018w8-where-does-your-medicine-come-from){target="_blank"}
+* Data sources: ITC, TradeMap, [GO](https://www.trademap.org/Country_SelProduct_TS.aspx?nvpm=1%7c%7c%7c%7c%7cTOTAL%7c%7c%7c2%7c1%7c1%7c2%7c2%7c1%7c2%7c1%7c%7c1){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

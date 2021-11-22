@@ -1,0 +1,339 @@
+id,name,lat,lon
+1,Accra,5.603717,-0.18696
+2,Accra,5.603717,-0.18696
+3,Ambriz,-7.86308,13.11926
+4,Americas,18.45777,-66.0992
+5,Amsterdam,52.37022,4.895168
+6,Annapolis,38.97845,-76.4922
+7,Annotta Bay,18.27035,-76.7704
+8,Anomabu,5.425707,-2.09226
+9,Antigua,17.07466,-61.8175
+10,Antigua or Dominica,17.07466,-61.8175
+11,Antonia,18.18333,-76.4659
+12,Arcahaie,18.12778,-72.0861
+13,Ardra,6.466667,2.6
+14,Axim,4.866509,-2.24089
+15,Badagry,6.431581,2.887644
+16,Bahamas,25.03428,-77.3963
+17,Bahia,-12.5797,-41.7007
+18,Bahia Honda,22.9064,-83.1639
+19,Baia de Sepetiba,-22.9708,-43.8775
+20,Banana Islands,8.1159,-13.2115
+21,Bance Island,8.569862,-13.0404
+22,Banes,20.95704,-75.7197
+23,Barbados,13.19389,-59.5432
+24,Barcelona,41.38506,2.173404
+25,Bassa,10.05447,8.799071
+26,Bayonne,43.49295,-1.47484
+27,Beaufort,32.4333,-80.6833
+28,Belgium,50.50389,4.469936
+29,Benguela,-12.5905,13.4165
+30,Benin,9.30769,2.315834
+31,Berbice,6.298915,-57.525
+32,Bermuda,32.3078,-64.7505
+33,Bight of Benin,9.30769,2.315834
+34,Bight of Bonny,2.8333,-8
+35,Bight of Bonny,2.8333,-8
+36,Biloxi,30.39603,-88.8853
+37,Bight of Bonny,2.8333,-8
+38,Bissagos,11.25,-16.0833
+39,Bissau,11.88166,-15.6178
+40,Black River,18.0257,-77.8509
+41,Boary,-4.77861,11.86361
+42,Bonny,7.166667,4.433333
+43,Bordeaux,44.83779,-0.57918
+44,Boston,42.36008,-71.0589
+45,Brazil,-14.235,-51.9253
+46,Brazil,-14.235,-51.9253
+47,Brest,48.39039,-4.48608
+48,Bristol,51.45451,-2.58791
+49,Bristol (RI),41.67711,-71.2662
+50,British Americas,41.67711,-71.2662
+51,British Caribbean,21.75,-71.5833
+52,British Caribbean,21.75,-71.5833
+53,British Leewards,17.1167,-61.85
+54,Buenos Aires,-34.6037,-58.3816
+55,C.C. Castle and Windward,-33.9259,18.4278
+56,Cabanas,22.9777,-82.9224
+57,Cabinda,-5.57057,12.19758
+58,Cabo de Bìzios,-24.7469,-41.8819
+59,Cabo Frio,-22.8869,-42.0266
+60,Cabo Lopo Gonçalves,-0.633,8.7
+61,Cacheu,12.27326,-16.1669
+62,Cadiz,36.52706,-6.2886
+63,Calabar,4.975717,8.341701
+64,Cameroons,4.05,9.683333
+65,Cameroons River,3.920278,9.556944
+66,Campos,-21.7627,-41.3185
+67,"Canasi, Cuba",23.11304,-81.7828
+68,Cap des Palmes,4.368889,-7.72861
+69,Cap Français,-48.6731,69.05639
+70,Cap Lopez,-0.633,8.7
+71,Cape Coast Castle,5.10359,-1.24112
+72,Cape Lahou,5.133333,-5.01667
+73,Cape Mount,6.723333,-11.3533
+74,Cape of Good Hope,-34.3581,18.4719
+75,Cape Verde Islands,16,-24
+76,Caracas,10.48059,-66.9036
+77,Cardenas,23.0428,-81.2036
+78,Caribbean,21.46911,-78.6569
+79,Carolinas,32.4333,-80.6833
+80,Cartagena,10.39105,-75.4794
+81,Casamance,12.61878,-16.0993
+82,Catuamo and Maria Farinha,-7.59561,-34.8917
+83,Cayenne,4.92242,-52.3135
+84,"Les Cayes, Haiti",18.20429,-73.7537
+85,Charleston,32.77647,-79.9311
+86,Chester,53.19339,-2.89308
+87,Congo North,-0.22802,15.82766
+88,Congo River,-2.42009,16.18162
+89,Copacabana,-22.9698,-43.1869
+90,Copenhagen,55.6761,12.56834
+91,Corisco,0.917262,9.317375
+92,Cork,51.89689,-8.48632
+93,Costa da Mina,5.0833,-1.35
+94,Cowes,50.76279,-1.30053
+95,"Camaguey, Cuba",21.52176,-77.7812
+96,"Camaguey, Cuba",21.52176,-77.7812
+97,"Camaguey, Cuba",21.52176,-77.7812
+98,Cul-de-Sac,18.5333,-72.3333
+99,Cumingsberg,6.25,-57.5167
+100,Curaçao,12.16957,-68.99
+101,Danish Gold Coast,5.546944,-0.1825
+102,Danish West Indies,18.3333,-64.8333
+103,Dartmouth,50.351,-3.579
+104,Demerara,5.794783,-58.4085
+105,Dieppe,49.92299,1.077483
+106,Dois Rios,-23.1797,-44.1933
+107,Dominica,15.415,-61.371
+108,Dominica or Jamaica,15.415,-61.371
+109,Dordrecht,51.8133,4.690093
+110,Dunkerque,51.03437,2.376776
+111,Dutch Guianas,5.825278,-55.15
+112,Eastern New Jersey,40.467,-74.333
+113,Elmina,5.105338,-1.3421
+114,Emden,53.3594,7.20601
+115,Epe,6.594595,3.977639
+116,Essequibo,6.914755,-58.3033
+117,Exeter,50.71841,-3.5339
+118,"Falmouth, Jamaica",18.49,-77.661
+119,Fort Dauphin,-25.0225,46.98537
+120,Fort-Royale,14.6,-61.0833
+121,France,46.22764,2.213749
+122,"Fort-de-France, Martinique",14.6,-61.0833
+123,"Fort-de-France, Martinique",14.6,-61.0833
+124,Gabon,-0.80369,11.60944
+125,Gallinhas,8.4844,-13.2344
+126,Gambia,13.44318,-15.3101
+127,Georgia,32.16562,-82.9001
+128,Gibraltar,36.14075,-5.35359
+129,Glasgow,55.86424,-4.25181
+130,Accra,5.546944,-0.1825
+131,Accra,5.546944,-0.1825
+132,Gorée,14.66786,-17.3989
+133,Great Britain,55.37805,-3.43597
+134,Greenock,55.95648,-4.77198
+135,Grenada,12.1165,-61.679
+136,Groningen,53.21938,6.566502
+137,Guadaloupe,16.25,-61.5833
+138,Guanimar,22.69108,-82.6524
+139,Guiana,4.860416,-58.9302
+140,Hamburg,53.5653,10.0014
+141,Hampton,37.02987,-76.3452
+142,Havana,23.05407,-82.3452
+143,Hellevoetsluis,51.83186,4.13181
+144,Hispaniola,19.00187,-71.5724
+145,Honduras,15.2,-86.2419
+146,Honfleur,49.41876,0.233262
+147,Ile de France,48.84992,2.637041
+148,"Iles de Los, Guinea",9.500819,-13.7608
+149,Ilha de Itamaric,-7.7478,-34.8258
+150,Ilha de Marambaia,-23.1845,-47.3181
+151,Ilha de Paquetá,-22.7661,-43.1081
+152,Ilha Grande,-2.85811,-41.819
+153,Inhambane,-23.888,35.39599
+154,Isla de Pinas,21.75,-82.85
+155,Jacmel,18.24301,-72.5264
+156,Jacquin,6.65,2.15
+157,"Summerfield, Jamaica",18.10958,-77.2975
+158,"Summerfield, Jamaica",18.10958,-77.2975
+159,"Jeremie, Haiti",18.63897,-74.1181
+160,"Kingston, Jamaica",17.9833,-76.8
+161,"Georgetown, Guyana",6.789848,-58.1261
+162,Maryland,39.04575,-76.6413
+163,Kormantine,5.2025,-1.09028
+164,La Balise,29.1225,-89.1072
+165,La Guiara,10.58751,-66.9214
+166,La Rochelle,46.16033,-1.15114
+167,"Lagos, Onim",6.524379,3.379206
+168,Lancaster,54.047,-2.801
+169,Lay,12.52262,-1.77079
+170,Le Havre,49.49437,0.107929
+171,"Léogâne, Haiti",18.51284,-72.624
+172,Limerick,52.66802,-8.6305
+173,Lisbon,38.72225,-9.13934
+174,Liverpool,53.40837,-2.99157
+175,Loango,-4.34231,15.27782
+176,London,51.50735,-0.12776
+177,Lorient,47.74825,-3.37024
+178,Louisiana,30.9843,-91.9623
+179,"Lower James River, Wingina",37.58905,-78.6594
+180,Lucea,18.45042,-78.1764
+181,Lyme,50.725,-2.94
+182,Macaé,-22.3837,-41.7827
+183,Madagascar,-18.7669,46.86911
+184,Madeira,32.76071,-16.9595
+185,"Magari, Manzanillo",20.3397,-77.1086
+186,Malembo,-14.2292,34.81688
+187,Mangaratiba,-22.9599,-44.0413
+188,Maranhão,-4.96095,-45.2744
+189,Margarita,10.99707,-63.9113
+190,Mariel,22.98744,-82.7536
+191,Marseille,43.29648,5.36978
+192,Martha Brae,18.47048,-77.6601
+193,Martinique,14.64153,-61.0242
+194,Maryland,39.04575,-76.6413
+195,Matanzas,22.57671,-81.3399
+196,Mississippi,32.35467,-89.3985
+197,Mobile,30.69537,-88.0399
+198,Moerdijk,51.70182,4.62735
+199,Monte Christi,19.84735,-71.6406
+200,Montego Bay,18.47622,-77.8939
+201,Montevideo,-34.9011,-56.1645
+202,Montrose,56.70692,-2.46612
+203,Montserrat,16.7425,-62.1874
+204,Mozambique,-18.6657,35.52956
+205,Mpinda,-29.1391,26.2377
+206,Nantes,47.21837,-1.55362
+207,Nassau,25.04798,-77.3554
+208,Netherlands,52.13263,5.291266
+209,Netherlands,52.13263,5.291266
+210,Nevis,17.15536,-62.5796
+211,New Bedford,41.63622,-70.9342
+212,New Calabar,4.958819,8.327819
+213,New Orleans,29.95107,-90.0715
+214,New Providence,40.69843,-74.4015
+215,New York,40.71278,-74.0059
+216,Newport,41.4901,-71.3128
+217,Norfolk,36.85077,-76.2859
+218,North Carolina,35.75957,-79.0193
+219,North Potomac,39.09777,-77.2348
+220,Nova Zeelandia (Wild Coast),6.783333,-58.5167
+221,Odessa,46.48253,30.72331
+222,Other Dutch Americas,5.825278,-55.15
+223,Oxford,51.75202,-1.25773
+224,Oyapock,3.888889,-51.8011
+225,Pará,-1.99813,-54.9306
+226,Paraíba,-7.23996,-36.782
+227,Paramaribo,5.852036,-55.2038
+228,Paranaguá,-25.5166,-48.523
+229,"Patuxent, Maryland",38.53997,-76.7477
+230,Pernambuco,-8.81372,-36.9541
+231,Petit Goave,18.43114,-72.8545
+232,Philadelphia,39.95258,-75.1652
+233,Pillau,54.65912,19.92289
+234,Piscataqua river,43.10549,-70.7912
+235,Plymouth,50.37546,-4.14266
+236,Pointe-a-Pitre,16.23769,-61.534
+237,Ponta Negro,-4.76916,-35.1711
+238,Poole,50.71505,-1.98725
+239,Popo,-3.32391,17.39103
+240,Port Louis,-20.1669,57.50233
+241,Port Maria,18.36536,-76.8923
+242,Port Royal,17.93677,-76.8411
+243,Port-au-Prince,18.5944,-72.3074
+244,Port-de-Paix,19.93489,-72.8309
+245,Porto Novo,6.496857,2.628852
+246,"Portobelo, Panama",9.548889,-79.653
+247,Portsmouth (NH),43.07176,-70.7626
+248,Guinea-Bissau (Portuguese Guinea),12,-15
+249,Poulton,53.84396,-2.98628
+250,Princes Island,0.33333,6.7333
+251,São Tomé and Príncipe,0.33333,6.7333
+252,Providence,41.82399,-71.4128
+253,Puerto Padre,21.18785,-76.6066
+254,Puerto Rico,18.22083,-66.5901
+255,Quilimane,-17.8503,36.92186
+256,"Rappahannock river, Virginia",37.79891,-76.6759
+257,Rhode Island,41.58009,-71.4774
+258,Rio de Janeiro,-22.9068,-43.1729
+259,Rio de Janeiro province,-22.9068,-43.1729
+260,"Rio de Janeiro, Sao Paulo, Santa Catarina",-22.9068,-43.1729
+261,Rio de la Hacha,11.54417,11.54417
+262,Rio Grande do Sul Province,-30.0346,-51.2177
+263,"Rio Pongo, Guinea (Fatala river)",10.16667,-14.0333
+264,Rio Real,-11.4818,-37.9336
+265,São José do Rio Preto,-20.8081,-49.3811
+266,River Brass,4.317373,6.224294
+267,River del Rey,4.733333,8.65
+268,Rochefort,45.9367,-0.9617
+269,Rotterdam,51.92442,4.477733
+270,Sagua,23.05704,-82.3731
+271,Saint Ann's Bay,18.43295,-77.1974
+272,Saint-Domingue,18.48606,-69.9312
+273,Saint-Malo,48.64934,-2.02567
+274,Saint-Marc,19.10493,-72.6949
+275,Saint-Pierre,14.7417,-61.1758
+276,Santa Catarina,-27.2423,-50.2189
+277,Santiago de Cuba,20.01693,-75.8302
+278,Santo Domingo,18.48606,-69.9312
+279,Santos,-23.9679,-46.3289
+280,São Sebastião,-23.8063,-45.4017
+281,São Tomé and Príncipe,0.330192,6.733343
+282,São Tomé and Príncipe,0.330192,6.733343
+283,Savanna la Mar,18.22917,-78.1393
+284,Savannah,32.08354,-81.0998
+285,Senegal,14.4974,-14.4524
+286,Gambia,13.46667,-16.6
+287,Sherbro,7.555433,-12.6676
+288,Shoreham,50.83421,-0.27156
+289,Sierra Leone,8.460555,-11.7799
+290,Sierra Leone,8.460555,-11.7799
+291,South Carolina,33.83608,-81.1637
+292,South Potomac,39.01817,-77.2086
+293,Southeast Brazil,-14.235,-51.9253
+294,Spain,40.46367,-3.74922
+295,"Camaguey, Cuba",21.52176,-77.7812
+296,Honduras,15.2,-86.2419
+297,"Santo Domingo, Dominican Republic",18.48606,-69.9312
+298,"Santo Domingo, Dominican Republic",18.48606,-69.9312
+299,St. Augustine,29.90124,-81.3124
+300,St. Barthélemy,17.9,-62.8333
+301,St. Croix,17.70584,-64.8585
+302,St. Eustatius,17.48903,-62.9736
+303,St. Kitts,17.25,-62.6667
+304,St. Lucia,13.90944,-60.9789
+305,St. Maarten,18.04248,-63.0548
+306,St. Paul de Loanda,-8.83833,13.23444
+307,St. Thomas,18.33536,-64.9534
+308,St. Vincent,13.25,-61.2
+309,Stabroek,6.807041,-58.16
+310,Stockton,54.57,-1.32
+311,Surinam,3.919305,-56.0278
+312,Taipu,-5.62346,-35.5976
+313,Texel,53.09955,4.808668
+314,Tobago,11.25,-60.667
+315,Tortola,18.43347,-64.6333
+316,Tortuga,20.05487,-72.7925
+317,Trinidad,10.46056,-61.2486
+318,Trinidad de Cuba,21.79603,-79.9808
+319,Ubatuba,-23.4337,-45.0838
+320,"Upper James River, Wingina",37.58905,-78.6594
+321,USA,37.09024,-95.7129
+322,USA,37.09024,-95.7129
+323,Vannes,47.65824,-2.76085
+324,Vera Cruz,19.19028,-96.1533
+325,Virginia,37.43157,-78.6569
+326,Vitória,-20.2976,-40.2958
+327,Vlissingen,51.45367,3.570913
+328,Warren,41.7303,-71.2825
+329,West Central Africa and St. Helena,-15.95,-5.71667
+330,West Indies,21.46911,-78.6569
+331,Whitehaven,54.5497,-3.58923
+332,Whydah,-26.1156,28.37181
+333,"Adiaké, Côte d'Ivoire",5.161389,-3.47028
+334,"Adiaké, Côte d'Ivoire",5.161389,-3.47028
+335,"Adiaké, Côte d'Ivoire",5.161389,-3.47028
+336,"York River, Virgina",37.28305,-76.5604
+337,Zanzibar,-6.16592,39.20264
+338,Zeeland,51.49403,3.849682

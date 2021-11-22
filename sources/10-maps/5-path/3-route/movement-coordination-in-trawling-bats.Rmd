@@ -1,0 +1,165 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(geojsonio)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggsci)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+MAPS
+</div>
+
+# Route Map
+## Submarine Cable Map
+
+Route map of the world's major operating and planned submarine cable systems and landing stations.
+
+***
+
+# Load data
+## The routes
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+cables = read.csv("archetypes/fusion-cables.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+cables
+
+```
+
+
+## The landing points
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+landing_points = read.csv("archetypes/fusion-landing-points.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+landing_points
+
+```
+
+
+## Natural Earth base map
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# PLOT NATURAL EARTH BORDERS
+ne_world <- ne_countries(scale = "medium", returnclass = "sf")
+# class(ne_world)
+
+```
+
+
+## Theme
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+theme_opts <- theme(
+      legend.position="none",
+      plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.background=element_rect(fill="white", colour="white"),
+      panel.border = element_blank()
+)
+
+```
+
+
+## Route map
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6, out.width = "100%"}
+
+v1 <- ggplot(data = ne_world) +
+  geom_path( data = cables, aes(x=longitude, y=latitude, group=factor(id)), color=cables$color, size=0.5) +
+  geom_sf(fill="#f0f0f0", color="#888888", stroke=0.5) +
+  geom_point( data = landing_points, aes(x=lon, y=lat ), shape=21, size=1, fill="#ffffff", color="#111111", stroke=0.5 ) +
+  scale_color_tron() +
+  scale_fill_tron() +
+  ylim(-53,80) + # removes Antarctica
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "Routes Map", 
+       subtitle="Submarine Cable Map") +
+  theme_opts
+  
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+## Save output to file
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# ggsave(filename = "assets/submarine-cable-map.svg", plot = v1, width=12, height=6)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+Inspired by <a href="https://github.com/telegeography/www.submarinecablemap.com">Source</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

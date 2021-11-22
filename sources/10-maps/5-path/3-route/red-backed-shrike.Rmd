@@ -1,0 +1,201 @@
+---
+pagetitle: "Red-backed shrike geolocator data"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Libraries
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(wesanderson)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS
+</div>
+
+# Red-backed shrike geolocator data
+## Route map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo from Wikipedia Commons"}
+
+masthead <- "assets/Red-backed_shrike.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Shrikes were songbirds; he ought to know...\
+--- Jodi Meadows\
+
+***
+
+The red-backed shrike (Lanius collurio) is a carnivorous passerine bird and member of the shrike family Laniidae. Its breeding range stretches from Western Europe east to central Russia. It is migratory and winters in the eastern areas of tropical Africa and southern Africa.
+
+### Ingest
+#### The routes
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+routes <- read.csv("archetypes/red-backed-shrike/red-backed-shrike-coords.csv", header = TRUE)
+routes
+
+```
+
+### Ingest
+#### The stopovers
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+stopovers <- read.csv("archetypes/red-backed-shrike/red-backed-shrike-main-stopovers.csv", header = TRUE)
+stopovers
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+
+```
+
+
+### Map labels
+#### from centroids within range of limits
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+centroids = read.csv("archetypes/red-backed-shrike//country-centroids.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+countryref <- centroids %>% select(iso3c, latitude, longitude)
+countryref <- filter(countryref, latitude > -35 & latitude < 60)
+countryref <- filter(countryref, longitude > -20 & longitude < 55)
+
+countryref
+
+```
+
+
+### Route map
+#### follow the shrike
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+      axis.line=element_blank(),
+      axis.text.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.ticks=element_blank(),
+      axis.title.x=element_blank(),
+      axis.title.y=element_blank(),
+      legend.position="none",
+      legend.title = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.background=element_rect(fill="#ffffff", colour="#ffffff"),
+      panel.border = element_blank()
+)
+
+# color palette for number of months
+pal <- wes_palette("Zissou1", 12, type = "continuous")
+
+v1 <- ggplot(data = ne_world) +
+  geom_sf(data = ne_world, fill="#f5f5f5", color="#d5d5d5", size=1.0) +
+  geom_text(data= countryref, aes(x=longitude, y=latitude, label=iso3c),
+            color = "gray20", fontface = "italic", check_overlap = T, size = 2) +
+  # routes
+  geom_path(data = routes, aes(y, x), alpha = 0.8, size = 1.5, color = "#666666" ) + 
+  geom_point(data = routes, aes(y, x), shape=21, alpha = 1.0, size = 2.0, fill = "#ffffff", color = "#666666") +
+  # stopovers
+  geom_point(data = stopovers, aes(Medianlon, Medianlat, size = stopover_duration, color = Main_month), alpha = 0.9) +
+  # Now, for each of these points we plot the uncertainties
+  # Horizontal
+  geom_segment(data = stopovers, aes(y=Medianlat, x=FstQu.lon, xend=TrdQu.lon, yend=Medianlat), size = 0.5) +
+  # Vertical
+  geom_segment(data = stopovers, aes(y=FstQu.lat, x=Medianlon, xend=Medianlon, yend=TrdQu.lat), size = 0.5) +
+  # color and size scales
+  scale_color_gradientn(colours = pal) + 
+  scale_size_continuous(range=c(3,12)) +
+  # limit view to relevant area
+  coord_sf(xlim = c(-20, 55), ylim = c(-35, 60), expand = TRUE) +
+  theme_bw() +
+  labs(x=NULL,
+       y=NULL,
+       title = "Red-Backed Shrike", 
+       subtitle="Geolocation Routes") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 9, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.65))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+ggsave(filename = "outputs/red-backed-shrike-fs.svg", plot = v1, width=9, height=12)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data source: 
+  + Pedersen, Lykke & Thorup, Kasper & Tøttrup, Anders. (2018), [GO](https://core.ac.uk/download/pdf/269314309.pdf){target="_blank"} 
+  + Annual GPS tracking reveals unexpected wintering area in a long-distance migratory songbird.[GO](https://link.springer.com/article/10.1007/s10336-018-1610-8){target="_blank"} 
+  + Journal of Ornithology, [GO](https://www.springer.com/journal/10336){target="_blank"} 
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

@@ -1,0 +1,231 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(CoordinateCleaner)
+library(geojsonio)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(scales)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Refugee Flows
+## Flow Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Julie Ricard on Unsplash"}
+
+masthead <- "assets/julie-ricard-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> No one leaves home unless home is the mouth of a shark...\
+--- Warsan Shire\
+
+***
+
+### Ingest
+#### Flows and points
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_flows = read.csv("archetypes/refugee-flows/unhcr-refugee-flows.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+head(df_flows)
+
+```
+
+
+### Wrangle
+#### filter origin and year
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# change the filter to experiment with other exporters or importers
+df_flows_origin <- filter( df_flows, Country_of_origin_ISO3c == "SYR" )
+df_flows_origin <- filter( df_flows_origin, Refugees_under_UNHCR_mandate > 0 )
+df_flows_origin <- filter( df_flows_origin, Year == 2020 )
+
+df_flows_origin <- df_flows_origin %>% select( Country_of_origin, Country_of_origin_ISO3c, Country_of_asylum, Country_of_asylum_ISO3c, Refugees_under_UNHCR_mandate )
+
+df_flows_origin
+
+```
+
+
+### Wrangle
+#### enrich with coordinates
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+centroids = read.csv("archetypes/refugee-flows/country-centroids.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+countryref <- centroids %>% select(iso3c, latitude, longitude)
+countryref
+
+df_geo <- merge(df_flows_origin, countryref, by.x="Country_of_origin_ISO3c", by.y="iso3c")
+df_geo <- df_geo %>% rename(slongitude = longitude, slatitude = latitude)
+
+df_geo <- merge(df_geo, countryref, by.x="Country_of_asylum_ISO3c", by.y="iso3c")
+df_geo <- df_geo %>% rename(tlongitude = longitude, tlatitude = latitude)
+
+df_geo
+
+
+```
+
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+# PLOT NATURAL EARTH BORDERS
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# class(ne_world)
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
+
+```
+
+
+### Flow Map
+#### origin
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# theme parameters
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_blank(),
+  panel.border = element_blank(),
+  plot.background = element_blank()
+)
+
+
+v1 <- ggplot(data = ne_world) +
+  geom_sf(fill="#ffffff", color="#cccccc", size=0.75) +
+  geom_point( data = df_geo, aes(x=tlongitude, y=tlatitude, size=Refugees_under_UNHCR_mandate, fill=Refugees_under_UNHCR_mandate), shape=21, color="white", stroke=1, alpha=1.0) +
+  geom_segment( data = df_geo, aes( x=slongitude, y=slatitude, 
+                                  xend=tlongitude, yend=tlatitude, 
+                                  size=Refugees_under_UNHCR_mandate, color=Refugees_under_UNHCR_mandate, alpha=Refugees_under_UNHCR_mandate ), 
+                                  lineend="round", linejoin="round" ) +
+  geom_point( data = head(df_geo, n=1), aes(x=slongitude, y=slatitude), shape=21, size=14, fill='black', color="black", stroke=1, alpha=0.7) +
+  geom_text( data = head(df_geo, n=1), aes(x=slongitude, y=slatitude, label = Country_of_origin_ISO3c), color="white", alpha=1.0) +
+  scale_size_continuous(range=c(1,10), guide="none") +
+  scale_alpha_continuous(range=c(0.2,0.6), guide="none") +
+  scale_fill_gradient(low = "#3949AB", high = "#8E24AA", guide="none") + 
+  scale_color_gradient(low = "#3949AB", high = "#8E24AA", guide="none") + 
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "Refugee Flows", 
+       subtitle="From Syria, Refugees_under_UNHCR_mandate") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/refugee-flows-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/refugee-flows-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data: UNHCR, https://www.unhcr.org/refugee-statistics/
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'global refugees'
+commands <- 'ne_countries geom_sf geom_segment'
+sources <- 'UNHCR'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

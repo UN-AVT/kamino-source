@@ -1,0 +1,186 @@
+---
+pagetitle: "Where do surfers travel?"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Libraries
+library(tidyverse)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Where do surfers travel?
+## Connection Map
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Josh Withers on Unsplash"}
+
+masthead <- "assets/josh-withers-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> I'm surfing the giant life wave....\
+--- William Shatner\
+
+***
+
+### Ingest
+#### tweets and lights
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df <- read.csv("archetypes/where-do-surfers-travel/where-do-surfers-travel.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+# use city populations to simulate lights as in original
+lights = read.csv("archetypes/cities-top-10000-world.csv", header = TRUE, stringsAsFactors = FALSE)
+# lights
+
+```
+
+### Wrangler
+#### column as factor
+
+Categorizing __homecontinent__ column as a factor. The Continents levels will be used to color the lines on the map.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# factor for color scale
+df$homecontinent=factor(df$homecontinent, levels=c("Asia", "Europe", "Australia", "Africa", "North America", "South America", "Antarctica"))
+df
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# PLOT NATURAL EARTH BORDERS
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+
+```
+
+
+### Map Theme
+#### dark
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+theme_opts <- theme(
+      legend.position="bottom",
+      legend.title = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+)
+
+theme_dark <- theme(
+  panel.background=element_rect(fill="#05050f", colour="#000000"),
+)
+
+```
+
+
+### Connection Map
+#### with geom_line
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v1 <- ggplot(data = ne_world) +
+  # map feature styling to match blue marble dark lights
+  geom_sf(fill="#211f3c", color="#131522", stroke=0.5) +
+  # lights
+  geom_point( data = lights, aes(x=lng, y=lat, alpha=Population), size=0.5, color="#f9e6ba" ) +
+  # brightness by population
+  scale_alpha_continuous(range=c(0.1,1), guide=FALSE) +
+  # connections
+  geom_line(data=df, aes(x=lon, y=lat, group=group, colour=homecontinent, alpha=n), size=0.6) +
+  # guides(alpha = "none") +
+  scale_color_brewer(palette="Set3") +
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "Where surfers travel", 
+       subtitle="10,000 #surf tweets recovered") +
+  theme_opts +
+  theme_dark
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+ggsave(filename = "outputs/where-surfers-travel-fs.svg", plot = v1, width=16, height=9)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data source: [GO](https://github.com/holtzy/About-Surfers-On-Twitter){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

@@ -1,0 +1,164 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(maptools)
+library(sp)
+library(sf)
+library(rgdal)
+library(raster)
+library(rgeos)
+
+library(tidyverse)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggthemes)
+
+```
+
+## Dot Density Map - Raster to Vector Transform
+
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
+
+# Load density file
+the_raster <- raster("./archetypes/gpw-v4-population-count-2020/gpw-v4-population-count_2020.tif")
+the_raster
+
+levels(the_raster)
+cellStats(the_raster, sd)
+hist(the_raster)
+
+
+
+```
+
+
+```{r, echo=FALSE}
+
+the_raster_df <- as.data.frame(the_raster, xy = TRUE) 
+str(the_raster_df)
+
+# remove loaded file
+rm(the_raster)
+
+```
+
+
+
+```{r, echo=FALSE}
+
+
+
+```
+
+
+
+```{r, echo=FALSE, fig.width=12, fig.height=6}
+
+the_raster_df <- filter( the_raster_df, mex_pd_2020_1km_UNadj != "NA")
+the_raster_df <- filter( the_raster_df, mex_pd_2020_1km_UNadj > 5)
+
+write.csv(the_raster_df,"../archetypes/mex_pd_2020_1km_UNadj.csv", row.names = FALSE)
+
+head(the_raster_df)
+str(the_raster_df)
+
+# unique(pigs_livestock_df$Glb_Pigs_CC2006_AD)
+min(the_raster_df$mex_pd_2020_1km_UNadj)
+max(the_raster_df$mex_pd_2020_1km_UNadj)
+summary(the_raster_df$mex_pd_2020_1km_UNadj)
+# hist(pigs_livestock_df$Glb_Pigs_CC2006_AD)
+
+```
+
+
+
+```{r, echo=FALSE, fig.width=12, fig.height=6}
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+# PLOT NATURAL EARTH BORDERS
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# class(ne_world)
+
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 == "MEX") 
+
+v1 <- ggplot(data = ne_world) +
+  geom_sf(fill="#ffffff", color="#666666", stroke=0.25) +
+  geom_raster(data = the_raster_df,
+              aes(x = x, y = y, alpha = mex_pd_2020_1km_UNadj) ) + 
+  scale_alpha_continuous(range =  c(0.1, 0.9), guide = "none") +
+  coord_sf() +
+  theme_opts
+
+v1
+
+
+```
+
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+<a href="https://govdata360-backend.worldbank.org/api/v1/datasets/4034/dump.csv">Source</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

@@ -1,0 +1,174 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(ggplot2)
+library(ggthemes)
+library(rnaturalearth)
+library(rgdal)
+library(sf)
+library(wbstats)
+# install.packages("remotes")
+#library(remotes)
+#install_github("rCarto/popcircle")
+library(popcircle) # Not in CRAN (Comprehensive R Archive Network)
+library(cartography)
+library(ggiraph)
+
+# install.packages(c("ggthemes", "rnaturalearth", "rgdal", "sf", "wbstats", "cartography"))
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Geo Circle Packing
+## Geographical Maps  +  Circle Packing (visualization where area of circles represents the numerical data)
+## Case: Population
+
+
+> Who runs in circles never gets far...\
+--- Thornton Burgess\
+
+***
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Get countries
+ctry <- ne_countries(scale = "small", returnclass = "sf") # "sf" = simplefeatures (one of the standard in r for mapping)
+ctry <- st_transform(ctry, 3857)
+
+# Only keep the largest polygons of multipart polygons for a few countries
+# (e.g. display only continental US)
+frag_ctry <- c("US", "RU", "FR", "IN", "ES", "NL", "CL", "NZ", "ZA")
+largest_ring = function(x) {
+  x$ids <- 1:nrow(x)
+  pols = st_cast(x, "POLYGON", warn = FALSE)
+  spl = split(x = pols, f = pols$ids)
+  do.call(rbind, (lapply(spl, function(y) y[which.max(st_area(y)),])))
+}
+st_geometry(ctry[ctry$iso_a2 %in% frag_ctry,]) <-
+  st_geometry(largest_ring(ctry[ctry$iso_a2 %in% frag_ctry,]))
+
+
+```
+
+# Section
+## Subsection
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+## POPULATION
+# Get and merge data
+data_pop <- wb(indicator = "SP.POP.TOTL", startdate = 2017, enddate = 2017)
+ctry_pop <- merge(ctry[,"iso_a2"], data_pop, by.x = "iso_a2", by.y = "iso2c" )
+
+data_pop
+ctry_pop
+
+# Computes circles and polygons
+res_pop <- popcircle(x = ctry_pop, var = "value")
+circles_pop <- res_pop$circles
+shapes_pop <- res_pop$shapes
+
+circles_pop$lab <- paste0(circles_pop$country, '\n', round(circles_pop$value/1000000))
+
+```
+
+## Question: Which countries have the highest populations? What do these countries look like?
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6, out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+circles_pop_sf = st_as_sf(circles_pop)
+shapes_pop_sf = st_as_sf(shapes_pop)
+
+v1 <- ggplot() +
+  geom_sf(data = circles_pop_sf, aes(fill = value), color = "#ffffff", stroke = 0.5 ) +
+  geom_sf(data = shapes_pop_sf, fill = "#ffffff", color = "#ffffff", stroke = 0.25 ) +
+  geom_sf_text(data = circles_pop_sf, aes( label = ifelse((value>125000000),iso3c, "")), size=3, color = 'black') +
+  scale_fill_gradient2_tableau() +
+  theme_bw() +
+  labs(title = "Population, Million Inhabitants", 
+       subtitle="T. Giraud, 2019 - World Development Indicators, 2017") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# ggsave(filename = "assets/pop-circles-population.svg", plot = v1, width=12, height=6)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+<a href="https://github.com/rCarto/popcircle">Source</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

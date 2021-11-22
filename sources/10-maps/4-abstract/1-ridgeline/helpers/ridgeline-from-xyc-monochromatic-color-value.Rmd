@@ -1,0 +1,150 @@
+---
+title: "Ridgeline Map"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+library(maptools)
+library(sp)
+library(sf)
+
+library(rgdal)
+library(raster)
+library(gdalUtils)
+
+library(reshape)
+library(tidyverse)
+library(ggplot2)
+library(ggridges)
+
+library(maptools)
+library(rgeos) #create a range standardisation function
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggthemes)
+
+library(data.table)
+
+#Load
+library(magick)
+library(imager)
+
+```
+
+
+## R Markdown
+
+
+```{r, echo=FALSE}
+
+ne_download(scale = 10, type = "urban_areas", returnclass = "sf", destdir = ".", load = FALSE) 
+
+urban <- ne_load(scale = 10, type = "urban_areas", returnclass = "sf", destdir = ".")
+
+urban
+
+png <- ggplot() +
+  theme_void() +
+  geom_sf(data = urban, aes(alpha = area_sqkm), fill = "black", color = "black") +
+  scale_alpha_continuous(range = c(0.1, 1.0)) +
+  theme(legend.position = "none")
+
+png
+
+ggsave(filename="ne_10m_urban_areas.png", plot=png, device="png", width=12, height=6, units="in", dpi=500)
+
+fpath <- system.file('../archetypes/ne_10m_urban_areas.png', package='imager')
+fmap <- load.image('../archetypes/ne_10m_urban_areas.png')
+
+fmap <- grayscale(fmap)
+
+print(fmap)
+
+fmap %>% hist(main="Luminance values")
+
+fmap_df <- as.data.frame(fmap)
+head(fmap_df)
+
+
+
+```
+
+
+```{r}
+
+summary(fmap_df)
+nrow(fmap_df)
+
+# 176,946,593
+fmap_df_f <- filter(fmap_df, value < 0.9999)
+
+summary(fmap_df_f)
+nrow(fmap_df_f)
+
+fmap_df_f
+
+# if source image has color
+#rgb_df <- mutate(fmap_df,channel=factor(cc,labels=c('R','G','B')))
+#head(rgb_df)
+
+# if source image is greyscale
+f <- ecdf(fmap)
+plot(f,main="Empirical CDF of luminance values")
+
+```
+
+
+
+```{r, echo=FALSE, fig.width=12, fig.height=6}
+
+ggplot(fmap_df_f, aes(x, y, alpha = value)) +
+  geom_point(size = 0.1) +
+  scale_alpha_continuous(range = c(01., 1)) +
+  scale_y_reverse()
+
+
+```
+
+```{r, echo=FALSE, fig.width=24, fig.height=12}
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  #panel.grid = element_blank(),
+  panel.grid.major = element_line(colour="#ffffff"),
+  panel.grid.minor = element_line(colour="#ffffff"),
+  panel.background=element_rect(fill="#f0f0f0", colour="#f0f0f0"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+v1 <- ggplot(fmap_df_f, aes(x, y, height = value, group = y)) + 
+  geom_density_ridges(stat = "identity", scale = 5, size=0.1, color = "#666666", fill = "#ffffff") + 
+  scale_y_reverse(expand = c(0,0)) +
+  scale_x_continuous(expand = c(0,0)) +
+  theme_bw() +
+  theme_opts
+
+v1
+
+```
+
+
+
+
+```{r}
+
+ggsave(filename = "world-population-ridgeline.svg", plot = v1, width=12, height=6)
+
+```
+

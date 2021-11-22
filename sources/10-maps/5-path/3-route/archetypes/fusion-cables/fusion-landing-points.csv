@@ -1,0 +1,1556 @@
+city_id,name,lon,lat,cable_id
+16503,"Koungou, Comoros",45.206894,-12.736801,1865
+16809,"BP Clair Ridge, United Kingdom",2.294939,60.441045,1576
+16803,"Port Mathurin, Mauritius",63.426978,-19.679717,1901
+7660,"Hong Kong, China",114.158717,22.283324,1902
+16758,"Baie Longue, SaintMartin",-63.145703,18.059657,1245
+10783,"Philipsburg, Sint Maarten",-63.045825,18.030201,1245
+9134,"Mamoudzou, Mayotte",45.233286,-12.783309,1872
+3017,"Melbourne, Australia",144.967149,-37.817502,1818
+4045,"Adelaide, Australia",138.599867,-34.926097,1818
+7671,"Hobart, Australia",147.331601,-42.881635,1818
+3239,"Perth, Australia",115.857227,-31.953442,1818
+3030,"Sydney, Australia",151.206990,-33.869872,1818
+3925,"Port Moresby, Papua New Guinea",147.188510,-9.479600,1898
+16730,"Kikori, Papua New Guinea",144.240196,-7.413512,1898
+16720,"Sisimiut, Greenland",-53.673381,66.939467,1897
+16719,"Maniitsoq, Greenland",-52.905718,65.407681,1897
+16718,"Aasiaat, Greenland",-52.859111,68.706971,1897
+3029,"Singapore, Singapore",103.853106,1.293881,1895
+7311,"Dumai, Indonesia",101.447639,1.665609,1895
+5862,"Batam, Indonesia",103.962506,1.134726,1895
+3012,"Jakarta, Indonesia",106.827861,-6.171594,1895
+9595,"Bali, Indonesia",115.596973,-8.464415,1895
+9720,"Makassar, Indonesia",119.412401,-5.152185,1895
+9716,"Balikpapan, Indonesia",116.831201,-1.265371,1895
+16618,"Tarakan, Indonesia",117.578515,3.327352,1895
+15115,"Manado, Indonesia",124.839620,1.490829,1895
+16717,"Madura, Indonesia",113.283473,-6.902282,1895
+5942,"Mtunzini, South Africa",31.757853,-28.950440,1878
+4361,"Jeddah, Saudi Arabia",39.182873,21.481542,1878
+5896,"Mombasa, Kenya",39.672839,-4.053016,1878
+9486,"Zafarana, Egypt",32.649893,29.116658,1878
+3259,"Karachi, Pakistan",67.028539,24.889683,1878
+4252,"Maputo, Mozambique",32.580631,-25.968166,1878
+13489,"Antsiranana, Madagascar",49.292170,-12.275253,1878
+9400,"Terre Rouge, Mauritius",57.510086,-20.077813,1901
+9400,"Terre Rouge, Mauritius",57.510086,-20.077813,1878
+4182,"Dar Es Salaam, Tanzania",39.269690,-6.822985,1878
+3212,"Mumbai, India",72.875875,19.076075,1878
+5962,"Fujairah, United Arab Emirates",56.333744,25.121665,1878
+16693,"Mocha, Yemen",43.247325,13.320291,1878
+5950,"Port Sudan, Sudan",37.219691,19.615552,1878
+5942,"Mtunzini, South Africa",31.757853,-28.950440,1864
+4252,"Maputo, Mozambique",32.580631,-25.968166,1864
+4182,"Dar Es Salaam, Tanzania",39.269690,-6.822985,1864
+5896,"Mombasa, Kenya",39.672839,-4.053016,1864
+4177,"Djibouti City, Djibouti",43.148033,11.594853,1864
+4363,"Aqaba, Jordan",35.006972,29.531966,1864
+16715,"Quseer, Egypt",34.274355,26.106821,1864
+7694,"Hanko, Finland",22.968221,59.823211,1816
+16711,"Bomba, Belize",-88.294458,17.925611,1893
+16710,"San Pedro, Belize",-87.978345,17.911036,1893
+16695,"Kiamsam, Malaysia",115.168946,5.255329,1891
+16694,"Socotra, Yemen",53.486553,12.696390,1863
+16693,"Mocha, Yemen",43.247300,13.320291,1863
+5506,"São Mateus, Brazil",-39.859130,-18.716705,1888
+5493,"Porto Seguro, Brazil",-39.064697,-16.451081,1888
+4590,"Ilhéus, Brazil",-39.047704,-14.787972,1888
+3342,"Salvador, Brazil",-38.504541,-12.969979,1888
+3356,"Aracajú, Brazil",-37.074805,-10.909604,1888
+3344,"Maceió, Brazil",-35.734962,-9.666465,1888
+3352,"Recife, Brazil",-34.871974,-8.055333,1888
+3351,"João Pessoa, Brazil",-34.861037,-7.115295,1888
+3354,"Natal, Brazil",-35.211183,-5.794836,1888
+3242,"Rio de Janeiro, Brazil",-43.209568,-22.903397,1888
+3343,"Vitória, Brazil",-40.301659,-20.294024,1888
+3387,"Macaé, Brazil",-41.785643,-22.371806,1888
+16689,"Sitio, Brazil",-37.570508,-11.846664,1888
+16690,"Atafona, Brazil",-41.027245,-21.631157,1888
+16505,"Thinadhoo, Maldives",72.997677,0.531088,1868
+16506,"Kolhufushi, Maldives",73.424630,2.776766,1868
+16283,"Oranjestad Bay, Bonaire, Sint Eustatius and Saba",-62.987036,17.481849,1807
+16282,"Fort Bay, Bonaire, Sint Eustatius and Saba",-63.251636,17.616493,1807
+16123,"Great Bay Beach, Saint Martin",-63.055054,18.024452,1807
+16635,"Terempa, Indonesia",106.211137,3.207137,1886
+16634,"Penarik, Indonesia",108.290238,3.666756,1886
+16627,"Jayapura, Indonesia",140.669104,-2.591566,1885
+16628,"Sarmi, Indonesia",139.353285,-2.175233,1885
+16629,"Biak, Indonesia",136.053286,-1.163466,1885
+16630,"Manokwari, Indonesia",134.062003,-0.861465,1885
+16573,"Sorong, Indonesia",131.295403,-0.882070,1885
+16636,"Labuha, Indonesia",127.480463,-0.626797,1884
+15115,"Manado, Indonesia",124.839547,1.490878,1884
+16572,"Ternate, Indonesia",127.375385,0.789853,1884
+16622,"Sofifi, Indonesia",127.561420,0.734970,1884
+16573,"Sorong, Indonesia",131.295403,-0.882070,1884
+16623,"Sanana, Indonesia",125.937007,-2.201479,1884
+16624,"Namlea, Indonesia",127.085834,-3.233412,1884
+16571,"Ambon, Indonesia",128.190717,-3.655384,1884
+16570,"Kendari, Indonesia",122.512985,-3.998475,1884
+16625,"Masohi, Indonesia",128.955267,-3.297840,1884
+16626,"Bandaneria, Indonesia",129.872064,-4.520179,1884
+16574,"Fakfak, Indonesia",133.019425,-3.097767,1884
+16631,"Waisai, Indonesia",130.857610,-0.383364,1885
+16574,"Fakfak, Indonesia",133.019425,-3.097767,1885
+16632,"Tual, Indonesia",132.752043,-5.626550,1885
+16633,"Kaimana, Indonesia",133.791495,-3.679359,1885
+16575,"Timika, Indonesia",136.889614,-4.550257,1885
+16576,"Merauke, Indonesia",140.405042,-8.499083,1885
+16621,"Tutuyan, Indonesia",124.574996,0.761435,1883
+16620,"Luwuk, Indonesia",122.792770,-0.938784,1883
+16619,"Tanjung Selor, Indonesia",117.819433,2.572030,1882
+16618,"Tarakan, Indonesia",117.578515,3.327352,1882
+16617,"Muntok, Indonesia",105.164263,-2.065151,1881
+7802,"Surabaya, Indonesia",112.746681,-7.258581,1880
+9720,"Makassar, Indonesia",119.412401,-5.152185,1880
+3239,"Perth, Australia",115.857227,-31.953442,1744
+3029,"Singapore, Singapore",103.853033,1.293661,1744
+16556,"Øygarden, Norway",4.830241,60.587346,1203
+15386,"Farsund, Norway",6.752799,58.082770,1203
+16362,"Tjele, Denmark",9.611684,56.510798,1875
+16552,"Tachognya Beach, Tinian, Northern Mariana Islands",145.629258,14.958767,1874
+16551,"Sasanlagu, Rota, Northern Mariana Islands",145.134337,14.144937,1874
+16550,"Sugar Dock, Saipan",145.699571,15.151809,1874
+5970,"Tungku, Brunei",114.885840,4.926374,1891
+4862,"Virginia Beach, Virginia, United States",-76.059198,36.755009,1900
+4862,"Virginia Beach, Virginia, United States",-76.059198,36.755009,1890
+4862,"Virginia Beach, Virginia, United States",-76.059198,36.755009,1873
+16519,"Laucala Bay, Fiji",178.488813,-18.148785,1855
+16520,"Tuasivi, Samoa",-172.178174,-13.670614,1855
+16521,"Fagali'i, Samoa",-171.740084,-13.849227,1855
+5936,"Carcavelos, Portugal",-9.331557,38.690165,1046
+5936,"Carcavelos, Portugal",-9.331557,38.690165,1443
+5936,"Carcavelos, Portugal",-9.331557,38.690165,1629
+5936,"Carcavelos, Portugal",-9.331557,38.690165,1045
+16441,"Utqiaġvik, Alaska, United States",-156.788635,71.290552,1862
+16440,"Point Hope, Alaska, United States",-166.808058,68.347768,1862
+16439,"Wainwright, Alaska, United States",-160.038342,70.636951,1862
+16438,"Kotzebue, Alaska, United States",-162.596681,66.898342,1862
+16437,"Nome, Alaska, United States",-165.406398,64.501114,1862
+13390,"Prudhoe Bay, Alaska, United States",-148.338442,70.255640,1862
+16518,"Kauditan, Indonesia",125.065621,1.378622,1823
+7775,"Candelaria, Canary Islands, Spain",-16.371739,28.355538,1701
+16514,"Cabo Espiritu Santo, Argentina",-68.605784,-52.658901,1871
+16513,"Punta Dungeness, Argentina",-68.419749,-52.390224,1871
+16516,"Sengigi, Indonesia",116.047266,-8.485460,1867
+16515,"Seraya, Indonesia",115.746680,-8.386266,1867
+16517,"Tarahales, Spain",-15.450743,28.096371,1866
+4979,"Manhattan Beach, California, United States",-118.410832,33.887127,1858
+16442,"Mangawhai, New Zealand",174.574459,-36.126145,1733
+16358,"Kapolei, HI, United States",-158.056895,21.335424,1733
+10498,"Taba, Egypt",34.894863,29.492574,1806
+16413,"Praia Grande, Brazil",-46.412496,-24.008866,1728
+9754,"Sines, Portugal",-8.869594,37.957218,1725
+6007,"Cape D'Aguilar, China",114.260255,22.208031,1739
+16373,"Bosaso, Somalia",49.187922,11.275566,1863
+16373,"Bosaso, Somalia",49.187922,11.275566,1850
+10093,"Berbera, Somalia",45.010874,10.435112,1863
+10093,"Berbera, Somalia",45.010874,10.435112,1850
+5924,"Salalah, Oman",54.148076,17.095827,1850
+16371,"Gwador, Pakistan",62.325026,25.132297,1849
+16372,"Thanlyin, Myanmar",96.248252,16.758754,1854
+5706,"Diego Garcia, British Indian Ocean Territory",72.416622,-7.333361,1845
+7777,"Chipiona, Spain",-6.428872,36.731303,1866
+7777,"Chipiona, Spain",-6.428872,36.731303,1852
+10340,"La Union, Philippines",120.389646,16.582594,1507
+16316,"Lingang, China",121.896091,30.935664,1786
+9719,"Jambi, Indonesia",103.609967,-1.590004,1844
+15182,"San Andres, Colombia",-81.700553,12.584696,1843
+16208,"Skagway, Alaska, United States",-135.313894,59.458343,1840
+16207,"Haines, Alaska, United States",-135.445003,59.235833,1840
+16121,"Kaunakakai, HI, United States",-157.023886,21.093359,1456
+16122,"Manele Bay, HI, United States",-156.896885,20.743432,1456
+16118,"Ko Olina, HI, United States",-158.119495,21.339697,1455
+16116,"Koko Head, HI, United States",-157.696005,21.277563,1456
+16116,"Koko Head, HI, United States",-157.696005,21.277563,1455
+7795,"Kihei, Maui, HI, United States",-156.463096,20.782153,1456
+7795,"Kihei, Maui, HI, United States",-156.463096,20.782153,1455
+4822,"Lihue, HI, United States",-159.368562,21.974938,1456
+4822,"Lihue, HI, United States",-159.368562,21.974938,1455
+5721,"Gran Canaria, Canary Islands, Spain",-15.596593,27.957760,1449
+7781,"Lanzaarote, Canary Islands, Spain",-13.650402,29.038509,1449
+16021,"Skaill, United Kingdom",-3.354948,59.051459,1836
+16020,"Dunnet Head, United Kingdom",-3.376579,58.670331,1836
+16018,"Whitehead, United Kingdom",-5.718716,54.753707,1834
+11461,"Troon, United Kingdom",-4.659928,55.541328,1834
+3537,"Aberdeen, United Kingdom",-2.106804,57.153791,1203
+10400,"Rota, Spain",-6.363003,36.626274,1666
+16016,"Tinocas, Canary Islands, Spain",-15.487706,28.134359,1666
+16017,"Güimar, Canary Islands",-16.412559,28.310580,1666
+9719,"Jambi, Indonesia",103.609967,-1.590004,1832
+16015,"Bratu Prahu, Indonesia",106.547465,-3.079921,1833
+3012,"Jakarta, Indonesia",106.827836,-6.171594,1844
+9095,"Tanjung Pakis, Indonesia",107.120903,-5.981262,1844
+10687,"Tanjung Pandan, Indonesia",107.662895,-2.767445,1844
+8360,"Pontianak, Indonesia",109.335452,-0.027407,1844
+5862,"Batam, Indonesia",103.962506,1.134726,1887
+5862,"Batam, Indonesia",103.962506,1.134726,1844
+7311,"Dumai, Indonesia",101.447565,1.665609,1559
+7311,"Dumai, Indonesia",101.447565,1.665609,1844
+9724,"Pekanbaru, Indonesia",101.450007,0.533335,1844
+9723,"Palembang, Indonesia",104.757330,-2.990980,1881
+9723,"Palembang, Indonesia",104.757330,-2.990980,1844
+9727,"Bandar Lampung, Indonesia",105.254107,-5.409290,1844
+5861,"Medan, Indonesia",98.676082,3.752132,1559
+5861,"Medan, Indonesia",98.676082,3.752132,1844
+14269,"Bandar Bukit Tinggi, Malaysia",101.436726,3.009286,1844
+9722,"Padang, Indonesia",100.361628,-0.943862,1844
+16284,"Baturaja, Indonesia",103.838971,-5.040320,1844
+16285,"Teping Tinggi, Indonesia",99.208211,3.380599,1844
+16286,"Rantu Prapat, Indonesia",99.827840,2.105136,1844
+16287,"Sibolga, Indonesia",98.786629,1.747812,1844
+16014,"Pesaren, Indonesia",105.582720,-1.553871,1833
+16013,"Linao, Chile",-73.504463,-41.991132,1830
+16012,"Meimen, Chile",-73.155293,-41.806928,1830
+6009,"Kota Kinabalu, Malaysia",116.074316,5.981330,1828
+7809,"Miri, Malaysia",114.007423,4.425300,1828
+7811,"Bintulu, Malaysia",113.068361,3.197005,1828
+7808,"Kuching, Malaysia",110.353714,1.520175,1886
+7808,"Kuching, Malaysia",110.353714,1.520175,1828
+7855,"Canterbury, New Zealand",171.707371,-43.494184,1487
+7854,"Marlborough, New Zealand",173.580710,-41.527241,1487
+7853,"Manawatu-Wanganui, New Zealand",175.618209,-39.625435,1487
+7852,"Taranaki, New Zealand",174.371530,-39.287862,1487
+7851,"Waikato, New Zealand",175.534908,-37.915890,1487
+4052,"Wellington, New Zealand",174.767135,-41.280537,1487
+15837,"Largs, United Kingdom",-4.867301,55.793342,1827
+15838,"Kilchatten Bay, United Kingdom",-5.028092,55.751839,1827
+15839,"Otter Ferry, United Kingdom",-5.321207,56.008284,1827
+15840,"Achnaba, United Kingdom",-5.365787,56.019416,1827
+15841,"Blackwaterfoot, United Kingdom",-5.332096,55.501948,1827
+15842,"Ardnacross, United Kingdom",-5.533414,55.476546,1827
+15843,"Down Craig, United Kingdom",-4.900455,55.780159,1827
+15844,"Corrie, United Kingdom",-5.141422,55.643648,1827
+15845,"Ardneil Bay, United Kingdom",-4.889371,55.693049,1827
+15846,"Port Askaig, United Kingdom",-6.106314,55.847737,1827
+15847,"Feolin Ferry, United Kingdom",-6.089908,55.846748,1827
+15848,"Lavagulin, United Kingdom",-6.125406,55.636116,1827
+15849,"Glenbarr, United Kingdom",-5.697574,55.565498,1827
+15850,"Craighouse, United Kingdom",-5.953824,55.833674,1827
+15851,"Ormsary, United Kingdom",-5.614566,55.891682,1827
+15852,"Kilchoan Ferry, United Kingdom",-6.093960,56.688569,1827
+15853,"Tobermory, United Kingdom",-6.070279,56.621845,1827
+15854,"Duart Bay, United Kingdom",-5.669351,56.455842,1827
+15855,"Ganavan Bay, United Kingdom",-5.475797,56.437763,1827
+15856,"Corran, United Kingdom",-5.245377,56.722529,1827
+15857,"Ardmair, United Kingdom",-5.196207,57.934076,1827
+15858,"Branahuie Bay, United Kingdom",-6.310757,58.209064,1827
+15859,"Leverburgh, United Kingdom",-7.008364,57.769403,1827
+15860,"Lochmaddy, United Kingdom",-7.163345,57.603693,1827
+15861,"Dunvegan, United Kingdom",-6.581655,57.436323,1827
+15862,"Sandwick Village, United Kingdom",-7.274136,57.366694,1827
+15863,"Ardvasar, United Kingdom",-5.906460,57.059370,1827
+15864,"Mallaigvaig, United Kingdom",-5.820425,57.008479,1827
+15865,"Scarinish, United Kingdom",-6.808511,56.503791,1827
+15866,"Calgary, United Kingdom",-6.272378,56.582124,1827
+15867,"Ludag, United Kingdom",-7.328139,57.105537,1827
+15868,"Balla, United Kingdom",-7.312173,57.081525,1827
+15869,"North Bay, United Kingdom",-7.449477,57.025288,1827
+15870,"Bay of Tuquoy, United Kingdom",-2.939519,59.279767,1827
+15871,"Aikerness , United Kingdom",-2.959147,59.350457,1827
+15872,"Portachur Point, United Kingdom",-4.943863,55.742769,1827
+15873,"Coilleag, United Kingdom",-7.302212,57.073615,1827
+15874,"Ardbeg Point, United Kingdom",-5.063590,55.858589,1827
+15875,"Ardyne Point, United Kingdom",-5.019986,55.869417,1827
+15876,"Ardgour, United Kingdom",-5.233658,56.721565,1827
+15884,"Raglan, New Zealand",174.871822,-37.801388,1750
+15834,"Ola, Russia",151.283357,59.583343,1825
+15833,"Okha, Russia",142.942443,53.577548,1825
+15832,"Ust-Bolsheretsk, Russia",156.287066,52.812411,1825
+15836,"Porthcressa Beach, United Kingdom",-6.308169,49.919908,1826
+4255,"Mogadishu, Somalia",45.344174,2.041195,1863
+4255,"Mogadishu, Somalia",45.344174,2.041195,1246
+10985,"Rayong, Thailand",101.277351,12.670658,1776
+6011,"Cherating, Malaysia",103.393658,4.130232,1828
+6011,"Cherating, Malaysia",103.393658,4.130232,1776
+3902,"Davao, Philippines",125.612788,7.079987,1823
+15111,"Ilyich, Russia",36.770838,45.423609,1822
+15112,"Kerch, Ukraine",36.477382,45.356983,1822
+3144,"Domburg, Netherlands",3.496160,51.563950,1819
+3225,"Aldeburgh, United Kingdom",1.590606,52.157846,1819
+5777,"Port Hedland, Australia",118.577245,-20.313457,1817
+7685,"Darwin, Australia",130.843157,-12.467489,1817
+15033,"Igiugig, Alaska, United States",-155.894736,59.327801,1693
+15032,"Port Alwsorth, Alaska, United States",-154.336926,60.200372,1693
+15031,"Fish Camp, Alaska, United States",-154.858846,59.949200,1693
+15030,"Nondalton, Alaska, United States",-154.847716,59.972649,1693
+15029,"Newhalem, Alaska, United States",-154.899767,59.718145,1693
+15028,"Kokhanok, Alaska, United States",-154.752747,59.442157,1693
+15026,"Pile Bay, Alaska, United States",-153.880477,59.776055,1693
+15027,"Illiamna, Alaska, United States",-154.906116,59.754766,1693
+15025,"Pedro Bay, Alaska, United States",-154.106115,59.787213,1693
+15024,"Williamsport, Alaska, United States",-153.632138,59.682403,1693
+15023,"McHugh Point, Alaska, United States",-149.732188,61.015715,1813
+15022,"Portage, Alaska, United States",-148.989809,60.828289,1813
+15021,"Matara, Sri Lanka",80.539861,5.940827,1559
+15020,"Kuakata, Bangladesh",90.116614,21.816735,1559
+14639,"Ngwe Saung, Myanmar",94.391221,16.858034,1739
+14639,"Ngwe Saung, Myanmar",94.391221,16.858034,1559
+9269,"Yanbu, Saudi Arabia",38.106971,24.070555,1559
+5346,"Toulon, France",5.930338,43.125294,1559
+15019,"Al Bustan, Oman",58.606082,23.576085,1739
+15018,"Kuala Kurau, Malaysia",100.397078,5.019465,1739
+5806,"Buenaventura, Colombia",-77.040301,3.883675,1084
+14844,"Puerto Chacabuco, Chile",-72.805098,-45.458294,1805
+14843,"Quellon, Chile",-73.479463,-43.117475,1805
+7762,"Gavá, Spain",2.001348,41.304006,1187
+14842,"Fomboni Moheli, Comoros",43.739585,-12.288241,1803
+14841,"Mutsamudu, Comoros",44.400034,-12.166659,1865
+14841,"Mutsamudu, Comoros",44.400034,-12.166659,1872
+14841,"Mutsamudu, Comoros",44.400034,-12.166659,1803
+14840,"Chindini, Comoros",43.489097,-11.923495,1865
+14840,"Chindini, Comoros",43.489097,-11.923495,1872
+14840,"Chindini, Comoros",43.489097,-11.923495,1803
+14839,"Mouly, New Caledonia",166.489014,-20.705938,1802
+14838,"Xepenehe, New Caledonia",167.151318,-20.780913,1802
+14837,"Poindimie, New Caledonia",165.341554,-20.945879,1802
+14836,"Angra do Heroismo, Portugal",-27.215825,38.658524,1801
+14835,"Vila do Porto, Portugal",-25.141266,36.956767,1801
+14834,"Sao Mateus, Portugal",-28.461235,38.432291,1801
+14833,"Velas, Portugal",-28.213188,38.683841,1801
+7784,"Porto Santo, Madeira, Portugal",-16.347666,33.047321,1800
+5935,"Funchal, Portugal",-16.908945,32.646869,1800
+14806,"Toco, Trinidad and Tobago",-60.949684,10.831132,1799
+14807,"Pigeon Point, Trinidad and Tobago",-60.840309,11.165410,1799
+14805,"Kaliko, Haiti",-72.608711,18.864588,1361
+14804,"Huahine, French Polynesia",-151.000059,-16.730061,1556
+14798,"Moorea, French Polynesia",-149.829558,-17.538776,1556
+14799,"Uturoa, French Polynesia",-151.443027,-16.730915,1556
+14800,"Vaitape, French Polynesia",-151.749528,-16.506330,1556
+9603,"Nasugbu, Philippines",120.695798,14.317593,1839
+16046,"Pinamalayan, Philippines",121.464548,13.045780,1839
+7840,"Roxas, Philippines",122.749997,11.583305,1839
+16047,"Masbate City, Philippines",123.616696,12.366727,1839
+16048,"Legazpi City, Philippines",123.743746,13.139090,1839
+9384,"Calbayog, Philippines",124.600289,12.069901,1839
+9387,"Ormoc, Philippines",124.612789,11.006889,1839
+3901,"Cebu, Philippines",123.894625,10.310039,1839
+16050,"Cadiz City, Philippines",123.299996,10.950029,1839
+7842,"Dumaguete, Philippines",123.281442,9.295611,1839
+16052,"Ozamiz City, Philippines",123.849996,8.150030,1839
+10658,"Cagayan de Oro, Philippines",124.631929,8.454229,1839
+16053,"Butuan City, Philippines",125.540620,8.947613,1839
+14753,"San Jose de Buenavista, Philippines",121.941306,10.748808,1796
+14733,"Santiago de Cuba, Cuba",-75.828974,20.028796,1529
+14732,"Killala, Ireland",-9.232191,54.206832,1691
+3522,"Cork, Ireland",-8.472768,51.898337,1889
+3522,"Cork, Ireland",-8.472768,51.898337,1673
+8542,"Milton, Newfoundland and Labrador, Canada",-53.960234,48.207616,1569
+3730,"Pacific City, OR, United States",-123.962630,45.201929,1786
+3730,"Pacific City, OR, United States",-123.962630,45.201929,1733
+14677,"Blackpool Sands, United Kingdom",-3.610905,50.318833,1784
+14675,"Onslow, Australia",115.113282,-21.637871,1783
+14648,"Ende, Indonesia",121.651560,-8.855308,1780
+14649,"Sumbawa Besar, Indonesia",117.400976,-8.496959,1780
+14650,"Ambalawi, Indonesia",118.760350,-8.319396,1780
+14651,"Saraemee, Indonesia",118.711815,-8.796934,1780
+14652,"Waingapu, Indonesia",120.253025,-9.646153,1780
+14653,"Kupang, Indonesia",123.583395,-10.183311,1780
+14655,"Taytay, Philippines",119.500389,10.819609,1796
+14655,"Taytay, Philippines",119.500389,10.819609,1781
+7841,"San Jose, Philippines",121.050095,12.362626,1781
+9385,"Coron, Philippines",120.200682,12.004960,1781
+14647,"El-Quawef, Libya",25.087372,31.760810,1779
+14659,"Faial, Portugal",-28.647563,38.525101,1801
+14659,"Faial, Portugal",-28.647563,38.525101,1782
+14658,"Graciosa, Portugal",-27.963481,39.011026,1801
+14658,"Graciosa, Portugal",-27.963481,39.011026,1782
+14657,"Corvo, Portugal",-31.110550,39.671939,1782
+14656,"Flores, Portugal",-31.128519,39.462210,1782
+14646,"Piedra Santa, Spain",-15.408800,28.040621,1778
+14646,"Piedra Santa, Spain",-15.408800,28.040621,1777
+14645,"Las Caletillas, Spain",-16.362364,28.377279,1778
+14645,"Las Caletillas, Spain",-16.362364,28.377279,1777
+9118,"Sihanoukville, Cambodia",103.506647,10.630009,1679
+9118,"Sihanoukville, Cambodia",103.506647,10.630009,1739
+9118,"Sihanoukville, Cambodia",103.506647,10.630009,1776
+14631,"Tera Cora, Curaçao",-69.020627,12.234501,1727
+14635,"Kralendijk, Bonaire, Netherlands",-68.276682,12.150687,1494
+10730,"North Salina, Bonaire, Netherlands",-68.284104,12.163773,1774
+14621,"Ratmalana, Sri Lanka",79.889275,6.820392,1735
+14613,"Mataram, Indonesia",116.081543,-8.586388,1780
+14613,"Mataram, Indonesia",116.081543,-8.586388,1767
+14612,"Jimbaran, Indonesia",115.159864,-8.784093,1767
+14611,"Beculuk, Indonesia",114.097071,-8.615636,1767
+9597,"Bali, Indonesia",115.596973,-8.464415,1767
+14610,"Toweli, Indonesia",119.388377,-1.142470,1767
+14609,"Sangata, Indonesia",117.550976,0.326889,1767
+14608,"Pankalan, Indonesia",111.752932,-2.849672,1767
+14607,"Ketapang, Indonesia",109.971878,-1.859120,1767
+7803,"Banjarmasin, Indonesia",114.604005,-3.327967,1880
+7803,"Banjarmasin, Indonesia",114.604005,-3.327967,1767
+8360,"Pontianak, Indonesia",109.335648,-0.027407,1767
+14586,"Klagshamn, Sweden",12.916663,55.533296,1765
+11045,"Brondby, Denmark",12.414905,55.647249,1765
+13466,"Nybor, Denmark",10.799476,55.324104,1761
+13465,"Korsor, Denmark",11.149379,55.325752,1761
+3130,"Rostock, Germany",12.132386,54.078890,1816
+3130,"Rostock, Germany",12.132386,54.078890,1762
+3130,"Rostock, Germany",12.132386,54.078890,1759
+14585,"Markgrafenheide, Germany",12.149476,54.191402,1764
+10322,"Osterby, Denmark",11.199281,57.313459,1688
+10739,"Kristinelund, Sweden",12.588636,56.134736,1730
+14584,"Velling, Sweden",12.963831,55.471065,1261
+14583,"Mosede, Denmark",12.273011,55.575850,1261
+13410,"Tinian, Northern Mariana Islands",145.637461,15.011123,1757
+13408,"Saipan, Northern Mariana Islands",145.750938,15.177737,1757
+13409,"Rota, Northern Mariana Islands",145.212462,14.151846,1757
+13402,"Vila Olga, VI, United States",-64.948022,18.335731,1756
+13401,"Banana Bay, VI, United States",-64.943774,18.328224,1756
+13400,"Flamingo Bay, VI, United States",-64.957787,18.312830,1756
+9589,"Tortola, Virgin Islands (U.K.)",-64.597241,18.414784,1290
+13399,"Great Bay, VI, United States",-64.843188,18.322474,1756
+13398,"Brewer's Bay, VI, United States",-64.975317,18.342408,1756
+5750,"St. Croix, Virgin Islands, United States",-64.819408,17.771864,1829
+13397,"Frederiksted, VI, United States",-64.881518,17.712428,1756
+13396,"Christiansted, VI, United States",-64.703149,17.746656,1756
+11390,"Larne, United Kingdom",-5.809879,54.857491,1614
+13378,"Girvan, United Kingdom",-4.854215,55.240205,1614
+7732,"Donaghadee, United Kingdom",-5.538785,54.642867,1387
+7731,"Portpatrick, United Kingdom",-5.115543,54.843721,1387
+13377,"Carrickfergus, United Kingdom",-5.808170,54.713668,1754
+13376,"Saltcoats, United Kingdom",-4.783512,55.637581,1754
+3171,"Douglas, Isle of Man",-4.480875,54.150277,1753
+13373,"Ballyhornan, United Kingdom",-5.559390,54.302047,1752
+13375,"Silecroft Beach, United Kingdom",-3.357145,54.210628,1752
+13374,"Groudle Bay, United Kingdom",-4.423893,54.166976,1752
+13372,"Peel, United Kingdom",-4.691422,54.222445,1752
+13372,"Peel, United Kingdom",-4.691422,54.222445,1751
+13371,"Ballywater, United Kingdom",-5.484390,54.542745,1751
+13370,"Port Grenaugh, United Kingdom",-4.566666,54.099996,1616
+9215,"Hulhumale, Maldives",73.540157,4.211946,1868
+9215,"Hulhumale, Maldives",73.540157,4.211946,1746
+10811,"Kulhudhufushi, Maldives",73.071407,6.622443,1868
+10811,"Kulhudhufushi, Maldives",73.071407,6.622443,1746
+10812,"Eydhafushi, Maldives",73.070821,5.103230,1868
+10812,"Eydhafushi, Maldives",73.070821,5.103230,1746
+10813,"Dhangethi, Maldives",72.955587,3.608089,1746
+10814,"Gan, Maldives",73.544649,1.918417,1746
+10815,"Gahdhoo, Maldives",73.455489,0.288803,1746
+10816,"Hithadhoo, Maldives",73.089181,-0.606020,1868
+10816,"Hithadhoo, Maldives",73.089181,-0.606020,1746
+10817,"Fuvahmulah, Maldives",73.426876,-0.298306,1746
+10818,"Port Gentil, Gabon",8.781606,-0.721035,1747
+8409,"Egmond, Netherlands",4.616374,52.616379,1365
+3269,"Winterton-on-Sea, United Kingdom",1.693536,52.715231,1365
+10984,"Noro, Solomon Islands",157.199956,-8.241124,1736
+10893,"Auki, Solomon Islands",160.699954,-8.766734,1736
+10892,"Honiara, Solomon Islands",159.948392,-9.430333,1736
+10907,"Lusk, Ireland",-6.165884,53.526254,1685
+7874,"Tobrok, Libya",23.960310,32.079609,1779
+7874,"Tobrok, Libya",23.960310,32.079609,1184
+10838,"Al Baida, Libya",21.741659,32.881732,1184
+7872,"Tolmeta, Libya",20.949960,32.716730,1184
+7871,"Benghazi, Libya",20.066757,32.116584,1184
+7870,"Al Brega, Libya",19.576523,30.378108,1184
+7869,"Ras Lanuf, Libya",18.411875,30.586738,1184
+7868,"Sirt, Libya",16.588341,31.205256,1184
+7867,"Misurata, Libya",15.094787,32.374274,1184
+7866,"Al Khoms, Libya",14.264416,32.649664,1184
+7865,"Zawia, Libya",12.529749,32.774725,1184
+7864,"Zwara, Libya",12.083362,32.933380,1184
+4966,"Hermosa Beach, California, United States",-118.399553,33.862237,1823
+10799,"Sandy Point, Australia",146.119688,-38.820187,1472
+10796,"Four Mile Bluff, Australia",146.850156,-41.033272,1742
+10797,"McGaurans Beach, Australia",147.071250,-38.443624,1742
+7861,"Stanley, Australia",145.294102,-40.760371,1492
+7860,"Inverloch, Australia",145.729454,-38.633444,1492
+7813,"Boat Harbour, Tasmania, Australia",145.623790,-40.950874,1472
+8722,"Balboa, Panama",-79.566673,8.950030,1791
+8722,"Balboa, Panama",-79.566673,8.950030,1727
+8918,"Manta, Ecuador",-80.716184,-0.950014,1727
+10790,"Hudishibana, Aruba",-70.049972,12.616630,1727
+10782,Tyra,4.748503,55.715608,1737
+10781,Valdemar,4.564323,55.804072,1737
+10780,South Arne,4.228386,56.078291,1737
+5724,"Tjornuvik, Faeroe Islands",-7.147231,62.289921,1737
+5858,"Vestmannaeyjar, Iceland",-20.267293,63.437687,1737
+6053,"Ajaccio, France",8.738638,41.919326,1428
+7766,"La Seyne, France",5.878092,43.102907,1428
+7765,"L’Île-Rousse, France",8.937075,42.636513,1427
+6279,"Cannes, France",7.017349,43.552931,1427
+6084,"Condado Beach, PR, United States",-66.077953,18.459901,1229
+10737,"Alsgarde, Denmark",12.536878,56.074885,1730
+6083,"Pargas, Finland",22.301033,60.306621,1340
+3131,"Kristiansand, Norway",7.996255,58.150958,1875
+3131,"Kristiansand, Norway",7.996255,58.150958,1327
+6054,"Thisted, Denmark",8.703481,56.959162,1327
+6056,"Arendal, Norway",8.772427,58.461700,1326
+5821,"Hjørring, Denmark",9.995571,57.456135,1326
+6028,"Monte Carlo, Monaco",7.427212,43.739735,1302
+6027,"Otranto, Italy",18.485703,40.148050,1299
+6017,"Umag, Croatia",13.520178,45.433106,1286
+6016,"Mestre, Italy",12.244105,45.495874,1286
+5052,"Vaasa, Finland",21.616366,63.095194,1271
+6004,"Umeå, Sweden",20.262948,63.825870,1271
+5951,"Nynashamn, Sweden",17.946543,58.902923,1270
+5999,"Meremöisa, Estonia",24.276618,59.400848,1268
+5993,"Mielno, Poland",16.062267,54.259945,1262
+5994,"Gedebak Odde, Denmark",14.966662,55.012593,1262
+6000,"Väddö, Sweden",18.816562,59.983379,1208
+6171,"Norrtalge, Sweden",18.701328,59.759661,1207
+3126,"Turku, Finland",22.259237,60.449309,1207
+4242,"Santo Domingo, Dominican Republic",-69.983273,18.500001,1227
+6043,"Dubrovnik, Croatia",18.106406,42.641859,1317
+6024,"Corfu, Greece",19.919492,39.619302,1299
+6024,"Corfu, Greece",19.919492,39.619302,1317
+6025,"Durres, Albania",19.450058,41.316689,1317
+6025,"Durres, Albania",19.450058,41.316689,1296
+4202,"Bridgetown, Barbados",-59.613356,13.098954,1290
+4207,"Castries, Saint Lucia",-61.006813,13.994217,1290
+4906,"Pointe-a-Pitre, Guadeloupe",-61.533082,16.241042,1290
+4260,"Roseau, Dominica",-61.370728,15.251797,1290
+4355,"Plymouth, Montserrat",-62.215699,16.706569,1290
+4195,"The Valley, Anguilla",-63.057202,18.217408,1290
+3411,"Santos, Brazil",-46.328072,-23.961844,1876
+3411,"Santos, Brazil",-46.328072,-23.961844,1725
+3411,"Santos, Brazil",-46.328072,-23.961844,1860
+3411,"Santos, Brazil",-46.328072,-23.961844,1787
+3162,"Cagliari, Italy",9.109340,39.215311,1729
+7751,"Civitavecchia, Italy",11.796839,42.091127,1729
+8592,"Olbia, Italy",9.486879,40.922512,1729
+10603,"Khark Island, Iran",50.312043,29.245772,1250
+10604,"Soroosh Platform, Iran",49.478059,29.072481,1250
+10579,"Diba, Oman",56.258036,25.616977,1695
+10414,"Ijmuiden, Netherlands",4.612761,52.460910,1343
+9135,"Tanah Merah, Singapore",103.946588,1.327255,1683
+9135,"Tanah Merah, Singapore",103.946588,1.327255,1617
+5804,"Nanhui, China",121.191404,30.306306,1786
+5804,"Nanhui, China",121.191404,30.306306,1617
+3824,"West Palm Beach, FL, United States",-80.053343,26.715353,1643
+5758,"Magen's Bay, VI, United States",-64.937084,18.372987,1229
+5758,"Magen's Bay, VI, United States",-64.937084,18.372987,1643
+5758,"Magen's Bay, VI, United States",-64.937084,18.372987,1645
+10388,"Tricomo, Cyprus",33.896816,35.297295,1705
+10382,"Samandag, Turkey",35.999257,36.082341,1705
+9661,"Girne, Cyprus",33.236270,35.299126,1341
+9080,"Mersin, Turkey",34.633340,36.799980,1341
+10355,"Daet, Philippines",122.949899,14.116617,1679
+10381,"Dartmouth, United Kingdom",-3.578385,50.351743,1703
+10379,"St. Ouens Bay, Jersey",-2.225896,49.215709,1704
+10377,"Archirondel, Jersey",-2.021306,49.225279,1700
+10378,"Surville, France",-1.650017,49.283287,1700
+10375,"Greve de Lecq, Jersey",-2.201433,49.247948,1702
+10375,"Greve de Lecq, Jersey",-2.201433,49.247948,1700
+10376,"Havelet Bay, Guernsey",-2.529509,49.450987,1700
+9374,"New Victoria, NS, Canada",-60.129567,46.252905,1577
+9375,"Rose Blanche, NL, Canada",-58.686599,47.617687,1577
+10380,"L'Ancresse Bay, Guernsey",-2.533464,49.503392,1784
+10380,"L'Ancresse Bay, Guernsey",-2.533464,49.503392,1703
+10374,"Saints Bay, United Kingdom",-2.558025,49.423326,1702
+10374,"Saints Bay, United Kingdom",-2.558025,49.423326,1697
+10373,"Pembroke, United Kingdom",-2.537614,49.509544,1697
+4224,"Malabo, Equatorial Guinea",8.783364,3.749788,1842
+4224,"Malabo, Equatorial Guinea",8.783364,3.749788,1699
+4723,"Palma, Spain",2.605254,39.552322,1696
+7776,"Santa Cruz de La Palma, Canary Islands, Spain",-17.765244,28.663180,1666
+10315,"Nuku'alofa, Tonga",-175.200042,-21.133281,1687
+10358,"Fresh Creek, Bahamas",-77.844604,24.689805,1510
+10363,"Port Nelson, Bahamas",-74.840546,23.652147,1510
+10359,"George Town, Bahamas",-75.788007,23.516551,1510
+10360,"Clarence Town, Bahamas",-74.966181,23.098338,1510
+10364,"Cockburn Town, Bahamas",-74.530244,24.052537,1510
+10357,"Governors Harbor, Bahamas",-76.240643,25.196116,1510
+10361,"Duncan Town, Bahamas",-75.733466,22.183263,1510
+10362,"Mayaguana, Bahamas",-73.064131,22.401561,1510
+3696,"Miami, Florida, United States",-80.226384,25.788645,1686
+10283,"Kuala Tungkal, Indonesia",103.466705,-0.816543,1680
+5862,"Batam, Indonesia",103.962506,1.134726,1832
+5862,"Batam, Indonesia",103.962506,1.134726,1833
+5862,"Batam, Indonesia",103.962506,1.134726,1785
+5862,"Batam, Indonesia",103.962506,1.134726,1680
+10307,"Sakra Island, Singapore",103.704205,1.258920,1680
+5748,"Grover Beach, California, United States",-120.621420,35.120635,1007
+5883,"Shima, Japan",136.874380,34.336834,1794
+5883,"Shima, Japan",136.874380,34.336834,1617
+5883,"Shima, Japan",136.874380,34.336834,1007
+5884,"Ajigaura, Japan",140.612268,36.383562,1007
+4512,"Brookhaven, New York, United States",-72.912276,40.773147,1143
+3080,"Beverwijk, Netherlands",4.656901,52.486313,1143
+3081,"Whitesands Bay, United Kingdom",-5.698453,50.078514,1143
+4512,"Brookhaven, New York, United States",-72.912276,40.773147,1070
+5750,"St. Croix, Virgin Islands, United States",-64.819408,17.771864,1070
+3650,"Hollywood, Florida, United States",-80.160221,26.010202,1070
+5748,"Grover Beach, California, United States",-120.621420,35.120635,1072
+3484,"Tijuana, Mexico",-117.038219,32.530853,1072
+9762,"Northport, New York, United States",-73.344111,40.909451,1028
+5751,"Morro Bay, California, United States",-120.847202,35.366680,1009
+5752,"Spencer Beach, Hawaii, United States",-155.822086,20.023108,1009
+5918,"Takapuna, New Zealand",174.767916,-36.787961,1009
+5919,"Whenuapai, New Zealand",174.623385,-36.788816,1009
+5750,"St. Croix, Virgin Islands, United States",-64.819408,17.771864,1084
+3331,"Valparaíso, Chile",-71.620479,-33.045775,1791
+3331,"Valparaíso, Chile",-71.620479,-33.045775,1084
+3347,"Fortaleza, Brazil",-38.542968,-3.718836,1873
+3347,"Fortaleza, Brazil",-38.542968,-3.718836,1856
+3347,"Fortaleza, Brazil",-38.542968,-3.718836,1787
+3347,"Fortaleza, Brazil",-38.542968,-3.718836,1725
+3347,"Fortaleza, Brazil",-38.542968,-3.718836,1709
+3347,"Fortaleza, Brazil",-38.542968,-3.718836,1686
+3347,"Fortaleza, Brazil",-38.542968,-3.718836,1084
+5930,"Lurin, Peru",-76.874286,-12.278525,1084
+3242,"Rio de Janeiro, Brazil",-43.209568,-22.903397,1876
+3242,"Rio de Janeiro, Brazil",-43.209568,-22.903397,1873
+3242,"Rio de Janeiro, Brazil",-43.209568,-22.903397,1686
+3242,"Rio de Janeiro, Brazil",-43.209568,-22.903397,1084
+3411,"Santos, Brazil",-46.328072,-23.961844,1084
+3330,"Las Toninas, Argentina",-56.695487,-36.472532,1132
+5963,"Maldonado, Uruguay",-54.950175,-34.900389,1860
+5963,"Maldonado, Uruguay",-54.950175,-34.900389,1132
+3330,"Las Toninas, Argentina",-56.695487,-36.472532,1084
+5925,"Fort Amador, Panama",-79.546739,8.934112,1084
+5703,"Kitaibaraki, Japan",140.750940,36.801787,1010
+5883,"Shima, Japan",136.874380,34.336834,1010
+5887,"Maruyama, Japan",139.816956,35.037517,1786
+5887,"Maruyama, Japan",139.816956,35.037517,1679
+5887,"Maruyama, Japan",139.816956,35.037517,1617
+5887,"Maruyama, Japan",139.816956,35.037517,1010
+5760,"Makaha, Hawaii, United States",-158.206064,21.460265,1823
+5760,"Makaha, Hawaii, United States",-158.206064,21.460265,1791
+5760,"Makaha, Hawaii, United States",-158.206064,21.460265,1456
+5760,"Makaha, Hawaii, United States",-158.206064,21.460265,1010
+5751,"Morro Bay, California, United States",-120.847202,35.366680,1010
+3687,"Manchester, California, United States",-123.686946,38.969205,1010
+3082,"Porthcurno, United Kingdom",-5.654507,50.043052,1826
+3082,"Porthcurno, United Kingdom",-5.654507,50.043052,1697
+3082,"Porthcurno, United Kingdom",-5.654507,50.043052,1027
+3212,"Mumbai, India",72.875899,19.075794,1739
+3212,"Mumbai, India",72.875899,19.075794,1735
+3212,"Mumbai, India",72.875899,19.075794,1027
+5943,"Estepona, Spain",-5.145865,36.427104,1251
+5943,"Estepona, Spain",-5.145865,36.427104,1027
+3177,"Palermo, Italy",13.358362,38.121500,1027
+6044,"Alexandria, Egypt",29.889787,31.191889,1027
+5825,"Suez, Egypt",32.530118,29.972285,1027
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1559
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1739
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1735
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1027
+3307,"Penang, Malaysia",100.362996,5.353645,1735
+3307,"Penang, Malaysia",100.362996,5.353645,1027
+4265,"Songkhla, Thailand",100.596980,7.078449,1739
+4265,"Songkhla, Thailand",100.596980,7.078449,1617
+4265,"Songkhla, Thailand",100.596980,7.078449,1027
+5852,"Lantau Island, Hong Kong",113.948341,22.271496,1027
+5889,"Miura, Japan",139.620667,35.144036,1027
+9763,"Island Park, New York, United States",-73.655928,40.600308,1028
+5803,"Shantou, China",116.675488,23.354552,1031
+5853,"Deep Water Bay, Hong Kong",114.183985,22.249437,1031
+5900,"Taipa, China",113.561036,22.156127,1031
+3218,"Batangas, Philippines",121.064939,13.765555,1031
+5986,"Danang, Vietnam",108.214750,16.051564,1617
+5986,"Danang, Vietnam",108.214750,16.051564,1031
+5970,"Tungku, Brunei",114.885840,4.926374,1031
+5902,"Mersing, Malaysia",103.849908,2.295516,1887
+5902,"Mersing, Malaysia",103.849908,2.295516,1886
+5902,"Mersing, Malaysia",103.849908,2.295516,1828
+5902,"Mersing, Malaysia",103.849908,2.295516,1679
+5902,"Mersing, Malaysia",103.849908,2.295516,1031
+5938,"Tuas, Singapore",103.647076,1.338193,1559
+5938,"Tuas, Singapore",103.647076,1.338193,1031
+3808,"Tuckerton, New Jersey, United States",-74.337910,39.603885,1076
+5793,"St. David’s, Bermuda",-64.769506,32.312238,1076
+3347,"Fortaleza, Brazil",-38.542968,-3.718836,1076
+3563,"Boca Raton, Florida, United States",-80.088932,26.350327,1787
+3563,"Boca Raton, Florida, United States",-80.088932,26.350327,1076
+5886,"Okinawa, Japan",127.680561,26.212412,1692
+5886,"Okinawa, Japan",127.680561,26.212412,1031
+5975,"Keoje, Korea, Rep.",128.620795,34.880645,1031
+3246,"Shanghai, China",121.472458,31.247504,1031
+5981,"Toucheng, Taiwan",121.801462,24.863596,1786
+5981,"Toucheng, Taiwan",121.801462,24.863596,1617
+5981,"Toucheng, Taiwan",121.801462,24.863596,1031
+5980,"Fangshan, Taiwan",120.662107,22.249254,1031
+5860,"Ancol, Indonesia",106.833305,-6.129358,1031
+3239,"Perth, Australia",115.857227,-31.953442,1845
+3239,"Perth, Australia",115.857227,-31.953442,1783
+3239,"Perth, Australia",115.857227,-31.953442,1031
+3307,"Penang, Malaysia",100.362996,5.353645,1031
+5956,"Satun, Thailand",100.066121,6.613214,1854
+5956,"Satun, Thailand",100.066121,6.613214,1739
+5956,"Satun, Thailand",100.066121,6.613214,1031
+5911,"Pyapon, Myanmar",95.681943,16.282204,1031
+5949,"Mt. Lavinia, Sri Lanka",79.866716,6.832697,1031
+4322,"Cochin, India",76.269550,9.938091,1031
+3212,"Mumbai, India",72.875899,19.075794,1031
+3259,"Karachi, Pakistan",67.028539,24.889378,1849
+3259,"Karachi, Pakistan",67.028539,24.889378,1559
+3259,"Karachi, Pakistan",67.028539,24.889378,1739
+3259,"Karachi, Pakistan",67.028539,24.889378,1031
+4225,"Muscat, Oman",58.591043,23.615098,1849
+4225,"Muscat, Oman",58.591043,23.615098,1031
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1031
+4177,"Djibouti City, Djibouti",43.147984,11.594682,1863
+4177,"Djibouti City, Djibouti",43.147984,11.594682,1845
+4177,"Djibouti City, Djibouti",43.147984,11.594682,1559
+4177,"Djibouti City, Djibouti",43.147984,11.594682,1739
+4177,"Djibouti City, Djibouti",43.147984,11.594682,1558
+4177,"Djibouti City, Djibouti",43.147984,11.594682,1031
+5825,"Suez, Egypt",32.530118,29.972285,1031
+6044,"Alexandria, Egypt",29.889787,31.191889,1031
+5811,"Yeroskipos, Cyprus",32.466544,34.766411,1713
+5811,"Yeroskipos, Cyprus",32.466544,34.766411,1523
+5811,"Yeroskipos, Cyprus",32.466544,34.766411,1740
+5811,"Yeroskipos, Cyprus",32.466544,34.766411,1303
+5811,"Yeroskipos, Cyprus",32.466544,34.766411,1031
+5959,"Marmaris, Turkey",28.253679,36.855253,1559
+5959,"Marmaris, Turkey",28.253679,36.855253,1031
+3215,"Mazara del Vallo, Italy",12.591272,37.650126,1772
+3215,"Mazara del Vallo, Italy",12.591272,37.650126,1729
+3215,"Mazara del Vallo, Italy",12.591272,37.650126,1031
+5934,"Sesimbra, Portugal",-9.102748,38.442691,1443
+5934,"Sesimbra, Portugal",-9.102748,38.442691,1031
+3119,"Penmarch, France",-4.338688,47.811315,1031
+3292,"Goonhilly Downs, United Kingdom",-5.174527,50.024803,1704
+3292,"Goonhilly Downs, United Kingdom",-5.174527,50.024803,1031
+5840,"Norden, Germany",7.201822,53.595480,1031
+3142,"Sylt, Germany",8.383364,54.898506,1737
+3142,"Sylt, Germany",8.383364,54.898506,1143
+3808,"Tuckerton, New Jersey, United States",-74.337910,39.603885,1043
+5840,"Norden, Germany",7.201822,53.595480,1043
+3283,"Katwijk, Netherlands",4.396452,52.205173,1043
+5331,"St. Valéry, France",0.708478,49.860423,1043
+4554,"Bude, United Kingdom",-4.544401,50.828110,1043
+3686,"Manasquan, New Jersey, United States",-74.047041,40.123343,1043
+4257,"Praia, Cape Verde",-23.521247,14.923013,1045
+4180,"Dakar, Senegal",-17.451914,14.686599,1045
+3347,"Fortaleza, Brazil",-38.542968,-3.718836,1045
+3330,"Las Toninas, Argentina",-56.695487,-36.472532,1045
+3650,"Hollywood, Florida, United States",-80.160221,26.010202,1046
+5944,"Conil, Spain",-6.087222,36.276567,1701
+5944,"Conil, Spain",-6.087222,36.276567,1448
+5944,"Conil, Spain",-6.087222,36.276567,1046
+3215,"Mazara del Vallo, Italy",12.591272,37.650126,1046
+4230,"Nassau, Bahamas",-77.340252,25.067039,1510
+4230,"Nassau, Bahamas",-77.340252,25.067039,1078
+5782,"Crooked Island, Bahamas",-74.194990,22.629711,1510
+5782,"Crooked Island, Bahamas",-74.194990,22.629711,1078
+4258,"Providenciales, Turks and Caicos Islands",-72.120235,21.851098,1078
+5694,"Punta Cana, Dominican Republic",-68.438254,18.621278,1227
+5694,"Punta Cana, Dominican Republic",-68.438254,18.621278,1078
+5823,"Puerto Plata, Dominican Republic",-70.691232,19.799341,1686
+5823,"Puerto Plata, Dominican Republic",-70.691232,19.799341,1078
+5807,"Riohacha, Colombia",-72.952705,11.482914,1078
+5920,"Bluefields, Nicaragua",-83.771450,11.991776,1078
+5692,"Puerto Lempira, Honduras",-83.776766,15.261221,1078
+5850,"Trujillo, Honduras",-85.954750,15.915151,1078
+5851,"Puerto Cortes, Honduras",-87.946058,15.844802,1078
+5848,"Puerto Barrios, Guatemala",-88.597229,15.727138,1686
+5848,"Puerto Barrios, Guatemala",-88.597229,15.727138,1078
+3649,"Hillsboro, Oregon, United States",-123.811171,45.824780,1009
+5753,"Kahe Point, Hawaii, United States",-158.130575,21.353979,1009
+4268,"Suva, Fiji",178.437446,-18.123810,1687
+4268,"Suva, Fiji",178.437446,-18.123810,1682
+4268,"Suva, Fiji",178.437446,-18.123810,1009
+3036,"Barcelona, Spain",2.168536,41.385341,1053
+5880,"Savona, Italy",8.483755,44.305543,1302
+5880,"Savona, Italy",8.483755,44.305543,1053
+3215,"Mazara del Vallo, Italy",12.591272,37.650126,1065
+3213,"Tel Aviv, Israel",34.769668,32.044599,1065
+5811,"Yeroskipos, Cyprus",32.466544,34.766411,1065
+5722,"El Médano, Canary Islands, Spain",-16.538584,28.046652,1448
+5800,"Arica, Chile",-70.306711,-18.473810,1073
+5824,"Punta Carnero, Ecuador",-80.914420,-2.272914,1073
+5776,"Baby Beach, Aruba",-69.878683,12.414139,1289
+5776,"Baby Beach, Aruba",-69.878683,12.414139,1073
+3640,"Halifax, Nova Scotia, Canada",-63.573950,44.645801,1080
+3683,"Lynn, Massachusetts, United States",-70.950265,42.463673,1080
+3077,"Dublin, Ireland",-6.248257,53.348043,1080
+3324,"Southport, United Kingdom",-3.006364,53.647933,1080
+4554,"Bude, United Kingdom",-4.544401,50.828110,1081
+3563,"Boca Raton, Florida, United States",-80.088932,26.350327,1083
+4262,"San Juan, Puerto Rico, United States",-66.106664,18.465833,1873
+4262,"San Juan, Puerto Rico, United States",-66.106664,18.465833,1727
+4262,"San Juan, Puerto Rico, United States",-66.106664,18.465833,1686
+4262,"San Juan, Puerto Rico, United States",-66.106664,18.465833,1083
+3347,"Fortaleza, Brazil",-38.542968,-3.718836,1083
+3242,"Rio de Janeiro, Brazil",-43.209568,-22.903397,1083
+3411,"Santos, Brazil",-46.328072,-23.961844,1083
+3330,"Las Toninas, Argentina",-56.695487,-36.472532,1083
+3331,"Valparaíso, Chile",-71.620479,-33.045775,1083
+5800,"Arica, Chile",-70.306711,-18.473810,1083
+5930,"Lurin, Peru",-76.874286,-12.278525,1083
+5849,"Puerto San Jose, Guatemala",-90.822222,13.934610,1083
+5848,"Puerto Barrios, Guatemala",-88.597229,15.727138,1083
+5810,"Puerto Limon, Costa Rica",-83.037662,9.988603,1071
+3813,"Vero Beach, Florida, United States",-80.394255,27.638388,1645
+3813,"Vero Beach, Florida, United States",-80.394255,27.638388,1069
+4230,"Nassau, Bahamas",-77.340252,25.067039,1069
+5783,"Eight-Mile Rock, Bahamas",-78.802849,26.539621,1069
+3470,"Mazatlán, Mexico",-106.421873,23.199535,1072
+5925,"Fort Amador, Panama",-79.546739,8.934112,1072
+5921,"Puerto Cabezas, Nicaragua",-83.393911,14.021609,1078
+3251,"Tanguisson Point, Guam",144.809337,13.549100,1757
+5802,"Chongming, China",121.395212,31.619880,1786
+5802,"Chongming, China",121.395212,31.619880,1617
+3554,"Bandon, Oregon, United States",-124.408235,43.118556,1794
+5885,"Chikura, Japan",139.954652,34.976653,1794
+3347,"Fortaleza, Brazil",-38.542968,-3.718836,1148
+5575,"Cayenne, French Guiana",-52.321075,4.941365,1148
+5905,"Le Lamentin, Martinique",-61.094264,14.615542,1290
+5905,"Le Lamentin, Martinique",-61.094264,14.615542,1148
+5762,"Miramar, Puerto Rico, United States",-66.082884,18.453419,1227
+5762,"Miramar, Puerto Rico, United States",-66.082884,18.453419,1148
+4236,"Port of Spain, Trinidad and Tobago",-61.516676,10.649785,1148
+3650,"Hollywood, Florida, United States",-80.160221,26.010202,1148
+5750,"St. Croix, Virgin Islands, United States",-64.819408,17.771864,1148
+5966,"Camuri, Venezuela",-66.878294,10.606108,1148
+5693,"Cartagena, Colombia",-75.505683,10.386699,1727
+5693,"Cartagena, Colombia",-75.505683,10.386699,1686
+5693,"Cartagena, Colombia",-75.505683,10.386699,1078
+5784,"Cat Island, Bahamas",-75.525898,24.403330,1510
+5784,"Cat Island, Bahamas",-75.525898,24.403330,1078
+5779,"Paddington, Australia",151.228670,-33.882128,1135
+5779,"Paddington, Australia",151.228670,-33.882128,1102
+5778,"Oxford Falls, Australia",151.245076,-33.737377,1750
+5778,"Oxford Falls, Australia",151.245076,-33.737377,1102
+3251,"Tanguisson Point, Guam",144.809337,13.549100,1102
+5972,"Tumon Bay, Guam",144.800548,13.513590,1692
+5972,"Tumon Bay, Guam",144.800548,13.513590,1102
+5887,"Maruyama, Japan",139.816956,35.037517,1102
+5883,"Shima, Japan",136.874380,34.336834,1102
+5890,"Ninomiya, Japan",139.255433,35.299443,1027
+5975,"Keoje, Korea, Rep.",128.620795,34.880645,1027
+4361,"Jeddah, Saudi Arabia",39.182751,21.481262,1739
+4361,"Jeddah, Saudi Arabia",39.182751,21.481262,1552
+4361,"Jeddah, Saudi Arabia",39.182751,21.481262,1675
+4361,"Jeddah, Saudi Arabia",39.182751,21.481262,1027
+4363,"Aqaba, Jordan",35.006972,29.531758,1806
+4363,"Aqaba, Jordan",35.006972,29.531758,1027
+3342,"Salvador, Brazil",-38.504638,-12.969979,1686
+3342,"Salvador, Brazil",-38.504638,-12.969979,1083
+5861,"Medan, Indonesia",98.676082,3.751741,1031
+4361,"Jeddah, Saudi Arabia",39.182751,21.481262,1031
+6097,"Alexandria, Australia",151.196248,-33.913988,1009
+5885,"Chikura, Japan",139.954652,34.976653,1049
+4183,"Pusan, Korea, Rep.",128.999310,35.170147,1786
+4183,"Pusan, Korea, Rep.",128.999310,35.170147,1617
+4183,"Pusan, Korea, Rep.",128.999310,35.170147,1049
+3822,"Wall Township, New Jersey, United States",-74.062861,40.152908,1728
+3822,"Wall Township, New Jersey, United States",-74.062861,40.152908,1149
+3242,"Rio de Janeiro, Brazil",-43.209568,-22.903397,1076
+5803,"Shantou, China",116.675488,23.354552,1049
+5903,"Kuantan, Malaysia",103.322565,3.815169,1617
+5903,"Kuantan, Malaysia",103.322565,3.815169,1049
+5703,"Kitaibaraki, Japan",140.750940,36.801787,1049
+4191,"Chennai, India",80.243083,13.063480,1735
+4191,"Chennai, India",80.243083,13.063480,1179
+3214,"Catania, Italy",15.067443,37.511588,1559
+3214,"Catania, Italy",15.067443,37.511588,1185
+3213,"Tel Aviv, Israel",34.769668,32.044599,1185
+3905,"Haifa, Israel",34.998769,32.811420,1713
+3905,"Haifa, Israel",34.998769,32.811420,1185
+3221,"Istanbul, Turkey",28.986101,41.040615,1185
+5723,"Chania, Greece",24.012165,35.511809,1739
+5723,"Chania, Greece",24.012165,35.511809,1303
+5723,"Chania, Greece",24.012165,35.511809,1185
+5092,"Sochi, Russia",39.725818,43.615504,1192
+5530,"Poti, Georgia",41.667614,42.150771,1192
+6255,"Whittier, Alaska, United States",-148.684731,60.772930,1168
+5764,"Valdez, Alaska, United States",-146.353345,61.130352,1168
+4816,"Juneau, Alaska, United States",-134.406863,58.299506,1840
+4816,"Juneau, Alaska, United States",-134.406863,58.299506,1168
+3270,"Dubai, United Arab Emirates",55.308427,25.269346,1209
+3867,"Doha, Qatar",51.519367,25.294346,1739
+3867,"Doha, Qatar",51.519367,25.294346,1209
+4188,"Manama, Bahrain",50.575812,26.228977,1209
+3871,"Kuwait City, Kuwait",47.974739,29.374019,1209
+5837,"Lannion, France",-3.459928,48.730260,1889
+5837,"Lannion, France",-3.459928,48.730260,1697
+5837,"Lannion, France",-3.459928,48.730260,1213
+3783,"Shirley, New York, United States",-72.872237,40.800283,1691
+3783,"Shirley, New York, United States",-72.872237,40.800283,1213
+3686,"Manasquan, New Jersey, United States",-74.047041,40.123343,1213
+4554,"Bude, United Kingdom",-4.544401,50.828110,1213
+5855,"Tong Fuk, Hong Kong",113.932130,22.227379,1150
+5981,"Toucheng, Taiwan",121.801462,24.863596,1150
+5767,"Bellport, New York, United States",-72.937813,40.755544,1081
+5967,"Puerto Viejo, Venezuela",-67.029954,10.611211,1084
+3650,"Hollywood, Florida, United States",-80.160221,26.010202,1071
+5928,"Maria Chiquita, Panama",-79.753532,9.437334,1727
+5928,"Maria Chiquita, Panama",-79.753532,9.437334,1071
+5808,"Tolu, Colombia",-75.558564,9.496294,1843
+5808,"Tolu, Colombia",-75.558564,9.496294,1071
+5799,"Half Moon Bay, Cayman Islands",-81.166764,19.282959,1068
+5799,"Half Moon Bay, Cayman Islands",-81.166764,19.282959,1071
+5741,"Skewjack, United Kingdom",-5.675064,50.063560,1028
+10729,"Willemstad, Curaçao",-68.896604,12.095316,1494
+10729,"Willemstad, Curaçao",-68.896604,12.095316,1774
+10729,"Willemstad, Curaçao",-68.896604,12.095316,1289
+4275,"Willemstad, Curaçao",-68.896604,12.095316,1148
+5923,"Kårstø, Norway",5.524381,59.279266,1203
+3084,"Lowestoft, United Kingdom",1.729180,52.471359,1203
+5117,"Novorossiysk, Russia",37.772791,44.723633,1192
+3649,"Hillsboro, Oregon, United States",-123.811171,45.824780,1166
+5765,"Lena Point, Alaska, United States",-134.747293,58.550946,1840
+5765,"Lena Point, Alaska, United States",-134.747293,58.550946,1166
+6255,"Whittier, Alaska, United States",-148.684731,60.772930,1166
+5842,"Ribnitz, Germany",12.431507,54.243343,1200
+5820,"Gedser, Denmark",11.928968,54.576351,1762
+5820,"Gedser, Denmark",11.928968,54.576351,1764
+5820,"Gedser, Denmark",11.928968,54.576351,1759
+5820,"Gedser, Denmark",11.928968,54.576351,1200
+5828,"Kärdla, Estonia",22.738045,59.000860,1221
+5952,"Stavsnas, Sweden",18.764609,59.822723,1221
+5934,"Sesimbra, Portugal",-9.102748,38.442691,1219
+10726,"Alta Vista, Canary Islands, Spain",-15.699962,27.999496,1852
+10726,"Alta Vista, Canary Islands, Spain",-15.699962,27.999496,1219
+4180,"Dakar, Senegal",-17.451914,14.686599,1219
+4181,"Accra, Ghana",-0.201092,5.558283,1219
+3315,"Cotonou, Benin",2.439922,6.356574,1219
+3280,"Lagos, Nigeria",3.423210,6.438874,1821
+3280,"Lagos, Nigeria",3.423210,6.438874,1219
+4221,"Libreville, Gabon",9.454360,0.394272,1747
+4221,"Libreville, Gabon",9.454360,0.394272,1219
+5775,"Cacuaco, Angola",13.372327,-8.776671,1219
+5941,"Melkbosstrand, South Africa",18.445762,-33.727220,1219
+4210,"Douala, Cameroon",9.706313,4.047151,1219
+3316,"Abidjan, Côte d'Ivoire",-4.026237,5.323518,1219
+3307,"Penang, Malaysia",100.362996,5.353645,1220
+4322,"Cochin, India",76.269550,9.938091,1220
+5906,"Baie Jacotet, Mauritius",57.485379,-20.474004,1220
+5978,"Saint Paul, Réunion",55.279130,-21.000249,1220
+5942,"Mtunzini, South Africa",31.757853,-28.950636,1220
+5930,"Lurin, Peru",-76.874286,-12.278525,1073
+3334,"Panama City, Panama",-79.536693,8.964605,1073
+6093,"Colón, Panama",-79.900023,9.353716,1791
+6093,"Colón, Panama",-79.900023,9.353716,1084
+6093,"Colón, Panama",-79.900023,9.353716,1073
+5750,"St. Croix, Virgin Islands, United States",-64.819408,17.771864,1073
+5933,"Kolobrzeg, Poland",15.574865,54.172347,1199
+5954,"Ystad, Sweden",13.828284,55.431331,1199
+5820,"Gedser, Denmark",11.928968,54.576351,1199
+5863,"Kilmore Quay, Ireland",-6.584097,52.174582,1054
+5863,"Kilmore Quay, Ireland",-6.584097,52.174582,1223
+5742,"Sennen Cove, United Kingdom",-5.698746,50.076060,1054
+5742,"Sennen Cove, United Kingdom",-5.698746,50.076060,1223
+5865,"Sandymount, Ireland",-6.215445,53.331417,1224
+3324,"Southport, United Kingdom",-3.006364,53.647933,1224
+5852,"Lantau Island, Hong Kong",113.948341,22.271496,1049
+5802,"Chongming, China",121.395212,31.619880,1049
+5939,"Katong, Singapore",103.904693,1.309286,1049
+3218,"Batangas, Philippines",121.064939,13.765555,1049
+4275,"Willemstad, Curaçao",-68.896604,12.095316,1078
+5965,"Punto Fijo, Venezuela",-70.204367,11.708598,1078
+3246,"Shanghai, China",121.472458,31.247504,1027
+5892,"Wada, Japan",140.016761,35.035845,1150
+5770,"Lynnwood, Washington, United States",-122.315859,47.823998,1168
+5941,"Melkbosstrand, South Africa",18.445762,-33.727220,1220
+5982,"Tanshui, Taiwan",121.462595,25.181357,1794
+5982,"Tanshui, Taiwan",121.462595,25.181357,1049
+5965,"Punto Fijo, Venezuela",-70.204367,11.708598,1073
+4315,"Barranquilla, Colombia",-74.779755,10.940459,1076
+4315,"Barranquilla, Colombia",-74.779755,10.940459,1686
+4315,"Barranquilla, Colombia",-74.779755,10.940459,1073
+3678,"Los Angeles, California, United States",-118.245353,34.053399,1155
+5893,"Toyohashi, Japan",137.391567,34.769060,1155
+3649,"Hillsboro, Oregon, United States",-123.811171,45.824780,1155
+5781,"Brookvale, Australia",151.273982,-33.761156,1009
+5822,"Pedersker, Denmark",14.992150,55.030928,1199
+3089,"Tallinn, Estonia",24.752399,59.436200,1263
+3089,"Tallinn, Estonia",24.752399,59.436200,1221
+5894,"Emi, Japan",140.061097,35.062383,1155
+5863,"Kilmore Quay, Ireland",-6.584097,52.174582,1205
+3145,"Oxwich Bay, United Kingdom",-4.169596,51.557785,1835
+3145,"Oxwich Bay, United Kingdom",-4.169596,51.557785,1205
+5772,"North Miami Beach, Florida, United States",-80.162370,25.932944,1078
+10365,"Katthammarsvik, Sweden",18.845273,57.431037,1222
+5723,"Chania, Greece",24.012165,35.511809,1031
+5818,"Blaabjerg, Denmark",8.328970,55.751533,1900
+5818,"Blaabjerg, Denmark",8.328970,55.751533,1737
+5818,"Blaabjerg, Denmark",8.328970,55.751533,1043
+4059,"Fukuoka, Japan",130.401653,33.590301,1231
+3563,"Boca Raton, Florida, United States",-80.088932,26.350327,1232
+5786,"Caves Point, Bahamas",-77.452996,25.068455,1232
+5787,"Current, Bahamas",-76.787664,25.407834,1232
+5788,"Sandy Point, Bahamas",-77.399529,26.025205,1510
+5788,"Sandy Point, Bahamas",-77.399529,26.025205,1232
+5745,"Highbridge, United Kingdom",-2.975017,51.222226,1149
+5745,"Highbridge, United Kingdom",-2.975017,51.222226,1173
+3067,"Bilbao, Spain",-2.946159,43.268348,1890
+3067,"Bilbao, Spain",-2.946159,43.268348,1173
+5956,"Satun, Thailand",100.066121,6.613214,1027
+5722,"El Médano, Canary Islands, Spain",-16.538584,28.046652,1045
+5909,"Tétouan, Morocco",-5.391812,35.565923,1251
+5909,"Tétouan, Morocco",-5.391812,35.565923,1031
+5908,"Tulum, Mexico",-87.463587,20.212549,1078
+5773,"Isla Verde, Puerto Rico, United States",-66.016869,18.441651,1229
+5773,"Isla Verde, Puerto Rico, United States",-66.016869,18.441651,1227
+5773,"Isla Verde, Puerto Rico, United States",-66.016869,18.441651,1078
+5973,"Piti, Guam",144.694688,13.464688,1902
+5973,"Piti, Guam",144.694688,13.464688,1874
+5973,"Piti, Guam",144.694688,13.464688,1823
+5973,"Piti, Guam",144.694688,13.464688,1605
+5973,"Piti, Guam",144.694688,13.464688,1155
+5785,"Hawksbill, Bahamas",-78.736833,26.516904,1510
+5785,"Hawksbill, Bahamas",-78.736833,26.516904,1232
+3842,"Cancún, Mexico",-86.767549,21.095727,1686
+3842,"Cancún, Mexico",-86.767549,21.095727,1071
+5791,"Belize City, Belize",-88.181610,17.495546,1078
+4265,"Songkhla, Thailand",100.596980,7.078449,1238
+5862,"Batam, Indonesia",103.962506,1.134726,1238
+5937,"Changi South, Singapore",103.987017,1.389047,1679
+5940,"Changi North, Singapore",103.987017,1.389047,1887
+5940,"Changi North, Singapore",103.987017,1.389047,1561
+5940,"Changi North, Singapore",103.987017,1.389047,1238
+9102,"Logi, Russia",28.499871,59.799883,1610
+3064,"Helsinki, Finland",24.932490,60.171075,1816
+3064,"Helsinki, Finland",24.932490,60.171075,1268
+3064,"Helsinki, Finland",24.932490,60.171075,1263
+3064,"Helsinki, Finland",24.932490,60.171075,1242
+3089,"Tallinn, Estonia",24.752399,59.436200,1242
+5968,"Maiquetia, Venezuela",-66.960325,10.599394,1076
+5774,"El Djamila, Algeria",2.901445,36.800224,1234
+5789,"Ostend, Belgium",2.912676,51.231125,1031
+5725,"Funningsfjordur, Faeroe Islands",-6.928140,62.244108,1240
+5859,"Seydisfjordur, Iceland",-14.018029,65.251346,1240
+5938,"Tuas, Singapore",103.647076,1.338193,1179
+5810,"Puerto Limon, Costa Rica",-83.037662,9.988603,1078
+3842,"Cancún, Mexico",-86.767549,21.095727,1078
+5836,"Plerin, France",-2.768083,48.534740,1028
+3211,"Athens, Greece",23.736287,37.976078,1185
+4183,"Pusan, Korea, Rep.",128.999310,35.170147,1150
+4183,"Pusan, Korea, Rep.",128.999310,35.170147,1231
+5948,"Ses Covetes, Spain",2.970964,39.354544,1187
+5948,"Ses Covetes, Spain",2.970964,39.354544,1234
+5895,"Kita-kyushu, Japan",131.032024,33.839276,1692
+5895,"Kita-kyushu, Japan",131.032024,33.839276,1231
+5746,"Dunnet Bay, United Kingdom",-3.346208,58.615314,1240
+3641,"Harbour Pointe, Washington, United States",-122.302181,47.886217,1007
+4361,"Jeddah, Saudi Arabia",39.182751,21.481262,1247
+5950,"Port Sudan, Sudan",37.219666,19.615564,1675
+5950,"Port Sudan, Sudan",37.219666,19.615564,1247
+3871,"Kuwait City, Kuwait",47.974739,29.374019,1250
+5990,"Ganaveh, Iran",50.521125,29.570747,1250
+4191,"Chennai, India",80.243083,13.063480,1252
+5940,"Changi North, Singapore",103.987017,1.389047,1252
+4177,"Djibouti City, Djibouti",43.147984,11.594682,1246
+5896,"Mombasa, Kenya",39.672790,-4.053211,1863
+5896,"Mombasa, Kenya",39.672790,-4.053211,1246
+4182,"Dar Es Salaam, Tanzania",39.269665,-6.823229,1863
+4182,"Dar Es Salaam, Tanzania",39.269665,-6.823229,1246
+4252,"Maputo, Mozambique",32.580606,-25.968533,1246
+7398,"Toliara, Madagascar",43.663120,-23.354764,1901
+7398,"Toliara, Madagascar",43.663120,-23.354764,1246
+5942,"Mtunzini, South Africa",31.757853,-28.950636,1246
+10728,"Saint Maarten, Sint Maarten",-63.073706,18.031043,1290
+5773,"Isla Verde, Puerto Rico, United States",-66.016869,18.441651,1245
+4271,"Tripoli, Libya",13.187268,32.877301,1184
+4271,"Tripoli, Libya",13.187268,32.877301,1287
+3215,"Mazara del Vallo, Italy",12.591272,37.650126,1287
+6019,"Halul Island, Qatar",52.420245,25.668564,1254
+6020,"Das Island, United Arab Emirates",52.865948,25.152634,1254
+3214,"Catania, Italy",15.067443,37.511588,1301
+4058,"Msida, Malta",14.488146,35.898711,1301
+5812,"Pentaskhinos, Cyprus",33.603555,34.828484,1740
+5812,"Pentaskhinos, Cyprus",33.603555,34.828484,1305
+3862,"Beirut, Lebanon",35.485195,33.892474,1305
+5812,"Pentaskhinos, Cyprus",33.603555,34.828484,1306
+6030,"Tartous, Syria",35.897792,34.891704,1306
+5969,"Aden, Yemen",45.033530,12.800687,1739
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1308
+6031,"Jask, Iran",57.797391,25.681235,1689
+6031,"Jask, Iran",57.797391,25.681235,1695
+6031,"Jask, Iran",57.797391,25.681235,1308
+6030,"Tartous, Syria",35.897792,34.891704,1319
+6044,"Alexandria, Egypt",29.889787,31.191889,1319
+6046,"Trablous, Lebanon",35.859120,34.439422,1321
+3862,"Beirut, Lebanon",35.485195,33.892474,1321
+6047,"Saida, Lebanon",35.386269,33.450189,1321
+6030,"Tartous, Syria",35.897792,34.891704,1321
+3272,"Kingston, Jamaica",-76.792157,17.992225,1068
+6048,"Cayman Brac, Cayman Islands",-79.877647,19.690332,1068
+3084,"Lowestoft, United Kingdom",1.729180,52.471359,1137
+3141,"Zandvoort, Netherlands",4.527214,52.370407,1137
+6050,"Pevensey Bay, United Kingdom",0.366681,50.819016,1323
+6051,"Cayeux-sur-Mer, France",1.493438,50.178806,1323
+6033,"Broadstairs, United Kingdom",1.439434,51.358884,1324
+5789,"Ostend, Belgium",2.912676,51.231125,1324
+5839,"Puttgarden, Germany",11.212464,54.496065,1336
+5814,"Rodbyhavn, Denmark",11.358656,54.663069,1336
+3084,"Lowestoft, United Kingdom",1.729180,52.471359,1343
+4490,"Calais, France",1.852813,50.952915,1343
+6086,"Dover, United Kingdom",1.317560,51.125559,1343
+6170,"Balluta Bay, Malta",14.380041,35.934062,1249
+3214,"Catania, Italy",15.067443,37.511588,1249
+3867,"Doha, Qatar",51.519367,25.294346,1254
+3858,"Abu Dhabi, United Arab Emirates",54.418877,24.443785,1254
+5755,"Seward, Alaska, United States",-149.443129,60.112188,1348
+6191,"Warrenton, Oregon, United States",-123.923860,46.165124,1348
+5956,"Satun, Thailand",100.066121,6.613214,1035
+4191,"Chennai, India",80.243083,13.063480,1035
+3887,"Colombo, Sri Lanka",79.871990,6.926740,1035
+3212,"Mumbai, India",72.875899,19.075794,1035
+3259,"Karachi, Pakistan",67.028539,24.889378,1035
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1035
+4361,"Jeddah, Saudi Arabia",39.182751,21.481262,1035
+5825,"Suez, Egypt",32.530118,29.972285,1035
+6044,"Alexandria, Egypt",29.889787,31.191889,1035
+3177,"Palermo, Italy",13.358362,38.121500,1035
+5958,"Bizerte, Tunisia",9.867348,37.276347,1035
+4196,"Annaba, Algeria",7.755435,36.902348,1035
+3210,"Marseille, France",5.372623,43.293165,1739
+3210,"Marseille, France",5.372623,43.293165,1035
+6299,"Cox’s Bazar, Bangladesh",91.994933,21.429174,1035
+6300,"Melaka, Malaysia",102.220905,2.273177,1559
+6300,"Melaka, Malaysia",102.220905,2.273177,1035
+7311,"Dumai, Indonesia",101.447565,1.665316,1350
+6300,"Melaka, Malaysia",102.220905,2.273177,1350
+3259,"Karachi, Pakistan",67.028539,24.889378,1351
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1351
+3280,"Lagos, Nigeria",3.423210,6.438874,1357
+4554,"Bude, United Kingdom",-4.544401,50.828110,1357
+5950,"Port Sudan, Sudan",37.219666,19.615564,1246
+7678,"Tuticorine, India",78.145135,8.802203,1356
+5949,"Mt. Lavinia, Sri Lanka",79.866716,6.832697,1356
+5897,"Ventspils, Latvia",21.569979,57.389533,1270
+5897,"Ventspils, Latvia",21.569979,57.389533,1364
+7412,"Farosund, Sweden",19.055332,57.862983,1364
+3063,"Stockholm, Sweden",18.062852,59.332208,1364
+3063,"Stockholm, Sweden",18.062852,59.332208,1340
+3212,"Mumbai, India",72.875899,19.075794,1346
+5825,"Suez, Egypt",32.530118,29.972285,1346
+4294,"Al Safat, Kuwait",47.976497,29.369930,1346
+4188,"Manama, Bahrain",50.575812,26.228977,1346
+7646,"Al Seeb, Oman",58.176102,23.684703,1346
+7645,"Khasab, Oman",56.246806,26.181308,1695
+7645,"Khasab, Oman",56.246806,26.181308,1346
+4196,"Annaba, Algeria",7.755435,36.902348,1366
+3210,"Marseille, France",5.372623,43.293165,1366
+7646,"Al Seeb, Oman",58.176102,23.684703,1351
+4176,"Algiers, Algeria",3.031804,36.765336,1366
+7679,"Al Ghaydah, Yemen",52.182355,16.210378,1346
+4361,"Jeddah, Saudi Arabia",39.182751,21.481262,1346
+7681,"Al Hudaydah, Yemen",43.008531,14.685562,1559
+7681,"Al Hudaydah, Yemen",43.008531,14.685562,1346
+5950,"Port Sudan, Sudan",37.219666,19.615564,1346
+7689,"Bull Bay, Jamaica",-76.666668,17.949671,1361
+7730,"Kokkini, Greece",19.923984,39.753824,1383
+3160,"Bari, Italy",16.866661,41.125490,1739
+3160,"Bari, Italy",16.866661,41.125490,1296
+3160,"Bari, Italy",16.866661,41.125490,1383
+3867,"Doha, Qatar",51.519367,25.294346,1346
+7729,"Al Khobar, Saudi Arabia",50.214191,26.286167,1346
+5823,"Puerto Plata, Dominican Republic",-70.691232,19.799341,1361
+5851,"Puerto Cortes, Honduras",-87.946058,15.844802,1071
+3270,"Dubai, United Arab Emirates",55.308427,25.269346,1346
+4251,"Male, Maldives",73.499923,4.166267,1517
+7706,"Trivendrum, India",76.970233,8.798150,1517
+7981,"Unqui, Costa Rica",-84.454262,9.525860,1072
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1516
+3030,"Sydney, Australia",151.206990,-33.869872,1736
+3030,"Sydney, Australia",151.206990,-33.869872,1733
+3030,"Sydney, Australia",151.206990,-33.869872,1514
+5704,"Noumea, New Caledonia",166.439209,-22.303324,1514
+5896,"Mombasa, Kenya",39.672790,-4.053211,1516
+3210,"Marseille, France",5.372623,43.293165,1512
+3030,"Sydney, Australia",151.206990,-33.869872,1520
+5973,"Piti, Guam",144.694688,13.464688,1520
+5910,"Asilah, Morocco",-6.035757,35.470781,1666
+5910,"Asilah, Morocco",-6.035757,35.470781,1512
+8350,"Ela Beach, Papua New Guinea",147.156406,-9.480235,1527
+3030,"Sydney, Australia",151.206990,-33.869872,1527
+4251,"Male, Maldives",73.499923,4.166267,1369
+3887,"Colombo, Sri Lanka",79.871990,6.926740,1369
+6012,"Qingdao, China",120.342576,36.087077,1513
+5802,"Chongming, China",121.395212,31.619880,1513
+5982,"Tanshui, Taiwan",121.462595,25.181357,1636
+5982,"Tanshui, Taiwan",121.462595,25.181357,1513
+5975,"Keoje, Korea, Rep.",128.620795,34.880645,1513
+3711,"Nedonna Beach, Oregon, United States",-123.940071,45.643738,1513
+8351,"Siboney, Cuba",-75.712372,19.963635,1529
+8352,"La Guaira, Venezuela",-66.889622,10.603154,1529
+8357,"Spanish River Park, Florida, United States",-80.067692,26.378061,1232
+8355,"Crown Haven, Bahamas",-77.821941,26.912509,1232
+8354,"Riding Point, Bahamas",-78.245873,26.616745,1232
+8359,"Oran, Algeria",-0.641961,35.701641,1366
+5862,"Batam, Indonesia",103.962506,1.134726,1535
+3012,"Jakarta, Indonesia",106.827836,-6.171887,1833
+3012,"Jakarta, Indonesia",106.827836,-6.171887,1683
+3012,"Jakarta, Indonesia",106.827836,-6.171887,1535
+5812,"Pentaskhinos, Cyprus",33.603555,34.828484,1185
+7834,"Ishikari, Japan",141.315393,43.171180,1528
+8366,"Nevelsk, Russia",141.859143,46.684448,1528
+4067,"Anchorage, Alaska, United States",-149.858360,61.217461,1530
+8392,"Homer, Alaska, United States",-151.544297,59.646368,1693
+8392,"Homer, Alaska, United States",-151.544297,59.646368,1530
+8393,"Kenai, Alaska, United States",-151.259779,60.552910,1530
+8394,"Kodiak, Alaska, United States",-152.395279,57.794135,1530
+5755,"Seward, Alaska, United States",-149.443129,60.112188,1530
+8395,"Narrow Cape, Alaska, United States",-152.329169,57.426838,1530
+4275,"Willemstad, Curaçao",-68.896604,12.095316,1532
+5362,"Nakhodka, Russia",132.874015,42.812306,1518
+5529,"Naoetsu, Japan",138.242152,37.169743,1518
+8397,"Dumpton Gap, United Kingdom",1.439337,51.358579,1539
+8396,"Bredene, Belgium",2.961882,51.246384,1539
+3139,"Zeebrugge, Belgium",3.207000,51.330722,1538
+3141,"Zandvoort, Netherlands",4.527214,52.370407,1538
+8398,"Sizewell, United Kingdom",1.620294,52.207126,1538
+8399,"Thorpeness, United Kingdom",1.613067,52.180844,1538
+10605,"Kungsbacka, Sweden",12.076234,57.487482,1760
+10605,"Kungsbacka, Sweden",12.076234,57.487482,1218
+3268,"Helsingborg, Sweden",12.695862,56.043843,1731
+3268,"Helsingborg, Sweden",12.695862,56.043843,1259
+3268,"Helsingborg, Sweden",12.695862,56.043843,1544
+10606,"Saeby, Denmark",10.516566,57.330829,1760
+10606,"Saeby, Denmark",10.516566,57.330829,1218
+6065,"Helsingør, Denmark",12.592151,56.030439,1259
+6065,"Helsingør, Denmark",12.592151,56.030439,1731
+6065,"Helsingør, Denmark",12.592151,56.030439,1544
+8400,"Dragor, Denmark",12.670179,55.593538,1545
+8401,"Bunkeflostand, Sweden",12.918714,55.556807,1545
+8402,"Tuborg, Denmark",12.545569,55.721956,1541
+8403,"Barsebäck, Sweden",12.955432,55.770381,1541
+3081,"Whitesands Bay, United Kingdom",-5.698453,50.078514,1547
+8406,"Ballygrangans, Ireland",-6.558804,52.184079,1547
+8407,"Ballinesker, Ireland",-6.364859,52.401462,1547
+8408,"Blackpool, United Kingdom",-3.050749,53.808663,1753
+8408,"Blackpool, United Kingdom",-3.050749,53.808663,1616
+8408,"Blackpool, United Kingdom",-3.050749,53.808663,1092
+3077,"Dublin, Ireland",-6.248257,53.348043,1092
+4315,"Barranquilla, Colombia",-74.779755,10.940459,1083
+5824,"Punta Carnero, Ecuador",-80.914420,-2.272914,1083
+5779,"Paddington, Australia",151.228670,-33.882128,1526
+5754,"Keawaula, Hawaii, United States",-158.151714,21.425634,1526
+8484,"Mancora, Peru",-81.053782,-4.154041,1083
+5945,"Ponta Delgada, Portugal",-25.668756,37.739213,1801
+5945,"Ponta Delgada, Portugal",-25.668756,37.739213,1800
+5945,"Ponta Delgada, Portugal",-25.668756,37.739213,1046
+5693,"Cartagena, Colombia",-75.505683,10.386699,1554
+3563,"Boca Raton, Florida, United States",-80.088932,26.350327,1554
+5876,"Trapani, Italy",12.513636,38.017948,1555
+6015,"Kelibia, Tunisia",11.089906,36.849308,1772
+6015,"Kelibia, Tunisia",11.089906,36.849308,1555
+3686,"Manasquan, New Jersey, United States",-74.047041,40.123343,1551
+5793,"St. David’s, Bermuda",-64.769506,32.312238,1551
+5902,"Mersing, Malaysia",103.849908,2.295516,1507
+5940,"Changi North, Singapore",103.987017,1.389047,1507
+6014,"Sri Racha, Thailand",100.930574,13.174369,1507
+5970,"Tungku, Brunei",114.885840,4.926374,1507
+6013,"Vung Tau, Vietnam",107.079203,10.341850,1739
+6013,"Vung Tau, Vietnam",107.079203,10.341850,1507
+5852,"Lantau Island, Hong Kong",113.948341,22.271496,1507
+3772,"San Luis Obispo, California, United States",-120.662729,35.285015,1507
+8541,"Ballesteros, Philippines",121.513962,18.409412,1534
+6013,"Vung Tau, Vietnam",107.079203,10.341850,1534
+5853,"Deep Water Bay, Hong Kong",114.183985,22.249437,1534
+8685,"Morant Point, Jamaica",-76.184344,17.918360,1554
+5754,"Keawaula, Hawaii, United States",-158.151714,21.425634,1507
+3251,"Tanguisson Point, Guam",144.809337,13.549100,1507
+3925,"Port Moresby, Papua New Guinea",147.188510,-9.479600,1899
+16730,"Kikori, Papua New Guinea",144.240196,-7.413512,1899
+3925,"Port Moresby, Papua New Guinea",147.188510,-9.479600,1899
+8558,"Madang, Papua New Guinea",145.784751,-5.233679,1899
+16627,"Jayapura, Indonesia",140.669007,-2.591615,1899
+16731,"Vanimo, Papua New Guinea",141.299841,-2.689686,1899
+16732,"Wewak, Papua New Guinea",143.658312,-3.580018,1899
+16733,"Lorengau, Papua New Guinea",147.279038,-2.034975,1899
+16734,"Kavieng, Papua New Guinea",150.808602,-2.578114,1899
+16735,"Kokopo, Papua New Guinea",152.274616,-4.342347,1899
+16736,"Kimbe, Papua New Guinea",150.138729,-5.551160,1899
+16737,"Arawa, Papua New Guinea",155.567803,-6.225622,1899
+16738,"Lae, Papua New Guinea",146.992954,-6.742785,1899
+16739,"Popondetta, Papua New Guinea",148.293466,-8.604478,1899
+16740,"Alotau, Papua New Guinea",150.458773,-10.315708,1899
+16741,"Kerema, Papua New Guinea",145.771739,-7.963732,1899
+16742,"Daru, Papua New Guinea",143.209972,-9.078184,1899
+8558,"Madang, Papua New Guinea",145.784922,-5.233679,1520
+3212,"Mumbai, India",72.875899,19.075794,1552
+4177,"Djibouti City, Djibouti",43.147984,11.594682,1552
+5942,"Mtunzini, South Africa",31.757853,-28.950636,1552
+4252,"Maputo, Mozambique",32.580606,-25.968533,1552
+4182,"Dar Es Salaam, Tanzania",39.269665,-6.823229,1552
+5896,"Mombasa, Kenya",39.672790,-4.053211,1552
+3212,"Mumbai, India",72.875899,19.075794,1536
+6044,"Alexandria, Egypt",29.889787,31.191889,1536
+5825,"Suez, Egypt",32.530118,29.972285,1536
+3259,"Karachi, Pakistan",67.028539,24.889378,1536
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1536
+3214,"Catania, Italy",15.067443,37.511588,1536
+8663,"Tripoli, Lebanon",35.859120,34.439422,1536
+3210,"Marseille, France",5.372623,43.293165,1536
+4361,"Jeddah, Saudi Arabia",39.182751,21.481262,1536
+5885,"Chikura, Japan",139.954652,34.976653,1525
+8838,"Chaguaramas, Trinidad and Tobago",-61.650806,10.686162,1290
+8838,"Chaguaramas, Trinidad and Tobago",-61.650806,10.686162,1532
+8849,"Chabahar, Iran",60.629616,25.298228,1695
+8849,"Chabahar, Iran",60.629616,25.298228,1689
+8849,"Chabahar, Iran",60.629616,25.298228,1346
+8848,"Bandar Abbas, Iran",56.274345,27.187167,1346
+8973,"Kawaihae, Hawaii, United States",-155.831406,20.039990,1456
+8973,"Kawaihae, Hawaii, United States",-155.831406,20.039990,1455
+8973,"Kawaihae, Hawaii, United States",-155.831406,20.039990,1556
+8974,"Papenoo, French Polynesia",-149.441078,-17.512336,1556
+4359,"St. Thomas, Virgin Islands (U.S.)",-64.904418,18.324513,1073
+5764,"Valdez, Alaska, United States",-146.353345,61.130352,1166
+9038,"Coleraine, United Kingdom",-6.676187,55.130733,1080
+4181,"Accra, Ghana",-0.201092,5.558283,1357
+4227,"Moroni, Comoros",43.243394,-11.700693,1865
+4227,"Moroni, Comoros",43.243394,-11.700693,1872
+4227,"Moroni, Comoros",43.243394,-11.700693,1246
+5928,"Maria Chiquita, Panama",-79.753532,9.437334,1078
+5311,"Sventoji, Lithuania",21.082382,56.028291,1222
+5940,"Changi North, Singapore",103.987017,1.389047,1534
+3210,"Marseille, France",5.372623,43.293165,1523
+6044,"Alexandria, Egypt",29.889787,31.191889,1523
+9581,"Matthew Town, Bahamas",-73.683076,20.950512,1510
+3878,"Port-au-Prince, Haiti",-72.343135,18.542689,1510
+4992,"Redondo Beach, California, United States",-118.388023,33.844476,1525
+3887,"Colombo, Sri Lanka",79.871990,6.926740,1517
+9596,"Al-Faw, Iraq",48.531770,29.923299,1346
+9486,"Zafarana, Egypt",32.649844,29.116683,1559
+9486,"Zafarana, Egypt",32.649844,29.116683,1739
+9486,"Zafarana, Egypt",32.649844,29.116683,1552
+4554,"Bude, United Kingdom",-4.544401,50.828110,1547
+5938,"Tuas, Singapore",103.647076,1.338193,1035
+7688,"Ocho Rios, Jamaica",-77.103192,18.398560,1529
+5887,"Maruyama, Japan",139.816956,35.037517,1513
+9086,"Port Vila, Vanuatu",168.322802,-17.730329,1682
+3655,"Jacksonville, Florida, United States",-81.655735,30.331758,1791
+3655,"Jacksonville, Florida, United States",-81.655735,30.331758,1727
+3655,"Jacksonville, Florida, United States",-81.655735,30.331758,1686
+10323,"Skalvik, Sweden",12.683265,56.683186,1688
+10321,"Vestero, Denmark",10.966957,57.272248,1688
+10320,"Lyngsa, Denmark",10.514613,57.244807,1688
+10338,"Deeside Clwyd, United Kingdom",-3.027556,53.201730,1685
+10313,"Clonshaugh, Ireland",-6.197915,53.410055,1684
+10353,"Glen Lyon, United Kingdom",-4.333414,60.333074,1576
+4361,"Jeddah, Saudi Arabia",39.182751,21.481262,1558
+9486,"Zafarana, Egypt",32.649844,29.116683,1558
+9485,"Abu Talat, Egypt",29.702482,31.071845,1559
+9485,"Abu Talat, Egypt",29.702482,31.071845,1739
+9485,"Abu Talat, Egypt",29.702482,31.071845,1558
+3215,"Mazara del Vallo, Italy",12.591272,37.650126,1558
+5530,"Poti, Georgia",41.667614,42.150771,1563
+9594,"Balchik, Bulgaria",28.167449,43.414344,1563
+5862,"Batam, Indonesia",103.962506,1.134726,1561
+3210,"Marseille, France",5.372623,43.293165,1573
+8392,"Homer, Alaska, United States",-151.544297,59.646368,1571
+8539,"Florence, Oregon, United States",-124.099837,43.982130,1571
+4067,"Anchorage, Alaska, United States",-149.858360,61.217461,1571
+8540,"Nikiski, Alaska, United States",-151.291709,60.689824,1571
+8488,"Nuuk, Greenland",-51.729962,64.181131,1897
+8488,"Nuuk, Greenland",-51.729962,64.181131,1569
+8543,"Qaqortoq, Greenland",-46.035396,60.718938,1569
+8994,"Landeyjar, Iceland",-20.142294,63.642167,1569
+8544,"Landeyjasandur, Iceland",-20.666756,63.733072,1568
+5818,"Blaabjerg, Denmark",8.328970,55.751533,1568
+8549,"Wrangell, Alaska, United States",-132.383814,56.470796,1567
+8550,"Petersburg, Alaska, United States",-132.970044,56.807612,1567
+8552,"Hawk Inlet, Alaska, United States",-134.741824,58.128107,1567
+8553,"Angoon, Alaska, United States",-134.582254,57.501838,1567
+8554,"Sitka, Alaska, United States",-135.334402,57.052912,1567
+3215,"Mazara del Vallo, Italy",12.591272,37.650126,1581
+8561,"St. Paul's Bay, Malta",14.415588,35.950505,1581
+8680,"Banff, United Kingdom",-2.523650,57.666864,1576
+8681,"Torshavn, Faeroe Islands",-6.771841,62.017461,1576
+8682,"Ayre of Cara, United Kingdom",-2.900114,58.833270,1576
+8683,"Sandwick, United Kingdom",-1.238689,59.995977,1576
+8684,"Maywick, United Kingdom",-1.323797,60.003985,1576
+5884,"Ajigaura, Japan",140.612268,36.383562,1592
+5883,"Shima, Japan",136.874380,34.336834,1592
+5931,"Cavite, Philippines",120.820115,14.286270,1592
+5983,"Pa Li, Taiwan",121.383200,25.149985,1592
+5977,"Shindu-Ri, Korea, Rep.",126.391597,36.576249,1592
+5857,"Tseung Kwan O, Hong Kong",114.258692,22.318297,1858
+5857,"Tseung Kwan O, Hong Kong",114.258692,22.318297,1617
+5857,"Tseung Kwan O, Hong Kong",114.258692,22.318297,1679
+5857,"Tseung Kwan O, Hong Kong",114.258692,22.318297,1592
+6012,"Qingdao, China",120.342576,36.087077,1592
+5885,"Chikura, Japan",139.954652,34.976653,1592
+5982,"Tanshui, Taiwan",121.462595,25.181357,1592
+5980,"Fangshan, Taiwan",120.662107,22.249254,1592
+3218,"Batangas, Philippines",121.064939,13.765555,1592
+3246,"Shanghai, China",121.472458,31.247504,1592
+5856,"Chung Hom Kok, Hong Kong",114.203028,22.222045,1592
+5937,"Changi South, Singapore",103.987017,1.389047,1592
+5940,"Changi North, Singapore",103.987017,1.389047,1592
+4183,"Pusan, Korea, Rep.",128.999310,35.170147,1592
+5940,"Changi North, Singapore",103.987017,1.389047,1597
+8947,"Barka, Oman",58.004324,23.679429,1735
+8947,"Barka, Oman",58.004324,23.679429,1695
+8947,"Barka, Oman",58.004324,23.679429,1689
+8947,"Barka, Oman",58.004324,23.679429,1580
+3255,"Monaco, Monaco",7.417642,43.732618,1580
+4361,"Jeddah, Saudi Arabia",39.182751,21.481262,1580
+3212,"Mumbai, India",72.875899,19.075794,1580
+4271,"Tripoli, Libya",13.187268,32.877301,1580
+4177,"Djibouti City, Djibouti",43.147984,11.594682,1580
+4554,"Bude, United Kingdom",-4.544401,50.828110,1580
+8948,"Gibraltar, Gibraltar",-5.347672,36.155937,1580
+7646,"Al Seeb, Oman",58.176102,23.684703,1558
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1580
+5934,"Sesimbra, Portugal",-9.102748,38.442691,1580
+5862,"Batam, Indonesia",103.962506,1.134726,1601
+8970,"Rengit, Malaysia",103.147662,1.677133,1601
+9028,"Bahar ic-Caghaq, Malta",14.458752,35.934062,1602
+8972,"Pozzallo, Italy",14.853869,36.733720,1602
+3580,"Charlestown, Rhode Island, United States",-71.645870,41.411904,1596
+9069,"Paget, Bermuda",-64.788696,32.280536,1596
+5754,"Keawaula, Hawaii, United States",-158.151714,21.425634,1600
+8838,"Chaguaramas, Trinidad and Tobago",-61.650806,10.686162,1612
+3904,"Georgetown, Guyana",-58.154910,6.804108,1612
+9669,"Totness, Suriname",-56.375370,5.886628,1612
+4262,"San Juan, Puerto Rico, United States",-66.106664,18.465833,1829
+8836,"Jarry, Guadeloupe",-61.554859,16.243007,1829
+8834,"Baillif, Guadeloupe",-61.713941,16.028945,1829
+7875,"Saint Martin, Guadeloupe",-63.050073,18.092787,1829
+7876,"Saint Barthelemy, Guadeloupe",-62.833374,17.900062,1829
+6183,"Needham’s Point, Barbados",-59.612722,13.078788,1619
+5750,"St. Croix, Virgin Islands, United States",-64.819408,17.771864,1619
+4356,"Basseterre, Saint Kitts and Nevis",-62.731226,17.298451,1807
+4356,"Basseterre, Saint Kitts and Nevis",-62.731226,17.298451,1290
+4356,"Basseterre, Saint Kitts and Nevis",-62.731226,17.298451,1619
+8837,"Rodney Bay, Saint Lucia",-60.988551,14.035623,1619
+4219,"Kingstown, Saint Vincent and the Grenadines",-61.254664,13.187870,1290
+4219,"Kingstown, Saint Vincent and the Grenadines",-61.254664,13.187870,1619
+4244,"St. George's, Grenada",-61.711597,12.188016,1290
+4244,"St. George’s, Grenada",-61.711597,12.188016,1619
+8838,"Chaguaramas, Trinidad and Tobago",-61.650806,10.686162,1619
+4239,"St. John’s, Antigua and Barbuda",-61.857935,17.051479,1290
+4239,"St. John’s, Antigua and Barbuda",-61.857935,17.051479,1619
+5905,"Le Lamentin, Martinique",-61.094264,14.615542,1619
+8835,"Canefield, Dominica",-61.384840,15.303335,1619
+9058,"Seixal, Portugal",-9.107387,38.642276,1173
+9058,"Seixal, Portugal",-9.107387,38.642276,1565
+4181,"Accra, Ghana",-0.201092,5.558283,1565
+9060,"Majuro, Republic of Marshall Islands",171.185691,7.116242,1605
+7879,"Kwajalein, Republic of Marshall Islands",167.424365,9.189776,1605
+9062,"Pohnpei, Federated States of Micronesia",159.070267,7.786407,1605
+3280,"Lagos, Nigeria",3.423210,6.438874,1565
+5705,"Apia, Samoa",-171.766694,-13.833675,1620
+9070,"Pago Pago, American Samoa",-170.695705,-14.276546,1733
+9070,"Pago Pago, American Samoa",-170.695705,-14.276546,1620
+9094,"Sungai Kakap, Indonesia",109.183206,-0.067056,1597
+9095,"Tanjung Pakis, Indonesia",107.120903,-5.981457,1597
+9096,"Tanjung Bemban, Indonesia",104.133111,1.173202,1597
+6015,"Kelibia, Tunisia",11.089906,36.849308,1621
+3215,"Mazara del Vallo, Italy",12.591272,37.650126,1621
+9070,"Pago Pago, American Samoa",-170.695705,-14.276546,1600
+5311,"Sventoji, Lithuania",21.082382,56.028291,1611
+5310,"Liepaja, Latvia",21.011288,56.508186,1611
+4552,"Kotka, Finland",26.883563,60.501043,1610
+9103,"Helsingfors, Finland",24.932490,60.171075,1610
+5952,"Stavsnas, Sweden",18.764609,59.822723,1609
+5830,"Mariehamn, Finland",19.937851,60.113836,1208
+5830,"Mariehamn, Finland",19.937851,60.113836,1609
+9104,"Haradsholm, Finland",22.302108,60.300970,1609
+7694,"Hanko, Finland",22.968221,59.823211,1609
+9103,"Helsingfors, Finland",24.932490,60.171075,1609
+3064,"Helsinki, Finland",24.932490,60.171075,1624
+3089,"Tallinn, Estonia",24.752399,59.436200,1624
+3063,"Stockholm, Sweden",18.062852,59.332208,1624
+9398,"Toamasina, Madagascar",49.400325,-18.146173,1594
+9399,"Sainte Marie, Réunion",55.549931,-20.897368,1901
+9399,"Sainte Marie, Réunion",55.549931,-20.897368,1594
+9400,"Terre Rouge, Mauritius",57.510086,-20.077813,1594
+3119,"Penmarch, France",-4.338688,47.811315,1629
+4192,"Nouakchott, Mauritania",-15.978282,18.083876,1629
+4180,"Dakar, Senegal",-17.451914,14.686599,1629
+4348,"Banjul, Gambia",-16.581358,13.455948,1629
+4208,"Conakry, Guinea",-13.703820,9.513628,1629
+4212,"Freetown, Sierra Leone",-13.238098,8.485333,1629
+4178,"Monrovia, Liberia",-10.797181,6.300080,1629
+3316,"Abidjan, Côte d'Ivoire",-4.026237,5.323518,1629
+4181,"Accra, Ghana",-0.201092,5.558283,1629
+3315,"Cotonou, Benin",2.439922,6.356574,1629
+3280,"Lagos, Nigeria",3.423210,6.438874,1629
+4221,"Libreville, Gabon",9.454360,0.394272,1629
+9426,"Muanda, Congo, Dem. Rep.",12.349866,-5.933362,1560
+5971,"Point Noire, Congo, Rep.",11.863636,-4.779090,1560
+3280,"Lagos, Nigeria",3.423210,6.438874,1560
+3317,"Lome, Togo",1.227813,6.126008,1560
+4181,"Accra, Ghana",-0.201092,5.558283,1560
+3316,"Abidjan, Côte d'Ivoire",-4.026237,5.323518,1560
+10725,"Palmarejo, Cape Verde",-23.521247,14.923013,1560
+5720,"El Goro, Canary Islands, Spain",-15.398741,27.959396,1666
+5720,"El Goro, Canary Islands, Spain",-15.398741,27.959396,1560
+10366,"Guningtou, Taiwan",118.307128,24.476145,1632
+10367,"Lake Ci, Taiwan",118.289745,24.455516,1632
+9434,"Bata, Equatorial Guinea",9.768227,1.860067,1842
+9434,"Bata, Equatorial Guinea",9.768227,1.860067,1699
+9434,"Bata, Equatorial Guinea",9.768227,1.860067,1629
+10368,"Dadeng Island, China",118.300975,24.556736,1632
+10369,"Guanyin Mountain, China",118.188964,24.493919,1632
+5963,"Maldonado, Uruguay",-54.950175,-34.900389,1633
+3330,"Las Toninas, Argentina",-56.695487,-36.472532,1633
+5793,"St. David’s, Bermuda",-64.769506,32.312238,1634
+6035,"Holyhead, United Kingdom",-4.630387,53.306039,1684
+6035,"Holyhead, United Kingdom",-4.630387,53.306039,1641
+3077,"Dublin, Ireland",-6.248257,53.348043,1641
+5862,"Batam, Indonesia",103.962506,1.134726,1648
+7311,"Dumai, Indonesia",101.447565,1.665316,1648
+9589,"Tortola, Virgin Islands (U.K.)",-64.597241,18.414784,1727
+9589,"Tortola, Virgin Islands (U.K.)",-64.597241,18.414784,1634
+3212,"Mumbai, India",72.875899,19.075794,1598
+9596,"Al-Faw, Iraq",48.531770,29.923299,1598
+3871,"Kuwait City, Kuwait",47.974739,29.374019,1598
+9683,"Bushehr, Iran",50.842707,28.970015,1598
+7729,"Al Khobar, Saudi Arabia",50.214191,26.286167,1598
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1598
+5885,"Chikura, Japan",139.954652,34.976653,1604
+5803,"Shantou, China",116.675488,23.354552,1604
+9603,"Nasugbu, Philippines",120.695798,14.317398,1604
+4265,"Songkhla, Thailand",100.596980,7.078449,1604
+5938,"Tuas, Singapore",103.647076,1.338193,1604
+9671,"Breivika, Norway",16.553185,68.735048,1651
+9672,"Longyearbyen, Svalbard, Norway",15.648790,78.218527,1651
+3319,"Auckland, New Zealand",174.770455,-36.884421,1487
+3319,"Auckland, New Zealand",174.770455,-36.884421,1135
+7713,"Tenerife, Canary Islands, Spain",-16.522764,28.292782,1666
+5812,"Pentaskhinos, Cyprus",33.603555,34.828484,1573
+8620,"Fuzhou, China",119.303221,26.071091,1636
+5745,"Highbridge, United Kingdom",-2.975017,51.222226,1560
+9058,"Seixal, Portugal",-9.107387,38.642276,1560
+9844,"Yzerfontein, South Africa",18.155528,-33.348217,1560
+9845,"Swakopmund, Namibia",14.528088,-22.678324,1560
+9846,"Limbe, Cameroon",9.208462,4.014510,1560
+8359,"Oran, Algeria",-0.641961,35.701641,1664
+3066,"Valencia, Spain",-0.376971,39.468314,1696
+3066,"Valencia, Spain",-0.376971,39.468314,1664
+9485,"Abu Talat, Egypt",29.702482,31.071845,1573
+9486,"Zafarana, Egypt",32.649844,29.116683,1580
+9485,"Abu Talat, Egypt",29.702482,31.071845,1580
+9845,"Swakopmund, Namibia",14.528088,-22.678324,1629
+3921,"Cape Town, South Africa",18.421934,-33.919164,1629
+10094,"Santana, Sao Tome and Principe",6.532877,0.859580,1629
+4190,"Luanda, Angola",13.235022,-8.812852,1709
+4190,"Luanda, Angola",13.235022,-8.812852,1629
+9426,"Muanda, Congo, Dem. Rep.",12.349866,-5.933362,1629
+7713,"Tenerife, Canary Islands, Spain",-16.522764,28.292782,1629
+10095,"Kribi, Cameroon",9.910414,2.932918,1856
+10095,"Kribi, Cameroon",9.910414,2.932918,1821
+10095,"Kribi, Cameroon",9.910414,2.932918,1842
+7873,"Darnah, Libya",22.639217,32.763556,1184
+7873,"Darnah, Libya",22.639217,32.763556,1665
+5723,"Chania, Greece",24.012165,35.511809,1665
+9600,"Harbour View, Jamaica",-76.716864,17.949671,1671
+10120,"Haina, Dominican Republic",-70.161838,18.699000,1671
+10121,"Nanny Cay, Virgin Islands (U.K.)",-64.597241,18.414784,1671
+10122,"Nyali, Kenya",39.700036,-4.050501,1667
+10123,"Kaweni, Mayotte",45.165854,-12.817099,1667
+10683,"Amwaj Island, Bahrain",50.575812,26.228977,1631
+10682,"Al-Kheesa, Qatar",51.519367,25.294346,1631
+7729,"Al Khobar, Saudi Arabia",50.214191,26.286167,1631
+3270,"Dubai, United Arab Emirates",55.308427,25.269346,1631
+4362,"Victoria, Seychelles",55.445048,-4.617615,1672
+4182,"Dar Es Salaam, Tanzania",39.269665,-6.823229,1672
+3640,"Halifax, Nova Scotia, Canada",-63.573950,44.645801,1673
+5736,"Brean, United Kingdom",-3.010905,51.293735,1835
+5736,"Brean, United Kingdom",-3.010905,51.293735,1673
+3213,"Tel Aviv, Israel",34.769668,32.044599,1677
+3160,"Bari, Italy",16.866661,41.125490,1677
+7646,"Al Seeb, Oman",58.176102,23.684703,1598
+10233,"Al Hidd, Bahrain",50.656183,26.241586,1598
+10232,"Al Daayen, Qatar",51.451886,25.538584,1598
+6300,"Melaka, Malaysia",102.220905,2.273177,1648
+10684,"Qalhat, Oman",58.591043,23.615098,1559
+10684,"Qalhat, Oman",58.591043,23.615098,1631
+10727,"Sangano, Angola",13.235022,-8.812852,1560
+5962,"Fujairah, United Arab Emirates",56.333720,25.121690,1631
+5856,"Chung Hom Kok, Hong Kong",114.205665,22.225036,1604
+10309,"Telisai, Brunei",114.570606,4.703718,1604
+3239,"Perth, Australia",115.857227,-31.953442,1683
+3029,"Singapore, Singapore",103.853033,1.293661,1833
+3029,"Singapore, Singapore",103.853033,1.293661,1785

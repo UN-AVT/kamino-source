@@ -1,0 +1,238 @@
+---
+pagetitle: "Mapping airline routes"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Libraries
+library(tidyverse)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(geosphere)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Mapping airline routes
+## Connection Map
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Wade Lambert on Unsplash"}
+
+masthead <- "assets/wade-lambert-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> The scientific theory I like best is that the rings of Saturn are composed entirely of lost airline luggage....\
+--- Mark Russell\
+
+***
+
+### Ingest
+#### Routes and lights
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+flights_routes <- read.csv("archetypes/flight-routes/british-airways.csv", header = TRUE)
+flights_routes
+
+# use city populations to simulate lights as in original
+lights = read.csv("archetypes/cities-top-10000-world.csv", header = TRUE, stringsAsFactors = FALSE)
+# lights
+
+```
+
+
+### Wrangle
+#### group and filter
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+flights_points <- flights_routes %>%
+  group_by(group) %>%
+  filter(row_number() == 1 | row_number() == n())
+
+flights_points
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# PLOT NATURAL EARTH BORDERS
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA")
+
+```
+
+
+### Map Theme
+#### Theme, light and dark
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+theme_opts <- theme(
+      axis.line=element_blank(),
+      axis.text.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.ticks=element_blank(),
+      axis.title.x=element_blank(),
+      axis.title.y=element_blank(),
+      legend.position="none",
+      legend.title = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.background=element_rect(fill="#0d0e1b", colour="#0d0e1b"),
+      panel.border = element_blank()
+)
+
+theme_dark <- theme(
+      panel.background=element_rect(fill="#0d0e1b", colour="#0d0e1b")
+)
+
+theme_light <- theme(
+      panel.background=element_rect(fill="#ffffff", colour="#ffffff")
+)
+
+
+```
+
+
+### Connection Map
+#### with dark theme
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v1 <- ggplot() +
+  # Draw the natural earth map  styling to match blue marble dark lights
+  geom_sf(data = ne_world, fill="#0f1227", color="#1c3153", stroke=1.0) +
+  # Plot all the lights of the cities at night
+  geom_point(data = lights, aes(x=lng, y=lat, alpha=Population), size=0.5, color="#ffffff" ) +
+  # routes
+  geom_path(data = flights_routes, aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.5) + 
+  # airline hubs
+  geom_point(data = flights_points, aes(long, lat), alpha = 0.3, size = 1, colour = "#f9ba00") +
+  # brightness by population
+  scale_alpha_continuous(range=c(0.1,1), guide=FALSE) +
+  # color by airline
+  scale_color_manual(values = c("#f9ba00", "#075aaa", "#ff0000")) +
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "Airline Flight Routes", 
+       subtitle="") +
+  theme_opts +
+  theme_dark
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### Connection Map
+#### with light theme
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v2 <- ggplot() +
+  geom_sf(data = ne_world, fill="#f5f5f5", color="#d5d5d5", stroke=1.0) +
+  # lights
+  geom_point(data = lights, aes(x=lng, y=lat, alpha=Population), size=0.5, color="#777777" ) +
+  # routes
+  geom_path(data = flights_routes, aes(long, lat, group = id, color = name), alpha = 0.2, size = 0.5) + 
+  # airline hubs
+  geom_point(data = flights_points, aes(long, lat), alpha = 0.3, size = 1, colour = "#075aaa") +
+  # brightness by population
+  scale_alpha_continuous(range=c(0.1,1), guide=FALSE) +
+  # color by airline
+  scale_color_manual(values = c("#075aaa", "#f9ba00", "#ff0000")) +
+  theme_bw() +
+  labs(x="",
+       y="",
+       title = "Airline Flight Routes", 
+       subtitle="") +
+  theme_opts +
+  theme_light
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+ggsave(filename = "outputs/airline-flight-routes-dark-map-fs.svg", plot = v1, width=16, height=9)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data source: Open Flights,[GO](https://openflights.org/data.html){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

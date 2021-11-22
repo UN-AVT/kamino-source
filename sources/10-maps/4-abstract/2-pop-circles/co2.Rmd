@@ -1,0 +1,172 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+#library(remotes)
+#install_github("rCarto/popcircle")
+
+library(ggplot2)
+library(ggthemes)
+library(rnaturalearth)
+library(rgdal)
+library(sf)
+library(wbstats)
+library(popcircle)
+library(cartography)
+library(ggiraph)
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Geo Circle Packing
+## Population and CO2
+
+> Who runs in circles never gets far...\
+--- Thornton Burgess\
+
+***
+
+```{r, echo=FALSE}
+
+# Get countries
+ctry <- ne_countries(scale = "small", returnclass = "sf")
+ctry <- st_transform(ctry, 3857)
+
+# Only keep the largest polygons of multipart polygons for a few countries
+# (e.g. display only continental US)
+frag_ctry <- c("US", "RU", "FR", "IN", "ES", "NL", "CL", "NZ", "ZA")
+largest_ring = function(x) {
+  x$ids <- 1:nrow(x)
+  pols = st_cast(x, "POLYGON", warn = FALSE)
+  spl = split(x = pols, f = pols$ids)
+  do.call(rbind, (lapply(spl, function(y) y[which.max(st_area(y)),])))
+}
+st_geometry(ctry[ctry$iso_a2 %in% frag_ctry,]) <-
+  st_geometry(largest_ring(ctry[ctry$iso_a2 %in% frag_ctry,]))
+
+
+```
+
+# Section
+## Subsection
+
+```{r, echo=FALSE}
+
+## CO2
+# Get and merge data
+data_co2 <- wb(indicator = "EN.ATM.CO2E.KT", startdate = 2014, enddate = 2014)
+ctry_co2 <- merge(ctry[,"iso_a2"], data_co2, by.x = "iso_a2", by.y = "iso2c" )
+
+# Computes circles and polygons
+res_co2 <- popcircle(x = ctry_co2, var = "value")
+circles_co2 <- res_co2$circles
+shapes_co2 <- res_co2$shapes
+
+circles_co2$lab <- paste0(circles_co2$country, '\n', round(circles_co2$value/1000))
+
+```
+
+# Section
+## Subsection
+
+```{r, echo=FALSE, fig.width=13, fig.height=13}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+circles_co2_sf = st_as_sf(circles_co2)
+shapes_co2_sf = st_as_sf(shapes_co2)
+
+v1 <- ggplot() +
+  geom_sf(data = circles_co2_sf, aes(fill = value), color = "#ffffff", stroke = 0.5 ) +
+  geom_sf(data = shapes_co2_sf, fill = "#ffffff", color = "#ffffff", stroke = 0.25 ) +
+  # filter labels for largest values
+  geom_sf_text(data = circles_co2_sf, aes( label = ifelse((value>500000),iso3c, "")), size=3, color = '#333333') +
+  scale_fill_gradient2_tableau(trans = "reverse") +
+  theme_bw() +
+  labs(title = "CO2 Emissions, Million Tons", 
+       subtitle="T. Giraud, 2019 - World Development Indicators, 2014 ") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 13,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, echo=FALSE}
+
+# ggsave(filename = "pop-circles-co2.svg", plot = v1, width=12, height=6)
+
+```
+
+
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+<a href="https://github.com/rCarto/popcircle">Source</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
