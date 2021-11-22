@@ -1,0 +1,67 @@
+id,ident,type,name,latitude_deg,longitude_deg,elevation_ft,continent,country_name,iso_country,region_name,iso_region,local_region,municipality,scheduled_service,gps_code,iata_code,local_code,home_link,wikipedia_link,keywords,score,last_updated
+"#meta +id","#meta +code","#loc +airport +type","#loc +airport +name","#geo +lat","#geo +lon","#geo +elevation +ft","#region +continent +code","#country +name","#country +code +iso2","#adm1 +name","#adm1 +code +iso","#adm1 +code +local","#loc +municipality +name","#status +scheduled","#loc +airport +code +gps","#loc +airport +code +iata","#loc +airport +code +local","#meta +url +airport","#meta +url +wikipedia","#meta +keywords","#meta +score","#date +updated"
+3247,HSSJ,large_airport,"Juba International Airport",4.87201023102,31.6011009216,1513,AF,"South Sudan",SS,"Central Equatoria State",SS-17,17,Juba,1,HSSJ,JUB,,,https://en.wikipedia.org/wiki/Juba_Airport,JIA,825,2014-10-08T20:31:10+00:00
+3248,HSSM,medium_airport,"Malakal Airport",9.55897045135498,31.65220069885254,1291,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,Malakal,1,HSSM,MAK,,,https://en.wikipedia.org/wiki/Malakal_Airport,,825,2008-08-11T09:30:06+00:00
+31614,HSAW,small_airport,"Aweil Airport",8.767000198364258,27.399999618530273,1394,AF,"South Sudan",SS,"Northern Bahr el Ghazal State",SS-15,15,Aweil,0,HSAW,,,,https://en.wikipedia.org/wiki/Aweil_Airport,,50,2009-04-03T07:26:42+00:00
+31615,HSBR,small_airport,"Bor Airport",6.191942,31.600408,1394,AF,"South Sudan",SS,"Jonglei State",SS-20,20,Bor,0,HSBR,,,,https://en.wikipedia.org/wiki/Bor_Airport_(Sudan),,50,2020-08-26T19:47:18+00:00
+31623,HSMK,small_airport,"Rumbek Airport",6.8249998092699995,29.6690006256,1378,AF,"South Sudan",SS,"Lakes State",SS-18,18,Rumbek,0,HSMK,RBX,,,https://en.wikipedia.org/wiki/Rumbek_Airport,,50,2012-12-07T21:34:49+00:00
+308309,SS-0011,small_airport,"Ayod Airstrips",8.13052406119,31.407251358,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,,0,,,,,,,0,2013-03-04T08:07:15+00:00
+308314,SS-0016,small_airport,"Panyagor Airstrip",7.32998059644,31.422260999699997,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,,0,,,,,,,0,2013-03-04T08:58:35+00:00
+308307,SS-0009,small_airport,"Turuk Airstrip",7.98800762753,31.9675540924,,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,,0,,,,,,,0,2013-03-04T07:53:56+00:00
+300862,HSFA,medium_airport,"Paloich Airport, Heliport",10.529167,32.500556,1290,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,Higleig,0,HSFA,HGI,,,https://en.wikipedia.org/wiki/Paloich_Airport,"Palouge, DPOC",0,2017-04-01T14:09:04+00:00
+31620,HSKJ,small_airport,"Kajo Keji Airport",3.85754,31.65652,2500,AF,"South Sudan",SS,"Central Equatoria State",SS-17,17,"Kajo Keji",0,HSKJ,,,,https://en.wikipedia.org/wiki/Kago_Kaju_Airport,,50,2021-05-07T14:25:27+00:00
+31621,HSKP,small_airport,"Kapoeta Airport",4.7829999923706055,33.58300018310547,2220,AF,"South Sudan",SS,"Eastern Equatoria State",SS-19,19,Kapoeta,0,HSKP,,,,,,50,2008-12-30T14:07:23+00:00
+31622,HSMD,small_airport,"Marida Airport",4.916999816894531,29.466999053955078,1901,AF,"South Sudan",SS,"Western Equatoria State",SS-16,16,Marida,0,HSMD,,,,,,50,2008-12-30T14:07:23+00:00
+31626,HSNM,small_airport,"Nimule Airport",3.597659,32.090278,2059,AF,"South Sudan",SS,"Eastern Equatoria State",SS-19,19,Nimule,0,HSNM,,,,,,50,2021-05-07T14:27:59+00:00
+31627,HSPA,small_airport,"Pachella Airport",7.178563117980957,34.09735870361328,2000,AF,"South Sudan",SS,"Jonglei State",SS-20,20,Pachella,0,HSPA,,,,https://en.wikipedia.org/wiki/Pachella_Airport,,50,2009-03-04T21:40:18+00:00
+31628,HSRJ,small_airport,"Raga Airport",8.461110115050001,25.681100845299998,1788,AF,"South Sudan",SS,"Western Bahr el Ghazal State",SS-14,14,Raga,0,HSRJ,,,,https://en.wikipedia.org/wiki/Raga_Airport,,50,2012-11-10T11:51:48+00:00
+31616,HSBT,small_airport,"Bentiu Airport",9.308488,29.787316,2000,AF,"South Sudan",SS,"Unity State",SS-22,22,Rubkona,0,HSBT,,,,https://en.wikipedia.org/wiki/Bentu_Airport,,50,2021-05-07T14:21:19+00:00
+31630,HSTO,small_airport,"Tong Airport",7.267000198364258,28.982999801635742,1413,AF,"South Sudan",SS,"Warrap State",SS-21,21,Tong,0,HSTO,,,,,,50,2008-12-30T14:07:23+00:00
+31631,HSTR,small_airport,"Torit Airport",4.400000095367432,32.58300018310547,2050,AF,"South Sudan",SS,"Eastern Equatoria State",SS-19,19,Torit,0,HSTR,,,,,,50,2008-12-30T14:07:23+00:00
+31632,HSTU,small_airport,"Tumbura Airport",5.599999904632568,27.450000762939453,2230,AF,"South Sudan",SS,"Western Equatoria State",SS-16,16,Tumbura,0,HSTU,,,,,,50,2008-12-30T14:07:23+00:00
+30553,HSWW,medium_airport,"Wau Airport",7.7258300781199996,27.9750003815,1529,AF,"South Sudan",SS,"Western Bahr el Ghazal State",SS-14,14,Wau,1,HSWW,WUU,,,https://en.wikipedia.org/wiki/Wau_Airport,,50,2011-07-09T07:23:17+00:00
+31633,HSYA,small_airport,"Yambio Airport",4.567220211029053,28.423900604248047,2375,AF,"South Sudan",SS,"Western Equatoria State",SS-16,16,Yambio,0,HSYA,,,,,,50,2008-12-30T14:07:23+00:00
+31634,HSYE,small_airport,"Yei Airport",4.13028160099,30.7280731201,2000,AF,"South Sudan",SS,"Central Equatoria State",SS-17,17,Yei,0,HSYE,,,,https://en.wikipedia.org/wiki/Yei_Airport,,50,2013-06-13T20:32:45+00:00
+31635,HSYL,small_airport,"Yirol Airport",6.566999912261963,30.5,1424,AF,"South Sudan",SS,"Lakes State",SS-18,18,Yirol,0,HSYL,,,,,,50,2008-12-30T14:07:23+00:00
+308299,SS-0001,small_airport,"Ajuini Airstrip",7.45404976088,31.4126586914,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,,0,,,,,,,0,2013-03-04T06:57:18+00:00
+308300,SS-0002,small_airport,"Duk Payuel Airstrip",7.47779350981,31.5149688721,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,,0,,,,,,,0,2013-03-04T07:09:42+00:00
+308301,SS-0003,small_airport,"Duk Kwenyakwol Airstrip",7.60015111547,31.4517974854,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,,0,,,,,,,0,2013-03-04T07:12:24+00:00
+308302,SS-0004,small_airport,"Panjut Airstrip",7.74662801419,31.6912651062,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,,0,,,,,,,0,2013-03-04T07:16:41+00:00
+308303,SS-0005,small_airport,"Duk Fadiat Airstrip",7.739313875750001,31.400299072299998,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,,0,,,,,,,0,2013-03-04T07:33:50+00:00
+308308,SS-0010,small_airport,"Mogok Airstrip",8.41523437349,31.333179473900003,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,,0,,,,,,,0,2013-03-04T08:00:13+00:00
+308310,SS-0012,small_airport,"Buk Airfield",8.01095641186,31.428108215299996,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,,0,,,,,,,0,2013-03-04T08:13:27+00:00
+308311,SS-0013,small_airport,"Pathai Airstrip",8.06976738146,31.8386363983,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,,0,,,,,,,0,2013-03-04T08:20:56+00:00
+300307,AEE,small_airport,"Adareil Airport",10.0536111111,32.9594444444,1301,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,,0,,AEE,,,,,0,2011-12-31T01:49:09+00:00
+308304,SS-0006,small_airport,"Waat Airstrip",8.18967862785,32.1531844139,,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,,0,,,,,,,0,2013-03-04T07:44:26+00:00
+308305,SS-0007,small_airport,"Pieri Airstrip",8.041297817979999,32.0298671722,,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,,0,,,,,,,0,2013-03-04T07:47:30+00:00
+308306,SS-0008,small_airport,"Yuai Airstrip",7.905763916620001,31.887645721400002,,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,,0,,,,,,,0,2013-03-04T07:51:01+00:00
+308312,SS-0014,small_airport,"Pulturuk Airstrip",8.59629748793,31.948328018199998,,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,,0,,,,,,,0,2013-03-04T08:27:45+00:00
+43976,HSAK,small_airport,"Akobo Airport",7.7779,33.0027,1352,AF,"South Sudan",SS,"Jonglei State",SS-20,20,Akobo,0,HSAK,,,,https://en.wikipedia.org/wiki/Akobo_Airport,Ahobo,0,2015-08-28T01:44:00+00:00
+344056,SS-0030,small_airport,"Athidwey Airport",10.26976,32.22511,,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,Athidwey,0,,,,,,,0,2021-05-09T17:18:54+00:00
+344063,SS-0037,small_airport,"Bieh Airport",8.46238,30.13021,,AF,"South Sudan",SS,"Unity State",SS-22,22,Dhomor,0,,,,,,,0,2021-05-09T17:28:54+00:00
+344029,SS-0023,small_airport,"Doregh Airstrip",9.04242,30.70938,1314,AF,"South Sudan",SS,"Jonglei State",SS-20,20,Doregh,0,,,,,,,0,2021-05-08T18:58:04+00:00
+344060,SS-0034,small_airport,"Thar Jath Airport",8.78311,30.13077,,AF,"South Sudan",SS,"Unity State",SS-22,22,Duar,0,,,,,,,0,2021-05-09T17:25:24+00:00
+344061,SS-0035,heliport,"Dwil Keil Heliport",8.84604,29.9147,,AF,"South Sudan",SS,"Unity State",SS-22,22,"Dwil Keil",0,,,,,,,0,2021-05-09T17:27:13+00:00
+344052,SS-0026,small_airport,"Ganyiel Airport",7.3989,30.4721,,AF,"South Sudan",SS,"Unity State",SS-22,22,Ganyiel,0,,,,,,,0,2021-05-09T16:39:28+00:00
+319226,SS-0020,small_airport,"Ibba Airstrip",4.791895,29.157161,,AF,"South Sudan",SS,"Western Equatoria State",SS-16,16,Ibba,0,,,,,,,0,2016-06-29T03:08:16+00:00
+344030,SS-0024,small_airport,"Keew Airstrip",9.26371,30.63692,1319,AF,"South Sudan",SS,"Jonglei State",SS-20,20,Keew,0,,,HSDD,,,,0,2021-05-08T18:59:27+00:00
+315282,SS-0017,small_airport,"Lokwor Airport",5.288,35.8328,1415,AF,"South Sudan",SS,"Eastern Equatoria State",SS-19,19,Kibbish,0,,,,,,,0,2015-08-29T14:38:25+00:00
+344062,SS-0036,small_airport,"Koch Airport",8.60289,29.98998,,AF,"South Sudan",SS,"Unity State",SS-22,22,Koch,0,,,,,,,0,2021-05-09T17:27:51+00:00
+344058,SS-0032,small_airport,"Kodok Airport",9.89608,32.12014,,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,Kodok,0,,,,,,,0,2021-05-09T17:20:37+00:00
+315284,SS-0018,small_airport,"Kokuro Airport",4.6753,35.7116,1378,AF,"South Sudan",SS,"Eastern Equatoria State",SS-19,19,Kokuro,0,,,,,,,0,2015-08-29T16:17:14+00:00
+308313,SS-0015,small_airport,"Lankien Airstrip",8.5263,32.063026,1329,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,Lankien,0,,,,,,,0,2021-04-23T00:51:25+00:00
+344053,SS-0027,small_airport,"Luri Airport",4.85299,31.39548,,AF,"South Sudan",SS,"Central Equatoria State",SS-17,17,Luri,0,,,,,,,0,2021-05-09T16:42:21+00:00
+344067,SS-0041,small_airport,"Panyagor Airport",7.1638,31.40863,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,Mabior,0,,,,,,,0,2021-05-09T17:36:15+00:00
+344055,SS-0029,small_airport,"Melut Airport",10.3342,32.26825,,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,Melut,0,,,,,,,0,2021-05-09T17:17:55+00:00
+319225,SS-0019,small_airport,"Mundri West Airport",5.359401,30.346927,,AF,"South Sudan",SS,"Western Equatoria State",SS-16,16,"Mundri West",0,,,,,,,0,2016-06-29T03:06:55+00:00
+319228,SS-0022,small_airport,"Mvolo Airport",6.06388,29.956666,,AF,"South Sudan",SS,"Western Equatoria State",SS-16,16,Mvolo,0,,,,,,,0,2016-06-29T03:12:36+00:00
+344066,SS-0040,small_airport,"Nyal Airport",7.72751,30.24454,,AF,"South Sudan",SS,"Unity State",SS-22,22,Nyal,0,,,,,,,0,2021-05-09T17:34:33+00:00
+319227,SS-0021,small_airport,"Nzara Airport",4.635486,28.26757,,AF,"South Sudan",SS,"Western Equatoria State",SS-16,16,Nzara,0,,,,,,,0,2016-06-29T03:10:00+00:00
+344064,SS-0038,small_airport,"Padeah Airport",8.4094,30.18628,,AF,"South Sudan",SS,"Unity State",SS-22,22,Padeah,0,,,,,,,0,2021-05-09T17:30:32+00:00
+344057,SS-0031,small_airport,"Payuer Airport",10.07147,32.28504,,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,Payuer,0,,,,,,,0,2021-05-09T17:19:43+00:00
+299485,HSPI,small_airport,"Pibor Airport",6.79333333333,33.1305555556,1377,AF,"South Sudan",SS,"Jonglei State",SS-20,20,"Pibor Post",0,HSPI,,,,https://en.wikipedia.org/wiki/Pibor_Airport,,0,2011-09-29T17:05:58+00:00
+344054,SS-0028,small_airport,"Pulmok Airport",7.3367,30.41285,,AF,"South Sudan",SS,"Unity State",SS-22,22,Pulmok,0,,,,,,,0,2021-05-09T16:54:03+00:00
+299486,HSRN,small_airport,"Renk Airport",11.8324692723,32.810497283900006,1278,AF,"South Sudan",SS,"Upper Nile State",SS-23,23,Renk,0,HSRN,,,,https://en.wikipedia.org/wiki/Renk_Airport,"Renk City",0,2011-09-29T18:02:55+00:00
+344065,SS-0039,small_airport,"Thornyor Airfield",8.22396,30.22138,,AF,"South Sudan",SS,"Unity State",SS-22,22,"Thar Cheng",0,,,,,,,0,2021-05-09T17:31:29+00:00
+344059,SS-0033,small_airport,"Tondiak Airport",9.39786,31.15106,,AF,"South Sudan",SS,"Jonglei State",SS-20,20,Tondiak,0,,,,,,,0,2021-05-09T17:21:46+00:00
+344031,SS-0025,small_airport,"Tuai Bur Airstrip",9.39234,30.66912,1316,AF,"South Sudan",SS,"Jonglei State",SS-20,20,"Tuai Bur",0,,,,,,,0,2021-05-08T19:01:06+00:00

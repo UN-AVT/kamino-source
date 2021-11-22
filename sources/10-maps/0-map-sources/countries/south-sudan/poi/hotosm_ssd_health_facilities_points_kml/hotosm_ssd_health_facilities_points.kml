@@ -1,0 +1,2473 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Health_Facilities" id="Health_Facilities">
+	<SimpleField name="osm_id" type="string"></SimpleField>
+	<SimpleField name="source" type="string"></SimpleField>
+	<SimpleField name="amenity" type="string"></SimpleField>
+	<SimpleField name="addr:city" type="string"></SimpleField>
+	<SimpleField name="building" type="string"></SimpleField>
+	<SimpleField name="addr:full" type="string"></SimpleField>
+	<SimpleField name="healthcare:speciality" type="string"></SimpleField>
+	<SimpleField name="operator:type" type="string"></SimpleField>
+	<SimpleField name="capacity:persons" type="string"></SimpleField>
+	<SimpleField name="healthcare" type="string"></SimpleField>
+</Schema>
+<Folder><name>Health_Facilities</name>
+  <Placemark>
+	<name>Nahichod Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">2567047420</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="operator:type">public</SimpleData>
+		<SimpleData name="healthcare">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>33.5664114,4.2673529</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Wau Shilluk Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">2651471128</SimpleData>
+		<SimpleData name="source">IRNA</SimpleData>
+		<SimpleData name="amenity">doctors</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.7445662,9.6614679</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Masiya Pharmacy</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">2766848998</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.384477,4.5770067</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">2787812664</SimpleData>
+		<SimpleData name="source">survey</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="operator:type">ngo</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>33.7445474,9.9894867</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>BUNJ HOSPITAL</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">2911977289</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>33.7116589,9.958457</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>MSF Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">2989928233</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5025207,6.0461028</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Dispensary</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">3020107845</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.1318664,8.3095947</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Pillieny PHU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">3047312319</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.2009916,8.2653755</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Koch Primary Healthcare Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">3047384453</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>29.9837057,8.6110606</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mir Mir PHU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">3047384455</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.1021666,8.4646247</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Rupkai PHU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">3047384458</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.0769749,8.3928252</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Thaker Primary Healthcare Unit</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">3047384461</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.0544212,8.3935384</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Martha Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">3456334855</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>30.6676106,4.0974904</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Egyptian Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4075243308</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6091424,4.8566074</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Padiek Feeding Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4344581412</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6966687,7.8493215</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Yuai Feeding Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4344586501</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.8864986,7.9013632</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Modit Feeding Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4344591171</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.877684,8.0011889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Antipas Pharmacy</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4520549530</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5644661,4.8626999</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lou Specialized Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4520549531</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5587359,4.8644222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Life Bridge Pharmacy</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4520549544</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5334656,4.867858</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Whole Sale Pharmacy</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4520549545</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5339285,4.8678925</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>SowetoClinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4520549547</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5311008,4.8678751</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>SP Star Pharmscuticals</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4533225212</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5804592,4.8617667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Arroyo PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599483789</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.8570299,8.6759193</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Majak Kaar PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599487199</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.021688,9.2237202</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gok Machar PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599501981</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.855328,9.2172846</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Panthou PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599583941</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.7496302,8.7086648</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Wathmuok PHCU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599583942</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.6812111,8.6969168</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Udhum PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599588819</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.2536455,8.887924</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Riang Angon PHCU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599598829</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.1985074,8.9544357</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Malualkon PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599603669</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.6248177,9.0135615</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Warawar PHCU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599604375</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.6167898,9.1455122</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Malek Alel PHCU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599611139</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.5959417,8.5962275</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Akewich PHCU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599618849</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.0428662,9.0985958</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Nyamlell PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599623988</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>26.9822415,9.1380517</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mayen Ulem PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4599631001</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.2937748,9.0476212</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Renk Civil Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4782457498</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.8000957,11.7491759</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Medair Abayok PHCU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">4782457500</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.8270745,11.7302102</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Fc Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">5251054561</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>28.8937435,5.7544155</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Bahr El Ghazal clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">5407429541</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.3948233,8.76358</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mawien Dit clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">5427196422</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.571072,9.0141435</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Atuet phcu</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">5427233322</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.7563321,8.9937953</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>AAA hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">5484125723</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>27.5924397,8.9878338</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>MSF Gumuruk PHCU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">6335302603</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="healthcare">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.9082517,6.6352964</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>MRDC Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">7025353386</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6029585,4.8386411</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Freedom Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">7463859975</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6016927,4.8438013</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Al Amin Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">7463869697</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5747783,4.8455049</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>OVCI Usratuna Rehabilitation Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">7538335702</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6051662,4.8453033</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mangateen Primary Health Care Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">7674079731</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5695693,4.8874907</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Akobo District Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">7906445085</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>33.0101729,7.7989425</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>OXFAM.</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8002628885</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5827385,4.854982</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Grace clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564600</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5694444,4.8780556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Best Care MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564601</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5365829,4.8700771</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sunlight Clinic &amp; Lab</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564602</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6069444,4.8594444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Metro Medical Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564603</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5952778,4.8663889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gudele Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564604</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5719444,4.8441667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Bethaya Drugstore &amp; Lab services</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564605</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5958176,4.809515</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Thong Ping Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564606</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.595,4.8580556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Munuki West Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564607</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5694444,4.8775</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Healing Pool 2</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564608</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5922222,4.8377778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Care Medical Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564609</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5138889,4.8491667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Three Angels Health Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564610</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5965557,4.8263831</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>New Generation Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564611</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5677778,4.8855556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hills Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564612</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5925,4.8575</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>City Brothers Medical Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564613</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5902778,4.9077778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Twins Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564614</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5497222,4.8680556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>New Generation MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564615</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5751171,4.8420072</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Holistic Care Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564616</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5405556,4.8702778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>CMC Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564617</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5702438,4.8641581</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Well Care medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564618</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6407642,4.8048029</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Nyakuron PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564619</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5647222,4.8911111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Human Health Care Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564620</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.58,4.8191667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>CPA Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564621</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6368675,4.7919001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Unknown Gumbo</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564622</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.610785,4.8183324</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Panakimbda Health Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564623</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5945625,4.8085322</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Junub Medical Services</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564624</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5672222,4.8236111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Diagnostic Medical consultation and endemic disease</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564625</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5693874,4.863688</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Philimona MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564626</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.57,4.8619444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kingdom Health Care Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564627</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6383228,4.7996602</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Egyptian Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564628</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5658333,4.8572222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Quality Care Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564629</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5644444,4.8886111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kisanet Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564630</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5966667,4.8380556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Emma clinic &amp; drug store</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564631</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5982056,4.8274851</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>64 Health Care center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564632</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5697222,4.8680556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Reform Pharmacuitical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564633</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5155556,4.8483333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kumi PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564634</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5527778,4.8727778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Family Right Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564635</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5758324,4.840137</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Aluma Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564636</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5130556,4.8655556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Shandiga Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564637</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5391667,4.8794444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Life Trust Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564638</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5969444,4.86</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gift of life clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564639</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5780556,4.8208333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Elizabeth Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564640</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5904503,4.907115</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Marhaba Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564641</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.59,4.8605556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Luri Rokwe PHCU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564642</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6077778,4.8561111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Golden Pharmacy &amp; Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564643</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5811111,4.8205556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Enoch MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564644</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5752778,4.8280556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mercy Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564645</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6094444,4.835</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>M&amp;A Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564646</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.56,4.8713889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Greenland Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564647</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6431694,4.7973881</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Bazia Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564648</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5930556,4.8591667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Mary Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564649</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6367321,4.7915831</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mercy Clinic_KK</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564650</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6467285,4.7969679</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Greenworld central medical center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564651</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5748672,4.8470068</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Bone Fracture Ortho Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564652</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6399441,4.795423</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Thong Ping medical centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564653</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5916667,4.8594444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Modern Specialty Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564654</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6158333,4.8480556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gurei PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564655</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5186111,4.8669444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Brenda Health Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564656</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5936111,4.8616667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Trust Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564657</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5983333,4.8983333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>New Bongo Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564658</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.595,4.9194444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>High-Yoou Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564659</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6357975,4.7867551</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Star Health Care</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564660</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5719444,4.8569444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Trusted Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564661</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5819444,4.8763889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>New World-2 Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564662</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.571207,4.8406768</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hope Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564663</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5677395,4.8778429</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Classic Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564664</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5777607,4.8422871</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>University Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564665</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5991667,4.8394444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Noah MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564666</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5219444,4.8688889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hope Medical Complex</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564667</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5695572,4.8726029</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Dagama Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564668</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5775,4.8513889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564669</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5619444,4.8483333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Olemb Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564670</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5619444,4.8802778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Jebel PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564671</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5582218,4.8476271</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Delina Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564672</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6378269,4.8022818</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Peace Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564673</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6127778,4.8525</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kenyi &amp; sons clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564674</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5577778,4.8319444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Don Bosco PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564675</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6280327,4.79879</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Reform Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564676</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5491667,4.8652778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kuel MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564677</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5669444,4.8188889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Embrator Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564678</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5563889,4.8886111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Reform Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564679</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5488889,4.8652778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kuku MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564680</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5758333,4.8297222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Generation Mededical Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564681</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5894176,4.8432905</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Akaana Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564682</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5813889,4.8697222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Run 2 clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564683</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5927778,4.86</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lane Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003564684</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6038889,4.8422222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gideou Medical clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574685</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5130556,4.8633333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Ambrose Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574686</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.535593,4.866498</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lozok Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574687</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5703811,4.863203</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>God's Care 2 Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574688</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5674991,4.8400898</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Jude Medical clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574689</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5763889,4.8652778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Medicare MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574690</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5544444,4.8655556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mal Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574691</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.565,4.8861111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Green light clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574692</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5911111,4.8575</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Amraan Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574693</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5891667,4.8369444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Kizito MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574694</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5703869,4.8600921</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mirembe Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574695</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6081943,4.8284879</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gumbo PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574696</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6225872,4.8150048</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>BMC - Bor Medical Complex</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574697</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6456756,4.7964382</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Thomas MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574698</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5363369,4.864583</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Modern Care Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574699</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6372337,4.79392</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gurei Life Care Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574700</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5133333,4.8655556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Catherina medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574701</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5813889,4.8477778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Trinity Health Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574702</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5902778,4.8444444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Muhepo clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574703</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5777778,4.8872222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Harmony Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574704</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.590251,4.8430128</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Center for Life MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574705</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5587425,4.848587</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Unity Medical Clinic 2</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574706</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5413889,4.8736111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>New World MC 2</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574707</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5344143,4.8683801</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hope Clinic and Lab</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574708</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5738889,4.8691667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Christ the King Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574709</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5497222,4.8677778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Universal Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574710</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5698604,4.8650698</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Oasis Health Initiative</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574711</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.635828,4.804553</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>International Medical Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574712</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5891667,4.8616667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Custom Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574713</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5811111,4.8472222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Wandi Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574714</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5581169,4.8477678</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Obama MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574715</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5416667,4.8758333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Jebel MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574716</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5713889,4.8313889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Doctor�s Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574717</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5697222,4.8775</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>OST Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574718</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.57,4.8511111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Juba Medical complex</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574719</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6091667,4.8480556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Andrew Drug Store</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574720</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5955556,4.8363889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Reconciliation Lutheran Church (PHCU)</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574721</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5636111,4.8880556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Komenta MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574722</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5563889,4.8472222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Ebeniezer Geueral Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574723</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6088889,4.8561111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Active Care Medical Complex</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574724</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6008333,4.8411111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Rosina Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574725</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5916309,4.807075</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kyamiri Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574726</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5102778,4.8661111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Fulla Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574727</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6071873,4.8292351</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Adonai Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574728</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6371479,4.803648</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Rosok Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574729</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6369629,4.8038921</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lado Meleb Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574730</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6094444,4.85</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gobolo Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574731</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6061115,4.836688</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Alpha MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574732</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5575,4.8663889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Seventh day Adventist Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574733</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5777206,4.8565603</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Life Saving Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574734</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5630556,4.8497222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>God's Will Drug Store</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574735</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5955556,4.9175</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Joseph Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574736</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6111111,4.8505556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mangateen 2 PHCU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574737</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5786111,4.8872222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Makor Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574738</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5613889,4.8869444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Golden Eagle Modern Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574739</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5708313,4.8791651</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Amen Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574740</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5976143,4.8286081</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Peter Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574741</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5921898,4.807065</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>MG modern Pharmacy</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574742</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6461525,4.7972431</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gudele Med&amp;Surg Home</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574743</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5516667,4.8677778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Balsam Modern Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574744</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5083333,4.8661111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Simon Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574745</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5953045,4.8446031</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Morobo IV Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574746</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5875,4.8597222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hai Mauna MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574747</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5777302,4.8540621</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Care medical clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574748</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5694444,4.8808333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>The Pretoria Capitol</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574749</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5749645,4.8481622</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Morobo Specialized Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574750</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5664368,4.837317</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hai Thoura Medical Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574751</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5658333,4.8502778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Chrispo Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574752</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6048126,4.8419699</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Unity Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574753</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5419444,4.8780556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Nazreth Medical Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574754</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5947222,4.8388889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Highland Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574755</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5683333,4.8405556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Chrispo sons clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574756</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5594444,4.8636111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Victorious Health center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574757</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6077778,4.8463889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Nyok Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574758</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5924721,4.904778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Independence MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574759</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5647222,4.8541667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Classic 2 Gurei Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574760</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5118828,4.8636732</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Victorious Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574761</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6077778,4.8388889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Ondia Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574762</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6025,4.8311111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Jerusalem Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574763</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5763889,4.8661111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Dilima Drug Store</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574764</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5119362,4.8649969</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>YDK Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574765</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5697222,4.8769444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>OST Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574766</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5727778,4.8580556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>John 14 Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574767</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5958333,4.8636111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>EB Medical Services</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574768</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5780556,4.8658333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Payang Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574769</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6352024,4.784677</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kenlands Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574770</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5683333,4.8563889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Ebenezer Drug Store</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574771</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5586111,4.8666667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Aboka Family Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574772</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5979271,4.8464532</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Richards MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574773</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5378914,4.8522391</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kwerjik Luri PHCU</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574774</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5872222,4.9327778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Emanuel Pharmacy &amp; Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574775</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5663889,4.8547222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Al-Amin Nursing Home</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574776</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5728245,4.8449879</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Save Community Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574777</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.595,4.9191667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Life Care Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574778</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5649223,4.866097</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Nile Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574779</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5636111,4.8841667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Alfa Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574780</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6071071,4.8444872</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Save Life Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574781</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5586111,4.8638889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Life guard MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574782</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5588889,4.8672222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gods Mercy 1</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574783</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5780556,4.8186111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Soneto Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574784</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5892639,4.9026971</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mama Poni Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574785</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5766667,4.8675</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lou Specialized Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574786</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5588889,4.8647222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gods Mercy 2</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574787</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5783333,4.8191667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Atlabara PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574788</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.590251,4.8391239</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. Matthew MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574789</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5353775,4.8696899</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>MDicLine &amp; Care</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574790</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6357765,4.786603</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Grace of God Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574791</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5719444,4.8294444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Awual Thoou Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574792</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5903396,4.9093599</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Super Life</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574793</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5822525,4.8412619</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Monica &amp; sons clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574794</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6441078,4.7974371</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hai Kosti Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574795</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6072222,4.8358333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Bless Drug Store and Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574796</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5583333,4.8316667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Tebake Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574797</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5988889,4.83</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Musawo Annet MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574798</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5801716,4.8421001</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Health Concern Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574799</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5365028,4.8645978</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>China Friendship Hosp.</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574800</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6005556,4.8616667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Top Care MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574801</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.602932,4.836123</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Nation Prison Health Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574802</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6130556,4.8486111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Health Concern Clinic_RC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574803</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5601082,4.8466582</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>City Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574804</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5675831,4.8743272</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Venis MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574805</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5590973,4.8479071</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>New Life Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574806</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5988922,4.8493619</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Holy Fmaily Clinic &amp; drug store</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574807</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5133333,4.8622222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>City Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574808</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5777778,4.8869444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Wisdom Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574809</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5919444,4.8575</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Omron Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574810</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6360989,4.7802301</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Jebel Specialized MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574811</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5595398,4.830925</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Cure Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574812</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5408333,4.8711111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Yafa Paediatric and child health centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574813</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5988889,4.8402778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Panakinda Health Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574814</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6381836,4.7982349</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kator Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574815</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5913889,4.8308333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Dr. Festo Maternity Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574816</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5767059,4.8559532</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Panda MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574817</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.575,4.8283333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kator PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574818</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5963889,4.8311111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Eliabeth Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574819</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5697422,4.8326182</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Rebecca medical clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574820</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5761111,4.8866667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Komenta 1 Drugstore &amp; Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574821</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5561111,4.8472222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Eman clinic &amp; pharmacy</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574822</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6108333,4.8458333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Al Cardinal kidney Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574823</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6088889,4.8475</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Salam MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574824</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5747166,4.8488031</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Life Care Medical Center</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574825</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6369819,4.8046169</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Far East Medical Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574826</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5891667,4.8372222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Amal Clnic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574827</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5644444,4.8877778</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Silon Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574828</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6075,4.8563889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Logire MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574829</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5436111,4.8669444</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Soweto MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574830</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5310783,4.868062</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Siringa Medical Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574831</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5647222,4.8533333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Maryline Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574832</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5147222,4.8486111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lologo PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574833</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5956879,4.8173971</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Good Will Medical Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574834</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5708333,4.8425</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Atlabara C Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574835</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5936111,4.8338889</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>St. John Clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574836</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5117073,4.8648081</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mathiang Pharmacy and clinic</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574837</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.6097222,4.8316667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Makane Hiswett MC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8003574838</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5972222,4.8397222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Omduluis Primary Health Care Unit</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8209727440</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>33.104971,12.1411114</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Renk County Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8212614222</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.8,11.749</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Abukadhra Primary Health Care Unit</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8212614223</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.8000128,11.830342</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gusfami Primary Health Care Unit</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8212614224</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.8737854,11.9259099</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gieger Primary Health Care Centre</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8212614225</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.7589502,11.9904443</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Koloug Primary Health Care Unit</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8212614226</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.9693605,11.9826501</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kilo 5 Primary Health Care Unit</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8212926601</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.8202,12.0541</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Romale Primary Health Care Unit</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8212926602</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.7820659,12.0761102</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kilo 15 Primary Health Care Unit</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8212926603</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.8218962,12.1409857</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Alaka Primary Health Care Unit</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8212926605</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.7850185,12.1696612</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Nojum</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8428339617</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>31.5650694,4.8910396</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kodok Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8500297330</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="addr:city">Kodok</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.1162706,9.8906103</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Torit Civil Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8559808618</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.5763182,4.4060185</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Torit Civil Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8559810317</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.5759562,4.4062963</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Torit Civil Hospital</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8559909417</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.5764909,4.4061894</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mutaram PHCC</name>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">8592279718</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>32.4932703,4.522527</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

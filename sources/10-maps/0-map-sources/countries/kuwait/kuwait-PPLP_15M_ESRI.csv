@@ -1,0 +1,6 @@
+CITY_NAME,GMI_ADMIN,ADMIN_NAME,FIPS_CNTRY,CNTRY_NAME,STATUS,POP_RANK,POP_CLASS,PORT_ID,LABEL_FLAG,update
+Al-Jahrah,KWT-AJH,Al Jahrah,KU,Kuwait,Provincial capital,"5","100,000 to 250,000","0","0","2003"
+Kuwait,KWT-AKW,Al Kuwayt,KU,Kuwait,National and provincial capital,"2","1,000,000 to 5,000,000","48370","0","2003"
+Hawalli,KWT-HWL,Hawalli,KU,Kuwait,Provincial capital,"5","100,000 to 250,000","0","1","2003"
+Al-Ahmadi,KWT-AHM,Al Ahmadi,KU,Kuwait,Provincial capital,"4","250,000 to 500,000","48361","0","2003"
+Al-Farawaniyah,,Al-Farawaniyah,,,Provincial capital,"0",,"0","0","2014"

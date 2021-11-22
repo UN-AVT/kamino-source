@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="Health_Facilities" id="Health_Facilities">
+	<SimpleField name="osm_id" type="string"></SimpleField>
+	<SimpleField name="source" type="string"></SimpleField>
+	<SimpleField name="amenity" type="string"></SimpleField>
+	<SimpleField name="addr:city" type="string"></SimpleField>
+	<SimpleField name="building" type="string"></SimpleField>
+	<SimpleField name="addr:full" type="string"></SimpleField>
+	<SimpleField name="healthcare:speciality" type="string"></SimpleField>
+	<SimpleField name="operator:type" type="string"></SimpleField>
+	<SimpleField name="capacity:persons" type="string"></SimpleField>
+	<SimpleField name="healthcare" type="string"></SimpleField>
+</Schema>
+<Folder><name>Health_Facilities</name>
+  <Placemark>
+	<name>UNMISS Level 2 Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">192387557</SimpleData>
+		<SimpleData name="source">own GPS survey (garmin etrex 30)</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5956323,4.8683639 31.5959048,4.8681301 31.5959369,4.8681673 31.5960017,4.8681117 31.5960643,4.868184 31.5960033,4.8682363 31.5959915,4.8682227 31.5959812,4.8682316 31.5959986,4.8682518 31.5961954,4.8684794 31.596061,4.8685948 31.5959839,4.8685056 31.5960391,4.8684582 31.5960174,4.8684331 31.5959296,4.8685084 31.5958736,4.8684437 31.5959636,4.8683664 31.5959454,4.8683454 31.5958522,4.8684253 31.5958124,4.8683792 31.5958976,4.8683061 31.5958797,4.8682854 31.5957327,4.8684115 31.595765,4.8684487 31.5958134,4.8684084 31.5959753,4.8686019 31.5959283,4.868641 31.5959362,4.8686505 31.5958917,4.8686875 31.5958725,4.8686646 31.59583,4.8686999 31.5956793,4.8685199 31.5957303,4.8684775 31.5956323,4.8683639</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Aweil Civil Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">218239681</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>27.3971806,8.7687189 27.3986716,8.767718 27.3992219,8.7685614 27.3977593,8.7695695 27.3971806,8.7687189</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Bentiu hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">255525260</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.8016269,9.2542054 29.8018478,9.2526915 29.804116,9.2529959 29.8038812,9.2545636 29.8016269,9.2542054</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Médecins Sans Frontières</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">255667795</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.7960275,9.2508185 29.7962758,9.2494469 29.7969837,9.2495718 29.7967354,9.2509433 29.7960275,9.2508185</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">260109222</SimpleData>
+		<SimpleData name="source">Bing</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5473848,4.8650409 31.5474973,4.8650192 31.5475176,4.8651239 31.547405,4.8651455 31.5473848,4.8650409</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Nimra Talata Medical Complex</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">261332081</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5980375,4.8399969 31.5980403,4.8399081 31.5982989,4.8399161 31.5982961,4.8400049 31.5980375,4.8399969</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Queens Pharmacy</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">261332557</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6007323,4.839343 31.6007488,4.8391509 31.6008057,4.8391558 31.6007893,4.8393478 31.6007323,4.839343</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Victorious Medical Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">264115520</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6072346,4.8401605 31.6073265,4.8401593 31.6073281,4.8402777 31.6072361,4.8402789 31.6072346,4.8401605</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Usratuna PHCC</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">265497829</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6048811,4.8467892 31.6050461,4.8467836 31.6050513,4.8469373 31.6048863,4.8469429 31.6048811,4.8467892</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Melut Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">272542548</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.200817,10.4444669 32.2008376,10.4443901 32.2012279,10.4444911 32.2011541,10.4447675 32.200839,10.444686 32.2008573,10.4446178 32.2010945,10.4446791 32.2011296,10.4445477 32.200817,10.4444669</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>GOAL Health Center</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">278181852</SimpleData>
+		<SimpleData name="amenity">doctors</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.2585723,10.4234426 32.258599,10.4233877 32.2587247,10.4234469 32.258698,10.4235017 32.2585723,10.4234426</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>GOAL Health Center</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">278181853</SimpleData>
+		<SimpleData name="amenity">doctors</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.2588316,10.4234394 32.2588957,10.4233275 32.2589655,10.4233662 32.2589014,10.4234781 32.2588316,10.4234394</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>MSF Health Center</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">278181854</SimpleData>
+		<SimpleData name="amenity">doctors</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.2470948,10.4345571 32.2471822,10.4343838 32.2472742,10.4344287 32.2471868,10.434602 32.2470948,10.4345571</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Primary Health Care Center</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">281991281</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="building">public</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.1897918,10.4372017 32.1898041,10.4371462 32.1900359,10.4371958 32.1900445,10.4371566 32.1898129,10.437107 32.1898267,10.4370443 32.1901312,10.4371095 32.1900964,10.4372669 32.1897918,10.4372017</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">283205734</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">public</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.1570403,10.578835 32.157066,10.57878 32.1571668,10.5788256 32.1571411,10.5788806 32.1570403,10.578835</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">283205735</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">public</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.1572911,10.5790395 32.1573902,10.5789421 32.1574407,10.5789917 32.1573416,10.5790891 32.1572911,10.5790395</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">283205737</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">public</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.1570685,10.5790417 32.1571334,10.5790147 32.1571565,10.5790686 32.1570916,10.5790955 32.1570685,10.5790417</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">283205738</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">public</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.1575781,10.5793309 32.1576638,10.5792432 32.1577157,10.5792922 32.15763,10.57938 32.1575781,10.5793309</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">283205741</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">public</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.1572248,10.5793696 32.1572828,10.5793198 32.1573743,10.5794227 32.1573162,10.5794725 32.1572248,10.5793696</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">283205743</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">public</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.1579575,10.578958 32.1580348,10.578867 32.15809,10.5789124 32.1580127,10.5790033 32.1579575,10.578958</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Médecins Sans Frontières (MSF): Feeding Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">297039448</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.1311856,8.308532 30.1311934,8.3078019 30.1317442,8.3078456 30.1317519,8.3085089 30.1313953,8.3085234 30.1311856,8.308532</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Médecins Sans Frontières (MSF): Hospital (destroyed in 2016)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">297039826</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.1309361,8.3093179 30.1310433,8.3093183 30.1321831,8.3093269 30.1322031,8.3099777 30.1322223,8.3100645 30.1322168,8.3101215 30.1322168,8.3101568 30.1320907,8.3101595 30.1319344,8.3101459 30.1318216,8.3101522 30.1316707,8.3101522 30.1314973,8.3101584 30.1313585,8.3101514 30.1312952,8.3101579 30.1312328,8.3101572 30.1310513,8.3101634 30.1310084,8.3100229 30.1309848,8.3098786 30.1309809,8.3098411 30.1309562,8.3096011 30.1309361,8.3093179</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Airport Clinic</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">297589463</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5823244,4.8542371 31.5824178,4.8542177 31.5824299,4.8542753 31.5824493,4.8542713 31.5824588,4.8543166 31.5824394,4.8543207 31.5824623,4.85443 31.5823689,4.8544495 31.5823244,4.8542371</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>MoH/Unido Clinic</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">297912649</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.0161747,8.1317132 30.0162986,8.1317141 30.0167317,8.1316529 30.0167887,8.1321058 30.01638,8.132151 30.0162937,8.1318205 30.0162155,8.1318108 30.0161747,8.1317132</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Mir Mir PHC</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">299871772</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.1021348,8.4645131 30.1022016,8.4644371 30.1023362,8.464553 30.1022694,8.4646289 30.1022239,8.4645898 30.1022609,8.4645477 30.1022413,8.4645308 30.1022043,8.4645729 30.1021348,8.4645131</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Tutnyang PHU</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">299871784</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.0978811,8.3612898 30.0980259,8.3610779 30.0982481,8.3611034 30.0983927,8.3614294 30.0982481,8.3615881 30.0980577,8.3615921 30.0978811,8.3612898</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Rubkuach Health Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">299871794</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.0768547,8.3927905 30.0770287,8.3927799 30.0770338,8.3928623 30.0768598,8.3928729 30.0768547,8.3927905</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Rubkuach Health Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">299871811</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.0771029,8.3924299 30.0773824,8.3924013 30.0773891,8.3924654 30.0771096,8.392494 30.0771029,8.3924299</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Care Plus clinic</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">299872472</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.596978,4.8619838 31.5972479,4.8619835 31.597248,4.8621419 31.5969782,4.8621421 31.596978,4.8619838</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St. Jospeh's Pharmacy</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300179331</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6096091,4.8501095 31.6097015,4.8501074 31.609704,4.8502185 31.6097319,4.8502179 31.6097342,4.850319 31.6096138,4.8503217 31.6096091,4.8501095</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300521216</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.2009293,8.2653084 30.2009539,8.2652776 30.2009813,8.265299 30.2009567,8.2653298 30.2009293,8.2653084</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Adok Health Post</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300521219</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.3130511,8.187118 30.3130957,8.1870974 30.3131014,8.1871093 30.3131292,8.1870964 30.3131137,8.1870635 30.3131568,8.1870435 30.3131805,8.1870938 30.3131378,8.1871135 30.3131426,8.1871237 30.3131144,8.1871367 30.3130697,8.1871574 30.3130511,8.187118</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Dabluai Primary Healthcare Unit</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300521220</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.0356189,8.314141 30.035648,8.313907 30.0357876,8.3137826 30.0360226,8.3138263 30.0360793,8.3139426 30.0360516,8.3140438 30.0358996,8.3142025 30.0356189,8.314141</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Dablual Primary Healthcare Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300521221</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.0359121,8.3140645 30.0359775,8.3139409 30.036038,8.3139723 30.0359726,8.3140959 30.0359121,8.3140645</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Dablual Primary Healthcare Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300521222</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.0356686,8.3141315 30.0356903,8.3140588 30.0358052,8.3140923 30.0357835,8.314165 30.0356686,8.3141315</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Kuok Primary Healthcare Unit</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300521233</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.0700628,8.4407677 30.0700689,8.4406683 30.0701348,8.4406722 30.0701287,8.4407717 30.0700628,8.4407677</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Pillieny Primary Health Care Unit</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300521240</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.200987,8.2654503 30.2010673,8.2653509 30.2011285,8.2653994 30.2010482,8.2654987 30.200987,8.2654503</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Thaker Primary Healthcare Unit</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300521242</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.0547049,8.3937675 30.0547131,8.3937151 30.0548483,8.3937357 30.0548401,8.3937881 30.0547049,8.3937675</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Thaker Primary Healthcare Unit</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300521243</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.0538787,8.3934108 30.0539459,8.3934088 30.0539531,8.3936426 30.0538859,8.3936446 30.0538787,8.3934108</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Thonyor Primary Healthcare Unit</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300521245</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.220444,8.2233319 30.2204787,8.2232875 30.22055,8.223231 30.220605,8.2231776 30.2206845,8.2231151 30.2206916,8.2231453 30.2207548,8.2231847 30.2208373,8.223223 30.2209208,8.2232643 30.2210838,8.2233258 30.2211113,8.2233601 30.2211022,8.2234014 30.2210156,8.2235083 30.220931,8.2236152 30.2208251,8.2235386 30.2207405,8.2234892 30.2206121,8.2234387 30.2205245,8.2234035 30.220444,8.2233319</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Koch Primary Healthcare Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300634006</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.9835972,8.61121 29.9836456,8.61121 29.9836456,8.6112598 29.983693,8.6112598 29.983693,8.6112305 29.9837355,8.6112305 29.9837355,8.6113125 29.9837848,8.6113125 29.9837848,8.6112305 29.9838313,8.6112305 29.9838313,8.6112598 29.9838777,8.6112598 29.9838777,8.6112305 29.9839251,8.6112305 29.9839251,8.6113203 29.9839073,8.6113203 29.9839073,8.6113809 29.9838016,8.6113809 29.9838016,8.611335 29.9837216,8.611335 29.9837216,8.6113809 29.9836179,8.6113809 29.9836179,8.6113203 29.9835972,8.6113203 29.9835972,8.61121</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Koch Primary Healthcare Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300634007</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.9835024,8.6112315 29.9835547,8.6112295 29.9835589,8.6113397 29.9835066,8.6113416 29.9835024,8.6112315</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Koch Primary Healthcare Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300634008</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.9838495,8.6114357 29.9838846,8.6114356 29.9838847,8.611473 29.9838497,8.6114731 29.9838495,8.6114357</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Koch Primary Healthcare Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300634009</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.9837425,8.611182 29.9837786,8.6111813 29.9837793,8.6112135 29.9837432,8.6112143 29.9837425,8.611182</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Koch Primary Healthcare Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300634011</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.9834978,8.6111553 29.9836045,8.6111544 29.9836047,8.6111836 29.983498,8.6111845 29.9834978,8.6111553</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Koch Primary Healthcare Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300634012</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.9835073,8.6113623 29.9835488,8.6113623 29.9835488,8.6114443 29.9835073,8.6114443 29.9835073,8.6113623</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Koch Primary Healthcare Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300634014</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.9834863,8.6110032 29.9839367,8.6110008 29.9839392,8.6114764 29.9834888,8.6114787 29.9834863,8.6110032</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Koch Primary Healthcare Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300634016</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.9835895,8.6114001 29.9836222,8.6114 29.9836222,8.6114166 29.983631,8.6114166 29.9836311,8.6114389 29.9835896,8.6114391 29.9835895,8.6114001</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Koch Primary Healthcare Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">300634017</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.983699,8.6114515 29.9837232,8.6114514 29.9837232,8.6114383 29.9837568,8.6114382 29.983757,8.6114692 29.9837233,8.6114694 29.9837233,8.6114645 29.983699,8.6114646 29.983699,8.6114515</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>EPC Clinic Yei</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">307435433</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.6869073,4.0950929 30.6870069,4.0950982 30.6874805,4.0951235 30.6874604,4.0955955 30.6869087,4.0955971 30.6869073,4.0950929</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>His House of Hope</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">307436835</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="addr:city">Yei</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.6566514,4.1156075 30.6575097,4.1153747 30.6577431,4.1161131 30.6569223,4.1162201 30.6566514,4.1156075</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Jaguar Primary Healthcare Unit</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">314483172</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.0167005,8.3775245 30.0169129,8.3770384 30.0171635,8.3770035 30.0171901,8.3774116 30.0168344,8.377732 30.0167005,8.3775245</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Typhor pharmacy</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">318936219</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+		<SimpleData name="addr:city">Juba</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.602341,4.8381318 31.6023443,4.8380248 31.602484,4.838029 31.6024808,4.8381359 31.602341,4.8381318</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Lakes State Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">319377840</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>29.6796311,6.8100041 29.6796437,6.8094284 29.6806835,6.808909 29.6829795,6.8116374 29.6811547,6.8121396 29.6796311,6.8100041</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Malakia Health Center</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">320136046</SimpleData>
+		<SimpleData name="source">USAID http://www.southsudanmaps.org/</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6031913,4.8378595 31.6031926,4.8378386 31.6035999,4.8374419 31.6041214,4.8380703 31.6031913,4.8378595</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Gabot Health Center</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">320298606</SimpleData>
+		<SimpleData name="source">USAID http://www.southsudanmaps.org/</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6087611,4.8588558 31.6088856,4.8588296 31.608902,4.8589077 31.6087775,4.8589337 31.6087611,4.8588558</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Munuki Health Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">320317511</SimpleData>
+		<SimpleData name="source">USAID http://www.southsudanmaps.org/</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5797628,4.8634695 31.5797629,4.8634079 31.579801,4.8634079 31.579801,4.8633732 31.5798596,4.8633734 31.5798594,4.8634697 31.5797628,4.8634695</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Police Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">320444443</SimpleData>
+		<SimpleData name="source">USAID http://www.southsudanmaps.org/Juba.html</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5909204,4.8486901 31.5909827,4.8485827 31.5909851,4.8484937 31.5919744,4.8485875 31.5920709,4.8485916 31.5925129,4.8485928 31.5930503,4.8486567 31.5929266,4.8494115 31.5928309,4.8495608 31.5911322,4.849571 31.5909204,4.8486901</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Bulluk Eye Clinic</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">320445860</SimpleData>
+		<SimpleData name="source">USAID http://www.southsudanmaps.org/Juba.html</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5963725,4.8481507 31.596388,4.8479555 31.5965639,4.8479693 31.5965483,4.8481646 31.5963725,4.8481507</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Military Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">320463522</SimpleData>
+		<SimpleData name="source">USAID http://www.southsudanmaps.org/Juba.html</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5828819,4.8318042 31.5829517,4.8306738 31.5853899,4.8305547 31.5865267,4.8303865 31.5869778,4.8325922 31.5829959,4.8324306 31.5828819,4.8318042</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Juba Teaching Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">320467303</SimpleData>
+		<SimpleData name="source">USAID http://www.southsudanmaps.org/Juba.html</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6072659,4.8496375 31.6075544,4.8492612 31.6078398,4.8488973 31.6080121,4.8489306 31.6084058,4.848484 31.6085615,4.8483073 31.6092513,4.8481596 31.6092892,4.8482205 31.6093874,4.8484829 31.6094394,4.848712 31.6095084,4.8517292 31.6081307,4.8517691 31.6080562,4.8507079 31.6079208,4.8506451 31.6077033,4.8506198 31.6075147,4.8501897 31.6072659,4.8496375</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Da Genesis</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">324341739</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5964577,4.8386349 31.5964649,4.8384686 31.5965313,4.8384714 31.5965269,4.8385716 31.5965741,4.8385736 31.5965775,4.8384965 31.5966224,4.8384985 31.5966162,4.8386418 31.5964577,4.8386349</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Queens Medical Clinic</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">330207794</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6003719,4.8393262 31.6005613,4.8392612 31.6005793,4.8393134 31.60039,4.8393784 31.6003719,4.8393262</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Agok Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">331341249</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>28.5977561,9.3594415 28.5981985,9.3582757 28.5998224,9.3587619 28.5992904,9.3601211 28.5977561,9.3594415</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Yei Civil Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">347332603</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.6735971,4.0893922 30.6760799,4.0891402 30.6760984,4.0892727 30.6762702,4.0914274 30.676186,4.0915541 30.6740653,4.0916847 30.6737878,4.0909936 30.6736717,4.0906364 30.6736028,4.0899058 30.6735971,4.0893922</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Continental Whole Sale Pharmacy</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">353010744</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5812401,4.8684805 31.5813259,4.8684608 31.5813511,4.8685694 31.5812652,4.8685892 31.5812401,4.8684805</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St Anne's</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">372759883</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6129376,4.8564718 31.6129765,4.8564695 31.6129796,4.85652 31.6129406,4.8565224 31.6129376,4.8564718</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St Luke's Medical Clinic</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">372761107</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6110529,4.8570881 31.611224,4.8570656 31.6112343,4.8571433 31.6110632,4.8571657 31.6110529,4.8570881</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Medi care Health Clinic</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">376089683</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5310541,4.8687649 31.5310544,4.8687185 31.5311007,4.8687188 31.5311012,4.8686417 31.5311483,4.868642 31.5311475,4.8687654 31.5310541,4.8687649</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">383734683</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6104569,4.8501913 31.6106278,4.8501865 31.61063,4.8502624 31.6104591,4.8502673 31.6104569,4.8501913</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Local Dispensary</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">418728685</SimpleData>
+		<SimpleData name="amenity">doctors</SimpleData>
+		<SimpleData name="addr:city">Wau</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>27.9872341,7.7138682 27.9875276,7.7134365 27.9880951,7.7138154 27.9878016,7.7142471 27.9872341,7.7138682</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Comboni Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">418731625</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>27.9952314,7.7004066 27.9954184,7.6988506 27.9960079,7.6989815 27.9958688,7.7004983 27.9952314,7.7004066</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Awoda Primary Health Care Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">431899038</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>26.8391028,8.068427 26.8391793,8.0684099 26.8392101,8.0685455 26.8391337,8.0685626 26.8391028,8.068427</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">431899039</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>26.8392413,8.0685738 26.8394066,8.0685206 26.8394255,8.0685781 26.8392603,8.0686314 26.8392413,8.0685738</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">431899040</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>26.83939,8.0683438 26.8394626,8.0683272 26.8394955,8.0684679 26.8394229,8.0684845 26.83939,8.0683438</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>NASIR HOSPITAL MSF (until 2015)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">432939108</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.0566063,8.6114467 33.0568665,8.6106378 33.057124,8.6099483 33.0572554,8.609707 33.0573815,8.6097998 33.057588,8.6099642 33.0577382,8.6101074 33.0578804,8.6102268 33.0580386,8.6103992 33.0581352,8.6104946 33.0582854,8.6106405 33.0584141,8.610789 33.0583551,8.6108553 33.0585268,8.6109826 33.0584356,8.6111019 33.0581888,8.6113592 33.0577221,8.6116217 33.0572796,8.6119108 33.0566063,8.6114467</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Hospital gouvernemental</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">432939113</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.0740524,8.6171572 33.0740727,8.6168297 33.0745053,8.6168698 33.074485,8.6171839 33.0740524,8.6171572</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Pulchuol Feeding Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">436574297</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.9620512,8.1105679 31.9620778,8.1104483 31.9621427,8.1104624 31.9621161,8.1105821 31.9620512,8.1105679</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Yuai PHCU</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">451369890</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.8909631,7.9080229 31.890977,7.9079408 31.8910936,7.9079602 31.8910797,7.9080423 31.8909631,7.9080229</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Chiness Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">455697991</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5681133,4.8604391 31.5683322,4.86033 31.5683773,4.8603942 31.5681455,4.8605161 31.5681133,4.8604391</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Nyakuron Health Center</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">457128760</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5788101,4.8459779 31.5788362,4.8459004 31.5788852,4.8459097 31.5788905,4.8458917 31.5788449,4.8458777 31.578851,4.8458549 31.5788691,4.8458342 31.5789442,4.8458456 31.5789515,4.845863 31.5790266,4.8458797 31.5790219,4.8458957 31.5790394,4.845901 31.5790501,4.8458857 31.5790682,4.8458917 31.5790575,4.8459051 31.5790689,4.8459077 31.579085,4.8458944 31.5791245,4.8459071 31.5791252,4.8459445 31.579154,4.8459518 31.5791601,4.8459291 31.5791909,4.8459318 31.5791742,4.8460086 31.5792043,4.846014 31.5791976,4.8460467 31.5791661,4.846042 31.579152,4.8460948 31.5790696,4.8460768 31.5790789,4.8460367 31.5789891,4.846018 31.578981,4.8460527 31.5788637,4.8460293 31.5788624,4.8459933 31.5788101,4.8459779</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>36.6</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">529788333</SimpleData>
+		<SimpleData name="amenity">pharmacy</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.0384124,9.8273108 32.0384583,9.8272902 32.0384747,9.8273255 32.0384288,9.8273462 32.0384124,9.8273108</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Doma Primary Health Care Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">542973469</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+		<SimpleData name="healthcare">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.572075,8.8800151 32.5721493,8.8799951 32.5721877,8.880134 32.5721134,8.8801541 32.572075,8.8800151</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Ulang Primary Health Care Centre</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">543644048</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+		<SimpleData name="healthcare">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.719277,8.6559422 32.7196112,8.6554889 32.7201774,8.6558969 32.7198433,8.6563502 32.719277,8.6559422</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Liap PHCU</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">543660309</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+		<SimpleData name="healthcare">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.7221433,8.6688892 32.7225251,8.6688306 32.7225349,8.6688933 32.7221532,8.6689519 32.7221433,8.6688892</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Lotimor clinic</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">584929739</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>35.129965,5.517078 35.1299696,5.5168557 35.130478,5.5166686 35.1306043,5.5170749 35.1300682,5.5172789 35.1299727,5.5171884 35.129965,5.517078</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">615481621</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>28.406672,4.5655129 28.4080135,4.5654503 28.4082255,4.5654176 28.4082922,4.5668819 28.4091684,4.5668623 28.4092198,4.5676929 28.4068159,4.5678407 28.406672,4.5655129</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St. Teresa Mission Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">769772399</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.0747865,4.2405704 33.0748619,4.2405239 33.0749894,4.2407293 33.0749141,4.2407759 33.0747865,4.2405704</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St. Teresa Mission Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">769772408</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.0752527,4.2402896 33.0753202,4.2402344 33.0754479,4.2403898 33.0753803,4.240445 33.0752527,4.2402896</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St. Teresa Mission Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">769772409</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.0754494,4.2403597 33.0755907,4.2402577 33.0756469,4.2403351 33.0755057,4.2404371 33.0754494,4.2403597</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St. Teresa Mission Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">769772410</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.0753095,4.2401606 33.0754326,4.2400519 33.0755003,4.2401281 33.0753771,4.2402368 33.0753095,4.2401606</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St. Teresa Mission Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">769772411</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.0750004,4.2404166 33.0750622,4.2403728 33.075137,4.2404774 33.0750752,4.2405213 33.0750004,4.2404166</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St. Teresa Mission Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">769772412</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.0750181,4.2399889 33.0752054,4.2398821 33.0752408,4.2399438 33.0750536,4.2400507 33.0750181,4.2399889</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St. Teresa Mission Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">769772413</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.0757546,4.2399818 33.0759061,4.2398534 33.0759524,4.2399079 33.0759039,4.239949 33.07597,4.2400267 33.0759069,4.2400802 33.0758497,4.240013 33.0758007,4.240036 33.0757546,4.2399818</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St. Teresa Mission Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">769772414</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.0759263,4.2398638 33.0760632,4.2397345 33.0761394,4.2398148 33.0760025,4.2399441 33.0759263,4.2398638</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Goli Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785868006</SimpleData>
+		<SimpleData name="source">EPC Yei</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.4492031,4.2019001 30.4493283,4.2018169 30.4494383,4.2017753 30.449499,4.2016732 30.4495028,4.2016089 30.4496432,4.2014992 30.4502311,4.201363 30.4502766,4.2012873 30.450417,4.201276 30.4504701,4.2013478 30.4505421,4.2013857 30.4505346,4.2014916 30.4505725,4.2015975 30.4506673,4.2018699 30.4504397,4.2020363 30.4503828,4.2021082 30.4503146,4.2021612 30.4501477,4.2022709 30.4499618,4.2023919 30.4499049,4.2024676 30.4498442,4.2025281 30.4497342,4.2024109 30.4496128,4.2024827 30.4495725,4.2025043 30.4492031,4.2019001</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>UNMISS Level 1 Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785870491</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5955046,4.8677867 31.5957366,4.8675936 31.595763,4.8675936 31.5957901,4.8676214 31.5958786,4.8677231 31.5959121,4.8677636 31.5958387,4.8678169 31.5957972,4.8678598 31.5957271,4.867917 31.5956577,4.8679726 31.5956258,4.8679384 31.5955046,4.8677867</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Used to be URG clinic, closed since Dec 2013</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785904471</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.588941,4.8576229 31.5889495,4.8572818 31.5893079,4.857262 31.589326,4.8576191 31.588941,4.8576229</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>UNMISS Bor Level 1 Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785904732</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6033042,6.1922024 31.6037746,6.1922062 31.6037821,6.1924362 31.6033175,6.1924438 31.6033042,6.1922024</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Small Clinic</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785905738</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="building">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5987738,4.8619014 31.5987786,4.8617679 31.598903,4.8617742 31.5989014,4.8619014 31.5987738,4.8619014</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Yangiri Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785906906</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>27.956498,5.1797353 27.9565037,5.1796597 27.9565436,5.1795653 27.9571239,5.1796257 27.9572282,5.1796862 27.9569893,5.1800432 27.9569191,5.180011 27.9568982,5.1799865 27.9568148,5.1799317 27.956498,5.1797353</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785907725</SimpleData>
+		<SimpleData name="source">survey</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="operator:type">ngo</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.7581897,9.983021 33.7592952,9.9825823 33.7597704,9.9836621 33.7586624,9.9840867 33.7581897,9.983021</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Lui Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785909392</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.4484673,5.3435858 30.4486578,5.3432066 30.4489367,5.3433241 30.4487624,5.3437007 30.4484673,5.3435858</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Medicines Sans Frontieres Lankien</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785910312</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.0609279,8.526644 32.0609677,8.5266077 32.0609948,8.5266093 32.061022,8.5265904 32.061057,8.526551 32.0611177,8.526469 32.0612931,8.5265967 32.061325,8.526685 32.0613856,8.5266977 32.0614095,8.5267229 32.0614255,8.526756 32.0612708,8.526939 32.0609757,8.526726 32.0610028,8.5266913 32.0609406,8.5266582 32.0609279,8.526644</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Ganyliel</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785910576</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.472009,7.4047974 30.4728674,7.4046591 30.4730149,7.405449 30.4721485,7.4055687 30.472009,7.4047974</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>MSF hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785915937</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.1345674,6.7960597 33.1345747,6.7957302 33.1346102,6.7954202 33.1346327,6.795246 33.1346607,6.7949404 33.1348572,6.7945759 33.1349148,6.7944332 33.1349545,6.7943554 33.1352283,6.7943499 33.1358805,6.7958499 33.1347046,6.7961862 33.1345674,6.7960597</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Ministry of Health(Bor Hospital)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785916583</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5556567,6.2066669 31.555725,6.2065764 31.5557933,6.2064784 31.5560095,6.206286 31.5561233,6.2062106 31.5562598,6.206105 31.5563281,6.2061201 31.5564571,6.2062936 31.556624,6.2064859 31.5568933,6.2068215 31.5561802,6.207274 31.5560988,6.2071469 31.5560512,6.2071835 31.5559899,6.207115 31.5556567,6.2066669</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Ministry of Health</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">785917095</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5547618,6.2078967 31.5552993,6.2075495 31.5554013,6.2077414 31.5555975,6.2079982 31.5556087,6.2080505 31.5555784,6.2080696 31.5553965,6.2081885 31.5552498,6.2082709 31.5551127,6.2083248 31.5549914,6.2082059 31.5547618,6.2078967</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">786443684</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>28.1005999,8.526764 28.1007409,8.526764 28.1007364,8.5268566 28.100609,8.5268521 28.1005999,8.526764</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Rony PHCU</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">786443820</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.7142248,4.0569758 30.7142503,4.0569344 30.7142798,4.0568835 30.7143157,4.0568716 30.7144273,4.056913 30.7143524,4.0570331 30.7143141,4.0570426 30.7142248,4.0569758</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Payawa PHCU</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">786444050</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.7390579,3.9536723 30.7392147,3.9536655 30.7392158,3.9538523 30.739067,3.9538647 30.7390579,3.9536723</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Renk Military Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">786450006</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>32.8152074,11.7460463 32.8152369,11.745592 32.8154676,11.7456445 32.8159558,11.7457522 32.815996,11.7457706 32.8159155,11.7461514 32.8152074,11.7460463</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Hai jebel primary health care unit</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">786450489</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5576931,4.8473287 31.558018,4.8472317 31.5580709,4.8474504 31.5581163,4.8476384 31.5581361,4.8477032 31.5578041,4.8478037 31.5576931,4.8473287</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>GUDELE  SURGICAL CLINIC</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">786452912</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5569911,4.8704034 31.5571963,4.8703506 31.5572448,4.8705326 31.5570362,4.8705843 31.5569911,4.8704034</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>MSF Lekuangole PHCC</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">786469673</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.0074733,7.0519066 33.0078663,7.0514847 33.0081198,7.0517443 33.0082311,7.0518774 33.0081104,7.0520664 33.007924,7.0522034 33.0076759,7.0521382 33.0075096,7.0519758 33.0074733,7.0519066</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Al Sabbah Children Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">786470511</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6061249,4.8445285 31.6069973,4.844502 31.6070068,4.8449953 31.6061457,4.8450255 31.6061249,4.8445285</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Aspen Medical International (AMI) Clinic</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">786471216</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="addr:city">Juba</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.588427,4.8598402 31.5887354,4.8598381 31.5887376,4.8601577 31.5884292,4.8601598 31.588427,4.8598402</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>DMI Nursery</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">786546062</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.5280639,4.8100141 31.528941,4.8100019 31.5289449,4.8102854 31.5280678,4.8102974 31.5280639,4.8100141</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Bunj Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">803697254</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="building">yes</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.7115231,9.9583373 33.711608,9.9583349 33.7116054,9.9582446 33.711767,9.9582401 33.7117699,9.9583412 33.7118736,9.9583383 33.7118765,9.95844 33.7117686,9.958443 33.711766,9.9583526 33.711735,9.9583535 33.7117375,9.9584414 33.7117142,9.9584421 33.7117174,9.9585546 33.7115566,9.9585591 33.7115534,9.9584492 33.7115263,9.95845 33.7115231,9.9583373</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>Dr John Garang Diagnostic and Medical Center &amp; Infectious Diseases Unit</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">806114139</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>31.6060654,4.8476747 31.606297,4.8476161 31.6062761,4.8475329 31.6063046,4.8474875 31.60639,4.8474289 31.6068214,4.8472273 31.6069483,4.8471711 31.607316,4.8470392 31.6074193,4.8470659 31.6076419,4.8478249 31.6061988,4.8483942 31.6061908,4.8483581 31.6061794,4.8482852 31.6061638,4.8482259 31.6060654,4.8476747</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>St. Bakhita Hospital</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">823940906</SimpleData>
+		<SimpleData name="amenity">clinic</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>30.6860781,4.0898993 30.6870039,4.0900084 30.6870132,4.0909596 30.6862029,4.0909919 30.6861412,4.0905662 30.6860781,4.0898993</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>CUHUDUM HOSPITAL</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">889382823</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare:speciality">general</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.485189,4.2276099 33.4860456,4.2265744 33.4867573,4.2269585 33.4868805,4.2277881 33.4860867,4.2285249 33.485189,4.2276099</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#Health_Facilities">
+		<SimpleData name="osm_id">899293945</SimpleData>
+		<SimpleData name="amenity">hospital</SimpleData>
+		<SimpleData name="healthcare">hospital</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>33.760413,4.083815 33.7607121,4.083485 33.7610837,4.0838539 33.760751,4.0841557 33.760413,4.083815</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+</Folder>
+</Document></kml>
