@@ -93,12 +93,15 @@ df
 ### Plot Beeswarm
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+
+mycolors <- c("Sub-Saharan Africa" = "#9590ff","South Asia" = "#f8766d","Middle East and North Africa" = "#e76bf3", "Commonwealth of Independent States" = "#ff62bc","Southeast Asia" = "#00b0f6","East Asia" = "#00bf7d", "Central & Eastern Europe" = "#39b600","Latin America and Caribbean" = "#ffaec8","Western Europe" = "#00bfc4", "North America and ANZ" = "#ffdf13")
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
-    plot.title = element_text(color = "#E36857", size = 20, face = "bold", hjust = 0.5),
-    axis.text.x = element_text(color = "#ff9a55", size = 9, face = "bold"),
+    plot.title = element_text(color = "#E36857", size = 30, face = "bold", hjust = 0.5),
+    axis.text.x = element_text(color = mycolors, size = 12, face = "bold"),
     axis.text.y = element_text(color = "#4392C0", size = 10, face = "bold"),
     axis.title.x = element_blank(),
     axis.title.y = element_text(color = "#4392C0", size=12,face="bold"),
@@ -106,6 +109,7 @@ theme_opts <- theme(
     # panel.background = element_blank(),
     # panel.grid.minor = element_blank(), # remove minor gridlines
     legend.position = "none")
+
 
 v1 <- ggplot(data = df1, aes(x= factor(Region, levels=c(
                  "Sub-Saharan Africa","South Asia","Middle East and North Africa",
@@ -125,11 +129,12 @@ v1 <- ggplot(data = df1, aes(x= factor(Region, levels=c(
                  "Commonwealth of\nIndependent States","Southeast Asia","East Asia",
                  "Central &\nEastern Europe","Latin America &\nCaribbean","Western Europe",
                  "North America &\nANZ"))+
+  scale_color_manual(values = mycolors)+
   theme_bw()+
   theme_opts
   
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 
@@ -183,6 +188,7 @@ v2 <- ggplot( transform(df2,
       geom_bar( stat = "identity" ) + 
       facet_wrap( ~ Region, scales = "free_x", ncol=10 ) + 
       scale_x_discrete(limits = rev(x_position))+
+      scale_fill_manual(values = mycolors)+
       coord_flip() +
        
       theme(
@@ -193,6 +199,9 @@ v2 <- ggplot( transform(df2,
       axis.ticks = element_blank(),
       strip.text.x = element_blank(),
       axis.text.y = element_text(size=6),
+      panel.border = element_blank(),
+      panel.background = element_blank(),
+      panel.grid.minor = element_blank(), # remove minor gridlines
       legend.position = "none")
 
 
@@ -201,12 +210,12 @@ v2 <- ggplot( transform(df2,
 
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 
 v3 <- ggarrange(v1, v2, ncol=1, nrow=2, heights = c(1,0.3))
 
-girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v3, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
@@ -218,10 +227,10 @@ girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
 # eval = FALSE as default; run manually as chunk
 
 # full version
-ggsave(filename = "assets/happiness-index.svg", plot = v3, width=1280/72, height=720/72)
+ggsave(filename = "assets/happiness-index.jpg", plot = v3, width=1280/72, height=720/72)
 
 # thumbnail version without annotations
-ggsave(filename = "assets/happiness-index-sm.png", plot = v3, width=4, height=2.25)
+#ggsave(filename = "assets/happiness-index-sm.png", plot = v3, width=4, height=2.25)
 
 ```
  
