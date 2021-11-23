@@ -1,0 +1,183 @@
+---
+pagetitle: "African Country's Economic Survey"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(reshape2)
+library(RColorBrewer)
+library(ggthemes)
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# African's Country Economic Survey
+
+## Looking ahead, do you expect economic conditions in this country to be better or worse in twelve months time?	
+
+## Bar stacked divergent 
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Simon Berger  on Unsplash"}
+
+masthead <- "assets/simon-berger-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> We have to be impatient in Moving African Forward...\
+--- Akinwumi Ayodeji Adesina, AFB President\
+
+***
+
+### Ingest the data
+#### AfroBarometer (R7 2016/2018)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df <- read.csv("archetypes/AfroBarometer.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+### Wrangle the Data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+colnames(df)<-c("Country", "Much worse", "Worse", "Same", "Better",  "Much better")
+
+# We will be diving the data in half so that it centers on 0
+df2 <- df %>% mutate(midLow = Same/2, midHigh = Same/2) %>% select(Country, `Much worse`, Worse, midLow, midHigh, Better, `Much better`)
+
+#Determing the colors for the factors
+colorset = c('Much worse'='#E66101','Worse'='#FDB863','Almost the Same'='#e2c0a6', 'Better' = '#B2ABD2', 'Much better' = '#5E3C99')
+
+#GGplot works well with Long Format
+df3 <- melt(df2, id="Country")
+df3$value<-df3$value*100
+df3$Country<-factor(df3$Country)
+
+
+#This is the code for the devision, we'll be plotting two bar plots on either side of 0
+highs<-na.omit(df3[(length(df3[,1])/2)+1:length(df3[,1]),])
+lows<-na.omit(df3[1:(length(df3[,1])/2),])
+lows <- lows[rev(rownames(lows)),]
+highs <- highs[rev(rownames(highs)),]
+
+#We convert the mid-values back to Same
+levels(highs$variable)[levels(highs$variable) == "midHigh"] <- "Almost the Same" 
+levels(lows$variable)[levels(lows$variable) == "midLow"] <- "Almost the Same" 
+
+```
+
+
+
+### Plot
+#### Number of Millionaires
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Common theme for both charts
+theme_opts <- theme(
+    legend.position='none', 
+    panel.background = element_rect(fill = "white", colour = "white"), 
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 20, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 15),
+    plot.caption = element_text(color = "#555555", size = 15),
+    axis.text = element_text(size=15,face = "bold" ),
+    panel.grid.major.x = element_line(size = 0.5, linetype = 'solid', colour = "#b0bfc8"),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank()
+    )
+
+v1 <- ggplot() + geom_bar(data=highs, aes(x = factor(Country, level = rev(levels(df3$Country))), y=value, fill=variable), position= position_stack(reverse = T), stat="identity") +
+  geom_bar(data=lows, aes(x = Country, y=-value, fill=variable), position="stack", stat="identity") +
+  geom_hline(yintercept = 0, color =c("#e2c0a6")) +
+  scale_fill_manual(values = colorset, name = "Survey Results") +
+coord_flip() +
+  scale_y_continuous(breaks=seq(-100,100,25), limits=c(-100,100)) +
+  labs(title="African Country’s Economic Survey", 
+       subtitle = "Looking ahead, do you expect economic conditions\nin this country to be better or worse in twelve months time?",
+       caption = "Afrobarometer (R7 2016/2018)",
+       y="Percent",x="") +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 11, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 0.6)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/world-wealth-report.png", plot = v1, width=11, height=16)
+
+# thumbnail version without annotations
+#ggsave(filename = "outputs/world-cuisine-preferences-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Inspiration and Narrative Sources: R not R, [GO](http://rnotr.com/likert/ggplot/barometer/likert-plots/){target="_blank"}
+* Data Sources: AfroBarometer, [GO](https://afrobarometer.org/data){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
