@@ -1,0 +1,219 @@
+---
+pagetitle: "United Nations Clear Map"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(colorspace)
+library(sf)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Water Access Points
+## Voronoi
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Visit Greenland on Unsplash"}
+
+#masthead <- "assets/visit-greenland-unsplash.jpg"
+#knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Aasiaat, Greenland during winter</div>
+
+> How do you find America? Turn left at Greenland...\
+--- Ringo Starr, media question to Beatles during first U.S. tour 1964\
+
+***
+
+### Ingest
+#### map attributes with climate zones
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df <- read.csv("archetypes/water-access-points/water-access-points.csv", header = TRUE, stringsAsFactors = FALSE)
+head(df, n=10)
+
+```
+
+
+### Wrangle
+#### enrich climate zone labels
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_wrangle <- df %>%
+  mutate(
+    label = case_when(
+      str_detect(country_name, "Dominic") ~ "Dominican Rep.", 
+      str_detect(country_name, "Congo") ~ "Congo",
+      country_name == "Central African Republic" ~ "CAR",
+      TRUE ~ country_name
+    ),
+    country_name = case_when(
+      str_detect(country_name, "Congo") ~ "Democratic Republic of the Congo",
+      country_name == "Swaziland" ~ "Eswatini",
+      country_name == "Tanzania" ~ "United Republic of Tanzania",
+      country_name == "Timor-Leste" ~ "East Timor",
+      TRUE ~ country_name
+    ))
+
+df_wrangle
+
+```
+
+
+### Analytics
+#### count
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_view <-
+  df_wrangle %>% 
+  filter(!is.na(country_name)) %>% 
+  count(lat_deg, lon_deg, country_name, label) %>% 
+  mutate(row_id = row_number())
+
+df_view
+
+```
+
+
+### Plot
+#### contour
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata", size = 12), 
+  plot.title = element_text(color = "black", size = 16, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 11),
+  plot.background = element_rect(fill = "#f0f0f0", color = NA),
+  plot.margin = margin(.25, .25, .25, .25, "cm"),
+  axis.title.x = element_blank(),
+  axis.title.y = element_blank(),
+  axis.text.x = element_blank(),
+  axis.text.y = element_blank(),
+  panel.border = element_blank(),
+  panel.background = element_rect(fill = "#f0f0f0", color = NA),
+  # panel.grid.minor = element_blank(),
+  # panel.grid.major = element_blank(),
+  legend.position = 'bottom',
+  legend.title = element_blank(), #change legend title font size
+  legend.text = element_text(size=10)
+)
+
+fill_palette <- c(
+  "#4f3314",
+  "#784e1e",
+  "#a16928",
+  "#ca8432",
+  "#ca9273",
+  "#d8af98",
+  "#e7daae",
+  "#dbd787",
+  "#cbcf60",
+  "#b6ccca",
+  "#98b7b4",
+  "#7aa29e",
+  "#36b9cd",
+  "#2890a0"
+)
+
+color_palette <- darken(fill_palette, 0.1)
+
+v1 = ggplot(data = climate_zone_map_enriched) + 
+  geom_sf(aes(fill=type, color=type), stroke=0.5) +
+  scale_fill_manual( values = fill_palette ) +
+  scale_color_manual( values = color_palette ) +
+  coord_sf() +
+  ggtitle( "Köppen-Geiger Climate Zones" ) +
+  theme_void() +
+  theme_opts
+
+girafe( ggobj = v1, width_svg = 16, height_svg = 9,
+  options = list( opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+```
+
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+ggsave(filename = "assets/climate-classification-fs.svg", plot = v1, width=16, height=7.5)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: inspired by visualization created by Cédric Scherer
+* Map Source: Kottek et al. 2006 (DOI: 10.1127/0941-2948/2006/0130)
+
+<pre>
+Based on raster file from:
+Kottek, M., J. Grieser, C. Beck, B. Rudolf, and F. Rubel, 
+2006: World Map of the Koppen-Geiger climate classification updated. 
+Meteorol. Z., 15, 259-263. 
+DOI: 10.1127/0941-2948/2006/0130.
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

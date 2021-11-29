@@ -1,0 +1,246 @@
+---
+pagetitle: "Bombing Cambodia"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(wesanderson)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Bombing Cambodia
+## Dot Density Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Boudewijn Huysmans on Unsplash"}
+
+masthead <- "assets/boudewijn-huysmans-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Fish Island, Kampot, Cambodia</div>
+
+> This is not an invasion of Cambodia....\
+--- US President Nixon, Speech on Cambodia, April 30, 1970\
+
+***
+
+### Ingest
+#### bombing events with coordinates and other details
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/bombing-cambodia/cambodia-sites-targeted-in-us-bombing-1965-1975.csv", header = TRUE)
+head( df, n = 10 )
+
+```
+
+
+### Wrangle & Analyze
+#### simplify and aggregate
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_simplified <- df %>% mutate(LATR = round(LAT, digits = 3), LONR = round(LON, digits = 2)) %>% 
+  group_by(LATR, LONR) %>% 
+  summarise(LOAD_LBS = sum(LOAD_LBS), COUNT = n())
+
+head( df_simplified, n = 10 )
+
+```
+
+
+### Load Maps
+#### borders and physical features
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, results=FALSE, class.source = 'fold-show'}
+
+# Load map sources
+# ++++++++++++++++++++
+# using the same map sources up to adm2 which contains info of area of district in each region in Uganda
+adm0 <- st_read("archetypes/bombing-cambodia/maps/khm-admbnda-adm0-gov.geojson")
+adm1 <- st_read("archetypes/bombing-cambodia/maps/khm-admbnda-adm1-gov.geojson")
+adm2 <- st_read("archetypes/bombing-cambodia/maps/khm-admbnda-adm2-gov.geojson")
+adm3 <- st_read("archetypes/bombing-cambodia/maps/khm-admbnda-adm3-gov.geojson")
+
+soil_fertility <- st_read("archetypes/bombing-cambodia/maps/soil-fertility.geojson")
+
+rivers <- st_read("archetypes/bombing-cambodia/maps/khm_rivl_gov.geojson")
+lakes <- st_read("archetypes/bombing-cambodia/maps/khm-lakea-riva-gov.geojson")
+
+# view to read properties
+# head(as.data.frame(adm0))
+# head(as.data.frame(adm1))
+# head(as.data.frame(adm2))
+# head(as.data.frame(adm3))
+# head(as.data.frame(soil_fertility))
+# head(as.data.frame(rivers))
+# head(as.data.frame(lakes))
+
+# used for color scale
+# unique(soil_fertility$type_en)
+
+```
+
+
+### Plot
+#### borders and bombs
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 18, face = "bold"),
+  plot.background = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_blank(),
+  panel.border = element_blank(),
+  legend.position = "none",
+  legend.title = element_blank()
+)
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+v1 <- ggplot() +
+  geom_sf(data = adm0, color="#333333", fill = transparent_fill, size=2.0) +
+  # geom_sf(data = adm1, color="#333333", fill = transparent_fill, size=1.5) +
+  geom_sf(data = adm2, color="#333333", fill = transparent_fill, size=1.0) +
+  # geom_sf(data = adm3, color="#333333", fill = transparent_fill, size=0.25) +
+  geom_sf(data = lakes, color="#abc8cb", fill = "#abc8cb", size=0.25) + 
+  # geom_point(data = df, aes(x = LON, y = LAT), size = 2, color="red" ) +
+  geom_point(data = df_simplified, aes(x = LONR, y = LATR, size = LOAD_LBS, alpha = COUNT), color="red" ) +
+  scale_size_continuous(range = c(2,5)) +
+  scale_alpha_continuous(range = c(0.2, 0.8)) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+      y = NULL, # Latitude
+      title = NULL, 
+      subtitle = NULL) +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 13,
+       options = list(opts_sizing(rescale = TRUE, width = 0.5)))
+
+```
+
+
+### Plot
+#### borders, soil types, and bombs
+
+This view is based on the research "How War Changes Land: Soil Fertility, Unexploded Bombs, and the Underdevelopment of Cambodia" and The Economist graphic "Blood and Soil" describing how farmers avoid fertile areas that may contain unexploded ordnance.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+soil_palette <- c(
+  "Low Fertility Soil" = "#dcd6be",
+  "Medium Fertility Soil" = "#abc6b0",
+  "High Fertility Soil" = "#87ad45"
+)
+
+v2 <- ggplot() +
+  geom_sf(data = soil_fertility, aes(fill = type_en, color = type_en ), size=1.0, alpha = 0.3 ) +
+  # geom_sf(data = adm0, color="#333333", fill = transparent_fill, size=2.0) +
+  # geom_sf(data = adm1, color="#333333", fill = transparent_fill, size=1.5) +
+  geom_sf(data = lakes, color="#abc8cb", fill = "#abc8cb", size=0.25) +
+  # geom_point(data = df, aes(x = LON, y = LAT), size = 2, color="red" ) +
+  geom_point(data = df_simplified, aes(x = LONR, y = LATR, size = LOAD_LBS, alpha = COUNT), shape=21, color="red", fill="red" ) +
+  scale_size_continuous(range = c(2,5)) +
+  scale_alpha_continuous(range = c(0.2, 0.8)) +
+  scale_fill_manual(values = soil_palette) +
+  scale_color_manual(values = soil_palette) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+      y = NULL, # Latitude
+      title = "US bombing between 1965 to 1975", 
+      subtitle = NULL) +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 13,
+       options = list(opts_sizing(rescale = TRUE, width = 0.5)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+ggsave(filename = "outputs/bombing-cambodia-fs.svg", plot = v2, width=16, height=13)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data sources: US bombing in Cambodia (1965-1975), OD Mekong Datahub, [GO](https://data.opendevelopmentcambodia.net//dataset/us-bombing-in-cambodia-1965-1975-){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

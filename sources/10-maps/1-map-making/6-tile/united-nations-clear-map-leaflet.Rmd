@@ -1,0 +1,121 @@
+---
+pagetitle: "United Nations Clear Map"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(sp)
+library(leaflet)
+library(leaflet.esri)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# United Nations Clear Map
+## Choropleth Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Manuel on Unsplash"}
+
+#masthead <- "assets/manuel-unsplash.jpg"
+#knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> the quote...\
+--- the attribution\
+
+***
+
+
+### Section
+#### Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# lights <- read.csv("../archetypes/cities-top-10000-world.csv", header = TRUE, stringsAsFactors = FALSE)
+
+```
+
+
+### Section
+#### Subsection
+
+* WebPlain
+* WebTopo
+* WebGray
+* WebDark
+* WebImagery
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=16, fig.height=9, out.width="100%"}
+
+m <- leaflet() %>%
+  setView(16.263981,-0.027987, 4) %>%
+  addEsriTiledMapLayer(url = "https://geoservices.un.org/arcgis/rest/services/ClearMap_WebTopo/MapServer") %>%
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+
+m
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Data sources: The Data Source,  [GO](https://govdata360-backend.worldbank.org/api/v1/datasets/4034/dump.csv){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

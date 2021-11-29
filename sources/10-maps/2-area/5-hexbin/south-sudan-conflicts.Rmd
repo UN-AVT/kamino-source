@@ -1,0 +1,250 @@
+---
+pagetitle: "South Sudan Events"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include = FALSE, results = "hide"}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(geojsonio)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# South Sudan Events
+## hexbin
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Randy Fath on Unsplash"}
+
+masthead <- "assets/randy-fath-nsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Dinka tribe, South Sudan</div>
+
+> The journey of my people from conflict to peace, independence and freedom was costly,\
+  and characterized by economic and political marginalization, a prolonged war, humanitarian disasters,\
+  the loss of millions of lives and untold human suffering...\
+--- South Sudanese President Salva Kiir, speech to the United Nations General Assembly, 2014\
+
+***
+
+### Map Sources
+#### geojson state, country, and abeyi boundaries
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = "hide", class.source='fold-show'}
+
+# Load map sources
+# Shape files and data
+# ++++++++++++++++++++
+# state_boundaries
+# county
+# abeyi
+# ++++++++++++++++++++
+
+# Borders
+state_boundaries <- st_read("archetypes/south-sudan/maps/ss-state.geojson")
+county <- st_read("archetypes/south-sudan/maps/ss-county.geojson")
+abeyi <- st_read("archetypes/south-sudan/maps/ss-abeyi.geojson")
+
+head(as.data.frame(state_boundaries))
+head(as.data.frame(county))
+head(as.data.frame(abeyi))
+
+```
+
+
+### Ingest the data
+#### conflict data
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+conflict_data = read.csv("archetypes/south-sudan/conflict-data-ssd.csv", header = TRUE, stringsAsFactors = FALSE)
+conflict_data
+
+iati_activities = read.csv("archetypes/south-sudan/iati-activities.csv", header = TRUE, stringsAsFactors = FALSE)
+# iati_activities
+
+qc_conflict = read.csv("archetypes/south-sudan/qc-conflict-data-ssd.csv", header = TRUE, stringsAsFactors = FALSE)
+# qc_conflict
+
+```
+
+
+### Plot
+#### as points and no binning
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+# In order of layer placement top -> down
+v1 = ggplot() + 
+  geom_point(data=conflict_data, aes(x=longitude, y=latitude), color="orange", size=3) +
+  geom_sf(data = state_boundaries, color="#333333", fill = transparent_fill, size=1.0) +
+  geom_sf(data = county, color="#333333", fill = transparent_fill, size=0.5) +
+  geom_sf(data = abeyi, color="#333333", fill = transparent_fill, size=0.5, linetype = "dashed") +
+  scale_fill_gradient(low="orange", high="red",trans="log10") +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+       y = NULL, # Latitude
+       title = NULL, 
+       subtitle = NULL) +
+  theme_opts
+
+girafe( ggobj = v1, width_svg = 16, height_svg = 12, options = list( opts_sizing(rescale = TRUE, width = 0.9) ))
+
+```
+
+
+
+### Plot
+#### as hex geom, 40 bins
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+# In order of layer placement top -> down
+v2 = ggplot() + 
+  geom_hex(data=conflict_data, aes(x=longitude, y=latitude), color="#ffffff", size=0.5, bins=40) +
+  geom_sf(data = state_boundaries, color="#333333", fill = transparent_fill, size=1.0) +
+  geom_sf(data = county, color="#333333", fill = transparent_fill, size=0.5) +
+  geom_sf(data = abeyi, color="#333333", fill = transparent_fill, size=0.5, linetype = "dashed") +
+  scale_fill_gradient(low="orange", high="red",trans="log10") +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+       y = NULL, # Latitude
+       title = NULL, 
+       subtitle = NULL) +
+  theme_opts
+
+girafe( ggobj = v2, width_svg = 16, height_svg = 12, options = list( opts_sizing(rescale = TRUE, width = 0.9) ))
+
+```
+
+
+### Plot
+#### bin2d geom, 25 bins
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v3 = ggplot() + 
+  geom_bin2d(data=conflict_data, aes(x=longitude, y=latitude), color="#ffffff", size=0.5, bins=25) +
+  geom_sf(data = state_boundaries, color="#333333", fill = transparent_fill, size=1.0) +
+  geom_sf(data = county, color="#333333", fill = transparent_fill, size=0.5) +
+  geom_sf(data = abeyi, color="#333333", fill = transparent_fill, size=0.5, linetype = "dashed") +
+  scale_fill_gradient(low="orange", high="red",trans="log10") +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+       y = NULL, # Latitude
+       title = NULL, 
+       subtitle = NULL) +
+  theme_opts
+
+girafe( ggobj = v3, width_svg = 16, height_svg = 12, options = list( opts_sizing(rescale = TRUE, width = 0.9) ))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "assets/ssd-hexbin-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/ssd-hexbin-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative Inspiration: TBD
+* Data Source: TBD
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
