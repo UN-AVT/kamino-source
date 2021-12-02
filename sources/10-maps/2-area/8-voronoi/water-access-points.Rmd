@@ -1,5 +1,5 @@
 ---
-pagetitle: "United Nations Clear Map"
+pagetitle: "Water Access Points"
 output: 
   html_document:
     theme: lumen
@@ -24,8 +24,16 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
+library(geosphere)
+library(tmap)
+library(tmaptools)
+library(patchwork)
+library(cowplot)
 library(colorspace)
 library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggvoronoi)
 library(ggiraph)
 
 library(showtext)
@@ -43,22 +51,22 @@ MAPS
 # Water Access Points
 ## Voronoi
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Visit Greenland on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Jeff Ackley on Unsplash"}
 
-#masthead <- "assets/visit-greenland-unsplash.jpg"
-#knitr::include_graphics(masthead, dpi=72)
+masthead <- "assets/jeff-ackley-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">Aasiaat, Greenland during winter</div>
-
-> How do you find America? Turn left at Greenland...\
---- Ringo Starr, media question to Beatles during first U.S. tour 1964\
+> Water is life, and clean water means health...\
+--- Audrey Hepburn\
 
 ***
 
+The voronoi map shows water points monitored over time by governments and development partners. The data is collected by the __Water Point Data Exchange (WPDx)__ which aims to unlock the potential of water point data to improve decision-making and increase rural water access. Voronoi maps are based on the minimal distance needed to reach a landmark by using tessellation techniques that partition a plane into regions closest to these points. The darker the color of the region, the closer it is to the country's capital city.
+
 ### Ingest
-#### map attributes with climate zones
+#### coordinates and features of water points
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
@@ -69,134 +77,204 @@ head(df, n=10)
 ```
 
 
-### Wrangle
-#### enrich climate zone labels
+### Ingest
+#### country captials with coordinates
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_wrangle <- df %>%
+country_capitals <- read.csv("archetypes/water-access-points/country-capitals.csv", header = TRUE, stringsAsFactors = FALSE)
+country_capitals <- filter(country_capitals, ContinentName == "Africa")
+head(country_capitals, n = 10)
+
+```
+
+
+### Wrangle
+#### clean names, enrich with capital city coordinates
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- df %>%
+  filter(country_name %in% unique(country_capitals$CountryName)) %>%
   mutate(
-    label = case_when(
-      str_detect(country_name, "Dominic") ~ "Dominican Rep.", 
-      str_detect(country_name, "Congo") ~ "Congo",
-      country_name == "Central African Republic" ~ "CAR",
-      TRUE ~ country_name
-    ),
     country_name = case_when(
-      str_detect(country_name, "Congo") ~ "Democratic Republic of the Congo",
-      country_name == "Swaziland" ~ "Eswatini",
-      country_name == "Tanzania" ~ "United Republic of Tanzania",
-      country_name == "Timor-Leste" ~ "East Timor",
+      country_name == "Congo - Kinshasa" ~ "Democratic Republic of the Congo",
+      country_name == "Congo - Brazzaville" ~ "Republic of Congo", # Republic of the Congo
+      #country_name == "Swaziland" ~ "Eswatini",
+      #country_name == "Tanzania" ~ "United Republic of Tanzania",
       TRUE ~ country_name
     ))
 
-df_wrangle
+df_wrangle <- merge(df, country_capitals, by.x = "country_name", by.y = "CountryName")
+df_wrangle <- df_wrangle %>% select(row_id, country_name, lat_deg, lon_deg, water_source, water_tech, CapitalName, CapitalLatitude, CapitalLongitude, CountryCode)
+
+df_wrangle <- df_wrangle %>%
+  mutate(
+    country_name = case_when(
+      #country_name == "Swaziland" ~ "Eswatini",
+      country_name == "Tanzania" ~ "United Republic of Tanzania",
+      TRUE ~ country_name
+    ))
+
+head(df_wrangle, n=10)
+
 
 ```
 
 
 ### Analytics
-#### count
+#### calculate geospatial distance (in meters) to capital city
+
+* distHaversine()
+* distMeeus()
+* distRhumb()
+* distVincentyEllipsoid()
+* distVincentySphere()
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
-df_view <-
-  df_wrangle %>% 
-  filter(!is.na(country_name)) %>% 
-  count(lat_deg, lon_deg, country_name, label) %>% 
-  mutate(row_id = row_number())
+df_wrangle <- 
+    df_wrangle %>% 
+    mutate(lon_deg = if_else(lon_deg > 180, lon_deg - 360, lon_deg))
 
-df_view
+df_analytics <- df_wrangle %>%
+  rowwise() %>%
+  mutate(lat_deg = round(lat_deg, digits = 2),  lon_deg = round(lon_deg, digits = 2)) %>%
+  mutate( dist_to_capital = distm ( x = c(lon_deg, lat_deg), y = c(CapitalLongitude, CapitalLatitude), fun = distHaversine))
+
+df_analytics <- df_analytics %>% distinct(lon_deg, lat_deg, .keep_all = TRUE)
+
+head(df_analytics, n=10)
 
 ```
 
 
-### Plot
-#### contour
+### Voronoi function
+#### generated by country
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 theme_opts <- theme(
   text = element_text(family = "inconsolata", size = 12), 
-  plot.title = element_text(color = "black", size = 16, face = "bold"),
-  plot.subtitle = element_text(color = "black", size = 12),
+  plot.title = element_text(color = "black", size = 16, face = "bold", hjust = 0.5),
+  plot.subtitle = element_text(color = "black", size = 12, hjust = 0.5),
   plot.caption = element_text(color = "#555555", size = 11),
-  plot.background = element_rect(fill = "#f0f0f0", color = NA),
   plot.margin = margin(.25, .25, .25, .25, "cm"),
+  plot.background = element_blank(),
   axis.title.x = element_blank(),
   axis.title.y = element_blank(),
   axis.text.x = element_blank(),
   axis.text.y = element_blank(),
   panel.border = element_blank(),
-  panel.background = element_rect(fill = "#f0f0f0", color = NA),
-  # panel.grid.minor = element_blank(),
-  # panel.grid.major = element_blank(),
-  legend.position = 'bottom',
-  legend.title = element_blank(), #change legend title font size
-  legend.text = element_text(size=10)
+  panel.background = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.grid.major = element_blank(),
+  legend.position = 'none'
 )
 
-fill_palette <- c(
-  "#4f3314",
-  "#784e1e",
-  "#a16928",
-  "#ca8432",
-  "#ca9273",
-  "#d8af98",
-  "#e7daae",
-  "#dbd787",
-  "#cbcf60",
-  "#b6ccca",
-  "#98b7b4",
-  "#7aa29e",
-  "#36b9cd",
-  "#2890a0"
-)
-
-color_palette <- darken(fill_palette, 0.1)
-
-v1 = ggplot(data = climate_zone_map_enriched) + 
-  geom_sf(aes(fill=type, color=type), stroke=0.5) +
-  scale_fill_manual( values = fill_palette ) +
-  scale_color_manual( values = color_palette ) +
-  coord_sf() +
-  ggtitle( "Köppen-Geiger Climate Zones" ) +
-  theme_void() +
-  theme_opts
-
-girafe( ggobj = v1, width_svg = 16, height_svg = 9,
-  options = list( opts_sizing(rescale = TRUE, width = 1.0) )
-)
+draw_voronoi <- function(country) {
+  
+  # map for specified country
+  map_sp <- ne_countries(scale = "small", country = country, returnclass = "sp")
+  # for scale limits
+  bounding_box <- bb(map_sp, projection=4326)
+  
+  # filter data for specified country and limit coordinates to bounding box
+  df_country <- filter(df_analytics, country_name == country)
+  df_country <- filter(df_country, lon_deg >= bounding_box$xmin & lon_deg <= bounding_box$xmax)
+  df_country <- filter(df_country, lat_deg >= bounding_box$ymin & lat_deg <= bounding_box$ymax)
+  
+  v <-  df_country %>% 
+    ggplot(aes(x = lon_deg, y = lat_deg)) +
+    # country borders
+    geom_polygon(data = map_sp, aes(long, lat), color = "grey20", fill = "#ffffff", size = 13.5) +
+    geom_polygon(data = map_sp, aes(long, lat), color = "white", fill = "#ffffff", size = 10) +
+    # alternative to country borders
+    # geom_voronoi(fill = "white", color = "grey25", size = 13.5, outline = map_sp) +
+    # geom_voronoi(fill = "white", color = "white", size = 10, outline = map_sp) +
+    # color by distance, outline using map
+    geom_voronoi(aes(fill = dist_to_capital, color = dist_to_capital), size = 0.3, outline = map_sp) +
+    # contour of water points
+    geom_density_2d(color = "white") +
+    # all water points
+    # geom_point(color = "white", alpha = 0.5, size = 0.5) +
+    # show capital city location
+    geom_point(data = head(df_country, n=1), aes(x = CapitalLongitude, y = CapitalLatitude), shape = 21, fill = "white", color = "black", size = 6) +
+    geom_point(data = head(df_country, n=1), aes(x = CapitalLongitude, y = CapitalLatitude), size = 3) +
+    scale_x_continuous(limits = c(bounding_box$xmin, bounding_box$xmax), expand = c(0.05, 0.05)) +
+    scale_y_continuous(limits = c(bounding_box$ymin, bounding_box$ymax), expand = c(0.05, 0.05)) +
+    scale_fill_gradient(low = "yellow", high = "red", na.value = NA) +
+    # lightened to see voronoi borders
+    scale_color_gradient(low = lighten("yellow", 0.25), high = lighten("red", 0.25), na.value = NA) +
+    coord_map(clip = "off") +
+    # labs(title = country, subtitle = "voronoi of water points, color by distance to capital city") +
+    theme_void() +
+    theme_opts
+  v
+}
 
 ```
 
 
+### Plot
+#### Uganda
 
 
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
-# eval = FALSE as default; run manually as chunk
-ggsave(filename = "assets/climate-classification-fs.svg", plot = v1, width=16, height=7.5)
+# list of countries to select from
+# africa <- unique(df_analytics$country_name)
+africa <- c(
+  "Algeria",
+  "Angola",
+  "Burkina Faso",
+  "Burundi",
+  "Central African Republic",
+  "Chad",
+  "Egypt",
+  "Ethiopia",
+  "Ghana",
+  "Kenya",
+  "Liberia",
+  "Madagascar",
+  "Mali",
+  "Mauritania",
+  "Mozambique",
+  "Namibia",
+  "Niger",
+  "Nigeria",
+  "Rwanda",
+  "Sierra Leone",
+  "South Africa",
+  "South Sudan",
+  "Sudan",
+  "Swaziland",
+  "United Republic of Tanzania",
+  "Uganda",
+  "Zambia",
+  "Zimbabwe"
+)
+
+uganda <- draw_voronoi("Uganda")
+
+girafe(ggobj = uganda, width_svg = 16, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 0.5))
+)
 
 ```
+
 
 
 ### References
 #### citations for narrative and data sources
 
 * Narrative: inspired by visualization created by Cédric Scherer
-* Map Source: Kottek et al. 2006 (DOI: 10.1127/0941-2948/2006/0130)
+* Data Source: Water Point Data Exchange (WPDx), [GO](https://www.waterpointdata.org/){target="_blank"}
 
-<pre>
-Based on raster file from:
-Kottek, M., J. Grieser, C. Beck, B. Rudolf, and F. Rubel, 
-2006: World Map of the Koppen-Geiger climate classification updated. 
-Meteorol. Z., 15, 259-263. 
-DOI: 10.1127/0941-2948/2006/0130.
-</pre>
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
