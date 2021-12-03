@@ -1,0 +1,269 @@
+---
+pagetitle: "Sahel fatalities"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include = FALSE, results = "hide"}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(ggtext)
+library(geosphere) # To calculate distance
+library(ggiraph)
+
+
+```
+
+# Map of civilians killed by jihadist groups, Burkina Faso, Mali and Niger, 2021.
+<div class="activity">
+MAPS  
+</div>
+
+# Sahel fatalities
+## Bubble Map
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Kazuo Ota l on Unsplash"}
+
+masthead <- "assets/kazuo-ota-vz6mG_p6o9o-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> In 2022, over 28 million people in the region will need urgent humanitarian assistance...\
+--- UN OCHA Agency, regarding the situation in Sahel\
+
+***
+
+### Ingest
+
+
+#### World map from Nathural Earth package
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ne_world <- ne_countries(scale = "medium", returnclass = "sf")
+
+```
+
+#### Custom shape files for the Sahel area
+
+```{r, message = FALSE, warning = FALSE, include= FALSE, echo = TRUE, class.source = 'fold-hide'}
+
+sahel_shape <- st_read("archetypes/sahel-fatalities/shapefile/sahel/sahel_1.shp")
+sahel_country_lines  <- st_read("archetypes/sahel-fatalities/shapefile/sahel_country_lines/sahel_country_lines.shp")
+
+```
+
+#### ACLED data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+acled_sahel = readRDS("archetypes/sahel-fatalities/acled_sahel_1900-01-01-2021-11-19.rds")
+
+
+
+```
+
+### Wrangle
+
+#### Sahel map
+
+```{r, message = FALSE, warning = FALSE, include= FALSE, echo = TRUE, class.source = 'fold-hide'}
+
+sahel_shape_wrangled <- sahel_shape %>%
+  filter(!name == "sahel_custom_shape") %>%
+  mutate(is_country_of_focus = case_when(
+    name == "Mali" ~ "yes_sahel",
+    name == "Burkina faso" ~ "yes_sahel",
+    name == "Niger" ~ "yes_sahel",
+    TRUE ~ "no_sahel"
+  ))
+
+
+```
+
+#### Acled data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+acled_sahel_cleanup <- acled_sahel %>%
+  filter(country == "Mali" | 
+           country == "Burkina Faso" |
+           country == "Niger") %>%
+  filter(year == "2021") %>%
+  filter(fatalities > 0) %>%
+  rename(Deaths = fatalities)
+
+acled_sahel_cleanup
+
+```
+
+#### World map
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ne_western_africa <- ne_world %>%
+  filter(continent == "Africa")
+
+wa_adm0_wrangled <- ne_western_africa %>%
+  mutate(is_country_of_focus = case_when(
+    admin == "Mali" ~ "yes",
+    admin == "Burkina Faso" ~ "yes",
+    admin == "Niger" ~ "yes",
+    TRUE ~ "no"
+  ))
+
+```
+
+#### Creating data frames with country, city names to display, and assigning x and y coordinates
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+country_names <- data.frame(name = c("MALI", "NIGER", "BURKINA\nFASO"),
+                            longitude = c(-2,6,-2),
+                            latitude = c(20,18,12))
+
+other_country_names <- data.frame(
+  name = c("MAURITANIA", "ALGERIA", "GUINEA", "IVORY COAST", "GHANA", "TOGO", "BENIN", "NIGERIA"),
+  longitude = c(-10,4,-11.5,-5.2,-1.2,1.5,2,6),
+  latitude = c(19,22,11,9,9,10,10.7,10))
+
+city_names <- data.frame(name = "Bamako",
+                         longitude = c(-8.002778),
+                         latitude = c(12.639167))
+
+city_names_text_position <- data.frame(name = "Bamako",
+                         longitude = c(-9.5), 
+                         latitude = c(13))
+
+other_city_names <- data.frame(name = c("Outtagouna", "Gao", "Menaka"),
+                               longitude = c(0.721667, -0.05, 2.4),
+                               latitude = c(15.184167, 16.266667, 15.916667)
+                               )
+
+other_city_names_text_position <- data.frame(name = c("Outtagouna", "Gao", "Menaka"),
+                               longitude = c(-1.5, -0.6, 2.4),
+                               latitude = c(15.6, 16.7, 16.4)
+                               )
+
+
+```
+
+
+
+### Plot
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+theme_opts <- theme(
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  plot.background = element_rect(fill = "#ffffff"),
+  legend.position = c(0.8, -0.1),
+  legend.spacing = unit(0, "pt"),
+  legend.margin = margin(r = 0, l = 0),
+  legend.text = ggtext::element_markdown(size = 30),
+  legend.title = element_text(size = 30),
+  legend.justification="right",
+  legend.direction = "horizontal",
+  # element_markdown is a fonction from ggtext, which allow to use HMTL code to elements
+  plot.caption = element_markdown(hjust=0, size=rel(2))
+  )
+
+# Manual color palettes
+status_palette <- c("yes" = "#dbdbd5","no" = "#c0c0b7")
+sahel_palette <- c("yes" = "#dbdbd5","no" = "#c0c0b7", "yes_sahel" = "#cbcbc4","no_sahel" = "#b4b4aa")
+
+v1 <- ggplot() + 
+  geom_sf(data = wa_adm0_wrangled, aes(fill=is_country_of_focus), size=2.0, color = "#FFFFFF") +
+  # Add Sahel fill
+  geom_sf(data = sahel_shape_wrangled, aes(fill=is_country_of_focus), color = NA) +
+  # Add white line between countries within Sahel
+  geom_sf(data = sahel_country_lines, size=2.0, color = "#FFFFFF") +
+  geom_point(data = acled_sahel_cleanup,
+             aes(x = longitude, y = latitude,
+                 size = Deaths), color = "#d86966", alpha = 0.4) +
+  scale_size(range = c(1, 35), breaks = c(10, 100)) +
+  scale_x_continuous(limits = c(-13, 7)) +
+  scale_y_continuous(limits = c(9, 24)) +
+  geom_text(data=country_names, aes(x=longitude, y=latitude, label=name), size = 15, fontface="bold") +
+  geom_text(data=other_country_names, aes(x=longitude, y=latitude, label=name), 
+            size = 12, color = "#727265") +
+  geom_point(data= city_names, aes(x=longitude, y=latitude),
+             shape = 22, size = 8, fill = "black", color = "white", stroke = 2) +
+  geom_text(data=other_city_names_text_position, aes(x=longitude, y=latitude, label=name), size = 11) +
+  geom_point(data= other_city_names, aes(x=longitude, y=latitude),
+             shape = 21, size = 8, fill = "black", color = "white", stroke = 2) +
+  geom_text(data=city_names_text_position, aes(x=longitude, y=latitude, label=name), size = 12) +
+  geom_text(aes(x=-10, y=16.5, label="S A H E L"), size = 15, color = "#727265", angle = -3) +
+  geom_segment(aes(x = 4.06, y = 23.5, xend = 7, yend = 23.5)) +
+  geom_segment(aes(x = 4.06, y = 23.4, xend = 4.06, yend = 23.6)) +
+  geom_segment(aes(x = 7, y = 23.4, xend = 7, yend = 23.6)) +
+  geom_text(aes(x= 5.5, y = 23.8, label = paste0(round(distm(c(4.06,23.5),c(7,23.5))/1000,digits=0)," km")),
+            size = 8) +
+  scale_fill_manual(values = sahel_palette) +
+  theme_bw() +
+  theme_opts +
+  labs(x = NULL, # Longitude
+       y = NULL, # Latitude
+       subtitle = NULL) +
+  guides(fill = "none") + 
+  labs(caption="<b><p><span style = 'font-size:30pt;'>Civilians killed by jihadist groups</b></span></p>
+       <p><span style = 'font-size:25pt;'>Burkina Faso, Mali and Niger, 2021</span></p>
+       <p><span style = 'color:#abacab; font-size:25pt;'>Sources: ACLED; Jose Luengo-Cabrera</span></p>")
+
+girafe( ggobj = v1, width_svg = 16, height_svg = 16, options = list( opts_sizing(rescale = TRUE, width = 0.8) ))
+
+```
+
+### References
+#### citations for data sources
+
+* Narrative: The Economist, Why the war against jihadists in Mali is going badly, [GO](https://www.economist.com/middle-east-and-africa/why-the-war-against-jihadists-in-mali-is-going-badly/21806350){target="_blank"}
+* Data: ACLED, The Armed Conflict Location & Event Data Project, [GO](https://acleddata.com/){target="_blank"}
+* Map: OCHA Services, West and Central Africa - Administrative boundaries levels 0 - 2, [GO](https://data.humdata.org/dataset/west-and-central-africa-administrative-boundaries-levels){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
