@@ -1,0 +1,217 @@
+Country_or_Subregion,Total_Cases,Cumulative_Incidence,Confirmed,Imported,Deaths,Year
+Canada,0,0,,19,0,2015
+Canada,0,0,,468,0,2016
+Canada,74,0,,74,0,2017
+Canada,0,0,0,14,0,2018
+Canada,0,0,0,,0,2019
+Canada,0,0,0,0,0,2020
+Canada,0,0,0,0,0,2021
+United States of America,0,0,0,62,0,2015
+United States of America,224,0,224,4897,0,2016
+United States of America,7,0,7,437,0,2017
+United States of America,0,0,0,68,,2018
+United States of America,0,0,0,20,0,2019
+United States of America,0,0,0,2,0,2020
+United States of America,0,0,0,2,0,2021
+Belize,0,0,0,0,0,2015
+Belize,899,245,82,,,2016
+Belize,1132,302,187,,,2017
+Belize,126,33,,,,2018
+Costa Rica,0,0,0,0,0,2015
+Costa Rica,7556,156,7533,2,0,2016
+Costa Rica,2414,49,2414,,,2017
+Costa Rica,431,9,,,,2018
+Costa Rica,220,4,,,0,2019
+Costa Rica,108,2,,,0,2020
+Costa Rica,28,1,,,0,2021
+El Salvador,4597,72,0,0,0,2015
+El Salvador,7873,128,3,0,0,2016
+El Salvador,481,8,,,,2018
+El Salvador,817,13,,,0,2019
+El Salvador,203,3,0,,0,2020
+Guatemala,292,2,68,,,2015
+Guatemala,4062,24,822,,,2016
+Guatemala,703,4,164,,,2017
+Guatemala,2300,13,106,,,2018
+Guatemala,338,2,10,,0,2019
+Guatemala,904,5,0,,0,2020
+Guatemala,1197,7,0,,0,2021
+Honduras,56,1,2,0,0,2015
+Honduras,31468,384,260,0,0,2016
+Honduras,120,1,4,,,2017
+Honduras,350,4,0,,0,2018
+Honduras,240,3,0,0,0,2019
+Honduras,24,0,0,,0,2020
+Honduras,0,0,0,,0,2021
+Mexico,23,0,23,0,0,2015
+Mexico,8508,7,8508,0,0,2016
+Mexico,3260,3,3260,,,2017
+Mexico,877,1,877,,,2018
+Mexico,138,0,138,,0,2019
+Mexico,20,0,20,,0,2020
+Mexico,32,0,32,,0,2021
+Nicaragua,0,0,0,0,0,2015
+Nicaragua,608,10,608,0,0,2016
+Nicaragua,757,12,6,,,2017
+Nicaragua,177,3,0,,,2018
+Nicaragua,160,3,0,,0,2019
+Nicaragua,17,0,0,,0,2020
+Nicaragua,3,0,0,,0,2021
+Panama,61,2,60,0,0,2015
+Panama,3893,98,756,0,0,2016
+Panama,1891,46,243,,,2017
+Panama,2752,66,83,1,,2018
+Bolivia,2,0,2,0,0,2015
+Bolivia,1294,12,186,,0,2016
+Bolivia,1736,16,628,,0,2017
+Bolivia,1736,15,486,,0,2018
+Bolivia,293,3,49,,0,2019
+Bolivia,728,6,16,,0,2020
+Bolivia,106,1,2,,0,2021
+Colombia,16763,34,1697,0,0,2015
+Colombia,91711,189,8017,0,0,2016
+Colombia,1498,3,3,,,2017
+Colombia,857,2,607,,,2018
+Colombia,429,1,12,,0,2019
+Colombia,165,0,1,,0,2020
+Colombia,70,0,0,,0,2021
+Ecuador,3,0,3,0,0,2015
+Ecuador,3547,22,874,0,0,2016
+Ecuador,3183,19,2134,,,2017
+Ecuador,4,0,4,,,2018
+Ecuador,0,0,0,,0,2019
+Ecuador,0,0,0,,0,2020
+Ecuador,0,0,,,0,2021
+Peru,0,0,0,0,0,2015
+Peru,1669,5,778,2,0,2016
+Peru,5361,17,513,,,2017
+Peru,984,3,,,0,2018
+Peru,2500,8,2292,,0,2019
+Peru,119,0,14,,0,2020
+Peru,39,0,1,,0,2021
+Venezuela,17,0,0,0,0,2015
+Venezuela,61691,196,0,0,0,2016
+Venezuela,209,1,,,,2018
+Venezuela,76,0,0,,0,2019
+Venezuela,34,0,0,,0,2020
+Argentina,0,0,0,0,0,2015
+Argentina,128,0,26,,,2016
+Argentina,684,2,250,,,2017
+Argentina,57,0,37,11,,2018
+Brazil,56159,28,17825,0,0,2015
+Brazil,273904,131,128793,,,2016
+Brazil,31754,15,9202,,,2017
+Brazil,19020,9,1379,,,2018
+Brazil,30500,15,4257,,3,2019
+Brazil,18941,9,2644,,1,2020
+Brazil,13250,6,2466,,1,2021
+Chile,0,0,0,,0,2016
+Chile,0,0,,,0,2018
+Chile,0,0,0,,0,2019
+Chile,0,0,0,0,0,2020
+Chile,0,0,0,0,0,2021
+Paraguay,6,0,6,0,0,2015
+Paraguay,30,0,6,0,0,2016
+Paraguay,84,1,2,,,2017
+Paraguay,145,2,4,,0,2018
+Paraguay,2,0,0,,0,2019
+Paraguay,593,9,0,,0,2020
+Paraguay,244,3,0,,0,2021
+Uruguay,0,0,,0,0,2017
+Uruguay,0,0,0,,0,2018
+Uruguay,0,0,0,,0,2019
+Uruguay,0,0,0,,0,2020
+Uruguay,0,0,0,,0,2021
+Cuba,0,0,0,0,0,2015
+Cuba,245,2,245,58,0,2016
+Cuba,1384,12,,21,0,2017
+Cuba,873,8,,,,2018
+Dominican Republic,0,0,0,0,0,2015
+Dominican Republic,5575,52,336,0,0,2016
+Dominican Republic,9,0,0,,,2017
+Puerto Rico,10,0,10,0,0,2015
+Puerto Rico,36861,1001,36861,0,0,2016
+Puerto Rico,0,0,0,,0,2018
+Puerto Rico,59,2,59,,0,2019
+Puerto Rico,47,1,47,,0,2020
+Puerto Rico,34,1,1,,0,2021
+Anguilla,0,0,0,0,0,2015
+Anguilla,41,241,19,0,0,2016
+Anguilla,12,71,4,,,2017
+Anguilla,0,0,0,,,2018
+Aruba,0,0,0,0,0,2015
+Aruba,769,675,28,0,0,2016
+Aruba,706,614,617,,,2017
+Bahamas,449,114,25,,,2016
+Barbados,780,268,135,,,2016
+Barbados,29,10,2,,,2017
+Barbados,14,5,0,,,2018
+Bermuda,0,0,0,0,,2018
+"Bonaire, Saint Eustatius and Saba",0,,0,0,0,2015
+Cayman Islands,240,421,30,,,2016
+Cayman Islands,19,33,0,,,2017
+Curaçao,0,0,0,0,0,2015
+Curaçao,5966,3977,1880,0,0,2016
+Dominica,0,0,0,0,0,2015
+Dominica,1233,1666,79,,,2016
+French Guiana,0,0,0,0,0,2015
+French Guiana,10790,3909,48,0,0,2016
+Grenada,0,0,0,0,0,2015
+Grenada,447,403,113,0,0,2016
+Grenada,7,6,6,,,2017
+Grenada,0,0,0,,0,2019
+Guadeloupe,0,0,0,0,0,2015
+Guadeloupe,32278,6853,28,0,0,2016
+Guyana,1,0,1,0,0,2015
+Haiti,12,0,0,0,0,2015
+Haiti,3065,28,0,0,0,2016
+Haiti,121,1,,,0,2018
+Haiti,4,0,,,1,2019
+Haiti,0,0,,,0,2020
+Haiti,0,0,,,0,2021
+Jamaica,13,0,0,0,0,2015
+Jamaica,6974,249,186,0,0,2016
+Jamaica,157,5,0,,,2017
+Jamaica,1,0,1,,,2018
+Jamaica,0,0,0,,0,2019
+Jamaica,0,0,0,,0,2020
+Jamaica,0,0,0,,0,2021
+Martinique,332,82,0,0,0,2015
+Martinique,37665,9511,0,0,0,2016
+Montserrat,21,420,5,,,2016
+Saint Barthelemy,0,0,0,0,0,2015
+Saint Barthelemy,331,3678,61,0,0,2016
+Saint Kitts and Nevis,0,0,0,,,2015
+Saint Kitts and Nevis,583,1121,33,,,2016
+Saint Kitts and Nevis,4,8,0,,,2017
+Saint Lucia,0,0,0,0,0,2015
+Saint Lucia,332,202,52,0,0,2016
+Saint Lucia,0,0,0,,0,2017
+Saint Lucia,0,0,0,,0,2018
+Saint Lucia,0,0,0,,0,2019
+Saint Lucia,0,0,0,,0,2020
+Saint Lucia,0,0,0,,0,2021
+Saint Martin,0,0,0,0,0,2015
+Saint Martin,1780,5563,200,0,0,2016
+Saint Vincent and the Grenadines,0,0,0,0,0,2015
+Sint Maarten,2,5,0,0,0,2015
+Sint Maarten,377,920,146,0,0,2016
+Suriname,509,93,110,0,0,2015
+Suriname,3031,553,622,0,0,2016
+Suriname,9,2,1,,,2017
+Suriname,3,1,,,,2018
+Suriname,1,0,1,,0,2019
+Suriname,1,0,0,,0,2020
+Suriname,0,0,0,,0,2021
+Trinidad and Tobago,0,0,0,0,0,2015
+Turks and Caicos Islands,0,0,0,,,2015
+Turks and Caicos Islands,194,380,24,,,2016
+Virgin Islands (UK),0,0,0,,,2015
+Virgin Islands (UK),127,374,53,,,2016
+Virgin Islands (UK),0,0,0,,,2017
+Virgin Islands (US),0,0,0,0,0,2015
+Virgin Islands (US),456,443,56,0,0,2016
+Virgin Islands (US),2,2,2,,,2018
+Virgin Islands (US),0,0,0,,0,2019
+Virgin Islands (US),0,0,0,0,0,2020
+Virgin Islands (US),0,0,0,,0,2021

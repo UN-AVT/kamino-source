@@ -1,0 +1,2201 @@
+world_rank,institution,country,year
+1,Harvard University,USA,2012
+2,Massachusetts Institute of Technology,USA,2012
+3,Stanford University,USA,2012
+4,University of Cambridge,United Kingdom,2012
+5,California Institute of Technology,USA,2012
+6,Princeton University,USA,2012
+7,University of Oxford,United Kingdom,2012
+8,Yale University,USA,2012
+9,Columbia University,USA,2012
+10,"University of California, Berkeley",USA,2012
+11,University of Chicago,USA,2012
+12,Cornell University,USA,2012
+13,University of Pennsylvania,USA,2012
+14,University of Tokyo,Japan,2012
+15,Johns Hopkins University,USA,2012
+16,Swiss Federal Institute of Technology in Zurich,Switzerland,2012
+17,Kyoto University,Japan,2012
+18,Weizmann Institute of Science,Israel,2012
+19,"University of California, Los Angeles",USA,2012
+20,"University of California, San Diego",USA,2012
+21,Rockefeller University,USA,2012
+22,Hebrew University of Jerusalem,Israel,2012
+23,New York University,USA,2012
+24,"University of California, San Francisco",USA,2012
+25,University of Wisconsin–Madison,USA,2012
+26,University of Illinois at Urbana–Champaign,USA,2012
+27,Duke University,USA,2012
+28,Imperial College London,United Kingdom,2012
+29,University of Texas Southwestern Medical Center,USA,2012
+30,University of Texas at Austin,USA,2012
+31,University College London,United Kingdom,2012
+32,Osaka University,Japan,2012
+33,Northwestern University,USA,2012
+34,"University of Michigan, Ann Arbor",USA,2012
+35,University of Toronto,Canada,2012
+36,University of North Carolina at Chapel Hill,USA,2012
+37,Washington University in St. Louis,USA,2012
+38,University of Utah,USA,2012
+39,University of Washington - Seattle,USA,2012
+40,"University of California, Santa Barbara",USA,2012
+41,McGill University,Canada,2012
+42,"Purdue University, West Lafayette",USA,2012
+43,Carnegie Mellon University,USA,2012
+44,University of Southern California,USA,2012
+45,"University of California, Davis",USA,2012
+46,University of Colorado Boulder,USA,2012
+47,"University of California, Irvine",USA,2012
+48,University of Paris-Sud,France,2012
+49,"University of Minnesota, Twin Cities",USA,2012
+50,University of Arizona,USA,2012
+51,Technion – Israel Institute of Technology,Israel,2012
+52,"Ohio State University, Columbus",USA,2012
+53,University of Rochester,USA,2012
+54,École normale supérieure - Paris,France,2012
+55,University of Florida,USA,2012
+56,Tel Aviv University,Israel,2012
+57,Rice University,USA,2012
+58,Dartmouth College,USA,2012
+59,Vanderbilt University,USA,2012
+60,University of Edinburgh,United Kingdom,2012
+61,École Polytechnique,France,2012
+62,Boston University,USA,2012
+63,Pierre-and-Marie-Curie University,France,2012
+64,"Pennsylvania State University, University Park",USA,2012
+65,University of Geneva,Switzerland,2012
+66,Brown University,USA,2012
+67,University of British Columbia,Canada,2012
+68,"University of Maryland, College Park",USA,2012
+69,Swiss Federal Institute of Technology in Lausanne,Switzerland,2012
+70,Karolinska Institute,Sweden,2012
+71,University of Pittsburgh - Pittsburgh Campus,USA,2012
+72,Rutgers University-New Brunswick,USA,2012
+73,"Texas A&M University, College Station",USA,2012
+74,Nagoya University,Japan,2012
+75,Seoul National University,South Korea,2012
+76,University of Manchester,United Kingdom,2012
+77,Sapienza University of Rome,Italy,2012
+78,Case Western Reserve University,USA,2012
+79,Tohoku University,Japan,2012
+80,Arizona State University,USA,2012
+81,Emory University,USA,2012
+82,Ruprecht Karl University of Heidelberg,Germany,2012
+83,Ludwig Maximilian University of Munich,Germany,2012
+84,University of Virginia,USA,2012
+85,Leiden University,Netherlands,2012
+86,Tufts University,USA,2012
+87,Georgia Institute of Technology,USA,2012
+88,University of Zurich,Switzerland,2012
+89,University of Helsinki,Finland,2012
+90,Technical University of Munich,Germany,2012
+91,University of Oslo,Norway,2012
+92,University of Queensland,Australia,2012
+93,University of Copenhagen,Denmark,2012
+94,University of Sydney,Australia,2012
+95,Williams College,USA,2012
+96,University of Texas MD Anderson Cancer Center,USA,2012
+97,University of Nottingham,United Kingdom,2012
+98,University of Bristol,United Kingdom,2012
+99,Utrecht University,Netherlands,2012
+100,Mines ParisTech,France,2012
+1,Harvard University,USA,2013
+2,Stanford University,USA,2013
+3,University of Oxford,United Kingdom,2013
+4,Massachusetts Institute of Technology,USA,2013
+5,University of Cambridge,United Kingdom,2013
+6,Columbia University,USA,2013
+7,"University of California, Berkeley",USA,2013
+8,Princeton University,USA,2013
+9,University of Chicago,USA,2013
+10,Yale University,USA,2013
+11,California Institute of Technology,USA,2013
+12,University of Pennsylvania,USA,2013
+13,Cornell University,USA,2013
+14,University of Tokyo,Japan,2013
+15,Kyoto University,Japan,2013
+16,"University of California, Los Angeles",USA,2013
+17,Johns Hopkins University,USA,2013
+18,Swiss Federal Institute of Technology in Zurich,Switzerland,2013
+19,New York University,USA,2013
+20,"University of California, San Diego",USA,2013
+21,Hebrew University of Jerusalem,Israel,2013
+22,"University of California, San Francisco",USA,2013
+23,University of Wisconsin–Madison,USA,2013
+24,University of Illinois at Urbana–Champaign,USA,2013
+25,Duke University,USA,2013
+26,University of Texas at Austin,USA,2013
+27,Imperial College London,United Kingdom,2013
+28,Northwestern University,USA,2013
+29,University of Toronto,Canada,2013
+30,University College London,United Kingdom,2013
+31,University of Washington - Seattle,USA,2013
+32,"University of Michigan, Ann Arbor",USA,2013
+33,Weizmann Institute of Science,Israel,2013
+34,University of North Carolina at Chapel Hill,USA,2013
+35,Osaka University,Japan,2013
+36,University of Paris-Sud,France,2013
+37,"University of California, Santa Barbara",USA,2013
+38,"Purdue University, West Lafayette",USA,2013
+39,University of Southern California,USA,2013
+40,Seoul National University,South Korea,2013
+41,University of Colorado Boulder,USA,2013
+42,University of Utah,USA,2013
+43,Rutgers University-New Brunswick,USA,2013
+44,"University of Minnesota, Twin Cities",USA,2013
+45,University of Edinburgh,United Kingdom,2013
+46,University of Texas Southwestern Medical Center,USA,2013
+47,McGill University,Canada,2013
+48,Pierre-and-Marie-Curie University,France,2013
+49,Rockefeller University,USA,2013
+50,"Pennsylvania State University, University Park",USA,2013
+51,Carnegie Mellon University,USA,2013
+52,"Ohio State University, Columbus",USA,2013
+53,"University of California, Davis",USA,2013
+54,Boston University,USA,2013
+55,University of Florida,USA,2013
+56,University of Geneva,Switzerland,2013
+57,Tel Aviv University,Israel,2013
+58,University of British Columbia,Canada,2013
+59,"University of Maryland, College Park",USA,2013
+60,Karolinska Institute,Sweden,2013
+61,Vanderbilt University,USA,2013
+62,Sapienza University of Rome,Italy,2013
+63,Washington University in St. Louis,USA,2013
+64,École normale supérieure - Paris,France,2013
+65,"University of California, Irvine",USA,2013
+66,Technion – Israel Institute of Technology,Israel,2013
+67,Ludwig Maximilian University of Munich,Germany,2013
+68,University of Copenhagen,Denmark,2013
+69,University of Pittsburgh - Pittsburgh Campus,USA,2013
+70,Keio University,Japan,2013
+71,University of Virginia,USA,2013
+72,University of Manchester,United Kingdom,2013
+73,Arizona State University,USA,2013
+74,University of Zurich,Switzerland,2013
+75,King's College London,United Kingdom,2013
+76,University of Rochester,USA,2013
+77,Brown University,USA,2013
+78,University of Arizona,USA,2013
+79,Ruprecht Karl University of Heidelberg,Germany,2013
+80,"Texas A&M University, College Station",USA,2013
+81,University of Oslo,Norway,2013
+82,Dartmouth College,USA,2013
+83,Swiss Federal Institute of Technology in Lausanne,Switzerland,2013
+84,Utrecht University,Netherlands,2013
+85,Indiana University - Bloomington,USA,2013
+86,École Polytechnique,France,2013
+87,National University of Singapore,Singapore,2013
+88,University of Texas MD Anderson Cancer Center,USA,2013
+89,Stony Brook University,USA,2013
+90,Lomonosov Moscow State University,Russia,2013
+91,Nagoya University,Japan,2013
+92,University of Sydney,Australia,2013
+93,Emory University,USA,2013
+94,Rice University,USA,2013
+95,Tohoku University,Japan,2013
+96,Australian National University,Australia,2013
+97,University of Alberta,Canada,2013
+98,University of Helsinki,Finland,2013
+99,Paris Diderot University - Paris 7,France,2013
+100,Georgia Institute of Technology,USA,2013
+1,Harvard University,USA,2014
+2,Stanford University,USA,2014
+3,Massachusetts Institute of Technology,USA,2014
+4,University of Cambridge,United Kingdom,2014
+5,University of Oxford,United Kingdom,2014
+6,Columbia University,USA,2014
+7,"University of California, Berkeley",USA,2014
+8,University of Chicago,USA,2014
+9,Princeton University,USA,2014
+10,Yale University,USA,2014
+11,Cornell University,USA,2014
+12,California Institute of Technology,USA,2014
+13,University of Tokyo,Japan,2014
+14,University of Pennsylvania,USA,2014
+15,"University of California, Los Angeles",USA,2014
+16,Kyoto University,Japan,2014
+17,New York University,USA,2014
+18,Swiss Federal Institute of Technology in Zurich,Switzerland,2014
+19,Johns Hopkins University,USA,2014
+20,"University of California, San Diego",USA,2014
+21,"University of Michigan, Ann Arbor",USA,2014
+22,Hebrew University of Jerusalem,Israel,2014
+23,Northwestern University,USA,2014
+24,Seoul National University,South Korea,2014
+25,University of Wisconsin–Madison,USA,2014
+26,Duke University,USA,2014
+27,"University of California, San Francisco",USA,2014
+28,University of Illinois at Urbana–Champaign,USA,2014
+29,University of Texas at Austin,USA,2014
+30,University College London,United Kingdom,2014
+31,University of Toronto,Canada,2014
+32,University of Washington - Seattle,USA,2014
+33,Rutgers University-New Brunswick,USA,2014
+34,Keio University,Japan,2014
+35,École normale supérieure - Paris,France,2014
+36,École Polytechnique,France,2014
+37,Rockefeller University,USA,2014
+38,Weizmann Institute of Science,Israel,2014
+39,Imperial College London,United Kingdom,2014
+40,Waseda University,Japan,2014
+41,University of Virginia,USA,2014
+42,McGill University,Canada,2014
+43,Osaka University,Japan,2014
+44,Dartmouth College,USA,2014
+45,University of North Carolina at Chapel Hill,USA,2014
+46,"Pennsylvania State University, University Park",USA,2014
+47,"Ohio State University, Columbus",USA,2014
+48,Lomonosov Moscow State University,Russia,2014
+49,"University of Minnesota, Twin Cities",USA,2014
+50,University of Paris-Sud,France,2014
+51,University of Southern California,USA,2014
+52,"Purdue University, West Lafayette",USA,2014
+53,University of Pittsburgh - Pittsburgh Campus,USA,2014
+54,Carnegie Mellon University,USA,2014
+55,Peking University,China,2014
+56,University of Edinburgh,United Kingdom,2014
+57,"University of California, Davis",USA,2014
+58,Washington University in St. Louis,USA,2014
+59,University of Florida,USA,2014
+60,"University of California, Santa Barbara",USA,2014
+61,University of British Columbia,Canada,2014
+62,University of Utah,USA,2014
+63,University of Colorado Boulder,USA,2014
+64,University of Notre Dame,USA,2014
+65,National Taiwan University,Taiwan,2014
+66,University of Texas Southwestern Medical Center,USA,2014
+67,Boston University,USA,2014
+68,Pierre-and-Marie-Curie University,France,2014
+69,University of Manchester,United Kingdom,2014
+70,University of Arizona,USA,2014
+71,Vanderbilt University,USA,2014
+72,Tohoku University,Japan,2014
+73,Karolinska Institute,Sweden,2014
+74,National University of Singapore,Singapore,2014
+75,University of Geneva,Switzerland,2014
+76,"University of Maryland, College Park",USA,2014
+77,University of Rochester,USA,2014
+78,Emory University,USA,2014
+79,University of Copenhagen,Denmark,2014
+80,"University of California, Irvine",USA,2014
+81,Brown University,USA,2014
+82,Ludwig Maximilian University of Munich,Germany,2014
+83,Georgia Institute of Technology,USA,2014
+84,Tufts University,USA,2014
+85,University of Zurich,Switzerland,2014
+86,Tel Aviv University,Israel,2014
+87,Tsinghua University,China,2014
+88,Utrecht University,Netherlands,2014
+89,Ruprecht Karl University of Heidelberg,Germany,2014
+90,King's College London,United Kingdom,2014
+91,Sapienza University of Rome,Italy,2014
+92,Kyushu University,Japan,2014
+93,Swiss Federal Institute of Technology in Lausanne,Switzerland,2014
+94,Katholieke Universiteit Leuven,Belgium,2014
+95,University of Sydney,Australia,2014
+96,Tokyo Institute of Technology,Japan,2014
+97,University of Melbourne,Australia,2014
+98,University of Bonn,Germany,2014
+99,Technical University of Munich,Germany,2014
+100,Royal Institute of Technology,Sweden,2014
+101,Erasmus University Rotterdam,Netherlands,2014
+102,Case Western Reserve University,USA,2014
+103,University of Alberta,Canada,2014
+104,University of Texas MD Anderson Cancer Center,USA,2014
+105,"Texas A&M University, College Station",USA,2014
+106,Arizona State University,USA,2014
+107,Yonsei University,South Korea,2014
+108,Rice University,USA,2014
+109,Technion – Israel Institute of Technology,Israel,2014
+110,University of Helsinki,Finland,2014
+111,University of Oslo,Norway,2014
+112,Michigan State University,USA,2014
+113,Indiana University - Bloomington,USA,2014
+114,University of the Witwatersrand,South Africa,2014
+115,University of Queensland,Australia,2014
+116,Lund University,Sweden,2014
+117,Leiden University,Netherlands,2014
+118,Georgetown University,USA,2014
+119,Aarhus University,Denmark,2014
+120,University of Barcelona,Spain,2014
+121,Baylor College of Medicine,USA,2014
+122,University of Amsterdam,Netherlands,2014
+123,University of Bristol,United Kingdom,2014
+124,Uppsala University,Sweden,2014
+125,University of Iowa,USA,2014
+126,Stony Brook University,USA,2014
+127,University of Groningen,Netherlands,2014
+128,Korea Advanced Institute of Science and Technology (KAIST),South Korea,2014
+129,Radboud University Nijmegen,Netherlands,2014
+130,Korea University,South Korea,2014
+131,University of São Paulo,Brazil,2014
+132,Nagoya University,Japan,2014
+133,University of Colorado Denver,USA,2014
+134,University of Montreal,Canada,2014
+135,Albert Ludwig University of Freiburg,Germany,2014
+136,Ghent University,Belgium,2014
+137,University of Glasgow,United Kingdom,2014
+138,University of Miami,USA,2014
+139,Université libre de Bruxelles,Belgium,2014
+140,Paris Diderot University - Paris 7,France,2014
+141,McMaster University,Canada,2014
+142,University of Birmingham,United Kingdom,2014
+143,University of Texas at Dallas,USA,2014
+144,VU University Amsterdam,Netherlands,2014
+145,Wake Forest University,USA,2014
+146,University of Southampton,United Kingdom,2014
+147,University of Nottingham,United Kingdom,2014
+148,Nanyang Technological University,Singapore,2014
+149,University of New South Wales,Australia,2014
+150,Osaka City University,Japan,2014
+151,University of Leeds,United Kingdom,2014
+152,Western University (The University of Western Ontario),Canada,2014
+153,Kobe University,Japan,2014
+154,University of Basel,Switzerland,2014
+155,University of Hong Kong,Hong Kong,2014
+156,Indiana University-Purdue University Indianapolis,USA,2014
+157,Humboldt University of Berlin,Germany,2014
+158,Free University of Berlin,Germany,2014
+159,University of Tübingen,Germany,2014
+160,Australian National University,Australia,2014
+161,Goethe University Frankfurt,Germany,2014
+162,University of Houston,USA,2014
+163,"University of California, Santa Cruz",USA,2014
+164,University of Alabama at Birmingham,USA,2014
+165,Icahn School of Medicine at Mount Sinai,USA,2014
+166,University of Calgary,Canada,2014
+167,Mines ParisTech,France,2014
+168,University of Gothenburg,Sweden,2014
+169,University of Göttingen,Germany,2014
+170,Monash University,Australia,2014
+171,Southern Methodist University,USA,2014
+172,Yeshiva University,USA,2014
+173,University of South Florida - Tampa,USA,2014
+174,Hanyang University,South Korea,2014
+175,Oregon Health & Science University,USA,2014
+176,University of Strasbourg,France,2014
+177,University of Cincinnati,USA,2014
+178,University of Sheffield,United Kingdom,2014
+179,University of Hamburg,Germany,2014
+180,George Washington University,USA,2014
+181,University of Milan,Italy,2014
+182,Iowa State University,USA,2014
+183,"University of Maryland, Baltimore",USA,2014
+184,University of Padua,Italy,2014
+185,University of New Mexico,USA,2014
+186,Pohang University of Science and Technology,South Korea,2014
+187,Stockholm University,Sweden,2014
+188,Hokkaido University,Japan,2014
+189,Fudan University,China,2014
+190,University of Sussex,United Kingdom,2014
+191,Université catholique de Louvain,Belgium,2014
+192,Wayne State University,USA,2014
+193,University of Massachusetts Medical School,USA,2014
+194,University of Lausanne,Switzerland,2014
+195,Shanghai Jiao Tong University,China,2014
+196,University of Missouri–Columbia,USA,2014
+197,Technical University of Denmark,Denmark,2014
+198,Complutense University of Madrid,Spain,2014
+199,University of Cologne,Germany,2014
+200,"Trinity College, Dublin",Ireland,2014
+201,University of Bern,Switzerland,2014
+202,Chinese University of Hong Kong,Hong Kong,2014
+203,University of Kansas,USA,2014
+204,Sungkyunkwan University,South Korea,2014
+205,University of Vienna,Austria,2014
+206,Zhejiang University,China,2014
+207,University of Georgia,USA,2014
+208,University of Massachusetts Amherst,USA,2014
+209,Cardiff University,United Kingdom,2014
+210,University of Münster,Germany,2014
+211,University of Liverpool,United Kingdom,2014
+212,University of Ottawa,Canada,2014
+213,University of Erlangen-Nuremberg,Germany,2014
+214,Queen Mary University of London,United Kingdom,2014
+215,Karlsruhe Institute of Technology,Germany,2014
+216,Louisiana State University - Baton Rouge,USA,2014
+217,Nanjing University,China,2014
+218,University of Illinois at Chicago,USA,2014
+219,University of Bologna,Italy,2014
+220,University of Manitoba,Canada,2014
+221,Joseph Fourier University,France,2014
+222,"University of California, Riverside",USA,2014
+223,Julius-Maximilian's University of Würzburg,Germany,2014
+224,Aix-Marseille University,France,2014
+225,University of Western Australia,Australia,2014
+226,Laval University,Canada,2014
+227,"University of Tennessee, Knoxville",USA,2014
+228,North Carolina State University,USA,2014
+229,Newcastle University,United Kingdom,2014
+230,Claude Bernard University Lyon 1,France,2014
+231,University of Turin,Italy,2014
+232,University of Kiel,Germany,2014
+233,University of Connecticut,USA,2014
+234,Tulane University,USA,2014
+235,University of Oklahoma - Norman Campus,USA,2014
+236,Brandeis University,USA,2014
+237,Dresden University of Technology,Germany,2014
+238,RWTH Aachen University,Germany,2014
+239,University of Texas Health Science Center at San Antonio,USA,2014
+240,Virginia Commonwealth University,USA,2014
+241,University of Montpellier 2,France,2014
+242,Dalian University of Technology,China,2014
+243,Rensselaer Polytechnic Institute,USA,2014
+244,Paul Sabatier University - Toulouse III,France,2014
+245,Paris Descartes University,France,2014
+246,National Cheng Kung University,Taiwan,2014
+247,University of Delaware,USA,2014
+248,Vrije Universiteit Brussel,Belgium,2014
+249,Johannes Gutenberg University of Mainz,Germany,2014
+250,Maastricht University,Netherlands,2014
+251,University of Düsseldorf,Germany,2014
+252,University of Dundee,United Kingdom,2014
+253,University of Tsukuba,Japan,2014
+254,Autonomous University of Barcelona,Spain,2014
+255,Florida State University,USA,2014
+256,University of Texas at San Antonio,USA,2014
+257,London School of Hygiene & Tropical Medicine,United Kingdom,2014
+258,Lehigh University,USA,2014
+259,University of Kentucky,USA,2014
+260,Thomas Jefferson University,USA,2014
+261,Drexel University,USA,2014
+262,Colorado State University - Fort Collins,USA,2014
+263,University of Leicester,United Kingdom,2014
+264,Durham University,United Kingdom,2014
+265,Oregon State University,USA,2014
+266,University of Florence,Italy,2014
+267,University of Cape Town,South Africa,2014
+268,"University at Buffalo, The State University of New York",USA,2014
+269,University College Dublin,Ireland,2014
+270,University of Science and Technology of China,China,2014
+271,Virginia Polytechnic Institute and State University,USA,2014
+272,University of Naples Federico II,Italy,2014
+273,University of Auckland,New Zealand,2014
+274,University of Texas Health Science Center at Houston,USA,2014
+275,Delft University of Technology,Netherlands,2014
+276,University of Aberdeen,United Kingdom,2014
+277,Queen's University,Canada,2014
+278,University of Lisbon,Portugal,2014
+279,Hiroshima University,Japan,2014
+280,University of Waterloo,Canada,2014
+281,Okayama University,Japan,2014
+282,University of Ulm,Germany,2014
+283,Chulalongkorn University,Thailand,2014
+284,Dalhousie University,Canada,2014
+285,Saint Petersburg State University,Russia,2014
+286,Norwegian University of Science and Technology,Norway,2014
+287,University of Reading,United Kingdom,2014
+288,Wageningen University and Research Centre,Netherlands,2014
+289,Umeå University,Sweden,2014
+290,University of Porto,Portugal,2014
+291,Hong Kong University of Science and Technology,Hong Kong,2014
+292,Sun Yat-sen University,China,2014
+293,Medical College of Wisconsin,USA,2014
+294,City College of New York,USA,2014
+295,Hannover Medical School,Germany,2014
+296,"Washington State University, Pullman",USA,2014
+297,Technical University of Berlin,Germany,2014
+298,University of South Carolina - Columbia,USA,2014
+299,Leipzig University,Germany,2014
+300,University of Stuttgart,Germany,2014
+301,University of Valencia,Spain,2014
+302,Linköping University,Sweden,2014
+303,University of Duisburg-Essen,Germany,2014
+304,Ruhr University Bochum,Germany,2014
+305,University of Bergen,Norway,2014
+306,London School of Economics,United Kingdom,2014
+307,Wesleyan University,USA,2014
+308,University of Pisa,Italy,2014
+309,Autonomous University of Madrid,Spain,2014
+310,Medical University of Vienna,Austria,2014
+311,Stellenbosch University,South Africa,2014
+312,Medical University of South Carolina,USA,2014
+313,Charles University in Prague,Czech Republic,2014
+314,Kyungpook National University,South Korea,2014
+315,"University of Science, Malaysia",Malaysia,2014
+316,University of Liège,Belgium,2014
+317,University of Hull,United Kingdom,2014
+318,Northeastern University,USA,2014
+319,Kansas State University,USA,2014
+320,University of Vermont,USA,2014
+321,Rush University,USA,2014
+322,University of Louisville,USA,2014
+323,University of St Andrews,United Kingdom,2014
+324,University of Warwick,United Kingdom,2014
+325,University of Rome Tor Vergata,Italy,2014
+326,University of Innsbruck,Austria,2014
+327,Darmstadt University of Technology,Germany,2014
+328,Indian Institute of Technology Delhi,India,2014
+329,Federal University of Rio de Janeiro,Brazil,2014
+330,University of Antwerp,Belgium,2014
+331,National and Kapodistrian University of Athens,Greece,2014
+332,Boston College,USA,2014
+333,Vita-Salute San Raffaele University,Italy,2014
+334,Gwangju Institute of Science and Technology,South Korea,2014
+335,University of Nebraska–Lincoln,USA,2014
+336,University of York,United Kingdom,2014
+337,National Autonomous University of Mexico,Mexico,2014
+338,University of Regensburg,Germany,2014
+339,Yokohama National University,Japan,2014
+340,University of Adelaide,Australia,2014
+341,University of Genoa,Italy,2014
+342,Queen's University Belfast,United Kingdom,2014
+343,University of Marburg,Germany,2014
+344,University of Pavia,Italy,2014
+345,"St George's, University of London",United Kingdom,2014
+346,University of Oregon,USA,2014
+347,University of Navarra,Spain,2014
+348,San Diego State University,USA,2014
+349,Nankai University,China,2014
+350,University of East Anglia,United Kingdom,2014
+351,University of Nebraska Medical Center,USA,2014
+352,University of Southern Denmark,Denmark,2014
+353,Eindhoven University of Technology,Netherlands,2014
+354,Xiamen University,China,2014
+355,University of Otago,New Zealand,2014
+356,University of Santiago de Compostela,Spain,2014
+357,University of Exeter,United Kingdom,2014
+358,University of Jena,Germany,2014
+359,University of Perugia,Italy,2014
+360,Justus Liebig University Giessen,Germany,2014
+361,College of William and Mary,USA,2014
+362,Ben-Gurion University of the Negev,Israel,2014
+363,Saint Louis University,USA,2014
+364,Colorado School of Mines,USA,2014
+365,Oklahoma State University–Stillwater,USA,2014
+366,University of Guelph,Canada,2014
+367,University of Trieste,Italy,2014
+368,University of Verona,Italy,2014
+369,"University at Albany, SUNY",USA,2014
+370,Tongji University,China,2014
+371,Eötvös Loránd University,Hungary,2014
+372,University of Alabama - Tuscaloosa,USA,2014
+373,University of Eastern Finland,Finland,2014
+374,Ewha Womans University,South Korea,2014
+375,City University of Hong Kong,Hong Kong,2014
+376,Tokyo Medical and Dental University,Japan,2014
+377,University of Victoria,Canada,2014
+378,University of Buenos Aires,Argentina,2014
+379,University of Texas Medical Branch at Galveston,USA,2014
+380,Kyung Hee University,South Korea,2014
+381,Hong Kong Polytechnic University,Hong Kong,2014
+382,Saarland University,Germany,2014
+383,Scuola Normale Superiore di Pisa,Italy,2014
+384,University of Seville,Spain,2014
+385,Beijing Normal University,China,2014
+386,Chiba University,Japan,2014
+387,University of Ferrara,Italy,2014
+388,University of Bari Aldo Moro,Italy,2014
+389,Polytechnic University of Milan,Italy,2014
+390,Temple University,USA,2014
+391,University of Turku,Finland,2014
+392,Aalto University,Finland,2014
+393,Simon Fraser University,Canada,2014
+394,Tianjin University,China,2014
+395,Chalmers University of Technology,Sweden,2014
+396,Middle East Technical University,Turkey,2014
+397,Cranfield University,United Kingdom,2014
+398,York University,Canada,2014
+399,Xi'an Jiaotong University,China,2014
+400,Chonnam National University,South Korea,2014
+401,University of Central Florida,USA,2014
+402,University of Lorraine,France,2014
+403,University of Bordeaux II,France,2014
+404,University of New Hampshire,USA,2014
+405,Versailles Saint-Quentin-en-Yvelines University,France,2014
+406,Chonbuk National University,South Korea,2014
+407,Kumamoto University,Japan,2014
+408,Huazhong University of Science and Technology,China,2014
+409,Brunel University,United Kingdom,2014
+410,Polytechnic University of Catalonia,Spain,2014
+411,National Chiao Tung University,Taiwan,2014
+412,Southeast University,China,2014
+413,Tokyo University of Science,Japan,2014
+414,Catholic University of the Sacred Heart,Italy,2014
+415,Brigham Young University,USA,2014
+416,Technical University of Madrid,Spain,2014
+417,Nagasaki University,Japan,2014
+418,National Tsing Hua University,Taiwan,2014
+419,University of Warsaw,Poland,2014
+420,King Saud University,Saudi Arabia,2014
+421,University of Bath,United Kingdom,2014
+422,Concordia University,Canada,2014
+423,Georgia Regents University,USA,2014
+424,Niigata University,Japan,2014
+425,University of Oulu,Finland,2014
+426,Pompeu Fabra University,Spain,2014
+427,Vienna University of Technology,Austria,2014
+428,Sogang University,South Korea,2014
+429,Gyeongsang National University,South Korea,2014
+430,University of Tampere,Finland,2014
+431,University of Milan - Bicocca,Italy,2014
+432,University of Bordeaux I,France,2014
+433,Swedish University of Agricultural Sciences,Sweden,2014
+434,George Mason University,USA,2014
+435,Jilin University,China,2014
+436,University of Delhi,India,2014
+437,University of Campinas,Brazil,2014
+438,Wuhan University,China,2014
+439,West Virginia University,USA,2014
+440,Pusan National University,South Korea,2014
+441,University of Mississippi - Oxford Campus,USA,2014
+442,University of Arkansas for Medical Sciences,USA,2014
+443,Miami University,USA,2014
+444,University of Tokushima,Japan,2014
+445,University of Twente,Netherlands,2014
+446,Loyola University Chicago,USA,2014
+447,Ajou University,South Korea,2014
+448,Syracuse University,USA,2014
+449,Lancaster University,United Kingdom,2014
+450,Pontifical Catholic University of Chile,Chile,2014
+451,University of Chile,Chile,2014
+452,Innsbruck Medical University,Austria,2014
+453,University of Granada,Spain,2014
+454,Kanazawa University,Japan,2014
+455,University of Parma,Italy,2014
+456,University of Siena,Italy,2014
+457,Shandong University,China,2014
+458,Technical University of Dortmund,Germany,2014
+459,University of KwaZulu-Natal,South Africa,2014
+460,"University of Nevada, Reno",USA,2014
+461,Yokohama City University,Japan,2014
+462,École normale supérieure de Lyon,France,2014
+463,University College Cork,Ireland,2014
+464,Ohio University,USA,2014
+465,Central South University,China,2014
+466,University of Modena and Reggio Emilia,Italy,2014
+467,New Mexico State University,USA,2014
+468,University of Konstanz,Germany,2014
+469,University of Hawaii at Manoa,USA,2014
+470,University of Nebraska Omaha,USA,2014
+471,Shinshu University,Japan,2014
+472,University of Strathclyde,United Kingdom,2014
+473,Baylor University,USA,2014
+474,Polytechnic University of Valencia,Spain,2014
+475,Harbin Institute of Technology,China,2014
+476,University of Rennes 1,France,2014
+477,University of Arkansas - Fayetteville,USA,2014
+478,Aristotle University of Thessaloniki,Greece,2014
+479,Jagiellonian University,Poland,2014
+480,Texas Tech University (TTU),USA,2014
+481,University of Rostock,Germany,2014
+482,University of Akron,USA,2014
+483,University of Saskatchewan,Canada,2014
+484,Juntendo University,Japan,2014
+485,University of Wyoming,USA,2014
+486,Macquarie University,Australia,2014
+487,University of Canterbury,New Zealand,2014
+488,University of Denver,USA,2014
+489,Illinois Institute of Technology,USA,2014
+490,Creighton University,USA,2014
+491,Bielefeld University,Germany,2014
+492,University of Malaya,Malaysia,2014
+493,University of Ulsan,South Korea,2014
+494,City University London,United Kingdom,2014
+495,Grenoble Institute of Technology,France,2014
+496,Federal University of Minas Gerais,Brazil,2014
+497,University of Hanover,Germany,2014
+498,South China University of Technology,China,2014
+499,University of Surrey,United Kingdom,2014
+500,Otto-von-Guericke University Magdeburg,Germany,2014
+501,Indian Institute of Science,India,2014
+502,Tokyo Metropolitan University,Japan,2014
+503,Bar-Ilan University,Israel,2014
+504,Mississippi State University,USA,2014
+505,"University of Maryland, Baltimore County",USA,2014
+506,University of Wollongong,Australia,2014
+507,Flinders University,Australia,2014
+508,Martin Luther University of Halle-Wittenberg,Germany,2014
+509,Graduate University for Advanced Studies,Japan,2014
+510,Clemson University,USA,2014
+511,University of Brescia,Italy,2014
+512,Georgia State University,USA,2014
+513,Dongguk University,South Korea,2014
+514,University of Fribourg,Switzerland,2014
+515,Sichuan University,China,2014
+516,University of Iceland,Iceland,2014
+517,University of Sherbrooke,Canada,2014
+518,University of Graz,Austria,2014
+519,University of Málaga,Spain,2014
+520,University of Zaragoza,Spain,2014
+521,New York Medical College,USA,2014
+522,SUNY Downstate Medical Center,USA,2014
+523,École Centrale Paris,France,2014
+524,Utah State University,USA,2014
+525,University of Ljubljana,Slovenia,2014
+526,University of Montpellier 1,France,2014
+527,Victoria University of Wellington,New Zealand,2014
+528,East China University of Science and Technology,China,2014
+529,Konkuk University,South Korea,2014
+530,University of Potsdam,Germany,2014
+531,University of the Basque Country,Spain,2014
+532,University of Nice Sophia Antipolis,France,2014
+533,University of Udine,Italy,2014
+534,National Yang-Ming University,Taiwan,2014
+535,Indian Institute of Technology Bombay,India,2014
+536,University of Bayreuth,Germany,2014
+537,University of Wisconsin–Milwaukee,USA,2014
+538,University of Dayton,USA,2014
+539,Nihon University,Japan,2014
+540,Montana State University - Bozeman,USA,2014
+541,"Royal Holloway, University of London",United Kingdom,2014
+542,Tokyo Women's Medical University,Japan,2014
+543,Panjab University,India,2014
+544,Tampere University of Technology,Finland,2014
+545,University of Coimbra,Portugal,2014
+546,University of Newcastle,Australia,2014
+547,Nara Institute of Science and Technology,Japan,2014
+548,Auburn University,USA,2014
+549,University of Bremen,Germany,2014
+550,Mahidol University,Thailand,2014
+551,University of Crete,Greece,2014
+552,Bangor University,United Kingdom,2014
+553,University of Aveiro,Portugal,2014
+554,University of Palermo,Italy,2014
+555,Nagoya City University,Japan,2014
+556,University of Tartu,Estonia,2014
+557,University of Savoy,France,2014
+558,University of Tromsø - The Arctic University of Norway,Norway,2014
+559,University of Missouri–Kansas City,USA,2014
+560,Beihang University,China,2014
+561,American University of Beirut,Lebanon,2014
+562,University of Nantes,France,2014
+563,University of Essex,United Kingdom,2014
+564,University of Zagreb,Croatia,2014
+565,National Central University,Taiwan,2014
+566,University Lille 1: Sciences and Technologies,France,2014
+567,University of Catania,Italy,2014
+568,National Polytechnic Institute of Toulouse,France,2014
+569,Indian Institute of Technology Kanpur,India,2014
+570,Kagoshima University,Japan,2014
+571,Lanzhou University,China,2014
+572,James Cook University,Australia,2014
+573,Shizuoka University,Japan,2014
+574,Indian Institute of Technology Kharagpur,India,2014
+575,Second University of Naples,Italy,2014
+576,Indian Institute of Technology Madras,India,2014
+577,Plymouth University,United Kingdom,2014
+578,International School for Advanced Studies,Italy,2014
+579,Polytechnic University of Turin,Italy,2014
+580,University of Oviedo,Spain,2014
+581,Ehime University,Japan,2014
+582,University of Ioannina,Greece,2014
+583,University of Cagliari,Italy,2014
+584,Tottori University,Japan,2014
+585,Federal University of Rio Grande do Sul,Brazil,2014
+586,Kent State University,USA,2014
+587,University of Los Andes (Colombia),Colombia,2014
+588,Hunan University,China,2014
+589,Tokai University,Japan,2014
+590,LSU Health Sciences Center New Orleans,USA,2014
+591,Southern Illinois University Carbondale,USA,2014
+592,Tata Institute of Fundamental Research,India,2014
+593,Aalborg University,Denmark,2014
+594,Osaka Prefecture University,Japan,2014
+595,Chang Gung University,Taiwan,2014
+596,Northern Illinois University,USA,2014
+597,University of Trento,Italy,2014
+598,Semmelweis University,Hungary,2014
+599,University of Science and Technology Beijing,China,2014
+600,"National University of Ireland, Galway",Ireland,2014
+601,Dankook University,South Korea,2014
+602,Istanbul University,Turkey,2014
+603,Tokyo University of Agriculture and Technology,Japan,2014
+604,University of Montana - Missoula,USA,2014
+605,Queensland University of Technology,Australia,2014
+606,Binghamton University,USA,2014
+607,Université de Namur,Belgium,2014
+608,University of Tasmania,Australia,2014
+609,University of Pretoria,South Africa,2014
+610,Central China Normal University,China,2014
+611,Indian Institute of Technology Roorkee,India,2014
+612,Curtin University,Australia,2014
+613,Deakin University,Australia,2014
+614,Tilburg University,Netherlands,2014
+615,Inha University,South Korea,2014
+616,University of New Orleans,USA,2014
+617,Paris-Est Créteil Val-de-Marne University,France,2014
+618,University of L'Aquila,Italy,2014
+619,Chungnam National University,South Korea,2014
+620,University of Salamanca,Spain,2014
+621,University of Alaska Fairbanks,USA,2014
+622,University of Poitiers,France,2014
+623,Albany Medical College,USA,2014
+624,"Birkbeck, University of London",United Kingdom,2014
+625,Griffith University,Australia,2014
+626,Federal University of São Paulo,Brazil,2014
+627,Carleton University,Canada,2014
+628,Massey University,New Zealand,2014
+629,Catholic University of Korea,South Korea,2014
+630,Open University (UK),United Kingdom,2014
+631,University of Patras,Greece,2014
+632,Universidade Nova de Lisboa,Portugal,2014
+633,Texas A&M Health Science Center,USA,2014
+634,Braunschweig University of Technology,Germany,2014
+635,National Chung Hsing University,Taiwan,2014
+636,La Trobe University,Australia,2014
+637,Missouri University of Science and Technology,USA,2014
+638,University of Idaho,USA,2014
+639,Louisiana Tech University,USA,2014
+640,University of Portsmouth,United Kingdom,2014
+641,University of La Laguna,Spain,2014
+642,Florida International University,USA,2014
+643,Medical University of Graz,Austria,2014
+644,Howard University,USA,2014
+645,University of Hertfordshire,United Kingdom,2014
+646,State University of New York Upstate Medical University,USA,2014
+647,Royal College of Surgeons in Ireland,Ireland,2014
+648,National Technical University of Athens,Greece,2014
+649,University of Windsor,Canada,2014
+650,Rovira i Virgili University,Spain,2014
+651,University of Burgundy,France,2014
+652,Gunma University,Japan,2014
+653,AGH University of Science and Technology,Poland,2014
+654,Gifu University,Japan,2014
+655,Hacettepe University,Turkey,2014
+656,Örebro University,Sweden,2014
+657,Memorial University of Newfoundland,Canada,2014
+658,Kindai University,Japan,2014
+659,University of Rhode Island,USA,2014
+660,University of Alicante,Spain,2014
+661,New Jersey Institute of Technology,USA,2014
+662,Lille 2 University of Health and Law,France,2014
+663,Keele University,United Kingdom,2014
+664,University of Jyväskylä,Finland,2014
+665,Rochester Institute of Technology,USA,2014
+666,Sapporo Medical University,Japan,2014
+667,Banaras Hindu University,India,2014
+668,King Abdullah University of Science and Technology,Saudi Arabia,2014
+669,Northeast Normal University,China,2014
+670,Portland State University,USA,2014
+671,University of Québec at Montreal,Canada,2014
+672,East China Normal University,China,2014
+673,University of Debrecen,Hungary,2014
+674,Loma Linda University,USA,2014
+675,Old Dominion University,USA,2014
+676,University of Insubria,Italy,2014
+677,"University of Nevada, Las Vegas",USA,2014
+678,Hong Kong Baptist University,Hong Kong,2014
+679,University of Minho,Portugal,2014
+680,University of Messina,Italy,2014
+681,University of Texas at Arlington,USA,2014
+682,"University François Rabelais, Tours",France,2014
+683,"UNESP, São Paulo State University",Brazil,2014
+684,Toho University,Japan,2014
+685,Beijing University of Chemical Technology,China,2014
+686,"Rutgers, The State University of New Jersey - Newark",USA,2014
+687,Johannes Kepler University of Linz,Austria,2014
+688,Warsaw University of Technology,Poland,2014
+689,University of Paris 13,France,2014
+690,University of Toyama,Japan,2014
+691,University of Toledo,USA,2014
+692,University of Vigo,Spain,2014
+693,University of Kent,United Kingdom,2014
+694,Jichi Medical University,Japan,2014
+695,Roma Tre University,Italy,2014
+696,Chung Yuan Christian University,Taiwan,2014
+697,University of Haifa,Israel,2014
+698,Åbo Akademi University,Finland,2014
+699,Swansea University,United Kingdom,2014
+700,China Agricultural University,China,2014
+701,Marche Polytechnic University,Italy,2014
+702,"University of Maine, Orono",USA,2014
+703,Heriot-Watt University,United Kingdom,2014
+704,Marquette University,USA,2014
+705,Loughborough University,United Kingdom,2014
+706,Kaiserslautern University of Technology,Germany,2014
+707,Aston University,United Kingdom,2014
+708,University of Girona,Spain,2014
+709,Hasselt University,Belgium,2014
+710,Nanjing University of Science and Technology,China,2014
+711,"University of Natural Resources and Life Sciences, Vienna",Austria,2014
+712,University of Szeged,Hungary,2014
+713,Soochow University (Suzhou),China,2014
+714,University of the Balearic Islands,Spain,2014
+715,Fuzhou University,China,2014
+716,University of Memphis,USA,2014
+717,San Francisco State University,USA,2014
+718,East Carolina University,USA,2014
+719,University of Augsburg,Germany,2014
+720,University of Missouri–St. Louis,USA,2014
+721,Kyoto Prefectural University of Medicine,Japan,2014
+722,Shanghai University,China,2014
+723,University of South Australia,Australia,2014
+724,Liverpool John Moores University,United Kingdom,2014
+725,Graz University of Technology,Austria,2014
+726,Kitasato University,Japan,2014
+727,University of North Carolina at Charlotte,USA,2014
+728,"G. d'Annunzio University, Chieti-Pescara",Italy,2014
+729,University of Cantabria,Spain,2014
+730,Miguel Hernández University of Elche,Spain,2014
+731,Donghua University,China,2014
+732,Comenius University in Bratislava,Slovak Republic,2014
+733,University of Alabama in Huntsville,USA,2014
+734,Mie University,Japan,2014
+735,University of Stirling,United Kingdom,2014
+736,Hunter College,USA,2014
+737,Swinburne University of Technology,Australia,2014
+738,University of Ulster,United Kingdom,2014
+739,University of Évry Val d'Essonne,France,2014
+740,University of Salerno,Italy,2014
+741,National University of La Plata,Argentina,2014
+742,Masaryk University,Czech Republic,2014
+743,Yamaguchi University,Japan,2014
+744,University of Yamanashi,Japan,2014
+745,Showa University,Japan,2014
+746,North Dakota State University - Main Campus,USA,2014
+747,"University of North Texas, Denton",USA,2014
+748,University of Mississippi Medical Center,USA,2014
+749,University of Tehran,Iran,2014
+750,"Paul Valéry University, Montpellier III",France,2014
+751,Wuhan University of Technology,China,2014
+752,University of Hyogo,Japan,2014
+753,The Catholic University of America,USA,2014
+754,University of Neuchâtel,Switzerland,2014
+755,National Polytechnic Institute,Mexico,2014
+756,Jikei University School of Medicine,Japan,2014
+757,University of Valladolid,Spain,2014
+758,University of Calabria,Italy,2014
+759,University of Lübeck,Germany,2014
+760,Kurume University,Japan,2014
+761,Peking Union Medical College,China,2014
+762,Yamagata University,Japan,2014
+763,University of Córdoba (Spain),Spain,2014
+764,University of Mons,Belgium,2014
+765,Saga University,Japan,2014
+766,Clarkson University,USA,2014
+767,University of South Alabama,USA,2014
+768,Inje University,South Korea,2014
+769,University of Caen Lower Normandy,France,2014
+770,University of Castilla–La Mancha,Spain,2014
+771,Czech Technical University in Prague,Czech Republic,2014
+772,Saitama Medical University,Japan,2014
+773,Istanbul Technical University,Turkey,2014
+774,Kaohsiung Medical University,Taiwan,2014
+775,University of Electro-Communications,Japan,2014
+776,Yeungnam University,South Korea,2014
+777,Jawaharlal Nehru Centre for Advanced Scientific Research,India,2014
+778,"Putra University, Malaysia",Malaysia,2014
+779,Institut national des sciences Appliquées de Lyon,France,2014
+780,University of Perpignan Via Domitia,France,2014
+781,University of Miyazaki,Japan,2014
+782,Second Military Medical University,China,2014
+783,Northern Arizona University,USA,2014
+784,École Polytechnique de Montréal,Canada,2014
+785,University of Salento,Italy,2014
+786,Fukuoka University,Japan,2014
+787,Nagoya Institute of Technology,Japan,2014
+788,Ankara University,Turkey,2014
+789,Blaise Pascal University,France,2014
+790,University of Electronic Science and Technology of China,China,2014
+791,National Sun Yat-sen University,Taiwan,2014
+792,University of Rouen,France,2014
+793,Bowling Green State University,USA,2014
+794,Norwegian University of Life Sciences,Norway,2014
+795,University of Picardie Jules Verne,France,2014
+796,Michigan Technological University,USA,2014
+797,University of Concepción,Chile,2014
+798,China Medical University (Taiwan),Taiwan,2014
+799,University of Hohenheim,Germany,2014
+800,Aberystwyth University,United Kingdom,2014
+801,Wilfrid Laurier University,Canada,2014
+802,Cairo University,Egypt,2014
+803,University of Murcia,Spain,2014
+804,"Palacký University, Olomouc",Czech Republic,2014
+805,Taipei Medical University,Taiwan,2014
+806,University of Bradford,United Kingdom,2014
+807,King Fahd University of Petroleum and Minerals,Saudi Arabia,2014
+808,Ege University,Turkey,2014
+809,University of Belgrade,Serbia,2014
+810,"University of Eastern Piedmont Amedeo Avogadro""""",Italy,2014
+811,Budapest University of Technology and Economics,Hungary,2014
+812,University of Salzburg,Austria,2014
+813,University of Massachusetts Lowell,USA,2014
+814,Jaume I University,Spain,2014
+815,Chongqing University,China,2014
+816,Beijing Institute of Technology,China,2014
+817,Manchester Metropolitan University,United Kingdom,2014
+818,Zhengzhou University,China,2014
+819,Dublin City University,Ireland,2014
+820,"National University of Ireland, Maynooth",Ireland,2014
+821,Kangwon National University,South Korea,2014
+822,"Royal Veterinary College, University of London",United Kingdom,2014
+823,Wright State University - Dayton,USA,2014
+824,Capital Medical University,China,2014
+825,University of Brighton,United Kingdom,2014
+826,Sofia University,Bulgaria,2014
+827,University of Regina,Canada,2014
+828,Magna Græcia University of Catanzaro,Italy,2014
+829,Chungbuk National University,South Korea,2014
+830,Kōchi University,Japan,2014
+831,University of New Brunswick,Canada,2014
+832,Sejong University,South Korea,2014
+833,Sharif University of Technology,Iran,2014
+834,Chung-Ang University,South Korea,2014
+835,"Queens College, City University of New York",USA,2014
+836,Murdoch University,Australia,2014
+837,Chosun University,South Korea,2014
+838,Vilnius University,Lithuania,2014
+839,University of Maribor,Slovenia,2014
+840,Ritsumeikan University,Japan,2014
+841,University of Sassari,Italy,2014
+842,Nanjing Normal University,China,2014
+843,University of Franche-Comté,France,2014
+844,University of Texas at El Paso,USA,2014
+845,Rio de Janeiro State University,Brazil,2014
+846,Jinan University,China,2014
+847,University of Massachusetts Boston,USA,2014
+848,University of Alcalá,Spain,2014
+849,Tehran University of Medical Sciences,Iran,2014
+850,University of the Ryukyus,Japan,2014
+851,University of Angers,France,2014
+852,Fluminense Federal University,Brazil,2014
+853,Florida Institute of Technology,USA,2014
+854,Trent University,Canada,2014
+855,National Chung Cheng University,Taiwan,2014
+856,Bilkent University,Turkey,2014
+857,National Taiwan Normal University,Taiwan,2014
+858,Saitama University,Japan,2014
+859,RMIT University,Australia,2014
+860,Hamamatsu University School of Medicine,Japan,2014
+861,University of Greifswald,Germany,2014
+862,University of Pécs,Hungary,2014
+863,University of Fukui,Japan,2014
+864,Oakland University,USA,2014
+865,Nanjing University of Technology,China,2014
+866,"University of Technology, Sydney",Australia,2014
+867,University of North Carolina at Greensboro,USA,2014
+868,"All India Institute of Medical Sciences, New Delhi",India,2014
+869,Kyoto Institute of Technology,Japan,2014
+870,Ocean University of China,China,2014
+871,Chiang Mai University,Thailand,2014
+872,University of Camerino,Italy,2014
+873,Hirosaki University,Japan,2014
+874,University of North Dakota,USA,2014
+875,University of Extremadura,Spain,2014
+876,Teikyo University,Japan,2014
+877,Jiangnan University,China,2014
+878,Adam Mickiewicz University in Poznań,Poland,2014
+879,University of Waikato,New Zealand,2014
+880,University of Veterinary Medicine Vienna,Austria,2014
+881,University of Cádiz,Spain,2014
+882,Florida Atlantic University,USA,2014
+883,Huazhong Agricultural University,China,2014
+884,Brock University,Canada,2014
+885,University of Lleida,Spain,2014
+886,Shanghai Normal University,China,2014
+887,Jean Monnet University,France,2014
+888,Shimane University,Japan,2014
+889,University of Orléans,France,2014
+890,University of Siegen,Germany,2014
+891,Makerere University,Uganda,2014
+892,"University of Wales, Trinity Saint David",United Kingdom,2014
+893,National Taiwan University of Science and Technology,Taiwan,2014
+894,University of Brasília,Brazil,2014
+895,University of Western Brittany,France,2014
+896,Nanjing Agricultural University,China,2014
+897,National University of Córdoba,Argentina,2014
+898,Federal University of Santa Catarina,Brazil,2014
+899,National Taiwan Ocean University,Taiwan,2014
+900,Gazi University,Turkey,2014
+901,National University of Colombia,Colombia,2014
+902,University of Jaén,Spain,2014
+903,Boğaziçi University,Turkey,2014
+904,Jadavpur University,India,2014
+905,Pukyong National University,South Korea,2014
+906,University of Western Sydney,Australia,2014
+907,Northeastern University (China),China,2014
+908,University of Mannheim,Germany,2014
+909,University of Osnabrück,Germany,2014
+910,Charles Darwin University,Australia,2014
+911,University of Hyderabad,India,2014
+912,Northwest University (China),China,2014
+913,University of Southern Mississippi,USA,2014
+914,University of Wrocław,Poland,2014
+915,Carlos III University of Madrid,Spain,2014
+916,Novosibirsk State University,Russia,2014
+917,Nanjing Medical University,China,2014
+918,Nicolaus Copernicus University in Toruń,Poland,2014
+919,Federal University of Santa Maria,Brazil,2014
+920,Chemnitz University of Technology,Germany,2014
+921,Southwest University,China,2014
+922,Wrocław University of Technology,Poland,2014
+923,"University of California, Merced",USA,2014
+924,United Arab Emirates University,United Arab Emirates,2014
+925,Federal University of São Carlos,Brazil,2014
+926,University of Thessaly,Greece,2014
+927,University of Basilicata,Italy,2014
+928,Feng Chia University,Taiwan,2014
+929,Federal University of Paraná,Brazil,2014
+930,University of Almería,Spain,2014
+931,Hallym University,South Korea,2014
+932,Fourth Military Medical University,China,2014
+933,University of the Republic (Uruguay),Uruguay,2014
+934,Dokuz Eylül University,Turkey,2014
+935,Nanjing University of Aeronautics and Astronautics,China,2014
+936,Public University of Navarre,Spain,2014
+937,University of A Coruña,Spain,2014
+938,Isfahan University of Technology,Iran,2014
+939,University of New England (Australia),Australia,2014
+940,Federal University of Pernambuco,Brazil,2014
+941,Jiangsu University,China,2014
+942,Third Military Medical University,China,2014
+943,South China Normal University,China,2014
+944,University of Limerick,Ireland,2014
+945,Xiangtan University,China,2014
+946,Yangzhou University,China,2014
+947,Northwestern Polytechnical University,China,2014
+948,University of Reims Champagne-Ardenne,France,2014
+949,Ibaraki University,Japan,2014
+950,Chung Shan Medical University,Taiwan,2014
+951,Alexandria University,Egypt,2014
+952,Yuan Ze University,Taiwan,2014
+953,University of Cyprus,Cyprus,2014
+954,University of Silesia,Poland,2014
+955,Southern Medical University,China,2014
+956,Shiraz University,Iran,2014
+957,University of Bucharest,Romania,2014
+958,Mansoura University,Egypt,2014
+959,Amirkabir University of Technology,Iran,2014
+960,Beijing Jiaotong University,China,2014
+961,University of Valenciennes and Hainaut-Cambresis,France,2014
+962,University of the Algarve,Portugal,2014
+963,"University of Chemistry and Technology, Prague",Czech Republic,2014
+964,Federal University of Ceará,Brazil,2014
+965,Ain Shams University,Egypt,2014
+966,University of Oldenburg,Germany,2014
+967,Federal University of Bahia,Brazil,2014
+968,Hunan Normal University,China,2014
+969,Western Michigan University,USA,2014
+970,University of Seoul,South Korea,2014
+971,Federico Santa María Technical University,Chile,2014
+972,Ryerson University,Canada,2014
+973,South China Agricultural University,China,2014
+974,Fu Jen Catholic University,Taiwan,2014
+975,China Pharmaceutical University,China,2014
+976,Tarbiat Modares University,Iran,2014
+977,University of Puerto Rico at Mayagüez,Puerto Rico,2014
+978,National University of Rosario,Argentina,2014
+979,University of Pau and Pays de l'Adour,France,2014
+980,Xidian University,China,2014
+981,Zhejiang University of Technology,China,2014
+982,China Medical University (PRC),China,2014
+983,Federal University of ABC,Brazil,2014
+984,King Juan Carlos University,Spain,2014
+985,Beijing University of Technology,China,2014
+986,Guangxi University,China,2014
+987,Northwest A&F University,China,2014
+988,Shanxi University,China,2014
+989,Tamkang University,Taiwan,2014
+990,Harbin Medical University,China,2014
+991,Zhejiang Normal University,China,2014
+992,King Abdulaziz University,Saudi Arabia,2014
+993,Iran University of Science and Technology,Iran,2014
+994,I-Shou University,Taiwan,2014
+995,University of Maine (Le Mans),France,2014
+996,National Dong Hwa University,Taiwan,2014
+997,National Taipei University of Technology,Taiwan,2014
+998,Shaanxi Normal University,China,2014
+999,National University of Defense Technology,China,2014
+1000,Yanbian University,China,2014
+1,Harvard University,USA,2015
+2,Stanford University,USA,2015
+3,Massachusetts Institute of Technology,USA,2015
+4,University of Cambridge,United Kingdom,2015
+5,University of Oxford,United Kingdom,2015
+6,Columbia University,USA,2015
+7,"University of California, Berkeley",USA,2015
+8,University of Chicago,USA,2015
+9,Princeton University,USA,2015
+10,Cornell University,USA,2015
+11,Yale University,USA,2015
+12,California Institute of Technology,USA,2015
+13,University of Tokyo,Japan,2015
+14,University of Pennsylvania,USA,2015
+15,"University of California, Los Angeles",USA,2015
+16,Johns Hopkins University,USA,2015
+17,Kyoto University,Japan,2015
+18,New York University,USA,2015
+19,"University of Michigan, Ann Arbor",USA,2015
+20,Swiss Federal Institute of Technology in Zurich,Switzerland,2015
+21,"University of California, San Diego",USA,2015
+22,Northwestern University,USA,2015
+23,Hebrew University of Jerusalem,Israel,2015
+24,Seoul National University,South Korea,2015
+25,University of Wisconsin–Madison,USA,2015
+26,"University of California, San Francisco",USA,2015
+27,University College London,United Kingdom,2015
+28,Duke University,USA,2015
+29,Rockefeller University,USA,2015
+30,University of Texas at Austin,USA,2015
+31,University of Washington - Seattle,USA,2015
+32,University of Toronto,Canada,2015
+33,University of Illinois at Urbana–Champaign,USA,2015
+34,Keio University,Japan,2015
+35,Imperial College London,United Kingdom,2015
+36,École Polytechnique,France,2015
+37,École normale supérieure - Paris,France,2015
+38,Waseda University,Japan,2015
+39,Weizmann Institute of Science,Israel,2015
+40,University of North Carolina at Chapel Hill,USA,2015
+41,University of Virginia,USA,2015
+42,McGill University,Canada,2015
+43,"Purdue University, West Lafayette",USA,2015
+44,Dartmouth College,USA,2015
+45,Osaka University,Japan,2015
+46,University of Pittsburgh - Pittsburgh Campus,USA,2015
+47,"Pennsylvania State University, University Park",USA,2015
+48,"University of Minnesota, Twin Cities",USA,2015
+49,"Ohio State University, Columbus",USA,2015
+50,Rutgers University-New Brunswick,USA,2015
+51,University of Southern California,USA,2015
+52,Washington University in St. Louis,USA,2015
+53,"University of California, Davis",USA,2015
+54,University of Colorado Boulder,USA,2015
+55,University of Edinburgh,United Kingdom,2015
+56,Peking University,China,2015
+57,National Taiwan University,Taiwan,2015
+58,University of Paris-Sud,France,2015
+59,Lomonosov Moscow State University,Russia,2015
+60,University of Florida,USA,2015
+61,Carnegie Mellon University,USA,2015
+62,University of British Columbia,Canada,2015
+63,Pierre-and-Marie-Curie University,France,2015
+64,"University of California, Santa Barbara",USA,2015
+65,National University of Singapore,Singapore,2015
+66,Boston University,USA,2015
+67,University of Manchester,United Kingdom,2015
+68,University of Arizona,USA,2015
+69,Vanderbilt University,USA,2015
+70,University of Utah,USA,2015
+71,Karolinska Institute,Sweden,2015
+72,"University of Maryland, College Park",USA,2015
+73,Tohoku University,Japan,2015
+74,University of Copenhagen,Denmark,2015
+75,University of Texas Southwestern Medical Center,USA,2015
+76,Ruprecht Karl University of Heidelberg,Germany,2015
+77,University of Notre Dame,USA,2015
+78,Tsinghua University,China,2015
+79,Ludwig Maximilian University of Munich,Germany,2015
+80,Georgia Institute of Technology,USA,2015
+81,University of Rochester,USA,2015
+82,Katholieke Universiteit Leuven,Belgium,2015
+83,Brown University,USA,2015
+84,Emory University,USA,2015
+85,Erasmus University Rotterdam,Netherlands,2015
+86,Tel Aviv University,Israel,2015
+87,Utrecht University,Netherlands,2015
+88,University of Sydney,Australia,2015
+89,"University of California, Irvine",USA,2015
+90,University of Texas MD Anderson Cancer Center,USA,2015
+91,Swiss Federal Institute of Technology in Lausanne,Switzerland,2015
+92,University of Geneva,Switzerland,2015
+93,University of Melbourne,Australia,2015
+94,King's College London,United Kingdom,2015
+95,Tufts University,USA,2015
+96,University of Zurich,Switzerland,2015
+97,Arizona State University,USA,2015
+98,Yonsei University,South Korea,2015
+99,University of Oslo,Norway,2015
+100,Kyushu University,Japan,2015
+101,Technical University of Munich,Germany,2015
+102,"Texas A&M University, College Station",USA,2015
+103,University of Queensland,Australia,2015
+104,Mines ParisTech,France,2015
+105,Case Western Reserve University,USA,2015
+106,Indiana University - Bloomington,USA,2015
+107,University of Alberta,Canada,2015
+108,Leiden University,Netherlands,2015
+109,Tokyo Institute of Technology,Japan,2015
+110,University of Groningen,Netherlands,2015
+111,University of Helsinki,Finland,2015
+112,Sapienza University of Rome,Italy,2015
+113,Georgetown University,USA,2015
+114,University of Amsterdam,Netherlands,2015
+115,Korea University,South Korea,2015
+116,University of Barcelona,Spain,2015
+117,Lund University,Sweden,2015
+118,Michigan State University,USA,2015
+119,Ghent University,Belgium,2015
+120,Rice University,USA,2015
+121,Baylor College of Medicine,USA,2015
+122,Aarhus University,Denmark,2015
+123,University of Bristol,United Kingdom,2015
+124,Uppsala University,Sweden,2015
+125,Nagoya University,Japan,2015
+126,Royal Institute of Technology,Sweden,2015
+127,University of Colorado Denver,USA,2015
+128,University of Glasgow,United Kingdom,2015
+129,VU University Amsterdam,Netherlands,2015
+130,University of New South Wales,Australia,2015
+131,Paris Diderot University - Paris 7,France,2015
+132,University of São Paulo,Brazil,2015
+133,Western University (The University of Western Ontario),Canada,2015
+134,Radboud University Nijmegen,Netherlands,2015
+135,Nanyang Technological University,Singapore,2015
+136,Technion – Israel Institute of Technology,Israel,2015
+137,University of Miami,USA,2015
+138,Stony Brook University,USA,2015
+139,University of Texas at Dallas,USA,2015
+140,University of Nottingham,United Kingdom,2015
+141,University of Iowa,USA,2015
+142,Southern Methodist University,USA,2015
+143,Icahn School of Medicine at Mount Sinai,USA,2015
+144,Korea Advanced Institute of Science and Technology (KAIST),South Korea,2015
+145,Monash University,Australia,2015
+146,University of Alabama at Birmingham,USA,2015
+147,Free University of Berlin,Germany,2015
+148,University of Southampton,United Kingdom,2015
+149,University of the Witwatersrand,South Africa,2015
+150,McMaster University,Canada,2015
+151,University of Montreal,Canada,2015
+152,University of Birmingham,United Kingdom,2015
+153,Humboldt University of Berlin,Germany,2015
+154,"University of California, Santa Cruz",USA,2015
+155,Albert Ludwig University of Freiburg,Germany,2015
+156,University of Tübingen,Germany,2015
+157,University of Cincinnati,USA,2015
+158,University of Bonn,Germany,2015
+159,Wake Forest University,USA,2015
+160,University of Basel,Switzerland,2015
+161,University of Leeds,United Kingdom,2015
+162,University of Hamburg,Germany,2015
+163,Université libre de Bruxelles,Belgium,2015
+164,Indiana University-Purdue University Indianapolis,USA,2015
+165,Pohang University of Science and Technology,South Korea,2015
+166,Oregon Health & Science University,USA,2015
+167,University of Calgary,Canada,2015
+168,Stockholm University,Sweden,2015
+169,University of Padua,Italy,2015
+170,University of Hong Kong,Hong Kong,2015
+171,Yeshiva University,USA,2015
+172,University of Milan,Italy,2015
+173,University of Sheffield,United Kingdom,2015
+174,Technical University of Denmark,Denmark,2015
+175,"University of Maryland, Baltimore",USA,2015
+176,Goethe University Frankfurt,Germany,2015
+177,University of Göttingen,Germany,2015
+178,Hokkaido University,Japan,2015
+179,Australian National University,Australia,2015
+180,Shanghai Jiao Tong University,China,2015
+181,University of New Mexico,USA,2015
+182,University of Strasbourg,France,2015
+183,University of Massachusetts Medical School,USA,2015
+184,University of Houston,USA,2015
+185,"Trinity College, Dublin",Ireland,2015
+186,University of Lausanne,Switzerland,2015
+187,Iowa State University,USA,2015
+188,Joseph Fourier University,France,2015
+189,Wayne State University,USA,2015
+190,University of South Florida - Tampa,USA,2015
+191,Zhejiang University,China,2015
+192,Hanyang University,South Korea,2015
+193,University of Ottawa,Canada,2015
+194,University of Missouri–Columbia,USA,2015
+195,Fudan University,China,2015
+196,University of Kansas,USA,2015
+197,University of Cologne,Germany,2015
+198,University of Georgia,USA,2015
+199,University of Liverpool,United Kingdom,2015
+200,University of Bern,Switzerland,2015
+201,Cardiff University,United Kingdom,2015
+202,George Washington University,USA,2015
+203,University of Illinois at Chicago,USA,2015
+204,University of Erlangen-Nuremberg,Germany,2015
+205,University of Münster,Germany,2015
+206,Aix-Marseille University,France,2015
+207,Claude Bernard University Lyon 1,France,2015
+208,University of Bologna,Italy,2015
+209,Queen Mary University of London,United Kingdom,2015
+210,Dresden University of Technology,Germany,2015
+211,Sungkyunkwan University,South Korea,2015
+212,Newcastle University,United Kingdom,2015
+213,Karlsruhe Institute of Technology,Germany,2015
+214,"University of California, Riverside",USA,2015
+215,University of Kiel,Germany,2015
+216,University of Western Australia,Australia,2015
+217,Paris Descartes University,France,2015
+218,University of Connecticut,USA,2015
+219,University of Massachusetts Amherst,USA,2015
+220,Chinese University of Hong Kong,Hong Kong,2015
+221,University of Turin,Italy,2015
+222,University of Manitoba,Canada,2015
+223,University of Vienna,Austria,2015
+224,University of Montpellier,France,2015
+225,Maastricht University,Netherlands,2015
+226,National Cheng Kung University,Taiwan,2015
+227,"University of Tennessee, Knoxville",USA,2015
+228,Complutense University of Madrid,Spain,2015
+229,Laval University,Canada,2015
+230,RWTH Aachen University,Germany,2015
+231,Université catholique de Louvain,Belgium,2015
+232,North Carolina State University,USA,2015
+233,Johannes Gutenberg University of Mainz,Germany,2015
+234,University of Texas Health Science Center at San Antonio,USA,2015
+235,Julius-Maximilian's University of Würzburg,Germany,2015
+236,Paul Sabatier University - Toulouse III,France,2015
+237,University of Gothenburg,Sweden,2015
+238,University College Dublin,Ireland,2015
+239,University of Science and Technology of China,China,2015
+240,University of Leicester,United Kingdom,2015
+241,Autonomous University of Barcelona,Spain,2015
+242,University of Dundee,United Kingdom,2015
+243,Norwegian University of Science and Technology,Norway,2015
+244,Nanjing University,China,2015
+245,Okayama University,Japan,2015
+246,London School of Hygiene & Tropical Medicine,United Kingdom,2015
+247,University of Florence,Italy,2015
+248,University of Cape Town,South Africa,2015
+249,University of Texas Health Science Center at Houston,USA,2015
+250,Moscow Institute of Physics and Technology,Russia,2015
+251,University of Düsseldorf,Germany,2015
+252,Florida State University,USA,2015
+253,University of Sussex,United Kingdom,2015
+254,Thomas Jefferson University,USA,2015
+255,Delft University of Technology,Netherlands,2015
+256,Virginia Polytechnic Institute and State University,USA,2015
+257,University of Lisbon,Portugal,2015
+258,Drexel University,USA,2015
+259,Virginia Commonwealth University,USA,2015
+260,Oregon State University,USA,2015
+261,Durham University,United Kingdom,2015
+262,University of Tsukuba,Japan,2015
+263,University of Reading,United Kingdom,2015
+264,Lehigh University,USA,2015
+265,Medical University of Vienna,Austria,2015
+266,University of Auckland,New Zealand,2015
+267,University of Kentucky,USA,2015
+268,University of Naples Federico II,Italy,2015
+269,University of Waterloo,Canada,2015
+270,Charles University in Prague,Czech Republic,2015
+271,Colorado State University - Fort Collins,USA,2015
+272,Tulane University,USA,2015
+273,"University at Buffalo, The State University of New York",USA,2015
+274,Brandeis University,USA,2015
+275,Northeastern University,USA,2015
+276,Wageningen University and Research Centre,Netherlands,2015
+277,Sun Yat-sen University,China,2015
+278,University of Ulm,Germany,2015
+279,London School of Economics,United Kingdom,2015
+280,Vrije Universiteit Brussel,Belgium,2015
+281,University of Delaware,USA,2015
+282,Rensselaer Polytechnic Institute,USA,2015
+283,University of Bergen,Norway,2015
+284,Queen's University,Canada,2015
+285,University of Aberdeen,United Kingdom,2015
+286,Dalhousie University,Canada,2015
+287,Umeå University,Sweden,2015
+288,University of Duisburg-Essen,Germany,2015
+289,City College of New York,USA,2015
+290,Hiroshima University,Japan,2015
+291,University of Texas at San Antonio,USA,2015
+292,Hannover Medical School,Germany,2015
+293,University of Warwick,United Kingdom,2015
+294,University of Valencia,Spain,2015
+295,University of Pisa,Italy,2015
+296,Ruhr University Bochum,Germany,2015
+297,Medical College of Wisconsin,USA,2015
+298,University of Louisville,USA,2015
+299,University of Bordeaux,France,2015
+300,University of South Carolina - Columbia,USA,2015
+301,National and Kapodistrian University of Athens,Greece,2015
+302,Leipzig University,Germany,2015
+303,Medical University of South Carolina,USA,2015
+304,Autonomous University of Madrid,Spain,2015
+305,Dalian University of Technology,China,2015
+306,Stellenbosch University,South Africa,2015
+307,Kyungpook National University,South Korea,2015
+308,University of Porto,Portugal,2015
+309,University of St Andrews,United Kingdom,2015
+310,Gwangju Institute of Science and Technology,South Korea,2015
+311,Chulalongkorn University,Thailand,2015
+312,University of Antwerp,Belgium,2015
+313,Xiamen University,China,2015
+314,University of Nebraska–Lincoln,USA,2015
+315,Nankai University,China,2015
+316,University of Stuttgart,Germany,2015
+317,University of Rome Tor Vergata,Italy,2015
+318,University of Regensburg,Germany,2015
+319,Hong Kong University of Science and Technology,Hong Kong,2015
+320,Kobe University,Japan,2015
+321,University of Liège,Belgium,2015
+322,Federal University of Rio de Janeiro,Brazil,2015
+323,Rush University,USA,2015
+324,University of Vermont,USA,2015
+325,University of York,United Kingdom,2015
+326,Boston College,USA,2015
+327,University of Pavia,Italy,2015
+328,University of Jena,Germany,2015
+329,Vita-Salute San Raffaele University,Italy,2015
+330,University of Genoa,Italy,2015
+331,Tianjin University,China,2015
+332,Louisiana State University - Baton Rouge,USA,2015
+333,University of Exeter,United Kingdom,2015
+334,National Autonomous University of Mexico,Mexico,2015
+335,University of Adelaide,Australia,2015
+336,University of East Anglia,United Kingdom,2015
+337,York University,Canada,2015
+338,University of Navarra,Spain,2015
+339,University of Oregon,USA,2015
+340,"St George's, University of London",United Kingdom,2015
+341,Indian Institute of Technology Delhi,India,2015
+342,University of Trieste,Italy,2015
+343,Queen's University Belfast,United Kingdom,2015
+344,University of Perugia,Italy,2015
+345,Technical University of Berlin,Germany,2015
+346,University of Marburg,Germany,2015
+347,University of Innsbruck,Austria,2015
+348,Eindhoven University of Technology,Netherlands,2015
+349,Ben-Gurion University of the Negev,Israel,2015
+350,University of Oklahoma - Norman Campus,USA,2015
+351,Wesleyan University,USA,2015
+352,University of Victoria,Canada,2015
+353,Kansas State University,USA,2015
+354,Hong Kong Polytechnic University,Hong Kong,2015
+355,Linköping University,Sweden,2015
+356,University of Southern Denmark,Denmark,2015
+357,University of Otago,New Zealand,2015
+358,Justus Liebig University Giessen,Germany,2015
+359,University of New Hampshire,USA,2015
+360,College of William and Mary,USA,2015
+361,San Diego State University,USA,2015
+362,Simon Fraser University,Canada,2015
+363,University of Santiago de Compostela,Spain,2015
+364,Saint Louis University,USA,2015
+365,Colorado School of Mines,USA,2015
+366,University of Eastern Finland,Finland,2015
+367,University of Buenos Aires,Argentina,2015
+368,University of Guelph,Canada,2015
+369,University of Ferrara,Italy,2015
+370,Polytechnic University of Catalonia,Spain,2015
+371,Versailles Saint-Quentin-en-Yvelines University,France,2015
+372,Saarland University,Germany,2015
+373,City University of Hong Kong,Hong Kong,2015
+374,Darmstadt University of Technology,Germany,2015
+375,Pompeu Fabra University,Spain,2015
+376,Pontifical Catholic University of Chile,Chile,2015
+377,University of Bari Aldo Moro,Italy,2015
+378,University of Texas Medical Branch at Galveston,USA,2015
+379,University of Delhi,India,2015
+380,"Washington State University, Pullman",USA,2015
+381,Temple University,USA,2015
+382,University of Milan - Bicocca,Italy,2015
+383,University of Turku,Finland,2015
+384,Chonnam National University,South Korea,2015
+385,University of Lorraine,France,2015
+386,National Chiao Tung University,Taiwan,2015
+387,Catholic University of the Sacred Heart,Italy,2015
+388,"University at Albany, SUNY",USA,2015
+389,Xi'an Jiaotong University,China,2015
+390,Ewha Womans University,South Korea,2015
+391,Jilin University,China,2015
+392,Tokyo Medical and Dental University,Japan,2015
+393,Scuola Normale Superiore di Pisa,Italy,2015
+394,University of Central Florida,USA,2015
+395,Innsbruck Medical University,Austria,2015
+396,Beijing Normal University,China,2015
+397,Polytechnic University of Milan,Italy,2015
+398,University of Seville,Spain,2015
+399,University of Nebraska Medical Center,USA,2015
+400,Huazhong University of Science and Technology,China,2015
+401,Kyung Hee University,South Korea,2015
+402,Chalmers University of Technology,Sweden,2015
+403,Brigham Young University,USA,2015
+404,University of Campinas,Brazil,2015
+405,University of Bath,United Kingdom,2015
+406,Saint Petersburg State University,Russia,2015
+407,National Tsing Hua University,Taiwan,2015
+408,University of Twente,Netherlands,2015
+409,University of Alabama - Tuscaloosa,USA,2015
+410,Harbin Institute of Technology,China,2015
+411,University of Verona,Italy,2015
+412,Oklahoma State University–Stillwater,USA,2015
+413,Shandong University,China,2015
+414,George Mason University,USA,2015
+415,Wuhan University,China,2015
+416,Swedish University of Agricultural Sciences,Sweden,2015
+417,Concordia University,Canada,2015
+418,Chiba University,Japan,2015
+419,Kumamoto University,Japan,2015
+420,Tongji University,China,2015
+421,Aalto University,Finland,2015
+422,Chonbuk National University,South Korea,2015
+423,Peking Union Medical College,China,2015
+424,Georgia Regents University,USA,2015
+425,University of Chile,Chile,2015
+426,Lancaster University,United Kingdom,2015
+427,Vienna University of Technology,Austria,2015
+428,University of Denver,USA,2015
+429,University of Arkansas for Medical Sciences,USA,2015
+430,Grenoble Institute of Technology,France,2015
+431,University of Granada,Spain,2015
+432,University of Modena and Reggio Emilia,Italy,2015
+433,Ajou University,South Korea,2015
+434,Gyeongsang National University,South Korea,2015
+435,Technical University of Madrid,Spain,2015
+436,University College Cork,Ireland,2015
+437,Loyola University Chicago,USA,2015
+438,Central South University,China,2015
+439,South China University of Technology,China,2015
+440,Polytechnic University of Valencia,Spain,2015
+441,West Virginia University,USA,2015
+442,University of Tampere,Finland,2015
+443,Southeast University,China,2015
+444,Miami University,USA,2015
+445,University of Dayton,USA,2015
+446,University of Siena,Italy,2015
+447,University of Oulu,Finland,2015
+448,Indian Institute of Science,India,2015
+449,Macquarie University,Australia,2015
+450,University of Rostock,Germany,2015
+451,Jagiellonian University,Poland,2015
+452,Pusan National University,South Korea,2015
+453,University of Strathclyde,United Kingdom,2015
+454,"University of Nevada, Reno",USA,2015
+455,University of Saskatchewan,Canada,2015
+456,University of Parma,Italy,2015
+457,Kanazawa University,Japan,2015
+458,Eötvös Loránd University,Hungary,2015
+459,Aristotle University of Thessaloniki,Greece,2015
+460,Ohio University,USA,2015
+461,University of Iceland,Iceland,2015
+462,University of Warsaw,Poland,2015
+463,Syracuse University,USA,2015
+464,Bielefeld University,Germany,2015
+465,Juntendo University,Japan,2015
+466,University of Wyoming,USA,2015
+467,University of Wollongong,Australia,2015
+468,Niigata University,Japan,2015
+469,Texas Tech University (TTU),USA,2015
+470,Middle East Technical University,Turkey,2015
+471,École normale supérieure de Lyon,France,2015
+472,Brunel University,United Kingdom,2015
+473,Nihon University,Japan,2015
+474,Osaka City University,Japan,2015
+475,University of Rennes 1,France,2015
+476,University of Oklahoma Health Sciences Center,USA,2015
+477,East China University of Science and Technology,China,2015
+478,University of KwaZulu-Natal,South Africa,2015
+479,Sichuan University,China,2015
+480,Illinois Institute of Technology,USA,2015
+481,Tokyo University of Science,Japan,2015
+482,"University of Science, Malaysia",Malaysia,2015
+483,Clemson University,USA,2015
+484,University of Zaragoza,Spain,2015
+485,University of the Basque Country,Spain,2015
+486,Nagasaki University,Japan,2015
+487,Technical University of Dortmund,Germany,2015
+488,University of Hawaii at Manoa,USA,2015
+489,University of Nebraska Omaha,USA,2015
+490,University of Konstanz,Germany,2015
+491,Panjab University,India,2015
+492,University of Hanover,Germany,2015
+493,"University of Maryland, Baltimore County",USA,2015
+494,University of Newcastle,Australia,2015
+495,University of Ulsan,South Korea,2015
+496,Renmin University of China,China,2015
+497,Martin Luther University of Halle-Wittenberg,Germany,2015
+498,University of Malaya,Malaysia,2015
+499,University of Savoy,France,2015
+500,University of Udine,Italy,2015
+501,Tokyo Metropolitan University,Japan,2015
+502,University of Sherbrooke,Canada,2015
+503,University of Brescia,Italy,2015
+504,University of Ljubljana,Slovenia,2015
+505,University of Nice Sophia Antipolis,France,2015
+506,University of Hull,United Kingdom,2015
+507,University of Coimbra,Portugal,2015
+508,Creighton University,USA,2015
+509,Georgia State University,USA,2015
+510,University of Wisconsin–Milwaukee,USA,2015
+511,Catholic University of Korea,South Korea,2015
+512,University of Tokushima,Japan,2015
+513,Yokohama City University,Japan,2015
+514,Lanzhou University,China,2015
+515,University of Crete,Greece,2015
+516,SUNY Downstate Medical Center,USA,2015
+517,University of Potsdam,Germany,2015
+518,Yokohama National University,Japan,2015
+519,New Mexico State University,USA,2015
+520,University of Bayreuth,Germany,2015
+521,Bar-Ilan University,Israel,2015
+522,University of Mississippi - Oxford Campus,USA,2015
+523,University of Tasmania,Australia,2015
+524,Graduate University for Advanced Studies,Japan,2015
+525,University of Surrey,United Kingdom,2015
+526,Federal University of Minas Gerais,Brazil,2015
+527,University of Tromsø - The Arctic University of Norway,Norway,2015
+528,University of Palermo,Italy,2015
+529,Shinshu University,Japan,2015
+530,University of Science and Technology Beijing,China,2015
+531,University of Catania,Italy,2015
+532,Mahidol University,Thailand,2015
+533,University of Canterbury,New Zealand,2015
+534,Indian Institute of Technology Madras,India,2015
+535,University of Bremen,Germany,2015
+536,Otto-von-Guericke University Magdeburg,Germany,2015
+537,University of Tartu,Estonia,2015
+538,University of Windsor,Canada,2015
+539,University of Nantes,France,2015
+540,"Royal Holloway, University of London",United Kingdom,2015
+541,James Cook University,Australia,2015
+542,National Yang-Ming University,Taiwan,2015
+543,University of Akron,USA,2015
+544,National Chung Hsing University,Taiwan,2015
+545,City University London,United Kingdom,2015
+546,New York Medical College,USA,2015
+547,Nara Institute of Science and Technology,Japan,2015
+548,École Centrale Paris,France,2015
+549,Auburn University,USA,2015
+550,University of Arkansas - Fayetteville,USA,2015
+551,University of Zagreb,Croatia,2015
+552,University of Lübeck,Germany,2015
+553,Hunan University,China,2015
+554,University of Missouri–Kansas City,USA,2015
+555,Tokyo Women's Medical University,Japan,2015
+556,Montana State University - Bozeman,USA,2015
+557,University of Aveiro,Portugal,2015
+558,"National University of Ireland, Galway",Ireland,2015
+559,University of Oviedo,Spain,2015
+560,Dongguk University,South Korea,2015
+561,University of Trento,Italy,2015
+562,University Lille 1: Sciences and Technologies,France,2015
+563,Chang Gung University,Taiwan,2015
+564,National Central University,Taiwan,2015
+565,Aalborg University,Denmark,2015
+566,Utah State University,USA,2015
+567,Baylor University,USA,2015
+568,Bangor University,United Kingdom,2015
+569,King Saud University,Saudi Arabia,2015
+570,University of Cagliari,Italy,2015
+571,Kent State University,USA,2015
+572,Central China Normal University,China,2015
+573,University of Fribourg,Switzerland,2015
+574,Medical University of Graz,Austria,2015
+575,Second University of Naples,Italy,2015
+576,International School for Advanced Studies,Italy,2015
+577,Tampere University of Technology,Finland,2015
+578,Inha University,South Korea,2015
+579,Deakin University,Australia,2015
+580,National Polytechnic Institute of Toulouse,France,2015
+581,Sogang University,South Korea,2015
+582,University of Ioannina,Greece,2015
+583,Federal University of Rio Grande do Sul,Brazil,2015
+584,University of Graz,Austria,2015
+585,University of Montana - Missoula,USA,2015
+586,East China Normal University,China,2015
+587,Plymouth University,United Kingdom,2015
+588,Victoria University of Wellington,New Zealand,2015
+589,Federal University of São Paulo,Brazil,2015
+590,Southern Illinois University Carbondale,USA,2015
+591,University of Alaska Fairbanks,USA,2015
+592,University of Toledo,USA,2015
+593,Carleton University,Canada,2015
+594,Cranfield University,United Kingdom,2015
+595,Curtin University,Australia,2015
+596,Indian Institute of Technology Bombay,India,2015
+597,University of Portsmouth,United Kingdom,2015
+598,Osaka Prefecture University,Japan,2015
+599,Nagoya City University,Japan,2015
+600,LSU Health Sciences Center New Orleans,USA,2015
+601,Tata Institute of Fundamental Research,India,2015
+602,Konkuk University,South Korea,2015
+603,University of La Laguna,Spain,2015
+604,University of Hertfordshire,United Kingdom,2015
+605,Florida International University,USA,2015
+606,University of Rhode Island,USA,2015
+607,Mississippi State University,USA,2015
+608,Gunma University,Japan,2015
+609,University of New Orleans,USA,2015
+610,"Putra University, Malaysia",Malaysia,2015
+611,Memorial University of Newfoundland,Canada,2015
+612,Universidade Nova de Lisboa,Portugal,2015
+613,Griffith University,Australia,2015
+614,Indian Institute of Technology Kharagpur,India,2015
+615,Soochow University (Suzhou),China,2015
+616,Texas A&M Health Science Center,USA,2015
+617,Semmelweis University,Hungary,2015
+618,Lille 2 University of Health and Law,France,2015
+619,Kagoshima University,Japan,2015
+620,Flinders University,Australia,2015
+621,Queensland University of Technology,Australia,2015
+622,Tokai University,Japan,2015
+623,Istanbul University,Turkey,2015
+624,Tokyo University of Agriculture and Technology,Japan,2015
+625,Louisiana Tech University,USA,2015
+626,University of Texas at Arlington,USA,2015
+627,China Agricultural University,China,2015
+628,Chungnam National University,South Korea,2015
+629,University of Minho,Portugal,2015
+630,"University of Eastern Piedmont Amedeo Avogadro""""",Italy,2015
+631,Open University (UK),United Kingdom,2015
+632,University of Essex,United Kingdom,2015
+633,Paris-Est Créteil Val-de-Marne University,France,2015
+634,Hacettepe University,Turkey,2015
+635,State University of New York Upstate Medical University,USA,2015
+636,Braunschweig University of Technology,Germany,2015
+637,University of Salamanca,Spain,2015
+638,Indian Institute of Technology Roorkee,India,2015
+639,Örebro University,Sweden,2015
+640,Northeast Normal University,China,2015
+641,University of Patras,Greece,2015
+642,Beijing University of Chemical Technology,China,2015
+643,Northern Illinois University,USA,2015
+644,Rovira i Virgili University,Spain,2015
+645,La Trobe University,Australia,2015
+646,Warsaw University of Technology,Poland,2015
+647,Binghamton University,USA,2015
+648,Shizuoka University,Japan,2015
+649,Hong Kong Baptist University,Hong Kong,2015
+650,Albany Medical College,USA,2015
+651,Ehime University,Japan,2015
+652,University of Los Andes (Colombia),Colombia,2015
+653,Polytechnic University of Turin,Italy,2015
+654,University of Burgundy,France,2015
+655,University of Idaho,USA,2015
+656,Old Dominion University,USA,2015
+657,Yamaguchi University,Japan,2015
+658,Massey University,New Zealand,2015
+659,Donghua University,China,2015
+660,University of the Balearic Islands,Spain,2015
+661,Portland State University,USA,2015
+662,Marche Polytechnic University,Italy,2015
+663,University of Québec at Montreal,Canada,2015
+664,"UNESP, São Paulo State University",Brazil,2015
+665,Loma Linda University,USA,2015
+666,University of Toyama,Japan,2015
+667,University of Debrecen,Hungary,2015
+668,"University of Maine, Orono",USA,2015
+669,Graz University of Technology,Austria,2015
+670,Gifu University,Japan,2015
+671,University of Jyväskylä,Finland,2015
+672,University of Paris 13,France,2015
+673,University of Girona,Spain,2015
+674,Keele University,United Kingdom,2015
+675,University of Poitiers,France,2015
+676,University of Insubria,Italy,2015
+677,Wuhan University of Technology,China,2015
+678,University of Pretoria,South Africa,2015
+679,Banaras Hindu University,India,2015
+680,University of L'Aquila,Italy,2015
+681,University of Alicante,Spain,2015
+682,American University of Beirut,Lebanon,2015
+683,University of Ulster,United Kingdom,2015
+684,Shanghai University,China,2015
+685,Comenius University in Bratislava,Slovak Republic,2015
+686,University of Vigo,Spain,2015
+687,"University of Nevada, Las Vegas",USA,2015
+688,Swinburne University of Technology,Australia,2015
+689,Tilburg University,Netherlands,2015
+690,University of Messina,Italy,2015
+691,Kaiserslautern University of Technology,Germany,2015
+692,University of Kent,United Kingdom,2015
+693,University of Málaga,Spain,2015
+694,Loughborough University,United Kingdom,2015
+695,National Technical University of Athens,Greece,2015
+696,Liverpool John Moores University,United Kingdom,2015
+697,Sharif University of Technology,Iran,2015
+698,"Birkbeck, University of London",United Kingdom,2015
+699,"University François Rabelais, Tours",France,2015
+700,University of Haifa,Israel,2015
+701,Roma Tre University,Italy,2015
+702,Masaryk University,Czech Republic,2015
+703,University of Salerno,Italy,2015
+704,King Abdullah University of Science and Technology,Saudi Arabia,2015
+705,Beihang University,China,2015
+706,Fuzhou University,China,2015
+707,Heriot-Watt University,United Kingdom,2015
+708,China Medical University (Taiwan),Taiwan,2015
+709,University of Cantabria,Spain,2015
+710,Rochester Institute of Technology,USA,2015
+711,Royal College of Surgeons in Ireland,Ireland,2015
+712,San Francisco State University,USA,2015
+713,Sapporo Medical University,Japan,2015
+714,Indian Institute of Technology Kanpur,India,2015
+715,Johannes Kepler University of Linz,Austria,2015
+716,Czech Technical University in Prague,Czech Republic,2015
+717,Marquette University,USA,2015
+718,Missouri University of Science and Technology,USA,2015
+719,Howard University,USA,2015
+720,Aston University,United Kingdom,2015
+721,École normale supérieure de Cachan,France,2015
+722,Jichi Medical University,Japan,2015
+723,"Rutgers, The State University of New Jersey - Newark",USA,2015
+724,"Palacký University, Olomouc",Czech Republic,2015
+725,Ankara University,Turkey,2015
+726,University of Belgrade,Serbia,2015
+727,Toho University,Japan,2015
+728,Kyoto Prefectural University of Medicine,Japan,2015
+729,Swansea University,United Kingdom,2015
+730,Université de Namur,Belgium,2015
+731,University of Szeged,Hungary,2015
+732,Kitasato University,Japan,2015
+733,Hasselt University,Belgium,2015
+734,University of Córdoba (Spain),Spain,2015
+735,Åbo Akademi University,Finland,2015
+736,Tottori University,Japan,2015
+737,Kindai University,Japan,2015
+738,University of Castilla–La Mancha,Spain,2015
+739,University of Augsburg,Germany,2015
+740,"Paul Valéry University, Montpellier III",France,2015
+741,University of Mons,Belgium,2015
+742,Istanbul Technical University,Turkey,2015
+743,"University of Natural Resources and Life Sciences, Vienna",Austria,2015
+744,National University of La Plata,Argentina,2015
+745,University of Calabria,Italy,2015
+746,University of Memphis,USA,2015
+747,"G. d'Annunzio University, Chieti-Pescara",Italy,2015
+748,University of Missouri–St. Louis,USA,2015
+749,Beijing Institute of Technology,China,2015
+750,University of Évry Val d'Essonne,France,2015
+751,University of South Australia,Australia,2015
+752,University of Alabama in Huntsville,USA,2015
+753,University of Salzburg,Austria,2015
+754,University of Mississippi Medical Center,USA,2015
+755,National Research Nuclear University MEPhI,Russia,2015
+756,Chung-Ang University,South Korea,2015
+757,Kaohsiung Medical University,Taiwan,2015
+758,University of Neuchâtel,Switzerland,2015
+759,University of Yamanashi,Japan,2015
+760,Yamagata University,Japan,2015
+761,New Jersey Institute of Technology,USA,2015
+762,East Carolina University,USA,2015
+763,University of Hyogo,Japan,2015
+764,University of Picardie Jules Verne,France,2015
+765,University of Salento,Italy,2015
+766,Northern Arizona University,USA,2015
+767,Miguel Hernández University of Elche,Spain,2015
+768,University of Tehran,Iran,2015
+769,Blaise Pascal University,France,2015
+770,Yeungnam University,South Korea,2015
+771,Kurume University,Japan,2015
+772,Institut national des sciences Appliquées de Lyon,France,2015
+773,Saga University,Japan,2015
+774,Chongqing University,China,2015
+775,Jikei University School of Medicine,Japan,2015
+776,Second Military Medical University,China,2015
+777,Jawaharlal Nehru Centre for Advanced Scientific Research,India,2015
+778,"University of North Texas, Denton",USA,2015
+779,Ege University,Turkey,2015
+780,Mie University,Japan,2015
+781,École Polytechnique de Montréal,Canada,2015
+782,AGH University of Science and Technology,Poland,2015
+783,University of Electronic Science and Technology of China,China,2015
+784,University of Stirling,United Kingdom,2015
+785,University of Greifswald,Germany,2015
+786,National Polytechnic Institute,Mexico,2015
+787,Jacobs University Bremen,Germany,2015
+788,Capital Medical University,China,2015
+789,Norwegian University of Life Sciences,Norway,2015
+790,Michigan Technological University,USA,2015
+791,Vilnius University,Lithuania,2015
+792,North Dakota State University - Main Campus,USA,2015
+793,University of Hohenheim,Germany,2015
+794,University of North Carolina at Charlotte,USA,2015
+795,Zhengzhou University,China,2015
+796,Cairo University,Egypt,2015
+797,University of Caen Lower Normandy,France,2015
+798,Saitama Medical University,Japan,2015
+799,University of Murcia,Spain,2015
+800,Showa University,Japan,2015
+801,University of Oldenburg,Germany,2015
+802,Magna Græcia University of Catanzaro,Italy,2015
+803,National Sun Yat-sen University,Taiwan,2015
+804,Nanjing University of Science and Technology,China,2015
+805,University of Concepción,Chile,2015
+806,Chungbuk National University,South Korea,2015
+807,Taipei Medical University,Taiwan,2015
+808,Jaume I University,Spain,2015
+809,Bowling Green State University,USA,2015
+810,Nanjing University of Technology,China,2015
+811,University of New England (Australia),Australia,2015
+812,Kangwon National University,South Korea,2015
+813,Inje University,South Korea,2015
+814,Aberystwyth University,United Kingdom,2015
+815,"University of Technology, Sydney",Australia,2015
+816,University of Franche-Comté,France,2015
+817,University of Sassari,Italy,2015
+818,Chiang Mai University,Thailand,2015
+819,Budapest University of Technology and Economics,Hungary,2015
+820,University of Maribor,Slovenia,2015
+821,University of Bradford,United Kingdom,2015
+822,University of Perpignan Via Domitia,France,2015
+823,Florida Institute of Technology,USA,2015
+824,University of Brighton,United Kingdom,2015
+825,University of Massachusetts Boston,USA,2015
+826,Rio de Janeiro State University,Brazil,2015
+827,Nagoya Institute of Technology,Japan,2015
+828,Jiangnan University,China,2015
+829,Murdoch University,Australia,2015
+830,"University of Wales, Trinity Saint David",United Kingdom,2015
+831,University of Rouen,France,2015
+832,The Catholic University of America,USA,2015
+833,Wright State University - Dayton,USA,2015
+834,Dankook University,South Korea,2015
+835,Clarkson University,USA,2015
+836,University of Regina,Canada,2015
+837,Boğaziçi University,Turkey,2015
+838,Kōchi University,Japan,2015
+839,University of Miyazaki,Japan,2015
+840,University of Electro-Communications,Japan,2015
+841,University of Valladolid,Spain,2015
+842,Bilkent University,Turkey,2015
+843,Dublin City University,Ireland,2015
+844,University of South Alabama,USA,2015
+845,Sofia University,Bulgaria,2015
+846,Ocean University of China,China,2015
+847,King Fahd University of Petroleum and Minerals,Saudi Arabia,2015
+848,University of Veterinary Medicine Vienna,Austria,2015
+849,University of Alcalá,Spain,2015
+850,Hunter College,USA,2015
+851,"All India Institute of Medical Sciences, New Delhi",India,2015
+852,Gazi University,Turkey,2015
+853,"National University of Ireland, Maynooth",Ireland,2015
+854,Tehran University of Medical Sciences,Iran,2015
+855,University of the Ryukyus,Japan,2015
+856,Florida Atlantic University,USA,2015
+857,University of Siegen,Germany,2015
+858,Huazhong Agricultural University,China,2015
+859,University of Angers,France,2015
+860,University of Seoul,South Korea,2015
+861,Brock University,Canada,2015
+862,Fukuoka University,Japan,2015
+863,Hamamatsu University School of Medicine,Japan,2015
+864,Nanjing Normal University,China,2015
+865,National Chung Cheng University,Taiwan,2015
+866,Nanjing Agricultural University,China,2015
+867,University of the Republic (Uruguay),Uruguay,2015
+868,Sejong University,South Korea,2015
+869,Makerere University,Uganda,2015
+870,University of New Brunswick,Canada,2015
+871,Northeastern University (China),China,2015
+872,University of Extremadura,Spain,2015
+873,RMIT University,Australia,2015
+874,"Royal Veterinary College, University of London",United Kingdom,2015
+875,Chung Yuan Christian University,Taiwan,2015
+876,University of Osnabrück,Germany,2015
+877,Northwest University (China),China,2015
+878,Chosun University,South Korea,2015
+879,University of Orléans,France,2015
+880,Jean Monnet University,France,2015
+881,École centrale de Lyon,France,2015
+882,University of Western Sydney,Australia,2015
+883,Hefei University of Technology,China,2015
+884,University of Massachusetts Lowell,USA,2015
+885,Manchester Metropolitan University,United Kingdom,2015
+886,Nanjing Medical University,China,2015
+887,Kyoto Institute of Technology,Japan,2015
+888,Shanghai Normal University,China,2015
+889,Southwest University,China,2015
+890,Adam Mickiewicz University in Poznań,Poland,2015
+891,University of Calcutta,India,2015
+892,University of Pécs,Hungary,2015
+893,"Queens College, City University of New York",USA,2015
+894,University of Lleida,Spain,2015
+895,Nanjing University of Aeronautics and Astronautics,China,2015
+896,University of Western Brittany,France,2015
+897,University of North Carolina at Greensboro,USA,2015
+898,Pukyong National University,South Korea,2015
+899,Fourth Military Medical University,China,2015
+900,University of Fukui,Japan,2015
+901,University of Southern Mississippi,USA,2015
+902,University of Mannheim,Germany,2015
+903,Shimane University,Japan,2015
+904,China University of Geosciences (Wuhan),China,2015
+905,University of Thessaly,Greece,2015
+906,Oakland University,USA,2015
+907,Wilfrid Laurier University,Canada,2015
+908,Teikyo University,Japan,2015
+909,Saitama University,Japan,2015
+910,Trent University,Canada,2015
+911,Nicolaus Copernicus University in Toruń,Poland,2015
+912,Tarbiat Modares University,Iran,2015
+913,University of North Dakota,USA,2015
+914,Isfahan University of Technology,Iran,2015
+915,Fluminense Federal University,Brazil,2015
+916,National Taiwan University of Science and Technology,Taiwan,2015
+917,University of Lethbridge,Canada,2015
+918,Federal University of Santa Catarina,Brazil,2015
+919,University of Camerino,Italy,2015
+920,University of Brasília,Brazil,2015
+921,University of Wrocław,Poland,2015
+922,University of Basilicata,Italy,2015
+923,Jadavpur University,India,2015
+924,South China Normal University,China,2015
+925,University of Hyderabad,India,2015
+926,Ritsumeikan University,Japan,2015
+927,Carlos III University of Madrid,Spain,2015
+928,University of Cyprus,Cyprus,2015
+929,University of Texas at El Paso,USA,2015
+930,University of Cádiz,Spain,2015
+931,Shahid Beheshti University of Medical Sciences,Iran,2015
+932,National Taiwan Normal University,Taiwan,2015
+933,National University of Córdoba,Argentina,2015
+934,Federal University of Paraná,Brazil,2015
+935,University of Jaén,Spain,2015
+936,"University of California, Merced",USA,2015
+937,University of Waikato,New Zealand,2015
+938,University of Central Lancashire,United Kingdom,2015
+939,Federal University of Pernambuco,Brazil,2015
+940,University of Almería,Spain,2015
+941,Federal University of São Carlos,Brazil,2015
+942,Charles Darwin University,Australia,2015
+943,Yangzhou University,China,2015
+944,Wrocław University of Technology,Poland,2015
+945,Hirosaki University,Japan,2015
+946,National Taiwan Ocean University,Taiwan,2015
+947,Jiangsu University,China,2015
+948,Northwestern Polytechnical University,China,2015
+949,Xiangtan University,China,2015
+950,United Arab Emirates University,United Arab Emirates,2015
+951,Gachon University,South Korea,2015
+952,Hallym University,South Korea,2015
+953,Harbin Engineering University,China,2015
+954,Dokuz Eylül University,Turkey,2015
+955,Jinan University,China,2015
+956,Shiraz University,Iran,2015
+957,Third Military Medical University,China,2015
+958,Amirkabir University of Technology,Iran,2015
+959,Public University of Navarre,Spain,2015
+960,Federico Santa María Technical University,Chile,2015
+961,Federal University of ABC,Brazil,2015
+962,University of Puerto Rico at Mayagüez,Puerto Rico,2015
+963,Southern Medical University,China,2015
+964,University of Silesia,Poland,2015
+965,Ain Shams University,Egypt,2015
+966,University of Valenciennes and Hainaut-Cambresis,France,2015
+967,Chung Shan Medical University,Taiwan,2015
+968,National University of Colombia,Colombia,2015
+969,South China Agricultural University,China,2015
+970,Ibaraki University,Japan,2015
+971,Fu Jen Catholic University,Taiwan,2015
+972,Hunan Normal University,China,2015
+973,Ulsan National Institute of Science and Technology,South Korea,2015
+974,Federal University of Santa Maria,Brazil,2015
+975,Shenzhen University,China,2015
+976,Tianjin Medical University,China,2015
+977,Beijing University of Technology,China,2015
+978,University of Reims Champagne-Ardenne,France,2015
+979,Yuan Ze University,Taiwan,2015
+980,"University of Chemistry and Technology, Prague",Czech Republic,2015
+981,University of Limerick,Ireland,2015
+982,China Medical University (PRC),China,2015
+983,Feng Chia University,Taiwan,2015
+984,Zhejiang University of Technology,China,2015
+985,Novosibirsk State University,Russia,2015
+986,University of Bucharest,Romania,2015
+987,Babeș-Bolyai University,Romania,2015
+988,Mansoura University,Egypt,2015
+989,University of Pau and Pays de l'Adour,France,2015
+990,Henan Normal University,China,2015
+991,Xidian University,China,2015
+992,Federal University of Bahia,Brazil,2015
+993,Southwest Jiaotong University,China,2015
+994,Ryerson University,Canada,2015
+995,King Abdulaziz University,Saudi Arabia,2015
+996,University of the Algarve,Portugal,2015
+997,Alexandria University,Egypt,2015
+998,Federal University of Ceará,Brazil,2015
+999,University of A Coruña,Spain,2015
+1000,China Pharmaceutical University,China,2015

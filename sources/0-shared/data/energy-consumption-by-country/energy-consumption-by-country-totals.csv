@@ -1,0 +1,9 @@
+﻿Code,Entity,Name,Renew Type,Source,Source ID,Square Color - Coal,Square Color - Gas,Square Color - Hydro,Square Color - Non-Renewable,Square Color - Nuclear,Square Color - Oil,Square Color - Other,Square Color - Renewable,Square Color - Solar,Square Color - Wind,0,1,10,2,5,9,Full Total,Number of Records,Par Coal,Par Gas,Par Hydro,Par Non-Renewable,Par Nuclear,Par Oil,Par Other,Par Renewable,Par Solar,Par Wind,Period Total
+OWID_WRL,World,Coal,Non-Renewable,Coal,1,True,True,True,True,True,True,True,True,True,True,0,1,10,2,5,9,1488550.26040712,1,1,2,3,10,4,5,6,9,7,8,434.3K
+OWID_WRL,World,Gas,Non-Renewable,Gas,2,True,True,True,True,True,True,True,True,True,True,0,1,10,2,5,9,1488550.26040712,1,1,2,3,10,4,5,6,9,7,8,339.3K
+OWID_WRL,World,Hydropower,Renewable,Hydropower,3,True,True,True,True,True,True,True,True,True,True,0,1,10,2,5,9,1488550.26040712,1,1,2,3,10,4,5,6,9,7,8,99.2K
+OWID_WRL,World,Nuclear,Renewable,Nuclear,4,True,True,True,True,True,True,True,True,True,True,0,1,10,2,5,9,1488550.26040712,1,1,2,3,10,4,5,6,9,7,8,68.8K
+OWID_WRL,World,Oil,Non-Renewable,Oil,5,True,True,True,True,True,True,True,True,True,True,0,1,10,2,5,9,1488550.26040712,1,1,2,3,10,4,5,6,9,7,8,509.8K
+OWID_WRL,World,Other,Renewable,Other,6,True,True,True,True,True,True,True,True,True,True,0,1,10,2,5,9,1488550.26040712,1,1,2,3,10,4,5,6,9,7,8,12.7K
+OWID_WRL,World,Solar,Renewable,Solar,7,True,True,True,True,True,True,True,True,True,True,0,1,10,2,5,9,1488550.26040712,1,1,2,3,10,4,5,6,9,7,8,5.7K
+OWID_WRL,World,Wind,Renewable,Wind,8,True,True,True,True,True,True,True,True,True,True,0,1,10,2,5,9,1488550.26040712,1,1,2,3,10,4,5,6,9,7,8,18.7K

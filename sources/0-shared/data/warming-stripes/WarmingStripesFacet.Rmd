@@ -1,0 +1,650 @@
+---
+title: "Warming Stripes as Geofacet"
+author: "Cédric Scherer"
+date: "21st of February 2021"
+output:
+  html_document:
+    theme: paper
+    highlight: kate
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, fig.showtext = T, fig.retina = 1)
+```
+
+```{r prep, message=FALSE}
+## packages
+library(tidyverse)
+library(geofacet)
+library(ggtext)
+library(systemfonts)
+library(cowplot)
+library(pdftools)
+
+register_variant(
+  name = "Ostrich Sans Bold", 
+  family = "Ostrich Sans", 
+  weight = "bold"
+)
+
+register_variant(
+  name = "Overpass Light", 
+  family = "Overpass", 
+  weight = "light"
+)
+
+## ggplot theme
+theme_set(theme_void())
+
+theme_update(
+  text = element_text(family = "Ostrich Sans", color = "grey20"),
+  plot.title = element_text(family = "Ostrich Sans Bold", size = 68, 
+                            hjust = .5, margin = margin(t = 25, b = 15)),
+  plot.subtitle = element_text(size = 38, hjust = .5, margin = margin(b = 50)),
+  plot.caption = element_text(family = "Overpass Light", size = 18,  color = "grey40",
+                              hjust = 0, margin = margin(t = 0, b = 0)),
+  strip.text = element_text(size = 16, color = "grey40", face = "bold", 
+                            hjust = .5, margin = margin(0, -1, -.3, -1)),
+  legend.title = element_blank(),
+  legend.text = element_text(family = "Overpass Light", color = "grey40", 
+                             size = 17, margin = margin(t = 5)),
+  legend.position = "bottom",
+  plot.margin = margin(50, 50, 25, 50),
+  panel.spacing.y = unit(.6, "lines"),
+  legend.key.width = unit(4.7, "lines"),
+  legend.key.height = unit(.6, "lines")
+)
+```
+
+```{r data}
+df_temp <- 
+  readr::read_csv(
+    'https://gist.githubusercontent.com/anttilipp/fc2c4eb2224ff0151d2a5ac1124b585e/raw/b2615e38c87226bf67e310cdb8ff65f70e481bbb/Tdata.csv'
+  )
+```
+
+```{r data-prep}
+df_temp_prep <-
+  df_temp %>% 
+  pivot_longer(
+    cols = -c(Country, ISOA3, Continent),
+    names_to = "year",
+    values_to = "temp_diff"
+  ) %>% 
+  mutate(
+    year = as.numeric(year),
+    Country = str_replace(Country, " and ", " & "),
+    Country = case_when(
+      ISOA3 == "USA" ~ "United States",
+      #ISOA3 == "TTO" ~ "Trinidad & Tobago",
+      ISOA3 == "CAF" ~ "Central African Rep.",
+      ISOA3 == "STP" ~ "Sao Tome & Principe",
+      ISOA3 == "CIV" ~ "Cote d'Ivoire",
+      #ISOA3 == "GNQ" ~ "Equ. Guinea",
+      #ISOA3 == "UAE" ~ "U.A.E.",
+      ISOA3 == "MKD" ~ "North Macedonia",
+      #ISOA3 == "BIH" ~ "Bosnia & Herzegovina",
+      ISOA3 == "RUS" ~ "Russia",
+      ISOA3 == "VCT" ~ "St. Vincent & The Gren.",
+      #ISOA3 == "MHL" ~ "Marshalls",
+      #ISOA3 == "PNG" ~ "Papua N. Guinea",
+      TRUE ~ Country
+    )
+  ) 
+
+## world averages
+df_temp_world <- 
+  df_temp_prep %>% 
+  group_by(year) %>% 
+  summarize(temp_diff = mean(temp_diff, na.rm = TRUE)) %>% 
+  mutate(
+    temp_diff = case_when(
+      temp_diff > 1.5 ~ 1.5,
+      temp_diff < -1.5 ~ -1.5,
+      TRUE ~ temp_diff
+    )
+  ) 
+
+## geofacet
+df_temp_geo <-
+  df_temp_prep %>% 
+  mutate(
+    temp_diff = case_when(
+      temp_diff > 1.5 ~ 1.5,
+      temp_diff < -1.5 ~ -1.5,
+      TRUE ~ temp_diff
+    )
+  ) %>% 
+  full_join(world_countries_grid1, by = c("ISOA3" = "code_alpha3")) %>% 
+  filter(!is.na(ISOA3), !is.na(Country))
+
+my_grid <- 
+  df_temp_prep %>% 
+  filter(!is.na(temp_diff)) %>% 
+  count(Country, ISOA3, Continent) %>% 
+  full_join(world_countries_grid1, by = c("ISOA3" = "code_alpha3")) %>% 
+  mutate(
+    col = case_when(
+      ISOA3 %in% c("ESP", "PRT", "ITA") ~ col - 1, 
+      ISOA3 == "AND" ~ 11,
+      ISOA3 == "LIE" ~ 12,
+      ISOA3 == "MCO" ~ 12,
+      ISOA3 == "SMR" ~ 13,
+      ISOA3 == "TWN" ~ 25,
+      TRUE ~ col
+    ),
+    row = case_when(
+      ISOA3 %in% c("ITA", "MLT", "ESP", "PRT") ~ row + 1,
+      ISOA3 == "AND" ~ 6,
+      ISOA3 == "LIE" ~ 6,
+      ISOA3 == "MCO" ~ 7,
+      ISOA3 == "SMR" ~ 7,
+      ISOA3 == "TWN" ~ 8,
+      TRUE ~ row
+    )
+  ) %>% 
+  filter(!is.na(Country), !is.na(col)) %>% 
+  dplyr::select(name = Country, code_alpha3 = ISOA3, 
+                code_continent = Continent, col, row)
+
+## caption (always the same)
+caption <- "Visualization: Cédric Scherer  •  Data: GISTEMP (country-level data prepared by Antti Lipponen)"
+```
+
+
+# World
+
+## Light Version
+
+```{r world}
+world <-  
+  ggplot(df_temp_world, aes(year, 1)) +
+    geom_tile(aes(color = temp_diff, fill = temp_diff)) +
+    geom_text(
+      data = tibble(x = c(seq(1880, 2010, by = 10), 2019), y = -.5, h = .5),
+      aes(x = x, y = y, label = x),
+      family = "Ostrich Sans", size = 9, color = "grey40", 
+      fontface = "bold", hjust = .5
+    ) +
+    coord_cartesian(expand = FALSE, clip = "off") +
+    scale_y_continuous(limits = c(-4.5, 1.5)) +
+    scale_color_distiller(palette = "RdBu", direction = -1, limits = c(-1.5, 1.5),
+                          guide = "none") +
+    scale_fill_distiller(palette = "RdBu", direction = -1, limits = c(-1.5, 1.5),
+                         breaks = seq(-1.5, 1.5, by = .25),
+                         labels = function(x) if_else(abs(x) == 1.5, paste0(format(x, nsmall = 2), "°C"), paste0(format(x, nsmall = 2)))) +
+    guides(fill = guide_bins(axis = FALSE)) +
+    labs(title = "The Whole World is Getting Warmer",
+         subtitle = "Temperature Anomalies by Country (1880–2019 compared to 1950–1980 baseline)") +
+    theme(plot.margin = margin(15, 50, 15, 50))
+```
+
+```{r country-facet}
+facet <-
+  df_temp_geo %>% 
+  ggplot(aes(year, 1)) +
+    geom_tile(aes(fill = temp_diff)) +
+    geofacet::facet_geo(
+      ~Country, 
+      grid = my_grid, 
+      label = "name"
+    ) +
+    coord_cartesian(clip = "off") +
+    scale_x_continuous(expand = c(.025, .025)) +
+    scale_fill_distiller(palette = "RdBu", direction = -1, 
+                         na.value = "grey87", guide = "none") +
+    labs(caption = caption)
+```
+
+```{r}
+p <- facet + theme(plot.margin = margin(360, 50, 25, 50))
+full <- ggdraw(p) + draw_plot(world, x = .5, y = 1, width = 1, height = .22, vjust = 1, hjust = .5)
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_World.pdf"), 
+       width = 50, height = 23, device = cairo_pdf, limitsize = FALSE)
+```
+
+
+## Dark Version
+
+```{r world-dark}
+world_dark <- 
+  ggplot(df_temp_world, aes(year, 1)) +
+    geom_tile(aes(color = temp_diff, fill = temp_diff)) +
+    geom_text(
+      data = tibble(x = c(seq(1880, 2010, by = 10), 2019), y = -.5, h = .5),
+      aes(x = x, y = y, label = x),
+      family = "Ostrich Sans", size = 9, color = "grey60", 
+      fontface = "bold", hjust = .5
+    ) +
+    coord_cartesian(expand = FALSE, clip = "off") +
+    scale_y_continuous(limits = c(-4.5, 1.5)) +
+    scico::scale_color_scico(palette = "berlin", limits = c(-1.5, 1.5),
+                             guide = "none") +
+    scico::scale_fill_scico(palette = "berlin", limits = c(-1.5, 1.5),
+                             breaks = seq(-1.5, 1.5, by = .25),
+                             labels = function(x) if_else(abs(x) == 1.5, 
+                                                          paste0(format(x, nsmall = 2), "°C"),
+                                                          paste0(format(x, nsmall = 2)))) + 
+    guides(fill = guide_bins(axis = FALSE)) +
+    labs(title = "The Whole World is Getting Warmer",
+         subtitle = "Temperature Anomalies by Country (1880–2019 compared to 1950–1980 baseline)") +
+    theme(text = element_text(color = "grey80"),
+          plot.subtitle = element_text(face = "bold"),
+          plot.margin = margin(15, 50, 15, 50),
+          legend.text = element_text(color = "grey60"))
+```
+
+```{r country-facet-dark}
+facet_dark <-
+  df_temp_geo %>% 
+  ggplot(aes(year, 1)) +
+    geom_tile(aes(fill = temp_diff)) +
+    geofacet::facet_geo(
+      ~Country, 
+      grid = my_grid, 
+      label = "name"
+    ) +
+    coord_cartesian(clip = "off") +
+    scale_x_continuous(expand = c(.025, .025)) +
+    scico::scale_fill_scico(palette = "berlin", na.value = "grey13", guide = "none") +
+    labs(caption = caption) +
+    theme(text = element_text(color = "grey80"),
+          plot.caption = element_text(color = "grey60"),
+          strip.text = element_text(color = "grey60"),
+          plot.background = element_rect(fill = "grey2", color = NA))
+```
+
+```{r}
+p_dark <- facet_dark + theme(plot.margin = margin(360, 50, 25, 50))
+full_dark <- ggdraw(p_dark) + 
+  draw_plot(world_dark, x = .5, y = 1, width = 1, height = .22, vjust = 1, hjust = .5)
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_World_dark.pdf"), 
+       width = 50, height = 23, device = cairo_pdf, limitsize = FALSE)
+```
+
+
+## No Labels
+
+```{r country-facet-blank}
+facet <-
+  df_temp_geo %>% 
+  ggplot(aes(year, 1)) +
+    geom_tile(aes(fill = temp_diff)) +
+    geofacet::facet_geo(
+      ~Country, 
+      grid = my_grid, 
+      label = "name"
+    ) +
+    coord_cartesian(clip = "off") +
+    scale_x_continuous(expand = c(.025, .025)) +
+    scale_fill_distiller(palette = "RdBu", direction = -1, 
+                         na.value = "grey87", guide = "none") +
+    labs(caption = caption)
+```
+
+```{r}
+p <- facet + theme(plot.margin = margin(360, 50, 25, 50), 
+                   strip.text = element_blank(),
+                   strip.background = element_blank())
+full <- ggdraw(p) + draw_plot(world, x = .5, y = 1, width = 1, height = .24, vjust = 1, hjust = .5)
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_World_blank.pdf"), 
+       width = 50, height = 21, device = cairo_pdf, limitsize = FALSE)
+```
+
+
+## Portrait Format
+
+```{r country-facet-vertical}
+facet_vert <-
+  df_temp_geo %>% 
+  ggplot(aes(1, year)) +
+    geom_tile(aes(fill = temp_diff)) +
+    geofacet::facet_geo(
+      ~Country, 
+      grid = my_grid, 
+      label = "code_alpha3"
+    ) +
+    coord_cartesian(clip = "off") +
+    scale_y_continuous(expand = c(.025, .025)) +
+    scale_fill_distiller(palette = "RdBu", direction = -1, 
+                         na.value = "grey87", guide = "none") +
+    theme(strip.text = element_text(size = 30),
+          plot.margin = margin(430, 50, 25, 50),
+          panel.spacing.y = unit(1.6, "lines"))
+```
+
+```{r}
+world_vert <- world + 
+  labs(caption = caption) +
+  theme(plot.caption = element_text(hjust = .5))
+full <- ggdraw(facet_vert) + 
+  draw_plot(world_vert, x = .5, y = 1, width = 1, height = .07, vjust = 1, hjust = .5)
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_World_vert.pdf"), 
+       width = 30, height = 75, device = cairo_pdf, limitsize = FALSE)
+```
+
+
+# By Continents
+
+```{r}
+theme_continent <- function() {
+  theme(legend.position = "top",
+          legend.direction = "horizontal",
+          legend.text = element_text(size = 9),
+          legend.key.width = unit(2.2, "lines"),
+          legend.key.height = unit(.3, "lines"),
+          plot.title = element_text(size = 36, margin = margin(t = 10, b = 10)),
+          plot.subtitle = element_text(size = 16, margin = margin(t = 0, b = 15)),
+          plot.caption = element_text(size = 9, margin = margin(t = 20, b = 0)),
+          plot.margin = margin(15, 25, 15, 25),
+          strip.text = element_text(color = "grey60", margin = margin(rep(0, 4))))
+}
+
+dark_mode <- function() {
+    theme(text = element_text(color = "grey80"),
+          legend.text = element_text(color = "grey60"),
+          plot.caption = element_text(color = "grey60"),
+          strip.text = element_text(color = "grey60"),
+          plot.background = element_rect(fill = "grey2", color = NA),
+          plot.subtitle = element_text(face = "bold"))
+}
+```
+
+
+## Europe
+
+```{r europe}
+my_grid_europe <- 
+  my_grid %>% 
+  filter(code_continent == "Europe") %>% 
+  mutate(
+    col = col - min(col) + 1,
+    row = row - min(row) + 1,
+    col = if_else(code_alpha3 == "RUS", col - 7, col)
+  )
+
+facet_europe <-
+  df_temp_geo %>%
+  filter(Continent == "Europe") %>% 
+  ggplot(aes(year, 1)) +
+    geom_tile(aes(fill = temp_diff)) +
+    geofacet::facet_geo(
+      ~Country, 
+      grid = my_grid_europe, 
+      label = "name"
+    ) +
+    coord_cartesian(clip = "off") +
+    scale_x_continuous(expand = c(.025, .025)) +
+    scale_fill_distiller(palette = "RdBu", direction = -1, 
+                         na.value = "grey87", limits = c(-1.5, 1.5),
+                         breaks = seq(-1.5, 1.5, by = .25),
+                         labels = function(x) if_else(abs(x) == 1.5, 
+                                                      paste0(format(x, nsmall = 2), "°C"),
+                                                      paste0(format(x, nsmall = 2)))) + 
+    guides(fill = guide_bins(axis = FALSE)) +
+    labs(title = "Europe is Getting Warmer",
+         subtitle = "Temperature Anomalies of European Countries (1880–2019 compared to 1950–1980 baseline)",
+         caption = caption) +
+    theme_continent()
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_Europe.pdf"), 
+       width = 20, height = 9.8, device = cairo_pdf, limitsize = FALSE)
+
+facet_europe_dark <- facet_europe +
+    scico::scale_fill_scico(palette = "berlin", na.value = "grey13", limits = c(-1.5, 1.5),
+                            breaks = seq(-1.5, 1.5, by = .25),
+                            labels = function(x) if_else(abs(x) == 1.5, 
+                                                         paste0(format(x, nsmall = 2), "°C"),
+                                                         paste0(format(x, nsmall = 2)))) +
+    labs(caption = caption) +
+    dark_mode()
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_Europe_dark.pdf"), 
+       width = 20, height = 9.8, device = cairo_pdf, limitsize = FALSE)
+```
+
+
+## Asia
+
+```{r asia}
+my_grid_asia <- 
+  my_grid %>% 
+  filter(
+    code_continent == "Asia" |
+    name == "Maledives"  
+  ) %>% 
+  mutate(
+    col = col - min(col) + 1,
+    row = row - min(row) + 1,
+    col = if_else(code_alpha3 == "JPN", col - 1, col)
+  )
+
+facet_asia <-
+  df_temp_geo %>%
+  filter(
+    Continent == "Asia" |
+    Country == "Maledives"  
+  )  %>% 
+  ggplot(aes(year, 1)) +
+    geom_tile(aes(fill = temp_diff)) +
+    geofacet::facet_geo(
+      ~Country, 
+      grid = my_grid_asia, 
+      label = "name"
+    ) +
+    coord_cartesian(clip = "off") +
+    scale_x_continuous(expand = c(.025, .025)) +
+    scale_fill_distiller(palette = "RdBu", direction = -1, 
+                         na.value = "grey87", limits = c(-1.5, 1.5),
+                         breaks = seq(-1.5, 1.5, by = .25),
+                         labels = function(x) if_else(abs(x) == 1.5, 
+                                                      paste0(format(x, nsmall = 2), "°C"),
+                                                      paste0(format(x, nsmall = 2)))) + 
+    guides(fill = guide_bins(axis = FALSE)) +
+    labs(title = "Asia is Getting Warmer",
+         subtitle = "Temperature Anomalies of Asian Countries (1880–2019 compared to 1950–1980 baseline)",
+         caption = caption) +
+    theme_continent()
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_Asia.pdf"), 
+       width = 21, height = 10, device = cairo_pdf, limitsize = FALSE)
+
+facet_asia_dark <- facet_asia +
+    scico::scale_fill_scico(palette = "berlin", na.value = "grey13", limits = c(-1.5, 1.5),
+                            breaks = seq(-1.5, 1.5, by = .25),
+                            labels = function(x) if_else(abs(x) == 1.5, 
+                                                         paste0(format(x, nsmall = 2), "°C"),
+                                                         paste0(format(x, nsmall = 2)))) +
+    labs(caption = caption) +
+    dark_mode()
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_Asia_dark.pdf"), 
+       width = 21, height = 10, device = cairo_pdf, limitsize = FALSE)
+```
+
+
+## Americas
+
+```{r americas}
+my_grid_americas <- 
+  my_grid %>% 
+  filter(code_continent %in% c("South America", "North America")) %>% 
+  mutate(
+    col = col - min(col) + 1,
+    row = row - min(row) + 1
+  )
+
+facet_americas <-
+  df_temp_geo %>%
+  filter(Continent %in% c("South America", "North America")) %>% 
+  ggplot(aes(year, 1)) +
+    geom_tile(aes(fill = temp_diff)) +
+    geofacet::facet_geo(
+      ~Country, 
+      grid = my_grid_americas, 
+      label = "name"
+    ) +
+    coord_cartesian(clip = "off") +
+    scale_x_continuous(expand = c(.025, .025)) +
+    scale_fill_distiller(palette = "RdBu", direction = -1, 
+                         na.value = "grey87", limits = c(-1.5, 1.5),
+                         breaks = seq(-1.5, 1.5, by = .25),
+                         labels = function(x) if_else(abs(x) == 1.5, 
+                                                      paste0(format(x, nsmall = 2), "°C"),
+                                                      paste0(format(x, nsmall = 2)))) + 
+    guides(fill = guide_bins(axis = FALSE)) +
+    labs(title = "The Americas Are Getting Warmer",
+         subtitle = "Temperature Anomalies of American Countries (1880–2019 compared to 1950–1980 baseline)",
+         caption = caption) +
+    theme_continent()
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_Americas.pdf"), 
+       width = 19, height = 14, device = cairo_pdf, limitsize = FALSE)
+
+facet_americas_dark <- facet_americas +
+    scico::scale_fill_scico(palette = "berlin", na.value = "grey13", limits = c(-1.5, 1.5),
+                            breaks = seq(-1.5, 1.5, by = .25),
+                            labels = function(x) if_else(abs(x) == 1.5, 
+                                                         paste0(format(x, nsmall = 2), "°C"),
+                                                         paste0(format(x, nsmall = 2)))) +
+    labs(caption = caption) +
+    dark_mode()
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_Americas_dark.pdf"), 
+       width = 19, height = 14, device = cairo_pdf, limitsize = FALSE)
+```
+
+
+## Africa
+
+```{r africa}
+my_grid_africa <- 
+  my_grid %>% 
+  filter(
+    code_continent == "Africa" |
+    name %in% c("Mauritius", "Seychelles")
+  ) %>% 
+  mutate(
+    col = col - min(col) + 1,
+    row = row - min(row) + 1
+  )
+
+facet_africa <-
+  df_temp_geo %>%
+  filter(
+    Continent == "Africa" |
+    Country %in% c("Mauritius", "Seychelles")
+  ) %>% 
+  ggplot(aes(year, 1)) +
+    geom_tile(aes(fill = temp_diff)) +
+    geofacet::facet_geo(
+      ~Country, 
+      grid = my_grid_africa, 
+      label = "name"
+    ) +
+    coord_cartesian(clip = "off") +
+    scale_x_continuous(expand = c(.025, .025)) +
+    scale_fill_distiller(palette = "RdBu", direction = -1, 
+                         na.value = "grey87", limits = c(-1.5, 1.5),
+                         breaks = seq(-1.5, 1.5, by = .25),
+                         labels = function(x) if_else(abs(x) == 1.5, 
+                                                      paste0(format(x, nsmall = 2), "°C"),
+                                                      paste0(format(x, nsmall = 2)))) + 
+    guides(fill = guide_bins(axis = FALSE)) +
+    labs(title = "Africa is Getting Warmer",
+         subtitle = "Temperature Anomalies of African Countries (1880–2019 compared to 1950–1980 baseline)",
+         caption = caption) +
+    theme_continent()
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_Africa.pdf"), 
+       width = 21, height = 10, device = cairo_pdf, limitsize = FALSE)
+
+facet_africa_dark <- facet_africa +
+    scico::scale_fill_scico(palette = "berlin", na.value = "grey13", limits = c(-1.5, 1.5),
+                            breaks = seq(-1.5, 1.5, by = .25),
+                            labels = function(x) if_else(abs(x) == 1.5, 
+                                                         paste0(format(x, nsmall = 2), "°C"),
+                                                         paste0(format(x, nsmall = 2)))) +
+    labs(caption = caption) +
+    dark_mode()
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_Africa_dark.pdf"), 
+       width = 21, height = 10, device = cairo_pdf, limitsize = FALSE)
+```
+
+
+## Oceania
+
+```{r oceania}
+my_grid_oceania <- 
+  my_grid %>% 
+  filter(code_continent == "Oceania") %>% 
+  mutate(
+    col = col - min(col) + 1,
+    row = row - min(row) + 1
+  )
+
+facet_oceania <-
+  df_temp_geo %>%
+  filter(Continent == "Oceania") %>% 
+  ggplot(aes(year, 1)) +
+    geom_tile(aes(fill = temp_diff)) +
+    geofacet::facet_geo(
+      ~Country, 
+      grid = my_grid_oceania, 
+      label = "name"
+    ) +
+    coord_cartesian(clip = "off") +
+    scale_x_continuous(expand = c(.025, .025)) +
+    scale_fill_distiller(palette = "RdBu", direction = -1, 
+                         na.value = "grey87", limits = c(-1.5, 1.5),
+                         breaks = seq(-1.5, 1.5, by = .25),
+                         labels = function(x) if_else(abs(x) == 1.5, 
+                                                      paste0(format(x, nsmall = 2), "°C"),
+                                                      paste0(format(x, nsmall = 2)))) + 
+    guides(fill = guide_bins(axis = FALSE)) +
+    labs(title = "Oceania is Getting Warmer",
+         subtitle = "Temperature Anomalies of Oceanian Countries (1880–2019 compared to 1950–1980 baseline)",
+         caption = caption) +
+    theme_continent()
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_Oceania.pdf"), 
+       width = 16, height = 9.5, device = cairo_pdf, limitsize = FALSE)
+
+facet_oceania_dark <- facet_oceania +
+    scico::scale_fill_scico(palette = "berlin", na.value = "grey13", limits = c(-1.5, 1.5),
+                            breaks = seq(-1.5, 1.5, by = .25),
+                            labels = function(x) if_else(abs(x) == 1.5, 
+                                                         paste0(format(x, nsmall = 2), "°C"),
+                                                         paste0(format(x, nsmall = 2)))) +
+    labs(caption = caption) +
+    dark_mode()
+
+ggsave(here::here("plots", "WarmingStripesGeofacet_Oceania_dark.pdf"), 
+       width = 16, height = 9.5, device = cairo_pdf, limitsize = FALSE)
+```
+
+
+## Aftermath
+
+```{r convert}
+pdfs <- list.files(here::here("plots"), pattern = "*.pdf", full.names = TRUE)
+for(pdf in pdfs) {
+  pdf_convert(pdf = glue::glue("{pdf}"), 
+              filenames = glue::glue("{str_remove(pdf, '.pdf')}.png"),
+              format = "png", dpi = 800)
+}
+```
+
+***
+
+```{r session}
+sessionInfo()
+```
+

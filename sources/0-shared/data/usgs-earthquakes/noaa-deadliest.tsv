@@ -1,0 +1,12 @@
+"Search Parameters"	"Year"	"Mo"	"Dy"	"Hr"	"Mn"	"Sec"	"Tsu"	"Vol"	"Location Name"	"Latitude"	"Longitude"	"Focal Depth (km)"	"Mag"	"MMI Int"	"Deaths"	"Death Description"	"Missing"	"Missing Description"	"Injuries"	"Injuries Description"	"Damage ($Mil)"	"Damage Description"	"Houses Destroyed"	"Houses Destroyed Description"	"Houses Damaged"	"Houses Damaged Description"	"Total Deaths"	"Total Death Description"	"Total Missing"	"Total Missing Description"	"Total Injuries"	"Total Injuries Description"	"Total Damage ($Mil)"	"Total Damage Description"	"Total Houses Destroyed"	"Total Houses Destroyed Description"	"Total Houses Damaged"	"Total Houses Damaged Description"
+"[""Deaths >= 140000""]"																																						
+	115	12	13				4396		"TURKEY:  ANTAKYA (ANTIOCH)"	36.1	36.1		7.5	11	260000	4						4					260000	4						4				
+	525	5	29						"TURKEY:  ANTAKYA (ANTIOCH), SAMANDAG"	36.25	36.1		7	9	250000	4						4					250000	4						4				
+	856	12	22						"IRAN:  DAMGHAN, QUMIS"	36.2	54.3		7.9	10	200000	4						4		4			200000	4						4		4		
+	893	12	24						"ARMENIA:  DVIN; IRAN:  ARDABIL"	40	44.6	10		10	150000	4						4		4			150000	4						4		4		
+	1139								"AZERBAIJAN:  GYZNDZHA"	40.3	46.3			11	230000	4						4		4			230000	4						4		4		
+	1556	1	23						"CHINA:  SHAANXI PROVINCE"	34.5	109.7		8	11	830000	4						4					830000	4						4				
+	1920	12	16	12	5	54.7	3541		"CHINA:  GANSU PROVINCE, SHANXI PROVINCE"	36.601	105.317	25	8.3	12	200000	4					25	4					200000	4					25	4				
+	1923	9	1	2	58	37	1526		"JAPAN:  TOKYO, YOKOHAMA"	35.1	139.5	35	7.9		142807	4	43476	4	47000	4	600	4					142807	4	43476	4	47000	4	600	4	695000	4		
+	1976	7	27	19	42	54.6			"CHINA:  NE:  TANGSHAN"	39.57	117.98	23	7.5	11	242769	4			799000	4	5600	4					242769	4			799000	4	5600	4				
+	2010	1	12	21	53	10	4622		"HAITI:  PORT-AU-PRINCE"	18.457	-72.533	13	7		316000	4			30000	4	8000	4	97294	4	188383	4	316000	4			300000	4	8000	4	97294	4	188383	4

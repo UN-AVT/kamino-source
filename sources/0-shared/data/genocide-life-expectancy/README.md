@@ -1,0 +1,1 @@
+![](https://raw.githubusercontent.com/ysamano/30diasdegraficos-/master/dia_02/02_lineas.png)
