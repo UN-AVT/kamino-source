@@ -1,0 +1,17 @@
+Country,In_Service,Decommissioned,Under_Construction,Never_Completed,Total
+Argentina,0,2,0,0,2
+Australia,0,3,0,0,3
+Brazil,0,2,0,0,2
+Canada,0,3,0,0,3
+China,2,0,2,0,4
+France,1,7,1,7,16
+Germany,0,0,0,7,7
+India,1,2,2,0,5
+Italy,2,0,1,2,5
+Japan,0,20,2,4,26
+Netherlands,0,4,0,0,4
+Russia,1,4,0,2,7
+Spain,1,2,0,1,4
+Thailand,1,0,0,0,1
+United Kingdom,2,41,0,13,56
+United States,11,55,2,12,80

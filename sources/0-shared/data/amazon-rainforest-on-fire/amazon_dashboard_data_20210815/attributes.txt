@@ -1,0 +1,20 @@
+Table 1: Shapefile attribute table and units
+Attribute Class	Attribute	Explanation / Units
+Fire type classification	cluster_ID	Unique identifier number of fire event, changes with each daily updated
+fire_type	(1) savanna and grassland, (2) small clearing and agriculture, (3) understory, and (4) deforestation fires
+confidence	(1) low, (2) moderate, (3) high
+Metrics used for fire type characterization	tree cover	Average tree cover fraction within perimeter (%) from Hansen et al. (2013)
+biomass	Average biomass within fire perimeter (ton ha-1) from Avitabile (2016)
+deforestation	Fraction (0-1) of 550m grid cells with historic deforestation (2015-2019) within fire perimeter from INPE (2020)
+size	Fire size in km2
+detections	Total number of fire detections within fire perimeter
+frp	Average fire radiative power (FRP) for all fire detections within fire perimeter in megawatts (MW)
+persistence	Average fire persistence across 550m grid cells within fire perimeter (days)
+progression	Average fire progression fraction across 550m grid cells within perimeter (0-1)
+daytime	Fraction of 1:30pm detections (0-1) for all fire detections within fire perimeter
+Status	start_DOY	Day of new fire start as of day of year (1-366)
+last_DOY	Most recent active fire detection within fire perimeter as of day of year (1-366)
+is_new	New fire start within past 24 hours (1) or existing fire (0)
+is_active	Fire was active within the past 10 days (1) or not (0)
+biome	Fire is within (1) or outside (0) the Amazon biome according to RAISG
+protected	Fraction (0-1) of fire occuring within protected area or indigenous land according to RAISG

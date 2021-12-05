@@ -1,0 +1,85 @@
+[{
+        id: 1,
+        industry: "Health care",
+        year: 1980,
+        share: 53,
+        female: 67.6
+    }, {
+        id: 2,
+        industry: "Non-medical\nprofessional",
+        year: 1980,
+        share: 136,
+        female: 48
+    }, {
+        id: 3,
+        industry: "Manufacturing",
+        year: 1980,
+        share: 282,
+        female: 16.5
+    }, {
+        id: 4,
+        industry: "Wholesale/\nretail trade",
+        year: 1980,
+        share: 138,
+        female: 17.6
+    }, {
+        id: 5,
+        industry: "Finance, insurance,\nreal estate",
+        year: 1980,
+        share: 51,
+        female: 39.7
+    }, {
+        id: 6,
+        industry: "Other industries",
+        year: 1980,
+        share: 340,
+        female: 17.8
+    }, {
+        id: 7,
+        industry: "All",
+        year: 1980,
+        share: 0,
+        female: 25.3
+    }, {
+        id: 1,
+        industry: "Health care",
+        year: 2012,
+        share: 119,
+        female: 78.4
+    }, {
+        id: 2,
+        industry: "Non-medical\nprofessional",
+        year: 2012,
+        share: 210,
+        female: 68.4
+    }, {
+        id: 3,
+        industry: "Manufacturing",
+        year: 2012,
+        share: 129,
+        female: 24.4
+    }, {
+        id: 4,
+        industry: "Wholesale/\nretail trade",
+        year: 2012,
+        share: 121,
+        female: 32.1
+    }, {
+        id: 5,
+        industry: "Finance, insurance,\nreal estate",
+        year: 2012,
+        share: 73,
+        female: 59.7
+    }, {
+        id: 6,
+        industry: "Other industries",
+        year: 2012,
+        share: 347,
+        female: 27.6
+    }, {
+        id: 7,
+        industry: "All",
+        year: 2012,
+        share: 0,
+        female: 43.5
+    }]

@@ -1,0 +1,123 @@
+id,value,name,cancer
+HU2,351.66,Dunántúl,351.66
+HU3,347.58,Alföld és Észak,347.58
+HR0,333.48,Hrvatska,333.48
+HU1,333.16,Közép-Magyarország,333.16
+PL6,321.81,Makroregion Pólnocny,321.81
+SK0,313.83,Slovensko,313.83
+PT2,313.16,Região Autónoma dos Açores (PT),313.16
+UKM,311.43,Scotland,311.43
+UKC,310.85,North East (UK),310.85
+PL4,308.52,Makroregion Pólnocno-Zachodni,308.52
+SI0,307.48,Slovenija,307.48
+PL2,299.05,Makroregion Poludniowy,299.05
+NL1,297.4,Noord-Nederland,297.4
+PL7,296.52,Makroregion Centralny,296.52
+LV0,294.61,Latvija,294.61
+PL5,293.79,Makroregion Poludniowo-Zachodni,293.79
+DK0,293.36,Danmark,293.36
+UKD,291.92,North West (UK),291.92
+PL9,291.01,Makroregion Województwo Mazowieckie,291.01
+UKN,290.86,Northern Ireland (UK),290.86
+EE0,287.6,Eesti,287.6
+RO2,287.57,Macroregiunea doi,287.57
+FRE,284.61,Hauts-de-France,284.61
+NL4,284.58,Zuid-Nederland,284.58
+UKE,283.26,Yorkshire and The Humber,283.26
+RO1,282.99,Macroregiunea unu,282.99
+NL2,282.19,Oost-Nederland,282.19
+NL3,281.9,West-Nederland,281.9
+LT0,280.48,Lietuva,280.48
+UKL,280.14,Wales,280.14
+CZ0,276.89,Cesko,276.89
+RO3,276.45,Macroregiunea trei,276.45
+IE0,275.96,Éire/Ireland,275.96
+DEA,275.85,Nordrhein-Westfalen,275.85
+UKG,274.53,West Midlands (UK),274.53
+UKF,272.87,East Midlands (UK),272.87
+DEF,271.61,Schleswig-Holstein,271.61
+DE8,270.92,Mecklenburg-Vorpommern,270.92
+DEE,270.83,Sachsen-Anhalt,270.83
+DEC,269.8,Saarland,269.8
+IS0,269.79,Ísland,269.79
+DE6,268.12,Hamburg,268.12
+PL8,267.37,Makroregion Wschodni,267.37
+BE3,267.08,Région wallonne,267.08
+DE3,266.54,Berlin,266.54
+EL3,264.48,Attiki,264.48
+DE5,263.74,Bremen,263.74
+UKH,263.09,East of England,263.09
+DE4,261.89,Brandenburg,261.89
+FRD,261.71,Normandie,261.71
+UKK,261.05,South West (UK),261.05
+EU28,259.14,European Union - 28 countries (2013-2020),259.14
+FI2,258.33,Åland,258.33
+PT3,258.3,Região Autónoma da Madeira (PT),258.3
+UKJ,257.16,South East (UK),257.16
+EU27_2020,257.06,European Union - 27 countries (from 2020),257.06
+DE9,256.98,Niedersachsen,256.98
+FRF,256.04,Grand Est,256.04
+FRH,254.68,Bretagne,254.68
+RO4,253.62,Macroregiunea patru,253.62
+FRB,253.11,Centre - Val de Loire,253.11
+DEB,252.52,Rheinland-Pfalz,252.52
+ITC,252.13,Nord-Ovest,252.13
+ES1,251.4,Noroeste (ES),251.4
+AT1,250.86,Ostösterreich,250.86
+EL5,249.66,Voreia Ellada,249.66
+DEG,249.5,Thüringen,249.5
+UKI,246.8,London,246.8
+FRI,246.42,Nouvelle-Aquitaine,246.42
+FRG,245.27,Pays-de-la-Loire,245.27
+PT1,243.89,Continente,243.89
+BE1,243.11,Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest,243.11
+FRC,242.58,Bourgogne - Franche-Comté,242.58
+BG3,242.45,Severna i yugoiztochna Bulgaria,242.45
+NO0,242.23,Norge,242.23
+ES2,241.85,Noreste (ES),241.85
+DE7,241.07,Hessen,241.07
+ITI,239.94,Centro (IT),239.94
+DED,239.6,Sachsen,239.6
+EL4,239.22,"Nisia Aigaiou, Kriti",239.22
+ITH,236.34,Nord-Est,236.34
+ITG,235.81,Isole,235.81
+LU0,235.45,Luxembourg,235.45
+AT2,235.44,Südösterreich,235.44
+BE2,234.52,Vlaams Gewest,234.52
+FRJ,233.73,Occitanie,233.73
+FRK,233.54,Auvergne - Rhône-Alpes,233.54
+EL6,233.24,Kentriki Ellada,233.24
+ES7,232.92,Canarias,232.92
+DE2,232.5,Bayern,232.5
+ITF,232.2,Sud,232.2
+SE2,231.91,Södra Sverige,231.91
+ES4,231.76,Centro (ES),231.76
+TRA,228.98,Kuzeydogu Anadolu,228.98
+SE3,228.4,Norra Sverige,228.4
+FR1,227.87,Île de France,227.87
+ES5,227.65,Este (ES),227.65
+TR1,226.88,Istanbul,226.88
+ES6,226.22,Sur (ES),226.22
+SE1,225.68,Östra Sverige,225.68
+DE1,223.99,Baden-Württemberg,223.99
+FRL,223.36,Provence-Alpes-Côte d'Azur,223.36
+TR2,222.19,Bati Marmara,222.19
+MT0,220.95,Malta,220.95
+AT3,220.53,Westösterreich,220.53
+FRM,220.45,Corse,220.45
+FI1,219.31,Manner-Suomi,219.31
+BG4,218.9,Yugozapadna i yuzhna tsentralna Bulgaria,218.9
+TR4,217.14,Dogu Marmara,217.14
+CH0,215.31,Schweiz/Suisse/Svizzera,215.31
+ES3,205.06,Comunidad de Madrid,205.06
+FRY,200.76,RUP FR - Régions ultrapériphériques françaises,200.76
+TR3,198.16,Ege,198.16
+TR5,198.04,Bati Anadolu,198.04
+LI0,197.37,Liechtenstein,197.37
+TR7,194.89,Orta Anadolu,194.89
+CY0,193.8,Kypros,193.8
+TRB,188.7,Ortadogu Anadolu,188.7
+TR8,186.43,Bati Karadeniz,186.43
+TR9,183.93,Dogu Karadeniz,183.93
+TR6,171.34,Akdeniz,171.34
+TRC,151.2,Güneydogu Anadolu,151.2

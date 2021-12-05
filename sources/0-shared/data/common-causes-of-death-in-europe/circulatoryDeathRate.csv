@@ -1,0 +1,123 @@
+id,value,name,circulatory
+BG3,1142.42,Severna i yugoiztochna Bulgaria,1142.42
+BG4,1041.22,Yugozapadna i yuzhna tsentralna Bulgaria,1041.22
+RO4,956.32,Macroregiunea patru,956.32
+RO3,892.83,Macroregiunea trei,892.83
+RO1,882.39,Macroregiunea unu,882.39
+RO2,879.36,Macroregiunea doi,879.36
+LV0,848.55,Latvija,848.55
+LT0,844.91,Lietuva,844.91
+HU3,802.26,Alföld és Észak,802.26
+HU2,732.59,Dunántúl,732.59
+HU1,656.16,Közép-Magyarország,656.16
+EE0,643.31,Eesti,643.31
+HR0,629.93,Hrvatska,629.93
+SK0,617.4,Slovensko,617.4
+TR2,609.07,Bati Marmara,609.07
+PL7,595.03,Makroregion Centralny,595.03
+PL2,593.76,Makroregion Poludniowy,593.76
+TR4,580.57,Dogu Marmara,580.57
+PL8,573.87,Makroregion Wschodni,573.87
+CZ0,568.97,Cesko,568.97
+TR8,556.09,Bati Karadeniz,556.09
+PL5,553.35,Makroregion Poludniowo-Zachodni,553.35
+TR3,544.62,Ege,544.62
+TR6,538.97,Akdeniz,538.97
+TR7,525.91,Orta Anadolu,525.91
+PL4,525.71,Makroregion Pólnocno-Zachodni,525.71
+TRC,521.54,Güneydogu Anadolu,521.54
+PL6,512.97,Makroregion Pólnocny,512.97
+PL9,501.63,Makroregion Województwo Mazowieckie,501.63
+PT2,497.96,Região Autónoma dos Açores (PT),497.96
+TR5,489.03,Bati Anadolu,489.03
+DEE,486.41,Sachsen-Anhalt,486.41
+TRB,484.44,Ortadogu Anadolu,484.44
+TRA,477.6,Kuzeydogu Anadolu,477.6
+TR1,469.33,Istanbul,469.33
+DEG,439.48,Thüringen,439.48
+DED,439.43,Sachsen,439.43
+DE8,437.04,Mecklenburg-Vorpommern,437.04
+TR9,436.57,Dogu Karadeniz,436.57
+SI0,428.01,Slovenija,428.01
+FI2,426.34,Åland,426.34
+DE4,425.89,Brandenburg,425.89
+AT1,423.11,Ostösterreich,423.11
+DE9,415,Niedersachsen,415
+DEB,392.56,Rheinland-Pfalz,392.56
+AT2,392.18,Südösterreich,392.18
+DEF,391.39,Schleswig-Holstein,391.39
+DE5,386.55,Bremen,386.55
+DE2,379.47,Bayern,379.47
+PT3,378.42,Região Autónoma da Madeira (PT),378.42
+DEC,378.17,Saarland,378.17
+EL5,372,Voreia Ellada,372
+DE7,371.99,Hessen,371.99
+EU27_2020,370.19,European Union - 27 countries (from 2020),370.19
+AT3,364.57,Westösterreich,364.57
+FI1,359.26,Manner-Suomi,359.26
+EU28,356.28,European Union - 28 countries (2013-2020),356.28
+LI0,353.35,Liechtenstein,353.35
+SE3,352.7,Norra Sverige,352.7
+EL3,348.06,Attiki,348.06
+ITF,347.63,Sud,347.63
+EL6,346.94,Kentriki Ellada,346.94
+DEA,345.6,Nordrhein-Westfalen,345.6
+DE1,342.64,Baden-Württemberg,342.64
+DE3,334.04,Berlin,334.04
+MT0,332.74,Malta,332.74
+CY0,331.55,Kypros,331.55
+ITG,326.09,Isole,326.09
+IS0,315.89,Ísland,315.89
+SE2,313.95,Södra Sverige,313.95
+EL4,308.85,"Nisia Aigaiou, Kriti",308.85
+IE0,307.08,Éire/Ireland,307.08
+DE6,306.51,Hamburg,306.51
+UKM,305.72,Scotland,305.72
+SE1,302.32,Östra Sverige,302.32
+ES6,301.23,Sur (ES),301.23
+LU0,298.15,Luxembourg,298.15
+BE3,296.45,Région wallonne,296.45
+PT1,291.6,Continente,291.6
+ITI,287.12,Centro (IT),287.12
+NL1,283.35,Noord-Nederland,283.35
+UKL,275.09,Wales,275.09
+UKE,272.07,Yorkshire and The Humber,272.07
+ITC,271.55,Nord-Ovest,271.55
+ITH,270.93,Nord-Est,270.93
+NL4,270.86,Zuid-Nederland,270.86
+NL2,268.48,Oost-Nederland,268.48
+UKC,267.54,North East (UK),267.54
+UKD,264,North West (UK),264
+CH0,260.51,Schweiz/Suisse/Svizzera,260.51
+BE2,254.33,Vlaams Gewest,254.33
+UKF,253.26,East Midlands (UK),253.26
+UKG,253.22,West Midlands (UK),253.22
+ES7,252.98,Canarias,252.98
+ES1,251.89,Noroeste (ES),251.89
+NL3,250.99,West-Nederland,250.99
+BE1,249.49,Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest,249.49
+DK0,246.98,Danmark,246.98
+NO0,245.99,Norge,245.99
+UKN,240.65,Northern Ireland (UK),240.65
+UKK,236.66,South West (UK),236.66
+UKI,233.5,London,233.5
+FRE,233.16,Hauts-de-France,233.16
+ES5,231.34,Este (ES),231.34
+UKH,228.81,East of England,228.81
+UKJ,226.8,South East (UK),226.8
+FRH,222.66,Bretagne,222.66
+ES4,221.35,Centro (ES),221.35
+FRY,219.21,RUP FR - Régions ultrapériphériques françaises,219.21
+ES2,218.11,Noreste (ES),218.11
+FRF,215.43,Grand Est,215.43
+FRD,212.83,Normandie,212.83
+FRC,200.86,Bourgogne - Franche-Comté,200.86
+FRI,198.3,Nouvelle-Aquitaine,198.3
+FRB,197.43,Centre - Val de Loire,197.43
+FRG,196.73,Pays-de-la-Loire,196.73
+FRJ,192.58,Occitanie,192.58
+FRM,192.05,Corse,192.05
+FRK,186.66,Auvergne - Rhône-Alpes,186.66
+ES3,177.43,Comunidad de Madrid,177.43
+FRL,170.97,Provence-Alpes-Côte d'Azur,170.97
+FR1,158.6,Île de France,158.6
