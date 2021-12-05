@@ -1,0 +1,263 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(dplyr)
+library(magrittr)
+library(ggplot2)
+require(ggrepel)
+library(scales)
+library(patchwork)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Slope Plot
+## Coal, Gas, Nuclear, Hydro? How Your State Generates Power
+
+<p>Defined by Edward Tufte in his 1983 book The Visual Display of Quantitative Information, this type of chart is useful for seeing trends over time and comparison among the subjects (categorical) measured.</p>
+
+
+***
+
+## Load data [Ingest]
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load csv data file
+electricity_production_df = read.csv("archetypes/Net_generation_for_electric_power.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# RowIDs, Year, Measure, Country_Name,	State,	Series_Name,	Series_Code
+
+# Create ordered factor for year
+#electricity_production_df$Year <- factor(electricity_production_df$Year, ordered = TRUE, levels = c("2004", "2014"))
+
+electricity_production_df
+
+
+```
+
+
+## Plot [ Views / Temporals ]
+
+Theme
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+color_palette <- c("coal" = "#7dbfe6", 
+                   "Petroleum" = "#eaaa61", 
+                   "natural gas" = "#777777",
+                   "nuclear"="#fde12d",
+                   "Renewables"="#cc59d2",
+                   "Hydro"="#688b58"
+                   )
+
+slope_specs <- list(  
+  # move the x axis labels up top
+  scale_x_discrete(expand = expansion(mult = c(0.3, 0.9)), position = "top"),
+  ylim(0, 100), # to make all scales comparable
+  theme_bw(),
+  # Format tweaks
+  theme(plot.margin = margin(.25, .25, .25, .25, "cm")),
+  theme(panel.spacing = unit(c(.5, 1, .5, .5), "cm")),
+  theme(axis.ticks.length = unit(0, "null")),
+  # theme(axis.ticks.margin = unit(0, "null")),
+  # theme(legend.margin = unit(0, "null")),
+  # Remove the legend
+  theme(legend.position = "none"),
+  theme(plot.background = element_rect(fill = "#f5f5f5")),
+  theme(panel.background = element_rect(fill = "#ebebeb")),
+  # Remove the panel border
+  theme(panel.border     = element_blank()),
+  # Remove just about everything from the y axis
+  theme(axis.title.y     = element_blank()),
+  theme(axis.text.y      = element_blank()),
+  theme(panel.grid.major.y = element_blank()),
+  theme(panel.grid.minor.y = element_blank()),
+  # Remove a few things from the x axis and increase font size
+  theme(axis.title.x     = element_blank()),
+  theme(panel.grid.major.x = element_blank()),
+  theme(axis.text.x.top      = element_text(size=9)),
+  # Remove x & y tick marks
+  theme(axis.ticks       = element_blank()),
+  # Format title & subtitle
+  theme(plot.title       = element_text(size=10, face = "bold")),
+  theme(plot.subtitle    = element_text())
+)
+
+```
+
+Plot
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=3, , fig.align='center', out.width="100%"}
+States=c("UnitedStates",
+"Connecticut",
+"Maine",
+"Massachusetts",
+"NewHampshire",
+"RhodeIsland",
+"Vermont",
+"NewJersey",
+"NewYork",
+"Pennsylvania",
+"Illinois",
+"Indiana",
+"Michigan",
+"Ohio",
+"Wisconsin",
+"Iowa",
+"Kansas",
+"Minnesota",
+"Missouri",
+"Nebraska",
+"NorthDakota",
+"SouthDakota",
+"Delaware",
+"Florida",
+"Georgia",
+"Maryland",
+"NorthCarolina",
+"SouthCarolina",
+"Virginia",
+"WestVirginia",
+"Alabama",
+"Kentucky",
+"Mississippi",
+"Tennessee",
+"Arkansas",
+"Louisiana",
+"Oklahoma",
+"Texas",
+"Arizona",
+"Colorado",
+"Idaho",
+"Montana",
+"Nevada",
+"NewMexico",
+"Utah",
+"Wyoming",
+"California",
+"Oregon",
+"Washington",
+"Alaska")
+
+# Store plots
+plotLists<-list()
+# Filter by states
+
+  for (i in 1:length(States))
+{
+#df <- subset(electricity_production_df,electricity_production_df$State == States[4])
+df <- subset(electricity_production_df,electricity_production_df$State == States[i])
+
+df
+plot<- ggplot(data = df, aes(x = Year, y = Percent)) +
+  geom_line(aes(color = Category), size = 0.75, alpha = 1) +
+  geom_text_repel(data = df %>% filter(Year == "2014"),
+                  aes(label = paste0(Category)) ,
+                  force = 1,
+                  hjust = "left",
+                  #fontface = "bold",
+                  size = 2.5,
+                  nudge_x = .25,
+                  direction = "y",
+                  segment.color = "gray") +
+  # shape = 21, colour = "black", fill = "white", size = 5, stroke = 5
+  geom_point(aes(fill = Category), shape = 21, color="white", size = 2, stroke = 0.75, alpha = 1) +
+  geom_text_repel(aes(label = paste0(round(Percent, digits=0), "%")) ,
+                  force = 1,
+                  hjust = "center",
+                  #fontface = "bold",
+                  size = 2.0,
+                  # nudge_x = 0,
+                  direction = "y",
+                  segment.color = "gray") +
+  scale_fill_manual(values = color_palette) +
+  scale_color_manual(values = color_palette) +
+  slope_specs +
+  labs(x=NULL, y=NULL) +
+  labs(
+    title = States[i]
+  )
+
+ plotLists<- append(plotLists,list(plot))
+}
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, , fig.align='center', out.width="100%"}
+
+plotLists
+#wrap_plots(plotLists[1],plotLists[2],plotLists[3],plotLists[4])
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Save plot to svg file
+# width and height defined for kamino aspect ratio
+# ggsave(filename = "Net_generation_for_electric_power.svg", plot = patch, width=13.33, height=7.5)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+<a href="https://www.eia.gov/electricity/data/browser/#/topic/0?agg=2,0,1&fuel=vtt8&geo=g0fvvvvvvvvvo&sec=008&linechart=ELEC.GEN.ALL-US-98.A&columnchart=ELEC.GEN.ALL-US-98.A&map=ELEC.GEN.ALL-US-98.A&freq=A&start=2004&end=2014&ctype=columnchart&ltype=pin&columnvalues=0&rtype=s&maptype=0&rse=0&pin=">< ELECTRICITY DATA BROWSER</a><br>
+<a href="">U.S. Energy Information Administration</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

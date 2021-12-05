@@ -1,0 +1,232 @@
+---
+pagetitle: "Maternal Mortality - Oceania"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+require(ggrepel)
+library(ggiraph)
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Maternal Mortality - Oceania
+## Slope Plot
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Kai Butcher on Unsplash"}
+
+masthead <- "assets/kai-butcher-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> God could not be everywhere, and therefore he made mothers....\
+--- Rudyard Kipling\
+
+***
+
+### Ingest
+
+``````{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/maternal-mortality/maternal-mortality-slope-chart.csv", header = TRUE, stringsAsFactors = FALSE)
+
+df
+
+```
+
+
+### Wranglers
+#### Filter
+
+Filter only __Year__ of <mark> 2000 </mark>, <mark> 2005 </mark>, <mark> 2010 </mark> and <mark> 2015 </mark>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Filter for year and continent
+maternal_mortality_df <- df %>%
+  filter(Year %in% c(2000, 2005, 2010, 2015) &
+           Continent %in% c("Oceania", "World"))
+
+maternal_mortality_df
+
+```
+
+
+#### Factor
+
+Create ordered factor for __Year__
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Create ordered factor for year
+maternal_mortality_df$Year <- factor(maternal_mortality_df$Year, ordered = TRUE, levels = c("2000", "2005", "2010", "2015"))
+
+maternal_mortality_df
+
+```
+
+
+### Slope Plot
+#### <kbd> geom_line() </kbd> and <kbd> geom_point() </kbd> 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+color_palette <- c("Kiribati" = "#cccccb", 
+                   "Papua New Guinea" = "#cccccb", 
+                   "Nauru" = "#cccccb", 
+                   "Tuvalu" = "#cccccb",
+                   "Micronesia" = "#cccccb",
+                   "Marshall Islands" = "#cccccb",
+                   "Vanuatu" = "#cccccb",
+                   "Solomon Islands" = "#cccccb",
+                   "Palau" = "#cccccb",
+                   "Samoa" = "#cccccb",
+                   "Fiji" = "#cccccb",
+                   "Tonga" = "#d8472b",
+                   "New Zealand" = "#cccccb",
+                   "Australia" = "#cccccb",
+                   "World" = "#7dbfe6")
+
+slope_specs <- list(  
+  # move the x axis labels up top
+  scale_x_discrete(position = "top"),
+  theme_bw(),
+  # Format tweaks
+  # Remove the legend
+  theme(legend.position = "none"),
+  # Remove the panel border
+  theme(panel.border     = element_blank()),
+  # Remove just about everything from the y axis
+  theme(axis.title.y     = element_blank()),
+  theme(axis.text.y      = element_blank()),
+  theme(panel.grid.major.y = element_blank()),
+  theme(panel.grid.minor.y = element_blank()),
+  # Remove a few things from the x axis and increase font size
+  theme(axis.title.x     = element_blank()),
+  theme(panel.grid.major.x = element_blank()),
+  theme(axis.text.x.top      = element_text(size=12)),
+  # Remove x & y tick marks
+  theme(axis.ticks       = element_blank()),
+  # Format title & subtitle
+  theme(plot.title       = element_text(size=14, face = "bold")),
+  theme(plot.subtitle    = element_text())
+)
+
+v1 <- ggplot(data = maternal_mortality_df, aes(x = Year, y = Maternal_Mortality_Ratio, group = Entity)) +
+  geom_line(aes(color = Entity), size = 0.5, alpha = 1) +
+  geom_text_repel(data = maternal_mortality_df %>% filter(Year == "2000"), 
+                  aes(label = paste0(Entity)) , 
+                  force = 1,
+                  hjust = "left", 
+                  fontface = "bold", 
+                  size = 2.5, 
+                  nudge_x = -.5, 
+                  direction = "y",
+                  segment.color = "gray") +
+  geom_text_repel(data = maternal_mortality_df %>% filter(Year == "2015"), 
+                  aes(label = paste0(Entity)), 
+                  force = 1,
+                  hjust = "right", 
+                  fontface = "bold", 
+                  size = 2.5, 
+                  nudge_x = .5, 
+                  direction = "y",
+                  segment.color = "gray") +
+  geom_point(aes(fill = Entity), shape = 21, color="white", size = 2, stroke = 0.75, alpha = 1) +
+  # geom_text(aes(label = Maternal_Mortality_Ratio), color="black", size = 2.5, alpha = 1) +
+  geom_text_repel(aes(label = Maternal_Mortality_Ratio), color="black", size = 2.5, alpha = 1,
+                  force = 1,
+                  hjust = "center", 
+                  #fontface = "bold", 
+                  size = 2.0, 
+                  # nudge_x = 0, 
+                  direction = "y",
+                  segment.color = "gray") +
+  scale_fill_manual(values = color_palette) +
+  scale_color_manual(values = color_palette) +
+  slope_specs +
+  labs(
+    title = "Maternal Mortality by Country",
+    subtitle = "Oceania, Maternal deaths per 100,000 live births.",
+    caption = "source: Our World in Data"
+  )
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/maternal-mortality-oceania.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/maternal-mortality-oceania.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data sources: Maternal Mortality - Our World in Data, [GO](https://ourworldindata.org/grapher/maternal-mortality-slope-chart?time=1990..latest&country=ARG~BOL~BRA~ECU~GUY~URY~VEN~PRY~PER~SUR~CHL~CO){target="_blank"}
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

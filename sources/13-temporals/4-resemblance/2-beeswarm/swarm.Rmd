@@ -1,0 +1,159 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/kamino.css", "../../../z-assemblers/wranglers.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/header.html"
+      after_body: "../../../z-assemblers/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(ggplot2)
+library(ggbeeswarm)
+library(ggthemes)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+## R Markdown
+
+https://github.com/eclarke/ggbeeswarm
+
+```{r mpg}
+knitr::kable(
+  head(mpg), caption = 'mpg'
+)
+```
+
+## geom_quasirandom method
+
+You can also embed plots, for example:
+
+```{r echo=FALSE}
+
+#default geom_quasirandom
+ggplot(mpg,aes(class, hwy)) + geom_quasirandom()
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+
+# With categorical y-axis
+ggplot(mpg,aes(hwy, class)) + geom_quasirandom(groupOnX=FALSE)
+
+```
+
+
+```{r}
+
+# Some groups may have only a few points. Use `varwidth=TRUE` to adjust width dynamically.
+ggplot(mpg,aes(class, hwy)) + geom_quasirandom(varwidth = TRUE)
+
+```
+
+
+```{r}
+
+# Automatic dodging
+sub_mpg <- mpg[mpg$class %in% c("midsize", "pickup", "suv"),]
+ggplot(sub_mpg, aes(class, displ, color=factor(cyl))) + geom_quasirandom(dodge.width=1)
+
+```
+
+```{r}
+
+ggplot(iris,aes(Species, Sepal.Length)) + geom_beeswarm()
+
+```
+
+
+```{r}
+
+ggplot(iris,aes(Species, Sepal.Length)) + geom_beeswarm(beeswarmArgs=list(side=1))
+
+```
+
+
+```{r}
+
+ggplot(mpg,aes(class, hwy)) + geom_beeswarm(size=.5)
+
+```
+
+
+```{r}
+
+# With categorical y-axis
+ggplot(mpg,aes(hwy, class)) + geom_beeswarm(size=.5,groupOnX=FALSE)
+
+```
+
+
+```{r}
+
+# Also watch out for points escaping from the plot with geom_beeswarm
+ggplot(mpg,aes(hwy, class)) + geom_beeswarm(size=.5,groupOnX=FALSE) + scale_y_discrete(expand=expansion(add=c(0.5,1)))
+
+```
+
+
+```{r}
+
+ggplot(mpg,aes(class, hwy)) + geom_beeswarm(size=1.1)
+
+```
+
+
+```{r}
+
+# With automatic dodging
+ggplot(sub_mpg, aes(class, displ, color=factor(cyl))) + geom_beeswarm(dodge.width=0.5)
+
+```
+
+
+```{r}
+
+#With different beeswarm point distribution priority
+dat<-data.frame(x=rep(1:3,c(20,40,80)))
+dat$y<-rnorm(nrow(dat),dat$x)
+ggplot(dat,aes(x,y)) + geom_beeswarm(size=2) + ggtitle('Default (ascending)') + scale_x_continuous(expand=expansion(add=c(0.5,.5)))
+
+```
+
+
+```{r}
+
+ggplot(dat,aes(x,y)) + geom_beeswarm(size=2,priority='descending') + ggtitle('Descending') + scale_x_continuous(expand=expansion(add=c(0.5,.5)))
+
+```
+
+
+```{r}
+
+ggplot(dat,aes(x,y)) + geom_beeswarm(size=2,priority='density') + ggtitle('Density') + scale_x_continuous(expand=expansion(add=c(0.5,.5)))
+
+```
+
+
+```{r}
+
+ggplot(dat,aes(x,y)) + geom_beeswarm(size=2,priority='random') + ggtitle('Random') + scale_x_continuous(expand=expansion(add=c(0.5,.5)))
+
+```
+

@@ -1,0 +1,1146 @@
+year,month,investor,quantity,share,partner,sector,subsector,country,region
+2005,January,Sinohydro,100,,,Transport,Aviation,Qatar,Arab World
+2005,January,Minmetals,500,,Cubapetroleo,Metals,,Cuba,North America
+2005,January,Sinomach,240,,,Real estate,Construction,Angola,Sub-Saharan Africa
+2005,January,Lenovo,1740,,IBM,Technology,,USA,USA
+2005,February,Sinohydro,150,,Oman Wastewater Services,Agriculture,,Oman,Arab World
+2005,February,Minmetals,550,50%,Codelco,Metals,Copper,Chile,South America
+2005,February,China Railway Construction,350,,,Transport,Rail,Angola,Sub-Saharan Africa
+2005,March,Sinoma,170,,,Real estate,Construction,Saudi Arabia,Arab World
+2005,March,MCC,670,85%,Highlands Pacific,Metals,Steel,Papua New Guinea,East Asia
+2005,April,CNOOC,130,17%,MEG Energy,Energy,Oil,Canada,North America
+2005,May,CNPC,390,,SONATRACH,Energy,,Algeria,Arab World
+2005,May,Norinco,840,,Tehran Railway,Transport,Rail,Iran,West Asia
+2005,June,MCC,170,,,Transport,Aviation,Mauritania,Arab World
+2005,June,Sinomach and Sinohydro,860,,,Energy,Coal,Indonesia,East Asia
+2005,June,Sinopec,120,40%,Synenco,Energy,Oil,Canada,North America
+2005,June,China Railway Construction and Genertec,1270,,Cengiz and IC Ictas,Transport,Rail,Turkey,West Asia
+2005,July,Sinohydro,130,,,Energy,Hydro,Myanmar,East Asia
+2005,July,Nanjing Auto,100,,MG,Transport,Autos,Britain,Europe
+2005,August,CNPC,4200,67%,PetroKazakhstan,Energy,Oil,Kazakhstan,West Asia
+2005,September,Sinopec,350,,Aker Kvaerner,Chemicals,,Saudi Arabia,Arab World
+2005,September,CNPC and Sinopec,1420,,EnCana,Energy,Oil,Ecuador,South America
+2005,October,ChemChina,180,100%,Qenos,Chemicals,,Australia,Australia
+2005,October,Sinosteel,140,50%,Midwest,Metals,Steel,Australia,Australia
+2005,October,China Communications Construction,200,,,Transport,Autos,Indonesia,East Asia
+2005,October,China Nonferrous,300,,Kazakhstan Aluminum,Metals,Aluminum,Kazakhstan,West Asia
+2005,November,CITIC,940,,,Real estate,Construction,Venezuela,South America
+2005,December,Sinohydro,210,,,Agriculture,,Algeria,Arab World
+2005,December,Sinoma,580,,Saudi Cement,Real estate,Construction,Saudi Arabia,Arab World
+2005,December,CNPC,290,16%,Petro-Canada,Energy,Oil,Syria,Arab World
+2005,December,CITIC,430,,Brazil Power,Energy,Coal,Brazil,South America
+2005,December,CITIC,900,,,Metals,Aluminum,Iran,West Asia
+2006,January,State Construction Engineering,300,,,Real estate,Construction,UAE,Arab World
+2006,January,ChemChina,480,100%,Adisseo,Agriculture,,France,Europe
+2006,January,CNOOC,2270,45%,South African Petroleum,Energy,,Nigeria,Sub-Saharan Africa
+2006,February,Sinohydro,540,,,Real estate,Construction,Qatar,Arab World
+2006,February,Sinohydro,280,,,Energy,Hydro,Cambodia,East Asia
+2006,March,CITIC,2920,,Mineralogy,Metals,Steel,Australia,Australia
+2006,March,Sinomach,460,,,Energy,Coal,Sri Lanka,West Asia
+2006,April,Sinopec,1290,,Petrobras,Energy,Gas,Brazil,South America
+2006,April,Group of Shanghai state firms,1300,,,Real estate,Property,Russia,West Asia
+2006,May,CITIC and China Railway Construction,6200,,,Transport,Autos,Algeria,Arab World
+2006,May,Sinopec,730,75%,Sonangol,Energy,Oil,Angola,Sub-Saharan Africa
+2006,May,MCC,120,,,Other,Timber,Russia,West Asia
+2006,June,Weihai,160,,,Transport,Aviation,Congo,Sub-Saharan Africa
+2006,June,Sinopec,3490,97%,Rosneft,Energy,,Russia,West Asia
+2006,June,Tebian Electric Apparatus,340,,,Energy,,Tajikistan,West Asia
+2006,July,State Construction Engineering,260,,,Transport,Aviation,Algeria,Arab World
+2006,July,CITIC,100,51%,Kuwait Petroleum,Energy,Oil,Indonesia,East Asia
+2006,July,Dongfang Electric,330,,Marubeni,Energy,Coal,Vietnam,East Asia
+2006,July,Sinopec,2800,,North West Shelf Partners,Energy,Oil,Iran,West Asia
+2006,July,CNPC,500,,Rosneft,Energy,,Russia,West Asia
+2006,August,Suntech,110,67%,MSK,Energy,Alternative,Japan,East Asia
+2006,September,Sinopec,430,50%,Omimex,Energy,Oil,Colombia,South America
+2006,September,"ZTE, Huawei, and China Communications Construction",2400,,Ethiopia Telecom,Technology,Telecom,Ethiopia,Sub-Saharan Africa
+2006,October,CITIC and Chinalco,940,,,Metals,Aluminum,Egypt,Arab World
+2006,October,Jiangxi Copper,110,75%,bcMetals,Metals,Copper,Canada,North America
+2006,October,CITIC,1910,,Nations Energy,Energy,,Kazakhstan,West Asia
+2006,November,Genertec,220,,,Real estate,Construction,Yemen,Arab World
+2006,November,China National Chemical Engineering,180,,,Energy,Coal,Indonesia,East Asia
+2006,November,Three Gorges,140,,,Energy,Hydro,Laos,East Asia
+2006,November,Southern Power Grid and China Power Investment,2010,,Vinacomin,Energy,Coal,Vietnam,East Asia
+2006,November,China Development Bank,800,1%,Anglo-American,Metals,,Britain,Europe
+2006,November,CITIC,340,,ThyssenKrupp and CVRD,Metals,Steel,Brazil,South America
+2006,November,Export-Import Bank,2000,,,Metals,,DRC,Sub-Saharan Africa
+2006,November,Sinosteel,230,50%,Samancor Chrome,Metals,Steel,South Africa,Sub-Saharan Africa
+2006,November,China Nonferrous,310,,(Chambishi),Metals,Copper,Zambia,Sub-Saharan Africa
+2006,November,China Communications Construction,490,,,Transport,Autos,Pakistan,West Asia
+2006,December,China Power Investment,260,,Truba Alam Manunggal,Energy,Coal,Indonesia,East Asia
+2006,December,Bank of China,970,,Singapore Aircraft Leasing,Transport,Aviation,Singapore,East Asia
+2006,December,Sichuan Changhong Electric,100,75%,Sterope investments,Finance,Investment,Netherlands,Europe
+2006,December,Sinohydro,100,,,Agriculture,,Angola,Sub-Saharan Africa
+2006,December,Sinohydro,130,,,Transport,Autos,Ethiopia,Sub-Saharan Africa
+2007,January,State Construction Engineering,350,,,Real estate,Construction,UAE,Arab World
+2007,January,ChemChina,700,,Rhodia,Chemicals,,France,Europe
+2007,January,CNPC,200,50%,EnCana,Energy,Oil,Chad,Sub-Saharan Africa
+2007,January,Shandong Electric,2860,,,Energy,Coal,India,West Asia
+2007,January,China Mobile,280,89%,Paktel,Technology,Telecom,Pakistan,West Asia
+2007,February,"Zijin, China Nonferrous, and Xiamen C&D",190,"45%, 35%, 20%",Monterrico,Metals,Copper,Peru,South America
+2007,February,Sinopec,100,,Syntroleum,Energy,,USA,USA
+2007,March,State Construction Engineering,410,,,Real estate,Construction,Kuwait,Arab World
+2007,March,Gezhouba,400,,,Real estate,Construction,Libya,Arab World
+2007,March,China National Chemical Engineering,540,,PLN,Energy,Coal,Indonesia,East Asia
+2007,March,Sinosteel,500,,,Metals,Steel,India,West Asia
+2007,March,Sinohydro and China Communications Construction,360,,,Transport,Shipping,Sri Lanka,West Asia
+2007,April,Sinomach and China Nonferrous,3990,,Western Way,Metals,Aluminum,Saudi Arabia,Arab World
+2007,April,Sinohydro,170,85%,Electricite de Laos,Energy,Hydro,Laos,East Asia
+2007,April,Sinomach,650,,,Energy,Hydro,Equatorial Guinea,Sub-Saharan Africa
+2007,April,Sinohydro,600,,,Energy,Hydro,Ghana,Sub-Saharan Africa
+2007,May,LinkGlobal Logistics,130,,Parchim Airport,Transport,Aviation,Germany,Europe
+2007,May,CIC,3030,9%,Blackstone,Finance,Investment,USA,USA
+2007,May,China Mobile,180,11%,Paktel,Technology,Telecom,Pakistan,West Asia
+2007,May,Sinomach,150,,,Energy,,Pakistan,West Asia
+2007,June,Sinoma,370,,,Real estate,Construction,Egypt,Arab World
+2007,June,China Communications Construction,410,,,Transport,Shipping,Kuwait,Arab World
+2007,June,Sinohydro,1700,,,Energy,Hydro,Laos,East Asia
+2007,June,China Ocean Shipping,140,80%,Burg Industries,Transport,Shipping,Netherlands,Europe
+2007,June,Chinalco,790,,Peru Copper,Metals,Copper,Peru,South America
+2007,July,CITIC,100,8%,Macarthur Coal,Energy,Coal,Australia,Australia
+2007,July,China Development Bank,3040,3%,Barclays,Finance,Banking,Britain,Europe
+2007,July,Golden Dragon,100,,,Metals,copper,Mexico,North America
+2007,July,China Communications Construction,250,,,Transport,Autos,Congo,Sub-Saharan Africa
+2007,August,China Railway Engineering,310,50%,,Transport,Rail,Mauritania,Arab World
+2007,August,Dongfang Electric and China Power Investment,2010,,PLN,Energy,Coal,Indonesia,East Asia
+2007,August,Southern Power Grid,340,,,Energy,Hydro,Laos,East Asia
+2007,September,Ansteel,330,50%,Gindalbie Metals,Metals,Steel,Australia,Australia
+2007,September,Shenzhen Energy and China Development Bank,140,,Sunon Asogli Power,Energy,Gas,Ghana,Sub-Saharan Africa
+2007,September,Sany Heavy,150,,,Real estate,Construction,USA,USA
+2007,September,Sinomach,210,,,Energy,Gas,Azerbaijan,West Asia
+2007,September,Huawei,150,,Bharti Airtel,Technology,Telecom,Sri Lanka,West Asia
+2007,October,China Ocean Shipping,150,20%,,Transport,Shipping,Egypt,Arab World
+2007,October,China Electronics Technology,100,50%,Pakistan Infrastructure Development,Transport,Rail,Jordan,Arab World
+2007,October,ICBC,5600,20%,Standard Bank,Finance,Banking,South Africa,Sub-Saharan Africa
+2007,October,Sinomach,160,,Tanzania Super,Agriculture,,Tanzania,Sub-Saharan Africa
+2007,October,Minsheng Bank,200,10%,UCBH,Finance,Banking,USA,USA
+2007,October,Gezhouba,210,,Iran Water and Power,Energy,Hydro,Iran,West Asia
+2007,October,China Nonferrous,110,,Jahad Tahghighat,Metals,Aluminum,Iran,West Asia
+2007,November,Chinalco,1200,40%,"Binladin, MMC",Metals,Aluminum,Saudi Arabia,Arab World
+2007,November,Guizhou Hongfu,350,,,Chemicals,,Saudi Arabia,Arab World
+2007,November,China Communications Construction,230,,,Transport,Shipping,Saudi Arabia,Arab World
+2007,November,CNPC,690,,Vinachem,Agriculture,,Vietnam,East Asia
+2007,November,Ping An,2700,4%,Fortis,Finance,,Belgium,Europe
+2007,November,Youngor,120,100%,Kellwood,Other,Textiles,USA,USA
+2007,November,MCC and Jiangxi Copper,2870,,,Metals,Copper,Afghanistan,West Asia
+2007,December,China Power Investment,920,,,Energy,,Iraq,Arab World
+2007,December,Sinohydro,140,,,Real estate,Construction,UAE,Arab World
+2007,December,State Grid-led consortium,1580,40%,Transco,Energy,,Philippines,East Asia
+2007,December,CITIC,620,,,Real estate,Construction,Belarus,Europe
+2007,December,Minmetals and Jiangxi Copper,450,,Northern Peru Copper,Metals,Copper,Peru,South America
+2007,December,Sinohydro,120,,,Real estate,Construction,Angola,Sub-Saharan Africa
+2007,December,Sinohydro,140,,,Transport,Autos,Kenya,Sub-Saharan Africa
+2007,December,Sinohydro,160,,,Metals,,Niger,Sub-Saharan Africa
+2007,December,Sinosteel,100,92%,Zimasco,Metals,Steel,Zimbabwe,Sub-Saharan Africa
+2007,December,CIC,5000,10%,Morgan Stanley,Finance,Investment,USA,USA
+2007,December,Sinopec,2010,51%,National Iranian Oil,Energy,Oil,Iran,West Asia
+2007,December,CNPC,1540,,,Energy,Gas,Kazakhstan,West Asia
+2007,December,CNPC,620,,,Energy,Gas,Uzbekistan,West Asia
+2008,January,China Communications Construction,290,,,Transport,Shipping,Mauritania,Arab World
+2008,January,SAFE,180,1%,three Australian banks,Finance,Banking,Australia,Australia
+2008,January,China Communications Construction,160,,,Transport,Shipping,Vietnam,East Asia
+2008,January,Jinchuan,210,,Tyler Resources,Metals,,Mexico,North America
+2008,January,Wuxi PharmaTech,160,100%,AppTec Lab Services,Technology,,USA,USA
+2008,January,MCC,200,,,Real estate,Construction,Georgia,West Asia
+2008,February,China Railway Construction,2600,,,Transport,Rail,Libya,Arab World
+2008,February,Sinochem,470,17%,Soco,Energy,Oil,Yemen,Arab World
+2008,February,Chinalco,12800,11%,Rio Tinto,Metals,Aluminum,Australia,Australia
+2008,February,MCC,370,,Cape Lambert Iron,Metals,Steel,Australia,Australia
+2008,February,Sinomach,1350,,,Energy,,Laos,East Asia
+2008,February,Minmetals and Xinxing Iron,1200,"20%, 35%",Kelachandra and Manasara,Metals,Steel,India,West Asia
+2008,March,China Railway Engineering,260,,,Transport,Rail,Morocco,Arab World
+2008,March,China National Building Materials,160,,Oman Cement,Real estate,Construction,Oman,Arab World
+2008,March,Sinopec,560,60%,AED,Energy,Oil,Australia,Australia
+2008,March,Huaneng Power,3040,,Temasek,Energy,,Singapore,East Asia
+2008,March,China Railway Engineering,100,,,Real estate,Construction,Angola,Sub-Saharan Africa
+2008,March,China Life,260,1%,Visa,Finance,,USA,USA
+2008,March,CIC,100,,Visa,Finance,,USA,USA
+2008,March,Mindray Medical,200,,Datascope,Technology,Medical,USA,USA
+2008,April,Three Gorges,100,,,Agriculture,,Sudan,Arab World
+2008,April,Sinhydro and Three Gorges,400,,,Energy,Hydro,Sudan,Arab World
+2008,April,CNOOC,130,50%,Husky Energy,Energy,Gas,Indonesia,East Asia
+2008,April,Hopu,150,,Lung Ming,Metals,Steel,Mongolia,East Asia
+2008,April,SAFE,2010,1%,BP,Energy,,Britain,Europe
+2008,April,SAFE,2800,2%,Total,Energy,,France,Europe
+2008,April,CIC,3200,80%,JC Flowers fund,Finance,Investment,USA,USA
+2008,May,Datang,330,,Cambodia Hydropower and Cambodia Grid,Energy,Hydro,Cambodia,East Asia
+2008,May,Chinalco,2160,,,Metals,Copper,Peru,South America
+2008,May,MCC,290,,,Transport,Autos,Sri Lanka,West Asia
+2008,June,Michelle Corp.,500,,,Energy,Hydro,Cambodia,East Asia
+2008,June,Sinomach,540,,,Energy,Hydro,Cambodia,East Asia
+2008,June,Zoomlion,250,60%,Compagnia Italiana Forme Acciaio,Real estate,Construction,Italy,Europe
+2008,June,CITIC,3540,,,Real estate,Construction,Angola,Sub-Saharan Africa
+2008,June,China National Nuclear,190,,,Metals,,Niger,Sub-Saharan Africa
+2008,June,CNPC,4990,,,Energy,Oil,Niger,Sub-Saharan Africa
+2008,June,COFCO,140,5%,Smithfield Foods,Agriculture,,USA,USA
+2008,June,SAFE,2510,20%,TPG fund,Finance,Investment,USA,USA
+2008,July,Guangdong Overseas Construction,610,,King Khalid University,Real estate,Construction,Saudi Arabia,Arab World
+2008,July,Sinosteel,1320,51%,Midwest,Metals,Steel,Australia,Australia
+2008,July,Sinomach,120,,,Energy,,Malaysia,East Asia
+2008,July,China Nonferrous,810,50%,Tagaung Taung,Metals,,Myanmar,East Asia
+2008,July,Sinochem,200,51%,GMG Global,Agriculture,,Singapore,East Asia
+2008,July,MCC,520,,Singapore Resorts,Real estate,Property,Singapore,East Asia
+2008,July,Chinalco,460,,Vinacomin,Metals,Aluminum,Vietnam,East Asia
+2008,July,CNOOC,2490,,Awilco Offshore,Energy,Oil,Norway,Europe
+2008,July,Sinomach,140,,,Agriculture,,Venezuela,South America
+2008,July,China Railway Engineering,1190,28%,Congo Simco,Metals,Copper,DRC,Sub-Saharan Africa
+2008,July,MCC and Sinohydro,1350,40%,Congo Simco,Metals,Copper,DRC,Sub-Saharan Africa
+2008,July,China Communications Construction,440,,,Transport,Shipping,Nigeria,Sub-Saharan Africa
+2008,July,China Communications Construction,990,,African Finance Corporation,Transport,Autos,Nigeria,Sub-Saharan Africa
+2008,August,Shenhua,260,,,Energy,Coal,Australia,Australia
+2008,August,Sinomach,240,,,Energy,,Indonesia,East Asia
+2008,August,Sinohydro,300,,,Energy,Hydro,Tajikistan,West Asia
+2008,September,China Communications Construction,220,,,Transport,Shipping,Egypt,Arab World
+2008,September,Sinopec,1990,,Tanganyika Oil,Energy,Oil,Syria,Arab World
+2008,September,Jiangsu Shagang and RGL Group,360,45%,Grange Resources,Metals,Steel,Australia,Australia
+2008,September,China Ocean Shipping,330,29%,Yantai Raffles Shipyard,Transport,Shipping,Singapore,East Asia
+2008,September,Sany Heavy,140,,,Real estate,Construction,Germany,Europe
+2008,October,Three Gorges led consortium,880,,,Energy,Hydro,Malaysia,East Asia
+2008,October,China Communications Construction,680,,,Transport,Autos,Malaysia,East Asia
+2008,October,Sinoma,210,,Lafarge,Real estate,Construction,Ukraine,Europe
+2008,October,MCC,150,,,Other,Utilities,Mozambique,Sub-Saharan Africa
+2008,October,Sinohydro,290,,Zesco,Energy,Hydro,Zambia,Sub-Saharan Africa
+2008,October,CIC,200,3%,Blackstone,Finance,Investment,USA,USA
+2008,October,Sinoma,450,,Holcim,Real estate,Construction,Azerbaijan,West Asia
+2008,October,Three Gorges,160,,,Energy,Hydro,India,West Asia
+2008,October,ZTE,400,,Aircel,Technology,Telecom,India,West Asia
+2008,October,Minmetals,300,,Mechel,Metals,Steel,Russia,West Asia
+2008,October,Datong,760,,Herma Enerji,Energy,Coal,Turkey,West Asia
+2008,November,CNPC,3020,,,Energy,Oil,Iraq,Arab World
+2008,November,Sinohydro,250,,,Energy,Coal,Indonesia,East Asia
+2008,November,MCC,1020,,,Metals,Copper,Philippines,East Asia
+2008,November,China Ocean Shipping,4560,,,Transport,Shipping,Greece,Europe
+2008,November,Zhongmei Engineering,120,,,Transport,Autos,Ethiopia,Sub-Saharan Africa
+2008,November,Sinohydro,400,,,Energy,Hydro,Gabon,Sub-Saharan Africa
+2008,November,Shenzhen Energy,2400,,First Bank,Energy,Gas,Nigeria,Sub-Saharan Africa
+2008,November,Three Gorges,240,,,Transport,Shipping,Pakistan,West Asia
+2008,December,CNPC,3290,,International Petroleum Investment,Energy,Oil,UAE,Arab World
+2008,December,State Construction Engineering,260,,,Transport,Autos,UAE,Arab World
+2008,December,China Communications Construction,200,,African Development Bank,Transport,Autos,Gabon,Sub-Saharan Africa
+2008,December,Wuhan Iron and Steel and China Development Bank,110,,,Metals,Steel,Liberia,Sub-Saharan Africa
+2009,January,Sinohydro,220,,,Transport,Autos,Sudan,Arab World
+2009,January,Huawei,240,,,Technology,Telecom,Costa Rica,North America
+2009,January,Sinomach,300,,,Energy,,Angola,Sub-Saharan Africa
+2009,January,Sinohydro,100,,,Energy,Hydro,Botswana,Sub-Saharan Africa
+2009,January,Sinohydro,160,,,Energy,Hydro,Mali,Sub-Saharan Africa
+2009,January,CNPC,1760,,National Iranian Oil,Energy,Oil,Iran,West Asia
+2009,January,Xinjiang Guanghui,250,49%,Tarbagatay Munay,Energy,,Kazakhstan,West Asia
+2009,January,China National Chemical Engineering,440,,European Nickel,Metals,,Turkey,West Asia
+2009,February,China Railway Construction,390,21%,,Transport,Rail,Saudi Arabia,Arab World
+2009,February,China Communications Construction,100,,,Transport,Shipping,Saudi Arabia,Arab World
+2009,February,Hunan Valin,770,17%,Fortescue Metals,Metals,Steel,Australia,Australia
+2009,February,Sinomach,580,,,Energy,,Philippines,East Asia
+2009,February,Shougang,990,,,Metals,Steel,Peru,South America
+2009,February,China Communications Construction,1130,,,Transport,Shipping,Angola,Sub-Saharan Africa
+2009,February,Sinomach,140,,,Energy,Hydro,Madagascar,Sub-Saharan Africa
+2009,March,Sinomach,100,,,Energy,Alternative,Czech Republic,Europe
+2009,March,Wuhan Iron and Steel,240,20%,Consolidated Thompson,Metals,Steel,Canada,North America
+2009,March,Sinoma,140,,George Forrest Congo,Real estate,Construction,Congo,Sub-Saharan Africa
+2009,March,Sinohydro,370,,Communauté Electrique du Bénin,Energy,Hydro,Togo,Sub-Saharan Africa
+2009,March,CIC,800,,Morgan Stanley,Real estate,Property,USA,USA
+2009,March,State Construction Engineering,410,,,Transport,Autos,USA,USA
+2009,March,CNOOC-led consortium,3350,,,Energy,Gas,Iran,West Asia
+2009,April,Sinopec,350,,Kuwait Oil,Energy,,Kuwait,Arab World
+2009,April,Tianjin Pipe,1010,,,Metals,Steel,USA,USA
+2009,April,CNPC,2600,50%,Central Asia Petroleum,Energy,Gas,Kazakhstan,West Asia
+2009,May,Sinohydro,160,,,Agriculture,,Qatar,Arab World
+2009,May,Guangdong Rising Asset Management,140,20%,PanAust,Metals,,Australia,Australia
+2009,May,HNA,150,,Allco Finance,Finance,Investment,Australia,Australia
+2009,May,MCC,520,10%,Mineralogy,Energy,Coal,Australia,Australia
+2009,May,MCC,1540,,Palmer's Mineralology,Energy,Coal,Australia,Australia
+2009,May,CNPC,1020,46%,Singapore Petroleum,Energy,Oil,Singapore,East Asia
+2009,May,China Railway Engineering,350,,,Transport,Rail,Vietnam,East Asia
+2009,May,CNOOC and Sinopec,320,,Talisman Energy,Energy,Oil,Trinidad-Tobago,North America
+2009,May,Najinzhao,100,,Cardero,Metals,Steel,Peru,South America
+2009,May,China Nonferrous,370,,Muliashi,Metals,Copper,Zambia,Sub-Saharan Africa
+2009,May,Huawei,200,,Unitech,Technology,Telecom,India,West Asia
+2009,June,China Railway Construction,2570,,,Transport,Rail,Algeria,Arab World
+2009,June,Ansteel,130,24%,Gindalbie Metals,Metals,Steel,Australia,Australia
+2009,June,Minmetals,1390,51%,Oz Minerals,Metals,,Australia,Australia
+2009,June,CNPC,1240,,,Energy,,Myanmar,East Asia
+2009,June,Sinopec,7200,100%,Addax Petroleum,Energy,,Switzerland,Europe
+2009,June,Sinomach,670,,,Energy,Hydro,Zambia,Sub-Saharan Africa
+2009,June,CIC,1210,1%,Morgan Stanley,Finance,Banking,USA,USA
+2009,June,CIC,500,,Blackstone,Finance,Investment,USA,USA
+2009,June,CIC,710,,Blackrock,Finance,Investment,USA,USA
+2009,June,Sinomach,850,,,Energy,Coal,Sri Lanka,West Asia
+2009,July,Tianjin Development,280,,,Real estate,Property,Egypt,Arab World
+2009,July,Shandong Electric Power,1800,,Saudi Electricity Company,Energy,Oil,Saudi Arabia,Arab World
+2009,July,China Railway Construction,530,,,Real estate,Construction,Saudi Arabia,Arab World
+2009,July,Genertec,270,,,Energy,,Sudan,Arab World
+2009,July,China National Building Materials,110,,Les Ciments de Bizerte,Real estate,Construction,Tunisia,Arab World
+2009,July,Chinalco,1500,1%,Rio Tinto,Metals,Aluminum,Australia,Australia
+2009,July,Shenhua,330,,,Energy,Coal,Indonesia,East Asia
+2009,July,Three Gorges,110,,,Agriculture,,Philippines,East Asia
+2009,July,Wuhan Kaidi Electric,200,,Vietnam National Coal,Energy,Coal,Vietnam,East Asia
+2009,July,CIC,370,1%,Diageo,Agriculture,,Britain,Europe
+2009,July,CIC,1500,17%,Teck Resources,Metals,Copper,Canada,North America
+2009,July,China Railway Engineering,7500,,,Transport,Rail,Venezuela,South America
+2009,July,Sinohydro,2420,,,Energy,Hydro,Ethiopia,Sub-Saharan Africa
+2009,July,"Taiyuan Iron, China Development Bank, Shanxi Coking Coal, and Tianli Enterprises",740,"34, 33, 21, 12%",,Real estate,Property,Mauritius,Sub-Saharan Africa
+2009,July,Xiyang Group,480,,,Metals,Steel,Russia,West Asia
+2009,August,State Construction Engineering,260,,,Transport,Autos,Algeria,Arab World
+2009,August,CNOOC,100,,Qatar Petroleum,Energy,Gas,Qatar,Arab World
+2009,August,CIC,1090,,Goodman Group,Real estate,Property,Australia,Australia
+2009,August,Yanzhou Coal,2950,100%,Felix Resources,Energy,Coal,Australia,Australia
+2009,August,CIC,450,19%,Songbird Estates,Real estate,Property,Britain,Europe
+2009,August,Sinochem,880,100%,Emerald Energy,Energy,,Britain,Europe
+2009,August,CNPC,1740,60%,Athabasca Oil Sands,Energy,Oil,Canada,North America
+2009,August,CNPC,470,,,Energy,Oil,Chad,Sub-Saharan Africa
+2009,September,CNPC,1160,50%,Singapore Petroleum,Energy,Oil,Singapore,East Asia
+2009,September,ICBC,530,,ACL Bank,Finance,Banking,Thailand,East Asia
+2009,September,Unicom,1000,1%,Telefonica,Technology,Telecom,Spain,Europe
+2009,September,China State Construction Engineering,100,3%,Baha Mar Resort,Real estate,Property,Bahamas,North America
+2009,September,China Communications Construction,120,,,Transport,Autos,Equatorial Guinea,Sub-Saharan Africa
+2009,September,Gezhouba,410,,Ethiopian Electric Power Corporation,Energy,Hydro,Ethiopia,Sub-Saharan Africa
+2009,September,China Power Investment,350,40%,Goss International,Other,,USA,USA
+2009,September,CIC,600,,Oaktree Capital Management distressed asset fund,Real estate,Property,USA,USA
+2009,September,CIC,600,,Goldman Sachs distressed asset fund,Real estate,Property,USA,USA
+2009,September,CIC,940,11%,JSC KazMunaiGas E&P,Energy,Gas,Kazakhstan,West Asia
+2009,October,CNPC,260,,,Energy,Oil,Sudan,Arab World
+2009,October,China Communications Construction,100,,,Transport,Shipping,Sudan,Arab World
+2009,October,CNPC,5590,37%,BP and Iraq South Oil,Energy,Oil,Iraq,Arab World
+2009,October,CIC,250,13%,South Gobi Energy,Energy,Coal,Mongolia,East Asia
+2009,October,China Power Investment,1380,,Electricite de Vietnam,Energy,Coal,Vietnam,East Asia
+2009,October,China Communications Construction,100,,,Transport,Shipping,Brazil,South America
+2009,October,Sinoma,230,,Dangote,Real estate,Construction,Nigeria,Sub-Saharan Africa
+2009,October,China Railway Construction,850,,,Transport,Rail,Nigeria,Sub-Saharan Africa
+2009,October,CIC,300,45%,Nobel Holdings,Energy,Oil,Russia,West Asia
+2009,November,Sinoma,150,,,Real estate,Construction,Saudi Arabia,Arab World
+2009,November,BaoSteel,240,15%,Aquila Resources,Metals,Steel,Australia,Australia
+2009,November,Wuhan Iron and Steel,250,15%,Centrex Metals,Metals,Steel,Australia,Australia
+2009,November,Great Wall Motor,120,,Litex Motors,Transport,Autos,Bulgaria,Europe
+2009,November,Wuhan Iron and Steel,400,22%,MMX Mineracao,Metals,Steel,Brazil,South America
+2009,November,Sinomach,970,,,Energy,,Botswana,Sub-Saharan Africa
+2009,November,China Communications Construction,610,,,Transport,Autos,Ethiopia,Sub-Saharan Africa
+2009,November,Beijing West Industries,100,,Delphi,Transport,Autos,USA,USA
+2009,November,CIC,1580,15%,AES,Energy,,USA,USA
+2009,November,CNOOC,100,,Statoil,Energy,Oil,USA,USA
+2009,November,State Construction Engineering,100,,,Transport,Rail,USA,USA
+2009,November,Harbin Electric,600,,,Energy,,Pakistan,West Asia
+2009,November,China Communications Construction,210,,,Transport,Aviation,Sri Lanka,West Asia
+2009,December,CNPC,240,,State Oil Marketing Organization and South Oil Company,Energy,Oil,Iraq,Arab World
+2009,December,Sun Paper,200,,,Other,Timber,Laos,East Asia
+2009,December,CIC,500,,CVRD (Vale),Metals,Steel,Brazil,South America
+2009,December,Shunde Rixin and Minmetals,1910,70%,,Metals,Steel,Chile,South America
+2009,December,China Railway Construction and China Nonferrous,650,100%,Corriente Resources,Metals,Copper,Ecuador,South America
+2009,December,China Communications Construction,500,,,Transport,Shipping,Cameroon,Sub-Saharan Africa
+2009,December,Sinohydro,460,,,Energy,Hydro,Senegal,Sub-Saharan Africa
+2009,December,BAIC,200,,Saab US,Transport,Autos,USA,USA
+2009,December,Jinjiang International Hotels,150,50%,Interstate Hotel and Resorts,Real estate,Property,USA,USA
+2009,December,Sinohydro,350,,,Transport,Autos,Bangladesh,West Asia
+2009,December,Shanghai Auto,350,50%,GM India,Transport,Autos,India,West Asia
+2009,December,China Mobile,500,,,Technology,Telecom,Pakistan,West Asia
+2009,December,CNPC,3130,,,Energy,Gas,Turkmenistan,West Asia
+2009,December,"Baiyin Non-Ferrous, CITIC & Chang Xin",190,60%,Oxus,Metals,,Uzbekistan,West Asia
+2010,January,China Communications Construction,130,,,Agriculture,,UAE,Arab World
+2010,January,Gezhouba,600,,Philippine Green Energy,Energy,Hydro,Philippines,East Asia
+2010,January,Three Gorges,110,,,Transport,Autos,Cameroon,Sub-Saharan Africa
+2010,January,Norinco,460,,Daghestan Public Aviation Parts,Transport,Autos,Russia,West Asia
+2010,February,Gezhouba,200,,,Other,Utilities,Mauritania,Arab World
+2010,February,Chinalco,350,35%,GIIG,Metals,Aluminum,Malaysia,East Asia
+2010,February,CIC,960,2%,Apax Finance,Finance,Investment,Britain,Europe
+2010,February,Wanhua Industrial,190,,BorsodChem,Chemicals,,Hungary,Europe
+2010,February,Sany Heavy,200,,,Real estate,Construction,Brazil,South America
+2010,February,CIC,1500,,"Lexington Partners, Pantheon Ventures, Goldman Sachs",Finance,Investment,USA,USA
+2010,February,Gezhouba and Xinjiang International Economic Cooperation,730,,Kazakhstan Natural Gas Technology,Energy,Hydro,Kazakhstan,West Asia
+2010,March,China Poly,100,,Poly Hon Done Pelagic Fishery,Agriculture,,Mauritania,Arab World
+2010,March,China National Chemical Engineering,500,,,Agriculture,,Sudan,Arab World
+2010,March,CNPC,1580,50%,Arrow Energy,Energy,Gas,Australia,Australia
+2010,March,China Railway Engineering,4800,,Bhakta Hill Pan Pacific Railway,Transport,Rail,Indonesia,East Asia
+2010,March,Dongfang Electric,1400,,Electricite de Vietnam,Energy,Coal,Vietnam,East Asia
+2010,March,Geely Auto,1800,,Ford,Transport,Autos,Sweden,Europe
+2010,March,Geely Auto,900,,Volvo,Transport,Autos,Sweden,Europe
+2010,March,State Construction Engineering,2500,,,Real estate,Construction,Bahamas,North America
+2010,March,CIC,200,,Brookefield,Finance,Investment,Canada,North America
+2010,March,CNOOC,3100,50%,Bridas,Energy,,Argentina,South America
+2010,March,East China Mineral Exploration and Development Bureau (Jiangsu),1200,,,Metals,Steel,Brazil,South America
+2010,March,Sinomach,500,,,Transport,Autos,Cameroon,Sub-Saharan Africa
+2010,March,Sinohydro,800,,,Energy,Hydro,Cameroon,Sub-Saharan Africa
+2010,March,First Auto Works and China Development Bank,100,,,Transport,Autos,South Africa,Sub-Saharan Africa
+2010,March,Sinomach,420,,,Real estate,Construction,Zambia,Sub-Saharan Africa
+2010,March,CNPC,180,51%,INOVA Geophysical Equipment,Energy,,USA,USA
+2010,March,Sinopec,1700,,Kazakhstan Petrochemical,Chemicals,,Kazakhstan,West Asia
+2010,March,Sinomach and Gezhouba,1510,,,Energy,Hydro,Pakistan,West Asia
+2010,April,Three Gorges,840,,,Energy,Hydro,Sudan,Arab World
+2010,April,CNOOC,270,5%,BG,Energy,Gas,Australia,Australia
+2010,April,Sichuan Hanlong,140,55%,Moly Mines,Metals,,Australia,Australia
+2010,April,CNOOC,180,,Chevron,Energy,Gas,Australia,Australia
+2010,April,Huadian,580,,,Energy,Hydro,Cambodia,East Asia
+2010,April,China Communications Construction,260,,,Transport,Autos,Serbia,Europe
+2010,April,Sinopec,4650,9%,ConocoPhillip,Energy,Oil,Canada,North America
+2010,April,CNPC,900,,PDVSA,Energy,Oil,Venezuela,South America
+2010,April,China Railway Construction,260,13%,African Minerals,Metals,Steel,Sierra Leone,Sub-Saharan Africa
+2010,April,State Construction Engineering,940,,,Transport,Autos,Congo,Sub-Saharan Africa
+2010,April,State Grid,1500,,Wo Dante,Energy,,India,West Asia
+2010,April,Jinchuan,120,49%,Kazakhmys,Metals,Copper,Kazakhstan,West Asia
+2010,April,Tencent,300,10%,Digital Sky Technologies,Technology,,Russia,West Asia
+2010,April,Genertec,280,,,Transport,Rail,Sri Lanka,West Asia
+2010,April,Sinomach,360,,,Energy,,Turkey,West Asia
+2010,April,Sinoma,780,,Eren Group,Real estate,Construction,Turkey,West Asia
+2010,May,Rongsheng Holding and Sinochem,1990,,,Energy,Oil,Egypt,Arab World
+2010,May,Shandong Electric,1720,,Al-Arrab,Energy,Hydro,Saudi Arabia,Arab World
+2010,May,CNPC,1480,35%,Shell,Energy,,Syria,Arab World
+2010,May,CNPC,150,,,Energy,,Indonesia,East Asia
+2010,May,Tianyu Group,990,,Lippo Incheon Development,Real estate,Property,South Korea,East Asia
+2010,May,Jiangsu Zongyi,200,,,Energy,Alternative,Italy,Europe
+2010,May,CIC,1220,"5%, 45%",Penn West and Penn West Energy,Energy,Oil,Canada,North America
+2010,May,Sinochem,3070,40%,Statoil,Energy,Oil,Brazil,South America
+2010,May,State Grid,990,,Plena Transmissoras,Energy,,Brazil,South America
+2010,May,Jiangsu Yongyuan,140,,,Real estate,Construction,Ethiopia,Sub-Saharan Africa
+2010,May,Dongfang Electric,500,,,Energy,Hydro,Ethiopia,Sub-Saharan Africa
+2010,May,Sinomach,100,,,Energy,,Kenya,Sub-Saharan Africa
+2010,May,Jinchuan Group and China Development Bank,230,51%,Wesizwe Platinum,Metals,,South Africa,Sub-Saharan Africa
+2010,May,Tangshan Jidong Cement and China Development Bank,120,60%,Women Investment Portfolio Holdings,Real estate,Construction,South Africa,Sub-Saharan Africa
+2010,May,Sinohydro,400,,Zesa,Energy,Hydro,Zimbabwe,Sub-Saharan Africa
+2010,May,Hopu,100,1%,Chesapeake Energy,Energy,Gas,USA,USA
+2010,June,China National Electric Equipment Engineering,1680,,,Energy,Coal,Laos,East Asia
+2010,June,China Communications Construction,320,,,Transport,Shipping,Singapore,East Asia
+2010,June,Sinohydro,170,,,Transport,Rail,Thailand,East Asia
+2010,June,BCEGI,130,,,Real estate,Construction,Greece,Europe
+2010,June,Yunnan Metallurgical,100,50%,Selwyn Resources,Metals,,Canada,North America
+2010,June,Shaanxi Chemical,1010,,,Chemicals,,Argentina,South America
+2010,June,Sinohydro,2300,,,Energy,Hydro,Ecuador,South America
+2010,June,China Power Investment,1150,60%,Goss International,Other,,USA,USA
+2010,June,Gezhouba,100,,,Energy,Hydro,Nepal,West Asia
+2010,July,China Merchants Group,550,100%,Loscam,Transport,Shipping,Australia,Australia
+2010,July,Hangzhou Jinjiang,510,51%,ANTAM,Metals,,Indonesia,East Asia
+2010,July,Huadian,1990,,Tan Tao Investment and Industrial,Energy,Coal,Vietnam,East Asia
+2010,July,Dongfang Electric,710,,Energy Financing,Energy,Coal,Bosnia,Europe
+2010,July,Sinomach,2470,,,Transport,Rail,Argentina,South America
+2010,July,Tempo Group and Beijing city,440,,Nexteer Auto,Transport,Autos,USA,USA
+2010,August,Norinco,1500,,,Agriculture,,Laos,East Asia
+2010,August,Sinoma,140,,Hume Cement,Real estate,Construction,Malaysia,East Asia
+2010,August,China Machine New Energy,700,,AEI,Energy,,Guatemala,North America
+2010,August,Chery,400,,,Transport,Autos,Brazil,South America
+2010,August,Gezhouba,670,,Hidropaute,Energy,Hydro,Ecuador,South America
+2010,August,China Communications Construction,130,100%,Friede Goldman United,Energy,Oil,USA,USA
+2010,August,Gezhouba,590,,,Energy,,Pakistan,West Asia
+2010,September,Inner Mongolia Hong Jun,180,51%,Cambodia International Investment Development,Energy,,Cambodia,East Asia
+2010,September,Norinco,1480,,Myanmar Economic Holdings,Metals,Copper,Myanmar,East Asia
+2010,September,Shanda Games,100,100%,Eyedentity Games,Other,Consumer,South Korea,East Asia
+2010,September,Jinchuan,420,100%,Continental Metals,Metals,Copper,Canada,North America
+2010,September,Sinomach,960,,Venezuela National Electric Power Company,Energy,Coal,Venezuela,South America
+2010,September,Bosai Minerals,1200,80%,Ghana Bauxite,Metals,Aluminum,Ghana,Sub-Saharan Africa
+2010,September,Sinomach,110,,,Transport,Aviation,Sierra Leone,Sub-Saharan Africa
+2010,September,Huadian,360,51%,JSC Territorial,Energy,,Russia,West Asia
+2010,October,MCC,570,,MAK Group,Real estate,Construction,Kuwait,Arab World
+2010,October,Three Gorges and Sinohydro,240,,,Transport,Autos,Morocco,Arab World
+2010,October,Sinomach,610,,Moly Mines,Metals,Copper,Australia,Australia
+2010,October,Sinohydro,130,,,Energy,,Laos,East Asia
+2010,October,Sinochem,1440,60%,Makhteshim-Agan,Agriculture,,Israel,Europe
+2010,October,Huawei,970,,Vodafone Italia,Technology,Telecom,Italy,Europe
+2010,October,China Communications Construction,400,,,Transport,Autos,Jamaica,North America
+2010,October,Sinopec,7100,40%,Repsol,Energy,Oil,Brazil,South America
+2010,October,Minmetals,2500,,,Metals,Copper,Peru,South America
+2010,October,CNOOC,2370,33%,Chesapeake Energy,Energy,Gas,USA,USA
+2010,October,Sinohydro,1500,,Zanjan Regional Water,Energy,Hydro,Iran,West Asia
+2010,October,Sinomach,290,,,Other,Utilities,Iran,West Asia
+2010,October,Three Gorges,2290,50%,EuroSibEnergo,Energy,,Russia,West Asia
+2010,November,Chongqing Chonggang Minerals,270,60%,AsiaIron,Metals,,Australia,Australia
+2010,November,Guangdong Rising,400,,Caledon Resources,Energy,Coal,Australia,Australia
+2010,November,Huadian,170,,,Energy,Coal,Cambodia,East Asia
+2010,November,CNPC,4500,,Cuvenpetrol,Energy,Oil,Cuba,North America
+2010,November,CNPC and Sinopec,610,,,Energy,Oil,Ecuador,South America
+2010,November,Sinomach,380,,,Energy,Hydro,Congo,Sub-Saharan Africa
+2010,November,China Merchants and China Development Bank,150,48%,ZIM Integrated Shipping,Transport,Shipping,Nigeria,Sub-Saharan Africa
+2010,November,CIC,1030,,General Growth Properties,Real estate,Property,USA,USA
+2010,November,Huaneng Power,1230,50%,InterGen,Energy,,USA,USA
+2010,November,SAIC,500,1%,GM,Transport,Autos,USA,USA
+2010,December,Sinoma,110,,Mass Iraq,Real estate,Construction,Iraq,Arab World
+2010,December,Sinoma,140,,,Real estate,Construction,Saudi Arabia,Arab World
+2010,December,Taiyuan Heavy Machinery,130,100%,Valley Longwall,Energy,Coal,Australia,Australia
+2010,December,Sinopec,680,18%,Chevron,Energy,Gas,Indonesia,East Asia
+2010,December,Sinohydro,260,,Tenaga,Energy,Hydro,Malaysia,East Asia
+2010,December,Sinomach,900,,Lion Group,Metals,Steel,Malaysia,East Asia
+2010,December,China Communications Construction,100,,,Transport,Aviation,Myanmar,East Asia
+2010,December,Shangdi Guanqun,2000,,Pyongyang Investment and Development,Real estate,Property,North Korea,East Asia
+2010,December,Ashima Cultural Group,1500,,,Real estate,Property,Thailand,East Asia
+2010,December,Wuhan Kaidi Electric,650,,Thang Long Thermoelectric,Energy,Coal,Vietnam,East Asia
+2010,December,Sinomach,190,,,Energy,Hydro,Belarus,Europe
+2010,December,Sinochem,270,50%,DSM,Technology,Medical,Netherlands,Europe
+2010,December,Sinomach,220,,Electrical Power Company of Serbia,Energy,Coal,Serbia,Europe
+2010,December,Sinopec,2470,,Occidental Petroleum,Energy,,Argentina,South America
+2010,December,CIC,200,,BTG Pactual,Finance,Investment,Brazil,South America
+2010,December,Three Gorges,270,,,Energy,Hydro,Ecuador,South America
+2010,December,Gezhouba,290,,,Agriculture,,Venezuela,South America
+2010,December,Sinomach,870,,,Other,Utilities,Cameroon,Sub-Saharan Africa
+2010,December,Sinohydro,320,,,Energy,,Equatorial Guinea,Sub-Saharan Africa
+2010,December,"China Railway Construction, Nanjing Government, China Development Bank, and Guangdong Xinguang",2500,,,Real estate,Property,Nigeria,Sub-Saharan Africa
+2010,December,ZTE,400,,,Technology,Telecom,Nigeria,Sub-Saharan Africa
+2010,December,AVIC,190,,Teledyne Technologies,Transport,Aviation,USA,USA
+2010,December,Sinomach,220,,,Technology,Telecom,Bangladesh,West Asia
+2010,December,Xinjiang Hualing and Shanghai Boda,100,,,Real estate,Property,Georgia,West Asia
+2010,December,Datang,1400,,Spice Energy,Energy,Coal,India,West Asia
+2010,December,China Communications Construction,160,,,Transport,Shipping,Pakistan,West Asia
+2010,December,Three Gorges,170,,EuroSibEnergo,Energy,,Russia,West Asia
+2011,January,China Communications Construction,100,,,Transport,Shipping,Egypt,Arab World
+2011,January,Sinohydro,720,,Diar Real Estate,Real estate,Construction,Qatar,Arab World
+2011,January,China Communications Construction,880,,,Transport,Shipping,Qatar,Arab World
+2011,January,Yanzhou Coal,920,,,Energy,Coal,Australia,Australia
+2011,January,China Communications Construction,100,,,Energy,Coal,Indonesia,East Asia
+2011,January,Lenovo,180,51%,NEC,Technology,,Japan,East Asia
+2011,January,Gezhouba,150,,,Energy,Hydro,Myanmar,East Asia
+2011,January,Guangdong Changda Highway Engineering,180,,,Transport,Autos,Vietnam,East Asia
+2011,January,CNPC,510,50%,INEOS Britain,Energy,,Britain,Europe
+2011,January,CNPC,510,50%,INEOS France,Energy,,France,Europe
+2011,January,Jinsheng Industry,130,50%,EMAG,Other,,Germany,Europe
+2011,January,ChemChina,2010,100%,Orkla,Chemicals,,Norway,Europe
+2011,January,China Unicom,500,1%,Telefonica,Technology,Telecom,Spain,Europe
+2011,January,Wuhan Iron and Steel,120,60%,Adriana Resources,Metals,Steel,Canada,North America
+2011,January,ICBC,140,80%,Bank of East Asia,Finance,Banking,USA,USA
+2011,January,China Communications Construction,810,,,Transport,Shipping,Sri Lanka,West Asia
+2011,February,China Communications Construction,1210,,,Transport,Aviation,Sudan,Arab World
+2011,February,Sinopec,1520,15%,Origin Energy-ConocoPhillips,Energy,Gas,Australia,Australia
+2011,February,CIC,190,,Morgan Stanley,Finance,Banking,Japan,East Asia
+2011,February,Wanhua Industrial,1660,58%,BorsodChem,Chemicals,,Hungary,Europe
+2011,February,Fulida Group,250,,Neucel Specialty,Other,Timber,Canada,North America
+2011,February,CNOOC,330,,ExxonMobil,Energy,Oil,Argentina,South America
+2011,February,State Construction Engineering,600,,,Transport,Autos,Congo,Sub-Saharan Africa
+2011,February,Sinohydro,660,,,Energy,Hydro,DRC,Sub-Saharan Africa
+2011,February,AVIC,200,100%,Cirrus,Transport,Aviation,USA,USA
+2011,February,Nanshan Group,160,,,Metals,Aluminum,USA,USA
+2011,February,Tencent,400,84%,Riot Games,Other,Consumer,USA,USA
+2011,February,CIC,100,,VTB Group,Finance,Banking,Russia,West Asia
+2011,March,Sinopec,3300,38%,SABC,Energy,Oil,Saudi Arabia,Arab World
+2011,March,Sichuan Hanlong,180,16%,Sundance Resources,Metals,Steel,Australia,Australia
+2011,March,State Construction Engineering and China Communications Construction,150,,,Transport,Autos,Indonesia,East Asia
+2011,March,China Communications Construction,640,,,Energy,,Indonesia,East Asia
+2011,March,China Communications Construction,210,,,Transport,Shipping,Myanmar,East Asia
+2011,March,Chongqing Grain,1410,,,Agriculture,,Brazil,South America
+2011,March,Sinomach,170,,EASBA,Agriculture,,Kenya,Sub-Saharan Africa
+2011,March,State Construction Engineering,300,,,Transport,Aviation,Mauritius,Sub-Saharan Africa
+2011,March,Tebian Electric Apparatus,290,,Zesco,Energy,,Zambia,Sub-Saharan Africa
+2011,April,State Construction Engineering,200,,,Real estate,Construction,Algeria,Arab World
+2011,April,State Construction Engineering,220,,,Real estate,Construction,Algeria,Arab World
+2011,April,China Power Investment,1010,,,Energy,,Iraq,Arab World
+2011,April,Sinomach,200,,,Energy,,Iraq,Arab World
+2011,April,Datang Power and Boading Tianwei,2030,64%,CBD Energy,Energy,Alternative,Australia,Australia
+2011,April,Sany Heavy,200,,,Real estate,Construction,Indonesia,East Asia
+2011,April,Gezhouba,170,,Perusahaan Listrik Negara,Energy,Coal,Indonesia,East Asia
+2011,April,Sinohydro,1990,,,Energy,Hydro,Laos,East Asia
+2011,April,Chinalco,800,,Smelter Asia,Metals,Aluminum,Malaysia,East Asia
+2011,April,Genertec,830,,Alstom,Energy,Coal,Malaysia,East Asia
+2011,April,Huadian,790,,Janakuasa,Energy,Coal,Vietnam,East Asia
+2011,April,Sinomach,770,,,Other,Timber,Belarus,Europe
+2011,April,ICBC,100,,,Finance,Banking,Brazil,South America
+2011,April,ZTE,200,,,Technology,Telecom,Brazil,South America
+2011,April,Sinomach,990,,,Transport,Aviation,Chad,Sub-Saharan Africa
+2011,April,Evergreen Potassium,120,100%,MagIndustries,Agriculture,,Congo,Sub-Saharan Africa
+2011,April,Sinomach,180,,,Transport,Autos,Zambia,Sub-Saharan Africa
+2011,April,Beiqi Foton,380,,,Transport,Autos,India,West Asia
+2011,April,State Construction Engineering,450,,,Transport,Air,Pakistan,West Asia
+2011,May,BYD,200,,,Transport,Autos,Indonesia,East Asia
+2011,May,China National Building Material,350,,PT Semen Grobogan Semarang,Real estate,Construction,Indonesia,East Asia
+2011,May,Gezhouba,990,,Perusahaan Listrik Negara,Energy,Hydro,Indonesia,East Asia
+2011,May,China Railway Engineering,760,,,Transport,Rail,Myanmar,East Asia
+2011,May,Fosun,120,10%,Folli Follie,Other,Consumer,Greece,Europe
+2011,May,Zijin Mining,100,,Glencore,Metals,,Switzerland,Europe
+2011,May,Sinomach,2010,,,Real estate,Construction,Ukraine,Europe
+2011,May,Chery,200,,,Transport,Autos,Venezuela,South America
+2011,May,Shandong Iron,1490,25%,African Minerals,Metals,Steel,Sierra Leone,Sub-Saharan Africa
+2011,May,Sinopec,540,80%,Shell,Energy,Oil,Cameroon,Sub-Saharan Africa
+2011,May,Three Gorges,200,,Cameroon Electricity Development,Energy,Hydro,Cameroon,Sub-Saharan Africa
+2011,May,"CITIC, China Development Bank, Long March Capital",470,75%,Gold One,Metals,,South Africa,Sub-Saharan Africa
+2011,May,China Dalian International Economic & Technical Cooperation,100,,,Energy,Alternative,Tanzania,Sub-Saharan Africa
+2011,May,China Chengtong,350,,,Real estate,Property,Russia,West Asia
+2011,June,State Construction Engineering,700,,,Real estate,Construction,Algeria,Arab World
+2011,June,CNPC,170,,Maysan Oil,Energy,Oil,Iraq,Arab World
+2011,June,Suning,110,31%,Laox,Other,Consumer,Japan,East Asia
+2011,June,Genertec,600,,,Transport,Aviation,Belarus,Europe
+2011,June,Lenovo,670,82%,Medion,Technology,,Germany,Europe
+2011,June,Heilongjiang Beidahuang Nongken,1510,,Cresud,Agriculture,,Argentina,South America
+2011,June,ICBC,680,75%,Standard Bank,Finance,Banking,Argentina,South America
+2011,June,China Energy Engineering,120,,,Energy,Alternative,Ethiopia,Sub-Saharan Africa
+2011,June,Gezhouba,270,,,Other,Utilities,Ghana,Sub-Saharan Africa
+2011,June,Anhui Foreign Economic Construction,100,,,Real estate,Construction,Zimbabwe,Sub-Saharan Africa
+2011,June,HNA,270,,Carlyle,Real estate,Property,USA,USA
+2011,June,Fuyao Glass,200,,,Transport,Autos,Russia,West Asia
+2011,July,COFCO,140,99%,Tully Sugar,Agriculture,,Australia,Australia
+2011,July,Zhejiang Hengyi and Sinopec,2800,70%,Damai,Energy,Oil,Brunei,East Asia
+2011,July,Jilin Jien Nickel,930,,,Metals,Steel,Indonesia,East Asia
+2011,July,Haier,130,,Panasonic,Other,Consumer,Japan,East Asia
+2011,July,Shenhua,1010,21%,Mitsui and Peabody,Energy,Coal,Mongolia,East Asia
+2011,July,CITIC,420,100%,KSM Castings,Transport,Autos,Germany,Europe
+2011,July,China Guodian,260,70%,Farm Owned Power,Energy,Alternative,Canada,North America
+2011,July,CNOOC,2040,100%,Opti Canada,Energy,Oil,Canada,North America
+2011,July,Chery,170,,Socma,Transport,Autos,Argentina,South America
+2011,July,Jinchuan,1360,100%,Metorex,Metals,Copper,South Africa,Sub-Saharan Africa
+2011,July,Sinosteel,300,,,Metals,,Zimbabwe,Sub-Saharan Africa
+2011,July,Tebian Electric Apparatus,210,,Kyrgyz National Grid,Energy,,Kyrgyzstan,West Asia
+2011,August,Bright Foods,390,75%,Manassen Foods,Agriculture,,Australia,Australia
+2011,August,Yanzhou,210,100%,Syntech,Energy,Coal,Australia,Australia
+2011,August,Norinco,700,,Wanbao Burma,Metals,Copper,Myanmar,East Asia
+2011,August,HNA,530,100%,GE SeaCo,Transport,Shipping,Singapore,East Asia
+2011,August,CIC,360,19%,AES and POSCO,Energy,Coal,Vietnam,East Asia
+2011,August,CIC,3240,30%,GDF Suez,Energy,,France,Europe
+2011,August,SAFE,720,3%,Munich Re,Finance,,Germany,Europe
+2011,August,Jilin Jien Nickel,400,,,Metals,,Canada,North America
+2011,August,Sinomach,170,,,Agriculture,,Jamaica,North America
+2011,August,JAC Motors,100,20%,SHC,Transport,Autos,Brazil,South America
+2011,August,"Taiyuan Iron, CITIC, Baosteel",1950,15%,CBMM,Metals,,Brazil,South America
+2011,August,Three Gorges,450,,,Energy,Hydro,Guinea,Sub-Saharan Africa
+2011,August,Guangdong Midea,230,51%,Carrier's Latin American Operations,Other,,USA,USA
+2011,September,Shandong Electric,150,,GE,Energy,Gas,Egypt,Arab World
+2011,September,Yanzhou,300,,Wesfarmers,Energy,Coal,Australia,Australia
+2011,September,Jilin Huroc Nonferrous,2990,,Billy Indonesia,Metals,Steel,Indonesia,East Asia
+2011,September,Qingdao Tianzhong Investment,100,,,Transport,Autos,Vietnam,East Asia
+2011,September,Yanzhou,260,,North Atlantic Potash,Chemicals,,Canada,North America
+2011,September,China Communications Construction,220,,International Container Terminal Services,Transport,Shipping,Mexico,North America
+2011,September,China Communications Construction,320,,Ferrominera Orinoco,Transport,,Venezuela,South America
+2011,September,Sinomach,100,,,Real estate,Construction,Angola,Sub-Saharan Africa
+2011,September,Minmetals,1280,100%,Anvil Mining,Metals,Copper,DRC,Sub-Saharan Africa
+2011,September,Henan Guoju,420,,,Real estate,Construction,Mozambique,Sub-Saharan Africa
+2011,September,Sichuan Hongda,2400,,,Energy,Coal,Tanzania,Sub-Saharan Africa
+2011,September,CNPC,500,,Tanzania Petroleum Development,Energy,Gas,Tanzania,Sub-Saharan Africa
+2011,September,Power Construction Corp,250,,Itezhi-Tehzi Power Corporation,Energy,Hydro,Zambia,Sub-Saharan Africa
+2011,September,Xinjiang Goldwind,200,,,Energy,Alternative,USA,USA
+2011,September,China Nonferrous,930,,KALCO,Metals,Aluminum,Iran,West Asia
+2011,September,United Energy,750,,BP,Energy,,Pakistan,West Asia
+2011,September,China Merchants Group,280,55%,Aitken Spence,Transport,Shipping,Sri Lanka,West Asia
+2011,October,China Nickel Resources,270,80%,PT Yiwan Mining,Metals,,Indonesia,East Asia
+2011,October,Tsingtao Beer,100,,Namyong,Agriculture,,Thailand,East Asia
+2011,October,China Railway Engineering,550,,,Transport,Rail,Vietnam,East Asia
+2011,October,Wolong Holding,140,100%,ATB Group,Transport,Autos,Austria,Europe
+2011,October,Wanhua Industrial,260,,,Chemicals,,Hungary,Europe
+2011,October,Sinopec,2100,100%,Daylight Energy,Energy,,Canada,North America
+2011,October,Sinomach,240,,,Energy,Coal,Colombia,South America
+2011,October,Power Construction Corp,210,,Celec,Energy,Hydro,Ecuador,South America
+2011,October,China Communications Construction,260,,Bolivarian Ports,Transport,Shipping,Venezuela,South America
+2011,October,Three Gorges,110,,,Energy,Hydro,Mauritius,Sub-Saharan Africa
+2011,October,Sinomach,320,,Siemens,Energy,Gas,Tanzania,Sub-Saharan Africa
+2011,October,Soho China,570,,Rockpoint,Real estate,Property,USA,USA
+2011,October,CNPC,400,,Watan,Energy,Oil,Afghanistan,West Asia
+2011,October,Tebian Electric Apparatus,400,,,Energy,Alternative,India,West Asia
+2011,November,Sinomach,1080,,,Energy,,Iraq,Arab World
+2011,November,Guangxi Nonferrous Metal,500,,,Metals,Steel,Cambodia,East Asia
+2011,November,China Railway Engineering,120,10%,"Transpacific, Bukit Asam",Transport,Rail,Indonesia,East Asia
+2011,November,Power Construction Corp,240,,,Energy,Coal,Indonesia,East Asia
+2011,November,Zhouda Real Estate,790,,,Real estate,Property,Malaysia,East Asia
+2011,November,Sinosteel,100,,OM Holdings,Metals,,Malaysia,East Asia
+2011,November,Huawei,130,,,Technology,Telecom,Italy,Europe
+2011,November,CIC,850,10%,GDF Suez,Energy,,Trinidad-Tobago,North America
+2011,November,ICBC,100,5%,Standard Bank,Finance,Banking,Argentina,South America
+2011,November,Sinopec,4800,30%,Galp Energia,Energy,,Brazil,South America
+2011,November,China Communications Construction,460,,Petroquimica de Venezuela,Chemicals,,Venezuela,South America
+2011,November,China Communications Construction,140,,,Transport,Aviation,Guyana,South America
+2011,November,State Construction Engineering,130,,,Real estate,Construction,Ethiopia,Sub-Saharan Africa
+2011,November,Anhui Foreign Economic Construction,200,50%,Zimbabwe Mining Development,Metals,,Zimbabwe,Sub-Saharan Africa
+2011,November,China Communications Construction,140,,,Transport,Rail,Sri Lanka,West Asia
+2011,December,Power Construction Corp,130,,Mazaya Qatar Real Estate Development,Real estate,Construction,Qatar,Arab World
+2011,December,Sinopec,990,10%,Australia Pacific Liquefied Natural Gas,Energy,Gas,Australia,Australia
+2011,December,Yanzhou,2210,77%,Gloucester,Energy,Coal,Australia,Australia
+2011,December,Huadian,880,,Bukit Asam,Energy,Coal,Indonesia,East Asia
+2011,December,CIC,800,,Government of Singapore Investment,Real estate,,Japan,East Asia
+2011,December,Shougang Group,240,40%,Hiap Teck Venture Berhad,Metals,Steel,Malaysia,East Asia
+2011,December,Three Gorges,3510,21%,Energias de Portugal,Energy,,Portugal,Europe
+2011,December,Harbin Electric,470,,Celec,Energy,Hydro,Ecuador,South America
+2011,December,China Railway Engineering Corporation,1140,,,Real estate,Construction,Angola,Sub-Saharan Africa
+2011,December,Sinoma,260,,Palanca Cimentos,Real estate,Construction,Angola,Sub-Saharan Africa
+2011,December,China Railway Construction,5630,,,Transport,Rail,Chad,Sub-Saharan Africa
+2011,December,CNPC,150,51%,Varun Industries,Energy,Oil,Madagascar,Sub-Saharan Africa
+2011,December,China Communications Construction,490,,African Minerals,Transport,Rail,Sierra Leone,Sub-Saharan Africa
+2011,December,CIC,250,25%,Shanduka Group,Finance,Investment,South Africa,Sub-Saharan Africa
+2011,December,Sinomach,720,,,Agriculture,,Bangladesh,West Asia
+2011,December,CITIC,100,,Kazakh State Energy,Energy,Oil,Kazakhstan,West Asia
+2011,December,Sinopec,850,,Marubeni,Energy,Oil,Kazakhstan,West Asia
+2011,December,Three Gorges,130,,,Energy,Alternative,Pakistan,West Asia
+2012,January,CNPC,270,50%,Bow Energy,Energy,Gas,Australia,Australia
+2012,January,Wan Feng Shanghai,1520,,,Real estate,Property,Laos,East Asia
+2012,January,CIC,920,9%,Thames Water,Other,Utilities,Britain,Europe
+2012,January,Sany Heavy,480,90%,Putzmeister,Real estate,Construction,Germany,Europe
+2012,January,Shandong Heavy,460,75%,Ferretti,Transport,Shipping,Italy,Europe
+2012,January,CNPC,670,40%,Athabasca Oil Sands,Energy,Oil,Canada,North America
+2012,January,Jilin Jien Nickel,100,100%,Goldbrook Ventures,Metals,,Canada,North America
+2012,January,China Energy Engineering,1400,,,Energy,Hydro,South Sudan,Sub-Saharan Africa
+2012,January,HNA,130,,Assa Properties,Real estate,Property,USA,USA
+2012,January,Sinopec,2440,33%,Devon Energy,Energy,Gas,USA,USA
+2012,January,China Merchants Group,150,30%,Aitken Spence,Transport,Shipping,Sri Lanka,West Asia
+2012,February,State Construction Engineering,1340,,,Real estate,Construction,Algeria,Arab World
+2012,February,China Communications Construction,400,,,Transport,Autos,Belarus,Europe
+2012,February,Sinochem,260,35%,Siat,Energy,Oil,Belgium,Europe
+2012,February,Guangxi Liu Gong Machinery,100,100%,Huta Stalowa Wola,Transport,Autos,Poland,Europe
+2012,February,State Grid,510,25%,REN,Energy,,Portugal,Europe
+2012,February,CIC and Sinopec,300,,Sunshine Oilsands,Energy,Oil,Canada,North America
+2012,February,CNPC,1030,20%,Shell,Energy,Gas,Canada,North America
+2012,February,Xinjiang Goldwind,190,,Mainstream Renewable Power,Energy,Alternative,Chile,South America
+2012,February,Sinochem,980,,Total,Energy,Gas,Colombia,South America
+2012,February,China Railway Construction,510,,,Transport,Rail,Djibouti,Sub-Saharan Africa
+2012,February,Three Gorges,350,,,Transport,Autos,Senegal,Sub-Saharan Africa
+2012,February,CNOOC,1450,,,Energy,Oil,Uganda,Sub-Saharan Africa
+2012,February,China Shipping,120,,,Transport,Shipping,USA,USA
+2012,February,Golden Dragon,100,,,Metals,Copper,USA,USA
+2012,February,Three Gorges,1600,,,Energy,Hydro,Nepal,West Asia
+2012,February,Three Gorges,270,,,Agriculture,,Pakistan,West Asia
+2012,March,Jushi Group,230,,,Real estate,Construction,Egypt,Arab World
+2012,March,Dalian Shipbuilding,320,,Sino Tharwa,Energy,Oil,Egypt,Arab World
+2012,March,Power Construction Corp,390,,,Real estate,Construction,Kuwait,Arab World
+2012,March,China General Nuclear and China Development Bank,2380,100%,Extract Resources,Metals,,Australia,Australia
+2012,March,Anhui Conch,400,,,Real estate,Construction,Indonesia,East Asia
+2012,March,Power Construction Corp,1420,,,Real estate,Construction,Malaysia,East Asia
+2012,March,China Communications Construction,290,,,Transport,Shipping,Papua New Guinea,East Asia
+2012,March,State Grid,550,,Copel,Energy,,Brazil,South America
+2012,March,Bosai,100,,,Metals,Aluminum,Guyana,South America
+2012,March,Three Gorges,180,,,Energy,,Ghana,Sub-Saharan Africa
+2012,March,Zijin Mining,100,,,Metals,,Russia,West Asia
+2012,April,Shanghai Pengxin,170,100%,Crafar Farms,Agriculture,,New Zealand,East Asia
+2012,April,Xuzhou Construction Machinery,330,52%,Schwing,Real estate,Construction,Germany,Europe
+2012,April,China Railway Construction,140,,Danya Cebus,Transport,Autos,Israel,Europe
+2012,April,Hebei Iron and Steel,200,20%,Alderon Iron Ore,Metals,Steel,Canada,North America
+2012,April,Sinomach,230,,Albanisa,Energy,Oil,Nicaragua,North America
+2012,April,Sinopec,850,,Ghana National Gas,Energy,Gas,Ghana,Sub-Saharan Africa
+2012,April,CIC,200,,Blackrock,Finance,Investment,USA,USA
+2012,April,Power Construction Corp,630,,,Energy,Hydro,Georgia,West Asia
+2012,April,Power Construction Corp,2400,,Infrastructure Leasing & Financial Services,Energy,Coal,India,West Asia
+2012,April,Norinco,500,,Basic Element,Metals,Aluminum,Russia,West Asia
+2012,April,Power Construction Corp,250,,,Energy,Hydro,Sri Lanka,West Asia
+2012,April,AVIC,750,,Hattat Holding,Energy,Coal,Turkey,West Asia
+2012,May,China National Chemical Engineering,2950,,,Real estate,Construction,UAE,Arab World
+2012,May,State Construction Engineering,1350,,Aabar,Real estate,Construction,UAE,Arab World
+2012,May,Ex-Im Bank,240,,,Other,,Cambodia,East Asia
+2012,May,Shanghai Construction Corp,120,,,Transport,Autos,Cambodia,East Asia
+2012,May,China Architecture Design and Research,150,100%,CPG,Real estate,Construction,Singapore,East Asia
+2012,May,Sinomach,100,,,Energy,,Thailand,East Asia
+2012,May,Bright Foods,1940,60%,Weetabix,Agriculture,,Britain,Europe
+2012,May,SAFE,440,,,Real estate,Property,Britain,Europe
+2012,May,China Ocean Shipping,150,,,Transport,Shipping,Greece,Europe
+2012,May,Huawei,1500,,,Technology,Telecom,Hungary,Europe
+2012,May,China Railway Construction,990,,,Transport,Rail,Hungary,Europe
+2012,May,Huadian,1300,,Complexul Energetic Rovinari,Energy,Coal,Romania,Europe
+2012,May,Sinomach,120,60%,Procon,Metals,,Canada,North America
+2012,May,China Construction Bank,200,,WestLB,Finance,Banking,Brazil,South America
+2012,May,State Grid,940,,ACS,Energy,,Brazil,South America
+2012,May,Power Construction Corp,100,,,Other,Utilities,Angola,Sub-Saharan Africa
+2012,May,China Communications Construction,680,,,Transport,Shipping,Nigeria,Sub-Saharan Africa
+2012,May,Dalian Wanda,2600,100%,AMC Entertainment,Other,,USA,USA
+2012,May,Wanxiang,420,,Great Point Energy,Energy,Alternative,USA,USA
+2012,May,Norinco,1250,,Tehran Railway,Transport,Rail,Iran,West Asia
+2012,May,United Energy,200,,,Energy,Gas,Pakistan,West Asia
+2012,May,CIC,420,5%,Polyus,Metals,,Russia,West Asia
+2012,June,State Construction Engineering,170,,,Real estate,Construction,Algeria,Arab World
+2012,June,Zijin Mining,240,100%,Norton Gold,Metals,,Australia,Australia
+2012,June,China Nickel Resources,1260,61%,PT Jhonlinto,Metals,Steel,Indonesia,East Asia
+2012,June,China National Chemical Engineering,700,,Sumber Segara Primadaya,Energy,Coal,Indonesia,East Asia
+2012,June,Power Construction Corp,100,,Electricite de Vietnam,Energy,Hydro,Vietnam,East Asia
+2012,June,China Communications Construction,200,,Electricite de Vietnam,Transport,Shipping,Vietnam,East Asia
+2012,June,SAFE,200,10%,Veolia Water,Other,Utilities,Britain,Europe
+2012,June,CIC,490,7%,Eutelsat,Technology,Telecom,France,Europe
+2012,June,Hanergy,510,,Q-Cells,Energy,Alternative,Germany,Europe
+2012,June,China Railway Construction,410,,C.V.G. Ferrominera Orinoco,Metals,Steel,Venezuela,South America
+2012,June,Wison,1470,,Hyundai,Energy,Oil,Venezuela,South America
+2012,June,China Communications Construction,1580,,,Transport,Rail,Ethiopia,Sub-Saharan Africa
+2012,June,China Communications Construction,160,,,Transport,Aviation,South Sudan,Sub-Saharan Africa
+2012,June,Tencent,330,40%,Epic Games,Other,Consumer,USA,USA
+2012,June,State Construction Engineering,100,,,Transport,Autos,USA,USA
+2012,June,Sinomach,170,,,Energy,,Bangladesh,West Asia
+2012,June,Xinjiang Hualing,100,90%,Basisbank,Finance,Banking,Georgia,West Asia
+2012,June,Three Gorges,360,,,Energy,Hydro,Kazakhstan,West Asia
+2012,June,Huadian,600,,,Energy,,Russia,West Asia
+2012,June,Chery,120,,,Transport,Autos,Turkey,West Asia
+2012,July,China South Locomotive,130,,,Transport,Rail,Malaysia,East Asia
+2012,July,Sinopec,1500,49%,Talisman Energy,Energy,Oil,Britain,Europe
+2012,July,China Power Investment,740,51%,Kompania Weglowa,Energy,Coal,Poland,Europe
+2012,July,Hubei Changyang Hongxin,160,,,Metals,,Ukraine,Europe
+2012,July,Sichuan Bohong,250,100%,Wescast Industries,Transport,Autos,Canada,North America
+2012,July,China Communications Construction,610,,,Transport,Autos,Jamaica,North America
+2012,July,State Grid,1310,,National Electric Corp.,Energy,,Venezuela,South America
+2012,July,China Communications Construction,460,,,Transport,Autos,Cameroon,Sub-Saharan Africa
+2012,July,China Railway Engineering,360,,,Real estate,Construction,Ghana,Sub-Saharan Africa
+2012,July,State Construction Engineering,1750,,,Energy,Hydro,Kenya,Sub-Saharan Africa
+2012,July,China Communications Construction,2660,,,Transport,Rail,Kenya,Sub-Saharan Africa
+2012,July,Jiangxi Zhongmei Engineering,590,,,Transport,Autos,Kenya,Sub-Saharan Africa
+2012,July,China Railway Construction,1490,,,Transport,Rail,Nigeria,Sub-Saharan Africa
+2012,July,China Copper Mines,100,,,Metals,Copper,Zambia,Sub-Saharan Africa
+2012,July,Sinomach,200,,,Agriculture,,Zimbabwe,Sub-Saharan Africa
+2012,July,SAFE,1500,,GM,Finance,Investment,USA,USA
+2012,July,SAFE,500,,Blackstone,Real estate,Property,USA,USA
+2012,July,China Electric Equipment,600,,,Energy,Alternative,Turkey,West Asia
+2012,August,China Energy Engineering,130,,,Other,Utilities,Iraq,Arab World
+2012,August,Dafeng Port,600,,,Metals,Steel,Indonesia,East Asia
+2012,August,Huadian,640,,,Energy,Coal,Indonesia,East Asia
+2012,August,Shenwu Group,180,,,Metals,Steel,Indonesia,East Asia
+2012,August,Zhejiang Huayou Cobalt,350,,,Metals,,DRC,Sub-Saharan Africa
+2012,August,China Energy Engineering,500,,,Energy,Coal,Malawi,Sub-Saharan Africa
+2012,August,Wanbao Grain,290,,,Agriculture,,Mozambique,Sub-Saharan Africa
+2012,August,China Merchants,190,50%,Thesar Maritime,Transport,Shipping,Togo,Sub-Saharan Africa
+2012,August,China Merchants,190,50%,Terminal Investment Ltd,Transport,Shipping,Togo,Sub-Saharan Africa
+2012,August,CIC,500,,Cheniere Energy,Energy,Gas,USA,USA
+2012,August,State Construction Engineering,230,,,Real estate,Construction,Pakistan,West Asia
+2012,September,Sinoma,180,,Southern Province Cement,Real estate,Construction,Saudi Arabia,Arab World
+2012,September,China Communications Construction,160,,Saudi Global Ports,Transport,Shipping,Saudi Arabia,Arab World
+2012,September,Shandong Energy,210,100%,Rocklands Richfield,Energy,Coal,Australia,Australia
+2012,September,Shandong Gold,240,51%,Focus Minerals,Metals,,Australia,Australia
+2012,September,Shandong RuYi Scientific,260,80%,Lempriere Properrty,Agriculture,,Australia,Australia
+2012,September,Synutra,120,,Sodiaal,Agriculture,,France,Europe
+2012,September,Shandong Heavy,930,25%,Kion,Real estate,Construction,Germany,Europe
+2012,September,Wuhan Iron and Steel,450,,ThyssenKrupp,Metals,Steel,Germany,Europe
+2012,September,Xinwei,300,,,Technology,Telecom,Nicaragua,North America
+2012,September,Beiqi Foton,300,,,Transport,Autos,Brazil,South America
+2012,September,Lenovo,150,,Digibras,Technology,,Brazil,South America
+2012,September,China Railway Engineering,510,,Sithe Global Power,Energy,Hydro,Guyana,South America
+2012,September,China Communications Construction,150,,,Transport,Shipping,Ghana,Sub-Saharan Africa
+2012,September,AVIC,650,,,Transport,Aviation,Kenya,Sub-Saharan Africa
+2012,September,China Communications Construction,720,,,Transport,Autos,Mozambique,Sub-Saharan Africa
+2012,September,China Communications Construction,700,,,Transport,Shipping,Mozambique,Sub-Saharan Africa
+2012,September,China Power Investment,130,,,Energy,,Nigeria,Sub-Saharan Africa
+2012,September,China Railway Construction,680,,,Transport,Aviation,Nigeria,Sub-Saharan Africa
+2012,September,Sinomach,210,,,Other,Utilities,South Sudan,Sub-Saharan Africa
+2012,September,Sinomach,100,,,Metals,Steel,Uganda,Sub-Saharan Africa
+2012,September,China Nonferrous,830,,,Metals,Copper,Zambia,Sub-Saharan Africa
+2012,September,BGI,120,100%,Complete Genomics,Technology,Medical,USA,USA
+2012,September,Hanergy,120,100%,Miasole,Energy,Alternative,USA,USA
+2012,September,Sinopec,1020,,Summit Power,Energy,,USA,USA
+2012,September,Huawei,150,,,Technology,Telecom,India,West Asia
+2012,October,Sinomach,320,,Sudanese Sugar Company,Agriculture,,Sudan,Arab World
+2012,October,CNOOC,1930,,BG,Energy,Gas,Australia,Australia
+2012,October,Sinopec,850,,,Energy,Oil,Indonesia,East Asia
+2012,October,Haier,680,,Fisher and Paykel,Other,Consumer,New Zealand,East Asia
+2012,October,Shanghai Greenland,900,,,Real estate,Property,South Korea,East Asia
+2012,October,Shandong Linglong Tyre,120,,,Transport,Autos,Thailand,East Asia
+2012,October,Shanghai Auto,150,51%,CP Group,Transport,Autos,Thailand,East Asia
+2012,October,MCC,890,,,Metals,Steel,Vietnam,East Asia
+2012,October,CIC,730,10%,Ferrovial,Transport,Aviation,Britain,Europe
+2012,October,Sinopec,170,50%,Mercuria,Energy,Oil,Switzerland,Europe
+2012,October,CNPC,1510,50%,TransCanada,Energy,Oil,Canada,North America
+2012,October,JAC Motors,450,,,Transport,Autos,Brazil,South America
+2012,October,China Communications Construction,660,,,Transport,Autos,Gabon,Sub-Saharan Africa
+2012,October,Beijing Jingmei,100,,Coal of Africa,Energy,Coal,South Africa,Sub-Saharan Africa
+2012,October,China Railway Construction,150,,,Other,Utilities,Zambia,Sub-Saharan Africa
+2012,October,China Energy Engineering,210,,,Energy,Gas,Bangladesh,West Asia
+2012,November,China Power Investment,990,33%,"Samsung, Al Toukhi",Agriculture,,Saudi Arabia,Arab World
+2012,November,China National Chemical Engineering,400,,Saudi Basic Industries,Transport,Shipping,Saudi Arabia,Arab World
+2012,November,Shanghai Zhongfu,730,,,Agriculture,,Australia,Australia
+2012,November,State Grid,510,41%,ElectraNet,Energy,,Australia,Australia
+2012,November,Sinoma,210,,Bosawa,Real estate,Construction,Indonesia,East Asia
+2012,November,CIC,400,,Deutsche Bank,Real estate,Property,Britain,Europe
+2012,November,CIC,110,13%,Brookefield,Other,Timber,Canada,North America
+2012,November,CIC,460,33%,Government of Singapore Investment and Canada Pension Plan,Real estate,Property,Brazil,South America
+2012,November,Sinopec,2500,20%,Total,Energy,Oil,Nigeria,Sub-Saharan Africa
+2012,November,China Communications Construction,480,,,Transport,Autos,Uganda,Sub-Saharan Africa
+2012,November,Sinopec,1980,,DKRW,Energy,,USA,USA
+2012,November,China National Building Material,300,,Tajik Aluminum,Real estate,Construction,Tajikistan,West Asia
+2012,December,Chengdu Tianqi Industry and CIC,840,65% and 35%,Talison Lithium,Metals,,Australia,Australia
+2012,December,CNPC,1630,,BHP,Energy,Gas,Australia,Australia
+2012,December,Sinomach,2300,,Cambodia Petrochemical,Energy,Oil,Cambodia,East Asia
+2012,December,Country Garden Holdings,330,,,Real estate,Property,Malaysia,East Asia
+2012,December,Harbin Electric,640,,Genting,Energy,Coal,Malaysia,East Asia
+2012,December,MCC,1480,,,Other,Timber,Malaysia,East Asia
+2012,December,Yili Industrial,170,100%,Oceania Dairy,Agriculture,,New Zealand,East Asia
+2012,December,"China Shipping, China Ocean Shipping, China Merchants",140,"10%,10%,10%",Yang Ming Marine,Transport,Shipping,Taiwan,East Asia
+2012,December,SAFE,110,49%,One Angel Square,Real estate,Property,Britain,Europe
+2012,December,Zoomlion,240,40%,Compagnia Italiana Forme Acciaio,Real estate,Construction,Italy,Europe
+2012,December,Jinsheng Group,700,,Oerlikon,Other,Textiles,Switzerland,Europe
+2012,December,CNOOC,15100,,Nexen,Energy,,Canada,North America
+2012,December,CNPC,2180,49%,Encana,Energy,Gas,Canada,North America
+2012,December,State Grid,220,,"Copel, Furnas",Energy,,Brazil,South America
+2012,December,Sinosteel,660,,,Metals,Steel,Cameroon,Sub-Saharan Africa
+2012,December,China Merchants Group,190,24%,Port de Djibouti S.A.,Transport,Shipping,Djibouti,Sub-Saharan Africa
+2012,December,"Hebei Steel, General Development, Tewoo",380,"35%,25%,20%",Palabor Mining,Metals,Copper,South Africa,Sub-Saharan Africa
+2012,December,Wanxiang,260,,A123,Energy,Alternative,USA,USA
+2012,December,CNPC,900,,KazMunaiGas,Energy,Gas,Kazakhstan,West Asia
+2013,January,State Construction Engineering,160,,,Transport,Aviation,UAE,Arab World
+2013,January,Minmetals,1570,,,Metals,,Australia,Australia
+2013,January,Sinoma,350,,Cemindo Gemilang,Real estate,Construction,Indonesia,East Asia
+2013,January,China Merchants,530,49%,CMA CGM,Transport,Shipping,France,Europe
+2013,January,China Communications Construction,850,,,Transport,Autos,Serbia,Europe
+2013,January,Sinomach,130,,JD Development,Real estate,Construction,Canada,North America
+2013,January,Xugong Machinery,200,,,Real estate,Construction,Brazil,South America
+2013,January,SkySolar,1360,,,Energy,Alternative,Chile,South America
+2013,January,State Construction Engineering,110,,,Real estate,Construction,Equatorial Guinea,Sub-Saharan Africa
+2013,January,China Power Investment,5950,,,Metals,Aluminum,Guinea,Sub-Saharan Africa
+2013,January,Power Construction Corp,500,,,Energy,Hydro,Ivory Coast,Sub-Saharan Africa
+2013,January,China Communications Construction,930,,,Transport,Shipping,Ivory Coast,Sub-Saharan Africa
+2013,January,State Construction Engineering,320,,,Real estate,Construction,Mozambique,Sub-Saharan Africa
+2013,January,Sinochem,1700,40%,Pioneer Natural Resouces,Energy,Oil,USA,USA
+2013,January,China Nonferrous,710,,,Metals,Steel,Iran,West Asia
+2013,January,China Communications Construction,300,80%,,Energy,Hydro,Pakistan,West Asia
+2013,January,Three Gorges,260,,,Transport,Shipping,Pakistan,West Asia
+2013,January,China National Chemical Engineering,1100,,,Energy,,Turkey,West Asia
+2013,February,State Construction Engineering,400,,,Real estate,Construction,Algeria,Arab World
+2013,February,CITIC,470,13%,Alumina Ltd.,Metals,Aluminum,Australia,Australia
+2013,February,Guangxi Beibu,650,,,Metals,,Malaysia,East Asia
+2013,February,Guangxi Beibu,400,49%,Malaysia-China Kuantan Park,Real estate,Property,Malaysia,East Asia
+2013,February,Guangxi Beibu,480,40%,IJM Corporation,Transport,Shipping,Malaysia,East Asia
+2013,February,Yashili International,180,,,Agriculture,,New Zealand,East Asia
+2013,February,Geely Auto,150,100%,Manganese Bronze,Transport,Autos,Britain,Europe
+2013,February,SAFE,840,40%,UPP Group,Real estate,Property,Britain,Europe
+2013,February,HNA,310,20%,NH Hoteles,Real estate,Property,Spain,Europe
+2013,February,Power Construction Corp,240,,,Energy,Hydro,Ecuador,South America
+2013,February,Sinopec,1020,50%,Chesapeake Energy,Energy,Oil,USA,USA
+2013,February,Vanke,620,70%,Tishman Speyer,Real estate,Property,USA,USA
+2013,February,CIC,100,20%,Moscow Stock Exchange,Finance,Investment,Russia,West Asia
+2013,March,State Construction Engineering,120,,,Real estate,Construction,UAE,Arab World
+2013,March,Shanghai Greenland,490,,Brookefield Asset management,Real estate,Property,Australia,Australia
+2013,March,Shanghai Construction Corp,250,,,Transport,Autos,Cambodia,East Asia
+2013,March,State Construction Engineering,110,,,Energy,Coal,Indonesia,East Asia
+2013,March,Sinoma,120,,Tunggal Prakarsa,Real estate,Construction,Indonesia,East Asia
+2013,March,Power Construction Corp,300,,OM Holdings,Metals,,Malaysia,East Asia
+2013,March,Power Construction Corp,100,,,Real estate,Construction,Congo,Sub-Saharan Africa
+2013,March,Anhui Foreign Economic Construction,100,,,Metals,,DRC,Sub-Saharan Africa
+2013,March,CNPC,4210,29%,,Energy,Gas,Mozambique,Sub-Saharan Africa
+2013,March,State Construction Engineering,100,,,Transport,Autos,Zambia,Sub-Saharan Africa
+2013,March,State Grid,1140,,Sintez,Energy,,Russia,West Asia
+2013,April,Tianjin Development,500,,,Real estate,Property,Egypt,Arab World
+2013,April,Tsingshan Group,530,50%,Bintang Delapan,Metals,Steel,Indonesia,East Asia
+2013,April,China Vanke,110,30%,,Real estate,Property,Singapore,East Asia
+2013,April,China National Aviation Fuel,130,26%,,Energy,Oil,South Korea,East Asia
+2013,April,ICBC,680,20%,SinoPac Financial,Finance,Banking,Taiwan,East Asia
+2013,April,Fosun,240,96%,Alma Lasers,Technology,Medical,Israel,Europe
+2013,April,Huawei,1300,,VimpelCom,Technology,Telecom,Italy,Europe
+2013,April,COFCO,320,,,Agriculture,,Brazil,South America
+2013,April,China Railway Construction and China Nonferrous,2040,,,Metals,Copper,Ecuador,South America
+2013,April,State Grid,1000,,,Energy,Hydro,Ethiopia,Sub-Saharan Africa
+2013,April,China Communications Construction,480,,,Transport,Shipping,Kenya,Sub-Saharan Africa
+2013,April,Huawei,750,,Globacom,Technology,Telecom,Nigeria,Sub-Saharan Africa
+2013,April,ZTE,500,,Globacom,Technology,Telecom,Nigeria,Sub-Saharan Africa
+2013,April,Sinomach,220,,,Real estate,Construction,South Sudan,Sub-Saharan Africa
+2013,April,China Jiangsu International Group,200,,,Transport,Aviation,Zimbabwe,Sub-Saharan Africa
+2013,April,Hongye International,100,,Singpoli,Finance,Investment,USA,USA
+2013,April,China National Chemical Engineering,180,,,Energy,Gas,Bangladesh,West Asia
+2013,April,China Nonferrous,750,50%,East Siberian Metals,Metals,,Russia,West Asia
+2013,April,CIC,100,21%,Russia Forest Products,Other,Timber,Russia,West Asia
+2013,May,Qixing Group,140,,Stonewall Resources,Metals,,Australia,Australia
+2013,May,State Grid,810,20%,Singapore Power,Energy,,Australia,Australia
+2013,May,State Grid,2350,60%,Singapore Power,Energy,,Australia,Australia
+2013,May,Power Construction Corp,240,,Tenaga,Energy,Gas,Malaysia,East Asia
+2013,May,CDH,110,10%,Mobile World,Technology,Telecom,Vietnam,East Asia
+2013,May,Shenzhou International,120,,,Other,Textiles,Vietnam,East Asia
+2013,May,Fosun,360,46%,Club Med,Other,,France,Europe
+2013,May,China Energy Engineering,560,33%,Rafako,Energy,Coal,Poland,Europe
+2013,May,China Communications Construction,120,,,Transport,Shipping,Gabon,Sub-Saharan Africa
+2013,May,Power Construction Corp. and Sinomach,1290,,,Energy,Hydro,Nigeria,Sub-Saharan Africa
+2013,May,Shuanghui,7100,100%,Smithfield Foods,Agriculture,,USA,USA
+2013,May,State Construction Engineering,130,,,Transport,Autos,USA,USA
+2013,May,Sinomach,130,,,Technology,Telecom,Bangladesh,West Asia
+2013,May,Sinomach,150,,,Transport,Aviation,Nepal,West Asia
+2013,May,China Construction Bank,100,2%,VTB Bank,Finance,Banking,Russia,West Asia
+2013,May,Sinomach,230,,,Agriculture,,Sri Lanka,West Asia
+2013,May,Harbin Electric,2400,,Hattat Holding,Energy,Coal,Turkey,West Asia
+2013,June,China Communications Construction,600,,,Transport,Autos,Qatar,Arab World
+2013,June,Comtec Solar,380,,,Energy,Alternative,Malaysia,East Asia
+2013,June,China Communications Construction,140,,,Transport,Autos,Papua New Guinea,East Asia
+2013,June,Wanda,1090,,,Real estate,Property,Britain,Europe
+2013,June,Wanda,500,92%,Sunseeker,Transport,Shipping,Britain,Europe
+2013,June,Shandong Gaosu,330,,,Transport,Autos,Serbia,Europe
+2013,June,Shanghai Construction Group,160,,,Real estate,Construction,Trinidad-Tobago,North America
+2013,June,Sinopec,1520,10%,Marathon,Energy,Oil,Angola,Sub-Saharan Africa
+2013,June,State Construction Engineering,240,,Bata Univeristy,Real estate,Construction,Equatorial Guinea,Sub-Saharan Africa
+2013,June,Sinomach,650,,,Agriculture,,Ethiopia,Sub-Saharan Africa
+2013,June,China Jiangxi Corporation for International Economic and Technical Cooperation,140,,,Energy,Alternative,Kenya,Sub-Saharan Africa
+2013,June,Mindray Medical,110,100%,ZONARE Systems,Technology,Medical,USA,USA
+2013,June,Shanghai MicroPort Scientific,290,,Wright Medical,Technology,Medical,USA,USA
+2013,June,Soho China,680,20%,GM Building,Real estate,Property,USA,USA
+2013,June,Zarsion,750,,Signature Development,Real estate,Property,USA,USA
+2013,June,CNPC,940,20%,Novatek,Energy,Gas,Russia,West Asia
+2013,June,AVIC,260,,,Real estate,Property,Sri Lanka,West Asia
+2013,July,State Construction Engineering,160,,,Other,,Algeria,Arab World
+2013,July,CNPC,550,,Halfaya,Energy,Oil,Iraq,Arab World
+2013,July,China Communications Construction,500,,,Other,Utilities,Saudi Arabia,Arab World
+2013,July,China Molybdenum,820,80%,Rio Tinto,Metals,Copper,Australia,Australia
+2013,July,MCC,100,,,Metals,Steel,Indonesia,East Asia
+2013,July,China Communications Construction,100,,,Transport,Shipping,Malaysia,East Asia
+2013,July,Sinopec,110,,,Chemicals,,Singapore,East Asia
+2013,July,Texhong Textile,300,,,Other,Textiles,Vietnam,East Asia
+2013,July,Power Construction Corp,280,,,Energy,Gas,Bosnia,Europe
+2013,July,Ping An,390,,Commerz Real,Real estate,Property,Britain,Europe
+2013,July,Shanghai Greenland,240,,Melia Hotels,Real estate,Property,Spain,Europe
+2013,July,Harbin Electric,600,,Celec,Energy,Hydro,Ecuador,South America
+2013,July,China Fishery,820,98%,Copeinca,Agriculture,,Peru,South America
+2013,July,Kingho Energy,1700,,,Metals,Steel,Sierra Leone,Sub-Saharan Africa
+2013,July,Sinomach,420,,Eurafric,Energy,,Nigeria,Sub-Saharan Africa
+2013,July,Sinomach,200,,,Energy,,Nigeria,Sub-Saharan Africa
+2013,July,China Railway Engineering,300,,,Transport,Aviation,Sierra Leone,Sub-Saharan Africa
+2013,July,Yunnan Copper-led consortium,180,100%,Kilembe Mines,Metals,Copper,Uganda,Sub-Saharan Africa
+2013,July,Three Gorges,500,,,Energy,Hydro,Uganda,Sub-Saharan Africa
+2013,July,Meidu Holding,140,,Woodbine Holdings,Energy,Oil,USA,USA
+2013,July,Shanghai Greenland,990,,California State Teachers' Retirement System,Real estate,Property,USA,USA
+2013,July,Tencent,350,6%,Activision,Other,Consumer,USA,USA
+2013,July,CNPC,5300,8%,KazMunaiGas National,Energy,Oil,Kazakhstan,West Asia
+2013,July,China Communications Construction,1430,,,Transport,Shipping,Sri Lanka,West Asia
+2013,August,Sinopec,3100,33%,Apache,Energy,,Egypt,Arab World
+2013,August,Shanxi Coking Coal,140,100%,Inova,Metals,,Australia,Australia
+2013,August,Belle International,120,32%,Baroque Japan,Other,Textiles,Japan,East Asia
+2013,August,Power Construction Corp,190,,Sarawak Cable,Energy,,Malaysia,East Asia
+2013,August,Shandong Bright Ruby,910,,Park Hotel,Real estate,Property,Singapore,East Asia
+2013,August,China Ocean Shipping,300,,,Transport,Shipping,Greece,Europe
+2013,August,China Communications Construction,470,,,Transport,Autos,Costa Rica,North America
+2013,August,Sinomach,320,,,Real estate,Construction,Equatorial Guinea,Sub-Saharan Africa
+2013,August,Sinomach,200,,,Transport,Autos,Equatorial Guinea,Sub-Saharan Africa
+2013,August,Huawei and ZTE,1600,,,Technology,Telecom,Ethiopia,Sub-Saharan Africa
+2013,August,Sinomach,100,,,Energy,,Uganda,Sub-Saharan Africa
+2013,August,State Construction Engineering,290,,,Agriculture,,Bangladesh,West Asia
+2013,August,China Communications Construction,300,,,Transport,Shipping,Sri Lanka,West Asia
+2013,August,Sinomach,220,,,Energy,,Turkey,West Asia
+2013,September,China Communications Construction,390,,Aramco,Transport,Shipping,Saudi Arabia,Arab World
+2013,September,Ansteel,230,12%,Gindalbie Metals,Metals,Steel,Australia,Australia
+2013,September,Zhongjin Lingnan,110,47%,Perilya,Metals,,Australia,Australia
+2013,September,China Communications Construction,140,,,Transport,Autos,Vietnam,East Asia
+2013,September,Sinoma,140,59%,Hazemag & EPR,Real estate,Construction,Germany,Europe
+2013,September,China Power Investment,260,,Enemalta,Energy,,Malta,Europe
+2013,September,Shaanxi Yanchang Petroleum,220,100%,Novus Energy,Energy,,Canada,North America
+2013,September,Sinomach and China Railway,190,75%,Yapilo,Transport,Rail,Bolivia,South America
+2013,September,Sinopec,1400,,,Energy,Oil,Venezuela,South America
+2013,September,Tianjin Materials,990,17%,African Minerals,Metals,Steel,Sierra Leone,Sub-Saharan Africa
+2013,September,CNOOC,2000,85%,Kingfisher,Energy,Oil,Uganda,Sub-Saharan Africa
+2013,September,Guangzhou Dongsong Energy,560,,,Chemicals,,Uganda,Sub-Saharan Africa
+2013,September,Power Construction Corp,1690,,,Energy,Hydro,Uganda,Sub-Saharan Africa
+2013,September,Shandong Taishan Sunlight,1240,,Oil Stone Investments,Energy,Coal,Zimbabwe,Sub-Saharan Africa
+2013,September,CIC,2040,13%,Uralkali,Agriculture,,Russia,West Asia
+2013,September,China Communications Construction,100,,,Transport,Aviation,Sri Lanka,West Asia
+2013,October,Sinopec,1670,,,Energy,Oil,Cambodia,East Asia
+2013,October,CIC,1300,,Bumi Resources Minerals,Energy,Coal,Indonesia,East Asia
+2013,October,Hongqiao,600,60%,Winning Investment,Metals,Aluminum,Indonesia,East Asia
+2013,October,China Communications Construction,1100,70%,Daya Bumindo,Transport,Shipping,Indonesia,East Asia
+2013,October,China Communications Construction,1500,,Jakarta Monorail,Transport,Rail,Indonesia,East Asia
+2013,October,Sinomach,170,,,Transport,Autos,Papua New Guinea,East Asia
+2013,October,Huawei,200,,,Technology,Telecom,Britain,Europe
+2013,October,State Construction Engineering,220,20%,Manchester Airport and Carillion,Real estate,Construction,Britain,Europe
+2013,October,Huawei,700,,,Technology,Telecom,Denmark,Europe
+2013,October,CNOOC,120,10%,Total and Wintershall,Energy,Gas,Argentina,South America
+2013,October,China Energy Engineering,2820,,Electroingenieria,Energy,Hydro,Argentina,South America
+2013,October,China Aerospace Science and Technology,300,,Tupac Katari,Technology,Telecom,Bolivia,South America
+2013,October,China Construction Bank,720,74%,Banco Industrial e Comerical,Finance,Banking,Brazil,South America
+2013,October,CNOOC and CNPC,1280,"10%, 10%","Petrobras, Shell, and Total",Energy,Oil,Brazil,South America
+2013,October,Three Gorges,240,,,Other,Utilities,Ghana,Sub-Saharan Africa
+2013,October,Sinoma,260,,United Cement,Real estate,Construction,Nigeria,Sub-Saharan Africa
+2013,October,Sinopec,150,,,Energy,Oil,Sao Tome,Sub-Saharan Africa
+2013,October,Yuemei,150,,,Other,Textiles,Tanzania,Sub-Saharan Africa
+2013,October,Tebian Electric Apparatus,690,,,Energy,,Tanzania,Sub-Saharan Africa
+2013,October,Power Construction Corp,400,,Tanzania Electric Supply,Energy,Gas,Tanzania,Sub-Saharan Africa
+2013,October,China Railway Engineering,500,,NHC,Real estate,Construction,Tanzania,Sub-Saharan Africa
+2013,October,Alibaba,110,18%,Shoprunner,Other,Consumer,USA,USA
+2013,October,Fosun,730,,JPMorgan,Real estate,Property,USA,USA
+2013,October,Meijing,100,100%,Mooney Aviation,Transport,Aviation,USA,USA
+2013,November,China Communications Construction,170,,,Other,Utilities,Iraq,Arab World
+2013,November,Sinomach,240,,Kar Group,Real estate,Construction,Iraq,Arab World
+2013,November,Sinomach,270,,,Real estate,Construction,Jordan,Arab World
+2013,November,China Communications Construction,510,,,Transport,Shipping,Yemen,Arab World
+2013,November,CNPC,1250,25%,ExxonMobil,Energy,Oil,Iraq,Arab World
+2013,November,Shanghai Greenland,980,,,Real estate,Property,South Korea,East Asia
+2013,November,CSR,400,,ZF Friedrichshafen,Transport,Autos,Germany,Europe
+2013,November,Power Construction Corp,400,51%,,Transport,Autos,Macedonia,Europe
+2013,November,Ming Yan,540,,Speranta & Succesul,Energy,Alternative,Romania,Europe
+2013,November,Sinomach,720,,,Energy,Coal,Serbia,Europe
+2013,November,CNPC,2600,,Petrobras,Energy,,Peru,South America
+2013,November,Sinomach,130,,,Energy,Electric,Equatorial Guinea,Sub-Saharan Africa
+2013,November,Sinomach,290,,,Real estate,Construction,Kenya,Sub-Saharan Africa
+2013,November,China Communications Construction,300,,,Transport,Shipping,Namibia,Sub-Saharan Africa
+2013,November,China Railway Construction,1070,,,Transport,Autos,Nigeria,Sub-Saharan Africa
+2013,November,Shanghai Zendai,100,,AECI,Real estate,Property,South Africa,Sub-Saharan Africa
+2013,November,China Communications Construction,540,,,Real estate,Construction,Sri Lanka,West Asia
+2013,November,Sinomach and Hunan Construction Engineering,430,,,Transport,Autos,Sri Lanka,West Asia
+2013,November,China Communications Construction,400,,,Transport,Autos,Sri Lanka,West Asia
+2013,December,China Railway Construction,1180,,,Transport,Autos,Algeria,Arab World
+2013,December,China Communications Construction,160,,,Other,Utilities,Iraq,Arab World
+2013,December,Guangzhou R&F,1370,,,Real estate,Property,Malaysia,East Asia
+2013,December,CITIC,200,,Siam Cement,Real estate,Construction,Myanmar,East Asia
+2013,December,AVIC,260,59%,KHD,Real estate,Construction,Germany,Europe
+2013,December,Henan Civil Aviation,220,35%,Cargolux Airlines,Transport,Aviation,Luxembourg,Europe
+2013,December,Sinomach,190,,Boska,Energy,Alternative,Poland,Europe
+2013,December,Three Gorges,130,50%,Cachoeira-caldeirao,Energy,Hydro,Brazil,South America
+2013,December,Three Gorges,250,50%,Jari,Energy,Hydro,Brazil,South America
+2013,December,China Railway Construction,3300,,,Transport,Rail,Ethiopia,Sub-Saharan Africa
+2013,December,Anhui Foreign Economic Construction,500,,,Metals,,Mozambique,Sub-Saharan Africa
+2013,December,Sinoma,540,,,Real estate,Construction,Nigeria,Sub-Saharan Africa
+2013,December,Hazens,100,,,Real estate,Property,USA,USA
+2013,December,Keer Group,220,,,Other,Textiles,USA,USA
+2013,December,Oceanwide Real Estate,190,,,Real estate,Property,USA,USA
+2013,December,China National Nuclear,6500,,,Energy,,Pakistan,West Asia
+2014,January,State Construction Engineering,240,,Skai,Real estate,Construction,UAE,Arab World
+2014,January,ICBC,770,,Standard Bank,Finance,Investment,Britain,Europe
+2014,January,Shanghai Greenland,980,,Minerva,Real estate,Property,Britain,Europe
+2014,January,Fosun,1360,80%,Caixa Geral,Finance,,Portugal,Europe
+2014,January,China Communications Construction,700,,,Transport,Shipping,Cameroon,Sub-Saharan Africa
+2014,January,Sinomach,300,,,Other,Utilities,Ghana,Sub-Saharan Africa
+2014,January,China National Nuclear,190,25%,Langer Heinrich,Metals,,Namibia,Sub-Saharan Africa
+2014,January,Fuyao,200,,,Transport,Autos,USA,USA
+2014,January,Lenovo,2300,,IBM,Technology,,USA,USA
+2014,January,Lenovo,2910,100%,Motorola Mobility,Technology,Telecom,USA,USA
+2014,January,Meidu Holding,290,,Woodbine Holdings,Energy,Oil,USA,USA
+2014,January,Power Construction Corp,240,,,Energy,Hydro,Pakistan,West Asia
+2014,February,CNPC,560,,Ma'aden,Chemicals,,Saudi Arabia,Arab World
+2014,February,China Communications Construction,200,,,Transport,Shipping,Saudi Arabia,Arab World
+2014,February,"Bank of China, China Life, and Hopu Investment",160,2%,Global Logistics Properties,Real estate,Property,Singapore,East Asia
+2014,February,Landing International Development,1100,50%,Genting Singapore,Real estate,Property,South Korea,East Asia
+2014,February,Dongfeng,1100,14%,Pugeot,Transport,Autos,France,Europe
+2014,February,Huaxin,310,85%,Alcatel-Lucent,Technology,Telecom,France,Europe
+2014,February,COFCO,1210,51%,Nidera,Agriculture,,Netherlands,Europe
+2014,February,Three Gorges,390,33%,Terra Novo,Energy,Hydro,Brazil,South America
+2014,February,State Grid,100,51%,Central Furnas and North Central Electric,Energy,,Brazil,South America
+2014,February,Power Construction Corp,480,80%,Camargo Correa,Transport,Autos,Venezuela,South America
+2014,February,State Construction Engineering,520,,,Real estate,Construction,Congo,Sub-Saharan Africa
+2014,February,Sinomach,130,,,Transport,Autos,Congo,Sub-Saharan Africa
+2014,February,China Communications Construction,400,,,Transport,Shipping,Eritrea,Sub-Saharan Africa
+2014,February,China Communications Construction,200,,,Transport,Shipping,Tanzania,Sub-Saharan Africa
+2014,February,Beijing Capital Development,100,,Silverstone,Real estate,Property,USA,USA
+2014,February,Goldleaf,670,95%,ERG Resources,Energy,,USA,USA
+2014,February,Wanxiang,150,100%,Fisker Automotive,Transport,Autos,USA,USA
+2014,February,China Nonferrous,490,,Kazakhmys,Metals,Copper,Kazakhstan,West Asia
+2014,February,CNPC,1400,,,Energy,Gas,Kyrgyzstan,West Asia
+2014,March,Beijing Urban Construction,1300,,Zenith Sdn.,Transport,Autos,Malaysia,East Asia
+2014,March,Beijing Capital,800,,Transpacific,Other,Utilities,New Zealand,East Asia
+2014,March,Tencent,500,28%,CJ Games,Other,Consumer,South Korea,East Asia
+2014,March,China Energy Engineering,340,,Frodnoernergo,Energy,,Belarus,Europe
+2014,March,Geely Auto,200,100%,Emerald Automotive,Transport,Autos,Britain,Europe
+2014,March,Shanghai Greenland,990,,Commercial Estates Group,Real estate,Property,Britain,Europe
+2014,March,Fosun,140,19%,Deutsche Bank,Finance,Banking,Germany,Europe
+2014,March,SAFE,2760,"2%, 3%","Eni, Enel",Energy,,Italy,Europe
+2014,March,China Communications Construction,1120,,,Transport,Autos,Montenegro,Europe
+2014,March,Shanghai Greenland,360,,,Real estate,Property,Canada,North America
+2014,March,Sinomach,250,,,Agriculture,,Congo,Sub-Saharan Africa
+2014,March,Zhenfa New Energy Science,250,,,Energy,Alternative,Zimbabwe,Sub-Saharan Africa
+2014,March,Alibaba,220,20%,TangoMe,Technology,Telecom,USA,USA
+2014,March,Cinda,300,70%,Zeller Realty,Real estate,Property,USA,USA
+2014,March,State Construction Engineering,210,,,Transport,Autos,USA,USA
+2014,March,China Communications Construction,160,,,Real estate,Construction,Iran,West Asia
+2014,March,Three Gorges,900,,,Energy,Hydro,Pakistan,West Asia
+2014,March,China Communications Construction,220,,,Transport,Shipping,Pakistan,West Asia
+2014,March,State Construction Engineering,710,,,Real estate,Construction,Russia,West Asia
+2014,March,China Merchants,990,,,Transport,Autos,Sri Lanka,West Asia
+2014,April,Sinoma,260,,Ciment Lafarge Souakri,Real estate,Construction,Algeria,Arab World
+2014,April,State Construction Engineering,110,,,Transport,Autos,UAE,Arab World
+2014,April,China Merchants,820,50%,Hastings,Transport,Shipping,Australia,Australia
+2014,April,Sinomach,670,,BTN,Energy,Coal,Indonesia,East Asia
+2014,April,Shanghai Greenland,180,,,Real estate,Property,Malaysia,East Asia
+2014,April,Sanpower,790,89%,House of Fraser,Other,Consumer,Britain,Europe
+2014,April,Power Construction Corp,110,,,Transport,Autos,Bolivia,South America
+2014,April,Minmetals,5850,,Glencore,Metals,Copper,Peru,South America
+2014,April,Chinalco,500,,Venalum,Metals,Aluminum,Venezuela,South America
+2014,April,Sinoma,180,,,Real estate,Construction,Congo,Sub-Saharan Africa
+2014,April,China Energy Engineering,480,,,Transport,Rail,Ethiopia,Sub-Saharan Africa
+2014,April,China Communications Construction,100,,,Agriculture,,South Sudan,Sub-Saharan Africa
+2014,April,Sinopec,1200,50%,Lukoil,Energy,Oil,Kazakhstan,West Asia
+2014,April,China Mobile,520,,,Technology,Telecom,Pakistan,West Asia
+2014,April,Sinomach,1990,,,Energy,Coal,Pakistan,West Asia
+2014,April,China Communications Construction,130,,,Transport,Shipping,Pakistan,West Asia
+2014,April,ICBC,320,76%,Tekstil Bankasi,Finance,Banking,Turkey,West Asia
+2014,May,China Communications Construction,500,,Aramco,Agriculture,,Saudi Arabia,Arab World
+2014,May,State Construction Engineering,100,,,Transport,Aviation,UAE,Arab World
+2014,May,Power Construction Corp,1000,,AC Energy and Power Partners,Energy,Coal,Philippines,East Asia
+2014,May,Alibaba,250,10%,Singapore Post,Other,,Singapore,East Asia
+2014,May,Shanghai Shentong,290,,,Transport,Rail,Singapore,East Asia
+2014,May,Bright Foods,960,56%,Tnuva,Agriculture,,Israel,Europe
+2014,May,Power Construction Corp,560,40%,Ansaldo Energia,Energy,,Italy,Europe
+2014,May,Sinopec and Huadian,1240,"10%, 5%",Petronas,Energy,Gas,Canada,North America
+2014,May,Chinalco,1350,41%,Rio Tinto,Metals,Steel,Guinea,Sub-Saharan Africa
+2014,May,Hongqiao,110,90%,,Metals,Aluminum,Guinea,Sub-Saharan Africa
+2014,May,MCC,350,,,Metals,Steel,Iran,West Asia
+2014,May,Sinomach,250,,,Transport,Aviation,Nepal,West Asia
+2014,May,Great Wall Motor,340,,,Transport,Autos,Russia,West Asia
+2014,May,Sinomach,180,,,Real estate,Construction,Russia,West Asia
+2014,May,Sinoma,150,,,Real estate,Construction,Russia,West Asia
+2014,May,China Railway Construction,1990,,China International Fund Limited and JSC Mosinzhproekt,Transport,Rail,Russia,West Asia
+2014,May,CNPC,600,,,Energy,Gas,Turkmenistan,West Asia
+2014,June,State Construction Engineering,890,,,Transport,Aviation,Algeria,Arab World
+2014,June,Baosteel,860,65%,Aquila Resources,Metals,Steel,Australia,Australia
+2014,June,State Construction Engineering,250,,,Real estate,Construction,Papua New Guinea,East Asia
+2014,June,China Mobile,880,18%,True Corp,Technology,Telecom,Thailand,East Asia
+2014,June,China Construction Bank,190,,,Real estate,Property,Britain,Europe
+2014,June,China Life,950,70%,Songbird,Real estate,Property,Britain,Europe
+2014,June,Fosun,200,,Latsis,Transport,Aviation,Greece,Europe
+2014,June,China Communications Construction,1020,,,Transport,Shipping,Israel,Europe
+2014,June,Dalian Wanda,360,,Santander,Real estate,Property,Spain,Europe
+2014,June,Power Construction Corp,240,,,Energy,Hydro,Bolivia,South America
+2014,June,State Construction Engineering,590,,,Real estate,Construction,Congo,Sub-Saharan Africa
+2014,June,Power Construction Corp,1340,,,Energy,Coal,Zimbabwe,Sub-Saharan Africa
+2014,June,Shanghai International Group and Sanpower,170,100%,Brookstone Holdings,Other,Consumer,USA,USA
+2014,June,China Railway Engineering,1550,,,Transport,Autos,Bangladesh,West Asia

@@ -1,0 +1,151 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(reshape2)
+library(dplyr)
+library(extrafont)
+library(ggplot2)
+library(gganimate)
+library(animation)
+library(grid)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# WSJ Polio Vaccination Calendar Chart
+## Battling Infectious Diseases in the 20th Century: The Impact of Vaccines
+
+<a href="http://graphics.wsj.com/infectious-diseases-and-vaccines/">WSJ Article</a>
+
+***
+
+## Load data [Ingest]
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+polio = read.csv("archetypes/project-tycho-level-1-v1.0.0-polio.csv", header = TRUE, stringsAsFactors = FALSE)
+polio
+
+```
+
+
+## Plot [ Views / Temporals ]
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=10, fig.align='center', out.width="100%"}
+
+cols<- c("#e7f0fa", #lighter than light blue
+         "#c9e2f6", #light blue
+         "#95cbee", #blue
+         "#0099dc", #darker blue
+         "#4ab04a", #green
+         "#ffd73e", #yellow
+         "#eec73a", #mustard
+         "#e29421", #dark khaki (?)
+         "#f05336", #orange red
+         "#ce472e") #red
+
+v1 <- ggplot(polio, aes(y=state, x=year, fill=incidence)) + 
+  geom_tile(colour="white",
+            width=.9, height=.9) + theme_minimal() +
+  scale_fill_gradientn(colours=cols, limits=c(0, 160),
+                       values=c(0, 0.01, 0.02, 0.03, 0.09, 0.1, .15, .25, .4, .5, 1), 
+                       na.value=rgb(246, 246, 246, max=255),
+                       #labels=c("0k", "1k", "2k", "3k", "4k"),
+                       guide=guide_colourbar(ticks=T, nbin=50,
+                                             barheight=.5, label=T, 
+                                             barwidth=10))
+
+v1 <- v1 +
+  scale_x_continuous(expand=c(0,0), 
+                     breaks=seq(1930, 2010, by=10)) +
+  geom_segment(x=1955, xend=1955, y=0, yend=51.5, size=.9) +
+  labs(x="", y="", fill="") +
+  ggtitle("Polio")
+
+v1 <- v1 +
+  theme(legend.position=c(.5, -.13),
+        legend.direction="horizontal",
+        legend.text=element_text(colour="grey20"),
+        plot.margin=grid::unit(c(.5,.5,1.5,.5), "cm"),
+        axis.text.y=element_text(size=6, 
+                                 hjust=1),
+        axis.text.x=element_text(size=8),
+        axis.ticks.y=element_blank(),
+        panel.grid=element_blank(),
+        title=element_text(hjust=-.07, vjust=1),
+        text=element_text()) +
+  annotate("text", label="Vaccine introduced", x=1955, y=53, 
+           vjust=1, hjust=0, size=I(3))
+
+v1
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# ggsave(filename = "wsj-polio-vaccination-calendar-chart.svg", plot = v1, width=11, height=6)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

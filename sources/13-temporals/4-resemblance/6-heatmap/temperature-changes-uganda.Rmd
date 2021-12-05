@@ -1,0 +1,252 @@
+---
+pagetitle: "Temperature Changes in Uganda"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(dplyr)
+library(ggiraph)
+library(wesanderson)
+
+library(DiagrammeR)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS  
+</div>
+
+# Temperature Changes in Uganda
+## Heatmap
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Drew Willson on Unsplash"}
+
+masthead <- "assets/drew-willson-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+<div class="figure-text">Shoreline fishing, Lake Victoria</div>
+
+> It doesn't matter what temperature the room is, it's always room temperature....\
+--- Steven Wright\
+
+***
+
+
+### Ingest
+
+Loading the temperature-changes-around-the-world 
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/temperature-changes-around-the-world/tas_1901_2020.csv", header = TRUE, stringsAsFactors = TRUE)
+
+df
+
+```
+### Wranglers
+#### Rename Columns
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df1 <- df %>% rename("Temp_Celsius"="Temperature....Celsius.")
+
+
+df1 <- df1 %>% rename("Month"="Statistics")
+
+head(df1)
+
+```
+
+### Wranglers
+#### Format String
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# replace space with no character
+df1$ISO3 <- gsub(" ","",df1$ISO3)
+df1$Country <- gsub(" ","",df1$Country)
+
+# replace "Average" with no character
+df1$Month <- gsub(" Average","",df1$Month)
+
+# replace space with no character
+df1$Month <- gsub(" ","",df1$Month)
+
+#transforming from factor to double
+df1$Temp_Celsius <- as.numeric(as.character(df1$Temp_Celsius))
+
+
+head(df1)
+
+```
+
+
+
+### Wranglers
+#### Filter 
+Uganda records __ISO3__ == UGA and Year from 2015 and beyond
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df2 <- df1 %>% filter(ISO3 == "UGA" & Year >= 2015)
+
+head(df2)
+```
+
+
+### Wranglers
+#### Select
+Select only __Temperature__, __Year__ and __Month__
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df2$Month <- factor(df2$Month, levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug","Sep","Oct","Nov","Dec"))
+
+
+df3 <- df2 %>% select(Year,Month,Temp_Celsius)
+
+df3
+```
+### Temporal Heatmap
+#### Average Temperature Monthly per Year
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    legend.position = 'bottom'
+)
+
+pal <- wes_palette("Zissou1", 10, type = "continuous")
+
+
+v1 <- ggplot(df3)+
+      geom_tile(aes(x = Month, y = Year, fill = Temp_Celsius), color = "white", size = 1) +
+      scale_y_continuous(breaks=c(2015,2016,2017,2018,2019,2020)) +
+      scale_fill_gradientn(colours = pal) + 
+      labs(title = "Temperature Changes in Uganda - 2015-2020",
+        subtitle = "Average in Celsius",
+        caption = "worldbank")+
+      theme_bw() +
+      theme_opts
+ 
+girafe(ggobj = v1, width_svg = 8, height_svg = 7,
+      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+### Temporal Heatmap
+#### Interactivity
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major = element_blank(),
+    legend.position = 'bottom'
+)
+
+pal <- wes_palette("Zissou1", 10, type = "continuous")
+
+
+v2 <- ggplot(df3)+
+      geom_tile_interactive(aes(x = Month, y = Year, fill = Temp_Celsius), color = "white", size = 1,
+                            tooltip = paste0(df3$Year,"\n",df3$Month,"\n", df3$Temp_Celsius,"C")) +
+      scale_y_continuous(breaks=c(2015,2016,2017,2018,2019,2020)) +
+      scale_fill_gradientn(colours = pal) + 
+      labs(title = "Temperature Changes in Uganda - 2015-2020",
+        subtitle = "Average in Celsius",
+        caption = "worldbank")+
+      theme_bw() +
+      theme_opts
+ 
+girafe(ggobj = v2, width_svg = 8, height_svg = 7,
+      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/temperature-changes-uganda.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/temperature-changes-uganda.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data sources: Worldbank Climate Knowledge Portal, [GO](https://climateknowledgeportal.worldbank.org/download-data){target="_blank"}
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

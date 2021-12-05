@@ -1,0 +1,216 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+<div class="activity">
+TEMPORAL  
+</div>
+
+# Women in Power
+## Scatter Bar
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Aditya Joshi on Unsplash"}
+
+knitr::include_graphics("assets/aditya-joshi-unsplash.jpg", dpi=72)
+
+```
+
+> If they don't give you a seat at the table, bring a folding chair...\
+--- Shirley Chisholm\
+
+***
+
+Ensuring that women are full and active participants in leadership and decision-making positions is a critically important target within the 2030 Agenda for Sustainable Development. SDG 5 target 5.5 seeks the achievement of: “women’s full and effective participation and equal opportunities for leadership at all levels of decision-making in political, economic, and public life.”
+
+This article's data comes from the Inter-Parliamentary Union (IPU), but has been collated by The World Bank as part of their World Development Indicators database. The number of seats in single or lower chambers of national parliaments held by women, expressed as a percentage of all occupied seats. National parliaments are either bicameral or unicameral (they contain either two chambers, or one). This indicator covers the single chamber in unicameral parliaments and the lower chamber in bicameral parliaments, but not the upper chamber in bicameral parliaments. Seats are usually won through general parliamentary elections, but may also be filled by nomination, appointment, indirect election, rotation of members, and by-election.
+
+### Ingest
+#### country, year, proportion
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df = read.csv("archetypes/women-in-power/female-political-representation.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle
+#### Remove missing values, transform percent format
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df[complete.cases(df), ]
+df_wrangle <- df_wrangle %>% mutate(Percent = Proportion_of_seats_held_by_women_in_national_parliaments_percent * 100)
+df_wrangle
+
+```
+
+
+
+### Analyze
+#### Calculate yearly world average
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_mean <- df_wrangle %>%
+  group_by(Year) %>%
+  summarise_at(vars(Percent), list(Mean = mean))
+
+df_mean
+
+```
+
+
+### Plot
+#### data only
+
+To created the scatter effect, we'll use <kbd>geom_jitter()</kbd>.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", color = "#76B7B2"), 
+    legend.position='none',
+    plot.title = element_text(color = "#76B7B2", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "#76B7B2", size = 8),
+    plot.caption = element_text(color = "#76B7B2", size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text = element_text(color = "#76B7B2"),
+    panel.border = element_blank(),
+    panel.background = element_rect(fill = "#2C363F"),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major = element_blank(), # remove x (vertical) gridlines
+    panel.grid.major.y = element_line(color = "#333D45"),
+    plot.background = element_rect(fill = "#2C363F")
+  )
+
+v1 <- ggplot(df_wrangle, aes(x=Year, y=Percent, group = Year)) + 
+  geom_jitter(shape = 21, color = '#76B7B2', fill = '#76B7B2', alpha = 0.6) +
+  geom_point(data = df_mean, aes(y = Mean), shape = 21, size = 4, color = 'white', fill = 'white', alpha = 0.6) +
+  scale_x_continuous(breaks=seq(1997,2019,1)) +
+  scale_y_continuous(breaks=seq(0,100,20), limits=c(0,100), labels = function(x) paste0(x, "%")) + # Multiply by 100 & add %
+  labs( title = "Women in Power",
+        subtitle = "Proportion of seats held by women in national parliaments (%)",
+        caption = "Source: World Bank | #Makeover Monday 2020 W30") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot with annotations
+#### some narrative to help tell the story
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+df_rwanda <- filter(df_wrangle, Country_Name == 'Rwanda' & Year == 2008 )
+df_rwanda
+
+v2 <- v1 + 
+    annotate("text", x = 1997, y = 90, 
+             label = "According to the world bank data only 11.7% of all national parliamentarians
+were women in 1997. This proportion has since shown very gradual increase
+over time to reach to 24.6% in 2019. This shows gender equality in national
+parliaments is still miles away", 
+             hjust = "left", vjust = 0.5, color = "#76B7B2", size = 3, fontface = 1) +
+    annotate("text", x = df_rwanda$Year, y = df_rwanda$Percent + 2, 
+             label = "Rwanda, however has been on top consistently with the highest
+proportion of seats held by women in national parliament", 
+             hjust = 0.5, vjust = 0.0, color = "#76B7B2", size = 3, fontface = 1)
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+  
+```
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/women-in-power-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/women-in-power-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: makeovermonday_2020w30, https://data.world/makeovermonday/2020w30
+* Data Source: World Bank, https://data.worldbank.org/indicator/SG.GEN.PARL.ZS)
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'women power leader parliament'
+commands <- 'complete.cases group_by summarise_at geom_jitter'
+sources <- 'World Bank'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

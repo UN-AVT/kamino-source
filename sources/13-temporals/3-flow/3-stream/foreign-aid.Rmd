@@ -1,0 +1,220 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(reshape2)
+#devtools::install_github('Ather-Energy/ggTimeSeries')
+library(ggTimeSeries)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Foreign Aid
+## Streamgraph
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Lyman Hansel Gerona on Unsplash"}
+
+masthead <- "assets/lyman-hansel-gerona-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+***
+
+Official development assistance (ODA) by sector is defined as the distribution of bilateral ODA commitments by economic sector. It does not refer to the type of goods or services provided. These data are aggregates of individual projects notified under the Creditor Reporting System, supplemented by reporting on the sectoral distribution of technical co-operation, and on actual disbursements of food and emergency aid. This indicator is measured in million USD constant prices, using 2018 as the base year.
+
+### Ingest
+#### country, year, number of tests
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df <- read.csv("archetypes/foreign-aid/oecd-oda-by-sector.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+
+```
+
+
+### Analyze
+#### group by and sum
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_sum_by_sector <- df %>%
+  group_by(TIME, SUBJECT) %>%
+  summarise_at(vars(Value),
+               list(TOTAL = sum)) 
+
+df_sum_by_sector
+
+df_sum_by_year <- df_sum_by_sector %>%
+  group_by(TIME) %>%
+  summarise_at(vars(TOTAL),
+               list(TOTAL = sum)) 
+
+df_sum_by_year
+
+```
+
+
+### Streamgraph
+#### color by sector
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text.y = element_blank(),
+  axis.line.y = element_blank(),
+  axis.ticks.y = element_blank(),
+  axis.title.y = element_blank(),
+  # panel.grid = element_blank(),
+  # panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = margin(0.25, 1, 0.25, 1, "in")
+)
+
+code_pal <- c("SOCINFRA" = "#FF606D", 
+              "ECOINFRA" = "#FC4C1A",
+              "PROD" = "#94BF69",
+              "MULTISEC" = "#469A58",
+              "PROGASSIST" = "#69BFBF",
+              "DEBTRELIEF" = "#43CEFF",
+              "HUMAID" = "#956AC0",
+              "UNSPECIFIED" = "#BF69AA"
+              )
+
+v1 <- ggplot(df_sum_by_sector, aes(x = TIME, y = TOTAL, group = SUBJECT, fill = SUBJECT)) +
+  stat_steamgraph(color="#ffffff") +
+  scale_x_continuous(breaks = seq(min(df_sum_by_sector$TIME), max(df_sum_by_sector$TIME), 5)) +
+  scale_fill_manual(values = code_pal ) +
+  #coord_fixed( 0.2 * diff(range(df$Year)) / diff(range(df$N))) +
+  theme_bw() +
+  theme_opts +
+  xlab(NULL) +
+  ylab(NULL)
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+### Streamgraph
+#### with annotations
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+last_row <- nrow(df_sum_by_year)
+first_year <- df_sum_by_year$TIME[1]
+first_value <- paste0( "$", round(df_sum_by_year$TOTAL[1] / 10000, digits=0 ), "bn" )
+last_year <- df_sum_by_year$TIME[last_row]
+last_value <- paste0( "$", round(df_sum_by_year$TOTAL[last_row] / 10000, digits=0 ), "bn" )
+
+v2 <- v1 + 
+  coord_cartesian(clip="off") +
+  annotate("text", x = first_year, y = 0, label = first_value, hjust = "right", size = 12, fontface = 2) +
+  annotate("text", x = last_year, y = 0, label = last_value, hjust = "left", size = 12, fontface = 2)
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/foreign-aid-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/foreign-aid-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative:  Information is Beautiful, https://informationisbeautiful.net/beautifulnews/80-foreign-aid/
+* Data: OECD (2021), ODA by sector (indicator). doi: 10.1787/a5a1f674-en (Accessed on 14 October 2021), https://data.oecd.org/oda/oda-by-sector.htm
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'foreign aid'
+commands <- 'stat_steamgraph'
+sources <- 'Information is Beautiful OECD'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

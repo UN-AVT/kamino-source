@@ -1,0 +1,51 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+TEMPORAL 
+</div>
+
+# Beeswarm
+
+A Beeswarm plot is a way of plotting points to avoid __overlaps__. It is useful to display the __density__ of data, especially in cases when many points may have near __equal values__ and the spead of the swarm can increase visibility.
+
+For this case, we'll look at the Language Diversity Index, a quantitative measure of the diversity of languages for a geographic area. The index calculates the probability that any two speakers in a population will speak the same language. A higher resulting LDI measure indicates greater linguistic diversity. A score of 1 would imply that no two individuals share a language.
+
+Although a country's official languages may be limited to a select few, LDI offers insight on the true scale of language use reflecting the cultural history of a country.  For example, Canada with two official languages, has a rich history of diverse Aboriginal languages, and a long history of immigration from a wide range of ethno-linguistic cultures.  We'll use census data to reveal this diversity using the Beeswarm plot, followed by a global view of all countries.
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

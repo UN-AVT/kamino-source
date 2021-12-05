@@ -1,0 +1,135 @@
+---
+pagetitle: "Freedom of Association Indicators"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+SEMIOGRAPHIC  
+</div>
+
+# Aircraft carriers by country
+# isotypes
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Manuel on Unsplash"}
+
+masthead <- "assets/manuel-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> quote...\
+--- attribution\
+
+***
+
+
+### Ingest
+#### number of aircraft carriers in operation worldwide as of December 2019
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+
+df <- data.frame (country  = c("United States", "United States", "United States", "United States",
+                               "United States", "United States", "United States", "United States",
+                               "United States", "United States", "United States", "China", "China",
+                               "Italy", "Italy", "United Kingdom", "United Kingdom",
+                               "France", "India", "Russia","Spain","Thailand"),
+                  carrier = c("boat", "boat", "boat", "boat", "boat",
+                              "boat", "boat", "boat", "boat", "boat",
+                              "boat", "boat", "boat", "boat", "boat",
+                              "boat", "boat", "boat", "boat", "boat",
+                              "boat","boat")
+)
+df
+
+```
+
+
+### Plot
+#### tbd
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.width=13, fig.height=5, fig.align='center', out.width="100%"}
+
+isotype_plot = istack(df, 
+           var = 'country', 
+           #group = 'carrier', 
+           icon = "assets/aircraft-carrier.svg",
+           size = 0.05,
+           asp = 2) + theme(panel.grid.major.x = element_line(colour = "grey", linetype = 'dashed')) +
+  ggtitle('Number of aircraft carriers in operation as of December 2019')
+
+ girafe(ggobj = isotype_plot, width_svg = 13.0, height_svg = 5.0,
+        options = list(opts_sizing(rescale = TRUE, width = 1)))
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+source: <a href="https://www.statista.com/chart/6483/the-worlds-aircraft-carrier-fleets/" target="_blank">China Commissions Its Second Aircraft Carrier Article</a>
+
+<pre>
+@misc{niallmccarthy_2019_infographic,
+  author = {Niall McCarthy},
+  month = {12},
+  publisher = {Statista},
+  title = {Infographic: China Commissions Its Second Aircraft Carrier},
+  url = {https://www.statista.com/chart/6483/the-worlds-aircraft-carrier-fleets/},
+  urldate = {2021-07-19},
+  year = {2019},
+  organization = {Statista Infographics}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

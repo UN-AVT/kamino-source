@@ -1,0 +1,298 @@
+---
+pagetitle: "IMDb Top 250 TV Shows"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(reshape2)
+library(janitor)
+library(countrycode)
+library(patchwork)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS  
+</div>
+
+# Student teacher ratios
+## Area Facet
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Greg Schneider on Unsplash"}
+
+masthead <- "assets/greg-schneider-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> A teacher affects eternity: he can never tell where his influence stops...\
+--- Henry Adams\
+
+***
+
+
+### Ingest
+#### by country, year, and ratio
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df <- read.csv("archetypes/student-teacher-ratios/student-teacher-ratios.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+
+```
+
+
+### Wrangle
+#### wide to long
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- melt(df, id.vars=c("Country", "type"))
+df_wrangle$variable <- as.integer(gsub("X", "", df_wrangle$variable))
+df_wrangle
+
+```
+
+
+### Wrangle
+#### enrich with country code, continent, and region
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df_wrangle %>% 
+  filter(type == "Countries") %>% 
+  mutate(country_code = countrycode(Country, "country.name", "iso3c")) %>% 
+  mutate(region = countrycode(country_code, "iso3c", "un.regionsub.name")) %>% 
+  mutate(continent = countrycode(country_code, "iso3c", "continent")) %>% 
+  filter(!is.na(region)) %>%
+  mutate(year = variable) %>%
+  mutate(ratio = value)
+
+df_wrangle
+
+```
+
+
+### Analytics
+#### aggregate by group (continent and region)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_region <- df_wrangle %>% 
+  group_by(year, region, continent) %>% 
+  summarize(ratio = mean(ratio, na.rm = TRUE)) %>% 
+  filter(!is.nan(ratio))
+
+df_region
+
+df_continent <- df_wrangle %>% 
+  group_by(year, continent) %>% 
+  summarize(ratio = mean(ratio, na.rm = TRUE)) %>% 
+  filter(!is.nan(ratio))
+
+# df_continent
+
+```
+
+
+### Plot
+#### facet by continent
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 10), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position='none',
+    panel.spacing.x = unit(1, "lines"),
+    panel.spacing.y = unit(1, "lines"),
+    panel.grid.minor = element_blank(),
+    strip.text = element_text(size = 8.5, face = "bold"),
+    strip.background = element_blank()
+)
+
+continent_palette <- c(
+  "Asia" = "#171635",
+  "Europe" = "#00225D",
+  "Africa" = "#763262",
+  "Oceania" = "#CA7508",
+  "Americas" = "#E9A621"
+)
+
+# Plot
+v1 <- ggplot(df_continent, aes(x = year, y = ratio, color = continent, fill = continent)) +
+  geom_area(alpha = 0.5) +
+  # geom_vline(aes(xintercept = year), size = 0.1, color = "gray80") +
+  facet_wrap( ~ continent, ncol = 1) +
+  scale_x_continuous(breaks = seq(1970, 2020, by = 10)) +
+  scale_color_manual(values = continent_palette) +
+  scale_fill_manual(values = continent_palette) +
+  labs(title = "Student Teacher Ratios",
+       subtitle = "by continent",
+       caption = "Source: UNESCO Institute of Statistics",
+       x = NULL,
+       y = NULL) +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = FALSE, width = 0.75))
+)
+
+```
+
+
+### Plot
+#### facet by region
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+
+list_of_continents <- c("Africa", "Americas", "Asia", "Europe", "Oceania")
+
+p1 <- ggplot(data = subset(df_region, continent == list_of_continents[[1]] ), aes(x = year, y = ratio, color = continent, fill = continent)) +
+  geom_area(alpha = 0.5) +
+  facet_wrap( ~ region, nrow = 1) +
+  scale_x_continuous(breaks = seq(1970, 2020, by = 10)) +
+  scale_color_manual(values = continent_palette) +
+  scale_fill_manual(values = continent_palette) +
+  labs(x = NULL,
+       y = NULL,
+       title = list_of_continents[[1]]) +
+  theme_bw() +
+  theme_opts
+
+p2 <- ggplot(data = subset(df_region, continent == list_of_continents[[2]] ), aes(x = year, y = ratio, color = continent, fill = continent)) +
+  geom_area(alpha = 0.5) +
+  facet_wrap( ~ region, nrow = 1) +
+  scale_x_continuous(breaks = seq(1970, 2020, by = 10)) +
+  scale_color_manual(values = continent_palette) +
+  scale_fill_manual(values = continent_palette) +
+  labs(x = NULL,
+       y = NULL,
+       title = list_of_continents[[2]]) +
+  theme_bw() +
+  theme_opts
+
+p3 <- ggplot(data = subset(df_region, continent == list_of_continents[[3]] ), aes(x = year, y = ratio, color = continent, fill = continent)) +
+  geom_area(alpha = 0.5) +
+  facet_wrap( ~ region, nrow = 1) +
+  scale_x_continuous(breaks = seq(1970, 2020, by = 10)) +
+  scale_color_manual(values = continent_palette) +
+  scale_fill_manual(values = continent_palette) +
+  labs(x = NULL,
+       y = NULL,
+       title = list_of_continents[[3]]) +
+  theme_bw() +
+  theme_opts
+
+p4 <- ggplot(data = subset(df_region, continent == list_of_continents[[4]] ), aes(x = year, y = ratio, color = continent, fill = continent)) +
+  geom_area(alpha = 0.5) +
+  facet_wrap( ~ region, nrow = 1) +
+  scale_x_continuous(breaks = seq(1970, 2020, by = 10)) +
+  scale_color_manual(values = continent_palette) +
+  scale_fill_manual(values = continent_palette) +
+  labs(x = NULL,
+       y = NULL,
+       title = list_of_continents[[4]]) +
+  theme_bw() +
+  theme_opts
+
+p5 <- ggplot(data = subset(df_region, continent == list_of_continents[[5]] ), aes(x = year, y = ratio, color = continent, fill = continent)) +
+  geom_area(alpha = 0.5) +
+  facet_wrap( ~ region, nrow = 1) +
+  scale_x_continuous(breaks = seq(1970, 2020, by = 10)) +
+  scale_color_manual(values = continent_palette) +
+  scale_fill_manual(values = continent_palette) +
+  labs(x = NULL,
+       y = NULL,
+       title = list_of_continents[[5]]) +
+  theme_bw() +
+  theme_opts
+
+girafe(code = print(p1 / p2 / p3 / p4 / p5), width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = FALSE, width = 0.75))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/student-teacher-ratios-fs.svg", plot = v1, width=720/72, height=1280/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/student-teacher-ratios-sm.svg", plot = v1, width=2.25, height=4)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative inspiration: Jake Kaupp, TidyTuesday, [GO](https://github.com/jkaupp/tidytuesdays/tree/master/2019/week19){target="_blank"}
+* Data sources: UNESCO Institute of Statistics, [GO](http://uis.unesco.org/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

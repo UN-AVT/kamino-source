@@ -1,0 +1,188 @@
+---
+pagetitle: "Mobile phone usage in Bolivia"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(emojifont)
+# devtools::install_github("hrbrmstr/waffle")
+library(waffle)
+library(hrbrthemes)
+library(ggtext)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+font_add("FontAwesome5Free-Solid", 
+         "assets/fa-solid-900.ttf")
+font_add("FontAwesome5Free-Regular", 
+         "assets/fa-regular-400.ttf")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+SEMIOGRAPHIC  
+</div>
+
+# Mobile phone usage in Bolivia
+# infographic
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Jari Hytonen on Unsplash"}
+
+masthead <- "assets/jari-hytonen-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> quote...\
+--- attribution\
+
+***
+
+
+### Ingest
+#### number of aircraft carriers in operation worldwide as of December 2019
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/mobile-phone-usage-in-turkey/mobile-phone-usage-in-turkey.csv", header = TRUE)
+df
+
+```
+
+
+### Wrangle
+#### filter for country
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_wrangle <- df %>% filter(entity == "Honduras")
+df_wrangle
+
+```
+
+
+
+### Wrangle
+#### filter, mutate, select, and pivot
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Wrangle
+df_wrangle <- df_wrangle %>% 
+  mutate(mobile_subs = round(mobile_subs, 0)) %>% 
+  filter(year %in% c(1997, 2007, 2017)) %>% 
+  select(year, mobile_subs) %>% 
+  mutate(no_subs = 100 - mobile_subs) %>% 
+  pivot_longer(!year, names_to = "subscription", values_to = "n")
+
+df_wrangle
+
+```
+
+
+
+### Plot
+#### tbd
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
+
+# Plot
+v1 <- ggplot(data = df_wrangle, aes(label = subscription, values = n)) +
+  geom_pictogram(aes(colour = subscription), size = 5, n_rows = 10, make_proportional = TRUE) + 
+  scale_color_manual(
+    guide = FALSE,
+    values = c("black", "#b30000")
+  ) +
+  scale_label_pictogram(
+    guide = FALSE,
+    values = c("mobile-alt", "times")
+  ) +
+  coord_cartesian() +
+  labs(
+    title = "MOBILE PHONE USAGE IN BOLIVIA",
+    subtitle = "Technology Adoption",
+    caption = NULL
+  ) +
+  theme_ipsum_rc(grid = " ") +
+  theme_enhance_waffle() +
+  theme(
+    strip.text = element_text(hjust = 0.5, face = "bold"),
+    plot.title = element_markdown(hjust = 0.5, vjust = 0),
+    plot.subtitle = element_markdown(hjust = 0.5, family = "inconsolata"),
+    plot.caption = element_text(hjust = 0.5),
+    plot.background = element_rect(fill = "gray100"),
+    plot.margin = margin(55, 20, 35, 20, unit = "pt")
+  ) +
+  facet_wrap(~ year, ncol = 3)
+
+ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+        options = list(opts_sizing(rescale = TRUE, width = 1)))
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+source: Hannah Ritchie (2017) - "Technology Adoption". Published online at OurWorldInData.org. Retrieved from: 'https://ourworldindata.org/technology-adoption' [Online Resource]
+
+<pre>
+@misc{niallmccarthy_2019_infographic,
+  author = {Niall McCarthy},
+  month = {12},
+  publisher = {Statista},
+  title = {Infographic: China Commissions Its Second Aircraft Carrier},
+  url = {https://www.statista.com/chart/6483/the-worlds-aircraft-carrier-fleets/},
+  urldate = {2021-07-19},
+  year = {2019},
+  organization = {Statista Infographics}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,286 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+## packages
+library(tidyverse)
+library(ggstream)
+library(colorspace)
+library(ggtext)
+library(ragg)
+library(cowplot)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# X-Men Characters
+## Streamgraph
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Jack O'-'Rourke on Unsplash"}
+
+masthead <- "assets/jack-o-rourke-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> You Are Not Broken...\
+--- Dark Phoenix
+
+***
+
+### Ingest
+#### character, costume, and appearance
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_best_stream_fct <- read.csv("archetypes/x-men-characters/five-most-popular.csv", header = TRUE, stringsAsFactors = FALSE)
+df_best_stream_fct$char_costume <- as.factor(df_best_stream_fct$char_costume)
+df_best_stream_fct$parameter <- as.factor(df_best_stream_fct$parameter)
+df_best_stream_fct
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+pal <- c(
+  "#FFB400", lighten("#FFB400", .25, space = "HLS"),
+  "#C20008", lighten("#C20008", .2, space = "HLS"),
+  "#13AFEF", lighten("#13AFEF", .25, space = "HLS"),
+  "#8E038E", lighten("#8E038E", .2, space = "HLS"),
+  "#595A52", lighten("#595A52", .15, space = "HLS")
+)
+
+## factor levels for type of appearance
+levels <- c("depicted", "speech", "thought", "narrative")
+
+labels <- 
+  tibble(
+    issue = 78,
+    value = c(-21, -19, -14, -11),
+    parameter = factor(levels, levels = levels),
+    label = c("Depicted", "Speech\nBubbles", "Thought\nBubbles", "Narrative\nStatements")
+  )
+
+texts <-
+  tibble(
+    issue = c(295, 80, 245, 127, 196),
+    value = c(-35, 35, 30, 57, 55),
+    parameter = c("depicted", "depicted", "thought", "speech", "speech"),
+    text = c(
+      '**Gambit** was introduced for the first time in issue #266 called "Gambit: Out of the Frying Pan"— nevertheless, he is the **4<sup>th</sup> most popular X-Men character**!',
+      '**Wolverine is the most popular X-Men** and has a regular presence in the X-Men comics between 1975 and 1991.',
+      '**Storm** is by far the most thoughtful of the five most popular X-Men characters, especially in issues #220, #223 and #265. Storm **ranks 5<sup>th</sup>**.',
+      "**Magneto** was ranked by IGN as the *Greatest Comic Book Villain of All Time*. And even though he only appears from time to time he **ranks 2<sup>nd</sup>**—<br>4 ranks higher than his friend and opponent Professor X!",
+      'The **3<sup>rd</sup> most popular X-men character Nightcrawler** gets injured during the "Mutant Massacre"  and fell into a coma after an attack from Riptide in issue #211.'
+    ),
+    char_popular = c("Gambit", "Wolverine", "Storm", "Magneto", "Nightcrawler"),
+    costume = "costumed",
+    vjust = c(.5, .5, .4, .36, .38)
+  ) %>% 
+  mutate(
+    parameter = factor(parameter, levels = levels),
+    char_costume = if_else(
+      char_popular == "Storm",
+      glue::glue("{char_popular} ({costume})"),
+      glue::glue("{char_popular} ({costume})   ")
+    ),
+    char_costume = factor(char_costume, levels = levels(df_best_stream_fct$char_costume))
+  )
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+theme_set(theme_minimal(base_family = "Reem Kufi", base_size = 12))
+theme_update(
+  plot.title = element_text(size = 27, face = "bold", hjust = .5, margin = margin(10, 0, 30, 0)),
+  plot.caption = element_text(size = 9, color = "grey40", hjust = .5, margin = margin(20, 0, 5, 0)),
+  axis.text.y = element_blank(),
+  axis.title = element_blank(),
+  plot.background = element_rect(fill = "grey88", color = NA),
+  panel.background = element_rect(fill = NA, color = NA),
+  panel.grid = element_blank(),
+  panel.spacing.y = unit(0, "lines"),
+  strip.text.y = element_blank(),
+  legend.position = "bottom",
+  legend.text = element_text(size = 9, color = "grey40"),
+  legend.box.margin = margin(t = 30), 
+  legend.background = element_rect(color = "grey40", size = .3, fill = "grey95"),
+  legend.key.height = unit(.25, "lines"),
+  legend.key.width = unit(2.5, "lines"),
+  plot.margin = margin(rep(20, 4))
+)
+
+```
+
+
+### Streamgraph
+#### color by country
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v1 <- ggplot(df_best_stream_fct, aes(issue, value, color = char_costume, fill = char_costume )) +
+      geom_stream(geom = "contour", color = "white", size = 1.25, bw = .1 ) +
+      geom_hline(yintercept = 0, color = "grey88") +
+      geom_stream( geom = "polygon",
+        #n_grid = 12000,
+        bw = .1, size = 0 ) +
+      geom_vline( data = tibble(x = c(97, seq(125, 250, by = 25), 280)),
+        aes(xintercept = x), inherit.aes = F,  color = "grey88",  size = .5, linetype = "dotted" ) +
+      annotate( "rect", xmin = -Inf, xmax = 78,  ymin = -Inf, ymax = Inf, fill = "grey88" ) +
+      annotate( "rect", xmin = 299, xmax = Inf,  ymin = -Inf, ymax = Inf, fill = "grey88" ) +
+      geom_text( data = labels, aes(issue, value, label = label),
+        inherit.aes = F, family = "Reem Kufi", size = 4.7, color = "grey25", fontface = "bold", lineheight = .85, hjust = 0 ) +
+      ## needs facet_grid for space argument
+      facet_grid(parameter ~ ., scales = "free_y",space = "free" ) +
+      scale_x_continuous(limits = c(74, NA), breaks = c(94, seq(125, 250, by = 25), 280), labels = glue::glue("Issue\n#{c(97, seq(125, 250, by = 25), 280)}"), position = "top" ) + 
+      scale_y_continuous(expand = c(.03, .03)) + 
+      scale_color_manual( expand = c(0, 0), values = pal, guide = F ) +
+      scale_fill_manual( values = pal, name = NULL ) +
+      coord_cartesian(clip = "off") +
+      labs(
+        title = "Appearance of the Five Most Popular X-Men Characters in Chris Claremont's Comics",
+        caption = "Visualization by Cédric Scherer  •  Data by Claremont Run Project via Malcom Barret  •  Popularity Scores by ranker.com"
+      ) 
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+### Streamgraph
+#### with annotations
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v2 <- v1 +
+  geom_textbox(
+    data = texts,
+    aes( issue, value,label = text, color = char_costume, color = after_scale(darken(color, .12, space = "HLS")), vjust = vjust ),
+    family = "Reem Kufi", size = 2.7, fill = "grey95", maxwidth = unit(7.25, "lines"), hjust = .5
+  )
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v3 <- ggplot(df_best_stream_fct, aes(issue, value, color = char_costume, fill = char_costume)) +
+    geom_stream(geom = "contour", color = "white", size = 1.25, bw = .1 ) +
+    geom_hline(yintercept = 0, color = "grey88") +
+    geom_stream(geom = "polygon", #n_grid = 12000, 
+                bw = .1, size = 0 ) +
+    annotate("rect", xmin = -Inf, xmax = 78,  ymin = -Inf, ymax = Inf, fill = "grey88" ) +
+    annotate("rect", xmin = 299, xmax = Inf,ymin = -Inf, ymax = Inf, fill = "grey88" ) +
+    facet_grid( ## needs facet_grid for space argument
+      parameter ~ ., scales = "free_y", space = "free" ) +
+    scale_x_continuous(limits = c(74, NA)) + 
+    scale_y_continuous(expand = c(.03, .03)) + 
+    scale_color_manual( expand = c(0, 0), values = pal, guide = F ) +
+    scale_fill_manual( values = pal, guide = F ) +
+    coord_cartesian(clip = "off") +
+    theme(axis.text.x = element_blank())
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/x-men-characters-fs.svg", plot = v3, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/x-men-characters-sm.svg", plot = v3, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Visualization by Cédric Scherer, https://github.com/z3tt/TidyTuesday/blob/master/R/2020_27_ClaremontRunXMen.Rmd
+* Data by Claremont Run Project via Malcom Barret
+* Popularity Scores by ranker.com
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'zika virus epidemic'
+commands <- 'stat_steamgraph'
+sources <- 'Cédric Scherer'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

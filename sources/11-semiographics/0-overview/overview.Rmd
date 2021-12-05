@@ -1,0 +1,99 @@
+---
+pagetitle: "Semiographics Overview"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Semiographics Overview
+## conveying meaning with symbols
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Manuel on Unsplash"}
+
+masthead <- "assets/manuel-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The clearer a subject is worked out... the more it elicits radical change\
+  of the position (of society) in present-day life...\
+--- Otto Neurath\
+
+***
+
+The objective of this chapter is to bring meaning to symbol, and symbol to meaning. This section focuses on the use of symbols as a form of representation to convey language and quantity. Forms of sign language to “speak” to your audience with careful and deliberate selection of icon, glyph...
+
+### Substance and Representation
+#### language and numbers
+
+
+Semiotics is the study of signs and symbols and their significance to conveying meaning. A semiographic view is one which uses a symbol or arrangement of symbols to communicate an idea. From a substantive analytical perspective, the use of symbols can enhance the context setting of a representation. The use of semigraphic approaches will enable you to bring appropriate levels of realism to a complex idea. Two uses cases are the focus of this section: 
+
+* using symbols as a language
+* using symbols to represent numbers.
+
+The patterns found in this chapter represent the elements of symbol language. Gaining fluency in their use will enable you to design more expressive, clear and communicative visual representations. The semiographic patterns described in this chapter may be used either to enhance views, or to create a view. For example, a geospatial view may be enhanced with symbols to plot the location of an object using an pictogram. Alternatively, you might design an information graphic by creating a pictoral statistics view using a “symbols as numbers” pattern. In either case, the motivation for including semiographic patterns into a representation design is to reinforce understanding of the idea.
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Data sources: The Data Source,  [GO](https://govdata360-backend.worldbank.org/api/v1/datasets/4034/dump.csv){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

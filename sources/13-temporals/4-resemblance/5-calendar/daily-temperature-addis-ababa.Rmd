@@ -1,0 +1,215 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(dplyr)
+library(tidyr)
+library(forcats)
+library(lubridate)
+library(ggplot2)
+library(grid)
+library(ggTimeSeries)
+library(wesanderson)
+library(plotly)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Calendar Heatmap
+## Daily Temperatures, Addis Ababa, Ethiopia - July 1st thru July 20th 
+
+***
+
+## Load data [Ingest]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+temp_calendar = read.csv("archetypes/daily-temperature-addis-ababa_July_2021.csv", header = TRUE, stringsAsFactors = FALSE)
+temp_calendar
+
+```
+
+
+## Prepare data [Wrangle]
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+temp_calendar$timestamp <- as.Date(temp_calendar$timestamp)
+temp_calendar
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+temp_calendar$timestamp <- ymd(temp_calendar$timestamp)
+
+#creating new fields to separate day of the week (Sunday thru Saturday), month, week number, day number
+temp_calendar <- temp_calendar %>% 
+  mutate(weekday = wday(timestamp, label = T, week_start = 7), # can put week_start = 1 to start week on Monday
+         month = month(timestamp, label = T),
+         day_num = day(timestamp),
+         week = epiweek(timestamp)) #which week the timestamp represents whithin a year (52 weeks)
+
+
+#creating a new field monthweek represents the 4 weeks within a month
+temp_calendar <- temp_calendar %>% 
+  group_by(month) %>% 
+  mutate(monthweek = 1 + week - min(week))
+
+temp_calendar
+
+```
+
+
+## Plot [ Views / Temporals ]
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10, fig.height=8, fig.align='center', out.width="100%"}
+
+day_of_week_axis <- c( "S","M","T","W","T","F","S")
+labels_x <- levels(temp_calendar$weekday)
+
+week_axis <- c( 1,2,3,4,5)
+
+pal <- wes_palette("Zissou1", 10, type = "continuous")
+
+# weekday (day of the week - Sun thru Sat)
+# monthweek (up to 5 weeks per month)
+v1 <- ggplot(temp_calendar, aes(weekday, monthweek, fill = Addis.Ababa.Temperature)) + 
+  geom_tile(colour = "white", width=.9, height=.9) + 
+  theme_minimal()+
+  #make horizontal lines between the week number within the month
+  geom_hline(yintercept = seq(0, length(unique(temp_calendar$monthweek))) + .5, color="white") +
+  
+  #make vertical lines between the days of the week
+  geom_vline(xintercept = seq(0, length(unique(temp_calendar$weekday))) + .5, color="white") +
+  scale_x_discrete(breaks=labels_x , labels=day_of_week_axis) +
+  scale_y_reverse(breaks=week_axis, labels=week_axis, expand=c(0,0)) +
+  scale_fill_gradientn(colours = pal) + 
+  theme_bw() +
+  theme(
+      legend.position="bottom",
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.background=element_rect(fill="#f0f0f0", colour="#f0f0f0")
+    ) +
+  labs(x="Days of Week",
+       y="Weeks of July",
+       title = "Time-Series Calendar Heatmap ", 
+       subtitle="Daily Temperature - July 2021, Addis Ababa, Ethiopia") +
+  theme(strip.placement = "outside",# Place facet labels outside x axis labels.
+        strip.background = element_rect(fill = "white"))  # Make facet label background white.
+
+
+v1
+
+```
+
+
+## Now let's add some labels as well as some interactions to this calendar
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10, fig.height=8, fig.align='center', out.width="100%"}
+
+day_of_week_axis <- c( "S","M","T","W","T","F","S")
+labels_x <- levels(temp_calendar$weekday)
+
+week_axis <- c( 1,2,3,4,5)
+
+pal <- wes_palette("Zissou1", 10, type = "continuous")
+
+# weekday (day of the week - Sun thru Sat)
+# monthweek (up to 5 weeks per month)
+# Adding a text to show the day and the exact temperature on that day
+v1 <- ggplot(temp_calendar, aes(weekday, monthweek, fill = Addis.Ababa.Temperature, text = paste0("Day: ", day_num, "\nTemp: ",Addis.Ababa.Temperature ))) + 
+  geom_tile(colour = "white", width=.9, height=.9) + 
+  theme_minimal()+
+  geom_hline(yintercept = seq(0, length(unique(temp_calendar$monthweek))) + .5, color="white") +
+  geom_vline(xintercept = seq(0, length(unique(temp_calendar$weekday))) + .5, color="white") +
+  scale_x_discrete(breaks=labels_x , labels=day_of_week_axis) +
+  scale_y_reverse(breaks=week_axis, labels=week_axis, expand=c(0,0)) +
+  #facet_grid(day_num) + 
+  scale_fill_gradientn(colours = pal) + 
+  theme_bw() +
+  theme(
+      legend.position="bottom",
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.background=element_rect(fill="#f0f0f0", colour="#f0f0f0")
+    ) +
+  labs(x="Days of Week",
+       y="Weeks of July",
+       title = "Daily Temperature - July 2021, Addis Ababa, Ethiopia") + 
+      # subtitle="Daily Temperature - July 2021, Addis Ababa, Ethiopia") +
+  theme(strip.placement = "outside",# Place facet labels outside x axis labels.
+        strip.background = element_rect(fill = "white"))  # Make facet label background white.
+
+
+#v1
+
+#using library(plotly) package, this method allows you to add the interactivity to your grapg
+v2 <- ggplotly(v1, tooltip = "text")
+
+v2
+```
+
+
+```{r, echo=FALSE}
+
+# ggsave(filename = "daily-temperature-addis_ababa.svg", plot = v1, width=11, height=6)
+
+```
+
+
+
+# References
+## The citations and data sources used for this case
+
+source: <a href="https://www.meteoblue.com/en/weather/archive/export/addis-ababa_ethiopia_344979" target="_blank">Daily Temperatures, Addis Ababa, Ethiopia - July 1st thru July 20th </a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+read.bibtex(file = "citations/daily-temperature-addis-ababa.bib")
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

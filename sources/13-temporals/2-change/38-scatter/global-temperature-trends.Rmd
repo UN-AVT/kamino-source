@@ -1,0 +1,115 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
+# needed to include bib references
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Scatter
+## Case: Climate Change: Vital Signs of the Planet
+
+***
+
+# Load the data
+## Global temperature trends since 1880
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+data <- read.csv("archetypes/global-temperature-trends/global-temperature-trends-db.csv", header = TRUE, stringsAsFactors = TRUE)
+
+# Transpose columns
+data <- gather(data, TempMth, TempDiff, "Jan":"Dec", factor_key=FALSE)
+
+data
+
+```
+
+# Plot the chart
+## The warmest years have occurred since 2000
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=13, fig.height=7, out.width = "100%"}
+
+p = ggplot(data) + 
+  geom_point(aes(x=factor(Year), y=TempDiff, color=Year), shape=16, alpha=0.5, size=2.5) +
+  scale_color_gradient(low = "steelblue1", high = "orangered4") +
+  geom_hline(yintercept=0, colour='grey') +
+  scale_y_continuous(breaks=seq(-0.8,1.4,0.2), limits=c(-0.8,1.4)) +
+  scale_x_discrete(breaks=c(1880,1890,1900,1910,1920,1930,1940,1950,1960,1970,1980,1990,2000,2010)) +
+  labs(title = "Source: NASA's Goddard Institute for Space Studies (GISS)") +
+  theme_minimal() +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.ticks = element_line(),
+    legend.position = "none"
+  ) +
+  xlab(NULL) +
+  ylab("Temperature Anomaly (C)")
+
+p
+
+```
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+# References
+## The citations and data sources used for this case
+
+Source: <a href="https://climate.nasa.gov/vital-signs/global-temperature/">Global surface temperature | NASA Global Climate Change</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/global-temperature-trends.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

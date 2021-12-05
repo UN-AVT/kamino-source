@@ -1,0 +1,162 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(dplyr)
+library(tidyr)
+library(forcats)
+library(lubridate)
+library(ggplot2)
+library(grid)
+library(ggTimeSeries)
+library(wesanderson)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Calendar Heatmap
+## Daily Average Temperatures, Nairobi, Kenya
+
+***
+
+## Load data [Ingest]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+temp_calendar = read.csv("archetypes/daily-avg-temperature-kenya.csv", header = TRUE, stringsAsFactors = FALSE)
+temp_calendar
+
+```
+
+
+## Prepare data [Wrangle]
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+temp_calendar <- filter(temp_calendar, Year %in% c(1995, 2005, 2017))
+
+temp_calendar$DATE <- ymd(temp_calendar$DATE)
+
+temp_calendar <- temp_calendar %>% 
+  mutate(weekday = wday(DATE, label = T, week_start = 7), # can put week_start = 1 to start week on Monday
+         month = month(DATE, label = T),
+         date = yday(DATE),
+         week = epiweek(DATE))
+
+# isoweek makes the last week of the year as week 1, so need to change that to week 53 for the plot
+temp_calendar$week[temp_calendar$month=="Dec" & temp_calendar$week ==1] = 53 
+
+temp_calendar <- temp_calendar %>% 
+  group_by(month) %>% 
+  mutate(monthweek = 1 + week - min(week))
+
+temp_calendar
+
+```
+
+
+## Plot [ Views / Temporals ]
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, fig.align='center', out.width="100%"}
+
+day_of_week_axis <- c( "S","M","T","W","T","F","S")
+labels_x <- levels(temp_calendar$weekday)
+
+week_axis <- c( 1,2,3,4,5,6 )
+
+pal <- wes_palette("Zissou1", 10, type = "continuous")
+
+v1 <- ggplot(temp_calendar, aes(weekday, monthweek, fill = AvgTemperature)) + 
+  geom_tile(colour = "white") + 
+  geom_hline(yintercept = seq(0, length(unique(temp_calendar$monthweek))) + .5, color="white") +
+  geom_vline(xintercept = seq(0, length(unique(temp_calendar$weekday))) + .5, color="white") +
+  scale_x_discrete(breaks=labels_x , labels=day_of_week_axis) +
+  #scale_y_continuous(breaks=week_axis, labels=week_axis) +
+  scale_y_reverse(breaks=week_axis, labels=week_axis, expand=c(0,0)) +
+  facet_grid(Year~month) + 
+  scale_fill_gradientn(colours = pal) + 
+  theme_bw() +
+  theme(
+      legend.position="bottom",
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.background=element_rect(fill="#f0f0f0", colour="#f0f0f0")
+    ) +
+  labs(x="Day of Month",
+       y="Week of Month",
+       title = "Time-Series Calendar Heatmap", 
+       subtitle="Average Daily Temperature, Nairobi, Kenya") +
+  theme(strip.placement = "outside",                      # Place facet labels outside x axis labels.
+        strip.background = element_rect(fill = "white"),  # Make facet label background white.
+        axis.title = element_blank())                     # Remove x and y axis titles.
+
+v1
+
+
+```
+
+
+
+```{r, echo=FALSE}
+
+# ggsave(filename = "daily-avg-temperature-nairobi-kenya.svg", plot = v1, width=11, height=6)
+
+```
+
+
+
+# References
+## The citations and data sources used for this case
+
+source: <a href="https://www.timeanddate.com/weather/kenya/nairobi/climate" target="_blank">Daily Average Temperatures, Nairobi, Kenya</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+read.bibtex(file = "citations/daily-average-temperature.bib")
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

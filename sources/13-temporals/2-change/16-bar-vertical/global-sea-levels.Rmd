@@ -1,0 +1,215 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(wesanderson)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS  
+</div>
+
+# Global sea levels
+## vertical bar chart
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Saad Chaudhry on Unsplash"}
+
+masthead <- "assets/saad-chaudhry-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Sea level rise and destruction of water resources as glaciers melt alone may have horrendous human consequences...\
+--- Noam Chomsky\
+
+***
+
+
+### Ingest the data
+#### global sea level by year
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df <- read.csv("archetypes/global-sea-levels/global-sea-levels.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Plot
+#### standard baseline (0)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 8),
+    plot.caption = element_text(color = "#555555", size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major = element_blank(), # remove x (vertical) gridlines
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 8),
+    legend.position='none'
+)
+
+pal <- wes_palette("Zissou1", 21, type = "continuous")
+
+# Plot
+v1 <- ggplot(df) + 
+  # Vertical bars
+  geom_bar(aes(x = year, y = global_sea_level_mm, fill = global_sea_level_mm), stat = "identity", width = 1.89) +
+  scale_fill_gradientn(colours = pal) + 
+  # ylim(-200, 250) +
+  scale_y_continuous(breaks=seq(min(df$global_sea_level_mm), max(df$global_sea_level_mm), length=5), limits=c(min(df$global_sea_level_mm), max(df$global_sea_level_mm))) +
+  coord_cartesian(clip = 'off') +
+  # Modify theme
+  theme_bw() +
+  theme_opts +
+  # Add title
+  labs(title = "Global Sea Levels")
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+### Plot
+#### rescale negative values
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+df_trans <- df
+m <- min(df_trans$global_sea_level_mm) # find min
+df_trans$global_sea_level_mm <- df_trans$global_sea_level_mm - m
+
+v2 <- ggplot(df_trans) + 
+  geom_bar(aes(x = year, y = global_sea_level_mm, fill = global_sea_level_mm), stat = "identity", width = 1.89) +
+  scale_fill_gradientn(colours = pal) + 
+  # ylim(-200, 250) +
+  scale_y_continuous(breaks=seq(min(df_trans$global_sea_level_mm), max(df_trans$global_sea_level_mm), length=5), 
+                     limits=c(min(df_trans$global_sea_level_mm), max(df_trans$global_sea_level_mm)), 
+                     labels=as.character(round(seq(m, max(df_trans$global_sea_level_mm+m), length=5),2))) +
+  coord_cartesian(clip = 'off') +
+  theme_bw() +
+  theme_opts +
+  labs(title = "Global Sea Levels")
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+### Plot
+#### with annotations
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+city_label <- 'Abidjan, Accra, Alexandria, Bangkok, Dakka,\nFuzhou, Guangzhou, Hai Phong, Hong Kong, Jakarta, Karachi,\nKalkota, Lagos, Lomé, London, Manila, Miami,\nNYC, Ningbo, Rangoon, Shanghai, Singapore, Zhanjiang'
+
+v3 <- v2 + 
+    geom_hline(yintercept = -m, linetype="dashed", color = "red") +
+    geom_vline(xintercept=1860, linetype="dashed", color = "black") +
+    annotate("text", x = 1700, y = 170, 
+             label = city_label, 
+             hjust = 0.0, vjust = 0.0, color = "#333333", size = 3, fontface = 1, family = "inconsolata") +
+    annotate("text", x = 1865, y = 0, 
+             label = "Rise trend starts", 
+             hjust = 0.0, vjust = 1.75, color = "#333333", size = 6, fontface = 2, family = "inconsolata")
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+# full version
+ggsave(filename = "outputs/global-sea-levels-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/global-sea-levels-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: Observable, Day 19 of 30DayChartChallenge, https://observablehq.com/@terezaif/annual-global-sea-levels
+* Data: World Meteorological Organization, Climate Explorer, https://climexp.knmi.nl/getindices.cgi?WMO=PSMSLData/gsl_ann&STATION=global_sea_level&TYPE=i&id=someone@somewhere&NPERYEAR=1
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'sea levels'
+commands <- 'wes_palette geom_bar'
+sources <- 'Observable World-Meteorological-Organization WMO'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,132 @@
+---
+pagetitle: "Symbols as Numbers"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Symbols as Numbers
+## conveying meaning with symbols
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Manuel on Unsplash"}
+
+masthead <- "assets/manuel-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The clearer a subject is worked out... the more it elicits radical change\
+  of the position (of society) in present-day life...\
+--- Otto Neurath\
+
+***
+
+### Symbols as numbers
+#### Pictoral Statistics
+
+
+Views based on symbols as numbers can have both advantages and disadvantages when compared to other conventional methods used in charting. One of the advantages of designing symbol graphics for quantitative data is the context and free form of the canvas. A purposefuly selected symbol, for example, can reinforce the context of the subject. This advantage, however, can lead to significant distortion, integrity, and accuracy errors. Graphics of this nature are not bound to statistical charting principles such as a computed coordinate system, may contain excessive data ink, and generally take a longer time to create. However, these approaches are in widespread use and often receive favorable results when done correctly.
+
+
+### Vienna Method
+#### Pictoral Statistics
+
+
+The Vienna method of picture statistics represents an organized attempt to use graphical design for the purpose of achieving changes in society by presenting basic socio-economic facts in a readily comprehensible form. This was the program set forth by Otto Neurath in connection with his work on Isotype. Neurath also referred to his invention as education pictures and as fact pictures. A characteristic of picture statistics according to Neurath’s Vienna method is that numbers are represented by a series of identical pictorial elements or signs, each of them representing a defined quantity. They can be transformed back into numbers by counting picture elements. This contrasts with the practice of present-day bar charts or histograms in which numbers are translated into lengths of continuous line segments, and in which the numbers are reconstructed from readings on a numerically divided scale.
+
+The distinctive aspect of Neurath’s philosophy was his conviction that changes in society could only be achieved if the results of logical analysis were made available and accessible to large groups of the population by means of unified visual aids. Neurath founded in 1924 the _Gesellschafts- und Wirtschaftsmuseum_ (Social and Economic Museum, abbreviated as GeWiMu) with the objective to inform the masses about sociological and economical issues and to provide them access to universal knowledge through _education through the eye_.
+
+For this reason Neurath preferred the picture statistic approach over convention. While a conventional statistical chart may contain a greater amount of detail, is potentially more accurate than the picture statistic, an isotype method is been designed to produce a lasting imprint on the mind, complementing the imprints left by other pictures. They are intended as teaching pictures. Use of symbols representing people and objects reminds us of the subject we are dealing with, rather than with abstract numbers.
+
+
+### How it works
+#### Pictoral Statistics
+
+
+The GeWiMu hinged on three key processes of picture making: science, transformation and design with Neurath himself, Marie Reidemeister and Gerd Arntz as the chief representatives. Once the rules of the Vienna method were fixed, they were strictly adhered to. These rules can be summarized briefly as follows:
+
+* Picture statistics are designed to express amounts of the same thing or relations between amounts of different things. The number of repetitive signs should be countable, each sign expressing a given basic quantity. A larger amount of something must be represented by a larger amount of signs, not by a larger sign.
+* The signs should be highly stylized, endowed with the power to make them clear and pleasing to the eye. They should be used consistently, such that different pictures can be related to each other.
+* Less is more. A simple picture kept in the memory is better than any number of complex ones which have gone out of it.
+* Color should be used consistently.
+* Signs and colors are to be distributed over the plane of the picture in such a way that the attention is guided to certain points which have to be looked at fi rst.
+* It is unnecessary to say in words what we are able to make clear by pictures. And on the other hand, it is frequently hard to make a picture of a simple statement.
+* All pictures together make one unit, and it is important for the reader not to be troubled in any way if he is conscious of all the marks which teaching pictures have made on his memory.
+* One has to be like another so far as it gives the same details, and to be different from another so far as the story it gives is different.
+
+In addition to these principles for good practice, Neurath also suggested approaches for what not to do. In some cases, these views are contradictory to other patterns presented. For example, the GeWiMu approach would suggest that proportional symbols to express amounts should not be used due to the difficulties of accurate comparison. As we learned from the use of proportional symbols for geospatial views, this guidelines is not always applicable. However, the approach points out the flaws of using continuous lines for expressing the relationship between amounts and time where such points between two successive years have no meaning.
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Manuel on Unsplash"}
+
+masthead <- "assets/manuel-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+At the first look one should see the most important points, at the second, the less important points, at the third, the details, at the fourth nothing more - if you see more, the teaching picture is bad. Neurath’s influence on statistical graphics lasted only for a few decades after his death in 1945. The reasons for the decline of the Vienna method are not yet clarified. Possibly, the labor intensiveness (both from an intellectual and practical point of view) proved to be prohibitive for large-scale application. The Vienna method was also designed primarily for exposition and education rather than for discovery and exploration (although the latter can be stimulated indirectly by picture statistics). A remarkable aspect of a picture statistic is that it is capable of showing several dimensions of a situation without leading to confusion. You will notice from figures X and Y some “derivative” approaches to pictoral statistics.
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Manuel on Unsplash"}
+
+masthead <- "assets/manuel-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Data sources: The Data Source,  [GO](https://govdata360-backend.worldbank.org/api/v1/datasets/4034/dump.csv){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

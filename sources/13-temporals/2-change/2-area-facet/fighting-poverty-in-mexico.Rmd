@@ -1,0 +1,165 @@
+---
+pagetitle: "Fighting poverty in Mexico"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(reshape2)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS  
+</div>
+
+# Fighting Poverty in Mexico
+## Area Facet
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Dennis Schrader on Unsplash"}
+
+masthead <- "assets/dennis-schrader-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> A darle que es mole de olla...\
+--- Mexican Saying\
+
+***
+
+
+### Ingest
+#### by state, year, and percentage
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df <- read.csv("archetypes/fighting-poverty-in-mexico/fighting-poverty-in-mexico.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+
+```
+
+
+### Wrangle
+#### wide to long
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- melt(df, id.vars=c("entidad"))
+df_wrangle$variable <- as.integer(gsub("X", "", df_wrangle$variable))
+df_wrangle
+
+```
+
+
+### Plot
+#### facet by state
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1080/72, fig.height=1920/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 10), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position='none',
+    panel.spacing.x = unit(1, "lines"),
+    panel.spacing.y = unit(1, "lines"),
+    panel.grid.minor = element_blank(),
+    strip.text = element_text(size = 8.5, face = "bold"),
+    strip.background = element_blank()
+  )
+
+# Plot
+v1 <- 
+  ggplot(df_wrangle, aes(variable, value)) +
+  geom_area(fill = "#E08551") +
+  geom_vline(aes(xintercept = variable), size = 0.1, color = "gray80") +
+  facet_wrap( ~ entidad, scales = "free_x") +
+  scale_x_continuous(breaks = seq(2008, 2018, by = 2),
+                     labels = c("2008", "'10", "'12", "'14", "'16", "'18")) +
+  labs(title = "Diez años de combate a la pobreza en México",
+       subtitle = "Porcentaje de personas en situación de pobreza por entidad federativa",
+       caption = "Fuente: CONEVAL",
+       x = "Año",
+       y = "Porcentaje") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 15,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/fighting-poverty-in-mexico-fs.svg", plot = v1, width=720/72, height=1280/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/fighting-poverty-in-mexico-sm.svg", plot = v1, width=2.25, height=4)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data sources: Yobanny Sámano, 30DayChartChallenge, [GO](https://github.com/ysamano/30diasdegraficos-/tree/master/dia_04){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

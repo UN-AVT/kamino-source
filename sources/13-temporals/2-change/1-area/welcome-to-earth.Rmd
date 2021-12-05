@@ -1,0 +1,167 @@
+---
+pagetitle: "Welcome to Earth!"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(ggplot2)
+library(gridExtra)
+library(ggthemes)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORAL  
+</div>
+
+
+# Welcome to Earth! 
+## Area
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Albert Anthony on Unsplash"}
+
+masthead <- "assets/albert-antony-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> No unidentified objects in the popular sense have been seen from the International Space Station...\
+--- NASA\
+
+
+***
+
+## Load data [Ingest]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load csv data file
+df = read.csv("archetypes/welcome-to-earth/national-ufo-reporting-database-aggregated.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+## Prepare data [Wrangle]
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# Convert to date
+df$Date <- as.Date(df$Date, "%m-%d-%Y")
+df
+
+```
+
+
+## Plot [ Views / Temporals ]
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, , fig.align='center', class.source='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    plot.title = element_text(color = "black", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 8),
+    plot.caption = element_text(color = "#555555", size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 8),
+    legend.position='top'
+  )
+
+
+# Plot
+v1 <- ggplot(df, aes(x=Date, y=Count)) + 
+  geom_area(color = "#458cb6", fill= "#a1b5d2", alpha=1.0 , size=0.5) +
+   #geom_hline(yintercept = c(seq(0, 100, 10)), color="#ffffff", size=0.25, alpha=0.2) + # gridlines in the forefront
+  scale_x_date(date_labels = "%b") +
+  scale_y_continuous(breaks=seq(0, 2500, 500)) +
+  labs( title = "Welcome to Earth!",
+        subtitle = "United States, cumulative daily reported UFO sightings, 2020",
+        caption = "The Economist, The National UFO Reporting Center Online Database") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9)))
+
+```
+
+## Plot with annotations [ Views / Temporals ]
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, , fig.align='center', class.source='fold-hide', out.width="100%"}
+
+v2 <- v1 + annotate("text", x = as.Date("1-1-2020", "%m-%d-%Y"), y = 600, 
+             label = "  January 1st", 
+             hjust = "left", vjust = 0, color = "#458cb6", size = 4, fontface = 2) +
+    annotate("text", x = as.Date("7-4-2020", "%m-%d-%Y"), y = max(df$Count), 
+             label = "  July 4th", 
+             hjust = "left", vjust = 1, color = "#458cb6", size = 4, fontface = 2)
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9)))
+  
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Save plot to svg file
+# ggsave(filename = "assets/economist-welcome-to-earth.svg", plot = v2, width=12, height=6)
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+* Narrative and Data Sources: The National UFO Reporting Center Online Database, [GO](http://www.nuforc.org/webreports.html){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

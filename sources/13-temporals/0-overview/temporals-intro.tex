@@ -1,0 +1,85 @@
+\section{Introduction}\label{charts-intro}
+
+The objective of this chapter is to explore the theoretical and methodological underpinnings of
+temporal analysis and the use of specialized visualization patterns to increase understanding
+and insight of complex time dimension data. These foundations are extended to survey practical
+methods for designing appropriate representations based on a range of specialized patterns.
+
+\subsection{Analysis of Events and Time}\label{size-by-value}
+
+In 1837 Dietrich Hermann Hegewisch published his work the Introduction to Historical Chronology where he set
+forth to form a science for studying time and events. His goals were to explore the methods of understanding
+the past, present and future for meaningful discourse on the passing of events:
+
+to furnish a principle of order in the science of history and to promote the orderly arrangements
+of social life. This it accomplishes by teaching us how to give with correctness and precision the
+divisions of past time, in which any thing happened to the divisions of the present or future, in
+which any thing happens, or is going to happen.
+
+This idea of time for the ordering of social life serves as the basis for understanding that concepts and measures
+of temporal phenomena are largely based on our science of understanding events. This understanding
+enables us to bring potential order and insight to the many phenomena of time.
+
+The basis of temporal analysis lies in the intrinsic nature of the data and cases where changes over time or
+temporal aspects play a central goal to the task. This basic purpose leads to a host of possible analysis tasks
+such as those described by author Alan M. MacEachren in his book How Maps Work:
+• Existence of a data element: Does a data element exist at a specifi c time?
+• Temporal location: When does a data element exist in time?
+• Time interval: How long is the time span from beginning to end of the data element?
+• Temporal texture: How often does a data element occur?
+Rate of change: How fast is a data element changing or how much diff erence is there from data
+element to data element over time?
+• Sequence: In what order do data elements appear?
+• Synchronization: Do data elements exist together? [McEachren, 1995]
+
+\begin{description}
+	\item[Coordinate Systems] ...
+	\item[Shapes] ...
+\end{description}
+
+These substantive tasks suggest exploratory of whether events exhibit certain temporal relations such as proceeding, following, or occurring simultaneously with other events, or exhibit combined spatial–temporal relations such as being clustered in both space and time. Diagnoses of spatial–temporal relationships between events will allow researchers to quickly focus on areas, times, and events of particular interest and will support more detailed investigation of the dynamics underlying the events.
+
+Representation Structures
+
+When a temporal dimension is identified as a focus area, the representation structures are constructed to maximize the salience, differentiation, and meaning of this dimension. The visualization patterns of this chapter are designed to convey changes over time periods, behavior over time and other situational factors. The visual mapping of temporal data is based on encoding patterns borrowed from relational, geospatial, and quantitative approaches discussed earlier. Possible approaches include,
+• Time Lines: Visualize events as discrete points or intervals on a time scale
+• Time Graphs: Visualize events and times as nodes in a graph, and temporal relations as edges in the
+graph
+• Spatial-Temporal Maps: Display events as associated places on a map
+
+In addition to these approaches, the nature of temporal data provides a unique opportunity to employ preattentive measures known as pop-out eff ect. This concept is described in detail in Chapter X, Enhancing Perception. In brief, we can employ perception enhancements using a visual variable known as motion. The use of motion through animation sequencing.
+
+Working with Temporal Data
+Explicit and implicit references.
+
+What is temporal data?
+
+Temporal data structures are generally comprised of four scoping areas. These are structures for organizing time, temporal entities, bounding, and scaling. The structures for organizing time are time series and time cycle. Time series is a condition where time is treated as a linear sequence. Time cycle is when time is treated as a repeating cycle or periodic.
+
+There are four temporal entities: scene, episode, time phase, and event. A scene is represented as a time period with no change. An episode is a stage in a sequence and often a set of scenes. A time phase is an identifiable stage in cycle. Lastly, an event is an identifiable break point between scenes, episodes, or phases.
+
+The bounding relates to the time frame and time resolution. Time frame is the temporal span of consideration, and time resolution reflects the precision to record the observable events. Closely related to time resolution is the temporal units used for measure. The measures are based on temporal scales which may be standard such as diurnal, seasonal, annual, decadal or multi-decadal; or domain specific. Finally, the scaling of temporal structures may be conceptual or representational indicated by ratio between chronological time and display time.
+
+How is temporal data composed?
+
+The parts of time have only two relations to each other, that of magnitude or duration, and that of order or
+succession. Of a portion of time, I can only say it is greater or less than another, and it precedes or follows
+another.
+• Primitives: primitives are presented as either anchored or unanchored. Anchored represents an instant, single point of time or, interval - a duration between two points of time. Unanchored represents a span - duration of time.
+• Structure: linear, branching, or cyclic with points of observation of the past, present and future.
+• Scale: ordinal (only order is known), discrete (every instant in time has a unique predecessor and successor), and continuous (between any two instants in time there might be another one in between)
+• Granularity: units of observation.
+
+• Determinacy: determinate (complete knowledge of temporal attributes) or indeterminate in cases where you have incomplete knowledge of temporal attributes such as cases of no exact knowledge, future planning, and imprecise event times
+• History: valid time, event time; transaction time; decision time when the decision for a particular action was made.
+• Temporal Units: standard and domain specific
+As complex as these definitions appear, an understanding of each is necessary to identify the most appropriate encoding form of your visualization.
+
+Clock Speed
+
+Clock speed is a term used to describe the relative passing of time. You can think of this as a measurement of the size of an hour glass and the speed by which the sand trickles through its neck. Depending on the subject of study, this can be an important consideration for your analysis. Coming back to Hegewisch, 
+
+“For mathematical and astronomical chronologists, it must be matter of interest to know the Calendars of the Bramins, the Chinese, the Japanese and other nations, in order to compare them with our own, and from their greater or less perfection to infer the state of astronomical, and other kindred sciences among those nations, at the time, when their Calendars were
+introduced.”
+
+Let’s take for example a task to measure progress of an education program. You’re faced with decisions for how to represent. In this case would you consider the clock speed. weeks, months, years? A constrasting example may be the measurement of eradicating an epidemic. Certainly we would hope that the urgency and threats of propagation would call for containment. We would expect a clock speed to be measured in days or weeks, rather than months or years.

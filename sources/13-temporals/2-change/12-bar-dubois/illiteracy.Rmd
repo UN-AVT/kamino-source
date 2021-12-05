@@ -1,0 +1,242 @@
+---
+pagetitle: "Post-War Surplus of Women"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS  
+</div>
+
+# Illiteracy
+## Du Bois Bar
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by New York Public Library on Unsplash"}
+
+masthead <- "assets/the-new-york-public-library-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Bourscheid castle in the north of Luxembourg</div>
+
+> To be a poor man is hard, but to be a poor race in a land of dollars is the very bottom of hardships...\
+--- W E Du Bois\
+
+***
+
+
+### Ingest the data
+#### the original
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+pct <- c(99, 92.1, 81.6, 67.27, 50)
+df <- tibble(pct) %>%
+  mutate(xend = -100,
+         m_pct = - pct)
+
+# Create vectors of plot labels
+year_label <- c("(1900?)", "1890", "1880", "1870", "1860")
+pct_label <- c("99%", "92.1%", "81.6%", "67.27%", "(50%?)")
+df
+
+```
+
+### Ingest the data
+#### updated with world data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_world <- read.csv("archetypes/illiteracy/literacy-rate.csv", header = TRUE, stringsAsFactors = FALSE)
+df_world <- filter(df_world, Country.Name == 'World')
+df_world
+
+```
+### Wrangle
+#### select by decade
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df_world %>% select(X1980, X1990, X2000, X2010, X2019)
+df_wrangle
+
+```
+
+
+### Plot
+#### original
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.margin = margin(20, 40, 20, 40),
+    plot.title = element_text(size = 24, hjust = 0.5, face = "bold", margin = margin(0,0,10,0)),
+    axis.title.x = element_text(hjust = -0.1, vjust = 14),
+    panel.background = element_blank(),
+    panel.grid = element_blank(),
+    axis.title.y = element_blank(),
+    axis.ticks = element_blank()
+  )
+
+# Plot
+v1 <- ggplot(df) + 
+  # Vertical bars
+  geom_bar(aes(x = -pct, y = pct), stat = "identity", width = 1.89, fill = "black") +
+  # Horizontal black bars (the "outline")
+  geom_segment(aes(x = m_pct, y = pct, xend = xend, yend = pct), 
+               stat = "identity", size = 9.2, colour = "black", lineend = "square") +
+  # Horizontal white bars (the "fill")
+  geom_segment(aes(x = m_pct, y = pct, xend = xend, yend = pct), 
+               stat = "identity", size = 9, colour = "white", lineend = "square") +
+  # x axis labels
+  scale_x_continuous(breaks = -pct, 
+                     limits = c(-103, -45), 
+                     label = pct_label,
+                     expand=c(0,0),
+                     name = str_wrap("PERCENT OF ILLITERACY.", 10)) +
+  # y axis labels
+  scale_y_continuous(breaks = c(50, 67.27, 81.6, 92.1, 99), 
+                     limits = c(0, 103),
+                     label = year_label,
+                     expand=c(0,0)) +
+  coord_cartesian(clip = 'off') +
+  # Modify theme
+  theme_bw() +
+  theme_opts +
+  # Add title
+  labs(title = "ILLITERACY.")
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+### Plot
+#### world update
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Plot
+v2 <- ggplot(df) + 
+  # Vertical bars
+  geom_bar(aes(x = -pct, y = pct), stat = "identity", width = 1.89, fill = "black") +
+  # Horizontal black bars (the "outline")
+  geom_segment(aes(x = m_pct, y = pct, xend = xend, yend = pct), 
+               stat = "identity", size = 9.2, colour = "black", lineend = "square") +
+  # Horizontal white bars (the "fill")
+  geom_segment(aes(x = m_pct, y = pct, xend = xend, yend = pct), 
+               stat = "identity", size = 9, colour = "white", lineend = "square") +
+  # x axis labels
+  scale_x_continuous(breaks = -pct, 
+                     limits = c(-103, -45), 
+                     label = pct_label,
+                     expand=c(0,0),
+                     name = str_wrap("PERCENT OF ILLITERACY.", 10)) +
+  # y axis labels
+  scale_y_continuous(breaks = c(50, 67.27, 81.6, 92.1, 99), 
+                     limits = c(0, 103),
+                     label = year_label,
+                     expand=c(0,0)) +
+  coord_cartesian(clip = 'off') +
+  # Modify theme
+  theme_bw() +
+  theme_opts +
+  # Add title
+  labs(title = "ILLITERACY.")
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+### Save plot
+#### as vector or raster image
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/illiteracy-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/illiteracy-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative Inspiration: W E Du Bois remakes, https://rpubs.com/ejhollowood/du-bois
+* Data Source: World Bank, https://data.worldbank.org/indicator/SE.ADT.LITR.ZS?end=2019&start=1970&view=chart
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'dubois illiteracy'
+commands <- 'geom_bar geom_segment'
+sources <- 'UNESCO'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

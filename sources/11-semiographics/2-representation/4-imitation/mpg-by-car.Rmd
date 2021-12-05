@@ -1,0 +1,204 @@
+---
+pagetitle: "How far can you go with 1 gallon of gas?"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggimage)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+# font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+SEMIOGRAPHIC  
+</div>
+
+# How far can you go with 1 gallon of gas?
+# isotypes
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Jeremy Bezanger on Unsplash"}
+
+masthead <- "assets/jeremy-bezanger-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> quote...\
+--- attribution\
+
+***
+
+
+### Ingest
+#### number of aircraft carriers in operation worldwide as of December 2019
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_ingest <- read.csv("archetypes/mpg-by-car/mpg-by-car.csv", header = TRUE)
+df_ingest
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_cars_top <- 
+  df_ingest %>%
+  pivot_longer(cols = c("city08", "cityA08"), 
+               names_to = "fuel",
+               values_to = "mpg") %>%
+  filter(mpg > 0) %>%
+  group_by(make) %>%
+  summarize(median = median(mpg)) %>%
+  ungroup()  %>% 
+  arrange(-median) %>% 
+  top_n(20, median) %>% 
+  mutate(make = fct_shuffle(make), make_id =  as.numeric(make)) #%>%
+  # dplyr::select(-median) #%>% 
+  #gather(median, -make, -make_id)
+
+df_cars_top
+
+lines <-
+  df_cars_top %>% 
+  group_by(make_id) %>% 
+  summarize(val = unique(make_id) + 0.5) %>% 
+  add_row(make_id = 0, val = 0.5)
+
+lines
+
+```
+
+
+
+### Plot
+#### tbd
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
+
+set.seed(2019)
+car <- "archetypes/mpg-by-car/car.png"
+
+v1 <- 
+  ggplot(df_cars_top, 
+         aes(make_id, median, group = make_id)) +
+    ## lower tire track
+    geom_segment(aes(x = make_id - 0.15, xend = make_id - 0.15, 
+                     y = 0, yend = median),
+                 size = 1.7) +
+    ## upper tire track
+    geom_segment(aes(x = make_id + 0.15, xend = make_id + 0.15, 
+                     y = 0, yend = median),
+                 size = 1.7) +
+    ## car
+    geom_image(aes(make_id, median + 1.5, image = car), size = 0.05, asp = 0.7) +
+    ## guard stripes 
+    geom_vline(data = lines,
+               aes(xintercept = val),
+               color = "white",
+               linetype = "dashed",
+               size = 0.3) +
+    ## labels manufacturer
+    geom_text(aes(make_id, -16, label = make),
+              color = "grey80",
+              hjust = 0,
+              family = "Montserrat",
+              size = 5,
+              fontface = "bold") +
+    scale_x_continuous(expand = c(0.01, 0.01)) +
+    scale_y_continuous(limits = c(-17, 102), 
+                       expand = c(0.001, 0.001),
+                       breaks = seq(0, 100, by = 10),
+                       labels = c("0 miles", as.character(seq(10, 100, by = 10)))) + 
+    coord_flip() + 
+    theme_bw() +
+    theme(axis.ticks.x = element_blank(),
+          axis.text.x = element_text(size = 16),
+          axis.ticks.y = element_blank(),
+          axis.text.y = element_blank(),
+          plot.title = element_text(size = 32),
+          plot.subtitle = element_text(size = 18,
+                                       lineheight = 1.2),
+          plot.caption = element_text(size = 16,
+                                      color = "grey80"),
+          panel.border = element_blank(),
+          panel.grid.major.x = element_line(color = "grey10", 
+                                            size = 0.2),
+          plot.margin = margin(12, 18, 12, 12)) +
+      labs(x = NULL, y = NULL,
+           title = "How far can you go with 1 gallon of gas?",
+           subtitle = "Top 20 most energy efficient brands in city driving. Estimates are based on median MPG and MPGe of all models since 1984.\n\n",
+           caption = "\n\nVisualization by Cédric Scherer  |  Data: EPA  |  Icon: mynamepong via flaticon.com")
+
+ girafe(ggobj = v1, width_svg = 16, height_svg = 12,
+        options = list(opts_sizing(rescale = TRUE, width = 1)))
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+source: <a href="https://www.statista.com/chart/6483/the-worlds-aircraft-carrier-fleets/" target="_blank">China Commissions Its Second Aircraft Carrier Article</a>
+
+<pre>
+@misc{niallmccarthy_2019_infographic,
+  author = {Niall McCarthy},
+  month = {12},
+  publisher = {Statista},
+  title = {Infographic: China Commissions Its Second Aircraft Carrier},
+  url = {https://www.statista.com/chart/6483/the-worlds-aircraft-carrier-fleets/},
+  urldate = {2021-07-19},
+  year = {2019},
+  organization = {Statista Infographics}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

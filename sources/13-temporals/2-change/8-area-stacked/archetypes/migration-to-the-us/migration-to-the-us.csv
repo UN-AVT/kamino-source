@@ -1,0 +1,400 @@
+"Region","Percent","Year"
+"Austria-Hungary",0,1825
+"Germany",5753,1825
+"Ireland",51617,1825
+"Italy",430,1825
+"Russia",86,1825
+"Norway and Sweden",91,1825
+"United Kingdom",26336,1825
+"Rest of Europe",15305,1825
+"China",3,1825
+"India",9,1825
+"Philippines",0,1825
+"Rest of Asia",22,1825
+"Canada and Newfoundland",2297,1825
+"Mexico",3835,1825
+"Caribbean",3061,1825
+"Rest of America",463,1825
+"Central America",57,1825
+"South America",405,1825
+"Africa",19,1825
+"Oceania",2,1825
+"Not Specified",19173,1825
+"Austria-Hungary",0,1835
+"Germany",124726,1835
+"Ireland",170672,1835
+"Italy",2225,1835
+"Russia",280,1835
+"Norway and Sweden",1149,1835
+"United Kingdom",74350,1835
+"Rest of Europe",49451,1835
+"China",8,1835
+"India",38,1835
+"Philippines",0,1835
+"Rest of Asia",9,1835
+"Canada and Newfoundland",11875,1835
+"Mexico",7187,1835
+"Caribbean",11792,1835
+"Rest of America",1057,1835
+"Central America",94,1835
+"South America",957,1835
+"Africa",66,1835
+"Oceania",1,1835
+"Not Specified",83495,1835
+"Austria-Hungary",0,1845
+"Germany",385434,1845
+"Ireland",656145,1845
+"Italy",1476,1845
+"Russia",520,1845
+"Norway and Sweden",12389,1845
+"United Kingdom",218572,1845
+"Rest of Europe",94887,1845
+"China",32,1845
+"India",33,1845
+"Philippines",0,1845
+"Rest of Asia",56,1845
+"Canada and Newfoundland",34285,1845
+"Mexico",3069,1845
+"Caribbean",11803,1845
+"Rest of America",1370,1845
+"Central America",297,1845
+"South America",1062,1845
+"Africa",67,1845
+"Oceania",3,1845
+"Not Specified",7196,1845
+"Austria-Hungary",0,1855
+"Germany",976072,1855
+"Ireland",1029486,1855
+"Italy",8643,1855
+"Russia",423,1855
+"Norway and Sweden",22202,1855
+"United Kingdom",445322,1855
+"Rest of Europe",140469,1855
+"China",35933,1855
+"India",42,1855
+"Philippines",0,1855
+"Rest of Asia",105,1855
+"Canada and Newfoundland",64171,1855
+"Mexico",3446,1855
+"Caribbean",12447,1855
+"Rest of America",4137,1855
+"Central America",512,1855
+"South America",3569,1855
+"Africa",104,1855
+"Oceania",110,1855
+"Not Specified",71442,1855
+"Austria-Hungary",3375,1865
+"Germany",723734,1865
+"Ireland",427419,1865
+"Italy",9853,1865
+"Russia",1667,1865
+"Norway and Sweden",82937,1865
+"United Kingdom",532956,1865
+"Rest of Europe",98448,1865
+"China",54028,1865
+"India",50,1865
+"Philippines",0,1865
+"Rest of Asia",330,1865
+"Canada and Newfoundland",117975,1865
+"Mexico",1957,1865
+"Caribbean",8809,1865
+"Rest of America",1686,1865
+"Central America",70,1865
+"South America",1536,1865
+"Africa",458,1865
+"Oceania",107,1865
+"Not Specified",15472,1865
+"Austria-Hungary",60127,1875
+"Germany",751769,1875
+"Ireland",422264,1875
+"Italy",46296,1875
+"Russia",34977,1875
+"Norway and Sweden",178823,1875
+"United Kingdom",578447,1875
+"Rest of Europe",179347,1875
+"China",133139,1875
+"India",166,1875
+"Philippines",4,1875
+"Rest of Asia",762,1875
+"Canada and Newfoundland",323974,1875
+"Mexico",5133,1875
+"Caribbean",14592,1875
+"Rest of America",2190,1875
+"Central America",202,1875
+"South America",1109,1875
+"Africa",441,1875
+"Oceania",9094,1875
+"Not Specified",592,1875
+"Austria-Hungary",314787,1885
+"Germany",1445181,1885
+"Ireland",674061,1885
+"Italy",267660,1885
+"Russia",173081,1885
+"Norway and Sweden",586441,1885
+"United Kingdom",810900,1885
+"Rest of Europe",366573,1885
+"China",65797,1885
+"India",247,1885
+"Philippines",1,1885
+"Rest of Asia",5107,1885
+"Canada and Newfoundland",492508,1885
+"Mexico",2405,1885
+"Caribbean",27600,1885
+"Rest of America",7332,1885
+"Central America",359,1885
+"South America",1954,1885
+"Africa",768,1885
+"Oceania",7341,1885
+"Not Specified",778,1885
+"Austria-Hungary",534059,1895
+"Germany",579072,1895
+"Ireland",405710,1895
+"Italy",603761,1895
+"Russia",413382,1895
+"Norway and Sweden",334058,1895
+"United Kingdom",328759,1895
+"Rest of Europe",377610,1895
+"China",15268,1895
+"India",102,1895
+"Philippines",19,1895
+"Rest of Asia",45915,1895
+"Canada and Newfoundland",2668,1895
+"Mexico",734,1895
+"Caribbean",31885,1895
+"Rest of America",3469,1895
+"Central America",674,1895
+"South America",1389,1895
+"Africa",432,1895
+"Oceania",3279,1895
+"Not Specified",14112,1895
+"Austria-Hungary",2001376,1905
+"Germany",328722,1905
+"Ireland",344940,1905
+"Italy",1930475,1905
+"Russia",1501301,1905
+"Norway and Sweden",426981,1905
+"United Kingdom",469518,1905
+"Rest of Europe",569256,1905
+"China",19884,1905
+"India",3026,1905
+"Philippines",605,1905
+"Rest of Asia",276926,1905
+"Canada and Newfoundland",123067,1905
+"Mexico",31188,1905
+"Caribbean",100960,1905
+"Rest of America",22667,1905
+"Central America",7341,1905
+"South America",15253,1905
+"Africa",6326,1905
+"Oceania",11677,1905
+"Not Specified",33493,1905
+"Austria-Hungary",1154727,1915
+"Germany",174227,1915
+"Ireland",166445,1915
+"Italy",1229916,1915
+"Russia",1106998,1915
+"Norway and Sweden",192445,1915
+"United Kingdom",371878,1915
+"Rest of Europe",588775,1915
+"China",20916,1915
+"India",3478,1915
+"Philippines",0,1915
+"Rest of Asia",245342,1915
+"Canada and Newfoundland",708715,1915
+"Mexico",185334,1915
+"Caribbean",120860,1915
+"Rest of America",55630,1915
+"Central America",15692,1915
+"South America",39938,1915
+"Africa",8867,1915
+"Oceania",12339,1915
+"Not Specified",488,1915
+"Austria-Hungary",60891,1925
+"Germany",386634,1925
+"Ireland",201644,1925
+"Italy",528133,1925
+"Russia",61604,1925
+"Norway and Sweden",170329,1925
+"United Kingdom",342762,1925
+"Rest of Europe",808343,1925
+"China",30648,1925
+"India",2076,1925
+"Philippines",0,1925
+"Rest of Asia",94016,1925
+"Canada and Newfoundland",949286,1925
+"Mexico",498945,1925
+"Caribbean",83482,1925
+"Rest of America",59565,1925
+"Central America",16511,1925
+"South America",43025,1925
+"Africa",6362,1925
+"Oceania",9860,1925
+"Not Specified",930,1925
+"Austria-Hungary",13902,1935
+"Germany",117736,1935
+"Ireland",28195,1935
+"Italy",85053,1935
+"Russia",2473,1935
+"Norway and Sweden",13452,1935
+"United Kingdom",61813,1935
+"Rest of Europe",121780,1935
+"China",5874,1935
+"India",554,1935
+"Philippines",457,1935
+"Rest of Asia",12407,1935
+"Canada and Newfoundland",162703,1935
+"Mexico",32709,1935
+"Caribbean",18052,1935
+"Rest of America",16855,1935
+"Central America",6840,1935
+"South America",9990,1935
+"Africa",2120,1935
+"Oceania",3240,1935
+"Not Specified",0,1935
+"Austria-Hungary",13677,1945
+"Germany",119403,1945
+"Ireland",15701,1945
+"Italy",50509,1945
+"Russia",605,1945
+"Norway and Sweden",17326,1945
+"United Kingdom",131794,1945
+"Rest of Europe",123509,1945
+"China",16072,1945
+"India",1692,1945
+"Philippines",4099,1945
+"Rest of Asia",12669,1945
+"Canada and Newfoundland",160911,1945
+"Mexico",56158,1945
+"Caribbean",46285,1945
+"Rest of America",65081,1945
+"Central America",20135,1945
+"South America",19662,1945
+"Africa",6720,1945
+"Oceania",14262,1945
+"Not Specified",135,1945
+"Austria-Hungary",113015,1955
+"Germany",576905,1955
+"Ireland",47189,1955
+"Italy",189061,1955
+"Russia",453,1955
+"Norway and Sweden",44231,1955
+"United Kingdom",195709,1955
+"Rest of Europe",238410,1955
+"China",8836,1955
+"India",1922,1955
+"Philippines",17245,1955
+"Rest of Asia",107841,1955
+"Canada and Newfoundland",353169,1955
+"Mexico",273847,1955
+"Caribbean",115869,1955
+"Rest of America",178759,1955
+"Central America",40201,1955
+"South America",78418,1955
+"Africa",13016,1955
+"Oceania",11319,1955
+"Not Specified",12472,1955
+"Austria-Hungary",27590,1965
+"Germany",209616,1965
+"Ireland",37788,1965
+"Italy",200111,1965
+"Russia",2329,1965
+"Norway and Sweden",36150,1965
+"United Kingdom",220213,1965
+"Rest of Europe",399646,1965
+"China",14060,1965
+"India",18638,1965
+"Philippines",70660,1965
+"Rest of Asia",255205,1965
+"Canada and Newfoundland",433128,1965
+"Mexico",441824,1965
+"Caribbean",427843,1965
+"Rest of America",371390,1965
+"Central America",98569,1965
+"South America",250754,1965
+"Africa",23780,1965
+"Oceania",23659,1965
+"Not Specified",119,1965
+"Austria-Hungary",20387,1975
+"Germany",77142,1975
+"Ireland",11461,1975
+"Italy",150031,1975
+"Russia",28132,1975
+"Norway and Sweden",10298,1975
+"United Kingdom",133218,1975
+"Rest of Europe",395658,1975
+"China",17627,1975
+"India",148018,1975
+"Philippines",337726,1975
+"Rest of Asia",903155,1975
+"Canada and Newfoundland",179267,1975
+"Mexico",621218,1975
+"Caribbean",708643,1975
+"Rest of America",394508,1975
+"Central America",120376,1975
+"South America",273529,1975
+"Africa",71405,1975
+"Oceania",39983,1975
+"Not Specified",326,1975
+"Austria-Hungary",20437,1985
+"Germany",85752,1985
+"Ireland",22210,1985
+"Italy",55562,1985
+"Russia",33311,1985
+"Norway and Sweden",13941,1985
+"United Kingdom",153644,1985
+"Rest of Europe",284837,1985
+"China",170897,1985
+"India",231649,1985
+"Philippines",502056,1985
+"Rest of Asia",1486754,1985
+"Canada and Newfoundland",156313,1985
+"Mexico",1009586,1985
+"Caribbean",789343,1985
+"Rest of America",739262,1985
+"Central America",339376,1985
+"South America",399803,1985
+"Africa",141987,1985
+"Oceania",41432,1985
+"Not Specified",305406,1985
+"Austria-Hungary",27529,1995
+"Germany",92207,1995
+"Ireland",65384,1995
+"Italy",75992,1995
+"Russia",433427,1995
+"Norway and Sweden",17825,1995
+"United Kingdom",156182,1995
+"Rest of Europe",480673,1995
+"China",342058,1995
+"India",352528,1995
+"Philippines",534338,1995
+"Rest of Asia",1630975,1995
+"Canada and Newfoundland",194788,1995
+"Mexico",2757418,1995
+"Caribbean",1004114,1995
+"Rest of America",1180822,1995
+"Central America",610189,1995
+"South America",570596,1995
+"Africa",346410,1995
+"Oceania",56800,1995
+"Not Specified",25928,1995
+"Austria-Hungary",33929,2005
+"Germany",122373,2005
+"Ireland",15642,2005
+"Italy",28329,2005
+"Russia",167152,2005
+"Norway and Sweden",19382,2005
+"United Kingdom",171979,2005
+"Rest of Europe",790823,2005
+"China",591711,2005
+"India",590464,2005
+"Philippines",545463,2005
+"Rest of Asia",1743197,2005
+"Canada and Newfoundland",236349,2005
+"Mexico",1704166,2005
+"Caribbean",1053357,2005
+"Rest of America",1447657,2005
+"Central America",591130,2005
+"South America",856508,2005
+"Africa",759734,2005
+"Oceania",65793,2005
+"Not Specified",211930,2005

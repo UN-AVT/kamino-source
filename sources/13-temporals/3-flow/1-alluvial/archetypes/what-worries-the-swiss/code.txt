@@ -1,0 +1,107 @@
+
+ggplot(
+  ranks_of_worries,
+  aes(
+    x = year,
+    y = rank,
+    color = color,
+    group = topic,
+    label = topic
+  )
+) +
+  geom_line() +
+  geom_point(size = 2) +
+  geom_text_repel(
+    data = ranks_of_worries %>%
+      filter(year == max(year)),
+    segment.size = 0.25,
+    segment.color = "black",
+    nudge_x = 0.5,
+    hjust = 0,
+    direction = "y"
+  ) +
+  scale_y_continuous(trans = "reverse", limits = c(20, 1)) +
+  scale_color_identity() +
+  xlim(min(ranks_of_worries$year), max(ranks_of_worries$year) + 7) +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  labs(
+    title = "Rank of worries (labelled are only top 20 in 2018)",
+    x = NULL,
+    y = NULL
+  )
+ggplot(
+  ranks_of_worries %>%
+    filter(year %% 2 == 1) %>%
+    filter(topic %in% big_worries),
+  aes(
+    x = year,
+    y = rank,
+    color = color,
+    group = topic,
+    label = topic
+  )
+) +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(1995, 2015, 4),
+    limits = c(min(ranks_of_worries$year), max(ranks_of_worries$year) + 8)
+  ) +
+  scale_y_continuous(trans = "reverse", limits = c(20, 1)) +
+  scale_color_identity(guide = FALSE) +
+  geom_text_repel(
+    data = ranks_of_worries %>%
+      filter(year %% 2 == 1) %>%
+      filter(topic %in% big_worries) %>%
+      filter(year == max(year)),
+    segment.size = 0.25,
+    segment.color = "black",
+    nudge_x = 0.5,
+    hjust = 0,
+    direction = "y"
+  ) +
+  theme_minimal() +
+  labs(
+    title = "Top 10 worries ordered by rank",
+    x = NULL,
+    y = NULL
+  )
+
+ggplot(
+  ranks_of_worries %>%
+    filter(year %% 2 == 1) %>%
+    filter(topic %in% big_worries),
+  aes(
+    x = year,
+    y = value,
+    color = color,
+    group = topic,
+    label = topic
+  )
+) +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(
+    breaks = seq(1995, 2015, 4),
+    limits = c(min(ranks_of_worries$year), max(ranks_of_worries$year) + 8)
+  ) +
+  scale_color_identity(guide = FALSE) +
+  geom_text_repel(
+    data = ranks_of_worries %>%
+      filter(year %% 2 == 1) %>%
+      filter(topic %in% big_worries) %>%
+      filter(year == max(year)),
+    segment.size = 0.25,
+    segment.color = "black",
+    nudge_x = 0.5,
+    hjust = 0,
+    direction = "y"
+  ) +
+  theme_minimal() +
+  labs(
+    title = "Real values: how many people were worried in this year?",
+    subtitle = "Displayed are only the top 9 topics",
+    x = NULL,
+    y = NULL
+  )

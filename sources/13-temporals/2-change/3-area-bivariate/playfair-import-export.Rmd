@@ -1,0 +1,155 @@
+---
+pagetitle: "Playfair Import Export"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(reshape2)
+library(tidyverse)
+library(directlabels)
+library(ggiraph)
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Playfair Import Export
+# Area Bivariate
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Clem Onojeghuo on Unsplash"}
+
+masthead <- "assets/clem-onojeghuo-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> To be a good trader, you need to trade with your eyes open, recognize real trends and turns, and not waste time or energy on regrets and wishful thinking...\
+--- Alexander Elder
+
+
+***
+
+### Load data [Ingest]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+playfair_balance <- read.csv("archetypes/playfair-import-export/playfair-import-export.csv", header = TRUE, stringsAsFactors = TRUE)
+playfair_balance
+
+```
+
+### Prepare data [Wrangle]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+## create min for geom_ribbon
+playfair_balance$min <- with(playfair_balance, pmin(exports, imports))
+year <- playfair_balance$year
+
+## melt data
+molten_data <- melt(playfair_balance,  id.vars = c("year", "min"))
+molten_data
+
+```
+
+
+### Plot [ Views / Temporals ]
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide',  fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+  title = element_text(size = 8, face = 'bold'),
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  plot.margin = unit(c(0, 0.25, 0, 0.25), "in")
+)
+
+
+v1 <- ggplot(molten_data, aes(x = year, y = value)) + 
+  geom_line(aes(col = variable), size  = 1) +
+  geom_ribbon(aes(ymin = min, ymax = value, fill = variable), alpha = 0.3) +
+  scale_color_manual(values = c("darkred", "gold3"), guide = FALSE) + 
+  scale_fill_manual(values = c("#90752d", "#BB5766"), guide = FALSE) + 
+  scale_x_continuous(breaks = seq(1700, 1780, 10), expand = c(0, 0)) + 
+  scale_y_continuous(breaks = seq(0, 200, 10), position = "right") +
+  coord_cartesian(clip="off") +
+  annotate("text", x = 1710, y = 87, label = "Line of Imports", angle = 20, size = 3) +
+  annotate("text", x = 1720, y = 72,  label = "Line of Exports",  angle = 345, size = 3) +
+  annotate("text", x = 1730, y = 83,  label = "italic('BALANCE AGAINST')",  angle = 0, parse = TRUE) +
+  annotate("text", x = 1770, y = 110, label = "italic('BALANCE in\nFAVOUR of\nENGLAND')",  angle = 0, parse = TRUE) +
+  annotate("text", x = 1770, y = 82,  label = "Imports",  angle = 20, size = 3) +
+  annotate("text", x = 1760, y = 131, label = "Exports",  angle = 65, size = 3) +
+  ggtitle("Exports and Imports to and from DENMARK & NORWAY from 1700 to 1780") + 
+  theme_bw() + 
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9)))
+
+```
+
+
+```{r, echo=FALSE}
+
+ggsave(filename = "assets/playfair-import-export.svg", plot = v1, width=16, height=9)
+
+```
+
+
+### References
+#### Citations and data sources
+
+* Narrative inspiration: William Playfair's Import Export, [GO](https://www.historyofinformation.com/detail.php?entryid=2929){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

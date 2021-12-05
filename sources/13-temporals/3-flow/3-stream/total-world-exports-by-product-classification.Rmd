@@ -1,0 +1,216 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+
+library(tidyverse)
+library(ggrepel)
+#devtools::install_github('Ather-Energy/ggTimeSeries')
+library(ggTimeSeries)
+library(ggstream)
+library(ggthemes)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Total World Exports (US$ Trillion), by Product Classification
+## Streamgraph
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Paul Teysen on Unsplash"}
+
+masthead <- "assets/paul-teysen-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+***
+
+# Ingest
+## year, product, and value
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df = read.csv("./archetypes/world-exports/total-world-exports-by-product-classification-summary.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle
+#### value transform
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df$Value <- df$Value / 1000000000
+df
+
+```
+
+
+### Plot
+#### color by product type
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Standard theme options to use for each view
+theme_opts <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text.y = element_blank(),
+  axis.line.y = element_blank(),
+  axis.ticks.y = element_blank(),
+  axis.title.y = element_blank(),
+  # panel.grid = element_blank(),
+  # panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+# "Animal"
+# "Capital goods"
+# "Chemicals"
+# "Consumer goods"
+# "Food Products"
+# "Footwear"
+# "Fuels"
+# "Hides and Skins"
+# "Intermediate goods"
+# "Mach and Elec"
+# "Metals"
+# "Minerals"
+# "Miscellaneous"
+# "Plastic or Rubber"
+# "Raw materials"
+# "Stone and Glass"
+# "Textiles and Clothing"
+# "Transportation"
+# "Vegetable"
+# "Wood"
+
+v1 <- ggplot(df, aes(x = Year, y = Value, group = Product, fill = Product)) +
+  stat_steamgraph() +
+  scale_x_continuous(breaks = c(1988, 1990, 1992, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014, 2016)) +
+  scale_fill_tableau(palette = "Tableau 20") + # Classic 20, Tableau 20
+  theme_bw() +
+  theme_opts +
+  xlab(NULL) +
+  ylab(NULL)
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v2 <- ggplot(df, aes(x = Year, y = Value, group = Product, fill = Product)) +
+  geom_stream(lwd = 0.25, n_grid = 100) +
+  geom_stream_label(aes(label = Product)) +
+  scale_x_continuous(breaks = c(1988, 1990, 1992, 1994, 1996, 1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014, 2016)) +
+  scale_fill_tableau(palette = "Tableau 20") + # Classic 20, Tableau 20
+  theme_bw() +
+  theme_opts +
+  xlab(NULL) +
+  ylab(NULL)
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/world-exports-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/world-exports-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+* Data source: World Bank, TCdata360, https://data.worldbank.org/indicator/ne.exp.gnfs.zs
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+read.bibtex(file = "citations/total-world-exports-by-product-classification.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'world exports'
+commands <- 'stat_steamgraph'
+sources <- 'World Bank'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

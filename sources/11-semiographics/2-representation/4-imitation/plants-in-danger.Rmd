@@ -1,0 +1,376 @@
+---
+pagetitle: "Plants in Danger"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(colorspace)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+#font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+SEMIOGRAPHIC  
+</div>
+
+# Plants in Danger
+# isotypes
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Agata Create on Unsplash"}
+
+masthead <- "assets/agata-create-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> quote...\
+--- attribution\
+
+***
+
+
+### Ingest
+#### number of aircraft carriers in operation worldwide as of December 2019
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_ingest <- read.csv("archetypes/plants-in-danger/plants-in-danger.csv", header = TRUE)
+df_ingest
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df_ingest %>%
+  mutate(group = if_else(group == "Ferns and Allies", "Ferns & Allies", group))
+head(df_wrangle, n=10)
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_iucn_threat <- 
+  df_wrangle %>%
+  pivot_longer(
+    cols = threat_AA:threat_GE,
+    names_to = "threat",
+    values_to = "threathened"
+  ) %>% 
+  replace_na(list(threathened = 0)) %>% 
+  mutate(
+    id = fct_rev(factor(threat)),
+    id = as.numeric(id) / 2 + 7
+  ) %>%
+  dplyr::select(binomial_name, group, continent, type = threat, id, case = threathened, year_last_seen) %>% 
+  unique() %>% 
+  complete(nesting(
+    continent, group, binomial_name, year_last_seen), 
+    id = seq(7, 14, by = .25), fill = list(case = 0)
+  ) %>% 
+  mutate(
+    base = if_else((id %% .5 == 0 & id %in% seq(7.5, 12.5, by = .5)), .6, 0),
+    case = if_else(case == 1, .6, case)
+  )
+
+df_iucn_threat
+
+df_iucn_action <-
+  df_wrangle %>% 
+  pivot_longer(
+    cols = action_LWP:action_EA,
+    names_to = "action",
+    values_to = "actioned"
+  )  %>% 
+  replace_na(list(actioned = 0)) %>% 
+  mutate(id = as.numeric(factor(action))) %>%
+  dplyr::select(binomial_name, group, continent, type = action, id, case = actioned, year_last_seen) %>% 
+  unique() %>% 
+  complete(nesting(
+    continent, binomial_name, group, year_last_seen),
+    id = seq(0, 6, by = .5), fill = list(case = 0)
+  ) %>% 
+  mutate(base = if_else((id %% 1 == 0 & id %in% 1:5), 1, 0))
+
+df_iucn_action
+
+df_iucn_long <-
+  df_iucn_action %>% 
+  bind_rows(df_iucn_threat) %>% 
+  mutate(
+    type = str_sub(type, 1, 6),
+    year_last_seen = if_else(is.na(year_last_seen), "unknown", year_last_seen),
+    year_last_seen = fct_relevel(factor(year_last_seen), "Before 1900", after = 0),
+    group = factor(group)
+  ) %>% 
+  group_by(continent, binomial_name, group, year_last_seen, id, type) %>% 
+  summarize(case = max(case), base = max(base))
+
+df_iucn_long
+
+pal <- c(
+  "Before 1900" = "#9FA651", 
+  "1900-1919" = "#799447", 
+  "1920-1939" = "#4F7E35", 
+  "1940-1959" = "#2A6B2A",
+  "1960-1979" = "#4C8B64", 
+  "1980-1999" = "#5C9F8C", 
+  "2000-2020" = "#6BB2B2", 
+  "unknown" = "#68696A"
+)
+
+shapes <- c(
+  "Algae" = 24, 
+  "Conifer" = 25, 
+  "Cycad" = 23, 
+  "Ferns & Allies" = 22, 
+  "Flowering Plant" = 21, 
+  "Mosses" = 8
+)
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+plot_plant <- function(data, shape) {
+  ggplot(
+    data = data,
+    aes(
+        x = id, y = case, 
+        fill = year_last_seen, 
+        group = year_last_seen
+      )
+    ) +
+    ## base leaves/roots
+    geom_area(
+      aes(y = base), 
+      position = position_dodge(), 
+      size = 0, fill = "grey89"
+    ) +
+    ## colored leaves
+    geom_area(
+      data = data %>% filter(id < 7), 
+      aes(fill = year_last_seen), 
+      position = position_dodge(), 
+      size = 0
+    ) +
+    ## colored roots
+    geom_area(
+      data = data %>% filter(id > 7), 
+      aes(
+        fill = year_last_seen, 
+        fill = after_scale(darken(fill, .3))
+      ), 
+      position = position_dodge(), 
+      size = 0
+    ) +
+    ## remove part of leaves/roots
+    geom_point(
+      data = tibble(x = 0, y = 0), 
+      aes(x, y), 
+      inherit.aes = F, color = "#F1F5F7", size = 7
+    ) +
+    ## base stems
+    geom_linerange(
+      aes(ymin = 0, ymax = base - .3), 
+      color = "grey79", size = .1, alpha = .5
+    ) +
+    ## colored stems
+    geom_linerange(
+      aes(
+        ymin = 0, ymax = case - .3, 
+        color = year_last_seen#, 
+        #color = after_scale(darken(color, .3))
+      ), 
+      size = .2
+    ) +
+    ## white vessils leaves
+    geom_linerange(
+      data = data %>% filter(id < 7),
+      aes(
+        ymin = .184, ymax = case - .3
+        
+      ), 
+      color = "white",
+      size = .2
+    ) +
+    coord_polar(start = 4.92, clip = "off") +
+    scale_y_continuous(limits = c(0, 1.15), expand = c(0, 0)) +
+    scale_color_manual(values = pal) +
+    scale_fill_manual(values = pal) +
+    scale_shape_manual(values = shape) +
+    scale_alpha_manual(values = c(1, .5))
+}
+
+
+```
+
+
+
+### Plot
+#### tbd
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
+
+flower_facet <- function(cont) {
+  d <- 
+    df_iucn_long %>% 
+    filter(continent == cont)
+    
+  s <- shapes[as.numeric(unique(d$group))]
+  
+  cont_trim <- str_remove(cont, "\\s")
+  
+  p <- plot_plant(data = d, shape = s) +
+    ## plant group indicator
+    geom_point(
+      aes(
+        x = 3, y = 1.15, 
+        shape = group, 
+        color = year_last_seen,
+        fill = year_last_seen
+      ), 
+      inherit.aes = F, size = 2.5, stroke = .2
+    ) + 
+    facet_wrap(~binomial_name, labeller = label_wrap_gen(10), ncol = 13) +
+    labs(
+      title = "Plants in Danger",
+      subtitle = glue::glue("— **{cont}** —"),
+      caption = "Visualization: Cédric Scherer  • Idea: Florent Lavergne  •  Data: IUCN Red List"
+    ) +
+    theme_bw()
+}
+
+v1 <- flower_facet("Africa")
+
+girafe(ggobj = v1, width_svg = 25, height_svg = 39.44,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+
+
+```
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
+
+v2 <- flower_facet("Asia")
+
+girafe(ggobj = v2, width_svg = 25, height_svg = 14.21,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
+
+v3 <- flower_facet("Europe")
+
+girafe(ggobj = v3, width_svg = 25, height_svg = 5.8,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
+
+v4 <- flower_facet("North America")
+
+girafe(ggobj = v4, width_svg = 25, height_svg = 18.41,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
+
+v5 <- flower_facet("Oceania")
+
+girafe(ggobj = v5, width_svg = 25, height_svg = 10,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
+
+v6 <- flower_facet("South America")
+
+girafe(ggobj = v6, width_svg = 25, height_svg = 18.41,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+source: <a href="https://www.statista.com/chart/6483/the-worlds-aircraft-carrier-fleets/" target="_blank">China Commissions Its Second Aircraft Carrier Article</a>
+
+<pre>
+@misc{niallmccarthy_2019_infographic,
+  author = {Niall McCarthy},
+  month = {12},
+  publisher = {Statista},
+  title = {Infographic: China Commissions Its Second Aircraft Carrier},
+  url = {https://www.statista.com/chart/6483/the-worlds-aircraft-carrier-fleets/},
+  urldate = {2021-07-19},
+  year = {2019},
+  organization = {Statista Infographics}
+}
+</pre>
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

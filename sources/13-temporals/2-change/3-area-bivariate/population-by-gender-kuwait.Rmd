@@ -1,0 +1,132 @@
+---
+pagetitle: "Gender Disparity Kuwait"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Gender Disparity Kuwait
+## Area Bivariate
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Sandy Millar on Unsplash"}
+
+masthead <- "assets/sandy-millar-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Achieving gender equality requires the engagement of women and men, girls and boys. It is everyone’s responsibility...\
+--- Ban Ki-Moon
+
+
+***
+
+### Load data [Ingest]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/gender-disparity-kuwait/gender-kuwaits.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Plot [ Views / Temporals ]
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide',  fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+    plot.title = element_text(color = "black", size = 20, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 15),
+    plot.caption = element_text(color = "#555555", size = 10),
+  
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    #panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 8),
+    legend.position='top'
+  )
+
+v1 <- ggplot(df)+
+  geom_line(aes(x=Year, y= M_Pop), colour= "#2da9d9", size = 1)+
+  geom_line(aes(x=Year, y= F_Pop), colour= "#b73377", size = 1)+
+  geom_ribbon(aes(x=Year, ymin= F_Pop, ymax = M_Pop), alpha = 0.3, fill = "#769dc8")+
+   annotate("text", x = 2010, y = 1790000, label = "Male Population", angle = 45, size = 4, colour= "#2da9d9")+
+   annotate("text", x = 2006, y = 900000, label = "Female Population", angle = 22, size = 4, colour= "#b73377")+
+  annotate("text", x = 2017, y = 1950000, label = "Growing\nGender Imbalance", size = 5, fontface = 2, colour = "#147fa8")+
+  labs(title = "Gender Imbalance (Kuwait)",
+    subtitle = "Disaparity between Male and Female Population",
+    y = "Population",
+    x = "Year",
+    caption = "Data Source: World Bank")+
+  theme_bw() + 
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9)))
+
+```
+
+
+```{r, echo=FALSE}
+
+ggsave(filename = "assets/kuwait-gender-imbalance.svg", plot = v1, width=16, height=9)
+
+```
+
+
+### References
+#### Citations and data sources
+
+* Narrative and Data Sources: World Bank, [GO](https://data.worldbank.org/indicator/SP.POP.TOTL.MA.IN){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

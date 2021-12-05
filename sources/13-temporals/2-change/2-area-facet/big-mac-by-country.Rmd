@@ -1,0 +1,166 @@
+---
+pagetitle: "Big Mac Index by Country"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(heatwaveR)
+library(scales)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS  
+</div>
+
+# Big Mac Index by Country
+## Area Facet
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Akash Rai on Unsplash"}
+
+masthead <- "assets/akash-rai-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> I didn’t invent the hamburger. I just took it more seriously than anyone else...\
+--- Ray Kroc, CEO, McDonald's\
+
+***
+
+
+### Ingest
+#### by country, date, and price
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df <- read.csv("archetypes/big-mac-by-country/big-mac-by-country.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+
+```
+
+
+### Wrangle
+#### filter
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df %>% filter(name != "United States", !is.na(usd_adjusted))
+df_wrangle$date <-  as.Date(df_wrangle$date, format = "%Y-%m-%d")
+df_wrangle
+
+```
+
+
+### Plot
+#### facet by country
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1080/72, fig.height=1920/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 10), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position='none',
+    panel.spacing.x = unit(1, "lines"),
+    panel.spacing.y = unit(1, "lines"),
+    panel.grid.minor = element_blank(),
+    strip.text = element_text(size = 8.5, face = "bold"),
+    strip.background = element_blank()
+)
+
+# Plot
+v1 <- ggplot(df_wrangle, aes(date, usd_adjusted)) + 
+  geom_flame(aes(x = date, y2 = usd_adjusted, y = 0), fill = "#e63946") +
+  geom_flame(aes(x = date, y = usd_adjusted, y2 = 0), fill = "#52b788") + 
+  scale_y_continuous(labels = scales::percent) + 
+  geom_hline(yintercept = 0) + 
+  facet_wrap(vars(name), ncol = 6) + 
+  labs(title = "The Big Mac Index",
+       subtitle = "GDP adjusted index where currency is over (green) or under (red)-valued.",
+       caption = "Source: The Economist",
+       y = "GDP adjusted index, relative to the US dollar") + 
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 11, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/big-mac-by-country-fs.svg", plot = v1, width=720/72, height=1280/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/big-mac-by-country-sm.svg", plot = v1, width=2.25, height=4)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+
+* Narrative inspiration: ndy Baker, [GO](https://github.com/AndyABaker/TidyTuesday){target="_blank"}
+* Data sources: TidyTuesday, [GO](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-12-22/big-mac.csv){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

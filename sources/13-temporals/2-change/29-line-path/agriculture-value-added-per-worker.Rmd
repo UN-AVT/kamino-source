@@ -1,0 +1,172 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(ggthemes)
+library(hrbrthemes)
+library(dplyr)
+library(ggrepel)
+library(tidyr)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Line Path a.k.a. Connected Scatter
+
+***
+
+## Load data [Ingest]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df = read.csv("archetypes/agricultural-workers/agriculture-value-added-per-worker-vs-gdp-per-capita.csv", header = TRUE, stringsAsFactors = TRUE)
+df
+
+
+```
+
+## Plot [ Views / Temporals ]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, , fig.align='center', out.width="100%"}
+
+
+# Create data source for start points only
+start_points = df %>% 
+  group_by(Entity) %>% 
+  slice_min(Year)
+
+# Create data source for end points only
+end_points = df %>% 
+  group_by(Entity) %>% 
+  slice_max(Year)
+
+# Specific labels to show
+labels <- c("Argentina",
+            "Burundi",
+            "Brazil",
+            "Cape Verde",
+            "China",
+            "Ethiopia",
+            "Italy",
+            "Lebanon",
+            "Liberia",
+            "Nigeria",
+            "United States",
+            "Zimbabwe"
+            )
+# Label source
+end_labels <- end_points %>%
+  filter(Entity %in% labels)
+
+# Palette by Region
+palette <- c("Africa" = "#923E8B", "Asia" = "#2D8587", "Europe" = "#4C5C78", "North America" = "#E04E4B", "Oceania" = "#A8633C", "South America" = "#932834", "Composite" = "#cccccb", "World" = "#cccccb")
+
+x_axis <- c(200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 150000)
+y_axis <- c(200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000)
+
+v1 <- ggplot(df, aes(x=GDP, y=Value_added_per_worker, label=Entity, color=Continent, group=Entity)) +
+  geom_text_repel(data = end_labels, 
+                  aes(label = paste0(Entity)) , 
+                  force = 1,
+                  hjust = "center", 
+                  # fontface = "bold", 
+                  size = 2.5, 
+                  nudge_x = 0.25, 
+                  direction = "y",
+                  segment.color = "gray") +
+  # includes end arrow
+  geom_path(aes(group=Entity), size=0.5, alpha=0.5, arrow = arrow(length = unit(0.10, "cm"), type = "closed")) +
+  # start point
+  geom_point(data = start_points, aes( fill=Continent ), shape=21, stroke=1, size=0.25) +
+  # log scale with breaks as in example
+  scale_x_continuous(breaks = x_axis, labels = x_axis, trans='log2') +
+  scale_y_continuous(breaks = y_axis, labels = y_axis, trans='log2') +
+  # Use palette mapping
+  scale_fill_manual(guide=FALSE, values=palette) +
+  scale_color_manual(guide=FALSE, values=palette) +
+  labs(
+    x="GDP per capita (constant 2010 US$)",
+    y="Agriculture value added per worker (constant 2010 US$)",
+    title="Agriculture value added per worker vs. GDP per capita, 1991 to 2017",
+    subtitle="Agriculture value added per worker versus gross domestic product (GDP) per capita, both measured in constant 2010\nUS$. Agriculture value added per worker is a measure of agricultural productivity. It corresponds to the ratio between\nvalue added in agriculture (constant 2010 US$) and number of people employed in agriculture.",
+    caption="Sources:  Our World in Data"
+  ) + 
+  theme_bw() +
+  # right margin to accommodate last axis tick label
+  theme( plot.margin = unit(c(1, 2, 1, 1), "lines"))
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# ggsave(filename = "agriculture-value-added-per-worker.svg", plot = plot, width=13.33, height=7.5)
+
+```
+
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+Source: Max Roser (2013) - <a href="https://ourworldindata.org/employment-in-agriculture" target="_blank"> "Employment in Agriculture". </a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+ cleanbib()
+ read.bibtex(file = "citations/agriculture-value-added-per-worker.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

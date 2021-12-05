@@ -1,0 +1,152 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(ggthemes)
+library(hrbrthemes)
+library(dplyr)
+library(ggrepel)
+library(tidyr)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Line Path a.k.a. Connected Scatter
+
+A connected scatter plot uses line segments to connect consecutive scatter plot points, for example to illustrate trajectories over time. This example shows the shifting relationship between the price of gas and the average number of miles driven in a year, adapted from Driving Shifts Into Reverse by Hannah Fairfield, The New York Times (May 2, 2010).
+
+***
+
+## Load data [Ingest]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df = read.csv("archetypes/nyt-gas-and-driving.csv", header = TRUE, stringsAsFactors = TRUE)  # read text file 
+df
+
+```
+
+## Plot [ Views / Temporals ]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, , fig.align='center', out.width="100%"}
+
+v1 <- ggplot(df, aes(x=miles, y=gas, label=year)) +
+  geom_text_repel(aes(label = year), size = 3)+
+  geom_segment(aes(
+    xend=c(tail(miles, n=-1), NA), 
+    yend=c(tail(gas, n=-1), NA)
+    ),
+    size=1.0,
+    # arrow=arrow(length=unit(0.3,"cm"))
+  ) +
+  geom_point(shape=21, color="black", fill="white", stroke=1, size=2) +
+  labs(
+    x="Miles driven per capita each year",
+    y="Price of a gallon of gasoline",
+    title="Driving Shifts Into Reverse",
+    subtitle="New York Times, May 2, 2010",
+    caption="Sources:  Energy Information Administration; Federal Highway Administration; Brookings Institution"
+  ) + 
+  # theme_linedraw()
+  theme_light()
+  # theme_minimal()
+  # theme_tufte()
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+## Plot with annotations [ Views / Temporals ]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=8, , fig.align='center', out.width="100%"}
+
+v2 <- v1 + 
+  annotate("text", x = 5000, y = 2.35, label = "Cheap gas, \nlonger commutes", hjust = "center", size = 3, fontface = 2) +
+  annotate("text", x = 6150, y = 2.10, label = "The Arab oil embargo", hjust = "left", size = 3, fontface = 2) +
+  annotate("text", x = 6900, y = 3.10, label = "Energy crisis", hjust = "left", size = 3, fontface = 2) +
+  annotate("text", x = 9000, y = 2.00, label = "Record low prices", hjust = "center", size = 3, fontface = 2) +
+  annotate("text", x = 9000, y = 3.10, label = "The swing backward", hjust = "center", size = 3, fontface = 2) +
+  annotate("text", x = 9000, y = 3.05, 
+           label = "The average number of \nmiles that Americans \ndrive annually begins to \nfall, so the chart appears \nto turn around.", 
+           vjust = "top",
+           hjust = "center", 
+           size = 2
+          )
+
+girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# ggsave(filename = "driving-shifts-into-reverse.svg", plot = v2, width=12, height=8)
+
+```
+
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

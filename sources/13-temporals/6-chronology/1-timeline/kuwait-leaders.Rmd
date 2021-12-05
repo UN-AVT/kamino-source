@@ -1,0 +1,184 @@
+---
+pagetitle: "Kuwait Leaders Timeline"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Kuwait Leaders: Emirs & Speakers
+## Timeline
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Masrur Rahman on Unsplash"}
+
+masthead <- "assets/masrur-rahman-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Kuwait is the mother and father, Earth and it's supplies. She is the past, present and future...\
+--- Jaber Al-Ahmad Al-Sabah
+
+
+***
+
+### Load data [Ingest]
+### Emirs of Kuwait
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+emirs <- read.csv("archetypes/heads-of-state/kuwait-emirs.csv", header = TRUE, stringsAsFactors = FALSE)
+
+emirs
+```
+
+### Speakers of Kuwait National Assembly
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+speakers <- read.csv("archetypes/heads-of-state/kuwait-speakers.csv", header = TRUE, stringsAsFactors = FALSE)
+
+speakers
+```
+
+### Prepare data [Wrangle]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+#Abbreviate the First Names for better visualization
+speakers$Name <- sub("[a-z]+", ".", speakers$Name)
+
+#Assign an id for each individual person (Each person may held office multiple times)
+speakers$Name <- factor(speakers$Name, levels = c("A. Al-Ghanim", "A. Al-Saqr", "S. Al-Abdulrazzaq", "A. Al-Serhan", "K. Al-Ghunaim", "M. Al-Adasani", "A. Al-Sadoun", "J. Al-Kharafi", "A. Al-Rashid", "M. Al-Ghanim"))
+speakers <- transform(speakers,id=as.numeric(Name))
+
+#For the Emirs of Kuwait, we do not need to do much wrangling
+emirs$id <- as.numeric(rownames(emirs))
+
+```
+
+
+### Plot [ Views / Temporals ]
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+    plot.title = element_text(color = "black", size = 23, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 18),
+    plot.caption = element_text(color = "#555555", size = 10),
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    #panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 8),
+    legend.position='bottom'
+  )
+
+v1 <- ggplot(emirs, aes(x = Reign.start, y = id, color = Branch)) +
+ geom_segment(aes(xend = Reign.end, yend = id, color = Branch), size = 6) +
+ geom_text(aes(label = Name, hjust = ifelse(id < 4, -1.5, 1.1)), size = 6, show.legend = FALSE) +
+  scale_color_manual(values = c("Before Mubarak Al-Sabah" = "#35aa56", "Al Ahmad" = "#004266", "Al Salim"  = "#D62828")) +
+      labs(title = "His Highness, the Emirs of Kuwait",
+        subtitle = "Timeline of Reign")+
+   theme_bw() + 
+  theme_opts
+   
+   
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9)))
+
+```
+
+***
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.align='center', out.width="100%"}
+
+v2 <- ggplot(speakers, aes(x = Start, y = id, color = Political.Faction)) +
+ geom_segment(aes(xend = End, yend = id, color = Political.Faction), size = 6) +
+ geom_text(aes(label = Name, hjust = ifelse(id < 5, -0.5, 1.1)), size = 6, show.legend = FALSE) +
+ scale_color_manual(values = c("Chamber of Commerce" = "#35aa56", "Muslim Brotherhood" = "#FCB322", "Independent" = "#004266", "Populist bloc"  = "#D62828")) +
+   labs(title = "Speakers of Kuwait National Assembly",
+        subtitle = "Timeline as Speakers")+
+   theme_bw() + 
+  theme_opts
+   
+   
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9)))
+
+
+```
+
+
+```{r, echo=FALSE}
+
+ggsave(filename = "assets/kuwait_emirs.svg", plot = v1, width=16, height=9)
+ggsave(filename = "assets/kuwait_speakers.svg", plot = v2, width=16, height=9)
+
+```
+
+
+### References
+#### Citations and data sources
+
+* Narrative and Data Sources: Wikipedia, [GO](https://en.wikipedia.org/wiki/Emir_of_Kuwait){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

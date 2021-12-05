@@ -1,0 +1,561 @@
+"Year","Product","Value"
+"1988","Animal",14077990000
+"1988","Capital goods",297808780000
+"1988","Chemicals",61826750000
+"1988","Consumer goods",233846730000
+"1988","Food Products",12907870000
+"1988","Footwear",6831610000
+"1988","Fuels",11507100000
+"1988","Hides and Skins",7671080000
+"1988","Intermediate goods",189669300000
+"1988","Mach and Elec",249034200000
+"1988","Metals",69844260000
+"1988","Minerals",5489400000
+"1988","Miscellaneous",69765640000
+"1988","Plastic or Rubber",32141920000
+"1988","Raw materials",35850840000
+"1988","Stone and Glass",22702210000
+"1988","Textiles and Clothing",52005580000
+"1988","Transportation",132650530000
+"1988","Vegetable",9622340000
+"1988","Wood",26984390000
+"1989","Animal",30764820000
+"1989","Capital goods",403901350000
+"1989","Chemicals",82054440000
+"1989","Consumer goods",352407870000
+"1989","Food Products",30882740000
+"1989","Footwear",10980060000
+"1989","Fuels",53492310000
+"1989","Hides and Skins",11968050000
+"1989","Intermediate goods",298430900000
+"1989","Mach and Elec",329652670000
+"1989","Metals",106564640000
+"1989","Minerals",15412530000
+"1989","Miscellaneous",88710910000
+"1989","Plastic or Rubber",47352450000
+"1989","Raw materials",106949480000
+"1989","Stone and Glass",32482860000
+"1989","Textiles and Clothing",75404750000
+"1989","Transportation",185374690000
+"1989","Vegetable",37109570000
+"1989","Wood",62512590000
+"1990","Animal",35177880000
+"1990","Capital goods",457543810000
+"1990","Chemicals",93564720000
+"1990","Consumer goods",413357170000
+"1990","Food Products",36745210000
+"1990","Footwear",13426220000
+"1990","Fuels",76998450000
+"1990","Hides and Skins",12375680000
+"1990","Intermediate goods",325884050000
+"1990","Mach and Elec",376823720000
+"1990","Metals",112350260000
+"1990","Minerals",17884080000
+"1990","Miscellaneous",107923240000
+"1990","Plastic or Rubber",53375110000
+"1990","Raw materials",130339030000
+"1990","Stone and Glass",37438050000
+"1990","Textiles and Clothing",85248460000
+"1990","Transportation",209504820000
+"1990","Vegetable",40923650000
+"1990","Wood",68249370000
+"1991","Animal",46741480000
+"1991","Capital goods",674661810000
+"1991","Chemicals",135645420000
+"1991","Consumer goods",525084000000
+"1991","Food Products",54158700000
+"1991","Footwear",14702590000
+"1991","Fuels",137567590000
+"1991","Hides and Skins",14178110000
+"1991","Intermediate goods",424493260000
+"1991","Mach and Elec",532961340000
+"1991","Metals",131677060000
+"1991","Minerals",20528480000
+"1991","Miscellaneous",158992250000
+"1991","Plastic or Rubber",72331230000
+"1991","Raw materials",221800890000
+"1991","Stone and Glass",48447550000
+"1991","Textiles and Clothing",104314150000
+"1991","Transportation",292130710000
+"1991","Vegetable",66729280000
+"1991","Wood",87028060000
+"1992","Animal",70611310000
+"1992","Capital goods",814782460000
+"1992","Chemicals",176810430000
+"1992","Consumer goods",730575560000
+"1992","Food Products",82484700000
+"1992","Footwear",21714340000
+"1992","Fuels",173653120000
+"1992","Hides and Skins",19687200000
+"1992","Intermediate goods",535922400000
+"1992","Mach and Elec",650993500000
+"1992","Metals",163316270000
+"1992","Minerals",24945030000
+"1992","Miscellaneous",209280200000
+"1992","Plastic or Rubber",95256320000
+"1992","Raw materials",274386290000
+"1992","Stone and Glass",59842040000
+"1992","Textiles and Clothing",153263190000
+"1992","Transportation",348373590000
+"1992","Vegetable",91987110000
+"1992","Wood",112863120000
+"1993","Animal",75928400000
+"1993","Capital goods",943044250000
+"1993","Chemicals",202004810000
+"1993","Consumer goods",863963590000
+"1993","Food Products",97477330000
+"1993","Footwear",31882440000
+"1993","Fuels",194884950000
+"1993","Hides and Skins",26867720000
+"1993","Intermediate goods",605784200000
+"1993","Mach and Elec",780625200000
+"1993","Metals",180761290000
+"1993","Minerals",23604050000
+"1993","Miscellaneous",257832270000
+"1993","Plastic or Rubber",106421380000
+"1993","Raw materials",294166320000
+"1993","Stone and Glass",79317850000
+"1993","Textiles and Clothing",189985150000
+"1993","Transportation",367530380000
+"1993","Vegetable",95426720000
+"1993","Wood",121530190000
+"1994","Animal",98276330000
+"1994","Capital goods",1267918530000
+"1994","Chemicals",281924430000
+"1994","Consumer goods",1160906400000
+"1994","Food Products",137201550000
+"1994","Footwear",45051940000
+"1994","Fuels",221013170000
+"1994","Hides and Skins",38710160000
+"1994","Intermediate goods",819036830000
+"1994","Mach and Elec",1056520010000
+"1994","Metals",253854190000
+"1994","Minerals",28149530000
+"1994","Miscellaneous",317743660000
+"1994","Plastic or Rubber",151740400000
+"1994","Raw materials",363703920000
+"1994","Stone and Glass",109933570000
+"1994","Textiles and Clothing",257912390000
+"1994","Transportation",471236480000
+"1994","Vegetable",131618480000
+"1994","Wood",161370380000
+"1995","Animal",112375410000
+"1995","Capital goods",1536837830000
+"1995","Chemicals",345884940000
+"1995","Consumer goods",1332482150000
+"1995","Food Products",160605490000
+"1995","Footwear",49537570000
+"1995","Fuels",244173160000
+"1995","Hides and Skins",43758100000
+"1995","Intermediate goods",1023841710000
+"1995","Mach and Elec",1306902160000
+"1995","Metals",330605430000
+"1995","Minerals",36609560000
+"1995","Miscellaneous",378791100000
+"1995","Plastic or Rubber",193277850000
+"1995","Raw materials",425430750000
+"1995","Stone and Glass",130557350000
+"1995","Textiles and Clothing",293204660000
+"1995","Transportation",525894630000
+"1995","Vegetable",156853870000
+"1995","Wood",205019250000
+"1996","Animal",114503290000
+"1996","Capital goods",1630483570000
+"1996","Chemicals",363576710000
+"1996","Consumer goods",1451138050000
+"1996","Food Products",176150720000
+"1996","Footwear",51684910000
+"1996","Fuels",351103030000
+"1996","Hides and Skins",45810570000
+"1996","Intermediate goods",1049808360000
+"1996","Mach and Elec",1381992010000
+"1996","Metals",335556940000
+"1996","Minerals",39066200000
+"1996","Miscellaneous",400093270000
+"1996","Plastic or Rubber",194573650000
+"1996","Raw materials",496293290000
+"1996","Stone and Glass",140730450000
+"1996","Textiles and Clothing",302645370000
+"1996","Transportation",560780890000
+"1996","Vegetable",166833190000
+"1996","Wood",196998880000
+"1997","Animal",112813420000
+"1997","Capital goods",1739822060000
+"1997","Chemicals",381304570000
+"1997","Consumer goods",1512762980000
+"1997","Food Products",173211350000
+"1997","Footwear",51648650000
+"1997","Fuels",323419760000
+"1997","Hides and Skins",46039260000
+"1997","Intermediate goods",1073708090000
+"1997","Mach and Elec",1461683880000
+"1997","Metals",349447370000
+"1997","Minerals",40551750000
+"1997","Miscellaneous",421094790000
+"1997","Plastic or Rubber",200254560000
+"1997","Raw materials",465374040000
+"1997","Stone and Glass",143856630000
+"1997","Textiles and Clothing",326735720000
+"1997","Transportation",598891390000
+"1997","Vegetable",168097130000
+"1997","Wood",196245990000
+"1998","Animal",108351200000
+"1998","Capital goods",1784024690000
+"1998","Chemicals",390081580000
+"1998","Consumer goods",1518165320000
+"1998","Food Products",164747290000
+"1998","Footwear",48360280000
+"1998","Fuels",272809650000
+"1998","Hides and Skins",41724360000
+"1998","Intermediate goods",1053071580000
+"1998","Mach and Elec",1473112940000
+"1998","Metals",338902440000
+"1998","Minerals",38882220000
+"1998","Miscellaneous",420067770000
+"1998","Plastic or Rubber",201307720000
+"1998","Raw materials",421378850000
+"1998","Stone and Glass",149294930000
+"1998","Textiles and Clothing",316131380000
+"1998","Transportation",650093590000
+"1998","Vegetable",163635170000
+"1998","Wood",192164230000
+"1999","Animal",113118360000
+"1999","Capital goods",1914640490000
+"1999","Chemicals",432011360000
+"1999","Consumer goods",1637511000000
+"1999","Food Products",169049590000
+"1999","Footwear",49209740000
+"1999","Fuels",358682940000
+"1999","Hides and Skins",40985100000
+"1999","Intermediate goods",1087105160000
+"1999","Mach and Elec",1593224940000
+"1999","Metals",339639680000
+"1999","Minerals",37436810000
+"1999","Miscellaneous",454633780000
+"1999","Plastic or Rubber",219081760000
+"1999","Raw materials",474840320000
+"1999","Stone and Glass",163541460000
+"1999","Textiles and Clothing",321361520000
+"1999","Transportation",692838490000
+"1999","Vegetable",159197070000
+"1999","Wood",203396920000
+"2000","Animal",117930620000
+"2000","Capital goods",2164063510000
+"2000","Chemicals",456122230000
+"2000","Consumer goods",1793660860000
+"2000","Food Products",165902330000
+"2000","Footwear",52194880000
+"2000","Fuels",607501290000
+"2000","Hides and Skins",47867260000
+"2000","Intermediate goods",1190607220000
+"2000","Mach and Elec",1830964810000
+"2000","Metals",377430020000
+"2000","Minerals",41122040000
+"2000","Miscellaneous",584674420000
+"2000","Plastic or Rubber",238675430000
+"2000","Raw materials",633084220000
+"2000","Stone and Glass",181599260000
+"2000","Textiles and Clothing",346251540000
+"2000","Transportation",705259550000
+"2000","Vegetable",151505830000
+"2000","Wood",219100030000
+"2001","Animal",122258130000
+"2001","Capital goods",2030170170000
+"2001","Chemicals",478544170000
+"2001","Consumer goods",1808992580000
+"2001","Food Products",176377230000
+"2001","Footwear",52988290000
+"2001","Fuels",551496510000
+"2001","Hides and Skins",50156060000
+"2001","Intermediate goods",1162127120000
+"2001","Mach and Elec",1690186980000
+"2001","Metals",360180180000
+"2001","Minerals",40156290000
+"2001","Miscellaneous",573028650000
+"2001","Plastic or Rubber",233022530000
+"2001","Raw materials",592567680000
+"2001","Stone and Glass",176293270000
+"2001","Textiles and Clothing",336681590000
+"2001","Transportation",714092440000
+"2001","Vegetable",152868250000
+"2001","Wood",208483620000
+"2002","Animal",123773810000
+"2002","Capital goods",2097185520000
+"2002","Chemicals",539278710000
+"2002","Consumer goods",1937810970000
+"2002","Food Products",190201990000
+"2002","Footwear",54581530000
+"2002","Fuels",558784110000
+"2002","Hides and Skins",49956510000
+"2002","Intermediate goods",1221364230000
+"2002","Mach and Elec",1734589080000
+"2002","Metals",380962590000
+"2002","Minerals",41421450000
+"2002","Miscellaneous",587927330000
+"2002","Plastic or Rubber",250566120000
+"2002","Raw materials",619360690000
+"2002","Stone and Glass",191850620000
+"2002","Textiles and Clothing",354980560000
+"2002","Transportation",777842830000
+"2002","Vegetable",165358700000
+"2002","Wood",216952940000
+"2003","Animal",141980310000
+"2003","Capital goods",2406696600000
+"2003","Chemicals",643690590000
+"2003","Consumer goods",2269737180000
+"2003","Food Products",220707480000
+"2003","Footwear",60859310000
+"2003","Fuels",696687160000
+"2003","Hides and Skins",56376140000
+"2003","Intermediate goods",1440857980000
+"2003","Mach and Elec",1991449740000
+"2003","Metals",456605650000
+"2003","Minerals",47719430000
+"2003","Miscellaneous",693771560000
+"2003","Plastic or Rubber",297720450000
+"2003","Raw materials",743822570000
+"2003","Stone and Glass",224033150000
+"2003","Textiles and Clothing",411930030000
+"2003","Transportation",884854590000
+"2003","Vegetable",197466050000
+"2003","Wood",245701650000
+"2004","Animal",163563180000
+"2004","Capital goods",2922693980000
+"2004","Chemicals",775489630000
+"2004","Consumer goods",2687395940000
+"2004","Food Products",250876490000
+"2004","Footwear",67897390000
+"2004","Fuels",906007410000
+"2004","Hides and Skins",64284280000
+"2004","Intermediate goods",1794474900000
+"2004","Mach and Elec",2420757120000
+"2004","Metals",632008200000
+"2004","Minerals",67250220000
+"2004","Miscellaneous",828585480000
+"2004","Plastic or Rubber",366263360000
+"2004","Raw materials",911226250000
+"2004","Stone and Glass",271637590000
+"2004","Textiles and Clothing",462496810000
+"2004","Transportation",1037954800000
+"2004","Vegetable",223015120000
+"2004","Wood",283760060000
+"2005","Animal",181398790000
+"2005","Capital goods",3245762280000
+"2005","Chemicals",862792600000
+"2005","Consumer goods",3072263560000
+"2005","Food Products",273496020000
+"2005","Footwear",74421400000
+"2005","Fuels",1226108060000
+"2005","Hides and Skins",68548710000
+"2005","Intermediate goods",2007969370000
+"2005","Mach and Elec",2696294780000
+"2005","Metals",731393360000
+"2005","Minerals",94885590000
+"2005","Miscellaneous",874437720000
+"2005","Plastic or Rubber",420599980000
+"2005","Raw materials",1175179410000
+"2005","Stone and Glass",298054660000
+"2005","Textiles and Clothing",490829560000
+"2005","Transportation",1124735330000
+"2005","Vegetable",238775520000
+"2005","Wood",299959190000
+"2006","Animal",194784600000
+"2006","Capital goods",3718523150000
+"2006","Chemicals",968736010000
+"2006","Consumer goods",3494400600000
+"2006","Food Products",308072610000
+"2006","Footwear",82860040000
+"2006","Fuels",1608218530000
+"2006","Hides and Skins",73981320000
+"2006","Intermediate goods",2347990430000
+"2006","Mach and Elec",3092990850000
+"2006","Metals",931357750000
+"2006","Minerals",122176500000
+"2006","Miscellaneous",993901270000
+"2006","Plastic or Rubber",483481450000
+"2006","Raw materials",1438885870000
+"2006","Stone and Glass",356786630000
+"2006","Textiles and Clothing",541426330000
+"2006","Transportation",1275096380000
+"2006","Vegetable",266768900000
+"2006","Wood",326325370000
+"2007","Animal",225750710000
+"2007","Capital goods",4189862330000
+"2007","Chemicals",1121061470000
+"2007","Consumer goods",4044644660000
+"2007","Food Products",358395560000
+"2007","Footwear",92902680000
+"2007","Fuels",1719024160000
+"2007","Hides and Skins",80724540000
+"2007","Intermediate goods",2779515890000
+"2007","Mach and Elec",3455142980000
+"2007","Metals",1134742890000
+"2007","Minerals",148592750000
+"2007","Miscellaneous",1194777490000
+"2007","Plastic or Rubber",559635980000
+"2007","Raw materials",1655526460000
+"2007","Stone and Glass",421533460000
+"2007","Textiles and Clothing",599658720000
+"2007","Transportation",1488458400000
+"2007","Vegetable",342091830000
+"2007","Wood",369374310000
+"2008","Animal",262868460000
+"2008","Capital goods",4546244070000
+"2008","Chemicals",1294230700000
+"2008","Consumer goods",4687886420000
+"2008","Food Products",417174410000
+"2008","Footwear",103077340000
+"2008","Fuels",2503267100000
+"2008","Hides and Skins",84254670000
+"2008","Intermediate goods",3172352270000
+"2008","Mach and Elec",3712823180000
+"2008","Metals",1277881830000
+"2008","Minerals",181743960000
+"2008","Miscellaneous",1376315630000
+"2008","Plastic or Rubber",608086440000
+"2008","Raw materials",2208570850000
+"2008","Stone and Glass",491659410000
+"2008","Textiles and Clothing",627541840000
+"2008","Transportation",1597631790000
+"2008","Vegetable",449845960000
+"2008","Wood",382969110000
+"2009","Animal",236100310000
+"2009","Capital goods",3593853750000
+"2009","Chemicals",1129614930000
+"2009","Consumer goods",3650862960000
+"2009","Food Products",394279770000
+"2009","Footwear",92557950000
+"2009","Fuels",1512494920000
+"2009","Hides and Skins",68156300000
+"2009","Intermediate goods",2359753670000
+"2009","Mach and Elec",2981479630000
+"2009","Metals",815059670000
+"2009","Minerals",141731000000
+"2009","Miscellaneous",1249247150000
+"2009","Plastic or Rubber",485214600000
+"2009","Raw materials",1470176920000
+"2009","Stone and Glass",434303420000
+"2009","Textiles and Clothing",539940490000
+"2009","Transportation",1127491810000
+"2009","Vegetable",382587860000
+"2009","Wood",314327950000
+"2010","Animal",268803130000
+"2010","Capital goods",4365512390000
+"2010","Chemicals",1301648760000
+"2010","Consumer goods",4392063080000
+"2010","Food Products",432766990000
+"2010","Footwear",109315070000
+"2010","Fuels",2182414020000
+"2010","Hides and Skins",88796950000
+"2010","Intermediate goods",2965514440000
+"2010","Mach and Elec",3600989610000
+"2010","Metals",1056962480000
+"2010","Minerals",221071600000
+"2010","Miscellaneous",1407792980000
+"2010","Plastic or Rubber",620048170000
+"2010","Raw materials",2026605470000
+"2010","Stone and Glass",556675460000
+"2010","Textiles and Clothing",623179560000
+"2010","Transportation",1407425870000
+"2010","Vegetable",440056570000
+"2010","Wood",360686140000
+"2011","Animal",319678690000
+"2011","Capital goods",4960279160000
+"2011","Chemicals",1504588820000
+"2011","Consumer goods",5165969330000
+"2011","Food Products",510252450000
+"2011","Footwear",129789080000
+"2011","Fuels",2765033900000
+"2011","Hides and Skins",107087120000
+"2011","Intermediate goods",3610703380000
+"2011","Mach and Elec",4028696240000
+"2011","Metals",1277327370000
+"2011","Minerals",290259320000
+"2011","Miscellaneous",1553665460000
+"2011","Plastic or Rubber",755671410000
+"2011","Raw materials",2573466070000
+"2011","Stone and Glass",754654020000
+"2011","Textiles and Clothing",733061290000
+"2011","Transportation",1639086420000
+"2011","Vegetable",555908160000
+"2011","Wood",404713090000
+"2012","Animal",317930830000
+"2012","Capital goods",5046203680000
+"2012","Chemicals",1483232950000
+"2012","Consumer goods",5317419290000
+"2012","Food Products",527234270000
+"2012","Footwear",132438350000
+"2012","Fuels",2912680540000
+"2012","Hides and Skins",110245980000
+"2012","Intermediate goods",3652358060000
+"2012","Mach and Elec",4042959050000
+"2012","Metals",1207138600000
+"2012","Minerals",262639810000
+"2012","Miscellaneous",1557912270000
+"2012","Plastic or Rubber",746690570000
+"2012","Raw materials",2597654900000
+"2012","Stone and Glass",907117120000
+"2012","Textiles and Clothing",691957270000
+"2012","Transportation",1651992320000
+"2012","Vegetable",564077280000
+"2012","Wood",380409530000
+"2013","Animal",346027550000
+"2013","Capital goods",5221978990000
+"2013","Chemicals",1521312010000
+"2013","Consumer goods",5710238300000
+"2013","Food Products",561850340000
+"2013","Footwear",145560200000
+"2013","Fuels",2985545710000
+"2013","Hides and Skins",122505810000
+"2013","Intermediate goods",3807333550000
+"2013","Mach and Elec",4199505900000
+"2013","Metals",1180712690000
+"2013","Minerals",275375130000
+"2013","Miscellaneous",1587294650000
+"2013","Plastic or Rubber",766888450000
+"2013","Raw materials",2648697430000
+"2013","Stone and Glass",1014159320000
+"2013","Textiles and Clothing",748157500000
+"2013","Transportation",1696804640000
+"2013","Vegetable",577329080000
+"2013","Wood",403341430000
+"2014","Animal",366121580000
+"2014","Capital goods",5346327910000
+"2014","Chemicals",1544174960000
+"2014","Consumer goods",5831967420000
+"2014","Food Products",567009970000
+"2014","Footwear",159559450000
+"2014","Fuels",2782638180000
+"2014","Hides and Skins",122398270000
+"2014","Intermediate goods",3677932840000
+"2014","Mach and Elec",4306602230000
+"2014","Metals",1212389020000
+"2014","Minerals",254566950000
+"2014","Miscellaneous",1642312850000
+"2014","Plastic or Rubber",767791350000
+"2014","Raw materials",2497838090000
+"2014","Stone and Glass",863175430000
+"2014","Textiles and Clothing",774436390000
+"2014","Transportation",1762239430000
+"2014","Vegetable",579587360000
+"2014","Wood",414221810000
+"2015","Animal",306121890000
+"2015","Capital goods",4990491090000
+"2015","Chemicals",1398681240000
+"2015","Consumer goods",4911500070000
+"2015","Food Products",505376870000
+"2015","Footwear",146707300000
+"2015","Fuels",1487833850000
+"2015","Hides and Skins",112431730000
+"2015","Intermediate goods",3186528930000
+"2015","Mach and Elec",4003366030000
+"2015","Metals",1018922860000
+"2015","Minerals",182195520000
+"2015","Miscellaneous",1459076460000
+"2015","Plastic or Rubber",667473410000
+"2015","Raw materials",1546088080000
+"2015","Stone and Glass",726019080000
+"2015","Textiles and Clothing",701708540000
+"2015","Transportation",1661140850000
+"2015","Vegetable",502155980000
+"2015","Wood",360261620000

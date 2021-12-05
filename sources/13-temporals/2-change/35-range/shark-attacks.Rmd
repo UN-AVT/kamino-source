@@ -1,0 +1,192 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Knife Crime
+## A range plot showing trend direction
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Snehal Krishna on Unsplash"}
+
+masthead <- "assets/ethan-wilkinson-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Remember, it is never the knife's fault...\
+--- Daniel Boulud\
+
+
+***
+
+### Ingest
+#### area, year, trend
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df = read.csv("archetypes/knife-crime/knife-crime.csv", header = TRUE, stringsAsFactors = TRUE)
+df
+
+```
+
+
+### Wrangle
+#### filter for rising and declining
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_rising <- filter(df, color == "Increase in knife crimes")
+df_declining <- filter(df, color == "Decrease in knife crimes")
+
+```
+
+
+### Plot
+#### Where is knife crime rising?
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+
+theme_opts <- theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.ticks = element_line(),
+    legend.position = "none"
+  )
+
+v1 = ggplot(df_rising) + 
+  geom_point(aes(x=X2017, y=factor(Area.Name)), shape=16, alpha=1.0, size=2, color="#a82e13") +
+  geom_segment(aes(x=X2017, y=factor(Area.Name), xend=X2018, yend=factor(Area.Name)), 
+               lineend = "round", linejoin = "round", size=1, color="#a82e13") + 
+  geom_text(aes(x=X2018, y=Area.Name), label = "\u25B6", size = 12, color="#a82e13", vjust = 0.55) + 
+  scale_x_continuous() +
+  scale_y_discrete() +
+  labs(title = "Where is knife crime rising?") +
+  theme_minimal() +
+  theme_opts +
+  xlab(NULL) +
+  ylab(NULL)
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### Plot
+#### Where is knife crime decreasing?
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+
+v2 = ggplot(df_declining) + 
+  geom_point(aes(x=X2017, y=factor(Area.Name)), shape=16, alpha=1.0, size=2, color="#63a0cd") +
+  geom_segment(aes(x=X2017, y=factor(Area.Name), xend=X2018, yend=factor(Area.Name)), size=1, color="#63a0cd") + 
+  geom_text(aes(x=X2018, y=Area.Name), label = "\u25C0", size = 12, color="#63a0cd", vjust = 0.55) + 
+  scale_x_continuous() +
+  scale_y_discrete() +
+  labs(title = "Where is knife crime decreasing?") +
+  theme_minimal() +
+  theme_opts +
+  xlab(NULL) +
+  ylab(NULL)
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/knife-crime-fs.svg", plot = v1, width=720/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/knife-crime-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+Inspiration: Datawrapper, Where is knife crime rising?, https://blog.datawrapper.de/weekly-chart-range-plot-the-times-ryan-watts/
+Data Source: Office for National Statistics
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "range" # mostly used in wranglers and analytics
+keywords <- 'knife crime'
+commands <- 'geom_point geom_segment scale_y_discrete arrow'
+sources <- 'Office for National Statistics'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

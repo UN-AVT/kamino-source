@@ -1,0 +1,47 @@
+---
+pagetitle: "OHLC"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+
+library(plotly)
+library(quantmod)
+
+```
+
+### OHLC
+
+
+
+#### LOAD DATA
+
+```{r, echo=FALSE}
+
+
+
+df = read.csv("../archetypes/aapl-2.csv", header = TRUE)
+df <- tail(df, 87)
+df
+
+
+```
+
+```{r, echo=FALSE, fig.width=10.5, fig.height=10.5}
+
+fig <- df %>% plot_ly(x = ~Date, type="ohlc",
+                      open = ~Open, close = ~Close,
+                      high = ~High, low = ~Low) 
+fig <- fig %>% layout(title = "Apple OHLC Chart",
+                      xaxis = list(rangeslider = list(visible = F)),yaxis = list(
+        tickformat = "$"
+  ))
+
+fig
+```
+
+

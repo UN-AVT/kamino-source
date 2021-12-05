@@ -1,0 +1,220 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(reshape2)
+library(ggplot2)
+library(gridExtra)
+library(ggthemes)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+<div class="activity">
+TEMPORAL  
+</div>
+
+# Swedish trash
+## Area Stacked
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Pawel Czerwinski on Unsplash"}
+
+knitr::include_graphics("assets/pawel-czerwinski-unsplash.jpg", dpi=72)
+
+```
+
+> You hang out with trash and you start to smell like garbage...\
+--- Caroline Manzo\
+
+***
+
+Most countries pile their trash up in huge heaps, or they bury it. But Sweden? Only one in every 200 tonnes ends up at a landfill site. The rest gets either recycled, turned into biogas, or poured into “district heating” plants that provide hot water and electricity to the biggest cities. Sweden’s need for trash is so large, in fact, that it imports hundreds of thousands of tonnes per year from neighbouring countries.
+
+### Ingest the data
+#### year and use by millions of tonnes
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df = read.csv("archetypes/sweden-trash-landfill/sweden-sends-almost-no-trash-to-landfill.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle the data
+#### convert strings to numbers, and wide to long
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df
+
+# convert strings to numbers
+df_wrangle$material.recycling <- as.numeric(gsub(",", "", df_wrangle$material.recycling))
+df_wrangle$biological.treatment <- as.numeric(gsub(",", "", df_wrangle$biological.treatment))
+df_wrangle$energy.recovery <- as.numeric(gsub(",", "", df_wrangle$energy.recovery))
+df_wrangle$landfill <- as.numeric(gsub(",", "", df_wrangle$landfill))
+df_wrangle$TOTAL <- as.numeric(gsub(",", "", df_wrangle$TOTAL))
+# df_wrangle
+
+# transform wide to long
+df_long <- melt(df_wrangle, id.vars=c("year", "TOTAL"))
+df_long
+
+```
+
+
+### Plot
+#### data only
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 8),
+    plot.caption = element_text(color = "#555555", size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 8),
+    legend.position='bottom'
+  )
+
+series_pal <- c("material.recycling" = "#569BA0",
+                "biological.treatment" = "#49C0A6",
+                "energy.recovery" = "#536299",
+                "landfill" = "#492193")
+
+# Plot
+v1 <- ggplot(df_long, aes(x = year, y = value, group = variable)) + 
+  geom_area(aes(color = variable, fill = variable), position="stack", stat="identity", width=1.0) +
+  scale_x_continuous(breaks=c(1975,1985,1995,2005,2015,2017)) +
+  scale_y_continuous(breaks=seq(0, 5000000, 1000000)) +
+  scale_fill_manual(values = series_pal) +
+  scale_color_manual(values = series_pal) +
+  labs( title = "Sweden sends almost no trash to landfill",
+        subtitle = "million tonnes of household waste",
+        caption = "Source: Information is Beautiful") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot with annotations
+#### some narrative to help tell the story
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# material.recycling, biological.treatment, energy.recovery, landfill
+
+v2 <- v1 + 
+    annotate("text", x = 2017, y = 3800000, 
+             label = "34%", 
+             hjust = 1.2, vjust = 0.5, color = "#ffffff", size = 6, fontface = 2) +
+    annotate("text", x = 2017, y = 2700000, 
+             label = "15%", 
+             hjust = 1.2, vjust = 0.5, color = "#ffffff", size = 6, fontface = 2) +
+    annotate("text", x = 2017, y = 1000000, 
+             label = "50%", 
+             hjust = 1.2, vjust = 0.5, color = "#ffffff", size = 6, fontface = 2) +
+    annotate("text", x = 2017, y = 200000, 
+             label = "0.5%", 
+             hjust = 1.2, vjust = 0.5, color = "#ffffff", size = 6, fontface = 2)
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+  
+```
+
+### Save plot
+#### as vector or raster image
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# full version
+ggsave(filename = "assets/swedish-trash-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# without annotations
+ggsave(filename = "assets/swedish-trash-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Information is Beautiful, https://informationisbeautiful.net/beautifulnews/600-sweden-trash-landfill/
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'swedish trash landfill recycle'
+commands <- 'melt gsub geom_area'
+sources <- 'Information is Beautiful'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

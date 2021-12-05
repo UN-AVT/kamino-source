@@ -1,0 +1,226 @@
+---
+pagetitle: "Smallpox Vaccination"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+# Load needed libraries
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORAL  
+</div>
+
+# Smallpox Vaccination
+## Area
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Image by the Library of Congress"}
+
+masthead <- "assets/the_cow_pock.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">The Cow-Pock—or—the Wonderful Effects of the New Inoculation!—vide. the Publications of ye Anti-Vaccine Society</div>
+
+
+> Smallpox was officially declared eradicated in 1979...\
+--- World Health Organization\
+
+***
+
+The above image, published in 1802 and created by British satirist James Gillray caricatured a scene at the Smallpox and Inoculation Hospital at St. Pancras, showing cowpox vaccine being administered to frightened young women, and cows emerging from different parts of people's bodies. The cartoon was inspired by the controversy over inoculating against the dreaded disease, smallpox. Opponents of vaccination had depicted cases of vaccinees developing bovine features and this is picked up and exaggerated by Gillray.
+
+### Ingest
+#### year and death rate
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df <- read.csv("archetypes/smallpox-vaccination/deaths-from-smallpox-in-london.csv", header = TRUE)
+head(df, n=10)
+
+```
+
+
+### Wrangle
+#### Convert to date
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_wrangled <- df %>%
+  mutate(date = as.Date(paste0(Year,"-01-01"))) %>%
+  select(date, yearly_rate = Smallpox_death_rate_in_London)
+
+head(df_wrangled, n=10)
+
+```
+
+
+### View
+#### create an annotation reference
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+annotation_df <- data.frame(text = c("Mary II dies of\nsmallpox aged 32",
+                                     "Variolation\nintroduced\nto England",
+                                     "George III’s son dies\nafter being inoculated\nvia variolation",
+                                     "Variolation\nbanned",
+                                     "Infant vaccination\nbecomes mandatory",
+                                     "Franco-Prussian\nwar causes\nepidemic",
+                                     "Glycerine added\nto vaccine to reduce\ncontamination"),
+                            year = as.Date(c("1694-12-28",
+                                     "1721-01-01",
+                                     "1783-05-03",
+                                     "1840-01-01",
+                                     "1853-08-01",
+                                     "1871-01-01",
+                                     "1891-01-01")),
+                            y = c(17,20,20,13,17,10,18))
+
+annotation_df
+
+```
+
+
+### Plot
+#### area, points, segments, and text
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 18, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "black", size = 16, family = "inconsolata"),
+  plot.caption = element_text(color = "#555555", size = 8),
+  axis.title.x = element_blank(),
+  axis.title.y = element_blank(),
+  axis.ticks.length=unit(.25, "cm"),
+  axis.ticks.y = element_blank(),
+  axis.text.x = element_text(size = 14),
+  axis.text.y = element_blank(),
+  panel.border = element_blank(),
+  panel.background = element_blank(),
+  panel.grid = element_blank(),
+  legend.position='none'
+  )
+
+# Manually create the ticks on x-axis
+choosing_breaks <- as.Date(c("1630-01-01","1640-01-01","1650-01-01","1660-01-01","1670-01-01","1680-01-01","1690-01-01",
+                             "1700-01-01","1710-01-01","1720-01-01","1730-01-01","1740-01-01","1750-01-01","1760-01-01"
+                             ,"1770-01-01","1780-01-01","1790-01-01","1800-01-01","1810-01-01","1820-01-01","1830-01-01"
+                             ,"1840-01-01","1850-01-01","1860-01-01","1870-01-01","1880-01-01","1890-01-01",
+                             "1900-01-01"))
+
+# Control label display on x-axis
+choosing_labels <- c("1630","","50","","","","","1700","","","","","50","","","","",
+                     "1800","","","","","50","","","","","1900")
+
+v1 <- ggplot(data = df_wrangled, 
+       aes(x = date, y = yearly_rate)) +
+  geom_segment(data = annotation_df, aes(x = year, y = 0, xend = year, yend = y)) +
+  geom_area(color="#31c0d0",
+            fill="#ddf5f7",
+            size = 1.2) +
+  geom_point(color = "#31c0d0") +
+  scale_x_date(breaks = choosing_breaks,
+               labels = choosing_labels,
+               # remove space between y-axis and plot
+               expand = c(0,0),
+               limits = c(as.Date("1620-01-01"),as.Date("1910-01-01"))) +
+  # Remove space between x-axis and plot
+  scale_y_continuous(expand = c(0,0), breaks = c(0,5,10,15,20), labels=c("0", "5%", "10%", "15%", "20%"),
+                     limits = c(0,25), position = "right") +
+  geom_text(data = annotation_df, aes(x = year-730, y = y+0.5, label = text), 
+            hjust = "right", vjust = "top",
+            color = "#828180", size = 4, family = "inconsolata", lineheight = 0.9) +
+  geom_point(data = annotation_df, aes(x = year, y = y), color = "#828180") +
+  geom_segment(aes(x = as.Date("1800-01-01"), y = 0, xend = as.Date("1800-01-01"), yend = 21), 
+               linetype=2, color = "#ea4d48", size = 1) +
+  geom_text(aes(x = as.Date("1800-01-01")+2*365, y = 21+0.5, label = "Cowpox vaccine\nintroduced"), 
+            hjust = "left", vjust = "top",
+            color = "#ea4d48", size = 6, family = "inconsolata", lineheight = 0.9) +
+  geom_hline(yintercept = 0) +
+  labs(title = "Smallpox, London",
+       subtitle = "% of all deaths") +
+  geom_text(aes(x = as.Date("1905-01-01"), y = 0.5, label = "0"), 
+            color = "#828180", size = 5, family = "inconsolata") +
+  geom_segment(aes(x = as.Date("1898-01-01"), y = 5, xend = as.Date("1908-01-01"), yend = 5), 
+               color = "#828180") +
+  geom_text(aes(x = as.Date("1905-01-01"), y = 5.5, label = "5%"), 
+            color = "#828180", size = 5, family = "inconsolata") +
+  geom_segment(aes(x = as.Date("1898-01-01"), y = 10, xend = as.Date("1908-01-01"), yend = 10), 
+               color = "#828180") +
+  geom_text(aes(x = as.Date("1905-01-01"), y = 10.5, label = "10%"), 
+            color = "#828180", size = 5, family = "inconsolata") +
+  geom_segment(aes(x = as.Date("1898-01-01"), y = 15, xend = as.Date("1908-01-01"), yend = 15), 
+               color = "#828180") +
+  geom_text(aes(x = as.Date("1905-01-01"), y = 15.5, label = "15%"), 
+            color = "#828180", size = 5, family = "inconsolata") +
+  geom_segment(aes(x = as.Date("1898-01-01"), y = 20, xend = as.Date("1908-01-01"), yend = 20), 
+               color = "#828180") +
+  geom_text(aes(x = as.Date("1905-01-01"), y = 20.5, label = "20%"), 
+            color = "#828180", size = 5, family = "inconsolata") +
+  theme_bw() +
+  theme_opts
+
+girafe( ggobj = v1, width_svg = 16, height_svg = 9, options = list( opts_sizing(rescale = TRUE, width = 0.8) ))
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: The Economist, _The smallpox vaccine took decades to bear fruit_, [GO](https://www.economist.com/graphic-detail/2021/01/23/the-smallpox-vaccine-took-decades-to-bear-fruit/){target="_blank"}  
+* Data sources: Our World in Data, _Deaths caused by smallpox as a share of all deaths in London_, [GO](https://ourworldindata.org/grapher/deaths-from-smallpox-in-london){target="_blank"}  
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

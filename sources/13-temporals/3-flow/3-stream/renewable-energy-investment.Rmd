@@ -1,0 +1,204 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+#devtools::install_github('Ather-Energy/ggTimeSeries')
+library(ggTimeSeries)
+library(knitcitations)
+library(bibtex)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Renewable Energy Investment
+## Streamgraph
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by American Public Power Association on Unsplash"}
+
+masthead <- "assets/american-public-power-association-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+***
+
+### Ingest
+#### country, year, number of tests
+
+
+```{r, echo=FALSE}
+
+df <- read.csv("archetypes/renewable-energy-investment/renewable-energy-investment.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle
+#### wide to long
+
+
+```{r, echo=FALSE}
+
+df_wrangle <- melt(df, id.vars=c("Year", "Global_total"))
+df_wrangle
+
+```
+
+
+### Streamgraph
+#### color by country
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata", color = "#ffffff"), 
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text.x = element_text(family = "inconsolata", color = "#ffffff", size = 11), 
+  axis.text.y = element_blank(),
+  axis.line.y = element_blank(),
+  axis.ticks.y = element_blank(),
+  axis.title.y = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="black", colour="black"),
+  panel.border = element_blank(),
+  plot.background = element_rect(fill="black", colour="black"),
+)
+
+code_pal <- c("China" = "#D1206B", 
+              "Europe" = "#FBAC00",
+              "India" = "#FFA000",
+              "Japan" = "#16F0CC",
+              "US" = "#8598EE",
+              "Rest_of_world" = "#ADF0E8"
+              )
+
+v1 <- ggplot(df_wrangle, aes(x = Year, y = value, group = variable, fill = variable, color = variable)) +
+  stat_steamgraph() +
+  scale_x_continuous(breaks = seq(min(df_wrangle$Year), max(df_wrangle$Year), 2)) +
+  scale_fill_manual(values = code_pal ) +
+  scale_color_manual(values = code_pal ) +
+  #coord_fixed( 0.2 * diff(range(df$Year)) / diff(range(df$N))) +
+  theme_bw() +
+  theme_opts +
+  xlab(NULL) +
+  ylab(NULL)
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+### Streamgraph
+#### with annotations
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v2 <- v1 + 
+  coord_cartesian(clip="off") +
+  annotate("text", x = 1962, y = 80, label = "Peak testing of nuclear\nweapons in 1962", hjust = "center", size = 3, fontface = 2) +
+  annotate("text", x = 1998, y = 15, label = "Pakistan\nConducted 3 test in\n1998", hjust = "center", size = 3, fontface = 2) +
+  annotate("text", x = 1998, y = -10, label = "India Conducted\n5 test in 1998", hjust = "center", size = 3, fontface = 2)
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/nuclear-weapons-tests-fs.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/nuclear-weapons-tests-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+Source:  Oklahoma Geological Survey Observatory, https://commons.wikimedia.org/wiki/Data:Nuclear_Weapons_Testing_-_Oklahoma_Geological_Survey_Observatory_(OWID_121).tab
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+ cleanbib()
+ read.bibtex(file = "citations/nuclear-weapons-tests.bib")
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'nuclear weapon test'
+commands <- 'stat_steamgraph'
+sources <- 'Oklahoma Geological Survey Observatory'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

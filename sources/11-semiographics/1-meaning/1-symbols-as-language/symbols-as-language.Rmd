@@ -1,0 +1,184 @@
+---
+pagetitle: "Symbols as language"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+#font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+#showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Symbols as language
+## conveying meaning with symbols
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Danie Franco on Unsplash"}
+
+masthead <- "assets/danie-franco-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The clearer a subject is worked out... the more it elicits radical change\
+  of the position (of society) in present-day life...\
+--- Otto Neurath\
+
+***
+
+Representing symbols as nouns or objects is often referred to as a pictogram or icon. A pictogram is a pictorial representation of an object that is intended to communicate to readers through visual literacy.
+
+### Design Considerations
+#### subsection
+
+
+In his hallmark work The Semiology of Graphics, Jacques Bertin posed this leading question: Can you develop a set of unique symbols that can be placed on a display and be rapidly perceived and differentiated?X This question highlights the design objectives for using semiographic approaches to enhance a visual. One of the earliest thinkers on the subject, Charles Sanders Pierce began writing on the subject in the 1860s. During this time Pierce devised a system semiosis is the process of communication by any type of sign, a sign being anything that stands for something (its object), to somebody (its interpreter), in some respect (its context).
+
+* A sign is something interpretable as saying something about something.
+* An object is a subject matter of a sign and an interpretant.
+* An interpretant is the sign’s more or less clarifi ed meaning.
+
+Knowledge about the specific graphic system used to depict the subject matter. Severe deficiencies in either of these aspects of background knowledge can mean that a viewer finds a graphic incomprehensible and confusing.
+
+
+### The form of symbols
+#### subsection
+
+
+In Universal Principles of Design, the possible approaches to symbol design (described as iconic representation) are classified as:
+
+* Similar: images that are visually analogous to an action, object, or concept.
+* Example: images of things that exemplify or are commonly associated with an action, object, or concept.
+* Symbolic: images that represent an action, object, or concept at a higher level of abstraction.
+* Arbitrary: images that bear little or no relationship to the action, object, or concept.
+
+
+### The significance of symbols
+#### subsection
+
+
+Two schools of thinking...C.S. Peirce and Saussure. Peirce “science of signs” / Saussure “the life of signs in society”. Both offer complimentary perspectives on the usage of signs for the design of visual representations.
+Morris proposed five modes of signifying:
+
+* Designative: the sign directs attention by signifying observable properties--properties are designed.
+* Appraisive: sign signifies the consummatory properties of a referent, it directs attention to preferential treatment of the referent, or it assigns a value judgement.
+* Prescriptive: sign signifies how a situation should be reacted to, it directs attention to performing a response. (e.g. arrow).
+* Indentificative: directs attention to a certain spatial-temporal region (index, legend, dot)
+* Formative: sign signifies in a logical, lexical, structural, or grammatical way. Performs operations on other signs, e.g. a link.
+
+
+### The function of symbols
+#### subsection
+
+
+There are many possible purposes for which a designer produces a symbol. 
+
+* Informative: intended to inform about something. 
+* Valuative: intended to aid in preferential selection. 
+* Incitive: intended to incite response sequences.
+* Systemic: intended to organize sign-produced behavour into a determinate whole. 
+
+
+### The meaning of symbols
+#### subsection
+
+
+* Singular: permits only one referent
+* General: permits any number of individual referents
+* Interpersonal: a shared common understanding
+* Comsign: same signification for both creator and viewer
+* Vague: does not allow a determination of whether a particular entity is or is not a referent of the sign.
+* Unambiguous: Has one interpretant with explicit meaning
+* Ambiguous: Has several interpretants
+
+
+### The comprehension of symbols
+#### subsection
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Symbols with meaning"}
+
+knitr::include_graphics("assets/symbols-with-meaning.svg", dpi=300)
+
+```
+
+
+### Isotype
+#### subsection
+
+One of the most notable initiatives to create a common vocabulary of symbols is known as The International System of TYpographic Picture Education (Isotype). Isotype is a system of pictograms designed by Otto Neurath in collaboration with illustrator Gerd Arntz to communicate information in a simple, non-verbal way. Arntz designed around 4000 signs, which symbolized key data from industry, demographics, politics and economy. The development of these signs set way for what Neurath conceived as the idea of an international picture language, which would allow people all over the world to communicate and learn about important socio-economic issues:
+
+> The Isotype method may well become one of the elements which may help to bring about\
+  a civilization in which all men can participate in a common culture and in which the canyon\
+  between educated and uneducated will be bridged ... . We cannot hope to democratize cultural\
+  life without many new ways of conveying information.
+
+In 1940, Isotype included both picture elements and a number of simple rules for combining them into pictorial sentences. One of the most important contributions of Neurath’s work resulted in the identification of two central rules for generating the vocabulary of international pictures: reduction, for determining the style of individual signs; and consistency, for giving a group of signs the appearance of a coherent system. Reduction refers to
+finding the simplest expression of an object.
+
+Consistency refers to the stylistic uniformity of a set of signs and to the standardized use of signs, allowing them to become conventional in a particular community of people. Isotype is based on a concept of universal
+legibility; Practically, stylistic consistency unites a group of signs dispersed throughout an environment. Establishing a consistent way of grouping signs in a series of charts allows users to learn to read them and
+to deduce from context what is not immediately understood. When consistent rules have been set, their occasional violation is then understood as meaningful.
+
+These approaches provide a useful construct for an isotype pattern when designing one’s own pictogram.
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Manuel on Unsplash"}
+
+#masthead <- "assets/manuel-unsplash.jpg"
+#knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Data sources: The Data Source,  [GO](https://govdata360-backend.worldbank.org/api/v1/datasets/4034/dump.csv){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

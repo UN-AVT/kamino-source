@@ -1,0 +1,83 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+INGEST  
+</div>
+
+# Case
+## Child Labor, average-working-hours-of-children
+
+> All the problems of the world - child labor, corruption - are symptoms of a spiritual disease: lack of compassion...\
+--- Bill Vaughan\
+
+***
+
+# Accessing a comma-separated-values file (.csv)
+
+```{r, echo=TRUE, message=FALSE}
+
+df <- read.csv('archetypes/child-labor/average-working-hours-of-children.csv')
+df
+
+```
+
+## Fixing encoding issue
+
+```{r, echo=TRUE, message=FALSE}
+
+df1 <- read.csv('archetypes/child-labor/average-working-hours-of-children.csv', encoding = "UTF-8")
+df1
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+The data files used as examples here were obtained from the [Child Labor](https://ourworldindata.org/child-labor) article published by Our World in Data.
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/average-working-hours-of-children.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

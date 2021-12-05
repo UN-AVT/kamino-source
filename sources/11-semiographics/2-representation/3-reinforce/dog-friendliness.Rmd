@@ -1,0 +1,188 @@
+---
+pagetitle: "Friendliest Dogs"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(fuzzyjoin)
+library(ggimage)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+SEMIOGRAPHIC  
+</div>
+
+# Friendliest Dogs
+## reinforce
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Picsea on Unsplash"}
+
+masthead <- "assets/picsea-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> quote...\
+--- attribution\
+
+***
+
+
+### Ingest
+#### number of aircraft carriers in operation worldwide as of December 2019
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_ingest <- read.csv("archetypes/dog-friendliness/dog-descriptions.csv", header = TRUE)
+df_ingest
+
+```
+
+
+### Wrangle
+#### dog breeds
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+dog_breeds <- tibble(filename = list.files("archetypes/dog-friendliness/png/", "png")) %>% 
+  mutate(
+    breed_primary = str_to_title(
+    str_replace_all(filename, c(".png" = "", "-" = " "))
+  )
+)
+
+dog_breeds
+
+child_f <-  df_ingest %>% 
+  count(breed_primary, env_children) %>% 
+  pivot_wider(names_from = env_children, names_prefix ="child_", values_from = n) %>% 
+  mutate(
+    child_total = child_FALSE + child_TRUE,
+    child_friendliness = child_TRUE/(child_FALSE + child_TRUE),
+  )
+
+cat_f <-  df_ingest %>% 
+  count(breed_primary, env_cats) %>% 
+  pivot_wider(names_from = env_cats, names_prefix ="cat_", values_from = n) %>% 
+  mutate(
+    cat_total = cat_FALSE + cat_TRUE,
+    cat_friendliness = cat_TRUE/(cat_FALSE + cat_TRUE),
+  )
+
+cc_f <- left_join(child_f, cat_f)
+
+fuzzy_dogs <- stringdist_left_join(dog_breeds, cc_f) %>% 
+  filter(!is.na(breed_primary.y)) %>% 
+  filter(!is.na(child_friendliness)) %>% 
+  filter(!is.na(cat_friendliness))
+
+fuzzy_dogs
+
+```
+
+
+### Plot
+#### tbd
+
+Child- and cat-friendliness of 30 dog breeds, as assessed on Petfinder.com, for adoptable dogs since 2003
+Based on presumed primary breed, as percentage of friendly to total number assessed for every breed
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 14, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 12),
+  plot.caption = element_text(color = "#555555", size = 8),
+  plot.margin = margin(0.15, 0.15, 0.15, 0.15, "in"),
+  plot.background = element_rect(fill = "#E0F7FA", color = NA),
+  panel.grid = element_line(color = "black", size = 0.05),
+  axis.title = element_text(size = 16, color = "black"),
+  axis.title.x = element_text(margin = margin(20, 0, 0, 0)),
+  axis.title.y = element_text(margin = margin(0, 20, 0, 0)),
+  axis.text = element_text(size = 12, color = "black"),
+  legend.position = "none"
+)
+
+v1 <- ggplot(fuzzy_dogs) +
+  geom_point(aes(x = child_friendliness, y = cat_friendliness), size = 10, color = "#E0F7FA") +
+  geom_image(aes(x = child_friendliness, y = cat_friendliness, image = paste0("archetypes/dog-friendliness/png", "/", filename)), size = 0.05) +
+  geom_label_repel(aes(x = child_friendliness, y = cat_friendliness, label = breed_primary.y), 
+                   force = 6, point.padding = 3, box.padding = 1.2, 
+                   segment.color = "black", segment.size = 0.2, 
+                   fill = "black", color = "#ffffff", family = "IBM Plex Sans Bold", size = 4) +
+  scale_x_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0%", "", "50%", "", "100%")) +
+  scale_y_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c("0%", "", "50%", "", "100%")) +
+  coord_fixed(xlim = c(0, 1), ylim = c(0, 1)) +
+  labs(
+    caption = NULL,
+    x = "\u2190 Less child-friendly  More child-friendly \u2192",
+    y = "\u2190 Less cat-friendly  More cat-friendly \u2192"
+  ) +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16.0, height_svg = 12.0,
+        options = list(opts_sizing(rescale = TRUE, width = 0.85)))
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+* Narrative Source: Georgios Karamanis
+* Data Source: Petfinder.com via The Pudding
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,157 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    # css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      # in_header: "../../../z-assemblers/fragments/header.html"
+      # after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(reshape2)
+library(stringr)
+library(lubridate)
+library(ggplot2)
+library(gridExtra)
+library(ggthemes)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Sparklines
+## Big Mac Index
+
+> People say, "Do you know how much a million dollars is?" I don't have a clue. How many Big Macs will it buy me?\
+--- Billie Jean King\
+
+
+***
+
+# Load data [Ingest]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load csv data file
+df = read.csv("archetypes/big-mac-index/big-mac-adjusted-index-data.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+# Prepare data [Wrangle]
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Convert from wide to long
+df_long <- melt(df, id.vars=c("Country"))
+df_long$variable <- str_remove(df_long$variable, "X")
+# df_long
+
+# Convert to date type
+df_long$date <- as.Date(df_long$variable, "%Y.%m.%d")
+# df_long$date <- ymd(df_long$variable)
+df_long <- df_long[complete.cases(df_long), ]
+df_long
+
+```
+
+
+# Plot [ Views / Temporals ]
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=20, , fig.align='center', out.width="100%"}
+
+# Calculate ends and ribbon bar
+mins <- group_by(df_long, Country) %>% slice(which.min(value))
+maxs <- group_by(df_long, Country) %>% slice(which.max(value))
+starts <- group_by(df_long, Country) %>% filter(date == min(date))
+ends <- group_by(df_long, Country) %>% filter(date == max(date))
+quarts <- df_long %>% group_by(Country) %>%
+  summarize(quart1 = quantile(value, 0.25),
+            quart2 = quantile(value, 0.75)) %>%
+  right_join(df_long)
+
+
+v1 <- ggplot(df_long, aes(x=date, y=value)) + 
+  facet_grid(Country ~ ., scales = "free_y") + 
+  geom_ribbon(data = quarts, aes(ymin = quart1, max = quart2), fill = 'grey90') +
+  geom_line(size=0.3) +
+  geom_point(data = mins, col = 'red') +
+  geom_point(data = maxs, col = 'blue') +
+  geom_text(data = mins, aes(label = value), size = 3, vjust = -1) +
+  geom_text(data = maxs, aes(label = value), size = 3, vjust = 2.5) +
+  geom_text(data = ends, aes(label = value), size = 3, hjust = 0, nudge_x = 1) +
+  geom_text(data = ends, aes(label = value), size = 3, hjust = 0, nudge_x = 5) +
+  geom_text(data = ends, aes(label = Country), size = 3, hjust = 0, position = position_nudge(x = 150), check_overlap = TRUE) +
+  scale_x_date(date_labels = "%Y", limits = c(min(df_long$date), max(df_long$date) + (0.1 * (max(df_long$date) - min(df_long$date))))) +
+  scale_y_continuous(expand = c(0.1, 0)) +
+  coord_cartesian(clip = "off") +
+  theme_tufte() +
+  theme(axis.title=element_blank(), axis.text.y = element_blank(), 
+        axis.ticks = element_blank(), strip.text = element_blank(),
+        plot.margin = unit(c(0,1,0,0), "in"))
+
+v1
+
+```
+
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Save plot to svg file
+# ggsave(filename = "assets/big-mac-index.svg", plot = v1, width=12, height=20)
+
+```
+
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+source: <a href="https://www.economist.com/big-mac-index" target="_blank" >The Big Mac Index</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+read.bibtex(file = "citations/big-mac-index.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

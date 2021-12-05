@@ -1,0 +1,213 @@
+---
+pagetitle: "Toronto Bike Thefts"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+
+library(tidyverse)
+require(ggrepel)
+library(ggiraph)
+library(lubridate)
+
+# library(tidyr)
+# library(forcats)
+
+
+#library(grid)
+#library(ggTimeSeries)
+library(wesanderson)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Toronto Bike Thefts
+## Calendar 
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Ali Tawfiq on Unsplash"}
+
+masthead <- "assets/ali-tawfiq-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> A thief believes everybody steals....\
+--- E. W. Howe\
+
+***
+
+### Ingest
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/toronto-stolen-bikes/toronto-stolen-bikes.csv", header = TRUE, stringsAsFactors = FALSE)
+
+df
+
+```
+
+
+### Wranglers
+#### Filter __Year__ of <mark> 2017 </mark>, <mark> 2018 </mark>, and <mark> 2019 </mark>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df2 <- filter(df, Year %in% c(2017,2018,2019))
+
+df2
+
+```
+
+#### Format Date
+
+Using specific date functions <kbd> wday </kbd>, <kbd> month </kbd>, <kbd> yday </kbd> and <kbd> epiweek </kbd> to create the following new columns:
+
+* weekday
+* month
+* date
+* week
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df2$DATE <- ymd(df2$DATE)
+
+bike_calendar <- df2 %>% 
+  mutate(weekday = wday(DATE, label = T, week_start = 7), # can put week_start = 1 to start week on Monday
+         month = month(DATE, label = T),
+         date = yday(DATE),
+         week = epiweek(DATE))
+
+bike_calendar
+
+```
+
+Creating __monthweek__ column for each month of the calendar
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# isoweek makes the last week of the year as week 1, so need to change that to week 53 for the plot
+# as it happened last on Dec 2018 and 2019
+bike_calendar$week[bike_calendar$month=="Dec" & bike_calendar$week ==1] = 53
+
+bike_calendar <- bike_calendar %>%
+  group_by(month) %>%
+  mutate(monthweek = 1 + week - min(week))
+
+bike_calendar
+
+```
+
+
+
+### Calendar Plot
+#### <kbd> geom_tile() </kbd> and <kbd> facet_grid </kbd> 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+day_of_week_axis <- c( "S","M","T","W","T","F","S")
+labels_x <- levels(bike_calendar$weekday)
+
+week_axis <- c( 1,2,3,4,5,6 )
+
+pal <- wes_palette("Zissou1", 10, type = "continuous")
+
+v1 <- ggplot(bike_calendar, aes(weekday, monthweek, fill = COUNT)) + 
+  geom_tile(colour = "white") + 
+  geom_hline(yintercept = seq(0, length(unique(bike_calendar$monthweek))) + .5, color="white") +
+  geom_vline(xintercept = seq(0, length(unique(bike_calendar$weekday))) + .5, color="white") +
+  scale_x_discrete(breaks=labels_x , labels=day_of_week_axis) +
+  #scale_y_continuous(breaks=week_axis, labels=week_axis) +
+  scale_y_reverse(breaks=week_axis, labels=week_axis, expand=c(0,0)) +
+  facet_grid(Year~month) + 
+  scale_fill_gradientn(colours = pal) + 
+  theme_bw() +
+  theme(
+      legend.position="bottom",
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.background=element_rect(fill="#f0f0f0", colour="#f0f0f0")
+    ) +
+  labs(x="Day of Month",
+       y="Week of Month",
+       title = "Temporal Calendar", 
+       subtitle="Bike Thefts, Toronto, Canada") +
+  theme(strip.placement = "outside",                      # Place facet labels outside x axis labels.
+        strip.background = element_rect(fill = "white"),  # Make facet label background white.
+        axis.title = element_blank())                     # Remove x and y axis titles.
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
+      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/toronto-bike-thefts.svg", plot = v1, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/toronto-bike-thefts.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data sources: Toronto Bike Thefts - Toronto Police, [GO](https://data.torontopolice.on.ca/datasets/bicycle-thefts){target="_blank"}
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

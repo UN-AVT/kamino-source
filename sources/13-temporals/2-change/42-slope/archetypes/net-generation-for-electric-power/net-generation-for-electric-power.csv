@@ -1,0 +1,410 @@
+"Year","State","Category","Percent"
+"2004","Alabama","coal",56.47478202954711
+"2004","Alabama","natural gas",11.314028820537661
+"2004","Alabama","nuclear",23.943448776943573
+"2004","Alabama","Hydro",8.042201501574231
+"2004","Alaska","Petroleum",11.276455026455027
+"2004","Alaska","coal",6.4980158730158735
+"2004","Alaska","natural gas",57.45701058201058
+"2004","Alaska","Hydro",24.76851851851852
+"2004","Arizona","coal",38.362870183838915
+"2004","Arizona","natural gas",27.454186252469515
+"2004","Arizona","nuclear",27.359785115763042
+"2004","Arizona","Hydro",6.734596556791529
+"2004","Arkansas","coal",50.80690598840953
+"2004","Arkansas","natural gas",9.707018673535094
+"2004","Arkansas","nuclear",31.08902124919511
+"2004","Arkansas","Hydro",7.380875724404379
+"2004","California","Renewables",13.164864895588218
+"2004","California","Petroleum",1.0230876786140572
+"2004","California","coal",1.0213825324830337
+"2004","California","natural gas",48.646113971967395
+"2004","California","nuclear",17.203787697939045
+"2004","California","Hydro",18.940763223408247
+"2004","Colorado","coal",75.12783971833348
+"2004","Colorado","natural gas",22.208483527537933
+"2004","Colorado","Hydro",2.1020202866962863
+"2004","Connecticut","Renewables",2.3983546907134947
+"2004","Connecticut","Petroleum",5.106786900806835
+"2004","Connecticut","coal",13.463059642461635
+"2004","Connecticut","natural gas",25.211200759373515
+"2004","Connecticut","nuclear",52.330327479829144
+"2004","Connecticut","Hydro",1.4902705268153773
+"2004","Delaware","Petroleum",10.216585921915074
+"2004","Delaware","coal",65.916215445996
+"2004","Delaware","natural gas",23.867198632088915
+"2004","Florida","Renewables",1.1960397164732453
+"2004","Florida","Petroleum",17.490305260017898
+"2004","Florida","coal",30.58802918602063
+"2004","Florida","natural gas",35.81963758954909
+"2004","Florida","nuclear",14.780512980771507
+"2004","Georgia","coal",65.00591074770958
+"2004","Georgia","natural gas",4.8533806193150095
+"2004","Georgia","nuclear",27.704988014317145
+"2004","Georgia","Hydro",2.2904147374642894
+"2004","Hawaii","Renewables",3.3447604929120724
+"2004","Hawaii","Petroleum",81.26563513388308
+"2004","Hawaii","coal",14.861484295376634
+"2004","Idaho","natural gas",16.117000392618767
+"2004","Idaho","Hydro",83.05850019630938
+"2004","Illinois","coal",48.95684026118809
+"2004","Illinois","natural gas",1.3128417476243563
+"2004","Illinois","nuclear",48.864999734564954
+"2004","Indiana","coal",97.4657828068216
+"2004","Indiana","natural gas",1.787145181264114
+"2004","Iowa","Renewables",2.697254751391822
+"2004","Iowa","coal",81.00643117680937
+"2004","Iowa","natural gas",1.953349971203686
+"2004","Iowa","nuclear",11.828086004991361
+"2004","Iowa","Hydro",2.2701094259934727
+"2004","Kansas","Petroleum",1.8256055067444792
+"2004","Kansas","coal",73.94984929134868
+"2004","Kansas","natural gas",1.7678872998567734
+"2004","Kansas","nuclear",21.66142927381945
+"2004","Kentucky","Petroleum",3.852086679928937
+"2004","Kentucky","coal",91.61711045627175
+"2004","Kentucky","Hydro",4.021233816661525
+"2004","Louisiana","Petroleum",5.21093903707243
+"2004","Louisiana","coal",33.18530593889654
+"2004","Louisiana","natural gas",35.953792967761885
+"2004","Louisiana","nuclear",24.002923072599007
+"2004","Louisiana","Hydro",1.5444503780319851
+"2004","Maine","Renewables",11.559275561007286
+"2004","Maine","Petroleum",5.238473194314164
+"2004","Maine","coal",1.4647521466195252
+"2004","Maine","natural gas",61.050580849989174
+"2004","Maine","Hydro",20.686918248069848
+"2004","Maryland","Petroleum",6.3869224853587845
+"2004","Maryland","coal",57.028769743458284
+"2004","Maryland","natural gas",2.184844122808747
+"2004","Maryland","nuclear",28.750024648512216
+"2004","Maryland","Hydro",4.945477490978645
+"2004","Massachusetts","Renewables",2.649902865998734
+"2004","Massachusetts","Petroleum",15.585095933468665
+"2004","Massachusetts","coal",22.890882500600267
+"2004","Massachusetts","natural gas",44.830070067448105
+"2004","Massachusetts","nuclear",12.96356929255888
+"2004","Massachusetts","Hydro",1.0804793399253487
+"2004","Michigan","Renewables",1.4266386831561237
+"2004","Michigan","coal",58.755832307078556
+"2004","Michigan","natural gas",12.339340537352783
+"2004","Michigan","nuclear",26.505125492168663
+"2004","Minnesota","Renewables",2.469283548747407
+"2004","Minnesota","Petroleum",1.5198659645763524
+"2004","Minnesota","coal",65.78307004946545
+"2004","Minnesota","natural gas",2.4972075953406736
+"2004","Minnesota","nuclear",26.51986596457635
+"2004","Minnesota","Hydro",1.210706877293761
+"2004","Mississippi","Petroleum",6.5968161531301455
+"2004","Mississippi","coal",41.695505859328385
+"2004","Mississippi","natural gas",27.284660731759708
+"2004","Mississippi","nuclear",24.42301725578176
+"2004","Missouri","coal",85.69249297470895
+"2004","Missouri","natural gas",3.2723518953948503
+"2004","Missouri","nuclear",8.98204966450651
+"2004","Missouri","Hydro",1.8294431381544989
+"2004","Montana","Petroleum",1.6411870503597121
+"2004","Montana","coal",65.12290167865707
+"2004","Montana","Hydro",33.18345323741007
+"2004","Nebraska","coal",63.90871525169046
+"2004","Nebraska","nuclear",32.05922865013774
+"2004","Nebraska","Hydro",2.8581267217630857
+"2004","Nevada","Renewables",3.4478178872154484
+"2004","Nevada","coal",48.49523202380004
+"2004","Nevada","natural gas",43.51209923765506
+"2004","Nevada","Hydro",4.289850452891333
+"2004","NewHampshire","Renewables",3.330202373836564
+"2004","NewHampshire","Petroleum",8.005294167876356
+"2004","NewHampshire","coal",17.40244214840748
+"2004","NewHampshire","natural gas",22.214157629579027
+"2004","NewHampshire","nuclear",43.454871488344295
+"2004","NewHampshire","Hydro",5.59303219195628
+"2004","NewJersey","Renewables",1.4844429637033336
+"2004","NewJersey","Petroleum",1.999000499750125
+"2004","NewJersey","coal",19.105262183722953
+"2004","NewJersey","natural gas",27.749088418753587
+"2004","NewJersey","nuclear",50.126788457623036
+"2004","NewMexico","Renewables",1.5625475922146752
+"2004","NewMexico","coal",89.13526849623831
+"2004","NewMexico","natural gas",8.787426517620542
+"2004","NewYork","Renewables",1.1442951778246548
+"2004","NewYork","Petroleum",15.462048036712186
+"2004","NewYork","coal",16.396136338403462
+"2004","NewYork","natural gas",19.823840716479772
+"2004","NewYork","nuclear",30.080307908663634
+"2004","NewYork","Hydro",17.093371821916286
+"2004","NorthCarolina","coal",60.86271707978469
+"2004","NorthCarolina","natural gas",2.061395318627252
+"2004","NorthCarolina","nuclear",32.54958634071885
+"2004","NorthCarolina","Hydro",3.904391527088797
+"2004","NorthDakota","coal",93.9534570890503
+"2004","NorthDakota","Hydro",5.199085283831047
+"2004","Ohio","coal",86.76028016114022
+"2004","Ohio","nuclear",10.835524215188755
+"2004","Oklahoma","coal",56.060402233133786
+"2004","Oklahoma","natural gas",38.32817649828479
+"2004","Oklahoma","Hydro",4.612564740700882
+"2004","Oregon","Renewables",1.4172848440986672
+"2004","Oregon","coal",7.108537884727499
+"2004","Oregon","natural gas",24.930140924351164
+"2004","Oregon","Hydro",66.50382968457873
+"2004","Pennsylvania","Petroleum",1.855321982307619
+"2004","Pennsylvania","coal",55.13174165319129
+"2004","Pennsylvania","natural gas",4.202891657947303
+"2004","Pennsylvania","nuclear",36.83962712831732
+"2004","Pennsylvania","Hydro",1.1742604394559117
+"2004","RhodeIsland","Renewables",2.0799347471451877
+"2004","RhodeIsland","natural gas",97.55301794453507
+"2004","SouthCarolina","coal",40.22705197965514
+"2004","SouthCarolina","natural gas",3.9551326906808426
+"2004","SouthCarolina","nuclear",53.474187719976186
+"2004","SouthCarolina","Hydro",1.3535389403544684
+"2004","SouthDakota","Renewables",2.1035814139262414
+"2004","SouthDakota","coal",48.19597923046199
+"2004","SouthDakota","natural gas",1.4911463187325256
+"2004","SouthDakota","Hydro",47.90307548928239
+"2004","Tennessee","coal",59.94004300801898
+"2004","Tennessee","nuclear",30.30900096397284
+"2004","Tennessee","Hydro",9.354773784176015
+"2004","Texas","coal",42.22945554634542
+"2004","Texas","natural gas",44.3410149695151
+"2004","Texas","nuclear",11.67841680698481
+"2004","UnitedStates","Renewables",1.393267659456235
+"2004","UnitedStates","Petroleum",3.0201907009266415
+"2004","UnitedStates","coal",51.54503041180708
+"2004","UnitedStates","natural gas",16.517370744881877
+"2004","UnitedStates","nuclear",20.76688582832176
+"2004","UnitedStates","Hydro",6.7572546546064105
+"2004","Utah","coal",95.88311999361312
+"2004","Utah","natural gas",2.3019400164994543
+"2004","Utah","Hydro",1.197541049045959
+"2004","Vermont","Renewables",7.31214403821422
+"2004","Vermont","nuclear",70.88002939555392
+"2004","Vermont","Hydro",21.42200992099945
+"2004","Virginia","Renewables",1.2676317251964961
+"2004","Virginia","Petroleum",6.651758541297272
+"2004","Virginia","coal",45.969513324688386
+"2004","Virginia","natural gas",8.092730304072829
+"2004","Virginia","nuclear",37.46658903855823
+"2004","Washington","Renewables",1.5079813883349704
+"2004","Washington","coal",10.30387809160987
+"2004","Washington","natural gas",8.327628798476146
+"2004","Washington","nuclear",8.910979493437305
+"2004","Washington","Hydro",70.92572199569432
+"2004","WestVirginia","coal",98.66301656178294
+"2004","Wisconsin","coal",70.94073279590354
+"2004","Wisconsin","natural gas",3.549804518562087
+"2004","Wisconsin","nuclear",20.56533923814137
+"2004","Wisconsin","Hydro",3.084454900875342
+"2004","Wyoming","Renewables",1.3893580130153798
+"2004","Wyoming","coal",97.07942083811841
+"2004","Wyoming","Hydro",1.3353149136436309
+"2014","Alabama","coal",32.4185755620159
+"2014","Alabama","natural gas",32.50448444361972
+"2014","Alabama","nuclear",28.345807302942205
+"2014","Alabama","Hydro",6.506395057146588
+"2014","Alaska","Petroleum",7.1020699500356885
+"2014","Alaska","coal",7.994289793004997
+"2014","Alaska","natural gas",57.441113490364025
+"2014","Alaska","Hydro",27.462526766595293
+"2014","Arizona","Renewables",5.635631622978249
+"2014","Arizona","coal",37.180179866146126
+"2014","Arizona","natural gas",23.624860568878976
+"2014","Arizona","nuclear",28.16595789180145
+"2014","Arizona","Hydro",5.343697713329615
+"2014","Arkansas","coal",55.45355739486665
+"2014","Arkansas","natural gas",15.604046484407657
+"2014","Arkansas","nuclear",24.20867820416353
+"2014","Arkansas","Hydro",4.526377393194549
+"2014","California","Renewables",26.272427970573876
+"2014","California","natural gas",55.890738961264
+"2014","California","nuclear",8.919204171326854
+"2014","California","Hydro",8.623052566909784
+"2014","Colorado","Renewables",14.000299031884275
+"2014","Colorado","coal",60.81000261652899
+"2014","Colorado","natural gas",22.29469592195268
+"2014","Colorado","Hydro",2.8763129368668934
+"2014","Connecticut","Renewables",2.2881303239445376
+"2014","Connecticut","Petroleum",1.557545234098116
+"2014","Connecticut","coal",2.5648199962693528
+"2014","Connecticut","natural gas",42.9708387738606
+"2014","Connecticut","nuclear",49.24765280109432
+"2014","Connecticut","Hydro",1.3710128707330722
+"2014","Delaware","Petroleum",2.7284926196511106
+"2014","Delaware","coal",12.896973311465635
+"2014","Delaware","natural gas",84.37453406888325
+"2014","Florida","Renewables",1.2678409085819975
+"2014","Florida","coal",23.194636643334093
+"2014","Florida","natural gas",62.131369993685425
+"2014","Florida","nuclear",12.480462889566624
+"2014","Georgia","coal",37.05350134269779
+"2014","Georgia","natural gas",33.53356744474282
+"2014","Georgia","nuclear",26.9117950836604
+"2014","Georgia","Hydro",1.8715141499690149
+"2014","Hawaii","Renewables",9.54470652770159
+"2014","Hawaii","Petroleum",73.911135490949
+"2014","Hawaii","coal",16.083379045529348
+"2014","Idaho","Renewables",1.8398637137989777
+"2014","Idaho","natural gas",21.482112436115845
+"2014","Idaho","Hydro",76.67802385008517
+"2014","Illinois","Renewables",5.35570537331455
+"2014","Illinois","coal",43.01217548802576
+"2014","Illinois","natural gas",2.2891929965787887
+"2014","Illinois","nuclear",49.2342523646609
+"2014","Indiana","Petroleum",1.2424306662857039
+"2014","Indiana","coal",89.83474197443248
+"2014","Indiana","natural gas",8.300690341668433
+"2014","Iowa","Renewables",30.136710159800618
+"2014","Iowa","coal",58.19527928456238
+"2014","Iowa","natural gas",2.3401993842545084
+"2014","Iowa","nuclear",7.608855006597273
+"2014","Iowa","Hydro",1.6108341885354052
+"2014","Kansas","Renewables",21.85258321915048
+"2014","Kansas","coal",57.935036672845975
+"2014","Kansas","natural gas",2.8451680502941885
+"2014","Kansas","nuclear",17.244297573950192
+"2014","Kentucky","Petroleum",1.2775906391277367
+"2014","Kentucky","coal",92.63584788582573
+"2014","Kentucky","natural gas",2.498670330644446
+"2014","Kentucky","Hydro",3.483733711550394
+"2014","Louisiana","Petroleum",6.63391677675033
+"2014","Louisiana","coal",26.448976221928667
+"2014","Louisiana","natural gas",41.479524438573314
+"2014","Louisiana","nuclear",23.82072875385293
+"2014","Louisiana","Hydro",1.4998899163364157
+"2014","Maine","Renewables",19.09400305128506
+"2014","Maine","Petroleum",3.0747564839807535
+"2014","Maine","natural gas",39.33810585612017
+"2014","Maine","Hydro",37.91808473183899
+"2014","Maryland","Renewables",1.122760670354165
+"2014","Maryland","Petroleum",1.2080684663859764
+"2014","Maryland","coal",48.0035223864168
+"2014","Maryland","natural gas",5.748644706788849
+"2014","Maryland","nuclear",39.46999091884752
+"2014","Maryland","Hydro",4.447012851206693
+"2014","Massachusetts","Renewables",4.132459468782339
+"2014","Massachusetts","Petroleum",3.1873059675750257
+"2014","Massachusetts","coal",9.561917902725076
+"2014","Massachusetts","natural gas",61.7247326664367
+"2014","Massachusetts","nuclear",19.89996550534667
+"2014","Massachusetts","Hydro",1.4936184891341842
+"2014","Michigan","Renewables",5.543119070461571
+"2014","Michigan","coal",51.018015136979
+"2014","Michigan","natural gas",11.459332693742672
+"2014","Michigan","nuclear",30.279772460776616
+"2014","Minnesota","Renewables",19.707035504247443
+"2014","Minnesota","coal",49.459086618746824
+"2014","Minnesota","natural gas",6.705147752849778
+"2014","Minnesota","nuclear",23.065054817396355
+"2014","Mississippi","coal",20.170102512109946
+"2014","Mississippi","natural gas",60.557245315609634
+"2014","Mississippi","nuclear",19.248244527054936
+"2014","Missouri","coal",83.61634201637904
+"2014","Missouri","natural gas",4.609494285846481
+"2014","Missouri","nuclear",10.729653449312913
+"2014","Montana","Petroleum",1.532252303735981
+"2014","Montana","coal",55.61468676334024
+"2014","Montana","natural gas",1.8394171012215157
+"2014","Montana","Hydro",41.01364383170226
+"2014","Nebraska","Renewables",7.125307125307126
+"2014","Nebraska","coal",62.90950040950041
+"2014","Nebraska","natural gas",1.0365479115479117
+"2014","Nebraska","nuclear",25.854832104832106
+"2014","Nebraska","Hydro",2.9637592137592135
+"2014","Nevada","Renewables",7.947000582411182
+"2014","Nevada","coal",19.06814210832848
+"2014","Nevada","natural gas",65.98427489807804
+"2014","Nevada","Hydro",6.956901572510192
+"2014","NewHampshire","Renewables",7.920113821995047
+"2014","NewHampshire","Petroleum",1.4280444748906571
+"2014","NewHampshire","coal",6.908362754913842
+"2014","NewHampshire","natural gas",22.885598355904516
+"2014","NewHampshire","nuclear",53.58065026084206
+"2014","NewHampshire","Hydro",7.2772303314538656
+"2014","NewJersey","Renewables",1.2573560638233332
+"2014","NewJersey","coal",3.8206030455620947
+"2014","NewJersey","natural gas",46.7648486319238
+"2014","NewJersey","nuclear",47.78711399623855
+"2014","NewMexico","Renewables",7.225031605562579
+"2014","NewMexico","coal",64.3362831858407
+"2014","NewMexico","natural gas",27.92983565107459
+"2014","NewYork","Renewables",4.398953730130932
+"2014","NewYork","Petroleum",1.4732731703318405
+"2014","NewYork","coal",3.1917192658225964
+"2014","NewYork","natural gas",39.84171814801291
+"2014","NewYork","nuclear",32.07294080825093
+"2014","NewYork","Hydro",19.0213948774508
+"2014","NorthCarolina","Renewables",1.063821284418335
+"2014","NorthCarolina","coal",39.09203532749871
+"2014","NorthCarolina","natural gas",22.893338128921393
+"2014","NorthCarolina","nuclear",32.74347600207809
+"2014","NorthCarolina","Hydro",3.852455740718539
+"2014","NorthDakota","Renewables",17.082575882774197
+"2014","NorthDakota","coal",75.28783121247177
+"2014","NorthDakota","Hydro",6.971299509722911
+"2014","Ohio","coal",68.10904863575233
+"2014","Ohio","natural gas",17.84881202938964
+"2014","Ohio","nuclear",12.372825979591372
+"2014","Oklahoma","Renewables",17.225605356575947
+"2014","Oklahoma","coal",42.59863199515138
+"2014","Oklahoma","natural gas",38.25074316719097
+"2014","Oklahoma","Hydro",1.9077029640105054
+"2014","Oregon","Renewables",13.631515685046303
+"2014","Oregon","coal",5.40554267043627
+"2014","Oregon","natural gas",21.249724898000643
+"2014","Oregon","Hydro",59.696287392710225
+"2014","Pennsylvania","Renewables",2.42262904386661
+"2014","Pennsylvania","coal",36.190414675106574
+"2014","Pennsylvania","natural gas",23.828132208832375
+"2014","Pennsylvania","nuclear",36.31636739439349
+"2014","RhodeIsland","Renewables",3.3376330216059333
+"2014","RhodeIsland","Petroleum",1.144792002579813
+"2014","RhodeIsland","natural gas",95.45307965172525
+"2014","SouthCarolina","coal",30.18194416739283
+"2014","SouthCarolina","natural gas",11.940282837615094
+"2014","SouthCarolina","nuclear",55.033648647229896
+"2014","SouthCarolina","Hydro",1.7658978047013618
+"2014","SouthDakota","Renewables",21.246020918599363
+"2014","SouthDakota","coal",24.45657116871305
+"2014","SouthDakota","natural gas",4.229195088676671
+"2014","SouthDakota","Hydro",50.00454752160073
+"2014","Tennessee","coal",45.08809915855255
+"2014","Tennessee","natural gas",7.720831334517497
+"2014","Tennessee","nuclear",35.874962724785746
+"2014","Tennessee","Hydro",10.90381049929339
+"2014","Texas","Renewables",10.309637808406078
+"2014","Texas","coal",37.438002956150434
+"2014","Texas","natural gas",42.20321639273848
+"2014","Texas","nuclear",9.926348901550085
+"2014","UnitedStates","Renewables",6.709772402929683
+"2014","UnitedStates","coal",39.7798884075508
+"2014","UnitedStates","natural gas",26.198462535588984
+"2014","UnitedStates","nuclear",20.213985266388683
+"2014","UnitedStates","Hydro",6.38679634733023
+"2014","Utah","Renewables",1.4161608949184814
+"2014","Utah","coal",78.37677020111865
+"2014","Utah","natural gas",18.64334166369154
+"2014","Utah","Hydro",1.5066047840057122
+"2014","Vermont","Renewables",10.866771383692702
+"2014","Vermont","nuclear",72.2690275596173
+"2014","Vermont","Hydro",16.778523489932887
+"2014","Virginia","Renewables",2.948671277757554
+"2014","Virginia","Petroleum",1.609836993892327
+"2014","Virginia","coal",27.42385632811552
+"2014","Virginia","natural gas",27.743396836953444
+"2014","Virginia","nuclear",40.7461338294975
+"2014","Washington","Renewables",6.820564797986858
+"2014","Washington","coal",5.833216832098421
+"2014","Washington","natural gas",9.608730602544387
+"2014","Washington","nuclear",8.298091709772123
+"2014","Washington","Hydro",69.42716342793234
+"2014","WestVirginia","Renewables",1.8216850586792783
+"2014","WestVirginia","coal",96.26529539824338
+"2014","Wisconsin","Renewables",4.439577603476962
+"2014","Wisconsin","coal",62.132015890801675
+"2014","Wisconsin","natural gas",13.232148314148926
+"2014","Wisconsin","nuclear",16.038504634817155
+"2014","Wisconsin","Hydro",3.928559301891277
+"2014","Wyoming","Renewables",9.115359152598478
+"2014","Wyoming","coal",88.84682224428997
+"2014","Wyoming","Hydro",1.7978318437603442

@@ -1,0 +1,161 @@
+---
+pagetitle: "Rating Ramen"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+SEMIOGRAPHIC  
+</div>
+
+# Rating Ramen
+# isotypes
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Redd on Unsplash"}
+
+masthead <- "assets/redd-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Two million bucks would buy you a lot of ramen...\
+--- Jim Butcher\
+
+***
+
+
+### Ingest
+#### brand, variety, style, country, and stars
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+
+df_ingest <- read.csv("archetypes/rating-ramen/rating-ramen.csv", header = TRUE)
+df_ingest
+
+```
+
+
+### Wrangle
+#### filter, sort, and set order
+
+
+```{r}
+
+# dupes <- ramen_ratings %>% group_by(brand, variety, style, country, stars) %>% filter(n() > 1)
+
+df_wrangle <- df_ingest %>%
+  filter(country == "Japan", str_detect(variety, "Shio")) %>% 
+  arrange(., stars) %>%
+  mutate(n = 1:n())
+
+df_wrangle
+
+```
+
+
+### Plot
+#### rankings and chopsticks
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
+
+v1 <- ggplot() +
+  # chopstics
+  geom_polygon(aes(x = c(-30, 32, 32, -30), y = c(0.02, 0.02, 0.1, 0.3)),
+               fill = "firebrick4") +
+  geom_polygon(aes(x = c(-30, 32, 32, -30), y = c(0.35, 0.12, 0.2, 0.63)),
+               fill = "firebrick4") +
+  # stars
+  geom_text(aes(x = -20,  y = c(1.1, 2.1, 3.1, 4.1, 5.1),
+                label = c("1 star", "2 stars", "3 stars", "4 stars", "5 stars")),
+            color = "gray85", size = 2, hjust = 0,
+            family = "IBM Plex Mono") +
+  geom_segment(aes(x = -20, y = c(0.99, 1.99, 2.99, 3.99, 4.99),
+                   xend = c(0.6, 1.6, 3.6, 9.6, 23.6), yend = c(0.99, 1.99, 2.99, 3.99, 4.99)),
+               color = "gray85", size = 0.3, alpha = 0.5) +
+  # 5 starred
+  geom_text(data = df_wrangle, aes(x = n, y = -0.2,
+                label = paste(brand, variety, sep = " - ")),
+            size = 1.8, family = "IBM Plex Sans",
+            hjust = 0, angle = 90, color = "gray85") +
+    
+  # ramen               
+  geom_col(data = df_wrangle, aes(n, stars), width = 0.5, fill = "khaki") +
+  scale_y_reverse(limits = c(8, -5), breaks = c(1, 2, 3, 4, 5), position = "right") +
+  # title, subtitle and caption
+  geom_text(aes(x = 32, y = 7.4, label = "Ratings of Japanese Instant Shio Ramen"),
+            family = "IBM Plex Serif SemiBold", hjust = 1,
+            color = "white", size = 4.5) +
+  geom_text(aes(x = 32, y = 7.8, label = ""),
+            family = "IBM Plex Sans", hjust = 1,
+            color = "white", size = 3) +
+  
+  theme_void() +
+  theme(
+    panel.background = element_rect(fill = "#0881A3", color = "#0881A3"),
+  )
+
+ girafe(ggobj = v1, width_svg = 9.0, height_svg = 16.0,
+        options = list(opts_sizing(rescale = TRUE, width = 1)))
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+Graphic: Georgios Karamanis
+Source: TheRamenRater.com
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

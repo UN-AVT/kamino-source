@@ -1,0 +1,168 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/kamino.css", "../../../z-assemblers/temporals.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/header.html"
+      after_body: "../../../z-assemblers/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+
+library(tidyverse)
+library(ggTimeSeries)
+library(ggthemes)
+
+library(htmltools) # needed to include html snippets
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+# Streamgraph
+## Refugee flows
+
+***
+
+# Section
+## Subsection
+
+```{r, echo=FALSE}
+
+df_orig <- read.csv("../archetypes/refugee-flows-top-by-origin.csv", header = TRUE, stringsAsFactors = TRUE)
+df_orig
+
+df_dest <- read.csv("../archetypes/refugee-flows-top-by-destination.csv", header = TRUE, stringsAsFactors = TRUE, fileEncoding = "UTF-8")
+df_dest
+
+```
+
+# Section
+## Subsection
+
+
+```{r, echo=FALSE, fig.width=12, fig.height=6}
+
+theme_opts <- theme(
+  legend.position = "bottom",
+  legend.title = element_blank(),
+  axis.text.y = element_blank(),
+  axis.line.y = element_blank(),
+  axis.ticks.y = element_blank(),
+  axis.title.y = element_blank(),
+  # panel.grid = element_blank(),
+  # panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+v1 <- ggplot(df_orig, aes(x = year, y = value, group = country, fill = country)) +
+  stat_steamgraph() +
+  scale_x_continuous(breaks = c(1950, 1955, 1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020)) +
+  scale_fill_tableau(palette = "Tableau 20") + # Classic 20
+  #coord_fixed( 0.2 * diff(range(df$Year)) / diff(range(df$N))) +
+  theme_bw() +
+  theme_opts +
+  xlab(NULL) +
+  ylab(NULL)
+
+v1
+
+```
+
+# Section
+## Subsection
+
+```{r, echo=FALSE, fig.width=12, fig.height=6}
+
+v2 <- ggplot(df_dest, aes(x = year, y = value, group = country, fill = country)) +
+  stat_steamgraph() +
+  scale_x_continuous(breaks = c(1950, 1955, 1960, 1965, 1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020)) +
+  scale_fill_tableau(palette = "Tableau 20") +
+  theme_bw() +
+  theme_opts +
+  xlab(NULL) +
+  ylab(NULL)
+
+v2
+
+```
+
+# Section
+## Subsection
+
+
+```{r, echo=FALSE}
+
+# ggsave(filename = "stream-refugee-flows-top-by-origin.svg", plot = v1, width = 12, height = 6)
+# ggsave(filename = "stream-refugee-flows-top-by-origin.png", plot = v1, device = "png", height = 12, width = 6, units = "in", dpi = 500)
+
+# ggsave(filename = "stream-refugee-flows-top-by-destination.svg", plot = v2, width = 12, height = 6)
+# ggsave(filename = "stream-refugee-flows-top-by-destination.png", plot = v2, device = "png", height = 12, width = 6, units = "in", dpi = 500)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+Source:  UNHCR
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+
+# echo=FALSE will exclude block from code folding
+# Example for including external html content when needed
+htmltools::includeHTML("mark-complete-button.html")
+
+```
+
+
+
+```{r, child='mark-complete-click.Rmd'}
+
+# JS event handler for button click
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

@@ -1,0 +1,77 @@
+red: mammals
+black: birds
+blue: other vertebrates
+yellow: invertebrates
+
+animal,type,lifespan
+insect,invertebrates.0.1
+rat;mouse,mammals,3.5
+hare,mammals,5.5
+toad,other vertebrates,6
+fox,mammals,6.5
+squirrel,mammals,7
+eel,other vertebrates,8
+earthworm,invertebrates,9
+blackbird,birds,11
+reindeer,mammals,12
+lion,mammals,12.5
+sheep,mammals,13.5
+wolf,mammals,14
+woodpecker,birds,14.5
+cat,mammals,17
+dog,mammals,17.5
+canary,birds,18.5
+chicken,birds,19
+elk,mammals,21
+crocodile,other vertebrates,22.5
+raven,birds,23
+heron,birds,24
+gull,birds,26
+dove,birds,26.5
+ostrich,birds,27
+carp,other vertebrates,27.5
+horse,mammals,28
+dromedary,mammals,29
+bear,mammals,31
+owl,birds,31.5
+crane,birds,38
+hippopotamus,mammals,39
+swan,birds,47
+parrot,birds,48
+goose,birds,49
+rhinoceros,mammals,51
+elephant,mammals58
+pearl mussel,invertebrates,66.5
+whale,mammals,68
+giant tortoise,other,149
+label0,label,0
+label5,label,5
+label10,label,10
+label15,label,15
+label20,label,20
+label25,label,25
+label30,label,30
+label35,label,35
+label40,label,40
+label45,label,45
+label50,label,50
+label55,label,55
+label60,label,60
+label65,label,65
+label70,label,70
+label75,label,75
+label80,label,80
+label85,label,85
+label90,label,90
+label95,label,95
+label100,label,100
+label105,label,105
+label110,label,110
+label115,label,115
+label120,label,120
+label125,label,125
+label130,label,130
+label135,label,135
+label140,label,140
+label145,label,145
+label150,label,150

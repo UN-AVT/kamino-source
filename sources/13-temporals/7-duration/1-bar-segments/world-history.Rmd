@@ -1,0 +1,150 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(gridExtra)
+library(ggthemes)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+```
+<div class="activity">
+TEMPORAL  
+</div>
+
+# Duration Bar Segment
+## Conflicts of the World 
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Levi Meir Clancy on Unsplash"}
+
+masthead <- "assets/levi-meir-clancy-kj-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The United Nations is our one great hope for a peaceful and free world...\
+--- Ralph J. Bunche
+
+***
+
+## Load data [Ingest]
+
+```{r, echo=FALSE}
+
+# Load csv data file
+df <- read.csv("archetypes/conflicts-of-the-world/conflicts-of-the-world-short.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# Show records
+df
+
+```
+
+## Wrangler [Clean]
+```{r}
+df_cleaned <- df %>% 
+              select(c(2,3,4,6,8)) 
+df_cleaned
+```
+
+## Plot [ Views / Temporals ]
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, fig.align='center', class.source='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    panel.background = element_rect(fill = "#162033",
+                                size = 2, linetype = "solid"),
+    plot.background = element_rect(fill = "#162033"), 
+    plot.title = element_text(color = "white", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "white", size = 8),
+    plot.caption = element_text(color = "#555555", size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    axis.text.x = element_text(color="white", size=8),
+    axis.text.y = element_text(color="white", size=8),
+    panel.border = element_blank(),
+    panel.grid.major.y = element_line(color = '#81858c', linetype = "dotted"),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major.x = element_blank(), # remove x gridlines
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 8),
+    legend.position="top",
+    legend.background = element_rect(fill="white")
+  )
+
+
+
+# Create a color palette
+colors <- c("CIVIL WAR" = "#fc9003","GENOCIDE" = "#fc0380", "WAR" = "#03a5fc")
+
+# Plot
+v1 <- df_cleaned %>%
+      mutate(Conflict.Deaths = fct_reorder(Conflict.Deaths, Deaths)) %>% 
+      ggplot(aes(x = Start.Year, y = Conflict.Deaths)) + 
+      geom_segment(aes(xend = End.Year, yend = Conflict.Deaths, color = Type.Of.Conflict, position = "identity")
+                   , size = 4) +
+      geom_point_interactive(aes(tooltip = paste0("Deaths: ", format(round(as.numeric(Deaths), 1), big.mark=",")), 
+                                 data_id = Conflict.Deaths, x = 1850, size = Deaths, 
+                                 fill = Type.Of.Conflict, color = Type.Of.Conflict), 
+                             stroke = 1,shape = 21)+
+      scale_x_continuous(breaks=c(1880,1920,1960,2000)) +
+      scale_fill_manual(values = colors) +
+      scale_colour_manual(values = colors) +
+      labs( title = "CONFLICTS OF THE WORLD", subtitle = "TIMELINE OF CONFLICTS")+
+      theme_bw() +
+      theme_opts+
+      # Don't show the legend of the points
+      scale_size(guide=FALSE, range = c(0.5,3.5))
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+```{r, echo=FALSE}
+
+# Save plot to svg file
+# width and height defined for kamino aspect ratio
+# ggsave(filename = "assets/conflicts-of-the-world.svg", plot = v2, width=12, height=6)
+
+```
+
+
+# References
+
+Data: <a href="https://informationisbeautiful.net/data/" target="_blank">  Information is Beautiful </a>
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/conflicts-of-the-world.bib")
+
+```
+

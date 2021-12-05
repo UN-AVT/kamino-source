@@ -1,0 +1,41 @@
+---
+pagetitle: "Post-War Surplus of Women"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+```
+
+<div class="activity">
+TEMPORAL 
+</div>
+
+# Rank
+
+A Rank or Bump Chart is a special form of a line plot designed for exploring changes in rank over time. The focus here is usually on comparing the position or performance of multiple observations with respect to each other rather than the actual values itself, hence the rank measure can be a composite of other values.
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,170 @@
+---
+pagetitle: "Different Political Regimes"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS 
+</div>
+
+#  Different Political Regimes
+## Area Segmented
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Chris Grafton on Unsplash"}
+
+#masthead <- "assets/chris-grafton-unsplash.jpg"
+#knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The greatest power is not money power, but political power....\
+--- Walter Annenberg\
+
+***
+
+### Ingest
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+#tuesdata <- tidytuesdayR::tt_load('2021-08-10')
+#investment <- tuesdata$investment
+
+df_suicides <- read_csv("https://query.data.world/s/2uk7p5qdxocbm5gdof3dntomnt3x5d")
+write.csv(df_suicides,"../15-bar-unit/archetypes/drug-poisoning/suicides.csv", row.names = FALSE)
+
+#df <- read.csv("archetypes/california-droughts/droughts.csv", header = TRUE, stringsAsFactors = FALSE)
+#df
+
+```
+
+### Temporal Area Segmented
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+theme_opts <- theme(
+    plot.title = element_text(color = "black", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 8),
+    plot.caption = element_text(color = "#555555", size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 8),
+    legend.position='top'
+  )
+
+df$Regime <- factor(df$Regime , levels=c("Dictatorship or Monarchy", "Closed Anocracy", "Open Anocracy", "Transition or no Data", "Colony", "Democracy"))
+# Create a color palette
+colors <- c("Democracy" = "#7c94a5", "Colony" = "#9ebdd5", "Transition or no Data" = "#dbdbdb", 
+            "Open Anocracy" = "#f2dba3", "Closed Anocracy" = "#e7b455", "Dictatorship or Monarchy" = "#c47361")
+
+# Plot
+v1 <- ggplot(df, aes(x=Year, y=Percent)) + 
+  geom_area(aes(color = Regime, fill=Regime), alpha=1.0 , size=1) +
+  # geom_hline(yintercept = c(seq(0, 100, 10)), color="#ffffff", size=0.25, alpha=0.2) + # gridlines in the forefront
+  scale_x_continuous(breaks=c(1820,1840,1860,1880,1900,1920,1940,1960,1980,2000)) +
+  scale_y_continuous(breaks=seq(0, 100, 10)) +
+  scale_fill_manual(values = colors) +
+  scale_color_manual(values = colors) +
+  labs( title = "Number of world citizens living under different political regimes",
+        subtitle = "The Polity IV score captures the type of political regime for each country on a range from -10 (full autocracy) to +10 (full democracy).  Regimes that fall into the middle of this spectrum are called anocracies.",
+        caption = "Calculations by Max Roser based on Polity IV data, and data from Wimmer and Min (2006), Gapminder.org, UN Population Division (2015 rev), and Our World in Data") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+### Temporal Area Segmented
+#### Annotations
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+v2 <- v1 + annotate("text", x = 1825, y = 10, 
+             label = paste0("Until 1944, more than", "\n", "30% of the world", "\n", "population was home", "\n", "in colonies."), 
+             hjust = "left", vjust = 0, color = "#ffffff", size = 3, fontface = 1) +
+    annotate("text", x = 1985, y = 5, 
+             label = paste0("50% of the world", "\n", "population have been", "\n", "living in a democracy", "\n", "since 1994."), 
+             hjust = "left", vjust = 0, color = "#ffffff", size = 3, fontface = 1)
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+  
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+# eval = FALSE as default; set to TRUE for production outputs
+
+# full version
+ggsave(filename = "assets/different-political-regimes.svg", plot = v2, width=1280/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "assets/different-political-regimes.png", plot = v2, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data sources: World citizens living under different political regimes - Our World in Data, [GO](https://ourworldindata.org/grapher/world-pop-by-political-regime?country=~OWID_WRL){target="_blank"}
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

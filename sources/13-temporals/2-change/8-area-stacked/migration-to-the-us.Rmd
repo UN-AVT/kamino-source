@@ -1,0 +1,237 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(knitr)
+library(ggplot2)
+library(gridExtra)
+library(ggthemes)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+<div class="activity">
+TEMPORAL  
+</div>
+
+# Who takes us to space?
+## Area Stacked and Stepped
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by SpaceX on Unsplash"}
+
+knitr::include_graphics("assets/spacex-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">SpaceX Falcon Heavy</div>
+
+> Rockets are cool. There's no getting around that...\
+--- Elon Musk\
+
+***
+
+REUTERS GRAPHICS created an interesting visual story describing the _race for space_, its early history dominated by __government__ and __military__ programs, and recent growth into the __private__ sector.  The story was also represented with DataWrapper, a visualization platform for data journalism, the example we'll use to create an area stacked chart.
+
+
+### Ingest the data
+#### series, values, and dates
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load csv data file
+df = read.csv("archetypes/who-takes-us-to-space-long.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle the data
+#### Refactor to set stack sort order
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Refactor to set stack sort order
+df$SERIES <- factor(df$SERIES, levels = c("Military", "Civil", "Private"))
+df
+
+```
+
+
+### Plot
+#### data only
+
+To created the stepped effect, we'll use <kbd>geom_bar()</kbd> at full width with the same color and fill to create a categorical area shape.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 12, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 8),
+    plot.caption = element_text(color = "#555555", size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    legend.title = element_blank(), # remove legend title
+    legend.text = element_text(color = "black", size = 8),
+    legend.position='top'
+  )
+
+series_pal <- c("Civil" = "#dbdad9",
+                "Military" = "#8c92a7",
+                "Private" = "#d5b07d")
+
+# Plot
+v1 <- ggplot(df, aes(x=DATE, y=VALUE, group = SERIES)) + 
+  geom_bar(aes(color = SERIES, fill = SERIES), position="stack", stat="identity", width=1.0) +
+  scale_x_continuous(breaks=c(1955,1960,1965,1970,1975,1980,1985,1990,1995,2000,2005,2010,2015,2020)) +
+  scale_y_continuous(breaks=seq(0, 160, 20)) +
+  scale_fill_manual(values = series_pal) +
+  scale_color_manual(values = series_pal) +
+  labs( title = "Who takes us to space?",
+        subtitle = "Reuters Graphics, New Space",
+        caption = "") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Plot with annotations
+#### some narrative to help tell the story
+
+<mark style="background-color: #dbdad9">Military</mark> launches ushered in the beginning of the space age. They typically carried spy or communication satellites to be used by defense forces.  
+
+<mark style="background-color: #8c92a7">Civil</mark> launches are conducted by government organizations for research purposes. While having accounted for a smaller share of the total launches in history, their number has remained steady.  
+
+<mark style="background-color: #d5b07d">Private</mark> launches are more recent development. These carry payloads to add to the growing number of private and commercial satellites in earth's orbit, providing imagery and communications services.  
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+v2 <- v1 + 
+    annotate("text", x = 1999, y = 90, 
+             label = "Cubesat invented", 
+             hjust = "center", vjust = 0, color = "#333333", size = 3, fontface = 1) +
+    annotate("text", x = 2019, y = 122, 
+             label = "Chinese space probe\nlands on dark side\nof the moon", 
+             hjust = "right", vjust = 0, color = "#333333", size = 3, fontface = 1) +
+    annotate("text", x = 2014, y = 102, 
+             label = "India's Mangalyaan\norbiter reaches Mars", 
+             hjust = "center", vjust = 0, color = "#333333", size = 3, fontface = 1) +
+    annotate("text", x = 1980, y = 139, 
+             label = "Develop the Space Shuttle,\nfirst reusable rocket", 
+             hjust = "center", vjust = 1, color = "#333333", size = 3, fontface = 1) +
+    annotate("text", x = 1958, y = 42, 
+             label = "NASA is founded", 
+             hjust = "center", vjust = 0, color = "#333333", size = 3, fontface = 1) +
+    annotate("text", x = 1957, y = 22, 
+             label = "Launch Sputnik\n into orbit", 
+             hjust = "center", vjust = 0, color = "#333333", size = 3, fontface = 1) +
+    annotate("text", x = 1978, y = 70, 
+             label = paste0("During the Cold War,", "\n", "most launches were military."), 
+             hjust = "center", vjust = 0, color = "#ffffff", size = 6, fontface = 2) +
+    annotate("text", x = 1970, y = 5, 
+             label = "Civil", 
+             hjust = "center", vjust = 0, color = "#333333", size = 6, fontface = 2) +
+    annotate("text", x = 2008, y = 12, 
+             label = "Private", 
+             hjust = "center", vjust = 0, color = "#333333", size = 6, fontface = 2) +
+    theme(legend.position='none')
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+  
+```
+
+### Save plot
+#### as vector or raster image
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# full version
+ggsave(filename = "assets/who-takes-us-to-space-fs.svg", plot = v2, width=1280/72, height=720/72)
+
+# without annotations
+ggsave(filename = "assets/who-takes-us-to-space-sm.svg", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Reuters Graphics, New Space, https://graphics.reuters.com/SPACE-EXPLORATION-NEW-SPACE/0100B03R062/index.html
+* Plot: DataWrapper, https://blog.datawrapper.de/space-launches-military-civil-private/
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+read.bibtex(file = "citations/who-takes-us-to-space.bib")
+
+```
+
+
+### Metadata
+#### keywords, commands, sources
+
+```{r, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+uid <- paste0(sub(".*sources/", "", dirname(rstudioapi::getActiveDocumentContext()$path)), '/who-takes-us-to-space.html')
+keywords <- c('space launches satellite military civil private')
+commands <- c('geom_bar()')
+sources <- c('Reuters DataWrapper')
+last_update <- Sys.Date()
+
+metadata <- data.frame(uid, keywords, commands, sources, last_update)
+metadata
+write.csv(metadata,"who-takes-us-to-space-metadata.csv", row.names = FALSE)
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

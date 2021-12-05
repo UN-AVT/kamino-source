@@ -1,0 +1,185 @@
+---
+pagetitle: "Toronoto Shelters"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(lubridate)
+library(reshape2)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS  
+</div>
+
+# Toronto Shelters
+## Area Facet
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Brxxto on Unsplash"}
+
+masthead <- "assets/brxxto-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Everyone, rich or poor, deserves a shelter for the soul...\
+--- Samuel\
+
+***
+
+
+### Ingest
+#### date, shelter, sector, occupancy, and capacity
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df <- read.csv("archetypes/toronto-shelters/toronto-shelters.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+
+```
+
+
+### Wrangle
+#### convert dates, filter, and summarize
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+occupancy_rate_data <- df %>% 
+  mutate(day = wday(occupancy_date, label = TRUE),
+         yday = yday(occupancy_date),
+         week = week(occupancy_date),
+         month = month(occupancy_date, label = TRUE),
+         year = year(occupancy_date)) %>% 
+  filter(shelter_city == "Toronto") %>% 
+  group_by(sector, year, yday) %>% 
+  summarize(avg_rate = mean(occupancy/capacity,na.rm = TRUE)) %>% 
+  arrange(sector, year, yday) %>% 
+  group_by(sector) %>% 
+  mutate(idx = row_number(),
+         avg_rate = replace(avg_rate, is.infinite(avg_rate), 1))
+
+occupancy_rate_data
+
+```
+
+
+### Plot
+#### facet by state
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 10), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position='none',
+    panel.spacing.x = unit(1, "lines"),
+    panel.spacing.y = unit(1, "lines"),
+    panel.grid.minor = element_blank(),
+    strip.text = element_text(size = 8.5, face = "bold"),
+    strip.background = element_blank()
+  )
+
+# Plot
+v1 <- ggplot(occupancy_rate_data, aes(idx, avg_rate)) +
+  # geom_area(fill = "#E08551", alpha = 0.4) +
+  # geom_rect(aes(xmin = idx, xmax = idx+1, ymin = 0, ymax = avg_rate), fill = "blue", alpha = 0.4) +
+  geom_segment(aes(x=idx,xend=idx,y=0,yend=avg_rate,color=avg_rate)) +
+  scale_color_gradient(low = "yellow", high = "#E78D37") +
+  geom_hline(aes(yintercept = 1.0), size = 0.5, color = "red") +
+  facet_wrap( ~ sector, scales = "fixed", nrow = 1) +
+  scale_x_continuous(breaks = seq(2017, 2020, by = 1), labels = c("2017", "'18", "'19", "'20")) +
+  scale_y_continuous(breaks = seq(0, max(occupancy_rate_data$avg_rate) + 0.1, by = 0.1), labels = scales::percent_format(accuracy = 1) ) +
+  labs(title = "Since 2017 Toronto Shelters Have Been Operating Near Or Over Capacity",
+       subtitle = "occupancy rate by sector",
+       caption = "Source: open.toronto.ca via {opendatatoronto}",
+       x = NULL,
+       y = "Capacity") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/toronto-shelters-fs.svg", plot = v1, width=720/72, height=1280/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/toronto-shelters-sm.svg", plot = v1, width=2.25, height=4)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: Jake Kaupp, TidyTuesday, https://github.com/jkaupp/tidytuesdays/tree/master/2020/week49
+* Data Source: open.toronto.ca via {opendatatoronto}
+
+
+* Narrative inspiration: Jake Kaupp, TidyTuesday, [GO](https://github.com/jkaupp/tidytuesdays/tree/master/2020/week49){target="_blank"}
+* Data sources: opendatatoronto, [GO](open.toronto.ca){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

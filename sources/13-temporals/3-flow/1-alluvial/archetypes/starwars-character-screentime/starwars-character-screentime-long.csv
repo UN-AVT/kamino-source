@@ -1,0 +1,84 @@
+EPISODE,SCREENTIME,CHARACTER,Total,ID
+I_The_Phantom_Menace,210,Yoda,2610,0
+II_Attack_of_the_Clones,585,Yoda,2610,1
+III_Revenge_of_the_Sith,705,Yoda,2610,2
+V_The_Empire_Strikes_Back,750,Yoda,2610,3
+VI_Return_of_the_Jedi,240,Yoda,2610,4
+VIII_The_Last_Jedi,120,Yoda,2610,5
+VII_The_Force_Awakens,2580,Rey,7740,6
+VIII_The_Last_Jedi,1815,Rey,7740,7
+IX_The_Rise_of_Skywalker,3345,Rey,7740,8
+I_The_Phantom_Menace,435,R2-D2,3495,9
+II_Attack_of_the_Clones,315,R2-D2,3495,10
+III_Revenge_of_the_Sith,300,R2-D2,3495,11
+IV_A_New_Hope,1080,R2-D2,3495,12
+V_The_Empire_Strikes_Back,675,R2-D2,3495,13
+VI_Return_of_the_Jedi,435,R2-D2,3495,14
+VII_The_Force_Awakens,75,R2-D2,3495,15
+VIII_The_Last_Jedi,60,R2-D2,3495,16
+IX_The_Rise_of_Skywalker,120,R2-D2,3495,17
+VII_The_Force_Awakens,525,Poe Dameron,2805,18
+VIII_The_Last_Jedi,735,Poe Dameron,2805,19
+IX_The_Rise_of_Skywalker,1545,Poe Dameron,2805,20
+I_The_Phantom_Menace,1290,Padme Amidala,4320,21
+II_Attack_of_the_Clones,1935,Padme Amidala,4320,22
+III_Revenge_of_the_Sith,1095,Padme Amidala,4320,23
+I_The_Phantom_Menace,1275,Obi-Wan Kenobi,6795,24
+II_Attack_of_the_Clones,2040,Obi-Wan Kenobi,6795,25
+III_Revenge_of_the_Sith,2235,Obi-Wan Kenobi,6795,26
+IV_A_New_Hope,1050,Obi-Wan Kenobi,6795,27
+V_The_Empire_Strikes_Back,60,Obi-Wan Kenobi,6795,28
+VI_Return_of_the_Jedi,135,Obi-Wan Kenobi,6795,29
+III_Revenge_of_the_Sith,45,Luke Skywalker,7935,30
+IV_A_New_Hope,2250,Luke Skywalker,7935,31
+V_The_Empire_Strikes_Back,2085,Luke Skywalker,7935,32
+VI_Return_of_the_Jedi,2055,Luke Skywalker,7935,33
+VII_The_Force_Awakens,60,Luke Skywalker,7935,34
+VIII_The_Last_Jedi,1275,Luke Skywalker,7935,35
+IX_The_Rise_of_Skywalker,165,Luke Skywalker,7935,36
+III_Revenge_of_the_Sith,30,Leia Organa,4635,37
+IV_A_New_Hope,810,Leia Organa,4635,38
+V_The_Empire_Strikes_Back,1365,Leia Organa,4635,39
+VI_Return_of_the_Jedi,1275,Leia Organa,4635,40
+VII_The_Force_Awakens,375,Leia Organa,4635,41
+VIII_The_Last_Jedi,525,Leia Organa,4635,42
+IX_The_Rise_of_Skywalker,255,Leia Organa,4635,43
+IV_A_New_Hope,1170,Han Solo,4980,44
+V_The_Empire_Strikes_Back,1410,Han Solo,4980,45
+VI_Return_of_the_Jedi,1065,Han Solo,4980,46
+VII_The_Force_Awakens,1230,Han Solo,4980,47
+IX_The_Rise_of_Skywalker,105,Han Solo,4980,48
+VII_The_Force_Awakens,1905,Finn,4440,49
+VIII_The_Last_Jedi,1050,Finn,4440,50
+IX_The_Rise_of_Skywalker,1485,Finn,4440,51
+I_The_Phantom_Menace,435,Emperor Palpatine / Darth Sidious,2955,52
+II_Attack_of_the_Clones,240,Emperor Palpatine / Darth Sidious,2955,53
+III_Revenge_of_the_Sith,1485,Emperor Palpatine / Darth Sidious,2955,54
+V_The_Empire_Strikes_Back,60,Emperor Palpatine / Darth Sidious,2955,55
+VI_Return_of_the_Jedi,375,Emperor Palpatine / Darth Sidious,2955,56
+IX_The_Rise_of_Skywalker,360,Emperor Palpatine / Darth Sidious,2955,57
+III_Revenge_of_the_Sith,60,Chewbacca,3525,58
+IV_A_New_Hope,660,Chewbacca,3525,59
+V_The_Empire_Strikes_Back,990,Chewbacca,3525,60
+VI_Return_of_the_Jedi,630,Chewbacca,3525,61
+VII_The_Force_Awakens,510,Chewbacca,3525,62
+VIII_The_Last_Jedi,120,Chewbacca,3525,63
+IX_The_Rise_of_Skywalker,555,Chewbacca,3525,64
+I_The_Phantom_Menace,120,C-3PO,4275,65
+II_Attack_of_the_Clones,255,C-3PO,4275,66
+III_Revenge_of_the_Sith,165,C-3PO,4275,67
+IV_A_New_Hope,1155,C-3PO,4275,68
+V_The_Empire_Strikes_Back,870,C-3PO,4275,69
+VI_Return_of_the_Jedi,810,C-3PO,4275,70
+VII_The_Force_Awakens,105,C-3PO,4275,71
+VIII_The_Last_Jedi,150,C-3PO,4275,72
+IX_The_Rise_of_Skywalker,645,C-3PO,4275,73
+VII_The_Force_Awakens,1140,Ben Solo / Kylo Ren,3285,74
+VIII_The_Last_Jedi,915,Ben Solo / Kylo Ren,3285,75
+IX_The_Rise_of_Skywalker,1230,Ben Solo / Kylo Ren,3285,76
+I_The_Phantom_Menace,1410,Anakin Skywalker / Darth Vader,9690,77
+II_Attack_of_the_Clones,2880,Anakin Skywalker / Darth Vader,9690,78
+III_Revenge_of_the_Sith,3165,Anakin Skywalker / Darth Vader,9690,79
+IV_A_New_Hope,555,Anakin Skywalker / Darth Vader,9690,80
+V_The_Empire_Strikes_Back,795,Anakin Skywalker / Darth Vader,9690,81
+VI_Return_of_the_Jedi,885,Anakin Skywalker / Darth Vader,9690,82

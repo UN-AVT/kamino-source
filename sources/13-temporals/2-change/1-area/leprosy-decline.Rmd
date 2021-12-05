@@ -1,0 +1,203 @@
+---
+pagetitle: "Leprosy Decline"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(gridExtra)
+library(ggthemes)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORAL  
+</div>
+
+# Leprosy Decline
+## Area
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Abhyuday Majhi on Unsplash"}
+
+masthead <- "assets/abhyuday-majhi-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> The biggest disease today is not leprosy or tuberculosis, but rather the feeling of being unwanted...\
+--- Mother Theresa\
+
+***
+
+Leprosy is caused by the slow-growing bacterium known as Mycobacterium leprae. It is difficult to catch, and it can take many years to develop symptoms of the disease following an infection However, people who catch the disease can easily be cured with antibiotics. Stopping the ignorance & stigma, though, is crucial for early diagnosis.
+Multi-drug therapy has reduced the number of global cases by 75% in 20 years. Leprosy is no longer considered a public health problem.
+
+
+### Ingest
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df = read.csv("archetypes/leprosy-decline/Leprosy is On The Way Out.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle
+#### parse_number
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+#Converting the new.cases columns to numeric
+df$new.cases <-parse_number(df$new.cases)
+df
+
+```
+
+
+### Plot 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    plot.title = element_text(color = "#174e5a", size = 14, face = "bold"),
+    plot.subtitle = element_text(color = "#2a656f", size = 8),
+    plot.caption = element_text(color = "#545951", size = 8),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_rect(fill = "#92d8d4"),
+    plot.background = element_rect(fill = "#92d8d4"),
+    
+    panel.grid.minor = element_blank(), # remove minor gridlines
+    panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
+    legend.title = element_blank(), # remove legend title
+    
+  )
+
+
+grad_df <- data.frame(yintercept = seq(0, 800000, length.out = 200), 
+                      alpha = seq(0.3, 0, length.out = 200))
+
+# Plot
+v1 <- ggplot(df, aes(x=year, y=new.cases)) + 
+  geom_area(fill="#ff8663",color = "#4d4d4d", alpha=0.8, size=1 ) +
+  geom_hline(data = grad_df, aes(yintercept = yintercept, alpha = alpha), 
+             size = 2.5, colour = "white") +
+
+  scale_x_continuous(breaks = c(1995,2006,2018),labels=c(1995,2006,2018)) +
+  scale_y_continuous(breaks=seq(0, 800000, 200000)) +
+  geom_hline(aes(yintercept = 2), alpha = 0.02) +
+  scale_alpha_identity() + 
+  #scale_fill_continuous() +
+  labs( title = "Leprosy Is on The Way Out",
+        subtitle = "Cases worldwide",
+        caption = "source: Leprosy Review, World Health Organisation") +
+  theme_bw() +
+  theme_opts
+
+
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9)))
+
+
+
+grad_df <- data.frame(yintercept = seq(1995, 2018, length.out = 200), 
+                      alpha = seq(0.3, 0, length.out = 200))
+
+# Plot
+v2 <- ggplot(df, aes(x=year, y=new.cases)) + 
+  geom_area(fill="#ff8663",color = "#4d4d4d", alpha=0.8, size=1 ) +
+  geom_vline(data = grad_df, aes(xintercept = yintercept, alpha = alpha), 
+             size = 2.5, colour = "white") +
+
+  scale_x_continuous(breaks = c(1995,2006,2018),labels=c(1995,2006,2018)) +
+  scale_y_continuous(breaks=seq(0, 800000, 200000)) +
+  geom_vline(aes(xintercept = 2017), alpha = 0.02) +
+  scale_alpha_identity() + 
+  #scale_fill_continuous() +
+  labs( title = "Leprosy Is on The Way Out",
+        subtitle = "Cases worldwide",
+        caption = "source: Leprosy Review, World Health Organisation") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.9)))
+
+```
+
+
+## Plot with annotations [ Views / Temporals ]
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+v3 <- v2 + annotate("text", x = as.Date("1-1-2020", "%m-%d-%Y"), y = 600, 
+             label = "  January 1st", 
+             hjust = "left", vjust = 0, color = "#458cb6", size = 4, fontface = 2) +
+    annotate("text", x = as.Date("7-4-2020", "%m-%d-%Y"), y = max(df$Count), 
+             label = "  July 4th", 
+             hjust = "left", vjust = 1, color = "#458cb6", size = 4, fontface = 2)
+
+girafe(ggobj = v3, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+  
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: TBD
+* Data Source: TBD
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

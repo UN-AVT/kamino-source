@@ -1,0 +1,64 @@
+---
+pagetitle: "Waterfall"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(tidyr)
+library(waterfalls)
+```
+
+### Waterfall 
+_Create company income statement_
+```{r, echo=FALSE}
+
+# Create company income statement
+category <- c("Sales", "Services", "Fixed Costs", 
+              "Variable Costs", "Taxes")
+amount <- c(101000, 52000, -23000, -15000, -10000)
+income <- data.frame(category, amount) 
+
+income
+```
+_Create basic waterfall chart_
+
+```{r, echo=FALSE}
+# basic
+p1<-waterfall(income)
+p1
+```
+
+_Create waterfall chart with total column_
+
+```{r, echo=FALSE, fig.width=13, fig.height=6}
+
+
+  
+# create waterfall chart with total column
+p <-waterfall(income, 
+          calc_total=TRUE, 
+          total_axis_text = "Net",
+          total_rect_text_color="black",
+          total_rect_color="goldenrod1") +
+  scale_y_continuous(label=scales::dollar) +
+  labs(title = "West Coast Profit and Loss", 
+       subtitle = "Year 2017",
+       y="", 
+       x="") +
+  theme_minimal() 
+
+p
+```
+```{r, echo=FALSE}
+
+ggsave(filename = "waterfall.svg", plot = p, width=24.5, height=6.5)
+
+```

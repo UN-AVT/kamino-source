@@ -1,0 +1,177 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(reshape2)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS  
+</div>
+
+# Global Seafood
+## Area Segmented Facet
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Paul Einerhand on Unsplash"}
+
+masthead <- "assets/paul-einerhand-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> I want everybody to go jump in the ocean to see for themselves how beautiful it is,\
+  how important it is to get acquainted with fish swimming in the ocean,\
+  rather than just swimming with lemon slices and butter...\
+--- Sylvia Earle\
+
+***
+
+
+### Ingest
+#### by country, year, fish, and production tonnes
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+df <- read.csv("archetypes/global-seafood/seafood-and-fish-production.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+head(df, n=10)
+
+```
+
+
+### Plot
+#### facet by country
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1080/72, fig.height=1920/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 10), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position='top',
+    panel.spacing.x = unit(1, "lines"),
+    panel.spacing.y = unit(1, "lines"),
+    panel.grid.minor = element_blank(),
+    strip.text = element_text(size = 8.5, face = "bold"),
+    strip.background = element_blank()
+)
+
+fish_palette <- c(
+  "Pelagic" = "#001e54", 
+  "Crustaceans" = "#489cd4", 
+  "Cephalopods" = "#00b4b5", 
+  "Demersal" = "#a2f1f2", 
+  "Freshwater" = "#daa494", 
+  "Molluscs" = "#7b2c21", 
+  "Other Marine" = "#4e2012"
+)
+
+# Plot
+v1 <- 
+  ggplot(df, aes(Year, Prod, fill = Fish, group = Fish)) +
+  geom_area(position = "fill", colour = "black", size = .2, alpha = .4) +
+  # geom_vline(aes(xintercept = variable), size = 0.1, color = "gray80") +
+  facet_wrap( ~ Entity, ncol = 10) +
+  scale_x_continuous(breaks = c(1970, 1990, 2010)) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = fish_palette) +
+  labs(title = "Seafood and fish production",
+       subtitle = "by thousand tonnes, percent of produced",
+       caption = "Source: OurWorldInData",
+       x = NULL,
+       y = NULL) +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 720/72, height_svg = 1280/72,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/global-seafood-fs.svg", plot = v1, width=720/72, height=1280/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/global-seafood-sm.svg", plot = v1, width=2.25, height=4)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: Blake Robert Mills, TidyTuesday, https://github.com/BlakeRMills/TidyTuesday/tree/main/Global%20Seafood%20(12%20Oct%202021)
+* Data Source: OurWorldInData, Seafood and fish production, World, https://ourworldindata.org/grapher/seafood-and-fish-production-thousand-tonnes?country=~OWID_WRL
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "Area Segmented Facet" # mostly used in wranglers and analytics
+keywords <- 'global fish seafood production'
+commands <- 'geom_area facet_wrap'
+sources <- 'TidyTuesday OurWorldInData'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
