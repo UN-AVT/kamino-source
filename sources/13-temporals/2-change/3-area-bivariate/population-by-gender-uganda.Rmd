@@ -1,5 +1,5 @@
 ---
-pagetitle: "Gender Disparity Uganda"
+pagetitle: "Uganda Population by Gender"
 output:
   html_document:
     theme: lumen
@@ -26,47 +26,63 @@ gc() #free up memrory and report the memory usage.
 library(tidyverse)
 library(ggiraph)
 
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
 ```
 
 <div class="activity">
 TEMPORALS
 </div>
 
-# Gender Disparity Uganda
+# Uganda Population by Gender
 ## Area Bivariate
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Sandy Millar on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Roman Nguyen on Unsplash"}
 
-masthead <- "assets/sandy-millar-unsplash.jpg"
+masthead <- "assets/roman-nguyen-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-> Achieving gender equality requires the engagement of women and men, girls and boys. It is everyone’s responsibility...\
---- Ban Ki-Moon
+
+> If you climb up a tree, you must climb down the same tree...\
+--- Ugandan Proverb\
 
 
 ***
 
-### Load data [Ingest]
+
+### Ingest
+#### male, female population by year
+
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df <- read.csv("archetypes/gender-disparity-kuwait/gender-uganda.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "population-by-gender/gender-uganda.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE)
 df
 
 ```
 
 
-### Plot [ Views / Temporals ]
+### Plot
+#### lines with a ribbon
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide',  fig.align='center', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide',  fig.align='center', out.width="100%"}
 
 theme_opts <- theme(
-    plot.title = element_text(color = "black", size = 20, face = "bold"),
-    plot.subtitle = element_text(color = "black", size = 15),
-    plot.caption = element_text(color = "#555555", size = 10),
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 18, face = "bold", family = "inconsolata"),
+    plot.subtitle = element_text(color = "black", size = 16, family = "inconsolata"),
+    plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),
     panel.border = element_blank(),
     panel.background = element_blank(),
     #panel.grid.minor = element_blank(), # remove minor gridlines
@@ -74,32 +90,24 @@ theme_opts <- theme(
     legend.title = element_blank(), # remove legend title
     legend.text = element_text(color = "black", size = 8),
     legend.position='top'
-  )
+)
 
 v1 <- ggplot(df)+
-  geom_line(aes(x=Year, y= M_Pop), colour= "#2da9d9", size = 1)+
-  geom_line(aes(x=Year, y= F_Pop), colour= "#b73377", size = 1)+
-  geom_ribbon(aes(x=Year, ymin= F_Pop, ymax = M_Pop), alpha = 0.3, fill = "#ff99cd")+
-   annotate("text", x = 2010, y = 15500000, label = "Male Population", angle = 25, size = 4, colour= "#2da9d9")+
-   annotate("text", x = 2006, y = 15000000, label = "Female Population", angle = 25, size = 4, colour= "#b73377")+
-  annotate("text", x = 2017, y = 18000000, label = "Gender Imbalance\nnot Very Large", size = 5, fontface = 2, colour = "#b73377")+
-  labs(title = "Gender Imbalance (Uganda)",
-    subtitle = "Disaparity between Male and Female Population",
+  geom_line(aes(x=Year, y= M_Pop), colour= "#2da9d9", size = 1) +
+  geom_line(aes(x=Year, y= F_Pop), colour= "#b73377", size = 1) +
+  geom_ribbon(aes(x=Year, ymin= F_Pop, ymax = M_Pop), alpha = 0.3, fill = "#ff99cd") +
+   annotate("text", x = 2010, y = 15500000, label = "Male Population", angle = 25, size = 4, colour= "#2da9d9") +
+   annotate("text", x = 2006, y = 15000000, label = "Female Population", angle = 25, size = 4, colour= "#b73377") +
+  labs(title = "Population",
+    subtitle = "by gender",
     y = "Population",
     x = "Year",
-    caption = "Data Source: World Bank")+
+    caption = "Data Source: World Bank") +
   theme_bw() + 
   theme_opts
 
 girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.9)))
-
-```
-
-
-```{r, echo=FALSE}
-
-ggsave(filename = "assets/kuwait-gender-imbalance.svg", plot = v1, width=16, height=9)
 
 ```
 

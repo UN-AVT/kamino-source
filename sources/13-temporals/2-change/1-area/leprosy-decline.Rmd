@@ -56,16 +56,18 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
-Leprosy is caused by the slow-growing bacterium known as Mycobacterium leprae. It is difficult to catch, and it can take many years to develop symptoms of the disease following an infection However, people who catch the disease can easily be cured with antibiotics. Stopping the ignorance & stigma, though, is crucial for early diagnosis.
-Multi-drug therapy has reduced the number of global cases by 75% in 20 years. Leprosy is no longer considered a public health problem.
-
 
 ### Ingest
+#### year and cases
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df = read.csv("archetypes/leprosy-decline/Leprosy is On The Way Out.csv", header = TRUE, stringsAsFactors = FALSE)
-df
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "leprosy-decline/leprosy-decline.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE)
+head(df, n=10)
 
 ```
 
@@ -74,19 +76,21 @@ df
 #### parse_number
 
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 #Converting the new.cases columns to numeric
-df$new.cases <-parse_number(df$new.cases)
-df
+df_wrangle <- df
+df_wrangle$new.cases <-parse_number(df_wrangle$new.cases)
+head(df_wrangle, n=10)
 
 ```
 
 
 ### Plot 
+#### area with gradient
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
 
 theme_opts <- theme(
     plot.title = element_text(color = "#174e5a", size = 14, face = "bold"),
@@ -98,48 +102,48 @@ theme_opts <- theme(
     panel.border = element_blank(),
     panel.background = element_rect(fill = "#92d8d4"),
     plot.background = element_rect(fill = "#92d8d4"),
-    
     panel.grid.minor = element_blank(), # remove minor gridlines
     panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
     legend.title = element_blank(), # remove legend title
-    
-  )
+)
 
 
-grad_df <- data.frame(yintercept = seq(0, 800000, length.out = 200), 
+grad_1_df <- data.frame(yintercept = seq(0, 800000, length.out = 200), 
                       alpha = seq(0.3, 0, length.out = 200))
 
-# Plot
-v1 <- ggplot(df, aes(x=year, y=new.cases)) + 
+v1 <- ggplot(df_wrangle, aes(x=year, y=new.cases)) + 
   geom_area(fill="#ff8663",color = "#4d4d4d", alpha=0.8, size=1 ) +
-  geom_hline(data = grad_df, aes(yintercept = yintercept, alpha = alpha), 
+  geom_hline(data = grad_1_df, aes(yintercept = yintercept, alpha = alpha), 
              size = 2.5, colour = "white") +
-
   scale_x_continuous(breaks = c(1995,2006,2018),labels=c(1995,2006,2018)) +
   scale_y_continuous(breaks=seq(0, 800000, 200000)) +
   geom_hline(aes(yintercept = 2), alpha = 0.02) +
   scale_alpha_identity() + 
-  #scale_fill_continuous() +
-  labs( title = "Leprosy Is on The Way Out",
+  labs( title = "Leprosy Decline",
         subtitle = "Cases worldwide",
         caption = "source: Leprosy Review, World Health Organisation") +
   theme_bw() +
   theme_opts
 
-
-
 girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.9)))
 
+```
 
 
-grad_df <- data.frame(yintercept = seq(1995, 2018, length.out = 200), 
+### Plot
+#### with annotations
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+grad_2_df <- data.frame(yintercept = seq(1995, 2018, length.out = 200), 
                       alpha = seq(0.3, 0, length.out = 200))
 
 # Plot
-v2 <- ggplot(df, aes(x=year, y=new.cases)) + 
+v2 <- ggplot(df_wrangle, aes(x=year, y=new.cases)) + 
   geom_area(fill="#ff8663",color = "#4d4d4d", alpha=0.8, size=1 ) +
-  geom_vline(data = grad_df, aes(xintercept = yintercept, alpha = alpha), 
+  geom_vline(data = grad_2_df, aes(xintercept = yintercept, alpha = alpha), 
              size = 2.5, colour = "white") +
 
   scale_x_continuous(breaks = c(1995,2006,2018),labels=c(1995,2006,2018)) +
@@ -147,7 +151,7 @@ v2 <- ggplot(df, aes(x=year, y=new.cases)) +
   geom_vline(aes(xintercept = 2017), alpha = 0.02) +
   scale_alpha_identity() + 
   #scale_fill_continuous() +
-  labs( title = "Leprosy Is on The Way Out",
+  labs( title = "Leprosy Decline",
         subtitle = "Cases worldwide",
         caption = "source: Leprosy Review, World Health Organisation") +
   theme_bw() +
@@ -159,9 +163,11 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
 ```
 
 
-## Plot with annotations [ Views / Temporals ]
+### Plot
+#### with annotations
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide', fig.align='center', out.width="100%"}
 
 v3 <- v2 + annotate("text", x = as.Date("1-1-2020", "%m-%d-%Y"), y = 600, 
              label = "  January 1st", 

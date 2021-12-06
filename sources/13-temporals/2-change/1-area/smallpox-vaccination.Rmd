@@ -52,19 +52,24 @@ knitr::include_graphics(masthead, dpi=72)
 <div class="figure-text">The Cow-Pock—or—the Wonderful Effects of the New Inoculation!—vide. the Publications of ye Anti-Vaccine Society</div>
 
 
-> Smallpox was officially declared eradicated in 1979...\
---- World Health Organization\
+> This Inquiry will lay all those troublesome ghosts which have so long haunted the Metropolis\
+  with their ox-faces, & dismal hootings against Vaccination...\
+--- Edward Jenner\
 
 ***
 
-The above image, published in 1802 and created by British satirist James Gillray caricatured a scene at the Smallpox and Inoculation Hospital at St. Pancras, showing cowpox vaccine being administered to frightened young women, and cows emerging from different parts of people's bodies. The cartoon was inspired by the controversy over inoculating against the dreaded disease, smallpox. Opponents of vaccination had depicted cases of vaccinees developing bovine features and this is picked up and exaggerated by Gillray.
+The above image, published in 1802 and created by British satirist James Gillray caricatured a scene at the Smallpox and Inoculation Hospital at St. Pancras, showing cowpox vaccine being administered to frightened young women, and cows emerging from different parts of people's bodies. The cartoon was inspired by the controversy over inoculating against the disease. Opponents of vaccination had depicted cases of those receiving the vaccine developing bovine features, a myth depicted in the image.  This article is a re-creation of The Economist's graphic detail visualization illustrating how, despite the introduction of a __vaccine__ in 1796, it _took decades for England to vanquish the disease_ in 1890. 
 
 ### Ingest
 #### year and death rate
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df <- read.csv("archetypes/smallpox-vaccination/deaths-from-smallpox-in-london.csv", header = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "smallpox-vaccination/deaths-from-smallpox-in-london.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE)
 head(df, n=10)
 
 ```
@@ -165,9 +170,9 @@ v1 <- ggplot(data = df_wrangled,
             hjust = "right", vjust = "top",
             color = "#828180", size = 4, family = "inconsolata", lineheight = 0.9) +
   geom_point(data = annotation_df, aes(x = year, y = y), color = "#828180") +
-  geom_segment(aes(x = as.Date("1800-01-01"), y = 0, xend = as.Date("1800-01-01"), yend = 21), 
+  geom_segment(aes(x = as.Date("1796-01-01"), y = 0, xend = as.Date("1796-01-01"), yend = 21), 
                linetype=2, color = "#ea4d48", size = 1) +
-  geom_text(aes(x = as.Date("1800-01-01")+2*365, y = 21+0.5, label = "Cowpox vaccine\nintroduced"), 
+  geom_text(aes(x = as.Date("1796-01-01")+2*365, y = 21+0.5, label = "Cowpox vaccine\nintroduced"), 
             hjust = "left", vjust = "top",
             color = "#ea4d48", size = 6, family = "inconsolata", lineheight = 0.9) +
   geom_hline(yintercept = 0) +
