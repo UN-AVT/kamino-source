@@ -1,17 +1,17 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Conflicts of the World"
 output: 
   html_document:
     theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: libs
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
@@ -28,16 +28,19 @@ library(gridExtra)
 library(ggthemes)
 library(ggiraph)
 
-library(knitcitations)
-library(bibtex)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 <div class="activity">
 TEMPORAL  
 </div>
 
-# Duration Bar Segment
-## Conflicts of the World 
+# Conflicts of the World
+## Duration Bar Segment
 
 
 ```{r, out.width = "60%", fig.align = 'center', fig.cap="Levi Meir Clancy on Unsplash"}
@@ -52,7 +55,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
-## Load data [Ingest]
+### Load data [Ingest]
 
 ```{r, echo=FALSE}
 
@@ -64,14 +67,19 @@ df
 
 ```
 
-## Wrangler [Clean]
+
+### Wrangler [Clean]
+
+
 ```{r}
 df_cleaned <- df %>% 
               select(c(2,3,4,6,8)) 
 df_cleaned
 ```
 
-## Plot [ Views / Temporals ]
+
+### Plot [ Views / Temporals ]
+
 
 ```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, fig.align='center', class.source='fold-hide', out.width="100%"}
 
@@ -95,8 +103,6 @@ theme_opts <- theme(
     legend.position="top",
     legend.background = element_rect(fill="white")
   )
-
-
 
 # Create a color palette
 colors <- c("CIVIL WAR" = "#fc9003","GENOCIDE" = "#fc0380", "WAR" = "#03a5fc")
@@ -126,25 +132,29 @@ girafe(ggobj = v1, width_svg = 13, height_svg = 7,
 ```
 
 
-
-```{r, echo=FALSE}
-
-# Save plot to svg file
-# width and height defined for kamino aspect ratio
-# ggsave(filename = "assets/conflicts-of-the-world.svg", plot = v2, width=12, height=6)
-
-```
-
-
-# References
+### References
+#### citations for narrative and data sources
 
 Data: <a href="https://informationisbeautiful.net/data/" target="_blank">  Information is Beautiful </a>
 
 
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-# cleanbib()
-# read.bibtex(file = "citations/conflicts-of-the-world.bib")
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
 

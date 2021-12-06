@@ -84,9 +84,7 @@ theme_opts <- theme(
     panel.background = element_blank(),
     #panel.grid.minor = element_blank(), # remove minor gridlines
     panel.grid.major.x = element_blank(), # remove x (vertical) gridlines
-    legend.title = element_blank(), # remove legend title
-    legend.text = element_text(color = "black", size = 8),
-    legend.position='top'
+    legend.position='none'
 )
 
 v1 <- ggplot(df)+

@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: vendor
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
@@ -38,12 +38,12 @@ showtext_auto()
 TEMPORALS 
 </div>
 
-#  Different Political Regimes
+# Different Political Regimes
 ## Area Segmented
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Chris Grafton on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Marco Lastella on Unsplash"}
 
-masthead <- "assets/chris-grafton-unsplash.jpg"
+masthead <- "assets/marco-lastella-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -57,22 +57,27 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "different-political-regimes/different-political-regimes.csv"
+url <- paste0(url_root, url_file)
 
-df <- read.csv("archetypes/different-political-regimes/different-political-regimes.csv", header = TRUE, stringsAsFactors = FALSE)
-
-df
+df <- read.csv(url, header = TRUE)
+head(df, n=10)
 
 ```
 
-### Temporal Area Segmented
+
+### Plot
+#### area, scaled from 0 to 100
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
 
 theme_opts <- theme(
-    plot.title = element_text(color = "black", size = 12, face = "bold"),
-    plot.subtitle = element_text(color = "black", size = 8),
-    plot.caption = element_text(color = "#555555", size = 8),
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata"),
+    plot.subtitle = element_text(color = "black", size = 12, family = "inconsolata"),
+    plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     panel.border = element_blank(),
@@ -92,14 +97,13 @@ colors <- c("Democracy" = "#7c94a5", "Colony" = "#9ebdd5", "Transition or no Dat
 # Plot
 v1 <- ggplot(df, aes(x=Year, y=Percent)) + 
   geom_area(aes(color = Regime, fill=Regime), alpha=1.0 , size=1) +
-  # geom_hline(yintercept = c(seq(0, 100, 10)), color="#ffffff", size=0.25, alpha=0.2) + # gridlines in the forefront
   scale_x_continuous(breaks=c(1820,1840,1860,1880,1900,1920,1940,1960,1980,2000)) +
   scale_y_continuous(breaks=seq(0, 100, 10)) +
   scale_fill_manual(values = colors) +
   scale_color_manual(values = colors) +
   labs( title = "Number of world citizens living under different political regimes",
-        subtitle = "The Polity IV score captures the type of political regime for each country on a range from -10 (full autocracy) to +10 (full democracy).  Regimes that fall into the middle of this spectrum are called anocracies.",
-        caption = "Calculations by Max Roser based on Polity IV data, and data from Wimmer and Min (2006), Gapminder.org, UN Population Division (2015 rev), and Our World in Data") +
+        subtitle = "The Polity IV score captures the type of political regime for each country on a range from -10 (full autocracy) to +10 (full democracy).\nRegimes that fall into the middle of this spectrum are called anocracies.",
+        caption = "Calculations by Max Roser based on Polity IV data,\nand data from Wimmer and Min (2006),\nGapminder.org, UN Population Division (2015 rev), and Our World in Data") +
   theme_bw() +
   theme_opts
 
@@ -108,17 +112,19 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 
 ```
 
-### Temporal Area Segmented
-#### Annotations
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+### Plot
+#### with annotations
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
 
 v2 <- v1 + annotate("text", x = 1825, y = 10, 
              label = paste0("Until 1944, more than", "\n", "30% of the world", "\n", "population was home", "\n", "in colonies."), 
-             hjust = "left", vjust = 0, color = "#ffffff", size = 3, fontface = 1) +
+             hjust = "left", vjust = 0, color = "#ffffff", size = 3, fontface = 1, family = "inconsolata") +
     annotate("text", x = 1985, y = 5, 
              label = paste0("50% of the world", "\n", "population have been", "\n", "living in a democracy", "\n", "since 1994."), 
-             hjust = "left", vjust = 0, color = "#ffffff", size = 3, fontface = 1)
+             hjust = "left", vjust = 0, color = "#ffffff", size = 3, fontface = 1, family = "inconsolata")
 
 girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
@@ -126,25 +132,10 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
 ```
 
 
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/different-political-regimes.svg", plot = v2, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/different-political-regimes.png", plot = v2, width=4, height=2.25)
-
-```
-
-
 ### References
 #### citations for narrative and data sources
 
 * Narrative and Data sources: World citizens living under different political regimes - Our World in Data, [GO](https://ourworldindata.org/grapher/world-pop-by-political-regime?country=~OWID_WRL){target="_blank"}
-
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

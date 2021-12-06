@@ -41,9 +41,9 @@ showtext_auto()
 # The rise of the Chinese tourist in Canada
 ## Rank Chart a.k.a. Bump
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Luke Porter on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Bruno on Unsplash"}
 
-masthead <- "assets/luke-porter-unsplash.jpg"
+masthead <- "assets/bruno-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -67,18 +67,17 @@ rank_df
 
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE, class.source = 'fold-hide'}
-## Prepare data [Wrangle] -->
+
 # Filter for year and continent
-#rank_df <- rank_df %>%
-#  filter(YEAR %in% c(1990, 1995, 2000, 2005, 2010, 2015, 2018))
+rank_df <- rank_df %>% filter(YEAR %in% c(1990, 1995, 2000, 2005, 2010, 2015, 2018))
 # Create ordered factor for year
-#rank_df$YEAR <- factor(rank_df$YEAR, ordered = TRUE, levels = c("1990", "1995", "2000", "2005", "2010", "2015", "2018"))
-#rank_df
+rank_df$YEAR <- factor(rank_df$YEAR, ordered = TRUE, levels = c("1990", "1995", "2000", "2005", "2010", "2015", "2018"))
+rank_df
 
 ```
 
 
-### Plot [ Views / Temporals ]
+### View
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide',  fig.align='center', out.width="100%"}
@@ -86,25 +85,18 @@ rank_df
 plot_specs <- list(  
   theme_bw(),
   theme( plot.margin = unit(c(0,3,0,3), "cm") ),
-  # Format tweaks
-  # Remove the legend
   theme(legend.position = "none"),
-  # Remove the panel border
   theme(panel.border     = element_blank()),
-  # Remove just about everything from the y axis
   theme(axis.title.y     = element_blank()),
   theme(axis.text.y      = element_blank()),
   theme(panel.grid.major.x = element_blank()),
   theme(panel.grid.minor.x = element_blank()),
   theme(panel.grid.major.y = element_blank()),
   theme(panel.grid.minor.y = element_blank()),
-  # Remove a few things from the x axis and increase font size
   theme(axis.title.x     = element_blank()),
   theme(panel.grid.major.x = element_blank()),
   theme(axis.text.x.top      = element_text(size=12)),
-  # Remove x & y tick marks
   theme(axis.ticks       = element_blank()),
-  # Format title & subtitle
   theme(plot.title       = element_text(size=14, face = "bold")),
   theme(plot.subtitle    = element_text())
 )
@@ -114,9 +106,9 @@ x_axis <- c(1990, 1995, 2000, 2005, 2010, 2015, 2018)
 discrete_color_palette <- c('#cccccb', '#c22800')
 
 v1 <- ggplot(data = rank_df, aes(x = YEAR, y = RANK, group = COUNTRY)) +
-  
-  geom_xspline(aes(color=ifelse(((COUNTRY %in% "China")),"Below", "Above")), size = 1.0,
-               spline_shape = -.15) +
+  #geom_xspline(aes(color=ifelse(((COUNTRY %in% "China")),"Below", "Above")), size = 1.0,
+  #             spline_shape = -.15) +
+  geom_line(aes(color=ifelse(((COUNTRY %in% "China")),"Below", "Above")), size = 1.0) +
   geom_text(data = rank_df %>% filter(YEAR == "1990"), 
                   aes(label = paste0(RANK)) , 
                   hjust = "right",
@@ -137,9 +129,8 @@ v1 <- ggplot(data = rank_df, aes(x = YEAR, y = RANK, group = COUNTRY)) +
   geom_point(data = rank_df %>% filter(YEAR == "2018"), 
              aes(fill=ifelse(((COUNTRY %in% "China")),"Below", "Above")), 
              shape = 21, color = "white", size = 2.0, stroke = 1, alpha = 1) +
-  scale_x_continuous(breaks = x_axis, labels = x_axis, position = "bottom") +
+  scale_x_discrete(breaks = x_axis, labels = x_axis, position = "bottom") +
   scale_y_reverse() +
-  # Important to remove clipping for long y axis labels
   coord_cartesian(clip = "off") +
   scale_fill_manual(values = discrete_color_palette) +
   scale_color_manual(values = discrete_color_palette) +
@@ -150,15 +141,8 @@ v1 <- ggplot(data = rank_df, aes(x = YEAR, y = RANK, group = COUNTRY)) +
     caption = "source: Statistics Canada"
   )
 
-v1
-
-```
-
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
-
-ggsave(filename = "assets/the-rise-of-the-chinese-tourist.svg", plot = v1, width=13.33, height=7.5)
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
+      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
@@ -167,8 +151,7 @@ ggsave(filename = "assets/the-rise-of-the-chinese-tourist.svg", plot = v1, width
 #### Citations and data sources
 
 * Narrative inspiration: CBC, Why Canada's tourism industry is finally heating up again, [GO](https://www.cbc.ca/news/canada/travel-canada-numbers-1.4682484){target="_blank"}
-* Data Sources: Statistics Canada,
-[GO](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=2410000601){target="_blank"}
+* Data Sources: Statistics Canada, [GO](https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=2410000601){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

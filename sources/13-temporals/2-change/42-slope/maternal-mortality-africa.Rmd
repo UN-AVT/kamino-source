@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: vendor
+    lib_dir: "vendor"
 ---
 
 
@@ -27,7 +27,6 @@ gc() #free up memory and report the memory usage.
 library(tidyverse)
 require(ggrepel)
 library(ggiraph)
-
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -45,9 +44,9 @@ TEMPORALS
 ## Slope Plot
 
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Aditya Romansa on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Barbara Verge on Unsplash"}
 
-masthead <- "assets/aditya-romansa-unsplash.jpg"
+masthead <- "assets/barbara-verge-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -59,17 +58,17 @@ knitr::include_graphics(masthead, dpi=72)
 ***
 
 ### Ingest
+#### country, year, maternal mortality ratio
 
-``````{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df <- read.csv("archetypes/maternal-mortality/maternal-mortality-slope-chart.csv", header = TRUE, stringsAsFactors = FALSE)
-
-df
+df <- read.csv("archetypes/maternal-mortality/maternal-mortality.csv", header = TRUE, stringsAsFactors = FALSE)
+head(df, n=10)
 
 ```
 
 
-### Wranglers
+### Wrangle
 #### Filter
 
 *  __Year__ of <mark> 2000 </mark>, <mark> 2005 </mark>, <mark> 2010 </mark> and <mark> 2015 </mark>
@@ -87,21 +86,20 @@ entity_list <- c("Angola", "Algeria","Cameroon", "Ethiopia", "Ghana", "Kenya" , 
 maternal_mortality_df <- maternal_mortality_df %>%
   filter(Entity %in% entity_list)
 
-maternal_mortality_df
+head(maternal_mortality_df, n=10)
 
 ```
 
 
+### Wrangle
 #### Factor
 
 Create ordered factor for __Year__
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Create ordered factor for year
 maternal_mortality_df$Year <- factor(maternal_mortality_df$Year, ordered = TRUE, levels = c("2000", "2005", "2010", "2015"))
-
-maternal_mortality_df
+head(maternal_mortality_df, n=10)
 
 ```
 
@@ -194,19 +192,6 @@ v1 <- ggplot(data = maternal_mortality_df, aes(x = Year, y = Maternal_Mortality_
 girafe(ggobj = v1, width_svg = 16, height_svg = 9,
       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
-
-```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/maternal-mortality-africa.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/maternal-mortality-africa.png", plot = v1, width=4, height=2.25)
 
 ```
 

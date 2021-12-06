@@ -1,5 +1,5 @@
 ---
-pagetitle: "Mobile phone usage in Bolivia"
+pagetitle: "Mobile phone usage in Colombia"
 output: 
   html_document:
     theme: lumen
@@ -48,12 +48,12 @@ showtext_auto()
 SEMIOGRAPHIC  
 </div>
 
-# Mobile phone usage in Bolivia
+# Mobile phone usage in Colombia
 # infographic
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Jari Hytonen on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Jorge Gardner on Unsplash"}
 
-masthead <- "assets/jari-hytonen-unsplash.jpg"
+masthead <- "assets/jorge-gardner-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -66,13 +66,13 @@ knitr::include_graphics(masthead, dpi=72)
 
 
 ### Ingest
-#### number of aircraft carriers in operation worldwide as of December 2019
+#### mobile phone subscribers
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df <- read.csv("archetypes/mobile-phone-usage-in-turkey/mobile-phone-usage-in-turkey.csv", header = TRUE)
-df
+df <- read.csv("archetypes/mobile-phone-usage/mobile-phone-usage.csv", header = TRUE)
+head(df, n=10)
 
 ```
 
@@ -83,7 +83,7 @@ df
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_wrangle <- df %>% filter(entity == "Honduras")
+df_wrangle <- df %>% filter(entity == "Colombia")
 df_wrangle
 
 ```
@@ -96,7 +96,6 @@ df_wrangle
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Wrangle
 df_wrangle <- df_wrangle %>% 
   mutate(mobile_subs = round(mobile_subs, 0)) %>% 
   filter(year %in% c(1997, 2007, 2017)) %>% 
@@ -109,9 +108,9 @@ df_wrangle
 ```
 
 
-
 ### Plot
 #### tbd
+
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
 

@@ -23,7 +23,6 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
-
 library(tidyverse)
 library(ggiraph)
 
@@ -42,9 +41,9 @@ TEMPORALS
 # Uganda Head of State
 ## Timeline
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Melissa Askew on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Image from Wikipedia, Residence of former ruler Idi Amin"}
 
-masthead <- "assets/melissa-askew-nsplash.jpg"
+masthead <- "assets/residence-of-idi-amin.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -61,22 +60,25 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 df <- read.csv("archetypes/heads-of-state/uganda-head-of-state.csv", header = TRUE, stringsAsFactors = FALSE)
-
 df
+
 ```
+
 
 ### Prepare data [Wrangle]
 
+
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
 #Assign an id for each individual person (Each person may held office multiple times)
 df$Name <- factor(df$Name, levels = c("Yoweri Museveni", "Tito Okello", "Bazilio Olara-Okello", "Milton Obote", "Presidential Commission", "Paulo Muwanga", "Godfrey Binaisa", "Yusuf Lule", "Idi Amin", "Edward Mutesa"))
 df <- transform(df,id=as.numeric(Name))
 
-
 # custom h-just for geom_text annotations
-
 df$just <- c(-0.5, 0.05, -2.5, -0.4, -0.4, -0.4, -0.3, 1.1, 1.1, 1.1, 1.1 )
 df[2,1] <- ''
+
+head(df, n=10)
 
 ```
 
@@ -117,14 +119,6 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 
 
 ```
-
-
-```{r, echo=FALSE}
-
-ggsave(filename = "assets/uganda-leaders.svg", plot = v1, width=16, height=9)
-
-```
-
 
 ### References
 #### Citations and data sources

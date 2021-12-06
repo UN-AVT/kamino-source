@@ -42,7 +42,7 @@ SEMIOGRAPHIC
 </div>
 
 # Slavery
-# isotypes
+## imitation
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Edrin Spahiu on Unsplash"}
 
@@ -59,18 +59,22 @@ knitr::include_graphics(masthead, dpi=72)
 
 
 ### Ingest
-#### number of aircraft carriers in operation worldwide as of December 2019
+#### year and number of slaves
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 df_ingest <- read.csv("archetypes/slavery/slave-routes.csv", header = TRUE)
-df_ingest
+head(df_ingest, n=10)
 
 ```
 
 
-```{r}
+### Wrangle
+#### group by and sum
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 df_wrangle <- df_ingest %>% 
   mutate(
@@ -91,11 +95,11 @@ df_wrangle
 ```
 
 
-
 ### Plot
-#### tbd
+#### chains
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%"}
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
 
 v1 <- ggplot(df_wrangle) +
   # Links I O

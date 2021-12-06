@@ -26,7 +26,6 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-
 library(ggalluvial)
 library(ggiraph)
 
@@ -118,7 +117,7 @@ df_country
 
 Standard theme options to use for each view.
 
-```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 # Color palette for each energy type
 energy_pal <- c("gas_electricity" = "#7b9095", 
@@ -208,24 +207,10 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
 ```
 
 
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/energy-consumption-by-fuel-type-kuwait.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/energy-consumption-by-fuel-type-kuwait.png", plot = v1, width=4, height=2.25)
-
-```
-
-
 ### References
 #### citations for narrative and data sources
 
 * Narrative and Data sources: Energy Production and Consumption - Our World in Data, [GO](https://ourworldindata.org/energy-production-consumption){target="_blank"}
-
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

@@ -23,7 +23,6 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
-
 library(tidyverse)
 library(ggiraph)
 
@@ -42,9 +41,9 @@ TEMPORALS
 # Kuwait Leaders: Emirs & Speakers
 ## Timeline
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Masrur Rahman on Unsplash"}
+```{r, out.width = "75%", fig.align = 'center', fig.cap="Photo from the British Library, Mubarak Al Sabah on horseback"}
 
-masthead <- "assets/masrur-rahman-unsplash.jpg"
+masthead <- "assets/mubarak-al-sabah.png"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -77,7 +76,7 @@ speakers
 
 ### Prepare data [Wrangle]
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 #Abbreviate the First Names for better visualization
 speakers$Name <- sub("[a-z]+", ".", speakers$Name)
@@ -148,20 +147,19 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
 
 ```
 
-
-```{r, echo=FALSE}
-
-ggsave(filename = "assets/kuwait_emirs.svg", plot = v1, width=16, height=9)
-ggsave(filename = "assets/kuwait_speakers.svg", plot = v2, width=16, height=9)
-
-```
-
-
 ### References
 #### Citations and data sources
 
 * Narrative and Data Sources: Wikipedia, [GO](https://en.wikipedia.org/wiki/Emir_of_Kuwait){target="_blank"}
 
+<pre>
+Reference: Photo 49/1/21
+Title': The Shaikh waiting, Koweit.'
+Photographer: Unknown
+Pages: 20r
+Author: East India Company, the Board of Control, the India Office, or other British Government Department
+Usage terms: Open Government Licence
+</pre>
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 

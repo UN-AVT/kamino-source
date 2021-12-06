@@ -168,8 +168,8 @@ v1 <- ggplot(df3)+
       theme_bw() +
       theme_opts
  
-girafe(ggobj = v1, width_svg = 8, height_svg = 7,
-      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+      options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
 ### Temporal Heatmap
@@ -206,20 +206,8 @@ v2 <- ggplot(df3)+
       theme_bw() +
       theme_opts
  
-girafe(ggobj = v2, width_svg = 8, height_svg = 7,
-      options = list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-```
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/temperature-changes-uganda.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/temperature-changes-uganda.png", plot = v1, width=4, height=2.25)
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+      options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
 
@@ -227,8 +215,7 @@ ggsave(filename = "assets/temperature-changes-uganda.png", plot = v1, width=4, h
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data sources: Worldbank Climate Knowledge Portal, [GO](https://climateknowledgeportal.worldbank.org/download-data){target="_blank"}
-
+* Narrative and Data sources: World Bank Climate Knowledge Portal, [GO](https://climateknowledgeportal.worldbank.org/download-data){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

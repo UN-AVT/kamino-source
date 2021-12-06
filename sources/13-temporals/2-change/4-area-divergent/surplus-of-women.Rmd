@@ -41,11 +41,11 @@ TEMPORALS
 </div>
 
 # Post-War Surplus of Women
-# Area Diverging
+## Area Diverging
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Library of Congress on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo from the Australian War Memorial"}
 
-masthead <- "assets/library-of-congress-unsplash.jpg"
+masthead <- "assets/victory-job.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -56,37 +56,46 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
-### Load data [Ingest]
+### Ingest
+#### data for 1950 and 2018
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df <- read.csv("archetypes/surplus-of-women/data.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "surplus-of-women/surplus-of-women.csv"
+url <- paste0(url_root, url_file)
 
+df <- read.csv(url, header = TRUE)
 colnames(df) <- c("age", "Y1950", "Y2018")
-df
+
+head(df, n = 10)
 
 ```
 
-### Prepare data [Wrangle]
+### Wrangle
+#### convert to number
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df[91:100,2] <- 0
+df_wrangle <- df
+df_wrangle[91:100,2] <- 0
+df_wrangle$Y1950 <- as.numeric(df_wrangle$Y1950)
 
-df$Y1950 <- as.numeric(df$Y1950)
+head(df_wrangle, n=10)
 
 ```
 
 
-### Plot [ Views / Temporals ]
+### Plot
+#### area and annotate
 
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6, , fig.align='center', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
 
 theme_opts <- theme(
-    plot.title = element_text(color = "black", size = 23, face = "bold"),
-    plot.subtitle = element_text(color = "black", size = 18),
-    plot.caption = element_text(color = "#555555", size = 10),
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 18, face = "bold", family = "inconsolata"),
+    plot.subtitle = element_text(color = "black", size = 16, family = "inconsolata"),
+    plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),
     axis.title.x = element_blank(),
     axis.title.y = element_blank(),
     # axis.text.x = element_text(vjust = 12),
@@ -100,14 +109,14 @@ theme_opts <- theme(
   )
 
 
-v1 <- ggplot(df) + 
+v1 <- ggplot(df_wrangle) + 
   geom_area(aes(x = age, y = Y2018), fill = '#8395a8', alpha = 0.8)+
   geom_area(aes(x = age, y = Y1950), fill = '#f2d9a2', alpha = 0.8)+
   geom_line(aes(x = age, y = Y1950), color = 'white', size = 1)+
-  annotate("text", x = 40, y = 50000, label = "Surplus\nof women\nin 1950", size = 4, colour = "#bb7213", fontface =2)+
-  annotate("text", x = 83, y = 50000, label = "Surplus\nof women\nin 2018", size = 4, colour = "#152845", fontface =2)+
-   annotate("text", x = 28, y = -12000, label = "Surplus of men\nin 2018", size = 4, colour = "#152845", fontface =2)+
-  annotate("text", x = 100, y = -40000, label = "Age", size = 4, colour = "#152845", fontface =2)+
+  annotate("text", x = 40, y = 50000, label = "Surplus\nof women\nin 1950", size = 4, colour = "#bb7213", fontface = 2, family = "inconsolata")+
+  annotate("text", x = 83, y = 50000, label = "Surplus\nof women\nin 2018", size = 4, colour = "#152845", fontface = 2, family = "inconsolata")+
+  annotate("text", x = 28, y = -12000, label = "Surplus of men\nin 2018", size = 4, colour = "#152845", fontface = 2, family = "inconsolata")+
+  annotate("text", x = 100, y = -40000, label = "Age", size = 4, colour = "#152845", fontface = 2, family = "inconsolata")+
   labs(title = "Surplus of women due to World War fades in Germany, but higher life expectancy\nstill causes a plus of elderly women",
        subtitle = "Differences between number of men and women for each age, in 1950 (yellow) and 2018(blue), in Germany",
        y="", x="",
@@ -122,19 +131,11 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 ```
 
 
-```{r, echo=FALSE}
-
-ggsave(filename = "assets/surplus-of-women.svg", plot = v1, width=16, height=9)
-
-```
-
-
 ### References
 #### Citations and data sources
 
 * Narrative inspiration: Data Wrapper, Lisa Charlotte Rost, [GO](https://river.datawrapper.de/_/aM2B6){target="_blank"}
-* Data Sources: De Statis,
-[GO](https://service.destatis.de/bevoelkerungspyramide/#!y=2020&v=2){target="_blank"}
+* Data Sources: De Statis, [GO](https://service.destatis.de/bevoelkerungspyramide/#!y=2020&v=2){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

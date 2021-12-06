@@ -24,19 +24,11 @@ options(scipen=999)  # turn-off scientific notation like 1e+48
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
-
 library(tidyverse)
-require(ggrepel)
-library(ggiraph)
 library(lubridate)
-
-# library(tidyr)
-# library(forcats)
-
-
-#library(grid)
-#library(ggTimeSeries)
+require(ggrepel)
 library(wesanderson)
+library(ggiraph)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -71,23 +63,24 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 df <- read.csv("archetypes/toronto-stolen-bikes/toronto-stolen-bikes.csv", header = TRUE, stringsAsFactors = FALSE)
-
-df
+head(df, n=10)
 
 ```
 
 
-### Wranglers
+### Wrangle
 #### Filter __Year__ of <mark> 2017 </mark>, <mark> 2018 </mark>, and <mark> 2019 </mark>
+
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 df2 <- filter(df, Year %in% c(2017,2018,2019))
-
-df2
+head(df2, n=10)
 
 ```
 
+
+### Wrangle
 #### Format Date
 
 Using specific date functions <kbd> wday </kbd>, <kbd> month </kbd>, <kbd> yday </kbd> and <kbd> epiweek </kbd> to create the following new columns:
@@ -107,7 +100,7 @@ bike_calendar <- df2 %>%
          date = yday(DATE),
          week = epiweek(DATE))
 
-bike_calendar
+head(bike_calendar, n=10)
 
 ```
 
@@ -123,14 +116,14 @@ bike_calendar <- bike_calendar %>%
   group_by(month) %>%
   mutate(monthweek = 1 + week - min(week))
 
-bike_calendar
+head(bike_calendar, n=10)
 
 ```
 
 
-
 ### Calendar Plot
 #### <kbd> geom_tile() </kbd> and <kbd> facet_grid </kbd> 
+
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
@@ -172,24 +165,10 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 12,
 ```
 
 
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/toronto-bike-thefts.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/toronto-bike-thefts.png", plot = v1, width=4, height=2.25)
-
-```
-
-
 ### References
 #### citations for narrative and data sources
 
 * Narrative and Data sources: Toronto Bike Thefts - Toronto Police, [GO](https://data.torontopolice.on.ca/datasets/bicycle-thefts){target="_blank"}
-
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

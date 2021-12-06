@@ -50,8 +50,6 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-
-
 > I dream of giving birth to a child who will ask, Mother, what was war?\
 --- Eve Merriam\
 
@@ -60,24 +58,40 @@ knitr::include_graphics(masthead, dpi=72)
 This example is based on a __Graphic Detail__ report of The __Economist__ from November 8th 2018.  As the report indicates, since 2000 the world is more __peaceful__, an observation well represented in this stacked area chart enriched with timeline data and annotations. 
 
 ### Ingest 
+#### Combat deaths per 100,000 people worldwide
 
-Combat deaths per 100,000 people worldwide, conflict timeline
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-# Load csv data file
-df <- read.csv("archetypes/which-countries-are-most-likely-to-fight-wars/conflict_years_df_region_aggregated.csv", header = TRUE, stringsAsFactors = FALSE)
-df
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file_aggregated <- "which-countries-are-most-likely-to-fight-wars/conflict_years_df_region_aggregated.csv"
+url_aggregated <- paste0(url_root, url_file_aggregated)
 
-df_timeline <- read.csv("archetypes/which-countries-are-most-likely-to-fight-wars/conflict_timeline_of_battle_deaths.csv", header = TRUE, stringsAsFactors = FALSE)
-df_timeline
+df <- read.csv(url_aggregated, header = TRUE)
+head(df, n=10)
+
+```
+
+
+### Ingest 
+#### conflict timeline
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+url_file_timeline <- "which-countries-are-most-likely-to-fight-wars/conflict_timeline_of_battle_deaths.csv"
+url_timeline <- paste0(url_root, url_file_timeline)
+
+df_timeline <- read.csv(url_timeline, header = TRUE, stringsAsFactors = FALSE)
+head(df_timeline, n=10)
 
 ```
 
 ### Wrangle 
 #### Refactor to set stack sort order
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
 
 # Refactor to set stack sort order
 df$region <- factor(df$region, levels = c("Europe", "Americas", "Asia", "Africa", "Middle East"))
@@ -86,13 +100,13 @@ df
 ```
 
 
-### Temporal Area Stacked 
+### View 
 #### geom_bar()
 
 To created the stepped effect, we'll use <kbd>geom_bar()</kbd> at full width with the same color and fill to create a categorical area shape.
 Using visual variables __year__, __deaths__ and __region__
 
-```{r,message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r,message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -116,7 +130,6 @@ series_pal <- c("Africa" = "#6fccdc",
                 "Europe" = "#e65035",
                 "Middle East" = "#9b4050")
 
-# Plot
 v1 <- ggplot() + 
   geom_bar(data = df, aes(x=year, y=deaths, group = region, color = region, fill = region), position="stack", stat="identity", width=1.0) +
   scale_x_continuous(breaks=seq(1900, 2020, 10)) +
@@ -135,13 +148,13 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 ```
 
 
-### Plot with timeline
-#### geom_segment()
+### View
+#### with timeline
 
 Now we add the timelines with <kbd>geom_segment()</kbd> and include end points and labels to indicate conflict __start__ and __end__.
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
 
 df_timeline$mid_year <- (df_timeline$conflict_start_year + df_timeline$conflict_end_year)/2
 
@@ -157,11 +170,12 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
 ```
 
 
-### Plot with annotations
+### View
+#### with timeline and annotations
 
 Lastly, some texts to help explain the visual and tell a story.
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
 
 v3 <- v2 + 
     annotate("text", x = 1950, y = 90, 
@@ -174,23 +188,11 @@ girafe(ggobj = v3, width_svg = 16, height_svg = 9,
 ```
 
 
-
-```{r,  echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# full version
-ggsave(filename = "assets/which-countries-are-most-likely-to-fight-wars-fs.svg", plot = v3, width=1280/72, height=720/72)
-
-# without annotations
-ggsave(filename = "assets/which-countries-are-most-likely-to-fight-wars-sm.png", plot = v3, width=4, height=2.25)
-
-```
-
-
 ### References
 #### citations for narrative and data sources
 
-* Narrative sources: The Economist,[GO](https://www.economist.com/graphic-detail/2018/11/08/which-countries-are-most-likely-to-fight-wars){target="_blank"}
-* Data sources: GitHub,[GO](https://github.com/TheEconomist/graphic-detail-data/tree/master/data/2018-11-03-war-fighting){target="_blank"}
+* Narrative sources: The Economist, [GO](https://www.economist.com/graphic-detail/2018/11/08/which-countries-are-most-likely-to-fight-wars){target="_blank"}
+* Data sources: GitHub, [GO](https://github.com/TheEconomist/graphic-detail-data/tree/master/data/2018-11-03-war-fighting){target="_blank"}
 
 
 

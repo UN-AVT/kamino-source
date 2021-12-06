@@ -40,7 +40,7 @@ SEMIOGRAPHIC
 </div>
 
 # Beer production
-# imitation
+## imitation
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Engin Akyurt on Unsplash"}
 

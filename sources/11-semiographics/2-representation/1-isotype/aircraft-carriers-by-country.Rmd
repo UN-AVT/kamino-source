@@ -48,18 +48,18 @@ SEMIOGRAPHIC
 </div>
 
 # Aircraft carriers by country
-# isotypes
+## isotypes
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Manuel on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo from Wikipedia"}
 
-masthead <- "assets/manuel-unsplash.jpg"
+masthead <- "assets/china-aircraft-carrier.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
 
-> quote...\
---- attribution\
+> Japan has always regarded the aircraft carrier as one of the most offensive of armaments...\
+--- Isoroku Yamamoto\
 
 ***
 
@@ -68,7 +68,7 @@ knitr::include_graphics(masthead, dpi=72)
 #### number of aircraft carriers in operation worldwide as of December 2019
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 df <- data.frame (country  = c("United States", "United States", "United States", "United States",
                                "United States", "United States", "United States", "United States",
@@ -87,26 +87,28 @@ df
 
 
 ### Plot
-#### tbd
+#### count by symbol
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.width=13, fig.height=5, fig.align='center', out.width="100%"}
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, fig.align='center', out.width="100%", class.source='fold-hide'}
 
 isotype_plot = istack(df, 
            var = 'country', 
            #group = 'carrier', 
            icon = "assets/aircraft-carrier.svg",
            size = 0.05,
-           asp = 2) + theme(panel.grid.major.x = element_line(colour = "grey", linetype = 'dashed')) +
+           asp = 2) + 
+  theme(panel.grid.major.x = element_line(colour = "grey", linetype = 'dashed')) +
   ggtitle('Number of aircraft carriers in operation as of December 2019')
 
- girafe(ggobj = isotype_plot, width_svg = 13.0, height_svg = 5.0,
-        options = list(opts_sizing(rescale = TRUE, width = 1)))
+ girafe(ggobj = isotype_plot, width_svg = 16.0, height_svg = 9.0,
+        options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
 
 
-# References
-## The citations and data sources used for this case
+### References
+#### citations for narrative and data sources
 
 source: <a href="https://www.statista.com/chart/6483/the-worlds-aircraft-carrier-fleets/" target="_blank">China Commissions Its Second Aircraft Carrier Article</a>
 
