@@ -1,5 +1,5 @@
 ---
-pagetitle: "Submarine Cable Map"
+pagetitle: "Stork Tracks"
 output: 
   html_document:
     theme: lumen
@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: vendor
+    lib_dir: "vendor"
 ---
 
 
@@ -25,11 +25,14 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
+library(janitor)
+library(lubridate)
 library(geojsonio)
 library(sf)
+library(geosphere)
 library(rnaturalearth)
 library(rnaturalearthdata)
-library(ggsci)
+library(ggrepel)
 library(ggiraph)
 
 library(showtext)
@@ -44,101 +47,206 @@ showtext_auto()
 MAPS
 </div>
 
-# Submarine Cable Map
+# Stork Tracks
 ## Route Map
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo from Wikipedia Commons"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Peter Schad on Unsplash"}
 
-masthead <- "assets/seekabelverlegung-wikipedia.jpg"
+masthead <- "assets/peter-schad-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-> No cord or cable can draw so forcibly, or bind so fast, as love can do with a single thread...\
---- Robert Burton\
+> There would be no population explosion if people who are trying to keep the wolf from the door\
+  wouldn't let the stork fly in through the window...\
+--- Evan Esar\
 
 ***
 
-Route map of the world's major operating and planned submarine cable systems and landing stations.
+Tracking data of adult white storks (_Ciconia ciconia_) for the years 2014–2016. The position of the storks has been estimated via GPS every 5 minutes. A stork called Gili (ID 2421/HH847) traveled the furthest distance from South Africa to Germany.
 
 ### Ingest
-#### the routes
+#### tracking data from a directory of files
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-cables <- read.csv("archetypes/fusion-cables/fusion-cables.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
-cables
+data_files <- list.files(path = "archetypes/stork-tracks/data/gps/", pattern="*.csv")
+data_files
+
+stork_gps <- purrr::map_df(data_files, 
+             ~read.csv(paste0("archetypes/stork-tracks/data/gps/", .x), stringsAsFactors = FALSE) %>% 
+             mutate(filename = .x))
+
+head(stork_gps, n=10)
+
 
 ```
 
 
-#### The landing points
+### Wrangle
+#### clean, parse timestamp, sort, and filter
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-landing_points = read.csv("archetypes/fusion-cables/fusion-landing-points.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
-landing_points
+stork_gps_wrangled <- stork_gps %>% janitor::clean_names() %>%
+             mutate(timestamp = as.POSIXlt(timestamp), format = "%Y-%m-%d %H:%M:%S") %>%
+             select(tag_local_identifier, individual_local_identifier, timestamp, location_long, location_lat, ground_speed, heading)
+
+
+stork_gps_wrangled <- stork_gps_wrangled %>% arrange(tag_local_identifier, timestamp)
+
+stork_gps_wrangled$year <- as.integer(stork_gps_wrangled$timestamp$year + 1900)
+
+# Years - [1] 112 (2012) 113 (2013) 114 (2014) 115 (2015) 116 (2016)
+stork_gps_year <- filter(stork_gps_wrangled, year == 2016)
+
+head(stork_gps_year, n=10)
 
 ```
 
 
-### Base map
-#### natural earth
+### Wrangle
+#### highlight Gili
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+gili <- filter(stork_gps_year, individual_local_identifier == '2421/HH847/Gili')
+head(gili, n=10)
+
+gili_labels <- gili %>% filter(row_number() == 1 | row_number() == n())
+gili_labels
+
+stork_gps_rest <- filter(stork_gps_year, individual_local_identifier != '2421/HH847/Gili')
+
+```
+
+
+### Analyze
+#### compute geospatial distance along route
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# calculate the distance from previous point
+gili_dist <- gili %>%
+  mutate(plocation_long = lag(location_long), plocation_lat = lag(location_lat)) %>%
+  rowwise() %>%
+  mutate(distance = distm( c(plocation_long, plocation_lat), c(location_long, location_lat), fun=distHaversine )) %>%
+  mutate(km = distance/1000)
+
+gili_dist <- as.data.frame(gili_dist)
+
+# calculate cumulative sum and select samples
+gili_dist <- gili_dist %>% 
+  filter(distance > 0) %>% 
+  mutate(cumulative_km = round(cumsum(km), digits=0)) %>%
+  filter(row_number() %% 750 == 1)
+
+gili_dist
+
+```
+
+### Base map, natural earth, option 1
+#### continent and country select
+
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
 
-# PLOT NATURAL EARTH BORDERS
+africa <- ne_countries(scale = "small", continent = 'africa', returnclass = "sf")
+
+europe <- ne_countries(scale = "small", continent = 'europe', returnclass = "sf")
+europe <- filter(europe, iso_a3 != "RUS") 
+europe <- filter(europe, iso_a3 != "GUF") 
+
+middle_east <- ne_countries(scale = "small", country = c('turkey', 'syria', 'lebanon', 'jordan', 'iraq', 'israel', 'saudi arabia', 'yemen'), returnclass = "sf")
+
+ne_region <- rbind(africa, europe, middle_east)
+
+```
+
+
+### Base map, natural earth, option 2
+#### world
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+# natural earth base map
 ne_world <- ne_countries(scale = "small", returnclass = "sf")
-# class(ne_world)
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
 
 ```
 
 
 ### Route map
-#### with geom_path
+#### paths, points, and labels with coordinate limits
+
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 theme_opts <- theme(
-      legend.position="none",
-      plot.background = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank(),
-      panel.background=element_rect(fill="white", colour="white"),
-      panel.border = element_blank()
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 18, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "black", size = 16, family = "inconsolata"),
+  plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),    
+  plot.background = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="#cacdcf", colour="#cacdcf"),
+  panel.border = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  legend.position="none"
+)
+
+stork_palette <- c(
+  "#F44336",
+  "#E91E63",
+  "#9C27B0",
+  "#673AB7",
+  "#3F51B5",
+  "#2196F3",
+  "#03A9F4",
+  "#00BCD4",
+  "#009688",
+  "#4CAF50",
+  "#8BC34A",
+  "#FFEB3B"
 )
 
 v1 <- ggplot(data = ne_world) +
-  geom_path( data = cables, aes(x=longitude, y=latitude, group=factor(id)), color=cables$color, size=0.5) +
-  geom_sf(fill="#f0f0f0", color="#888888", stroke=0.5) +
-  geom_point( data = landing_points, aes(x=lon, y=lat ), shape=21, size=1, fill="#ffffff", color="#111111", stroke=0.5 ) +
-  scale_color_tron() +
-  scale_fill_tron() +
-  ylim(-53,80) + # removes Antarctica
+  geom_sf_interactive(aes(tooltip = iso_a3, data_id = iso_a3), fill="#e7e7e5", color="#717c8a", stroke=0.5) +
+  geom_path( data = stork_gps_rest, aes(x=location_long, y=location_lat, group=factor(tag_local_identifier)), color = "transparent", fill = 'white', size=3, alpha = 0.6) +
+  geom_path( data = stork_gps_rest, aes(x=location_long, y=location_lat, group=factor(tag_local_identifier), color = individual_local_identifier), size=0.5, alpha = 0.8) +
+  geom_path( data = gili, aes(x=location_long, y=location_lat, group=factor(tag_local_identifier)), size=4, color = "transparent", fill = 'white', alpha = 0.6) +
+  geom_path( data = gili, aes(x=location_long, y=location_lat, group=factor(tag_local_identifier)), size=1.5, color = 'orange') +
+  geom_point( data = gili_dist, aes(x=location_long, y=location_lat), shape = 21, size = 3, color = "white", fill = "black") +
+  geom_label_repel( data = gili_dist, aes(x=location_long, y=location_lat, label = paste0(cumulative_km, " kilometers\n", timestamp)), 
+                    xlim  = c(max(gili_dist$location_long)+10, NA),
+                    force_pull = 0, segment.size = 0.5, direction = "both", min.segment.length = 0,
+                    segment.curvature = -0.1, segment.ncp = 3, segment.angle = 20,
+                    size = 4, label.padding = unit(0.5, "lines"), fill = "orange", color = "black", alpha = 0.8, hjust = 0.0) +
+  geom_point( data = gili_labels, aes(x=location_long, y=location_lat), shape = 21, size = 4, color = "white", fill = "orange") +
+  geom_label( data = gili_labels, aes(x=location_long, y=location_lat, label = paste0("Gili\n", timestamp)), 
+                    nudge_x = -6, size = 4, label.padding = unit(0.5, "lines"), fill = "black", color = "white", hjust = 0.5) +
+  scale_color_manual(values = stork_palette) +
+  xlim(-20,60) +
+  ylim(-35,60) +
   theme_bw() +
   labs(x="",
        y="",
-       title = "Routes Map", 
-       subtitle="Submarine Cable Map") +
+       title = "Stork Migration Tracks", 
+       subtitle="Routes Map, 2016") +
   theme_opts
   
-girafe(ggobj = v1, width_svg = 16, height_svg = 9,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+girafe(ggobj = v1, width_svg = 12, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 0.5))
 )
-
-```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/submarine-cable-map-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/submarine-cable-map-sm.png", plot = v1, width=4, height=2.25)
 
 ```
 
@@ -146,7 +254,16 @@ ggsave(filename = "outputs/submarine-cable-map-sm.png", plot = v1, width=4, heig
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data source: Telegeography,[GO](https://github.com/telegeography/www.submarinecablemap.com){target="_blank"}
+* Narrative: inspired by the work of Cédric Scherer
+* Original Research and Data source:
+
+<pre>
+Rotics S, Kaatz M, Turjeman S, Zurell D, Wikelski M, Sapir N, Eggers U, Fiedler W, Jeltsch F,Nathan R (2018) Early arrival at breeding grounds: causes, costs and a trade-off with over wintering latitude. Journal of Animal Ecology.
+doi:10.1111/1365-2656.12898
+
+Rotics S, Kaatz M, Turjeman S, Zurell D, Wikelski M, Sapir N, Eggers U, Fiedler W, Jeltsch F,Nathan R (2018) Data from: Early arrival at breeding grounds: causes, costs and a trade-off with over wintering latitude.
+Movebank Data Repository. doi:10.5441/001/1.v8d24552
+</pre>
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

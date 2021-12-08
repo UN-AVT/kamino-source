@@ -1,5 +1,5 @@
 ---
-pagetitle: "Submarine Cable Map"
+pagetitle: "Global Energy Monitor"
 output: 
   html_document:
     theme: lumen
@@ -25,11 +25,11 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
+library(janitor)
 library(geojsonio)
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
-library(ggsci)
 library(ggiraph)
 
 library(showtext)
@@ -44,41 +44,60 @@ showtext_auto()
 MAPS
 </div>
 
-# Submarine Cable Map
+# Global Energy Monitor
 ## Route Map
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo from Wikipedia Commons"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Alireza Khatami on Unsplash"}
 
-masthead <- "assets/seekabelverlegung-wikipedia.jpg"
+masthead <- "assets/alireza-khatami-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-> No cord or cable can draw so forcibly, or bind so fast, as love can do with a single thread...\
---- Robert Burton\
+> The grid is awesomely complex. It is the largest machine in the world...\
+--- Gretchen Bakke\
 
 ***
-
-Route map of the world's major operating and planned submarine cable systems and landing stations.
 
 ### Ingest
 #### the routes
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-cables <- read.csv("archetypes/fusion-cables/fusion-cables.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
-cables
+df_pipelines <- read.csv("archetypes/global-energy-monitor/GFIT-Pipelines-December-2020.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+head(df_pipelines, n=10)
 
 ```
 
 
-#### The landing points
+### Ingest
+#### the terminals
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_terminals <- read.csv("archetypes/global-energy-monitor/GFIT-LNG-Terminals-June-2021.csv", header = TRUE, stringsAsFactors = FALSE)
+df_terminals <- df_terminals %>% janitor::clean_names() %>% mutate(latitude = as.numeric(latitude), longitude = as.numeric(longitude))
+head(df_terminals, n=10)
+
+```
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+### Wrangle
+#### create routes from path data
 
-landing_points = read.csv("archetypes/fusion-cables/fusion-landing-points.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
-landing_points
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_pipelines_routes <- df_pipelines %>%
+  janitor::clean_names() %>%
+  mutate(route_id = rownames(df_pipelines)) %>%
+  separate_rows(route, sep = ":", convert = TRUE) %>%
+  separate(route, c("rlat", "rlon"), sep = ",", convert = TRUE) %>%
+  mutate(rlat = as.numeric(rlat), rlon = as.numeric(rlon)) %>%
+  select(route_id, status, fuel, rlat, rlon) %>%
+  filter(nchar(rlat) > 0)
+
+head(df_pipelines_routes, n=10)
+
 
 ```
 
@@ -88,9 +107,10 @@ landing_points
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
 
-# PLOT NATURAL EARTH BORDERS
+# natural earth base map
 ne_world <- ne_countries(scale = "small", returnclass = "sf")
-# class(ne_world)
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA") 
 
 ```
 
@@ -105,40 +125,37 @@ theme_opts <- theme(
       plot.background = element_blank(),
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
-      panel.background=element_rect(fill="white", colour="white"),
+      panel.background=element_rect(fill="#cacdcf", colour="#cacdcf"),
       panel.border = element_blank()
 )
 
+# unique(df_ingest$status)
+status_palette <- c(
+  "Proposed" = "#e9b529",
+  "Cancelled" = "#acd994",
+  "Operating" = "#8b6f5d",
+  "Construction" = "#b3351f",
+  "Mothballed" = "#d4d4d4",
+  "Shelved" = "#9cb9d8",
+  "Retired" = "#718abe",
+  "Idle" = "black"
+)
+
 v1 <- ggplot(data = ne_world) +
-  geom_path( data = cables, aes(x=longitude, y=latitude, group=factor(id)), color=cables$color, size=0.5) +
-  geom_sf(fill="#f0f0f0", color="#888888", stroke=0.5) +
-  geom_point( data = landing_points, aes(x=lon, y=lat ), shape=21, size=1, fill="#ffffff", color="#111111", stroke=0.5 ) +
-  scale_color_tron() +
-  scale_fill_tron() +
-  ylim(-53,80) + # removes Antarctica
+  geom_sf(fill="#e7e7e5", color="#e2dedd", stroke=0.5) +
+  geom_path( data = df_pipelines_routes, aes(x=rlon, y=rlat, group=factor(route_id), color=status), size=0.5) +
+  geom_point( data = df_terminals, aes(x=longitude, y=latitude, color=status ), size=2 ) +
+  scale_color_manual(values = status_palette) +
   theme_bw() +
   labs(x="",
        y="",
-       title = "Routes Map", 
-       subtitle="Submarine Cable Map") +
+       title = "Global Energy Monitor", 
+       subtitle="Fossil Infrastructure Tracker") +
   theme_opts
   
-girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+girafe(ggobj = v1, width_svg = 16, height_svg = 7.5,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
-
-```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/submarine-cable-map-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/submarine-cable-map-sm.png", plot = v1, width=4, height=2.25)
 
 ```
 
@@ -146,7 +163,7 @@ ggsave(filename = "outputs/submarine-cable-map-sm.png", plot = v1, width=4, heig
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data source: Telegeography,[GO](https://github.com/telegeography/www.submarinecablemap.com){target="_blank"}
+* Narrative and Data source: Global Fossil Infrastructure Tracker, Global Energy Monitor, December 2021
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
