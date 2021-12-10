@@ -69,9 +69,6 @@ df <- read.csv(url, header = TRUE)
 
 df
 
-#df <- read.csv("archetypes/women-in-space/astronaut-data.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
-#df
-
 ```
 
 

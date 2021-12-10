@@ -82,10 +82,6 @@ df <- read.csv(url, header = TRUE)
 
 df
 
-
-#df <- read.csv("archetypes/citation-rates-for-speeding-stops/citation-rates-for-speeding-stops.csv", header = TRUE, stringsAsFactors = FALSE)
-#df
-
 ```
 
 

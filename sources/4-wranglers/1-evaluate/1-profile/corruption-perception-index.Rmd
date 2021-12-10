@@ -71,10 +71,6 @@ df <- read.csv(url, header = TRUE)
 
 df
 
-
-#df <- read.csv("archetypes/corruption-perception-index/corruption-perception-index-2020.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
-#df
-
 ```
 ### Missing Values
 #### <kbd>check for each column</kbd>
