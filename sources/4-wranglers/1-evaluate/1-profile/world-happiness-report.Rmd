@@ -64,12 +64,18 @@ looking to better understand what makes people happy...\
 
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df <- read_xls('./archetypes/happiness-report/happiness-report-2020.xls')
+#Load
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "happiness-report/happiness-report-2020.csv"
+url <- paste0(url_root, url_file)
+df <- read.csv(url, header = TRUE)
+
 df
+
 ```
 
 ### Dimensions
-#### number of columns and rows
+#### <kbd>number of columns and rows</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -80,86 +86,8 @@ dim(df)
 The output tells us that the data contains 1704 rows, and 26 columns.
 
 
-### Type Detection
-#### List keys and column types
-
-```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
-glimpse(df)
-
-```
-
-The above provides a little more information. For example, we see that 'Country name' is a column of characters __char__, and that all other columns are numbers __dbl__. This is useful because we can already guess that 'Year' does not have the right type. It should not be treated as a number. We will fix it with the next command. Also notice the beginning values of each column; this is useful to get familiar with the data on hand. Some columns display a lot of NA, which indicates the absence of data.
-
-```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
-
-df <- df %>% mutate(Year = as.factor(Year))
-str(df$Year)
-
-```
-
-Column 'Year' is now a datatype called factor, which is a type of categorical variables in R. Levels are the possible values in the factor.
-
-
-```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
-
-glimpse(df)
-
-```
-
-### Check for Missing Values
-#### for each column, check from NAs
-
-```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
-
-missing_stats <- purrr::map_df(df, ~ sum(is.na(.))) %>%
-  gather('Column name', 'Count of missing values')
-
-missing_stats
-
-```
-
-We now know that the first 3 Columns are not missing any value, but 'Log GDP per capita' has 28 missing values.
-
-### Distinct Values
-#### by Country and Years
-
-For Country Name:
-
-```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
-
-distinct_df <- distinct(df,`Country name`) %>% arrange(`Country name`)
-distinct_df
-
-```
-
-
-For Year:
-
-
-```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
-distinct_df <- distinct(df, Year) %>% arrange(Year)
-distinct_df
-```
-
-
-### Value Frequency
-#### absolute and relative frequency for Year
-
-```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
-
-df_1= table(df$Year)
-df_2 <- as.data.frame(df_1) %>% 
-  dplyr::rename(Year = Var1, Freq_absolute = Freq) %>% 
-  mutate(Freq_relative=paste0(round(100*Freq_absolute/sum(Freq_absolute),digits=2),"%"))
-df_2
-
-```
-
-
-For the year 2008, we have 110 records, which represents about 6.5% of the entire dataset.
-
 ### Positive, Negative and Zero Values
-#### for all the numerical columns
+#### <kbd>Check for all the numerical columns</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -179,44 +107,12 @@ result <- as.data.frame(Map(calcStats, colnames(df1)))
 result
 
 ```
-
-
-
-### Histograms
-#### for all numerical variables
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
-
-df_long <- df %>%
-  pivot_longer(
-    `Life Ladder`:`Most people can be trusted, WVS round 2010-2014`,
-    names_to = "measure",
-    values_to = "value"
-  )
-
-v1 <- ggplot(df_long, aes(x=value)) +
-  geom_histogram(fill = "#79B8E5") +
-  facet_wrap(~ measure, scales="free")+
-  theme(panel.grid = element_blank(), 
-        strip.background = element_blank(),
-        panel.background = element_blank()
- ) 
-
-girafe(ggobj = v1, width_svg = 16, height_svg = 9, options =
-  list(opts_sizing(rescale = TRUE, width = 1.0))
-)
-
- 
-```
-
-
-As we will see later in the course, the two variables of interest will be "Life Ladder" and "Log GDP per capita". Just looking at the graph, we see that the "Life Ladder" varies from 0 to 8, with the majority of values between 4 and 6. "Log GDP per capita" varies from about 5 to 12. So the GDP per person would vary in this dataset from $150 to $160k.
-
-
 ### References
 #### citations for narrative and data sources:
 
 * Narrative and Data sources: The 7th World Happiness Report, [GO](https://worldhappiness.report/ed/2019/){target="_blank"}  
+
+<!-- or -->
 
 <pre>
 @misc{helliwell_2019_world,
