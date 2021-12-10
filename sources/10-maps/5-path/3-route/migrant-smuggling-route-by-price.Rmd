@@ -1,18 +1,19 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Migrant Smuggling Route by Price"
 output: 
   html_document:
     theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: libs
+    lib_dir: vendor
 ---
+
 
 ```{r setup, include=FALSE}
 
@@ -21,18 +22,21 @@ options(scipen = 999) ## To disable scientific notation
 
 # Clear environment and memory
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memrory and report the memory usage.
+gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(geojsonio)
+library(sp)
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
-library(ggsci)
+library(ggrepel)
 library(ggiraph)
 
-library(knitcitations)
-library(bibtex)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
@@ -40,117 +44,169 @@ library(bibtex)
 MAPS
 </div>
 
-# Route Map
-## Submarine Cable Map
+# Migrant Smuggling Route by Price
+## Route Map
 
-Route map of the world's major operating and planned submarine cable systems and landing stations.
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Sujeeth Potla on Unsplash"}
+
+masthead <- "assets/sujeeth-potla-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Business is booming.\
+--- 36-year old male smuggler\
 
 ***
 
-# Load data
-## The routes
+
+
+### Ingest
+#### the routes
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-cables = read.csv("archetypes/fusion-cables.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
-cables
+routes <- read.csv("archetypes/migrant-smuggling-route-by-price/route-paths.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+routes
 
 ```
 
 
-## The landing points
+### Ingest
+#### departure and destination points
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-landing_points = read.csv("archetypes/fusion-landing-points.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
-landing_points
+location_points = read.csv("archetypes/migrant-smuggling-route-by-price/location-points.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+location_points
 
 ```
 
 
-## Natural Earth base map
+### Base map
+#### natural earth
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
 
 # PLOT NATURAL EARTH BORDERS
-ne_world <- ne_countries(scale = "medium", returnclass = "sf")
-# class(ne_world)
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# removes Antarctica
+ne_world <- filter(ne_world, iso_a3 != "ATA")
 
 ```
 
 
-## Theme
+### Projection
+#### mercator
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+ne_world <- ne_world %>% st_as_sf() %>% st_set_crs(4326)
+ne_world <- st_transform(ne_world, crs = "+proj=merc")
+
+routes_sf <- routes %>% st_as_sf(coords = c("xcoord", "ycoord"), crs = 4326) # %>% st_set_crs("+proj=merc")
+routes_sf <- st_transform(routes_sf, crs = "+proj=merc")
+
+location_points_sf <- location_points %>% st_as_sf(coords = c("xcoord", "ycoord"), crs = 4326) # %>% st_set_crs("+proj=merc")
+location_points_sf <- st_transform(location_points_sf, crs = "+proj=merc")
+
+routes_sf <- as.data.frame(routes_sf)
+location_points_sf <- as.data.frame(location_points_sf)
+
+routes_sf <- routes_sf %>% mutate(xcoord = st_coordinates(geometry)[,1], ycoord = st_coordinates(geometry)[,2])
+#routes_sf
+
+location_points_sf <- location_points_sf %>% mutate(xcoord = st_coordinates(geometry)[,1], ycoord = st_coordinates(geometry)[,2])
+#location_points_sf
+
+```
+
+
+
+### Route map
+#### with path (interactive), points, and labels
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 theme_opts <- theme(
-      legend.position="none",
+      text = element_text(family = "inconsolata"), 
+      plot.title = element_text(color = "black", size = 14, face = "bold"),
+      plot.subtitle = element_text(color = "black", size = 12),
+      plot.caption = element_text(color = "#555555", size = 8),
       plot.background = element_blank(),
+      panel.grid = element_blank(),
       panel.grid.major = element_blank(),
       panel.grid.minor = element_blank(),
       panel.background=element_rect(fill="white", colour="white"),
-      panel.border = element_blank()
+      panel.border = element_rect(color = "black", fill = NA, size = 2),
+      axis.text = element_blank(),
+      axis.line = element_blank(),
+      axis.ticks = element_blank(),
+      axis.title = element_blank(),
+      legend.position="none"
+)
+
+route_palette <- c(
+  "middle east-europe" = "#8fc44e",
+  "african countries transfer" = "#8181e6",
+  "european countries transfer" = "#00ccff",
+  "direction to the us and canada" = "#9900cc",
+  "asia transfer" = "#669999",
+  "africa-asia" = "#F57C00",
+  "africa-europe" = "#dd87a9"
+)
+
+# the extent of the bounding box in the new projection
+b <- st_bbox(ne_world)
+# b
+
+v1 <- ggplot(data = ne_world) +
+  geom_sf(fill="#ede4be", color="#ffffff", stroke=0.5) +
+  geom_path_interactive( data = routes_sf, aes( x=xcoord, y=ycoord, group=factor(id), color=color, size=value,
+        tooltip = paste0("From: ", from, "\nTo: ", to, "\nHighest documented value: ", format(value, big.mark=",")), data_id = row.names(routes_sf),
+        hover_css = "fill:none;stroke:#000000")) +
+  geom_point( data = location_points_sf, aes( x=xcoord, y=ycoord ), size=3, color=ifelse(location_points_sf$type == "destination", 'black', '#999999') ) +
+  geom_point( data = location_points_sf, aes( x=xcoord, y=ycoord ), size=1.0, color="white" ) +
+  geom_text_repel( data = location_points_sf, aes( x=xcoord, y=ycoord, label = location ), seed = 123, 
+                   direction = "both", force = 0.5, force_pull = 0, point.size = 4,
+                   min.segment.length = 0, segment.size = 0.5, segment.curvature = -0.1, segment.ncp = 3, segment.angle = 20,
+                   size=3, color="black", family="inconsolata" ) +
+  scale_color_manual( values = route_palette) +
+  scale_size_binned(range = c(0.5, 3)) +
+  # limits set to area of interest
+  coord_sf(crs = "+proj=merc", xlim = c( b["xmin"]*0.7, b["xmax"]*0.85 ), ylim = c( b["ymin"]*0.3, b["ymax"]*0.6) ) +
+  labs(x="",
+       y="",
+       title = "Migrant Smuggling in the World", 
+       subtitle="Main Directions of Migrant Smuggling, Prices of Smugglers in EUR") +
+  theme_bw() +
+  theme_opts
+  
+girafe(ggobj = v1, width_svg = 16, height_svg = 7.5,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
 ```
 
 
-## Route map
+### References
+#### citations for narrative and data sources
+
+* Narrative: IOM, visualization by MINDS/CTK, 2017.
+* Data sources: georeferenced from raster image using QGIS
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6, out.width = "100%"}
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-v1 <- ggplot(data = ne_world) +
-  geom_path( data = cables, aes(x=longitude, y=latitude, group=factor(id)), color=cables$color, size=0.5) +
-  geom_sf(fill="#f0f0f0", color="#888888", stroke=0.5) +
-  geom_point( data = landing_points, aes(x=lon, y=lat ), shape=21, size=1, fill="#ffffff", color="#111111", stroke=0.5 ) +
-  scale_color_tron() +
-  scale_fill_tron() +
-  ylim(-53,80) + # removes Antarctica
-  theme_bw() +
-  labs(x="",
-       y="",
-       title = "Routes Map", 
-       subtitle="Submarine Cable Map") +
-  theme_opts
-  
-girafe(ggobj = v1, width_svg = 13, height_svg = 7,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```
-
-
-## Save output to file
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
-
-# ggsave(filename = "assets/submarine-cable-map.svg", plot = v1, width=12, height=6)
-
-```
-
-
-# Exercises and practice
-## Knime and R practice solutions
-
-
-
-# References
-## The citations and data sources used for this case
-
-Inspired by <a href="https://github.com/telegeography/www.submarinecablemap.com">Source</a>
-
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# read.bibtex(file = "./citations.bib")
-
-```
-
-
 
 
 ```{js, message=FALSE, warning=FALSE, echo=FALSE}
@@ -161,5 +217,3 @@ $(function() {
 })
 
 ```
-
-
