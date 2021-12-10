@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Animal Bites"
 output: 
   html_document:
     theme: lumen
@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
 
 
@@ -31,7 +31,7 @@ library(reshape2)
 # General profiling
 #library(Amelia)
 library(skimr)
-library(Hmisc)
+#library(Hmisc)
 library(pastecs)
 library(psych)
 library(summarytools)
@@ -45,12 +45,6 @@ library(janitor)
 library(epiDisplay)
 library(gmodels)
 library(questionr)
-
-# For dates
-library(lubridate)
-library(anytime)
-library(broom)
-library(ggiraph)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -83,13 +77,21 @@ This is the principal difference between a dog and man...\
 
 ***
 
-# Load the data
+### Load the data
+
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load
-df <- read.csv('./archetypes/animal-bites/animal-bites.csv', header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "animal-bites/animal-bites.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE)
+
+df
+#df <- read.csv('./archetypes/animal-bites/animal-bites.csv', header = TRUE, stringsAsFactors = FALSE)
 # View
-df[1:100,]
+#df[1:100,]
 
 ```
 
@@ -111,147 +113,15 @@ Based on an initial view of the data, we can see basic table structure and the c
 * __release_date__: the date the animal was released
 * __ResultsIDDesc__: results from lab tests (for rabies)
 
-The column definitions give a hint for the data we can expect, but let's use profiling methods to fully explore all the features and characteristics.
-
-# Structure
-## What are the data types, column definitions, and record length?
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
-
-# check the number of columns
-length(df)
-
-# check how many observations and attributes exist
-# dim(df)
-dim_df <- data.frame(obs_attribs = unclass(dim(df)), check.names = FALSE, stringsAsFactors = FALSE)
-dim_df
-
-# check and derive attribute / column names
-# names(df)
-names_df <- data.frame(attrib_cols = unclass(names(df)), check.names = FALSE, stringsAsFactors = FALSE)
-names_df
-
-# determine data types of each attribute
-str(df)
-
-# sapply(df, class)
-class_df <- data.frame(type = unclass(sapply(df, class)), check.names = FALSE, stringsAsFactors = FALSE)
-class_df
-
-# sapply(df, typeof)
-typeof_df <- data.frame(type = unclass(sapply(df, typeof)), check.names = FALSE, stringsAsFactors = FALSE)
-typeof_df
+The column definitions give a hint for the data we can expect, but let's use profiling method to explore the features and characteristics.
 
 
-# identify potential character columns
-char_col <- filter(typeof_df, type == "character")
-char_col
+### Value Frequency
+#### absolute and relative frequency
 
-# identify potential numeric columns
-num_col <- filter(typeof_df, type == "integer")
-num_col
+Option 1: <kbd>__Check all columns__</kbd>
 
-# will auto detect and convert col types
-df_type_test <- readr::type_convert(df)
-df_type_test[1:100,]
-
-```
-
-
-# Completeness
-## Are there missing, null, or erroneous values?
-
-```{r, message=FALSE, echo=FALSE, fig.width=12, fig.height=6}
-library(tidyr)
-library(broom)
-
-# METHOD 1
-col_sums <- tidy(colSums(is.na(df)))
-col_sums$test <- "COL_SUMS"
-col_sums
-
-null_check <- tidy(is.null(df))
-null_check$test <- "NULL_CHECK"
-null_check
-
-na_check <- tidy(is.na(df))
-na_check$test <- "NA_CHECK"
-na_check
-
-# METHOD 2
-allmisscols <- sapply(df, function(x) all(is.na(x) | x == '' ))
-tidy(allmisscols)
-
-# METHOD 3
-missing_stats <- purrr::map_df(df, ~ sum(is.na(.))) %>%
-  gather('Column', 'na_count')
-
-print(missing_stats)
-
-# VIEW RESULTS
-# missmap(df)
-
-# BAR CHART
-
-# TREEMAP
-
-# TILE MAP
-ggplot_missing <- function(x){
-  
-  x %>% 
-    is.na %>%
-    melt %>%
-    ggplot(data = .,
-           aes(x = Var1,
-               y = Var2)) +
-    geom_tile(aes(fill = value)) +
-    scale_fill_manual(name = "", values = c("green", "red"), labels = c("Present","Missing")) +
-    theme_minimal() + 
-    theme(axis.text.x  = element_text(angle=90, hjust = 1, vjust = 0.25 )) + 
-    labs(x = "Rows / observations",
-         y = "Variables in Dataset")
-}
-
-v1 <- ggplot_missing(df)
-
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72, options =
-list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-```
-
-Hmm, the results don't seem right. Since we saw from the column profiles that there are many blank entries and references to "UNKNOWN" values, let's test to see if they are effecting the result.  We can remove __whitespace__ and _UNKNOWN_ values and profile again.
-
-```{r, message=FALSE, echo=FALSE, fig.width=12, fig.height=6}
-
-# Since we are changing the data set, lets create a copy
-df_adj <- df
-
-# REMOVE WHITESPACE (MOVE TO CLEAN)
-df_adj[df_adj == ""] <- NA
-
-# REMOVE UNKNOWNs
-df_adj$GenderIDDesc <- gsub('UNKNOWN', NA, df_adj$GenderIDDesc)
-df_adj$DispositionIDDesc <- gsub('UNKNOWN', NA, df_adj$DispositionIDDesc)
-df_adj$ResultsIDDesc <- gsub('UNKNOWN', NA, df_adj$ResultsIDDesc)
-
-df_adj[1:100,
-       ]
-
-v2 <- ggplot_missing(df_adj)
-
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72, options =
-list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-
-```
-
-
-# Uniqueness
-## What is the frequency of a value relative to the number of records?
-
-Option 1: Check all columns
-
-```{r, message=FALSE, echo=FALSE}
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 # METHOD 1
 apply(df, 2, function(x) length(unique(x)))
@@ -263,18 +133,17 @@ head(df %>% summarise_all(n_distinct), 10)
 ```
 
 
-Option 2: Check a specified column
+Option 2: <kbd>__Check a specified column__</kbd>
 
-
-```{r, message=FALSE, echo=FALSE}
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 # Specify column to measure
 freq_column <- "vaccination_yrs"
 
 df_na <- table(df[,freq_column], useNA = "ifany")
-df_na
+#df_na
 
-prop.table(table(df[,freq_column]))
+#prop.table(table(df[,freq_column]))
 
 # Calculate absolute frequency
 df_1 <- table(df[,freq_column])
@@ -284,287 +153,26 @@ df_2 <- as.data.frame(df_1) %>% rename( Freq_abs = Freq )
 df_2$Freq_rel <- df_2$Freq_abs / sum( df_2$Freq_abs )
 df_2
 
-tabyl(df[,freq_column], sort = TRUE)
+#tabyl(df[,freq_column], sort = TRUE)
 
 #tab1(df[,freq_column], sort.group = "decreasing", cum.percent = TRUE)
 
 
 
 summarytools::freq(df[,freq_column], order = "freq")
-CrossTable(df[,freq_column])
+#CrossTable(df[,freq_column])
 questionr::freq(df[,freq_column], cum = TRUE, sort = "dec", total = TRUE)
 
-# METHOD 3
-#ds_freq_table(df[,freq_column])
 
 ```
 
 
-# Value Validity
-## Do the values correspond to the meaning of the feature?
+### References
+#### citations for narrative and data sources
 
-```{r, message=FALSE, echo=FALSE}
+* Narrative and Data source: This case is based on a dataset of animal bite incidents reported to and investigated by Louisville Metro Department of Public Health and Wellness , [GO](https://www.kaggle.com/willcanniford/animal-bites-analysis){target="_blank"}
 
-# String value
-df_bad_strings <- df %>% filter(!AdvIssuedYNDesc %in% c('YES','NO'))
-count(df_bad_strings)
-
-# Numeric value
-df_bad_numeric <- df %>% filter( !vaccination_yrs >= 1 )
-df_bad_numeric
-
-```
-
-
-# Value positive, negative and zero
-## Are there positive, negative, or zero values?
-
-```{r, message=FALSE, echo=FALSE}
-
-#variable <- c('vaccination_yrs','victim_zip')
-
-#positive <- c(length(df$Measure[df$Measure>0]),length(df$Population[df$Population>0]))
-#negative <- c(length(df$Measure[df$Measure<0]),length(df$Population[df$Population<0]))
-#zero <- c(length(df$Measure[df$Measure==0]),length(df$Population[df$Population==0]))
-
-#df_3 <- data.frame(variable, positive, negative, zero)
-#df_3
-
-```
-
-
-# Distribution
-## What is the distribution for the numerical features?
-
-```{r, message=FALSE, echo=FALSE}
-
-# METHOD 1
-summary_report <- data.frame(unclass(summary(df)), check.names = FALSE, stringsAsFactors = FALSE)
-summary_report
-
-# METHOD 2
-Hmisc::describe(df)
-
-# METHOD 3
-stat.desc(df)
-
-# METHOD 4
-#psych::describe(df)
-
-# METHOD 5
-skim(df)
-
-# METHOD 6
-# summarytools::descr(df)
-summarytools::descr(df, transpose = TRUE)
-# dfSummary(df)
-
-# METHOD 7
-CreateTableOne(data = df)
-summary(CreateTableOne(data = df))
-
-# METHOD 8
-desctable(df)
-
-# METHOD 9
-ds_summary_stats(df)
-
-# METHOD 10
-ds_screener(df)
-
-# VIEW
-# ggpairs(df)
-# ggpairs(df, mapping = aes(colour = SpeciesIDDesc))
-
-
-```
-
-
-## What is the distribution by group?
-
-
-```{r, message=FALSE, echo=FALSE}
-
-grouping_column <- "SpeciesIDDesc"
-
-# psych::describeBy(df, df[,grouping_column])
-psych::describeBy(df, df[,grouping_column], mat = TRUE)
-
-# ds_group_summary(df[,grouping_column], data$rating)
-
-# CreateTableOne(strata = grouping_column, data = df)
-# print(CreateTableOne(strata = grouping_column, data = df), nonnormal = "score")
-
-# ds_multi_stats(filter(df, !is.na(score)), score, rating)
-
-
-```
-
-
-# Format and Pattern
-## Are there any formatting inconsistencies?
-
-
-```{r}
-
-# Format Consistency
-# color
-
-```
-
-## Do any columns have a date pattern?
-
-```{r, message=FALSE, echo=FALSE}
-
-# Validate entries for a specific class of features
-# See validation methods
-
-# METHOD TEST SPECIFIED COLUMNS
-# +++++++++++++++++++++++
-
-# is_date
-# if date, cast as date to enable subsequent profiling
-date_test_column <- df$bite_date[[1]]
-
-date_test_df <- data.frame(matrix(ncol = 5, nrow = 1))
-    date_test_cols <- c("COLUMN", "DATE_TEST_1", "DATE_TEST_2", "DATE_TEST_3", "DATE_TEST_4")
-    colnames(date_test_df) <- date_test_cols
-
-is.Date <- function(x) {
-  inherits(x, c("Date", "POSIXt"))
-}
-
-date_test_df[1,"COLUMN"] <- "bite_date"
-# Returns TRUE if test positive, FALSE is error
-date_test_df[1,"DATE_TEST_1"] <- tryCatch(!is.na(is.Date(as.Date(date_test_column))), error = function(err) {FALSE})
-date_test_df[1,"DATE_TEST_2"] <- tryCatch(!is.na(is.Date(as.POSIXct(date_test_column))), error = function(err) {FALSE})
-date_test_df[1,"DATE_TEST_3"] <- tryCatch(!is.na(is.Date(as.POSIXlt(date_test_column))), error = function(err) {FALSE})
-# If format not in standard form
-date_test_df[1,"DATE_TEST_4"] <- tryCatch(!is.na(is.Date(anytime(date_test_column))), error = function(err) {FALSE})
-
-date_test_df
-
-# METHOD TEST ALL COLUMNS
-# +++++++++++++++++++++++
-
-datelist = list()
-
-all_columns <- as.data.frame(names(df))
-# all_columns
-
-for (row in 1:nrow(all_columns)) {
-
-    # Create dataframe for each run
-    date_df <- data.frame(matrix(ncol = 4, nrow = 1))
-    date_cols <- c("COLUMN", "DATE_TEST_1", "DATE_TEST_2", "DATE_TEST_3")
-    colnames(date_df) <- date_cols
-      
-    # Specify column to measure
-    date_column <- all_columns[row, ]
-    # print(freq_column)
-    
-    # Calculate absolute frequency
-    date_df[1,"COLUMN"] <- date_column
-    
-    # Returns TRUE if test positive, FALSE is error
-    date_df[1,"DATE_TEST_1"] <- tryCatch(!is.na(is.Date(as.Date(df[1,date_column]))), error = function(err) {FALSE})
-    date_df[1,"DATE_TEST_2"] <- tryCatch(!is.na(is.Date(as.POSIXct(df[1,date_column]))), error = function(err) {FALSE})
-    date_df[1,"DATE_TEST_3"] <- tryCatch(!is.na(is.Date(as.POSIXlt(df[1,date_column]))), error = function(err) {FALSE})
-    
-    # add it to your list
-    datelist[[row]] <- date_df
-    
-}
-
-date_report <- do.call(rbind, datelist)
-date_report
-
-date_report_filtered <- filter(date_report, DATE_TEST_1 == TRUE | DATE_TEST_2 == TRUE | DATE_TEST_3 == TRUE )
-date_report_filtered
-
-date_report_true <- filter(date_report, DATE_TEST_1 == TRUE & DATE_TEST_2 == TRUE & DATE_TEST_3 == TRUE )
-date_report_true
-
-```
-
-Now that we've identified the date columns, we can test if there are any gaps.
-
-# Gap and Range Analysis
-## Are there any gaps in the date observations?
-
-For starters, we know the dataset includes _"bites which occurred near Louisville, Kentucky from 1985 to 2017."_  Let's see if the data matches the expectation.
-
-```{r, message=FALSE, echo=FALSE}
-
-# bite_date
-# vaccination_date
-# quarantine_date
-# release_date
-
-#df <- df$bite_date %>% col_datetime()
-#df <- df$vaccination_date %>% col_datetime()
-#df <- df$quarantine_date %>% col_datetime()
-#df <- df$release_date %>% col_datetime()
-#df
-
-#rDOY <- range(DOY); 
-#rnDOY <- seq(rDOY[1],rDOY[2]) 
-#rnDOY[!rnDOY %in% DOY]
-
-#DOY[ diff(DOY)!=1]
-#DOY[-1] [ diff(DOY)!=1] 
-
-# Convert V2 to dates
-# Default format is "%Y-%m-%d"
-# See ?as.Date
-#DF$V2 <- as.Date(DF$V2)
-
-# Get the range of dates covered
-#DateRange <- seq(min(DF$V2), max(DF$V2), by = 1)
-
-# Get the dates in DateRange that are not in DF$V2
-# See ?"%in%"
-#DateRange[!DateRange %in% DF$V2]
-
-# METHOD RANGE
-# Out of range test
-as.data.frame(df$bite_date[which(df$bite_date > ymd('2018-01-01'))])
-
-# METHOD - DATE GAPS
-df %>% 
-  filter(bite_date < ymd('2018-01-01')) %>% # Filter the data
-    ggplot(aes(year(bite_date))) + 
-    geom_bar() + 
-    labs(x = 'Year', y = 'Count', title = 'Bite records over time') + 
-    theme_minimal()
-
-month_data <- df %>%
-  filter(bite_date < ymd('2018-01-01')) %>% # Remove those future observations
-  group_by(month = month(bite_date)) %>% # Group by the month
-  summarise(n_incidents = n()) %>% # Count observations
-  transmute(month = ymd(paste('2018', month, '01', sep = '-')), n_incidents) # Create a month date object with lubridate
-
-month_data
-
-v3 <- month_data %>% 
-    ggplot(aes(x = month, y = n_incidents, fill = n_incidents)) + 
-    geom_col() + 
-    labs(x = 'Month', y = 'Incident count', title = "Number of incidents sorted by month") +
-    scale_x_date(date_labels = '%b', date_breaks = '2 month', date_minor_breaks = '1 month') + # Show just the month
-    scale_fill_continuous(name = '# incidents') + 
-    theme_minimal()
-
-girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72, options =
-list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-
-```
-
-
-# References
-## The citations and data sources used for this case
-
-This case is based on a dataset of <a href="https://www.kaggle.com/willcanniford/animal-bites-analysis" target="_blank" rel="noopener noreferrer">animal bite incidents</a> reported to and investigated by Louisville Metro Department of Public Health and Wellness.  The dataset includes information on over __9,000__ animal bites which occurred near Louisville, Kentucky from __1985 to 2017__ and includes information on whether the animal was quarantined after the bite occurred and whether that animal was rabid.  
+<!-- or -->
 
 <pre>
 @misc{canniford_2020_animal,
@@ -577,26 +185,14 @@ This case is based on a dataset of <a href="https://www.kaggle.com/willcanniford
 }
 </pre>
 
-
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "Profiling" # mostly used in wranglers and analytics
-keywords <- 'animal bites'
-commands <- 'anytime tidy desctable tab1 CrossTable tabyl map_df skim descr'
-sources <- 'Louisville-Metro-Department-of-Public-Health-and-Wellness'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
-
 ```
+
 
 
 ```{js, message=FALSE, warning=FALSE, echo=FALSE}
@@ -607,6 +203,3 @@ $(function() {
 })
 
 ```
-
-
-

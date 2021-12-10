@@ -1,0 +1,115 @@
+---
+pagetitle: "Corruption Perception Index"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(janitor)
+library(ggtext)
+library(ggdist)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Corruption Perception Index
+## Profiling
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nathaniel Tetteh on Unsplash"}
+
+masthead <- "assets/nathaniel-tetteh-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Corruption is paid by the poor...\
+--- Pope Francis\
+
+***
+
+### Ingest
+#### country, region, CPI score, standard error
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# Load
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "corruption-perception-index/corruption-perception-index-2020.csv"
+url <- paste0(url_root, url_file)
+df <- read.csv(url, header = TRUE)
+
+df
+
+
+#df <- read.csv("archetypes/corruption-perception-index/corruption-perception-index-2020.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+#df
+
+```
+### Missing Values
+#### <kbd>check for each column</kbd>
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+missing_stats <- purrr::map_df(df, ~ sum(is.na(.))) %>%
+  gather('Column name', 'Count of missing values')
+
+missing_stats
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Luis Freites, [GO](https://github.com/luisfrein/R_Tidytuesday){target="_blank"}
+* Data sources: Transparency International, [GO](https://www.transparency.org/en){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

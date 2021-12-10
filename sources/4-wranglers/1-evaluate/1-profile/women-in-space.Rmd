@@ -1,0 +1,138 @@
+---
+pagetitle: "Women in space"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, encoding = "utf-8")
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggforce)
+library(colorspace)
+library(ggiraph)
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Women in space
+## Profiling
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Greg Rakozy on Unsplash"}
+
+masthead <- "assets/greg-rakozy-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Weightlessness is a great equalizer...\
+--- Sally Ride\
+
+***
+
+### Ingest data 
+#### series, values, and dates
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "women-in-space/astronaut-data.csv"
+url <- paste0(url_root, url_file)
+df <- read.csv(url, header = TRUE)
+
+df
+
+#df <- read.csv("archetypes/women-in-space/astronaut-data.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+#df
+
+```
+
+
+### Distinct Values
+#### <kbd>check for female astronauts</kbd>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+pal <- c(
+  "#343854",
+  "#8C384D",
+  "#CF2438",
+  "#D95E31",
+  "#F0C742",
+  "#F8F0E5"
+)
+
+# Female astronauts
+hrs_mission <- df %>% 
+  filter(sex == "female") %>% 
+  distinct(name, total_hrs_sum)
+
+hrs_mission
+
+hrs_mission <- hrs_mission %>%  mutate(
+    a = seq(pi/12, pi - pi/12, length.out = nrow(hrs_mission)),
+		offset = 2000,                # make space for the Earth
+		x = (total_hrs_sum + offset) * cos(a),  # convert to polar
+		y = (total_hrs_sum + offset) * sin(a)
+)
+
+hrs_mission
+
+```
+
+#### <kbd>year of mission</kbd>
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+distinct_df <- distinct(df, name, year_of_mission) %>% arrange( year_of_mission, name)
+distinct_df
+```
+### References
+#### citations for narrative and data sources
+
+* Data sources: M. Stavnichuk & T. Corlett, [GO](https://doi.org/10.1016/j.lssr.2020.06.003){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
