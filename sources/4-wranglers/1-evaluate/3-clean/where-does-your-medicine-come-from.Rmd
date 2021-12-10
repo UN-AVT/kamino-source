@@ -1,0 +1,118 @@
+---
+pagetitle: "Where does your medicine come from?"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(rnaturalearth)
+library(rgdal)
+library(sf)
+# install.packages("remotes")
+# library(remotes)
+# install_github("rCarto/popcircle")
+#library(popcircle) # Not in CRAN (Comprehensive R Archive Network)
+library(cartography)
+library(ggthemes)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS 
+</div>
+
+# Where does your medicine come from?
+## Clean Data
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Benjamin Lehman on Unsplash"}
+
+masthead <- "assets/benjamin-lehman-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Always laugh when you can. It is cheap medicine....\
+--- Lord Byron\
+
+***
+
+
+### Ingest
+#### exporter, year, usd value
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "where-does-your-medicine-come-from/data/drug_medicine_exports.csv"
+url <- paste0(url_root, url_file)
+df <- read.csv(url, header = TRUE)
+df
+
+#df <- read.csv("archetypes/where-does-your-medicine-come-from/data/drug_medicine_exports.csv", header = TRUE)
+#df
+
+```
+
+### Wrangler
+#### clean data : <kbd> remove_missing_values </kbd>
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_1 <- df[!is.na(df$exports_usd),]
+df_1 
+
+```
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Makeover Monday, [GO](https://data.world/makeovermonday/2018w8-where-does-your-medicine-come-from){target="_blank"}
+* Data sources: ITC, TradeMap, [GO](https://www.trademap.org/Country_SelProduct_TS.aspx?nvpm=1%7c%7c%7c%7c%7cTOTAL%7c%7c%7c2%7c1%7c1%7c2%7c2%7c1%7c2%7c1%7c%7c1){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
