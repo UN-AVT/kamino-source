@@ -38,7 +38,7 @@ library(ggiraph)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
-font_add_google("Inconsolata", "inconsolata")
+#font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
 showtext_auto()
 
@@ -100,6 +100,7 @@ via_only <- filter(df_wrangled, nchar(via) > 0 & nchar(outbound) == 0)
 via_only$via_iso3c <- countrycode(via_only$via, origin = 'country.name', destination = 'iso3c')
 via_only <- merge(via_only, centroids, by.x = "via_iso3c", by.y = "iso3c")
 via_only <- via_only %>% rename(from_latitude = latitude.x, from_longitude = longitude.x, via_latitude = latitude.y, via_longitude = longitude.y)
+via_only <- via_only %>% select(-via_latitude, -via_longitude)
 via_only
 
 via_to <- filter(df_wrangled, nchar(via) > 0 & nchar(outbound) > 0)

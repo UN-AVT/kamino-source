@@ -1,17 +1,17 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Decline of the Landline"
 output: 
   html_document:
     theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: libs
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
@@ -24,7 +24,16 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
+library(geofacet)
+library(cowplot)
+library(ggimage)
 library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
@@ -32,60 +41,125 @@ library(ggiraph)
 MAPS  
 </div>
 
-# World Tile Grid
-## Temp
+# Decline of the Landline
+## Tile Grid
 
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Sanjoy Saha on Unsplash"}
 
+masthead <- "assets/sanjoy-saha-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Mr. Watson—Come here—I want to see you...\
+--- Alexander Graham Bell, first words spoken on a telephone\
 
 ***
 
-# Header
-## Subheader
+### Ingest
+#### landline subscriptions
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-worldtilegrid <- read.csv("archetypes/world-tile-grid.csv", header = TRUE)
-worldtilegrid
+landline <- read.csv("archetypes/phone-subscriptions/landline-usage.csv", header = TRUE)
+landline
 
 ```
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=6}
-
-mytheme <- theme_minimal() + theme(panel.grid = element_blank(), axis.text = element_blank(), axis.title = element_blank())
-colors <- c("#7F3C8D","#11A579","#3969AC","#F2B701","#E73F74","#80BA5A")
-
-v1 <- ggplot(worldtilegrid, aes(xmin = x, ymin = y, xmax = x + 1, ymax = y + 1, fill = region)) +
-  geom_rect(color = "#ffffff") +
-  geom_text(aes(x = x, y = y, label = alpha.2), color = "#ffffff", alpha = 0.5, nudge_x = 0.5, nudge_y = -0.5, size = 3) + 
-  scale_y_reverse() + 
-  scale_fill_manual(values = colors) + 
-  coord_equal() +
-  mytheme + theme(legend.position = "bottom")
-
-girafe(ggobj = v1, width_svg = 13, height_svg = 10,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-```
-
-# Exercises and practice
-## Knime and R practice solutions
+### Ingest
+#### mobile subscriptions
 
 
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# References
-## The citations and data sources used for this case
-
-http://www.maartenlambrechts.com/2017/10/22/tutorial-a-worldtilegrid-with-ggplot2.html
-
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# read.bibtex(file = "./citations.bib")
+mobile <- read.csv("archetypes/phone-subscriptions/mobile-phone-usage.csv", header = TRUE)
+mobile
 
 ```
 
 
+### Wrangle
+#### join, group, and summarize by decade
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+phones <- landline %>% 
+  select(entity, year, landline_subs) %>% 
+  left_join(mobile) %>% 
+  mutate(decade = year %/% 10 * 10) %>% 
+  group_by(entity, decade) %>% 
+  mutate(
+    median_landline_subs = median(landline_subs, na.rm = TRUE),
+    median_mobile_subs = median(mobile_subs, na.rm = TRUE)
+    ) %>% 
+  ungroup() %>% 
+  distinct(entity, code, decade, median_landline_subs, median_mobile_subs) %>% 
+  group_by(entity) %>% 
+  fill(code) %>% 
+  ungroup() %>% 
+  group_by(entity, decade) %>% 
+  mutate(
+    most = if_else(median_landline_subs > median_mobile_subs, "landline", "smartphone"),
+    img = if_else(!is.na(most), paste0("archetypes/phone-subscriptions/", most, ".png"), NULL)
+    ) %>% 
+  ungroup() %>% 
+  left_join(world_countries_grid1, by = c("entity" = "name"))
+
+phones
+
+```
+
+
+### View
+#### tiles with symbols by year
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata"),
+    plot.subtitle = element_text(color = "black", size = 12, family = "inconsolata"),
+    plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),    
+    plot.margin = margin(10, 10, 10, 10),
+    plot.background = element_rect(fill = "grey97", color = NA)
+)
+
+v1 <- ggplot(phones) +
+  geom_image(aes(col, -row - decade * 2.5, image = img), size = 0.014, asp = 0.8) +
+  geom_text(aes(-8, -10 - decade * 2.5, label = paste0("'", str_sub(decade, -2, -1), "s")), size = 10, stat = "unique", family = "inconsolata", color = "black", alpha = 0.8) +
+  labs(
+    title = toupper("The fall of landline"),
+    subtitle = "Indicating majority share of phone subscriptions (landline or mobile)\nas median values by country and decade"
+    ) +
+  coord_cartesian(clip = "off") +
+  xlim(-14, 34) +
+  theme_void() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 12, height_svg = 16,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Data: OurWorldInData.org
+* View: Georgios Karamanis
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
 
 
 ```{js, message=FALSE, warning=FALSE, echo=FALSE}
