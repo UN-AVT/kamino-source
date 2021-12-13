@@ -1,0 +1,174 @@
+---
+pagetitle: "State of Global Air: PM 2.5"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(geofacet)
+library(ggtext)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# State of Global Air: PM 2.5
+## World Tile Grid
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Yaroslav Boshnakov on Unsplash"}
+
+masthead <- "assets/yaroslav-boshnakov-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> this is a quote...\
+--- the attribution\
+
+
+***
+
+### Header
+#### Subheader
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_soga <- read.csv("archetypes/state-of-global-air/soga-pm2.5-rank-0.csv", header = TRUE)
+df_soga
+
+worldtilegrid <- read.csv("archetypes/world-tile-grid.csv", header = TRUE)
+worldtilegrid
+
+```
+
+
+### Header
+#### Subheader
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_soga_countries <- df_soga %>% select(Location, Average)
+
+df_soga_countries$iso3c <- countrycode(df_soga_countries$Location, origin = "country.name", destination = "iso3c")
+
+df_soga_countries
+
+```
+
+
+### Header
+#### Subheader
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+worldtilegrid <- worldtilegrid %>% select(alpha.3, x, y)
+
+df_grid <- merge(df_soga_countries, worldtilegrid, by.x = "iso3c", by.y = "alpha.3")
+df_grid
+
+```
+
+
+### View
+#### sized tiles with conditional label colors
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata", hjust = 0.5),
+    plot.subtitle = element_text(color = "black", size = 12, family = "inconsolata", hjust = 0.5),
+    plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),    
+    plot.margin = margin(10, 10, 10, 10),
+    plot.background = element_rect(fill = "#f5f5f5", color = NA),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background=element_rect(fill="#f5f5f5", colour="#f5f5f5"),
+    panel.border = element_blank(),
+    axis.text = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "none"
+)
+
+df_grid_view <- df_grid %>% mutate(color = ifelse(Average < mean(Average), "black", "white"))
+
+v1 <- ggplot(df_grid_view, aes(x = x, y = y)) +
+    geom_point(aes( fill = Average, size = Average), shape = 21, color = "white", stroke = 1.5) +
+    geom_text(aes(label = iso3c, color = color), size = 3, vjust = 0.5, hjust = 0.5, family = "inconsolata", fontface = "bold" ) +
+    scale_size( range = c(4, 16), guide = F ) +
+    scale_y_reverse() +
+    scale_fill_gradient(low = "#ffffff", high = "#111111", na.value = NA) +
+    scale_color_identity() +
+    coord_cartesian(clip = "off") +
+    labs(
+      title = "Global State of Air",
+      subtitle = "PM 2.5 Levels",
+      caption = NULL, x = NULL, y = NULL) +
+    theme_bw() +
+    theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 14,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+http://www.maartenlambrechts.com/2017/10/22/tutorial-a-worldtilegrid-with-ggplot2.html
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
