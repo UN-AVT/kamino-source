@@ -1,0 +1,138 @@
+---
+pagetitle: "Older Versus Younger"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, dev = "svg" )
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(reshape2)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+ 
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Older Versus Younger
+## Clean Data
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Paolo Bendandi on Unsplash"}
+
+masthead <- "assets/paolo-bendandi-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Count your age by friends, not years. Count your life by smiles, not tears.\
+--- John Lennon\
+
+***
+
+### Ingest
+#### age, gender, year, and population
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "older-versus-younger/IHME_GBD_2017_POP.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE)
+df
+
+```
+
+### Wrangle
+#### <kbd>Remove duplicates</kbd>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+age_levels <- c(
+     "Under 5",
+     "5 to 9",
+     "10 to 14",
+     "15 to 19",
+     "20 to 24",
+     "25 to 29",
+     "30 to 34",
+     "35 to 39",
+     "40 to 44",
+     "45 to 49",
+     "50 to 54",
+     "55 to 59",
+     "60 to 64",
+     "65 to 69",
+     "70 to 74",
+     "75 to 79",
+     "80 to 84",
+     "85 to 89",
+     "90 to 94",
+     "95 plus")
+
+
+# Select and filter rows
+# unique(df$age_group_name)
+# unique(df$location_name)
+df_wrangle  <- df[,c(2,4,6,7,11)]%>% 
+   filter(str_detect(location_name, 'SDI'))%>%
+   filter(sex_name!="Both")%>%
+   filter(age_group_name %in% age_levels) %>% 
+   filter(year_id == 2017)
+
+# Remove duplicate records
+df_wrangle <- unique(df_wrangle)
+df_wrangle
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Global Burden of Disease Study 2017 (GBD 2017) Population Estimates 1950-2017, [GO](http://ghdx.healthdata.org/record/ihme-data/gbd-2017-population-estimates-1950-2017){target="_blank"}
+* Data sources: SDI, [GO](http://www.healthdata.org/taxonomy/glossary/socio-demographic-index-sdi){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
