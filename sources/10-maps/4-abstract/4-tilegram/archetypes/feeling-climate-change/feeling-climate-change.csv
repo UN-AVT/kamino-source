@@ -1,0 +1,46 @@
+Region_Code,Region_Name,xcoord,ycoord,Observed_Change,Confidence_in_Human_Contribution
+NWN,North-Western North America,-3.7796,-2.0503,increase,high
+NEN,North-Eastern North America,-2.7186,-2.0503,increase,high
+WNA,Western North America,-4.3067,-1.1279,increase,medium
+CNA,Central North America,-3.2452,-1.1279,low agreement,low
+ENA,Eastern North America,-2.1885,-1.1279,low agreement,low
+NCA,Northern Central America,-3.5416,0.1311,increase,medium
+SCA,Southern Central America,-3.021,1.0488,increase,medium
+CAR,Caribbean,-1.9595,1.0488,increase,medium
+NWS,North-Western South America,-2.1396,2.3744,increase,high
+NSA,Northern South America,-1.0781,2.3744,increase,medium
+SAM,South American Monsoon,-1.6088,3.2994,increase,medium
+NES,North-Eastern South America,-0.5473,3.2994,increase,medium
+SWS,South-Western South America,-2.1396,4.2148,increase,medium
+SES,South-Eastern South America,-1.0781,4.2148,increase,high
+SSA,Southern South America,-1.6088,5.1171,limited data,low due to limited evidence
+GIC,Greenland/Iceland,-0.2419,-2.3373,increase,medium
+NEU,Northern Europe,2.8179,-2.3373,increase,high
+WCE,Western and Central Europe,2.2929,-1.4178,increase,high
+EEU,Eastern Europe,3.3544,-1.4178,increase,high
+MED,Mediterranean,2.8179,-0.2215,increase,high
+SAH,Sahara,2.404,1.0598,increase,medium
+WAF,Western Africa,1.883,1.9759,increase,medium
+CAF,Central Africa,2.9445,1.9759,limited data,low due to limited evidence
+NEAF,North Eastern Africa,3.9955,1.9759,increase,medium
+WSAF,West Southern Africa,2.404,2.8953,increase,high
+SEAF,South Eastern Africa,3.4655,2.8953,increase,medium
+MDG,Madagascar,4.8338,3.0797,increase,low
+ESAF,East Southern Africa,2.9348,3.8106,increase,high
+ARP,Arabian Peninsula,3.9955,0.5875,increase,medium
+WCA,West Central Asia,4.5295,-0.3341,increase,high
+WSB,West Siberia,5.0699,-1.2506,increase,high
+ESB,East Siberia,6.1314,-1.2506,increase,high
+RAR,Russian Arctic,6.6515,-2.1668,increase,medium
+RFE,Russian Far East,7.1816,-1.2506,increase,high
+ECA,East Central Asia,5.591,-0.3341,increase,high
+TIB,Tibetan Plateau,6.6515,-0.3173,increase,high
+SAS,South Asia,6.1212,0.5875,increase,high
+EAS,East Asia,7.713,-0.3173,increase,high
+SEA,South East Asia,8.2448,0.5875,increase,high
+NAU,Northern Australia,8.5885,2.2966,increase,high
+CAU,Central Australia,8.0541,3.2082,increase,high
+EAU,Eastern Australia,9.1156,3.2082,increase,high
+SAU,Southern Australia,8.5885,4.1372,increase,high
+PAC,Pacific Small Islands,9.9352,2.1049,increase,medium
+NZ,New Zealand,9.9352,4.3018,increase,low
