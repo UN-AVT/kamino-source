@@ -52,14 +52,14 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-> this is a quote...\
---- the attribution\
+> Environmental pollution is an incurable disease. It can only be prevented...\
+--- Barry Commoner\
 
 
 ***
 
-### Header
-#### Subheader
+### Ingest
+#### average PM 2.5 levels by country
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
@@ -67,14 +67,11 @@ knitr::include_graphics(masthead, dpi=72)
 df_soga <- read.csv("archetypes/state-of-global-air/soga-pm2.5-rank-0.csv", header = TRUE)
 df_soga
 
-worldtilegrid <- read.csv("archetypes/world-tile-grid.csv", header = TRUE)
-worldtilegrid
-
 ```
 
 
-### Header
-#### Subheader
+### Wrangle
+#### enrich with iso3c codes
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
@@ -88,12 +85,13 @@ df_soga_countries
 ```
 
 
-### Header
-#### Subheader
+### Wrangle
+#### enrich with grid coordinates
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
+worldtilegrid <- read.csv("archetypes/world-tile-grid.csv", header = TRUE)
 worldtilegrid <- worldtilegrid %>% select(alpha.3, x, y)
 
 df_grid <- merge(df_soga_countries, worldtilegrid, by.x = "iso3c", by.y = "alpha.3")
@@ -152,8 +150,12 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 14,
 ### References
 #### citations for narrative and data sources
 
-http://www.maartenlambrechts.com/2017/10/22/tutorial-a-worldtilegrid-with-ggplot2.html
+* Data: Health Effects Institute, State of Global Air / 2020
 
+<pre>
+Health Effects Institute. 2020. State of Global Air 2020. Special Report.
+Boston, MA:Health Effects Institute.
+</pre>
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 

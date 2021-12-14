@@ -27,10 +27,8 @@ gc() #free up memory and report the memory usage.
 library(tidyverse)
 library(janitor)
 library(countrycode)
-library(CoordinateCleaner)
 library(geojsonio)
 library(sf)
-library(geosphere)
 library(rnaturalearth)
 library(rnaturalearthdata)
 library(ggrepel)
@@ -38,7 +36,7 @@ library(ggiraph)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
-#font_add_google("Inconsolata", "inconsolata")
+font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
 showtext_auto()
 
@@ -51,32 +49,76 @@ MAPS
 # Pangolin Trafficking Routes
 ## Route Map
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Peter Schad on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Louis Mornaud on Unsplash"}
 
-masthead <- "assets/peter-schad-unsplash.jpg"
+masthead <- "assets/louis-mornaud-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-> There would be no population explosion if people who are trying to keep the wolf from the door\
-  wouldn't let the stork fly in through the window...\
---- Evan Esar\
+> Above all else, though, he prides himself on his skill at trapping pangolins,\
+  one of the most elusive but lucrative creatures in the forest...\
+--- Rachel Love Nuwer, Poached: Inside the Dark World of Wildlife Trafficking\
 
 ***
 
 
-
 ### Ingest
-#### tracking data from a directory of files
+#### trafficking routes
+
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df <- read.csv("archetypes/pangolin-trafficking-routes/pangolin-trafficking-routes.csv", header = TRUE)
-df
-# head(df, n=10)
+df <- read.csv("archetypes/pangolin-trafficking-routes/pangolin-trafficking-routes.csv", header = TRUE, fileEncoding = "utf-8")
+head(df, n=10)
 
-centroids <- read.csv("https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/lookups/country-centroids.csv", header = TRUE)
-centroids <- centroids %>% select(iso3c, latitude, longitude)
+```
+
+
+### Wrangle
+#### clean
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangled <- df %>% janitor::clean_names() %>%
+             mutate(date = as.POSIXlt(date), 
+                    latitude = as.numeric(latitude), 
+                    longitude = as.numeric(longitude),
+                    scale = as.integer(scale),
+                    carcass = as.integer(carcass),
+                    live = as.integer(live))
+
+head(df_wrangled, n=10)
+
+```
+
+
+### Wrangle
+#### summarize
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_total <- df_wrangled %>%
+  rowwise() %>%
+  mutate(total = sum(scale,carcass,live, na.rm = T))
+
+df_total$route_id <- seq.int(nrow(df_total))
+
+head(df_total, n=10)
+
+```
+
+
+### Wrangle
+#### enrich with country codes
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+df_total$via_iso3c <- countrycode(df_total$via, origin = 'country.name', destination = 'iso3c')
+df_total$outbound_iso3c <- countrycode(df_total$outbound, origin = 'country.name', destination = 'iso3c')
 
 ```
 
@@ -87,100 +129,116 @@ centroids <- centroids %>% select(iso3c, latitude, longitude)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df_wrangled <- df %>% janitor::clean_names() %>%
-             mutate(route_id = row_number(),
-                    date = as.POSIXlt(date), 
-                    latitude = as.numeric(latitude), 
-                    longitude = as.numeric(longitude),
-                    scale = as.integer(scale),
-                    carcass = as.integer(carcass),
-                    live = as.integer(live))
+centroids <- read.csv("https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/lookups/country-centroids.csv", header = TRUE)
+centroids <- centroids %>% select(iso3c, latitude, longitude)
+head(centroids, n=10)
 
-via_only <- filter(df_wrangled, nchar(via) > 0 & nchar(outbound) == 0)
-via_only$via_iso3c <- countrycode(via_only$via, origin = 'country.name', destination = 'iso3c')
+via_only <- filter(df_total, nchar(via) > 0 & nchar(outbound) == 0)
 via_only <- merge(via_only, centroids, by.x = "via_iso3c", by.y = "iso3c")
 via_only <- via_only %>% rename(from_latitude = latitude.x, from_longitude = longitude.x, via_latitude = latitude.y, via_longitude = longitude.y)
-via_only <- via_only %>% select(-via_latitude, -via_longitude)
-via_only
+#via_only
 
-via_to <- filter(df_wrangled, nchar(via) > 0 & nchar(outbound) > 0)
-via_to$via_iso3c <- countrycode(via_to$via, origin = 'country.name', destination = 'iso3c')
-via_to$outbound_iso3c <- countrycode(via_to$outbound, origin = 'country.name', destination = 'iso3c')
+via_to <- filter(df_total, nchar(via) > 0 & nchar(outbound) > 0)
 via_to <- merge(via_to, centroids, by.x = "via_iso3c", by.y = "iso3c")
 via_to <- merge(via_to, centroids, by.x = "outbound_iso3c", by.y = "iso3c")
 via_to <- via_to %>% rename(from_latitude = latitude.x, from_longitude = longitude.x, via_latitude = latitude.y, via_longitude = longitude.y, to_latitude = latitude, to_longitude = longitude)
-via_to
+#via_to
 
-to_only <- filter(df_wrangled, nchar(via) == 0 & nchar(outbound) > 0)
-to_only$via_iso3c <- countrycode(to_only$via, origin = 'country.name', destination = 'iso3c')
-to_only$outbound_iso3c <- countrycode(to_only$outbound, origin = 'country.name', destination = 'iso3c')
+to_only <- filter(df_total, nchar(via) == 0 & nchar(outbound) > 0)
 to_only <- merge(to_only, centroids, by.x = "outbound_iso3c", by.y = "iso3c")
 to_only <- to_only %>% rename(from_latitude = latitude.x, from_longitude = longitude.x, to_latitude = latitude.y, to_longitude = longitude.y)
-to_only
+#to_only
 
-no_dest <- filter(df_wrangled, nchar(via) == 0 & nchar(outbound) == 0)
-no_dest
+no_dest <- filter(df_total, nchar(via) == 0 & nchar(outbound) == 0)
+#no_dest
 
 ```
 
 
 ### Wrangle
-#### highlight Gili
+#### create points for hubs (origin, via, and destination)
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-gili <- filter(stork_gps_year, individual_local_identifier == '2421/HH847/Gili')
-head(gili, n=10)
+df_location_points <- df_total %>%
+  select(location, latitude, longitude, total) %>%
+  group_by(location, latitude, longitude) %>%
+  mutate(total = sum(total, na.rm = T), type = "location")
+  
+df_via_points_a <- via_only %>%
+  select(via, via_latitude, via_longitude, total) %>%
+  group_by(via, via_latitude, via_longitude) %>%
+  rename(location = via, latitude = via_latitude, longitude = via_longitude) %>%
+  mutate(total = sum(total, na.rm = T), type = "via")
 
-gili_labels <- gili %>% filter(row_number() == 1 | row_number() == n())
-gili_labels
+df_via_points_b <- via_to %>%
+  select(via, via_latitude, via_longitude, total) %>%
+  group_by(via, via_latitude, via_longitude) %>%
+  rename(location = via, latitude = via_latitude, longitude = via_longitude) %>%
+  mutate(total = sum(total, na.rm = T), type = "via")
 
-stork_gps_rest <- filter(stork_gps_year, individual_local_identifier != '2421/HH847/Gili')
+df_via_points <- rbind(df_via_points_a, df_via_points_b)
+  
+df_outbound_points_a <- via_to %>%
+  select(outbound, to_latitude, to_longitude, total) %>%
+  group_by(outbound, to_latitude, to_longitude) %>%
+  rename(location = outbound, latitude = to_latitude, longitude = to_longitude) %>%
+  mutate(total = sum(total, na.rm = T), type = "outbound")
+
+df_outbound_points_b <- to_only %>%
+  select(outbound, to_latitude, to_longitude, total) %>%
+  group_by(outbound, to_latitude, to_longitude) %>%
+  rename(location = outbound, latitude = to_latitude, longitude = to_longitude) %>%
+  mutate(total = sum(total, na.rm = T), type = "outbound")
+
+df_outbound_points <- rbind(df_outbound_points_a, df_outbound_points_b)
+
+df_all_points <- rbind(df_location_points, df_via_points, df_outbound_points)
+# df_all_points
+
+df_points <- df_all_points %>%
+  group_by(location, latitude, longitude, type) %>%
+  mutate(total = sum(total, na.rm = T))
+
+df_points$point_id <- seq.int(nrow(df_points))
+
+head(df_points, n=10)
 
 ```
 
 
-### Analyze
-#### compute geospatial distance along route
+### Wrangle
+#### create paths
 
+* origin -> via
+* origin -> via -> destination
+* origin -> destination
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-# calculate the distance from previous point
-gili_dist <- gili %>%
-  mutate(plocation_long = lag(location_long), plocation_lat = lag(location_lat)) %>%
-  rowwise() %>%
-  mutate(distance = distm( c(plocation_long, plocation_lat), c(location_long, location_lat), fun=distHaversine )) %>%
-  mutate(km = distance/1000)
+# via paths
+df_from <- via_only %>% select(route_id, location, scale, carcass, live, total, from_latitude, from_longitude ) %>% rename(latitude = from_latitude, longitude = from_longitude) %>% mutate(path_index = 0)
+df_to <- via_only %>% select(route_id, via, scale, carcass, live, total, via_latitude, via_longitude ) %>% rename(location = via, latitude = via_latitude, longitude = via_longitude) %>% mutate(path_index = 1)
+df_via_paths <- rbind(df_from, df_to)
+#df_via_paths
 
-gili_dist <- as.data.frame(gili_dist)
+# via and to paths
+df_from <- via_to %>% select(route_id, location, scale, carcass, live, total, from_latitude, from_longitude ) %>% rename(latitude = from_latitude, longitude = from_longitude) %>% mutate(path_index = 0)
+df_via <- via_to %>% select(route_id, via, scale, carcass, live, total, via_latitude, via_longitude ) %>% rename(location = via, latitude = via_latitude, longitude = via_longitude) %>% mutate(path_index = 1)
+df_to <- via_to %>% select(route_id, outbound, scale, carcass, live, total, to_latitude, to_longitude ) %>% rename(location = outbound, latitude = to_latitude, longitude = to_longitude) %>% mutate(path_index = 2)
+df_via_to_paths <- rbind(df_from, df_via, df_to)
+#df_via_to_paths
 
-# calculate cumulative sum and select samples
-gili_dist <- gili_dist %>% 
-  filter(distance > 0) %>% 
-  mutate(cumulative_km = round(cumsum(km), digits=0)) %>%
-  filter(row_number() %% 750 == 1)
+# to paths
+df_from <- to_only %>% select(route_id, location, scale, carcass, live, total, from_latitude, from_longitude ) %>% rename(latitude = from_latitude, longitude = from_longitude) %>% mutate(path_index = 0)
+df_to <- to_only %>% select(route_id, outbound, scale, carcass, live, total, to_latitude, to_longitude ) %>% rename(location = outbound, latitude = to_latitude, longitude = to_longitude) %>% mutate(path_index = 2)
+df_to_paths <- rbind(df_from, df_to)
+#df_to_paths
 
-gili_dist
-
-```
-
-### Base map, natural earth, option 1
-#### continent and country select
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
-
-africa <- ne_countries(scale = "small", continent = 'africa', returnclass = "sf")
-
-europe <- ne_countries(scale = "small", continent = 'europe', returnclass = "sf")
-europe <- filter(europe, iso_a3 != "RUS") 
-europe <- filter(europe, iso_a3 != "GUF") 
-
-middle_east <- ne_countries(scale = "small", country = c('turkey', 'syria', 'lebanon', 'jordan', 'iraq', 'israel', 'saudi arabia', 'yemen'), returnclass = "sf")
-
-ne_region <- rbind(africa, europe, middle_east)
+df_all_paths <- rbind(df_via_paths, df_via_to_paths, df_via_to_paths)
+df_all_paths <- df_all_paths %>% arrange(route_id, path_index) %>% distinct()
+head(df_all_paths, n=10)
 
 ```
 
@@ -200,70 +258,54 @@ ne_world <- filter(ne_world, iso_a3 != "ATA")
 
 
 ### Route map
-#### paths, points, and labels with coordinate limits
+#### paths and points
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 theme_opts <- theme(
   text = element_text(family = "inconsolata"), 
-  plot.title = element_text(color = "black", size = 18, face = "bold", family = "inconsolata"),
-  plot.subtitle = element_text(color = "black", size = 16, family = "inconsolata"),
+  plot.title = element_text(color = "black", size = 16, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "black", size = 14, family = "inconsolata"),
   plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),    
   plot.background = element_blank(),
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(),
-  panel.background=element_rect(fill="#cacdcf", colour="#cacdcf"),
+  panel.background=element_rect(fill="#B0BEC5", colour="#B0BEC5"),
   panel.border = element_blank(),
   axis.text = element_blank(),
   axis.line = element_blank(),
   axis.ticks = element_blank(),
   axis.title = element_blank(),
-  legend.position="none"
+  legend.title = element_blank(),
+  legend.position = "bottom"
 )
 
-stork_palette <- c(
-  "#F44336",
-  "#E91E63",
-  "#9C27B0",
-  "#673AB7",
-  "#3F51B5",
-  "#2196F3",
-  "#03A9F4",
-  "#00BCD4",
-  "#009688",
-  "#4CAF50",
-  "#8BC34A",
-  "#FFEB3B"
+point_shapes <- c(
+  "location" = 24,
+  "via" = 21,
+  "outbound" = 25
 )
 
 v1 <- ggplot(data = ne_world) +
-  geom_sf_interactive(aes(tooltip = iso_a3, data_id = iso_a3), fill="#e7e7e5", color="#717c8a", stroke=0.5) +
-  geom_path( data = stork_gps_rest, aes(x=location_long, y=location_lat, group=factor(tag_local_identifier)), color = "transparent", fill = 'white', size=3, alpha = 0.6) +
-  geom_path( data = stork_gps_rest, aes(x=location_long, y=location_lat, group=factor(tag_local_identifier), color = individual_local_identifier), size=0.5, alpha = 0.8) +
-  geom_path( data = gili, aes(x=location_long, y=location_lat, group=factor(tag_local_identifier)), size=4, color = "transparent", fill = 'white', alpha = 0.6) +
-  geom_path( data = gili, aes(x=location_long, y=location_lat, group=factor(tag_local_identifier)), size=1.5, color = 'orange') +
-  geom_point( data = gili_dist, aes(x=location_long, y=location_lat), shape = 21, size = 3, color = "white", fill = "black") +
-  geom_label_repel( data = gili_dist, aes(x=location_long, y=location_lat, label = paste0(cumulative_km, " kilometers\n", timestamp)), 
-                    xlim  = c(max(gili_dist$location_long)+10, NA),
-                    force_pull = 0, segment.size = 0.5, direction = "both", min.segment.length = 0,
-                    segment.curvature = -0.1, segment.ncp = 3, segment.angle = 20,
-                    size = 4, label.padding = unit(0.5, "lines"), fill = "orange", color = "black", alpha = 0.8, hjust = 0.0) +
-  geom_point( data = gili_labels, aes(x=location_long, y=location_lat), shape = 21, size = 4, color = "white", fill = "orange") +
-  geom_label( data = gili_labels, aes(x=location_long, y=location_lat, label = paste0("Gili\n", timestamp)), 
-                    nudge_x = -6, size = 4, label.padding = unit(0.5, "lines"), fill = "black", color = "white", hjust = 0.5) +
-  scale_color_manual(values = stork_palette) +
-  xlim(-20,60) +
-  ylim(-35,60) +
+  geom_sf(fill="#ECEFF1", color="#90A4AE", stroke=0.5) +
+  geom_path( data = df_all_paths, aes(x=longitude, y=latitude, group=factor(route_id)), color = "transparent", fill = 'white', size=3, alpha = 0.6) +
+  geom_path( data = df_all_paths, aes(x=longitude, y=latitude, group=factor(route_id), alpha = total), color = "#F06292", size=0.75) +
+  geom_point_interactive(data = df_points, aes(x=longitude, y=latitude, size = total, shape = type, tooltip = paste0("location: ", location, "\nType: ", type, "\nTotal: ", total), data_id = point_id), fill = "#F06292", color = "black") +
+  scale_shape_manual(values = point_shapes) +
+  scale_alpha_continuous(range = c(0.25, 1), guide = FALSE) +
+  scale_size_continuous(range = c(1, 5), guide = FALSE) +
+  xlim(-20, 150) +
+  ylim(-30, 60) +
   theme_bw() +
   labs(x="",
        y="",
-       title = "Stork Migration Tracks", 
-       subtitle="Routes Map, 2016") +
+       title = "Pangolin Trafficking Routes", 
+       subtitle="2000-2014") +
   theme_opts
   
-girafe(ggobj = v1, width_svg = 12, height_svg = 16,
-       options = list(opts_sizing(rescale = TRUE, width = 0.5))
+girafe(ggobj = v1, width_svg = 13, height_svg = 7.5,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
 ```
@@ -272,16 +314,7 @@ girafe(ggobj = v1, width_svg = 12, height_svg = 16,
 ### References
 #### citations for narrative and data sources
 
-* Narrative: inspired by the work of Cédric Scherer
-* Original Research and Data source:
-
-<pre>
-Rotics S, Kaatz M, Turjeman S, Zurell D, Wikelski M, Sapir N, Eggers U, Fiedler W, Jeltsch F,Nathan R (2018) Early arrival at breeding grounds: causes, costs and a trade-off with over wintering latitude. Journal of Animal Ecology.
-doi:10.1111/1365-2656.12898
-
-Rotics S, Kaatz M, Turjeman S, Zurell D, Wikelski M, Sapir N, Eggers U, Fiedler W, Jeltsch F,Nathan R (2018) Data from: Early arrival at breeding grounds: causes, costs and a trade-off with over wintering latitude.
-Movebank Data Repository. doi:10.5441/001/1.v8d24552
-</pre>
+* Data: Pangolin Project Data Catalog, [GO](https://roytangrb.github.io/pangolin/tHVzFgDQ18lvaol7/){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
