@@ -1,0 +1,201 @@
+---
+pagetitle: "Percentage of females married by 18"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(janitor)
+library(tidyverse)
+library(reshape2)
+library(kableExtra)
+library(ggtext)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Percentage of females married by 18
+## Normalize
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Karim Manjra on Unsplash"}
+
+masthead <- "assets/karim-manjra-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Let Girls Be Girls, Not Brides...\
+--- UN Secretary-General Ban Ki-Moon - 2012\
+
+***
+
+Normalization is used to standardize and scale values so they fit in a specific range. This pattern is useful when you need to run analytical models on your data (regression, classification, clustering, PCA, etc). Some models need the data to be "scaled" or normalized first before they can run. In situations where we have a lot of different (numerical variables) in very different ranges and levels of accuracy, we need to apply normalization processes.  Normalization recalculates the values, to always be in the same range.
+
+### Load the data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df = read_csv("archetypes/child-marriage/Viz5_Child_Marriage.csv")
+df
+
+```
+
+Let's look at the data types to observe what we'll need to wrangle.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+str(df)
+
+```
+
+Let's take a look at the summary statistics for the selected numerical measures:
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+summary(df)
+
+```
+Notice that these measures are in different scales. To illustrate why this may be an issue, let's plot:
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+
+dat.m <- melt(df,id.vars='Country', measure.vars=c('Females Married by 15', 'Females Married by 18', 'Males Married by 18'))
+v1 <- ggplot(dat.m) +
+  geom_boxplot(aes(y=value, color=variable)) +
+  theme_bw() +
+  theme(
+    panel.border = element_blank(),
+    legend.position = 'top',
+    axis.text.x=element_blank()
+  )
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9, options =
+list(opts_sizing(rescale = TRUE, width = 0.8)))
+```
+
+### Wrangle
+#### clean, arrange, and filter
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_wrangle <- df %>% janitor::clean_names()
+
+df_wrangle <- df_wrangle %>% arrange(desc(females_married_by_18)) %>%
+  filter(!is.na(males_married_by_18)) %>%
+  head(37)
+
+df_wrangle
+
+```
+
+Let's take a look at the summary statistics after data wrangling:
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+summary(df_wrangle)
+
+```
+
+### Z (statistical) Normalization
+#### <kbd> mutate_each_() </kbd>
+
+This normalization subtracts the mean of the data from all values and then divides them by the standard deviation. The distribution of the data has a __mean of zero__ and __a variance of one__. This is a common and very useful normalization technique. It preserves the original distribution of the data and is less influenced by outliers.
+
+Let's apply z normalization on the four columns from above:
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+
+df1 <- df_wrangle %>% mutate_each_(list(~scale(.) %>% as.vector), vars = c('females_married_by_15', 'females_married_by_18', 'males_married_by_18'))
+```
+
+
+```{r, echo=FALSE}
+df_tmp <-df1[1:10,]%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+column_spec(c(2:4), bold = TRUE, color = "#000000", background = "#CEE3F6")
+
+df_tmp 
+```
+
+After z normalization, let's check to make sure the mean is 0.
+
+```{r, echo=TRUE, message=FALSE,warning=FALSE}
+summary(df1)
+
+```
+Let's plot again. Notice that all measures are on similar scale.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+
+dat.m <- melt(df1,id.vars='country', measure.vars=c('females_married_by_15', 'females_married_by_18', 'males_married_by_18'))
+v2 <- ggplot(dat.m) +
+  geom_boxplot(aes(y=value, color=variable)) +
+  theme_bw() +
+  theme(
+    panel.border = element_blank(),
+    legend.position = 'top',
+    axis.text.x=element_blank()
+  )
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 9, options =
+list(opts_sizing(rescale = TRUE, width = 0.8)))
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Visualize Gender Equality - Help us end child marriage, [GO](https://media.data.world/1o2xvmj7TLCDfJPErISo_Child%20Marriage%20Dasbboard.png){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
