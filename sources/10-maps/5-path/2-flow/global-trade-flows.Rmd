@@ -69,7 +69,7 @@ knitr::include_graphics(masthead, dpi=72)
 df_flows = read.csv("archetypes/global-trade-flows/global-trade-flows.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
 df_points = read.csv("archetypes/global-trade-flows/global-trade-flows-points.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
 
-head(df_flows)
+head(df_flows, n=10)
 
 ```
 
@@ -84,12 +84,12 @@ head(df_flows)
 df_flows_exp <- filter( df_flows, expISO3 == "IRN" )
 df_flows_exp <- filter( df_flows_exp, tot_val_usd > 0 )
 
-df_flows_exp
+head(df_flows_exp, n=10)
 
 df_flows_imp <- filter( df_flows, impISO3 == "IRN" )
 df_flows_imp <- filter( df_flows_imp, tot_val_usd > 0 )
 
-df_flows_imp
+head(df_flows_imp, n=10)
 
 ```
 
@@ -105,13 +105,13 @@ df_flows_exporter <- df_flows_exp %>%
   group_by(exporter, expISO3, slongitude, slatitude) %>% 
   summarise(Total = sum(tot_val_usd))
 
-df_flows_exporter
+head(df_flows_exporter, n=10)
 
 df_flows_importer <- df_flows_imp %>% 
   group_by(importer, impISO3, tlongitude, tlatitude) %>% 
   summarise(Total = sum(tot_val_usd))
 
-df_flows_importer
+head(df_flows_importer, n=10)
 
 ```
 
@@ -124,7 +124,6 @@ df_flows_importer
 
 # PLOT NATURAL EARTH BORDERS
 ne_world <- ne_countries(scale = "small", returnclass = "sf")
-# class(ne_world)
 # removes Antarctica
 ne_world <- filter(ne_world, iso_a3 != "ATA") 
 
@@ -182,6 +181,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 7,
 ### Flow Map
 #### imports, by total value USD
 
+
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
 
 v2 <- ggplot(data = ne_world) +
@@ -205,14 +205,6 @@ v2 <- ggplot(data = ne_world) +
 girafe(ggobj = v2, width_svg = 16, height_svg = 7,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
-
-```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-ggsave(filename = "outputs/global-trade-flows-fs.svg", plot = v1, width=16, height=7)
 
 ```
 
