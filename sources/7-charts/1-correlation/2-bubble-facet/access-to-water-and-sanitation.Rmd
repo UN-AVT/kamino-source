@@ -57,7 +57,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
-Lack access to safely managed drinking water and sanitation services has a significant effect on people’s health. The impact on child mortality rates is devastating, causing death from diseases due to poor sanitation, poor hygiene, or unsafe drinking water.  The bubble chart is a perfect candidate to compare the services, so if we facet by year will we see any progress?
+Lack of access to safely managed drinking water and sanitation services has a significant effect on people’s health. The impact on child mortality rates is devastating, causing death from diseases due to poor sanitation, poor hygiene, or unsafe drinking water.  The bubble chart is a perfect candidate to compare the services, so if we facet by year will we see any progress?
 
 ### Ingest the data
 #### safely managed drinking water and sanitation services
@@ -70,8 +70,11 @@ Lack access to safely managed drinking water and sanitation services has a signi
 ```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # file path parameter
-df_file_path <- "archetypes/access-to water-and-sanitation/access-to water-and-sanitation-data.csv"
-df <- read.csv(df_file_path)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "access-to-water-and-sanitation/access-to-water-and-sanitation-data.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url)
 df
 
 ```
@@ -170,20 +173,6 @@ girafe(ggobj = v1, width_svg = 13, height_svg = 24,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/access-to-water-and-sanitation-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# without annotations
-ggsave(filename = "assets/access-to-water-and-sanitation-sm.png", plot = v1, width=4, height=2.25)
-
-```
-
 
 ### References
 #### The citations and data sources used for this case
