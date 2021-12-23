@@ -1,0 +1,141 @@
+---
+pagetitle: "Last Line of Defence"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(treemapify)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TREES  
+</div>
+
+# Last Line of Defence
+## The Treemap
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by National Cancer Institute on Unsplash"}
+
+masthead <- "assets/national-cancer-institute-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Without hair, a queen is still a queen...\
+--- Prajakta Mhadnak\
+
+
+***
+
+### Ingest the data
+#### disease by cause and death
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load data
+df <- read.csv("./archetypes/global-burden-of-disease/IHME-GBD_2019_DATA-GLOBAL-ALL-CAUSES.csv", header = TRUE, stringsAsFactors = TRUE)  # read text file 
+df
+
+df_taxonomy <- read.csv("./archetypes/global-burden-of-disease/IHME_GBD_2019_CAUSE_HIERARCHY_Y2020M11D25.csv", header = TRUE, stringsAsFactors = TRUE)  # read text file 
+# df_taxonomy
+
+```
+
+### Wrangle the data
+#### Create hierarchy
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+
+
+```
+
+
+### Analyze the data
+#### Create a quartile column to use for color mapping
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+
+
+```
+
+
+### The Layout
+#### squarified with size and fill
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Layouts
+# squarified" (the default), "scol", "srow" or "fixed"
+# Simple
+v1 <- ggplot(df_analysis, aes(area = val, fill = quartile)) +
+  geom_treemap(color = "#ffffff") +
+  scale_fill_brewer(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Sources:
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

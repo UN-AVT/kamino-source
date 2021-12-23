@@ -1,0 +1,101 @@
+Num,Company,Country,Sector,Market Cap (May 2021)
+#1,Apple,United States,Technology,"$2,051B"
+#2,Saudi Aramco,Saudi Arabia,Energy,"$1,920B"
+#3,Microsoft,United States,Technology,"$1,778B"
+#4,Amazon,United States,Consumer Discretionary,"$1,558B"
+#5,Alphabet,United States,Technology,"$1,393B"
+#6,Facebook,United States,Technology,$839B
+#7,Tencent,China,Technology,$753B
+#8,Tesla,United States,Consumer Discretionary,$641B
+#9,Alibaba,China,Consumer Discretionary,$615B
+#10,Berkshire Hathway,United States,Financials,$588B
+#11,TSMC,China,Technology,$534B
+#12,Visa,United States,Industrials,$468B
+#13,JPMorgan Chase,United States,Financials,$465B
+#14,Johnson & Johnson,United States,Health Care,$433B
+#15,Samsung Electronics,South Korea,Technology,$431B
+#16,Kweichow Moutai,China,Consumer Staples,$385B
+#17,Walmart,United States,Consumer Discretionary,$383B
+#18,Mastercard,United States,Industrials,$354B
+#19,UnitedHealth Group,United States,Health Care,$352B
+#20,LVMH Moët Hennessy,France,Consumer Discretionary,$337B
+#21,Walt Disney Co,United States,Consumer Discretionary,$335B
+#22,Bank of America,United States,Financials,$334B
+#23,Procter & Gamble,United States,Consumer Staples,$333B
+#24,Nvidia,United States,Technology,$331B
+#25,Home Depot,United States,Consumer Discretionary,$329B
+#26,Nestle SA,Switzerland,Consumer Staples,$322B
+#27,ICBC,China,Financials,$290B
+#28,Paypal Holdings,United States,Industrials,$284B
+#29,Roche Holdings,Switzerland,Health Care,$283B
+#30,Intel,United States,Technology,$261B
+#31,ASML Holding NV,Netherlands,Technology,$255B
+#32,Toyota Motor,Japan,Consumer Discretionary,$254B
+#33,Comcast,United States,Telecommunication,$248B
+#34,Verizon Communications,United States,Telecommunication,$241B
+#35,Exxon Mobil,United States,Energy,$236B
+#36,Netflix,United States,Consumer Discretionary,$231B
+#37,Adobe,United States,Technology,$228B
+#38,Coca-Cola Co,United States,Consumer Staples,$227B
+#39,Meituan,China,Technology,$226B
+#40,Ping An,China,Financials,$219B
+#41,Cisco Systems,United States,Telecommunication,$218B
+#42,AT&T,United States,Financials,$216B
+#43,L'Oréal,France,Consumer Discretionary,$215B
+#44,China Construction Bank,China,Financials,$213B
+#45,Abbott Labs,United States,Health Care,$212B
+#46,Novartis AG,Switzerland,Health Care,$212B
+#47,Nike,United States,Consumer Discretionary,$209B
+#48,Oracle,United States,Technology,$202B
+#49,Pfizer,United States,Health Care,$202B
+#50,Chevron,United States,Oil & Gas,$202B
+#51,China Merchants Bank,China,Financials,$196B
+#52,PepsiCo,United States,Consumer Staples,$195B
+#53,Salesforce.com,United States,Technology,$195B
+#54,Merck & Co,United States,Health Care,$195B
+#55,AbbVie,United States,Health Care,$191B
+#56,Broadcom,United States,Technology,$189B
+#57,Prosus NV,Netherlands,Technology,$181B
+#58,Reliance Industries,India,Energy,$180B
+#59,Thermo Fisher Scientific,United States,Health Care,$180B
+#60,Eli Lilly & Co,United States,Health Care,$179B
+#61,Agricultural Bank of China,China,Financials,$178B
+#62,Softbank Group,Japan,Telecommunication,$176B
+#63,Accenture,Ireland,Industrials,$176B
+#64,Texas Instruments,United States,Technology,$174B
+#65,McDonalds,United States,Consumer Discretionary,$167B
+#66,Volkswagen AG,Germany,Consumer Discretionary,$165B
+#67,BHP Group,Australia,Basic Materials,$163B
+#68,Wells Fargo & Co,United States,Financials,$162B
+#69,Tata Consultancy Services,India,Technology,$161B
+#70,Danaher,United States,Health Care,$160B
+#71,Novo Nordisk,Denmark,Health Care,$160B
+#72,Medtronic,Ireland,Health Care,$159B
+#73,Wuliangye Yibin,China,Consumer Staples,$159B
+#74,Costco Wholesale,United States,Consumer Discretionary,$156B
+#75,T-Mobile US,United States,Telecommunication,$156B
+#76,Citigroup,United States,Financials,$152B
+#77,Honeywell,United States,Industrials,$151B
+#78,Qualcomm,United States,Technology,$151B
+#79,SAP SE,Germany,Technology,$151B
+#80,Boeing,United States,Industrials,$149B
+#81,Royal Dutch Shell,Netherlands,Oil & Gas,$148B
+#82,NextEra Energy,United States,Utilities,$148B
+#83,United Parcel Service,United States,Industrials,$148B
+#84,Union PAC,United States,Industrials,$148B
+#85,Unilever,United Kingdom,Consumer Staples,$147B
+#86,AIA,China,Financials,$147B
+#87,Linde,United Kingdom,Basic Materials,$146B
+#88,Amgen,United States,Health Care,$144B
+#89,Bristol Myers Squibb,United States,Health Care,$141B
+#90,Siemens AG,Germany,Industrials,$140B
+#91,Bank of China,China,Financials,$139B
+#92,Philip Morris,United States,Consumer Staples,$138B
+#93,Lowe's Companies,United States,Consumer Discretionary,$136B
+#94,Charter Communications,United States,Telecommunication,$135B
+#95,China Mobile,China,Telecommunication,$134B
+#96,Sony Group,Japan,Consumer Discretionary,$132B
+#97,Astrazeneca,United Kingdom,Health Care,$131B
+#98,Royal Bank of Canada,Canada,Financials,$131B
+#99,Starbucks,United States,Consumer Discretionary,$129B
+#100,Anheuser-Busch,Belgium,Consumer Staples,$128B

@@ -1,0 +1,230 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(treemapify)
+library(ggiraph)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TREES  
+</div>
+
+# The Treemap
+## It's like a tree with squares
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Mike Kononov on Unsplash"}
+
+masthead <- "assets/mike-kononov-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Success doesn’t count unless you earn it fair and square...\
+--- Michelle Obama\
+
+The main distinguishing feature of a treemap is that it can display hierarchical, qualitative, and quantitative data.  Treemaps use size and color to convey data attributes, and a tiling layout to represent a tree structure.  Treemaps can be an effective display for revealing patterns and making comparisons between tree branches and leafs.
+
+***
+
+### Load data [Ingest]
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df = read.csv("./archetypes/nyt-the-top-1-percent/nyt-the-top-1-percent.csv", header = TRUE, stringsAsFactors = TRUE)  # read text file 
+df
+
+```
+
+### Analyze the data
+#### Create a quartile column to use for color mapping
+
+The within function is used for calculating new columns. The quantile function calculates the quartiles where 0:4/4 evaluates to c(0, 0.25, 0.50, 0.75, 1). Finally the cut function splits the data into the calculated quartiles. Casting the result to integers returns groups labeled as 1,2,3,4. The column is converted to a factor for use with a discrete color scale.
+
+```{r}
+
+df_analysis <- within(df, quartile <- factor(as.integer(cut(size, quantile(size, probs=0:4/4), include.lowest=TRUE))))
+df_analysis
+
+```
+
+
+
+### The Layout
+#### squarified with size and fill
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Layouts
+# squarified" (the default), "scol", "srow" or "fixed"
+# Simple
+v1 <- ggplot(df_analysis, aes(area = size, fill = quartile)) +
+  geom_treemap(color = "#ffffff") +
+  scale_fill_brewer(palette = "Oranges") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+#### with labels
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Labeled
+v2 <- ggplot(df_analysis, aes(area = size, fill = quartile, label = label)) +
+  geom_treemap(color = "#ffffff") +
+  geom_treemap_text(fontface = "italic", colour = "white", place = "centre", grow = TRUE) +
+  scale_fill_brewer(palette = "Oranges") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+#### with labels and color palette
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Sub-grouping
+v3 <- ggplot(df_analysis, aes(area = size, fill = quartile, label = label,
+                subgroup = pname)) +
+  geom_treemap(color = "#ffffff") +
+  geom_treemap_subgroup_border(colour = "white") +
+  geom_treemap_subgroup_text(place = "centre", grow = T, alpha = 0.5, colour =
+                               "black", fontface = "italic", min.size = 0) +
+  geom_treemap_text(colour = "white", place = "topleft", reflow = T) +
+  scale_fill_brewer(palette = "Oranges") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+# v3
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+#### as facets
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+filtered_data <- filter(df_analysis, pname != "all")
+
+# Sub-grouping
+v4 <- ggplot(filtered_data, 
+             aes(area = size, fill = quartile, label = label, subgroup = pname)) +
+  geom_treemap() +
+  facet_wrap( ~pname) +
+  scale_fill_brewer(palette = "Oranges") +
+  geom_treemap_subgroup_border(colour = "white") +
+  geom_treemap_subgroup_text(place = "centre", grow = T, alpha = 0.5, colour = "black", fontface = "italic", min.size = 0) +
+  geom_treemap_text(colour = "white", place = "topleft", reflow = T) +
+  theme_minimal()+
+  theme(legend.position = "bottom")
+
+girafe(ggobj = v4, width_svg = 1280/72, height_svg = 1280/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/nyt-the-top-1-percent-fs.svg", plot = v1, width=720/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/nyt-the-top-1-percent-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Sources:The New York Times, The Top 1 Percent: What Jobs Do They Have?, https://archive.nytimes.com/www.nytimes.com/packages/html/newsgraphics/2012/0115-one-percent-occupations/?ref=business
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'jobs occupation industry wealth'
+commands <- 'geom_treemap geom_treemap_subgroup_border geom_treemap_subgroup_text geom_treemap_text'
+sources <- 'The New York Times'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
