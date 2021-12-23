@@ -1,0 +1,73 @@
+Occupation,Type,Women_average_annual_salary,Men_average_annual_salary,Pay_gap,Pay_gap_as_a_percentage
+Receptionists,Admin & organisation,12009,13281,1272,10.59
+Secretaries,Admin & organisation,14614,15315,701,4.80
+Admin,Admin & organisation,14594,18729,4135,28.33
+Stock control,Admin & organisation,17271,20538,3267,18.92
+Government admin,Admin & organisation,19287,23047,3760,19.49
+Payroll & accounts,Admin & organisation,17914,25744,7830,43.71
+Human resources,Admin & organisation,25376,30153,4777,18.82
+Research & admin,Admin & organisation,31261,34986,3725,11.92
+Accountants,Admin & organisation,30122,40427,10305,34.21
+Paramedics,Care & education,34764,37078,2314,6.66
+Childcare,Care & education,11092,12880,1788,16.12
+Teaching assistants,Care & education,10931,13391,2460,22.50
+Care workers,Care & education,12204,16271,4067,33.33
+School crossing,Care & education,2301,3219,918,39.90
+Nurses,Care & education,26291,31816,5525,21.01
+Social workers,Care & education,29898,32286,2388,7.99
+Teaching & education,Care & education,30307,36971,6664,21.99
+Medical practitioners,Care & education,44955,78025,33070,73.56
+Culture & media,Creative & media,16093,24227,8134,50.54
+Graphic designers,Creative & media,22227,25610,3383,15.22
+Arts & media,Creative & media,22738,30197,7459,32.80
+Designers,Creative & media,25025,30506,5481,21.90
+Public relations ,Creative & media,25536,28820,3284,12.86
+Web design,Creative & media,26180,28990,2810,10.73
+Media professionals,Creative & media,28585,32236,3651,12.77
+Business & media,Creative & media,31168,37212,6044,19.39
+Advertising,Creative & media,34179,40084,5905,17.28
+Prison service,Law & justice,22634,28486,5852,25.85
+Legal associate,Law & justice,22645,31142,8497,37.52
+Police officers ,Law & justice,34715,40275,5560,16.02
+Senior police ,Law & justice,59871,57701,-2170,-3.62
+Probation officers,Law & justice,29767,31777,2010,6.75
+Solicitors,Law & justice,37734,42998,5264,13.95
+Traffic wardens,Law & justice,20023,18630,-1393,-6.96
+Security,Law & justice,19426,20096,670,3.45
+Debt collectors,Law & justice,14845,18338,3493,23.53
+Agricultural,Manual work,11925,18458,6533,54.78
+Construction,Manual work,18696,20442,1746,9.34
+Sewing machinists,Manual work,13510,17689,4179,30.93
+Printing & binding,Manual work,14190,20927,6737,47.48
+Textiles,Manual work,12938,21862,8924,68.98
+Leatherwork,Manual work,14146,22779,8633,61.03
+Metalwork,Manual work,15074,25544,10470,69.46
+Instrument making,Manual work,17952,28088,10136,56.46
+Electricians ,Manual work,24102,29666,5564,23.09
+Fire service,Sales & serving others,29782,30968,1186,3.98
+Housekeeping,Sales & serving others,11330,17101,5771,50.94
+Travel agents,Sales & serving others,14974,22505,7531,50.29
+Valeters,Sales & serving others,15183,14632,-551,-3.63
+Refuse ,Sales & serving others,12571,19289,6718,53.44
+Postal workers,Sales & serving others,16303,22974,6671,40.92
+Train & tram drivers,Sales & serving others,48422,47943,-479,-0.99
+Pharmacists,Sales & serving others,34039,44554,10515,30.89
+Sales assistants,Sales & serving others,7847,11720,3873,49.36
+Lab technicians,"Science, tech & engineering",16471,24094,7623,46.28
+Town planners,"Science, tech & engineering",29183,27725,-1458,-5.00
+Animal control,"Science, tech & engineering",14880,19210,4330,29.10
+Machine operatives,"Science, tech & engineering",13814,25280,11466,83.00
+Chemical operatives,"Science, tech & engineering",15840,25768,9928,62.68
+Architects,"Science, tech & engineering",29858,36006,6148,20.59
+Social scientists,"Science, tech & engineering",32007,36268,4261,13.31
+Civil engineers,"Science, tech & engineering",30472,38906,8434,27.68
+Electrical engineers,"Science, tech & engineering",42599,43382,783,1.84
+Finance & investing,Senior managers & execs,28609,37370,8761,30.62
+Taxation experts,Senior managers & execs,36155,42357,6202,17.15
+Retail managers,Senior managers & execs,19391,28658,9267,47.79
+HR managers,Senior managers & execs,39248,50516,11268,28.71
+IT directors,Senior managers & execs,63328,60215,-3113,-4.92
+Bank managers,Senior managers & execs,37129,63133,26004,70.04
+CEOs,Senior managers & execs,59048,86551,27503,46.58
+Business analysts,Senior managers & execs,33555,40599,7044,20.99
+Economists,Senior managers & execs,42405,44133,1728,4.07

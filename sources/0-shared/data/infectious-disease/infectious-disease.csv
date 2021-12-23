@@ -1,0 +1,63 @@
+N,Disease_Name,Pathogen type,Pathogen_Name,Pathogen_Size,Pathogen_Size_Grouped,R0,Contagiousness category,Case_Fatality_Rate_Percent,Primary_Mode_of_Transmission 
+1,Anthrax (untreated),bacterium,Bacillus anthracis,"4,000",1 µm < 10 µm,6.5,highly,20.00%,airborne
+2,Bubonic plague (treated),bacterium,Yersinia pestis,"1,500",1 µm < 10 µm,1,not very,15.00%,bite
+3,Bubonic plague (untreated),bacterium,Yersinia pestis,"1,500",1 µm < 10 µm,1,not very,60.00%,bite
+4,C. difficile,bacterium,Clostridium difficile,"1,250",1 µm < 10 µm,1.3,quite,24.00%,fecal-oral
+5,Campylobacter,bacterium,"Campylobacter, various species","4,000",1 µm < 10 µm,0.2,not very,1.20%,food
+6,Chicken pox,virus,Varicella zoster,175,100 nm < 1 µm,8.5,highly,0.00%,airborne
+7,Chikungunya,virus,Chikungunya virus,65,<100 nm,3.5,very,0.40%,bite
+8,Cholera,bacterium,"Vibro cholerae, some strains","1,300",1 µm < 10 µm,2.1,quite,1.60%,
+9,Common cold,virus,Many viral strains. Rhinoviruses most common.,30,<100 nm,6,highly,0.00%,airborne
+10,Dengue fever,virus,Dengue fever virus,50,<100 nm,3,very,0.10%,bite
+11,Diphtheria,bacterium,Corynebacterium diphtheriae,"4,000",1 µm < 10 µm,6.5,highly,7.50%,body fluids
+12,E. coli,bacterium,Escherichia coli ,"2,000",1 µm < 10 µm,1.2,quite,4.00%,fecal-oral
+13,Ebola,virus,"Ebolavirus, various species","14,000",10 µm < 100 µm,2.5,quite,50.00%,body fluids
+14,Echinococcosis,parasite,Echinococcus granulosus and Echinococcus multilocularis (worms),"4,000,000",> 1 mm,1.5,quite,,parasite
+15,Guinea worm disease (untreated),parasite,Dracunculus medinensis (worm),"1,000,000,000",> 1 mm,20,extremely,,waterborne
+16,"Hand, foot and mouth",virus,Coxsackievirus A16,30,<100 nm,3.5,very,0.10%,body fluids
+17,Hantavirus,virus,Hantavirus,140,100 nm < 1 µm,1.3,quite,36.00%,"airborne, fecal-oral"
+18,Helminthiases,parasite,Any parasitic worm,"250,000,000",> 1 mm,2.9,quite,,fecal-oral
+19,Hepatitis A,virus,Hepatitis A virus,30,<100 nm,1.3,quite,,fecal-oral
+20,Hepatitis B,virus,Hepatitis B virus,42,<100 nm,4,very,0.80%,body fluids
+21,HIV (treated),virus,Human immunodeficiency virus,120,100 nm < 1 µm,3.5,very,2.10%,sexual contact
+22,HIV (untreated),virus,Human immunodeficiency virus,120,100 nm < 1 µm,3.5,very,80.00%,sexual contact
+23,Influenza (bird flu),virus,Influenza A virus (H5N1),100,100 nm < 1 µm,1,not very,60.00%,airborne
+24,Influenza (seasonal flu),virus,"Influenza viruses, various species",85,<100 nm,2.5,quite,0.10%,airborne
+25,Influenza (Spanish flu),virus,Influenza A virus (H1N1),100,100 nm < 1 µm,3,very,2.50%,airborne
+26,Influenza (swine flu),virus,Influenza A virus (H1N1),100,100 nm < 1 µm,1.5,quite,0.20%,airborne
+27,Leishmaniasis,parasite,Leishmania parasites,"4,000",1 µm < 10 µm,8.5,highly,,bite
+28,Leprosy,bacterium,Mycobacterium leprae or Mycobacterium lepromatosis,"5,000",1 µm < 10 µm,2.8,quite,,body fluids
+29,Lyme disease,bacterium,"Borrelia, various species","16,500",10 µm < 100 µm,4.4,very,0.20%,bite
+30,Lymphatic filariasis,parasite,"Wuchereria bancrofti, Brugia malayi, and Brugia timori","75,000,000",> 1 mm,16,extremely,,bite
+31,Malaria (P. falciparum),parasite,Plasmodium falciparum,"2,000",1 µm < 10 µm,115,astronomically,0.50%,bite
+32,Malaria (P. malariae),parasite,Plasmodium malariae,"3,800",1 µm < 10 µm,16,extremely,0.50%,bite
+33,Marburg,virus,Marburg virus,"1,000",1 µm < 10 µm,1.6,quite,50.00%,body fluids
+34,Measles,virus,Measles virus,650,100 nm < 1 µm,15,extremely,0.30%,airborne
+35,"Meningitis (meningococcal, treated)",bacterium,Neisseria meningitidis ,"7,000",1 µm < 10 µm,1.3,quite,11.50%,"airborne, body fluids"
+36,"Meningitis (meningococcal, untreated)",bacterium,Neisseria meningitidis ,"7,000",1 µm < 10 µm,1.3,quite,50.00%,"airborne, body fluids"
+37,MERS,virus,MERS coronavirus,127,100 nm < 1 µm,0.5,not very,45.00%,airborne
+38,MRSA,bacterium,Staphylococcus aureus,"1,000",1 µm < 10 µm,1.6,quite,20.00%,surfaces
+39,Mumps,virus,Mumps rubulavirus,200,100 nm < 1 µm,13,extremely,1.00%,airborne
+40,Norovirus,virus,"Noroviruses, various serotypes",31,<100 nm,2,quite,0.00%,"fecal-oral, surfaces"
+41,Pneumonia (pneumococcal),bacterium,Streptococcus pneumoniae,875,100 nm < 1 µm,2,quite,7.50%,"airborne, body fluids"
+42,Pneumonic plague (untreated),bacterium,Yersinia pestis,"1,500",1 µm < 10 µm,3.2,very,100.00%,airborne
+43,Polio,virus,Poliovirus,30,<100 nm,6,highly,22.00%,fecal-oral
+44,Rabies (treated),virus,"Lyssaviruses, various species",180,100 nm < 1 µm,1.6,quite,1.00%,bite
+45,Rabies (untreated),virus,"Lyssaviruses, various species",180,100 nm < 1 µm,1.6,quite,100.00%,bite
+46,Rotavirus,virus,"Rotaviruses, various species",80,<100 nm,18,extremely,0.00%,fecal-oral
+47,Rubella,virus,Rubella virus,60,<100 nm,6,highly,0.00%,airborne
+48,Salmonella,bacterium,Salmonella enterica,"3,500",1 µm < 10 µm,0.8,not very,1.00%,food
+49,SARS,virus,SARS coronavirus,115,100 nm < 1 µm,2.4,quite,9.60%,airborne
+50,Scarlet fever,bacterium,Group A streptococcus: Streptococcus pyogenes and streptococcus dysgalactiae,"2,000",1 µm < 10 µm,2.8,quite,0.50%,body fluids
+51,Schistosomiasis,parasite,Parasitic flatworms called schistosomes,"15,000,000",> 1 mm,3.1,very,,waterborne
+52,Shigellosis,bacterium,"Shigella, various species","2,000",1 µm < 10 µm,1.5,quite,,
+53,Sleeping sickness,parasite,Trypanosoma brucei gambiense or T. brucei rhodesiense,"23,500",10 µm < 100 µm,0.8,not very,,bite
+54,Smallpox,virus,Variola virus,275,100 nm < 1 µm,6,highly,15.00%,airborne
+55,Syphilis (untreated),bacterium,Treponema pallidum,"10,500",10 µm < 100 µm,0.9,not very,33.00%,sexual contact
+56,Tuberculosis (untreated),bacterium,Mycobacterium tuberculosis ,"3,000",1 µm < 10 µm,10,extremely,60.00%,airborne
+57,Typhoid,bacterium,"Salmonella enterica, serotype Typhi","3,500",1 µm < 10 µm,2.8,quite,20.00%,fecal-oral
+58,vCJD,prion,Misfolded PRNP (prion protein),varies,varies,0.7,not very,100.00%,
+59,West Nile fever,virus,West Nile virus,50,<100 nm,9,highly,,bite
+60,Whooping cough,bacterium,Bordetella pertussis,800,100 nm < 1 µm,15,extremely,4.00%,airborne
+61,Yellow fever,virus,Yellow fever virus,50,<100 nm,3,very,7.50%,bite
+62,Zika,virus,Zika virus,40,<100 nm,4,very,,"bite, sexual contact"
