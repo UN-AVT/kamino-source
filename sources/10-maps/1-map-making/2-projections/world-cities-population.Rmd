@@ -177,14 +177,6 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 12,
 
 
 
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-ggsave(filename = "assets/global-city-populations-fs.svg", plot = v2, width=1280/72, height=720/72)
-
-```
-
-
 ### References
 #### citations for narrative and data sources
 

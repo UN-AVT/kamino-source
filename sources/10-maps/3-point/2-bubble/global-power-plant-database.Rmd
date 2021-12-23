@@ -128,19 +128,6 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ```
 
 
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/freedom-of-association-fs.svg", plot = v2, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/freedom-of-association-sm.svg", plot = v1, width=4, height=2.25)
-
-```
-
-
 ### References
 #### citations for narrative and data sources
 
@@ -149,20 +136,8 @@ ggsave(filename = "outputs/freedom-of-association-sm.svg", plot = v1, width=4, h
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "" # mostly used in wranglers and analytics
-keywords <- 'space launches satellite military civil private'
-commands <- 'geom_bar'
-sources <- 'Reuters DataWrapper'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

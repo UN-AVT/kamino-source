@@ -1,0 +1,320 @@
+---
+pagetitle: "Piracy"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(geojsonio)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(patchwork)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Piracy
+## Dot Map
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by the United States Navy on Wikimedia Commons"}
+
+masthead <- "assets/piracy.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+111218-N-ZZ999-070 GULF OF ADEN (Dec 19, 2011) A visit, board, search and seizure (VBSS) team from guided missile destroyer USS Pinckney (DDG 91), approached a suspected pirate after the Motor Vessel Nordic Apollo reported being under attack and fired upon by pirates. Pinckney is assigned to Combined Task Force 151, a multi-national, mission-based task force working under Combined Maritime Forces, to conduct counter-piracy operations in the Southern Red Sea, Gulf of Aden, Somali Basin, Arabian Sea, and Indian Ocean. (U.S. Navy photo/Released)
+
+
+> They're not here to fish...\
+--- Captain Phillips
+
+***
+
+
+### Ingest
+#### Anti-Shipping Activity Messages
+
+
+Anti-shipping Activity Messages (ASAM) include the locations and descriptive accounts of specific hostile acts against ships and mariners.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/piracy/nga-anti-shipping-activity-messages.csv", header = TRUE, stringsAsFactors = FALSE)
+head(df, n = 10)
+
+```
+
+
+### Wrangle
+#### create navarea boundaries
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+navarea_boundaries <- df %>% select(navarea, x, y) %>%
+  group_by(navarea) %>%
+  summarise(
+    xmin = min(x, na.rm = T),
+    xmax = max(x, na.rm = T),
+    ymin = min(y, na.rm = T),
+    ymax = max(y, na.rm = T),
+    count = n()
+  )
+
+navarea_boundaries
+
+```
+
+
+### Base map
+#### coastline
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# ne_world <- ne_countries(scale = "small", returnclass = "sf")
+ne_coastline <- ne_coastline(scale = "small", returnclass = "sf")
+
+```
+
+
+### View
+#### dot map with shape by victim vessel type (or hostility type) and navarea boundaries
+
+<div class="container-fluid">
+<div class="row">
+<div class="col  col-lg-5">
+
+__Hostility Type__
+
+* Naval Engagement
+* Pirate Assault
+* Other
+* Unknown
+* Kidnapping
+* Suspicious Approach
+* Robbery
+* Attempted Boarding 
+* Mothership Activity
+* Hijacking
+
+</div>
+<div class="col  col-lg-4">
+
+__Victim Vessel Type__
+
+* Vessel
+* Cargo Ship
+* Other
+* Merchant Vessel
+* Tanker
+* Sailing Vessel
+* Fishing Vessel
+* Tugboat
+* Unknown
+* Passenger Ship
+
+</div>
+<div class="col  col-lg-3">
+</br>
+
+* Barge
+* Offshore Vessel
+* Anchored Ship
+
+</div>
+</div>
+</div>
+
+<!-- we can use bootstrap css to help with the arrangement -->
+<div class="container-fluid">
+<div class="row">
+<div class="col  col-lg-12">
+
+<!-- top view -->
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "#111111", size = 14, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "#111111", size = 11, family = "inconsolata"),
+  plot.caption = element_text(color = "#111111", size = 8, family = "inconsolata"),
+  plot.background = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill="white", colour="black"),
+  panel.border = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  legend.title = element_blank()
+)
+
+# to limit bounds of map view
+xmin <- min(df$x)
+xmax <- max(df$x)
+ymin <- min(df$y)
+ymax <- max(df$y)
+
+# shape scale option for variable hostilit_D
+hostility_type <- c(
+  "Naval Engagement" = 1,
+  "Pirate Assault" = 2,
+  "Other" = 3,
+  "Unknown" = 4,
+  "Kidnapping" = 5,
+  "Suspicious Approach" = 6,
+  "Robbery" = 7,
+  "Attempted Boarding" = 8,
+  "Mothership Activity" = 9,
+  "Hijacking" = 10
+)
+
+# shape scale option for variable victim_l_D
+victim_vessel_type <- c(
+  "Vessel" = 1,
+  "Cargo Ship" = 2,
+  "Other" = 3,
+  "Merchant Vessel" = 4,
+  "Tanker" = 5,
+  "Sailing Vessel" = 6,
+  "Fishing Vessel" = 7,
+  "Tugboat" = 8,
+  "Unknown" = 9,
+  "NA" = 10,
+  "Passenger Ship" = 11,
+  "Barge" = 12,
+  "Offshore Vessel" = 13,
+  "Anchored Ship" = 14
+)
+
+vw <- ggplot(data = ne_coastline) +
+  geom_sf(fill="#f0f0f0", color="#888888", stroke=0.5) +
+  geom_rect(data = navarea_boundaries, mapping=aes(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax, color = count), fill=NA, alpha=0.5) +
+  geom_text(data = navarea_boundaries, aes(x=xmin+(xmax-xmin)/2, y=ymin+(ymax-ymin)/2, label=navarea), size=4, family = "inconsolata") +
+  geom_point( data = df, aes(x=x, y=y, shape = victim_l_D ), size=1.25, alpha = 0.7 ) +
+  scale_shape_manual( values = victim_vessel_type ) +
+  scale_colour_stepsn(colours = c("black", "orange", "red"), guide = "none") +
+  coord_sf(xlim = c(xmin, xmax), ylim = c(ymin, ymax)) +
+  labs(x=NULL,
+       y=NULL,
+       title = "Anti-Shipping Activity Messages", 
+       subtitle="with navarea zones") +
+  theme_bw() +
+  theme_opts + 
+  theme(legend.position = "top")
+
+girafe(ggobj = vw, width_svg = 16, height_svg = 6.20,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+</div>
+</div>
+
+<div class="row">
+<div class="col col-lg-12">
+    
+<!-- bottom view -->
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+iv <- filter(navarea_boundaries, navarea == "IV")
+v <- filter(navarea_boundaries, navarea == "V")
+
+viv <- ggplot(data = ne_coastline) +
+  geom_sf(fill="#f0f0f0", color="#888888", stroke=0.5) +
+  geom_point( data = df, aes(x=x, y=y, shape = victim_l_D ), size=4.0, alpha = 0.7 ) +
+  scale_shape_manual( values = victim_vessel_type ) +
+  coord_sf(xlim = c(iv$xmin, iv$xmax), ylim = c(iv$ymin, iv$ymax)) +
+  labs(x=NULL,
+       y=NULL,
+       title = "NAVAREA IV", 
+       subtitle=NULL) +
+  theme_bw() +
+  theme_opts +
+  theme(legend.position = "none")
+
+vv <- ggplot(data = ne_coastline) +
+  geom_sf(fill="#f0f0f0", color="#888888", stroke=0.5) +
+  geom_point( data = df, aes(x=x, y=y, shape = victim_l_D ), size=4.0, alpha = 0.7 ) +
+  scale_shape_manual( values = victim_vessel_type ) +
+  coord_sf(xlim = c(v$xmin, v$xmax), ylim = c(v$ymin, v$ymax)) +
+  labs(x=NULL,
+       y=NULL,
+       title = "NAVAREA V", 
+       subtitle=NULL) +
+  theme_bw() +
+  theme_opts +
+  theme(legend.position = "none")
+
+girafe(code = print(viv + vv), width_svg = 16, height_svg = 8.75,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+</div>
+</div>
+</div>
+
+### References
+#### Citations and data sources
+
+* National Geospatial-Intelligence Agency, ANTI-SHIPPING ACTIVITY MESSAGES, https://msi.nga.mil/Piracy
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

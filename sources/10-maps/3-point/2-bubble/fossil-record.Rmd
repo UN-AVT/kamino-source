@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Global City Populations"
 output: 
   html_document:
     theme: lumen
@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -47,7 +47,7 @@ showtext_auto()
 MAPS  
 </div>
 
-# Drone privacy laws
+# Fossil Record
 ## Bubble Map
 
 
@@ -128,41 +128,15 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ```
 
 
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/freedom-of-association-fs.svg", plot = v2, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/freedom-of-association-sm.svg", plot = v1, width=4, height=2.25)
-
-```
-
-
 ### References
 #### citations for narrative and data sources
 
 
-
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "" # mostly used in wranglers and analytics
-keywords <- 'space launches satellite military civil private'
-commands <- 'geom_bar'
-sources <- 'Reuters DataWrapper'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

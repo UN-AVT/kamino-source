@@ -1,0 +1,126 @@
+id,name,geometry/type,geometry/coordinates/0,geometry/coordinates/1,total,data/0/name,data/0/value,data/1/name,data/1/value,data/2/name,data/2/value,data/3/name,data/3/value
+HU2,Dunántúl,Point,4909735.778439152,2671069.0658224495,1439.57,Circulatory,732.59,Cancer,351.66,Respiratory,67.5,Other,288
+HU3,Alföld és Észak,Point,5137312.876623745,2757710.555454433,1500.58,Circulatory,802.26,Cancer,347.58,Respiratory,85.59,Other,265
+HR0,Hrvatska,Point,4844148.500364636,2316737.933478891,1334.01,Circulatory,629.93,Cancer,333.48,Respiratory,64.71,Other,306
+HU1,Közép-Magyarország,Point,5021896.844119321,2745513.173289673,1302.67,Circulatory,656.16,Cancer,333.16,Respiratory,82.23,Other,231
+PL6,Makroregion Pólnocny,Point,4862933.16413523,3428619.1089795707,1227.32,Circulatory,512.97,Cancer,321.81,Respiratory,85.01,Other,308
+SK0,Slovensko,Point,5016373.152454225,2888207.718149245,1315.24,Circulatory,617.4,Cancer,313.83,Respiratory,78.13,Other,306
+PT2,Região Autónoma dos Açores (PT),Point,1308144.1924964422,2351689.6013678075,1455.9,Circulatory,497.96,Cancer,313.16,Respiratory,200.41,Other,444
+UKM,Scotland,Point,3463937.777569431,3800294.3986347415,1137.73,Circulatory,305.72,Cancer,311.43,Respiratory,148.95,Other,372
+UKC,North East (UK),Point,3564010.450643234,3609675.9018437276,1103.28,Circulatory,267.54,Cancer,310.85,Respiratory,160.11,Other,365
+PL4,Makroregion Pólnocno-Zachodni,Point,4743998.814755342,3309016.2475441755,1238.03,Circulatory,525.71,Cancer,308.52,Respiratory,77.39,Other,326
+SI0,Slovenija,Point,4693423.869640536,2569249.988607765,1005.53,Circulatory,428.01,Cancer,307.48,Respiratory,67.53,Other,203
+PL2,Makroregion Poludniowy,Point,5012814.382993773,3041486.9776170813,1211.23,Circulatory,593.76,Cancer,299.05,Respiratory,52.01,Other,266
+NL1,Noord-Nederland,Point,4073218.035262565,3332532.809400402,1014.19,Circulatory,283.35,Cancer,297.4,Respiratory,76.95,Other,356
+PL7,Makroregion Centralny,Point,5012020.125351908,3177284.2255915753,1293.12,Circulatory,595.03,Cancer,296.52,Respiratory,75.63,Other,326
+LV0,Latvija,Point,5315759.977811137,3845447.9275269415,1476.67,Circulatory,848.55,Cancer,294.61,Respiratory,41.54,Other,292
+PL5,Makroregion Poludniowo-Zachodni,Point,4804286.99055047,3116968.0114234956,1213.63,Circulatory,553.35,Cancer,293.79,Respiratory,86.05,Other,280
+DK0,Danmark,Point,4278530.232667649,3658328.46301567,1013.63,Circulatory,246.98,Cancer,293.36,Respiratory,116.8,Other,356
+UKD,North West (UK),Point,3474780.470480184,3566391.625672558,1075.14,Circulatory,264,Cancer,291.92,Respiratory,161.82,Other,357
+PL9,Makroregion Województwo Mazowieckie,Point,5073157.250213301,3308369.597663222,1171.99,Circulatory,501.63,Cancer,291.01,Respiratory,93.88,Other,285
+UKN,Northern Ireland (UK),Point,3258006.2401747284,3625912.272094429,1013.77,Circulatory,240.65,Cancer,290.86,Respiratory,135.93,Other,346
+EE0,Eesti,Point,5233710.371257443,4054387.469592787,1206.88,Circulatory,643.31,Cancer,287.6,Respiratory,43.17,Other,233
+RO2,Macroregiunea doi,Point,5640751.594374423,2712851.352091085,1504.2,Circulatory,879.36,Cancer,287.57,Respiratory,88.91,Other,248
+FRE,Hauts-de-France,Point,3803124.679197909,3009749.8856786806,990.81,Circulatory,233.16,Cancer,284.61,Respiratory,76.35,Other,397
+NL4,Zuid-Nederland,Point,4002579.3072522064,3159495.4267130597,988.31,Circulatory,270.86,Cancer,284.58,Respiratory,83.12,Other,350
+UKE,Yorkshire and The Humber,Point,3583463.86808338,3488768.662629962,1039.11,Circulatory,272.07,Cancer,283.26,Respiratory,145.74,Other,338
+RO1,Macroregiunea unu,Point,5390373.139592196,2723769.7178672273,1458.87,Circulatory,882.39,Cancer,282.99,Respiratory,83.65,Other,210
+NL2,Oost-Nederland,Point,4048221.4481199095,3250353.6340778726,978.79,Circulatory,268.48,Cancer,282.19,Respiratory,86.36,Other,342
+NL3,West-Nederland,Point,3960736.2043570597,3243129.4622875485,959.82,Circulatory,250.99,Cancer,281.9,Respiratory,77.27,Other,350
+LT0,Lietuva,Point,5198375.546597099,3666276.4082289534,1452.21,Circulatory,844.91,Cancer,280.48,Respiratory,45.08,Other,282
+UKL,Wales,Point,3393201.4661295963,3331204.4786632787,1047.15,Circulatory,275.09,Cancer,280.14,Respiratory,161.32,Other,331
+CZ0,Cesko,Point,4704707.43405767,2972318.386399083,1203.85,Circulatory,568.97,Cancer,276.89,Respiratory,80.4,Other,278
+RO3,Macroregiunea trei,Point,5574087.156556716,2521602.7264690436,1454.87,Circulatory,892.83,Cancer,276.45,Respiratory,73.68,Other,212
+IE0,Éire/Ireland,Point,3125926.7851318168,3491377.3588754633,977.48,Circulatory,307.08,Cancer,275.96,Respiratory,133.58,Other,261
+DEA,Nordrhein-Westfalen,Point,4150862.682003529,3154429.66964329,1047.43,Circulatory,345.6,Cancer,275.85,Respiratory,85.47,Other,341
+UKG,West Midlands (UK),Point,3492802.577395604,3333792.8484851904,997.33,Circulatory,253.22,Cancer,274.53,Respiratory,134.82,Other,335
+UKF,East Midlands (UK),Point,3596013.0777022373,3366711.5310119144,988.1,Circulatory,253.26,Cancer,272.87,Respiratory,136.04,Other,326
+DEF,Schleswig-Holstein,Point,4309295.279234062,3441518.6304835244,1046.4,Circulatory,391.39,Cancer,271.61,Respiratory,71.15,Other,312
+DE8,Mecklenburg-Vorpommern,Point,4483903.055823759,3403481.301156039,1076.85,Circulatory,437.04,Cancer,270.92,Respiratory,64.15,Other,305
+DEE,Sachsen-Anhalt,Point,4437684.345847209,3212584.3789140885,1109.54,Circulatory,486.41,Cancer,270.83,Respiratory,54.15,Other,298
+DEC,Saarland,Point,4100117.9457955305,2924490.0951075368,1083.87,Circulatory,378.17,Cancer,269.8,Respiratory,56.46,Other,379
+IS0,Ísland,Point,2984932.434762216,4909798.574055957,944.58,Circulatory,315.89,Cancer,269.79,Respiratory,78.46,Other,280
+DE6,Hamburg,Point,4321663.05745376,3381277.5091772377,982.39,Circulatory,306.51,Cancer,268.12,Respiratory,56.7,Other,351
+PL8,Makroregion Wschodni,Point,5210428.356081868,3129002.866607056,1173.45,Circulatory,573.87,Cancer,267.37,Respiratory,57.43,Other,275
+BE3,Région wallonne,Point,3953866.406560006,3051589.2560100737,1088.11,Circulatory,296.45,Cancer,267.08,Respiratory,116.53,Other,408
+DE3,Berlin,Point,4551948.575952761,3271091.549671203,996.47,Circulatory,334.04,Cancer,266.54,Respiratory,86,Other,310
+EL3,Attiki,Point,5534441.91564435,1773812.5101294946,967.19,Circulatory,348.06,Cancer,264.48,Respiratory,122.42,Other,232
+DE5,Bremen,Point,4239808.837471099,3333803.434841744,1044.67,Circulatory,386.55,Cancer,263.74,Respiratory,94.29,Other,300
+UKH,East of England,Point,3676015.4621061897,3281507.5419058986,918.96,Circulatory,228.81,Cancer,263.09,Respiratory,125.59,Other,301
+DE4,Brandenburg,Point,4464254.05317905,3332686.339474473,1043.56,Circulatory,425.89,Cancer,261.89,Respiratory,70.29,Other,285
+FRD,Normandie,Point,3590479.562385495,2910965.258047968,883.01,Circulatory,212.83,Cancer,261.71,Respiratory,55.21,Other,353
+UKK,South West (UK),Point,3453248.949619246,3196615.826325732,923.75,Circulatory,236.66,Cancer,261.05,Respiratory,117.32,Other,309
+FI2,Åland,Point,4878998.733742394,4169248.37624288,985.08,Circulatory,426.34,Cancer,258.33,Respiratory,31.87,Other,269
+PT3,Região Autónoma da Madeira (PT),Point,1816437.8142662863,1519492.2972773653,1318.44,Circulatory,378.42,Cancer,258.3,Respiratory,288.33,Other,393
+UKJ,South East (UK),Point,3550672.1889239727,3204953.6941323928,892.92,Circulatory,226.8,Cancer,257.16,Respiratory,119.19,Other,290
+DE9,Niedersachsen,Point,4265894.445940844,3295110.4720576364,1050.71,Circulatory,415,Cancer,256.98,Respiratory,78.24,Other,300
+FRF,Grand Est,Point,3999128.3107691393,2851555.6048369086,898.09,Circulatory,215.43,Cancer,256.04,Respiratory,64.91,Other,362
+FRH,Bretagne,Point,3374719.3972572456,2865826.7476304374,890.47,Circulatory,222.66,Cancer,254.68,Respiratory,66.78,Other,346
+RO4,Macroregiunea patru,Point,5322513.639789463,2538429.6915025823,1483.73,Circulatory,956.32,Cancer,253.62,Respiratory,81.03,Other,193
+FRB,Centre - Val de Loire,Point,3694815.4980900423,2742752.1090329145,837.28,Circulatory,197.43,Cancer,253.11,Respiratory,50.56,Other,336
+DEB,Rheinland-Pfalz,Point,4169442.885150689,2935098.0196793764,1014.35,Circulatory,392.56,Cancer,252.52,Respiratory,70.73,Other,299
+ITC,Nord-Ovest,Point,4221022.946763466,2461753.9606651235,820.47,Circulatory,271.55,Cancer,252.13,Respiratory,62.11,Other,235
+ES1,Noroeste (ES),Point,2884667.601294486,2360473.3234310998,847.33,Circulatory,251.89,Cancer,251.4,Respiratory,88.3,Other,256
+AT1,Ostösterreich,Point,4758174.986829367,2799385.971558217,976.67,Circulatory,423.11,Cancer,250.86,Respiratory,48.95,Other,254
+EL5,Voreia Ellada,Point,5442365.378361132,2065544.2869476567,966.12,Circulatory,372,Cancer,249.66,Respiratory,91.87,Other,253
+DEG,Thüringen,Point,4392874.383300686,3088609.382126443,1068.75,Circulatory,439.48,Cancer,249.5,Respiratory,75.16,Other,305
+UKI,London,Point,3621046.4093641853,3193411.8612769577,859.7,Circulatory,233.5,Cancer,246.8,Respiratory,119.69,Other,260
+FRI,Nouvelle-Aquitaine,Point,3570894.350017166,2533989.9414267675,814.19,Circulatory,198.3,Cancer,246.42,Respiratory,51.71,Other,318
+FRG,Pays-de-la-Loire,Point,3510244.416018554,2768171.628885035,803.88,Circulatory,196.73,Cancer,245.27,Respiratory,50,Other,312
+PT1,Continente,Point,2787139.506756302,2026417.628343902,990.53,Circulatory,291.6,Cancer,243.89,Respiratory,118.72,Other,336
+BE1,Région de Bruxelles-Capitale/Brussels Hoofdstedelijk Gewest,Point,3923950.090484876,3096274.4497277895,944.6,Circulatory,249.49,Cancer,243.11,Respiratory,104.27,Other,348
+FRC,Bourgogne - Franche-Comté,Point,3927898.7340130294,2693348.128779107,856.18,Circulatory,200.86,Cancer,242.58,Respiratory,53.35,Other,359
+BG3,Severna i yugoiztochna Bulgaria,Point,5605781.407665308,2363817.299013435,1660.37,Circulatory,1142.42,Cancer,242.45,Respiratory,54.11,Other,221
+NO0,Norge,Point,4400360.071669444,4290749.169586167,894.88,Circulatory,245.99,Cancer,242.23,Respiratory,98.71,Other,308
+ES2,Noreste (ES),Point,3397745.779931127,2156360.8143977476,794.09,Circulatory,218.11,Cancer,241.85,Respiratory,76.29,Other,258
+DE7,Hessen,Point,4252501.337858381,3054765.3466161764,978.57,Circulatory,371.99,Cancer,241.07,Respiratory,70.41,Other,295
+ITI,Centro (IT),Point,4496355.22884418,2206734.949682473,825.05,Circulatory,287.12,Cancer,239.94,Respiratory,62.18,Other,236
+DED,Sachsen,Point,4554599.918862585,3110553.267159746,1001.66,Circulatory,439.43,Cancer,239.6,Respiratory,49.62,Other,273
+EL4,"Nisia Aigaiou, Kriti",Point,5675209.74892754,1482963.8355375738,925.16,Circulatory,308.85,Cancer,239.22,Respiratory,110.9,Other,266
+ITH,Nord-Est,Point,4444950.76940331,2488906.2226129146,808.22,Circulatory,270.93,Cancer,236.34,Respiratory,59.65,Other,241
+ITG,Isole,Point,4691645.376436951,1620552.1456962926,890.34,Circulatory,326.09,Cancer,235.81,Respiratory,61.46,Other,267
+LU0,Luxembourg,Point,4039761.2858585436,2969522.592701002,904.72,Circulatory,298.15,Cancer,235.45,Respiratory,71.41,Other,300
+AT2,Südösterreich,Point,4670832.517941102,2673778.3513223273,932.64,Circulatory,392.18,Cancer,235.44,Respiratory,49.23,Other,256
+BE2,Vlaams Gewest,Point,3970052.6950160656,3122054.03208919,889.05,Circulatory,254.33,Cancer,234.52,Respiratory,91.38,Other,309
+FRJ,Occitanie,Point,3687580.8601490455,2321866.953183975,807.1,Circulatory,192.58,Cancer,233.73,Respiratory,54.58,Other,326
+FRK,Auvergne - Rhône-Alpes,Point,3896492.6185135,2478658.6567373993,791.09,Circulatory,186.66,Cancer,233.54,Respiratory,52.85,Other,318
+EL6,Kentriki Ellada,Point,5378336.392421039,1858445.1035335895,943.78,Circulatory,346.94,Cancer,233.24,Respiratory,109.6,Other,254
+ES7,Canarias,Point,1713197.800617423,1034217.2750386917,871,Circulatory,252.98,Cancer,232.92,Respiratory,115.38,Other,270
+DE2,Bayern,Point,4425132.034864687,2871469.4046510654,972.21,Circulatory,379.47,Cancer,232.5,Respiratory,67.35,Other,293
+ITF,Sud,Point,4795297.089358328,1981527.6410189911,894.91,Circulatory,347.63,Cancer,232.2,Respiratory,63.58,Other,252
+SE2,Södra Sverige,Point,4555213.704192007,3817580.933897731,899.76,Circulatory,313.95,Cancer,231.91,Respiratory,65.1,Other,289
+ES4,Centro (ES),Point,2979933.43386502,2081159.0440715565,806.29,Circulatory,221.35,Cancer,231.76,Respiratory,98.81,Other,254
+TRA,Kuzeydogu Anadolu,Point,6960118.907804989,2450172.8889626698,1175.89,Circulatory,477.6,Cancer,228.98,Respiratory,174.29,Other,295
+SE3,Norra Sverige,Point,4693406.169645865,4725110.203655545,978.41,Circulatory,352.7,Cancer,228.4,Respiratory,60.72,Other,337
+FR1,Île de France,Point,3771751.3564317776,2873030.031617859,745.12,Circulatory,158.6,Cancer,227.87,Respiratory,51.49,Other,307
+ES5,Este (ES),Point,3655959.920806215,2117953.672794677,825.66,Circulatory,231.34,Cancer,227.65,Respiratory,84.41,Other,282
+TR1,Istanbul,Point,5856247.248854402,2201720.6384335947,1188.98,Circulatory,469.33,Cancer,226.88,Respiratory,161,Other,332
+ES6,Sur (ES),Point,3058664.233440575,1722356.8343914484,934.78,Circulatory,301.23,Cancer,226.22,Respiratory,102.27,Other,305
+SE1,Östra Sverige,Point,4685153.047810704,4034490.197813195,886.45,Circulatory,302.32,Cancer,225.68,Respiratory,61.08,Other,297
+DE1,Baden-Württemberg,Point,4250882.1287708385,2824981.8374329214,942.59,Circulatory,342.64,Cancer,223.99,Respiratory,58.74,Other,317
+FRL,Provence-Alpes-Côte d'Azur,Point,4004555.265419601,2325331.2576461476,802.7,Circulatory,170.97,Cancer,223.36,Respiratory,55.02,Other,353
+TR2,Bati Marmara,Point,5816849.482283216,2033564.6920407626,1275.75,Circulatory,609.07,Cancer,222.19,Respiratory,146.45,Other,298
+MT0,Malta,Point,4724721.257566071,1436760.1477476999,881.82,Circulatory,332.74,Cancer,220.95,Respiratory,95.07,Other,233
+AT3,Westösterreich,Point,4490987.677951175,2687766.4317561607,886.83,Circulatory,364.57,Cancer,220.53,Respiratory,56.55,Other,245
+FRM,Corse,Point,4246122.323787348,2114068.200135833,781.38,Circulatory,192.05,Cancer,220.45,Respiratory,46.96,Other,322
+FI1,Manner-Suomi,Point,5099820.00929246,4690366.602963888,974.4,Circulatory,359.26,Cancer,219.31,Respiratory,38.14,Other,358
+BG4,Yugozapadna i yuzhna tsentralna Bulgaria,Point,5490962.590923204,2224025.112251139,1529.8,Circulatory,1041.22,Cancer,218.9,Respiratory,75.68,Other,194
+TR4,Dogu Marmara,Point,6047172.270448001,2138289.7047051415,1281.42,Circulatory,580.57,Cancer,217.14,Respiratory,155.58,Other,328
+CH0,Schweiz/Suisse/Svizzera,Point,4184861.91581372,2650672.968982267,806.09,Circulatory,260.51,Cancer,215.31,Respiratory,51.84,Other,278
+ES3,Comunidad de Madrid,Point,3160248.5142888273,2039150.2629652102,710.51,Circulatory,177.43,Cancer,205.06,Respiratory,101.34,Other,227
+FRY,RUP FR - Régions ultrapériphériques françaises,Point,-2638134.614972216,778289.5374086602,858.9,Circulatory,219.21,Cancer,200.76,Respiratory,58.41,Other,381
+TR3,Ege,Point,5967718.149790756,1897589.6387739908,1225.66,Circulatory,544.62,Cancer,198.16,Respiratory,164.82,Other,318
+TR5,Bati Anadolu,Point,6278598.316694245,2008176.7631300394,1140.07,Circulatory,489.03,Cancer,198.04,Respiratory,139.32,Other,314
+LI0,Liechtenstein,Point,4287093.991729773,2669517.9342253134,891.57,Circulatory,353.35,Cancer,197.37,Respiratory,113.61,Other,227
+TR7,Orta Anadolu,Point,6505595.332196582,2154840.8148825774,1231.46,Circulatory,525.91,Cancer,194.89,Respiratory,189.92,Other,321
+CY0,Kypros,Point,6422725.970065843,1649752.350576063,966.21,Circulatory,331.55,Cancer,193.8,Respiratory,95.64,Other,345
+TRB,Ortadogu Anadolu,Point,7115459.724619516,2322049.719513328,1099.96,Circulatory,484.44,Cancer,188.7,Respiratory,150.75,Other,276
+TR8,Bati Karadeniz,Point,6356047.472971512,2323702.4823900335,1201.09,Circulatory,556.09,Cancer,186.43,Respiratory,163.03,Other,296
+TR9,Dogu Karadeniz,Point,6763236.812042372,2451586.085144408,1022.85,Circulatory,436.57,Cancer,183.93,Respiratory,137.67,Other,265
+TR6,Akdeniz,Point,6405011.160474715,1819848.3749145993,1174.63,Circulatory,538.97,Cancer,171.34,Respiratory,139.97,Other,324
+TRC,Güneydogu Anadolu,Point,6911273.627536284,2127717.6596096316,1117.85,Circulatory,521.54,Cancer,151.2,Respiratory,144.58,Other,301
+AL0,,Point,5167330.646069116,2060760.7661302658,,Circulatory,,Cancer,,Respiratory,,Other,
+ME0,,Point,5079740.841358178,2231888.587498815,,Circulatory,,Cancer,,Respiratory,,Other,
+MK0,,Point,5295559.177001531,2130780.666441309,,Circulatory,,Cancer,,Respiratory,,Other,
+RS1,,Point,5113884.868260734,2520004.2033068263,,Circulatory,,Cancer,,Respiratory,,Other,
+RS2,,Point,5216263.191572618,2356197.7482354236,,Circulatory,,Cancer,,Respiratory,,Other,

@@ -1,0 +1,208 @@
+---
+pagetitle: "Coral Bleaching"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(CoordinateCleaner)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+### Coral Bleaching
+#### Dot Map
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Pawah Reserve on Unsplash"}
+
+masthead <- "assets/bawah-reserve-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> The most single revelatory three minutes for me was\
+  the first time I put on scuba gear and dived on a coral reef...\
+--- David Attenborough
+
+***
+
+
+When corals are stressed by changes in conditions such as temperature, light, or nutrients, they expel the symbiotic algae living in their tissues, causing them to turn completely white. When a coral bleaches, it is not dead. Corals can survive a bleaching event, but they are under more stress and are subject to mortality.
+
+* Change in ocean temperature: increased ocean temperature caused by climate change is the leading cause of coral bleaching. 
+* Runoff and pollution: storm generated precipitation can rapidly dilute ocean water and runoff can carry pollutants — these can bleach near-shore corals. 
+* Overexposure to sunlight: when temperatures are high, high solar irradiance contributes to bleaching in shallow-water corals. 
+* Extreme low tides: exposure to the air during extreme low tides can cause bleaching in shallow corals.
+
+
+### Ingest
+#### bleach points
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_bleach <- read.csv("archetypes/coral-bleaching/bleach-pts.csv", header = TRUE, stringsAsFactors = FALSE)
+head( df_bleach, n = 10 )
+
+```
+
+
+### Wrangle
+#### order by severity
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# arrange high to appear on top
+severity_order <- c("Severity Unknown", "No Bleaching", "Low", "Medium", "High" )
+df_bleach <- df_bleach %>% dplyr::arrange(factor(SEVERITY, levels = severity_order))
+
+```
+
+
+### Base map
+#### natural earth borders, coastline, and country centroids
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+ne_coastline <- ne_coastline(scale = "small", returnclass = "sf")
+
+centroids <- countryref %>% filter(type == "country") %>%
+  select(name, centroid.lon, centroid.lat) %>%
+  group_by(name) %>%
+  summarise(
+    longitude = mean(centroid.lon, na.rm = T),
+    latitude = mean(centroid.lat, na.rm = T)
+  )
+  
+# xlim = c(-100, -40), ylim = c(-5, 35)
+centroids <- centroids %>% filter(longitude >= -100 & longitude <= -40)
+centroids <- centroids %>% filter(latitude >= -5 & latitude <= 35)
+head(centroids, n = 10)
+
+```
+
+
+### View
+#### color by severity
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "#111111", size = 14, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "#111111", size = 11, family = "inconsolata"),
+  plot.caption = element_text(color = "#111111", size = 8, family = "inconsolata"),
+  plot.background = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="#b5dafd", colour="#b5dafd"),
+  panel.border = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  legend.position = "bottom",
+  legend.title = element_blank()
+)
+
+# unique(df_bleach$SEVERITY)
+# color palette from severity values
+severity_types <- c(
+  "High" = "#FFFFFF",
+  "Medium" = "#FFD9FC",
+  "Low" = "#FFA8D4",
+  "No Bleaching" = "#ff7f50",
+  "Severity Unknown" = "#B2DFDB"
+)
+
+v1 <- ggplot() +
+  geom_sf(data = ne_coastline, fill=NA, color="#bddefe", size=10.0) +
+  geom_sf(data = ne_coastline, fill=NA, color="#edf5fc", size=4.0) +
+  geom_sf(data = ne_world, fill="#fdfbde", color="#797875", size=0.5) +
+  geom_point( data = df_bleach, aes(x=LON, y=LAT), color = "white", size=3.5) +
+  geom_point( data = df_bleach, aes(x=LON, y=LAT, fill=SEVERITY), shape = 21, color = "#ff7f50", size=2.5, alpha = 0.7) +
+  geom_text_repel(data = centroids, aes(x = longitude, y = latitude, label = name), 
+                  size = 4, hjust = 0.5, vjust = 0.5, family = "inconsolata", fontface = "bold",
+                  seed = 42, force = 10, force_pull = 0, min.segment.length = 0, color = "black", bg.color = "white", bg.r = 0.15) +
+  scale_fill_manual(values = severity_types) +
+  coord_sf(xlim = c(-100, -40), ylim = c(-5, 35)) +
+  labs(x=NULL,
+       y=NULL,
+       title = "Coral Bleaching", 
+       subtitle="color by severity") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 12.5,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+### References
+#### Citations and data sources
+
+
+* NOAA, What is coral bleaching?, https://oceanservice.noaa.gov/facts/coral_bleach.html
+* Reefbase, "Coral Bleaching Dataset," downloaded from http://www.reefbase.org on 10 August 2004.  
+* Global Coral Disease Database, United Nations Environment Programme -- World Conservation Monitoring Centre, 2001.
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
