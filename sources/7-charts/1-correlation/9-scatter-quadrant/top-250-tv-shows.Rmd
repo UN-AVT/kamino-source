@@ -58,7 +58,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/top-250-tv-shows/imdb_popular.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "top-250-tv-shows/imdb_popular.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df
 
 ```
@@ -80,7 +84,7 @@ summary(df)
 
 ### Scatter Quadrant Plot
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide',out.width = "100%"}
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -125,19 +129,6 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 
 
 ```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# full version
-ggsave(filename = "assets/imdb-top-tv-fs.svg", plot = v1, width=16, height=15)
-
-# without annotations
-# ggsave(filename = "assets/worlds-most-generous-sm.svg", plot = v1, width=4, height=2.25)
-
-```
-
 
 ### References
 #### Citations and data sources

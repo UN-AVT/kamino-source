@@ -66,8 +66,11 @@ Let's examine the situation.
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 #Load data
-url_file <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv"
-food_consumption <- read.csv(url_file)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "food-consumption-and-co2-emissions/food-consumption-and-co2-emissions.csv"
+url <- paste0(url_root, url_file)
+
+food_consumption <- read.csv(url)
 food_consumption
 
 ```

@@ -62,9 +62,12 @@ Based on the reporting of Our World in Data, if we compare life satisfaction rep
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # Load csv data file
-df <- read.csv("archetypes/life-satisfaction-vs-gdp/life-satisfaction-vs-gdp.csv", header = TRUE, stringsAsFactors = FALSE)
-df
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "life-satisfaction-vs-gdp/life-satisfaction-vs-gdp.csv"
+url <- paste0(url_root, url_file)
 
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
+df
 
 ```
 
@@ -103,7 +106,7 @@ df_clustered
 #### color by cluster
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -138,26 +141,11 @@ v1 <- ggplot(df_clustered, aes(x = Life_Satisfaction, y = GDP_per_Capita_PPP, co
   theme_bw() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.75))
 )
 
 ```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/life-satisfaction-vs-gdp-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/life-satisfaction-vs-gdp-sm.svg", plot = v1, width=4, height=2.25)
-
-```
-
 
 ### References
 #### citations for narrative and data sources

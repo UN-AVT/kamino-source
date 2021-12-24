@@ -65,7 +65,11 @@ Infectious diseases are diseases that are caused by germs.  As we'll see with th
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/infectious-disease/infectious-disease.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "infectious-disease/infectious-disease.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df
 
 ```
@@ -112,7 +116,7 @@ df_complete
 #### Position, Shape, Color
 
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # theme parameters
 theme_opts <- theme(
@@ -195,7 +199,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 12,
 #### and annotations...
 
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v2 <- v1 + geom_vline(xintercept = 1) +
   geom_vline(xintercept = 5) +
@@ -257,21 +261,6 @@ v2 <- v1 + geom_vline(xintercept = 1) +
 girafe(ggobj = v2, width_svg = 16, height_svg = 12,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
       )
-
-```
-
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/infectious-disease-fs.svg", plot = v2, width=1280/72, height=720/72)
-
-# without annotations
-ggsave(filename = "assets/infectious-disease-sm.png", plot = v1, width=4, height=2.25)
 
 ```
 

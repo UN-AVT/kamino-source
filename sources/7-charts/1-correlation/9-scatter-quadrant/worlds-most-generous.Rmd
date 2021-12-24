@@ -66,7 +66,11 @@ Let's take a closer look at the situation.
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/worlds-most-generous/worlds-most-generous.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "worlds-most-generous/worlds-most-generous.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df
 
 ```
@@ -125,7 +129,7 @@ df_complete
 #### position, shape, color, and labels
 
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # theme parameters
 theme_opts <- theme(
@@ -177,7 +181,7 @@ v1 <- ggplot(df_complete) +
 
 girafe(ggobj = v1, width_svg = 16, height_svg = 12,
        options = list(
-         opts_sizing(rescale = TRUE, width = 1.0), 
+         opts_sizing(rescale = TRUE, width = .80), 
          opts_hover(css = "fill:#81D4FA;")
          )
       )
@@ -189,7 +193,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 12,
 #### with annotations...
 
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v2 <- v1 + geom_hline(yintercept = generosity_average, linetype = "dashed", color = "#f15a24") +
   geom_vline(xintercept = gdp_average, linetype = "dashed", color = "#f15a24") +
@@ -220,22 +224,10 @@ v2 <- v1 + geom_hline(yintercept = generosity_average, linetype = "dashed", colo
 
 girafe(ggobj = v2, width_svg = 16, height_svg = 12,
        options = list(
-         opts_sizing(rescale = TRUE, width = 1.0), 
+         opts_sizing(rescale = TRUE, width = .80), 
          opts_hover(css = "fill:#81D4FA;")
          )
       )
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# full version
-ggsave(filename = "assets/worlds-most-generous-fs.svg", plot = v2, width=1280/72, height=720/72)
-
-# without annotations
-ggsave(filename = "assets/worlds-most-generous-sm.svg", plot = v1, width=4, height=2.25)
 
 ```
 

@@ -61,8 +61,14 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df <- read.csv("archetypes/ghg-emissions-by-country/ghg-emissions-by-country.csv", header = TRUE, stringsAsFactors = TRUE)
+#Load data
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "ghg-emissions-by-country/ghg-emissions-by-country.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = TRUE)
 df
+
 
 ```
 
@@ -70,7 +76,7 @@ df
 ### The Heatmap
 #### GHG emissions (million tons CO2 per year)
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -99,26 +105,11 @@ v1 <- ggplot(df)+
       theme_bw() +
       theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 
 ```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/ghg-emissions-heatmap-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/ghg-emissions-heatmap-sm.png", plot = v1, width=4, height=2.25)
-
-```
-
 
 ### References
 #### citations for narrative and data sources

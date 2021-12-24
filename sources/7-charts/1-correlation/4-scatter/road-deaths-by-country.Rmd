@@ -65,7 +65,12 @@ GDP
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df_gdp <- read.csv("archetypes/road-deaths-by-country/gdp.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+
+url_file1 <- "road-deaths-by-country/gdp.csv"
+url1 <- paste0(url_root, url_file1)
+
+df_gdp <- read.csv(url1, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
 df_gdp
 
 ```
@@ -76,8 +81,13 @@ Road deaths
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df_rd <- read.csv("archetypes/road-deaths-by-country/road-deaths.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+url_file2 <- "road-deaths-by-country/road-deaths.csv"
+url2 <- paste0(url_root, url_file2)
+
+df_rd <- read.csv(url2, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
 df_rd
+
+
 
 ```
 
@@ -112,7 +122,7 @@ df_final
 #### data points with smoothing
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -154,9 +164,8 @@ v1 <- ggplot(df_final, aes(x = GDP, y = ROAD_DEATHS)) +
   theme_bw() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
-       options = list(opts_sizing(rescale = TRUE, width = 0.75))
-)
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75)))
 
 ```
 
@@ -194,7 +203,7 @@ df_labels
 #### adding labels and annotations
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v2 <- v1 +
   geom_text_repel(data=df_labels, aes(label = COUNTRY), box.padding = 0.75, min.segment.length = 0.0, nudge_y = 0.75, point.padding = 0.5, family = "inconsolata") + 
@@ -202,20 +211,6 @@ v2 <- v1 +
 
 girafe(ggobj = v2, width_svg = 16, height_svg = 12,
        options = list(opts_sizing(rescale = TRUE, width = 0.8)))
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/road-deaths-by-country-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/road-deaths-by-country-sm.svg", plot = v1, width=4, height=2.25)
 
 ```
 
