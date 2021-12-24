@@ -1,0 +1,16 @@
+"Continent ID","Continent","Country ID","Country","ISO 3","Trade Value"
+"af","Africa","afken","Kenya","ken",3007773
+"af","Africa","afswz","Eswatini","swz",13.999999999999998
+"as","Asia","asare","United Arab Emirates","are",3140602
+"as","Asia","aschn","China","chn",2406054
+"as","Asia","asind","India","ind",979450
+"as","Asia","assau","Saudi Arabia","sau",3000
+"as","Asia","assgp","Singapore","sgp",55119
+"as","Asia","astur","Turkey","tur",62842.99999999999
+"eu","Europe","eubel","Belgium","bel",409494
+"eu","Europe","euche","Switzerland","che",24564908
+"eu","Europe","eudeu","Germany","deu",319718
+"eu","Europe","eufra","France","fra",596538
+"eu","Europe","euirl","Ireland","irl",67881
+"eu","Europe","eunld","Netherlands","nld",305933
+"na","North America","nausa","United States","usa",3428

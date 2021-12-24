@@ -149,20 +149,6 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 16,
 
 ```
 
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/water-sources-in-africa-fs.svg", plot = v1, width=1152/72, height=1152/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/water-sources-in-africa-sm.svg", plot = v1, width=16, height=16)
-
-```
-
-
 ### References
 #### citations for narrative and data sources
 

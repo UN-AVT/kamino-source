@@ -1,0 +1,251 @@
+---
+pagetitle: "The Global Burden of Disease"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(treemapify)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TREES  
+</div>
+
+# The Global Burden of Disease
+## The Treemap
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by National Cancer Institute on Unsplash"}
+
+masthead <- "assets/national-cancer-institute-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Without hair, a queen is still a queen...\
+--- Prajakta Mhadnak\
+
+Global Burden of Disease Study, 2019
+
+***
+
+### Ingest the data
+#### disease by cause and death
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load data
+df <- read.csv("./archetypes/global-burden-of-disease/IHME-GBD_2019_DATA-GLOBAL-ALL-CAUSES.csv", header = TRUE, stringsAsFactors = TRUE)  # read text file 
+df
+
+df_taxonomy <- read.csv("./archetypes/global-burden-of-disease/IHME_GBD_2019_CAUSE_HIERARCHY_Y2020M11D25.csv", header = TRUE, stringsAsFactors = TRUE)  # read text file 
+# df_taxonomy
+
+```
+
+### Wrangle the data
+#### Create hierarchy
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df %>% filter(measure_name == "Deaths")
+df_wrangle <- df_wrangle %>% filter(metric_name == "Number")
+df_wrangle <- df_wrangle %>% select(cause_id, cause_name, val)
+
+df_taxonomy_select <- df_taxonomy %>% select(Cause.ID, Cause.Name, Parent.ID, Parent.Name, Level)
+df_taxonomy_l1 <- df_taxonomy_select %>% filter(Level == 1)
+df_taxonomy_l2 <- df_taxonomy_select %>% filter(Level == 2)
+df_taxonomy_l3 <- df_taxonomy_select %>% filter(Level == 3)
+df_taxonomy_l4 <- df_taxonomy_select %>% filter(Level == 4)
+
+df_tree_1_2 <- merge(df_taxonomy_l1, df_taxonomy_l2, by.x="Cause.ID", by.y="Parent.ID")
+df_tree_1_2 <- df_tree_1_2 %>% select(Cause.ID, Cause.Name.x, Cause.ID.y, Cause.Name.y, )
+colnames(df_tree_1_2) <- c("L1_ID", "L1_NAME", "L2_ID", "L2_NAME")
+# df_tree_1_2
+
+df_tree_2_3 <- merge(df_taxonomy_l2, df_taxonomy_l3, by.x="Cause.ID", by.y="Parent.ID")
+df_tree_2_3 <- df_tree_2_3 %>% select(Cause.ID, Cause.Name.x, Cause.ID.y, Cause.Name.y, )
+colnames(df_tree_2_3) <- c("L2_ID", "L2_NAME", "L3_ID", "L3_NAME")
+# df_tree_2_3
+
+df_tree_3_4 <- merge(df_taxonomy_l3, df_taxonomy_l4, by.x="Cause.ID", by.y="Parent.ID")
+df_tree_3_4 <- df_tree_3_4 %>% select(Cause.ID, Cause.Name.x, Cause.ID.y, Cause.Name.y, )
+colnames(df_tree_3_4) <- c("L3_ID", "L3_NAME", "L4_ID", "L4_NAME")
+# df_tree_3_4
+
+df_tree_all <- merge(df_tree_1_2, df_tree_2_3, by="L2_ID")
+df_tree_all <- merge(df_tree_all, df_tree_3_4, by="L3_ID")
+df_tree_all <- df_tree_all %>% select(L1_ID, L1_NAME, L2_ID, L2_NAME.x, L3_ID, L3_NAME.x, L4_ID, L4_NAME)
+colnames(df_tree_all) <- c('L1_ID', 'L1_NAME', 'L2_ID', 'L2_NAME', 'L3_ID', 'L3_NAME', 'L4_ID', 'L4_NAME')
+# df_tree_all
+
+df_hierarchy <- merge(df_wrangle, df_tree_all, by.x="cause_id", by.y="L4_ID")
+df_hierarchy
+
+```
+
+
+### Analyze the data
+#### Create a quartile column to use for color mapping
+
+The within function is used for calculating new columns. The quantile function calculates the quartiles where 0:4/4 evaluates to c(0, 0.25, 0.50, 0.75, 1). Finally the cut function splits the data into the calculated quartiles. Casting the result to integers returns groups labeled as 1,2,3,4. The column is converted to a factor for use with a discrete color scale.
+<p></p>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_analysis <- within(df_hierarchy, quartile <- factor(as.integer(cut(val, quantile(val, probs=0:4/4), include.lowest=TRUE))))
+df_analysis <- df_analysis %>% select(L1_NAME, L2_NAME, L3_NAME, L4_NAME, val, quartile)
+df_analysis
+
+```
+
+
+### The Layout
+#### squarified with size and fill
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Layouts
+# squarified" (the default), "scol", "srow" or "fixed"
+# Simple
+v1 <- ggplot(df_analysis, aes(area = val, fill = quartile)) +
+  geom_treemap(color = "#ffffff") +
+  scale_fill_brewer(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+#### with labels
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Labeled
+v2 <- ggplot(df_analysis, aes(area = val, fill = quartile, label = L4_NAME)) +
+  geom_treemap(color = "#ffffff") +
+  geom_treemap_text(family = "inconsolata", fontface = "italic", colour = "white", place = "centre", grow = TRUE) +
+  scale_fill_brewer(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+#### with labels and color palette
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Sub-grouping
+v3 <- ggplot(df_analysis, aes(area = val, fill = quartile, label = L4_NAME,
+                subgroup = L1_NAME)) +
+  geom_treemap(color = "#ffffff") +
+  geom_treemap_subgroup_border(colour = "white") +
+  geom_treemap_subgroup_text(place = "centre", grow = T, alpha = 0.5, colour =
+                               "black", family = "inconsolata", fontface = "italic", min.size = 0) +
+  geom_treemap_text(family = "inconsolata", colour = "white", place = "topleft", reflow = T) +
+  scale_fill_brewer(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+# v3
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+#### as facets
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Sub-grouping
+v4 <- ggplot(df_analysis, 
+             aes(area = val, fill = quartile, label = L4_NAME, subgroup = L3_NAME)) +
+  geom_treemap(color = '#ffffff') +
+  facet_wrap( ~L2_NAME) +
+  scale_fill_brewer(palette = "Spectral") +
+  geom_treemap_subgroup_border(colour = "white") +
+  geom_treemap_subgroup_text(place = "centre", grow = T, alpha = 0.5, colour = "black", family = "inconsolata", fontface = "italic", min.size = 0) +
+  geom_treemap_text(family = "inconsolata", colour = "white", place = "topleft", reflow = T) +
+  theme_minimal()+
+  theme(legend.position = "bottom")
+
+girafe(ggobj = v4, width_svg = 1280/72, height_svg = 1280/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Sources:
+* Global Burden of Disease Collaborative Network.
+* Global Burden of Disease Study 2019 (GBD 2019) Results.
+* Seattle, United States: Institute for Health Metrics and Evaluation (IHME), 2020.
+* Available from http://ghdx.healthdata.org/gbd-results-tool.
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

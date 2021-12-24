@@ -1,0 +1,50 @@
+"Continent ID","Continent","Country ID","Country","ISO 3","Trade Value"
+"af","Africa","afbwa","Botswana","bwa",2010
+"af","Africa","afken","Kenya","ken",122112980
+"af","Africa","afrwa","Rwanda","rwa",20062573
+"af","Africa","afswz","Eswatini","swz",13.999999999999998
+"af","Africa","afzaf","South Africa","zaf",1036914
+"as","Asia","asare","United Arab Emirates","are",247163963
+"as","Asia","aschn","China","chn",121593119
+"as","Asia","ashkg","Hong Kong","hkg",2165380
+"as","Asia","asind","India","ind",17566192
+"as","Asia","asjor","Jordan","jor",251950
+"as","Asia","asjpn","Japan","jpn",10578333
+"as","Asia","askaz","Kazakhstan","kaz",324
+"as","Asia","askor","South Korea","kor",414229
+"as","Asia","assau","Saudi Arabia","sau",440300
+"as","Asia","assgp","Singapore","sgp",2894180
+"as","Asia","astha","Thailand","tha",5504129
+"as","Asia","astur","Turkey","tur",3202963
+"eu","Europe","euaut","Austria","aut",764427
+"eu","Europe","eubel","Belgium","bel",2885827
+"eu","Europe","eubgr","Bulgaria","bgr",317173
+"eu","Europe","eublr","Belarus","blr",94200
+"eu","Europe","euche","Switzerland","che",25224648
+"eu","Europe","eucze","Czechia","cze",179233
+"eu","Europe","eudeu","Germany","deu",10688369
+"eu","Europe","eudnk","Denmark","dnk",3835838
+"eu","Europe","euesp","Spain","esp",1100939
+"eu","Europe","eufin","Finland","fin",1820
+"eu","Europe","eufra","France","fra",1787451
+"eu","Europe","eugbr","United Kingdom","gbr",7424506
+"eu","Europe","eugrc","Greece","grc",149733
+"eu","Europe","euhrv","Croatia","hrv",52144
+"eu","Europe","euirl","Ireland","irl",82215
+"eu","Europe","euita","Italy","ita",3136775
+"eu","Europe","eultu","Lithuania","ltu",53700
+"eu","Europe","eulva","Latvia","lva",22721
+"eu","Europe","eumlt","Malta","mlt",2730898
+"eu","Europe","eunld","Netherlands","nld",23625407
+"eu","Europe","eunor","Norway","nor",42559
+"eu","Europe","eupol","Poland","pol",631404
+"eu","Europe","euprt","Portugal","prt",96
+"eu","Europe","eurus","Russia","rus",2930478
+"eu","Europe","eusvk","Slovakia","svk",13264
+"eu","Europe","eusvn","Slovenia","svn",361892
+"eu","Europe","euswe","Sweden","swe",76030
+"na","North America","nacan","Canada","can",444977
+"na","North America","nausa","United States","usa",21783654
+"oc","Oceania","ocaus","Australia","aus",78481
+"oc","Oceania","ocnzl","New Zealand","nzl",3228
+"sa","South America","sabra","Brazil","bra",1808569

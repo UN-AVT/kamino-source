@@ -1,17 +1,17 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "ACLED Conflict Map"
+output:
   html_document:
     theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: libs
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
@@ -23,14 +23,21 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
-library(maps)
-library(geojsonio)
+library(tidyverse)
+library(countrycode)
 library(sf)
+library(alphahull)
+library(geosphere)
 library(rnaturalearth)
 library(rnaturalearthdata)
-library(tidyverse)
+library(colorspace)
 library(ggiraph)
-library(ggdark)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
@@ -38,146 +45,180 @@ library(ggdark)
 MAPS  
 </div>
 
-# Meteorite Landings
+# ACLED Conflict Map
 ## Dot Map
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Tengyart on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap=""}
 
-knitr::include_graphics("archetypes/meteorite-landings/tengyart-unsplash.jpg", dpi=300)
+masthead <- "assets/ugandan-soldier.jpg"
+knitr::include_graphics(masthead, dpi=72)
 
 ```
 
 
-> Sometimes the meaning in life hits you like a meteorite...\
---- Curtis Tyrone Jones
+> War is a bad chisel with which to curve out tomorrow...\
+--- African Proverb
 
 ***
 
+ACLED collects real-time data on the locations, dates, actors, fatalities, and types of all reported political violence and protest events across Africa, the Middle East, Latin America & the Caribbean, East Asia, South Asia, Southeast Asia, Central Asia & the Caucasus, Europe, and the United States of America. This article will focus on a subset of event types.
 
-# Ingest the data
-## Meteorite Landings
+* Violence against civilians
+* __Battles__
+* Explosions/Remote violence
+* Protests
+* Strategic developments
+* Riots
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
+### Ingest
+#### Battles
 
-df = read.csv("archetypes/meteorite-landings/meteorite-landings.csv", header = TRUE, stringsAsFactors = FALSE)
-df
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/acled-visualizing-conflict/africa/africa-battles.csv", header = TRUE, stringsAsFactors = FALSE)
+head(df, n = 10)
 
 ```
 
 
-# Dot map
-## Meteor shape
+### Wrangle
+#### filter by SUB_EVENT_TYPE
+
+* Armed clash
+* Government regains territory
+* __Non-state actor overtakes territory__
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE, fig.width=13, fig.height=8}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_sorted <- df[order(df$mass),]
+battle_overtakes <- filter(df, SUB_EVENT_TYPE == "Non-state actor overtakes territory" )
+head(battle_overtakes, n = 10)
 
-# PLOT NATURAL EARTH BORDERS
-ne_world <- ne_countries(scale = "medium", returnclass = "sf")
-# class(ne_world)
+```
 
-# removes Antarctica
-# ne_world <- filter(ne_world, iso_a3 != "ATA") 
 
-# theme parameters
+### Analyze
+#### create hot zones with clustering
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+hot_zones <- data.frame("LONGITUDE" = battle_overtakes$LONGITUDE, "LATITUDE" = battle_overtakes$LATITUDE)
+hot_zones$CLUSTER <- cutree(hclust(dist(hot_zones[,1:2])), 20)
+
+hot_zones <- hot_zones %>%
+  group_by(CLUSTER) %>%
+  summarise(
+    minLONGITUDE = min(LONGITUDE, na.rm = T),
+    maxLONGITUDE = max(LONGITUDE, na.rm = T),
+    minLATITUDE = min(LATITUDE, na.rm = T),
+    maxLATITUDE = max(LATITUDE, na.rm = T),
+    cLONGITUDE = (minLONGITUDE + maxLONGITUDE) / 2,
+    cLATITUDE = (minLATITUDE + maxLATITUDE) / 2,
+    AREA = (maxLONGITUDE - minLONGITUDE) * (maxLATITUDE - minLATITUDE) + 10,
+    SIZE = n()
+  )
+head(hot_zones, n = 10)
+
+```
+
+
+### Analyze
+#### create a bounding box from coordinates
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# to limit bounds of map view
+xmin <- min(battle_overtakes$LONGITUDE)
+xmax <- max(battle_overtakes$LONGITUDE)
+ymin <- min(battle_overtakes$LATITUDE)
+ymax <- max(battle_overtakes$LATITUDE)
+
+```
+
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+
+```
+
+
+### View
+#### conflict points with hot zones
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
 theme_opts <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "black", size = 11, family = "inconsolata"),
+  plot.caption = element_text(color = "#555555", size = 10, family = "inconsolata"),
+  plot.background = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="#efc12b", colour="#efc12b"),
+  panel.border = element_blank(),
   axis.text = element_blank(),
   axis.line = element_blank(),
   axis.ticks = element_blank(),
   axis.title = element_blank(),
-  panel.grid = element_blank(),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  panel.background=element_rect(fill="white", colour="white"),
-  panel.border = element_blank(),
-  plot.background = element_blank(),
+  legend.position = "top",
+  legend.title = element_blank()
 )
+
+tooltip_css <- "background-color:#bf2a11;color:white;max-width:450px;padding:10px;"
 
 v1 <- ggplot(data = ne_world) +
-  # map feature styling
-  geom_sf(fill="white", color="#888888", stroke=0.5) +
-  # dot parameters
-  geom_point( data = df_sorted, aes(x=reclong, y=reclat, color=mass), shape=8, size=1.5) +
-  scale_color_gradient(low = "yellow", high = "red", na.value = NA) +
-  theme_bw() +
+  geom_sf(fill="#efc12b", color = darken("#efc12b", 0.2), size=0.5) +
+  geom_point(data = hot_zones, aes(x = cLONGITUDE, y = cLATITUDE, size = AREA), shape = 21, color = "#61987e", fill = "#ffffff", stroke = 1.5, alpha = 0.2) +
+  geom_point(data = hot_zones, aes(x = cLONGITUDE, y = cLATITUDE, size = AREA), shape = 21, color = "#61987e", fill = NA, stroke = 1.5) +
+  geom_point_interactive( data = battle_overtakes, aes(x=LONGITUDE, y=LATITUDE, 
+                          tooltip = paste0("Date: ", EVENT_DATE, "\nCountry: ", COUNTRY, "\nLocation: ", LOCATION, "\nDesc: ", NOTES), data_id = EVENT_ID_CNTY),
+                          shape=21, size=1.5, color = "#bf2a11", fill = "#bf2a11") +
+  scale_size_continuous(range = c(8, 105), guide = "none") +
+  coord_sf(xlim = c(xmin * 1.1, xmax * 1.1), ylim = c(ymin * 1.70, ymax * 1.15)) +
   labs(x=NULL,
        y=NULL,
-       title = "Meteorite Landings", 
-       subtitle="Color by mass") +
+       title = "Battle-Non-state actor overtakes territory", 
+       subtitle="",
+       caption="hover point for details") +
+  theme_bw() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 13, height_svg = 7,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-```
-
-
-# Dark theme
-## Using magnitude and alpha as a visual variable
-
-
-```{r, message=FALSE, warning=FALSE, echo=FALSE, fig.width=13, fig.height=10}
-
-# theme parameters
-theme_dark_opts <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
-  axis.text = element_blank(),
-  axis.line = element_blank(),
-  axis.ticks = element_blank(),
-  axis.title = element_blank(),
-  panel.grid = element_blank(),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  #bpanel.background=element_rect(fill="white", colour="white"),
-  panel.border = element_blank(),
-  #plot.background = element_blank(),
+girafe(ggobj = v1, width_svg = 14.5, height_svg = 16,
+       options = list(
+         opts_tooltip(css = tooltip_css),
+         opts_hover(css = "stroke-width:5px;"),
+         opts_sizing(rescale = TRUE, width = 0.6)
+        )
 )
 
-v2 <- ggplot(data = ne_world) +
-  # map feature styling
-  geom_sf(fill="transparent", color="#444444", stroke=0.5) +
-  # dot parameters
-  geom_point( data = df_sorted, aes(x=reclong, y=reclat, color=mass, alpha=mass), shape = 8, size = 1.5) +
-  scale_color_gradient(low = "yellow", high = "red", na.value = NA) +
-  scale_alpha_binned() +
-  labs(x=NULL,
-       y=NULL,
-       title = "Meteorite Landings", 
-       subtitle="Color and alpha by mass") +
-  dark_theme_bw() +
-  theme_dark_opts
-
-girafe(ggobj = v2, width_svg = 13, height_svg = 10,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
-
 ```
 
 
-
-```{r, echo=FALSE}
-
-# ggsave(filename = "assets/meteorite-landings.svg", plot = v1, width=13, height=10)
-
-```
+### References
+#### Citations and data sources
 
 
-# References
-## The citations and data sources used for this case
-
-Earthquake Catalog, https://earthquake.usgs.gov/earthquakes/search/  
-NOAA Satellite and Information Service, https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data?minDeaths=140000  
-Our World in Data, What were the world’s deadliest earthquakes? https://ourworldindata.org/the-worlds-deadliest-earthquakes  
+* Data: The Armed Conflict Location & Event Data Project, [GO](https://acleddata.com/#/dashboard){target="_blank"} 
 
 
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-# cleanbib()
-# read.bibtex(file = "./citations.bib")
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```
 

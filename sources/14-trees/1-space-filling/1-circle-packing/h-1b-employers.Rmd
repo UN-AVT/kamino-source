@@ -1,0 +1,208 @@
+---
+pagetitle: "H-1B Visa Employers"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(stringr)
+library(ggraph)
+library(igraph)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TREES  
+</div>
+
+# H-1B Visa Employers
+## Circle packing
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Kate Sade on Unsplash"}
+
+masthead <- "assets/kate-sade-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+>  ...in our increasingly global economy, highly skilled foreign workers are certain to be in a position to make unique contributions to the U.S. economy...\
+--- Senate Judiciary Committee 2000\
+
+***
+
+The H-1B is a visa in the United States under the Immigration and Nationality Act, section 101(a)(15)(H) that allows U.S. employers to temporarily employ foreign workers in specialty occupations. A specialty occupation requires the application of specialized knowledge and a bachelor's degree or the equivalent of work experience. The duration of stay is three years, extendable to six years; after which the visa holder may need to reapply. Laws limit the number of H-1B visas that are issued each year: 188,100 new and initial H-1B visas were issued in 2019.
+
+To illustrate the circle packing layout and custom configurations to manage the large number of data points, we'll demonstrate these key features: 
+
+* Create unique node ids to collapse the hierarchy, but retain the values
+* Apply conditional label formatting (what you see as a label)
+* Apply conditional label visibility (when labels are shown)
+
+### Ingest the data
+#### employer, state, and approvals
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_file_path <- "archetypes/h-1b-employers/2019-H-1B-Employers.csv"
+df = read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle the data
+#### Create node and edge tables
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Complete cases
+df_wrangle <- df %>% mutate(ID = row_number(), Approvals = as.integer(Initial.Approvals)+as.integer(Continuing.Approvals) )
+df_wrangle <- filter(df_wrangle, nchar(State) > 0 )
+df_wrangle <- filter(df_wrangle, nchar(Employer) > 0 )
+df_wrangle <- filter(df_wrangle, nchar(ZIP) > 0 )
+
+# limited for performance
+df_wrangle <- filter(df_wrangle, Approvals > 2 )
+
+# create a unique node id to collapse three level hierarchy
+df_wrangle <- df_wrangle %>% mutate(EMP_UNIQ = paste0(Employer, "_", State, "_", ZIP))
+
+# unique edges
+df_edges <- aggregate(x = df_wrangle$Approvals,
+          by = list(df_wrangle$State, df_wrangle$EMP_UNIQ),
+          FUN = sum)
+
+# standard edge table structure
+colnames(df_edges) <- c("FROM","TO", "SIZE")
+# df_edges
+
+# root nodes
+df_nodes_1 <- aggregate(x = df_wrangle$Approvals,
+          by = list(df_wrangle$State),
+          FUN = sum)
+
+colnames(df_nodes_1) <- c("NODE","SIZE")
+# df_nodes_1
+
+# leaf nodes
+# df_nodes_2 <- df_wrangle %>% select(EMP_UNIQ, Approvals)
+df_nodes_2 <- aggregate(x = df_wrangle$Approvals,
+         by = list(df_wrangle$EMP_UNIQ),
+          FUN = sum)
+colnames(df_nodes_2) <- c("NODE", "SIZE")
+# df_nodes_2
+
+# Combine
+df_nodes <- rbind(df_nodes_1, df_nodes_2)
+
+# Transform to graph data structure
+df_graph <- graph_from_data_frame( df_edges, vertices = df_nodes )
+
+```
+
+
+#### edge table
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_edges
+
+```
+
+<p></p>
+#### node table
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_nodes
+
+```
+
+
+### Plot
+#### circle pack layout with size, color, and labels (at root level)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1920/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    legend.position='none'
+  )
+
+n <- 15
+top_x <- head(arrange(df_nodes_2, desc(SIZE)), n = n)
+top <- top_x$SIZE[[1]]
+bottom <- top_x$SIZE[[n]]
+
+v1 <- ggraph(df_graph, layout = 'circlepack', weight = SIZE) + 
+  geom_node_circle(fill="#F0F0F0") + 
+  geom_node_label( aes(label=name, filter=depth==0), size = 6, family = "inconsolata") +
+  geom_node_text( aes(label=gsub("_", "\n", name), filter=SIZE >= bottom & SIZE <= top), size = 3, color = "#333333", family = "inconsolata", face="bold") +
+  coord_fixed() + 
+  theme_void() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1280/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Mike Bostock, Observable, https://observablehq.com/@mbostock/2019-h-1b-employers
+* Data sources: USCIS, H-1B Employer Data Hub, https://www.uscis.gov/tools/reports-and-studies/h-1b-employer-data-hub
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

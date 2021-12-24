@@ -1,0 +1,195 @@
+---
+pagetitle: "Vaccines in the pipeline"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(stringr)
+library(ggraph)
+library(igraph)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TREES  
+</div>
+
+# Vaccines in the pipeline
+## Circle packing
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by CDC on Unsplash"}
+
+masthead <- "assets/cdc-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Swine Flu vaccination administered by way of a jet injector known as a “Ped-O-Jet®”, 1976</div>
+
+> Science is telling us that we can do phenomenal things if we put our minds and our resources to it...\
+--- Anthony Fauci\
+
+***
+
+To facilitate the creation and dissemination of new vaccines, the WHO maintains a list of vaccines in the “pipeline” for clinical trials. The sources on information for these trials are clinicaltrials.gov and who.int/ictrp, which includes clinical trial registries from 17 countries. Some information is also obtained through contact with investigators, sponsors, and funders of vaccine trials.
+
+### Ingest the data
+#### disease, phases, and sample size enrollment
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_file_path <- "archetypes/vaccines-in-the-pipeline/new-vaccines-in-the-pipeline.csv"
+df = read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE)
+df
+
+
+```
+
+
+### Wrangle the data
+#### Create node and edge tables
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Complete cases
+df_wrangle <- df %>% mutate(ID = row_number(), Size = as.numeric(Sample.Size..Enrollment))
+df_wrangle <- filter(df_wrangle, Size > 0 )
+df_wrangle <- filter(df_wrangle, nchar(Registry.ID) > 0 )
+
+# Unique edges
+df_edges <- aggregate(x = df_wrangle$Size,
+          by = list(df_wrangle$Disease, df_wrangle$Registry.ID),
+          FUN = sum)
+
+# Standard edge table structure
+colnames(df_edges) <- c("FROM","TO", "SIZE")
+
+# Root nodes
+df_nodes_1 <- aggregate(x = df_wrangle$Size,
+          by = list(df_wrangle$Disease),
+          FUN = sum)
+
+colnames(df_nodes_1) <- c("NODE","SIZE")
+df_nodes_1$COLOR <- "0"
+
+# Leaf nodes
+df_nodes_2 <- df_wrangle %>% select(Registry.ID, PNUM, Size)
+colnames(df_nodes_2) <- c("NODE", "COLOR", "SIZE")
+
+# Combine
+df_nodes <- rbind(df_nodes_1, df_nodes_2)
+
+# Complete cases
+df_nodes <- filter(df_nodes, SIZE > 0 )
+
+
+# Transform to graph data structure
+df_graph <- graph_from_data_frame( df_edges, vertices = df_nodes )
+
+```
+
+
+#### edge table
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_edges
+
+```
+
+<p></p>
+#### node table
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_nodes
+
+```
+
+
+### Plot
+#### circle pack layout with size, color, and labels (at root level)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    legend.position='none'
+  )
+
+phase_pal <- c("0" = "#FFFFFF", "1" = "#6A1B9A", "1.5" = "#7B1FA2", "2" = "#8E24AA",
+               "2.5" = "#9C27B0", "3" = "#AB47BC", "3.5" = "#BA68C8", "4" = "#CE93D8")
+
+v1 <- ggraph(df_graph, layout = 'circlepack', weight = SIZE) + 
+  geom_node_circle(aes(fill = COLOR)) + 
+  scale_fill_manual(values = phase_pal) +
+  geom_node_label( aes(label=name, filter=depth==0), size = 6, family = "inconsolata") +
+  coord_fixed() + 
+  theme_void() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources: WHO vaccine pipeline tracker, World Health Organization, http://www.who.int/immunization/research/vaccine_pipeline_tracker_spreadsheet/en/
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

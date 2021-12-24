@@ -1,0 +1,284 @@
+id,pid,pname,label,size,change,discretion
+leaf-136,branch-38,Financial services sales occupations,Other industries,82,0.023,discretionary
+leaf-130,branch-36,Insurance sales occupations,Other industries,181,0.03,discretionary
+leaf-171,branch-57,Waiter/waitress,Other industries,954,0.004,discretionary
+leaf-132,branch-37,Real estate sales occupations,Other industries,1178,0.018,discretionary
+leaf-76,branch-13,Dentists,Other industries,1229,0.103,discretionary
+leaf-96,branch-23,Recreation workers,Other industries,2152,0.011,discretionary
+leaf-29,branch-1,Managers,Hotels and motels,2541,0.012,discretionary
+leaf-46,branch-1,Managers,"Guided missiles, space vehicles and parts",2547,0.042,discretionary
+leaf-48,branch-1,Managers,Industrial and miscellaneous chemicals,2554,0.044,discretionary
+leaf-42,branch-1,Managers,Personnel supply services,2602,0.036,discretionary
+leaf-47,branch-1,Managers,Theaters and motion pictures,2638,0.045,discretionary
+leaf-115,branch-30,Health Technologist,Health services,2692,0.006,discretionary
+leaf-15,branch-0,Chief executives and public administrators,"Electrical machinery, equipment and supplies",2694,0.158,discretionary
+leaf-123,branch-35,Supervisors and proprietors of sales jobs,Grocery stores,2712,0.005,discretionary
+leaf-11,branch-0,Chief executives and public administrators,Business services,2719,0.115,discretionary
+leaf-142,branch-40,Sales,Management and public relations services,2739,0.043,discretionary
+leaf-105,branch-26,Writer,"Printing, publishing and allied industries (except newspapers)",2809,0.035,discretionary
+leaf-139,branch-40,Sales,"Drugs, chemicals and allied products",2824,0.027,discretionary
+leaf-12,branch-0,Chief executives and public administrators,Credit agencies,2836,0.144,discretionary
+leaf-13,branch-0,Chief executives and public administrators,Advertising,2853,0.156,discretionary
+leaf-125,branch-35,Supervisors and proprietors of sales jobs,Apparel and accessory stores (except shoe),2910,0.011,discretionary
+leaf-14,branch-0,Chief executives and public administrators,Telephone communications,2926,0.164,discretionary
+leaf-85,branch-17,Therapist,Hospitals,2943,0.01,discretionary
+leaf-189,branch-71,Construction,All industries,2952,0.002,discretionary
+branch-71,nytg-treeMap-trunk,all,Construction,2952,null,null
+leaf-144,branch-41,Retail sales clerks,Department stores,2958,0.004,discretionary
+leaf-184,branch-66,Farm managers (except horticultural farms),All industries,3010,0.019,discretionary
+branch-66,nytg-treeMap-trunk,all,Farm managers (except horticultural farms),3010,null,null
+branch-19,nytg-treeMap-trunk,all,Librarian/Curator,3011,null,null
+leaf-91,branch-19,Librarian/Curator,All industries,3011,0.012,discretionary
+leaf-45,branch-1,Managers,Offices and clinics of physicians,3021,0.046,discretionary
+leaf-117,branch-32,Airplane pilots and navigators,All industries,3054,0.021,discretionary
+branch-32,nytg-treeMap-trunk,all,Airplane pilots and navigators,3054,null,null
+branch-76,nytg-treeMap-trunk,all,Fabricators and Operators,3079,null,null
+leaf-194,branch-76,Fabricators and Operators,All industries,3079,0.001,discretionary
+leaf-149,branch-42,Cashiers,Grocery stores,3114,0.003,discretionary
+leaf-155,branch-45,Secretaries,Offices and clinics of physicians,3125,0.019,discretionary
+leaf-112,branch-29,"Athletes, sports instructors and officials",Miscellaneous professional and related services ,3130,0.064,discretionary
+leaf-49,branch-1,Managers,Oil and gas extraction,3133,0.057,discretionary
+leaf-127,branch-35,Supervisors and proprietors of sales jobs,Motor vehicle dealers,3160,0.017,discretionary
+leaf-50,branch-1,Managers,Computers and related equipment,3162,0.057,discretionary
+branch-67,nytg-treeMap-trunk,all,Farm workers,3180,null,null
+leaf-185,branch-67,Farm workers,All industries,3180,0.003,discretionary
+leaf-124,branch-35,Supervisors and proprietors of sales jobs,Miscellaneous retail stores,3216,0.012,discretionary
+branch-72,nytg-treeMap-trunk,all,Carpenters,3235,null,null
+leaf-190,branch-72,Carpenters,All industries,3235,0.002,discretionary
+leaf-41,branch-1,Managers,Radio and television broadcasting and cable,3250,0.043,discretionary
+leaf-102,branch-25,Lawyers,"Security, commodity brokerage and investment companies",3251,0.293,discretionary
+branch-54,nytg-treeMap-trunk,all,"Housekeepers, maids, butlers, stewards and lodging quarters cleaners",3263,null,null
+leaf-164,branch-54,"Housekeepers, maids, butlers, stewards and lodging quarters cleaners",All industries,3263,0.002,discretionary
+leaf-38,branch-1,Managers,Services incidental to transportation,3273,0.023,discretionary
+branch-77,nytg-treeMap-trunk,all,Motor Vehicle Operators,3330,null,null
+leaf-195,branch-77,Motor Vehicle Operators,All industries,3330,0.002,discretionary
+leaf-198,branch-80,"Freight, Stock and Material Handlers",All industries,3450,0.003,discretionary
+branch-80,nytg-treeMap-trunk,all,"Freight, Stock and Material Handlers",3450,null,null
+leaf-154,branch-45,Secretaries,All construction ,3467,0.012,discretionary
+branch-51,nytg-treeMap-trunk,all,"Insurance adjusters, examiners and investigators",3481,null,null
+leaf-161,branch-51,"Insurance adjusters, examiners and investigators",All industries,3481,0.005,discretionary
+leaf-9,branch-0,Chief executives and public administrators,Health services,3519,0.136,discretionary
+leaf-110,branch-29,"Athletes, sports instructors and officials",Other industries,3525,0.022,discretionary
+leaf-169,branch-56,Food Service,Other industries,3550,0.003,discretionary
+leaf-177,branch-62,Personal Service Occupation,Miscellaneous entertainment and recreation services ,3556,0.009,discretionary
+leaf-181,branch-64,Child care workers,Other industries,3583,0.008,discretionary
+leaf-68,branch-10,Natural Scientist,"Research, development and testing services",3633,0.026,discretionary
+leaf-10,branch-0,Chief executives and public administrators,"Engineering, architectural and surveying services",3676,0.151,discretionary
+leaf-44,branch-1,Managers,"Accounting, auditing and bookkeeping services",3693,0.052,discretionary
+leaf-111,branch-29,"Athletes, sports instructors and officials",Miscellaneous entertainment and recreation services ,3699,0.031,discretionary
+leaf-147,branch-41,Retail sales clerks,"Radio, TV and computer stores",3763,0.014,discretionary
+leaf-81,branch-15,Registered nurses,Offices and clinics of physicians,3769,0.025,discretionary
+leaf-97,branch-23,Recreation workers,Lodging places (except hotels and motels),3770,0.059,discretionary
+leaf-134,branch-38,Financial services sales occupations,Credit agencies,3844,0.044,discretionary
+branch-24,nytg-treeMap-trunk,all,Clergy and religious workers,3885,null,null
+leaf-98,branch-24,Clergy and religious workers,All industries,3885,0.006,discretionary
+leaf-43,branch-1,Managers,"Medical, dental and optical instruments and supplies",3921,0.054,discretionary
+leaf-146,branch-41,Retail sales clerks,Miscellaneous retail stores,3930,0.01,discretionary
+leaf-77,branch-14,Veterinarians,All industries,3960,0.048,discretionary
+branch-14,nytg-treeMap-trunk,all,Veterinarians,3960,null,null
+leaf-140,branch-40,Sales,Professional and commercial equipment and supplies,4023,0.039,discretionary
+leaf-121,branch-34,"Legal assistants, paralegals and legal support",Other industries,4054,0.014,discretionary
+leaf-150,branch-42,Cashiers,Eating and drinking places,4091,0.004,discretionary
+leaf-178,branch-62,Personal Service Occupation,Eating and drinking places,4141,0.013,discretionary
+leaf-156,branch-46,Information Clerk,All industries,4173,0.006,discretionary
+branch-46,nytg-treeMap-trunk,all,Information Clerk,4173,null,null
+leaf-165,branch-55,"Police, Fire and Protective Service","Justice, public order and safety",4336,0.002,discretionary
+branch-63,nytg-treeMap-trunk,all,Hairdressers and cosmetologists,4502,null,null
+leaf-179,branch-63,Hairdressers and cosmetologists,All industries,4502,0.004,discretionary
+leaf-39,branch-1,Managers,"Research, development and testing services",4517,0.045,discretionary
+leaf-35,branch-1,Managers,Telephone communications,4557,0.029,discretionary
+leaf-104,branch-26,Writer,Miscellaneous professional and related services ,4575,0.049,discretionary
+leaf-73,branch-11,Physicians,Colleges and universities,4692,0.19,discretionary
+leaf-173,branch-59,Health Aides,All industries,4699,0.004,discretionary
+branch-59,nytg-treeMap-trunk,all,Health Aides,4699,null,null
+branch-12,nytg-treeMap-trunk,all,Doctor,4706,null,null
+leaf-74,branch-12,Doctor,All industries,4706,0.036,discretionary
+leaf-3,branch-0,Chief executives and public administrators,Banking,4711,0.084,discretionary
+leaf-89,branch-18,Teacher,Child day care services,4716,0.007,discretionary
+leaf-114,branch-30,Health Technologist,Hospitals,4729,0.006,discretionary
+leaf-92,branch-20,"Economists, market researchers and survey researchers",All industries,4743,0.041,discretionary
+branch-20,nytg-treeMap-trunk,all,"Economists, market researchers and survey researchers",4743,null,null
+leaf-34,branch-1,Managers,"Printing, publishing and allied industries (except newspapers)",4744,0.03,discretionary
+leaf-72,branch-11,Physicians,Other industries,4750,0.133,discretionary
+leaf-152,branch-44,Office,All industries,4750,0.006,discretionary
+branch-44,nytg-treeMap-trunk,all,Office,4750,null,null
+leaf-141,branch-40,Sales,Computer and data processing services,4842,0.051,discretionary
+leaf-135,branch-38,Financial services sales occupations,Banking,4902,0.077,discretionary
+leaf-95,branch-23,Recreation workers,Miscellaneous entertainment and recreation services ,5032,0.021,discretionary
+leaf-180,branch-64,Child care workers,Child day care services,5071,0.005,discretionary
+leaf-101,branch-25,Lawyers,"Justice, public order and safety",5094,0.033,discretionary
+leaf-80,branch-15,Registered nurses,Health services,5185,0.012,discretionary
+leaf-191,branch-73,Production supervisors or foremen,All industries,5239,0.005,discretionary
+branch-73,nytg-treeMap-trunk,all,Production supervisors or foremen,5239,null,null
+leaf-83,branch-17,Therapist,Other industries,5379,0.017,discretionary
+branch-74,nytg-treeMap-trunk,all,Precision Production,5552,null,null
+leaf-192,branch-74,Precision Production,All industries,5552,0.003,discretionary
+branch-22,nytg-treeMap-trunk,all,Social workers,5564,null,null
+leaf-94,branch-22,Social workers,All industries,5564,0.006,discretionary
+leaf-167,branch-55,"Police, Fire and Protective Service",Miscellaneous entertainment and recreation services ,5569,0.024,discretionary
+leaf-166,branch-55,"Police, Fire and Protective Service",Other industries,5654,0.004,discretionary
+leaf-8,branch-0,Chief executives and public administrators,"Real estate, including real estate-insurance offices ",5658,0.158,discretionary
+leaf-113,branch-30,Health Technologist,Other industries,5716,0.006,discretionary
+leaf-57,branch-3,Financial specialists,Credit agencies,5728,0.031,discretionary
+leaf-107,branch-27,Artist,Miscellaneous professional and related services ,5765,0.02,discretionary
+leaf-27,branch-1,Managers,Membership organizations,5801,0.024,discretionary
+leaf-120,branch-34,"Legal assistants, paralegals and legal support",Legal services,6079,0.015,discretionary
+leaf-66,branch-9,Computer Scientist,Computer and data processing services,6137,0.012,discretionary
+leaf-40,branch-1,Managers,Drugs,6189,0.074,discretionary
+leaf-84,branch-17,Therapist,Health services,6404,0.021,discretionary
+leaf-183,branch-65,Farmers (owners and tenants),All industries,6497,0.011,discretionary
+branch-65,nytg-treeMap-trunk,all,Farmers (owners and tenants),6497,null,null
+leaf-90,branch-18,Teacher,Educational services,6505,0.014,discretionary
+leaf-175,branch-61,Cleaning and Building Service Occupations (Except Households),All industries,6510,0.002,discretionary
+branch-61,nytg-treeMap-trunk,all,Cleaning and Building Service Occupations (Except Households),6510,null,null
+leaf-53,branch-2,Accountants and auditors,"Security, commodity brokerage and investment companies",6523,0.075,discretionary
+leaf-193,branch-75,Machine Operator,All industries,6533,0.001,discretionary
+branch-75,nytg-treeMap-trunk,all,Machine Operator,6533,null,null
+leaf-33,branch-1,Managers,Business services,6559,0.034,discretionary
+leaf-56,branch-3, Financial specialists,Banking,6563,0.029,discretionary
+leaf-182,branch-64,Child care workers,Private households,6575,0.023,discretionary
+branch-39,nytg-treeMap-trunk,all,Advertising and related sales jobs,6576,null,null
+leaf-137,branch-39,Advertising and related sales jobs,All industries,6576,0.025,discretionary
+leaf-28,branch-1,Managers,"Engineering, architectural and surveying services",6582,0.03,discretionary
+leaf-21,branch-1,Managers,Elementary and secondary schools,6652,0.013,discretionary
+leaf-6,branch-0,Chief executives and public administrators,Insurance,6705,0.181,discretionary
+branch-31,nytg-treeMap-trunk,all,Technician,6713,null,null
+leaf-116,branch-31,Technician,All industries,6713,0.005,discretionary
+leaf-119,branch-33,Computer software developers,Computer and data processing services,6746,0.013,discretionary
+leaf-109,branch-28,"Actors, directors and producers",All industries,6751,0.031,discretionary
+branch-28,nytg-treeMap-trunk,all,"Actors, directors and producers",6751,null,null
+branch-16,nytg-treeMap-trunk,all,Pharmacists,6854,null,null
+leaf-82,branch-16,Pharmacists,All industries,6854,0.025,discretionary
+leaf-62,branch-7,Architects,All industries,6973,0.034,discretionary
+branch-7,nytg-treeMap-trunk,all,Architects,6973,null,null
+leaf-197,branch-79,Construction Helpers,All industries,7065,0.003,discretionary
+branch-79,nytg-treeMap-trunk,all,Construction Helpers,7065,null,null
+leaf-93,branch-21,Psychologists,All industries,7134,0.035,discretionary
+branch-21,nytg-treeMap-trunk,all,Psychologists,7134,null,null
+leaf-5,branch-0,Chief executives and public administrators,Management and public relations services,7203,0.181,discretionary
+leaf-79,branch-15,Registered nurses,Other industries,7232,0.013,discretionary
+branch-81,nytg-treeMap-trunk,all,Laborers outside construction,7339,null,null
+leaf-199,branch-81,Laborers outside construction,All industries,7339,0.003,discretionary
+leaf-126,branch-35,Supervisors and proprietors of sales jobs,Insurance,7684,0.04,discretionary
+leaf-59,branch-4,Management analysts,Other industries,7813,0.024,discretionary
+leaf-37,branch-1,Managers,"Electrical machinery, equipment and supplies",7854,0.051,discretionary
+leaf-4,branch-0,Chief executives and public administrators,Computer and data processing services,7883,0.178,discretionary
+branch-78,nytg-treeMap-trunk,all,"Truck, delivery and tractor drivers",7992,null,null
+leaf-196,branch-78,"Truck, delivery and tractor drivers",All industries,7992,0.002,discretionary
+branch-47,nytg-treeMap-trunk,all,Receptionists,8006,null,null
+leaf-157,branch-47,Receptionists,All industries,8006,0.005,discretionary
+leaf-64,branch-8,Engineer,"Engineering, architectural and surveying services",8116,0.019,discretionary
+leaf-36,branch-1,Managers,Advertising,8267,0.053,discretionary
+leaf-30,branch-1,Managers,Insurance,8333,0.041,discretionary
+leaf-145,branch-41,Retail sales clerks,Apparel and accessory stores (except shoe),8405,0.015,discretionary
+leaf-186,branch-68,Agricultural Occupations (Except Farming),All industries,8854,0.004,discretionary
+branch-68,nytg-treeMap-trunk,all,Agricultural Occupations (Except Farming),8854,null,null
+leaf-24,branch-1,Managers,Hospitals,8912,0.026,discretionary
+leaf-7,branch-0,Chief executives and public administrators,"Security, commodity brokerage and investment companies",8986,0.244,discretionary
+leaf-174,branch-60,"Nursing aides, orderlies and attendants",All industries,9135,0.002,discretionary
+branch-60,nytg-treeMap-trunk,all,"Nursing aides, orderlies and attendants",9135,null,null
+leaf-148,branch-42,Cashiers,Other industries,9180,0.004,discretionary
+leaf-176,branch-62,Personal Service Occupation,Other industries,9301,0.007,discretionary
+leaf-22,branch-1,Managers,Colleges and universities,9307,0.02,discretionary
+leaf-128,branch-35,Supervisors and proprietors of sales jobs,"Security, commodity brokerage and investment companies",9327,0.133,discretionary
+leaf-32,branch-1,Managers,Credit agencies,9440,0.047,discretionary
+leaf-188,branch-70,Supervisors of construction work,All industries,9539,0.009,discretionary
+branch-70,nytg-treeMap-trunk,all,Supervisors of construction work,9539,null,null
+leaf-172,branch-58,"Cooks, variously defined",All industries,9701,0.003,discretionary
+branch-58,nytg-treeMap-trunk,all,"Cooks, variously defined",9701,null,null
+leaf-108,branch-27,Artist,Business services,9802,0.035,discretionary
+leaf-168,branch-56,Food Service,Eating and drinking places,9806,0.005,discretionary
+leaf-25,branch-1,Managers,Health services,9907,0.031,discretionary
+branch-34,nytg-treeMap-trunk,all,"Legal assistants, paralegals and legal support",10133,null,null
+leaf-103,branch-26,Writer,Other industries,10134,0.022,discretionary
+leaf-54,branch-3,Financial specialists,Other industries,10153,0.022,discretionary
+branch-29,nytg-treeMap-trunk,all,"Athletes, sports instructors and officials",10354,null,null
+leaf-187,branch-69,Mechanics and Repairers,All industries,10356,0.002,discretionary
+branch-69,nytg-treeMap-trunk,all,Mechanics and Repairers,10356,null,null
+leaf-158,branch-48,Records Processing,All industries,10632,0.01,discretionary
+branch-48,nytg-treeMap-trunk,all,Records Processing,10632,null,null
+leaf-170,branch-57,Waiter/waitress,Eating and drinking places,10688,0.005,discretionary
+leaf-118,branch-33,Computer software developers,Other industries,10693,0.012,discretionary
+branch-23,nytg-treeMap-trunk,all,Recreation workers,10954,null,null
+leaf-18,branch-1,Managers,Eating and drinking places,11116,0.01,discretionary
+leaf-88,branch-18,Teacher,Other industries,11139,0.011,discretionary
+leaf-106,branch-27,Artist,Other industries,11616,0.012,discretionary
+branch-57,nytg-treeMap-trunk,all,Waiter/waitress,11642,null,null
+leaf-67,branch-10,Natural Scientist,Other industries,11767,0.021,discretionary
+leaf-2,branch-0,Chief executives and public administrators,All construction ,11983,0.098,discretionary
+leaf-160,branch-50,"Material Recording, Scheduling and Distributing Clerks",All industries,12173,0.003,discretionary
+branch-50,nytg-treeMap-trunk,all,"Material Recording, Scheduling and Distributing Clerks",12173,null,null
+branch-52,nytg-treeMap-trunk,all,"Customer service reps, investigators and adjusters (except insurance)",12474,null,null
+leaf-162,branch-52,"Customer service reps, investigators and adjusters (except insurance)",All industries,12474,0.004,discretionary
+branch-30,nytg-treeMap-trunk,all,Health Technologist,13137,null,null
+leaf-26,branch-1,Managers,Management and public relations services,13338,0.055,discretionary
+branch-56,nytg-treeMap-trunk,all,Food Service,13356,null,null
+leaf-60,branch-5,"Personnel, HR, training and labor relations specialists",All industries,13685,0.014,discretionary
+branch-5,nytg-treeMap-trunk,all,"Personnel, HR, training and labor relations specialists",13685,null,null
+branch-17,nytg-treeMap-trunk,all,Therapist,14726,null,null
+branch-64,nytg-treeMap-trunk,all,Child care workers,15229,null,null
+branch-10,nytg-treeMap-trunk,all,Natural Scientist,15400,null,null
+branch-55,nytg-treeMap-trunk,all,"Police, Fire and Protective Service",15559,null,null
+leaf-65,branch-9,Computer Scientist,Other industries,16371,0.009,discretionary
+branch-42,nytg-treeMap-trunk,all,Cashiers,16385,null,null
+leaf-23,branch-1,Managers,Computer and data processing services,16439,0.047,discretionary
+leaf-129,branch-36,Insurance sales occupations,Insurance,16667,0.027,discretionary
+branch-36,nytg-treeMap-trunk,all,Insurance sales occupations,16848,null,null
+branch-62,nytg-treeMap-trunk,all,Personal Service Occupation,16998,null,null
+leaf-63,branch-8,Engineer,Other industries,17075,0.011,discretionary
+branch-33,nytg-treeMap-trunk,all,Computer software developers,17439,null,null
+branch-26,nytg-treeMap-trunk,all,Writer,17518,null,null
+leaf-143,branch-41,Retail sales clerks,Other industries,19032,0.008,discretionary
+branch-6,nytg-treeMap-trunk,all,"Purchasing, Inspecting and Management Support",19590,null,null
+leaf-61,branch-6,"Purchasing, Inspecting and Management Support",All industries,19590,0.014,discretionary
+leaf-151,branch-43,Office supervisors,All industries,19917,0.012,discretionary
+branch-43,nytg-treeMap-trunk,all,Office supervisors,19917,null,null
+leaf-78,branch-15,Registered nurses,Hospitals,19986,0.011,discretionary
+leaf-71,branch-11,Physicians,Health services,21181,0.207,discretionary
+leaf-52,branch-2,Accountants and auditors,"Accounting, auditing and bookkeeping services",21265,0.043,discretionary
+leaf-20,branch-1,Managers,Banking,21757,0.04,discretionary
+branch-9,nytg-treeMap-trunk,all,Computer Scientist,22508,null,null
+leaf-19,branch-1,Managers,"Real estate, including real estate-insurance offices ",22543,0.034,discretionary
+leaf-159,branch-49,Bookkeeping and Financial Records Processing,All industries,23901,0.01,discretionary
+branch-49,nytg-treeMap-trunk,all,Bookkeeping and Financial Records Processing,23901,null,null
+leaf-100,branch-25,Lawyers,Other industries,23939,0.121,discretionary
+branch-53,nytg-treeMap-trunk,all,Miscellaneous Administrative Support Occupations,24531,null,null
+leaf-163,branch-53,Miscellaneous Administrative Support Occupations,All industries,24531,0.007,discretionary
+leaf-31,branch-1,Managers,"Security, commodity brokerage and investment companies",24663,0.123,discretionary
+branch-8,nytg-treeMap-trunk,all,Engineer,25191,null,null
+leaf-75,branch-13,Dentists,Offices and clinics of dentists,25647,0.153,discretionary
+branch-13,nytg-treeMap-trunk,all,Dentists,26876,null,null
+branch-27,nytg-treeMap-trunk,all,Artist,27183,null,null
+leaf-133,branch-38,Financial services sales occupations,"Security, commodity brokerage and investment companies",27702,0.133,discretionary
+leaf-17,branch-1,Managers,All construction ,28961,0.022,discretionary
+leaf-55,branch-3,Financial specialists,"Security, commodity brokerage and investment companies",30694,0.107,discretionary
+leaf-87,branch-18,Teacher,Colleges and universities,31672,0.018,discretionary
+leaf-58,branch-4,Management analysts,Management and public relations services,32229,0.068,discretionary
+leaf-131,branch-37,Real estate sales occupations,"Real estate, including real estate-insurance offices ",32505,0.031,discretionary
+leaf-153,branch-45,Secretaries,Other industries,32832,0.008,discretionary
+leaf-51,branch-2,Accountants and auditors,Other industries,33245,0.019,discretionary
+branch-37,nytg-treeMap-trunk,all,Real estate sales occupations,33683,null,null
+branch-15,nytg-treeMap-trunk,all,Registered nurses,36172,null,null
+branch-38,nytg-treeMap-trunk,all,Financial services sales occupations,36530,null,null
+branch-82,nytg-treeMap-trunk,all,Miscellaneous Occupations,37330,null,null
+leaf-200,branch-82,Miscellaneous Occupations,All industries,37330,0.004,discretionary
+branch-41,nytg-treeMap-trunk,all,Retail sales clerks,38088,null,null
+branch-45,nytg-treeMap-trunk,all,Secretaries,39424,null,null
+branch-4,nytg-treeMap-trunk,all,Management analysts,40042,null,null
+leaf-122,branch-35,Supervisors and proprietors of sales jobs,Other industries,43328,0.013,discretionary
+leaf-138,branch-40,Sales,Other industries,49227,0.015,discretionary
+branch-3,nytg-treeMap-trunk,all,Financial specialists,53138,null,null
+leaf-86,branch-18,Teacher,Elementary and secondary schools,59362,0.009,discretionary
+branch-2,nytg-treeMap-trunk,all,Accountants and auditors,61033,null,null
+branch-40,nytg-treeMap-trunk,all,Sales,63655,null,null
+leaf-69,branch-11,Physicians,Hospitals,63687,0.172,discretionary
+branch-35,nytg-treeMap-trunk,all,Supervisors and proprietors of sales jobs,72337,null,null
+leaf-1,branch-0,Chief executives and public administrators,Other industries,86717,0.118,discretionary
+leaf-16,branch-1,Managers,Other industries,93303,0.02,discretionary
+leaf-70,branch-11,Physicians,Offices and clinics of physicians,97958,0.272,discretionary
+leaf-99,branch-25,Lawyers,Legal services,113280,0.146,discretionary
+branch-18,nytg-treeMap-trunk,all,Teacher,113394,null,null
+branch-25,nytg-treeMap-trunk,all,Lawyers,145564,null,null
+branch-0,nytg-treeMap-trunk,all,Chief executives and public administrators,161069,null,null
+branch-11,nytg-treeMap-trunk,all,Physicians,192268,null,null
+branch-1,nytg-treeMap-trunk,all,Managers,376076,null,null

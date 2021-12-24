@@ -1,0 +1,259 @@
+---
+pagetitle: "South Sudan Imports"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, dev="svg")
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(treemapify)
+library(patchwork)
+library(cowplot)
+library(ggiraph)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+# South Sudan Imports
+## The Treemap
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo from Wikimedia Commons"}
+
+masthead <- "assets/diagram-illustrating-high-potency-of-penicillin-wiki-commons.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Nature makes penicillin; I just found it...\
+--- Alexander Fleming\
+
+According to the __Observatory of Economic Complexity__ (OEC), in 2019 South Sudan imported $667M, making it the number 186 trade destination in the world. The most recent imports of South Sudan are led by Cars, Delivery Trucks, __Packaged Medicaments__, Other Edible Preparations, and Knit Men's Coats. The most common import partners for South Sudan are United Arab Emirates, Kenya, China, __Switzerland__, and Netherlands.
+
+Let's use the treemap layout to take a closer look.
+
+***
+
+### Ingest the data
+#### imports, section, hs levels, and trade value
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load data
+df = read.csv("archetypes/south-sudan-imports/imports-2019/imports-hs6-2019.csv", header = TRUE, stringsAsFactors = TRUE)  # 
+df
+
+```
+
+<p></p>
+#### origins, all
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_origins = read.csv("archetypes/south-sudan-imports/origins-2019/origins-2019.csv", header = TRUE, stringsAsFactors = TRUE)  # 
+df_origins
+
+```
+
+<p></p>
+#### origins, packaged-medicaments
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_origins_pm = read.csv("archetypes/south-sudan-imports/origins-2019/origins-of-packaged-medicaments-2019.csv", header = TRUE, stringsAsFactors = TRUE)  # 
+df_origins_pm
+
+```
+
+
+### Wrangle the data
+#### select only the needed, filter
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_wrangle <- df %>% select(Section, HS2, HS4, HS6, Trade.Value)
+# df_wrangle
+
+df_wrangle_pm <- filter(df_wrangle, HS4 == 'Packaged Medicaments')
+df_wrangle_pm
+
+df_origins_wrangle <- df_origins %>% select(Continent, Country, Trade.Value)
+# df_origins_wrangle
+
+df_origins_pm_wrangle <- df_origins_pm %>% select(Continent, Country, Trade.Value)
+# df_origins_pm_wrangle
+
+```
+
+
+### Plot the Treemap, Imports
+#### area, fill, labels, and subgroups
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+section_palette <- c(
+   'Animal Products' = '#a0d447',
+   'Vegetable Products' = '#ed40f2',
+   'Animal and Vegetable Bi-Products Foodstuffs' = '#02a347',
+   'Mineral Products' = '#aa7329',
+   'Chemical Products' = '#f4ce0f',
+   'Plastics and Rubbers' = "#ed40f2",
+   'Animal Hides' = '#ff73ff',
+   'Wood Products' = '#efdc81',
+   'Paper Goods' = '#9c9fb2',
+   'Textiles' = '#a53200',
+   'Footwear and Headwear' = '#2cba0f',
+   'Stone And Glass' = '#9e0071',
+   'Precious Metals' = '#f46d2a',
+   'Metals' = '#edb73e',
+   'Machines' = "#2e97ff",
+   'Transportation' = "#69c8ed",
+   'Instruments' = '#f2aa86',
+   'Weapons' = '#dd0e31',
+   'Miscellaneous' = '#6df2b0',
+   'Arts and Antiques' = '#9cf2cf'
+)
+
+# Layouts
+# squarified" (the default), "scol", "srow" or "fixed"
+
+v1 <- ggplot(df_wrangle, aes(area = Trade.Value, fill = Section, label = HS6, subgroup = Section)) +
+  geom_treemap() +
+  geom_treemap_subgroup_border(colour = "white") +
+  geom_treemap_subgroup_text(place = "centre", grow = T, alpha = 0.5, colour =
+                               "black", fontface = "italic", min.size = 0) +
+  geom_treemap_text(colour = "white", place = "topleft", reflow = T) +
+  scale_fill_manual(values = section_palette) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+
+```
+
+
+### Plot the Treemap, Origins
+#### area, fill, labels, and subgroups
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+continent_palette <- c(
+   'Africa' = '#a0d447',
+   'Asia' = '#a53200',
+   'Europe' = '#2e97ff',
+   'North America' = '#69c8ed',
+   'Oceania' = '#f4ce0f',
+   'South America' = "#edb73e"
+)
+
+# Layouts
+# squarified" (the default), "scol", "srow" or "fixed"
+
+v2 <- ggplot(df_origins_wrangle, aes(area = Trade.Value, fill = Continent, label = Country, subgroup = Continent)) +
+  geom_treemap() +
+  geom_treemap_subgroup_border(colour = "white") +
+  geom_treemap_subgroup_text(place = "centre", grow = T, alpha = 0.5, colour =
+                               "black", fontface = "italic", min.size = 0) +
+  geom_treemap_text(colour = "white", place = "topleft", reflow = T) +
+  scale_fill_manual(values = continent_palette) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Imports and Origins, Packaged Medicaments
+#### side-by-side layout
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v3 <- ggplot(df_wrangle_pm, aes(area = Trade.Value, fill = Section, label = HS6, subgroup = Section)) +
+  geom_treemap() +
+  geom_treemap_subgroup_border(colour = "white") +
+  geom_treemap_subgroup_text(place = "centre", grow = T, alpha = 0.5, colour =
+                               "black", fontface = "italic", min.size = 0) +
+  geom_treemap_text(colour = "white", place = "topleft", reflow = T) +
+  scale_fill_manual(values = section_palette) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+v4 <- ggplot(df_origins_pm_wrangle, aes(area = Trade.Value, fill = Continent, label = Country, subgroup = Continent)) +
+  geom_treemap() +
+  geom_treemap_subgroup_border(colour = "white") +
+  geom_treemap_subgroup_text(place = "centre", grow = T, alpha = 0.5, colour =
+                               "black", fontface = "italic", min.size = 0) +
+  geom_treemap_text(colour = "white", place = "topleft", reflow = T) +
+  scale_fill_manual(values = continent_palette) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+girafe( ggobj = plot_grid(v3, v4), width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Data Sources: Observatory of Economic Complexity (OEC), https://oec.world/en/profile/country/ssd
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

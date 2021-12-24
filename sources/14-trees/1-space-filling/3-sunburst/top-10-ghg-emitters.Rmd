@@ -1,0 +1,238 @@
+---
+pagetitle: "Top 100 GHG Emitters"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(sunburstR)
+library(ggraph)
+library(igraph)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+ TREES  
+</div>
+
+# Top 100 GHG Emitters
+## Sunburst Chart 
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo of Nemonte Nenquimo"}
+
+masthead <- "assets/nemonte-nenquimo.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> And now, as a woman, as a mother, as a water protector and a forest defender,\
+  I want you to join us in our fight to defend our way of life, our forests and our planet...\
+--- Nemonte Nenquimo\
+
+***
+
+
+### Ingest
+#### name, category, country, role
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_file_path <- "archetypes/top-10-ghg-emitters/top-10-ghg-emitters.csv"
+df <- read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+```
+
+
+### Wrangle
+#### enrich with continent to create hierarchy
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
+
+df_wrangle <- df
+
+# select only the needed columns
+df_wrangle <- df_wrangle %>% select(name, category, country, role)
+
+# enrich with UN region name
+df_wrangle$region <- countrycode(df_wrangle$country, origin='country.name', destination='un.region.name')
+
+# for non-matches, replace with a generic "World" entry
+# df_wrangle <- df_wrangle %>% replace_na(list(region = "World"))
+# or, replace with country entries
+df_wrangle$region <- ifelse(is.na(df_wrangle$region), df_wrangle$country, df_wrangle$region)
+
+# we'll add a constant size variable for the aggregation
+df_wrangle <- df_wrangle %>% mutate(ID = row_number(), SIZE = 1)
+# we need to create unique ids to avoid duplicate vertices
+df_wrangle <- df_wrangle %>% mutate(country = paste0(country, "_", ID))
+df_wrangle
+
+```
+
+
+### Wrangle, part II
+#### create graph hierarchy
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+df_filtered <- filter(df_wrangle, category != 'Top 100')
+
+# unique edges
+df_edges_0 <- aggregate(x = df_filtered$SIZE,
+          by = list(df_filtered$category),
+          FUN = sum)
+
+# standard edge table structure
+colnames(df_edges_0) <- c("TO", "SIZE")
+df_edges_0$FROM <- "Top 100"
+
+df_edges_1 <- aggregate(x = df_filtered$SIZE,
+          by = list(df_filtered$category, df_filtered$country),
+          FUN = sum)
+
+# standard edge table structure
+colnames(df_edges_1) <- c("FROM","TO", "SIZE")
+
+df_edges_2 <- aggregate(x = df_filtered$SIZE,
+          by = list(df_filtered$country, df_filtered$name),
+          FUN = sum)
+
+# standard edge table structure
+colnames(df_edges_2) <- c("FROM","TO", "SIZE")
+
+# combine
+df_edges <- rbind(df_edges_0, df_edges_1, df_edges_2)
+df_edges <- df_edges[c("FROM", "TO", "SIZE")]
+df_edges
+
+# consolidate to have nodes list; used for validation if needed
+df_node_list <- as.data.frame(c(df_edges$FROM, df_edges$TO))
+colnames(df_node_list) <- c("NODE")
+#df_node_list
+
+# root nodes
+df_nodes_1 <- aggregate(x = df_wrangle$SIZE,
+          by = list(df_wrangle$category),
+          FUN = sum)
+
+colnames(df_nodes_1) <- c("NODE","SIZE")
+df_nodes_1$COLOR <- df_nodes_1$NODE
+
+# leaf nodes
+df_nodes_2 <- aggregate(x = df_filtered$SIZE,
+          by = list(df_filtered$country, df_filtered$category),
+          FUN = sum)
+
+colnames(df_nodes_2) <- c("NODE", "COLOR", "SIZE")
+
+# leaf nodes
+# df_nodes_3 <- df_filtered %>% select(name, category, SIZE)
+df_nodes_3 <- aggregate(x = df_filtered$SIZE,
+          by = list(df_filtered$name, df_filtered$category),
+          FUN = sum)
+colnames(df_nodes_3) <- c("NODE", "COLOR", "SIZE")
+
+# combine
+df_nodes <- rbind(df_nodes_1, df_nodes_2, df_nodes_3)
+df_nodes
+
+# a check, when needed, to find missing node entries
+test_1 <- anti_join(df_nodes, df_node_list, by = "NODE" )
+#test_1
+test_2 <- anti_join(df_node_list, df_nodes, by = "NODE" )
+#test_2
+
+
+# transform to graph data structure
+df_graph <- graph_from_data_frame( df_edges, vertices = df_nodes )
+
+```
+
+
+### Plot
+#### graph version
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.margin = unit(c(1.5,1,1,1), "in"),
+    legend.position='none'
+  )
+
+category_palette <- c("Top 100" = "#FFFFFF", "LEAF" = "#FFFFFF", "Creativity" = "#E8F5E9", "Identity" = "#E3F2FD", "Knowledge" = "#F3E5F5","Leadership" = "#FCE4EC")
+
+v1 <- ggraph(df_graph, layout = 'partition', circular = TRUE, weight = SIZE) + 
+  geom_node_arc_bar(aes(fill = ifelse(leaf, 'LEAF', COLOR)), color='#ffffff') + 
+  scale_fill_manual(values = category_palette) +
+  geom_node_label( aes(label=name, filter=depth<2), size = 6, label.size = NA, family = "inconsolata") +
+  geom_node_text( aes(filter = leaf, angle = node_angle(x, y), label = name), hjust = 0, size = 3, family = "inconsolata" ) +
+  coord_fixed(clip = 'off') + 
+  theme_void() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+# pg <- ggplot_build(v1)
+# pg$data[[2]]
+# pg$data[[3]]
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and data sources: 
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
