@@ -1,0 +1,11 @@
+1.] Compose an article as would be published in a newspaper, magazine, website, or delivered as a brief.
+
+2.] Use the CSS file to set the style of fonts, sizing, colors, etc.
+
+3.] Use Rmarkdown to draft text (titles, headers, paragraphs)
+
+4.] Creating supporting visualizations for your story (see data sources)
+
+5.] Experiment with themes and aesthetics for your views
+
+6.] Have fun :-)

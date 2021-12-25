@@ -1,0 +1,305 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggraph)
+library(igraph)
+library(graphlayouts)
+library(tidygraph)
+
+
+library(knitcitations)
+library(bibtex)
+```
+
+<div class="activity">
+GRAPH  
+</div>
+
+# Node-links - Association
+## Case: Movies
+
+> If you take me out of it, I find 'six degrees' to be a beautiful concept that we should try to live by.\
+It's about compassion and responsibility for everyone on the planet...\
+--- Kevin Bacon\
+
+
+***
+
+## Load data [Ingest]
+
+```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("./archetypes/movies/movie-edges.csv", header = TRUE, stringsAsFactors = TRUE)
+df
+
+```
+
+```{r, echo=TRUE, class.source = 'fold-hide'}
+
+df_f <- filter(df, SOURCE %in% c("Tom Hanks", "Kevin Bacon"))
+df_f
+
+```
+
+
+# Prepare data [Wrangle]
+# Format the data into a graph data frame 
+## Creating two important sets: Nodes and Edges between the nodes
+
+```{r, echo=TRUE, class.source = 'fold-hide'}
+
+# Convert data to graph data frame
+# directed FALSE means no flow. It's just an association
+g <- graph.data.frame(df_f, directed = FALSE)
+g
+
+```
+
+
+## Associating different attributes for your Nodes 
+### Creating numercial fields for the Nodes set in order to attribute the nodes size and/or color  
+
+```{r, echo=TRUE, class.source = 'fold-hide'}
+
+## Creating centrality numerical field for the Nodes
+# centrality_alpha()
+# centrality_authority() 
+# centrality_betweenness() 
+# centrality_power() 
+# centrality_closeness() 
+# centrality_eigen() 
+# centrality_hub() 
+# centrality_pagerank() 
+# centrality_subgraph() 
+# centrality_degree() 
+# centrality_edge_betweenness() 
+# centrality_manual() 
+# centrality_closeness_harmonic() 
+# centrality_closeness_residual() 
+# centrality_closeness_generalised() 
+# centrality_integration() 
+# centrality_communicability() 
+# centrality_communicability_odd() 
+# centrality_communicability_even() 
+# centrality_subgraph_odd() 
+# centrality_subgraph_even() 
+# centrality_katz() 
+# centrality_betweenness_network() 
+# centrality_betweenness_current() 
+# centrality_betweenness_communicability() 
+# centrality_betweenness_rsp_simple() 
+# centrality_betweenness_rsp_net() 
+# centrality_information() 
+# centrality_decay() 
+# centrality_random_walk() 
+# centrality_expected()
+
+cg <- g %>% 
+    as_tbl_graph() %>% 
+    activate(nodes) %>% 
+  # associating a numerical value to nodes to differentiate their colors and size
+    mutate(centrality  = centrality_pagerank())
+
+
+## Creating group numerical field for the Nodes
+# group_components() 
+# group_edge_betweenness() 
+# group_fast_greedy() 
+# group_infomap() 
+# group_label_prop() 
+# group_leading_eigen() 
+# group_louvain() 
+# group_optimal() 
+# group_spinglass() 
+# group_walktrap() 
+# group_biconnected_component()
+
+cg <- cg %>% 
+  activate(nodes) %>%
+   # use functions to compute numerical values to attribute the edge width and/or color
+  mutate(group = group_louvain())
+
+cg
+
+
+```
+
+
+## Associating different attributes for the Edges between Nodes 
+### Creating new numerical fields (smaller values) in order to attribute the edge width and/or color  
+
+```{r, echo=TRUE, class.source = 'fold-hide'}
+
+cg <- cg %>% 
+    activate(edges) %>% 
+  # computing random number (n) which are between 0 and 1 to attribute the edge width
+    mutate(edge_weights = runif(n()))
+
+cg
+
+```
+
+
+## Layout & Aesthetic Parameters
+### Choose the types of Edges you would like to display
+
+```{r, echo=TRUE, class.source = 'fold-hide'}
+
+# Edge Types
+# geom_edge_arc
+# geom_edge_arc0
+# geom_edge_arc2
+# geom_edge_density
+# geom_edge_diagonal
+# geom_edge_diagonal0
+# geom_edge_diagonal2
+# geom_edge_elbow
+# geom_edge_elbow0
+# geom_edge_elbow2
+# geom_edge_fan
+# geom_edge_fan0
+# geom_edge_fan2
+# geom_edge_hive
+# geom_edge_hive0
+# geom_edge_hive2
+# geom_edge_link
+# geom_edge_link0
+# geom_edge_link2
+# geom_edge_loop
+# geom_edge_loop0
+
+# Layouts can be computationally intensive
+# Uncomment only for use
+
+# igraph
+# dh <- create_layout(cg, layout = 'dh')
+# fr <- create_layout(cg, layout = 'fr')
+# gem <- create_layout(cg, layout = 'gem')
+# lgl <- create_layout(cg, layout = 'lgl')
+# sugiyama <- create_layout(cg, layout = 'sugiyama')
+# star <- create_layout(cg, layout = 'star')
+# kk <- create_layout(cg, layout = 'kk', maxiter = 100)
+# drl <- create_layout(cg, layout = 'drl')
+# linear_straight <- create_layout(cg, layout = 'linear')
+# linear_circular <- create_layout(cg, layout = 'linear' , circular = TRUE)
+
+# ggraph
+# arc <- create_layout(cg, layout = 'linear')
+# arc_circular <- create_layout(cg, layout = 'linear', circular = TRUE)
+# stress <- create_layout(cg, layout = 'stress')
+# sparse_stress <- create_layout(cg, layout = 'sparse_stress')
+# backbone <- create_layout(cg, layout = 'backbone')
+# pmds <- create_layout(cg, layout = 'pmds')
+# eigen <- create_layout(cg, layout = 'eigen')
+# centrality <- create_layout(cg, layout = 'centrality')
+# focus <- create_layout(cg, layout = 'focus')
+# dendrogram <- create_layout(cg, layout = 'dendrogram')
+# unrooted <- create_layout(cg, layout = 'unrooted')
+# matrix <- create_layout(cg, layout = 'matrix')
+# hive <- create_layout(cg, layout = 'hive')
+# fabric <- create_layout(cg, layout = 'fabric')
+
+# graphlayouts
+# nicely <- create_layout(cg, layout = "nicely")
+# stress <- create_layout(cg, layout = "stress")
+radial <- create_layout(cg, layout = "focus", focus = 1)
+# centrality_bc <- create_layout(cg, layout = "centrality", centrality = bc, tseq = seq(0,1,0.15))
+# centrality_cc <- create_layout(cg, layout = "centrality", centrality = cc, tseq = seq(0,1,0.2))
+
+```
+
+
+## Plot with Layout
+
+
+```{r, echo=TRUE, class.source = 'fold-hide'}
+
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+v1 <- ggraph(radial) + 
+  geom_edge_link(aes(colour = factor(TYPE))) + 
+  geom_node_point(aes(color = group, size = centrality)) +
+  geom_node_text(aes(label = name)) +
+  scale_color_gradient(low = "green", high = "blue", na.value = NA) +
+  scale_size(range = c(2,6)) +
+  theme_graph()+
+  theme(legend.position = "none")
+
+v1
+
+
+```
+
+
+# Saving the graph as .svg file
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggsave(filename = "./assets/movie-network.svg", plot = v1, width=12, height=6)
+# ggsave(filename="template.png", plot=v1, device="png", width=12, height=6, units="in", dpi=500)
+
+```
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "./citations/.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

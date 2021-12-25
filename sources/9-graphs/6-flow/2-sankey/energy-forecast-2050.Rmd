@@ -1,0 +1,159 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(tidyr)
+library(plotly)
+library(networkD3)
+library(jsonlite)
+```
+
+<div class="activity">
+GRAPHS  
+</div>
+
+# Sankey
+## Energy Forecast 2050
+
+***
+
+## Load data [Ingest]
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+
+# Load data
+# Flatten for easy access to properties
+plotly_graph <- fromJSON('./archetypes/sankey_energy.json', flatten = TRUE)[[1]]
+# plotly_graph
+
+d3_graph <- fromJSON("./archetypes/energy.json")
+# d3_graph
+
+```
+
+
+## Plotly Version
+
+
+```{r, echo=FALSE, fig.width=11, fig.height=12}
+
+node_labels <- unlist(plotly_graph$node.label)
+node_color <- unlist(plotly_graph$node.color)
+
+link_source <- unlist(plotly_graph$link.source)
+link_target <- unlist(plotly_graph$link.target)
+link_value <- unlist(plotly_graph$link.value)
+link_label <- unlist(plotly_graph$link.label)
+
+fig <- plot_ly(
+  type = "sankey",
+  domain = list(
+    x =  c(0,1),
+    y =  c(0,1)
+  ),
+  orientation = "h",
+  valueformat = ".0f",
+  valuesuffix = "TWh",
+  
+  node = list(
+    label = node_labels,
+    color = node_color,
+    pad = 15,
+    thickness = 15,
+    line = list(
+      color = "black",
+      width = 0.5
+    )
+  ),
+  
+  link = list(
+    source = link_source,
+    target = link_target,
+    value =  link_value,
+    label =  link_label
+  )
+) 
+fig <- fig %>% layout(
+  title = "Energy forecast for 2050<br>Source: Department of Energy & Climate Change, Tom Counsell via Mike Bostock",
+  font = list(
+    size = 10
+  ),
+  xaxis = list(showgrid = F, zeroline = F),
+  yaxis = list(showgrid = F, zeroline = F)
+)
+
+fig
+
+```
+
+
+## Network D3 Version
+
+
+```{r, echo=FALSE, fig.width=11, fig.height=12}
+
+# Convert to data frame
+EngNodes <- d3_graph$nodes
+EngLinks <- d3_graph$links
+
+# EngNodes
+# EngLinks
+
+# Plot
+sankey <- sankeyNetwork(Links = EngLinks, Nodes = EngNodes, Source = "source",
+         Target = "target", Value = "value", NodeID = "name",
+         units = "TWh", fontSize = 12, nodeWidth = 30)
+
+sankey
+
+# saveNetwork(sankey, file = "energy.html", selfcontained = TRUE)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

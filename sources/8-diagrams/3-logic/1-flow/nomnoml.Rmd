@@ -1,0 +1,138 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(nomnoml)
+
+```
+
+
+```{nomnoml, svg=FALSE}
+
+#direction: right
+#zoom: 0.85
+#ranker: network-simplex
+#.wrangler: visual=roundrect fill=#FFAB91 solid
+#.box: visual=roundrect fill=#8f8 solid
+[<actor>start]->[<state>wranglers]
+[wranglers]->[<wrangler>evaluate]
+[evaluate]->[<wrangler>prepare]
+[prepare]->[<wrangler>reduce]
+[reduce]->[<wrangler>extend]
+[extend]->[<wrangler>arrange]
+[arrange]->[<wrangler>structure]
+[structure]->[<wrangler>preserve]
+[evaluate]->[<lollipop>profile]
+[evaluate]->[<lollipop>validate]
+[evaluate]->[<lollipop>clean]
+[evaluate]->[<lollipop>impute]
+[prepare]->[<lollipop>format]
+[prepare]->[<lollipop>parse]
+[prepare]->[<lollipop>replace]
+[prepare]->[<lollipop>column]
+[prepare]->[<lollipop>normalize]
+[reduce]->[<lollipop>slim]
+[reduce]->[<lollipop>split]
+[reduce]->[<lollipop>sample]
+[reduce]->[<lollipop>filter-find]
+[reduce]->[<lollipop>partition]
+[reduce]->[<lollipop>query]
+[extend]->[<lollipop>enrich]
+[extend]->[<lollipop>group]
+[arrange]->[<lollipop>shuffle]
+[arrange]->[<lollipop>sort]
+[structure]->[<lollipop>transform]
+[structure]->[<lollipop>mutate]
+[preserve]->[<lollipop>Store]
+[preserve]->[<end>end]
+
+```
+
+
+
+```{nomnoml, svg=TRUE}
+
+#direction: right
+#zoom: 0.85
+#ranker: network-simplex
+#.wrangler: visual=roundrect fill=#FFAB91 solid
+#.box: visual=roundrect fill=#8f8 solid
+[<actor>start]->[<state>wranglers]
+[wranglers]->[<wrangler>evaluate]
+[evaluate]->[<wrangler>prepare]
+[prepare]->[<wrangler>reduce]
+[reduce]->[<wrangler>extend]
+[extend]->[<wrangler>arrange]
+[arrange]->[<wrangler>structure]
+[structure]->[<wrangler>preserve]
+[evaluate]->[<lollipop>profile]
+[evaluate]->[<lollipop>validate]
+[evaluate]->[<lollipop>clean]
+[evaluate]->[<lollipop>impute]
+[prepare]->[<lollipop>format]
+[prepare]->[<lollipop>parse]
+[prepare]->[<lollipop>replace]
+[prepare]->[<lollipop>column]
+[prepare]->[<lollipop>normalize]
+[reduce]->[<lollipop>slim]
+[reduce]->[<lollipop>split]
+[reduce]->[<lollipop>sample]
+[reduce]->[<lollipop>filter-find]
+[reduce]->[<lollipop>partition]
+[reduce]->[<lollipop>query]
+[extend]->[<lollipop>enrich]
+[extend]->[<lollipop>group]
+[arrange]->[<lollipop>shuffle]
+[arrange]->[<lollipop>sort]
+[structure]->[<lollipop>transform]
+[structure]->[<lollipop>mutate]
+[preserve]->[<lollipop>Store]
+[preserve]->[<end>end]
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

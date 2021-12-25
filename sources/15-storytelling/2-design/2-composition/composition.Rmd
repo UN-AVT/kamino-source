@@ -1,0 +1,236 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MODULE  
+</div>
+
+# This is a title
+## This is a subtitle
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Abhidev Vaishnav on Unsplash"}
+
+knitr::include_graphics("archetypes/smile/abhidev-vaishnav-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">A smile from Pune, India</div>
+
+> This is a quote...\
+--- The attribution\
+
+***
+
+“ Composition is the positioning of all parts in a picture. It is the rhythm or repetition
+of parts in a picture. It is the arrangement of different shapes to unify everything around the center of interest or focal point of the work.
+
+<aside>
+<p>A note of reference that is set in the __side margin__ or a page usually in <u>_smaller type_</u> than the text.</p>
+</aside>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa fringilla, venenatis augue id, vulputate orci. Etiam in dictum nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque semper tristique malesuada. Sed maximus <mark>consequat</mark> est a fermentum. Nullam ex ante, pretium sit amet venenatis laoreet, iaculis non magna. Pellentesque vitae lacus sollicitudin, cursus enim a, fermentum nisl. Morbi venenatis ipsum eu ante vehicula, et faucibus risus eleifend. Nullam lobortis lectus in congue finibus.
+
+### Markdown tags
+#### with custom styling
+
+I am __bold__ and _italic_, with a ~~strikethrough~~.
+
+* Pellentesque semper tristique malesuada.
+* Morbi venenatis ipsum eu ante vehicula.
+* Sed maximus consequat est a fermentum
+
+
+### HTML tags
+#### with custom styling
+
+Using the package <kbd>ggplot()</kbd> you can add <kbd>annotate()</kbd> layers to include narrative explanations.
+
+Kamino's goal is to: 
+<q>To promote data science skills and capabilities to make a difference.</q>
+The programme is designed to...
+
+This text contains <sub>subscript</sub> text.
+This text contains <sup>superscript</sup> text.
+
+<details class="tip">
+  <summary>✱ Tip</summary>
+  a small but useful piece of practical advice.
+</details>
+
+<details class="reminder">
+  <summary>⚑ Reminder</summary>
+  a thing that causes someone to remember something.
+</details>
+
+<details class="technical">
+  <summary>⚙ Technical</summary>
+  relating to a particular subject, art, or craft, or its techniques.
+</details>
+
+
+### This is a section
+#### This is a subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# df_file_path <- "archetypes/../*.csv"
+# df = read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE)
+# df
+
+mpg
+
+```
+
+
+### This is a section
+#### This is a subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "80%"}
+
+grViz("
+digraph vv {
+
+# dot, neato, twopi, and circo
+graph [layout = dot, splines = ortho, nodesep = 0.8]
+
+# node definitions with substituted label text
+node [fontname = Inconsolata]
+vv [label = 'Visual Variables', shape = 'box', margin=0.2]
+px [label = 'Position X', shape = 'box', margin=0.2]
+py [label = 'Position Y', shape = 'box', margin=0.2]
+sh [label = 'Shape', shape = 'box', margin=0.2]
+sz [label = 'Size', shape = 'box', margin=0.2]
+c [label = 'Color', shape = 'box', margin=0.2]
+pxm [label = 'GDP', shape = 'box', margin=0.2]
+pym [label = 'Life Expectency', shape = 'box', margin=0.2]
+shm [label = 'circle\ngeom_point', shape = 'circle', margin=0.2]
+szm [label = 'Population', shape = 'box', margin=0.2]
+cm [label = 'Region', shape = 'box', margin=0.2]
+
+# edge definitions with the node IDs
+vv -> {px py sh sz c} [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+px -> pxm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+py -> pym [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+sh -> shm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+sz -> szm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+c -> cm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+}")
+
+```
+
+<div class="figure-text">Mapping of visual variables with shape parameter assigned as static.</div>
+
+### This is a section
+#### This is a subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# https://ggplot2.tidyverse.org/reference/theme.html
+# standard theme parameters
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_line(linetype = "dotted"),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_rect(fill="white", colour="white"),
+  plot.margin = unit(c(0.5,0.5,0.5,0.5), "in")
+)
+
+v1 <- ggplot(mpg, aes(displ, hwy, color = class)) + 
+  geom_point() +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Save plot
+#### as vector or raster image
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ggsave(filename = "assets/full-size.svg", plot = v1, width=1280/72, height=720/72)
+ggsave(filename = "assets/thumbnail.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

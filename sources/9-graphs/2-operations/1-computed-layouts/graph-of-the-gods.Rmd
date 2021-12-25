@@ -1,0 +1,233 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, dev='svg')
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggraph)
+library(igraph)
+library(graphlayouts)
+library(tidygraph)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+GRAPHS
+</div>
+
+# Graph of the Gods
+## computed layouts
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Kedar Gadge on Unsplash"}
+
+masthead <- "assets/kedar-gadge-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Under floods that are deepest, which Neptune obey, over rocks that are steepest, Love will find out the way...\
+--- Thomas Percy\
+
+***
+
+### Ingest
+#### a graphml source
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_path <- "archetypes/graph-of-the-gods/graph-of-the-gods.xml"
+df_graph <- read_graph( df_path, format = "graphml" )
+df_graph
+
+```
+
+
+### Analytics
+#### compute layout
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# igraph layouts
+
+# bipartite <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
+# circle <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
+# dh <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
+# drl <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
+fr <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
+gem <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
+graphopt <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
+# grid <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
+kk <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
+# lgl <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
+mds <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
+nicely <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
+# sphere <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
+star <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
+sugiyama <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+
+# ggraph layouts
+
+# backbone <- create_layout(df_graph_undirected, layout = 'backbone')
+
+centrality_bc <- betweenness(df_graph)
+centrality <- create_layout(df_graph, layout = 'centrality', centrality = centrality_bc)
+
+eigen <- create_layout(df_graph, layout = 'eigen', type = "laplacian", eigenvector = "smallest")
+
+fabric <- create_layout(df_graph, layout = 'fabric')
+# focus <- create_layout(df_graph_directed, layout = 'focus', focus = 1)
+
+# hive <- create_layout(df_graph, layout = 'hive', axis = friends, sort.by = degree)
+
+# linear <- create_layout(df_graph, layout = 'linear')
+# matrix <- create_layout(df_graph, layout = 'matrix')
+
+pmds_pivots <- 3
+pmds <- create_layout(df_graph, layout = 'pmds', pivots = pmds_pivots)
+
+stress <- create_layout(df_graph, layout = 'stress')
+
+unrooted <- create_layout(df_graph, layout = 'unrooted' )
+
+```
+
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Edge Types
+# geom_edge_arc
+# geom_edge_arc0
+# geom_edge_arc2
+# geom_edge_density
+# geom_edge_diagonal
+# geom_edge_diagonal0
+# geom_edge_diagonal2
+# geom_edge_elbow
+# geom_edge_elbow0
+# geom_edge_elbow2
+# geom_edge_fan
+# geom_edge_fan0
+# geom_edge_fan2
+# geom_edge_hive
+# geom_edge_hive0
+# geom_edge_hive2
+# geom_edge_link
+# geom_edge_link0
+# geom_edge_link2
+# geom_edge_loop
+# geom_edge_loop0
+
+```
+
+
+
+### Plot
+#### nicely
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    # plot.margin = unit(c(1.5,1,1,1), "in"),
+    legend.position='none'
+)
+
+v1 <- ggraph(stress) + 
+  geom_edge_link() +
+  geom_node_point(size = 2) +
+  geom_node_label(aes(label = name), size = 4) +
+  theme_graph() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+# eval = FALSE as default; run manually as chunk
+
+# full version
+ggsave(filename = "outputs/graph-of-the-gods-fs.svg", plot = v1, width=720/72, height=720/72)
+
+# thumbnail version without annotations
+ggsave(filename = "outputs/graph-of-the-gods-sm.svg", plot = v1, width=2.25, height=2.25)
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Data: manually created.
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'greek gods'
+commands <- 'graph_from_data_frame create_layout'
+sources <- 'common knowledge'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

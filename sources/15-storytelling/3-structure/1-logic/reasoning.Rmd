@@ -1,0 +1,125 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MODULE  
+</div>
+
+# This is a title
+## This is a subtitle
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Abhidev Vaishnav on Unsplash"}
+
+knitr::include_graphics("archetypes/smile/abhidev-vaishnav-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">A smile from Pune, India</div>
+
+> This is a quote...\
+--- The attribution\
+
+***
+
+The analysis activity is a process of reasoning. Awareness of the reasoning processes is therefore appropriate to ensure we are approaching out argument with clear thinking and lack of biases. We can upgrade the quality of our reasoning when we understand the intellectual processes that underlie reasoning. This method of thinking is based on four possible approaches: inductive, deductive, abductive, and scientific method.
+
+### Inductive
+#### with custom styling
+
+The practice of inductive reasoning generally starts with an examination of known facts and progresses to the development of theory of what happened or what the issue is about. Inductive reasoning is therefore about the synthesis of importation to develop theories or hypotheses about the event of issue. In the words of Clauser and Weir:
+
+Induction is the intellectual process of drawing generalizations on the basis of observations or other evidence. Induction takes place when one learns from experience... Induction occurs
+when one is able to postulate causal relationships. Intelligence estimates are largely the result of inductive processes, and, of course, induction takes place in the formulation of every
+hypothesis.81
+
+Inductive reasoning works from specifi c observations to broader generalizations and theories. We begin with specific observations and measures, begin to detect patterns and regularities, formulate some tentative hypotheses that we can explore, and fi nally end up developing some general conclusions or theories.
+
+### Deductive
+#### with custom styling
+
+Deductive reasoning works from the more general to the more specifi c. We might begin with thinking up a theory about our topic of interest. We then narrow that down into more specifi c hypotheses that we can test. We narrow down even further when we collect observations to address the hypotheses. This ultimately leads us to be able to test the hypotheses with specifi c data -- a confi rmation (or not) of our original theories.
+
+Deductive reasoning is more narrow in nature and is concerned with testing or confi rming hypotheses. Analysis conducted into an issue for the purpose of proving a hypothesis is considered to be deductive reasoning. An analyst can develop a hypothesis about an event or issue and conduct research to prove or disprove the theory.
+
+
+### Abductive
+#### This is a subsection
+
+
+Abduction is the process of generating a novel hypothesis to explain given evidence that does not readily suggest a familiar explanation. This process diff ers from induction in that it adds to the set of hypotheses available to the analyst. The analyst creatively generates an hypothesis, then sets about examining whether the available evidence unequivocally leads to the new conclusion.56
+
+Abductive reasoning may also be called intuition. It characterizes the analyst’s occasional ability to come to a conclusion spontaneously, often without a sense of having consciously taken defi nable steps to get there - creative thinking. Examples of abductive reasoning in analysis include situations in which the analyst has a nagging suspicion that something of value has happened or is about to happen, but has no immediate explanation for this conclusion.
+
+
+### Scientific Method
+#### This is a subsection
+
+The scientific method combines deductive and inductive reasoning: Induction is used to develop the hypothesis, and deduction is used to test it. In science, the analyst obtains data through direct observation of the subject and formulates an hypothesis to explain conclusions suggested by the evidence. Experiments on the subject are devised and conducted to test the validity of the hypothesis. If the experimental results match the expected outcome, then the hypothesis is validated; if not, then the analyst must develop a new hypothesis and appropriate experimental methods.
+
+The analyst typically does not have direct access to the observable subject, but gathers information indirectly. From these gathered data, the analyst may proceed with the scientifi c method by generating tentative explanations for a subject event or phenomenon. Next, each hypothesis is examined for plausibility and compared against newly acquired information, in a continual process toward reaching a conclusion. Analysts cannot usually experiment directly upon the subject matter, but must generate fi ctional scenarios and rigorously test them through mental processes and analysis methods.59
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

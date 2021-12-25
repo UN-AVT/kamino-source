@@ -1,0 +1,130 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Social Network Analysis
+## I want to fix irregularities in my dataset
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+Social Network Analysis (SNA) is a analytical method to focus on relationships among social entities and on the patterns and implications of these relationships. This perspective off ers potential insight for answering key behavioural questions in political, economic, or social communities. SNA provides a formal means of examining the relational dimensions. Social network analysis has been used in epidemiology to help understand how patterns of human contact aid or inhibit the spread of diseases such as HIV in a population.
+
+Social network analysis views social relationships in terms of actors and relational ties. There can be many kinds of ties between the nodes. Research in a number of academic fields has shown that social networks operate on many levels, from families up to the level of nations, and play a critical role in determining the way problems are solved, organizations are run, and the degree to which individuals succeed in achieving their goals. With these key concepts in mind, we can turn to the fundamental analysis methods of SNA. This includes the concepts of centrality and social groupings.
+
+Centrality
+Clustering
+Community Detection
+
+# Centrality
+
+Centrality is the extent to which a actor is “important” or having a position of predominance. The notion of centrality enables us to identify the main and most powerful or influential actors within a social network. Five major definitions are used for centrality: degree, closeness, betweenness, eigenvector, information, and power.
+
+* __Closeness__ : temp
+* __Betweenness__ : temp
+* __Eccentricity__ : temp
+* __Hits__ : temp
+* __Pagerank__ : temp
+
+Degree centrality is simply the number of direct relationships that an entity has. An entity with high degree centrality is generally an active player in the network, may serve as a connector or hub in the network, and may be in an advantaged position in the network. Degree centrality is computed as a sum of relational ties. Degree centrality focuses on distinctions between in-degree and out-degree. If an actor has a high in-degree, we say that this actor is prominent and has high prestige. Actors who have high out-degree are people who are able to interact with many other actors and possibly spread their ideas.
+
+Closeness centrality measures how quickly an entity can access more entities in a network. An entity with a high closeness centrality generally has quick access to other entities in a network, has a short path to other entities, is close to other entities, and may have high visibility as to what is happening in the network. Closeness is a measure of how close an actor is to all other actors.
+
+Betweenness centrality identifies an entity’s position within a network in terms of its ability to make connections to other pairs or groups in a network. An entity with a high betweenness centrality generally holds a favored or powerful position in the network, represents a single point of failure, and has a greater amount of influence over what happens in a network. Betweenness centrality measures the effectiveness of how a relation connects the various parts of the network. Actors that positioned within paths between other pairs of actors are more powerful because they control the fl ow of information between relations. That is, the more other entities depend on a certain entity to make connections, the more power the entity has. The more times an actor appears in the paths, the higher centrality it has.
+
+Eigenvalue measures how close an entity is to other highly close entities within a network. In other words, Eigenvalue identifi es the most central entities in terms of the global or overall makeup of the network. A high Eigenvalue generally indicates an actor that is more central to the main pattern of distances among all entities. The main idea behind eigenvector centrality is that entities receiving many communications from other well-connected entities will be better and more valuable sources of information. The eigenvector centrality scores correspond to the values of the principal eigenvector of the adjacency matrix.
+
+Information centrality considers a relational link as a channel transmitting signal .from i to j, and compute the information centrality of node i, which is the sum of the extent of all information along all paths from i to every node j. Here the size of the information of a path is inversely proportion to the distance of a path because the information is normally inversely proportion to the variance of estimators and the variance is proportion to the distance of the path to be used.
+
+Power and Status This module computes Philip Bonacich’s power centrality in Bonnacich P, 1987. Power and Centrality: A family of Measures. American Journal of Sociology 92, 1170-1182.
+
+Figure X demonstrates these concepts using Degree Centrality analysis of the UNHCR refugee statistics of 2009 as an example.
+
+# Clustering
+
+* __Affinity Propagation__ : temp
+* __Chinese Whisper__ : temp
+* __Fuzzy C-Means__ : temp
+* __Hierarchical__ : temp
+* __K-Means__ : temp
+* __K-Medoids__ : temp
+* __Markov__ : temp
+
+
+# Community Detection
+
+Louvain
+
+***
+
+# Section
+## Subsection
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Fold hide as this is not relevant to the task
+
+
+```
+
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

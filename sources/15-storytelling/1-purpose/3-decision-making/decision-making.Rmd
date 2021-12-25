@@ -1,0 +1,201 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MODULE  
+</div>
+
+# Decision-Making
+## This is a subtitle
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Kyle Glenn on Unsplash"}
+
+knitr::include_graphics("archetypes/kyle-glenn-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">Which way to go?</div>
+
+> Nothing is more difficult, and therefore more precious than to be able to decide...\
+--- Napoleon, Maxims, 1804\
+
+***
+
+The objective of this chapter is to explain the decision making process and how decisions are made. Understanding these basics will enable you to assess the information needs for your product.
+
+The Visual Analytic Report (VAR) is the packaged information product prepared in the fi nal stage of the process; it is the fi nal brief presented to the decision makers. In this chapter we will explore the use of a VAR as an alternative to conventional reporting.
+
+Traditional analytical reports have followed mostly textual models whether in abbreviated bullet format or extended. A parody is found in the 2008 movie Get Smart, an action comedy fi lm adaptation of Mel Brooks and Buck Henry’s 1960s television series of the same name. During an operations briefi ng among colleagues, Maxwell Smart (Agent 86) fi nds his colleagues asking questions leading him to wonder:
+
+“It was on page 476 of my last report. Doesn’t anybody ever read my reports?”
+
+This is not to suggest that text is “bad”, but to highlight that properly constructed narratives with visual support can signifi cantly improve the understanding of an analysis product. We can draw many lessons from the cinematography industry where narrative (the print equivalent of text) and video are purposefully mixed to produce an understandable storyline.
+
+When the process of photography was introduced early in the nineteenth century, photographs were called “mirrors with a memory” and “faithful witnesses.” In this spirit the Visual Analytic Report is intended to serve as an “expert witness” . Borrowing from the military concept of a “spot report” a definition is formed:
+
+A concise visual narrative report of essential information covering events or conditions that may have an immediate and signifi cant eff ect on current planning that is aff orded the most
+expeditious means of communications to the decision maker.
+
+The utility of the VAR is dependent on its value as a decision support instrument. In the following sections we’ll explore the concepts of decision theory, the lifecycle, and how decisions are made.
+
+### The Decision Making Cycle
+#### with custom styling
+
+The Observation, Orientation, Decision, and Action (OODA) cycle was developed by Col. John Boyd, of the US Air Force during the Korean War. This looping concept referred to the ability possessed by fi ghter pilots that allowed them to succeed in combat. It is now extended to broader application and used by organizations as a model of decision-making process.
+
+The OODA cycle describes the basic sequence that occurs when “commanders” make decisions. (See Figure X) This concept relies heavily on extensive research into adversarial “decision-action” cycles in aerial combat. The observation phase addresses the... The orientation phase is where situational awareness is gained. The decision phase represents the assessment of possible courses of action. Finally, the action phase represents the moment of decisive expression.
+
+The key point to understand of the decision cycle is that it is dependent heavily on the responsibly of the visual analyst to produce a meaningful product.
+
+
+### How Decisions are Made
+#### with custom styling
+
+One important model is the RPD model by Gary A Klein (1993). The RPD model asserts that people use situation assessment to generate a plausible course of action and use mental simulation to evaluate that course of action. For several years Klein has been studying command and control performance. On the basis of his studies he has generated the RPD model for naturalistic decision making. Klein’s principal conclusion is that the decision makers assess the nature of the situation and, based on the situation assessment, select an action appropriate to it. Klein believes that the RPD model describes how decision making is usually carried out in real-world settings. The RPD process consists of three phases - situation recognition, serial option evaluation, and mental simulation - and he asserts that people use situation assessment to generate a plausible course of action and use mental simulation to evaluate this course of action.
+
+The Recognition-Primed Decision (RPD) model (Klein, 1993) captures how domain experts make decisions based on the recognition of similarity between the current situation and past experiences. The RPD model states that feature-matching and storybuilding are two typical strategies used by experts to develop situation awareness. In feature-matching, a decision maker tries to fi nd whether he/she has ever experienced situations similar to the current one by matching the set of observed cues (synthesized from information describing the current situation) with the pattern of cues considered in past experiences.
+
+In case that feature-matching cannot produce an adequate account for the current situation due to lack of experience, story-building will be used to construct an explanation, by coherently linking the observed information. A story gives an explanation of how the current situation might have been emerging. When building a story, a decision maker need explore potential hypotheses and evaluate how well each of them may fit what have been observed.
+
+Situation Recognition
+
+At this stage the decision maker recognises the situation as typical or novel. Typical situations lead to typical actions, whereas novel situations pose new challenges that cannot be countered effectively by employing old routines. To recognise the situation and guide the selection of proper actions, the decision maker identifies critical cues that mark the type of the situation and causal factors that explain what is happening and what is going to happened. Based on these, he or she sets plausible goals.
+
+Seriel Option Evaluation
+
+In this phase the decision maker evaluates action alternatives one at a time until a satisfactory one is found. The actions are selected from an action queue, sorted according to typicality.
+
+Mental Simulation
+
+To evaluate whether an action is satisfactory, the decision maker acts it out in his or her imagination. He or she mentally simulates the successive steps to be taken.
+
+### Anticipating Information Needs for Decision Making
+#### with custom styling
+
+As well as domain actions, those information-needs emerging in the mental action decision-making is of particular interest, which helps an agent to reduce uncertainty in the process of making decisions, and consequently enables the agent to rationally select a course-of-action (COA) from several potential choices. Typically, a decision-point has several branches to be explored, and each branch is associated with some preference constraints.
+
+After a person has collected data and studied a proposition with great care so that his own mind is made up as to the best solution for the problem, he is apt to feel that his work is about
+completed. Usually, however, when his own mind is made up, his task is only half done. The larger and more diffi cult part of the work is to convince the minds of others that the proposed
+solution is the best one that all the recommendations are really necessary. (Brinton, Graphic methods for presenting facts)
+
+The idea of analysis paralysis was popularized by Barry Schwartz in his 2004 book, The Paradox of Choice. Observed in many cases is the paradox that more choices may lead to a poorer decision or a failure to make a decision at all. It is sometimes theorized to be caused by analysis paralysis, real or perceived, or perhaps from rational ignorance. A number of researchers including Sheena S. Iyengar and Mark R. Lepper have published studies on this phenomenon.[2]
+
+Increasing the salience of cues of information that are important within the context of the situation. The information that is used in the situation assessment comes from different cues; we can say that we have different sources to get information from. In the decision process a selection is made as to which cues are important and information that describes how to select the proper relations between the cues is used. Experienced people know which cues are important and how they should use them.
+
+Presenting Alternatives and Options
+
+Montgomery (1993) suggests that in situations where people have a number of alternatives to choose from, they tend to look for a dominant alternative. A dominant alternative is an alternative that is perceived to be at least as good as all the other alternatives on all relevant attributes and better that each of them on at least one attribute.
+
+Multi Criteria Analysis (MCA) is a process of integrated assessment of alternatives or options for setting, ranking or selecting priorities from a fi nite set of alternatives. MCA-based approaches make the options and their contribution to the diff erent criteria open, and all require the exercise of judgment. MCA processes are gaining in popularity because of their ability to integrate assessment of subjective and objective information with stakeholders’ values, in a single framework. MCA is a structured approach to determine overall preferences among alternative options, where the options accomplish several objectives.
+
+There exist many MCA-based approaches such as Analytic Hierarchy Process (Saaty, 1980), Multi-Attribute Utility Theory (MAUT), Simple Multi-Attribute Rating Technique (SMART), Preference Ranking Organization Method for Enrichment Evaluations (PROMETHEE), Elimination and Choice Translating Reality (ELECTRE), Novel Approach for Imprecise Assessment and Decision Evaluations (NAIADE) etc. However the use of MCAbased approaches in system planning, management and sustainability assessment in WATSAN projects in a variety of situations and countries is still an underresearched area.
+
+The indisputable advantage of ANP/AHP is its exhaustive practical verifi cation (Zahedi 1986) and support for multiscenario analysis and taking into account diff erent aspects of analysis, namely: benefi ts, opportunities, costs and risks (BOCR analysis).
+
+The Analytic Hierarchy Process (AHP)
+The AHP is a selection process that consists of four steps:
+
+* Decide upon the criteria for selection.
+* Rate the relative importance of these criteria using pair-wise comparisons.
+* Rate each potential choice relative to each other choice on the basis of each selection criterionÐthis is achieved by performing pairwise comparisons of the choices.
+* Combine the ratings derived in steps 2 and 3 to obtain an overall relative rating for each potential choice.
+
+The structure of AHP consists of a hierarchy of criteria and sub-criteria cascading from the decision objective or goal. By making pairwise comparisons at each level of the hierarchy, participants can develop relative weights, called priorities, to diff erentiate the importance of the criteria.
+
+Saaty (1989) argued that AHP facilitates honest exploration of a decision by expression of judgments according to some preference intensity that leads to a choice that rigorously captures these intensities in comparative magnitudes.
+
+we have applied the analytic hierarchy process (AHP), developed by Saaty (1980), which decomposes the decisional process in a hierarchy of criteria, subcriteria, attributes and alternatives through a set of weights that reflect the relative importance of alternatives.
+
+
+<div class="figure-text">Mapping of visual variables with shape parameter assigned as static.</div>
+
+### Visual Sense Making for Decision Taking
+#### This is a subsection
+
+Decision making is an information-intensive activity. It is thus crucial to priorities information requirements and only collect those that are relevant in making a decision. A good visual analyst will anticipate these needs and draft a VAR accordingly.
+
+ONE OF THE key skills required of an engineer is the ability to produce systems that satisfy users’ requirements, by the correct selection, confi guration, integration, operation and control of proprietary building blocks. These component parts can be physical entities such as computers and manufacturing machineryÐthe `hard’ system components. If the wrong components are selected then the users’ requirements will not be satisfied.
+
+If sub-optimal components are selected then the system solution will be sub-optimal. Clearly, selection is a critical element of the engineering process. Therefore, it is essential that it is systematic, formalized and accountable, so that it is amenable to detailed analysis for the purposes of verifi cation and optimisation.
+
+In Visual Explanations [1997b], Tufte lists the following dual principles of reasoning about evidence and the design of graphics:
+
+* Documenting the sources and characteristics of the data
+* Insistently enforcing appropriate comparisons
+* Demonstrating mechanisms of cause and eff ect
+* Expressing those mechanisms quantitatively
+* Recognizing the inherently multivariate nature of analytic problems
+* Inspecting and evaluating alternative explanations.
+
+The challenge is to ensure that products and presentations follow these principles.
+Last sentence fi rst. Follow standard report format.
+Findings
+Key Assumptions
+Inferences
+Sources
+Judgements
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

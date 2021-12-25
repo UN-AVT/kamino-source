@@ -1,0 +1,138 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+STORYTELLING  
+</div>
+
+# Situational Awareness
+## a state of knowledge
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by the Centers for Disease Control and Prevention (CDC) on Unsplash"}
+
+knitr::include_graphics("assets/cdc-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">CDC activated its Emergency Operations Center (EOC)<br>to assist public health partners in responding to the coronavirus outbreak</div>
+
+> I skate to where the puck is going to be, not where it has been...\
+--- Wayne Gretzky\
+
+***
+
+Situations are structured parts of the world. A situation can be thought of as a limited view of reality. Situation awareness is therefore a __state of knowledge__ that strives to understand the reality to form as accurate a view and understanding as possible.  It involves forming an awareness of the _who, what, when and where_ of a given situation.
+
+A key concept of SA are the __building blocks__ or __puzzle pieces__ that together form the picture.
+
+* entities  (i.e., person, organization, place, or thing) of interest
+* attributes that commonly and uniquely describe the entities (i.e., identity and descriptive features)
+* relationships and connections among entities
+* associating observations (_connecting the dots_) for all the above
+
+In simple terms, SA is _knowing what is going on so I can figure out what to do._
+
+### How it works
+#### levels of progressive capability and maturity
+
+Situational awareness is considered to have four levels of progressive capability and maturity:
+
+* Level 1 is the basic awareness of available information.
+* Level 2 includes developing a comprehensive view of the reality of interest. 
+* Level 3 is the ability to predict what those elements will do in the future
+* Level 4 is the ability to act proactively
+
+### In practice
+#### mission possible
+
+SA most often involves critical operational activities and serves as the basis for decision-making.  SA has high demands for performance, where limits of capability may result in serious consequences.
+
+```{r, out.width = "65%", fig.align = 'center', fig.cap="levels and their value operational and analytic objectives"}
+
+knitr::include_graphics("assets/situational-awareness.svg", dpi=300)
+
+```
+
+
+### Measuring Situational Awareness
+#### good enough is not good
+
+Entity Knowledge Fidelity
+
+How accurate is the understanding of an entity or relationship correspond to the ground truth reality.  
+
+System Knowledge Fidelity
+
+How accurate is the composite understanding of entities, their behaviors, and relations compared to the ground truth reality.  
+
+Operational Value
+
+The value of a situation estimate element measures how well the element meets the needs of a particular user and his/her application.  
+
+Cost of Loss or Gain
+
+The utility of a situation estimate element weighs the value of the element against the cost of producing the element.  
+
+
+### References
+#### citations for narrative and data sources
+
+* TBD
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

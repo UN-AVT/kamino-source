@@ -1,0 +1,10 @@
+﻿"",ABC_LLC,DEF_LLC,GHI_LLC,JKL_LLC,MNO_LLC,Mortgage_Company,Restaurant_1,Restaurant_2,Restaurant_3
+ABC_LLC,0,1,0,0,0,0,0,0,0
+DEF_LLC,0,0,1,0,0,0,0,0,0
+GHI_LLC,0,0,0,1,0,0,0,0,0
+JKL_LLC,0,0,0,0,1,0,0,0,0
+MNO_LLC,0,0,0,0,0,0,0,0,0
+Mortgage_Company,1,1,1,1,1,0,1,1,1
+Restaurant_1,0,0,0,0,0,1,0,1,1
+Restaurant_2,0,0,0,0,0,1,1,0,1
+Restaurant_3,0,0,0,0,0,1,1,1,0

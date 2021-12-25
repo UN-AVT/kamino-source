@@ -1,0 +1,130 @@
+---
+pagetitle: "Visual Variables"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+
+```
+
+<div class="activity">
+VIEWS  
+</div>
+
+# Layouts and Archetypes
+## to imitate and innovate
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Dan Cristian Padure on Unsplash"}
+
+masthead <- "assets/dan-cristian-padure-unsplash.svg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Every picture tells a story...\
+--- Rod Stewart, 1971\
+
+***
+
+### Charts
+#### quantitative
+
+We use the general term charts to describe the many quantitative representations for exploring and evaluating numerical data.
+
+> Often the most effective way to describe, explore, and summarize a set of numbers ... is to look at pictures of those numbers.
+--- Tufte (1983: 9 )\
+
+William Playfair (1759-1823) is generally viewed as the inventor of most of the common graphical forms used to display data, exemplified in his work The Commercial and Political Atlas, published in 1786. Playfair described his experience showing charts to King Louis XVI:
+
+> ...at once understood the charts and was highly pleased. He said they spoke all languages and were very clear and easily understood.
+Although the charts were novel, the King had no difficulty in grasping their purpose.
+--- Playfair, page 1
+
+Two centuries later, Playfair's experience has been.  
+
+* correlation
+* deviation
+* distribution
+* magnitude
+* part-to-whole
+* ranking
+* multiples
+
+### Diagrams
+#### explanatory
+
+
+### Graphs
+#### network and relational
+
+The objective of this chapter is to describe representation patterns for highlighting relational phenomena. Relational views bring salience to associations, social structures, organization, and
+networks. The methods presented in this Chapter are intended for expressing connections, linkages and other structures.
+
+Analysis of Linkages, Relations and Structures
+
+Relational representations are based on the exploration and discovery of associations between entities. This method of analysis provides visibility of the relationships and associations between objects of different types that are not apparent from raw data. These methods have long standing history for applications to social sciences and have developed through the contributions of multiple disciplines such as mathematics, graph theory, biology, physics, and other sciences. The common goal of these approaches is to provide visibility to structures that may be present as hidden patterns or links among seemingly unrelated items. The mapping of social structures as “networks” means choosing nodes and links as the basic units of analysis. For example, in the analysis of policy networks or policy processes the nodes mostly represent political actors who are very often corporate actors (organizations), but may also be events or issues in a policy process. Links (edges) may represent diff erent types of relations, such as links of communication, participation, resource exchange, social and political support, infl uence reputation, status relations, etc. You will find many practical uses for employing relational representation patterns to describe “small worlds”, organizational structures, communication networks, groups such as political parties, organizations, nation-states.
+
+
+### Maps
+#### geospatial
+
+
+### Semiographics
+#### symbolic
+
+The objective of this chapter is to bring meaning to symbol, and symbol to meaning. This Chapter focuses on the use of symbols as a form of representation to convey language and quantity. Forms of sign language to “speak” to your audience with careful and deliberate selection of icon, glyph...  Semiotics is the study of signs and symbols and their significance to conveying meaning. A semiographic view is one which uses a symbol or arrangement of symbols to communicate an idea. From a substantive analytical perspective, the use of symbols can enhance the context setting of a representation. The use of semigraphic approaches will enable you to bring appropriate levels of realism to a complex idea. Two uses cases are the focus of this Chapter: using symbols as a language and using symbols to represent numbers.
+
+### Tables
+#### columns and rows
+
+
+### Temporals
+#### time
+
+The objective of this chapter is to explore the theoretical and methodological underpinnings of temporal analysis and the use of specialized visualization patterns to increase understanding
+and insight of complex time dimension data. These foundations are extended to survey practical methods for designing appropriate representations based on a range of specialized patterns.
+
+### Trees
+#### hierarchy
+
+Tree data structures based on circular and hierarchical position systems. Each option will have advantages and disadvantages depending on the data structure you are working with. Circular layouts produce the best results with tree-structures where there are not traversals across branches. Hierarchical layouts are useful to reflect the existence of an ordered structure such as an organization chart or political structure. 
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: TBD
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

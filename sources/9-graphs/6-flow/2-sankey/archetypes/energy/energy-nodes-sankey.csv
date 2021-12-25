@@ -1,0 +1,49 @@
+Id,name
+0,Agricultural 'waste'
+1,Bio-conversion
+2,Liquid
+3,Losses
+4,Solid
+5,Gas
+6,Biofuel imports
+7,Biomass imports
+8,Coal imports
+9,Coal
+10,Coal reserves
+11,District heating
+12,Industry
+13,Heating and cooling - commercial
+14,Heating and cooling - homes
+15,Electricity grid
+16,Over generation / exports
+17,H2 conversion
+18,Road transport
+19,Agriculture
+20,Rail transport
+21,Lighting & appliances - commercial
+22,Lighting & appliances - homes
+23,Gas imports
+24,Ngas
+25,Gas reserves
+26,Thermal generation
+27,Geothermal
+28,H2
+29,Hydro
+30,International shipping
+31,Domestic aviation
+32,International aviation
+33,National navigation
+34,Marine algae
+35,Nuclear
+36,Oil imports
+37,Oil
+38,Oil reserves
+39,Other waste
+40,Pumped heat
+41,Solar PV
+42,Solar Thermal
+43,Solar
+44,Tidal
+45,UK land based bioenergy
+46,Wave
+47,Wind

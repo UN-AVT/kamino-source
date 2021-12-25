@@ -1,0 +1,180 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MODULE  
+</div>
+
+# This is a title
+## This is a subtitle
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Abhidev Vaishnav on Unsplash"}
+
+knitr::include_graphics("archetypes/smile/abhidev-vaishnav-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">A smile from Pune, India</div>
+
+> This is a quote...\
+--- The attribution\
+
+***
+
+Critical thinking calls for a persistent eff ort to examine any belief or supposed form of knowledge in the light
+of the evidence that supports it and the further conclusions to which it tends. It also generally requires ability
+to recognize problems, to fi nd workable means for meeting those problems, to gather and marshal pertinent
+information, to recognize unstated assumptions and values, to comprehend and use language with accuracy,
+clarity, and discrimination, to interpret data, to appraise evidence and evaluate arguments, to recognize the
+existence (or non-existence) of logical relationships between propositions, to draw warranted conclusions
+and generalizations, to put to test the conclusions and generalizations at which one arrives, to reconstruct
+one’s patterns of beliefs on the basis of wider experience, and to render accurate judgments about specifi c
+things and qualities in everyday life.
+
+The truly diffi cult problems of the information age are not technological; rather, they concern
+ourselves – what it is to think, to reason, and to engage in conversation [using] … new analytic
+techniques, new conceptual tools with which to analyze and understand the workings of the
+human mind. Keith Devlin, Goodbye Descartes: The End of Logic and the Search for a New
+Cosmology of the Mind, 1997
+
+### What You Need to Know
+#### with custom styling
+
+Other approaches to defi ning critical thinking focus on the specifi c skills. For example, Diane Halpern
+considers that:
+[critical] thinking is the use of those cognitive skills or strategies that increase the probability
+of a desirable outcome. It is … thinking that is purposeful, reasoned, and goal directed – the
+kind of thinking involved in solving problems, formulating inferences, calculating likelihoods,
+and making decisions, when the thinker is using skills that are thoughtful and eff ective to the
+particular context and type of thinking task.24
+Additional advocates of skills-based critical thinking include Edward Glaser and Alec Fisher, and their sets of
+critical thinking skills include a number of elements common to those identifi ed by Halpern. The overlapping
+competencies of critical thinkers as advanced by Paul and Elder and these three other proponents are
+summarized in table 1
+• Recognize problems or questions and fi nd eff ective means of solution
+• Engage in meta-cognitive activities that identify assumptions, biases, and performance as
+solutions are developed
+• Interpret data, appraise evidence, and evaluate statements in order to recognize logical
+relationships between propositions
+• Infer warranted conclusions and generalizations from evidence
+• Test generalizations and conclusions by seeking out contradictory evidence that enables them to
+judge the credibility of claims
+• Convey sound, well-reasoned arguments
+• Focus on the process of reasoning with the intention of improving the process
+
+
+### What You Need to Do
+#### with custom styling
+
+Paul and Elder also establish a set of intellectual standards that off er criteria for assessing the level and quality
+of thinking. Intellectual Standards
+• Clarity: understandable, meaning can be grasped
+Accuracy: free from errors or distortions, true
+• Precision: exact to the necessary level of detail
+• Relevance: relating to the matter at hand
+• Depth: containing complexities and multiple interrelationships
+• Breadth: encompassing multiple viewpoints
+• Logic: the parts make sense together, no contradictions
+• Signifi cance: focusing on the important, no trivial
+• Fairness: justifi able, not self-serving or one-sided.
+While getting to the right-hand side of the spectrum on each of these standards in fi gure 3 is highly desirable,
+the standard of thinking on an issue will vary based on the skills of the thinkers and the issues under scrutiny.
+Assessing the resulting shortfalls in thinking reveals gaps that can be corrected. The continuum therefore
+provides a detailed assessment by which thinking on issues can be improved.
+
+### What You Should Do
+#### This is a subsection
+
+
+These tools and techniques also must allow analysts to look at their problem at multiple levels of abstraction
+and support reasoning about situations that change. Convergent thinking: assembling evidence to fi nd
+an answer and Divergent thinking: thinking creatively to ensure that plausible alternatives have not been
+overlooked.
+People cannot reason eff ectively about hypotheses and scenarios that are unavailable to them [Garfi nkel,
+1967]. A key to good analytic discipline is early identifi cation of competing explanations and chains of
+reasoning for the issue under study. Awareness of the competing ideas must be maintained actively, so
+that they are kept “alive” as analytic possibilities. Often the most plausible explanation will be researched
+extensively, but a thorough check is to always revisit the key alternative ideas and ask, “If I were wrong, how
+would I know?”
+Additional analytical techniques include consideration of biases that may have precluded consideration
+of important alternatives, sensitivity to potential deception in evidence, and in cases of high risk, devil’s
+advocacy processes that assume a diff ering interpretation of data and attempt to reason in that direction,
+exposing potential weaknesses in the product.
+Magnum:
+I’m not really sure which kind of private investigator I am. The Holmesian-type with the
+constant deductive mind, or one with a Marlowe-type intuitive sense of the darker side of
+human nature? Hopefully a combination of both. At any rate, it doesn’t matter. Not when you
+have a “little voice”. I don’t know, maybe a gently nagging “little voice” is just another way of
+adding what you know, to what you feel... (Narration)
+The analyst collects and organizes information as he or she progresses toward judgment about a question.
+Throughout the reasoning process, the analyst identifi es or creates tangible pieces of information that
+contribute to reaching defensible judgments. Reaching defensible judgments is a subject of structured
+argumentation and analytical logic.
+
+
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

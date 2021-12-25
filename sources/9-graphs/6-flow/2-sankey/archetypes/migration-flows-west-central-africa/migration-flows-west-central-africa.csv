@@ -1,0 +1,183 @@
+origin,destination,value
+Niger (Origin),Nigeria (Destination),252717
+Niger (Origin),Niger (Destination),122179
+Niger (Origin),Libya (Destination),73031
+Niger (Origin),Burkina Faso (Destination),29264
+Niger (Origin),Mali (Destination),12215
+Niger (Origin),Algeria (Destination),2031
+Niger (Origin),"CÃ´te dIvoire (Destination)",381
+Niger (Origin),Chad (Destination),66
+Niger (Origin),Guinea (Destination),45
+Niger (Origin),Togo (Destination),24
+Niger (Origin),Senegal (Destination),7
+Niger (Origin),Benin (Destination),2
+Nigeria (Origin),Niger (Destination),287522
+Nigeria (Origin),Chad (Destination),4241
+Nigeria (Origin),Nigeria (Destination),2688
+Nigeria (Origin),Cameroon (Destination),1998
+Nigeria (Origin),Mali (Destination),274
+Nigeria (Origin),Togo (Destination),137
+Nigeria (Origin),Benin (Destination),108
+Nigeria (Origin),Algeria (Destination),92
+Nigeria (Origin),Ghana (Destination),92
+Nigeria (Origin),Senegal (Destination),30
+Nigeria (Origin),Libya (Destination),13
+Nigeria (Origin),Guinea (Destination),11
+Nigeria (Origin),Sierra Leone (Destination),4
+Senegal (Origin),Senegal (Destination),146984
+Senegal (Origin),Guinea (Destination),75809
+Senegal (Origin),Mali (Destination),64577
+Senegal (Origin),Guinea Bissau (Destination),388
+Senegal (Origin),Mauritania (Destination),264
+Senegal (Origin),Gambia (Destination),175
+Senegal (Origin),"CÃ´te dIvoire (Destination)",173
+Senegal (Origin),Niger (Destination),155
+Senegal (Origin),Burkina Faso (Destination),110
+Senegal (Origin),Sierra Leone (Destination),63
+Senegal (Origin),Togo (Destination),56
+Senegal (Origin),Nigeria (Destination),50
+Senegal (Origin),Liberia (Destination),27
+Senegal (Origin),Algeria (Destination),11
+Burkina Faso (Origin),"CÃ´te dIvoire (Destination)",103163
+Burkina Faso (Origin),Niger (Destination),84304
+Burkina Faso (Origin),Mali (Destination),28073
+Burkina Faso (Origin),Burkina Faso (Destination),3243
+Burkina Faso (Origin),Togo (Destination),1104
+Burkina Faso (Origin),Ghana (Destination),772
+Burkina Faso (Origin),Benin (Destination),390
+Burkina Faso (Origin),Nigeria (Destination),270
+Burkina Faso (Origin),Guinea (Destination),177
+Burkina Faso (Origin),Liberia (Destination),118
+Burkina Faso (Origin),Chad (Destination),34
+Burkina Faso (Origin),Senegal (Destination),30
+Burkina Faso (Origin),Algeria (Destination),21
+Burkina Faso (Origin),Guinea Bissau (Destination),11
+Burkina Faso (Origin),Libya (Destination),8
+Mali (Origin),Guinea (Destination),53476
+Mali (Origin),Senegal (Destination),51988
+Mali (Origin),Mali (Destination),29800
+Mali (Origin),Algeria (Destination),23980
+Mali (Origin),Mauritania (Destination),18220
+Mali (Origin),Burkina Faso (Destination),16047
+Mali (Origin),Niger (Destination),8306
+Mali (Origin),Gambia (Destination),7265
+Mali (Origin),Benin (Destination),1760
+Mali (Origin),Nigeria (Destination),1400
+Mali (Origin),Chad (Destination),918
+Mali (Origin),Togo (Destination),685
+Mali (Origin),Guinea Bissau (Destination),270
+Mali (Origin),Libya (Destination),152
+Mali (Origin),Morocco (Destination),84
+Mali (Origin),Sierra Leone (Destination),79
+Mali (Origin),Equatorial Guinea (Destination),52
+Mali (Origin),Liberia (Destination),14
+Mali (Origin),South Africa (Destination),10
+Mali (Origin),"CÃ´te dIvoire (Destination)",9
+Mali (Origin),Tunisia (Destination),3
+Mali (Origin),Ghana (Destination),1
+Chad (Origin),Chad (Destination),123997
+Chad (Origin),Libya (Destination),7047
+Chad (Origin),Nigeria (Destination),2559
+Chad (Origin),Sudan (Destination),992
+Chad (Origin),Mali (Destination),733
+Chad (Origin),Niger (Destination),114
+Chad (Origin),Burkina Faso (Destination),76
+Guinea (Origin),Senegal (Destination),56235
+Guinea (Origin),Mali (Destination),45905
+Guinea (Origin),Gambia (Destination),10635
+Guinea (Origin),Guinea (Destination),386
+Guinea (Origin),"CÃ´te dIvoire (Destination)",297
+Guinea (Origin),NULL (Destination),282
+Guinea (Origin),Algeria (Destination),196
+Guinea (Origin),Ghana (Destination),154
+Guinea (Origin),Burkina Faso (Destination),100
+Guinea (Origin),Niger (Destination),87
+Guinea (Origin),Libya (Destination),45
+Guinea (Origin),Nigeria (Destination),42
+Guinea (Origin),Togo (Destination),22
+Guinea (Origin),Mauritania (Destination),21
+Guinea (Origin),Benin (Destination),10
+Guinea (Origin),Sierra Leone (Destination),8
+Algeria (Origin),Mali (Destination),86052
+Algeria (Origin),Niger (Destination),10875
+Algeria (Origin),Nigeria (Destination),233
+Algeria (Origin),Guinea (Destination),93
+Algeria (Origin),Morocco (Destination),21
+Algeria (Origin),Burkina Faso (Destination),8
+Algeria (Origin),Senegal (Destination),5
+Libya (Origin),Niger (Destination),47819
+Libya (Origin),Chad (Destination),7623
+Libya (Origin),Sudan (Destination),193
+Libya (Origin),Libya (Destination),79
+Libya (Origin),Mali (Destination),32
+Libya (Origin),Gambia (Destination),7
+"CÃ´te dIvoire (Origin)",Burkina Faso (Destination),33810
+"CÃ´te dIvoire (Origin)",Guinea (Destination),609
+"CÃ´te dIvoire (Origin)","CÃ´te dIvoire (Destination)",278
+"CÃ´te dIvoire (Origin)",Senegal (Destination),69
+"CÃ´te dIvoire (Origin)",Niger (Destination),48
+"CÃ´te dIvoire (Origin)",Gambia (Destination),5
+"CÃ´te dIvoire (Origin)",Sierra Leone (Destination),3
+"CÃ´te dIvoire (Origin)",Mauritania (Destination),2
+"CÃ´te dIvoire (Origin)",Algeria (Destination),1
+Gambia (Origin),Guinea (Destination),16399
+Gambia (Origin),Mali (Destination),6640
+Gambia (Origin),Sierra Leone (Destination),530
+Gambia (Origin),Senegal (Destination),237
+Gambia (Origin),Liberia (Destination),51
+Gambia (Origin),Niger (Destination),50
+Gambia (Origin),Algeria (Destination),17
+Gambia (Origin),Gambia (Destination),8
+Gambia (Origin),Nigeria (Destination),6
+Gambia (Origin),Mauritania (Destination),5
+Mauritania (Origin),Mali (Destination),18416
+Mauritania (Origin),Senegal (Destination),203
+Mauritania (Origin),Guinea (Destination),137
+Mauritania (Origin),Guinea Bissau (Destination),70
+Mauritania (Origin),Gambia (Destination),20
+Mauritania (Origin),Nigeria (Destination),14
+Mauritania (Origin),Morocco (Destination),3
+Mauritania (Origin),Burkina Faso (Destination),2
+Mauritania (Origin),Sierra Leone (Destination),0
+Ghana (Origin),Burkina Faso (Destination),10085
+Ghana (Origin),Guinea (Destination),185
+Ghana (Origin),Nigeria (Destination),57
+Ghana (Origin),Niger (Destination),7
+Ghana (Origin),Mali (Destination),4
+Ghana (Origin),Gambia (Destination),2
+Togo (Origin),Burkina Faso (Destination),7014
+Togo (Origin),Mali (Destination),982
+Togo (Origin),Nigeria (Destination),130
+Togo (Origin),Guinea (Destination),66
+Togo (Origin),Sierra Leone (Destination),13
+Benin (Origin),Mali (Destination),2888
+Benin (Origin),Burkina Faso (Destination),687
+Benin (Origin),Niger (Destination),231
+Benin (Origin),Nigeria (Destination),135
+Benin (Origin),Algeria (Destination),15
+Benin (Origin),Benin (Destination),7
+Benin (Origin),Guinea (Destination),5
+Cameroon (Origin),Nigeria (Destination),2172
+Cameroon (Origin),Niger (Destination),9
+Sierra Leone (Origin),Gambia (Destination),545
+Sierra Leone (Origin),Mali (Destination),88
+Sierra Leone (Origin),Senegal (Destination),53
+Sierra Leone (Origin),Nigeria (Destination),29
+Sierra Leone (Origin),Burkina Faso (Destination),21
+Sierra Leone (Origin),Niger (Destination),20
+Sierra Leone (Origin),Ghana (Destination),16
+Sierra Leone (Origin),NULL (Destination),4
+Sierra Leone (Origin),Mauritania (Destination),3
+Guinea Bissau (Origin),Mali (Destination),234
+Guinea Bissau (Origin),Senegal (Destination),104
+Guinea Bissau (Origin),Guinea (Destination),11
+Guinea Bissau (Origin),Burkina Faso (Destination),4
+Liberia (Origin),Nigeria (Destination),28
+Liberia (Origin),Mali (Destination),14
+Liberia (Origin),Ghana (Destination),8
+Liberia (Origin),Gambia (Destination),6
+Liberia (Origin),NULL (Destination),4
+Liberia (Origin),Burkina Faso (Destination),4
+Sudan (Origin),Chad (Destination),31
+Zimbabwe (Origin),Cameroon (Destination),9
+Central African Republic (Origin),Nigeria (Destination),5}

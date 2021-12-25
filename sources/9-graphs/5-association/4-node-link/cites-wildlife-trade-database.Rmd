@@ -1,0 +1,429 @@
+---
+pagetitle: "CITES, Wildlife Trade Database"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, dev='svg')
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggraph)
+library(igraph)
+library(graphlayouts)
+library(tidygraph)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+GRAPHS
+</div>
+
+# CITES Wildlife Trade Database
+## Node-links - Association
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Bisakha Datta on Unsplash"}
+
+masthead <- "assets/bisakha-datta-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Rangers everywhere are part of a much-needed solution to restore our relationship with nature. By shielding wildlife and their habitats from harm, they help us preserve ecosystems and the livelihoods they sustain...\
+--- Ivonne Higuero, CITES Secretary-General, World Ranger Day 2021\
+
+***
+
+The Convention on International Trade in Endangered Species of Wild Fauna and Flora ( __CITES__ ) is an international treaty organization tasked with monitoring, reporting, and providing recommendations on the international species trade. Countries participating in CITES are obligated to report on the animal species and plant species brought into or exported out of their countries. This dataset records all legal species imports and exports reported to CITES as extracted from the Wildlife Trade Database.
+
+Case objectives:
+
+* Enrich the source with more readable labels, i.e. country names, and code definitions.
+* Convert the source to a tidy graph structure.
+* Experiment with strategies to simplify and sub-set the graph.
+* Apply aesthetics to convey meaning for categorical and numeric values.
+* Create reusable functions to enable exploration and producing multiple outputs for different lines of inquiry.
+
+### Ingest
+#### the database
+
+* Year: The year the export or import occurred. Either 2016 or 2017.
+* __Appendix__: The appendix the species belongs to. Appendix I species are the most protected, and Appendix III species are the least.
+* Taxon: The species' taxonomic taxon.
+* Class: The species' taxonomic class.
+* Order: The species' taxonomic order.
+* Family: The species' taxonomic family.
+* Genus: The species' taxonomic genus (or equivalently, its "scientific name").
+* Importer: The country importing the species as ISO_3166-1_alpha_2
+* Exporter: The country exporting the species as ISO_3166-1_alpha_2
+* Origin: The country from which the species originated as ISO_3166-1_alpha_2
+* Importer reported quantity: The quantity the good the importer reported to CITES.
+* Exporter reported quantity: How many copies of the good the exporter reported to CITES.
+* __Term__: The good being exported or imported.
+* Unit: If a request quantity was provided, the type of quantity recorded.
+* __Purpose__: The purpose with which the species was exported or imported.
+* __Source__: Describes how the animal or plant species was brought onto the market: bred, captured wild, zoo specimen, etcetera.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_path <- "archetypes/cites-wildlife-trade-database/cites-wildlife-trade-database-2020.csv"
+df_original <- read.csv(df_path, header = TRUE, stringsAsFactors = FALSE)
+head(df_original, n=10)
+
+```
+
+### Wrangle
+#### profile for filters
+
+Appendixes:
+
+* Appendix I species are those whose trade threatens them with extinction, i.e., black rhinoceros and the African elephant. 
+* Appendix II species are those not threatened with extinction, but whose trade is nevertheless detrimental.
+* Appendix III animals are those submitted to CITES by member states as a control mechanism; their export or import requires permits from the submitting member state(s).
+
+Purpose:
+
+* B Breeding in captivity or artificial propagation
+* E Educational
+* G Botanical garden
+* H Hunting trophy
+* L Law enforcement / judicial / forensic
+* M Medical (including biomedical research)
+* N Reintroduction or introduction into the wild
+* P Personal
+* Q Circus or travelling exhibition
+* S Scientific
+* T Commercial
+* Z Zoo
+
+Source:
+
+* A Plants that are artificially propagated.
+* C Animals bred in captivity.
+* D Appendix-I animals bred in captivity for commercial purposes and Appendix-I plants artificially propagated for commercial purposes.
+* F Animals born in captivity.
+* I Confiscated or seized specimens
+* O Pre-Convention specimens
+* R Ranched specimens: specimens of animals reared in a controlled environment, taken as eggs or juveniles from the wild, where they would otherwise have had a very low probability of surviving to adulthood.
+* U Source unknown.
+* W Specimens taken from the wild.
+* X Specimens taken in "the marine environment not under the jurisdiction of any State".
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+terms <- unique(df_original$Term)
+terms_df <- as.data.frame(terms)
+# terms_df
+
+n <- 10
+nr <- nrow(terms_df)
+terms_list <- split(terms_df, rep(1:ceiling(nr/n), each=n, length.out=nr))
+
+terms_list[[7]] <- lapply(terms_list[[7]], `length<-`, 10)
+# terms_list[[9]]
+
+all_terms <- data.frame(terms_list[[1]], terms_list[[2]], terms_list[[3]], terms_list[[4]], terms_list[[5]], terms_list[[6]], terms_list[[7]] )
+all_terms
+
+app_count <- df_original %>% count(App.)
+app_count
+
+genus_count <- df_original %>% count(Genus)
+genus_count
+
+term_count <- df_original %>% count(Term)
+term_count
+
+purpose_count <- df_original %>% count(Purpose)
+purpose_count
+
+source_count <- df_original %>% count(Source)
+source_count
+
+```
+
+
+### Wrangle
+#### enrich, simplify taxonomy, and filter
+
+* enrich by converting the ISO_3166-1_alpha_2 codes to country names
+* simplify the taxonomy by collapsing the taxon, class, order, and family into a single branch
+* filter based on specific areas of interest, using the Appendix, Term, Purpose, and Source as examples
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+#df_original$Origin <- countrycode(df_original$Origin, origin='iso2c', destination='country.name')
+#df_original$Exporter <- countrycode(df_original$Exporter, origin='iso2c', destination='country.name')
+#df_original$Importer <- countrycode(df_original$Importer, origin='iso2c', destination='country.name')
+
+df_filtered <- filter(df_original, Term == 'tails')
+# df_filtered
+
+df_filtered <- df_filtered %>% mutate(ID = row_number())
+
+df_filtered <- df_filtered %>% mutate(taxonomy = paste0(Taxon, '-', ifelse( (nchar(Class) == 0), '', Class), '-', ifelse( (nchar(Order) == 0), '', Order), '-', ifelse( (nchar(Family) == 0), '', Family)))
+df_filtered$taxonomy <- tolower(gsub(" ", "-", df_filtered$taxonomy))
+df_filtered$taxonomy <- gsub("--", "-", df_filtered$taxonomy)
+df_filtered
+
+```
+
+### Wrangle
+#### create the edge list
+
+* from
+* to
+* edge_type
+* edge_label
+* edge value
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Taxon -> Class -> Order -> Family -> Genus -> Origin -> Exporter -> Importer
+
+df_taxonomy_genus <- df_filtered %>% 
+  select(taxonomy, Genus) %>% 
+  distinct() %>% 
+  mutate(edge_type = 'taxonomy-genus', edge_label = 'taxonomy-genus', edge_value = 1 )
+df_taxonomy_genus <- df_taxonomy_genus %>% rename(from='taxonomy', to='Genus')
+# df_taxonomy_genus
+
+df_genus_origin <- df_filtered %>% 
+  filter(nchar(Origin)>0) %>% 
+  select(Genus, Origin) %>% distinct() %>% 
+  mutate(edge_type = 'genus-origin', edge_label = 'genus-origin', edge_value = 1 )
+df_genus_origin <- df_genus_origin %>% rename(from='Genus', to='Origin')
+# df_genus_origin
+
+df_genus_exporter <- df_filtered %>% 
+  filter(nchar(Origin)==0) %>% 
+  select(Genus, Exporter) %>% distinct() %>% 
+  mutate(edge_type = 'genus-exporter', edge_label = 'genus-exporter', edge_value = 1 )
+df_genus_exporter <- df_genus_exporter %>% rename(from='Genus', to='Exporter')
+# df_genus_exporter
+
+df_origin_exporter <- df_filtered %>% 
+  filter(nchar(Origin) > 0) %>% 
+  select(Origin, Exporter,Importer.reported.quantity) %>% 
+  distinct() %>% 
+  mutate(edge_type = 'origin-exporter', edge_label = 'origin-exporter', edge_value = Importer.reported.quantity )
+df_origin_exporter <- df_origin_exporter %>% select(-Importer.reported.quantity)
+df_origin_exporter <- df_origin_exporter %>% rename(from='Origin', to='Exporter')
+# df_origin_exporter
+
+df_exporter_importer <- df_filtered %>% 
+  select(Exporter, Importer, Exporter.reported.quantity, Term) %>% 
+  distinct() %>% 
+  mutate(edge_type = 'exporter-importer', edge_label = Term, edge_value = Exporter.reported.quantity )
+df_exporter_importer <- df_exporter_importer %>% select(-Exporter.reported.quantity, -Term)
+df_exporter_importer <- df_exporter_importer %>% rename(from='Exporter', to='Importer')
+# df_exporter_importer
+
+df_edges <- rbind(df_taxonomy_genus, df_genus_origin, df_genus_exporter, df_origin_exporter, df_exporter_importer)
+df_edges
+
+```
+
+
+### Wrangle
+#### create the node list
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Taxon -> Class -> Order -> Family -> Genus -> Origin -> Exporter -> Importer
+df_taxon <- df_filtered %>% select(Taxon) %>% distinct() %>% rename(node='Taxon')
+df_taxon$node_type <- 'Taxon'
+
+df_class <- df_filtered %>% select(Class) %>% distinct() %>% rename(node='Class')
+df_class$node_type <- 'Class'
+df_class
+df_class <- anti_join(df_class, df_taxon, by="node")
+df_class
+
+df_order <- df_filtered %>% select(Order) %>% distinct() %>% rename(node='Order')
+df_order$node_type <- 'Order'
+df_order <- anti_join(df_order, df_class, by="node")
+
+df_family <- df_filtered %>% select(Family) %>% distinct() %>% rename(node='Family')
+df_family$node_type <- 'Family'
+df_family <- anti_join(df_family, df_order, by="node")
+
+df_genus <- df_filtered %>% select(Genus) %>% distinct() %>% rename(node='Genus')
+df_genus$node_type <- 'Genus'
+df_genus <- anti_join(df_genus, df_family, by="node")
+
+df_origin <- df_filtered %>% select(Origin) %>% distinct() %>% rename(node='Origin')
+df_origin$node_type <- 'Origin'
+
+df_exporter <- df_filtered %>% select(Exporter) %>% distinct() %>% rename(node='Exporter')
+df_exporter$node_type <- 'Exporter'
+
+df_importer <- df_filtered %>% select(Importer) %>% distinct() %>% rename(node='Importer')
+df_importer$node_type <- 'Importer'
+
+df_nodes <- rbind(df_taxon, df_class, df_order, df_family, df_genus, df_origin, df_exporter, df_importer)
+df_nodes <- df_nodes %>% distinct()
+df_nodes
+
+```
+
+
+
+### Prepare data [Wrangle]
+#### Format the data into a graph data frame 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Convert data to graph data frame
+# directed FALSE means no flow. It's just an association
+df_graph <- graph.data.frame(df_edges, directed = TRUE) # vertices = df_nodes, 
+df_graph
+
+```
+
+
+### Prepare data [Wrangle]
+#### Subgraph
+
+
+```{r}
+
+# df_graph <- induced_subgraph(df_graph, c(as.numeric(V(df_graph)["CN"]), neighbors(df_graph,as.numeric(V(df_graph)["CN"]))))
+# df_graph
+
+```
+
+
+## Layout & Aesthetic Parameters
+### Choose the types of Edges you would like to display
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# igraph layouts
+
+# bipartite <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
+# circle <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
+# dh <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
+# drl <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
+# fr <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
+# gem <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
+# graphopt <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
+# grid <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
+kk <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
+# lgl <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
+# mds <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
+# nicely <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
+# sphere <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
+# star <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
+# sugiyama <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+
+# ggraph layouts
+
+# backbone <- create_layout(df_graph, layout = 'backbone')
+
+# centrality_bc <- betweenness(df_graph_directed)
+# centrality_cc <- closeness(df_graph_directed)
+# centrality <- create_layout(df_graph_undirected, layout = 'centrality', centrality = centrality_bc)
+
+# eigen <- create_layout(df_graph, layout = 'eigen', type = "laplacian", eigenvector = "smallest")
+
+# fabric <- create_layout(cg, layout = 'fabric')
+# focus <- create_layout(df_graph_directed, layout = 'focus', focus = 1)
+
+# hive <- create_layout(df_graph, layout = 'hive', axis = friends, sort.by = degree)
+
+# linear <- create_layout(df_graph, layout = 'linear')
+# matrix <- create_layout(df_graph, layout = 'matrix')
+
+# pmds_pivots <- 3
+# pmds <- create_layout(df_graph, layout = 'pmds', pivots = pmds_pivots)
+
+stress <- create_layout(df_graph, layout = 'stress')
+
+# df_unrooted <- df_graph_undirected %>%  activate(edges) %>%  mutate(length = runif(n()))
+# unrooted <- create_layout(df_graph_undirected, layout = 'unrooted' )
+
+```
+
+
+
+### Plot
+#### nicely
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    # plot.margin = unit(c(1.5,1,1,1), "in"),
+    legend.position='none'
+)
+
+v1 <- ggraph(kk) + 
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_text(aes(label = name)) +
+  theme_graph()+
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1280/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Data: CITES, Wildlife Trade Database, https://trade.cites.org/en/cites_trade/
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

@@ -1,0 +1,181 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MODULE  
+</div>
+
+# This is a title
+## This is a subtitle
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Abhidev Vaishnav on Unsplash"}
+
+knitr::include_graphics("archetypes/smile/abhidev-vaishnav-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">A smile from Pune, India</div>
+
+> This is a quote...\
+--- The attribution\
+
+***
+
+Structured argumentation enables an analyst to connect arguments to evidence in support of a hypothesis.
+An argument consists of a set of inferences that captures the chain of reasoning which connects evidence
+with a hypothesis. Analysis results derived from argument-based analyses are more rigorous, robust, and
+less sensitive to analyst’s bias than results derived from ad hoc approachesX. This logic serves two benefi ts:
+fi rst and foremost, it ensures the “well-formedness” of the analysis process. Secondly, it is used to capture
+reasoning carried out by the analyst.
+An argument ties facts and evidence to a conclusion via a logical sequence. At its most basic level, an argument
+consists of hypotheses, evidence, and inferences arranged in proof forms that capture the relationships
+among the evidence and hypotheses. Typically an argument has an internal structure, comprising of the
+following a set of assumptions or premises, a method of reasoning, and a conclusion or theory. The famous
+detective Sherlock Holmes explains to Dr. Watson his investigative method, which is founded both on
+evidence (observation) and on inference (deduction):
+“For example, observation shows me that you have been to the Wigmore Street Post-Offi ce this
+morning, but deduction lets me know that when there you dispatched a telegram.” A. Conan
+Doyle, Sign of the four, Chapter 1
+This “play of words” was likely referring to John Henry Wigmore, a famous evidence scholar, developed a
+graphical method for charting legal evidence that used an elaborate syntax and set of symbols for representing
+statements, propositions, evidence, and inferential links. In 1913, John Henry Wigmore proposed a chart
+method for analysing the mass of evidence presented in a legal case, in order to help the analyst reach a
+conclusion:
+Our object then, specifi cally, is in essence: “To perform the logical (or psychological) process of
+a conscious juxtaposition of detailed ideas for the purpose of producing rationally a single fi nal
+idea.” Wigmore, 1913, 2nd Edition 1931, p. 109).
+He sets out the “necessary conditions” for such an “apparatus”, following what we would now recognise as a
+model of structured argumentation. For a given case, one must be able to express diff erent types of evidence,
+relations between facts, represent and on demand see all the data, and distringuish be facts as alleged and
+facts as believed or disbelieved.
+“Hence, although we may not be able to demonstrate that we ought to reach that belief
+or disbelief, we have at least the satisfaction of having taken every precaution to reach it
+rationally. Our moral duty was to approximate, so far as capable, our belief to the fact. We have
+performed that duty, to the limits of our present rational capacity. And the scheme or method,
+if it has enlarged that capacity, will have achieved something worthwhile.” (p.111)
+Wigmore provided an excellent departure point for further development of structured argumentation
+approaches. In 1958, in his work The Uses of Argument, Stephen Edelston Toulmin developed a view of logic
+which was grounded in the study of reasoning practice. Toulmin emphasized a number of points highlighting
+the importance of reasoning and argument involve not only support for points of view, but also attack against
+them. Toulmin’s views led to the introduction of what would become The Toulmin model of argument.
+Toulmin model of argument provides the groundwork for the analyst to structure the evidence, supporting
+facts, refuting evidence and their confi dence level based on the support for proof of the hypothesis. It is
+based on Toulmin’s belief that a good argument can succeed in providing good justifi cation to a claim, which
+will stand up to criticism and earn a favourable verdict. Toulmin proposed a layout containing six interrelated
+components for analysing arguments as illustrated in Figure X.
+The Toulmin model serves as an excellent basis for credible analytical logic when addressing wicked problems.
+As descibed by John Tukey,
+The Scotland Yard detective, however, would be far from useless in the wild west or the
+outback. He has certain general understandings of conventional detective work that will help
+him anywhere. (Tukey)
+Structured argumentation provides the general understandings of conventional “detective work” which
+are applicable to any analytical task. This point was reinforced by Rittel: My recommentation would be to
+emphasise investigations into the understanding of designing as an argumentative process. Rittel’s work
+established a bridge between design and argumentation. The argumentative approach to design elevated
+the importance of the process of understanding a problem. Rittel and Webber hypthosized that a particularly
+powerful way to tackle such problems is by an “argumentative approach”
+
+### Markdown tags
+#### with custom styling
+
+I am __bold__ and _italic_, with a ~~strikethrough~~.
+
+* Pellentesque semper tristique malesuada.
+* Morbi venenatis ipsum eu ante vehicula.
+* Sed maximus consequat est a fermentum
+
+
+### HTML tags
+#### with custom styling
+
+Using the package <kbd>ggplot()</kbd> you can add <kbd>annotate()</kbd> layers to include narrative explanations.
+
+Kamino's goal is to: 
+<q>To promote data science skills and capabilities to make a difference.</q>
+The programme is designed to...
+
+This text contains <sub>subscript</sub> text.
+This text contains <sup>superscript</sup> text.
+
+<details class="tip">
+  <summary>✱ Tip</summary>
+  a small but useful piece of practical advice.
+</details>
+
+<details class="reminder">
+  <summary>⚑ Reminder</summary>
+  a thing that causes someone to remember something.
+</details>
+
+<details class="technical">
+  <summary>⚙ Technical</summary>
+  relating to a particular subject, art, or craft, or its techniques.
+</details>
+
+
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

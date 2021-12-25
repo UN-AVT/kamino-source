@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Kamino</title>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/navigation-1.1/codefolding.js"></script>
+<link href="libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<nav class="navbar navbar-expand-lg bc-white bbottom">
+  <div class="header">
+
+    <a class="navbar-brand" href="#" style="padding-top: 8px;">
+      <img class="d-inline-block" src="../../../z-assemblers/assets/logo/logo.svg" alt="" width="48">
+    </a>
+
+    <div class="d-flex" style="float: right; margin-top: 15px;">
+      <div class="navbar-nav">
+        <a class="nav-link" style="color: #47556e;" href="index.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Home"><i class="las la-campground"
+            style="font-size: 32px; color: #47556e;"></i></a>
+        <a class="nav-link" style="color: #47556e;" href="content-navigator.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Content Navigator"><i class="las la-compass"
+            style="font-size: 32px; color: #47556e;"></i></a>
+		<!--
+        <a class="nav-link" style="color: #47556e;" href="curriculum-navigator.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Curriculum Navigator"><i class="las la-hiking"
+            style="font-size: 32px; color: #47556e;"></i></a>
+        <a class="nav-link" style="color: #47556e;" href="progress.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Progress Tracker"><i class="las la-mountain"
+            style="font-size: 32px; color: #47556e;"></i></a>
+        <a class="nav-link" style="color: #47556e;" href="search.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Search for Content"><i class="las la-search"
+            style="font-size: 32px; color: #47556e;"></i></a>
+        <a class="nav-link" style="color: #47556e;" href="curriculum-manager.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Curriculum Manager"><i class="las la-map-marked-alt"
+            style="font-size: 32px; color: #47556e;"></i></a>
+        <a class="nav-link" style="color: #47556e;" href="https://github.com/UN-AVT" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Contribute"><i class="lab la-github"
+            style="font-size: 32px; color: #47556e;"></i></a>
+		-->
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="C:/Users/jaybe/Desktop/kamino-dev/sources/z-assemblers/assets/styles/content/kamino.css" type="text/css" />
+<link rel="stylesheet" href="C:/Users/jaybe/Desktop/kamino-dev/sources/z-assemblers/assets/icons/line-awesome/css/line-awesome.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>COLLECTIONS</p>
+</div>
+<div id="taming-the-wicked" class="section level1">
+<h1>Taming the Wicked</h1>
+<div id="what-are-they" class="section level2">
+<h2>What are they?</h2>
+<blockquote>
+<p>How many piano tuners are there in Chicago?<br />
+– Enrico Fermi<br />
+</p>
+</blockquote>
+<p>Kamino is a multi-disciplinary learning program for the analysis of complex issues that draws upon fields such as art, biology, computer science, cinematography, cultural studies, graphic design, history, mathematics, marketing, political science, and psychology to name a few. Kamino is an approach for applying a process and methods to foster a deeper understanding and sensemaking of complex issues.</p>
+<p>This concept is an important premise of the program whose genesis is borne on the assumption that decades of research and advances in knowledge can fold into a sense making discipline. This program is an attempt at bridging such convergence by drawing upon the logics, reasonings and methods found in the practices of arts and sciences. The objective is to form a new methodology for sensemaking of wicked problems.</p>
+<p>Kamino is based on a form of crowdsourcing, though the participants span centuries, traverse fields, and would by conventional thought represent an unlikely team of problem solvers. The work draws upon the many great minds of near and distant history, from Descartes to Walt Disney, where their ideas are re-purposed to shape a process, define a framework, and most importantly to coordinate a critical mass of expertise to a single goal.</p>
+<p>Learning from this expertise provides the setting for a recrafting of conventional analysis tradecraft. This opportunity gives rise to a need for new skills and competencies — a next generation scientist of sensemaking and artist of information. This concept captures the profile of the special skills aimed at visual sensemaking — one who can master and skillfully apply visual analytics to a sensemaking scenario to produce a meaningful decision product. Developing this expertise is the main theme of the program.</p>
+<p>This book will guide you through the learning process to reach the goal of putting Visualytica to practice and to become a Visual Analyst.</p>
+</div>
+</div>
+<div id="taming-the-wicked-1" class="section level1">
+<h1>Taming the Wicked</h1>
+<div id="the-problem" class="section level2">
+<h2>The Problem</h2>
+<hr />
+<p>If you could influence the course of human and natural events, how would you do it? No doubt you would start by studying the issues with a deep analysis of the causes and effects. an in-depth examination to develop a view of the world. How would you go about developing your view of the world? Could you explain the causes of conflict, poverty, economic development, or health? These questions are the departure point for this section which will introduce you to visual analytics and sense making for wicked problems. The goal is to equip you with the science and practice to contribute to the study of global issues with the intent to inform the decision making process — to contribute to the progress global development.</p>
+<p>Social, economic, environmental, and political challenges involve dealing with complex problems. Problems which a have been called “messes” and “wicked” when describing issues such as global climate change, illiteracy, poverty, conflict, and human development. The idea of wicked problems was originally proposed by H. W. J. Rittel and M. M. Webber, when in their 1973 article Dilemmas in a General Theory of Planning, they concluded that there is a realm of problems that cannot be successfully treated with traditional analytical approaches. Traditional analytic approaches are an inadequate way to deal with the complexity, interconnections and uncertainty often found in wicked problem scenarios.</p>
+<p>Tackling wicked problems raises the demand for specialized skills and the need to garner the required knowledge for grasping the interrelationships between the full range of causal factors underlying complex analytic issues. This point is the purpose of Kamino — to develop a practice for analyzing and making sense of the challenges we face.</p>
+<p>Why should you learn this practice? What are the benefits of the approach? The focus on analysis is important to emphasize the need for deep knowledge of issues and the value of fostering a better understanding of today’s complex situations. This we can say is the due diligence required of any analyst whose fi ndings underpin the reasoning found in decisions taken towards the design of public policy programs; decisions which we’ve seen from history can have profound consequences or great benefits. We learn from this history that accurate, credible, and meaningful analysis is paramount to the decision making process.</p>
+</div>
+</div>
+<div id="developing-a-model" class="section level1">
+<h1>Developing a Model</h1>
+<hr />
+<p>To provide meaningful analysis requires specialized practice and methodology. How can you learn this practice? To satisfy this goal, the text is constructed for an intended benefi t to you - the student, the analyst, and the decision maker and all those who contribute to shaping the world we live in. Take for example a complex subject where well informed decisions or program planning would yield a potential solution to the problem. How would you approach an analysis task to “make sense” of issues such as hunger, disease, illiteracy, or environmental sustainability? Do you know,</p>
+<ul>
+<li>How to represent an issue as a system and model?</li>
+<li>How to apply specialized methods of research and analysis?</li>
+<li>How to visualize and represent complex subjects?</li>
+<li>How to present your fi ndings with a clear story?</li>
+</ul>
+<p>Answering these questions is the aim of the book; to provide a resource of knowledge and technique that you can adopt, practice and improve upon.</p>
+</div>
+<div id="modelling-approach" class="section level1">
+<h1>Modelling Approach</h1>
+<hr />
+<p>In the words of John Tukey, “the greatest value of a picture is when it forces us to notice what we never expected to see.x” This is the task of a Visual Analyst and here is a look at a recent case highlighting the importance of such a skill. When Gapminder was founded in Stockholm during February 2005, they likely had no idea that, by coincidence, the idea of visual analytics was emerging. The non-profi t venture set way to “promoting sustainable global development and achievement of the UN Millennium Development Goalsa by increased use and understanding of statistics and other information about social, economic and environmental development at local, national and global levels.x” The initial activity was to develop Trendalyzer, a software aimed at unveiling “the beauty of statistical time series by converting boring numbers into enjoyable, animated and interactive graphics.x”</p>
+<p>Since its acquisition by Google in March 2007, Trendalyzer and Gapminder World continue to “produce visual representations showing major global development trends with animated statistics and colorful graphics.” The website for this endeavour, gapminder.org, is now ranked as one of the best sites in 2009x, with videos and presentations earning an audience of millionsy. Why is GapMinder so successful, you wonder? Because it makes sense of complex issues which are diffi cult to understand; it enabled us to “see” and discover facts about the world and our wicked problems.</p>
+<p>GapMinder is a simple but powerful demonstration of how certain methods can be followed to convey insight and meaning. The success is also a credit to GapMinder Director Hans Rosling’s (Professor of International Health and licensed physician) excellent profi ciency as a visual analyst. Well known for his sword swallowing theatrics and lectures using Gapminder graphics to visualise world development issues, Dr. Rosling’s lectures address questions such as: Can the population growth be stopped? Can everyone live on the same level as the rich countries? In each case, his presentations (see Figure 3) underscore the methodology and process used:</p>
+</div>
+<div id="learn-the-process-when" class="section level1">
+<h1>Learn the process (when)</h1>
+<hr />
+<p>The process provides the sequence of steps explaining when to perform an activity. For example, let’s say you want to organize, transform, and mine your data. These tasks are among the first steps of the process called Models of Information (Section II). An important part of the process is that the sequence of steps provide inputs and outputs that are needed for subsequent steps. In other words, you must organize your data before you can proceed to other activities. The process overview is covered in Chapter 3.</p>
+</div>
+<div id="understand-the-major-activities-what" class="section level1">
+<h1>Understand the major activities (what)</h1>
+<hr />
+<p>As process provides the when to do a certain action, the individual activities explain what to do. There are five key activities which are covered in signifi cant detail in Sections II through VI. A key point to understand about the activities is that there are several sub-processes and tasks. You’ll need to understand what each activity, subprocess and task does, it’s outputs, and whether or not you need to perform it for your analysis goal.</p>
+</div>
+<div id="study-the-patterns-how" class="section level1">
+<h1>Study the patterns (how)</h1>
+<hr />
+<p>Can you imagine knowing what to do, but not knowing how? You need instructions, right? This is exactly what a pattern is - a set of instructions. Patterns are a form of capturing the knowledge needed for doing something. I describe more than 200 patterns ranging from creating data cubes, performing social network analysis, drawing radial graphs, and designing for visual literacy. These patterns are sources of instructions and best practices collected from experts and proven solutions.</p>
+<p>The best way to use patterns is to load your brain with them and then recognize the places where you can apply them.</p>
+<p>Let’s begin the journey to “load your brain” begining with an overview of this fi eld called Visual Analytics.</p>
+</div>
+<div id="modelling-approach-1" class="section level1">
+<h1>Modelling Approach</h1>
+<hr />
+</div>
+<div id="modelling-approach-2" class="section level1">
+<h1>Modelling Approach</h1>
+<hr />
+</div>
+<div id="exercises-and-practice" class="section level1">
+<h1>Exercises and practice</h1>
+<div id="knime-and-r-practice-solutions" class="section level2">
+<h2>Knime and R practice solutions</h2>
+</div>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<div id="the-citations-and-data-sources-used-for-this-case" class="section level2">
+<h2>The citations and data sources used for this case</h2>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+
+<!-- Footer-->
+<footer class="footer text-center bc-white btop" style="padding-top: 30px; padding-bottom: 25px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <h3 class="text-uppercase mb-4">Use</h4>
+        <p class="centered text-center">This work is licensed under Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <h3 class="text-uppercase mb-4">Source</h4>
+        <p class="centered text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered"><i class="lab la-github"
+              style="font-size: 62px; color: #111111;"></i></a>
+        </p>
+      </div>
+      <div class="col-lg-4">
+        <h3 class="text-uppercase mb-4">Creation</h4>
+        <p class="centered text-center">Hand crafted with ♥ by the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>

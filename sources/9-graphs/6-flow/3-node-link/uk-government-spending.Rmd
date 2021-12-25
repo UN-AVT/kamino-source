@@ -1,0 +1,230 @@
+---
+pagetitle: "UK Government Spending"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(scales)
+library(ggraph)
+library(igraph)
+library(graphlayouts)
+library(tidygraph)
+library(countrycode)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+GRAPHS
+</div>
+
+# UK Government Spending
+## graph layouts
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Taylor Wilcox on Unsplash"}
+
+masthead <- "assets/taylor-wilcox-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+***
+
+### Ingest
+#### supplier to recipient data
+
+```{r,message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+nodes <- read.csv("archetypes/uk-government-spending/nodes.csv", header = TRUE, stringsAsFactors = FALSE)
+nodes$color <- as.character(paste0("#", nodes$color))
+head(nodes, n = 10)
+
+edges <- read.csv("archetypes/uk-government-spending/edges.csv", header = TRUE, stringsAsFactors = FALSE)
+edges$color <- as.character(paste0("#", edges$color))
+head(edges, n = 10)
+
+```
+
+
+### Wrangle 
+#### transform to graph structure 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# Convert data to graph data frame
+# directed=true means it is a flow not just an association between nodes
+g <- graph.data.frame(edges, directed=TRUE, vertices=nodes)
+g
+
+```
+
+### Ensuring proper attributes for Edges
+#### Computing Edges Weights (as per number of students flow)
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_graph <- g %>% 
+   as_tbl_graph() %>% 
+    activate(edges) %>% 
+    # computes numbers between 0 and 1 according to Number of Student Number
+    mutate(edge_weights = log10(billion_pounds)/10)
+df_graph
+
+```
+
+### Layout & Aesthetic Parameters
+#### Choose the types of Edges you would like to display
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+## Edge Types
+# geom_edge_arc
+# geom_edge_arc0
+# geom_edge_arc2
+# geom_edge_density
+# geom_edge_diagonal
+# geom_edge_diagonal0
+# geom_edge_diagonal2
+# geom_edge_elbow
+# geom_edge_elbow0
+# geom_edge_elbow2
+# geom_edge_fan
+# geom_edge_fan0
+# geom_edge_fan2
+# geom_edge_hive
+# geom_edge_hive0
+# geom_edge_hive2
+# geom_edge_link
+# geom_edge_link0
+# geom_edge_link2
+
+## Layouts can be computationally intensive
+# Uncomment only for use
+
+##################
+# igraph layouts #
+##################
+
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
+layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+
+## graphlayouts
+# layout <- create_layout(df_graph, layout = "nicely")
+# layout <- create_layout(df_graph, layout = "stress")
+# layout <- create_layout(df_graph, layout = "focus", focus = 1)
+
+
+```
+
+
+### View
+#### graph
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+color_palette <- E(df_graph)$color
+
+v1 <- ggraph(layout) + 
+  geom_edge_elbow(aes(edge_width = edge_weights, color = color)) + # aes(edge_width = edge_weights)
+  geom_node_point(aes(size=billion_pounds, color = color)) +
+  geom_node_label( aes(label=name, fill = color), color = "white", repel = FALSE, vjust = -0.5, hjust = 0.5, size = 4, family = "inconsolata") +
+  scale_size_continuous(range = c(1, 6)) + 
+  scale_color_identity() +
+  coord_fixed(clip = 'off') + 
+  theme_graph()+
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+Source: 
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

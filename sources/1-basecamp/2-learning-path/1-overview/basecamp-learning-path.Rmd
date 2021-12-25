@@ -1,0 +1,57 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+
+```
+
+<div class="activity">
+COLLECTIONS  
+</div>
+
+# Learning path
+## What are they?
+
+> How many piano tuners are there in Chicago?\
+-- Enrico Fermi\
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,193 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+```
+
+<div class="activity">
+BASECAMP  
+</div>
+
+# The way
+## the path to insight
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="AP Photo"}
+
+knitr::include_graphics("assets/josh-harvey-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">An unsolved mystery: Jersey City, N.J., one of the locations where authorities searched.</div>
+
+> Eliminate all other factors and the one which remains must be the truth...\
+--- Sherlock Holmes, The Sign of the Four\
+
+***
+
+### The basics
+#### planning and process, activities, tasks, methods, and solutions
+
+There are three key principles to understand: process, pattern catalog, and patterns. In summary,
+
+* The __planning and process__ section provides a framework for defining your focus question, and following a systems thinking and modeling approach to guide your analysis process.
+* The process is organized by __activities__, a logical set of tasks with clearly defined goals and objectives.
+* Each activity is comprised of __tasks__, an action to take to accomplish a specific objective.
+* All tasks are supported by one or more __methods__, an established approach to perform the task.
+* Finally, all methods have reusable __solutions__, a set of instructions for you to apply the method in practice.
+
+Let's look at each of these principles to orient you to the basics for getting started.
+
+### The process
+#### linked activities to transform
+
+Let’s begin with the premise that a systematic process is the most effective way to facilitate meaningful analysis. The importance of this premise is underscored when highlighting the potential consequence of an ill-formed process:
+
+> frequently groups of smart, well-motivated people...agree...on the wrong solution...\
+They failed because they followed a poor process in arriving at their decisions...\
+--- Russo and Schoemaker 1989
+
+Consequently, weak process can lead to weak analysis which leads decision makers to ignore information:
+
+> I don’t think the intelligence reports are all that hot. Some days I get more out of the New York Times.\
+-- JFK
+
+Clearly, we need to define a good process that will fit the purpose and value of analyzing complex problems. Let us consider a process definition to highlight its importance: 
+
+> A set of linked activities that take an input and transform it to create an output. 
+--- Johansson et al. (1993)
+
+Importantly, the set of linked activities should result in a transformation that yields value in its outputs. This definition emphasizes the links between activities and the transformation that takes place within the process. Following the definition, we can identify the key features a process should have:  
+
+* clearly defined boundaries, input and output. 
+* consist of activities that are ordered according to their position in time and space. 
+* the transformation taking place within the process must add value to the outcome.
+
+### The activities and tasks
+#### Why is this important?
+
+Based on these principles, we define a consistent and flexible collection of structured activities and tasks aimed at achieving a result. Figure X provides an overview of the major activities.
+
+```{r, out.width = "1080px", fig.align = 'center', fig.cap="Process Overview"}
+
+knitr::include_graphics("assets/the-pattern-catalog.svg", dpi=300)
+
+```
+
+The analyst iterates through the activities and tasks until all the goals are achieved. Importantly, the process is not serial or sequential but driven by goals and responsive to the dynamics of analyzing complex problems.
+
+For each activity we need to know what to do to carry out the specific tasks. This is the purpose of the activity construct. Based on a taxonomy, each activity is constructed to classify a collection of tasks and methods that together form a catalog of solutions.
+
+As illustrated in below, the main purpose of this catalog is to ensure a logical organization of reusable solutions. 
+
+```{r, out.width = "1080px", fig.align = 'center', fig.cap="Process Overview"}
+
+knitr::include_graphics("assets/the-pattern-catalog.svg", dpi=300)
+
+```
+
+<div class="figure-text">What happened to Jimmy Hoffa?</div>
+
+Depending on the activity or task you are working on, the catalog provides easy means for you to quickly search and find the best tools for your goal.
+
+### Solutions (a.k.a Patterns)
+#### easy to learn, easy to use
+
+If you are new to the idea of patterns, you will quickly understand how important the concept is to a practice. When twenty years ago author Christopher Alexander influenced the architectural world in his landmark book The Timeless Way of Building, he was introducing the idea of patterns. His thesis was that one could achieve excellence in architecture by learning and using a carefully-defi ned set of design rules, or patterns. He convinced us that although the quality of a well-designed building is sublime and hard to put into words, the patterns themselves that make up that building are remarkably simple and easy to understand by laymen.
+
+Given that the catalog serves as an instruction manual, and patterns are the instructions, we can extend this analogy to reveal the power and importance of patterns. In our example we use the catalog as the form for an organized guide for accomplishing tasks, but I’ve neglected the real importance of how this form is created. Consider for example how Alexander’s work in architecture is the culimnation of years of experience within the architecture, construction, building and other related studies. All of which is directed towards the creation of towns, buildings, schools, homes and the physical order for how we live. Therefore, patterns are a form of capturing experience and expertise so that we can resuse this knowledge in our own pursuits.
+
+Consider for example the value of capturing our experiences from decades of lessons learned in diplomacy, economics, science, political science, and other intersections of practice. Using patterns is a way to capture, convey and reuse these successful approaches:
+
+“The intent [of pedagogical patterns] is to capture the essence of the practice in a compact form that can be easily communicated to those who need the knowledge..
+
+Patterns are designed to capture best practice in a specific domain. 
+
+As illustrated in Figure X, patterns provide the perfect medium for describing solutions related to visual analytics. Do you know how to create a choropleth map? If not, check out the pattern and follow the instructions.
+
+```{r, out.width = "1080px", fig.align = 'center', fig.cap="Process Overview"}
+
+knitr::include_graphics("assets/a-pattern.svg", dpi=300)
+
+```
+
+<div class="figure-text">What happened to Jimmy Hoffa?</div>
+
+Now that you understand what a pattern is, let’s explore how a they are used.
+
+### Using Solutions and Making Recipes
+#### it worked before, it might work again
+
+As we depart from this introduction with a solid foundation of the concept of process, pattern catalog, and patterns, the significance of the approach will become evident as we apply it to a purpose. In the same way that Alexander’s original concept was applied to architecture patterns to empower us to design and build a town or structure, clearly a beautifully designed structure is not a single pattern, but rather a purposefully selected mix of patterns - a recipe of patterns combined to produce the final result.
+
+```{r, out.width = "1080px", fig.align = 'center', fig.cap="Process Overview"}
+
+knitr::include_graphics("assets/recipe.svg", dpi=300)
+
+```
+
+<div class="figure-text">What happened to Jimmy Hoffa?</div>
+
+
+By documenting the collective knowledge of the visual analytics field as patterns, we can now apply these ingredients to design and build our own visual representations of complex subjects. Let’s think of a typical case of Mom’s famous cookie recipe; the recipe which is passed on generation to generation and which is always guaranteed to produce a pleasing result. Such a recipe would look like this:
+
+* An ordered list and sequence of preparation steps
+* An assembly of the required ingredients
+* The tools and conditions needed to prepare
+
+This approach is much the same for the process (sequence) and patterns (ingredients). To construct a complex multi-faceted decision product, you must know the components that will be present in the final structure, you must also know the correct sequence—the set of assembly rules—for putting the components and subcomponents together. Alexander calls these assembly rules generative sequences or generative codesX: they tell you what decisions you have to make in what order during the construction process.
+
+### Why is this important?
+
+The key point of the cookie recipe is that it can be shared and repeated. If a sequence of the process and use of specific patterns yields a positive outcome, the recipe can be considered successful. Simply put, a recipe captures the experience of a successful outcome
+
+Most batches of data fail to tell us exactly how they should be analyzed. In making our most careful choices, we typically have to depend upon other bodies of data in similar subjects and upon experience. (Tukey)
+
+Recipes offer a formal and structured means of sharing experience; a means of sharing instructions which have proven successful. For example, great tasting cookies. And if a Visual Analyst follows a certain sequence, employs certain patterns to produce a final product which is considered successful, we too have the makings of a recipe; a recipe which can be shared and repeated.
+
+...to unlock the analysis of a body of data, to find the good way or ways to approach it, may require a key, whose finding is a creative act. (Tukey, viii)
+
+Figure X highlights this point with the case of GapMinder’s Motion ChartX. How did they mix the recipe? Notice in the illustration that such a graphic is produced by combining certain patterns from a sequence of tasks. As you become increasingly knowledgeable of the process and patterns presented in this book, you’ll begin to see such . Like looking at a building and knowing how it was made, the sequence, the patterns, etc. 
+
+```{r, out.width = "1080px", fig.align = 'center', fig.cap="Process Overview"}
+
+knitr::include_graphics("assets/pattern-cocktail-party.svg", dpi=300)
+
+```
+
+<div class="figure-text">What happened to Jimmy Hoffa?</div>
+
+
+As you work through the following chapters, you will gain a mastery over following process and mixing patterns to produce you’re own recipes. And most importantly, you can share you’re work with the community.
+
+# References
+## The citations and data sources used for this case
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

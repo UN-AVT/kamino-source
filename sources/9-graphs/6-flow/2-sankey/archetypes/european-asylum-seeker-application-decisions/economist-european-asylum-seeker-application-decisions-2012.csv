@@ -1,0 +1,240 @@
+source,target,value,EDGE_COLOR
+Serbia,Belgium,945,#d5e3eb
+Serbia,Germany,13095,#d5e3eb
+Serbia,France,810,#d5e3eb
+Serbia,Italy,105,#d5e3eb
+Serbia,Sweden,2455,#d5e3eb
+Serbia,Britain,5,#d5e3eb
+Serbia,Switzerland,1295,#d5e3eb
+Russia,Belgium,1820,#d5e3eb
+Russia,Germany,1090,#d5e3eb
+Russia,France,4870,#d5e3eb
+Russia,Italy,20,#d5e3eb
+Russia,Sweden,590,#d5e3eb
+Russia,Britain,130,#d5e3eb
+Russia,Switzerland,225,#d5e3eb
+Somalia,Belgium,320,#d5e3eb
+Somalia,Germany,735,#d5e3eb
+Somalia,France,690,#d5e3eb
+Somalia,Italy,900,#d5e3eb
+Somalia,Sweden,4100,#d5e3eb
+Somalia,Britain,555,#d5e3eb
+Somalia,Switzerland,430,#d5e3eb
+Nigeria,Belgium,150,#d5e3eb
+Nigeria,Germany,485,#d5e3eb
+Nigeria,France,1005,#d5e3eb
+Nigeria,Italy,6065,#d5e3eb
+Nigeria,Sweden,345,#d5e3eb
+Nigeria,Britain,1120,#d5e3eb
+Nigeria,Switzerland,2370,#d5e3eb
+Afghanistan,Belgium,2530,#d5e3eb
+Afghanistan,Germany,4495,#d5e3eb
+Afghanistan,France,605,#d5e3eb
+Afghanistan,Italy,1025,#d5e3eb
+Afghanistan,Sweden,4190,#d5e3eb
+Afghanistan,Britain,1085,#d5e3eb
+Afghanistan,Switzerland,475,#d5e3eb
+Pakistan,Belgium,435,#d5e3eb
+Pakistan,Germany,1615,#d5e3eb
+Pakistan,France,1610,#d5e3eb
+Pakistan,Italy,2070,#d5e3eb
+Pakistan,Sweden,175,#d5e3eb
+Pakistan,Britain,3870,#d5e3eb
+Pakistan,Switzerland,60,#d5e3eb
+Syria,Belgium,630,#d5e3eb
+Syria,Germany,7755,#d5e3eb
+Syria,France,375,#d5e3eb
+Syria,Italy,215,#d5e3eb
+Syria,Sweden,4470,#d5e3eb
+Syria,Britain,1150,#d5e3eb
+Syria,Switzerland,585,#d5e3eb
+Belgium,Total positive decisions,55,#fdf1d9
+Germany,Total positive decisions,25,#fdf1d9
+France,Total positive decisions,155,#fdf1d9
+Italy,Total positive decisions,80,#fdf1d9
+Sweden,Total positive decisions,20,#fdf1d9
+Switzerland,Total positive decisions,70,#fdf1d9
+Belgium,Rejected,890,#fdf1d9
+Germany,Rejected,13070,#fdf1d9
+France,Rejected,650,#fdf1d9
+Italy,Rejected,30,#fdf1d9
+Sweden,Rejected,2435,#fdf1d9
+Switzerland,Rejected,1225,#fdf1d9
+Belgium,Total positive decisions,375,#fdf1d9
+Germany,Total positive decisions,170,#fdf1d9
+France,Total positive decisions,900,#fdf1d9
+Italy,Total positive decisions,20,#fdf1d9
+Sweden,Total positive decisions,105,#fdf1d9
+Britain,Total positive decisions,55,#fdf1d9
+Switzerland,Total positive decisions,50,#fdf1d9
+Belgium,Rejected,1445,#fdf1d9
+Germany,Rejected,915,#fdf1d9
+France,Rejected,3965,#fdf1d9
+Sweden,Rejected,490,#fdf1d9
+Britain,Rejected,75,#fdf1d9
+Switzerland,Rejected,175,#fdf1d9
+Belgium,Total positive decisions,130,#fdf1d9
+Germany,Total positive decisions,510,#fdf1d9
+France,Total positive decisions,165,#fdf1d9
+Italy,Total positive decisions,885,#fdf1d9
+Sweden,Total positive decisions,2060,#fdf1d9
+Britain,Total positive decisions,400,#fdf1d9
+Switzerland,Total positive decisions,275,#fdf1d9
+Belgium,Rejected,190,#fdf1d9
+Germany,Rejected,225,#fdf1d9
+France,Rejected,525,#fdf1d9
+Italy,Rejected,20,#fdf1d9
+Sweden,Rejected,2040,#fdf1d9
+Britain,Rejected,160,#fdf1d9
+Switzerland,Rejected,155,#fdf1d9
+Belgium,Total positive decisions,10,#fdf1d9
+Germany,Total positive decisions,45,#fdf1d9
+France,Total positive decisions,85,#fdf1d9
+Italy,Total positive decisions,5005,#fdf1d9
+Sweden,Total positive decisions,35,#fdf1d9
+Britain,Total positive decisions,175,#fdf1d9
+Switzerland,Total positive decisions,20,#fdf1d9
+Belgium,Rejected,140,#fdf1d9
+Germany,Rejected,440,#fdf1d9
+France,Rejected,920,#fdf1d9
+Italy,Rejected,1060,#fdf1d9
+Sweden,Rejected,310,#fdf1d9
+Britain,Rejected,945,#fdf1d9
+Switzerland,Rejected,2350,#fdf1d9
+Belgium,Total positive decisions,1495,#fdf1d9
+Germany,Total positive decisions,1805,#fdf1d9
+France,Total positive decisions,275,#fdf1d9
+Italy,Total positive decisions,960,#fdf1d9
+Sweden,Total positive decisions,2535,#fdf1d9
+Britain,Total positive decisions,360,#fdf1d9
+Switzerland,Total positive decisions,185,#fdf1d9
+Belgium,Rejected,1035,#fdf1d9
+Germany,Rejected,2690,#fdf1d9
+France,Rejected,330,#fdf1d9
+Italy,Rejected,65,#fdf1d9
+Sweden,Rejected,1655,#fdf1d9
+Britain,Rejected,725,#fdf1d9
+Switzerland,Rejected,290,#fdf1d9
+Belgium,Total positive decisions,25,#fdf1d9
+Germany,Total positive decisions,300,#fdf1d9
+France,Total positive decisions,35,#fdf1d9
+Italy,Total positive decisions,1170,#fdf1d9
+Sweden,Total positive decisions,40,#fdf1d9
+Britain,Total positive decisions,660,#fdf1d9
+Switzerland,Total positive decisions,5,#fdf1d9
+Belgium,Rejected,410,#fdf1d9
+Germany,Rejected,1315,#fdf1d9
+France,Rejected,1575,#fdf1d9
+Italy,Rejected,900,#fdf1d9
+Sweden,Rejected,135,#fdf1d9
+Britain,Rejected,3210,#fdf1d9
+Switzerland,Rejected,55,#fdf1d9
+Belgium,Total positive decisions,595,#fdf1d9
+Germany,Total positive decisions,7465,#fdf1d9
+France,Total positive decisions,340,#fdf1d9
+Italy,Total positive decisions,200,#fdf1d9
+Sweden,Total positive decisions,4090,#fdf1d9
+Britain,Total positive decisions,920,#fdf1d9
+Switzerland,Total positive decisions,415,#fdf1d9
+Belgium,Rejected,30,#fdf1d9
+Germany,Rejected,290,#fdf1d9
+France,Rejected,35,#fdf1d9
+Italy,Rejected,15,#fdf1d9
+Sweden,Rejected,380,#fdf1d9
+Britain,Rejected,230,#fdf1d9
+Switzerland,Rejected,175,#fdf1d9
+Total positive decisions,E-Serbia,55,#dcedee
+Total positive decisions,E-Serbia,25,#dcedee
+Total positive decisions,E-Serbia,155,#dcedee
+Total positive decisions,E-Serbia,80,#dcedee
+Total positive decisions,E-Serbia,20,#dcedee
+Total positive decisions,E-Serbia,70,#dcedee
+Rejected,E-Serbia,890,#fceae1
+Rejected,E-Serbia,13070,#fceae1
+Rejected,E-Serbia,650,#fceae1
+Rejected,E-Serbia,30,#fceae1
+Rejected,E-Serbia,2435,#fceae1
+Rejected,E-Serbia,1225,#fceae1
+Total positive decisions,E-Russia,375,#dcedee
+Total positive decisions,E-Russia,170,#dcedee
+Total positive decisions,E-Russia,900,#dcedee
+Total positive decisions,E-Russia,20,#dcedee
+Total positive decisions,E-Russia,105,#dcedee
+Total positive decisions,E-Russia,55,#dcedee
+Total positive decisions,E-Russia,50,#dcedee
+Rejected,E-Russia,1445,#fceae1
+Rejected,E-Russia,915,#fceae1
+Rejected,E-Russia,3965,#fceae1
+Rejected,E-Russia,490,#fceae1
+Rejected,E-Russia,75,#fceae1
+Rejected,E-Russia,175,#fceae1
+Total positive decisions,E-Somalia,130,#dcedee
+Total positive decisions,E-Somalia,510,#dcedee
+Total positive decisions,E-Somalia,165,#dcedee
+Total positive decisions,E-Somalia,885,#dcedee
+Total positive decisions,E-Somalia,2060,#dcedee
+Total positive decisions,E-Somalia,400,#dcedee
+Total positive decisions,E-Somalia,275,#dcedee
+Rejected,E-Somalia,190,#fceae1
+Rejected,E-Somalia,225,#fceae1
+Rejected,E-Somalia,525,#fceae1
+Rejected,E-Somalia,20,#fceae1
+Rejected,E-Somalia,2040,#fceae1
+Rejected,E-Somalia,160,#fceae1
+Rejected,E-Somalia,155,#fceae1
+Total positive decisions,E-Nigeria,10,#dcedee
+Total positive decisions,E-Nigeria,45,#dcedee
+Total positive decisions,E-Nigeria,85,#dcedee
+Total positive decisions,E-Nigeria,5005,#dcedee
+Total positive decisions,E-Nigeria,35,#dcedee
+Total positive decisions,E-Nigeria,175,#dcedee
+Total positive decisions,E-Nigeria,20,#dcedee
+Rejected,E-Nigeria,140,#fceae1
+Rejected,E-Nigeria,440,#fceae1
+Rejected,E-Nigeria,920,#fceae1
+Rejected,E-Nigeria,1060,#fceae1
+Rejected,E-Nigeria,310,#fceae1
+Rejected,E-Nigeria,945,#fceae1
+Rejected,E-Nigeria,2350,#fceae1
+Total positive decisions,E-Afghanistan,1495,#dcedee
+Total positive decisions,E-Afghanistan,1805,#dcedee
+Total positive decisions,E-Afghanistan,275,#dcedee
+Total positive decisions,E-Afghanistan,960,#dcedee
+Total positive decisions,E-Afghanistan,2535,#dcedee
+Total positive decisions,E-Afghanistan,360,#dcedee
+Total positive decisions,E-Afghanistan,185,#dcedee
+Rejected,E-Afghanistan,1035,#fceae1
+Rejected,E-Afghanistan,2690,#fceae1
+Rejected,E-Afghanistan,330,#fceae1
+Rejected,E-Afghanistan,65,#fceae1
+Rejected,E-Afghanistan,1655,#fceae1
+Rejected,E-Afghanistan,725,#fceae1
+Rejected,E-Afghanistan,290,#fceae1
+Total positive decisions,E-Pakistan,25,#dcedee
+Total positive decisions,E-Pakistan,300,#dcedee
+Total positive decisions,E-Pakistan,35,#dcedee
+Total positive decisions,E-Pakistan,1170,#dcedee
+Total positive decisions,E-Pakistan,40,#dcedee
+Total positive decisions,E-Pakistan,660,#dcedee
+Total positive decisions,E-Pakistan,5,#dcedee
+Rejected,E-Pakistan,410,#fceae1
+Rejected,E-Pakistan,1315,#fceae1
+Rejected,E-Pakistan,1575,#fceae1
+Rejected,E-Pakistan,900,#fceae1
+Rejected,E-Pakistan,135,#fceae1
+Rejected,E-Pakistan,3210,#fceae1
+Rejected,E-Pakistan,55,#fceae1
+Total positive decisions,E-Syria,595,#dcedee
+Total positive decisions,E-Syria,7465,#dcedee
+Total positive decisions,E-Syria,340,#dcedee
+Total positive decisions,E-Syria,200,#dcedee
+Total positive decisions,E-Syria,4090,#dcedee
+Total positive decisions,E-Syria,920,#dcedee
+Total positive decisions,E-Syria,415,#dcedee
+Rejected,E-Syria,30,#fceae1
+Rejected,E-Syria,290,#fceae1
+Rejected,E-Syria,35,#fceae1
+Rejected,E-Syria,15,#fceae1
+Rejected,E-Syria,380,#fceae1
+Rejected,E-Syria,230,#fceae1
+Rejected,E-Syria,175,#fceae1

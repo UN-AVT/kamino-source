@@ -1,0 +1,3700 @@
+_id,_source,_target,_label,ownership_type
+e19676,n21381,n21380,IS_OWNER,Directly Controlled
+e19677,n21383,n21382,IS_OWNER,Directly Controlled
+e19678,n21385,n21384,IS_OWNER,Directly Controlled
+e19679,n21387,n21386,IS_OWNER,Directly Controlled
+e19680,n21387,n21388,IS_OWNER,Directly Controlled
+e19681,n21390,n21389,IS_OWNER,Directly Controlled
+e19682,n21392,n21391,IS_OWNER,Directly Controlled
+e19683,n21391,n21393,IS_OWNER,Directly Controlled
+e19684,n21395,n21394,IS_OWNER,Directly Controlled
+e19685,n21395,n21396,IS_OWNER,Directly Controlled
+e19686,n21392,n21397,IS_OWNER,Directly Controlled
+e19687,n21399,n21398,IS_OWNER,Directly Controlled
+e19688,n21401,n21400,IS_OWNER,Directly Controlled
+e19689,n21403,n21402,IS_OWNER,Directly Controlled
+e19690,n21395,n21404,IS_OWNER,Directly Controlled
+e19691,n21406,n21405,IS_OWNER,Directly Controlled
+e19692,n21403,n21406,IS_OWNER,Directly Controlled
+e19693,n21401,n21407,IS_OWNER,Directly Controlled
+e19694,n21401,n21395,IS_OWNER,Directly Controlled
+e19695,n21401,n21408,IS_OWNER,Directly Controlled
+e19696,n21410,n21409,IS_OWNER,Directly Controlled
+e19697,n21405,n21410,IS_OWNER,Directly Controlled
+e19698,n21406,n21411,IS_OWNER,Directly Controlled
+e19699,n21401,n21412,IS_OWNER,Directly Controlled
+e19700,n21406,n21413,IS_OWNER,Directly Controlled
+e19701,n21401,n21414,IS_OWNER,Directly Controlled
+e19702,n21405,n21401,IS_OWNER,Directly Controlled
+e19703,n21395,n21415,IS_OWNER,Directly Controlled
+e19704,n21401,n21416,IS_OWNER,Directly Controlled
+e19705,n21418,n21417,IS_OWNER,Directly Controlled
+e19706,n21392,n21419,IS_OWNER,Directly Controlled
+e19707,n21405,n21420,IS_OWNER,Directly Controlled
+e19708,n21420,n21421,IS_OWNER,Directly Controlled
+e19709,n21395,n21422,IS_OWNER,Directly Controlled
+e19710,n21420,n21423,IS_OWNER,Directly Controlled
+e19711,n21395,n21392,IS_OWNER,Directly Controlled
+e19712,n21397,n21424,IS_OWNER,Directly Controlled
+e19713,n21410,n21425,IS_OWNER,Directly Controlled
+e19714,n21427,n21426,IS_OWNER,Directly Controlled
+e19715,n21427,n21428,IS_OWNER,Directly Controlled
+e19716,n21427,n21429,IS_OWNER,Directly Controlled
+e19717,n21392,n21427,IS_OWNER,Directly Controlled
+e19718,n21401,n21430,IS_OWNER,Directly Controlled
+e19719,n21432,n21431,IS_OWNER,Directly Controlled
+e19720,n21392,n21433,IS_OWNER,Directly Controlled
+e19721,n21395,n21434,IS_OWNER,Directly Controlled
+e19722,n21395,n21435,IS_OWNER,Directly Controlled
+e19723,n21410,n21436,IS_OWNER,Directly Controlled
+e19724,n21410,n21437,IS_OWNER,Directly Controlled
+e19725,n21408,n21438,IS_OWNER,Directly Controlled
+e19726,n21408,n21439,IS_OWNER,Directly Controlled
+e19727,n21395,n21432,IS_OWNER,Directly Controlled
+e19728,n21395,n21440,IS_OWNER,Directly Controlled
+e19729,n21392,n21441,IS_OWNER,Directly Controlled
+e19730,n21401,n21442,IS_OWNER,Directly Controlled
+e19731,n21444,n21443,IS_OWNER,Directly Controlled
+e19732,n21444,n21445,IS_OWNER,Directly Controlled
+e19733,n21444,n21446,IS_OWNER,Directly Controlled
+e19734,n21444,n21447,IS_OWNER,Directly Controlled
+e19735,n21444,n21448,IS_OWNER,Directly Controlled
+e19736,n21450,n21449,IS_OWNER,Directly Controlled
+e19737,n21444,n21451,IS_OWNER,Directly Controlled
+e19738,n21444,n21452,IS_OWNER,Directly Controlled
+e19739,n21444,n21453,IS_OWNER,Directly Controlled
+e19740,n21455,n21454,IS_OWNER,Directly Controlled
+e19741,n21444,n21456,IS_OWNER,Directly Controlled
+e19742,n21458,n21457,IS_OWNER,Directly Controlled
+e19743,n21460,n21459,IS_OWNER,Directly Controlled
+e19744,n21462,n21461,IS_OWNER,Directly Controlled
+e19745,n21464,n21463,IS_OWNER,Directly Controlled
+e19746,n21466,n21465,IS_OWNER,Directly Controlled
+e19747,n21468,n21467,IS_OWNER,Directly Controlled
+e19748,n21470,n21469,IS_OWNER,Directly Controlled
+e19749,n21472,n21471,IS_OWNER,Directly Controlled
+e19750,n21403,n21473,IS_OWNER,Directly Controlled
+e19751,n21475,n21474,IS_OWNER,Directly Controlled
+e19752,n21477,n21476,IS_OWNER,Directly Controlled
+e19753,n21479,n21478,IS_OWNER,Directly Controlled
+e19754,n21481,n21480,IS_OWNER,Directly Controlled
+e19755,n21481,n21482,IS_OWNER,Directly Controlled
+e19756,n21484,n21483,IS_OWNER,Directly Controlled
+e19757,n21477,n21481,IS_OWNER,Directly Controlled
+e19758,n21468,n21485,IS_OWNER,Directly Controlled
+e19759,n21444,n21486,IS_OWNER,Directly Controlled
+e19760,n21444,n21487,IS_OWNER,Directly Controlled
+e19761,n21489,n21488,IS_OWNER,Directly Controlled
+e19762,n21408,n21490,IS_OWNER,Directly Controlled
+e19763,n21488,n21491,IS_OWNER,Directly Controlled
+e19764,n21408,n21492,IS_OWNER,Directly Controlled
+e19765,n21494,n21493,IS_OWNER,Directly Controlled
+e19766,n21496,n21495,IS_OWNER,Directly Controlled
+e19767,n21470,n21497,IS_OWNER,Directly Controlled
+e19768,n21403,n21498,IS_OWNER,Directly Controlled
+e19769,n21500,n21499,IS_OWNER,Directly Controlled
+e19770,n21502,n21501,IS_OWNER,Directly Controlled
+e19771,n21503,n21502,IS_OWNER,Directly Controlled
+e19772,n21505,n21504,IS_OWNER,Directly Controlled
+e19773,n21462,n21506,IS_OWNER,Directly Controlled
+e19774,n21468,n21507,IS_OWNER,Directly Controlled
+e19775,n21403,n21508,IS_OWNER,Directly Controlled
+e19776,n21510,n21509,IS_OWNER,Directly Controlled
+e19777,n21512,n21511,IS_OWNER,Directly Controlled
+e19778,n21502,n21513,IS_OWNER,Directly Controlled
+e19779,n21507,n21514,IS_OWNER,Directly Controlled
+e19780,n21514,n21515,IS_OWNER,Directly Controlled
+e19781,n21501,n21516,IS_OWNER,Directly Controlled
+e19782,n21501,n21505,IS_OWNER,Directly Controlled
+e19783,n21470,n21517,IS_OWNER,Directly Controlled
+e19784,n21501,n21518,IS_OWNER,Directly Controlled
+e19785,n21520,n21519,IS_OWNER,Directly Controlled
+e19786,n21522,n21521,IS_OWNER,Directly Controlled
+e19787,n21518,n21523,IS_OWNER,Directly Controlled
+e19788,n21517,n21524,IS_OWNER,Directly Controlled
+e19789,n21526,n21525,IS_OWNER,Directly Controlled
+e19790,n21528,n21527,IS_OWNER,Directly Controlled
+e19791,n21528,n21529,IS_OWNER,Directly Controlled
+e19792,n21531,n21530,IS_OWNER,Directly Controlled
+e19793,n21484,n21532,IS_OWNER,Directly Controlled
+e19794,n21528,n21533,IS_OWNER,Directly Controlled
+e19795,n21534,n21528,IS_OWNER,Directly Controlled
+e19796,n21528,n21535,IS_OWNER,Directly Controlled
+e19797,n21528,n21536,IS_OWNER,Directly Controlled
+e19798,n21535,n21537,IS_OWNER,Directly Controlled
+e19799,n21535,n21538,IS_OWNER,Directly Controlled
+e19800,n21535,n21539,IS_OWNER,Directly Controlled
+e19801,n21535,n21540,IS_OWNER,Directly Controlled
+e19802,n21535,n21541,IS_OWNER,Directly Controlled
+e19803,n21535,n21542,IS_OWNER,Directly Controlled
+e19804,n21528,n21543,IS_OWNER,Directly Controlled
+e19805,n21535,n21544,IS_OWNER,Directly Controlled
+e19806,n21535,n21545,IS_OWNER,Directly Controlled
+e19807,n21528,n21546,IS_OWNER,Directly Controlled
+e19808,n21528,n21547,IS_OWNER,Directly Controlled
+e19809,n21549,n21548,IS_OWNER,Directly Controlled
+e19810,n21551,n21550,IS_OWNER,Directly Controlled
+e19811,n21528,n21552,IS_OWNER,Directly Controlled
+e19812,n21528,n21553,IS_OWNER,Directly Controlled
+e19813,n21528,n21554,IS_OWNER,Directly Controlled
+e19814,n21484,n21555,IS_OWNER,Directly Controlled
+e19815,n21528,n21556,IS_OWNER,Directly Controlled
+e19816,n21558,n21557,IS_OWNER,Directly Controlled
+e19817,n21560,n21559,IS_OWNER,Directly Controlled
+e19818,n21562,n21561,IS_OWNER,Directly Controlled
+e19819,n21560,n21563,IS_OWNER,Directly Controlled
+e19820,n21565,n21564,IS_OWNER,Directly Controlled
+e19821,n21565,n21566,IS_OWNER,Directly Controlled
+e19822,n21565,n21567,IS_OWNER,Directly Controlled
+e19823,n21562,n21568,IS_OWNER,Directly Controlled
+e19824,n21403,n21569,IS_OWNER,Directly Controlled
+e19825,n21571,n21570,IS_OWNER,Directly Controlled
+e19826,n21403,n21572,IS_OWNER,Directly Controlled
+e19827,n21574,n21573,IS_OWNER,Directly Controlled
+e19828,n21381,n21575,IS_OWNER,Directly Controlled
+e19829,n21470,n21576,IS_OWNER,Directly Controlled
+e19830,n21403,n21577,IS_OWNER,Directly Controlled
+e19831,n21403,n21578,IS_OWNER,Directly Controlled
+e19832,n21403,n21579,IS_OWNER,Directly Controlled
+e19833,n21581,n21580,IS_OWNER,Directly Controlled
+e19834,n21403,n21582,IS_OWNER,Directly Controlled
+e19835,n21403,n21583,IS_OWNER,Directly Controlled
+e19836,n21581,n21584,IS_OWNER,Directly Controlled
+e19837,n21403,n21585,IS_OWNER,Directly Controlled
+e19838,n21381,n21586,IS_OWNER,Directly Controlled
+e19839,n21403,n21587,IS_OWNER,Directly Controlled
+e19840,n21403,n21588,IS_OWNER,Directly Controlled
+e19841,n21583,n21589,IS_OWNER,Directly Controlled
+e19842,n21403,n21590,IS_OWNER,Directly Controlled
+e19843,n21592,n21591,IS_OWNER,Directly Controlled
+e19844,n21403,n21593,IS_OWNER,Directly Controlled
+e19845,n21403,n21594,IS_OWNER,Directly Controlled
+e19846,n21403,n21595,IS_OWNER,Directly Controlled
+e19847,n21403,n21596,IS_OWNER,Directly Controlled
+e19848,n21403,n21597,IS_OWNER,Directly Controlled
+e19849,n21403,n21598,IS_OWNER,Directly Controlled
+e19850,n21600,n21599,IS_OWNER,Directly Controlled
+e19851,n21403,n21601,IS_OWNER,Directly Controlled
+e19852,n21603,n21602,IS_OWNER,Directly Controlled
+e19853,n21605,n21604,IS_OWNER,Directly Controlled
+e19854,n21600,n21606,IS_OWNER,Directly Controlled
+e19855,n21403,n21607,IS_OWNER,Directly Controlled
+e19856,n21592,n21608,IS_OWNER,Directly Controlled
+e19857,n21403,n21609,IS_OWNER,Directly Controlled
+e19858,n21385,n21610,IS_OWNER,Directly Controlled
+e19859,n21612,n21611,IS_OWNER,Directly Controlled
+e19860,n21381,n21613,IS_OWNER,Directly Controlled
+e19861,n21615,n21614,IS_OWNER,Directly Controlled
+e19862,n21385,n21615,IS_OWNER,Directly Controlled
+e19863,n21614,n21616,IS_OWNER,Directly Controlled
+e19864,n21614,n21617,IS_OWNER,Directly Controlled
+e19865,n21614,n21618,IS_OWNER,Directly Controlled
+e19866,n21620,n21619,IS_OWNER,Directly Controlled
+e19867,n21622,n21621,IS_OWNER,Directly Controlled
+e19868,n21381,n21623,IS_OWNER,Directly Controlled
+e19869,n21625,n21624,IS_OWNER,Directly Controlled
+e19870,n21627,n21626,IS_OWNER,Directly Controlled
+e19871,n21627,n21628,IS_OWNER,Directly Controlled
+e19872,n21627,n21629,IS_OWNER,Directly Controlled
+e19873,n21627,n21630,IS_OWNER,Directly Controlled
+e19874,n21627,n21631,IS_OWNER,Directly Controlled
+e19875,n21633,n21632,IS_OWNER,Directly Controlled
+e19876,n21627,n21634,IS_OWNER,Directly Controlled
+e19877,n21636,n21635,IS_OWNER,Directly Controlled
+e19878,n21627,n21637,IS_OWNER,Directly Controlled
+e19879,n21636,n21638,IS_OWNER,Directly Controlled
+e19880,n21640,n21639,IS_OWNER,Directly Controlled
+e19881,n21627,n21641,IS_OWNER,Directly Controlled
+e19882,n21627,n21642,IS_OWNER,Directly Controlled
+e19883,n21403,n21643,IS_OWNER,Directly Controlled
+e19884,n21636,n21644,IS_OWNER,Directly Controlled
+e19885,n21403,n21645,IS_OWNER,Directly Controlled
+e19886,n21403,n21646,IS_OWNER,Directly Controlled
+e19887,n21648,n21647,IS_OWNER,Directly Controlled
+e19888,n21403,n21649,IS_OWNER,Directly Controlled
+e19889,n21571,n21650,IS_OWNER,Directly Controlled
+e19890,n21649,n21651,IS_OWNER,Directly Controlled
+e19891,n21649,n21652,IS_OWNER,Directly Controlled
+e19892,n21649,n21653,IS_OWNER,Directly Controlled
+e19893,n21649,n21654,IS_OWNER,Directly Controlled
+e19894,n21656,n21655,IS_OWNER,Directly Controlled
+e19895,n21649,n21657,IS_OWNER,Directly Controlled
+e19896,n21649,n21658,IS_OWNER,Directly Controlled
+e19897,n21649,n21659,IS_OWNER,Directly Controlled
+e19898,n21649,n21660,IS_OWNER,Directly Controlled
+e19899,n21649,n21661,IS_OWNER,Directly Controlled
+e19900,n21649,n21662,IS_OWNER,Directly Controlled
+e19901,n21649,n21663,IS_OWNER,Directly Controlled
+e19902,n21649,n21664,IS_OWNER,Directly Controlled
+e19903,n21649,n21665,IS_OWNER,Directly Controlled
+e19904,n21649,n21666,IS_OWNER,Directly Controlled
+e19905,n21649,n21667,IS_OWNER,Directly Controlled
+e19906,n21669,n21668,IS_OWNER,Directly Controlled
+e19907,n21444,n21670,IS_OWNER,Directly Controlled
+e19908,n21649,n21671,IS_OWNER,Directly Controlled
+e19909,n21649,n21672,IS_OWNER,Directly Controlled
+e19910,n21656,n21673,IS_OWNER,Directly Controlled
+e19911,n21649,n21674,IS_OWNER,Directly Controlled
+e19912,n21649,n21675,IS_OWNER,Directly Controlled
+e19913,n21656,n21676,IS_OWNER,Directly Controlled
+e19914,n21656,n21677,IS_OWNER,Directly Controlled
+e19915,n21649,n21678,IS_OWNER,Directly Controlled
+e19916,n21649,n21679,IS_OWNER,Directly Controlled
+e19917,n21649,n21680,IS_OWNER,Directly Controlled
+e19918,n21649,n21681,IS_OWNER,Directly Controlled
+e19919,n21649,n21682,IS_OWNER,Directly Controlled
+e19920,n21649,n21683,IS_OWNER,Directly Controlled
+e19921,n21649,n21684,IS_OWNER,Directly Controlled
+e19922,n21649,n21685,IS_OWNER,Directly Controlled
+e19923,n21649,n21686,IS_OWNER,Directly Controlled
+e19924,n21649,n21687,IS_OWNER,Directly Controlled
+e19925,n21649,n21656,IS_OWNER,Directly Controlled
+e19926,n21649,n21688,IS_OWNER,Directly Controlled
+e19927,n21381,n21689,IS_OWNER,Directly Controlled
+e19928,n21444,n21690,IS_OWNER,Directly Controlled
+e19929,n21692,n21691,IS_OWNER,Directly Controlled
+e19930,n21444,n21692,IS_OWNER,Directly Controlled
+e19931,n21444,n21693,IS_OWNER,Directly Controlled
+e19932,n21444,n21694,IS_OWNER,Directly Controlled
+e19933,n21444,n21695,IS_OWNER,Directly Controlled
+e19934,n21444,n21696,IS_OWNER,Directly Controlled
+e19935,n21455,n21697,IS_OWNER,Directly Controlled
+e19936,n21444,n21698,IS_OWNER,Directly Controlled
+e19937,n21444,n21699,IS_OWNER,Directly Controlled
+e19938,n21444,n21700,IS_OWNER,Directly Controlled
+e19939,n21444,n21701,IS_OWNER,Directly Controlled
+e19940,n21444,n21702,IS_OWNER,Directly Controlled
+e19941,n21704,n21703,IS_OWNER,Directly Controlled
+e19942,n21706,n21705,IS_OWNER,Directly Controlled
+e19943,n21444,n21707,IS_OWNER,Directly Controlled
+e19944,n21444,n21708,IS_OWNER,Directly Controlled
+e19945,n21444,n21709,IS_OWNER,Directly Controlled
+e19946,n21444,n21706,IS_OWNER,Directly Controlled
+e19947,n21444,n21710,IS_OWNER,Directly Controlled
+e19948,n21444,n21711,IS_OWNER,Directly Controlled
+e19949,n21444,n21712,IS_OWNER,Directly Controlled
+e19950,n21444,n21713,IS_OWNER,Directly Controlled
+e19951,n21444,n21714,IS_OWNER,Directly Controlled
+e19952,n21444,n21715,IS_OWNER,Directly Controlled
+e19953,n21444,n21716,IS_OWNER,Directly Controlled
+e19954,n21444,n21717,IS_OWNER,Directly Controlled
+e19955,n21444,n21718,IS_OWNER,Directly Controlled
+e19956,n21455,n21719,IS_OWNER,Directly Controlled
+e19957,n21455,n21720,IS_OWNER,Directly Controlled
+e19958,n21444,n21721,IS_OWNER,Directly Controlled
+e19959,n21444,n21722,IS_OWNER,Directly Controlled
+e19960,n21444,n21723,IS_OWNER,Directly Controlled
+e19961,n21444,n21724,IS_OWNER,Directly Controlled
+e19962,n21444,n21725,IS_OWNER,Directly Controlled
+e19963,n21444,n21726,IS_OWNER,Directly Controlled
+e19964,n21444,n21727,IS_OWNER,Directly Controlled
+e19965,n21444,n21728,IS_OWNER,Directly Controlled
+e19966,n21444,n21729,IS_OWNER,Directly Controlled
+e19967,n21444,n21730,IS_OWNER,Directly Controlled
+e19968,n21444,n21731,IS_OWNER,Directly Controlled
+e19969,n21444,n21732,IS_OWNER,Directly Controlled
+e19970,n21444,n21733,IS_OWNER,Directly Controlled
+e19971,n21649,n21734,IS_OWNER,Directly Controlled
+e19972,n21444,n21735,IS_OWNER,Directly Controlled
+e19973,n21455,n21736,IS_OWNER,Directly Controlled
+e19974,n21690,n21737,IS_OWNER,Directly Controlled
+e19975,n21444,n21738,IS_OWNER,Directly Controlled
+e19976,n21444,n21739,IS_OWNER,Directly Controlled
+e19977,n21444,n21740,IS_OWNER,Directly Controlled
+e19978,n21444,n21741,IS_OWNER,Directly Controlled
+e19979,n21743,n21742,IS_OWNER,Directly Controlled
+e19980,n21743,n21744,IS_OWNER,Directly Controlled
+e19981,n21444,n21745,IS_OWNER,Directly Controlled
+e19982,n21444,n21746,IS_OWNER,Directly Controlled
+e19983,n21444,n21747,IS_OWNER,Directly Controlled
+e19984,n21455,n21748,IS_OWNER,Directly Controlled
+e19985,n21444,n21749,IS_OWNER,Directly Controlled
+e19986,n21444,n21750,IS_OWNER,Directly Controlled
+e19987,n21526,n21751,IS_OWNER,Directly Controlled
+e19988,n21455,n21752,IS_OWNER,Directly Controlled
+e19989,n21444,n21753,IS_OWNER,Directly Controlled
+e19990,n21444,n21743,IS_OWNER,Directly Controlled
+e19991,n21444,n21754,IS_OWNER,Directly Controlled
+e19992,n21455,n21755,IS_OWNER,Directly Controlled
+e19993,n21455,n21756,IS_OWNER,Directly Controlled
+e19994,n21444,n21450,IS_OWNER,Directly Controlled
+e19995,n21444,n21757,IS_OWNER,Directly Controlled
+e19996,n21455,n21758,IS_OWNER,Directly Controlled
+e19997,n21444,n21759,IS_OWNER,Directly Controlled
+e19998,n21444,n21760,IS_OWNER,Directly Controlled
+e19999,n21444,n21455,IS_OWNER,Directly Controlled
+e20000,n21444,n21761,IS_OWNER,Directly Controlled
+e20001,n21444,n21762,IS_OWNER,Directly Controlled
+e20002,n21707,n21763,IS_OWNER,Directly Controlled
+e20003,n21444,n21764,IS_OWNER,Directly Controlled
+e20004,n21444,n21765,IS_OWNER,Directly Controlled
+e20005,n21444,n21766,IS_OWNER,Directly Controlled
+e20006,n21444,n21767,IS_OWNER,Directly Controlled
+e20007,n21444,n21768,IS_OWNER,Directly Controlled
+e20008,n21444,n21769,IS_OWNER,Directly Controlled
+e20009,n21444,n21770,IS_OWNER,Directly Controlled
+e20010,n21444,n21771,IS_OWNER,Directly Controlled
+e20011,n21444,n21772,IS_OWNER,Directly Controlled
+e20012,n21444,n21773,IS_OWNER,Directly Controlled
+e20013,n21444,n21774,IS_OWNER,Directly Controlled
+e20014,n21444,n21775,IS_OWNER,Directly Controlled
+e20015,n21444,n21776,IS_OWNER,Directly Controlled
+e20016,n21444,n21777,IS_OWNER,Directly Controlled
+e20017,n21444,n21778,IS_OWNER,Directly Controlled
+e20018,n21444,n21779,IS_OWNER,Directly Controlled
+e20019,n21444,n21780,IS_OWNER,Directly Controlled
+e20020,n21444,n21781,IS_OWNER,Directly Controlled
+e20021,n21444,n21526,IS_OWNER,Directly Controlled
+e20022,n21781,n21782,IS_OWNER,Directly Controlled
+e20023,n21444,n21783,IS_OWNER,Directly Controlled
+e20024,n21707,n21784,IS_OWNER,Directly Controlled
+e20025,n21526,n21785,IS_OWNER,Directly Controlled
+e20026,n21444,n21786,IS_OWNER,Directly Controlled
+e20027,n21788,n21787,IS_OWNER,Directly Controlled
+e20028,n21790,n21789,IS_OWNER,Directly Controlled
+e20029,n21787,n21791,IS_OWNER,Directly Controlled
+e20030,n21787,n21792,IS_OWNER,Directly Controlled
+e20031,n21787,n21793,IS_OWNER,Directly Controlled
+e20032,n21795,n21794,IS_OWNER,Directly Controlled
+e20033,n21489,n21796,IS_OWNER,Directly Controlled
+e20034,n21798,n21797,IS_OWNER,Directly Controlled
+e20035,n21403,n21799,IS_OWNER,Directly Controlled
+e20036,n21403,n21800,IS_OWNER,Directly Controlled
+e20037,n21385,n21801,IS_OWNER,Directly Controlled
+e20038,n21803,n21802,IS_OWNER,Directly Controlled
+e20039,n21484,n21804,IS_OWNER,Directly Controlled
+e20040,n21403,n21805,IS_OWNER,Directly Controlled
+e20041,n21444,n21806,IS_OWNER,Directly Controlled
+e20042,n21808,n21807,IS_OWNER,Directly Controlled
+e20043,n21403,n21809,IS_OWNER,Directly Controlled
+e20044,n21385,n21810,IS_OWNER,Directly Controlled
+e20045,n21520,n21811,IS_OWNER,Directly Controlled
+e20046,n21571,n21812,IS_OWNER,Directly Controlled
+e20047,n21814,n21813,IS_OWNER,Directly Controlled
+e20048,n21403,n21815,IS_OWNER,Directly Controlled
+e20049,n21817,n21816,IS_OWNER,Directly Controlled
+e20050,n21385,n21817,IS_OWNER,Directly Controlled
+e20051,n21385,n21818,IS_OWNER,Directly Controlled
+e20052,n21820,n21819,IS_OWNER,Directly Controlled
+e20053,n21571,n21821,IS_OWNER,Directly Controlled
+e20054,n21823,n21822,IS_OWNER,Directly Controlled
+e20055,n21403,n21823,IS_OWNER,Directly Controlled
+e20056,n21790,n21824,IS_OWNER,Directly Controlled
+e20057,n21824,n21825,IS_OWNER,Directly Controlled
+e20058,n21455,n21826,IS_OWNER,Directly Controlled
+e20059,n21824,n21827,IS_OWNER,Directly Controlled
+e20060,n21824,n21828,IS_OWNER,Directly Controlled
+e20061,n21381,n21829,IS_OWNER,Directly Controlled
+e20062,n21385,n21830,IS_OWNER,Directly Controlled
+e20063,n21385,n21831,IS_OWNER,Directly Controlled
+e20064,n21830,n21832,IS_OWNER,Directly Controlled
+e20065,n21830,n21833,IS_OWNER,Directly Controlled
+e20066,n21385,n21834,IS_OWNER,Directly Controlled
+e20067,n21836,n21835,IS_OWNER,Directly Controlled
+e20068,n21836,n21837,IS_OWNER,Directly Controlled
+e20069,n21403,n21838,IS_OWNER,Directly Controlled
+e20070,n21840,n21839,IS_OWNER,Directly Controlled
+e20071,n21385,n21841,IS_OWNER,Directly Controlled
+e20072,n21840,n21842,IS_OWNER,Directly Controlled
+e20073,n21581,n21843,IS_OWNER,Directly Controlled
+e20074,n21489,n21844,IS_OWNER,Directly Controlled
+e20075,n21444,n21845,IS_OWNER,Directly Controlled
+e20076,n21845,n21846,IS_OWNER,Directly Controlled
+e20077,n21845,n21847,IS_OWNER,Directly Controlled
+e20078,n21849,n21848,IS_OWNER,Directly Controlled
+e20079,n21571,n21477,IS_OWNER,Directly Controlled
+e20080,n21444,n21849,IS_OWNER,Directly Controlled
+e20081,n21385,n21850,IS_OWNER,Directly Controlled
+e20082,n21605,n21851,IS_OWNER,Directly Controlled
+e20083,n21581,n21852,IS_OWNER,Directly Controlled
+e20084,n21850,n21853,IS_OWNER,Directly Controlled
+e20085,n21605,n21854,IS_OWNER,Directly Controlled
+e20086,n21381,n21855,IS_OWNER,Directly Controlled
+e20087,n21403,n21856,IS_OWNER,Directly Controlled
+e20088,n21581,n21857,IS_OWNER,Directly Controlled
+e20089,n21489,n21858,IS_OWNER,Directly Controlled
+e20090,n21381,n21859,IS_OWNER,Directly Controlled
+e20091,n21468,n21860,IS_OWNER,Directly Controlled
+e20092,n21385,n21861,IS_OWNER,Directly Controlled
+e20093,n21385,n21862,IS_OWNER,Directly Controlled
+e20094,n21864,n21863,IS_OWNER,Directly Controlled
+e20095,n21866,n21865,IS_OWNER,Directly Controlled
+e20096,n21444,n21867,IS_OWNER,Directly Controlled
+e20097,n21444,n21868,IS_OWNER,Directly Controlled
+e20098,n21870,n21869,IS_OWNER,Directly Controlled
+e20099,n21872,n21871,IS_OWNER,Directly Controlled
+e20100,n21874,n21873,IS_OWNER,Directly Controlled
+e20101,n21873,n21875,IS_OWNER,Directly Controlled
+e20102,n21484,n21876,IS_OWNER,Directly Controlled
+e20103,n21870,n21877,IS_OWNER,Directly Controlled
+e20104,n21870,n21878,IS_OWNER,Directly Controlled
+e20105,n21877,n21879,IS_OWNER,Directly Controlled
+e20106,n21381,n21880,IS_OWNER,Directly Controlled
+e20107,n21562,n21881,IS_OWNER,Directly Controlled
+e20108,n21869,n21882,IS_OWNER,Directly Controlled
+e20109,n21884,n21883,IS_OWNER,Directly Controlled
+e20110,n21704,n21885,IS_OWNER,Directly Controlled
+e20111,n21870,n21625,IS_OWNER,Directly Controlled
+e20112,n21886,n21640,IS_OWNER,Directly Controlled
+e20113,n21870,n21886,IS_OWNER,Directly Controlled
+e20114,n21870,n21887,IS_OWNER,Directly Controlled
+e20115,n21381,n21888,IS_OWNER,Directly Controlled
+e20116,n21403,n21889,IS_OWNER,Directly Controlled
+e20117,n21444,n21381,IS_OWNER,Directly Controlled
+e20118,n21381,n21890,IS_OWNER,Directly Controlled
+e20119,n21704,n21891,IS_OWNER,Directly Controlled
+e20120,n21381,n21892,IS_OWNER,Directly Controlled
+e20121,n21381,n21704,IS_OWNER,Directly Controlled
+e20122,n21894,n21893,IS_OWNER,Directly Controlled
+e20123,n21704,n21895,IS_OWNER,Directly Controlled
+e20124,n21704,n21896,IS_OWNER,Directly Controlled
+e20125,n21870,n21897,IS_OWNER,Directly Controlled
+e20126,n21893,n21870,IS_OWNER,Directly Controlled
+e20127,n21704,n21612,IS_OWNER,Directly Controlled
+e20128,n21704,n21898,IS_OWNER,Directly Controlled
+e20129,n21385,n21899,IS_OWNER,Directly Controlled
+e20130,n21444,n21900,IS_OWNER,Directly Controlled
+e20131,n21444,n21901,IS_OWNER,Directly Controlled
+e20132,n21704,n21902,IS_OWNER,Directly Controlled
+e20133,n21381,n21903,IS_OWNER,Directly Controlled
+e20134,n21444,n21904,IS_OWNER,Directly Controlled
+e20135,n21896,n21905,IS_OWNER,Directly Controlled
+e20136,n21896,n21906,IS_OWNER,Directly Controlled
+e20137,n21898,n21907,IS_OWNER,Directly Controlled
+e20138,n21444,n21908,IS_OWNER,Directly Controlled
+e20139,n21706,n21909,IS_OWNER,Directly Controlled
+e20140,n21704,n21910,IS_OWNER,Directly Controlled
+e20141,n21912,n21911,IS_OWNER,Directly Controlled
+e20142,n21896,n21913,IS_OWNER,Directly Controlled
+e20143,n21526,n21914,IS_OWNER,Directly Controlled
+e20144,n21704,n21915,IS_OWNER,Directly Controlled
+e20145,n21581,n21916,IS_OWNER,Directly Controlled
+e20146,n21918,n21917,IS_OWNER,Directly Controlled
+e20147,n21916,n21918,IS_OWNER,Directly Controlled
+e20148,n21916,n21919,IS_OWNER,Directly Controlled
+e20149,n21918,n21920,IS_OWNER,Directly Controlled
+e20150,n21918,n21921,IS_OWNER,Directly Controlled
+e20151,n21923,n21922,IS_OWNER,Directly Controlled
+e20152,n21916,n21924,IS_OWNER,Directly Controlled
+e20153,n21918,n21925,IS_OWNER,Directly Controlled
+e20154,n21918,n21923,IS_OWNER,Directly Controlled
+e20155,n21918,n21926,IS_OWNER,Directly Controlled
+e20156,n21918,n21927,IS_OWNER,Directly Controlled
+e20157,n21918,n21928,IS_OWNER,Directly Controlled
+e20158,n21918,n21929,IS_OWNER,Directly Controlled
+e20159,n21916,n21930,IS_OWNER,Directly Controlled
+e20160,n21918,n21931,IS_OWNER,Directly Controlled
+e20161,n21933,n21932,IS_OWNER,Directly Controlled
+e20162,n21933,n21934,IS_OWNER,Directly Controlled
+e20163,n21933,n21935,IS_OWNER,Directly Controlled
+e20164,n21460,n21936,IS_OWNER,Directly Controlled
+e20165,n21795,n21937,IS_OWNER,Directly Controlled
+e20166,n21939,n21938,IS_OWNER,Directly Controlled
+e20167,n21941,n21940,IS_OWNER,Directly Controlled
+e20168,n21385,n21942,IS_OWNER,Directly Controlled
+e20169,n21944,n21943,IS_OWNER,Directly Controlled
+e20170,n21571,n21945,IS_OWNER,Directly Controlled
+e20171,n21403,n21946,IS_OWNER,Directly Controlled
+e20172,n21381,n21947,IS_OWNER,Directly Controlled
+e20173,n21571,n21948,IS_OWNER,Directly Controlled
+e20174,n21385,n21949,IS_OWNER,Directly Controlled
+e20175,n21381,n21950,IS_OWNER,Directly Controlled
+e20176,n21385,n21951,IS_OWNER,Directly Controlled
+e20177,n21444,n21952,IS_OWNER,Directly Controlled
+e20178,n21444,n21953,IS_OWNER,Directly Controlled
+e20179,n21444,n21954,IS_OWNER,Directly Controlled
+e20180,n21781,n21955,IS_OWNER,Directly Controlled
+e20181,n21403,n21956,IS_OWNER,Directly Controlled
+e20182,n21956,n21957,IS_OWNER,Directly Controlled
+e20183,n21956,n21958,IS_OWNER,Directly Controlled
+e20184,n21956,n21959,IS_OWNER,Directly Controlled
+e20185,n21956,n21960,IS_OWNER,Directly Controlled
+e20186,n21956,n21961,IS_OWNER,Directly Controlled
+e20187,n21956,n21962,IS_OWNER,Directly Controlled
+e20188,n21956,n21963,IS_OWNER,Directly Controlled
+e20189,n21381,n21964,IS_OWNER,Directly Controlled
+e20190,n21381,n21965,IS_OWNER,Directly Controlled
+e20191,n21889,n21966,IS_OWNER,Directly Controlled
+e20192,n21381,n21967,IS_OWNER,Directly Controlled
+e20193,n21444,n21968,IS_OWNER,Directly Controlled
+e20194,n21381,n21969,IS_OWNER,Directly Controlled
+e20195,n21403,n21970,IS_OWNER,Directly Controlled
+e20196,n21403,n21971,IS_OWNER,Directly Controlled
+e20197,n21489,n21972,IS_OWNER,Directly Controlled
+e20198,n21489,n21605,IS_OWNER,Directly Controlled
+e20199,n21581,n21973,IS_OWNER,Directly Controlled
+e20200,n21468,n21974,IS_OWNER,Directly Controlled
+e20201,n21403,n21975,IS_OWNER,Directly Controlled
+e20202,n21571,n21976,IS_OWNER,Directly Controlled
+e20203,n21976,n21977,IS_OWNER,Directly Controlled
+e20204,n21976,n21978,IS_OWNER,Directly Controlled
+e20205,n21980,n21979,IS_OWNER,Directly Controlled
+e20206,n21976,n21981,IS_OWNER,Directly Controlled
+e20207,n21381,n21982,IS_OWNER,Directly Controlled
+e20208,n21526,n21983,IS_OWNER,Directly Controlled
+e20209,n21985,n21984,IS_OWNER,Directly Controlled
+e20210,n21489,n21985,IS_OWNER,Directly Controlled
+e20211,n21985,n21986,IS_OWNER,Directly Controlled
+e20212,n21385,n21987,IS_OWNER,Directly Controlled
+e20213,n21987,n21988,IS_OWNER,Directly Controlled
+e20214,n21985,n21989,IS_OWNER,Directly Controlled
+e20215,n21985,n21990,IS_OWNER,Directly Controlled
+e20216,n21985,n21991,IS_OWNER,Directly Controlled
+e20217,n21403,n21992,IS_OWNER,Directly Controlled
+e20218,n21403,n21444,IS_OWNER,Directly Controlled
+e20219,n21390,n21993,IS_OWNER,Directly Controlled
+e20220,n21994,n21390,IS_OWNER,Directly Controlled
+e20221,n21994,n21995,IS_OWNER,Directly Controlled
+e20222,n21390,n21996,IS_OWNER,Directly Controlled
+e20223,n21390,n21997,IS_OWNER,Directly Controlled
+e20224,n21995,n21998,IS_OWNER,Directly Controlled
+e20225,n21390,n21999,IS_OWNER,Directly Controlled
+e20226,n21390,n22000,IS_OWNER,Directly Controlled
+e20227,n21390,n22001,IS_OWNER,Directly Controlled
+e20228,n21390,n22002,IS_OWNER,Directly Controlled
+e20229,n21387,n22003,IS_OWNER,Directly Controlled
+e20230,n21390,n22004,IS_OWNER,Directly Controlled
+e20231,n21390,n22005,IS_OWNER,Directly Controlled
+e20232,n21390,n22006,IS_OWNER,Directly Controlled
+e20233,n21526,n22007,IS_OWNER,Directly Controlled
+e20234,n21489,n22008,IS_OWNER,Directly Controlled
+e20235,n21987,n22009,IS_OWNER,Directly Controlled
+e20236,n22011,n22010,IS_OWNER,Directly Controlled
+e20237,n22011,n22012,IS_OWNER,Directly Controlled
+e20238,n21403,n22011,IS_OWNER,Directly Controlled
+e20239,n21470,n22013,IS_OWNER,Directly Controlled
+e20240,n22011,n22014,IS_OWNER,Directly Controlled
+e20241,n22011,n22015,IS_OWNER,Directly Controlled
+e20242,n21385,n22016,IS_OWNER,Directly Controlled
+e20243,n21385,n22017,IS_OWNER,Directly Controlled
+e20244,n21864,n22018,IS_OWNER,Directly Controlled
+e20245,n21403,n22019,IS_OWNER,Directly Controlled
+e20246,n21385,n22020,IS_OWNER,Directly Controlled
+e20247,n22022,n22021,IS_OWNER,Directly Controlled
+e20248,n22021,n22023,IS_OWNER,Directly Controlled
+e20249,n21403,n22024,IS_OWNER,Directly Controlled
+e20250,n21605,n22025,IS_OWNER,Directly Controlled
+e20251,n22027,n22026,IS_OWNER,Directly Controlled
+e20252,n22028,n22022,IS_OWNER,Directly Controlled
+e20253,n22023,n22029,IS_OWNER,Directly Controlled
+e20254,n22031,n22030,IS_OWNER,Directly Controlled
+e20255,n22033,n22032,IS_OWNER,Directly Controlled
+e20256,n22035,n22034,IS_OWNER,Directly Controlled
+e20257,n22037,n22036,IS_OWNER,Directly Controlled
+e20258,n22039,n22038,IS_OWNER,Directly Controlled
+e20259,n21473,n22040,IS_OWNER,Directly Controlled
+e20260,n22042,n22041,IS_OWNER,Directly Controlled
+e20261,n22044,n22043,IS_OWNER,Directly Controlled
+e20262,n22046,n22045,IS_OWNER,Directly Controlled
+e20263,n22048,n22047,IS_OWNER,Directly Controlled
+e20264,n21875,n22049,IS_OWNER,Directly Controlled
+e20265,n22051,n22050,IS_OWNER,Directly Controlled
+e20266,n22048,n22052,IS_OWNER,Directly Controlled
+e20267,n21571,n22053,IS_OWNER,Directly Controlled
+e20268,n21381,n22054,IS_OWNER,Directly Controlled
+e20269,n22051,n22055,IS_OWNER,Directly Controlled
+e20270,n22048,n22056,IS_OWNER,Directly Controlled
+e20271,n22048,n22057,IS_OWNER,Directly Controlled
+e20272,n21381,n22058,IS_OWNER,Directly Controlled
+e20273,n22054,n22059,IS_OWNER,Directly Controlled
+e20274,n21403,n22060,IS_OWNER,Directly Controlled
+e20275,n22062,n22061,IS_OWNER,Directly Controlled
+e20276,n21403,n22063,IS_OWNER,Directly Controlled
+e20277,n22039,n22064,IS_OWNER,Directly Controlled
+e20278,n21403,n22065,IS_OWNER,Directly Controlled
+e20279,n21403,n22066,IS_OWNER,Directly Controlled
+e20280,n21649,n22067,IS_OWNER,Directly Controlled
+e20281,n21649,n22068,IS_OWNER,Directly Controlled
+e20282,n21472,n22069,IS_OWNER,Directly Controlled
+e20283,n22071,n22070,IS_OWNER,Directly Controlled
+e20284,n22062,n22072,IS_OWNER,Directly Controlled
+e20285,n21571,n21820,IS_OWNER,Directly Controlled
+e20286,n21622,n22073,IS_OWNER,Directly Controlled
+e20287,n22075,n22074,IS_OWNER,Directly Controlled
+e20288,n22077,n22076,IS_OWNER,Directly Controlled
+e20289,n22076,n22078,IS_OWNER,Directly Controlled
+e20290,n22075,n22079,IS_OWNER,Directly Controlled
+e20291,n21468,n21475,IS_OWNER,Directly Controlled
+e20292,n21571,n22080,IS_OWNER,Directly Controlled
+e20293,n21468,n22081,IS_OWNER,Directly Controlled
+e20294,n22039,n22082,IS_OWNER,Directly Controlled
+e20295,n21489,n22083,IS_OWNER,Directly Controlled
+e20296,n21489,n22084,IS_OWNER,Directly Controlled
+e20297,n21489,n21808,IS_OWNER,Directly Controlled
+e20298,n21489,n21866,IS_OWNER,Directly Controlled
+e20299,n21468,n22085,IS_OWNER,Directly Controlled
+e20300,n21571,n21790,IS_OWNER,Directly Controlled
+e20301,n21571,n21512,IS_OWNER,Directly Controlled
+e20302,n21468,n22086,IS_OWNER,Directly Controlled
+e20303,n21468,n22087,IS_OWNER,Directly Controlled
+e20304,n21468,n22088,IS_OWNER,Directly Controlled
+e20305,n21592,n21479,IS_OWNER,Directly Controlled
+e20306,n21479,n22089,IS_OWNER,Directly Controlled
+e20307,n21403,n21581,IS_OWNER,Directly Controlled
+e20308,n21571,n22090,IS_OWNER,Directly Controlled
+e20309,n21489,n22091,IS_OWNER,Directly Controlled
+e20310,n21581,n21503,IS_OWNER,Directly Controlled
+e20311,n21571,n22092,IS_OWNER,Directly Controlled
+e20312,n21571,n22093,IS_OWNER,Directly Controlled
+e20313,n21489,n22094,IS_OWNER,Directly Controlled
+e20314,n21648,n21840,IS_OWNER,Directly Controlled
+e20315,n21403,n21603,IS_OWNER,Directly Controlled
+e20316,n21571,n21592,IS_OWNER,Directly Controlled
+e20317,n21592,n21648,IS_OWNER,Directly Controlled
+e20318,n21592,n22095,IS_OWNER,Directly Controlled
+e20319,n21489,n22096,IS_OWNER,Directly Controlled
+e20320,n21468,n22097,IS_OWNER,Directly Controlled
+e20321,n21403,n22098,IS_OWNER,Directly Controlled
+e20322,n21489,n21798,IS_OWNER,Directly Controlled
+e20323,n21489,n22099,IS_OWNER,Directly Controlled
+e20324,n21403,n22100,IS_OWNER,Directly Controlled
+e20325,n21462,n22101,IS_OWNER,Directly Controlled
+e20326,n21468,n21510,IS_OWNER,Directly Controlled
+e20327,n21571,n22102,IS_OWNER,Directly Controlled
+e20328,n21468,n22103,IS_OWNER,Directly Controlled
+e20329,n21468,n22104,IS_OWNER,Directly Controlled
+e20330,n21468,n21558,IS_OWNER,Directly Controlled
+e20331,n21468,n22105,IS_OWNER,Directly Controlled
+e20332,n22106,n21560,IS_OWNER,Directly Controlled
+e20333,n21468,n21636,IS_OWNER,Directly Controlled
+e20334,n21468,n22107,IS_OWNER,Directly Controlled
+e20335,n21468,n22108,IS_OWNER,Directly Controlled
+e20336,n21468,n22109,IS_OWNER,Directly Controlled
+e20337,n21468,n22110,IS_OWNER,Directly Controlled
+e20338,n21468,n22111,IS_OWNER,Directly Controlled
+e20339,n21468,n22112,IS_OWNER,Directly Controlled
+e20340,n21468,n22113,IS_OWNER,Directly Controlled
+e20341,n21468,n22114,IS_OWNER,Directly Controlled
+e20342,n21468,n22115,IS_OWNER,Directly Controlled
+e20343,n22039,n22062,IS_OWNER,Directly Controlled
+e20344,n21571,n22039,IS_OWNER,Directly Controlled
+e20345,n21468,n22116,IS_OWNER,Directly Controlled
+e20346,n21468,n22117,IS_OWNER,Directly Controlled
+e20347,n22039,n22118,IS_OWNER,Directly Controlled
+e20348,n21468,n22119,IS_OWNER,Directly Controlled
+e20349,n22039,n21468,IS_OWNER,Directly Controlled
+e20350,n22039,n22120,IS_OWNER,Directly Controlled
+e20351,n21403,n22121,IS_OWNER,Directly Controlled
+e20352,n21468,n22122,IS_OWNER,Directly Controlled
+e20353,n21460,n22123,IS_OWNER,Directly Controlled
+e20354,n22125,n22124,IS_OWNER,Directly Controlled
+e20355,n21571,n22126,IS_OWNER,Directly Controlled
+e20356,n21468,n22127,IS_OWNER,Directly Controlled
+e20357,n21489,n21403,IS_OWNER,Directly Controlled
+e20358,n21403,n21788,IS_OWNER,Directly Controlled
+e20359,n21489,n21884,IS_OWNER,Directly Controlled
+e20360,n21489,n22128,IS_OWNER,Directly Controlled
+e20361,n21489,n21571,IS_OWNER,Directly Controlled
+e20362,n21571,n22129,IS_OWNER,Directly Controlled
+e20363,n21403,n21980,IS_OWNER,Directly Controlled
+e20364,n21468,n22130,IS_OWNER,Directly Controlled
+e20365,n21468,n22131,IS_OWNER,Directly Controlled
+e20366,n21468,n22132,IS_OWNER,Directly Controlled
+e20367,n21468,n22133,IS_OWNER,Directly Controlled
+e20368,n21648,n22134,IS_OWNER,Directly Controlled
+e20369,n21468,n22135,IS_OWNER,Directly Controlled
+e20370,n22125,n22136,IS_OWNER,Directly Controlled
+e20371,n21571,n22137,IS_OWNER,Directly Controlled
+e20372,n21489,n21472,IS_OWNER,Directly Controlled
+e20373,n21866,n22138,IS_OWNER,Directly Controlled
+e20374,n21468,n22139,IS_OWNER,Directly Controlled
+e20375,n21571,n21912,IS_OWNER,Directly Controlled
+e20376,n22125,n22140,IS_OWNER,Directly Controlled
+e20377,n22125,n22141,IS_OWNER,Directly Controlled
+e20378,n22125,n22142,IS_OWNER,Directly Controlled
+e20379,n21571,n22125,IS_OWNER,Directly Controlled
+e20380,n21571,n22143,IS_OWNER,Directly Controlled
+e20381,n21581,n22144,IS_OWNER,Directly Controlled
+e20382,n21571,n22145,IS_OWNER,Directly Controlled
+e20383,n21489,n22146,IS_OWNER,Directly Controlled
+e20384,n21489,n22147,IS_OWNER,Directly Controlled
+e20385,n22148,n21562,IS_OWNER,Directly Controlled
+e20386,n21403,n21565,IS_OWNER,Directly Controlled
+e20387,n21489,n22149,IS_OWNER,Directly Controlled
+e20388,n21571,n22150,IS_OWNER,Directly Controlled
+e20389,n22039,n22151,IS_OWNER,Directly Controlled
+e20390,n21468,n21939,IS_OWNER,Directly Controlled
+e20391,n21468,n22152,IS_OWNER,Directly Controlled
+e20392,n21489,n21803,IS_OWNER,Directly Controlled
+e20393,n21489,n22153,IS_OWNER,Directly Controlled
+e20394,n21468,n22154,IS_OWNER,Directly Controlled
+e20395,n21468,n22155,IS_OWNER,Directly Controlled
+e20396,n21571,n22156,IS_OWNER,Directly Controlled
+e20397,n21468,n22157,IS_OWNER,Directly Controlled
+e20398,n21489,n22158,IS_OWNER,Directly Controlled
+e20399,n21489,n22051,IS_OWNER,Directly Controlled
+e20400,n21468,n22159,IS_OWNER,Directly Controlled
+e20401,n21468,n22160,IS_OWNER,Directly Controlled
+e20402,n21468,n22161,IS_OWNER,Directly Controlled
+e20403,n21468,n22162,IS_OWNER,Directly Controlled
+e20404,n21648,n22163,IS_OWNER,Directly Controlled
+e20405,n21489,n22164,IS_OWNER,Directly Controlled
+e20406,n22039,n22071,IS_OWNER,Directly Controlled
+e20407,n21571,n22165,IS_OWNER,Directly Controlled
+e20408,n21941,n22166,IS_OWNER,Directly Controlled
+e20409,n21571,n21941,IS_OWNER,Directly Controlled
+e20410,n21571,n22167,IS_OWNER,Directly Controlled
+e20411,n22125,n22168,IS_OWNER,Directly Controlled
+e20412,n21468,n22169,IS_OWNER,Directly Controlled
+e20413,n21403,n22148,IS_OWNER,Directly Controlled
+e20414,n22039,n22170,IS_OWNER,Directly Controlled
+e20415,n21489,n21520,IS_OWNER,Directly Controlled
+e20416,n21648,n22171,IS_OWNER,Directly Controlled
+e20417,n21403,n22172,IS_OWNER,Directly Controlled
+e20418,n21385,n22173,IS_OWNER,Directly Controlled
+e20419,n21520,n21385,IS_OWNER,Directly Controlled
+e20420,n21622,n22174,IS_OWNER,Directly Controlled
+e20421,n21468,n22175,IS_OWNER,Directly Controlled
+e20422,n21385,n22176,IS_OWNER,Directly Controlled
+e20423,n21489,n22177,IS_OWNER,Directly Controlled
+e20424,n21571,n22178,IS_OWNER,Directly Controlled
+e20425,n21622,n22179,IS_OWNER,Directly Controlled
+e20426,n21468,n22180,IS_OWNER,Directly Controlled
+e20427,n21403,n22037,IS_OWNER,Directly Controlled
+e20428,n21520,n22181,IS_OWNER,Directly Controlled
+e20429,n21571,n22182,IS_OWNER,Directly Controlled
+e20430,n21571,n22183,IS_OWNER,Directly Controlled
+e20431,n21571,n22184,IS_OWNER,Directly Controlled
+e20432,n21468,n22185,IS_OWNER,Directly Controlled
+e20433,n22185,n22186,IS_OWNER,Directly Controlled
+e20434,n21403,n21600,IS_OWNER,Directly Controlled
+e20435,n21571,n22187,IS_OWNER,Directly Controlled
+e20436,n21571,n22188,IS_OWNER,Directly Controlled
+e20437,n21571,n22189,IS_OWNER,Directly Controlled
+e20438,n21571,n22190,IS_OWNER,Directly Controlled
+e20439,n21512,n22191,IS_OWNER,Directly Controlled
+e20440,n21571,n22192,IS_OWNER,Directly Controlled
+e20441,n22062,n22193,IS_OWNER,Directly Controlled
+e20442,n21489,n22194,IS_OWNER,Directly Controlled
+e20443,n22092,n22195,IS_OWNER,Directly Controlled
+e20444,n22039,n22196,IS_OWNER,Directly Controlled
+e20445,n21520,n21622,IS_OWNER,Directly Controlled
+e20446,n21571,n22197,IS_OWNER,Directly Controlled
+e20447,n21468,n22198,IS_OWNER,Directly Controlled
+e20448,n22150,n22199,IS_OWNER,Directly Controlled
+e20449,n21403,n22200,IS_OWNER,Directly Controlled
+e20450,n21571,n22201,IS_OWNER,Directly Controlled
+e20451,n21468,n22202,IS_OWNER,Directly Controlled
+e20452,n21468,n22106,IS_OWNER,Directly Controlled
+e20453,n22204,n22203,IS_OWNER,Directly Controlled
+e20454,n22204,n22205,IS_OWNER,Directly Controlled
+e20455,n22204,n22206,IS_OWNER,Directly Controlled
+e20456,n22146,n22204,IS_OWNER,Directly Controlled
+e20457,n21403,n22207,IS_OWNER,Directly Controlled
+e20458,n21571,n22208,IS_OWNER,Directly Controlled
+e20459,n22210,n22209,IS_OWNER,Directly Controlled
+e20460,n22125,n22211,IS_OWNER,Directly Controlled
+e20461,n21571,n22212,IS_OWNER,Directly Controlled
+e20462,n21571,n22213,IS_OWNER,Directly Controlled
+e20463,n22125,n22214,IS_OWNER,Directly Controlled
+e20464,n21489,n22215,IS_OWNER,Directly Controlled
+e20465,n21520,n22216,IS_OWNER,Directly Controlled
+e20466,n21571,n22210,IS_OWNER,Directly Controlled
+e20467,n22210,n22217,IS_OWNER,Directly Controlled
+e20468,n22125,n22218,IS_OWNER,Directly Controlled
+e20469,n21468,n22219,IS_OWNER,Directly Controlled
+e20470,n21571,n22027,IS_OWNER,Directly Controlled
+e20471,n21468,n22220,IS_OWNER,Directly Controlled
+e20472,n22092,n22221,IS_OWNER,Directly Controlled
+e20473,n22125,n22222,IS_OWNER,Directly Controlled
+e20474,n22125,n22223,IS_OWNER,Directly Controlled
+e20475,n22039,n22224,IS_OWNER,Directly Controlled
+e20476,n21468,n22225,IS_OWNER,Directly Controlled
+e20477,n22226,n21836,IS_OWNER,Directly Controlled
+e20478,n22204,n22227,IS_OWNER,Directly Controlled
+e20479,n21468,n22228,IS_OWNER,Directly Controlled
+e20480,n21531,n22229,IS_OWNER,Directly Controlled
+e20481,n22231,n22230,IS_OWNER,Directly Controlled
+e20482,n21531,n21418,IS_OWNER,Directly Controlled
+e20483,n22233,n22232,IS_OWNER,Directly Controlled
+e20484,n21872,n22234,IS_OWNER,Directly Controlled
+e20485,n22233,n22235,IS_OWNER,Directly Controlled
+e20486,n22233,n22236,IS_OWNER,Directly Controlled
+e20487,n22238,n22237,IS_OWNER,Directly Controlled
+e20488,n22233,n22239,IS_OWNER,Directly Controlled
+e20489,n22233,n22240,IS_OWNER,Directly Controlled
+e20490,n22242,n22241,IS_OWNER,Directly Controlled
+e20491,n22244,n22243,IS_OWNER,Directly Controlled
+e20492,n22246,n22245,IS_OWNER,Directly Controlled
+e20493,n22248,n22247,IS_OWNER,Directly Controlled
+e20494,n21464,n22249,IS_OWNER,Directly Controlled
+e20495,n22169,n22075,IS_OWNER,Directly Controlled
+e20496,n21462,n22250,IS_OWNER,Directly Controlled
+e20497,n21462,n22251,IS_OWNER,Directly Controlled
+e20498,n21462,n22252,IS_OWNER,Directly Controlled
+e20499,n21462,n22253,IS_OWNER,Directly Controlled
+e20500,n22255,n22254,IS_OWNER,Directly Controlled
+e20501,n21795,n22077,IS_OWNER,Directly Controlled
+e20502,n22255,n22256,IS_OWNER,Directly Controlled
+e20503,n22255,n22257,IS_OWNER,Directly Controlled
+e20504,n22255,n22258,IS_OWNER,Directly Controlled
+e20505,n21464,n22259,IS_OWNER,Directly Controlled
+e20506,n21462,n22260,IS_OWNER,Directly Controlled
+e20507,n21462,n22261,IS_OWNER,Directly Controlled
+e20508,n21462,n22262,IS_OWNER,Directly Controlled
+e20509,n21864,n22263,IS_OWNER,Directly Controlled
+e20510,n21462,n22264,IS_OWNER,Directly Controlled
+e20511,n21462,n22265,IS_OWNER,Directly Controlled
+e20512,n22267,n22266,IS_OWNER,Directly Controlled
+e20513,n21795,n22268,IS_OWNER,Directly Controlled
+e20514,n22255,n22269,IS_OWNER,Directly Controlled
+e20515,n22255,n22270,IS_OWNER,Directly Controlled
+e20516,n22272,n22271,IS_OWNER,Directly Controlled
+e20517,n22255,n22273,IS_OWNER,Directly Controlled
+e20518,n21464,n22274,IS_OWNER,Directly Controlled
+e20519,n22272,n22275,IS_OWNER,Directly Controlled
+e20520,n22272,n22276,IS_OWNER,Directly Controlled
+e20521,n21462,n21894,IS_OWNER,Directly Controlled
+e20522,n21462,n21933,IS_OWNER,Directly Controlled
+e20523,n21462,n21944,IS_OWNER,Directly Controlled
+e20524,n21464,n22272,IS_OWNER,Directly Controlled
+e20525,n21484,n22277,IS_OWNER,Directly Controlled
+e20526,n21462,n22278,IS_OWNER,Directly Controlled
+e20527,n22255,n22279,IS_OWNER,Directly Controlled
+e20528,n22280,n22255,IS_OWNER,Directly Controlled
+e20529,n21795,n22281,IS_OWNER,Directly Controlled
+e20530,n21574,n22282,IS_OWNER,Directly Controlled
+e20531,n21484,n22283,IS_OWNER,Directly Controlled
+e20532,n21795,n22284,IS_OWNER,Directly Controlled
+e20533,n22255,n22285,IS_OWNER,Directly Controlled
+e20534,n21462,n22286,IS_OWNER,Directly Controlled
+e20535,n22077,n22287,IS_OWNER,Directly Controlled
+e20536,n22268,n22288,IS_OWNER,Directly Controlled
+e20537,n21462,n22289,IS_OWNER,Directly Controlled
+e20538,n22290,n22044,IS_OWNER,Directly Controlled
+e20539,n22255,n22291,IS_OWNER,Directly Controlled
+e20540,n22293,n22292,IS_OWNER,Directly Controlled
+e20541,n22295,n22294,IS_OWNER,Directly Controlled
+e20542,n21574,n22295,IS_OWNER,Directly Controlled
+e20543,n22297,n22296,IS_OWNER,Directly Controlled
+e20544,n22299,n22298,IS_OWNER,Directly Controlled
+e20545,n21458,n22300,IS_OWNER,Directly Controlled
+e20546,n21468,n22301,IS_OWNER,Directly Controlled
+e20547,n21795,n21399,IS_OWNER,Directly Controlled
+e20548,n21462,n22302,IS_OWNER,Directly Controlled
+e20549,n22304,n22303,IS_OWNER,Directly Controlled
+e20550,n22305,n22297,IS_OWNER,Directly Controlled
+e20551,n21462,n21500,IS_OWNER,Directly Controlled
+e20552,n22297,n22306,IS_OWNER,Directly Controlled
+e20553,n21462,n22307,IS_OWNER,Directly Controlled
+e20554,n21462,n21458,IS_OWNER,Directly Controlled
+e20555,n21795,n22308,IS_OWNER,Directly Controlled
+e20556,n22248,n22309,IS_OWNER,Directly Controlled
+e20557,n21464,n22310,IS_OWNER,Directly Controlled
+e20558,n22280,n22311,IS_OWNER,Directly Controlled
+e20559,n21462,n22312,IS_OWNER,Directly Controlled
+e20560,n21795,n22313,IS_OWNER,Directly Controlled
+e20561,n21864,n22314,IS_OWNER,Directly Controlled
+e20562,n21460,n22315,IS_OWNER,Directly Controlled
+e20563,n22248,n22316,IS_OWNER,Directly Controlled
+e20564,n21462,n22317,IS_OWNER,Directly Controlled
+e20565,n22248,n22318,IS_OWNER,Directly Controlled
+e20566,n21571,n22319,IS_OWNER,Directly Controlled
+e20567,n21473,n22035,IS_OWNER,Directly Controlled
+e20568,n21474,n22046,IS_OWNER,Directly Controlled
+e20569,n21473,n22033,IS_OWNER,Directly Controlled
+e20570,n21531,n21460,IS_OWNER,Directly Controlled
+e20571,n22321,n22320,IS_OWNER,Directly Controlled
+e20572,n22233,n22321,IS_OWNER,Directly Controlled
+e20573,n22323,n22322,IS_OWNER,Directly Controlled
+e20574,n22325,n22324,IS_OWNER,Directly Controlled
+e20575,n21574,n22326,IS_OWNER,Directly Controlled
+e20576,n21795,n22327,IS_OWNER,Directly Controlled
+e20577,n22231,n22328,IS_OWNER,Directly Controlled
+e20578,n21462,n22329,IS_OWNER,Directly Controlled
+e20579,n21531,n22330,IS_OWNER,Directly Controlled
+e20580,n22128,n21531,IS_OWNER,Directly Controlled
+e20581,n21795,n21462,IS_OWNER,Directly Controlled
+e20582,n22231,n22331,IS_OWNER,Directly Controlled
+e20583,n21795,n21864,IS_OWNER,Directly Controlled
+e20584,n21864,n21484,IS_OWNER,Directly Controlled
+e20585,n21484,n21814,IS_OWNER,Directly Controlled
+e20586,n22234,n21874,IS_OWNER,Directly Controlled
+e20587,n21484,n22332,IS_OWNER,Directly Controlled
+e20588,n21574,n22333,IS_OWNER,Directly Controlled
+e20589,n22280,n22334,IS_OWNER,Directly Controlled
+e20590,n21484,n22335,IS_OWNER,Directly Controlled
+e20591,n22264,n22336,IS_OWNER,Directly Controlled
+e20592,n21462,n22337,IS_OWNER,Directly Controlled
+e20593,n22339,n22338,IS_OWNER,Directly Controlled
+e20594,n22338,n22340,IS_OWNER,Directly Controlled
+e20595,n22329,n22339,IS_OWNER,Directly Controlled
+e20596,n21462,n22341,IS_OWNER,Directly Controlled
+e20597,n21468,n22342,IS_OWNER,Directly Controlled
+e20598,n21872,n22343,IS_OWNER,Directly Controlled
+e20599,n21574,n21872,IS_OWNER,Directly Controlled
+e20600,n21574,n22344,IS_OWNER,Directly Controlled
+e20601,n22264,n22031,IS_OWNER,Directly Controlled
+e20602,n21864,n21549,IS_OWNER,Directly Controlled
+e20603,n21462,n22345,IS_OWNER,Directly Controlled
+e20604,n21574,n21795,IS_OWNER,Directly Controlled
+e20605,n21462,n22346,IS_OWNER,Directly Controlled
+e20606,n21531,n21574,IS_OWNER,Directly Controlled
+e20607,n21462,n21627,IS_OWNER,Directly Controlled
+e20608,n21531,n22347,IS_OWNER,Directly Controlled
+e20609,n21403,n22348,IS_OWNER,Directly Controlled
+e20610,n22342,n22349,IS_OWNER,Directly Controlled
+e20611,n22231,n22350,IS_OWNER,Directly Controlled
+e20612,n21468,n22351,IS_OWNER,Directly Controlled
+e20613,n21531,n22352,IS_OWNER,Directly Controlled
+e20614,n22101,n22353,IS_OWNER,Directly Controlled
+e20615,n21462,n22299,IS_OWNER,Directly Controlled
+e20616,n21531,n22354,IS_OWNER,Directly Controlled
+e20617,n21464,n22355,IS_OWNER,Directly Controlled
+e20618,n21531,n22356,IS_OWNER,Directly Controlled
+e20619,n21462,n22357,IS_OWNER,Directly Controlled
+e20620,n21531,n22358,IS_OWNER,Directly Controlled
+e20621,n22280,n22359,IS_OWNER,Directly Controlled
+e20622,n22280,n22360,IS_OWNER,Directly Controlled
+e20623,n22362,n22361,IS_OWNER,Directly Controlled
+e20624,n21464,n22363,IS_OWNER,Directly Controlled
+e20625,n22280,n22364,IS_OWNER,Directly Controlled
+e20626,n22231,n22242,IS_OWNER,Directly Controlled
+e20627,n21462,n22365,IS_OWNER,Directly Controlled
+e20628,n21466,n22366,IS_OWNER,Directly Controlled
+e20629,n22231,n22246,IS_OWNER,Directly Controlled
+e20630,n22231,n22280,IS_OWNER,Directly Controlled
+e20631,n22231,n21464,IS_OWNER,Directly Controlled
+e20632,n21462,n22367,IS_OWNER,Directly Controlled
+e20633,n21462,n22368,IS_OWNER,Directly Controlled
+e20634,n21462,n22369,IS_OWNER,Directly Controlled
+e20635,n21531,n22370,IS_OWNER,Directly Controlled
+e20636,n22329,n22371,IS_OWNER,Directly Controlled
+e20637,n21574,n22372,IS_OWNER,Directly Controlled
+e20638,n21462,n22290,IS_OWNER,Directly Controlled
+e20639,n21574,n22373,IS_OWNER,Directly Controlled
+e20640,n22246,n22374,IS_OWNER,Directly Controlled
+e20641,n22375,n22042,IS_OWNER,Directly Controlled
+e20642,n21464,n22248,IS_OWNER,Directly Controlled
+e20643,n22329,n22233,IS_OWNER,Directly Controlled
+e20644,n21462,n22376,IS_OWNER,Directly Controlled
+e20645,n21795,n22377,IS_OWNER,Directly Controlled
+e20646,n22379,n22378,IS_OWNER,Directly Controlled
+e20647,n22031,n22375,IS_OWNER,Directly Controlled
+e20648,n22356,n22380,IS_OWNER,Directly Controlled
+e20649,n22339,n22381,IS_OWNER,Directly Controlled
+e20650,n22383,n22382,IS_OWNER,Directly Controlled
+e20651,n21460,n22384,IS_OWNER,Directly Controlled
+e20652,n22386,n22385,IS_OWNER,Directly Controlled
+e20653,n22233,n22387,IS_OWNER,Directly Controlled
+e20654,n22311,n22388,IS_OWNER,Directly Controlled
+e20655,n22380,n22389,IS_OWNER,Directly Controlled
+e20656,n22356,n21551,IS_OWNER,Directly Controlled
+e20657,n22233,n22390,IS_OWNER,Directly Controlled
+e20658,n22235,n22391,IS_OWNER,Directly Controlled
+e20659,n22393,n22392,IS_OWNER,Directly Controlled
+e20660,n22390,n22394,IS_OWNER,Directly Controlled
+e20661,n21571,n22395,IS_OWNER,Directly Controlled
+e20662,n22333,n22396,IS_OWNER,Directly Controlled
+e20663,n22333,n22397,IS_OWNER,Directly Controlled
+e20664,n22255,n22398,IS_OWNER,Directly Controlled
+e20665,n22305,n22399,IS_OWNER,Directly Controlled
+e20666,n21460,n22305,IS_OWNER,Directly Controlled
+e20667,n21531,n22400,IS_OWNER,Directly Controlled
+e20668,n21462,n22401,IS_OWNER,Directly Controlled
+e20669,n21464,n22402,IS_OWNER,Directly Controlled
+e20670,n22311,n22403,IS_OWNER,Directly Controlled
+e20671,n22256,n22404,IS_OWNER,Directly Controlled
+e20672,n21460,n22405,IS_OWNER,Directly Controlled
+e20673,n22328,n22406,IS_OWNER,Directly Controlled
+e20674,n22257,n22407,IS_OWNER,Directly Controlled
+e20675,n21795,n22408,IS_OWNER,Directly Controlled
+e20676,n21795,n22409,IS_OWNER,Directly Controlled
+e20677,n22233,n22410,IS_OWNER,Directly Controlled
+e20678,n22231,n21522,IS_OWNER,Directly Controlled
+e20679,n22374,n22411,IS_OWNER,Directly Controlled
+e20680,n22413,n22412,IS_OWNER,Directly Controlled
+e20681,n22373,n22414,IS_OWNER,Directly Controlled
+e20682,n21464,n22415,IS_OWNER,Directly Controlled
+e20683,n22231,n22416,IS_OWNER,Directly Controlled
+e20684,n22317,n22417,IS_OWNER,Directly Controlled
+e20685,n22233,n22418,IS_OWNER,Directly Controlled
+e20686,n22420,n22419,IS_OWNER,Directly Controlled
+e20687,n21462,n22421,IS_OWNER,Directly Controlled
+e20688,n22233,n22422,IS_OWNER,Directly Controlled
+e20689,n22424,n22423,IS_OWNER,Directly Controlled
+e20690,n22422,n22424,IS_OWNER,Directly Controlled
+e20691,n22233,n22425,IS_OWNER,Directly Controlled
+e20692,n22233,n22426,IS_OWNER,Directly Controlled
+e20693,n22244,n22427,IS_OWNER,Directly Controlled
+e20694,n21899,n22325,IS_OWNER,Directly Controlled
+e20695,n22325,n22428,IS_OWNER,Directly Controlled
+e20696,n22420,n22429,IS_OWNER,Directly Controlled
+e20697,n22430,n22420,IS_OWNER,Directly Controlled
+e20698,n22432,n22431,IS_OWNER,Directly Controlled
+e20699,n22434,n22433,IS_OWNER,Directly Controlled
+e20700,n22233,n22432,IS_OWNER,Directly Controlled
+e20701,n22436,n22435,IS_OWNER,Directly Controlled
+e20702,n22233,n22437,IS_OWNER,Directly Controlled
+e20703,n22433,n22438,IS_OWNER,Directly Controlled
+e20704,n22233,n22439,IS_OWNER,Directly Controlled
+e20705,n22233,n22440,IS_OWNER,Directly Controlled
+e20706,n22431,n22441,IS_OWNER,Directly Controlled
+e20707,n21864,n22442,IS_OWNER,Directly Controlled
+e20708,n22325,n22430,IS_OWNER,Directly Controlled
+e20709,n22444,n22443,IS_OWNER,Directly Controlled
+e20710,n22244,n22444,IS_OWNER,Directly Controlled
+e20711,n22446,n22445,IS_OWNER,Directly Controlled
+e20712,n22237,n22447,IS_OWNER,Directly Controlled
+e20713,n21462,n22448,IS_OWNER,Directly Controlled
+e20714,n21462,n22449,IS_OWNER,Directly Controlled
+e20715,n22339,n22450,IS_OWNER,Directly Controlled
+e20716,n22329,n22451,IS_OWNER,Directly Controlled
+e20717,n22101,n22452,IS_OWNER,Directly Controlled
+e20718,n22350,n22453,IS_OWNER,Directly Controlled
+e20719,n22372,n22454,IS_OWNER,Directly Controlled
+e20720,n21460,n22455,IS_OWNER,Directly Controlled
+e20721,n22273,n22456,IS_OWNER,Directly Controlled
+e20722,n22383,n22413,IS_OWNER,Directly Controlled
+e20723,n21531,n22383,IS_OWNER,Directly Controlled
+e20724,n22360,n22457,IS_OWNER,Directly Controlled
+e20725,n22325,n22323,IS_OWNER,Directly Controlled
+e20726,n22233,n22458,IS_OWNER,Directly Controlled
+e20727,n22460,n22459,IS_OWNER,Directly Controlled
+e20728,n22458,n22460,IS_OWNER,Directly Controlled
+e20729,n22374,n22461,IS_OWNER,Directly Controlled
+e20730,n22244,n22462,IS_OWNER,Directly Controlled
+e20731,n22297,n22463,IS_OWNER,Directly Controlled
+e20732,n22233,n22464,IS_OWNER,Directly Controlled
+e20733,n21574,n22465,IS_OWNER,Directly Controlled
+e20734,n22374,n22466,IS_OWNER,Directly Controlled
+e20735,n22377,n22467,IS_OWNER,Directly Controlled
+e20736,n22383,n22468,IS_OWNER,Directly Controlled
+e20737,n22311,n22469,IS_OWNER,Directly Controlled
+e20738,n22380,n22470,IS_OWNER,Directly Controlled
+e20739,n22272,n22471,IS_OWNER,Directly Controlled
+e20740,n22233,n22472,IS_OWNER,Directly Controlled
+e20741,n22244,n22436,IS_OWNER,Directly Controlled
+e20742,n22233,n22473,IS_OWNER,Directly Controlled
+e20743,n22244,n22474,IS_OWNER,Directly Controlled
+e20744,n22336,n21470,IS_OWNER,Directly Controlled
+e20745,n21470,n21496,IS_OWNER,Directly Controlled
+e20746,n21460,n22475,IS_OWNER,Directly Controlled
+e20747,n21462,n22476,IS_OWNER,Directly Controlled
+e20748,n21798,n22477,IS_OWNER,Directly Controlled
+e20749,n21894,n22478,IS_OWNER,Directly Controlled
+e20750,n22479,n22446,IS_OWNER,Directly Controlled
+e20751,n22246,n22480,IS_OWNER,Directly Controlled
+e20752,n21460,n22481,IS_OWNER,Directly Controlled
+e20753,n21552,n22482,IS_OWNER,Directly Controlled
+e20754,n22383,n22483,IS_OWNER,Directly Controlled
+e20755,n21795,n22484,IS_OWNER,Directly Controlled
+e20756,n21462,n22485,IS_OWNER,Directly Controlled
+e20757,n21460,n22486,IS_OWNER,Directly Controlled
+e20758,n21460,n22487,IS_OWNER,Directly Controlled
+e20759,n22233,n22488,IS_OWNER,Directly Controlled
+e20760,n22490,n22489,IS_OWNER,Directly Controlled
+e20761,n21460,n22491,IS_OWNER,Directly Controlled
+e20762,n22233,n22492,IS_OWNER,Directly Controlled
+e20763,n22492,n22493,IS_OWNER,Directly Controlled
+e20764,n22233,n22494,IS_OWNER,Directly Controlled
+e20765,n22436,n22495,IS_OWNER,Directly Controlled
+e20766,n21460,n22496,IS_OWNER,Directly Controlled
+e20767,n22498,n22497,IS_OWNER,Directly Controlled
+e20768,n22233,n22499,IS_OWNER,Directly Controlled
+e20769,n21464,n22500,IS_OWNER,Directly Controlled
+e20770,n22339,n22501,IS_OWNER,Directly Controlled
+e20771,n22339,n22502,IS_OWNER,Directly Controlled
+e20772,n22504,n22503,IS_OWNER,Directly Controlled
+e20773,n22280,n22504,IS_OWNER,Directly Controlled
+e20774,n22504,n22505,IS_OWNER,Directly Controlled
+e20775,n22505,n22506,IS_OWNER,Directly Controlled
+e20776,n22231,n22507,IS_OWNER,Directly Controlled
+e20777,n21574,n22508,IS_OWNER,Directly Controlled
+e20778,n21531,n22509,IS_OWNER,Directly Controlled
+e20779,n22233,n22510,IS_OWNER,Directly Controlled
+e20780,n21460,n22511,IS_OWNER,Directly Controlled
+e20781,n21574,n22512,IS_OWNER,Directly Controlled
+e20782,n21795,n22231,IS_OWNER,Directly Controlled
+e20783,n22233,n22490,IS_OWNER,Directly Controlled
+e20784,n22514,n22513,IS_OWNER,Directly Controlled
+e20785,n21464,n22379,IS_OWNER,Directly Controlled
+e20786,n22244,n22515,IS_OWNER,Directly Controlled
+e20787,n22233,n22516,IS_OWNER,Directly Controlled
+e20788,n22291,n22517,IS_OWNER,Directly Controlled
+e20789,n22417,n22518,IS_OWNER,Directly Controlled
+e20790,n21462,n21466,IS_OWNER,Directly Controlled
+e20791,n22360,n22519,IS_OWNER,Directly Controlled
+e20792,n21795,n22520,IS_OWNER,Directly Controlled
+e20793,n22522,n22521,IS_OWNER,Directly Controlled
+e20794,n22523,n22522,IS_OWNER,Directly Controlled
+e20795,n21462,n22523,IS_OWNER,Directly Controlled
+e20796,n22280,n22524,IS_OWNER,Directly Controlled
+e20797,n22523,n22525,IS_OWNER,Directly Controlled
+e20798,n22362,n22526,IS_OWNER,Directly Controlled
+e20799,n22518,n22527,IS_OWNER,Directly Controlled
+e20800,n22518,n22528,IS_OWNER,Directly Controlled
+e20801,n22527,n22529,IS_OWNER,Directly Controlled
+e20802,n22294,n22386,IS_OWNER,Directly Controlled
+e20803,n22248,n22530,IS_OWNER,Directly Controlled
+e20804,n21484,n22531,IS_OWNER,Directly Controlled
+e20805,n21484,n22532,IS_OWNER,Directly Controlled
+e20806,n21464,n22533,IS_OWNER,Directly Controlled
+e20807,n22329,n22534,IS_OWNER,Directly Controlled
+e20808,n22383,n22535,IS_OWNER,Directly Controlled
+e20809,n21464,n22536,IS_OWNER,Directly Controlled
+e20810,n22231,n22537,IS_OWNER,Directly Controlled
+e20811,n21531,n22538,IS_OWNER,Directly Controlled
+e20812,n21470,n22539,IS_OWNER,Directly Controlled
+e20813,n22039,n22540,IS_OWNER,Directly Controlled
+e20814,n21462,n22362,IS_OWNER,Directly Controlled
+e20815,n21385,n22541,IS_OWNER,Directly Controlled
+e20816,n21403,n22542,IS_OWNER,Directly Controlled
+e20817,n21520,n22543,IS_OWNER,Directly Controlled
+e20818,n21403,n22544,IS_OWNER,Directly Controlled
+e20819,n22231,n22545,IS_OWNER,Directly Controlled
+e20820,n21470,n21383,IS_OWNER,Directly Controlled
+e20821,n21470,n22546,IS_OWNER,Directly Controlled
+e20822,n21494,n21387,IS_OWNER,Directly Controlled
+e20823,n21403,n21994,IS_OWNER,Directly Controlled
+e20824,n22144,n22547,IS_OWNER,Directly Controlled
+e20825,n21889,n22548,IS_OWNER,Directly Controlled
+e20826,n21462,n22549,IS_OWNER,Directly Controlled
+e20827,n21462,n22550,IS_OWNER,Directly Controlled
+e20828,n21462,n22551,IS_OWNER,Directly Controlled
+e20829,n21512,n22552,IS_OWNER,Directly Controlled
+e20830,n21462,n21633,IS_OWNER,Directly Controlled
+e20831,n21560,n22553,IS_OWNER,Directly Controlled
+e20832,n21489,n22554,IS_OWNER,Directly Controlled
+e20833,n21470,n21494,IS_OWNER,Directly Controlled
+e20834,n21470,n22555,IS_OWNER,Directly Controlled
+e20835,n22555,n22556,IS_OWNER,Directly Controlled
+e20836,n21866,n22557,IS_OWNER,Directly Controlled
+e20837,n21385,n22558,IS_OWNER,Directly Controlled
+e20838,n21866,n22559,IS_OWNER,Directly Controlled
+e20839,n21380,n22560,HAS_JURISDICTION,
+e20840,n21382,n22561,HAS_JURISDICTION,
+e20841,n21384,n22561,HAS_JURISDICTION,
+e20842,n21386,n22561,HAS_JURISDICTION,
+e20843,n21388,n22561,HAS_JURISDICTION,
+e20844,n21389,n22561,HAS_JURISDICTION,
+e20845,n21391,n22562,HAS_JURISDICTION,
+e20846,n21393,n22562,HAS_JURISDICTION,
+e20847,n21394,n22562,HAS_JURISDICTION,
+e20848,n21396,n22562,HAS_JURISDICTION,
+e20849,n21397,n22562,HAS_JURISDICTION,
+e20850,n21398,n22562,HAS_JURISDICTION,
+e20851,n21400,n22562,HAS_JURISDICTION,
+e20852,n21402,n22562,HAS_JURISDICTION,
+e20853,n21404,n22562,HAS_JURISDICTION,
+e20854,n21405,n22562,HAS_JURISDICTION,
+e20855,n21406,n22562,HAS_JURISDICTION,
+e20856,n21407,n22562,HAS_JURISDICTION,
+e20857,n21395,n22562,HAS_JURISDICTION,
+e20858,n21408,n22562,HAS_JURISDICTION,
+e20859,n21409,n22562,HAS_JURISDICTION,
+e20860,n21410,n22562,HAS_JURISDICTION,
+e20861,n21411,n22562,HAS_JURISDICTION,
+e20862,n21412,n22562,HAS_JURISDICTION,
+e20863,n21413,n22562,HAS_JURISDICTION,
+e20864,n21414,n22562,HAS_JURISDICTION,
+e20865,n21401,n22562,HAS_JURISDICTION,
+e20866,n21415,n22562,HAS_JURISDICTION,
+e20867,n21416,n22562,HAS_JURISDICTION,
+e20868,n21417,n22562,HAS_JURISDICTION,
+e20869,n21419,n22562,HAS_JURISDICTION,
+e20870,n21420,n22562,HAS_JURISDICTION,
+e20871,n21421,n22562,HAS_JURISDICTION,
+e20872,n21422,n22562,HAS_JURISDICTION,
+e20873,n21423,n22562,HAS_JURISDICTION,
+e20874,n21392,n22562,HAS_JURISDICTION,
+e20875,n21424,n22562,HAS_JURISDICTION,
+e20876,n21425,n22562,HAS_JURISDICTION,
+e20877,n21426,n22562,HAS_JURISDICTION,
+e20878,n21428,n22562,HAS_JURISDICTION,
+e20879,n21429,n22562,HAS_JURISDICTION,
+e20880,n21427,n22562,HAS_JURISDICTION,
+e20881,n21430,n22562,HAS_JURISDICTION,
+e20882,n21431,n22562,HAS_JURISDICTION,
+e20883,n21433,n22562,HAS_JURISDICTION,
+e20884,n21434,n22562,HAS_JURISDICTION,
+e20885,n21435,n22562,HAS_JURISDICTION,
+e20886,n21436,n22562,HAS_JURISDICTION,
+e20887,n21437,n22562,HAS_JURISDICTION,
+e20888,n21438,n22562,HAS_JURISDICTION,
+e20889,n21439,n22562,HAS_JURISDICTION,
+e20890,n21432,n22562,HAS_JURISDICTION,
+e20891,n21440,n22562,HAS_JURISDICTION,
+e20892,n21441,n22562,HAS_JURISDICTION,
+e20893,n21442,n22563,HAS_JURISDICTION,
+e20894,n21443,n22564,HAS_JURISDICTION,
+e20895,n21445,n22564,HAS_JURISDICTION,
+e20896,n21446,n22564,HAS_JURISDICTION,
+e20897,n21447,n22564,HAS_JURISDICTION,
+e20898,n21448,n22564,HAS_JURISDICTION,
+e20899,n21449,n22564,HAS_JURISDICTION,
+e20900,n21451,n22564,HAS_JURISDICTION,
+e20901,n21452,n22564,HAS_JURISDICTION,
+e20902,n21453,n22564,HAS_JURISDICTION,
+e20903,n21454,n22564,HAS_JURISDICTION,
+e20904,n21456,n22565,HAS_JURISDICTION,
+e20905,n21457,n22566,HAS_JURISDICTION,
+e20906,n21459,n22566,HAS_JURISDICTION,
+e20907,n21461,n22566,HAS_JURISDICTION,
+e20908,n21463,n22566,HAS_JURISDICTION,
+e20909,n21465,n22566,HAS_JURISDICTION,
+e20910,n21467,n22566,HAS_JURISDICTION,
+e20911,n21469,n22566,HAS_JURISDICTION,
+e20912,n21471,n22567,HAS_JURISDICTION,
+e20913,n21473,n22568,HAS_JURISDICTION,
+e20914,n21474,n22568,HAS_JURISDICTION,
+e20915,n21476,n22569,HAS_JURISDICTION,
+e20916,n21478,n22569,HAS_JURISDICTION,
+e20917,n21480,n22569,HAS_JURISDICTION,
+e20918,n21482,n22569,HAS_JURISDICTION,
+e20919,n21483,n22569,HAS_JURISDICTION,
+e20920,n21481,n22569,HAS_JURISDICTION,
+e20921,n21485,n22569,HAS_JURISDICTION,
+e20922,n21486,n22569,HAS_JURISDICTION,
+e20923,n21487,n22569,HAS_JURISDICTION,
+e20924,n21488,n22570,HAS_JURISDICTION,
+e20925,n21490,n22570,HAS_JURISDICTION,
+e20926,n21491,n22570,HAS_JURISDICTION,
+e20927,n21492,n22570,HAS_JURISDICTION,
+e20928,n21493,n22571,HAS_JURISDICTION,
+e20929,n21495,n22571,HAS_JURISDICTION,
+e20930,n21497,n22571,HAS_JURISDICTION,
+e20931,n21498,n22572,HAS_JURISDICTION,
+e20932,n21499,n22572,HAS_JURISDICTION,
+e20933,n21501,n22572,HAS_JURISDICTION,
+e20934,n21502,n22572,HAS_JURISDICTION,
+e20935,n21504,n22572,HAS_JURISDICTION,
+e20936,n21506,n22572,HAS_JURISDICTION,
+e20937,n21507,n22572,HAS_JURISDICTION,
+e20938,n21508,n22572,HAS_JURISDICTION,
+e20939,n21509,n22572,HAS_JURISDICTION,
+e20940,n21511,n22572,HAS_JURISDICTION,
+e20941,n21513,n22572,HAS_JURISDICTION,
+e20942,n21514,n22572,HAS_JURISDICTION,
+e20943,n21515,n22572,HAS_JURISDICTION,
+e20944,n21516,n22572,HAS_JURISDICTION,
+e20945,n21505,n22572,HAS_JURISDICTION,
+e20946,n21517,n22572,HAS_JURISDICTION,
+e20947,n21518,n22572,HAS_JURISDICTION,
+e20948,n21519,n22572,HAS_JURISDICTION,
+e20949,n21521,n22572,HAS_JURISDICTION,
+e20950,n21523,n22572,HAS_JURISDICTION,
+e20951,n21524,n22572,HAS_JURISDICTION,
+e20952,n21525,n22573,HAS_JURISDICTION,
+e20953,n21527,n22574,HAS_JURISDICTION,
+e20954,n21529,n22574,HAS_JURISDICTION,
+e20955,n21530,n22574,HAS_JURISDICTION,
+e20956,n21532,n22574,HAS_JURISDICTION,
+e20957,n21533,n22574,HAS_JURISDICTION,
+e20958,n21528,n22574,HAS_JURISDICTION,
+e20959,n21535,n22574,HAS_JURISDICTION,
+e20960,n21536,n22574,HAS_JURISDICTION,
+e20961,n21537,n22574,HAS_JURISDICTION,
+e20962,n21538,n22574,HAS_JURISDICTION,
+e20963,n21539,n22574,HAS_JURISDICTION,
+e20964,n21540,n22574,HAS_JURISDICTION,
+e20965,n21541,n22574,HAS_JURISDICTION,
+e20966,n21542,n22574,HAS_JURISDICTION,
+e20967,n21543,n22574,HAS_JURISDICTION,
+e20968,n21544,n22574,HAS_JURISDICTION,
+e20969,n21545,n22574,HAS_JURISDICTION,
+e20970,n21546,n22574,HAS_JURISDICTION,
+e20971,n21547,n22574,HAS_JURISDICTION,
+e20972,n21548,n22574,HAS_JURISDICTION,
+e20973,n21550,n22574,HAS_JURISDICTION,
+e20974,n21552,n22574,HAS_JURISDICTION,
+e20975,n21553,n22574,HAS_JURISDICTION,
+e20976,n21554,n22574,HAS_JURISDICTION,
+e20977,n21555,n22574,HAS_JURISDICTION,
+e20978,n21556,n22575,HAS_JURISDICTION,
+e20979,n21557,n22576,HAS_JURISDICTION,
+e20980,n21559,n22576,HAS_JURISDICTION,
+e20981,n21561,n22576,HAS_JURISDICTION,
+e20982,n21563,n22576,HAS_JURISDICTION,
+e20983,n21564,n22576,HAS_JURISDICTION,
+e20984,n21566,n22576,HAS_JURISDICTION,
+e20985,n21567,n22576,HAS_JURISDICTION,
+e20986,n21568,n22576,HAS_JURISDICTION,
+e20987,n21569,n22577,HAS_JURISDICTION,
+e20988,n21570,n22577,HAS_JURISDICTION,
+e20989,n21572,n22577,HAS_JURISDICTION,
+e20990,n21573,n22577,HAS_JURISDICTION,
+e20991,n21575,n22577,HAS_JURISDICTION,
+e20992,n21576,n22577,HAS_JURISDICTION,
+e20993,n21577,n22578,HAS_JURISDICTION,
+e20994,n21578,n22578,HAS_JURISDICTION,
+e20995,n21579,n22578,HAS_JURISDICTION,
+e20996,n21580,n22578,HAS_JURISDICTION,
+e20997,n21582,n22578,HAS_JURISDICTION,
+e20998,n21583,n22578,HAS_JURISDICTION,
+e20999,n21584,n22578,HAS_JURISDICTION,
+e21000,n21585,n22578,HAS_JURISDICTION,
+e21001,n21586,n22578,HAS_JURISDICTION,
+e21002,n21587,n22578,HAS_JURISDICTION,
+e21003,n21588,n22578,HAS_JURISDICTION,
+e21004,n21589,n22578,HAS_JURISDICTION,
+e21005,n21590,n22578,HAS_JURISDICTION,
+e21006,n21591,n22578,HAS_JURISDICTION,
+e21007,n21593,n22578,HAS_JURISDICTION,
+e21008,n21594,n22578,HAS_JURISDICTION,
+e21009,n21595,n22578,HAS_JURISDICTION,
+e21010,n21596,n22578,HAS_JURISDICTION,
+e21011,n21597,n22578,HAS_JURISDICTION,
+e21012,n21598,n22578,HAS_JURISDICTION,
+e21013,n21599,n22578,HAS_JURISDICTION,
+e21014,n21601,n22578,HAS_JURISDICTION,
+e21015,n21602,n22578,HAS_JURISDICTION,
+e21016,n21604,n22578,HAS_JURISDICTION,
+e21017,n21606,n22578,HAS_JURISDICTION,
+e21018,n21607,n22578,HAS_JURISDICTION,
+e21019,n21608,n22578,HAS_JURISDICTION,
+e21020,n21609,n22579,HAS_JURISDICTION,
+e21021,n21610,n22580,HAS_JURISDICTION,
+e21022,n21611,n22581,HAS_JURISDICTION,
+e21023,n21613,n22582,HAS_JURISDICTION,
+e21024,n21614,n22583,HAS_JURISDICTION,
+e21025,n21615,n22583,HAS_JURISDICTION,
+e21026,n21616,n22583,HAS_JURISDICTION,
+e21027,n21617,n22583,HAS_JURISDICTION,
+e21028,n21618,n22583,HAS_JURISDICTION,
+e21029,n21619,n22583,HAS_JURISDICTION,
+e21030,n21621,n22584,HAS_JURISDICTION,
+e21031,n21623,n22585,HAS_JURISDICTION,
+e21032,n21624,n22585,HAS_JURISDICTION,
+e21033,n21626,n22585,HAS_JURISDICTION,
+e21034,n21628,n22585,HAS_JURISDICTION,
+e21035,n21629,n22585,HAS_JURISDICTION,
+e21036,n21630,n22585,HAS_JURISDICTION,
+e21037,n21631,n22585,HAS_JURISDICTION,
+e21038,n21632,n22585,HAS_JURISDICTION,
+e21039,n21634,n22585,HAS_JURISDICTION,
+e21040,n21635,n22585,HAS_JURISDICTION,
+e21041,n21637,n22585,HAS_JURISDICTION,
+e21042,n21638,n22585,HAS_JURISDICTION,
+e21043,n21639,n22585,HAS_JURISDICTION,
+e21044,n21641,n22585,HAS_JURISDICTION,
+e21045,n21642,n22585,HAS_JURISDICTION,
+e21046,n21643,n22585,HAS_JURISDICTION,
+e21047,n21644,n22585,HAS_JURISDICTION,
+e21048,n21645,n22586,HAS_JURISDICTION,
+e21049,n21646,n22587,HAS_JURISDICTION,
+e21050,n21647,n22588,HAS_JURISDICTION,
+e21051,n21649,n22588,HAS_JURISDICTION,
+e21052,n21650,n22588,HAS_JURISDICTION,
+e21053,n21651,n22588,HAS_JURISDICTION,
+e21054,n21652,n22588,HAS_JURISDICTION,
+e21055,n21653,n22588,HAS_JURISDICTION,
+e21056,n21654,n22588,HAS_JURISDICTION,
+e21057,n21655,n22588,HAS_JURISDICTION,
+e21058,n21657,n22588,HAS_JURISDICTION,
+e21059,n21658,n22588,HAS_JURISDICTION,
+e21060,n21659,n22588,HAS_JURISDICTION,
+e21061,n21660,n22588,HAS_JURISDICTION,
+e21062,n21661,n22588,HAS_JURISDICTION,
+e21063,n21662,n22588,HAS_JURISDICTION,
+e21064,n21663,n22588,HAS_JURISDICTION,
+e21065,n21664,n22588,HAS_JURISDICTION,
+e21066,n21665,n22588,HAS_JURISDICTION,
+e21067,n21666,n22588,HAS_JURISDICTION,
+e21068,n21667,n22588,HAS_JURISDICTION,
+e21069,n21668,n22588,HAS_JURISDICTION,
+e21070,n21670,n22588,HAS_JURISDICTION,
+e21071,n21671,n22588,HAS_JURISDICTION,
+e21072,n21672,n22588,HAS_JURISDICTION,
+e21073,n21673,n22588,HAS_JURISDICTION,
+e21074,n21674,n22588,HAS_JURISDICTION,
+e21075,n21675,n22588,HAS_JURISDICTION,
+e21076,n21676,n22588,HAS_JURISDICTION,
+e21077,n21677,n22588,HAS_JURISDICTION,
+e21078,n21678,n22588,HAS_JURISDICTION,
+e21079,n21679,n22588,HAS_JURISDICTION,
+e21080,n21680,n22588,HAS_JURISDICTION,
+e21081,n21681,n22588,HAS_JURISDICTION,
+e21082,n21682,n22588,HAS_JURISDICTION,
+e21083,n21683,n22588,HAS_JURISDICTION,
+e21084,n21684,n22588,HAS_JURISDICTION,
+e21085,n21685,n22588,HAS_JURISDICTION,
+e21086,n21686,n22588,HAS_JURISDICTION,
+e21087,n21687,n22588,HAS_JURISDICTION,
+e21088,n21656,n22588,HAS_JURISDICTION,
+e21089,n21688,n22589,HAS_JURISDICTION,
+e21090,n21689,n22590,HAS_JURISDICTION,
+e21091,n21690,n22591,HAS_JURISDICTION,
+e21092,n21691,n22591,HAS_JURISDICTION,
+e21093,n21692,n22591,HAS_JURISDICTION,
+e21094,n21693,n22591,HAS_JURISDICTION,
+e21095,n21694,n22591,HAS_JURISDICTION,
+e21096,n21695,n22591,HAS_JURISDICTION,
+e21097,n21696,n22591,HAS_JURISDICTION,
+e21098,n21697,n22591,HAS_JURISDICTION,
+e21099,n21698,n22591,HAS_JURISDICTION,
+e21100,n21699,n22591,HAS_JURISDICTION,
+e21101,n21700,n22591,HAS_JURISDICTION,
+e21102,n21701,n22591,HAS_JURISDICTION,
+e21103,n21702,n22591,HAS_JURISDICTION,
+e21104,n21703,n22591,HAS_JURISDICTION,
+e21105,n21705,n22591,HAS_JURISDICTION,
+e21106,n21707,n22591,HAS_JURISDICTION,
+e21107,n21708,n22591,HAS_JURISDICTION,
+e21108,n21709,n22591,HAS_JURISDICTION,
+e21109,n21706,n22591,HAS_JURISDICTION,
+e21110,n21710,n22591,HAS_JURISDICTION,
+e21111,n21711,n22591,HAS_JURISDICTION,
+e21112,n21712,n22591,HAS_JURISDICTION,
+e21113,n21713,n22591,HAS_JURISDICTION,
+e21114,n21714,n22591,HAS_JURISDICTION,
+e21115,n21715,n22591,HAS_JURISDICTION,
+e21116,n21716,n22591,HAS_JURISDICTION,
+e21117,n21717,n22591,HAS_JURISDICTION,
+e21118,n21718,n22591,HAS_JURISDICTION,
+e21119,n21719,n22591,HAS_JURISDICTION,
+e21120,n21720,n22591,HAS_JURISDICTION,
+e21121,n21721,n22591,HAS_JURISDICTION,
+e21122,n21722,n22591,HAS_JURISDICTION,
+e21123,n21723,n22591,HAS_JURISDICTION,
+e21124,n21724,n22591,HAS_JURISDICTION,
+e21125,n21725,n22591,HAS_JURISDICTION,
+e21126,n21726,n22591,HAS_JURISDICTION,
+e21127,n21727,n22591,HAS_JURISDICTION,
+e21128,n21728,n22591,HAS_JURISDICTION,
+e21129,n21729,n22591,HAS_JURISDICTION,
+e21130,n21730,n22591,HAS_JURISDICTION,
+e21131,n21731,n22591,HAS_JURISDICTION,
+e21132,n21732,n22591,HAS_JURISDICTION,
+e21133,n21733,n22591,HAS_JURISDICTION,
+e21134,n21734,n22591,HAS_JURISDICTION,
+e21135,n21735,n22591,HAS_JURISDICTION,
+e21136,n21736,n22591,HAS_JURISDICTION,
+e21137,n21737,n22591,HAS_JURISDICTION,
+e21138,n21738,n22591,HAS_JURISDICTION,
+e21139,n21739,n22591,HAS_JURISDICTION,
+e21140,n21740,n22591,HAS_JURISDICTION,
+e21141,n21741,n22591,HAS_JURISDICTION,
+e21142,n21742,n22591,HAS_JURISDICTION,
+e21143,n21744,n22591,HAS_JURISDICTION,
+e21144,n21745,n22591,HAS_JURISDICTION,
+e21145,n21746,n22591,HAS_JURISDICTION,
+e21146,n21747,n22591,HAS_JURISDICTION,
+e21147,n21748,n22591,HAS_JURISDICTION,
+e21148,n21749,n22591,HAS_JURISDICTION,
+e21149,n21750,n22591,HAS_JURISDICTION,
+e21150,n21751,n22591,HAS_JURISDICTION,
+e21151,n21752,n22591,HAS_JURISDICTION,
+e21152,n21753,n22591,HAS_JURISDICTION,
+e21153,n21743,n22591,HAS_JURISDICTION,
+e21154,n21754,n22591,HAS_JURISDICTION,
+e21155,n21755,n22591,HAS_JURISDICTION,
+e21156,n21756,n22591,HAS_JURISDICTION,
+e21157,n21450,n22591,HAS_JURISDICTION,
+e21158,n21757,n22591,HAS_JURISDICTION,
+e21159,n21758,n22591,HAS_JURISDICTION,
+e21160,n21759,n22591,HAS_JURISDICTION,
+e21161,n21760,n22591,HAS_JURISDICTION,
+e21162,n21455,n22591,HAS_JURISDICTION,
+e21163,n21761,n22591,HAS_JURISDICTION,
+e21164,n21762,n22591,HAS_JURISDICTION,
+e21165,n21763,n22591,HAS_JURISDICTION,
+e21166,n21764,n22591,HAS_JURISDICTION,
+e21167,n21765,n22591,HAS_JURISDICTION,
+e21168,n21766,n22591,HAS_JURISDICTION,
+e21169,n21767,n22591,HAS_JURISDICTION,
+e21170,n21768,n22591,HAS_JURISDICTION,
+e21171,n21769,n22591,HAS_JURISDICTION,
+e21172,n21770,n22591,HAS_JURISDICTION,
+e21173,n21771,n22591,HAS_JURISDICTION,
+e21174,n21772,n22591,HAS_JURISDICTION,
+e21175,n21773,n22591,HAS_JURISDICTION,
+e21176,n21774,n22591,HAS_JURISDICTION,
+e21177,n21775,n22591,HAS_JURISDICTION,
+e21178,n21776,n22591,HAS_JURISDICTION,
+e21179,n21777,n22591,HAS_JURISDICTION,
+e21180,n21778,n22591,HAS_JURISDICTION,
+e21181,n21779,n22591,HAS_JURISDICTION,
+e21182,n21780,n22591,HAS_JURISDICTION,
+e21183,n21781,n22591,HAS_JURISDICTION,
+e21184,n21526,n22591,HAS_JURISDICTION,
+e21185,n21782,n22591,HAS_JURISDICTION,
+e21186,n21783,n22591,HAS_JURISDICTION,
+e21187,n21784,n22591,HAS_JURISDICTION,
+e21188,n21785,n22592,HAS_JURISDICTION,
+e21189,n21786,n22593,HAS_JURISDICTION,
+e21190,n21787,n22594,HAS_JURISDICTION,
+e21191,n21789,n22594,HAS_JURISDICTION,
+e21192,n21791,n22594,HAS_JURISDICTION,
+e21193,n21792,n22594,HAS_JURISDICTION,
+e21194,n21793,n22594,HAS_JURISDICTION,
+e21195,n21794,n22595,HAS_JURISDICTION,
+e21196,n21796,n22595,HAS_JURISDICTION,
+e21197,n21797,n22595,HAS_JURISDICTION,
+e21198,n21799,n22596,HAS_JURISDICTION,
+e21199,n21800,n22596,HAS_JURISDICTION,
+e21200,n21801,n22596,HAS_JURISDICTION,
+e21201,n21802,n22596,HAS_JURISDICTION,
+e21202,n21804,n22596,HAS_JURISDICTION,
+e21203,n21805,n22597,HAS_JURISDICTION,
+e21204,n21806,n22597,HAS_JURISDICTION,
+e21205,n21807,n22598,HAS_JURISDICTION,
+e21206,n21809,n22598,HAS_JURISDICTION,
+e21207,n21810,n22598,HAS_JURISDICTION,
+e21208,n21811,n22598,HAS_JURISDICTION,
+e21209,n21812,n22598,HAS_JURISDICTION,
+e21210,n21813,n22599,HAS_JURISDICTION,
+e21211,n21815,n22599,HAS_JURISDICTION,
+e21212,n21816,n22599,HAS_JURISDICTION,
+e21213,n21817,n22599,HAS_JURISDICTION,
+e21214,n21818,n22600,HAS_JURISDICTION,
+e21215,n21819,n22600,HAS_JURISDICTION,
+e21216,n21821,n22601,HAS_JURISDICTION,
+e21217,n21822,n22602,HAS_JURISDICTION,
+e21218,n21823,n22602,HAS_JURISDICTION,
+e21219,n21824,n22602,HAS_JURISDICTION,
+e21220,n21825,n22602,HAS_JURISDICTION,
+e21221,n21826,n22602,HAS_JURISDICTION,
+e21222,n21827,n22602,HAS_JURISDICTION,
+e21223,n21828,n22602,HAS_JURISDICTION,
+e21224,n21829,n22603,HAS_JURISDICTION,
+e21225,n21830,n22604,HAS_JURISDICTION,
+e21226,n21831,n22604,HAS_JURISDICTION,
+e21227,n21832,n22604,HAS_JURISDICTION,
+e21228,n21833,n22604,HAS_JURISDICTION,
+e21229,n21834,n22604,HAS_JURISDICTION,
+e21230,n21835,n22605,HAS_JURISDICTION,
+e21231,n21837,n22605,HAS_JURISDICTION,
+e21232,n21838,n22606,HAS_JURISDICTION,
+e21233,n21839,n22607,HAS_JURISDICTION,
+e21234,n21841,n22607,HAS_JURISDICTION,
+e21235,n21842,n22607,HAS_JURISDICTION,
+e21236,n21843,n22608,HAS_JURISDICTION,
+e21237,n21844,n22609,HAS_JURISDICTION,
+e21238,n21845,n22610,HAS_JURISDICTION,
+e21239,n21846,n22610,HAS_JURISDICTION,
+e21240,n21847,n22610,HAS_JURISDICTION,
+e21241,n21848,n22610,HAS_JURISDICTION,
+e21242,n21477,n22610,HAS_JURISDICTION,
+e21243,n21849,n22610,HAS_JURISDICTION,
+e21244,n21850,n22611,HAS_JURISDICTION,
+e21245,n21851,n22611,HAS_JURISDICTION,
+e21246,n21852,n22611,HAS_JURISDICTION,
+e21247,n21853,n22611,HAS_JURISDICTION,
+e21248,n21854,n22611,HAS_JURISDICTION,
+e21249,n21855,n22611,HAS_JURISDICTION,
+e21250,n21856,n22611,HAS_JURISDICTION,
+e21251,n21857,n22612,HAS_JURISDICTION,
+e21252,n21858,n22613,HAS_JURISDICTION,
+e21253,n21859,n22614,HAS_JURISDICTION,
+e21254,n21860,n22615,HAS_JURISDICTION,
+e21255,n21861,n22615,HAS_JURISDICTION,
+e21256,n21862,n22615,HAS_JURISDICTION,
+e21257,n21863,n22615,HAS_JURISDICTION,
+e21258,n21865,n22616,HAS_JURISDICTION,
+e21259,n21867,n22617,HAS_JURISDICTION,
+e21260,n21868,n22617,HAS_JURISDICTION,
+e21261,n21869,n22617,HAS_JURISDICTION,
+e21262,n21871,n22617,HAS_JURISDICTION,
+e21263,n21873,n22617,HAS_JURISDICTION,
+e21264,n21875,n22617,HAS_JURISDICTION,
+e21265,n21876,n22617,HAS_JURISDICTION,
+e21266,n21877,n22617,HAS_JURISDICTION,
+e21267,n21878,n22617,HAS_JURISDICTION,
+e21268,n21879,n22617,HAS_JURISDICTION,
+e21269,n21880,n22617,HAS_JURISDICTION,
+e21270,n21881,n22617,HAS_JURISDICTION,
+e21271,n21882,n22617,HAS_JURISDICTION,
+e21272,n21883,n22617,HAS_JURISDICTION,
+e21273,n21885,n22617,HAS_JURISDICTION,
+e21274,n21625,n22617,HAS_JURISDICTION,
+e21275,n21640,n22617,HAS_JURISDICTION,
+e21276,n21886,n22617,HAS_JURISDICTION,
+e21277,n21887,n22617,HAS_JURISDICTION,
+e21278,n21888,n22617,HAS_JURISDICTION,
+e21279,n21889,n22617,HAS_JURISDICTION,
+e21280,n21381,n22617,HAS_JURISDICTION,
+e21281,n21890,n22617,HAS_JURISDICTION,
+e21282,n21891,n22617,HAS_JURISDICTION,
+e21283,n21892,n22617,HAS_JURISDICTION,
+e21284,n21704,n22617,HAS_JURISDICTION,
+e21285,n21893,n22617,HAS_JURISDICTION,
+e21286,n21895,n22617,HAS_JURISDICTION,
+e21287,n21896,n22617,HAS_JURISDICTION,
+e21288,n21897,n22617,HAS_JURISDICTION,
+e21289,n21870,n22617,HAS_JURISDICTION,
+e21290,n21612,n22617,HAS_JURISDICTION,
+e21291,n21898,n22617,HAS_JURISDICTION,
+e21292,n21899,n22617,HAS_JURISDICTION,
+e21293,n21900,n22617,HAS_JURISDICTION,
+e21294,n21901,n22617,HAS_JURISDICTION,
+e21295,n21902,n22617,HAS_JURISDICTION,
+e21296,n21903,n22617,HAS_JURISDICTION,
+e21297,n21904,n22617,HAS_JURISDICTION,
+e21298,n21905,n22617,HAS_JURISDICTION,
+e21299,n21906,n22617,HAS_JURISDICTION,
+e21300,n21907,n22617,HAS_JURISDICTION,
+e21301,n21908,n22617,HAS_JURISDICTION,
+e21302,n21909,n22617,HAS_JURISDICTION,
+e21303,n21910,n22617,HAS_JURISDICTION,
+e21304,n21911,n22617,HAS_JURISDICTION,
+e21305,n21913,n22617,HAS_JURISDICTION,
+e21306,n21914,n22617,HAS_JURISDICTION,
+e21307,n21915,n22617,HAS_JURISDICTION,
+e21308,n21916,n22618,HAS_JURISDICTION,
+e21309,n21917,n22618,HAS_JURISDICTION,
+e21310,n21918,n22618,HAS_JURISDICTION,
+e21311,n21919,n22618,HAS_JURISDICTION,
+e21312,n21920,n22618,HAS_JURISDICTION,
+e21313,n21921,n22618,HAS_JURISDICTION,
+e21314,n21922,n22618,HAS_JURISDICTION,
+e21315,n21924,n22618,HAS_JURISDICTION,
+e21316,n21925,n22618,HAS_JURISDICTION,
+e21317,n21923,n22618,HAS_JURISDICTION,
+e21318,n21926,n22618,HAS_JURISDICTION,
+e21319,n21927,n22618,HAS_JURISDICTION,
+e21320,n21928,n22618,HAS_JURISDICTION,
+e21321,n21929,n22618,HAS_JURISDICTION,
+e21322,n21930,n22618,HAS_JURISDICTION,
+e21323,n21931,n22618,HAS_JURISDICTION,
+e21324,n21932,n22619,HAS_JURISDICTION,
+e21325,n21934,n22619,HAS_JURISDICTION,
+e21326,n21935,n22619,HAS_JURISDICTION,
+e21327,n21936,n22619,HAS_JURISDICTION,
+e21328,n21937,n22619,HAS_JURISDICTION,
+e21329,n21938,n22619,HAS_JURISDICTION,
+e21330,n21940,n22619,HAS_JURISDICTION,
+e21331,n21942,n22620,HAS_JURISDICTION,
+e21332,n21943,n22620,HAS_JURISDICTION,
+e21333,n21945,n22621,HAS_JURISDICTION,
+e21334,n21946,n22621,HAS_JURISDICTION,
+e21335,n21947,n22622,HAS_JURISDICTION,
+e21336,n21948,n22623,HAS_JURISDICTION,
+e21337,n21949,n22624,HAS_JURISDICTION,
+e21338,n21950,n22625,HAS_JURISDICTION,
+e21339,n21951,n22625,HAS_JURISDICTION,
+e21340,n21952,n22626,HAS_JURISDICTION,
+e21341,n21953,n22626,HAS_JURISDICTION,
+e21342,n21954,n22626,HAS_JURISDICTION,
+e21343,n21955,n22626,HAS_JURISDICTION,
+e21344,n21956,n22627,HAS_JURISDICTION,
+e21345,n21957,n22627,HAS_JURISDICTION,
+e21346,n21958,n22627,HAS_JURISDICTION,
+e21347,n21959,n22627,HAS_JURISDICTION,
+e21348,n21960,n22627,HAS_JURISDICTION,
+e21349,n21961,n22627,HAS_JURISDICTION,
+e21350,n21962,n22627,HAS_JURISDICTION,
+e21351,n21963,n22627,HAS_JURISDICTION,
+e21352,n21964,n22628,HAS_JURISDICTION,
+e21353,n21965,n22628,HAS_JURISDICTION,
+e21354,n21966,n22628,HAS_JURISDICTION,
+e21355,n21967,n22629,HAS_JURISDICTION,
+e21356,n21968,n22629,HAS_JURISDICTION,
+e21357,n21969,n22629,HAS_JURISDICTION,
+e21358,n21970,n22629,HAS_JURISDICTION,
+e21359,n21971,n22630,HAS_JURISDICTION,
+e21360,n21972,n22630,HAS_JURISDICTION,
+e21361,n21605,n22631,HAS_JURISDICTION,
+e21362,n21973,n22631,HAS_JURISDICTION,
+e21363,n21974,n22631,HAS_JURISDICTION,
+e21364,n21975,n22631,HAS_JURISDICTION,
+e21365,n21976,n22631,HAS_JURISDICTION,
+e21366,n21977,n22631,HAS_JURISDICTION,
+e21367,n21978,n22631,HAS_JURISDICTION,
+e21368,n21979,n22631,HAS_JURISDICTION,
+e21369,n21981,n22631,HAS_JURISDICTION,
+e21370,n21982,n22632,HAS_JURISDICTION,
+e21371,n21983,n22632,HAS_JURISDICTION,
+e21372,n21984,n22633,HAS_JURISDICTION,
+e21373,n21985,n22633,HAS_JURISDICTION,
+e21374,n21986,n22633,HAS_JURISDICTION,
+e21375,n21987,n22633,HAS_JURISDICTION,
+e21376,n21988,n22633,HAS_JURISDICTION,
+e21377,n21989,n22633,HAS_JURISDICTION,
+e21378,n21990,n22633,HAS_JURISDICTION,
+e21379,n21991,n22633,HAS_JURISDICTION,
+e21380,n21992,n22634,HAS_JURISDICTION,
+e21381,n21444,n22634,HAS_JURISDICTION,
+e21382,n21993,n22634,HAS_JURISDICTION,
+e21383,n21390,n22634,HAS_JURISDICTION,
+e21384,n21995,n22634,HAS_JURISDICTION,
+e21385,n21996,n22634,HAS_JURISDICTION,
+e21386,n21997,n22634,HAS_JURISDICTION,
+e21387,n21998,n22634,HAS_JURISDICTION,
+e21388,n21999,n22634,HAS_JURISDICTION,
+e21389,n22000,n22634,HAS_JURISDICTION,
+e21390,n22001,n22634,HAS_JURISDICTION,
+e21391,n22002,n22634,HAS_JURISDICTION,
+e21392,n22003,n22634,HAS_JURISDICTION,
+e21393,n22004,n22634,HAS_JURISDICTION,
+e21394,n22005,n22634,HAS_JURISDICTION,
+e21395,n22006,n22634,HAS_JURISDICTION,
+e21396,n22007,n22634,HAS_JURISDICTION,
+e21397,n22008,n22635,HAS_JURISDICTION,
+e21398,n22009,n22635,HAS_JURISDICTION,
+e21399,n22010,n22636,HAS_JURISDICTION,
+e21400,n22012,n22636,HAS_JURISDICTION,
+e21401,n22011,n22636,HAS_JURISDICTION,
+e21402,n22013,n22636,HAS_JURISDICTION,
+e21403,n22014,n22636,HAS_JURISDICTION,
+e21404,n22015,n22636,HAS_JURISDICTION,
+e21405,n22016,n22636,HAS_JURISDICTION,
+e21406,n22017,n22637,HAS_JURISDICTION,
+e21407,n22018,n22637,HAS_JURISDICTION,
+e21408,n22019,n22637,HAS_JURISDICTION,
+e21409,n22020,n22638,HAS_JURISDICTION,
+e21410,n22021,n22638,HAS_JURISDICTION,
+e21411,n22023,n22638,HAS_JURISDICTION,
+e21412,n22024,n22638,HAS_JURISDICTION,
+e21413,n22025,n22638,HAS_JURISDICTION,
+e21414,n22026,n22638,HAS_JURISDICTION,
+e21415,n22022,n22638,HAS_JURISDICTION,
+e21416,n22029,n22638,HAS_JURISDICTION,
+e21417,n22030,n22639,HAS_JURISDICTION,
+e21418,n22032,n22639,HAS_JURISDICTION,
+e21419,n22034,n22639,HAS_JURISDICTION,
+e21420,n22036,n22639,HAS_JURISDICTION,
+e21421,n22038,n22639,HAS_JURISDICTION,
+e21422,n22040,n22639,HAS_JURISDICTION,
+e21423,n22041,n22639,HAS_JURISDICTION,
+e21424,n22043,n22639,HAS_JURISDICTION,
+e21425,n22045,n22640,HAS_JURISDICTION,
+e21426,n22047,n22641,HAS_JURISDICTION,
+e21427,n22049,n22641,HAS_JURISDICTION,
+e21428,n22050,n22641,HAS_JURISDICTION,
+e21429,n22052,n22641,HAS_JURISDICTION,
+e21430,n22053,n22641,HAS_JURISDICTION,
+e21431,n22054,n22641,HAS_JURISDICTION,
+e21432,n22055,n22641,HAS_JURISDICTION,
+e21433,n22056,n22641,HAS_JURISDICTION,
+e21434,n22057,n22641,HAS_JURISDICTION,
+e21435,n22058,n22641,HAS_JURISDICTION,
+e21436,n22059,n22641,HAS_JURISDICTION,
+e21437,n22060,n22642,HAS_JURISDICTION,
+e21438,n22061,n22643,HAS_JURISDICTION,
+e21439,n22063,n22643,HAS_JURISDICTION,
+e21440,n22064,n22643,HAS_JURISDICTION,
+e21441,n22065,n22643,HAS_JURISDICTION,
+e21442,n22066,n22643,HAS_JURISDICTION,
+e21443,n22067,n22643,HAS_JURISDICTION,
+e21444,n22068,n22643,HAS_JURISDICTION,
+e21445,n22069,n22643,HAS_JURISDICTION,
+e21446,n22070,n22644,HAS_JURISDICTION,
+e21447,n22072,n22644,HAS_JURISDICTION,
+e21448,n21820,n22644,HAS_JURISDICTION,
+e21449,n22073,n22644,HAS_JURISDICTION,
+e21450,n22074,n22644,HAS_JURISDICTION,
+e21451,n22076,n22644,HAS_JURISDICTION,
+e21452,n22078,n22644,HAS_JURISDICTION,
+e21453,n22079,n22644,HAS_JURISDICTION,
+e21454,n21475,n22644,HAS_JURISDICTION,
+e21455,n22080,n22644,HAS_JURISDICTION,
+e21456,n22081,n22644,HAS_JURISDICTION,
+e21457,n22082,n22644,HAS_JURISDICTION,
+e21458,n22083,n22644,HAS_JURISDICTION,
+e21459,n22084,n22644,HAS_JURISDICTION,
+e21460,n21808,n22644,HAS_JURISDICTION,
+e21461,n21866,n22644,HAS_JURISDICTION,
+e21462,n22085,n22644,HAS_JURISDICTION,
+e21463,n21790,n22644,HAS_JURISDICTION,
+e21464,n21512,n22644,HAS_JURISDICTION,
+e21465,n22086,n22644,HAS_JURISDICTION,
+e21466,n22087,n22644,HAS_JURISDICTION,
+e21467,n22088,n22644,HAS_JURISDICTION,
+e21468,n21479,n22644,HAS_JURISDICTION,
+e21469,n22089,n22644,HAS_JURISDICTION,
+e21470,n21581,n22644,HAS_JURISDICTION,
+e21471,n22090,n22644,HAS_JURISDICTION,
+e21472,n22091,n22644,HAS_JURISDICTION,
+e21473,n21503,n22644,HAS_JURISDICTION,
+e21474,n22092,n22644,HAS_JURISDICTION,
+e21475,n22093,n22644,HAS_JURISDICTION,
+e21476,n22094,n22644,HAS_JURISDICTION,
+e21477,n21840,n22644,HAS_JURISDICTION,
+e21478,n21603,n22644,HAS_JURISDICTION,
+e21479,n21592,n22644,HAS_JURISDICTION,
+e21480,n21648,n22644,HAS_JURISDICTION,
+e21481,n22095,n22644,HAS_JURISDICTION,
+e21482,n22096,n22644,HAS_JURISDICTION,
+e21483,n22097,n22644,HAS_JURISDICTION,
+e21484,n22098,n22644,HAS_JURISDICTION,
+e21485,n21798,n22644,HAS_JURISDICTION,
+e21486,n22099,n22644,HAS_JURISDICTION,
+e21487,n22100,n22644,HAS_JURISDICTION,
+e21488,n22101,n22644,HAS_JURISDICTION,
+e21489,n21510,n22644,HAS_JURISDICTION,
+e21490,n22102,n22644,HAS_JURISDICTION,
+e21491,n22103,n22644,HAS_JURISDICTION,
+e21492,n22104,n22644,HAS_JURISDICTION,
+e21493,n21558,n22644,HAS_JURISDICTION,
+e21494,n22105,n22644,HAS_JURISDICTION,
+e21495,n21560,n22644,HAS_JURISDICTION,
+e21496,n21636,n22644,HAS_JURISDICTION,
+e21497,n22107,n22644,HAS_JURISDICTION,
+e21498,n22108,n22644,HAS_JURISDICTION,
+e21499,n22109,n22644,HAS_JURISDICTION,
+e21500,n22110,n22644,HAS_JURISDICTION,
+e21501,n22111,n22644,HAS_JURISDICTION,
+e21502,n22112,n22644,HAS_JURISDICTION,
+e21503,n22113,n22644,HAS_JURISDICTION,
+e21504,n22114,n22644,HAS_JURISDICTION,
+e21505,n22115,n22644,HAS_JURISDICTION,
+e21506,n22062,n22644,HAS_JURISDICTION,
+e21507,n22039,n22644,HAS_JURISDICTION,
+e21508,n22116,n22644,HAS_JURISDICTION,
+e21509,n22117,n22644,HAS_JURISDICTION,
+e21510,n22118,n22644,HAS_JURISDICTION,
+e21511,n22119,n22644,HAS_JURISDICTION,
+e21512,n21468,n22644,HAS_JURISDICTION,
+e21513,n22120,n22644,HAS_JURISDICTION,
+e21514,n22121,n22644,HAS_JURISDICTION,
+e21515,n22122,n22644,HAS_JURISDICTION,
+e21516,n22123,n22644,HAS_JURISDICTION,
+e21517,n22124,n22644,HAS_JURISDICTION,
+e21518,n22126,n22644,HAS_JURISDICTION,
+e21519,n22127,n22644,HAS_JURISDICTION,
+e21520,n21403,n22644,HAS_JURISDICTION,
+e21521,n21788,n22644,HAS_JURISDICTION,
+e21522,n21884,n22644,HAS_JURISDICTION,
+e21523,n22128,n22644,HAS_JURISDICTION,
+e21524,n21571,n22644,HAS_JURISDICTION,
+e21525,n22129,n22644,HAS_JURISDICTION,
+e21526,n21980,n22644,HAS_JURISDICTION,
+e21527,n22130,n22644,HAS_JURISDICTION,
+e21528,n22131,n22644,HAS_JURISDICTION,
+e21529,n22132,n22644,HAS_JURISDICTION,
+e21530,n22133,n22644,HAS_JURISDICTION,
+e21531,n22134,n22644,HAS_JURISDICTION,
+e21532,n22135,n22644,HAS_JURISDICTION,
+e21533,n22136,n22644,HAS_JURISDICTION,
+e21534,n22137,n22644,HAS_JURISDICTION,
+e21535,n21472,n22644,HAS_JURISDICTION,
+e21536,n22138,n22644,HAS_JURISDICTION,
+e21537,n22139,n22644,HAS_JURISDICTION,
+e21538,n21912,n22644,HAS_JURISDICTION,
+e21539,n22140,n22644,HAS_JURISDICTION,
+e21540,n22141,n22644,HAS_JURISDICTION,
+e21541,n22142,n22644,HAS_JURISDICTION,
+e21542,n22125,n22644,HAS_JURISDICTION,
+e21543,n22143,n22644,HAS_JURISDICTION,
+e21544,n22144,n22644,HAS_JURISDICTION,
+e21545,n22145,n22644,HAS_JURISDICTION,
+e21546,n22146,n22644,HAS_JURISDICTION,
+e21547,n22147,n22644,HAS_JURISDICTION,
+e21548,n21562,n22644,HAS_JURISDICTION,
+e21549,n21565,n22644,HAS_JURISDICTION,
+e21550,n22149,n22644,HAS_JURISDICTION,
+e21551,n22150,n22644,HAS_JURISDICTION,
+e21552,n22151,n22644,HAS_JURISDICTION,
+e21553,n21939,n22644,HAS_JURISDICTION,
+e21554,n22152,n22644,HAS_JURISDICTION,
+e21555,n21803,n22644,HAS_JURISDICTION,
+e21556,n22153,n22644,HAS_JURISDICTION,
+e21557,n22154,n22644,HAS_JURISDICTION,
+e21558,n22155,n22644,HAS_JURISDICTION,
+e21559,n22156,n22644,HAS_JURISDICTION,
+e21560,n22157,n22644,HAS_JURISDICTION,
+e21561,n22158,n22644,HAS_JURISDICTION,
+e21562,n22051,n22644,HAS_JURISDICTION,
+e21563,n22159,n22644,HAS_JURISDICTION,
+e21564,n22160,n22644,HAS_JURISDICTION,
+e21565,n22161,n22644,HAS_JURISDICTION,
+e21566,n22162,n22644,HAS_JURISDICTION,
+e21567,n22163,n22644,HAS_JURISDICTION,
+e21568,n22164,n22644,HAS_JURISDICTION,
+e21569,n22071,n22644,HAS_JURISDICTION,
+e21570,n22165,n22644,HAS_JURISDICTION,
+e21571,n22166,n22644,HAS_JURISDICTION,
+e21572,n21941,n22644,HAS_JURISDICTION,
+e21573,n22167,n22644,HAS_JURISDICTION,
+e21574,n22168,n22644,HAS_JURISDICTION,
+e21575,n22169,n22644,HAS_JURISDICTION,
+e21576,n22148,n22644,HAS_JURISDICTION,
+e21577,n22170,n22644,HAS_JURISDICTION,
+e21578,n21520,n22644,HAS_JURISDICTION,
+e21579,n22171,n22644,HAS_JURISDICTION,
+e21580,n22172,n22644,HAS_JURISDICTION,
+e21581,n22173,n22644,HAS_JURISDICTION,
+e21582,n21385,n22644,HAS_JURISDICTION,
+e21583,n22174,n22644,HAS_JURISDICTION,
+e21584,n22175,n22644,HAS_JURISDICTION,
+e21585,n22176,n22644,HAS_JURISDICTION,
+e21586,n22177,n22644,HAS_JURISDICTION,
+e21587,n22178,n22644,HAS_JURISDICTION,
+e21588,n22179,n22644,HAS_JURISDICTION,
+e21589,n22180,n22644,HAS_JURISDICTION,
+e21590,n22037,n22644,HAS_JURISDICTION,
+e21591,n22181,n22644,HAS_JURISDICTION,
+e21592,n22182,n22644,HAS_JURISDICTION,
+e21593,n22183,n22644,HAS_JURISDICTION,
+e21594,n22184,n22644,HAS_JURISDICTION,
+e21595,n22185,n22644,HAS_JURISDICTION,
+e21596,n22186,n22644,HAS_JURISDICTION,
+e21597,n21600,n22644,HAS_JURISDICTION,
+e21598,n22187,n22644,HAS_JURISDICTION,
+e21599,n22188,n22644,HAS_JURISDICTION,
+e21600,n22189,n22644,HAS_JURISDICTION,
+e21601,n22190,n22644,HAS_JURISDICTION,
+e21602,n22191,n22644,HAS_JURISDICTION,
+e21603,n22192,n22644,HAS_JURISDICTION,
+e21604,n22193,n22644,HAS_JURISDICTION,
+e21605,n22194,n22644,HAS_JURISDICTION,
+e21606,n22195,n22644,HAS_JURISDICTION,
+e21607,n22196,n22644,HAS_JURISDICTION,
+e21608,n21622,n22644,HAS_JURISDICTION,
+e21609,n22197,n22644,HAS_JURISDICTION,
+e21610,n22198,n22644,HAS_JURISDICTION,
+e21611,n22199,n22644,HAS_JURISDICTION,
+e21612,n22200,n22644,HAS_JURISDICTION,
+e21613,n22201,n22644,HAS_JURISDICTION,
+e21614,n22202,n22644,HAS_JURISDICTION,
+e21615,n22106,n22644,HAS_JURISDICTION,
+e21616,n22203,n22644,HAS_JURISDICTION,
+e21617,n22205,n22644,HAS_JURISDICTION,
+e21618,n22206,n22644,HAS_JURISDICTION,
+e21619,n22204,n22644,HAS_JURISDICTION,
+e21620,n22207,n22644,HAS_JURISDICTION,
+e21621,n22208,n22644,HAS_JURISDICTION,
+e21622,n22209,n22644,HAS_JURISDICTION,
+e21623,n22211,n22644,HAS_JURISDICTION,
+e21624,n22212,n22644,HAS_JURISDICTION,
+e21625,n22213,n22644,HAS_JURISDICTION,
+e21626,n22214,n22644,HAS_JURISDICTION,
+e21627,n22215,n22644,HAS_JURISDICTION,
+e21628,n22216,n22644,HAS_JURISDICTION,
+e21629,n22210,n22644,HAS_JURISDICTION,
+e21630,n22217,n22644,HAS_JURISDICTION,
+e21631,n22218,n22644,HAS_JURISDICTION,
+e21632,n22219,n22644,HAS_JURISDICTION,
+e21633,n22027,n22644,HAS_JURISDICTION,
+e21634,n22220,n22644,HAS_JURISDICTION,
+e21635,n22221,n22644,HAS_JURISDICTION,
+e21636,n22222,n22644,HAS_JURISDICTION,
+e21637,n22223,n22644,HAS_JURISDICTION,
+e21638,n22224,n22645,HAS_JURISDICTION,
+e21639,n22225,n22646,HAS_JURISDICTION,
+e21640,n21836,n22646,HAS_JURISDICTION,
+e21641,n22227,n22646,HAS_JURISDICTION,
+e21642,n22228,n22647,HAS_JURISDICTION,
+e21643,n22229,n22648,HAS_JURISDICTION,
+e21644,n22230,n22648,HAS_JURISDICTION,
+e21645,n21418,n22648,HAS_JURISDICTION,
+e21646,n22232,n22648,HAS_JURISDICTION,
+e21647,n22234,n22648,HAS_JURISDICTION,
+e21648,n22235,n22648,HAS_JURISDICTION,
+e21649,n22236,n22648,HAS_JURISDICTION,
+e21650,n22237,n22648,HAS_JURISDICTION,
+e21651,n22239,n22648,HAS_JURISDICTION,
+e21652,n22240,n22648,HAS_JURISDICTION,
+e21653,n22241,n22648,HAS_JURISDICTION,
+e21654,n22243,n22648,HAS_JURISDICTION,
+e21655,n22245,n22648,HAS_JURISDICTION,
+e21656,n22247,n22648,HAS_JURISDICTION,
+e21657,n22249,n22648,HAS_JURISDICTION,
+e21658,n22075,n22648,HAS_JURISDICTION,
+e21659,n22250,n22648,HAS_JURISDICTION,
+e21660,n22251,n22648,HAS_JURISDICTION,
+e21661,n22252,n22648,HAS_JURISDICTION,
+e21662,n22253,n22648,HAS_JURISDICTION,
+e21663,n22254,n22648,HAS_JURISDICTION,
+e21664,n22077,n22648,HAS_JURISDICTION,
+e21665,n22256,n22648,HAS_JURISDICTION,
+e21666,n22257,n22648,HAS_JURISDICTION,
+e21667,n22258,n22648,HAS_JURISDICTION,
+e21668,n22259,n22648,HAS_JURISDICTION,
+e21669,n22260,n22648,HAS_JURISDICTION,
+e21670,n22261,n22648,HAS_JURISDICTION,
+e21671,n22262,n22648,HAS_JURISDICTION,
+e21672,n22263,n22648,HAS_JURISDICTION,
+e21673,n22264,n22648,HAS_JURISDICTION,
+e21674,n22265,n22648,HAS_JURISDICTION,
+e21675,n22266,n22648,HAS_JURISDICTION,
+e21676,n22268,n22648,HAS_JURISDICTION,
+e21677,n22269,n22648,HAS_JURISDICTION,
+e21678,n22270,n22648,HAS_JURISDICTION,
+e21679,n22271,n22648,HAS_JURISDICTION,
+e21680,n22273,n22648,HAS_JURISDICTION,
+e21681,n22274,n22648,HAS_JURISDICTION,
+e21682,n22275,n22648,HAS_JURISDICTION,
+e21683,n22276,n22648,HAS_JURISDICTION,
+e21684,n21894,n22648,HAS_JURISDICTION,
+e21685,n21933,n22648,HAS_JURISDICTION,
+e21686,n21944,n22648,HAS_JURISDICTION,
+e21687,n22272,n22648,HAS_JURISDICTION,
+e21688,n22277,n22648,HAS_JURISDICTION,
+e21689,n22278,n22648,HAS_JURISDICTION,
+e21690,n22279,n22648,HAS_JURISDICTION,
+e21691,n22255,n22648,HAS_JURISDICTION,
+e21692,n22281,n22648,HAS_JURISDICTION,
+e21693,n22282,n22648,HAS_JURISDICTION,
+e21694,n22283,n22648,HAS_JURISDICTION,
+e21695,n22284,n22648,HAS_JURISDICTION,
+e21696,n22285,n22648,HAS_JURISDICTION,
+e21697,n22286,n22648,HAS_JURISDICTION,
+e21698,n22287,n22648,HAS_JURISDICTION,
+e21699,n22288,n22648,HAS_JURISDICTION,
+e21700,n22289,n22648,HAS_JURISDICTION,
+e21701,n22044,n22648,HAS_JURISDICTION,
+e21702,n22291,n22648,HAS_JURISDICTION,
+e21703,n22292,n22648,HAS_JURISDICTION,
+e21704,n22294,n22648,HAS_JURISDICTION,
+e21705,n22295,n22648,HAS_JURISDICTION,
+e21706,n22296,n22648,HAS_JURISDICTION,
+e21707,n22298,n22648,HAS_JURISDICTION,
+e21708,n22300,n22648,HAS_JURISDICTION,
+e21709,n22301,n22648,HAS_JURISDICTION,
+e21710,n21399,n22648,HAS_JURISDICTION,
+e21711,n22302,n22648,HAS_JURISDICTION,
+e21712,n22303,n22648,HAS_JURISDICTION,
+e21713,n22297,n22648,HAS_JURISDICTION,
+e21714,n21500,n22648,HAS_JURISDICTION,
+e21715,n22306,n22648,HAS_JURISDICTION,
+e21716,n22307,n22648,HAS_JURISDICTION,
+e21717,n21458,n22648,HAS_JURISDICTION,
+e21718,n22308,n22648,HAS_JURISDICTION,
+e21719,n22309,n22648,HAS_JURISDICTION,
+e21720,n22310,n22648,HAS_JURISDICTION,
+e21721,n22311,n22648,HAS_JURISDICTION,
+e21722,n22312,n22648,HAS_JURISDICTION,
+e21723,n22313,n22648,HAS_JURISDICTION,
+e21724,n22314,n22648,HAS_JURISDICTION,
+e21725,n22315,n22648,HAS_JURISDICTION,
+e21726,n22316,n22648,HAS_JURISDICTION,
+e21727,n22317,n22648,HAS_JURISDICTION,
+e21728,n22318,n22648,HAS_JURISDICTION,
+e21729,n22319,n22648,HAS_JURISDICTION,
+e21730,n22035,n22648,HAS_JURISDICTION,
+e21731,n22046,n22648,HAS_JURISDICTION,
+e21732,n22033,n22648,HAS_JURISDICTION,
+e21733,n21460,n22648,HAS_JURISDICTION,
+e21734,n22320,n22648,HAS_JURISDICTION,
+e21735,n22321,n22648,HAS_JURISDICTION,
+e21736,n22322,n22648,HAS_JURISDICTION,
+e21737,n22324,n22648,HAS_JURISDICTION,
+e21738,n22326,n22648,HAS_JURISDICTION,
+e21739,n22327,n22648,HAS_JURISDICTION,
+e21740,n22328,n22648,HAS_JURISDICTION,
+e21741,n22329,n22648,HAS_JURISDICTION,
+e21742,n22330,n22648,HAS_JURISDICTION,
+e21743,n21531,n22648,HAS_JURISDICTION,
+e21744,n21462,n22648,HAS_JURISDICTION,
+e21745,n22331,n22648,HAS_JURISDICTION,
+e21746,n21864,n22648,HAS_JURISDICTION,
+e21747,n21484,n22648,HAS_JURISDICTION,
+e21748,n21814,n22648,HAS_JURISDICTION,
+e21749,n21874,n22648,HAS_JURISDICTION,
+e21750,n22332,n22648,HAS_JURISDICTION,
+e21751,n22333,n22648,HAS_JURISDICTION,
+e21752,n22334,n22648,HAS_JURISDICTION,
+e21753,n22335,n22648,HAS_JURISDICTION,
+e21754,n22336,n22648,HAS_JURISDICTION,
+e21755,n22337,n22648,HAS_JURISDICTION,
+e21756,n22338,n22648,HAS_JURISDICTION,
+e21757,n22340,n22648,HAS_JURISDICTION,
+e21758,n22339,n22648,HAS_JURISDICTION,
+e21759,n22341,n22648,HAS_JURISDICTION,
+e21760,n22342,n22648,HAS_JURISDICTION,
+e21761,n22343,n22648,HAS_JURISDICTION,
+e21762,n21872,n22648,HAS_JURISDICTION,
+e21763,n22344,n22648,HAS_JURISDICTION,
+e21764,n22031,n22648,HAS_JURISDICTION,
+e21765,n21549,n22648,HAS_JURISDICTION,
+e21766,n22345,n22648,HAS_JURISDICTION,
+e21767,n21795,n22648,HAS_JURISDICTION,
+e21768,n22346,n22648,HAS_JURISDICTION,
+e21769,n21574,n22648,HAS_JURISDICTION,
+e21770,n21627,n22648,HAS_JURISDICTION,
+e21771,n22347,n22648,HAS_JURISDICTION,
+e21772,n22348,n22648,HAS_JURISDICTION,
+e21773,n22349,n22648,HAS_JURISDICTION,
+e21774,n22350,n22648,HAS_JURISDICTION,
+e21775,n22351,n22648,HAS_JURISDICTION,
+e21776,n22352,n22648,HAS_JURISDICTION,
+e21777,n22353,n22648,HAS_JURISDICTION,
+e21778,n22299,n22648,HAS_JURISDICTION,
+e21779,n22354,n22648,HAS_JURISDICTION,
+e21780,n22355,n22648,HAS_JURISDICTION,
+e21781,n22356,n22648,HAS_JURISDICTION,
+e21782,n22357,n22648,HAS_JURISDICTION,
+e21783,n22358,n22648,HAS_JURISDICTION,
+e21784,n22359,n22648,HAS_JURISDICTION,
+e21785,n22360,n22648,HAS_JURISDICTION,
+e21786,n22361,n22648,HAS_JURISDICTION,
+e21787,n22363,n22648,HAS_JURISDICTION,
+e21788,n22364,n22648,HAS_JURISDICTION,
+e21789,n22242,n22648,HAS_JURISDICTION,
+e21790,n22365,n22648,HAS_JURISDICTION,
+e21791,n22366,n22648,HAS_JURISDICTION,
+e21792,n22246,n22648,HAS_JURISDICTION,
+e21793,n22280,n22648,HAS_JURISDICTION,
+e21794,n21464,n22648,HAS_JURISDICTION,
+e21795,n22367,n22648,HAS_JURISDICTION,
+e21796,n22368,n22648,HAS_JURISDICTION,
+e21797,n22369,n22648,HAS_JURISDICTION,
+e21798,n22370,n22648,HAS_JURISDICTION,
+e21799,n22371,n22648,HAS_JURISDICTION,
+e21800,n22372,n22648,HAS_JURISDICTION,
+e21801,n22290,n22648,HAS_JURISDICTION,
+e21802,n22373,n22648,HAS_JURISDICTION,
+e21803,n22374,n22648,HAS_JURISDICTION,
+e21804,n22042,n22648,HAS_JURISDICTION,
+e21805,n22248,n22648,HAS_JURISDICTION,
+e21806,n22233,n22648,HAS_JURISDICTION,
+e21807,n22376,n22648,HAS_JURISDICTION,
+e21808,n22377,n22648,HAS_JURISDICTION,
+e21809,n22378,n22648,HAS_JURISDICTION,
+e21810,n22375,n22648,HAS_JURISDICTION,
+e21811,n22380,n22648,HAS_JURISDICTION,
+e21812,n22381,n22648,HAS_JURISDICTION,
+e21813,n22382,n22648,HAS_JURISDICTION,
+e21814,n22384,n22648,HAS_JURISDICTION,
+e21815,n22385,n22648,HAS_JURISDICTION,
+e21816,n22387,n22648,HAS_JURISDICTION,
+e21817,n22388,n22648,HAS_JURISDICTION,
+e21818,n22389,n22648,HAS_JURISDICTION,
+e21819,n21551,n22648,HAS_JURISDICTION,
+e21820,n22390,n22648,HAS_JURISDICTION,
+e21821,n22391,n22648,HAS_JURISDICTION,
+e21822,n22392,n22648,HAS_JURISDICTION,
+e21823,n22394,n22648,HAS_JURISDICTION,
+e21824,n22395,n22648,HAS_JURISDICTION,
+e21825,n22396,n22648,HAS_JURISDICTION,
+e21826,n22397,n22648,HAS_JURISDICTION,
+e21827,n22398,n22648,HAS_JURISDICTION,
+e21828,n22399,n22648,HAS_JURISDICTION,
+e21829,n22305,n22648,HAS_JURISDICTION,
+e21830,n22400,n22648,HAS_JURISDICTION,
+e21831,n22401,n22648,HAS_JURISDICTION,
+e21832,n22402,n22648,HAS_JURISDICTION,
+e21833,n22403,n22648,HAS_JURISDICTION,
+e21834,n22404,n22648,HAS_JURISDICTION,
+e21835,n22405,n22648,HAS_JURISDICTION,
+e21836,n22406,n22648,HAS_JURISDICTION,
+e21837,n22407,n22648,HAS_JURISDICTION,
+e21838,n22408,n22648,HAS_JURISDICTION,
+e21839,n22409,n22648,HAS_JURISDICTION,
+e21840,n22410,n22648,HAS_JURISDICTION,
+e21841,n21522,n22648,HAS_JURISDICTION,
+e21842,n22411,n22648,HAS_JURISDICTION,
+e21843,n22412,n22648,HAS_JURISDICTION,
+e21844,n22414,n22648,HAS_JURISDICTION,
+e21845,n22415,n22648,HAS_JURISDICTION,
+e21846,n22416,n22648,HAS_JURISDICTION,
+e21847,n22417,n22648,HAS_JURISDICTION,
+e21848,n22418,n22648,HAS_JURISDICTION,
+e21849,n22419,n22648,HAS_JURISDICTION,
+e21850,n22421,n22648,HAS_JURISDICTION,
+e21851,n22422,n22648,HAS_JURISDICTION,
+e21852,n22423,n22648,HAS_JURISDICTION,
+e21853,n22424,n22648,HAS_JURISDICTION,
+e21854,n22425,n22648,HAS_JURISDICTION,
+e21855,n22426,n22648,HAS_JURISDICTION,
+e21856,n22427,n22648,HAS_JURISDICTION,
+e21857,n22325,n22648,HAS_JURISDICTION,
+e21858,n22428,n22648,HAS_JURISDICTION,
+e21859,n22429,n22648,HAS_JURISDICTION,
+e21860,n22420,n22648,HAS_JURISDICTION,
+e21861,n22431,n22648,HAS_JURISDICTION,
+e21862,n22433,n22648,HAS_JURISDICTION,
+e21863,n22432,n22648,HAS_JURISDICTION,
+e21864,n22435,n22648,HAS_JURISDICTION,
+e21865,n22437,n22648,HAS_JURISDICTION,
+e21866,n22438,n22648,HAS_JURISDICTION,
+e21867,n22439,n22648,HAS_JURISDICTION,
+e21868,n22440,n22648,HAS_JURISDICTION,
+e21869,n22441,n22648,HAS_JURISDICTION,
+e21870,n22442,n22648,HAS_JURISDICTION,
+e21871,n22430,n22648,HAS_JURISDICTION,
+e21872,n22443,n22648,HAS_JURISDICTION,
+e21873,n22444,n22648,HAS_JURISDICTION,
+e21874,n22445,n22648,HAS_JURISDICTION,
+e21875,n22447,n22648,HAS_JURISDICTION,
+e21876,n22448,n22648,HAS_JURISDICTION,
+e21877,n22449,n22648,HAS_JURISDICTION,
+e21878,n22450,n22648,HAS_JURISDICTION,
+e21879,n22451,n22648,HAS_JURISDICTION,
+e21880,n22452,n22648,HAS_JURISDICTION,
+e21881,n22453,n22648,HAS_JURISDICTION,
+e21882,n22454,n22648,HAS_JURISDICTION,
+e21883,n22455,n22648,HAS_JURISDICTION,
+e21884,n22456,n22648,HAS_JURISDICTION,
+e21885,n22413,n22648,HAS_JURISDICTION,
+e21886,n22383,n22648,HAS_JURISDICTION,
+e21887,n22457,n22648,HAS_JURISDICTION,
+e21888,n22323,n22648,HAS_JURISDICTION,
+e21889,n22458,n22648,HAS_JURISDICTION,
+e21890,n22459,n22648,HAS_JURISDICTION,
+e21891,n22460,n22648,HAS_JURISDICTION,
+e21892,n22461,n22648,HAS_JURISDICTION,
+e21893,n22462,n22648,HAS_JURISDICTION,
+e21894,n22463,n22648,HAS_JURISDICTION,
+e21895,n22464,n22648,HAS_JURISDICTION,
+e21896,n22465,n22648,HAS_JURISDICTION,
+e21897,n22466,n22648,HAS_JURISDICTION,
+e21898,n22467,n22648,HAS_JURISDICTION,
+e21899,n22468,n22648,HAS_JURISDICTION,
+e21900,n22469,n22648,HAS_JURISDICTION,
+e21901,n22470,n22648,HAS_JURISDICTION,
+e21902,n22471,n22648,HAS_JURISDICTION,
+e21903,n22472,n22648,HAS_JURISDICTION,
+e21904,n22436,n22648,HAS_JURISDICTION,
+e21905,n22473,n22648,HAS_JURISDICTION,
+e21906,n22474,n22648,HAS_JURISDICTION,
+e21907,n21470,n22648,HAS_JURISDICTION,
+e21908,n21496,n22648,HAS_JURISDICTION,
+e21909,n22475,n22648,HAS_JURISDICTION,
+e21910,n22476,n22648,HAS_JURISDICTION,
+e21911,n22477,n22648,HAS_JURISDICTION,
+e21912,n22478,n22648,HAS_JURISDICTION,
+e21913,n22446,n22648,HAS_JURISDICTION,
+e21914,n22480,n22648,HAS_JURISDICTION,
+e21915,n22481,n22648,HAS_JURISDICTION,
+e21916,n22482,n22648,HAS_JURISDICTION,
+e21917,n22483,n22648,HAS_JURISDICTION,
+e21918,n22484,n22648,HAS_JURISDICTION,
+e21919,n22485,n22648,HAS_JURISDICTION,
+e21920,n22486,n22648,HAS_JURISDICTION,
+e21921,n22487,n22648,HAS_JURISDICTION,
+e21922,n22488,n22648,HAS_JURISDICTION,
+e21923,n22489,n22648,HAS_JURISDICTION,
+e21924,n22491,n22648,HAS_JURISDICTION,
+e21925,n22492,n22648,HAS_JURISDICTION,
+e21926,n22493,n22648,HAS_JURISDICTION,
+e21927,n22494,n22648,HAS_JURISDICTION,
+e21928,n22495,n22648,HAS_JURISDICTION,
+e21929,n22496,n22648,HAS_JURISDICTION,
+e21930,n22497,n22648,HAS_JURISDICTION,
+e21931,n22499,n22648,HAS_JURISDICTION,
+e21932,n22500,n22648,HAS_JURISDICTION,
+e21933,n22501,n22648,HAS_JURISDICTION,
+e21934,n22502,n22648,HAS_JURISDICTION,
+e21935,n22503,n22648,HAS_JURISDICTION,
+e21936,n22504,n22648,HAS_JURISDICTION,
+e21937,n22505,n22648,HAS_JURISDICTION,
+e21938,n22506,n22648,HAS_JURISDICTION,
+e21939,n22507,n22648,HAS_JURISDICTION,
+e21940,n22508,n22648,HAS_JURISDICTION,
+e21941,n22509,n22648,HAS_JURISDICTION,
+e21942,n22510,n22648,HAS_JURISDICTION,
+e21943,n22511,n22648,HAS_JURISDICTION,
+e21944,n22512,n22648,HAS_JURISDICTION,
+e21945,n22231,n22648,HAS_JURISDICTION,
+e21946,n22490,n22648,HAS_JURISDICTION,
+e21947,n22513,n22648,HAS_JURISDICTION,
+e21948,n22379,n22648,HAS_JURISDICTION,
+e21949,n22515,n22648,HAS_JURISDICTION,
+e21950,n22516,n22648,HAS_JURISDICTION,
+e21951,n22517,n22648,HAS_JURISDICTION,
+e21952,n22518,n22648,HAS_JURISDICTION,
+e21953,n21466,n22648,HAS_JURISDICTION,
+e21954,n22519,n22648,HAS_JURISDICTION,
+e21955,n22520,n22648,HAS_JURISDICTION,
+e21956,n22521,n22648,HAS_JURISDICTION,
+e21957,n22522,n22648,HAS_JURISDICTION,
+e21958,n22523,n22648,HAS_JURISDICTION,
+e21959,n22524,n22648,HAS_JURISDICTION,
+e21960,n22525,n22648,HAS_JURISDICTION,
+e21961,n22526,n22648,HAS_JURISDICTION,
+e21962,n22527,n22648,HAS_JURISDICTION,
+e21963,n22528,n22648,HAS_JURISDICTION,
+e21964,n22529,n22648,HAS_JURISDICTION,
+e21965,n22386,n22648,HAS_JURISDICTION,
+e21966,n22530,n22648,HAS_JURISDICTION,
+e21967,n22531,n22648,HAS_JURISDICTION,
+e21968,n22532,n22648,HAS_JURISDICTION,
+e21969,n22533,n22648,HAS_JURISDICTION,
+e21970,n22534,n22648,HAS_JURISDICTION,
+e21971,n22535,n22649,HAS_JURISDICTION,
+e21972,n22536,n22650,HAS_JURISDICTION,
+e21973,n22537,n22650,HAS_JURISDICTION,
+e21974,n22538,n22650,HAS_JURISDICTION,
+e21975,n22539,n22651,HAS_JURISDICTION,
+e21976,n22540,n22652,HAS_JURISDICTION,
+e21977,n22362,n22652,HAS_JURISDICTION,
+e21978,n22541,n22652,HAS_JURISDICTION,
+e21979,n22542,n22652,HAS_JURISDICTION,
+e21980,n22543,n22652,HAS_JURISDICTION,
+e21981,n22544,n22652,HAS_JURISDICTION,
+e21982,n22545,n22652,HAS_JURISDICTION,
+e21983,n21383,n22653,HAS_JURISDICTION,
+e21984,n22546,n22653,HAS_JURISDICTION,
+e21985,n21387,n22653,HAS_JURISDICTION,
+e21986,n21994,n22654,HAS_JURISDICTION,
+e21987,n22547,n22654,HAS_JURISDICTION,
+e21988,n22548,n22654,HAS_JURISDICTION,
+e21989,n22549,n22655,HAS_JURISDICTION,
+e21990,n22550,n22655,HAS_JURISDICTION,
+e21991,n22551,n22655,HAS_JURISDICTION,
+e21992,n22552,n22655,HAS_JURISDICTION,
+e21993,n21633,n22655,HAS_JURISDICTION,
+e21994,n22553,n22655,HAS_JURISDICTION,
+e21995,n22554,n22655,HAS_JURISDICTION,
+e21996,n21494,n22655,HAS_JURISDICTION,
+e21997,n22555,n22655,HAS_JURISDICTION,
+e21998,n22556,n22655,HAS_JURISDICTION,
+e21999,n22557,n22656,HAS_JURISDICTION,
+e22000,n22558,n22657,HAS_JURISDICTION,
+e22001,n22559,n22657,HAS_JURISDICTION,
+e22027,n22721,n22720,IS_OWNER,Directly Controlled
+e22028,n22721,n22722,IS_OWNER,Directly Controlled
+e22029,n22724,n22723,IS_OWNER,Directly Controlled
+e22030,n22724,n22725,IS_OWNER,Directly Controlled
+e22031,n22724,n22726,IS_OWNER,Directly Controlled
+e22032,n22728,n22727,IS_OWNER,Directly Controlled
+e22033,n22730,n22729,IS_OWNER,Directly Controlled
+e22034,n22730,n22731,IS_OWNER,Directly Controlled
+e22035,n22730,n22732,IS_OWNER,Directly Controlled
+e22036,n22734,n22733,IS_OWNER,Directly Controlled
+e22037,n22734,n22735,IS_OWNER,Directly Controlled
+e22038,n22734,n22736,IS_OWNER,Directly Controlled
+e22039,n22738,n22737,IS_OWNER,Directly Controlled
+e22040,n22740,n22739,IS_OWNER,Directly Controlled
+e22041,n22742,n22741,IS_OWNER,Directly Controlled
+e22042,n22725,n22741,IS_OWNER,Directly Controlled
+e22043,n22729,n22741,IS_OWNER,Directly Controlled
+e22044,n22743,n22741,IS_OWNER,Directly Controlled
+e22045,n22733,n22736,IS_OWNER,Directly Controlled
+e22046,n22744,n22742,IS_OWNER,Directly Controlled
+e22047,n22735,n22744,IS_OWNER,Directly Controlled
+e22048,n22737,n22745,IS_OWNER,Directly Controlled
+e22049,n22747,n22746,IS_OWNER,Directly Controlled
+e22050,n22732,n22728,IS_OWNER,Directly Controlled
+e22051,n22748,n22738,IS_OWNER,Directly Controlled
+e22052,n22748,n22749,IS_OWNER,Directly Controlled
+e22053,n22747,n22750,IS_OWNER,Directly Controlled
+e22054,n22752,n22751,IS_OWNER,Directly Controlled
+e22055,n22752,n22753,IS_OWNER,Directly Controlled
+e22056,n22755,n22754,IS_OWNER,Directly Controlled
+e22057,n22756,n22754,IS_OWNER,Directly Controlled
+e22058,n22750,n22754,IS_OWNER,Directly Controlled
+e22059,n22757,n22754,IS_OWNER,Directly Controlled
+e22060,n22722,n22754,IS_OWNER,Directly Controlled
+e22061,n22726,n22754,IS_OWNER,Directly Controlled
+e22062,n22758,n22754,IS_OWNER,Directly Controlled
+e22063,n22743,n22754,IS_OWNER,Directly Controlled
+e22064,n22736,n22754,IS_OWNER,Directly Controlled
+e22065,n22760,n22759,IS_OWNER,Directly Controlled
+e22066,n22762,n22761,IS_OWNER,Directly Controlled
+e22067,n22724,n22763,IS_OWNER,Directly Controlled
+e22068,n22724,n22764,IS_OWNER,Directly Controlled
+e22069,n22724,n22765,IS_OWNER,Directly Controlled
+e22070,n22743,n22758,IS_OWNER,Directly Controlled
+e22071,n22731,n22758,IS_OWNER,Directly Controlled
+e22072,n22736,n22758,IS_OWNER,Directly Controlled
+e22073,n22726,n22758,IS_OWNER,Directly Controlled
+e22074,n22767,n22766,IS_OWNER,Directly Controlled
+e22075,n22768,n22766,IS_OWNER,Directly Controlled
+e22076,n22770,n22769,IS_OWNER,Directly Controlled
+e22077,n22743,n22769,IS_OWNER,Directly Controlled
+e22078,n22772,n22771,IS_OWNER,Directly Controlled
+e22079,n22743,n22771,IS_OWNER,Directly Controlled
+e22080,n22772,n22773,IS_OWNER,Directly Controlled
+e22081,n22743,n22773,IS_OWNER,Directly Controlled
+e22082,n22775,n22774,IS_OWNER,Directly Controlled
+e22083,n22777,n22776,IS_OWNER,Directly Controlled
+e22084,n22779,n22778,IS_OWNER,Directly Controlled
+e22085,n22781,n22780,IS_OWNER,Directly Controlled
+e22086,n22782,n22619,HAS_JURISDICTION,
+e22087,n22783,n22619,HAS_JURISDICTION,
+e22088,n22784,n22619,HAS_JURISDICTION,
+e22089,n22785,n22619,HAS_JURISDICTION,
+e22090,n22786,n22619,HAS_JURISDICTION,
+e22091,n22787,n22619,HAS_JURISDICTION,
+e22092,n22788,n22619,HAS_JURISDICTION,
+e22093,n22789,n22619,HAS_JURISDICTION,
+e22094,n22790,n22619,HAS_JURISDICTION,
+e22095,n22791,n22619,HAS_JURISDICTION,
+e22096,n22792,n22619,HAS_JURISDICTION,
+e22097,n22793,n22619,HAS_JURISDICTION,
+e22098,n22794,n22619,HAS_JURISDICTION,
+e22099,n22795,n22619,HAS_JURISDICTION,
+e22100,n22796,n22619,HAS_JURISDICTION,
+e22101,n22797,n22619,HAS_JURISDICTION,
+e22102,n22798,n22619,HAS_JURISDICTION,
+e22103,n22799,n22619,HAS_JURISDICTION,
+e22104,n22800,n22619,HAS_JURISDICTION,
+e22105,n22801,n22619,HAS_JURISDICTION,
+e22106,n22802,n22619,HAS_JURISDICTION,
+e22107,n22803,n22619,HAS_JURISDICTION,
+e22108,n22804,n22619,HAS_JURISDICTION,
+e22109,n22805,n22619,HAS_JURISDICTION,
+e22110,n22806,n22619,HAS_JURISDICTION,
+e22111,n22807,n22619,HAS_JURISDICTION,
+e22112,n22808,n22619,HAS_JURISDICTION,
+e22113,n22809,n22619,HAS_JURISDICTION,
+e22114,n22810,n22619,HAS_JURISDICTION,
+e22115,n22811,n22619,HAS_JURISDICTION,
+e22116,n22812,n22619,HAS_JURISDICTION,
+e22117,n22813,n22619,HAS_JURISDICTION,
+e22118,n22814,n22619,HAS_JURISDICTION,
+e22119,n22815,n22619,HAS_JURISDICTION,
+e22120,n22816,n22619,HAS_JURISDICTION,
+e22121,n22817,n22619,HAS_JURISDICTION,
+e22122,n22818,n22619,HAS_JURISDICTION,
+e22123,n22819,n22619,HAS_JURISDICTION,
+e22124,n22820,n22619,HAS_JURISDICTION,
+e22125,n22821,n22619,HAS_JURISDICTION,
+e22126,n22822,n22619,HAS_JURISDICTION,
+e22127,n22823,n22619,HAS_JURISDICTION,
+e22128,n22824,n22619,HAS_JURISDICTION,
+e22129,n22825,n22619,HAS_JURISDICTION,
+e22130,n22826,n22619,HAS_JURISDICTION,
+e22131,n22827,n22619,HAS_JURISDICTION,
+e22132,n22828,n22619,HAS_JURISDICTION,
+e22133,n22829,n22619,HAS_JURISDICTION,
+e22134,n22830,n22619,HAS_JURISDICTION,
+e22135,n22831,n22619,HAS_JURISDICTION,
+e22136,n22832,n22619,HAS_JURISDICTION,
+e22137,n22833,n22619,HAS_JURISDICTION,
+e22138,n22834,n22619,HAS_JURISDICTION,
+e22139,n22835,n22619,HAS_JURISDICTION,
+e22140,n22836,n22619,HAS_JURISDICTION,
+e22141,n22837,n22619,HAS_JURISDICTION,
+e22142,n22838,n22619,HAS_JURISDICTION,
+e22143,n22839,n22619,HAS_JURISDICTION,
+e22144,n22840,n22619,HAS_JURISDICTION,
+e22145,n22841,n22619,HAS_JURISDICTION,
+e22146,n22842,n22619,HAS_JURISDICTION,
+e22147,n22843,n22619,HAS_JURISDICTION,
+e22148,n22844,n22619,HAS_JURISDICTION,
+e22149,n22845,n22619,HAS_JURISDICTION,
+e22150,n22846,n22619,HAS_JURISDICTION,
+e22151,n22847,n22619,HAS_JURISDICTION,
+e22152,n22848,n22619,HAS_JURISDICTION,
+e22153,n22849,n22619,HAS_JURISDICTION,
+e22154,n22850,n22619,HAS_JURISDICTION,
+e22155,n22851,n22619,HAS_JURISDICTION,
+e22156,n22852,n22619,HAS_JURISDICTION,
+e22157,n22853,n22619,HAS_JURISDICTION,
+e22158,n22854,n22619,HAS_JURISDICTION,
+e22159,n22855,n22619,HAS_JURISDICTION,
+e22160,n22856,n22619,HAS_JURISDICTION,
+e22161,n22857,n22619,HAS_JURISDICTION,
+e22162,n22858,n22619,HAS_JURISDICTION,
+e22163,n22859,n22619,HAS_JURISDICTION,
+e22164,n22860,n22619,HAS_JURISDICTION,
+e22165,n22861,n22619,HAS_JURISDICTION,
+e22166,n22862,n22619,HAS_JURISDICTION,
+e22167,n22863,n22619,HAS_JURISDICTION,
+e22168,n22864,n22619,HAS_JURISDICTION,
+e22169,n22865,n22619,HAS_JURISDICTION,
+e22170,n22866,n22619,HAS_JURISDICTION,
+e22171,n22867,n22619,HAS_JURISDICTION,
+e22172,n22868,n22619,HAS_JURISDICTION,
+e22173,n22869,n22619,HAS_JURISDICTION,
+e22174,n22870,n22619,HAS_JURISDICTION,
+e22175,n22871,n22619,HAS_JURISDICTION,
+e22176,n22872,n22619,HAS_JURISDICTION,
+e22177,n22873,n22619,HAS_JURISDICTION,
+e22178,n22874,n22619,HAS_JURISDICTION,
+e22179,n22875,n22619,HAS_JURISDICTION,
+e22180,n22876,n22619,HAS_JURISDICTION,
+e22181,n22877,n22619,HAS_JURISDICTION,
+e22182,n22878,n22619,HAS_JURISDICTION,
+e22183,n22879,n22619,HAS_JURISDICTION,
+e22184,n22880,n22619,HAS_JURISDICTION,
+e22185,n22881,n22619,HAS_JURISDICTION,
+e22186,n22882,n22619,HAS_JURISDICTION,
+e22187,n22883,n22619,HAS_JURISDICTION,
+e22188,n22884,n22619,HAS_JURISDICTION,
+e22189,n22885,n22619,HAS_JURISDICTION,
+e22190,n22886,n22619,HAS_JURISDICTION,
+e22191,n22887,n22619,HAS_JURISDICTION,
+e22192,n22888,n22619,HAS_JURISDICTION,
+e22193,n22889,n22619,HAS_JURISDICTION,
+e22194,n22890,n22619,HAS_JURISDICTION,
+e22195,n22891,n22619,HAS_JURISDICTION,
+e22196,n22892,n22619,HAS_JURISDICTION,
+e22197,n22893,n22619,HAS_JURISDICTION,
+e22198,n22894,n22619,HAS_JURISDICTION,
+e22199,n22895,n22619,HAS_JURISDICTION,
+e22200,n22896,n22619,HAS_JURISDICTION,
+e22201,n22897,n22619,HAS_JURISDICTION,
+e22202,n22898,n22619,HAS_JURISDICTION,
+e22203,n22899,n22619,HAS_JURISDICTION,
+e22204,n22900,n22619,HAS_JURISDICTION,
+e22205,n22901,n22619,HAS_JURISDICTION,
+e22206,n22902,n22619,HAS_JURISDICTION,
+e22207,n22903,n22619,HAS_JURISDICTION,
+e22208,n22904,n22619,HAS_JURISDICTION,
+e22209,n22905,n22619,HAS_JURISDICTION,
+e22210,n22906,n22619,HAS_JURISDICTION,
+e22211,n22907,n22619,HAS_JURISDICTION,
+e22212,n22908,n22619,HAS_JURISDICTION,
+e22213,n22909,n22619,HAS_JURISDICTION,
+e22214,n22910,n22619,HAS_JURISDICTION,
+e22215,n22911,n22619,HAS_JURISDICTION,
+e22216,n22912,n22619,HAS_JURISDICTION,
+e22217,n22913,n22619,HAS_JURISDICTION,
+e22218,n22914,n22619,HAS_JURISDICTION,
+e22219,n22915,n22619,HAS_JURISDICTION,
+e22220,n22916,n22619,HAS_JURISDICTION,
+e22221,n22917,n22619,HAS_JURISDICTION,
+e22222,n22918,n22619,HAS_JURISDICTION,
+e22223,n22919,n22619,HAS_JURISDICTION,
+e22224,n22920,n22619,HAS_JURISDICTION,
+e22225,n22921,n22619,HAS_JURISDICTION,
+e22226,n22922,n22619,HAS_JURISDICTION,
+e22227,n22923,n22619,HAS_JURISDICTION,
+e22228,n22924,n22619,HAS_JURISDICTION,
+e22229,n22925,n22619,HAS_JURISDICTION,
+e22230,n22926,n22619,HAS_JURISDICTION,
+e22231,n22927,n22619,HAS_JURISDICTION,
+e22232,n22928,n22619,HAS_JURISDICTION,
+e22233,n22929,n22619,HAS_JURISDICTION,
+e22234,n22930,n22619,HAS_JURISDICTION,
+e22235,n22931,n22619,HAS_JURISDICTION,
+e22236,n22932,n22619,HAS_JURISDICTION,
+e22237,n22933,n22619,HAS_JURISDICTION,
+e22238,n22934,n22619,HAS_JURISDICTION,
+e22239,n22935,n22619,HAS_JURISDICTION,
+e22240,n22936,n22619,HAS_JURISDICTION,
+e22241,n22937,n22619,HAS_JURISDICTION,
+e22242,n22938,n22619,HAS_JURISDICTION,
+e22243,n22939,n22619,HAS_JURISDICTION,
+e22244,n22940,n22619,HAS_JURISDICTION,
+e22245,n22941,n22619,HAS_JURISDICTION,
+e22246,n22942,n22619,HAS_JURISDICTION,
+e22247,n22943,n22619,HAS_JURISDICTION,
+e22248,n22944,n22619,HAS_JURISDICTION,
+e22249,n22945,n22619,HAS_JURISDICTION,
+e22250,n22946,n22619,HAS_JURISDICTION,
+e22251,n22947,n22619,HAS_JURISDICTION,
+e22252,n22948,n22619,HAS_JURISDICTION,
+e22253,n22949,n22619,HAS_JURISDICTION,
+e22254,n22950,n22619,HAS_JURISDICTION,
+e22255,n22951,n22619,HAS_JURISDICTION,
+e22256,n22952,n22619,HAS_JURISDICTION,
+e22257,n22953,n22619,HAS_JURISDICTION,
+e22258,n22954,n22619,HAS_JURISDICTION,
+e22259,n22955,n22619,HAS_JURISDICTION,
+e22260,n22956,n22619,HAS_JURISDICTION,
+e22261,n22957,n22619,HAS_JURISDICTION,
+e22262,n22958,n22619,HAS_JURISDICTION,
+e22263,n22959,n22619,HAS_JURISDICTION,
+e22264,n22960,n22619,HAS_JURISDICTION,
+e22265,n22961,n22619,HAS_JURISDICTION,
+e22266,n22962,n22619,HAS_JURISDICTION,
+e22267,n22963,n22619,HAS_JURISDICTION,
+e22268,n22964,n22619,HAS_JURISDICTION,
+e22269,n22965,n22619,HAS_JURISDICTION,
+e22270,n22966,n22619,HAS_JURISDICTION,
+e22271,n22967,n22619,HAS_JURISDICTION,
+e22272,n22968,n22619,HAS_JURISDICTION,
+e22273,n22969,n22619,HAS_JURISDICTION,
+e22274,n22970,n22619,HAS_JURISDICTION,
+e22275,n22971,n22619,HAS_JURISDICTION,
+e22276,n22972,n22619,HAS_JURISDICTION,
+e22277,n22973,n22619,HAS_JURISDICTION,
+e22278,n22974,n22619,HAS_JURISDICTION,
+e22279,n22975,n22619,HAS_JURISDICTION,
+e22280,n22976,n22619,HAS_JURISDICTION,
+e22281,n22977,n22619,HAS_JURISDICTION,
+e22282,n22978,n22619,HAS_JURISDICTION,
+e22283,n22979,n22619,HAS_JURISDICTION,
+e22284,n22980,n22619,HAS_JURISDICTION,
+e22285,n22981,n22619,HAS_JURISDICTION,
+e22286,n22982,n22619,HAS_JURISDICTION,
+e22287,n22983,n22619,HAS_JURISDICTION,
+e22288,n22984,n22619,HAS_JURISDICTION,
+e22289,n22985,n22619,HAS_JURISDICTION,
+e22290,n22986,n22619,HAS_JURISDICTION,
+e22291,n22987,n22619,HAS_JURISDICTION,
+e22292,n22988,n22619,HAS_JURISDICTION,
+e22293,n22989,n22619,HAS_JURISDICTION,
+e22294,n22990,n22619,HAS_JURISDICTION,
+e22295,n22991,n22619,HAS_JURISDICTION,
+e22296,n22992,n22619,HAS_JURISDICTION,
+e22297,n22993,n22619,HAS_JURISDICTION,
+e22298,n22994,n22619,HAS_JURISDICTION,
+e22299,n22995,n22619,HAS_JURISDICTION,
+e22300,n22996,n22619,HAS_JURISDICTION,
+e22301,n22997,n22619,HAS_JURISDICTION,
+e22302,n22998,n22619,HAS_JURISDICTION,
+e22303,n22999,n22619,HAS_JURISDICTION,
+e22304,n23000,n22619,HAS_JURISDICTION,
+e22305,n23001,n22619,HAS_JURISDICTION,
+e22306,n23002,n22619,HAS_JURISDICTION,
+e22307,n23003,n22619,HAS_JURISDICTION,
+e22308,n23004,n22619,HAS_JURISDICTION,
+e22309,n23005,n22619,HAS_JURISDICTION,
+e22310,n23006,n22619,HAS_JURISDICTION,
+e22311,n23007,n22619,HAS_JURISDICTION,
+e22312,n23008,n22619,HAS_JURISDICTION,
+e22313,n23009,n22619,HAS_JURISDICTION,
+e22314,n23010,n22619,HAS_JURISDICTION,
+e22315,n23011,n22619,HAS_JURISDICTION,
+e22316,n23012,n22619,HAS_JURISDICTION,
+e22317,n23013,n22619,HAS_JURISDICTION,
+e22318,n23014,n22619,HAS_JURISDICTION,
+e22319,n23015,n22619,HAS_JURISDICTION,
+e22320,n23016,n22619,HAS_JURISDICTION,
+e22321,n23017,n22619,HAS_JURISDICTION,
+e22322,n23018,n22619,HAS_JURISDICTION,
+e22323,n22810,n23019,HAS_LEGAL_TYPE,
+e22324,n22815,n23020,HAS_LEGAL_TYPE,
+e22325,n22816,n23020,HAS_LEGAL_TYPE,
+e22326,n22833,n23021,HAS_LEGAL_TYPE,
+e22327,n22727,n23023,ISSUES,
+e22328,n22824,n23023,ISSUES,
+e22329,n22739,n23024,ISSUES,
+e22330,n22834,n23024,ISSUES,
+e22331,n22826,n23025,ISSUES,
+e22332,n22749,n23026,ISSUES,
+e22333,n22782,n23026,ISSUES,
+e22334,n22739,n23027,ISSUES,
+e22335,n22834,n23027,ISSUES,
+e22336,n22800,n23028,ISSUES,
+e22337,n23029,n23030,ISSUES,
+e22338,n22800,n23031,ISSUES,
+e22339,n22813,n23032,ISSUES,
+e22340,n22758,n23033,ISSUES,
+e22341,n22825,n23033,ISSUES,
+e22342,n22758,n23034,ISSUES,
+e22343,n22825,n23034,ISSUES,
+e22344,n22785,n23035,ISSUES,
+e22345,n22758,n23036,ISSUES,
+e22346,n22825,n23036,ISSUES,
+e22347,n22823,n23037,ISSUES,
+e22348,n22726,n23038,ISSUES,
+e22349,n22814,n23038,ISSUES,
+e22350,n22750,n23039,ISSUES,
+e22351,n22792,n23039,ISSUES,
+e22352,n22784,n23040,ISSUES,
+e22353,n22720,n23041,ISSUES,
+e22354,n22799,n23041,ISSUES,
+e22355,n22755,n23042,ISSUES,
+e22356,n22783,n23042,ISSUES,
+e22357,n22822,n23043,ISSUES,
+e22358,n22832,n23044,ISSUES,
+e22359,n22798,n23045,ISSUES,
+e22360,n22746,n23046,ISSUES,
+e22361,n22827,n23046,ISSUES,
+e22362,n22812,n23047,ISSUES,
+e22363,n22758,n23048,ISSUES,
+e22364,n22825,n23048,ISSUES,
+e22365,n22726,n23049,ISSUES,
+e22366,n22814,n23049,ISSUES,
+e22367,n22736,n23049,ISSUES,
+e22368,n22831,n23049,ISSUES,
+e22369,n22758,n23050,ISSUES,
+e22370,n22825,n23050,ISSUES,
+e22371,n22726,n23051,ISSUES,
+e22372,n22814,n23051,ISSUES,
+e22373,n22722,n23052,ISSUES,
+e22374,n22809,n23052,ISSUES,
+e22375,n22933,n23052,ISSUES,
+e22376,n22800,n23053,ISSUES,
+e22377,n22720,n23054,ISSUES,
+e22378,n22799,n23054,ISSUES,
+e22379,n23029,n23055,ISSUES,
+e22380,n22756,n23056,ISSUES,
+e22381,n22786,n23056,ISSUES,
+e22382,n22722,n23057,ISSUES,
+e22383,n22809,n23057,ISSUES,
+e22384,n22933,n23057,ISSUES,
+e22385,n22750,n23058,ISSUES,
+e22386,n22792,n23058,ISSUES,
+e22387,n22736,n23059,ISSUES,
+e22388,n22831,n23059,ISSUES,
+e22389,n22754,n23060,ISSUES,
+e22390,n22793,n23060,ISSUES,
+e22391,n22813,n23061,ISSUES,
+e22392,n22758,n23062,ISSUES,
+e22393,n22825,n23062,ISSUES,
+e22394,n22727,n23063,ISSUES,
+e22395,n22824,n23063,ISSUES,
+e22396,n22720,n23064,ISSUES,
+e22397,n22799,n23064,ISSUES,
+e22398,n22726,n23065,ISSUES,
+e22399,n22814,n23065,ISSUES,
+e22400,n22722,n23066,ISSUES,
+e22401,n22809,n23066,ISSUES,
+e22402,n22933,n23066,ISSUES,
+e22403,n22750,n23067,ISSUES,
+e22404,n22792,n23067,ISSUES,
+e22405,n22722,n23068,ISSUES,
+e22406,n22809,n23068,ISSUES,
+e22407,n22933,n23068,ISSUES,
+e22408,n22739,n23069,ISSUES,
+e22409,n22834,n23069,ISSUES,
+e22410,n22726,n23070,ISSUES,
+e22411,n22814,n23070,ISSUES,
+e22412,n22758,n23071,ISSUES,
+e22413,n22825,n23071,ISSUES,
+e22414,n22800,n23072,ISSUES,
+e22415,n22736,n23073,ISSUES,
+e22416,n22831,n23073,ISSUES,
+e22417,n22758,n23074,ISSUES,
+e22418,n22825,n23074,ISSUES,
+e22419,n22726,n23075,ISSUES,
+e22420,n22814,n23075,ISSUES,
+e22421,n22764,n23076,ISSUES,
+e22422,n22819,n23076,ISSUES,
+e22423,n22818,n23077,ISSUES,
+e22424,n22727,n23078,ISSUES,
+e22425,n22824,n23078,ISSUES,
+e22426,n22832,n23079,ISSUES,
+e22427,n22789,n23080,ISSUES,
+e22428,n22761,n23081,ISSUES,
+e22429,n22796,n23081,ISSUES,
+e22430,n22758,n23082,ISSUES,
+e22431,n22825,n23082,ISSUES,
+e22432,n22758,n23083,ISSUES,
+e22433,n22825,n23083,ISSUES,
+e22434,n22758,n23084,ISSUES,
+e22435,n22825,n23084,ISSUES,
+e22436,n22739,n23085,ISSUES,
+e22437,n22834,n23085,ISSUES,
+e22438,n22820,n23086,ISSUES,
+e22439,n22722,n23087,ISSUES,
+e22440,n22809,n23087,ISSUES,
+e22441,n22933,n23087,ISSUES,
+e22442,n22828,n23088,ISSUES,
+e22443,n22828,n23088,ISSUES,
+e22444,n22828,n23088,ISSUES,
+e22445,n22722,n23089,ISSUES,
+e22446,n22809,n23089,ISSUES,
+e22447,n22933,n23089,ISSUES,
+e22448,n22812,n23090,ISSUES,
+e22449,n22758,n23091,ISSUES,
+e22450,n22825,n23091,ISSUES,
+e22451,n22838,n23092,ISSUES,
+e22452,n22764,n23093,ISSUES,
+e22453,n22819,n23093,ISSUES,
+e22454,n22750,n23094,ISSUES,
+e22455,n22792,n23094,ISSUES,
+e22456,n22839,n23095,ISSUES,
+e22457,n22840,n23096,ISSUES,
+e22458,n22841,n23097,ISSUES,
+e22459,n22810,n23098,ISSUES,
+e22460,n22842,n23099,ISSUES,
+e22461,n22843,n23100,ISSUES,
+e22462,n22844,n23101,ISSUES,
+e22463,n22845,n23102,ISSUES,
+e22464,n22797,n23103,ISSUES,
+e22465,n22846,n23103,ISSUES,
+e22466,n22847,n23104,ISSUES,
+e22467,n23105,n23106,ISSUES,
+e22468,n23107,n23108,ISSUES,
+e22469,n22800,n23109,ISSUES,
+e22470,n22850,n23110,ISSUES,
+e22471,n22758,n23111,ISSUES,
+e22472,n22825,n23111,ISSUES,
+e22473,n22851,n23112,ISSUES,
+e22474,n22749,n23113,ISSUES,
+e22475,n22782,n23113,ISSUES,
+e22476,n22833,n23114,ISSUES,
+e22477,n22726,n23115,ISSUES,
+e22478,n22814,n23115,ISSUES,
+e22479,n22852,n23116,ISSUES,
+e22480,n22853,n23117,ISSUES,
+e22481,n22759,n23118,ISSUES,
+e22482,n22854,n23118,ISSUES,
+e22483,n22813,n23119,ISSUES,
+e22484,n22758,n23120,ISSUES,
+e22485,n22825,n23120,ISSUES,
+e22486,n23105,n23121,ISSUES,
+e22487,n22726,n23122,ISSUES,
+e22488,n22814,n23122,ISSUES,
+e22489,n22856,n23123,ISSUES,
+e22490,n22722,n23124,ISSUES,
+e22491,n22809,n23124,ISSUES,
+e22492,n22933,n23124,ISSUES,
+e22493,n22833,n23125,ISSUES,
+e22494,n22857,n23126,ISSUES,
+e22495,n22750,n23127,ISSUES,
+e22496,n22792,n23127,ISSUES,
+e22497,n22858,n23128,ISSUES,
+e22498,n22749,n23129,ISSUES,
+e22499,n22782,n23129,ISSUES,
+e22500,n22859,n23130,ISSUES,
+e22501,n22755,n23131,ISSUES,
+e22502,n22783,n23131,ISSUES,
+e22503,n22860,n23132,ISSUES,
+e22504,n22847,n23133,ISSUES,
+e22505,n22860,n23134,ISSUES,
+e22506,n22722,n23135,ISSUES,
+e22507,n22809,n23135,ISSUES,
+e22508,n22933,n23135,ISSUES,
+e22509,n22758,n23136,ISSUES,
+e22510,n22825,n23136,ISSUES,
+e22511,n22726,n23137,ISSUES,
+e22512,n22814,n23137,ISSUES,
+e22513,n22726,n23138,ISSUES,
+e22514,n22814,n23138,ISSUES,
+e22515,n22758,n23139,ISSUES,
+e22516,n22825,n23139,ISSUES,
+e22517,n22726,n23140,ISSUES,
+e22518,n22814,n23140,ISSUES,
+e22519,n22722,n23141,ISSUES,
+e22520,n22809,n23141,ISSUES,
+e22521,n22933,n23141,ISSUES,
+e22522,n22864,n23142,ISSUES,
+e22523,n22758,n23143,ISSUES,
+e22524,n22825,n23143,ISSUES,
+e22525,n22758,n23144,ISSUES,
+e22526,n22825,n23144,ISSUES,
+e22527,n22849,n23145,ISSUES,
+e22528,n22867,n23145,ISSUES,
+e22529,n22726,n23145,ISSUES,
+e22530,n22814,n23145,ISSUES,
+e22531,n22847,n23146,ISSUES,
+e22532,n22750,n23147,ISSUES,
+e22533,n22792,n23147,ISSUES,
+e22534,n22758,n23148,ISSUES,
+e22535,n22825,n23148,ISSUES,
+e22536,n22726,n23149,ISSUES,
+e22537,n22814,n23149,ISSUES,
+e22538,n22869,n23150,ISSUES,
+e22539,n22860,n23151,ISSUES,
+e22540,n22870,n23152,ISSUES,
+e22541,n22765,n23153,ISSUES,
+e22542,n22871,n23153,ISSUES,
+e22543,n22758,n23154,ISSUES,
+e22544,n22825,n23154,ISSUES,
+e22545,n22727,n23155,ISSUES,
+e22546,n22824,n23155,ISSUES,
+e22547,n22867,n23156,ISSUES,
+e22548,n22758,n23157,ISSUES,
+e22549,n22825,n23157,ISSUES,
+e22550,n22810,n23158,ISSUES,
+e22551,n22758,n23159,ISSUES,
+e22552,n22825,n23159,ISSUES,
+e22553,n22722,n23160,ISSUES,
+e22554,n22809,n23160,ISSUES,
+e22555,n22933,n23160,ISSUES,
+e22556,n22874,n23161,ISSUES,
+e22557,n22875,n23161,ISSUES,
+e22558,n22876,n23162,ISSUES,
+e22559,n22864,n23163,ISSUES,
+e22560,n22726,n23164,ISSUES,
+e22561,n22814,n23164,ISSUES,
+e22562,n22758,n23165,ISSUES,
+e22563,n22825,n23165,ISSUES,
+e22564,n22879,n23166,ISSUES,
+e22565,n22810,n23167,ISSUES,
+e22566,n22750,n23168,ISSUES,
+e22567,n22792,n23168,ISSUES,
+e22568,n22739,n23169,ISSUES,
+e22569,n22834,n23169,ISSUES,
+e22570,n22758,n23170,ISSUES,
+e22571,n22825,n23170,ISSUES,
+e22572,n22736,n23171,ISSUES,
+e22573,n22831,n23171,ISSUES,
+e22574,n22879,n23172,ISSUES,
+e22575,n22800,n23173,ISSUES,
+e22576,n22750,n23174,ISSUES,
+e22577,n22792,n23174,ISSUES,
+e22578,n22843,n23175,ISSUES,
+e22579,n22867,n23176,ISSUES,
+e22580,n22758,n23177,ISSUES,
+e22581,n22825,n23177,ISSUES,
+e22582,n22755,n23178,ISSUES,
+e22583,n22783,n23178,ISSUES,
+e22584,n22722,n23179,ISSUES,
+e22585,n22809,n23179,ISSUES,
+e22586,n22933,n23179,ISSUES,
+e22587,n22726,n23180,ISSUES,
+e22588,n22814,n23180,ISSUES,
+e22589,n22847,n23181,ISSUES,
+e22590,n22840,n23182,ISSUES,
+e22591,n22798,n23183,ISSUES,
+e22592,n23184,n23185,ISSUES,
+e22593,n22758,n23186,ISSUES,
+e22594,n22825,n23186,ISSUES,
+e22595,n22798,n23187,ISSUES,
+e22596,n22726,n23188,ISSUES,
+e22597,n22814,n23188,ISSUES,
+e22598,n22800,n23189,ISSUES,
+e22599,n22726,n23190,ISSUES,
+e22600,n22814,n23190,ISSUES,
+e22601,n22758,n23191,ISSUES,
+e22602,n22825,n23191,ISSUES,
+e22603,n22789,n23192,ISSUES,
+e22604,n22852,n23193,ISSUES,
+e22605,n22887,n23194,ISSUES,
+e22606,n22726,n23195,ISSUES,
+e22607,n22814,n23195,ISSUES,
+e22608,n22765,n23196,ISSUES,
+e22609,n22871,n23196,ISSUES,
+e22610,n22761,n23197,ISSUES,
+e22611,n22796,n23197,ISSUES,
+e22612,n22758,n23199,ISSUES,
+e22613,n22825,n23199,ISSUES,
+e22614,n23200,n23201,ISSUES,
+e22615,n22889,n23202,ISSUES,
+e22616,n22890,n23203,ISSUES,
+e22617,n22891,n23204,ISSUES,
+e22618,n22816,n23205,ISSUES,
+e22619,n22750,n23206,ISSUES,
+e22620,n22792,n23206,ISSUES,
+e22621,n22892,n23207,ISSUES,
+e22622,n22832,n23208,ISSUES,
+e22623,n22860,n23209,ISSUES,
+e22624,n22893,n23210,ISSUES,
+e22625,n22894,n23211,ISSUES,
+e22626,n22895,n23211,ISSUES,
+e22627,n22896,n23212,ISSUES,
+e22628,n22758,n23213,ISSUES,
+e22629,n22825,n23213,ISSUES,
+e22630,n22898,n23214,ISSUES,
+e22631,n22832,n23215,ISSUES,
+e22632,n22758,n23216,ISSUES,
+e22633,n22825,n23216,ISSUES,
+e22634,n22726,n23217,ISSUES,
+e22635,n22814,n23217,ISSUES,
+e22636,n22900,n23218,ISSUES,
+e22637,n22901,n23219,ISSUES,
+e22638,n22758,n23220,ISSUES,
+e22639,n22825,n23220,ISSUES,
+e22640,n22757,n23221,ISSUES,
+e22641,n22904,n23221,ISSUES,
+e22642,n22898,n23222,ISSUES,
+e22643,n22798,n23223,ISSUES,
+e22644,n22726,n23223,ISSUES,
+e22645,n22814,n23223,ISSUES,
+e22646,n22903,n23224,ISSUES,
+e22647,n22905,n23225,ISSUES,
+e22648,n22763,n23226,ISSUES,
+e22649,n22906,n23226,ISSUES,
+e22650,n22907,n23227,ISSUES,
+e22651,n22758,n23228,ISSUES,
+e22652,n22825,n23228,ISSUES,
+e22653,n22798,n23229,ISSUES,
+e22654,n22726,n23230,ISSUES,
+e22655,n22814,n23230,ISSUES,
+e22656,n22756,n23231,ISSUES,
+e22657,n22786,n23231,ISSUES,
+e22658,n22739,n23232,ISSUES,
+e22659,n22834,n23232,ISSUES,
+e22660,n22908,n23233,ISSUES,
+e22661,n22750,n23234,ISSUES,
+e22662,n22792,n23234,ISSUES,
+e22663,n22909,n23235,ISSUES,
+e22664,n22813,n23236,ISSUES,
+e22665,n22867,n23237,ISSUES,
+e22666,n22910,n23238,ISSUES,
+e22667,n22755,n23239,ISSUES,
+e22668,n22783,n23239,ISSUES,
+e22669,n22919,n23240,ISSUES,
+e22670,n22753,n23241,ISSUES,
+e22671,n22914,n23241,ISSUES,
+e22672,n22918,n23242,ISSUES,
+e22673,n22917,n23243,ISSUES,
+e22674,n22916,n23243,ISSUES,
+e22675,n22915,n23244,ISSUES,
+e22676,n22913,n23245,ISSUES,
+e22677,n22912,n23245,ISSUES,
+e22678,n22751,n23246,ISSUES,
+e22679,n22911,n23246,ISSUES,
+e22680,n22758,n23247,ISSUES,
+e22681,n22825,n23247,ISSUES,
+e22682,n22726,n23248,ISSUES,
+e22683,n22814,n23248,ISSUES,
+e22684,n22765,n23249,ISSUES,
+e22685,n22871,n23249,ISSUES,
+e22686,n22921,n23250,ISSUES,
+e22687,n22909,n23251,ISSUES,
+e22688,n22917,n23252,ISSUES,
+e22689,n22922,n23253,ISSUES,
+e22690,n22915,n23254,ISSUES,
+e22691,n22923,n23255,ISSUES,
+e22692,n22924,n23256,ISSUES,
+e22693,n22798,n23257,ISSUES,
+e22694,n22758,n23258,ISSUES,
+e22695,n22825,n23258,ISSUES,
+e22696,n22798,n23259,ISSUES,
+e22697,n22727,n23260,ISSUES,
+e22698,n22824,n23260,ISSUES,
+e22699,n22755,n23261,ISSUES,
+e22700,n22783,n23261,ISSUES,
+e22701,n22847,n23262,ISSUES,
+e22702,n22722,n23263,ISSUES,
+e22703,n22809,n23263,ISSUES,
+e22704,n22933,n23263,ISSUES,
+e22705,n22927,n23264,ISSUES,
+e22706,n22726,n23265,ISSUES,
+e22707,n22814,n23265,ISSUES,
+e22708,n22928,n23266,ISSUES,
+e22709,n22758,n23267,ISSUES,
+e22710,n22825,n23267,ISSUES,
+e22711,n22750,n23268,ISSUES,
+e22712,n22792,n23268,ISSUES,
+e22713,n22930,n23269,ISSUES,
+e22714,n22813,n23270,ISSUES,
+e22715,n22931,n23269,ISSUES,
+e22716,n22785,n23271,ISSUES,
+e22717,n22743,n23274,ISSUES,
+e22718,n22952,n23274,ISSUES,
+e22719,n22743,n23275,ISSUES,
+e22720,n22952,n23275,ISSUES,
+e22721,n22743,n23276,ISSUES,
+e22722,n22952,n23276,ISSUES,
+e22723,n22743,n23277,ISSUES,
+e22724,n22952,n23277,ISSUES,
+e22725,n22743,n23279,ISSUES,
+e22726,n22952,n23279,ISSUES,
+e22727,n22743,n23280,ISSUES,
+e22728,n22952,n23280,ISSUES,
+e22729,n22743,n23281,ISSUES,
+e22730,n22952,n23281,ISSUES,
+e22731,n22743,n23282,ISSUES,
+e22732,n22952,n23282,ISSUES,
+e22733,n22743,n23283,ISSUES,
+e22734,n22952,n23283,ISSUES,
+e22735,n22743,n23284,ISSUES,
+e22736,n22952,n23284,ISSUES,
+e22737,n22743,n23285,ISSUES,
+e22738,n22952,n23285,ISSUES,
+e22739,n22743,n23286,ISSUES,
+e22740,n22952,n23286,ISSUES,
+e22741,n22743,n23287,ISSUES,
+e22742,n22952,n23287,ISSUES,
+e22743,n22743,n23288,ISSUES,
+e22744,n22952,n23288,ISSUES,
+e22745,n22743,n23289,ISSUES,
+e22746,n22952,n23289,ISSUES,
+e22747,n22743,n23290,ISSUES,
+e22748,n22952,n23290,ISSUES,
+e22749,n22743,n23291,ISSUES,
+e22750,n22952,n23291,ISSUES,
+e22751,n22743,n23292,ISSUES,
+e22752,n22952,n23292,ISSUES,
+e22753,n22743,n23293,ISSUES,
+e22754,n22952,n23293,ISSUES,
+e22755,n22743,n23295,ISSUES,
+e22756,n22952,n23295,ISSUES,
+e22757,n22743,n23296,ISSUES,
+e22758,n22952,n23296,ISSUES,
+e22759,n22743,n23297,ISSUES,
+e22760,n22952,n23297,ISSUES,
+e22761,n22743,n23299,ISSUES,
+e22762,n22952,n23299,ISSUES,
+e22763,n22743,n23300,ISSUES,
+e22764,n22952,n23300,ISSUES,
+e22765,n22743,n23301,ISSUES,
+e22766,n22952,n23301,ISSUES,
+e22767,n22743,n23302,ISSUES,
+e22768,n22952,n23302,ISSUES,
+e22769,n22743,n23303,ISSUES,
+e22770,n22952,n23303,ISSUES,
+e22771,n22743,n23296,ISSUES,
+e22772,n22952,n23296,ISSUES,
+e22773,n23023,n22802,HAS_CONTRACTOR,
+e22774,n23024,n22802,HAS_CONTRACTOR,
+e22775,n23025,n22802,HAS_CONTRACTOR,
+e22776,n23026,n22802,HAS_CONTRACTOR,
+e22777,n23027,n22802,HAS_CONTRACTOR,
+e22778,n23028,n22787,HAS_CONTRACTOR,
+e22779,n23030,n22787,HAS_CONTRACTOR,
+e22780,n23031,n22787,HAS_CONTRACTOR,
+e22781,n23032,n22810,HAS_CONTRACTOR,
+e22782,n23033,n22810,HAS_CONTRACTOR,
+e22783,n23034,n22810,HAS_CONTRACTOR,
+e22784,n23035,n22807,HAS_CONTRACTOR,
+e22785,n23036,n22807,HAS_CONTRACTOR,
+e22786,n23037,n22830,HAS_CONTRACTOR,
+e22787,n23038,n22830,HAS_CONTRACTOR,
+e22788,n23039,n22830,HAS_CONTRACTOR,
+e22789,n23040,n22830,HAS_CONTRACTOR,
+e22790,n23041,n22830,HAS_CONTRACTOR,
+e22791,n23042,n22830,HAS_CONTRACTOR,
+e22792,n23043,n22830,HAS_CONTRACTOR,
+e22793,n23044,n22830,HAS_CONTRACTOR,
+e22794,n23045,n22830,HAS_CONTRACTOR,
+e22795,n23046,n22830,HAS_CONTRACTOR,
+e22796,n23047,n22830,HAS_CONTRACTOR,
+e22797,n23048,n22836,HAS_CONTRACTOR,
+e22798,n23049,n22836,HAS_CONTRACTOR,
+e22799,n23050,n22791,HAS_CONTRACTOR,
+e22800,n23051,n22791,HAS_CONTRACTOR,
+e22801,n23052,n22791,HAS_CONTRACTOR,
+e22802,n23053,n22791,HAS_CONTRACTOR,
+e22803,n23054,n22791,HAS_CONTRACTOR,
+e22804,n23055,n22791,HAS_CONTRACTOR,
+e22805,n23056,n22791,HAS_CONTRACTOR,
+e22806,n23057,n22817,HAS_CONTRACTOR,
+e22807,n23058,n22817,HAS_CONTRACTOR,
+e22808,n23059,n22817,HAS_CONTRACTOR,
+e22809,n23060,n22817,HAS_CONTRACTOR,
+e22810,n23061,n22817,HAS_CONTRACTOR,
+e22811,n23062,n22817,HAS_CONTRACTOR,
+e22812,n23063,n22803,HAS_CONTRACTOR,
+e22813,n23064,n22803,HAS_CONTRACTOR,
+e22814,n23065,n22803,HAS_CONTRACTOR,
+e22815,n23066,n22803,HAS_CONTRACTOR,
+e22816,n23067,n22794,HAS_CONTRACTOR,
+e22817,n23068,n22794,HAS_CONTRACTOR,
+e22818,n23069,n22794,HAS_CONTRACTOR,
+e22819,n23070,n22794,HAS_CONTRACTOR,
+e22820,n23071,n22794,HAS_CONTRACTOR,
+e22821,n23072,n22816,HAS_CONTRACTOR,
+e22822,n23073,n22816,HAS_CONTRACTOR,
+e22823,n23074,n22816,HAS_CONTRACTOR,
+e22824,n23075,n22816,HAS_CONTRACTOR,
+e22825,n23076,n22816,HAS_CONTRACTOR,
+e22826,n23077,n22816,HAS_CONTRACTOR,
+e22827,n23078,n22816,HAS_CONTRACTOR,
+e22828,n23079,n22816,HAS_CONTRACTOR,
+e22829,n23080,n22816,HAS_CONTRACTOR,
+e22830,n23081,n22816,HAS_CONTRACTOR,
+e22831,n23082,n22808,HAS_CONTRACTOR,
+e22832,n23082,n22790,HAS_CONTRACTOR,
+e22833,n23082,n22804,HAS_CONTRACTOR,
+e22834,n23082,n22815,HAS_CONTRACTOR,
+e22835,n23083,n22821,HAS_CONTRACTOR,
+e22836,n23084,n22810,HAS_CONTRACTOR,
+e22837,n23085,n22820,HAS_CONTRACTOR,
+e22838,n23086,n22780,HAS_CONTRACTOR,
+e22839,n23086,n22835,HAS_CONTRACTOR,
+e22840,n23086,n22805,HAS_CONTRACTOR,
+e22841,n23086,n22797,HAS_CONTRACTOR,
+e22842,n23086,n22846,HAS_CONTRACTOR,
+e22843,n23086,n22811,HAS_CONTRACTOR,
+e22844,n23087,n22828,HAS_CONTRACTOR,
+e22845,n23087,n22829,HAS_CONTRACTOR,
+e22846,n23087,n22820,HAS_CONTRACTOR,
+e22847,n23088,n22811,HAS_CONTRACTOR,
+e22848,n23088,n22795,HAS_CONTRACTOR,
+e22849,n23088,n22801,HAS_CONTRACTOR,
+e22850,n23089,n22811,HAS_CONTRACTOR,
+e22851,n23089,n22760,HAS_CONTRACTOR,
+e22852,n23089,n22788,HAS_CONTRACTOR,
+e22853,n23089,n22806,HAS_CONTRACTOR,
+e22854,n23090,n22829,HAS_CONTRACTOR,
+e22855,n23091,n22829,HAS_CONTRACTOR,
+e22856,n23092,n22837,HAS_CONTRACTOR,
+e22857,n23093,n22837,HAS_CONTRACTOR,
+e22858,n23094,n22837,HAS_CONTRACTOR,
+e22859,n23095,n22837,HAS_CONTRACTOR,
+e22860,n23096,n22837,HAS_CONTRACTOR,
+e22861,n23097,n22837,HAS_CONTRACTOR,
+e22862,n23098,n22837,HAS_CONTRACTOR,
+e22863,n23099,n22837,HAS_CONTRACTOR,
+e22864,n23100,n22837,HAS_CONTRACTOR,
+e22865,n23101,n22837,HAS_CONTRACTOR,
+e22866,n23102,n22837,HAS_CONTRACTOR,
+e22867,n23103,n22837,HAS_CONTRACTOR,
+e22868,n23104,n22837,HAS_CONTRACTOR,
+e22869,n23106,n22837,HAS_CONTRACTOR,
+e22870,n23108,n22837,HAS_CONTRACTOR,
+e22871,n23109,n22837,HAS_CONTRACTOR,
+e22872,n23110,n22837,HAS_CONTRACTOR,
+e22873,n23111,n22837,HAS_CONTRACTOR,
+e22874,n23112,n22837,HAS_CONTRACTOR,
+e22875,n23113,n22837,HAS_CONTRACTOR,
+e22876,n23114,n22837,HAS_CONTRACTOR,
+e22877,n23115,n22837,HAS_CONTRACTOR,
+e22878,n23116,n22837,HAS_CONTRACTOR,
+e22879,n23117,n22837,HAS_CONTRACTOR,
+e22880,n23118,n22837,HAS_CONTRACTOR,
+e22881,n23119,n22855,HAS_CONTRACTOR,
+e22882,n23120,n22855,HAS_CONTRACTOR,
+e22883,n23121,n22855,HAS_CONTRACTOR,
+e22884,n23122,n22855,HAS_CONTRACTOR,
+e22885,n23123,n22855,HAS_CONTRACTOR,
+e22886,n23124,n22855,HAS_CONTRACTOR,
+e22887,n23125,n22855,HAS_CONTRACTOR,
+e22888,n23126,n22855,HAS_CONTRACTOR,
+e22889,n23127,n22855,HAS_CONTRACTOR,
+e22890,n23128,n22855,HAS_CONTRACTOR,
+e22891,n23129,n22855,HAS_CONTRACTOR,
+e22892,n23130,n22855,HAS_CONTRACTOR,
+e22893,n23131,n22855,HAS_CONTRACTOR,
+e22894,n23132,n22855,HAS_CONTRACTOR,
+e22895,n23133,n22861,HAS_CONTRACTOR,
+e22896,n23134,n22861,HAS_CONTRACTOR,
+e22897,n23135,n22861,HAS_CONTRACTOR,
+e22898,n23136,n22861,HAS_CONTRACTOR,
+e22899,n23137,n22861,HAS_CONTRACTOR,
+e22900,n23138,n22862,HAS_CONTRACTOR,
+e22901,n23139,n22862,HAS_CONTRACTOR,
+e22902,n23140,n22863,HAS_CONTRACTOR,
+e22903,n23141,n22863,HAS_CONTRACTOR,
+e22904,n23142,n22863,HAS_CONTRACTOR,
+e22905,n23143,n22863,HAS_CONTRACTOR,
+e22906,n23144,n22865,HAS_CONTRACTOR,
+e22907,n23145,n22865,HAS_CONTRACTOR,
+e22908,n23146,n22865,HAS_CONTRACTOR,
+e22909,n23147,n22865,HAS_CONTRACTOR,
+e22910,n23148,n22868,HAS_CONTRACTOR,
+e22911,n23149,n22868,HAS_CONTRACTOR,
+e22912,n23150,n22868,HAS_CONTRACTOR,
+e22913,n23151,n22868,HAS_CONTRACTOR,
+e22914,n23152,n22868,HAS_CONTRACTOR,
+e22915,n23153,n22868,HAS_CONTRACTOR,
+e22916,n23154,n22872,HAS_CONTRACTOR,
+e22917,n23155,n22872,HAS_CONTRACTOR,
+e22918,n23156,n22872,HAS_CONTRACTOR,
+e22919,n23157,n22873,HAS_CONTRACTOR,
+e22920,n23158,n22873,HAS_CONTRACTOR,
+e22921,n23159,n22864,HAS_CONTRACTOR,
+e22922,n23160,n22864,HAS_CONTRACTOR,
+e22923,n23161,n22864,HAS_CONTRACTOR,
+e22924,n23162,n22864,HAS_CONTRACTOR,
+e22925,n23163,n22877,HAS_CONTRACTOR,
+e22926,n23164,n22878,HAS_CONTRACTOR,
+e22927,n23165,n22878,HAS_CONTRACTOR,
+e22928,n23166,n22878,HAS_CONTRACTOR,
+e22929,n23167,n22878,HAS_CONTRACTOR,
+e22930,n23168,n22878,HAS_CONTRACTOR,
+e22931,n23169,n22878,HAS_CONTRACTOR,
+e22932,n23170,n22881,HAS_CONTRACTOR,
+e22933,n23171,n22881,HAS_CONTRACTOR,
+e22934,n23172,n22881,HAS_CONTRACTOR,
+e22935,n23173,n22881,HAS_CONTRACTOR,
+e22936,n23174,n22881,HAS_CONTRACTOR,
+e22937,n23175,n22881,HAS_CONTRACTOR,
+e22938,n23176,n22882,HAS_CONTRACTOR,
+e22939,n23177,n22882,HAS_CONTRACTOR,
+e22940,n23178,n22882,HAS_CONTRACTOR,
+e22941,n23179,n22882,HAS_CONTRACTOR,
+e22942,n23180,n22882,HAS_CONTRACTOR,
+e22943,n23181,n22882,HAS_CONTRACTOR,
+e22944,n23182,n22882,HAS_CONTRACTOR,
+e22945,n23183,n22882,HAS_CONTRACTOR,
+e22946,n23185,n22882,HAS_CONTRACTOR,
+e22947,n23186,n22883,HAS_CONTRACTOR,
+e22948,n23187,n22883,HAS_CONTRACTOR,
+e22949,n23188,n22883,HAS_CONTRACTOR,
+e22950,n23189,n22884,HAS_CONTRACTOR,
+e22951,n23190,n22884,HAS_CONTRACTOR,
+e22952,n23191,n22886,HAS_CONTRACTOR,
+e22953,n23192,n22886,HAS_CONTRACTOR,
+e22954,n23193,n22886,HAS_CONTRACTOR,
+e22955,n23194,n22886,HAS_CONTRACTOR,
+e22956,n23195,n22886,HAS_CONTRACTOR,
+e22957,n23196,n22886,HAS_CONTRACTOR,
+e22958,n23197,n22886,HAS_CONTRACTOR,
+e22959,n23199,n23198,HAS_CONTRACTOR,
+e22960,n23201,n23198,HAS_CONTRACTOR,
+e22961,n23202,n23198,HAS_CONTRACTOR,
+e22962,n23203,n23198,HAS_CONTRACTOR,
+e22963,n23204,n23198,HAS_CONTRACTOR,
+e22964,n23205,n23198,HAS_CONTRACTOR,
+e22965,n23206,n23198,HAS_CONTRACTOR,
+e22966,n23207,n23198,HAS_CONTRACTOR,
+e22967,n23208,n23198,HAS_CONTRACTOR,
+e22968,n23209,n23198,HAS_CONTRACTOR,
+e22969,n23210,n23198,HAS_CONTRACTOR,
+e22970,n23211,n23198,HAS_CONTRACTOR,
+e22971,n23212,n22897,HAS_CONTRACTOR,
+e22972,n23213,n22897,HAS_CONTRACTOR,
+e22973,n23214,n22897,HAS_CONTRACTOR,
+e22974,n23215,n22897,HAS_CONTRACTOR,
+e22975,n23216,n22899,HAS_CONTRACTOR,
+e22976,n23217,n22899,HAS_CONTRACTOR,
+e22977,n23218,n22899,HAS_CONTRACTOR,
+e22978,n23219,n22899,HAS_CONTRACTOR,
+e22979,n23220,n22902,HAS_CONTRACTOR,
+e22980,n23221,n22902,HAS_CONTRACTOR,
+e22981,n23222,n22902,HAS_CONTRACTOR,
+e22982,n23223,n22902,HAS_CONTRACTOR,
+e22983,n23224,n22902,HAS_CONTRACTOR,
+e22984,n23225,n22902,HAS_CONTRACTOR,
+e22985,n23226,n22791,HAS_CONTRACTOR,
+e22986,n23227,n22791,HAS_CONTRACTOR,
+e22987,n23228,n22791,HAS_CONTRACTOR,
+e22988,n23229,n22791,HAS_CONTRACTOR,
+e22989,n23230,n22791,HAS_CONTRACTOR,
+e22990,n23231,n22791,HAS_CONTRACTOR,
+e22991,n23232,n22791,HAS_CONTRACTOR,
+e22992,n23233,n22791,HAS_CONTRACTOR,
+e22993,n23234,n22791,HAS_CONTRACTOR,
+e22994,n23235,n22791,HAS_CONTRACTOR,
+e22995,n23236,n22791,HAS_CONTRACTOR,
+e22996,n23237,n22791,HAS_CONTRACTOR,
+e22997,n23238,n22791,HAS_CONTRACTOR,
+e22998,n23239,n22791,HAS_CONTRACTOR,
+e22999,n23240,n22791,HAS_CONTRACTOR,
+e23000,n23241,n22791,HAS_CONTRACTOR,
+e23001,n23242,n22791,HAS_CONTRACTOR,
+e23002,n23243,n22791,HAS_CONTRACTOR,
+e23003,n23244,n22791,HAS_CONTRACTOR,
+e23004,n23245,n22791,HAS_CONTRACTOR,
+e23005,n23246,n22791,HAS_CONTRACTOR,
+e23006,n23247,n22920,HAS_CONTRACTOR,
+e23007,n23248,n22920,HAS_CONTRACTOR,
+e23008,n23249,n22920,HAS_CONTRACTOR,
+e23009,n23250,n22920,HAS_CONTRACTOR,
+e23010,n23251,n22920,HAS_CONTRACTOR,
+e23011,n23252,n22920,HAS_CONTRACTOR,
+e23012,n23253,n22920,HAS_CONTRACTOR,
+e23013,n23254,n22920,HAS_CONTRACTOR,
+e23014,n23255,n22920,HAS_CONTRACTOR,
+e23015,n23256,n22920,HAS_CONTRACTOR,
+e23016,n23257,n22920,HAS_CONTRACTOR,
+e23017,n23258,n22925,HAS_CONTRACTOR,
+e23018,n23259,n22925,HAS_CONTRACTOR,
+e23019,n23260,n22925,HAS_CONTRACTOR,
+e23020,n23261,n22925,HAS_CONTRACTOR,
+e23021,n23262,n22925,HAS_CONTRACTOR,
+e23022,n23263,n22926,HAS_CONTRACTOR,
+e23023,n23264,n22926,HAS_CONTRACTOR,
+e23024,n23265,n22926,HAS_CONTRACTOR,
+e23025,n23266,n22926,HAS_CONTRACTOR,
+e23026,n23267,n22929,HAS_CONTRACTOR,
+e23027,n23268,n22929,HAS_CONTRACTOR,
+e23028,n23269,n22929,HAS_CONTRACTOR,
+e23029,n23270,n22929,HAS_CONTRACTOR,
+e23030,n23271,n22929,HAS_CONTRACTOR,
+e23031,n23274,n23272,HAS_CONTRACTOR,
+e23032,n23274,n22720,HAS_CONTRACTOR,
+e23033,n23274,n22799,HAS_CONTRACTOR,
+e23034,n23274,n22723,HAS_CONTRACTOR,
+e23035,n23274,n22935,HAS_CONTRACTOR,
+e23036,n23274,n22736,HAS_CONTRACTOR,
+e23037,n23274,n22831,HAS_CONTRACTOR,
+e23038,n23275,n23272,HAS_CONTRACTOR,
+e23039,n23275,n22958,HAS_CONTRACTOR,
+e23040,n23275,n22959,HAS_CONTRACTOR,
+e23041,n23275,n22743,HAS_CONTRACTOR,
+e23042,n23275,n22952,HAS_CONTRACTOR,
+e23043,n23275,n22960,HAS_CONTRACTOR,
+e23044,n23276,n22746,HAS_CONTRACTOR,
+e23045,n23276,n22827,HAS_CONTRACTOR,
+e23046,n23276,n22959,HAS_CONTRACTOR,
+e23047,n23276,n22961,HAS_CONTRACTOR,
+e23048,n23277,n22720,HAS_CONTRACTOR,
+e23049,n23277,n22799,HAS_CONTRACTOR,
+e23050,n23277,n23278,HAS_CONTRACTOR,
+e23051,n23277,n22962,HAS_CONTRACTOR,
+e23052,n23277,n22745,HAS_CONTRACTOR,
+e23053,n23277,n22953,HAS_CONTRACTOR,
+e23054,n23279,n22963,HAS_CONTRACTOR,
+e23055,n23279,n22964,HAS_CONTRACTOR,
+e23056,n23279,n22845,HAS_CONTRACTOR,
+e23057,n23280,n22965,HAS_CONTRACTOR,
+e23058,n23280,n22966,HAS_CONTRACTOR,
+e23059,n23280,n22967,HAS_CONTRACTOR,
+e23060,n23281,n22745,HAS_CONTRACTOR,
+e23061,n23281,n22953,HAS_CONTRACTOR,
+e23062,n23281,n22965,HAS_CONTRACTOR,
+e23063,n23281,n22968,HAS_CONTRACTOR,
+e23064,n23281,n22876,HAS_CONTRACTOR,
+e23065,n23282,n22789,HAS_CONTRACTOR,
+e23066,n23282,n22736,HAS_CONTRACTOR,
+e23067,n23282,n22831,HAS_CONTRACTOR,
+e23068,n23283,n22789,HAS_CONTRACTOR,
+e23069,n23283,n22743,HAS_CONTRACTOR,
+e23070,n23283,n22952,HAS_CONTRACTOR,
+e23071,n23284,n22736,HAS_CONTRACTOR,
+e23072,n23284,n22831,HAS_CONTRACTOR,
+e23073,n23284,n22743,HAS_CONTRACTOR,
+e23074,n23284,n22952,HAS_CONTRACTOR,
+e23075,n23285,n23272,HAS_CONTRACTOR,
+e23076,n23285,n22970,HAS_CONTRACTOR,
+e23077,n23285,n22736,HAS_CONTRACTOR,
+e23078,n23285,n22831,HAS_CONTRACTOR,
+e23079,n23286,n22778,HAS_CONTRACTOR,
+e23080,n23286,n22971,HAS_CONTRACTOR,
+e23081,n23286,n22972,HAS_CONTRACTOR,
+e23082,n23287,n22967,HAS_CONTRACTOR,
+e23083,n23287,n22973,HAS_CONTRACTOR,
+e23084,n23288,n22969,HAS_CONTRACTOR,
+e23085,n23288,n22736,HAS_CONTRACTOR,
+e23086,n23288,n22831,HAS_CONTRACTOR,
+e23087,n23289,n23272,HAS_CONTRACTOR,
+e23088,n23289,n22969,HAS_CONTRACTOR,
+e23089,n23289,n22974,HAS_CONTRACTOR,
+e23090,n23290,n23272,HAS_CONTRACTOR,
+e23091,n23290,n22975,HAS_CONTRACTOR,
+e23092,n23291,n22976,HAS_CONTRACTOR,
+e23093,n23291,n22977,HAS_CONTRACTOR,
+e23094,n23292,n22978,HAS_CONTRACTOR,
+e23095,n23292,n22928,HAS_CONTRACTOR,
+e23096,n23293,n22928,HAS_CONTRACTOR,
+e23097,n23293,n22979,HAS_CONTRACTOR,
+e23098,n23295,n23294,HAS_CONTRACTOR,
+e23099,n23295,n22980,HAS_CONTRACTOR,
+e23100,n23296,n23294,HAS_CONTRACTOR,
+e23101,n23296,n22981,HAS_CONTRACTOR,
+e23102,n23297,n22982,HAS_CONTRACTOR,
+e23103,n23297,n23298,HAS_CONTRACTOR,
+e23104,n23297,n22967,HAS_CONTRACTOR,
+e23105,n23297,n22983,HAS_CONTRACTOR,
+e23106,n23299,n22982,HAS_CONTRACTOR,
+e23107,n23299,n22984,HAS_CONTRACTOR,
+e23108,n23300,n22726,HAS_CONTRACTOR,
+e23109,n23300,n22814,HAS_CONTRACTOR,
+e23110,n23300,n22982,HAS_CONTRACTOR,
+e23111,n23300,n22985,HAS_CONTRACTOR,
+e23112,n23301,n22986,HAS_CONTRACTOR,
+e23113,n23301,n22845,HAS_CONTRACTOR,
+e23114,n23301,n22987,HAS_CONTRACTOR,
+e23115,n23302,n22743,HAS_CONTRACTOR,
+e23116,n23302,n22952,HAS_CONTRACTOR,
+e23117,n23302,n22988,HAS_CONTRACTOR,
+e23118,n23302,n22989,HAS_CONTRACTOR,
+e23119,n23302,n22990,HAS_CONTRACTOR,
+e23120,n23302,n22991,HAS_CONTRACTOR,
+e23121,n23303,n22991,HAS_CONTRACTOR,
+e23122,n23303,n22992,HAS_CONTRACTOR,
+e23123,n23296,n22766,HAS_CONTRACTOR,
+e23124,n23296,n22995,HAS_CONTRACTOR,
+e23125,n23296,n22743,HAS_CONTRACTOR,
+e23126,n23296,n22952,HAS_CONTRACTOR,
+e23127,n23023,n23022,CONTRACT_TYPE,
+e23128,n23024,n23022,CONTRACT_TYPE,
+e23129,n23025,n23022,CONTRACT_TYPE,
+e23130,n23026,n23022,CONTRACT_TYPE,
+e23131,n23027,n23022,CONTRACT_TYPE,
+e23132,n23028,n23022,CONTRACT_TYPE,
+e23133,n23030,n23022,CONTRACT_TYPE,
+e23134,n23031,n23022,CONTRACT_TYPE,
+e23135,n23032,n23022,CONTRACT_TYPE,
+e23136,n23033,n23022,CONTRACT_TYPE,
+e23137,n23034,n23022,CONTRACT_TYPE,
+e23138,n23035,n23022,CONTRACT_TYPE,
+e23139,n23036,n23022,CONTRACT_TYPE,
+e23140,n23037,n23022,CONTRACT_TYPE,
+e23141,n23038,n23022,CONTRACT_TYPE,
+e23142,n23039,n23022,CONTRACT_TYPE,
+e23143,n23040,n23022,CONTRACT_TYPE,
+e23144,n23041,n23022,CONTRACT_TYPE,
+e23145,n23042,n23022,CONTRACT_TYPE,
+e23146,n23043,n23022,CONTRACT_TYPE,
+e23147,n23044,n23022,CONTRACT_TYPE,
+e23148,n23045,n23022,CONTRACT_TYPE,
+e23149,n23046,n23022,CONTRACT_TYPE,
+e23150,n23047,n23022,CONTRACT_TYPE,
+e23151,n23048,n23022,CONTRACT_TYPE,
+e23152,n23049,n23022,CONTRACT_TYPE,
+e23153,n23050,n23022,CONTRACT_TYPE,
+e23154,n23051,n23022,CONTRACT_TYPE,
+e23155,n23052,n23022,CONTRACT_TYPE,
+e23156,n23053,n23022,CONTRACT_TYPE,
+e23157,n23054,n23022,CONTRACT_TYPE,
+e23158,n23055,n23022,CONTRACT_TYPE,
+e23159,n23056,n23022,CONTRACT_TYPE,
+e23160,n23057,n23022,CONTRACT_TYPE,
+e23161,n23058,n23022,CONTRACT_TYPE,
+e23162,n23059,n23022,CONTRACT_TYPE,
+e23163,n23060,n23022,CONTRACT_TYPE,
+e23164,n23061,n23022,CONTRACT_TYPE,
+e23165,n23062,n23022,CONTRACT_TYPE,
+e23166,n23063,n23022,CONTRACT_TYPE,
+e23167,n23064,n23022,CONTRACT_TYPE,
+e23168,n23065,n23022,CONTRACT_TYPE,
+e23169,n23066,n23022,CONTRACT_TYPE,
+e23170,n23067,n23022,CONTRACT_TYPE,
+e23171,n23068,n23022,CONTRACT_TYPE,
+e23172,n23069,n23022,CONTRACT_TYPE,
+e23173,n23070,n23022,CONTRACT_TYPE,
+e23174,n23071,n23022,CONTRACT_TYPE,
+e23175,n23072,n23022,CONTRACT_TYPE,
+e23176,n23073,n23022,CONTRACT_TYPE,
+e23177,n23074,n23022,CONTRACT_TYPE,
+e23178,n23075,n23022,CONTRACT_TYPE,
+e23179,n23076,n23022,CONTRACT_TYPE,
+e23180,n23077,n23022,CONTRACT_TYPE,
+e23181,n23078,n23022,CONTRACT_TYPE,
+e23182,n23079,n23022,CONTRACT_TYPE,
+e23183,n23080,n23022,CONTRACT_TYPE,
+e23184,n23081,n23022,CONTRACT_TYPE,
+e23185,n23082,n23022,CONTRACT_TYPE,
+e23186,n23083,n23022,CONTRACT_TYPE,
+e23187,n23084,n23022,CONTRACT_TYPE,
+e23188,n23085,n23022,CONTRACT_TYPE,
+e23189,n23086,n23022,CONTRACT_TYPE,
+e23190,n23087,n23022,CONTRACT_TYPE,
+e23191,n23088,n23022,CONTRACT_TYPE,
+e23192,n23088,n23022,CONTRACT_TYPE,
+e23193,n23088,n23022,CONTRACT_TYPE,
+e23194,n23089,n23022,CONTRACT_TYPE,
+e23195,n23090,n23022,CONTRACT_TYPE,
+e23196,n23091,n23022,CONTRACT_TYPE,
+e23197,n23092,n23022,CONTRACT_TYPE,
+e23198,n23093,n23022,CONTRACT_TYPE,
+e23199,n23094,n23022,CONTRACT_TYPE,
+e23200,n23095,n23022,CONTRACT_TYPE,
+e23201,n23096,n23022,CONTRACT_TYPE,
+e23202,n23097,n23022,CONTRACT_TYPE,
+e23203,n23098,n23022,CONTRACT_TYPE,
+e23204,n23099,n23022,CONTRACT_TYPE,
+e23205,n23100,n23022,CONTRACT_TYPE,
+e23206,n23101,n23022,CONTRACT_TYPE,
+e23207,n23102,n23022,CONTRACT_TYPE,
+e23208,n23103,n23022,CONTRACT_TYPE,
+e23209,n23104,n23022,CONTRACT_TYPE,
+e23210,n23106,n23022,CONTRACT_TYPE,
+e23211,n23108,n23022,CONTRACT_TYPE,
+e23212,n23109,n23022,CONTRACT_TYPE,
+e23213,n23110,n23022,CONTRACT_TYPE,
+e23214,n23111,n23022,CONTRACT_TYPE,
+e23215,n23112,n23022,CONTRACT_TYPE,
+e23216,n23113,n23022,CONTRACT_TYPE,
+e23217,n23114,n23022,CONTRACT_TYPE,
+e23218,n23115,n23022,CONTRACT_TYPE,
+e23219,n23116,n23022,CONTRACT_TYPE,
+e23220,n23117,n23022,CONTRACT_TYPE,
+e23221,n23118,n23022,CONTRACT_TYPE,
+e23222,n23119,n23022,CONTRACT_TYPE,
+e23223,n23120,n23022,CONTRACT_TYPE,
+e23224,n23121,n23022,CONTRACT_TYPE,
+e23225,n23122,n23022,CONTRACT_TYPE,
+e23226,n23123,n23022,CONTRACT_TYPE,
+e23227,n23124,n23022,CONTRACT_TYPE,
+e23228,n23125,n23022,CONTRACT_TYPE,
+e23229,n23126,n23022,CONTRACT_TYPE,
+e23230,n23127,n23022,CONTRACT_TYPE,
+e23231,n23128,n23022,CONTRACT_TYPE,
+e23232,n23129,n23022,CONTRACT_TYPE,
+e23233,n23130,n23022,CONTRACT_TYPE,
+e23234,n23131,n23022,CONTRACT_TYPE,
+e23235,n23132,n23022,CONTRACT_TYPE,
+e23236,n23133,n23022,CONTRACT_TYPE,
+e23237,n23134,n23022,CONTRACT_TYPE,
+e23238,n23135,n23022,CONTRACT_TYPE,
+e23239,n23136,n23022,CONTRACT_TYPE,
+e23240,n23137,n23022,CONTRACT_TYPE,
+e23241,n23138,n23022,CONTRACT_TYPE,
+e23242,n23139,n23022,CONTRACT_TYPE,
+e23243,n23140,n23022,CONTRACT_TYPE,
+e23244,n23141,n23022,CONTRACT_TYPE,
+e23245,n23142,n23022,CONTRACT_TYPE,
+e23246,n23143,n23022,CONTRACT_TYPE,
+e23247,n23144,n23022,CONTRACT_TYPE,
+e23248,n23145,n23022,CONTRACT_TYPE,
+e23249,n23146,n23022,CONTRACT_TYPE,
+e23250,n23147,n23022,CONTRACT_TYPE,
+e23251,n23148,n23022,CONTRACT_TYPE,
+e23252,n23149,n23022,CONTRACT_TYPE,
+e23253,n23150,n23022,CONTRACT_TYPE,
+e23254,n23151,n23022,CONTRACT_TYPE,
+e23255,n23152,n23022,CONTRACT_TYPE,
+e23256,n23153,n23022,CONTRACT_TYPE,
+e23257,n23154,n23022,CONTRACT_TYPE,
+e23258,n23155,n23022,CONTRACT_TYPE,
+e23259,n23156,n23022,CONTRACT_TYPE,
+e23260,n23157,n23022,CONTRACT_TYPE,
+e23261,n23158,n23022,CONTRACT_TYPE,
+e23262,n23159,n23022,CONTRACT_TYPE,
+e23263,n23160,n23022,CONTRACT_TYPE,
+e23264,n23161,n23022,CONTRACT_TYPE,
+e23265,n23162,n23022,CONTRACT_TYPE,
+e23266,n23163,n23022,CONTRACT_TYPE,
+e23267,n23164,n23022,CONTRACT_TYPE,
+e23268,n23165,n23022,CONTRACT_TYPE,
+e23269,n23166,n23022,CONTRACT_TYPE,
+e23270,n23167,n23022,CONTRACT_TYPE,
+e23271,n23168,n23022,CONTRACT_TYPE,
+e23272,n23169,n23022,CONTRACT_TYPE,
+e23273,n23170,n23022,CONTRACT_TYPE,
+e23274,n23171,n23022,CONTRACT_TYPE,
+e23275,n23172,n23022,CONTRACT_TYPE,
+e23276,n23173,n23022,CONTRACT_TYPE,
+e23277,n23174,n23022,CONTRACT_TYPE,
+e23278,n23175,n23022,CONTRACT_TYPE,
+e23279,n23176,n23022,CONTRACT_TYPE,
+e23280,n23177,n23022,CONTRACT_TYPE,
+e23281,n23178,n23022,CONTRACT_TYPE,
+e23282,n23179,n23022,CONTRACT_TYPE,
+e23283,n23180,n23022,CONTRACT_TYPE,
+e23284,n23181,n23022,CONTRACT_TYPE,
+e23285,n23182,n23022,CONTRACT_TYPE,
+e23286,n23183,n23022,CONTRACT_TYPE,
+e23287,n23185,n23022,CONTRACT_TYPE,
+e23288,n23186,n23022,CONTRACT_TYPE,
+e23289,n23187,n23022,CONTRACT_TYPE,
+e23290,n23188,n23022,CONTRACT_TYPE,
+e23291,n23189,n23022,CONTRACT_TYPE,
+e23292,n23190,n23022,CONTRACT_TYPE,
+e23293,n23191,n23022,CONTRACT_TYPE,
+e23294,n23192,n23022,CONTRACT_TYPE,
+e23295,n23193,n23022,CONTRACT_TYPE,
+e23296,n23194,n23022,CONTRACT_TYPE,
+e23297,n23195,n23022,CONTRACT_TYPE,
+e23298,n23196,n23022,CONTRACT_TYPE,
+e23299,n23197,n23022,CONTRACT_TYPE,
+e23300,n23199,n23022,CONTRACT_TYPE,
+e23301,n23201,n23022,CONTRACT_TYPE,
+e23302,n23202,n23022,CONTRACT_TYPE,
+e23303,n23203,n23022,CONTRACT_TYPE,
+e23304,n23204,n23022,CONTRACT_TYPE,
+e23305,n23205,n23022,CONTRACT_TYPE,
+e23306,n23206,n23022,CONTRACT_TYPE,
+e23307,n23207,n23022,CONTRACT_TYPE,
+e23308,n23208,n23022,CONTRACT_TYPE,
+e23309,n23209,n23022,CONTRACT_TYPE,
+e23310,n23210,n23022,CONTRACT_TYPE,
+e23311,n23211,n23022,CONTRACT_TYPE,
+e23312,n23212,n23022,CONTRACT_TYPE,
+e23313,n23213,n23022,CONTRACT_TYPE,
+e23314,n23214,n23022,CONTRACT_TYPE,
+e23315,n23215,n23022,CONTRACT_TYPE,
+e23316,n23216,n23022,CONTRACT_TYPE,
+e23317,n23217,n23022,CONTRACT_TYPE,
+e23318,n23218,n23022,CONTRACT_TYPE,
+e23319,n23219,n23022,CONTRACT_TYPE,
+e23320,n23220,n23022,CONTRACT_TYPE,
+e23321,n23221,n23022,CONTRACT_TYPE,
+e23322,n23222,n23022,CONTRACT_TYPE,
+e23323,n23223,n23022,CONTRACT_TYPE,
+e23324,n23224,n23022,CONTRACT_TYPE,
+e23325,n23225,n23022,CONTRACT_TYPE,
+e23326,n23226,n23022,CONTRACT_TYPE,
+e23327,n23227,n23022,CONTRACT_TYPE,
+e23328,n23228,n23022,CONTRACT_TYPE,
+e23329,n23229,n23022,CONTRACT_TYPE,
+e23330,n23230,n23022,CONTRACT_TYPE,
+e23331,n23231,n23022,CONTRACT_TYPE,
+e23332,n23232,n23022,CONTRACT_TYPE,
+e23333,n23233,n23022,CONTRACT_TYPE,
+e23334,n23234,n23022,CONTRACT_TYPE,
+e23335,n23235,n23022,CONTRACT_TYPE,
+e23336,n23236,n23022,CONTRACT_TYPE,
+e23337,n23237,n23022,CONTRACT_TYPE,
+e23338,n23238,n23022,CONTRACT_TYPE,
+e23339,n23239,n23022,CONTRACT_TYPE,
+e23340,n23240,n23022,CONTRACT_TYPE,
+e23341,n23241,n23022,CONTRACT_TYPE,
+e23342,n23242,n23022,CONTRACT_TYPE,
+e23343,n23243,n23022,CONTRACT_TYPE,
+e23344,n23244,n23022,CONTRACT_TYPE,
+e23345,n23245,n23022,CONTRACT_TYPE,
+e23346,n23246,n23022,CONTRACT_TYPE,
+e23347,n23247,n23022,CONTRACT_TYPE,
+e23348,n23248,n23022,CONTRACT_TYPE,
+e23349,n23249,n23022,CONTRACT_TYPE,
+e23350,n23250,n23022,CONTRACT_TYPE,
+e23351,n23251,n23022,CONTRACT_TYPE,
+e23352,n23252,n23022,CONTRACT_TYPE,
+e23353,n23253,n23022,CONTRACT_TYPE,
+e23354,n23254,n23022,CONTRACT_TYPE,
+e23355,n23255,n23022,CONTRACT_TYPE,
+e23356,n23256,n23022,CONTRACT_TYPE,
+e23357,n23257,n23022,CONTRACT_TYPE,
+e23358,n23258,n23022,CONTRACT_TYPE,
+e23359,n23259,n23022,CONTRACT_TYPE,
+e23360,n23260,n23022,CONTRACT_TYPE,
+e23361,n23261,n23022,CONTRACT_TYPE,
+e23362,n23262,n23022,CONTRACT_TYPE,
+e23363,n23263,n23022,CONTRACT_TYPE,
+e23364,n23264,n23022,CONTRACT_TYPE,
+e23365,n23265,n23022,CONTRACT_TYPE,
+e23366,n23266,n23022,CONTRACT_TYPE,
+e23367,n23267,n23022,CONTRACT_TYPE,
+e23368,n23268,n23022,CONTRACT_TYPE,
+e23369,n23269,n23022,CONTRACT_TYPE,
+e23370,n23270,n23022,CONTRACT_TYPE,
+e23371,n23271,n23022,CONTRACT_TYPE,
+e23372,n23274,n23273,CONTRACT_TYPE,
+e23373,n23275,n23273,CONTRACT_TYPE,
+e23374,n23276,n23273,CONTRACT_TYPE,
+e23375,n23277,n23273,CONTRACT_TYPE,
+e23376,n23279,n23273,CONTRACT_TYPE,
+e23377,n23280,n23273,CONTRACT_TYPE,
+e23378,n23281,n23273,CONTRACT_TYPE,
+e23379,n23282,n23273,CONTRACT_TYPE,
+e23380,n23283,n23273,CONTRACT_TYPE,
+e23381,n23284,n23273,CONTRACT_TYPE,
+e23382,n23285,n23273,CONTRACT_TYPE,
+e23383,n23286,n23273,CONTRACT_TYPE,
+e23384,n23287,n23273,CONTRACT_TYPE,
+e23385,n23288,n23273,CONTRACT_TYPE,
+e23386,n23289,n23273,CONTRACT_TYPE,
+e23387,n23290,n23273,CONTRACT_TYPE,
+e23388,n23291,n23273,CONTRACT_TYPE,
+e23389,n23292,n23273,CONTRACT_TYPE,
+e23390,n23293,n23273,CONTRACT_TYPE,
+e23391,n23295,n23273,CONTRACT_TYPE,
+e23392,n23296,n23273,CONTRACT_TYPE,
+e23393,n23297,n23273,CONTRACT_TYPE,
+e23394,n23299,n23273,CONTRACT_TYPE,
+e23395,n23300,n23273,CONTRACT_TYPE,
+e23396,n23301,n23273,CONTRACT_TYPE,
+e23397,n23302,n23273,CONTRACT_TYPE,
+e23398,n23303,n23273,CONTRACT_TYPE,
+e23399,n23296,n23273,CONTRACT_TYPE,

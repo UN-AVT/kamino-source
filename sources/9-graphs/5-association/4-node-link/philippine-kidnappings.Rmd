@@ -1,0 +1,297 @@
+---
+pagetitle: "Philippine Kidnappings"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, dev='svg')
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggraph)
+library(igraph)
+library(graphlayouts)
+library(tidygraph)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+GRAPHS
+</div>
+
+# Philippine Kidnappings
+## computed layouts
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo from Wikipedia"}
+
+masthead <- "assets/jolo-island-wikipedia.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> ...didn't pursue us...As time went on, we noticed that they never pursued us...\
+--- Gracia Burnham, ASG kidnap survivor\
+
+***
+
+Data refers to the Abu Sayyaf Group (ASG), a violent non-state actor operating in the Southern Philippines. In particular, this data is related to the Salast movement that has been founded by Aburajak Janjalani, a native terrorist of the Southern Philippines in 1991. ASG is active in kidnapping and other kinds of terrorist attacks (Gerdes et al. 2014).  Nodes are terrorist kidnappers of the ASG. Edges are the terrorist events they have attended. This network describes how many events any two kidnappers have in common.
+
+uses original data and network science to assess aspects of ASG’s strategic capabilities. More specifically, network simulations of agent-level data serve to measure the extent to which ASG’s observed pattern of disseminating hands-on operational knowledge differs from random.
+
+ASG began kidnapping hostages soon after its founding. 
+
+* an American missionary in Sulu in 1993,
+* five Americans and 11 Filipinos at Trankini Falls, a popular nature spot near Lake Sebu, in 1995
+* nearly 60 teachers and school children in Sumisip in 2000; 
+* 21 tourists from a dive-resort on the Malaysian island of Sipadan later that year;
+* another 20 tourists, including three Americans, from the Dos Palmas Beach Resort on Palawan in 2001. 
+* a myriad lower-profile kidnappings for ransom with victims such as Filipino businessmen,news reporters, and Christian clergy members.
+
+The most important component of the original data was the agent x event matrix, which provides a tabular listing of the individuals who participated in each event, as well as the location where each interaction occurred.
+
+DATA: 2-model matrix 246x105 persons by terrorist events, undirected binary relations are participation in events.  The PK network has 246 nodes and 2571 edges.
+
+An __incidence matrix__ is not square and entities provided in rows and columns are not necessary the same.
+
+### Ingest
+#### agent × event data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_path <- "archetypes/philippine-kidnappings/philippine-kidnappings.csv"
+df_csv <- read.csv(df_path, header=TRUE, row.names=1, check.names=FALSE, na.strings = "")
+df_csv
+
+df_nodes_path <- "archetypes/philippine-kidnappings/philippine-kidnappings-nodes.csv"
+df_nodes <- read.csv(df_nodes_path, header = TRUE, stringsAsFactors = FALSE)
+df_nodes
+
+df_edges_path <- "archetypes/philippine-kidnappings/philippine-kidnappings-edges.csv"
+df_edges <- read.csv(df_edges_path, header = TRUE, stringsAsFactors = FALSE)
+df_edges
+
+```
+
+
+### Wrangle
+#### convert matrix to graph, filter by degree
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_csv[is.na(df_csv)] <- 0
+matrix <- as.matrix(df_csv) 
+df_graph <- graph_from_incidence_matrix(matrix)
+df_graph
+
+# less than 3 degrees
+three_degrees <- which(degree(df_graph)<3)
+df_graph <- delete.vertices(df_graph, three_degrees)
+
+# remove isolates
+isolates <- which(degree(df_graph)==0)
+df_graph <- delete.vertices(df_graph, isolates)
+
+
+df_graph_manual <- graph_from_data_frame( df_edges, vertices=df_nodes )
+
+
+```
+
+
+### Analytics
+#### compute sna measures
+
+
+```{r}
+
+# Network	PK
+# weights	weighted
+# directionality	undirected
+# connectedness	false
+# no. of nodes n	246
+# no. of isolated nodes ni	16
+# no. of edges m	2571
+# no. of components |cc|	26
+# max avg. path length 〈d〉 for cc	3.034
+# max shortest path length d	9
+# density δ	0.085
+# avg. degree 〈k	20.9
+# max degree k	78
+# avg. clustering coeff. 〈C〉	0.753
+
+```
+
+
+### Analytics
+#### compute layout
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# igraph layouts
+
+# bipartite <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
+circle <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
+# dh <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
+# drl <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
+# fr <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
+# gem <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
+# graphopt <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
+# grid <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
+# kk <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
+# lgl <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
+# mds <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
+# nicely <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
+# sphere <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
+# star <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
+# sugiyama <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+
+# ggraph layouts
+
+# backbone <- create_layout(df_graph_undirected, layout = 'backbone')
+# centrality_bc <- betweenness(df_graph)
+# centrality <- create_layout(df_graph, layout = 'centrality', centrality = centrality_bc)
+# eigen <- create_layout(df_graph, layout = 'eigen', type = "laplacian", eigenvector = "smallest")
+# fabric <- create_layout(df_graph, layout = 'fabric')
+# focus <- create_layout(df_graph_directed, layout = 'focus', focus = 1)
+# hive <- create_layout(df_graph, layout = 'hive', axis = friends, sort.by = degree)
+# linear <- create_layout(df_graph, layout = 'linear')
+# matrix <- create_layout(df_graph, layout = 'matrix')
+# pmds_pivots <- 3
+# pmds <- create_layout(df_graph, layout = 'pmds', pivots = pmds_pivots)
+stress <- create_layout(df_graph, layout = 'stress')
+# unrooted <- create_layout(df_graph, layout = 'unrooted' )
+
+# stress_m <- create_layout(df_graph_manual, layout = 'stress')
+
+```
+
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Edge Types
+# geom_edge_arc
+# geom_edge_arc0
+# geom_edge_arc2
+# geom_edge_density
+# geom_edge_diagonal
+# geom_edge_diagonal0
+# geom_edge_diagonal2
+# geom_edge_elbow
+# geom_edge_elbow0
+# geom_edge_elbow2
+# geom_edge_fan
+# geom_edge_fan0
+# geom_edge_fan2
+# geom_edge_hive
+# geom_edge_hive0
+# geom_edge_hive2
+# geom_edge_link
+# geom_edge_link0
+# geom_edge_link2
+# geom_edge_loop
+# geom_edge_loop0
+
+```
+
+
+
+### Plot
+#### nicely
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    # plot.margin = unit(c(1.5,1,1,1), "in"),
+    legend.position='none'
+)
+
+v1 <- ggraph(circle) + 
+  geom_edge_link() +
+  geom_node_point(size = 2) +
+  geom_node_label(aes(label = name), size = 4) +
+  theme_graph() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v2 <- ggraph(stress_m) + 
+  geom_edge_link() +
+  geom_node_point(size = 2) +
+  geom_node_label(aes(label = NODE_NAME), size = 2) +
+  theme_graph() +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+
+* Narrative: Gerdes, Luke M., Kristine Ringler, and Barbara Autin. "Assessing the Abu Sayyaf Group's Strategic and Learning Capacities." Studies in Conflict & Terrorism 37, no. 3 (2014): 267-293.
+* Data: UCINET, Covert Networks, https://sites.google.com/site/ucinetsoftware/datasets/covert-networks
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

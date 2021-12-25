@@ -1,0 +1,139 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(data.table)
+library(knitr)
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+COLLECTIONS  
+</div>
+
+# Data Structures
+## What are they?
+
+> It is a capital mistake to theorize before one has data...\
+--- Sherlock Holmes, A Study in Scarlett (Arthur Conan Doyle)\
+
+Data Shaping and Transformation patterns are needed to mold data in forms particularized for analysis tasks.
+When french philosopher Gilles Deleuze wrote in his book The Fold:
+
+The model for the sciences of matter is the “origami” as the Japanese philospher might say, or the art of folding paper.X (page 7)
+
+This idea conveys the purpose of transform patterns which are applied as forms of origami to fold data structures into useful constructs for analysis. These patterns are derived from technological developments in online analytical processing (OLAP). OLAP methods provide techniques for a form of data origami which enables analysts to create data shapes known as “cubes” and perform useful operations.
+
+Shaping by Dimension
+
+A data cube allows data to be modelled and viewed in multiple dimensions. Although we usually think of cubes as three dimension structures, a data cube may be n-dimensional. It is defined by a structure which organizes information into dimensions and measures corresponding to the independent and dependent variables of focus.
+
+The structure of a data cube describes how your data gets transformed from a organized representation. This structure enables you to defi ne how to perform operations to aggregate, count, average and other functions such as drill-up and drill-down. Each of the elements of a dimension could be summarized using a hierarchy. Using these hierarchies, the analyst can explore and analyze the data cube at multiple meaningful levels of aggregation such as region.
+
+Dimensions are the perspectives on which you want to characterize your data based on your system model. These attributes serve as the primary source for querying and grouping. Measures are the numeric facts of a dimension such as gross domestic product or literacy rate. For example, countries may be a dimension, while the population of each country is a measure.
+
+Transform and Query Operations
+
+Using data cubes, you can navigate through data structures, change the data’s orientations and define analytical calculations. The user-initiated process of navigating by calling for page displays interactively, through the specifi cation of slices via rotations and drill down/up is sometimes called “slice and dice”. Common operations include slice and dice, drill down, roll up, and pivot. These operations are extremely useful to ...
+
+# Flat
+## Table Wide
+
+
+```{r}
+
+```
+
+
+## Table Long
+
+
+```{r}
+
+```
+
+
+# Hierarchical
+## Tree
+
+
+```{r}
+
+```
+
+
+# Graph
+## Adjacency List
+
+
+```{r}
+
+```
+
+
+## Nodes and Edges
+
+
+```{r}
+
+```
+
+
+## Triple Store
+
+
+```{r}
+
+```
+
+
+***
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

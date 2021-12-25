@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Kamino</title>
+
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/navigation-1.1/codefolding.js"></script>
+<link href="libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<nav class="navbar navbar-expand-lg bc-white bbottom">
+  <div class="header">
+
+    <a class="navbar-brand" href="#" style="padding-top: 8px;">
+      <img class="d-inline-block" src="../../../z-assemblers/assets/logo/logo.svg" alt="" width="48">
+    </a>
+
+    <div class="d-flex" style="float: right; margin-top: 15px;">
+      <div class="navbar-nav">
+        <a class="nav-link" style="color: #47556e;" href="index.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Home"><i class="las la-campground"
+            style="font-size: 32px; color: #47556e;"></i></a>
+        <a class="nav-link" style="color: #47556e;" href="content-navigator.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Content Navigator"><i class="las la-compass"
+            style="font-size: 32px; color: #47556e;"></i></a>
+		<!--
+        <a class="nav-link" style="color: #47556e;" href="curriculum-navigator.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Curriculum Navigator"><i class="las la-hiking"
+            style="font-size: 32px; color: #47556e;"></i></a>
+        <a class="nav-link" style="color: #47556e;" href="progress.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Progress Tracker"><i class="las la-mountain"
+            style="font-size: 32px; color: #47556e;"></i></a>
+        <a class="nav-link" style="color: #47556e;" href="search.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Search for Content"><i class="las la-search"
+            style="font-size: 32px; color: #47556e;"></i></a>
+        <a class="nav-link" style="color: #47556e;" href="curriculum-manager.html" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Curriculum Manager"><i class="las la-map-marked-alt"
+            style="font-size: 32px; color: #47556e;"></i></a>
+        <a class="nav-link" style="color: #47556e;" href="https://github.com/UN-AVT" data-bs-toggle="tooltip"
+          data-bs-placement="bottom" title="Contribute"><i class="lab la-github"
+            style="font-size: 32px; color: #47556e;"></i></a>
+		-->
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="C:/Users/jaybe/Desktop/kamino-dev/sources/z-assemblers/assets/styles/content/kamino.css" type="text/css" />
+<link rel="stylesheet" href="C:/Users/jaybe/Desktop/kamino-dev/sources/z-assemblers/assets/icons/line-awesome/css/line-awesome.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>COLLECTIONS</p>
+</div>
+<div id="systems-thinking" class="section level1">
+<h1>Systems Thinking</h1>
+<div id="what-are-they" class="section level2">
+<h2>What are they?</h2>
+<blockquote>
+<p>How many piano tuners are there in Chicago?<br />
+– Enrico Fermi<br />
+</p>
+</blockquote>
+<p>The objective of this section is to provide an overview of the key concepts of systems thinking and model building as they relate to the visual analytics process. Defining focal questions, developing a system model, understanding system behaviors and identifying potential leverage points are among the tasks which lead to developing an information model which is used for the basis of analysis.</p>
+</div>
+</div>
+<div id="defining-focal-questions" class="section level1">
+<h1>Defining Focal Questions</h1>
+<hr />
+<p>In practical terms, the focal question is often shaped by the tasking given to the analyst. Imagine, for example, your task as, How Many People Can the Earth Support?; or, What effects will climate change have on the world food supply? A focal question provides a definition and orientation to the problem space of the analytical landscape. It is framed in a way that allows exploration of the system with clear purpose and reason. A focal question is simply the problem the analyst intends to solve and serves as the compass for the analysis path.</p>
+<p>These leading questions signify the goals and serve to establish a “strategy-to-task” breakdown of the problem space.</p>
+<blockquote>
+<p>“Deconstruct the highest level abstraction of the problem into its lower level constituent functions until you arrive at the lowest level tasks that are to be performed or subproblems that are to be dealt with.”</p>
+</blockquote>
+<p>At the top level, the focal question reflects the decision maker’s view, priorities, and goals. At the task level, the questions reflect the view of the collection and analysis requirements. We’ll refer to these subtasks as the key analysis questions. As you work through the process, information is collected and populated to an analysis model. The analysis of the model is intended to fi nd answers to the questions posed in this problem definition process.</p>
+<p>To help us shape our focal questions, we can draw upon the tried and tested “ Five Ws and one H” pattern. This pattern has been a golden rule for methods of inquiry for centuries.</p>
+<ul>
+<li>What? What happened?</li>
+<li>Who? Who is involved? Who are the main actors?</li>
+<li>When? When does the event take place?</li>
+<li>Where? Where did it take place?</li>
+<li>Why? Why did it happen?</li>
+<li>How? How did it happen?</li>
+</ul>
+<p>With roots in journalism, the conventional principle underlying each question is that the answer should be factual. However, as will often be the case for analysis pursuits, an answer to a question may be generated from a hypothesis. In many cases the factual evidence available will support conclusions for some of our focal questions, leaving the remaining to be induced or deduced by analytical reasoning.</p>
+<p>We’ll look at this in further detail in Section III, Methods of Analysis, but before getting there, we’ll use the definition of focal questions as a departure point for setting the “lens” of our analysis to the system and model. With focal questions clearly defined, we can proceed to describe the system which represents the “reality” of the subject we will analyze. The marks our first step towards the “synthesis” of the problem space.</p>
+<p>This critical skill was highlighted in A Whole New Mind, Why Right-Brainers Will Rule the Future, where author Daniel H. Pink describes the importance:</p>
+<blockquote>
+<p>What’s in greatest demand today isn’t analysis but synthesis–seeing the big picture, crossing boundaries, and being able to combine disparate pieces into an arresting whole.<br />
+– Pink, p.66<br />
+</p>
+</blockquote>
+<p>This “big picture” building process begins with defining the system. Pink refers to this skill as “Symphony” — a concept which is drawn from decades of evolution from a field known as Systems Thinking.</p>
+</div>
+<div id="defining-a-system" class="section level1">
+<h1>Defining a System</h1>
+<hr />
+<p>The 19th century thinker and theologian John Henry Newman, wrote a book called <em>The Idea of a University</em>. In it he said:</p>
+<blockquote>
+<p>A truly great intellect…is one which takes a connected view of old and new, past and present, far and near, and which has an insight into the influence of all these, one on another… It possesses the knowledge, not only of things, but also of their mutual and true relations.<br />
+</p>
+</blockquote>
+<p>Newman was writing of the importance of taking a holistic system view when studying subjects of interest in the pursuit of knowledge and understanding. These tenets are the purpose of systems thinking and how looking at the world through a systems “lens” is so important. This lens has been referred to as the “macroscope” and “understandascope” illustrating how applying a macroscopic view to complex issues is paramount to the analytical process and the basis of the model activity.</p>
+<p>Designing a system is an approach for positioning our analytical lens and bringing focus to the problem. In Thinking in Systems, (D. Meadows at al), the authors highlight the importance of the system view: Hunger, poverty, environmental degradation, economic instability, unemployment, chronic disease, drug addiction, and war, for example, persist in spite of the analytic ability and technical brilliance that have been directed toward eradicating them…That is because they are intrinsically system problems-undesirable behaviors characteristic of the system structures that produce them. They will yield us only as we…see the system as the source of its own problems…X” (page 4)</p>
+<p>This is the point of beginning our journey, by setting the process to focus on a systems thinking approach to analysis.</p>
+</div>
+<div id="the-systems-thinking-approach" class="section level1">
+<h1>The Systems Thinking Approach</h1>
+<hr />
+<p>With origins dating back several decades, Systems Thinking has grown to a formal field of study with widespread application. Notables such as Jay Forrester, Ludwig von Bertalanff , C. West Churchman, Russel Ackoff , Kenneth Boulding and others have paved the way for what Peter Senge described as the Fifth Discipline. In his book of the same name, Senge presented a common sense view of the approach:</p>
+<blockquote>
+<p>A cloud masses, the sky darkens, leaves twist upward, and we know that it will rain. We also know that after the storm, the runoff will feed into groundwater miles away, and the sky will grow clear by tomorrow. All these events are distant in time and space, and yet they are all connected within the same pattern. Each has an influence on the rest, an influence that is usually hidden from view. You can only understand the system of a rainstorm by contemplating the whole, not any individual part of the pattern.  – Senge<br />
+</p>
+</blockquote>
+<p>By taking a systems view of weather forecasting, Meteorologists have rather successfully tooled themselves to understand and predict the behavior of the weather system. Systems Thinking offers the analysts similar potential for understanding complex issues, as Senge writes:</p>
+<blockquote>
+<p>Systems thinking is a discipline for seeing wholes. It is a framework for seeing interrelationships rather than things, for seeing patterns of change rather than static “snapshots.” It is a set of general principles—distilled over the course of the twentieth century, spanning fi elds as diverse as the physical and social sciences, engineering, and management.<br />
+</p>
+</blockquote>
+<p>Such a framework provides important value to the Visual Analyst and is a key concept to the analysis process. Consider this,</p>
+<blockquote>
+<p>All around us are examples of “systemic breakdowns”—problems such as global warming, ozone depletion, the international drug trade, and the U.S. trade and budget deficits — problems that have no simple local cause.<br />
+</p>
+</blockquote>
+<p>Looking at these examples of complex issues enables you to approach problem solving as a view of “problems” as parts of an overall system. Systems thinking is a framework that is based on the belief that the component parts of a system can best be understood in the context of relationships with each other and with other systems. Systems thinking concerns an understanding of a system by examining the linkages and interactions between the elements that compose the entirety of the system.</p>
+<p>Such an approach provides several benefits to shaping your focal questions into a “workable” problem, enabling you to understand the complex interrelationships of the system and the ramifications and tradeoffs of the actions or interventions we choose. Systems thinking attends to the connections between things, events and ideas. It gives them equal status with the things, events and ideas themselves. It is often the relationships between things, events and ideas that give them their meaning. For example, it now seems clear that climate change induced by human activity is likely to have major impacts on the planet, its environments, and its living organisms, including people. But all of these effects are so interdependent it is impossible to discover what the effects are likely to be by breaking the problem down.</p>
+<p>The field of systems thinking has generated a broad array of tools such as causal loops, stock and flow diagrams, and systems archetypes—all of which let you depict your understanding of a system which help you to test the potential impact of your interventions. As we explore these tools, you will learn to:</p>
+<ul>
+<li>identify the parts of a system and their functions</li>
+<li>understand how the parts work together and affect each other</li>
+<li>understand how the parts together produce an effect</li>
+<li>how the effect, or behavior over time, persist in a variety of circumstances</li>
+</ul>
+<p>Once well versed with these patterns, you will be able to increase your understanding of a particular system’s structure and behavior, communicate with others about your understandings, and design high-leverage interventions for problematic system behavior.</p>
+</div>
+<div id="what-is-a-system" class="section level1">
+<h1>What is a system?</h1>
+<hr />
+<p>The definition of a system is based on ideas of connectedness and behavior. These concepts are better understood with an example. Consider Figure X, a conceptual illustration of an “arms race” among nations, The systems view of the arms race shows a perpetual cycle of aggression. The United States responds to a perceived Threat to Americans by increasing U.S. arms, which increases the Threat to the Soviets, which leads to more Soviet arms, which increases the Threat to the United States, which leads to more U.S. arms, which increases the Threat to the Soviets, which. . . and so on, and so on.X</p>
+<p>Review the illustration along with the key points how connectedness and behavior are important when describing a system.</p>
+<p><img src="assets/what-is-a-system.svg" height="1000" /></p>
+<div id="connectedness" class="section level2">
+<h2>Connectedness</h2>
+<ul>
+<li>A system is an assembly of components connected together in an organized way.</li>
+<li>The components are affected by being in the system and the behavior of the system is changed if they leave it.</li>
+<li>This organized assembly of components does something.</li>
+<li>This assembly as a whole has been identified by someone who is interested in it.</li>
+</ul>
+</div>
+<div id="behavior" class="section level2">
+<h2>Behavior</h2>
+<p>A definition emphasizing the behaviors of systems has been given by Russell Ackoff (1981), who suggested that a system is a set of two or more elements that satisfies the following three conditions:X:</p>
+<ul>
+<li>The behavior of each element has an effect on the behavior of the whole.</li>
+<li>The behavior of the elements and their effects on the whole are interdependent.</li>
+<li>However subgroups of the elements are formed, each has an effect on the behavior of the whole and none has an independent effect on it.</li>
+</ul>
+<p>Following the example, we can see from the figure the two competing nations strive to maintain more arms than the other. Each nation watches the other to determine its level of arms, but there is a delay in the receipt of that information. The information gained by a nation about the level of its competitor’s arms is used to set the goal for arms production.</p>
+<p>Consider now the effect of an arms treaty. Take for example the Strategic Arms Reduction Treaty (START) whose effect is to increase retirement rate of arms. Consider if one nation was more industrially advanced than the other; or better off economically. By forming a system model of the situation, we can assess scenarios and possible causes and effects, and most importantly explore opportunities for intervention. The arms race example highlights several key concepts which describe the characteristics, archetypes, and behaviors of systems. We’ll look at these in closer detail.</p>
+</div>
+</div>
+<div id="characteristics-of-a-system" class="section level1">
+<h1>Characteristics of a System</h1>
+<hr />
+<p>All systems have certain characteristics which influence their connectedness and behavior. The principal characteristics of every system are stocks, flows, valves, delays, and feedback. These characteristics are interrelated and together form the whole of a system.</p>
+<p>Stocks are reservoirs serving as anything that increases or decreases in volume. Following the arms race example, stocks are synonymous to stockpiles. A nation will increase its stocks through arms production, or decrease due to treaty agreement or economic factors. Flows are expressed in volumes over periods of time. Flows can be money, people in cases of immigration, or information. Flow volumes raise or lower in level depending on valves. In the arms race example, a flow might be the investment of funds coming from an economy stock. Valves control flows similar to the valve of a faucet. The “turning” of the valve is described as a rate which controls the intensity of a flow. In our arms race example, the valve control is based on the goal of the nation setting the rate of production, e.g. how many arms to produce to meet the objective, and the rate of investment related to defense spending.</p>
+<p>Delays result from variations in the speed of circulation of the flows often due to “friction” between elements of the system. Delays have an important role in the behavioral phenomena of the system, where in the case of the arms race example, a delay is a result between the feedback and flow of arms production. The delay is experienced from the time between receiving the feedback that arms production is needed and the time it takes to produce the given quantity.</p>
+<p>Feedback loops effect the behavior of a system through integrating the effects of stocks, delays, valves, and flows and the return of information about the status of a process. For example, when a nation observes that it is losing the arms race, a feedback loop triggers action in the system. Feedback loops are common for monitoring and evaluation where the knowledge of information will result in a response or action.</p>
+<p>These characteristics are present in virtually all systems and are key to understanding how systems work. Not only are these elements present in systems, the manner of how they work together is often based certain social and natural behaviors.</p>
+</div>
+<div id="system-archetypes" class="section level1">
+<h1>System Archetypes</h1>
+<hr />
+<p>System archetypes are “common stories” of behaviors which appear as recurring themes. Think of an archetype as a storyline that you sense you’ve seen or heard before - a common plot to the occurrences of all systems. System archetypes are useful for gaining insight into the “nature” of the underlying problem and for offering a basic structure or foundation upon which a model can be further developed, constructed, and understood. As Senge notes,</p>
+<blockquote>
+<p>One of the most important, and potentially most empowering, insights to come from the young field of systems thinking is that certain patterns of structures recur again and again. These “systems archtetypes” or “generic structures” embody the key to learning to see structures…”<br />
+– Senge<br />
+</p>
+</blockquote>
+<p>This key is found in the idea that understanding system archetypes enables us to recognize potential patterns so as to be more able to see structures at play, and to see the leverage in those structures. That idea being that if we can tune our attention to detect the emergence of a specific system archetype, it may provide opportunities for intervention.</p>
+<p>Research has shown that a handful of archetype stories reveal patterns of behavior in systems. These archetypes are covered in extensive detail in The Fifth Discipline, Limits to Growth, and other notable worksX. For additional details and in-depth coverage, you should consult these resources; however a synopsis of each is provided to illustrate the importance of understanding the concept.</p>
+<p>In reviewing these archetypes you will notice a behavioral theme such as if this happens, then this effect is likely. You’ll recognize the stories – I see where this is heading. For example, in the Escalation archetype, two parties compete for superiority in an arena. As one party’s actions put it ahead, the other party responds by increasing its actions. The result is a continual competition of activity on both sides. The arms race system presented earlier is a good example of this story.</p>
+</div>
+<div id="behavior-of-systems" class="section level1">
+<h1>Behavior of Systems</h1>
+<hr />
+<p><img src="assets/system-behaviors.svg" height="800" /></p>
+<p>Similar to the system archetypes, Economist Kenneth Boulding, one of the founders of The Society for General Systems Theory, in his book, The World as a Total System, defined five generalized classes of systems which encompasses all other systems. These provide a means of understanding some general behavior of systems. These systems are arranged in forms of natural behaviors and societal systemsX.</p>
+<div id="natural-behaviors" class="section level2">
+<h2>Natural Behaviors</h2>
+<p>Natural behavior systems are biological in nature and reflect the phenomena of mutual competition, mutual cooperation, parasitic system, and predator system. The premise of mutual competition is that slight changes in the circumstances may lead to the extinction of one of the populations, sometimes called the “principle of competitive exclusion.” This is often described as the more of A the less of B and the more of B the less of A. In the case of mutual cooperation, it is described as the more of A, the more of B; the more of B, the more of A.(Page 56).</p>
+<p>A parasitic system system in one which a positive influence from one element to another provides a negative influence in return to the first element. I get positive things from you and provide you a negative return in response. Essentially I subsist on you. A predator system system is where the elements are essentially dependent on each other from the perspective that the quantity of one element determines the quantity of the other element. I will feed upon you even though my existence is dependent upon your existence.</p>
+</div>
+<div id="social-system-behaviors" class="section level2">
+<h2>Social System Behaviors</h2>
+<p>In contrast to the natural behaviors, Boulder describes social system behaviors as follows:</p>
+<blockquote>
+<p>The social system can be divided into three large, overlapping, and interpenetrating subsystems, which are distinguished by different modes of interaction of human beings, usually assisted by various artifacts, each of which has a certain rationale of its own that is also part of the human learning process…All actual human institutions and relationships involve mixtures of all three in varying proportions.<br />
+– reference<br />
+</p>
+</blockquote>
+<p>The key theme is social interaction which leads to three types: threat, exchange, and integrative. A threat system is one in which one element doesn’t do something if the other element doesn’t do something else. This is usually described in mirror images: If you do something I want you to do, then I won’t do something you don’t want me to; and You refrain from doing something that I don’t want and I will refrain from doing something that you don’t want.</p>
+<p>What happens then depends on the actions of the threatened party, B. At least five broad classes of response can be distinguished: submission or acquiescence, defiance, flight (refugee), counterthreat (possibility leading to deterrence), and threat reduction (defense building, legal action). The arms race case discussed earlier is an example of this behavior which is particularly common in political structures and foreign policy. International trade is an example of an exchange system. Elements of the system provide goods and services to other elements in exchange for money or other goods and services. If I do something you want me to do, then I expect you will do something I want you to do. Exchange is the main instrumentality of economic life and political bargaining. In such a relationship perception and equity are very important, where satisfaction or dissatisfaction will arise.</p>
+<p>Examples of an integrative system are endeavors where entities ban together to accomplish some common desired objective or goal. You and I do something together because of what we both want to accomplish. Or, you do something because of who you are and I am or what we both belong to.</p>
+</div>
+</div>
+<div id="why-do-i-need-to-know-this" class="section level1">
+<h1>Why do I need to know this?</h1>
+<hr />
+<p>This question brings me back to my early days of working for Disney where the working slogan was “behavior breeds behavior”. The point was, if you smile the customer will simile – you can effect a change with your actions. This idea leads us to the opportunities for leverage and intervention. Understanding systems, archetypes and behaviors provides insight to the possibilities for making a difference. In Boulding’s words:</p>
+<blockquote>
+<p>We see this clearly in the old story as to what would happen if we had tomorrow’s newspaper. The answer is, of course that tomorrow would not happen-it would be very different. All the people who were going to have something bad happen to them would take precautionary steps to try and prevent it from happening.<br />
+– Page, 60</p>
+</blockquote>
+<p>In short, use of the system dynamic method always starts with the need to examine some problem. The problem is thought to be influenced by causal influence between variables within a complex system over time. The system and the variables are studied in order to map the structure that is believed to influence the problem. A simulation model is made, based on the findings. The model is then studied, and policies for how to solve the problem are tried out in the model before implemented in a real setting.</p>
+<p>Let’s look at those opportunities and “leverage points” in closer detail.</p>
+</div>
+<div id="leverage-and-intervention" class="section level1">
+<h1>Leverage and Intervention</h1>
+<hr />
+<p>Archimedes [~287-212 B.C.], emphasizing the power of the lever, boasted, “Give me a place to stand on and I can move the earth.” Of course, no lever is that strong. The most notable work of this concept was proposed by Donella Meadows in her book, Thinking in Systems: A Primer, Meadows dedicates a chapter to the subject titled Leverage Points: Places to Intervene in a System. So, how do we change the structure of systems to produce more of what we want and less of that which is undesirable? (145) The answer lies in the levers of change of a system.</p>
+<p>Leverage is found by exploring sources of influence that cause things to change. Understanding these sources of cause and effect provide opportunity to reveal leverage points. Meadows proposed twelve leverage points to intervene in a system. These levers suggest that manipulation of the levers can influence the system. Most importantly, all levers are not equal in influence.</p>
+<p>In 1972 she was on the MIT team that produced the global computer model “World3” for the Club of Rome and provided the basis for the book, Limits to Growth. The book reported a study of long-term global trends in population, economics and the environment. The book made headlines around the world, and began a debate about the limits of Earth’s capacity to support human economic expansion, a debate that continues to this day.</p>
+<p>A current paradigm is “Nature is a stock of resources to be converted to human purpose”. What might happen to the lake were this collective idea changed ? A society paradigm is an idea, an unstated assumption that everyone shares, thoughts, or states of thoughts that are sources of systems. Paradigms are very hard to change, but there are no limits to paradigm change. Meadows indicates paradigms might be changed by repeatedly and consistently pointing out anomalies and failures to those with open minds.</p>
+<p>In an article of X, Elephants and Ivory, can banning the sale of ivory help to save elephants? Should the sale of ivory be banned? Has the ban in ivory trade put a stop to elephant poaching? Most people would agree that we should all strive to save elephants from extinction. Prompted by international concern over the intensive poaching of elephants that occurred in the 1970s and 1980s, the Conference of the Parties of Convention on International Trade in Endangered Species (CITES) imposed a total ban on trade in ivory and other elephant products in October 1989.</p>
+<p>The author describes a monitoring system to support the statistical analysis needed to assess whether there is a causal link between changes in CITES policy and changes in trends in elephant poaching and illegal trade in ivory. A finding of interest is that those countries with the greatest volume of illegal ivory trade tend to be those with unregulated (or poorly regulated) domestic ivory markets. Before President Bush’s 1989 ban, the United States was one of the largest importers of worked ivory in the world. Since the implementation of the ban, the ivory market has collapsed.</p>
+<p>John Stossel, special “You Can’t Even Talk About It” on 20/20 May 8, 2009 - The Best Way to Save Many Endangered Species is to Eat Them.</p>
+<blockquote>
+<p>International bans on the trade of rare animal parts (tiger organs, elephant tusks, rhino horns) have been about as successful as the international war on drugs. Why? Because wherever there is a demand strong enough, market forces overwhelm law enforcement.</p>
+</blockquote>
+<p>This illustrates the complexity of many decision and policy making scenarios. What is the best strategy to influence a positive change in a system? Clearly the first step is to understand the system and to assess each of the lever points. Take a closer look at Figure X and ask yourself the question: what would you do? What levers would you pull to address the issue?</p>
+<p><img src="./assets/leverage-points.svg" style="width:86.0%" /></p>
+</div>
+<div id="exercises-and-practice" class="section level1">
+<h1>Exercises and practice</h1>
+<div id="knime-and-r-practice-solutions" class="section level2">
+<h2>Knime and R practice solutions</h2>
+</div>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<div id="the-citations-and-data-sources-used-for-this-case" class="section level2">
+<h2>The citations and data sources used for this case</h2>
+<ol style="list-style-type: decimal">
+<li>Senge, Peter M. (1990), The Fifth Discipline, Doubleday/Currency,</li>
+<li>Ludwig von Bertalanffy (1976 - revised) General System theory: Foundations, Development, Applications.</li>
+<li>Ackoff, R. Towards A System of Systems Concepts. Originally published in Management Science, Vol. 17, No. 11, July 1971</li>
+<li>Systems thinking and practice, The Open University. <a href="http://openlearn.open.ac.uk/mod/resource/view.php?id=183686" class="uri">http://openlearn.open.ac.uk/mod/resource/view.php?id=183686</a></li>
+<li>Matthias Ruth, Bruce M. Hannon, Jay W. Forrester, Modeling dynamic economic systems</li>
+<li>Meadows, D. (2008, December). Thinking in Systems: A Primer. Chelsea Green Publishing.</li>
+<li>Rothenberg, J. The Nature of Modeling. Chapter for “AI, Simulation &amp; Modeling”</li>
+<li>Lawrence E. Widman, Kenneth A. Loparo, and Norman R. Nielsen, editors. John Wiley &amp; Sons, Inc., August 1989, pp. 75−92. (Reprinted as N−3027−DARPA, The RAND Corporation, November 1989.)</li>
+<li>Newman, J. H. (1999, September). The Idea of a University. Gateway Editions. Page 122.</li>
+<li>Choucri, Nazli, Goldsmith, Daniel, Madnick, Stuart E., Mistree, Dinsha, Morrison, J. Bradley and Siegel, Michael, Using System Dynamics to Model and Better Understand State Stability (July 1, 2007). MIT Sloan Research Paper No. 4661-07. Available at SSRN: <a href="http://ssrn.com/abstract=1011230" class="uri">http://ssrn.com/abstract=1011230</a></li>
+<li>W. May. Information extraction and integration with FLORID: The MONDIAL case study. Technical report, Universit¨at Freiburg, Institut fur Informatik, 1999. <a href="http://dbis.informatik.uni-goettingen.de/Mondial" class="uri">http://dbis.informatik.uni-goettingen.de/Mondial</a></li>
+<li>Sweeney, Linda, and John Sterman. “Bathtub dynamics: initial results of a systems thinking inventory.” System Dynamics Review 16 (2000): 249-286.</li>
+<li>National Geographic. The Big Idea: The Carbon Bathtub. December 2009. <a href="http://ngm.nationalgeographic.com/bigidea/05/carbon-bath" class="uri">http://ngm.nationalgeographic.com/bigidea/05/carbon-bath</a></li>
+<li>Sterman, John, and Linda Sweeney. “Cloudy skies: assessing public understanding of global warming.” System Dynamics Review 18 (2002): 207-240.</li>
+<li>J. D. Sterman and L. Booth Sweeney (2007) Understanding Public Complacency About Climate Change: Adults’ mental models of climate change violate conservation of matter. Climatic Change, 80, 213-238.</li>
+<li>Forrester, Jay Wright. World dynamics . Cambridge, Mass.: Wright-Allen Press, 1971.</li>
+<li>Pink, Daniel H.. A whole new mind: why right-brainers will rule the future. New York: Riverhead Books, 2006.</li>
+</ol>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+
+<!-- Footer-->
+<footer class="footer text-center bc-white btop" style="padding-top: 30px; padding-bottom: 25px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <h3 class="text-uppercase mb-4">Use</h4>
+        <p class="centered text-center">This work is licensed under Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <h3 class="text-uppercase mb-4">Source</h4>
+        <p class="centered text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered"><i class="lab la-github"
+              style="font-size: 62px; color: #111111;"></i></a>
+        </p>
+      </div>
+      <div class="col-lg-4">
+        <h3 class="text-uppercase mb-4">Creation</h4>
+        <p class="centered text-center">Hand crafted with ♥ by the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>

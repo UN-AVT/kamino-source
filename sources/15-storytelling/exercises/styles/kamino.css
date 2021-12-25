@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Basic:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap');
+
+body {
+	font-family: 'Goudy Bookletter 1911', serif;
+  font-size: 16px;
+  color: #111;
+}
+
+html {
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+
+/* MAIN PAGE */
+.main-container {
+  width: 86% !important;
+  max-width: 1280px !important;
+  min-width: 1280px !important;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+/* OVERRIDES TO STANDARD MARKDOWN TAGS */
+h1 {
+	font-family: 'Gentium Book Basic', serif;
+	font-weight: 600;
+	font-size: 36px;
+	line-height: 38px;
+	margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+h2 {
+	font-family: 'Gentium Book Basic', serif;
+	font-weight: 500;
+	font-size: 32px;
+	line-height: 36px;
+	margin-top: 5px;
+  margin-bottom: 5px;
+	
+}
+
+h3 {
+	font-family: 'Gentium Book Basic', serif;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 28px;
+	color: #666666;
+	margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+h4 {
+	font-family: 'Gentium Book Basic', serif;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 24px;
+	margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* STANDARD NARRATIVE TEXT */
+p {
+	font-family: 'Goudy Bookletter 1911', serif;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 32px;
+	margin: 25px;
+	margin-left: 75px;
+	margin-right: 75px;
+	text-align: justify;
+	text-justify: inter-word;
+	text-align-last: left;
+}
+
+
+/* HORIZONTAL RULE */
+hr {
+	height: 2px;
+}
+
+
+/* HORIZONTAL RULE */
+hr {
+	border: 1px solid #111111;
+	color: #111111;
+	background-color: #111111;
+}
+
+
+/* CUSTOM BLOCK QUOTE */
+blockquote{
+  max-width: 80%;
+  margin: 25px auto;
+  font-family: 'Gentium Book Basic', serif;
+  font-style: italic;
+  font-size: 24px;
+  color: #222222;
+  padding: 5px 10px 15px 30px;
+  border-left: 8px solid #222222 ;
+  line-height: 28px;
+  position: relative;
+  background: #F9F9F9;
+}
+
+blockquote::before{
+  font-family:Arial;
+  content: "\201C";
+  color:#222222;
+  font-size:64px;
+  position: absolute;
+  left: 10px;
+  top:20px;
+}
+
+blockquote::after{
+  content: '';
+}
+
+blockquote span{
+  display:block;
+  color:#222222;
+  font-style: normal;
+  font-weight: bold;
+  margin-top:0px;
+}
+
+/* CUSTOM LISTS */
+ul {
+  list-style-type: "→ ";
+  list-style-position: inside;
+  font-family: 'Goudy Bookletter 1911', serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  margin: 25px;
+  margin-left: 100px;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
+}
+
+p img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+img {
+  max-width:100%;
+  margin: 0 auto;
+}
+
+.tabbed-pane {
+  padding-top: 12px;
+}
+
+.html-widget {
+  margin-bottom: 20px;
+}
+
+button.dropdown-toggle {
+  display: none;
+}
+
+button.code-folding-btn {
+  display: none;
+}
+
+button.code-folding-btn:focus {
+  outline: none;
+}
+
+/* Citations */
+pre code {
+  padding: 0;
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+/* CUSTOM SCROLLBAR */
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #333333;
+}
+
+body::-webkit-scrollbar-thumb:active {
+  background: #111111;
+}

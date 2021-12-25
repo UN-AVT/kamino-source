@@ -1,0 +1,290 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, dev = "svg")
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+## libraries as needed
+library(showtext)
+library(tidyverse)
+library(scales)
+library(lubridate)
+library(ggplot2)
+library(ggiraph)
+library(ggthemes)
+library(ggrepel)
+library(plotrix)
+library(sf)
+library(sp)
+library(geojsonio)
+library(wesanderson)
+library(knitcitations)
+library(bibtex)
+
+
+```
+
+
+
+```{r, out.width = "100%"}
+
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">COMPOSITING & STORRYTELLING</div>
+
+# Disasters and their effects in Ethiopia
+## Objective: Disaster Risk Reduction
+
+<div class="figure-text">Severe Drought</div>
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by SpaceX on Unsplash"}
+
+knitr::include_graphics("assets/drought.jpg", dpi=00)
+masthead <- "assets/drought.jpg"
+
+```
+
+
+
+> Sometimes it takes a natural disaster to reveal a social disaster.\
+--- Jim Wallis
+
+***
+
+### Over the years, in Ehtiopia, disasters such as drought, flood, conflicts, fires have caused the following effects:
+
+* Deaths
+* Injuries
+* Damaged Houses
+* Destroyed Houses
+* Evacuation
+* Damaged Crops
+* Lost Cattle
+
+
+## __Disaster__ & __Effects__ Matrix in Ethiopia
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_dis = read.csv("archetypes/ethiopia-disaster-effects-awareness/ethiopia-disaster.csv", fileEncoding="UTF-8-BOM")
+df_dis <- mutate(df_dis, id = rownames(df_dis))
+df_dis
+
+```
+
+## __Number of Deaths__ - the most impactful effect!
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# filter data per effects
+df_deaths <- df_dis %>% select(Event,Deaths)
+
+#remove effects where deaths is NA
+df_deaths <- df_deaths[!is.na(df_deaths$Deaths), ]
+
+# creating a percentage column
+df_deaths <- mutate(df_deaths, Percent=round(100*df_deaths$Deaths/sum(df_deaths$Deaths)))
+df_deaths <- df_deaths %>% filter(df_deaths$Percent > 2)
+#df_deaths
+```
+
+## The main Cause of Deaths - __Drought__!
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=13, fig.height=7, out.width = "100%"}
+
+# theme_gray(), theme_bw(), theme_linedraw(), theme_light(), theme_dark(), theme_minimal(), theme_classic(), theme_void()
+# theme_fivethirtyeight(), theme_foundation(), theme_gdocs(), theme_hc()
+# theme_igray(), theme_map(), theme_pander(), theme_par(), theme_solarized() theme_solarized_2()
+# theme_solid(), theme_stata(), theme_tufte(), theme_wsj()
+
+theme_opts <- theme_minimal() + theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.ticks = element_line(),
+    panel.background = element_rect(fill = "white", colour = "white"), 
+    legend.position = "right"
+)
+
+area <- ggplot(df_deaths, aes(x="", y= Deaths, fill= Event)) +
+        geom_col(color="black")+
+        geom_text_repel(aes(label = paste(df_deaths$Deaths,"-",df_deaths$Percent,"%")),
+             color = "white",       
+             position = position_stack(vjust = 0.5),
+            show.legend = FALSE) +
+       coord_polar(theta = "y")+
+        labs(title = "Number of Deaths per Disaster", subtitle = "Preliminary Analysis") +
+        theme_minimal() +
+        theme_opts
+
+area
+  
+#girafe(ggobj = area, width_svg = 13, height_svg = 4,options = list(opts_sizing(rescale = TRUE, width = 1.0)))      
+ggsave(filename = "assets/ethiopia-disaster-deaths.svg", plot = area, width=13, height=4)
+
+```
+
+
+
+## Cumulative Number of Deaths over the __Years__ for ALL kinds of disasters!
+#### A linear regression can predict an increase of the number of __Deaths__.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df_temp <- read.csv("archetypes/ethiopia-disaster-effects-awareness/temporal-behaviour.csv", fileEncoding="UTF-8-BOM")
+
+#Wrangling data
+df_temp <- df_temp %>% select(Year, Deaths)
+df_temp[is.na(df_temp$Deaths),]$Deaths <- "0"
+
+df_temp <- transform(df_temp, Deaths = as.numeric(Deaths))
+df_temp
+
+#fit simple linear regression model
+#model <- lm(df_temp$Deaths~df_temp$Year)
+
+#view model summary
+#summary(model)
+
+#Call:
+#lm(formula = df_temp$Deaths~df_temp$Year)
+
+#From the model we see, Deaths=(-6325.840) + 3.303*(f_temp$Year)
+
+df_temp <- mutate(df_temp , Forecast=((-6325.840) + 3.303*(df_temp$Year)))
+#df_temp 
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=13, fig.height=7, out.width = "100%"}
+
+
+v_temp <- ggplot(df_temp,aes(x=Year)) +
+          geom_line(aes(y=Deaths), color="blue") +
+          geom_line(aes(y=Forecast), color="red") +
+          scale_y_continuous(breaks = seq(0, 4000, 1000), limits = c(0, 4000)) +
+          labs(y="Deaths along the years in Ehtiopira",
+               title = "Number of Deaths over the Years", 
+               subtitle = "Preliminary Analysis") +
+           theme(legend.position="bottom") +
+           annotate("text", x = 1992, y = 3921, 
+             label = paste0("In 1992 - the highest peak", "\n", "Deaths Number = 3,921"), 
+             hjust = "left", vjust = 0, color = "#000000", size = 4, fontface = 1) +
+           annotate("text", x = 2005, y = 1840, 
+             label = paste0("In 2005 - another peak", "\n", "Deaths Number = 1,840"), 
+             hjust = "left", vjust = 0, color = "#000000", size = 4, fontface = 1) 
+
+v_temp
+
+ 
+#girafe(ggobj = v_temp, width_svg = 13, height_svg = 7, options = list(opts_sizing(rescale = TRUE, width = 1.0)))      
+ggsave(filename = "assets/temporal-behaviour.svg", plot = v_temp, width=13, height=7)
+
+
+
+```
+
+## __Locations__ where the number of Deaths concetrates the most.
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load map sources
+# ++++++++++++++++++++
+
+# using the same map sources up to adm2 which contains info of area of Zones in each region in Ethiopia
+#adm0 <- st_read("map-sources/eth_admbnda_adm0_csa_bofed_20201008.geojson")
+adm1 <- st_read("map-sources/eth_admbnda_adm1_csa_bofed_20201008.geojson")
+#adm2 <- st_read("map-sources/eth_admbnda_adm2_csa_bofed_20201008.geojson")
+
+eth_map <- read.csv("archetypes/ethiopia-disaster-effects-awareness/ethiopial-spatial-distribution.csv", fileEncoding="UTF-8-BOM")
+eth_map <- eth_map %>% select(Geography,Deaths)
+
+
+#head(as.data.frame(adm0))
+#head(as.data.frame(adm1))
+#head(as.data.frame(adm2))
+
+
+
+adm1_new <- left_join(adm1,eth_map,by=c('ADM1_EN'='Geography'))
+adm1_new[!is.na(adm1_new$Deaths),]
+
+eth_map
+#as.data.frame(adm1_new)
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=13, fig.height=7, out.width = "100%"}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "right",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+
+# In order of layer placement top -> down
+v1 = ggplot(data = adm1_new, mapping = aes(fill = factor(as.numeric(Deaths)))) + 
+     geom_sf() +
+     scale_x_continuous() +
+     scale_y_continuous() +
+     coord_sf() +
+       labs(x = NULL, # Longitude
+       y = NULL, # Latitude
+       title = "Number of Deaths per Region", 
+       subtitle = "Preliminary Analysis") +
+  theme_opts
+v1
+
+
+#girafe(ggobj = v1, width_svg = 13, height_svg = 7,options = list(opts_sizing(rescale = TRUE, width = 1.0)))      
+ggsave(filename = "assets/ethiopial-spatial-distribution.svg", plot = v1, width=13, height=7)
+```
+
+### References
+#### The citations and data sources used for this case
+
+#### The data files used in this narrative were retrieved from <a href="https://www.desinventar.net/DesInventar/country_profile.jsp?countrycode=eth&lang=EN#more_info" target="_blank"> UNDRR DesInventar Sendai </a> where Ehtiopia was region searched and selected.
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/ehtiopian-disasters.bib")
+
+```

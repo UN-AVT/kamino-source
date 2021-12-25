@@ -1,0 +1,109 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(data.table)
+library(knitr)
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+COLLECTIONS  
+</div>
+
+# Data Features
+## What are they?
+
+> Determine the maximum number of Ping-Pong balls that could fit in the room you’re sitting in...\
+--- Karl A. Smith, Teamwork and Project Management\
+
+The objective of this chapter is to measure the output of the Models of Information activity. The goal is to provide evaluation criteria to “double check” the results. Does the model reflect reality? Does the model meet the needs for knowledge transformation? Is the model suitable for visual analytics processing?
+
+## Measure Twice, Cut Once
+
+The Model of Information activity is a precondition for success in the process. To ensure the success of our output, we’ll take a critical look from three angles: reality testing, the analysis information needs, and the readiness for the information visualization pipeline.
+
+## Virtual Reality
+
+The modeller must be able to recognize whether a model reflects reality, and to identify and deal with divergences between theory and data. A model is evaluated fi rst and foremost by its consistency to empirical data; any model inconsistent with reproducible observations must be modifi ed or rejected. However, a fit to empirical data alone is not sufficient for a model to be accepted as valid. Other factors important in evaluating a model include:
+
+* Ability to explain past observations
+* Ability to predict future observations
+* Ability to control events
+* Refutability, enabling estimation of the degree of confi dence in the model
+* Simplicity: The defi nition must include essential subsystems but nothing more.
+
+The second is to decide that the world is more-or-less as I see it but to recognize that my viewpoint is limited and the view-from-here may be misleading because it is only partial – there is no view of the roof, to use my previous metaphor. This is a stance that accepts that I must be careful to explore the world as fully as I can because I cannot see everything and may be misled. The third pole is to take on fully the implications of the world’s unknowability. This stance demands that I always carry an awareness that I will never know the world and must therefore always be trying to account for my own role in my perceptions of the world. Consciously making the choice between these poles, and all the variants in between, is an act of epistemological awareness.
+
+## Sensemakers Hierarchy of Needs
+
+In 1955, Kenneth Boulding presented a variation on the hierarchy consisting of “signals, messages, information, and knowledge”. In 1987, Checkoslovakian-born educator Milan Zeleny mapped the elements of the hierarchy to knowledge forms: know-nothing, know-what, know-how, and know-why. According to Russell Ackoff in his article From Data to Wisdom, a systems theorist and professor of organizational change, the content of the human mind can be classifi ed into fi ve categories: data, information, knowledge,
+understanding, and wisdom.
+
+Ackoff indicates that the fi rst four categories relate to the past; they deal with what has been or what is known. Only the fi fth category, wisdom, deals with the future because it incorporates vision and design. With wisdom, people can create the future rather than just grasp the present and past. But achieving wisdom isn’t easy; people must move successively through the other categories. Extending this concept, I’ll introduce the idea of situational awareness. Information science and knowledge management disciplines often describe information in terms of a data-information- knowledge–wisdom (DIKW) hierarchy or pyramid. What, at the heart, is DIKW and how does it work? It is suggested that there is a hierarchy built on thefoundation of data [4], p 3.
+
+Wisdom is located at the top of a hierarchy of types …. Descending from wisdom there are understanding, knowledge, information, and, at the bottom, data. Each of these includes the categories that fall below it… ([4],p 3)
+
+It is supposed that the many and various items of the world have properties that can be observed. And data is the symbolic representation of these observable properties. Ackoff writes Data are symbols that represent properties of objects, events and their environments. They are products of observation. To observe is to sense. The technology of sensing, instrumentation, is, of course, highly developed. ([4] p.3)
+
+Next up the hierarchy is information. This is relevant, or usable, or signifi cant, or meaningful, or processed data. The vision is that of a human asking a question beginning with, perhaps, “who”, “what”, “where”, “when”, or “how many” ([4] p.3); and the data is processed into an answer to an enquiry. When this happens, the data becomes “information”. Data itself is of no value until it is transformed into a relevant form. In consequence, the diff erence between data and information is functional, not structural ([4] p.3).
+
+The processing of data to produce information often reduces that data (because, typically, only some of the data is relevant). Ackoff writes Information systems generate, store, retrieve, and process data. In many cases their processing is statistical or arithmetical. In either case, information is inferred from data. ([4] p.3) Information is relevant data, together with, on occasions, the results of inferences from that relevant data. Information is thus a subset of the data, or a subset of the data augmented by additional items inferred or calculated or refi ned from that subset.
+
+The next category is knowledge. Users of this hierarchy often construe knowledge as know-how, or skill. Ackoff suggests that know-how allows an agent to promote information to a controlling role-- to transform information into instructions:
+
+Knowledge is know-how, for example, how a system works. It is what makes possible the transformation of information into instructions. It makes control of a system possible. ([4] p.4)
+
+Further up the hierarchy comes wisdom – a category which is given only limited discussion in the present paper. There are two immediate points to be made about wisdom. While wisdom is traditionally taken to be a layer in the hierarchy, few authors discuss it or use it. This may be because it is not required for the problems they address. (See [1].) Second, criticisms off ered in this paper will undermine the foundational layers, so a successful account of wisdom, whatever nature that might have, will not place it as an upper layer in the DIKW hierarchy.
+
+
+***
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

@@ -1,0 +1,179 @@
+---
+pagetitle: "Philippine Kidnappings"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+#if (!requireNamespace("BiocManager", quietly = TRUE))
+#    install.packages("BiocManager")
+
+#BiocManager::install("RCyjs")
+
+library(RCyjs)
+
+```
+
+## R Markdown
+
+```{r}
+
+task_nodes <- c("Wranglers", "Evaluate", "Prepare", "Reduce", "Extend", "Arrange", "Structure", "Preserve")
+evaluate_nodes <- c("Profile", "Validate", "Clean", "Impute", "Compare")
+prepare_nodes <- c("Format", "Parse", "Replace", "Column", "Normalize")
+reduce_nodes <- c("Slim", "Split", "Sample", "Filter", "Find", "Partition", "Query")
+extend_nodes <- c("Enrich", "Group")
+arrange_nodes <- c("Shuffle", "Sort")
+structure_nodes <- c("Transform", "Mutate")
+preserve_nodes <- c("Store")
+
+nodes <- rbind(task_nodes, evaluate_nodes, prepare_nodes, reduce_nodes, extend_nodes, arrange_nodes, structure_nodes, preserve_nodes)
+
+g <- graphNEL(nodes, edgemode="directed")
+g <- graph::addEdge("Wranglers", "Evaluate", g)
+g <- graph::addEdge("Wranglers", "Prepare", g)
+g <- graph::addEdge("Wranglers", "Reduce", g)
+g <- graph::addEdge("Wranglers", "Extend", g)
+g <- graph::addEdge("Wranglers", "Arrange", g)
+g <- graph::addEdge("Wranglers", "Structure", g)
+g <- graph::addEdge("Wranglers", "Preserve", g)
+
+g <- graph::addEdge("Evaluate", "Profile", g)
+g <- graph::addEdge("Evaluate", "Validate", g)
+g <- graph::addEdge("Evaluate", "Clean", g)
+g <- graph::addEdge("Evaluate", "Impute", g)
+g <- graph::addEdge("Evaluate", "Compare", g)
+
+g <- graph::addEdge("Prepare", "Format", g)
+g <- graph::addEdge("Prepare", "Parse", g)
+g <- graph::addEdge("Prepare", "Replace", g)
+g <- graph::addEdge("Prepare", "Column", g)
+g <- graph::addEdge("Prepare", "Normalize", g)
+
+g <- graph::addEdge("Reduce", "Slim", g)
+g <- graph::addEdge("Reduce", "Split", g)
+g <- graph::addEdge("Reduce", "Sample", g)
+g <- graph::addEdge("Reduce", "Filter", g)
+g <- graph::addEdge("Reduce", "Find", g)
+g <- graph::addEdge("Reduce", "Partition", g)
+g <- graph::addEdge("Reduce", "Query", g)
+
+g <- graph::addEdge("Extend", "Enrich", g)
+g <- graph::addEdge("Extend", "Group", g)
+
+g <- graph::addEdge("Arrange", "Shuffle", g)
+g <- graph::addEdge("Arrange", "Sort", g)
+
+g <- graph::addEdge("Structure", "Transform", g)
+g <- graph::addEdge("Structure", "Mutate", g)
+
+g <- graph::addEdge("Preserve", "Store", g)
+
+setDefaultNodeFontSize(rcy, 8)
+nodeDataDefaults(g, attr="label") <- "undefined"
+nodeDataDefaults(g, attr="type") <- "undefined"
+nodeDataDefaults(g, attr="flux") <- 0
+edgeDataDefaults(g, attr="edgeType") <- "undefined"
+
+# ----assignAttributes
+#nodeData(g, nodes, attr="label") <- c("Activator", "Target")
+#nodeData(g, nodes, attr="type") <- c("ligand", "receptor")
+edgeData(g, "Wranglers", "Evaluate", attr="edgeType") <- "binds"
+
+# ----displayGraph
+rcy <- RCyjs(title="RCyjs vignette")
+setGraph(rcy, g)
+
+# getLayoutStrategies(rcy)
+# "breadthfirst"
+# "circle"
+# "cola"
+# "concentric"
+# "cose"
+# "cose-bilkent"
+# "dagre"
+# "grid"
+# "random"
+layout(rcy, "concentric")
+fit(rcy, padding=150)
+setDefaultStyle(rcy)
+
+
+```
+
+```{r}
+
+if(interactive()){
+#rcy <- RCyjs(title="getJSON", graph=g)
+s <- getJSON(rcy)
+s.asList <- fromJSON(s) # easier to inspect if you wish toa
+}
+
+# s
+
+test <- readAndStandardizeJSONNetworkFile(s)
+
+
+if(interactive()){
+  gt <- test
+  rcyt <- RCyjs(title="rcyjs demo", graph=g)
+  layout(rcyt, "cose")
+  fit(rcyt, 100)
+  redraw(rcyt)
+}
+
+```
+
+
+
+```{r, echo=FALSE}
+
+# builtinShapes
+  getSupportedNodeShapes(rcy)
+  getSupportedEdgeDecoratorShapes(rcy)
+
+# changeSomeDefaults
+  setDefaultNodeShape(rcy, "roundrectangle")
+  setDefaultNodeSize(rcy, 50)
+  setDefaultNodeColor(rcy, "lightgreen")
+  setDefaultNodeFontSize(rcy, 8)
+  setDefaultNodeFontColor(rcy, "darkgreen")
+  setDefaultEdgeLineStyle(rcy, "dotted")
+  setDefaultEdgeWidth(rcy, 1)
+  setDefaultEdgeLineColor(rcy, "black")
+  setDefaultNodeBorderWidth(rcy, 2)
+  setDefaultNodeBorderColor(rcy, "white")
+  setBackgroundColor(rcy, "#F0F0F0")
+  setDefaultEdgeTargetArrowShape(rcy, "arrow")
+  redraw(rcy)
+
+# specificNodeVisualAssignements
+  setNodeColor(rcy, "Wranglers", "lightblue")
+  setNodeSize(rcy, "Evaluate", 80)
+  setNodeShape(rcy, "Wranglers", "hexagon")
+  setNodeBorderWidth(rcy, "Wranglers", 3)
+  redraw(rcy)
+
+# resetStyle
+  setDefaultStyle(rcy)
+
+
+```

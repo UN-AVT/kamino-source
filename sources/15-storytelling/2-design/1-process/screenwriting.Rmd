@@ -1,0 +1,154 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MODULE  
+</div>
+
+# This is a title
+## This is a subtitle
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Abhidev Vaishnav on Unsplash"}
+
+knitr::include_graphics("archetypes/smile/abhidev-vaishnav-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">A smile from Pune, India</div>
+
+> This is a quote...\
+--- The attribution\
+
+***
+
+All stories have a beginning, middle, and end traditionally broken down into a three-act structure. Each act in a story serves as a marker point in the journey of the protagonist
+
+ACTS
+
+The story is usually divided into three acts as mentioned above. The first act is the set-up and identification of characters and the problem. The second act is the process of dealing with the problem and the third act is how the problem is finally resolved.
+
+SEQUENCES
+
+Each act is a collection of sequences. A sequence is a collection of closely related scenes that form a unified whole, generally to drive home a particular story point of the act.
+
+SCENES
+
+Each sequence is divided into scenes. A scene is a collection of dramatic beats unified by character, location, time, or theme. Each scene needs an objective. The scene objective must relate to the overall objective for the arc of the story. Each scene must cause change to occur.
+
+Each scene causes change or turning points in four ways:
+
+* Increase curiosity—what's going to happen next?
+* Insight—fills the gap of the set-up from previous scenes.
+* New direction—changes the course in the film after established events.
+
+SHOTS
+
+Once a story begins to be expressed in the language of cinema, each moment can be expressed through a series of camera set-ups, known as shots.4 Shots are unique to film (although comics can also be said to have shots), in that a novel, a play, or a screenplay can have a story, acts, sequences, scenes, and beats, but only film can have shots.
+
+BEATS
+
+A story beat is an idea or little action; it is the smallest unit that tells the film’s story. It is the flow of these ideas that produce the questions and answer them. When a new idea is introduced, we have a new story beat. Each separate action toward the goal is a new beat. The story beats also create a sense of punctuation for sequences of actions. They allow us to follow the steps of the story by breaking the story down into chunks of actions.
+
+Screenwriting is the craft of structuring a story. The objective is to develop a screenplay which will be transcribed into an analytical product for the intended audience of your work. A screenplay is divided into scenes where every scene describes the setting and supports the plot. A plot is the structure of events within a story and the causal relationship between them. In our case, let’s look at the plot as a framework for structuring a story into a decision supporting product.
+
+In Sources of Power. How People Make Decisions. Gary Klein, Power to read minds:
+* Here’s what I think we face
+* Here’s what I think we should do
+* Here’s why
+* Here’s what we should keep our eye on
+* Now, talk to me
+
+Using this guidance as the basis for creating the plot, there are a number of approaches we can consider based on different sequence structures:
+* Sequence shot: temporal-visual organization in which fi lmic and chronological time are identifical and the visual plan has continuity.
+* Scene: temporal-visual organization in which fi lmic and chronological time are identical, but visual continuity is interrupted (sporting event)
+* Ordinary Sequence: contains both visual and temporal discontinuity, having changes in duration, gaps in time, and changes in place, but with temporal order maintained.
+* Episode sequence: Like above, but more extreme. Filmic time is compressed to an extreme degree
+* Alternating syntagm: Events actually taking place at the same time are presented alternately
+* Descriptive syntagm: use of time sequence to describe an area
+* Connecting syntagm: linear sequence of spatially or temporally diff erent shots depicting objects or events that belong to the same category or class. Using temporal proximity to suggest grouping
+(Gestalt)
+* Parallel syntagm: an alternating sequence of shots that depict changes in place but not time, typically places that belong to opposite categories where the temporal juxtaposition of the scenes
+puts emphasis on contrasts.
+
+As a screenplay serves as the script for the story, the storyboard is a form of visual script.
+
+
+
+### Markdown tags
+#### with custom styling
+
+
+
+
+### HTML tags
+#### with custom styling
+
+
+
+
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

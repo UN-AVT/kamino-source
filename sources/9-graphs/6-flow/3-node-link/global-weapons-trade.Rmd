@@ -1,0 +1,291 @@
+---
+pagetitle: "Global Arms Trade"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(scales)
+library(ggraph)
+library(igraph)
+library(graphlayouts)
+library(tidygraph)
+library(countrycode)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+GRAPHS
+</div>
+
+# Global Arms Trade
+## graph layouts
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Taylor Wilcox on Unsplash"}
+
+masthead <- "assets/taylor-wilcox-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+***
+
+### Ingest
+#### supplier to recipient data
+
+```{r,message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df <- read.csv("archetypes/global-arms-trade/supplier-recipient.csv", header = TRUE, stringsAsFactors = FALSE)
+head(df, n = 10)
+
+```
+
+
+### Wrangle
+#### clean
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_clean <- df %>% mutate(no_ordered = as.integer(no_ordered))
+df_clean$no_ordered[is.na(df_clean$no_ordered)] <- 0
+
+df_clean <- filter(df_clean, no_ordered > 0)
+df_clean
+
+```
+
+
+### Wrangle
+#### filter by weapon description
+
+<pre>
+  [1] "FGA aircraft"            "Frigate"                 "Patrol craft"            "APC"                     "IFV"                     "Light aircraft"          "UAV"                     "Reconnaissance ac"      
+  [9] "Tank turret"             "Diesel engine"           "Light helicopter"        "Trainer/combat ac"       "Transport aircraft"      "Trainer/combat aircraft" "Turboprop/turboshaft"    "Tank destroyer"         
+ [17] "AFSV"                    "Corvette"                "OPV"                     "Submarine"               "OPV/frigate"             "Armed UAV"               "Air search radar"        "Self-propelled mortar"  
+ [25] "AALS"                    "Light tank"              "Landing craft"           "Tank"                    "Air/sea search radar"    "Sea search radar"        "FAC/MCM ship"            "ASW helicopter"         
+ [33] "ASW sonar"               "Transport helicopter"    "MCM ship"                "Nuclear submarine"       "Anti-ship helicopter"    "Combat helicopter"       "Armoured car"            "APC/APV"                
+ [41] "Self-propelled gun"      "Anti-ship missile"       "BVRAAM"                  "Naval SAM system"        "Mortar"                  "Towed gun"               "ASM"                     "Turbofan"               
+ [49] "FAC"                     "Portable SAM"            "MP aircraft radar"       "Recce satellite"         "Submarine sonar"         "Replenishment ship"      "OPV/transport ship"      "Light transport ac"     
+ [57] "MP aircraft"             "AS/ASW torpedo"          "Multifunction radar"     "ABL"                     "Trainer aircraft"        "SAM system"              "AEV/ARV"                 "ARV"                    
+ [65] "Turboprop"               "ASW aircraft"            "Arty locating radar"     "IFV turret"              "Anti-tank missile"       "Combat ac radar"         "Aircraft recce system"   "Air refuel system"      
+ [73] "MP UAV"                  "Multifuntion radar"      "SAM"                     "AEW radar"               "APC turret"              "Naval gun"               "Supply ship"             "Helicopter"             
+ [81] "Fire control radar"      "APV"                     "multi-function radar"    "EO search/fire control"  "Multi-function radar"    "Transport ship"          "Ground surv radar"       "Landing ship"           
+ [89] "ASW MRL"                 "Reconnaissance AV"       "AEW helicopter"          "Mobile AD system"        "Guided bomb"             "ALV"                     "SPG chassis"             "Destroyer"              
+ [97] "Tanker/transport ac"     "Anti-ship missile/SSM"   "AA gun"                  "CIWS"                    "AA gun system"           "Training ship"           "ACV/landing craft"       "Gas turbine"            
+[105] "SPG turret"              "Support ship"            "SAM/ABM system"          "AEW&C aircraft"          "ISR aircraft"            "SIGINT aircraft"         "ASM/anti-tank missile"   "ABM"                    
+[113] "AGS aircraft"            "ARM"                     "Guided rocket"           "Combat heli radar"       "Transport ac/helicopter" "Aircraft EO system"      "ASW torpedo"             "Guided shell"           
+[121] "Self-propelled MRL"      "ABM system"              "ABM missile"            
+</pre>
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_weapons <- df_clean %>%
+  group_by(weapon_description) %>%
+  summarise(
+      total_orders = sum(no_ordered, na.rm = T),
+      count = n()
+  ) %>%
+  arrange(-count, .by_group = TRUE)
+
+df_weapons
+  
+# unique(df_clean$weapon_description)
+df_filtered <- filter(df_clean, weapon_description == "Submarine")
+df_filtered
+
+```
+
+
+### Wrangle 
+#### transform to graph structure 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# Convert data to graph data frame
+# directed=true means it is a flow not just an association between nodes
+g <- graph.data.frame(df_filtered, directed = TRUE)
+g
+
+```
+
+### Ensuring proper attributes for Edges
+#### Computing Edges Weights (as per number of students flow)
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_graph <- g %>% 
+   as_tbl_graph() %>% 
+    activate(edges) %>% 
+    # computes numbers between 0 and 1 according to Number of Student Number
+    mutate(edge_weights = log10(no_ordered))
+df_graph
+
+```
+
+### Ensuring proper attributes for Nodes
+#### Grouping all Nodes by Continents
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_graph <- df_graph %>% 
+  activate(nodes) %>%
+  mutate(group = countrycode(name, origin = 'country.name', destination = 'iso3c'))
+df_graph
+
+```
+
+
+### Layout & Aesthetic Parameters
+#### Choose the types of Edges you would like to display
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+## Edge Types
+# geom_edge_arc
+# geom_edge_arc0
+# geom_edge_arc2
+# geom_edge_density
+# geom_edge_diagonal
+# geom_edge_diagonal0
+# geom_edge_diagonal2
+# geom_edge_elbow
+# geom_edge_elbow0
+# geom_edge_elbow2
+# geom_edge_fan
+# geom_edge_fan0
+# geom_edge_fan2
+# geom_edge_hive
+# geom_edge_hive0
+# geom_edge_hive2
+# geom_edge_link
+# geom_edge_link0
+# geom_edge_link2
+
+## Layouts can be computationally intensive
+# Uncomment only for use
+
+##################
+# igraph layouts #
+##################
+
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+
+## graphlayouts
+layout <- create_layout(df_graph, layout = "nicely")
+# layout <- create_layout(df_graph, layout = "stress")
+# layout <- create_layout(df_graph, layout = "focus", focus = 1)
+
+
+```
+
+
+### View
+#### graph
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+)
+
+v1 <- ggraph(layout) + 
+  geom_edge_diagonal(aes(edge_width = edge_weights)) + # aes(edge_width = edge_weights)
+  geom_node_point(size=2) +
+  geom_node_label( aes(label=name), repel = FALSE, vjust = -0.5, hjust = 0.5, size = 4, family = "inconsolata") +
+  coord_fixed(clip = 'off') + 
+  theme_graph()+
+  theme(legend.position = "top")
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+Source: 
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
