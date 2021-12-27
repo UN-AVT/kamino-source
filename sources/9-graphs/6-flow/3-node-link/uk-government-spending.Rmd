@@ -144,10 +144,10 @@ df_graph
 # layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
 # layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
 # layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
-# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
+layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
 # layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
 # layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
-layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
 # layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
 # layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
 # layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
@@ -183,19 +183,21 @@ theme_opts <- theme(
   plot.background = element_blank(),
 )
 
-color_palette <- E(df_graph)$color
+colors <- unique(E(df_graph)$color)
+color_palette <- c( colors )
+color_palette
 
 v1 <- ggraph(layout) + 
   geom_edge_elbow(aes(edge_width = edge_weights, color = color)) + # aes(edge_width = edge_weights)
   geom_node_point(aes(size=billion_pounds, color = color)) +
   geom_node_label( aes(label=name, fill = color), color = "white", repel = FALSE, vjust = -0.5, hjust = 0.5, size = 4, family = "inconsolata") +
-  scale_size_continuous(range = c(1, 6)) + 
-  scale_color_identity() +
+  scale_size_continuous(range = c(1, 12)) + 
+  scale_color_manual(values = color_palette) +
   coord_fixed(clip = 'off') + 
   theme_graph()+
   theme_opts
 
-girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+girafe(ggobj = v1, width_svg = 16, height_svg = 14,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 

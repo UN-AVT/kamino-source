@@ -46,9 +46,9 @@ GRAPHS
 # Caviar
 ## computed layouts
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo from Wikipedia"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Bermix Studio on Unsplash"}
 
-masthead <- "assets/jolo-island-wikipedia.jpg"
+masthead <- "assets/bermix-studio-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -58,9 +58,19 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
+MONTREAL, Quebec, April 18 -- At least 30 alleged members of a Montreal-based gang of international drug traffickers have been arrested in Canada, while 10 affiliates were taken into custody in Spain, a police spokesman said Thursday. Inspector Jacques Tanguay of the Royal Canadian Mounted Police said the arrests followed a three-year investigation that involved police in Spain, Britain, Belgium, Holland, Brazil, Peru, Panama and the United States. Those arrested in Montreal were alleged to be members or affiliates of a Mafia organization known to police as the West End Gang, Tanguay said. Speaking at a press conference, Tanguay said the police sweep, code- named 'Operation Caviar,' began early Wednesday, when 238 police officers and members of other law-enforcement agencies began arresting the suspects, bagging a total of 30 by the end of the day. 'Operation Caviar' involved 'international networking at the highest level,' and took the fight against drug trafficking to a 'a new level of international cooperation,' he said. Included in the sweep was Frank (Santos) Cotroni, 65, a Mafia chief who announced in 1991 that he was giving up a life a crime, and his 35- year-old son Francesco (Frank Jr.), the police spokesman said. Tanguay told United Press International 'Operation Caviar' marked the first time law-enforcement agencies in so many parts of the world had worked in unison to crack a major drug-smuggling operation. Those arrested in Montreal face charges of conspiracy to import, importing, trafficking or possession of narcotic drugs, police said.
+
+They were arraigned in court Thursday. RCMP investigator Joseph Tomeo said the gangs were importing between 2,200 and 22,000 pounds (1,000 and 10,000 kg) of cocaine per month through Montreal. Heavily armed police guarded $250 million worth of cocaine, which was seized in the months leading up to the raids. 'Operation Caviar' generated 'Operation Scoop' which concentrated on the Montreal connection while drug seizures were made in Toronto and Halifax in Canada, Port Newark in the United States, London, Panama City, and Rio de Janeiro. Tanguay said more arrests were expected from ongoing European investigations. Police in Belgium are searching for a suspect identified as Anthonie Horst, while the authorities in Spain are seeking a man identified as Samir Rabbat, who evaded capture in Wednesday's roundup. Also included in the Montreal sweep was Wallace Lee, 39, vice president of the prestigious financial firm of Wood Gundy. Police said Lee was the Cotroni family's financial adviser. Another key figure netted was Daniel Serero, 37, alleged to be the new leader of the West End Gang, replacing convicted killer and drug trafficker Alan Ross, who is presently serving a prison term in Florida. Police described Serero as one of the world's most powerful and active narcotics importers.
+
+Project Caviar was a unique investigation that targeted a network of hashish and cocaine importers operating out of Montreal. The network was targeted between 1994 and 1996 by a tandem investigation uniting the Montreal Police, the Royal Canadian Mounted Police, and other national and regional law-enforcement agencies from various countries (i.e., England, Spain, Italy, Brazil, Paraguay, and Colombia). The case is unique because it involved a specific investigative approach that will be referred to as a “seize and wait” strategy. Unlike most law-enforcement strategies, the mandate set forward in the Project Caviar case was to seize identified drug consignments, but not to arrest any of the identified participants. This took place over a 2-year period. Thus, although 11 importation consignments were seized at different moments throughout this period, arrests only took place at the end of the investigation. What this case offers is a rare opportunity to study the evolution of a criminal network phenomenon as it was being disrupted by law-enforcement agents. The inherent investigative strategy permits an assessment of change in the network structure and an inside look into how network participants react and adapt to the growing constraints set upon them.
+
+The principal data source was comprised of information submitted as evidence during the trials of 22 participants in the Caviar network. It included 4,279 paragraphs of information (over 1,000 pages) revealing electronically intercepted telephone conversations between network participants. These transcripts were used to create the overall matrix of the drug-trafficking operation’s communication system throughout the course of the investigation. Individuals falling in the surveillance net were not all participants in the trafficking operation. An initial extraction of all names appearing in the surveillance data led to the identification of 318 individuals. From this pool, 208 individuals were not implicated in the trafficking operations. Most were simply named during the many transcripts of conversations, but never detected. Others who were detected had no clear participatory role within the network (e.g., family members or legitimate entrepreneurs). The final network was thus composed of 110 participants.
+
+Ties are communication exchanges between criminals. Values represent level of communication activity. Data comes from police wiretapping.
 
 ### Ingest
 #### agent × event data
+
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
@@ -89,10 +99,6 @@ df_graph <- delete.vertices(df_graph, three_degrees)
 # remove isolates
 isolates <- which(degree(df_graph)==0)
 df_graph <- delete.vertices(df_graph, isolates)
-
-
-# df_graph_manual <- graph_from_data_frame( df_edges, vertices=df_nodes )
-
 
 ```
 
@@ -127,41 +133,41 @@ df_graph <- delete.vertices(df_graph, isolates)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# igraph layouts
+# Layouts can be computationally intensive
+# Un-comment only for use
 
-# bipartite <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
-circle <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
-dh <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
-# drl <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
-fr <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
-gem <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
-graphopt <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
-# grid <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
-kk <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
-# lgl <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
-# mds <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
-nicely <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
-# sphere <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
-# star <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
-sugiyama <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+# igraph
+# layout <- create_layout(cg, layout = 'dh')
+# layout <- create_layout(cg, layout = 'fr')
+# layout <- create_layout(cg, layout = 'gem')
+# layout <- create_layout(cg, layout = 'lgl')
+# layout <- create_layout(cg, layout = 'sugiyama')
+# layout <- create_layout(cg, layout = 'star')
+# layout <- create_layout(cg, layout = 'kk', maxiter = 100)
+# layout <- create_layout(cg, layout = 'drl')
+# layout <- create_layout(cg, layout = 'linear')
+# layout <- create_layout(cg, layout = 'linear' , circular = TRUE)
 
-# ggraph layouts
+# ggraph
+# layout <- create_layout(cg, layout = 'linear')
+# layout <- create_layout(cg, layout = 'linear', circular = TRUE)
+layout <- create_layout(cg, layout = 'stress')
+# layout <- create_layout(cg, layout = 'sparse_stress')
+# layout <- create_layout(cg, layout = 'backbone')
+# layout <- create_layout(cg, layout = 'pmds')
+# layout <- create_layout(cg, layout = 'eigen')
+# layout <- create_layout(cg, layout = 'centrality')
+# layout <- create_layout(cg, layout = 'focus')
+# layout <- create_layout(cg, layout = 'dendrogram')
+# layout <- create_layout(cg, layout = 'unrooted')
+# layout <- create_layout(cg, layout = 'matrix')
+# layout <- create_layout(cg, layout = 'hive')
+# layout <- create_layout(cg, layout = 'fabric')
 
-# backbone <- create_layout(df_graph_undirected, layout = 'backbone')
-# centrality_bc <- betweenness(df_graph)
-# centrality <- create_layout(df_graph, layout = 'centrality', centrality = centrality_bc)
-# eigen <- create_layout(df_graph, layout = 'eigen', type = "laplacian", eigenvector = "smallest")
-# fabric <- create_layout(df_graph, layout = 'fabric')
-# focus <- create_layout(df_graph_directed, layout = 'focus', focus = 1)
-# hive <- create_layout(df_graph, layout = 'hive', axis = friends, sort.by = degree)
-# linear <- create_layout(df_graph, layout = 'linear')
-# matrix <- create_layout(df_graph, layout = 'matrix')
-# pmds_pivots <- 3
-# pmds <- create_layout(df_graph, layout = 'pmds', pivots = pmds_pivots)
-stress <- create_layout(df_graph, layout = 'stress')
-# unrooted <- create_layout(df_graph, layout = 'unrooted' )
-
-# stress_m <- create_layout(df_graph_manual, layout = 'stress')
+# graphlayouts
+# layout <- create_layout(cg, layout = "nicely")
+# layout <- create_layout(cg, layout = "stress")
+# layout <- create_layout(cg, layout = "focus", focus = 1)
 
 ```
 
@@ -197,11 +203,11 @@ stress <- create_layout(df_graph, layout = 'stress')
 
 
 
-### Plot
-#### nicely
+### View
+#### with computed layout and aesthetics
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -209,7 +215,7 @@ theme_opts <- theme(
     legend.position='none'
 )
 
-v1 <- ggraph(circle) + 
+v1 <- ggraph(layout) + 
   geom_edge_link() +
   geom_node_point(size = 2) +
   geom_node_label(aes(label = name), size = 4) +
@@ -224,28 +230,11 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ```
 
 
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
-
-v2 <- ggraph(stress) + 
-  geom_edge_link() +
-  geom_node_point(size = 2) +
-  geom_node_label(aes(label = name), size = 2) +
-  theme_graph() +
-  theme_opts
-
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0))
-)
-
-```
-
-
 ### References
 #### citations for narrative and data sources
 
 
-* Narrative: Gerdes, Luke M., Kristine Ringler, and Barbara Autin. "Assessing the Abu Sayyaf Group's Strategic and Learning Capacities." Studies in Conflict & Terrorism 37, no. 3 (2014): 267-293.
+* Narrative: Morselli, C., 2009. Inside criminal networks. New York: Springer.
 * Data: UCINET, Covert Networks, https://sites.google.com/site/ucinetsoftware/datasets/covert-networks
 
 

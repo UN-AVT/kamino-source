@@ -1,6 +1,6 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "European Asylum-Seeker Application Decisions"
+output:
   html_document:
     theme: lumen
     css: "../../../z-assemblers/assets/styles/content.css"
@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -24,11 +24,11 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(countrycode)
 library(ggraph)
 library(igraph)
 library(graphlayouts)
 library(tidygraph)
+library(ggalluvial)
 library(ggiraph)
 
 library(showtext)
@@ -43,13 +43,13 @@ showtext_auto()
 GRAPHS
 </div>
 
-# Country Borders
-## Node-links - Association
+# European Asylum-Seeker Application Decisions
+## sankey
 
 ```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Marjan Blan on Unsplash"}
 
-masthead <- "assets/marjan-blan-unsplash.jpg"
-knitr::include_graphics(masthead, dpi=72)
+#masthead <- "assets/marjan-blan-unsplash.jpg"
+#knitr::include_graphics(masthead, dpi=72)
 
 ```
 
@@ -61,10 +61,12 @@ knitr::include_graphics(masthead, dpi=72)
 ### Ingest
 #### border graph
 
+
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_path <- "archetypes/country-borders/country-borders.csv"
+df_path <- "archetypes/european-asylum-seeker-application-decisions/economist-european-asylum-seeker-application-decisions-2012.csv"
 df <- read.csv(df_path, header = TRUE, stringsAsFactors = FALSE)
+df <- df %>% mutate(id = row_number())
 df
 
 ```
@@ -76,15 +78,17 @@ df
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_wrangle <- df %>% rename(to='target', from='source')
-
-# enrich with UN region name
-df_wrangle$from_region <- countrycode(df_wrangle$from, origin='country.name', destination='un.region.name')
-df_wrangle$to_region <- countrycode(df_wrangle$to, origin='country.name', destination='un.region.name')
-
-df_wrangle <- df_wrangle %>% filter(from_region == 'Africa' & to_region == 'Africa' )
-
-df_wrangle
+ggplot(data = df,
+       aes(axis1 = source, axis2 = target,
+           y = value)) +
+  scale_x_discrete(limits = c("source", "target"), expand = c(.2, .05)) +
+  xlab("Demographic") +
+  geom_alluvium(aes(fill = EDGE_COLOR)) +
+  geom_stratum() +
+  geom_text(stat = "stratum", aes(label = after_stat(stratum))) +
+  theme_minimal() +
+  ggtitle("passengers on the maiden voyage of the Titanic",
+          "stratified by demographics and survival")
 
 ```
 
@@ -95,10 +99,19 @@ df_wrangle
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Convert data to graph data frame
-# directed FALSE means no flow. It's just an association
-g <- graph.data.frame(df_wrangle, directed = FALSE)
-g
+data(majors)
+majors
+majors$curriculum <- as.factor(majors$curriculum)
+
+ggplot(majors,
+       aes(x = semester, stratum = curriculum, alluvium = student,
+           fill = curriculum, label = curriculum)) +
+  scale_fill_brewer(type = "qual", palette = "Set2") +
+  geom_flow(stat = "alluvium", lode.guidance = "frontback",
+            color = "darkgray") +
+  geom_stratum() +
+  theme(legend.position = "bottom") +
+  ggtitle("student curricula across several semesters")
 
 ```
 
@@ -109,46 +122,21 @@ g
 Creating numerical fields for the Nodes set in order to attribute the nodes size and/or color  
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
-## Creating centrality numerical field for the Nodes
 
-# centrality_alpha()
-# centrality_authority() 
-# centrality_betweenness() 
-# centrality_power() 
-# centrality_closeness() 
-# centrality_eigen() 
-# centrality_hub() 
-# centrality_pagerank() 
-# centrality_subgraph() 
-# centrality_degree() 
-# centrality_edge_betweenness() 
-# centrality_manual() 
-# centrality_closeness_harmonic() 
-# centrality_closeness_residual() 
-# centrality_closeness_generalised() 
-# centrality_communicability() 
-# centrality_communicability_odd() 
-# centrality_communicability_even() 
-# centrality_subgraph_odd() 
-# centrality_subgraph_even() 
-# centrality_katz() 
-# centrality_betweenness_network() 
-# centrality_betweenness_current() 
-# centrality_betweenness_communicability() 
-# centrality_betweenness_rsp_simple() 
-# centrality_betweenness_rsp_net() 
-# centrality_information() 
-# centrality_decay() 
-# centrality_random_walk() 
-# centrality_expected()
-
-cg <- g %>% 
-    as_tbl_graph() %>% 
-    activate(nodes) %>% 
-  # associating random numerical value to nodes to differentiate their colors and sizes
-    mutate(centrality  = centrality_betweenness())
-
-
+data(vaccinations)
+vaccinations
+vaccinations <- transform(vaccinations,
+                          response = factor(response, rev(levels(response))))
+ggplot(vaccinations,
+       aes(x = survey, stratum = response, alluvium = subject,
+           y = freq,
+           fill = response, label = response)) +
+  scale_x_discrete(expand = c(.1, .1)) +
+  geom_flow() +
+  geom_stratum(alpha = .5) +
+  geom_text(stat = "stratum", size = 3) +
+  theme(legend.position = "none") +
+  ggtitle("vaccination survey responses at three points in time")
 
 ```
 
@@ -159,26 +147,7 @@ cg <- g %>%
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-## Creating group numerical field for the Nodes
 
-# group_components() 
-# group_edge_betweenness() 
-# group_fast_greedy() 
-# group_infomap() 
-# group_label_prop() 
-# group_leading_eigen() 
-# group_louvain() 
-# group_optimal() 
-# group_spinglass() 
-# group_walktrap() 
-# group_biconnected_component()
-
-cg <- cg %>% 
-  activate(nodes) %>%
-  # use functions to compute numerical values to attribute the edge width and/or color
-  mutate(group = group_louvain())
-
-cg
 
 ```
 
@@ -189,14 +158,7 @@ cg
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-cg <- cg %>% 
-    activate(edges) %>% 
-  # computing random number (n) which are between 0 and 1 to attribute the edge width and/or color
-    #mutate(edge_weights = runif(n()))
-  ## computes numbers between 0 and 1 according to distance in km
-  mutate(edge_weights = log10(km)/50)
 
-cg
 
 
 ```
@@ -208,41 +170,7 @@ cg
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Layouts can be computationally intensive
-# Un-comment only for use
 
-# igraph
-# dh <- create_layout(cg, layout = 'dh')
-# fr <- create_layout(cg, layout = 'fr')
-# gem <- create_layout(cg, layout = 'gem')
-# lgl <- create_layout(cg, layout = 'lgl')
-# sugiyama <- create_layout(cg, layout = 'sugiyama')
-# star <- create_layout(cg, layout = 'star')
-# kk <- create_layout(cg, layout = 'kk', maxiter = 100)
-# drl <- create_layout(cg, layout = 'drl')
-# linear_straight <- create_layout(cg, layout = 'linear')
-# linear_circular <- create_layout(cg, layout = 'linear' , circular = TRUE)
-
-# ggraph
-# arc <- create_layout(cg, layout = 'linear')
-# arc_circular <- create_layout(cg, layout = 'linear', circular = TRUE)
-# stress <- create_layout(cg, layout = 'stress')
-# sparse_stress <- create_layout(cg, layout = 'sparse_stress')
-# backbone <- create_layout(cg, layout = 'backbone')
-# pmds <- create_layout(cg, layout = 'pmds')
-# eigen <- create_layout(cg, layout = 'eigen')
-# centrality <- create_layout(cg, layout = 'centrality')
-# focus <- create_layout(cg, layout = 'focus')
-# dendrogram <- create_layout(cg, layout = 'dendrogram')
-# unrooted <- create_layout(cg, layout = 'unrooted')
-# matrix <- create_layout(cg, layout = 'matrix')
-# hive <- create_layout(cg, layout = 'hive')
-# fabric <- create_layout(cg, layout = 'fabric')
-
-# graphlayouts
-nicely <- create_layout(cg, layout = "nicely")
-# stress <- create_layout(cg, layout = "stress")
-# radial <- create_layout(cg, layout = "focus", focus = 1)
 
 ```
 
@@ -253,28 +181,7 @@ nicely <- create_layout(cg, layout = "nicely")
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Edge Types
-# geom_edge_arc
-# geom_edge_arc0
-# geom_edge_arc2
-# geom_edge_density
-# geom_edge_diagonal
-# geom_edge_diagonal0
-# geom_edge_diagonal2
-# geom_edge_elbow
-# geom_edge_elbow0
-# geom_edge_elbow2
-# geom_edge_fan
-# geom_edge_fan0
-# geom_edge_fan2
-# geom_edge_hive
-# geom_edge_hive0
-# geom_edge_hive2
-# geom_edge_link
-# geom_edge_link0
-# geom_edge_link2
-# geom_edge_loop
-# geom_edge_loop0
+
 
 ```
 
@@ -285,25 +192,7 @@ nicely <- create_layout(cg, layout = "nicely")
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
 
-theme_opts <- theme(
-    text = element_text(family = "inconsolata"), 
-    # plot.margin = unit(c(1.5,1,1,1), "in"),
-    legend.position='none'
-)
 
-v1 <- ggraph(nicely) + 
-  #geom_edge_link(aes(colour = factor(km), edge_width = edge_weights)) + 
-  geom_edge_link(aes(colour = factor(km))) +
-  geom_node_point(aes(color = group, size = centrality)) +
-  geom_node_text(aes(label = name)) +
-  scale_color_gradient(low = "green", high = "blue", na.value = NA) +
-  scale_size(range = c(1,6)) +
-  theme_graph()+
-  theme_opts
-
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0))
-)
 
 
 ```
@@ -312,13 +201,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
 
-# eval = FALSE as default; run manually as chunk
 
-# full version
-ggsave(filename = "outputs/country-borders-fs.svg", plot = v1, width=720/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/country-borders-sm.svg", plot = v1, width=2.25, height=2.25)
 
 ```
 

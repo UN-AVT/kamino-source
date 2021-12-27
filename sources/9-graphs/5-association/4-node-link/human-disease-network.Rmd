@@ -71,7 +71,7 @@ head(df)
 ```
 
 
-### Prepare data [Wrangle]
+### Wrangle
 #### Format the data into a graph data frame 
 
 
@@ -87,98 +87,56 @@ df_graph
 ```
 
 
-
-
 ## Layout & Aesthetic Parameters
 ### Choose the types of Edges you would like to display
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# igraph layouts
+# Layouts can be computationally intensive
+# Un-comment only for use
 
-# bipartite <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
-# circle <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
-# dh <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
-# drl <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
-# fr <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
-# gem <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
-# graphopt <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
-# grid <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
-# kk <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
-# lgl <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
-# mds <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
-# nicely <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
-# sphere <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
-# star <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
-# sugiyama <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+# igraph
+# layout <- create_layout(cg, layout = 'dh')
+# layout <- create_layout(cg, layout = 'fr')
+# layout <- create_layout(cg, layout = 'gem')
+# layout <- create_layout(cg, layout = 'lgl')
+# layout <- create_layout(cg, layout = 'sugiyama')
+# layout <- create_layout(cg, layout = 'star')
+# layout <- create_layout(cg, layout = 'kk', maxiter = 100)
+# layout <- create_layout(cg, layout = 'drl')
+# layout <- create_layout(cg, layout = 'linear')
+# layout <- create_layout(cg, layout = 'linear' , circular = TRUE)
 
-# ggraph layouts
+# ggraph
+# layout <- create_layout(cg, layout = 'linear')
+# layout <- create_layout(cg, layout = 'linear', circular = TRUE)
+layout <- create_layout(cg, layout = 'stress')
+# layout <- create_layout(cg, layout = 'sparse_stress')
+# layout <- create_layout(cg, layout = 'backbone')
+# layout <- create_layout(cg, layout = 'pmds')
+# layout <- create_layout(cg, layout = 'eigen')
+# layout <- create_layout(cg, layout = 'centrality')
+# layout <- create_layout(cg, layout = 'focus')
+# layout <- create_layout(cg, layout = 'dendrogram')
+# layout <- create_layout(cg, layout = 'unrooted')
+# layout <- create_layout(cg, layout = 'matrix')
+# layout <- create_layout(cg, layout = 'hive')
+# layout <- create_layout(cg, layout = 'fabric')
 
-# backbone <- create_layout(df_graph, layout = 'backbone')
-
-# centrality_bc <- betweenness(df_graph_directed)
-# centrality_cc <- closeness(df_graph_directed)
-# centrality <- create_layout(df_graph_undirected, layout = 'centrality', centrality = centrality_bc)
-
-# eigen <- create_layout(df_graph, layout = 'eigen', type = "laplacian", eigenvector = "smallest")
-
-# fabric <- create_layout(cg, layout = 'fabric')
-# focus <- create_layout(df_graph_directed, layout = 'focus', focus = 1)
-
-# hive <- create_layout(df_graph, layout = 'hive', axis = friends, sort.by = degree)
-
-# linear <- create_layout(df_graph, layout = 'linear')
-# matrix <- create_layout(df_graph, layout = 'matrix')
-
-# pmds_pivots <- 3
-# pmds <- create_layout(df_graph, layout = 'pmds', pivots = pmds_pivots)
-
-stress <- create_layout(df_graph, layout = 'stress')
-
-# df_unrooted <- df_graph_undirected %>%  activate(edges) %>%  mutate(length = runif(n()))
-# unrooted <- create_layout(df_graph_undirected, layout = 'unrooted' )
+# graphlayouts
+# layout <- create_layout(cg, layout = "nicely")
+# layout <- create_layout(cg, layout = "stress")
+# layout <- create_layout(cg, layout = "focus", focus = 1)
 
 ```
-
-
-## Layout & Aesthetic Parameters
-### Choose the types of Edges you would like to display
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
-
-# Edge Types
-# geom_edge_arc
-# geom_edge_arc0
-# geom_edge_arc2
-# geom_edge_density
-# geom_edge_diagonal
-# geom_edge_diagonal0
-# geom_edge_diagonal2
-# geom_edge_elbow
-# geom_edge_elbow0
-# geom_edge_elbow2
-# geom_edge_fan
-# geom_edge_fan0
-# geom_edge_fan2
-# geom_edge_hive
-# geom_edge_hive0
-# geom_edge_hive2
-# geom_edge_link
-# geom_edge_link0
-# geom_edge_link2
-# geom_edge_loop
-# geom_edge_loop0
-
-```
-
 
 
 ### Plot
 #### nicely
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -186,13 +144,13 @@ theme_opts <- theme(
     legend.position='top'
 )
 
-v1 <- ggraph(stress) + 
+v1 <- ggraph(layout) + 
   geom_edge_diagonal(aes(colour = factor(DISORDER_TYPE)), alpha = 0.6) +
   geom_node_point(size = 1, alpha = 0.6) +
   theme_graph()+
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1280/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 14,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 

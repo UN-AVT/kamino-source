@@ -58,15 +58,34 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
+Data refers to four groups involved in cocaine trafficking in Spain. Information comes from police wiretapping and meetings registered by police investigations of these criminal organisations between 2007 and 2009.
+
+Operation ACERO (N=11). This investigation started in 2007 and involved a smaller family-based group. The group was composed mainly of members of a same family and was led by a female. They distributed cocaine in Madrid (Spain) that was provided to them by other groups based in a northwest region of the country, one of the most active areas in the provision of cocaine from the countries of origin. The group also had their own procedures to launder money.
+
+Operation JAKE (N=62). In 2008, the group investigated was operating as a wholesale supplier and retail distributor of cocaine and heroin in a large distribution zone located in Madrid (Spain), where gypsy clans traditionally carry out similar activities. The group was in charge of acquiring, manipulating and selling the drugs in the gypsy quarter.
+
+Operation JUANES (N=51). In 2009, the police investigation detected a group involved in the smuggling of cocaine from Mexico to be distributed in Madrid (Spain). In this case, the group operated in close cooperation with another organization that was laundering the illegal income from drug distribution from this and other groups. The cocaine traffickers earned an estimated EUR 60 million.
+
+Operation MAMBO (N=22). The investigation started in 2006 and involved Colombian citizens that were introducing 50 kg of cocaine to be adulterated and distributed in Madrid (Spain). Ultimately, the group was involved in smuggling cocaine from Colombia through Brazil and Uruguay to be distributed in Spain. This is a typical Spanish middle cocaine group acting as wholesale supplier between a South American importer group and retailers in Madrid.
+
 
 ### Ingest
 #### agent × event data
 
+
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_path <- "archetypes/cocaine-smuggling/cocaine-smuggling-juanes.csv"
-df_csv <- read.csv(df_path, header=TRUE, row.names=1, check.names=FALSE, na.strings = "")
-df_csv
+df_acero <- read.csv("archetypes/cocaine-smuggling/cocaine-smuggling-acero.csv", header=TRUE, row.names=1, check.names=FALSE, na.strings = "")
+df_acero
+
+df_jake <- read.csv("archetypes/cocaine-smuggling/cocaine-smuggling-jake.csv", header=TRUE, row.names=1, check.names=FALSE, na.strings = "")
+df_jake
+
+df_juanes <- read.csv("archetypes/cocaine-smuggling/cocaine-smuggling-juanes.csv", header=TRUE, row.names=1, check.names=FALSE, na.strings = "")
+df_juanes
+
+df_mambo <- read.csv("archetypes/cocaine-smuggling/cocaine-smuggling-mambo.csv", header=TRUE, row.names=1, check.names=FALSE, na.strings = "")
+df_mambo
 
 ```
 
@@ -77,8 +96,8 @@ df_csv
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_csv[is.na(df_csv)] <- 0
-matrix <- as.matrix(df_csv) 
+df_acero[is.na(df_acero)] <- 0
+matrix <- as.matrix(df_acero) 
 df_graph <- graph_from_incidence_matrix(matrix)
 df_graph
 
@@ -90,34 +109,6 @@ df_graph <- delete.vertices(df_graph, three_degrees)
 isolates <- which(degree(df_graph)==0)
 df_graph <- delete.vertices(df_graph, isolates)
 
-
-# df_graph_manual <- graph_from_data_frame( df_edges, vertices=df_nodes )
-
-
-```
-
-
-### Analytics
-#### compute sna measures
-
-
-```{r}
-
-# Network	PK
-# weights	weighted
-# directionality	undirected
-# connectedness	false
-# no. of nodes n	246
-# no. of isolated nodes ni	16
-# no. of edges m	2571
-# no. of components |cc|	26
-# max avg. path length 〈d〉 for cc	3.034
-# max shortest path length d	9
-# density δ	0.085
-# avg. degree 〈k	20.9
-# max degree k	78
-# avg. clustering coeff. 〈C〉	0.753
-
 ```
 
 
@@ -127,116 +118,67 @@ df_graph <- delete.vertices(df_graph, isolates)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# igraph layouts
+# Layouts can be computationally intensive
+# Un-comment only for use
 
-# bipartite <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
-circle <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
-# dh <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
-# drl <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
-# fr <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
-# gem <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
-# graphopt <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
-# grid <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
-# kk <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
-# lgl <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
-# mds <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
-# nicely <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
-# sphere <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
-# star <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
-# sugiyama <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+# igraph
+# layout <- create_layout(df_graph, layout = 'dh')
+# layout <- create_layout(df_graph, layout = 'fr')
+# layout <- create_layout(df_graph, layout = 'gem')
+# layout <- create_layout(df_graph, layout = 'lgl')
+# layout <- create_layout(df_graph, layout = 'sugiyama')
+# layout <- create_layout(df_graph, layout = 'star')
+# layout <- create_layout(df_graph, layout = 'kk', maxiter = 100)
+# layout <- create_layout(df_graph, layout = 'drl')
+# layout <- create_layout(df_graph, layout = 'linear')
+# layout <- create_layout(df_graph, layout = 'linear' , circular = TRUE)
 
-# ggraph layouts
+# ggraph
+# layout <- create_layout(df_graph, layout = 'linear')
+# layout <- create_layout(df_graph, layout = 'linear', circular = TRUE)
+layout <- create_layout(df_graph, layout = 'stress')
+# layout <- create_layout(df_graph, layout = 'sparse_stress')
+# layout <- create_layout(df_graph, layout = 'backbone')
+# layout <- create_layout(df_graph, layout = 'pmds')
+# layout <- create_layout(df_graph, layout = 'eigen')
+# layout <- create_layout(df_graph, layout = 'centrality')
+# layout <- create_layout(df_graph, layout = 'focus')
+# layout <- create_layout(df_graph, layout = 'dendrogram')
+# layout <- create_layout(df_graph, layout = 'unrooted')
+# layout <- create_layout(df_graph, layout = 'matrix')
+# layout <- create_layout(df_graph, layout = 'hive')
+# layout <- create_layout(df_graph, layout = 'fabric')
 
-# backbone <- create_layout(df_graph_undirected, layout = 'backbone')
-# centrality_bc <- betweenness(df_graph)
-# centrality <- create_layout(df_graph, layout = 'centrality', centrality = centrality_bc)
-# eigen <- create_layout(df_graph, layout = 'eigen', type = "laplacian", eigenvector = "smallest")
-# fabric <- create_layout(df_graph, layout = 'fabric')
-# focus <- create_layout(df_graph_directed, layout = 'focus', focus = 1)
-# hive <- create_layout(df_graph, layout = 'hive', axis = friends, sort.by = degree)
-# linear <- create_layout(df_graph, layout = 'linear')
-# matrix <- create_layout(df_graph, layout = 'matrix')
-# pmds_pivots <- 3
-# pmds <- create_layout(df_graph, layout = 'pmds', pivots = pmds_pivots)
-stress <- create_layout(df_graph, layout = 'stress')
-# unrooted <- create_layout(df_graph, layout = 'unrooted' )
-
-# stress_m <- create_layout(df_graph_manual, layout = 'stress')
-
-```
-
-
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
-
-# Edge Types
-# geom_edge_arc
-# geom_edge_arc0
-# geom_edge_arc2
-# geom_edge_density
-# geom_edge_diagonal
-# geom_edge_diagonal0
-# geom_edge_diagonal2
-# geom_edge_elbow
-# geom_edge_elbow0
-# geom_edge_elbow2
-# geom_edge_fan
-# geom_edge_fan0
-# geom_edge_fan2
-# geom_edge_hive
-# geom_edge_hive0
-# geom_edge_hive2
-# geom_edge_link
-# geom_edge_link0
-# geom_edge_link2
-# geom_edge_loop
-# geom_edge_loop0
+# graphlayouts
+# layout <- create_layout(df_graph, layout = "nicely")
+# layout <- create_layout(df_graph, layout = "stress")
+# layout <- create_layout(df_graph, layout = "focus", focus = 1)
 
 ```
-
 
 
 ### Plot
 #### nicely
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
-    # plot.margin = unit(c(1.5,1,1,1), "in"),
-    legend.position='none'
+   legend.position='none'
 )
 
-v1 <- ggraph(circle) + 
+v1 <- ggraph(layout) + 
   geom_edge_link() +
   geom_node_point(size = 2) +
   geom_node_label(aes(label = name), size = 4) +
   theme_graph() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 14,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
-
-```
-
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
-
-v2 <- ggraph(stress) + 
-  geom_edge_link() +
-  geom_node_point(size = 2) +
-  geom_node_label(aes(label = name), size = 2) +
-  theme_graph() +
-  theme_opts
-
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0))
-)
 
 ```
 
@@ -245,7 +187,7 @@ girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
 #### citations for narrative and data sources
 
 
-* Narrative: Gerdes, Luke M., Kristine Ringler, and Barbara Autin. "Assessing the Abu Sayyaf Group's Strategic and Learning Capacities." Studies in Conflict & Terrorism 37, no. 3 (2014): 267-293.
+* Narrative: Jimenez-Salinas Framis, A. "Illegal networks or criminal organizations: Power, roles and facilitators in four cocaine trafficking structures." In Third Annual Illicit Networks Workshop, Montreal. 2011.
 * Data: UCINET, Covert Networks, https://sites.google.com/site/ucinetsoftware/datasets/covert-networks
 
 
