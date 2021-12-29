@@ -59,7 +59,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/worlds-women-report/figure-4-8_db.csv", header = TRUE, stringsAsFactors = FALSE) # read text file
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "worlds-women-report/figure-4-8_db.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE) # read text file
 df
 
 ```
@@ -67,7 +71,7 @@ df
 ### View, chart
 #### Poverty rates among lone-parents before and after transfers 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 # sort values and refactor
 df <- df %>% arrange(desc(y1_axis)) %>% mutate(x_axis=factor(x_axis, levels=x_axis))
@@ -93,7 +97,7 @@ v1<-ggplot(df) +
        x = "",
        y = "Percentage")
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
@@ -101,21 +105,21 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ### Step by step
 #### Plot the min and max points
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 # create dumbbell plot
 v2 <- ggplot(df) +  
   geom_point( aes(x = x_axis, y = y2_axis), size=3, color="#5c96d6" ) +
   geom_point( aes(x = x_axis, y = y1_axis), size=3, color="#692c7d" )
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 20, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 #### Connect the points with a vertical line (geom_segment)
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 # create dumbbell plot
 v3 <- ggplot(df) +  
@@ -123,14 +127,14 @@ v3 <- ggplot(df) +
   geom_point( aes(x = x_axis, y = y2_axis), size=3, color="#5c96d6" ) +
   geom_point( aes(x = x_axis, y = y1_axis), size=3, color="#692c7d" )
 
-girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v3, width_svg = 20, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 #### Add data labels
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 # create dumbbell plot
 v4 <- ggplot(df) +  
@@ -140,14 +144,14 @@ v4 <- ggplot(df) +
   geom_point( aes(x = x_axis, y = y1_axis), size=3, color="#692c7d" ) +
   geom_text( aes(x = x_axis, y = y1_axis, label = y1_axis), size=3, color="black", vjust = -1.5, fontface = "bold" )
 
-girafe(ggobj = v4, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v4, width_svg = 20, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 #### Beautify by adding themes and amending axes settings
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="85%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 # sort values and refactor
 df <- df %>% arrange(desc(y1_axis)) %>% mutate(x_axis=factor(x_axis, levels=x_axis))
@@ -173,21 +177,8 @@ v5 <- ggplot(df) +
        x = "",
        y = "Percentage")
 
-girafe(ggobj = v5, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v5, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/worlds-women-report-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/worlds-women-report-sm.svg", plot = v1, width=2.25, height=2.25)
 
 ```
 

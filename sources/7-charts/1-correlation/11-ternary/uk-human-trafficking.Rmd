@@ -66,9 +66,12 @@ This example is based on data obtained from UK National Crime Agency, National R
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load csv data file
-df <- read.csv("archetypes/uk-human-trafficking/2016-referrals-all.csv", header = TRUE, stringsAsFactors = FALSE)
-df
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "uk-human-trafficking/2016-referrals-all.csv"
+url <- paste0(url_root, url_file)
 
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
+df
 
 ```
 
@@ -119,7 +122,7 @@ df_wrangle
 #### position, shape, size, color, label
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # unique(df_wrangle$CONTINENT)
 # "Europe"   "Asia"     "Africa"   "Americas" "Kosovo"   NA         "Oceania" 
@@ -154,23 +157,9 @@ v1 <- ggtern(data=df_wrangle, aes(DOMESTIC_SERVITUDE, LABOUR_EXP, SEXUAL_EXP)) +
 
 # v1
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/uk-human-trafficking-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# without annotations
-ggsave(filename = "assets/uk-human-trafficking-sm.svg", plot = v1, width=4, height=2.25)
 
 ```
 

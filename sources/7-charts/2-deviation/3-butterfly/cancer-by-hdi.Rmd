@@ -60,8 +60,13 @@ The Butterfly plot is a graphical representation for comparing two treatment res
 
 ```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df <- read.csv("archetypes/global-cancer-data/cancer-hdi.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "global-cancer-data/cancer-hdi.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df
+
 
 ```
 
@@ -86,7 +91,7 @@ df_wrangle
 ### Plot Butterfly
 #### Cancer Incidence and Mortality Rate between Low and High HDIs
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 theme_opts <- theme(text = element_text(color = "#3A3F4A"),
     panel.grid.major.y = element_blank(),
@@ -123,21 +128,9 @@ v1 <- ggplot(df_wrangle, aes(x=Cancer)) +
   theme_opts
 
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# full version
-ggsave(filename = "assets/globalcan-stacked-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/globalcan-stacked-sm.png", plot = v1, width=4, height=2.25)
 
 ```
 

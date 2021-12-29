@@ -65,8 +65,13 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df <- read.csv('archetypes/better-life-index/better-life-index.csv', encoding = "UTF-8")
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "better-life-index/better-life-index.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, encoding = "UTF-8")
 df
+
 
 ```
 
@@ -180,7 +185,7 @@ df_pca_men_and_women
 
 # Plot
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # fviz_pca function produces a ggplot2 graph.
 v1 <- fviz_pca(df_pca_men,  repel = TRUE,  labelsize = 3) + 
@@ -188,13 +193,13 @@ v1 <- fviz_pca(df_pca_men,  repel = TRUE,  labelsize = 3) +
   labs(title = "Better Life Index, Education, Men")
 
 # Draw plot
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
  
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # fviz_pca function produces a ggplot2 graph.
 v2 <- fviz_pca(df_pca_women,  repel = TRUE,  labelsize = 3) + 
@@ -202,13 +207,13 @@ v2 <- fviz_pca(df_pca_women,  repel = TRUE,  labelsize = 3) +
   labs(title = "Better Life Index, Education, Women")
 
 # Draw plot
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # fviz_pca function produces a ggplot2 graph.
 v3 <- fviz_pca(df_pca_total,  repel = TRUE,  labelsize = 3) + 
@@ -216,13 +221,13 @@ v3 <- fviz_pca(df_pca_total,  repel = TRUE,  labelsize = 3) +
   labs(title = "Better Life Index, Education, Total")
 
 # Draw plot
-girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v3, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # fviz_pca function produces a ggplot2 graph.
 v4 <- fviz_pca(df_pca_men_and_women,  repel = TRUE,  labelsize = 3) + 
@@ -230,24 +235,10 @@ v4 <- fviz_pca(df_pca_men_and_women,  repel = TRUE,  labelsize = 3) +
   labs(title = "Better Life Index, Education, Men & Women")
 
 # Draw plot
-girafe(ggobj = v4, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v4, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/better-life-index-fs.svg", plot = v3, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/better-life-index-sm.png", plot = v3, width=4, height=2.25)
-
-```
-
 
 
 # References

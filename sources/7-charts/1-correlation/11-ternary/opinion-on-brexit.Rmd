@@ -69,8 +69,13 @@ The UK is currently scheduled to leave the EU on 29 March 2019. UK and EU negoti
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load data
-df <- read.csv("archetypes/opinion-on-brexit/economist-opinion-on-brexit.csv", header = TRUE, stringsAsFactors = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "opinion-on-brexit/economist-opinion-on-brexit.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = TRUE)
 df
+
 
 ```
 
@@ -92,7 +97,7 @@ df
 ### Plot
 #### position, shape, color
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 theme_opts <- theme(
   text = element_text(family = "inconsolata"), 
@@ -129,21 +134,6 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 12,
 )
 
 ```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/opinion-on-brexit-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# without annotations
-ggsave(filename = "assets/opinion-on-brexit-sm.png", plot = v1, width=4, height=2.25)
-
-```
-
 
 ### References
 #### citations for narrative and data sources

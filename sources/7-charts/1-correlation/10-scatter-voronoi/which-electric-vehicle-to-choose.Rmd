@@ -63,8 +63,13 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load data
-df <- read.csv("./archetypes/Cheapestelectriccars-EVDatabase.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "which-electric-vehicle-to-choose/Cheapestelectriccars-EVDatabase.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df
+
 
 ```
 
@@ -91,7 +96,7 @@ df <- df %>%  mutate(zero2sixty=cut(Acceleration, breaks=c(0,4,6,8,10,12),
 #### Top Speed and Price
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 
 theme_opts <- theme(
@@ -131,7 +136,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 #### Range and Price
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v2 <- ggplot(data = df, aes(y= Range,
                       x= rescale(Price.UK, to=c(200,640)),
@@ -152,21 +157,6 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/electric-voronoi.svg", plot = v1, width=16, height=9)
-
-# without annotations
-#ggsave(filename = "assets/economic-growth-happiness-sm.svg", plot = v1, width=4, height=2.25)
-
-```
-
 
 ### References
 #### citations for narrative and data sources
