@@ -60,7 +60,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/environmental-impact-of-food-by-life-cycle-stage/environmental-impact-of-food-by-life-cycle-stage.csv", header = TRUE, stringsAsFactors = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "environmental-impact-of-food-by-life-cycle-stage/environmental-impact-of-food-by-life-cycle-stage.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = TRUE)
 df
 
 ```
@@ -95,7 +99,7 @@ total_labels <- df_wrangle %>%
 ### Plot
 #### Greenhouse gas emissions across the food supply chain
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # As defined in imitated view
 supply_chain_palette <- c("Land use change" = "#1ea349", 
@@ -133,7 +137,7 @@ v1 = ggplot(df_wrangle, aes(x=EMISSION, y=reorder(FOOD_PRODUCT,EMISSION), fill=S
     ) +
     geom_text(data=total_labels, aes(x=TOTAL+0.5, y=FOOD_PRODUCT, label=TOTAL, fill=NULL, group=NULL), size=2.5, hjust="left")
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(
          opts_sizing(rescale = TRUE, width = 1.0), 
          opts_hover_inv(css = "opacity:0.2;"), 
@@ -146,7 +150,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ### Plot
 #### adding an annotation layer
 
-```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # With annotations
 v2 <- v1 + 
@@ -184,27 +188,13 @@ v2 <- v2 + geom_segment(aes(
     size=0.5
   )
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(
          opts_sizing(rescale = TRUE, width = 1.0), 
          opts_hover_inv(css = "opacity:0.2;"), 
          opts_hover(css = "fill:black;")
          )
       )
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/environmental-impact-of-food-by-life-cycle-stage-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/environmental-impact-of-food-by-life-cycle-stage-sm.png", plot = v1, width=4, height=2.25)
 
 ```
 

@@ -63,10 +63,16 @@ A radial bar chart is a bar chart plotted in polar coordinates.  Because the bar
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df_suppliers = read.csv("archetypes/arms-trade-database/TIV-Export-Top-10-2019-suppliers.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+
+url_file1 <- "arms-trade-database/TIV-Export-Top-10-2019-suppliers.csv"
+url1 <- paste0(url_root, url_file1)
+df_suppliers <- read.csv(url1, header = TRUE, stringsAsFactors = FALSE)
 df_suppliers
 
-df_recipients = read.csv("archetypes/arms-trade-database/TIV-Export-Top-10-2019-recipients.csv", header = TRUE, stringsAsFactors = FALSE)
+url_file2 <- "arms-trade-database/TIV-Export-Top-10-2019-recipients.csv"
+url2 <- paste0(url_root, url_file2)
+df_recipients <- read.csv(url2, header = TRUE, stringsAsFactors = FALSE)
 df_recipients
 
 ```
@@ -97,7 +103,7 @@ df_recipients
 ### Plot
 #### Suppliers
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide',out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 20), 
@@ -137,7 +143,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 12,
 ### Plot
 #### Recipients
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 v2 = ggplot(data=df_recipients, aes(x=Recipient, y=X2019) ) +
   geom_bar(aes(fill=Recipient), stat="identity") +
@@ -155,23 +161,6 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 12,
 )
 
 ```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/arms-trade-database-suppliers-fs.svg", plot = v1, width=1280/72, height=1280/72)
-ggsave(filename = "outputs/arms-trade-database-recipients-fs.svg", plot = v2, width=1280/72, height=1280/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/arms-trade-database-suppliers-sm.svg", plot = v1, width=4, height=4)
-ggsave(filename = "outputs/arms-trade-database-recipients-sm.svg", plot = v2, width=4, height=4)
-
-
-```
-
 
 ### References
 #### citations for narrative and data sources
