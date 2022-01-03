@@ -1,0 +1,190 @@
+City,Country,Group,Measure,Population
+buenos aires,Argentina,0. Exceeded,14.15959305,3054267
+adelaide,Australia,1. Within,7.1,23169
+albany,Australia,1. Within,6.863598056,97856
+canberra,Australia,1. Within,6.8,400000
+melbourne,Australia,1. Within,7.7,137889
+sydney,Australia,1. Within,7.68,205339
+graz,Austria,0. Exceeded,18.79859978,269997
+brussels,Belgium,0. Exceeded,18.24726567,1175173
+la paz,"Bolivia, Plurinational States of",0. Exceeded,44.39818865,789541
+curitiba,Brazil,0. Exceeded,11.11993402,1751907
+sao paulo,Brazil,0. Exceeded,18.625,11253503
+rio de janeiro,Brazil,0. Exceeded,15.88235294,6476631
+burlington,Canada,1. Within,9,42284
+calgary,Canada,1. Within,8.5,1203915
+edmonton,Canada,1. Within,7.5,878000
+houston,Canada,1. Within,9.138318982,2195914
+montreal,Canada,0. Exceeded,10.11111111,1886481
+north vancouver,Canada,1. Within,5.5,52898
+sydney,Canada,1. Within,6,205339
+toronto,Canada,1. Within,8.4,2753100
+vancouver,Canada,1. Within,7,603500
+winnipeg,Canada,1. Within,6.5,718400
+santiago,Chile,0. Exceeded,28.771,7314176
+anshan,China,0. Exceeded,65.14285714,1529850
+anyang,China,0. Exceeded,79.2,950301
+baoding,China,0. Exceeded,126,1157891
+baotou,China,0. Exceeded,51,2070801
+beijing,China,0. Exceeded,85.23853555,10717033
+benxi,China,0. Exceeded,53.5,1011377
+changchun,China,0. Exceeded,63.6,7392600
+changsha,China,0. Exceeded,73.5,6310000
+changzhou,China,0. Exceeded,65.33333333,3290918
+chongqing,China,0. Exceeded,61.35294118,6362501
+dalian,China,0. Exceeded,56,5720800
+dandong,China,0. Exceeded,48.75,865576
+daqing,China,0. Exceeded,35.8,1649825
+datong,China,0. Exceeded,42,1737517
+fushun,China,0. Exceeded,53,1410000
+fuzhou,China,0. Exceeded,31.33333333,6227300
+guangzhou,China,0. Exceeded,47.72727273,7607200
+guiyang,China,0. Exceeded,48.6,3545200
+haikou,China,0. Exceeded,22,1766800
+handan,China,0. Exceeded,111.75,941427
+hangzhou,China,0. Exceeded,60.63636364,6663100
+hefei,China,0. Exceeded,78.6,4698500
+hohhot,China,0. Exceeded,42.875,2158100
+hong kong,China,0. Exceeded,29.46666667,7336600
+huainan,China,0. Exceeded,65,1666826
+jiaozhuo,China,0. Exceeded,52.5,865413
+jilin,China,0. Exceeded,50.42857143,4330000
+jinan,China,0. Exceeded,51.75,6033500
+jingzhou,China,0. Exceeded,74.33333333,1154086
+jinzhou,China,0. Exceeded,55.4,1091799
+kaifeng,China,0. Exceeded,70.25,826961
+kaohsiung,China,0. Exceeded,30.16666667,2778729
+kunming,China,0. Exceeded,33.57142857,5143000
+lanzhou,China,0. Exceeded,58.4,3136400
+linyi,China,0. Exceeded,55.5,2303648
+liuzhou,China,0. Exceeded,65.16666667,1436599
+luoyang,China,0. Exceeded,56.14285714,1926079
+mudanjiang,China,0. Exceeded,49.8,965154
+nanchang,China,0. Exceeded,48.55555556,4839600
+nanjing,China,0. Exceeded,72.33333333,6072300
+nanning,China,0. Exceeded,47.25,6718900
+new taipei,China,0. Exceeded,22.27272727,3966818
+ningbo,China,0. Exceeded,45.125,5604500
+pingdingshan,China,0. Exceeded,69.75,979130
+pingtung,China,0. Exceeded,22.33333333,835792
+qingdao,China,0. Exceeded,45.88888889,7493800
+shanghai,China,0. Exceeded,51.6,14502576
+shantou,China,0. Exceeded,38,5389328
+shenyang,China,0. Exceeded,71.54545455,7035600
+shenzhen,China,0. Exceeded,33.63636364,7233375
+shijiazhuang,China,0. Exceeded,120.625,9395000
+suzhou,China,0. Exceeded,64,10465994
+taian,China,0. Exceeded,55.33333333,1735425
+taipei,China,0. Exceeded,18.71428571,2704810
+taiyuan,China,0. Exceeded,67,3488200
+tangshan,China,0. Exceeded,101.5,3187171
+taoyuan,China,0. Exceeded,23.66666667,2153521
+tianjin,China,0. Exceeded,87.4,7039516
+weifang,China,0. Exceeded,48.6,2044028
+wuhan,China,0. Exceeded,79.5,8188400
+wuxi,China,0. Exceeded,66.85714286,3542319
+xiamen,China,0. Exceeded,36,1603800
+xi'an,China,0. Exceeded,69.53846154,7531100
+xiangtan,China,0. Exceeded,69.71428571,684600
+xianyang,China,0. Exceeded,65.25,2199689
+xining,China,0. Exceeded,61.5,2127300
+xuzhou,China,0. Exceeded,66.42857143,3053778
+yantai,China,0. Exceeded,30.5,2227733
+yilan,China,0. Exceeded,16,458777
+yinchuan,China,0. Exceeded,47,1446800
+zhangjiakou,China,0. Exceeded,34,4345485
+zhanjiang,China,0. Exceeded,25.83333333,1611868
+zhengzhou,China,0. Exceeded,85.66666667,6916200
+zhuzhou,China,0. Exceeded,69.28571429,2416000
+zibo,China,0. Exceeded,54.5,3129228
+bogotá,Colombia,0. Exceeded,24,7878783
+valledupar,Colombia,0. Exceeded,15.62167599,453212
+copenhagen,Denmark,0. Exceeded,11.26575635,591481
+quito,Ecuador,0. Exceeded,18.446,2239191
+helsinki,Finland,1. Within,8.965,612664
+lahti,Finland,1. Within,7.67,119452
+turku,Finland,1. Within,7.547373422,186000
+lyon,France,0. Exceeded,14,1324637
+nancy,France,0. Exceeded,13.5,265000
+nantes,France,0. Exceeded,13,602923
+nice,France,0. Exceeded,13.5,550000
+paris,France,0. Exceeded,17.5,2265886
+hamburg,Germany,0. Exceeded,14.03143015,1762791
+heidelberg,Germany,0. Exceeded,13.71998172,144948
+athens,Greece,0. Exceeded,14.99841236,664046
+reykjavik,Iceland,0. Exceeded,10.8658999,122460
+ahmedabad,India,0. Exceeded,100.1,5570585
+bangalore,India,0. Exceeded,63.25307597,9621551
+coimbatore,India,0. Exceeded,36.40684905,1850000
+dehradun,India,0. Exceeded,100.4757648,447808
+gwalior,India,0. Exceeded,176.144902,1069276
+hyderabad,India,0. Exceeded,58.575,6731790
+indore,India,0. Exceeded,76.38299702,2197447
+jaipur,India,0. Exceeded,99.94036993,3073350
+kota,India,0. Exceeded,83.70005982,1001365
+nagpur,India,0. Exceeded,54.91621348,2405421
+pune,India,0. Exceeded,49.25632518,3115431
+rajkot,India,0. Exceeded,52.73639163,1432734
+shimla,India,0. Exceeded,30.78520324,169758
+surat,India,0. Exceeded,51.93329938,4466826
+thane,India,0. Exceeded,38.9053583,1886941
+bandung,Indonesia,0. Exceeded,33,2483977
+dublin,Ireland,0. Exceeded,10.54947581,527612
+jerusalem,Israel,0. Exceeded,19.2,890428
+bologna,Italy,0. Exceeded,17.35940543,386181
+ferrara,Italy,0. Exceeded,18.77521613,133155
+genova,Italy,1. Within,8.96170886,592995
+milan,Italy,0. Exceeded,30.18178025,1350680
+piacenza,Italy,0. Exceeded,22.84705882,102269
+ravenna,Italy,0. Exceeded,18.0402046,158911
+roma,Italy,0. Exceeded,17.01734198,2868347
+torino,Italy,0. Exceeded,25.72095826,898714
+udine,Italy,0. Exceeded,15.75752881,99528
+venezia,Italy,0. Exceeded,25.49049595,263104
+okayama,Japan,0. Exceeded,16.5,705917
+osaka,Japan,0. Exceeded,16.84,8864228
+sapporo,Japan,1. Within,9.8,1952356
+sendai,Japan,0. Exceeded,11.6,1073242
+tokyo,Japan,0. Exceeded,14.9,13513734
+yokohama,Japan,0. Exceeded,15.06666667,3719589
+amman,Jordan,0. Exceeded,36,3604459
+vilnius,Lithuania,0. Exceeded,22.98863579,542626
+mexico city,Mexico,0. Exceeded,19.776539,8874724
+toluca,Mexico,0. Exceeded,33.3,819661
+amsterdam,Netherlands,0. Exceeded,15.55740631,822272
+rotterdam,Netherlands,0. Exceeded,14.64784151,624000
+auckland,New Zealand,1. Within,5.72,1569900
+wellington,New Zealand,1. Within,6.287400672,209102
+oslo,Norway,0. Exceeded,10.85657324,658390
+lima,Peru,0. Exceeded,47.53648143,8755262
+warsaw,Poland,0. Exceeded,26.29567719,1626514
+faro,Portugal,0. Exceeded,11.32,61214
+lisbon,Portugal,0. Exceeded,11.15,547773
+incheon,Republic of Korea,0. Exceeded,25.81384759,2983484
+seoul,Republic of Korea,0. Exceeded,24.23340795,10297138
+singapore,Singapore,0. Exceeded,18,5535000
+ljubljana,Slovenia,0. Exceeded,20.26404494,288307
+johannesburg,South Africa,0. Exceeded,40.61695872,4764381
+barcelona,Spain,0. Exceeded,15.25063661,1611822
+madrid,Spain,1. Within,9.946102582,3156572
+zaragoza,Spain,0. Exceeded,10.37941176,661108
+stockholm,Sweden,1. Within,5.514511002,923516
+umeå,Sweden,1. Within,4.29101796,120058
+uppsala,Sweden,1. Within,4.3451029,217000
+växjö,Sweden,1. Within,4.541286416,89500
+basel,Switzerland,0. Exceeded,14.06914664,198206
+lausanne,Switzerland,0. Exceeded,14.14807692,140000
+zürich,Switzerland,0. Exceeded,14.30428782,404783
+lampang,Thailand,0. Exceeded,29.47811186,58074
+phuket,Thailand,0. Exceeded,13.34857895,72380
+istanbul,Turkey,0. Exceeded,32.54277681,14657434
+izmir,Turkey,0. Exceeded,29.57845967,4113072
+birmingham,United Kingdom,0. Exceeded,14.26939717,1101360
+bournemouth,United Kingdom,1. Within,9.18848314,191400
+bristol,United Kingdom,0. Exceeded,12.80943467,442500
+cardiff,United Kingdom,0. Exceeded,13.51017808,354300
+london,United Kingdom,0. Exceeded,15.02996603,8600000
+manchester,United Kingdom,1. Within,9.666666667,2762000
+"lancaster, pa",United States of America,0. Exceeded,13.4,60000
+"richmond, va",United States of America,1. Within,8.15,217853
+caracas,"Venezuela, Bolivarian Republic of",0. Exceeded,25.44774227,3518590
