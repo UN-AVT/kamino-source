@@ -60,7 +60,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/family-integration-policy-by-country/family-integration-policy-by-country.csv", header = TRUE, stringsAsFactors = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "family-integration-policy-by-country/family-integration-policy-by-country.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = TRUE)
 df
 
 ```
@@ -68,7 +72,7 @@ df
 ### Plot 
 #### with standard alpha order
 
-```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=10.5, out.width="100%"}
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -109,7 +113,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 #### ordered, ascending
 
 
-```{r drawa, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+```{r drawa, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v2 <- ggplot(df, aes(x=reorder(Country,Family.Integration.Policy.Average.Scores), y=Family.Integration.Policy.Average.Scores)) + 
   geom_bar(stat="identity", fill="#88b88a") +
@@ -129,7 +133,7 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
 #### ordered, descending
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v3 <- ggplot(df, aes(x=reorder(Country,-Family.Integration.Policy.Average.Scores), y=Family.Integration.Policy.Average.Scores)) + 
   geom_bar(stat="identity", fill="#88b88a") +
@@ -143,20 +147,6 @@ girafe(ggobj = v3, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/family-integration-policy-by-country-fs.svg", plot = v2, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/family-integration-policy-by-country-sm.png", plot = v2, width=4, height=2.25)
-
-```
-
 
 ### References
 #### The citations and data sources used for this case

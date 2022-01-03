@@ -64,7 +64,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df <- read.csv("archetypes/global-herd-immunity/covid-19-vaccination-survey.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "global-herd-immunity/covid-19-vaccination-survey.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df
 
 ```
@@ -120,7 +124,7 @@ df_final <- inner_join(df, pop) %>%
 ### Plot
 #### TBD
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 countries_displayed <- c("Kazakhstan", "Pakistan", "India", "Myanmar", "Jamaica", "Brazil", "Mexico",
                          "Nicaragua", "Jordan", "Egypt", "Gabon", "Nigeria", "Ethiopia", "United States",
@@ -183,22 +187,9 @@ v1 <- ggplot(df_final,aes(x=region_factor, y=percent_yes)) +
   labs(title = "Would you grab the jab?",
        subtitle = "\"If a vaccine to prevent coronavirus were available right now at no cost, would \nyou agree to be vaccinated?\", percent responded yes, Aug 2020-Feb 2021")
 
-girafe(ggobj = v1, width_svg = 16, height_svg = 10,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = FALSE, width = 0.95))
 )
-
-```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/global-herd-immunity-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/global-herd-immunity-sm.png", plot = v1, width=4, height=2.25)
 
 ```
 

@@ -60,7 +60,11 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Create dataset
-df = read_csv("archetypes/goal-4-quality-education.csv")
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "learning-poverty/goal-4-quality-education.csv"
+url <- paste0(url_root, url_file)
+
+df <- read_csv(url)
 df
 
 ```
@@ -105,7 +109,7 @@ df_final
 ### Plot
 #### final result
 
-```{r, echo=TRUE, fig.width=12, fig.height=10, out.width = "95%", class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -188,7 +192,7 @@ v1 <- ggplot(df_final) +
     theme_bw() +
     theme_opts 
 
-girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
@@ -197,7 +201,7 @@ girafe(ggobj = v1, width_svg = 13, height_svg = 7,
 ### Step-by-Step
 #### shapes
 
-```{r, echo=TRUE, fig.width=12, fig.height=10, out.width = "95%", class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 fill_colors <- c("Not learning poor" = "#95AEBF", 
                  "Learning poor - students below minimum proficiency level" = "#D7CE59", 
@@ -230,7 +234,7 @@ v2 <- ggplot(df_final) +
     theme_bw() +
     theme_opts 
 
-girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
@@ -239,7 +243,7 @@ girafe(ggobj = v2, width_svg = 13, height_svg = 7,
 #### shapes, labels, and annotations
 
 
-```{r, echo=TRUE, fig.width=12, fig.height=8, out.width = "95%", class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 
 v3 <- v2 +
@@ -276,23 +280,11 @@ v3 <- v2 +
   theme_bw() +
   theme_opts 
 
-girafe(ggobj = v3, width_svg = 13, height_svg = 7,
+girafe(ggobj = v3, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/learning-poverty-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/learning-poverty-sm.png", plot = v1, width=4, height=2.25)
-
-```
 
 ### References
 #### The citations and data sources used for this case
