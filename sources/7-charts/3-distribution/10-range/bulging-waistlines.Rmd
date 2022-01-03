@@ -27,8 +27,6 @@ library(tidyverse)
 library(janitor)
 library(ggiraph)
 
-library(knitcitations)
-library(bibtex)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -62,11 +60,18 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_males <- read.csv("archetypes/bulging-waistlines/mean-body-mass-index-bmi-in-adult-males.csv", header = TRUE, stringsAsFactors = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+
+url_file1 <- "bulging-waistlines/mean-body-mass-index-bmi-in-adult-males.csv"
+url1 <- paste0(url_root, url_file1)
+df_males <- read.csv(url1, header = TRUE, stringsAsFactors = TRUE)
 df_males
 
-df_females <- read.csv("archetypes/bulging-waistlines/mean-body-mass-index-bmi-in-adult-women.csv", header = TRUE, stringsAsFactors = TRUE)
+url_file2 <- "bulging-waistlines/mean-body-mass-index-bmi-in-adult-women.csv"
+url2 <- paste0(url_root, url_file2)
+df_females <- read.csv(url2, header = TRUE, stringsAsFactors = TRUE)
 df_females
+
 
 ```
 
@@ -116,7 +121,7 @@ df_wrangle
 * class 3 obesity: BMI of 40 or higher. Class 3 obesity is sometimes categorized as “severe” obesity.
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=2800/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -155,26 +160,10 @@ v1 = ggplot(df_wrangle) +
   theme_bw() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1920/72, height_svg = 2800/72,
+girafe(ggobj = v1, width_svg = 24, height_svg = 36,
        options = list(opts_sizing(rescale = TRUE, width = 0.95)))
 
 ```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/bulging-waistlines-fs.svg", plot = v1, width=720/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/bulging-waistlines-sm.svg", plot = v1, width=2.25, height=2.25)
-
-```
-
-
 
 ### References
 #### citations for narrative and data sources
