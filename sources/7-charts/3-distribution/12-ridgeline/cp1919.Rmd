@@ -62,15 +62,20 @@ EIGHTY SUCCESSIVE PERIODS of the first pulsar observed, CP1919 (Cambridge pulsar
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-cp1919_df = read.csv("archetypes/CP1919/CP1919.csv", header = TRUE, stringsAsFactors = TRUE)  # read text file
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "CP1919/CP1919.csv"
+url <- paste0(url_root, url_file)
+
+cp1919_df <- read.csv(url, header = TRUE, stringsAsFactors = TRUE)
 cp1919_df
+
 
 ```
 
 ### Plot
 #### lines and coordinates
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v1 = ggplot(cp1919_df, aes(x, y, height = y, group=line )) +
   geom_ridgeline(fill = "black", colour = "white", size = 0.4) +
@@ -90,7 +95,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 ### Plot
 #### portrait layout
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v2 = ggplot(cp1919_df, aes(x, ymax=y, ymin=0, group=line)) +
   geom_ribbon(colour='white') +
@@ -106,21 +111,6 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/cp1919-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/cp1919-sm.png", plot = v1, width=4, height=2.25)
-
-```
-
 
 
 ### References

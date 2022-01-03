@@ -63,7 +63,11 @@ What probability would you assign to the phrase “...” were asked. Answers be
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-probly_df = read.csv("archetypes/probly/probly.csv", header = TRUE, stringsAsFactors = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "probly/probly.csv"
+url <- paste0(url_root, url_file)
+
+probly_df <- read.csv(url, header = TRUE, stringsAsFactors = TRUE)
 probly_df
 
 ```
@@ -74,6 +78,7 @@ probly_df
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
+
 probly_df <- probly_df %>% mutate(text = fct_reorder(text, value))
 probly_df
 
@@ -83,7 +88,7 @@ probly_df
 ### Plot
 #### standard
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 y_axis <- c( "Almost Certainly",
   "Highly Likely",
@@ -123,7 +128,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 ### Plot
 #### as binlines
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v2 <- ggplot(probly_df, aes(y=text, x=value,  fill=text)) +
     geom_density_ridges(alpha=0.6, stat="binline", bins=20) +
@@ -140,21 +145,6 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/probly-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/probly-sm.png", plot = v1, width=4, height=2.25)
-
-```
-
 
 ### References
 #### citations for narrative and data sources

@@ -168,8 +168,8 @@ girafe(ggobj = v1, width_svg = 24, height_svg = 36,
 ### References
 #### citations for narrative and data sources
 
-Inspiration: Economist  
-Data Source: Our World in Data
+* Inspiration: The Economist, [GO](https://www.economist.com/graphic-detail/2019/10/28/china-worries-about-its-bulging-waistlines){target="_blank"} 
+* Data Source: Our World in Data, [GO](https://ourworldindata.org/){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

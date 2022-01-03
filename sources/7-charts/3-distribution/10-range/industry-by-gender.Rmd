@@ -59,7 +59,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/industry-by-gender/industry-by-gender.csv", header = TRUE, stringsAsFactors = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "industry-by-gender/industry-by-gender.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = TRUE)
 df
 
 ```
@@ -95,7 +99,7 @@ df_wrangle
 #### Do industries employ more men or women?
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -131,7 +135,7 @@ v1 = ggplot(df_wrangle) +
   xlab(NULL) +
   ylab(NULL)
 
-girafe(ggobj = v1, width_svg = 12, height_svg = 16,
+girafe(ggobj = v1, width_svg = 12, height_svg = 15,
        options = list(opts_sizing(rescale = FALSE, width = 1.0)))
 
 ```
@@ -141,7 +145,7 @@ girafe(ggobj = v1, width_svg = 12, height_svg = 16,
 #### with center labels
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 industry_df <- data.frame( industry = unique(df_wrangle$industry))
 
@@ -160,33 +164,17 @@ v2 = ggplot(df_wrangle) +
   xlab(NULL) +
   ylab(NULL)
 
-girafe(ggobj = v2, width_svg = 12, height_svg = 16,
+girafe(ggobj = v2, width_svg = 12, height_svg = 15,
        options = list(opts_sizing(rescale = FALSE, width = 1.0)))
 
 ```
 
 
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/industry-by-gender-fs.svg", plot = v1, width=720/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/industry-by-gender-sm.svg", plot = v1, width=2.25, height=2.25)
-
-```
-
-
-
 ### References
 #### citations for narrative and data sources
 
-* Inspiration: TidyTuesday
-* Data Source: Bureau of Labor Statistics
-
+* Inspiration: Rebecca Stevick, [GO](https://github.com/rjstevick/TidyTuesday){target="_blank"}
+* Data Source: Bureau of Labor Statistics, [GO](https://www.bls.gov/data/){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

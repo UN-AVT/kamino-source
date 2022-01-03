@@ -59,7 +59,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df = read.csv("archetypes/tourism-density-index/over-and-undertourism.csv", header = TRUE, stringsAsFactors = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "tourism-density-index/over-and-undertourism.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = TRUE)
 df
 
 ```
