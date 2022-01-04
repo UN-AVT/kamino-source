@@ -28,6 +28,7 @@ library(ggraph)
 library(igraph)
 library(tidygraph)
 library(graphlayouts)
+library(ggrepel)
 library(ggiraph)
 
 library(showtext)
@@ -39,16 +40,17 @@ showtext_auto()
 ```
 
 <div class="activity">
- TREES  
+GRAPHS  
 </div>
 
 # Ygot Drug Syndicate
-## Cartesian tree 
+## link analysis 
+
 
 ```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Jr Korpa on Unsplash"}
 
-masthead <- "assets/jr-korpa-unsplash.jpg"
-knitr::include_graphics(masthead, dpi=72)
+#masthead <- "assets/jr-korpa-unsplash.jpg"
+#knitr::include_graphics(masthead, dpi=72)
 
 ```
 
@@ -58,7 +60,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
-
+CEBU CITY, Philippines — She was dubbed as Consolacion’s drug queen when police found out that she was the source of 28 kilograms of shabu, worth P190.4 million. Jocelyn Encila, known to many as "Joy", served as a key operator at the heart of the Rustico Ygot Drug Syndicate. Encila and Ygot were ex-lovers, but their relationship endured as Encila helped Ygot run a drug syndicate from the confines of his prison cell at the New Bilibid Prison (NBP) in Muntinlupa City. But aside from Ygot, Encila allegedly also has other connections that helped the drug group in their illegal activities. Some of these individuals happened to be her alleged lovers, including policeman, another inmate from NBP, and officers from the Philippine Coast Guard (PCG) and the Philippine National Police (PNP). Encila's relationship with Jake Arglo Garces would prove deadly, as he is detained in NBP for murder charges, convicted for killing a "macho dancer" he suspected Encila was attracted to. Encila's involvement and illegal activities were discovered by authorities fter police raided her house. 
 
 ### Ingest
 #### the tree of mutations
@@ -66,10 +68,8 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Tree data
-df_tree_path <- "archetypes/covid-19-mutations/covid-19-mutations-tree.csv"
-df_tree <- read.csv(df_tree_path, header = TRUE, stringsAsFactors = FALSE)
-df_tree
+df <- read.csv("archetypes/ygot-drug-syndicate/ygot-drug-syndicate.csv", header = TRUE, stringsAsFactors = FALSE)
+df
 
 ```
 
@@ -81,12 +81,12 @@ df_tree
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 # transform to graph data structure
-df_graph <- graph_from_data_frame( df_tree )
-df_graph_directed <- graph_from_data_frame( df_tree, directed = TRUE )
-df_graph_undirected <- graph_from_data_frame( df_tree, directed = FALSE )
+df_graph <- graph_from_data_frame( df )
+df_graph_directed <- graph_from_data_frame( df, directed = TRUE )
+df_graph_undirected <- graph_from_data_frame( df, directed = FALSE )
 
 # to view results as data frame
-df_graph_view <-  get.data.frame(df_graph, what= "both" ) # as.data.frame(get.edgelist(df_graph))
+df_graph_view <-  get.data.frame(df_graph, what = "both" ) # as.data.frame(get.edgelist(df_graph))
 # df_graph_view
 
 ```
@@ -98,54 +98,57 @@ df_graph_view <-  get.data.frame(df_graph, what= "both" ) # as.data.frame(get.ed
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
 
+##################
+# igraph layouts #
+##################
 
-# igraph layouts
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
 
-# bipartite <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
-circle <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
-dh <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
-drl <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
-fr <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
-gem <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
-graphopt <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
-grid <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
-kk <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
-lgl <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
-mds <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
-nicely <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
-sphere <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
-star <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
-sugiyama <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+##################
+# ggraph layouts #
+##################
 
-# ggraph layouts
+# layout <- create_layout(df_graph_undirected, layout = 'backbone')
 
-backbone <- create_layout(df_graph_undirected, layout = 'backbone')
+# layout <- betweenness(df_graph_directed)
+# layout <- closeness(df_graph_directed)
+# layout <- create_layout(df_graph_undirected, layout = 'centrality', centrality = centrality_bc)
 
-centrality_bc <- betweenness(df_graph_directed)
-centrality_cc <- closeness(df_graph_directed)
-centrality <- create_layout(df_graph_undirected, layout = 'centrality', centrality = centrality_bc)
+# layout <- create_layout(df_graph_directed, layout = 'circlepack')
+# layout <- create_layout(df_graph_directed, layout = 'dendrogram')
+# layout <- create_layout(df_graph, layout = 'eigen', type = "laplacian", eigenvector = "smallest")
 
-circlepack <- create_layout(df_graph_directed, layout = 'circlepack')
-dendrogram <- create_layout(df_graph_directed, layout = 'dendrogram')
-eigen <- create_layout(df_graph, layout = 'eigen', type = "laplacian", eigenvector = "smallest")
+layout <- create_layout(df_graph, layout = 'focus', focus = 1)
 
-focus <- create_layout(df_graph_directed, layout = 'focus', focus = 1)
+# layout <- create_layout(df_graph, layout = 'hive', axis = friends, sort.by = degree)
 
-# hive <- create_layout(df_graph, layout = 'hive', axis = friends, sort.by = degree)
+# layout <- create_layout(df_graph, layout = 'linear')
+# layout <- create_layout(df_graph, layout = 'matrix')
+# layout <- create_layout(df_graph_directed, layout = 'partition')
 
-linear <- create_layout(df_graph, layout = 'linear')
-matrix <- create_layout(df_graph, layout = 'matrix')
-partition <- create_layout(df_graph_directed, layout = 'partition')
+# pmds_pivots <- 2
+# layout <- create_layout(df_graph, layout = 'pmds', pivots = pmds_pivots)
 
-pmds_pivots <- 3
-pmds <- create_layout(df_graph, layout = 'pmds', pivots = pmds_pivots)
-
-stress <- create_layout(df_graph, layout = 'stress')
-sunburst <- create_layout(df_graph_directed, layout = 'partition', circular = TRUE)
-treemap <- create_layout(df_graph_directed, layout = 'treemap')
+# layout <- create_layout(df_graph, layout = 'stress')
+# layout <- create_layout(df_graph_directed, layout = 'partition', circular = TRUE)
+# layout <- create_layout(df_graph_directed, layout = 'treemap')
 
 # df_unrooted <- df_graph_undirected %>%  activate(edges) %>%  mutate(length = runif(n()))
-unrooted <- create_layout(df_graph_undirected, layout = 'unrooted' )
+# layout <- create_layout(df_graph_undirected, layout = 'unrooted' )
 
 ```
 
@@ -154,27 +157,23 @@ unrooted <- create_layout(df_graph_undirected, layout = 'unrooted' )
 #### dendrogram
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
-    plot.margin = unit(c(1.5,1,1,1), "in"),
     legend.position='none'
-  )
+)
 
-category_palette <- c("Top 100" = "#FFFFFF", "LEAF" = "#FFFFFF", "Creativity" = "#E8F5E9", "Identity" = "#E3F2FD", "Knowledge" = "#F3E5F5","Leadership" = "#FCE4EC")
-
-v1 <- ggraph(df_graph, layout = dendrogram) + 
-  # geom_edge_elbow(aes(label = LABEL), angle_calc = 'along', label_dodge = unit(2.5, 'mm')) + 
-  # geom_edge_bend(aes(label = LABEL)) +
-  geom_edge_diagonal(aes(label = LABEL)) +
+v1 <- ggraph(df_graph, layout = layout) + 
+  geom_edge_link(aes(label = label), angle_calc = 'along', label_dodge = unit(2.5, 'mm'), size = 5, family = "inconsolata") +
   geom_node_point(size=4) +
-  geom_node_label( aes(label=name), repel = FALSE, vjust = 0.0, nudge_y = 0.1, size = 6, family = "inconsolata") +
-  # coord_fixed(clip = 'off') + 
+  #geom_node_text( aes(label=name), repel = TRUE, vjust = 0.0, hjust = 0.5, nudge_y = 0.1, size = 6, family = "inconsolata") +
+  geom_text_repel(aes(x = x, y = y, label = name), vjust = 0.5, hjust = 0.5, point.size = 10, direction = "both", size = 6, family = "inconsolata") +
+  coord_cartesian(clip = 'off') + 
   theme_void() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 14,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
@@ -185,76 +184,10 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ```
 
 
-#### sugiyama
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
-
-v2 <- ggraph(df_graph, layout = sugiyama) + 
-  # geom_edge_elbow(aes(label = LABEL), angle_calc = 'along', label_dodge = unit(2.5, 'mm')) + 
-  # geom_edge_bend(aes(label = LABEL)) +
-  geom_edge_diagonal(aes(label = LABEL)) +
-  geom_node_point(size=4) +
-  geom_node_label( aes(label=name), repel = FALSE, vjust = 0.0, nudge_y = 0.1, size = 6, family = "inconsolata") +
-  # coord_fixed(clip = 'off') + 
-  theme_void() +
-  theme_opts
-
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0))
-)
-
-```
-
-
-#### gem
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
-
-v3 <- ggraph(df_graph, layout = gem) + 
-  # geom_edge_elbow(aes(label = LABEL), angle_calc = 'along', label_dodge = unit(2.5, 'mm')) + 
-  # geom_edge_bend(aes(label = LABEL)) +
-  geom_edge_diagonal(aes(label = LABEL)) +
-  geom_node_point(size=4) +
-  geom_node_label( aes(label=name), repel = FALSE, vjust = 0.0, nudge_y = 0.1, size = 6, family = "inconsolata") +
-  # coord_fixed(clip = 'off') + 
-  theme_void() +
-  theme_opts
-
-girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0))
-)
-
-```
-
-
-#### unrooted
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
-
-v4 <- ggraph(df_graph, layout = unrooted) + 
-  # geom_edge_elbow(aes(label = LABEL), angle_calc = 'along', label_dodge = unit(2.5, 'mm')) + 
-  # geom_edge_bend(aes(label = LABEL)) +
-  geom_edge_diagonal(aes(label = LABEL)) +
-  geom_node_point(size=4) +
-  geom_node_label( aes(label=name), repel = FALSE, vjust = 0.0, nudge_y = 0.1, size = 6, family = "inconsolata") +
-  # coord_fixed(clip = 'off') + 
-  theme_void() +
-  theme_opts
-
-girafe(ggobj = v4, width_svg = 1280/72, height_svg = 720/72,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0))
-)
-
-```
-
-
 ### References
 #### citations for narrative and data sources
 
-* Narrative: 
+* Narrative: https://cebudailynews.inquirer.net/221416/love-and-drugs-encilas-life-as-consolacions-drug-queen
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

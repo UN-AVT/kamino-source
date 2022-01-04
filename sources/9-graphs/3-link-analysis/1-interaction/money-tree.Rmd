@@ -82,8 +82,8 @@ df_edges
 
 # transform to graph data structure
 df_graph <- graph_from_data_frame( df_edges, directed = TRUE )
-#df_graph_directed <- graph_from_data_frame( df_tree, directed = TRUE )
-#df_graph_undirected <- graph_from_data_frame( df_tree, directed = FALSE )
+# df_graph_directed <- graph_from_data_frame( df_tree, directed = TRUE )
+# df_graph_undirected <- graph_from_data_frame( df_tree, directed = FALSE )
 
 # to view results as data frame
 df_graph_view <-  get.data.frame(df_graph, what= "both" ) # as.data.frame(get.edgelist(df_graph))
@@ -96,7 +96,7 @@ df_graph_view <-  get.data.frame(df_graph, what= "both" ) # as.data.frame(get.ed
 #### compute layouts
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 ##################
 # igraph layouts #
@@ -163,7 +163,7 @@ theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
     plot.margin = unit(c(1,1,1,1), "in"),
     legend.position='none'
-  )
+)
 
 category_palette <- c("Top 100" = "#FFFFFF", "LEAF" = "#FFFFFF", "Creativity" = "#E8F5E9", "Identity" = "#E3F2FD", "Knowledge" = "#F3E5F5","Leadership" = "#FCE4EC")
 
