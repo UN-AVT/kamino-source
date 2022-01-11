@@ -1,0 +1,248 @@
+---
+pagetitle: "Perceptions Of Probability"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+library(scales)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+CHARTS
+</div>
+
+# Perceptions Of Probability
+## Box Whisker
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Naser Tamimi on Unsplash"}
+
+masthead <- "assets/naser-tamimi-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The 50-50-90 rule: Anytime you have a 50-50 chance of getting something right, there's a 90% probability you will get it wrong...\
+--- Andy Rooney\
+
+***
+
+### Ingest
+#### phrase, values
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+
+url_file1 <- "perceptions-of-probability/probly.csv"
+url1 <- paste0(url_root, url_file1)
+probly_df <- read_csv(url1)
+probly_df
+
+url_file2 <- "perceptions-of-probability/numberly.csv"
+url2 <- paste0(url_root, url_file2)
+numberly_df <- read_csv(url2)
+numberly_df
+
+
+```
+
+
+### Wrangle
+#### convert wide data to long
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Wide to long
+probly <- gather(probly_df,"phrase","value",1:17)
+probly
+
+numberly <- gather(numberly_df,"phrase","value",1:10)
+numberly
+
+```
+
+
+### Wrangle
+#### factor
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+probly$phrase <- factor(probly$phrase, 
+                        c("Chances Are Slight",
+                            "Highly Unlikely",
+                            "Almost No Chance",
+                            "Little Chance",
+                            "Probably Not",
+                            "Unlikely",
+                            "Improbable",
+                            "We Doubt",
+                            "About Even",
+                            "Better Than Even",
+                            "Probably",
+                            "We Believe",
+                            "Likely",
+                            "Probable",
+                            "Very Good Chance",
+                            "Highly Likely",
+                            "Almost Certainly"))
+
+probly
+
+numberly$phrase <- factor(numberly$phrase, 
+                        c( "Hundreds of",
+                            "Scores of",
+                            "Dozens",
+                            "Many",
+                            "A lot",
+                            "Several",
+                            "Some",
+                            "A few",
+                            "A couple",
+                            "Fractions of"))
+numberly
+
+```
+
+
+### Plot
+#### probly
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "#252525", size = 24, face = 'bold'),
+    #plot.subtitle = element_text(color = "black", size = 12),
+    #plot.caption = element_text(color = "#555555", size = 11),
+    axis.title.x = element_text(color="#525252", size=17),
+    axis.title.y = element_text(color="#525252", size=17),
+    axis.text.x = element_text(color="#525252",size=14),
+    axis.text.y = element_text(color="#525252",size=14),
+    panel.background = element_rect(fill="#f0f0f0",color="#f0f0f0"),
+    plot.background = element_rect(fill="#f0f0f0",color="#f0f0f0"),
+    panel.border = element_rect(color="#f0f0f0"),
+    panel.grid.major = element_line(color="#dcdcdc",size=0.25),
+    panel.grid.minor = element_blank(),
+    axis.ticks = element_blank(),
+    legend.position='none',
+    )
+
+
+
+v1 <- ggplot(probly, aes(phrase,value)) +
+      geom_boxplot(aes(fill=phrase),alpha=0.5,outlier.size = 3) +
+      geom_jitter(aes(color=phrase),size=5, alpha=0.2) + 
+      scale_y_continuous(breaks=seq(0,100,10), labels=c("0%","10%","20%","30%","40%","50%","60%","70%","80%","90%","100%")) +
+      labs(title="Perceptions of Probability",
+       x="Phrase",
+       y="Assigned Probability")+
+      coord_flip()+
+      theme_bw() +
+      theme_opts
+      
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+
+
+```
+
+### Plot
+#### numberly
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "#252525", size = 24, face = 'bold'),
+    #plot.subtitle = element_text(color = "black", size = 12),
+    #plot.caption = element_text(color = "#555555", size = 11),
+    axis.title.x = element_text(color="#525252", size=17),
+    axis.title.y = element_text(color="#525252", size=17),
+    axis.text.x = element_text(color="#525252",size=20),
+    axis.text.y = element_text(color="#525252",size=20),
+    panel.background = element_rect(fill="#f0f0f0",color="#f0f0f0"),
+    plot.background = element_rect(fill="#f0f0f0",color="#f0f0f0"),
+    panel.border = element_rect(color="#f0f0f0"),
+    panel.grid.major = element_line(color="#dcdcdc",size=0.25),
+    panel.grid.minor = element_blank(),
+    axis.ticks = element_blank(),
+    legend.position='none',
+    )
+
+
+
+v2 <- ggplot(numberly, aes(phrase,value)) +
+      geom_boxplot(aes(fill=phrase),alpha=0.5,outlier.size = 3) +
+      geom_jitter(aes(color=phrase),size=5, alpha=0.2) + 
+      scale_y_log10(breaks=10^(-2:6), labels=trans_format("log10",math_format(10^.x))) +
+      labs(title="Perceptions of Probability",
+       x="Phrase",
+       y="Assigned Number")+
+      coord_flip()+
+      theme_bw() +
+      theme_opts
+      
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and data sources: TBD
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
