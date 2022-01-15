@@ -1,0 +1,144 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MODULE  
+</div>
+
+# Storyboarding
+## process, technique, and tool
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Matt Popovich on Unsplash"}
+
+knitr::include_graphics("assets/storyboarding/matt-popovich-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">Storyboard reference copies used on set during the filming of The Empire Strikes Back in 1979.</div>
+<div class="figure-text">The original storyboards were created by artist Joe Johnston.</div>
+
+> I aim to get a complete vision of my film before it goes onto the studio floor...\
+--- Alfred Hichcock\
+
+***
+
+Storyboarding is a __planning__ and __pre-visualization__ process for designing a __frame-by-frame blueprint__ of an analytic story. Although storyboarding has its roots in animation, film-making, and other moving image arts, we can adopt the practice for data science and __learn from masters__ of storytelling.  This section takes the concepts, techniques, and best practices of storyboarding, and adopts the lessons with a __tailored approach__ specific to the __unique needs__ of analytic storytelling.
+
+### Process
+
+Storyboards are representations used to plan and design a visual narrative. A storyboard is composed of a series of _shots_ that are arranged in a __sequence__ to reveal your analytic story, with special attention to __techniques__ that can strengthen the __impact__ of your product. The process helps to identify the __essential elements__ from your analytic findings, and interpret them into a compelling and expressive story. As an analytic and creative process, it enables you to explore __design options__ such as choosing the highest impact frames, levels of detail, pace and tempo, and transitions for presenting the information, analytic findings, and recommendations to your audience.
+
+As a starting point, the process assumes you have completed your analytic tasks, visualizations, and have the basic construct of a story based on your findings.  In the film-making industry, this would be analogous to having a __script__. Using your script as a __roadmap__, your first task is to prepare a __shot list__, scene by scene, identifying the most meaningful views for what is most __important__ to your story line. Selecting your sequence of frames should encourage a critical view of the collection with a focus on key questions such as: _does the shot fulfill the story point? Is it the best and most meaningful to convey the point?_  Every frame and every scene has a specific reason for being incorporated into the story.
+
+Defining the shot list is only the beginning.  Next, we'll refer to techniques that may improve the flow and transition of the sequence to enhance the experience for your audience.
+
+### Technique
+
+The process benefits from several concepts, techniques, and proven approaches for using visual devices that assist and facilitate the narrative. 
+
+* visual structuring: mechanisms that communicate the overall structure of the narrative
+* highlighting: visual mechanisms that help direct the viewer’s attention to particular elements in the display
+* transition guidance. techniques for moving within or between visual scenes without disorienting the viewer
+
+
+Continuity: an uninterrupted sequence without significant change to engage the audience and retain the attention and interest of the viewers.
+
+
+
+
+Camera / Lens: Close-Up (CU), establishing (EST) shot, Extreme Wide Shot (EWS), Over-the-Shoulder (OTS) Shot
+
+show the audience all that you want them to see.
+
+The role of staging is to present the ideas clearly, in sequence, in a way that progresses the story.
+
+Action / Movement: Every movement should have meaning or purpose to advance the plot and enhance storytelling.
+
+### Markdown tags
+#### with custom styling
+
+focal point or center of interest. Creating storyboards is about describing story beats, and manipulating the audience to look at where you need them to look. In order to make your story point clear to the audience your focal point also needs to be clearly designed within the picture frame. Every element of the composition should also emphasize the center of interest.
+
+Dominance and contrast are used to achieve this. The viewer’s eyes will focus on the area of greatest contrast in the shot. You have to direct the viewer’s attention to the telling details of a scene. This is achieved in close-ups. It says, “ Look here, this is important. ” Remember every shot is a close-up of what you want to say to your audience, even if it is a shot as wide as the universe.
+
+Techniques such as foreground framing literally “frame” the scene and also throw the viewers eye further into the mise-en-scene from FGD to MGD to BGD. Framing the shot helps focus attention to the primary action in the scene, the “off-center” center of interest. Paying attention to the geometric elements in any given shot by applying the use of ovals as a design factor also helps hold the attention of the audience.
+
+RHYTHM
+Another element within the control of the storyboard artist is the rhythm of the shots and the pacing of the cuts. By rhythm we mean to describe how fast or slowly a scene develops from
+beginning to end. In
+
+You should know the sequence of events that happen in your scene as well as the
+who, what, where, when, and why.
+
+Causality:
+
+### HTML tags
+#### with custom styling
+
+
+
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

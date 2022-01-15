@@ -63,8 +63,11 @@ This example is based on the work of the __Transit Project__ using their databas
 ```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # file path parameter
-df_file_path <- "archetypes/transit-costs/transit-costs.csv"
-df <- read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "transit-costs/transit-costs.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df
 
 ```
@@ -95,7 +98,7 @@ df_wrangle
 ### Bubble Chart
 #### with loess smoothing (hover over points for additional details)
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -151,21 +154,8 @@ v1 <- ggplot(data = df_wrangle, aes(y = real_cost_n, x = length)) +
     theme_opts
 
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/transit-costs-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/transit-costs-sm.png", plot = v1, width=4, height=2.25)
 
 ```
 

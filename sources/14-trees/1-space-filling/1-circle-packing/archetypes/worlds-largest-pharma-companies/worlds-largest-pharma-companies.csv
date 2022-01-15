@@ -1,0 +1,201 @@
+﻿Company Rank,Company Name,Market Cap Value,Country
+1,Johnson & Johnson,$428.66 B, USA
+,JNJ,,
+2,Roche,$320.41 B, Switzerland
+,RHHBY,,
+3,Pfizer,$219.39 B, USA
+,PFE,,
+4,Eli Lilly,$208.99 B, USA
+,LLY,,
+5,Novartis,$207.70 B, Switzerland
+,NVS,,
+6,AbbVie,$202.60 B, USA
+,ABBV,,
+7,Merck,$191.67 B, USA
+,MRK,,
+8,Novo Nordisk,$187.83 B, Denmark
+,NVO,,
+9,Astrazeneca,$152.28 B, UK
+,AZN,,
+10,Bristol-Myers Squibb,$145.80 B, USA
+,BMY,,
+11,Amgen,$136.50 B, USA
+,AMGN,,
+12,Sanofi,$130.37 B, France
+,SNY,,
+13,CVS Health,$110.49 B, USA
+,CVS,,
+14,GlaxoSmithKline,$104.30 B, UK
+,GSK,,
+15,CSL,$103.10 B, Australia
+,CSL.AX,,
+16,Gilead Sciences,$83.62 B, USA
+,GILD,,
+17,Moderna,$83.25 B, USA
+,MRNA,,
+18,Merck KGaA,$80.61 B, Germany
+,MRK.DE,,
+19,Bayer,$59.43 B, Germany
+,BAYZF,,
+20,Jiangsu Hengrui Medicine,$58.51 B, China
+,600276.SS,,
+21,Regeneron Pharmaceuticals,$55.83 B, USA
+,REGN,,
+22,Biogen,$55.00 B, USA
+,BIIB,,
+23,BioNTech,$54.23 B, Germany
+,BNTX,,
+24,Takeda Pharmaceutical,$52.67 B, Japan
+,TAK,,
+25,Lonza,$52.16 B, Switzerland
+,LONN.SW,,
+26,Walgreens Boots Alliance,$45.05 B, USA
+,WBA,,
+27,Celltrion,$33.80 B, S. Korea
+,068270.KS,,
+28,Astellas Pharma,$33.42 B, Japan
+,ALPMF,,
+29,BeiGene,$31.65 B, China
+,BGNE,,
+30,Eisai,$31.20 B, Japan
+,4523.T,,
+31,West Pharma,$26.59 B, USA
+,WST,,
+32,Hansoh Pharma,$26.00 B, China
+,3692.HK,,
+33,LabCorp,$25.97 B, USA
+,LH,,
+34,Otsuka Holdings,$23.15 B, Japan
+,4578.T,,
+35,Horizon Therapeutics,$21.13 B, Ireland
+,HZNP,,
+36,Alnylam Pharmaceuticals,$20.42 B, USA
+,ALNY,,
+37,kyowa Kirin,$18.85 B, Japan
+,4151.T,,
+38,Catalent,$18.74 B, USA
+,CTLT,,
+39,Sino Biopharmaceutical,$18.48 B, Hong Kong
+,1177.HK,,
+40,Bio-Techne,$17.25 B, USA
+,TECH,,
+41,PPD,$16.26 B, USA
+,PPD,,
+42,Argenx,$16.03 B, Netherlands
+,ARGX,,
+43,Shionogi,$15.29 B, Japan
+,4507.T,,
+44,Dr. Reddy's,$11.88 B, India
+,RDY,,
+45,Teva Pharmaceutical Industries,$11.21 B, Israel
+,TEVA,,
+46,Ono Pharmaceutical,$11.12 B, Japan
+,4528.T,,
+47,ICON plc,$11.09 B, Ireland
+,ICLR,,
+48,Bausch Health,$10.47 B, Canada
+,BHC,,
+49,CRISPR Therapeutics,$10.42 B, Switzerland
+,CRSP,,
+50,Curevac,$10.33 B, Germany
+,CVAC,,
+51,Hualan Biological Engineering,$10.31 B, China
+,002007.SZ,,
+52,Vifor Pharma,$9.49 B, Switzerland
+,VIFN.SW,,
+53,Neurocrine Biosciences,$9.45 B, USA
+,NBIX,,
+54,Sinopharm,$9.42 B, China
+,1099.HK,,
+55,BridgeBio Pharma,$8.89 B, USA
+,BBIO,,
+56,Cadila Healthcare,$8.59 B, India
+,CADILAHC.NS,,
+57,Sumitomo Dainippon Pharma,$8.16 B, Japan
+,4506.T,,
+58,Tilray,$7.89 B, Canada
+,TLRY,,
+59,Ascendis Pharma,$7.51 B, Denmark
+,ASND,,
+60,Evotec,$7.19 B, Germany
+,EVT.F,,
+61,Lupin Limited,$7.04 B, India
+,LUPIN.NS,,
+62,Gland Pharma,$7.01 B, India
+,GLAND.NS,,
+63,Exelixis,$6.95 B, USA
+,EXEL,,
+64,GW Pharmaceuticals,$6.81 B, UK
+,GWPH,,
+65,KOBAYASHI Pharmaceutical,$6.78 B, Japan
+,4967.T,,
+66,Torrent Pharmaceuticals,$6.61 B, India
+,TORNTPHARM.NS,,
+67,Biocon,$6.43 B, India
+,BIOCON.NS,,
+68,PeptiDream,$6.32 B, Japan
+,4587.T,,
+69,Sarepta Therapeutics,$6.25 B, USA
+,SRPT,,
+70,Perrigo,$6.21 B, Ireland
+,PRGO,,
+71,Orion Corporation,$6.11 B, Finland
+,ORNAV.HE,,
+72,Lundbeck,$6.04 B, Denmark
+,LDB.F,,
+73,AbCellera,$5.87 B, Canada
+,ABCL,,
+74,Adaptive Biotechnologies,$5.69 B, USA
+,ADPT,,
+75,Intellia Therapeutics,$5.62 B, USA
+,NTLA,,
+76,Santen Pharmaceutical,$5.49 B, Japan
+,4536.T,,
+77,Nippon Shinyaku,$5.46 B, Japan
+,4516.T,,
+78,Beam Therapeutics,$5.43 B, USA
+,BEAM,,
+79,Reata Pharmaceuticals,$5.15 B, USA
+,RETA,,
+80,Swedish Orphan Biovitrum,$5.13 B, Sweden
+,SOBI.ST,,
+81,BB Biotech,$5.08 B, Switzerland
+,BION.SW,,
+82,Alkem Laboratories,$5.00 B, India
+,ALKEM.NS,,
+83,Abbott India,$4.69 B, India
+,ABBOTINDIA.NS,,
+84,Laurus Labs,$4.44 B, India
+,LAURUSLABS.NS,,
+85,Taisho Pharmaceutical,$4.39 B, Japan
+,4581.T,,
+86,Hanmi Pharmaceutical,$4.22 B, S. Korea
+,008930.KS,,
+87,Alkermes,$3.87 B, Ireland
+,ALKS,,
+88,Karuna Therapeutics,$3.71 B, USA
+,KRTX,,
+89,Shinpoong Pharm,$3.65 B, S. Korea
+,019170.KS,,
+90,NantKwest,$3.55 B, USA
+,NK,,
+91,Ipca Laboratories,$3.41 B, India
+,IPCALAB.NS,,
+92,Nektar Therapeutics,$3.02 B, USA
+,NKTR,,
+93,BioCryst Pharmaceuticals,$3.01 B, USA
+,BCRX,,
+94,Vericel,$2.96 B, USA
+,VCEL,,
+95,Dicerna Pharmaceuticals,$2.84 B, USA
+,DRNA,,
+96,Rocket Pharmaceuticals,$2.74 B, USA
+,RCKT,,
+97,Axsome Therapeutics,$2.65 B, USA
+,AXSM,,
+98,Natco Pharma,$2.63 B, India
+,NATCOPHARM.NS,,
+99,Alembic Pharmaceuticals,$2.59 B, India
+,APLLTD.NS,,
+100,Editas Medicine,$2.54 B, USA
+,EDIT,,

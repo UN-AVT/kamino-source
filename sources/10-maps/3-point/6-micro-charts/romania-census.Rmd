@@ -1,0 +1,234 @@
+---
+pagetitle: "Romania Census"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(janitor)
+library(stringr)
+library(sf)
+library(scales)
+library(scatterpie)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Romania Census
+## Point Microcharts
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Sherise VD on Unsplash"}
+
+masthead <- "assets/sherise-vd-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Bicaz-Chei, Romania</div>
+
+> Barbă lungă şi capra are, dar minte nicicum nu are...\
+--- Romanian proverb\
+
+***
+
+
+### Ingest
+#### census data
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+census <- read.csv("archetypes/romania-census/2011-census-county-ethnic-group.csv", header = TRUE, stringsAsFactors = FALSE)
+census
+
+```
+
+
+### Ingest
+#### county centroids
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+centroids <- read.csv("archetypes/romania-census/romania-county-centroids.csv", header = TRUE, stringsAsFactors = TRUE)
+centroids <- centroids[order(centroids$name),]
+centroids
+
+```
+
+
+### Wrangle
+#### clean and order
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+census_wrangled <- census %>% janitor::clean_names()
+census_wrangled <- census_wrangled %>%
+  mutate_at(c(2:12), as.integer) %>%
+  mutate(counties = str_to_title(counties)) %>%
+  filter(counties != "Romania")
+
+census_wrangled <- census_wrangled[order(census_wrangled$counties),]
+
+census_wrangled[is.na(census_wrangled)] <- 0
+
+# rescale / normalize value to size pies
+census_wrangled$r <- rescale(census_wrangled$stable_population_total, to=c(0.1,0.25))
+
+census_wrangled
+
+```
+
+### Wrangle
+#### enrich with coordinates
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+census_coords <- merge(census_wrangled, centroids, by.x = "counties", by.y = "name")
+census_coords
+
+```
+
+
+### Base map
+#### Romania counties
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+rom_map <- st_read("archetypes/romania-census/romania.geojson")
+# glimpse(rom_map)
+
+```
+
+
+### Wrangle
+#### Rescale and merge
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+census_coords_geo <- census_coords %>% select(counties, stable_population_total)
+rom_df <- merge(rom_map, census_coords_geo, by.x = "name", by.y = "counties", all = TRUE)
+# rom_df
+
+```
+
+
+### Plot
+#### symbol / chart map
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "black", size = 12, family = "inconsolata"),
+  plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),
+  plot.background = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  legend.position = "bottom",
+  legend.title = element_blank(),
+)
+
+pie_pal <- c(
+"romanian" = "#7500e6",
+"hungarian" = "#06c200",
+"roma" = "#ab5029",
+"german" = "#ff0000",
+"ukrainian" = "#98e600",
+"turkish" = "#e600a9",
+"tatar" = "#ff73df",
+"russian_lipovan" = "#469c99"
+)
+
+# other_ethnic_groups
+# ethnic_group_not_specified 
+
+v1 = ggplot() +
+  geom_sf(data = rom_df, fill = "#f0f0f0", color = "#1e1e1b", size = 0.25 ) +
+  geom_scatterpie(data = census_coords, 
+                    aes(x = xcoord, y = ycoord, r = r, group=counties),
+                    cols = c("romanian", "hungarian", "roma", "german", "ukrainian", "turkish", "tatar", "russian_lipovan"), 
+                    color=NA,
+                    alpha = 0.8) +
+  scale_fill_manual(values = pie_pal) +
+  coord_sf() +
+  labs(title = "Ethnic map of Romania",
+         subtitle = "2011 census data",
+         caption = "",
+         fill = NULL) +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 13.25,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* National Institute of Statistics (Romania). 
+* Romania Population and Housing Census 2011.
+* [GO](https://insse.ro/cms/files/statistici/comunicate/alte/2012/Comunicat%20DATE%20PROVIZORII%20RPL%202011e.pdf){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

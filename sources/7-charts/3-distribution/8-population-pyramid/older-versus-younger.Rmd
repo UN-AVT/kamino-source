@@ -59,8 +59,13 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df <- read.csv('archetypes/older-versus-younger/IHME_GBD_2017_POP.csv', header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "older-versus-younger/IHME_GBD_2017_POP.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
 df
+
 
 ```
 
@@ -117,7 +122,7 @@ df_wrangle
 The Socio-Demographic Index (SDI) is: "A summary measure that identifies where countries or other geographic areas sit on the spectrum of development. Expressed on a scale of 0 to 1, SDI is a composite average of the rankings of the incomes per capita, average educational attainment, and fertility rates of all areas in the GBD study."
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -160,7 +165,7 @@ v1 <- ggplot() +
   theme_minimal() +
   theme_opts  
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1080/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = FALSE, width = 1.0))
 )
 
@@ -171,7 +176,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1080/72,
 #### with center axis
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 age_df <- data.frame( age_level = age_levels )
 
@@ -189,7 +194,7 @@ v2 <- ggplot() +
     axis.text.y = element_blank()
   )
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 1080/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = FALSE, width = 1.0))
 )
 

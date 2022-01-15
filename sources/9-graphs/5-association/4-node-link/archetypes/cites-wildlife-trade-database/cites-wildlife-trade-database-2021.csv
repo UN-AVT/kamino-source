@@ -1,0 +1,24 @@
+Year,App.,Taxon,Class,Order,Family,Genus,Importer,Exporter,Origin,Importer reported quantity,Exporter reported quantity,Term,Unit,Purpose,Source
+2021,I,Falco hybrid,Aves,Falconiformes,Falconidae,Falco,BG,QA,ES,5,,live,,B,C
+2021,I,Falco peregrinus,Aves,Falconiformes,Falconidae,Falco,BG,BH,DK,1,,live,,T,C
+2021,I,Panthera pardus,Mammalia,Carnivora,Felidae,Panthera,FI,RU,,1,,live,,Z,F
+2021,I,Dalbergia nigra,,Fabales,Leguminosae,Dalbergia,US,FI,BR,,0.32,wood product,kg,T,O
+2021,I,Lutra lutra,Mammalia,Carnivora,Mustelidae,Lutra,FI,CH,,1,,live,,Z,C
+2021,I,Psittacus erithacus,Aves,Psittaciformes,Psittacidae,Psittacus,US,BG,,,1,live,,P,C
+2021,II,Acipenser gueldenstaedtii,Actinopteri,Acipenseriformes,Acipenseridae,Acipenser,UA,BG,,,195,live,,T,C
+2021,II,Alligator mississippiensis,Reptilia,Crocodylia,Alligatoridae,Alligator,BG,CH,US,3,,leather products (small),,T,W
+2021,II,Alligator mississippiensis,Reptilia,Crocodylia,Alligatoridae,Alligator,FI,CH,US,2,,leather products (small),,T,C
+2021,II,Alligator mississippiensis,Reptilia,Crocodylia,Alligatoridae,Alligator,FI,CH,US,3,,leather products (small),,T,W
+2021,II,Alligator mississippiensis,Reptilia,Crocodylia,Alligatoridae,Alligator,HK,FI,US,,5,leather products (small),,T,W
+2021,II,Alligator mississippiensis,Reptilia,Crocodylia,Alligatoridae,Alligator,HR,CH,US,2,,leather products (small),,T,W
+2021,II,Alligator mississippiensis,Reptilia,Crocodylia,Alligatoridae,Alligator,US,FI,US,,20,leather products (small),,T,W
+2021,II,Euphyllia ancora,Anthozoa,Scleractinia,Caryophylliidae,Euphyllia,BG,ID,,5,,raw corals,,T,W
+2021,II,Euphyllia glabrescens,Anthozoa,Scleractinia,Caryophylliidae,Euphyllia,BG,ID,,5,,raw corals,,T,W
+2021,II,Tubastraea spp.,Anthozoa,Scleractinia,Dendrophylliidae,Tubastraea,BG,ID,,3,,raw corals,,T,W
+2021,II,Turbinaria peltata,Anthozoa,Scleractinia,Dendrophylliidae,Turbinaria,BG,ID,,15,,raw corals,,T,W
+2021,II,Caulastraea spp.,Anthozoa,Scleractinia,Faviidae,Caulastraea,BG,ID,,5,,raw corals,,T,W
+2021,II,Fungia spp.,Anthozoa,Scleractinia,Fungiidae,Fungia,BG,ID,,8,,raw corals,,T,W
+2021,II,Dalbergia sissoo,,Fabales,Leguminosae,Dalbergia,HR,IN,,6058.62,,wood product,kg,T,A
+2021,II,Goniopora spp.,Anthozoa,Scleractinia,Poritidae,Goniopora,BG,ID,,26,,raw corals,,T,W
+2021,II,Varanus niloticus,Reptilia,Sauria,Varanidae,Varanus,FR,MG,TD,,53,leather products (small),,T,W
+2021,II,Scleractinia spp.,Anthozoa,Scleractinia,,,BG,ID,,100,,raw corals,,T,W

@@ -1,0 +1,295 @@
+---
+pagetitle: "Azerbaijan Anonymous"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggtext)
+library(emojifont)
+library(ggraph)
+library(igraph)
+library(tidygraph)
+library(graphlayouts)
+library(DiagrammeR)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+ GRAPHS  
+</div>
+
+# Azerbaijan Anonymous
+## Link analysis 
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Orkhan-Farmanli on Unsplash"}
+
+masthead <- "assets/orkhan-farmanli-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Searches in media databases (both English and Russian language) provide virtually no relevant results...\
+--- Global Witness\
+
+***
+
+
+
+### Ingest
+#### edges and nodes
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Tree data
+df_edges_path <- "archetypes/azerbaijan-anonymous/azerbaijan-anonymous-edges.csv"
+df_edges <- read.csv(df_edges_path, header = TRUE, stringsAsFactors = FALSE)
+df_edges
+
+df_nodes_path <- "archetypes/azerbaijan-anonymous/azerbaijan-anonymous-nodes.csv"
+df_nodes <- read.csv(df_nodes_path, header = TRUE, stringsAsFactors = FALSE)
+df_nodes
+
+```
+
+
+### Wrangle
+#### create graph structure
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# transform to graph data structure
+df_graph <- graph_from_data_frame( df_edges, vertices = df_nodes, directed = TRUE )
+#df_graph_directed <- graph_from_data_frame( df_tree, directed = TRUE )
+#df_graph_undirected <- graph_from_data_frame( df_tree, directed = FALSE )
+
+# to view results as data frame
+df_graph_view <-  get.data.frame(df_graph, what= "both" ) # as.data.frame(get.edgelist(df_graph))
+# df_graph_view
+
+```
+
+
+### Analytics
+#### compute layouts
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+
+# igraph layouts
+
+# bipartite <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
+circle <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
+dh <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
+drl <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
+fr <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
+gem <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
+graphopt <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
+grid <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
+kk <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
+
+lgl <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
+mds <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
+nicely <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
+sphere <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
+star <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
+sugiyama <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+
+# ggraph layouts
+
+#backbone <- create_layout(df_graph_undirected, layout = 'backbone')
+
+#centrality_bc <- betweenness(df_graph_directed)
+#centrality_cc <- closeness(df_graph_directed)
+#centrality <- create_layout(df_graph_undirected, layout = 'centrality', centrality = centrality_bc)
+
+# circlepack <- create_layout(df_graph_directed, layout = 'circlepack')
+# dendrogram <- create_layout(df_graph, layout = 'dendrogram')
+# eigen <- create_layout(df_graph, layout = 'eigen', type = "laplacian", eigenvector = "smallest")
+
+focus <- create_layout(df_graph, layout = 'focus', focus = V(df_graph)['Anar Aliyev'])
+
+# hive <- create_layout(df_graph, layout = 'hive', axis = friends, sort.by = degree)
+
+#linear <- create_layout(df_graph, layout = 'linear')
+#matrix <- create_layout(df_graph, layout = 'matrix')
+#partition <- create_layout(df_graph_directed, layout = 'partition')
+
+# pmds_pivots <- 4
+# pmds <- create_layout(df_graph, layout = 'pmds', pivots = pmds_pivots)
+
+stress <- create_layout(df_graph, layout = 'stress')
+# stress <- layout_rotate(stress, 90)
+
+#sunburst <- create_layout(df_graph_directed, layout = 'partition', circular = TRUE)
+#treemap <- create_layout(df_graph_directed, layout = 'treemap')
+
+# df_unrooted <- df_graph_undirected %>%  activate(edges) %>%  mutate(length = runif(n()))
+# unrooted <- create_layout(df_graph_undirected, layout = 'unrooted' )
+
+# mlc <- layout_as_multilevel(df_graph,type = "all", alpha = 25, beta = 45)
+# ml <- create_layout(df_graph, layout = mlc)
+
+```
+
+
+### Plot
+#### dendrogram
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.margin = unit(c(1,1,1,1), "in"),
+    legend.position='none'
+)
+
+node_palette <- c('Joint ventures with Socar' = '#B71C1C',
+                  'Contract holder with Socar' = '#009688',
+                  'Other companies' = '#0288D1',
+                  'Focus' = '#111111')
+
+edge_line_map <- c('Shareholding' = 'solid',
+                   'Directorship' = 'dashed',
+                   'Other' = 'dotted')
+
+#search_emoji('office')
+#emoji(search_emoji('office'))
+
+v1 <- ggraph(stress) + 
+  # draw_circle(use = "focus", max.circle = 5) +
+  geom_edge_link(aes(linetype = edge_type)) + 
+  # geom_edge_bend(aes(linetype = edge_type), strength=1.0) + 
+  # geom_edge_diagonal(aes(linetype = edge_type)) + 
+  geom_node_point(aes(color=type), shape=21, fill='white', size=12) +
+  # geom_textbox(aes(x = x, y = y, label=label, fill=type), halign = 0.5, hjust = 0.5, vjust = 0.5, nudge_y = 0.1, color='#ffffff', size = 4, family = "inconsolata") +
+  geom_text(aes(x = x, y = y, label=emoji(symbol), color=type), fill='black', family="EmojiOne", size=6, vjust = 0.5, nudge_y=0.06) +
+  scale_color_manual(values = node_palette) +
+  scale_fill_manual(values = node_palette) +
+  scale_edge_linetype_manual(values = edge_line_map) +
+  coord_fixed(clip = 'off') + 
+  theme_void() +
+  theme_opts
+
+#v1
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1280/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+# pg <- ggplot_build(v1)
+# pg$data[[2]]
+# pg$data[[3]]
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+graph <- create_graph()
+
+graph <- graph %>%
+  add_nodes_from_table(
+    table = df_nodes,
+    label_col = label,
+    type_col = type)
+
+graph <- graph %>%
+    add_edges_from_table(
+      table = df_edges,
+      from_col = from,
+      to_col = to,
+      from_to_map = node) # rel_col = edge_type
+
+# graph attributes
+graph <- add_global_graph_attrs(
+    graph = graph,
+    attr = c("layout", "fontname", "width"),
+    value = c("twopi", "inconsolata", 0.1),
+    attr_type = c("graph", "node", "node"))
+
+# graph %>% get_global_graph_attr_info()
+
+# nicely, circle, tree, kk, and fr or from graph spec
+# render_graph(graph, layout = 'kk', as_svg = FALSE)
+
+dot <- generate_dot(graph)
+# dot
+
+grViz(dot)
+
+# export_csv(
+#   graph,
+#   ndf_name = "nodes.csv",
+#   edf_name = "edges.csv",
+#   output_path = getwd(),
+#   colnames_type = NULL
+# )
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+visnetwork(graph)
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: Global Witness, Azerbaijan Anonymous  
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

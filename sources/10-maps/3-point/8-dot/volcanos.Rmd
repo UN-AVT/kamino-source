@@ -1,17 +1,17 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "Volcanos"
+output:
   html_document:
     theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: libs
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
@@ -23,14 +23,21 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
-library(maps)
-library(geojsonio)
+library(tidyverse)
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
-library(tidyverse)
+library(scales)
+library(cowplot)
+library(ggforce)
+library(ggthemes)
 library(ggiraph)
-library(ggdark)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
@@ -38,146 +45,208 @@ library(ggdark)
 MAPS  
 </div>
 
-# Meteorite Landings
+# Volcanos
 ## Dot Map
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Tengyart on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by sergejf on Wikimedia Commons"}
 
-knitr::include_graphics("archetypes/meteorite-landings/tengyart-unsplash.jpg", dpi=300)
+masthead <- "assets/ojos-del-salado.jpg"
+knitr::include_graphics(masthead, dpi=72)
 
 ```
 
+<div class="figure-text">Ojos del Salado on the Argentina-Chile border, the world's highest volcano at 6,893 m (22,615 ft)</div>
 
-> Sometimes the meaning in life hits you like a meteorite...\
---- Curtis Tyrone Jones
+
+> And many a fire there burns beneath the ground...\
+--- Empedocles\
 
 ***
 
 
-# Ingest the data
-## Meteorite Landings
+### Ingest
+#### volcanos and their attributes
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/meteorite-landings/meteorite-landings.csv", header = TRUE, stringsAsFactors = FALSE)
-df
+volcanos <- read.csv("archetypes/volcanos/volcanos.csv", header = TRUE, stringsAsFactors = FALSE, fileEncoding = "utf-8")
+head(volcanos, n = 10)
 
 ```
 
 
-# Dot map
-## Meteor shape
+### Wrangle
+#### clean volcano type names
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE, fig.width=13, fig.height=8}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_sorted <- df[order(df$mass),]
+volcano_map <- volcanos %>% 
+  mutate(primary_volcano_type = str_remove(primary_volcano_type, "\\(.+\\)|\\?"))
 
-# PLOT NATURAL EARTH BORDERS
-ne_world <- ne_countries(scale = "medium", returnclass = "sf")
-# class(ne_world)
+head(volcano_map, n = 10)
 
-# removes Antarctica
-# ne_world <- filter(ne_world, iso_a3 != "ATA") 
+```
 
-# theme parameters
-theme_opts <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
-  axis.text = element_blank(),
-  axis.line = element_blank(),
-  axis.ticks = element_blank(),
-  axis.title = element_blank(),
-  panel.grid = element_blank(),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  panel.background=element_rect(fill="white", colour="white"),
-  panel.border = element_blank(),
-  plot.background = element_blank(),
+
+### Analyze
+#### count top 5 rock types
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+major_rocks <- volcanos %>%
+  pivot_longer(cols = major_rock_1:major_rock_5, names_to = "major_rock", values_to = "major_rock_value") %>% 
+  mutate(major_rock_value = ifelse(nchar(major_rock_value) == 1, NA, major_rock_value)) %>% 
+  filter(nchar(major_rock_value) > 0)
+
+major_rocks <- major_rocks %>% 
+  group_by(major_rock_value) %>% 
+  summarise(n = n()) %>% 
+  mutate(
+    freq = n / sum(n),
+    major_rock_value = str_replace(major_rock_value, " / ", "\n")
+    ) %>% 
+  top_n(5, freq) %>% 
+  mutate(major_rock_value = fct_reorder(major_rock_value, freq))
+
+major_rocks
+
+```
+
+
+### View
+#### most common major rocks
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+rocks_opts <- theme(
+    plot.title = element_text(colour = "grey90", family = "inconsolata", hjust = 0.08, margin = margin(0, 0, 2, 0))
 )
 
-v1 <- ggplot(data = ne_world) +
-  # map feature styling
-  geom_sf(fill="white", color="#888888", stroke=0.5) +
-  # dot parameters
-  geom_point( data = df_sorted, aes(x=reclong, y=reclat, color=mass), shape=8, size=1.5) +
-  scale_color_gradient(low = "yellow", high = "red", na.value = NA) +
-  theme_bw() +
-  labs(x=NULL,
-       y=NULL,
-       title = "Meteorite Landings", 
-       subtitle="Color by mass") +
-  theme_opts
+major_rocks_plot <- ggplot(major_rocks) +
+  geom_col(aes(x = freq, y = major_rock_value), fill = "grey90", width = 0.6) +
+  geom_text(aes(x = freq, y = major_rock_value, label = percent(freq, accuracy = 0.1)), hjust = 1.0, nudge_x = -0.02, family = "inconsolata", size = 2, colour = "#1e2227") +
+  geom_text(aes(x = freq, y = major_rock_value, label = major_rock_value), hjust = 0, vjust = 0.5, family = "inconsolata", size = 1.8, colour = "grey90", nudge_x = 0.01, lineheight = 0.9) +
+  xlim(0, 1) +
+  labs(title = toupper("Most common major rocks")) +
+  theme_void(base_family = "inconsolata", base_size = 5) +
+  rocks_opts
 
-girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+
+```
+
+
+### Analyze
+#### create top 10 countries source
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+countries_list <- volcanos %>% 
+  count(country, sort = TRUE) %>% 
+  top_n(10, n)
+
+countries_list
+
+```
+
+
+### View
+#### top 10 countries
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+country_opts <- theme(
+    plot.title = element_text(colour = "grey90", family = "inconsolata", hjust = 0.93, margin = margin(0, 0, 3, 0))
+)
+
+countries_list_plot <- ggplot(countries_list) +
+  geom_text(aes(x = 0, y = country, label = paste0(country, " ", n)), family = "inconsolata", size = 2, hjust = 1, colour = "grey90") +
+  labs(title = toupper("Countries with\nthe most volcanos")) +
+  xlim(-1, 0) +
+  theme_void(base_size = 5) +
+  country_opts
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+
+```
+
+
+### View
+#### dot map
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+map_theme <- theme(
+  plot.background = element_rect(fill = "#1e2227", colour = "#1e2227"),
+  legend.position = "bottom",
+  legend.text = element_text(colour = "grey90", size = 6),
+  legend.title = element_text(hjust = 0.02, colour = "grey90", size = 6, margin = margin(0, 0, 5, 0)),
+  plot.caption = element_text(colour = "grey90", size = 5, hjust = 0.5),
+  plot.margin = margin(0, 0, 10, 0)
+)
+
+map_plot <- ggplot(volcano_map) +
+  geom_sf(data = ne_world, fill="#29323c", color="#1e2227", size = 0.5) +
+  geom_mark_circle(aes(longitude, latitude, label = volcano_name, description = "Highest Volcano, 6079 m", filter = elevation > 6870), 
+                   label.fontsize = 6, label.fill = "#29323c", label.colour = "grey90", label.lineheight = 0.9, label.margin = margin(1, 1, 1, 1, "mm"), 
+                   con.size = 0.25, size = 0, expand = unit(0, "mm"),  con.cap = 0, con.colour = "#ef8352") +
+  geom_mark_circle(aes(longitude, latitude, label = volcano_name, description = "Deepest Volcano, -2500 m", filter = elevation < -2499), 
+                   label.fontsize = 6, label.fill = "#29323c", label.colour = "grey90", label.lineheight = 0.9, label.margin = margin(1, 1, 1, 1, "mm"), 
+                   con.size = 0.25, size = 0, expand = unit(0.05, "mm"),  con.cap = 0, con.colour = "#ef8352") +
+  geom_point(aes(longitude, latitude, colour = primary_volcano_type), size = 0.75, shape = 17, alpha = 0.8) +
+  scale_colour_viridis_d(option = "plasma", guide = guide_legend(title = "Primary Volcano Type", nrow = 2, title.position = "left", keyheight = 0.7, keywidth = 0.8, override.aes = list(size = 1.2))) +
+  labs(caption = NULL) +
+  theme_void(base_family = "inconsolata") +
+  map_theme
+
+
+```
+
+
+### View
+#### final composition
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+v1 <- ggdraw(map_plot) +
+  draw_plot(major_rocks_plot, x = 0.04, y = 0.18, height = 0.2, width = 0.3) +
+  draw_plot(countries_list_plot, x = -0.095, y = 0.52, height = 0.24, width = 0.2) 
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 8.15,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 
-# Dark theme
-## Using magnitude and alpha as a visual variable
+### References
+#### Citations and data sources
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE, fig.width=13, fig.height=10}
-
-# theme parameters
-theme_dark_opts <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
-  axis.text = element_blank(),
-  axis.line = element_blank(),
-  axis.ticks = element_blank(),
-  axis.title = element_blank(),
-  panel.grid = element_blank(),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  #bpanel.background=element_rect(fill="white", colour="white"),
-  panel.border = element_blank(),
-  #plot.background = element_blank(),
-)
-
-v2 <- ggplot(data = ne_world) +
-  # map feature styling
-  geom_sf(fill="transparent", color="#444444", stroke=0.5) +
-  # dot parameters
-  geom_point( data = df_sorted, aes(x=reclong, y=reclat, color=mass, alpha=mass), shape = 8, size = 1.5) +
-  scale_color_gradient(low = "yellow", high = "red", na.value = NA) +
-  scale_alpha_binned() +
-  labs(x=NULL,
-       y=NULL,
-       title = "Meteorite Landings", 
-       subtitle="Color and alpha by mass") +
-  dark_theme_bw() +
-  theme_dark_opts
-
-girafe(ggobj = v2, width_svg = 13, height_svg = 10,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-```
+* Narrative: Inspired by the work of Georgios Karamanis
+* Data Source: The Smithsonian Institution
 
 
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-```{r, echo=FALSE}
-
-# ggsave(filename = "assets/meteorite-landings.svg", plot = v1, width=13, height=10)
-
-```
-
-
-# References
-## The citations and data sources used for this case
-
-Earthquake Catalog, https://earthquake.usgs.gov/earthquakes/search/  
-NOAA Satellite and Information Service, https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data?minDeaths=140000  
-Our World in Data, What were the world’s deadliest earthquakes? https://ourworldindata.org/the-worlds-deadliest-earthquakes  
-
-
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# read.bibtex(file = "./citations.bib")
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```
 

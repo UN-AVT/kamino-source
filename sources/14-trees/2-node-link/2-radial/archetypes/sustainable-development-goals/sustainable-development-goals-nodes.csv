@@ -1,0 +1,188 @@
+NID,TYPE,LABEL,SYMBOL,COLOR,SOURCE,STXT
+sdg.a.res.71.313a,sdg_framework,sdg framework,sdg-wheel,#666666,a.res.71.313 annex,sdg framework
+sdg.g01,sdg_goal,no poverty,sdg-goal-1,#ea1c2c,a.res.71.313 annex,goal 1: no poverty
+sdg.g02,sdg_goal,zero hunger,sdg-goal-2,#d19f29,a.res.71.313 annex,goal 2: zero hunger
+sdg.g03,sdg_goal,good health and well-being,sdg-goal-3,#2c9a47,a.res.71.313 annex,goal 3: good health and well-being for people
+sdg.g04,sdg_goal,quality education,sdg-goal-4,#c21f33,a.res.71.313 annex,goal 4: quality education
+sdg.g05,sdg_goal,gender equality,sdg-goal-5,#ef402a,a.res.71.313 annex,goal 5: gender equality
+sdg.g06,sdg_goal,clean water and sanitation,sdg-goal-6,#00add8,a.res.71.313 annex,goal 6: clean water and sanitation
+sdg.g07,sdg_goal,affordable and clean energy,sdg-goal-7,#fdb713,a.res.71.313 annex,goal 7: affordable and clean energy
+sdg.g08,sdg_goal,decent work and economic growth,sdg-goal-8,#8f1737,a.res.71.313 annex,goal 8: decent work and economic growth
+sdg.g09,sdg_goal,"industry, innovation, and infrastructure",sdg-goal-9,#f36e24,a.res.71.313 annex,"goal 9: industry, innovation, and infrastructure"
+sdg.g10,sdg_goal,reducing inequalities,sdg-goal-10,#e01a83,a.res.71.313 annex,goal 10: reducing inequalities
+sdg.g11,sdg_goal,sustainable cities and communities,sdg-goal-11,#f99d25,a.res.71.313 annex,goal 11: sustainable cities and communities
+sdg.g12,sdg_goal,responsible consumption and production,sdg-goal-12,#cd8c2a,a.res.71.313 annex,goal 12: responsible consumption and production
+sdg.g13,sdg_goal,climate action,sdg-goal-13,#48773d,a.res.71.313 annex,goal 13: climate action
+sdg.g14,sdg_goal,life below water,sdg-goal-14,#007dbb,a.res.71.313 annex,goal 14: life below water
+sdg.g15,sdg_goal,life on land,sdg-goal-15,#40ae49,a.res.71.313 annex,goal 15: life on land
+sdg.g16,sdg_goal,"peace, justice and strong institutions",sdg-goal-16,#00558a,a.res.71.313 annex,"goal 16: peace, justice and strong institutions"
+sdg.g17,sdg_goal,partnerships for the goals,sdg-goal-17,#1a3668,a.res.71.313 annex,goal 17: partnerships for the goals
+sdg.g01.t0101,sdg_target,eradicate extreme poverty,sdg_target,#ea1c2c,a.res.71.313 annex,1.1
+sdg.g01.t0102,sdg_target,reduce living in poverty,sdg_target,#ea1c2c,a.res.71.313 annex,1.2
+sdg.g01.t0103,sdg_target,social protection systems,sdg_target,#ea1c2c,a.res.71.313 annex,1.3
+sdg.g01.t0104,sdg_target,equal rights to economic resources,sdg_target,#ea1c2c,a.res.71.313 annex,1.4
+sdg.g01.t0105,sdg_target,climate-related events and disasters,sdg_target,#ea1c2c,a.res.71.313 annex,1.5
+sdg.g01.t010a,sdg_target,mobilization of resources,sdg_target,#ea1c2c,a.res.71.313 annex,1.a
+sdg.g01.t010b,sdg_target,policy frameworks,sdg_target,#ea1c2c,a.res.71.313 annex,1.b
+sdg.g02.t0201,sdg_target,end hunger,sdg_target,#d19f29,a.res.71.313 annex,2.1
+sdg.g02.t0202,sdg_target,end malnutrition,sdg_target,#d19f29,a.res.71.313 annex,2.2
+sdg.g02.t0203,sdg_target,agricultural productivity,sdg_target,#d19f29,a.res.71.313 annex,2.3
+sdg.g02.t0204,sdg_target,sustainable food production,sdg_target,#d19f29,a.res.71.313 annex,2.4
+sdg.g02.t0205,sdg_target,genetic diversity of agriculture,sdg_target,#d19f29,a.res.71.313 annex,2.5
+sdg.g02.t020a,sdg_target,investment in rural infrastructure,sdg_target,#d19f29,a.res.71.313 annex,2.a
+sdg.g02.t020b,sdg_target,world agricultural markets,sdg_target,#d19f29,a.res.71.313 annex,2.b
+sdg.g02.t020c,sdg_target,food commodity markets,sdg_target,#d19f29,a.res.71.313 annex,2.c
+sdg.g03.t0301,sdg_target,global maternal mortality,sdg_target,#2c9a47,a.res.71.313 annex,3.1
+sdg.g03.t0302,sdg_target,preventable deaths of under 5,sdg_target,#2c9a47,a.res.71.313 annex,3.2
+sdg.g03.t0303,sdg_target,water-borne and communicable diseases,sdg_target,#2c9a47,a.res.71.313 annex,3.3
+sdg.g03.t0304,sdg_target,premature mortality from disease,sdg_target,#2c9a47,a.res.71.313 annex,3.4
+sdg.g03.t0305,sdg_target,substance abuse,sdg_target,#2c9a47,a.res.71.313 annex,3.5
+sdg.g03.t0306,sdg_target,road traffic accidents,sdg_target,#2c9a47,a.res.71.313 annex,3.6
+sdg.g03.t0307,sdg_target,reproductive health,sdg_target,#2c9a47,a.res.71.313 annex,3.7
+sdg.g03.t0308,sdg_target,universal health coverage,sdg_target,#2c9a47,a.res.71.313 annex,3.8
+sdg.g03.t0309,sdg_target,hazardous chemicals and pollution,sdg_target,#2c9a47,a.res.71.313 annex,3.9
+sdg.g03.t030a,sdg_target,tobacco control,sdg_target,#2c9a47,a.res.71.313 annex,3.a
+sdg.g03.t030b,sdg_target,vaccines and medicines,sdg_target,#2c9a47,a.res.71.313 annex,3.b
+sdg.g03.t030c,sdg_target,health financing and recruitment,sdg_target,#2c9a47,a.res.71.313 annex,3.c
+sdg.g03.t030d,sdg_target,mgt of global health risks,sdg_target,#2c9a47,a.res.71.313 annex,3.d
+sdg.g04.t0401,sdg_target,equitable and quality education,sdg_target,#c21f33,a.res.71.313 annex,4.1
+sdg.g04.t0402,sdg_target,early childhood development,sdg_target,#c21f33,a.res.71.313 annex,4.2
+sdg.g04.t0403,sdg_target,affordable education,sdg_target,#c21f33,a.res.71.313 annex,4.3
+sdg.g04.t0404,sdg_target,skill development,sdg_target,#c21f33,a.res.71.313 annex,4.4
+sdg.g04.t0405,sdg_target,gender disparities,sdg_target,#c21f33,a.res.71.313 annex,4.5
+sdg.g04.t0406,sdg_target,literacy and numeracy,sdg_target,#c21f33,a.res.71.313 annex,4.6
+sdg.g04.t0407,sdg_target,education for sustainable development,sdg_target,#c21f33,a.res.71.313 annex,4.7
+sdg.g04.t040a,sdg_target,upgrade education facilities,sdg_target,#c21f33,a.res.71.313 annex,4.a
+sdg.g04.t040b,sdg_target,scholarships,sdg_target,#c21f33,a.res.71.313 annex,4.b
+sdg.g04.t040c,sdg_target,qualified teachers,sdg_target,#c21f33,a.res.71.313 annex,4.c
+sdg.g05.t0501,sdg_target,end gender discrimination,sdg_target,#ef402a,a.res.71.313 annex,5.1
+sdg.g05.t0502,sdg_target,end gender violence,sdg_target,#ef402a,a.res.71.313 annex,5.2
+sdg.g05.t0503,sdg_target,end harmful gender practices,sdg_target,#ef402a,a.res.71.313 annex,5.3
+sdg.g05.t0504,sdg_target,shared domestic responsibilities,sdg_target,#ef402a,a.res.71.313 annex,5.4
+sdg.g05.t0505,sdg_target,equal opportunity,sdg_target,#ef402a,a.res.71.313 annex,5.5
+sdg.g05.t0506,sdg_target,reproductive health and rights,sdg_target,#ef402a,a.res.71.313 annex,5.6
+sdg.g05.t050a,sdg_target,equal rights to economic resources,sdg_target,#ef402a,a.res.71.313 annex,5.a
+sdg.g05.t050b,sdg_target,enabling technology,sdg_target,#ef402a,a.res.71.313 annex,5.b
+sdg.g05.t050c,sdg_target,gender equality policy,sdg_target,#ef402a,a.res.71.313 annex,5.c
+sdg.g06.t0601,sdg_target,drinking water,sdg_target,#00add8,a.res.71.313 annex,6.1
+sdg.g06.t0602,sdg_target,equitable sanitation and hygiene,sdg_target,#00add8,a.res.71.313 annex,6.2
+sdg.g06.t0603,sdg_target,water quality,sdg_target,#00add8,a.res.71.313 annex,6.3
+sdg.g06.t0604,sdg_target,water-use efficiency,sdg_target,#00add8,a.res.71.313 annex,6.4
+sdg.g06.t0605,sdg_target,water resources management,sdg_target,#00add8,a.res.71.313 annex,6.5
+sdg.g06.t0606,sdg_target,water-related ecosystems,sdg_target,#00add8,a.res.71.313 annex,6.6
+sdg.g06.t060a,sdg_target,cooperation and capacity-building,sdg_target,#00add8,a.res.71.313 annex,6.a
+sdg.g06.t060b,sdg_target,water and sanitation management,sdg_target,#00add8,a.res.71.313 annex,6.b
+sdg.g07.t0701,sdg_target,energy services,sdg_target,#fdb713,a.res.71.313 annex,7.1
+sdg.g07.t0702,sdg_target,renewable energy,sdg_target,#fdb713,a.res.71.313 annex,7.2
+sdg.g07.t0703,sdg_target,energy efficiency,sdg_target,#fdb713,a.res.71.313 annex,7.3
+sdg.g07.t070a,sdg_target,energy research and tech,sdg_target,#fdb713,a.res.71.313 annex,7.a
+sdg.g07.t070b,sdg_target,infrastructure,sdg_target,#fdb713,a.res.71.313 annex,7.b
+sdg.g08.t0801,sdg_target,economic growth,sdg_target,#8f1737,a.res.71.313 annex,8.1
+sdg.g08.t0802,sdg_target,economic productivity,sdg_target,#8f1737,a.res.71.313 annex,8.2
+sdg.g08.t0803,sdg_target,development policies,sdg_target,#8f1737,a.res.71.313 annex,8.3
+sdg.g08.t0804,sdg_target,global resource efficiency,sdg_target,#8f1737,a.res.71.313 annex,8.4
+sdg.g08.t0805,sdg_target,productive employment,sdg_target,#8f1737,a.res.71.313 annex,8.5
+sdg.g08.t0806,sdg_target,youth employment,sdg_target,#8f1737,a.res.71.313 annex,8.6
+sdg.g08.t0807,sdg_target,eradicate forced labour,sdg_target,#8f1737,a.res.71.313 annex,8.7
+sdg.g08.t0808,sdg_target,labour rights,sdg_target,#8f1737,a.res.71.313 annex,8.8
+sdg.g08.t0809,sdg_target,sustainable tourism,sdg_target,#8f1737,a.res.71.313 annex,8.9
+sdg.g08.t0810,sdg_target,financial institution capacity,sdg_target,#8f1737,a.res.71.313 annex,8.1
+sdg.g08.t080a,sdg_target,aid for trade support,sdg_target,#8f1737,a.res.71.313 annex,8.a
+sdg.g08.t080b,sdg_target,youth employment,sdg_target,#8f1737,a.res.71.313 annex,8.b
+sdg.g09.t0901,sdg_target,develop infrastructure,sdg_target,#f36e24,a.res.71.313 annex,9.1
+sdg.g09.t0902,sdg_target,industrialization,sdg_target,#f36e24,a.res.71.313 annex,9.2
+sdg.g09.t0903,sdg_target,small-scale industrial,sdg_target,#f36e24,a.res.71.313 annex,9.3
+sdg.g09.t0904,sdg_target,upgrade infrastructure,sdg_target,#f36e24,a.res.71.313 annex,9.4
+sdg.g09.t0905,sdg_target,technological capabilities,sdg_target,#f36e24,a.res.71.313 annex,9.5
+sdg.g09.t090a,sdg_target,facilitate infrastructure development,sdg_target,#f36e24,a.res.71.313 annex,9.a
+sdg.g09.t090b,sdg_target,domestic technology development,sdg_target,#f36e24,a.res.71.313 annex,9.b
+sdg.g09.t090c,sdg_target,access to ict,sdg_target,#f36e24,a.res.71.313 annex,9.c
+sdg.g10.t1001,sdg_target,income growth,sdg_target,#e01a83,a.res.71.313 annex,10.1
+sdg.g10.t1002,sdg_target,"social, economic and political inclusion",sdg_target,#e01a83,a.res.71.313 annex,10.2
+sdg.g10.t1003,sdg_target,equal opportunity,sdg_target,#e01a83,a.res.71.313 annex,10.3
+sdg.g10.t1004,sdg_target,equality policies,sdg_target,#e01a83,a.res.71.313 annex,10.4
+sdg.g10.t1005,sdg_target,regulation of global financial markets,sdg_target,#e01a83,a.res.71.313 annex,10.5
+sdg.g10.t1006,sdg_target,economic representation,sdg_target,#e01a83,a.res.71.313 annex,10.6
+sdg.g10.t1007,sdg_target,migration policies,sdg_target,#e01a83,a.res.71.313 annex,10.7
+sdg.g10.t100a,sdg_target,special and differential treatment,sdg_target,#e01a83,a.res.71.313 annex,10.a
+sdg.g10.t100b,sdg_target,development assistance,sdg_target,#e01a83,a.res.71.313 annex,10.b
+sdg.g10.t100c,sdg_target,migrant remittances,sdg_target,#e01a83,a.res.71.313 annex,10.c
+sdg.g11.t1101,sdg_target,affordable housing,sdg_target,#f99d25,a.res.71.313 annex,11.1
+sdg.g11.t1102,sdg_target,transport systems,sdg_target,#f99d25,a.res.71.313 annex,11.2
+sdg.g11.t1103,sdg_target,sustainable urbanization,sdg_target,#f99d25,a.res.71.313 annex,11.3
+sdg.g11.t1104,sdg_target,cultural and natural heritage,sdg_target,#f99d25,a.res.71.313 annex,11.4
+sdg.g11.t1105,sdg_target,disaster impact,sdg_target,#f99d25,a.res.71.313 annex,11.5
+sdg.g11.t1106,sdg_target,environmental impact of cities,sdg_target,#f99d25,a.res.71.313 annex,11.6
+sdg.g11.t1107,sdg_target,green and public spaces,sdg_target,#f99d25,a.res.71.313 annex,11.7
+sdg.g11.t110a,sdg_target,urban-rural development planning,sdg_target,#f99d25,a.res.71.313 annex,11.a
+sdg.g11.t110b,sdg_target,disaster risk reduction,sdg_target,#f99d25,a.res.71.313 annex,11.b
+sdg.g11.t110c,sdg_target,buildings utilizing local materials,sdg_target,#f99d25,a.res.71.313 annex,11.c
+sdg.g12.t1201,sdg_target,sustainable consumption and production patterns,sdg_target,#cd8c2a,a.res.71.313 annex,12.1
+sdg.g12.t1202,sdg_target,sustainable management,sdg_target,#cd8c2a,a.res.71.313 annex,12.2
+sdg.g12.t1203,sdg_target,global food waste,sdg_target,#cd8c2a,a.res.71.313 annex,12.3
+sdg.g12.t1204,sdg_target,mgt of chemicals and waste,sdg_target,#cd8c2a,a.res.71.313 annex,12.4
+sdg.g12.t1205,sdg_target,reduce waste generation,sdg_target,#cd8c2a,a.res.71.313 annex,12.5
+sdg.g12.t1206,sdg_target,sustainable practices for companies,sdg_target,#cd8c2a,a.res.71.313 annex,12.6
+sdg.g12.t1207,sdg_target,public procurement practices,sdg_target,#cd8c2a,a.res.71.313 annex,12.7
+sdg.g12.t1208,sdg_target,harmony with nature,sdg_target,#cd8c2a,a.res.71.313 annex,12.8
+sdg.g12.t120a,sdg_target,sustainable patterns,sdg_target,#cd8c2a,a.res.71.313 annex,12.a
+sdg.g12.t120b,sdg_target,sustainable tourism,sdg_target,#cd8c2a,a.res.71.313 annex,12.b
+sdg.g12.t120c,sdg_target,fossil-fuel subsidies,sdg_target,#cd8c2a,a.res.71.313 annex,12.c
+sdg.g13.t1301,sdg_target,climate-related hazards,sdg_target,#48773d,a.res.71.313 annex,13.1
+sdg.g13.t1302,sdg_target,climate change measures,sdg_target,#48773d,a.res.71.313 annex,13.2
+sdg.g13.t1303,sdg_target,climate change education,sdg_target,#48773d,a.res.71.313 annex,13.3
+sdg.g13.t130a,sdg_target,unfccc,sdg_target,#48773d,a.res.71.313 annex,13.a
+sdg.g13.t130b,sdg_target,climate change-related planning and mgt,sdg_target,#48773d,a.res.71.313 annex,13.b
+sdg.g14.t1401,sdg_target,marine pollution,sdg_target,#007dbb,a.res.71.313 annex,14.1
+sdg.g14.t1402,sdg_target,marine and coastal ecosystems,sdg_target,#007dbb,a.res.71.313 annex,14.2
+sdg.g14.t1403,sdg_target,ocean acidification,sdg_target,#007dbb,a.res.71.313 annex,14.3
+sdg.g14.t1404,sdg_target,harvesting and overfishing,sdg_target,#007dbb,a.res.71.313 annex,14.4
+sdg.g14.t1405,sdg_target,coastal and marine areas,sdg_target,#007dbb,a.res.71.313 annex,14.5
+sdg.g14.t1406,sdg_target,fisheries subsidies,sdg_target,#007dbb,a.res.71.313 annex,14.6
+sdg.g14.t1407,sdg_target,"mgt of fisheries, aquaculture and tourism",sdg_target,#007dbb,a.res.71.313 annex,14.7
+sdg.g14.t140a,sdg_target,transfer marine technology,sdg_target,#007dbb,a.res.71.313 annex,14.a
+sdg.g14.t140b,sdg_target,marine resources and markets,sdg_target,#007dbb,a.res.71.313 annex,14.b
+sdg.g14.t140c,sdg_target,use of oceans,sdg_target,#007dbb,a.res.71.313 annex,14.c
+sdg.g15.t1501,sdg_target,terrestrial and inland freshwater ecosystems,sdg_target,#40ae49,a.res.71.313 annex,15.1
+sdg.g15.t1502,sdg_target,forests,sdg_target,#40ae49,a.res.71.313 annex,15.2
+sdg.g15.t1503,sdg_target,desertification,sdg_target,#40ae49,a.res.71.313 annex,15.3
+sdg.g15.t1504,sdg_target,mountain ecosystems,sdg_target,#40ae49,a.res.71.313 annex,15.4
+sdg.g15.t1505,sdg_target,natural habitats,sdg_target,#40ae49,a.res.71.313 annex,15.5
+sdg.g15.t1506,sdg_target,genetic resources,sdg_target,#40ae49,a.res.71.313 annex,15.6
+sdg.g15.t1507,sdg_target,poaching and trafficking,sdg_target,#40ae49,a.res.71.313 annex,15.7
+sdg.g15.t1508,sdg_target,invasive alien species,sdg_target,#40ae49,a.res.71.313 annex,15.8
+sdg.g15.t1509,sdg_target,biodiversity,sdg_target,#40ae49,a.res.71.313 annex,15.9
+sdg.g15.t150a,sdg_target,financial resources,sdg_target,#40ae49,a.res.71.313 annex,15.a
+sdg.g15.t150b,sdg_target,forest management,sdg_target,#40ae49,a.res.71.313 annex,15.b
+sdg.g15.t150c,sdg_target,poaching and trafficking,sdg_target,#40ae49,a.res.71.313 annex,15.c
+sdg.g16.t1601,sdg_target,violence,sdg_target,#00558a,a.res.71.313 annex,16.1
+sdg.g16.t1602,sdg_target,violence against children,sdg_target,#00558a,a.res.71.313 annex,16.2
+sdg.g16.t1603,sdg_target,equal access to justice,sdg_target,#00558a,a.res.71.313 annex,16.3
+sdg.g16.t1604,sdg_target,illicit financial and arms flows,sdg_target,#00558a,a.res.71.313 annex,16.4
+sdg.g16.t1605,sdg_target,corruption and bribery,sdg_target,#00558a,a.res.71.313 annex,16.5
+sdg.g16.t1606,sdg_target,transparent institutions,sdg_target,#00558a,a.res.71.313 annex,16.6
+sdg.g16.t1607,sdg_target,representative decision-making,sdg_target,#00558a,a.res.71.313 annex,16.7
+sdg.g16.t1608,sdg_target,global governance,sdg_target,#00558a,a.res.71.313 annex,16.8
+sdg.g16.t1609,sdg_target,legal identity,sdg_target,#00558a,a.res.71.313 annex,16.9
+sdg.g16.t1610,sdg_target,access to information,sdg_target,#00558a,a.res.71.313 annex,16.1
+sdg.g16.t160a,sdg_target,terrorism and crime,sdg_target,#00558a,a.res.71.313 annex,16.a
+sdg.g16.t160b,sdg_target,laws and policies for sustainable dev,sdg_target,#00558a,a.res.71.313 annex,16.b
+sdg.g17.t1701,sdg_target,domestic resource mobilization,sdg_target,#1a3668,a.res.71.313 annex,17.1
+sdg.g17.t1702,sdg_target,development assistance commitments,sdg_target,#1a3668,a.res.71.313 annex,17.2
+sdg.g17.t1703,sdg_target,financial resources,sdg_target,#1a3668,a.res.71.313 annex,17.3
+sdg.g17.t1704,sdg_target,long-term debt sustainability,sdg_target,#1a3668,a.res.71.313 annex,17.4
+sdg.g17.t1705,sdg_target,investment promotion regimes,sdg_target,#1a3668,a.res.71.313 annex,17.5
+sdg.g17.t1706,sdg_target,triangular cooperation,sdg_target,#1a3668,a.res.71.313 annex,17.6
+sdg.g17.t1707,sdg_target,environmentally sound technologies,sdg_target,#1a3668,a.res.71.313 annex,17.7
+sdg.g17.t1708,sdg_target,technology bank and science,sdg_target,#1a3668,a.res.71.313 annex,17.8
+sdg.g17.t1709,sdg_target,capacity-building,sdg_target,#1a3668,a.res.71.313 annex,17.9
+sdg.g17.t1710,sdg_target,multilateral trading system,sdg_target,#1a3668,a.res.71.313 annex,17.1
+sdg.g17.t1711,sdg_target,exports of developing countries,sdg_target,#1a3668,a.res.71.313 annex,17.11
+sdg.g17.t1712,sdg_target,duty-free and quota-free market access,sdg_target,#1a3668,a.res.71.313 annex,17.12
+sdg.g17.t1713,sdg_target,global macroeconomic stability,sdg_target,#1a3668,a.res.71.313 annex,17.13
+sdg.g17.t1714,sdg_target,policy coherence,sdg_target,#1a3668,a.res.71.313 annex,17.14
+sdg.g17.t1715,sdg_target,country policy implementation,sdg_target,#1a3668,a.res.71.313 annex,17.15
+sdg.g17.t1716,sdg_target,global partnership for sustainable development,sdg_target,#1a3668,a.res.71.313 annex,17.16
+sdg.g17.t1717,sdg_target,partnerships,sdg_target,#1a3668,a.res.71.313 annex,17.17
+sdg.g17.t1718,sdg_target,reliable data,sdg_target,#1a3668,a.res.71.313 annex,17.18
+sdg.g17.t1719,sdg_target,measurements of progress,sdg_target,#1a3668,a.res.71.313 annex,17.19

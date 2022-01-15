@@ -28,6 +28,7 @@ library(countrycode)
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
+library(flextable)
 library(ggiraph)
 
 library(showtext)
@@ -45,9 +46,9 @@ MAPS
 # Global Energy Monitor
 ## Flow Map
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Bart Van Dijk on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Amir Arabshahi on Unsplash"}
 
-masthead <- "assets/bart-van-dijk-unsplash.jpg"
+masthead <- "assets/amir-arabshahi-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
@@ -58,58 +59,79 @@ knitr::include_graphics(masthead, dpi=72)
 ***
 
 ### Ingest
-
+#### the flows
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df_tracker <- read.csv("archetypes/global-energy-monitor/global-energy-monitor.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
-head(df_tracker)
+df_tracker <- read.csv("archetypes/global-energy-monitor/global-energy-monitor.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T, fileEncoding = "utf-8")
+head(df_tracker, n=10)
 
 ```
 
 
 ### Wrangle
-#### aggregate points and flows
+#### group and aggregate flows
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 df_flows_count <- df_tracker %>% 
-  group_by(target_iso, target_lat, target_lng, source_iso, source_lat, source_lng,source,target) %>% 
-  summarise(Count = n())
+  group_by(target_iso, target_lat, target_lng, source_iso, source_lat, source_lng, source, target) %>% 
+  summarise(total_dollars = sum(dollars), total_megawatts = sum(megawatts), Count = n())
+head(df_flows_count, n=10)
 
-df_flows_count
+```
 
-df_target_count <- df_tracker %>% 
-  group_by(target_iso, target_lat, target_lng,target) %>% 
-  summarise(Count = n())
 
-# df_target_count
+### Wrangle
+#### aggregate points
 
-df_source_count <- df_tracker %>% 
-  group_by(source_iso, source_lat, source_lng,source) %>% 
-  summarise(Count = n())
 
-# df_source_count
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df_sources <- as.data.frame(df_source_count$source_iso)
-colnames(df_sources) <- c("iso")
-# df_sources
+df_source_points <- df_tracker %>% 
+  group_by(source_iso, source_lat, source_lng, source) %>% 
+  summarise(total_dollars = sum(dollars), total_megawatts = sum(megawatts))
+df_source_points$point_id <- paste0("source-", seq.int(nrow(df_source_points)))
+# df_source_points
 
-df_targets <- as.data.frame(df_target_count$target_iso)
-colnames(df_targets) <- c("iso")
-# df_targets
+df_target_points <- df_tracker %>% 
+  group_by(target_iso, target_lat, target_lng, target) %>% 
+  summarise(total_dollars = sum(dollars), total_megawatts = sum(megawatts))
+df_target_points$point_id <- paste0("target-", seq.int(nrow(df_target_points)))
+# df_target_points
 
-# Source for choropleth
-df_countries <- rbind(df_sources, df_targets)
-df_countries$color <- 1
-df_countries$iso <- countrycode(df_countries$iso, origin = 'iso2c', destination = 'iso3c') 
-df_countries <- df_countries[!duplicated(df_countries$iso), ]
-# df_countries
+df_project_points <- df_tracker %>% 
+  group_by(project_name, project_lat, project_lng) %>% 
+  summarise(total_dollars = sum(dollars), total_megawatts = sum(megawatts))
+df_project_points$point_id <- paste0("project-", seq.int(nrow(df_project_points)))
+df_project_points
 
 
 ```
 
+
+### Wrangle
+#### create visual variable for choropleth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+df_sources <- as.data.frame(df_source_points$source_iso)
+colnames(df_sources) <- c("iso")
+# head(df_sources, n=5)
+
+df_targets <- as.data.frame(df_target_points$target_iso)
+colnames(df_targets) <- c("iso")
+# head(df_targets, n=5)
+
+df_countries <- rbind(df_sources, df_targets)
+df_countries$color <- 1
+df_countries$iso <- countrycode(df_countries$iso, origin = 'iso2c', destination = 'iso3c') 
+df_countries <- df_countries[!duplicated(df_countries$iso), ]
+head(df_countries, n=10)
+
+```
 
 
 ### Base map
@@ -120,13 +142,10 @@ df_countries <- df_countries[!duplicated(df_countries$iso), ]
 
 # PLOT NATURAL EARTH BORDERS
 ne_world <- ne_countries(scale = "small", returnclass = "sf")
-# class(ne_world)
 # removes Antarctica
 ne_world <- filter(ne_world, iso_a3 != "ATA") 
 
-
 ```
-
 
 
 ### World map
@@ -150,51 +169,78 @@ ne_world_df$color[is.na(ne_world_df$color)] <- 0
 
 # theme parameters
 theme_opts <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "black", size = 12, family = "inconsolata"),
+  plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),
+  plot.background = element_rect(fill = "#f5f5f5"),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill = "#f5f5f5"),
+  panel.border = element_blank(),
   axis.text = element_blank(),
   axis.line = element_blank(),
   axis.ticks = element_blank(),
   axis.title = element_blank(),
-  panel.grid = element_blank(),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  panel.background = element_rect(fill = "#D6DADC"),
-  panel.border = element_blank(),
-  plot.background = element_rect(fill = "#D6DADC")
+  legend.position = "bottom",
+  legend.title = element_blank()
 )
 
+# tooltip -----
+fun_tooltip <- function(dat){
+  
+  cols <- as.data.frame(colnames(dat))
+  colnames(cols) <- "col"
+  cols <- filter(cols, col != "point_id")
+  
+  for (row in 1:nrow(dat)) {
+
+    tooltip <- NULL
+    
+    for (c in 1:nrow(cols)) {
+      tooltip <- paste0(tooltip, cols[c,"col"], ": ", dat[row, cols[c,"col"]], "\n")
+    }
+    dat[row, "tooltip"] <- tooltip
+  }
+  return(dat)
+}
+
+df_source_points <- fun_tooltip(df_source_points)
+df_target_points <- fun_tooltip(df_target_points)
+df_project_points <- fun_tooltip(df_project_points)
+# end of tooltip
+
+
 v1 <- ggplot(data = ne_world_df) +
-  geom_sf(fill=ifelse(ne_world_df$color == 1, "#F7EBE7", "#FFFFFF"), color="#A69F9D", size=0.5) +
-  geom_curve( data = df_flows_count, aes( x=source_lng, y=source_lat, xend=target_lng, yend=target_lat, size=Count, color=Count, alpha=Count  ), lineend="round", linejoin="round", curvature=0.2 ) +
-  #geom_segment( data = df_flows_count, aes( x=source_lng, y=source_lat, xend=target_lng, yend=target_lat, size=Count, color=Count, alpha=Count  ), lineend="round", linejoin="round" ) +
-  geom_point_interactive( data = df_source_count, aes(x=source_lng, y=source_lat, size=Count,
-    tooltip = source, data_id = source_iso), shape=21, color="#d8031c", fill="#d8031c", stroke=1, alpha=0.9) +
-  geom_point_interactive( data = df_target_count, aes(x=target_lng, y=target_lat, size=Count,
-    tooltip = target, data_id = target_iso), shape=21, color="#6497bf", fill="#6497bf", stroke=1, alpha=0.9) +
-  scale_size_continuous(range=c(1,15), guide="none") +
-  scale_alpha_continuous(range=c(0.4, 0.7), guide="none") +
-  scale_fill_gradient(low = "#939A99", high = "#333A41", guide="none") + 
-  scale_color_gradient(low = "#939A99", high = "#333A41", guide="none") + 
-  theme_bw() +
+  geom_sf(fill=ifelse(ne_world_df$color == 1, "#E0E0E0", "#FFFFFF"), color="#BDBDBD", size=0.5) +
+  geom_point_interactive( data = df_project_points, aes(x=project_lng, y=project_lat,
+    tooltip = tooltip, data_id = point_id), shape=21, 
+    size = 1.5, color="black", fill="black", stroke=1, alpha=0.5) +
+  geom_curve( data = df_flows_count, 
+    aes( x=source_lng, y=source_lat, xend=target_lng, yend=target_lat, alpha=total_dollars ), 
+    size=0.75, color = "black", alpha = 0.2, lineend="round", linejoin="round", curvature = 0.1 ) +
+  geom_point_interactive( data = df_source_points, aes(x=source_lng, y=source_lat, size=total_megawatts,
+    tooltip = tooltip, data_id = point_id), 
+    shape=21, color="#FF9800", fill=NA, stroke=1.5) +
+  geom_point_interactive( data = df_target_points, aes(x=target_lng, y=target_lat, size=total_megawatts,
+    tooltip = tooltip, data_id = point_id), 
+    shape=21, color="#455A64", fill=NA, stroke=0.75) +
+  scale_size_continuous(range=c(2,15), guide="none") +
   labs(x=NULL,
        y=NULL,
        title = "Global Coal Public Finance Flows", 
        subtitle=NULL,
        caption="Global Energy Monitor") +
+  theme_bw() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 16, height_svg = 7,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+girafe(ggobj = v1, width_svg = 16, height_svg = 7.15,
+       options = list(
+         opts_sizing(rescale = TRUE, width = 1.0),
+         opts_hover(css = "stroke-width:4;")
+       )
 )
-
-```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-ggsave(filename = "outputs/global-energy-monitor-fs.svg", plot = v1, width=16, height=7)
 
 ```
 

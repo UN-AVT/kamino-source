@@ -1,0 +1,125 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(data.table)
+library(knitr)
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+COLLECTIONS  
+</div>
+
+# Data Features
+## What are they?
+
+> It is a capital mistake to theorize before one has data...\
+--- Sherlock Holmes, A Study in Scarlett (Arthur Conan Doyle)\
+
+Features are __attributes__ that __describe__ the data object.  In tabular datasets, features are organized by fields or columns.  Think of features as the words you would use to describe something.  __Engineering__ and __selecting__ features to support a specific analysis objective is a key activity of the process.
+
+* After ingesting a data file, most tools enable you to __inspect__ the __columns__ and __feature types__
+* Use wrangler methods to profile features and assess their __influence__ in describing the object
+* Use wrangler methods to __enrich__ a data set by adding new features
+* Apply analytic methods to generate __measures__ and additional features
+* Design views to help explore the __impact__ each feature has contributing to the __quality__ of the data
+
+***
+
+# Selecting Features
+
+Feature selection is the thought process to focus on the data attributes that are __essential__ to the __analytic question__.  This includes not only the attributes identified for __enrichment__ (feature engineering) but also __omitting__ those that do not add __value__ to your solution.  The intended output of feature selection is having a data source that is "lean" and __fit for the purpose__.
+
+```{r}
+
+```
+
+
+# Engineering Features
+
+Feature engineering is the __addition__ of attributes to a dataset to __improve__ the quality, accuracy, description, and unique identification of data objects.  This requires a detailed assessment of feature __gaps__ that depreciate the full meaning of the data.  The concept is basically to identify new features needed to better __support__ the analytic __question__.
+
+* A unique identifier
+* A dimension
+* A measure
+* A classification
+* A descriptor
+* A reference
+
+```{r}
+
+```
+
+
+# Evaluating Feature Impact
+
+Feature impact identifies which attributes in a dataset have the greatest __effect__ on the outcomes.  Several methods may be used to measure which features are __meaningful__ to improving the accuracy and depth of analysis results.  Assessing which attributes are most impacting is a key input to the feature __selection__ process.
+
+* Contribute to the uniqueness of the data
+* Provide enhanced accuracy to the measured values, e.g. a specific date or location.
+* Enable multi-dimensional analysis
+
+```{r}
+
+```
+
+
+# Example : Who am I?
+
+![](./assets/who-am-i.svg){height=300}
+
+
+
+
+***
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

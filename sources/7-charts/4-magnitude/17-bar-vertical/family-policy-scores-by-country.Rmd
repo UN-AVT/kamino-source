@@ -22,8 +22,15 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
 gc() #free up memory and report the memory usage.
 
-# Load needed libraries
+
 library(tidyverse)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
@@ -52,7 +59,12 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load data
-df = read.csv("./archetypes/family-policy-scores-by-country/figure-7-3.csv", header = TRUE, stringsAsFactors = TRUE, fileEncoding="UTF-8-BOM")
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "family-policy-scores-by-country/figure-7-3.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = TRUE, fileEncoding="UTF-8-BOM")
 df
 
 ```
@@ -60,7 +72,7 @@ df
 ### Plot the chart
 #### Family Integration Policy Average Scores by Country, 2014 - Figure 7.3
 
-```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=7.5}
+```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Make the plot
 v1 <- ggplot(df, aes(x=reorder(Country, -Family.Integration.Policy.Average.Scores), y=Family.Integration.Policy.Average.Scores)) +
@@ -76,8 +88,12 @@ v1 <- ggplot(df, aes(x=reorder(Country, -Family.Integration.Policy.Average.Score
   ylab("Family integration policy average scores") + # for the y axis label
   coord_cartesian(ylim=c(0, 100))
 
-# Print the plot
-v1
+
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
 
 ```
 

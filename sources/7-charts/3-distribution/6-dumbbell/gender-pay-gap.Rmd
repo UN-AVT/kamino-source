@@ -60,7 +60,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df = read.csv("archetypes/gender-pay-gap/uk-gender-pay-gap.csv", header = TRUE, stringsAsFactors = FALSE) # read text file
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "gender-pay-gap/uk-gender-pay-gap.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE) # read text file
 df
 
 ```
@@ -83,7 +87,7 @@ head(df_wrangle)
 ### View, chart
 #### segment and points 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -130,23 +134,8 @@ v1<-ggplot(df_wrangle) +
   theme_minimal() + 
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1080/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 15,
        options = list(opts_sizing(rescale = TRUE, width = 0.95)))
-
-```
-
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/gender-pay-gap-fs.svg", plot = v1, width=720/72, height=1080/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/gender-pay-gap-sm.svg", plot = v1, width=2.25, height=2.25)
 
 ```
 

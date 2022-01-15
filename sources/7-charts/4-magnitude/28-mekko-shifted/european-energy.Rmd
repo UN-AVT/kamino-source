@@ -62,7 +62,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read_csv("archetypes/energy-consumption-by-country/energy.csv")
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "energy-consumption-by-country/energy.csv"
+url <- paste0(url_root, url_file)
+
+df <- read_csv(url)
 df
 
 ```
@@ -182,7 +186,7 @@ df_join
 #### visual variables mapped
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 theme_opts <- theme(
   text = element_text(family = "inconsolata", size = 16), 
@@ -243,7 +247,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 #### with annotations
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 offset <- 2
 

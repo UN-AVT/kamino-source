@@ -61,8 +61,14 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load data
-df_ingest <- read.csv("archetypes/usda-food-data/usda-food-data-src.csv", header = TRUE, stringsAsFactors = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "usda-food-data/usda-food-data-src.csv"
+url <- paste0(url_root, url_file)
+
+df_ingest <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df_ingest
+
+
 
 ```
 
@@ -112,7 +118,7 @@ df_wrangle
 #### position, shape, color, size
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 theme_opts <- theme(
   text = element_text(family = "inconsolata"), 
@@ -170,7 +176,7 @@ df_rescale
 #### with range rescaling
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v2 <- ggtern(data=df_rescale, aes(x=protein, y=carbohydrates, z=fat)) + 
   geom_point(aes(fill = calories, size = calories), shape = 21, color = "#ffffff", alpha = 0.7) + 
@@ -189,20 +195,6 @@ v2 <- ggtern(data=df_rescale, aes(x=protein, y=carbohydrates, z=fat)) +
 girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/usda-food-data-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# without annotations
-ggsave(filename = "assets/usda-food-data-sm.svg", plot = v1, width=4, height=2.25)
 
 ```
 

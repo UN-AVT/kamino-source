@@ -1,0 +1,71 @@
+from,to,edge_type
+Socar DC Heavy Crane,Heavy Crane FZE,Shareholding
+Marine Trading FZE,Union Grand Energy Middle East LLC,Shareholding
+Chemstar Energy FZE,Union Grand Energy Middle East LLC,Shareholding
+Heavy Crane FZE,Union Grand Energy Middle East LLC,Shareholding
+Socar Gulf GJSC,Gulf Geophysic FZE,Shareholding
+Gulf Geophysic FZE,Union Grand Energy Middle East LLC,Shareholding
+Bahar Energy,Rafi Oil FZE / Novatis Oil FZE,Shareholding
+Rafi Oil FZE / Novatis Oil FZE,Union Grand Energy Middle East LLC,Shareholding
+Surakhani Oil Operating Company SA,Rafi Oil FZE / Novatis Oil FZE,Shareholding
+Socar Petroleum SA,Becrux Investment & Finance BV,Shareholding
+Socar Energy SRL,Becrux Investment & Finance BV,Shareholding
+Socar Turkey; Petrol Enerji; Dagitim Sanayi ve Ticaret AS,Agena Petroleum Holding BV,Shareholding
+Socar Gas BV,Heritage-UGE Cooperative,Shareholding
+Becrux Investment & Finance BV,Heritage-UGE Cooperative,Shareholding
+Agena Petroleum Holding BV,Heritage-UGE Cooperative,Shareholding
+Heritage-UGE Cooperative,Heritage General Trading FZE / Eventus General Trading FZE,Shareholding
+Union Grand Energy Middle East LLC,Heritage General Trading FZE / Eventus General Trading FZE,Shareholding
+Caspian Drilling Company,Heritage General Trading FZE / Eventus General Trading FZE,Shareholding
+AzTurGaz,Heritage General Trading FZE / Eventus General Trading FZE,Shareholding
+Socar Gas Supply,Heritage General Trading FZE / Eventus General Trading FZE,Shareholding
+Socar Georgia Investments,Heritage General Trading FZE / Eventus General Trading FZE,Shareholding
+Socar Georgia Petroleum Ltd,Socar Georgia,Shareholding
+International Railway Expedition,Socar Georgia,Shareholding
+Kulevi Oil Terminal,Socar Georgia,Shareholding
+Socar Georgia Security Ltd,Socar Georgia,Shareholding
+Socar Georgia Gas Ltd,Socar Georgia,Shareholding
+Socar Black Sea SA,Supra Holdings Limited / Socar Trading Holding Limited,Shareholding
+Socar Resources Ltd (Formally Operational Global Concept Ltd),Supra Holdings Limited / Socar Trading Holding Limited,Shareholding
+Socar Trading S&L DMCC,Supra Holdings Limited / Socar Trading Holding Limited,Shareholding
+Socar Trading SA,Supra Holdings Limited / Socar Trading Holding Limited,Shareholding
+Supra Investments,Supra Holdings Limited / Socar Trading Holding Limited,Shareholding
+Socar Trading Singapore PTE Ltd,Socar Trading SA,Shareholding
+ST Overseas DMCC Dubai,Socar Trading SA,Shareholding
+Socar Aurora Fujaireh Terminal FZE,Socar Aurora Terminals SA,Shareholding
+Socar Aurora Terminals SA,Supra Investments,Shareholding
+Union Grand Energy Middle East LLC,Union Grand Energy PTE Ltd,Shareholding
+Anar Aliyev,Union Grand Energy PTE Ltd,Shareholding
+Anar Aliyev,RSR Holding PTE Ltd,Shareholding
+Relz Faktor AG LCC,RSR Holding PTE Ltd,Shareholding
+Gulf Drilling Supply FZE,RSR Holding PTE Ltd,Shareholding
+Socar-Rodan,Relz Faktor AG LCC,Shareholding
+Azlab LCC,Gulf Drilling Supply FZE,Shareholding
+Anar Aliyev,Socar Turkey Gaz Dagitim Sanayi Ve Tickaret Anonim Sirketi,Directorship
+Anar Aliyev,Sumato Energy Group,Other
+Trans Marine United Corporation,Union Grand Energy PTE Ltd,Shareholding
+Caspian Catering Services,Trans Marine United Corporation,Shareholding
+Caspian Marine Services (UK) Limited,Trans Marine United Corporation,Shareholding
+Caspian Ship Construction & Repair,Trans Marine United Corporation,Shareholding
+Caspian Marine Construction,Trans Marine United Corporation,Shareholding
+Socar-CMS,Caspian Marine Services (UK) Limited,Shareholding
+Socar CSCR MMC,Caspian Ship Construction & Repair,Shareholding
+Azerfeis,Caspian Marine Construction,Shareholding
+Caspian Shipyard Company LLC,Azerfeis,Shareholding
+Lancer Services SA,Union Grand Energy PTE Ltd,Shareholding
+Baki AG Sheher Office Building LLC,Union Grand Energy PTE Ltd,Shareholding
+A.P. International LLC,Union Grand Energy PTE Ltd,Shareholding
+Azgemeft LLC,Union Grand Energy PTE Ltd,Shareholding
+Socar-UGE,Union Grand Energy PTE Ltd,Shareholding
+UGE Asia PTE Ltd,Union Grand Energy PTE Ltd,Shareholding
+Core Energy FZE,Union Grand Energy PTE Ltd,Shareholding
+EKOL Engineering Services,Lancer Services SA,Shareholding
+Socar Petroleum CJSC,A.P. International LLC,Shareholding
+Neftchala Football Team,Socar Petroleum CJSC,Shareholding
+Socar Petroleum CJSC,Neftci Apartment Building,Shareholding
+Neftci Apartment Building,Azgemeft LLC,Shareholding
+Neftci Apartment Building,Socar-UGE,Shareholding
+UGE Lancer PTE Ltd,UGE Asia PTE Ltd,Shareholding
+Balakhani Operating Company Ltd,UGE Lancer PTE Ltd,Shareholding
+Socar Georgia,Heritage General Trading FZE / Eventus General Trading FZE,Shareholding
+Supra Holdings Limited / Socar Trading Holding Limited,Heritage General Trading FZE / Eventus General Trading FZE,Shareholding

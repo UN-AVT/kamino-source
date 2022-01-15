@@ -1,0 +1,277 @@
+---
+pagetitle: "Nuclear Supply Chains"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggraph)
+library(igraph)
+library(tidygraph)
+library(graphlayouts)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+ TREES  
+</div>
+
+# Nuclear Supply Chains
+## Cartesian tree 
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Jr Korpa on Unsplash"}
+
+masthead <- "assets/jr-korpa-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> It's clear that there's a lot of human wood out there for this coronavirus forest fire to burn...\
+--- Michael Thomas Osterholm\
+
+***
+
+
+
+### Ingest
+#### the tree of mutations
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Tree data
+df_tree_path <- "archetypes/covid-19-mutations/covid-19-mutations-tree.csv"
+df_tree <- read.csv(df_tree_path, header = TRUE, stringsAsFactors = FALSE)
+df_tree
+
+```
+
+
+### Wrangle
+#### create graph structure
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# transform to graph data structure
+df_graph <- graph_from_data_frame( df_tree )
+df_graph_directed <- graph_from_data_frame( df_tree, directed = TRUE )
+df_graph_undirected <- graph_from_data_frame( df_tree, directed = FALSE )
+
+# to view results as data frame
+df_graph_view <-  get.data.frame(df_graph, what= "both" ) # as.data.frame(get.edgelist(df_graph))
+# df_graph_view
+
+```
+
+
+### Analytics
+#### compute layouts
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+
+# igraph layouts
+
+# bipartite <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
+circle <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
+dh <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
+drl <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
+fr <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
+gem <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
+graphopt <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
+grid <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
+kk <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
+lgl <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
+mds <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
+nicely <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
+sphere <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
+star <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
+sugiyama <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+
+# ggraph layouts
+
+backbone <- create_layout(df_graph_undirected, layout = 'backbone')
+
+centrality_bc <- betweenness(df_graph_directed)
+centrality_cc <- closeness(df_graph_directed)
+centrality <- create_layout(df_graph_undirected, layout = 'centrality', centrality = centrality_bc)
+
+circlepack <- create_layout(df_graph_directed, layout = 'circlepack')
+dendrogram <- create_layout(df_graph_directed, layout = 'dendrogram')
+eigen <- create_layout(df_graph, layout = 'eigen', type = "laplacian", eigenvector = "smallest")
+
+focus <- create_layout(df_graph_directed, layout = 'focus', focus = 1)
+
+# hive <- create_layout(df_graph, layout = 'hive', axis = friends, sort.by = degree)
+
+linear <- create_layout(df_graph, layout = 'linear')
+matrix <- create_layout(df_graph, layout = 'matrix')
+partition <- create_layout(df_graph_directed, layout = 'partition')
+
+pmds_pivots <- 3
+pmds <- create_layout(df_graph, layout = 'pmds', pivots = pmds_pivots)
+
+stress <- create_layout(df_graph, layout = 'stress')
+sunburst <- create_layout(df_graph_directed, layout = 'partition', circular = TRUE)
+treemap <- create_layout(df_graph_directed, layout = 'treemap')
+
+# df_unrooted <- df_graph_undirected %>%  activate(edges) %>%  mutate(length = runif(n()))
+unrooted <- create_layout(df_graph_undirected, layout = 'unrooted' )
+
+```
+
+
+### Plot
+#### dendrogram
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.margin = unit(c(1.5,1,1,1), "in"),
+    legend.position='none'
+  )
+
+category_palette <- c("Top 100" = "#FFFFFF", "LEAF" = "#FFFFFF", "Creativity" = "#E8F5E9", "Identity" = "#E3F2FD", "Knowledge" = "#F3E5F5","Leadership" = "#FCE4EC")
+
+v1 <- ggraph(df_graph, layout = dendrogram) + 
+  # geom_edge_elbow(aes(label = LABEL), angle_calc = 'along', label_dodge = unit(2.5, 'mm')) + 
+  # geom_edge_bend(aes(label = LABEL)) +
+  geom_edge_diagonal(aes(label = LABEL)) +
+  geom_node_point(size=4) +
+  geom_node_label( aes(label=name), repel = FALSE, vjust = 0.0, nudge_y = 0.1, size = 6, family = "inconsolata") +
+  # coord_fixed(clip = 'off') + 
+  theme_void() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+# pg <- ggplot_build(v1)
+# pg$data[[2]]
+# pg$data[[3]]
+
+```
+
+
+#### sugiyama
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v2 <- ggraph(df_graph, layout = sugiyama) + 
+  # geom_edge_elbow(aes(label = LABEL), angle_calc = 'along', label_dodge = unit(2.5, 'mm')) + 
+  # geom_edge_bend(aes(label = LABEL)) +
+  geom_edge_diagonal(aes(label = LABEL)) +
+  geom_node_point(size=4) +
+  geom_node_label( aes(label=name), repel = FALSE, vjust = 0.0, nudge_y = 0.1, size = 6, family = "inconsolata") +
+  # coord_fixed(clip = 'off') + 
+  theme_void() +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+#### gem
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v3 <- ggraph(df_graph, layout = gem) + 
+  # geom_edge_elbow(aes(label = LABEL), angle_calc = 'along', label_dodge = unit(2.5, 'mm')) + 
+  # geom_edge_bend(aes(label = LABEL)) +
+  geom_edge_diagonal(aes(label = LABEL)) +
+  geom_node_point(size=4) +
+  geom_node_label( aes(label=name), repel = FALSE, vjust = 0.0, nudge_y = 0.1, size = 6, family = "inconsolata") +
+  # coord_fixed(clip = 'off') + 
+  theme_void() +
+  theme_opts
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+#### unrooted
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+v4 <- ggraph(df_graph, layout = unrooted) + 
+  # geom_edge_elbow(aes(label = LABEL), angle_calc = 'along', label_dodge = unit(2.5, 'mm')) + 
+  # geom_edge_bend(aes(label = LABEL)) +
+  geom_edge_diagonal(aes(label = LABEL)) +
+  geom_node_point(size=4) +
+  geom_node_label( aes(label=name), repel = FALSE, vjust = 0.0, nudge_y = 0.1, size = 6, family = "inconsolata") +
+  # coord_fixed(clip = 'off') + 
+  theme_void() +
+  theme_opts
+
+girafe(ggobj = v4, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: 
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

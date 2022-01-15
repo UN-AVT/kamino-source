@@ -1,0 +1,308 @@
+---
+pagetitle: "Volcanos"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(colorspace)
+library(rnaturalearth)
+library(sf)
+library(cowplot)
+library(patchwork)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Volcanos
+## zone dispersion map
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Iswanto Arif on Unsplash"}
+
+masthead <- "assets/iswanto-arif-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> This ground is hot enough to cook the Sunday roast!\
+--- John Seach (Volcanologist) just before his boots melted on the hot ground. Lopevi Volcano 2000.\
+
+
+***
+
+### Ingest
+#### volcanos
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_volcanos <- read.csv("archetypes/volcanos/volcanos.csv", header = TRUE)
+head(df_volcanos, n=10)
+
+```
+
+
+### Ingest
+#### eruptions
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_eruptions <- read.csv("archetypes/volcanos/eruptions.csv", header = TRUE)
+head(df_eruptions, n=10)
+
+```
+
+
+### Wrangle
+#### filter for distinct
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+df_eruptions <-
+  df_eruptions %>%
+  filter(volcano_number %in% unique(df_volcanos$volcano_number))
+
+```
+
+
+### Base Map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+# PLOT NATURAL EARTH BORDERS
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+
+```
+
+
+### Plates and Ring of Fire Maps
+#### geojson
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+plates <- st_read("archetypes/volcanos/PB2002_plates.geojson")
+rof <- st_read("archetypes/volcanos/ring-of-fire.geojson")
+
+```
+
+
+### Wrangle
+#### wrap dateline for ring of fire geometry
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-show'}
+
+rof_dt <- rof %>% 
+  st_cast("MULTILINESTRING") %>% 
+  st_cast("LINESTRING") %>% 
+  st_wrap_dateline(options = c("WRAPDATELINE=YES", "DATELINEOFFSET=180")) %>% 
+  st_union() %>% 
+  st_cast("POLYGON")
+
+```
+
+
+### View
+#### longitudinal density of volcanos
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata", hjust = 0.5),
+    plot.subtitle = element_text(color = "black", size = 12, family = "inconsolata", hjust = 0.5),
+    plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),    
+    plot.margin = margin(10, 10, 10, 10),
+    plot.background = element_rect(fill = "#ffffff", color = "#111111"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background=element_rect(fill="#ffffff", colour=NA),
+    panel.border = element_blank(),
+    axis.text = element_blank(),
+    axis.line = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "none"
+)
+
+v <- ggplot(data = df_volcanos, aes(longitude)) +
+    geom_density(
+      color = colorspace::darken("#546E7A", .2),
+      fill = "#546E7A",
+      alpha = .6, size = .3,  bw = .5
+    ) +
+    ggforce::geom_mark_circle(
+      aes(
+        x = 140,
+        y = .019,
+        label = "Highest number of volcanos   "
+      ),
+      color = "transparent",
+      label.fill = "transparent",
+      label.colour = colorspace::darken("#546E7A", .25),
+      label.family = "inconsolata",
+      label.fontsize = 9,
+      label.buffer = unit(9, "mm"),
+      con.colour = colorspace::darken("#546E7A", .25),
+      con.size = .4,
+      con.cap = unit(.1, "mm"),
+      expand = unit(1, "mm")
+    ) +
+    scale_x_continuous( expand = c(0, 0), limits = c(-180, 180)) +
+    scale_y_continuous( expand = c(0, 0), limits = c(NA, 0.031) ) +
+    theme_bw() +
+    theme_opts
+
+girafe(ggobj = v, width_svg = 16, height_svg = 3,
+       options = list(opts_sizing(rescale = TRUE, width = 0.65)))
+
+```
+
+
+### View
+#### longitudinal density of eruptions
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+e <-
+  df_eruptions %>%
+  ggplot(aes(longitude)) +
+    geom_density(
+      color = colorspace::darken("#cf1020", .2),
+      fill = "#cf1020",
+      alpha = .6, size = .3, bw = .5
+    ) +
+    ggforce::geom_mark_circle(
+      aes(
+        x = 138.8,
+        y = .029,
+        label = "Highest number of eruptions   "
+      ),
+      color = "transparent",
+      label.fill = "transparent",
+      label.colour = colorspace::darken("#cf1020", .25),
+      label.family = "inconsolata",
+      label.fontsize = 9,
+      label.margin = margin(50, 2, 2, 2, "mm"),
+      con.colour = colorspace::darken("#cf1020", .25),
+      con.size = .4,
+      con.cap = unit(.3, "mm"),
+      expand = unit(1, "mm")
+    ) +
+    scale_x_continuous( expand = c(0, 0), limits = c(-180, 180) ) +
+    scale_y_reverse( expand = c(0, 0), limits = c(.037, NA) ) +
+    theme_bw() +
+    theme_opts
+
+girafe(ggobj = e, width_svg = 16, height_svg = 3,
+       options = list(opts_sizing(rescale = TRUE, width = 0.65)))
+
+```
+
+
+### View
+#### plotting world borders, plates, ring of fire, and points
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+m <-
+  ggplot(ne_world) +
+    geom_sf( color = "#e5e5e5", fill = "#fefefe" ) +
+    geom_sf(data = rof_dt, color="transparent", fill = "red", size=1.0, alpha = 0.2) +
+    geom_sf(data = plates, color="#aaaaaa", fill = transparent_fill, size=1.0) +
+    geom_point(data = df_eruptions, aes(x = longitude, y = latitude), shape = 21, fill = "white", color = "red", size = 5.0) +
+    geom_point(data = df_volcanos, aes(x = longitude, y = latitude), size = 1.0, color = "#546E7A") +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0, 0)) +
+    coord_sf(xlim  = c(-180, 180) ) +
+    labs(
+      caption = NULL
+    ) +
+    theme_bw() +
+    theme_opts
+
+girafe(ggobj = m, width_svg = 16, height_svg = 8,
+       options = list(opts_sizing(rescale = TRUE, width = 0.65)))
+
+```
+
+
+### View
+#### as a plot grid with aligned longitude axis
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+
+girafe( ggobj = plot_grid(v, m, e, ncol = 1, align = "v", axis = "b", rel_heights = c(1, 2.75, 1)), 
+        width_svg = 16, height_svg = 14,
+        options = list(opts_sizing(rescale = TRUE, width = 0.65)))
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+
+* Data by The Smithsonian Institution
+* Visualization inspired by the work of Cédric Scherer
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

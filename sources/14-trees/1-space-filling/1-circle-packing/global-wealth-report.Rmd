@@ -1,0 +1,201 @@
+---
+pagetitle: "Global wealth report"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggraph)
+library(igraph)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TREES  
+</div>
+
+# Global wealth report
+## Circle packing
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Aleksey Malinovski on Unsplash"}
+
+masthead <- "assets/aleksey-malinovski-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Everyone wants to ride with you in the limo,\
+  but what you want is someone who will take the bus with you when the limo breaks down...\
+--- Oprah Winfrey\
+
+***
+
+Published by the Credit Suisse Research Institute, the Global wealth report analyzes the household wealth of 5.2 billion people across the globe.
+
+### Ingest the data
+#### country, region, wealth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_file_path <- "archetypes/global-wealth-report/global-wealth-report.csv"
+df = read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+
+```
+
+
+### Wrangle the data
+#### Create node and edge tables
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_wrangle <- df
+df_wrangle$un_region <- countrycode(df_wrangle$country, origin='country.name', destination='un.region.name')
+df_wrangle <- filter(df_wrangle, wealth_b > 0 )
+df_wrangle <- filter(df_wrangle, nchar(un_region) > 0 )
+df_wrangle
+
+# Unique edges
+df_edges <- aggregate(x = df_wrangle$wealth_b,
+          by = list(df_wrangle$country, df_wrangle$un_region),
+          FUN = sum)
+colnames(df_edges) <- c("TO","FROM", "SIZE")
+df_edges <- df_edges %>% select(FROM, TO)
+
+# Root nodes
+df_nodes_1 <- aggregate(x = df_wrangle$wealth_b,
+          by = list(df_wrangle$un_region),
+          FUN = sum)
+colnames(df_nodes_1) <- c("NODE", "SIZE")
+df_nodes_1$COLOR <- df_nodes_1$NODE
+
+df_nodes_2 <- aggregate(x = df_wrangle$wealth_b,
+          by = list(df_wrangle$country, df_wrangle$un_region),
+          FUN = sum)
+
+colnames(df_nodes_2) <- c("NODE", "COLOR", "SIZE")
+
+# Combine
+df_nodes <- rbind(df_nodes_1, df_nodes_2)
+
+# Transform to graph data structure
+df_graph <- graph_from_data_frame( df_edges, vertices = df_nodes )
+
+```
+
+
+#### edge table
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_edges
+
+```
+
+<p></p>
+#### node table
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_nodes
+
+```
+
+
+### Plot
+#### circle pack layout with size, color, and labels (at root level)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    legend.position='none'
+  )
+
+region_pal <- c("Africa" = "#E57373", 
+               "Americas" = "#80CBC4", 
+               "Asia" = "#FDD835", 
+               "Europe" = "#66BB6A",
+               "Oceania" = "#FFB300")
+
+n <- 10
+top_x <- head(arrange(df_nodes_2, desc(SIZE)), n = n)
+top <- top_x$SIZE[[1]]
+bottom <- top_x$SIZE[[n]]
+
+v1 <- ggraph(df_graph, layout = 'circlepack', weight = SIZE) + 
+  geom_node_circle(aes(fill = COLOR)) + 
+  scale_fill_manual(values = region_pal) +
+  geom_node_text( aes(label=name, filter=SIZE >= bottom & SIZE <= top), size = 4, color = "#ffffff", family = "inconsolata", face="bold") +
+  geom_node_label( aes(label=name, filter=depth==0), size = 6, family = "inconsolata") +
+  coord_fixed() + 
+  theme_void() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative source: How Much, All the World’s Wealth in One Visual, https://howmuch.net/articles/distribution-worlds-wealth-2019
+* Narrative source: MakeOverMonday, https://data.world/makeovermonday/2020w7-world-wealth
+* Data sources: Credit Suisse, Global Wealth Report, https://www.credit-suisse.com/about-us/en/reports-research/global-wealth-report.html
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

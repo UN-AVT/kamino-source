@@ -66,10 +66,16 @@ A study published in the the Journal of Cultural Economics, *Dining out as cultu
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load data
-df_exports <- read.csv("archetypes/world-cuisine-preferences/table-6-cuisine-net-exports-excluding-fast-food.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+
+url_file1 <- "world-cuisine-preferences/table-6-cuisine-net-exports-excluding-fast-food.csv"
+url1 <- paste0(url_root, url_file1)
+df_exports <- read.csv(url1, header = TRUE, stringsAsFactors = FALSE)
 df_exports
 
-df_fast_food <- read.csv("archetypes/world-cuisine-preferences/table-6-cuisine-net-exports-including-fast-food.csv", header = TRUE, stringsAsFactors = FALSE)
+url_file2 <- "world-cuisine-preferences/table-6-cuisine-net-exports-including-fast-food.csv"
+url2 <- paste0(url_root, url_file2)
+df_fast_food <- read.csv(url2, header = TRUE, stringsAsFactors = FALSE)
 df_fast_food
 
 ```
@@ -159,7 +165,7 @@ color_palette <- c("Exporter" = "#076fa1", "Importer" = "#2fc1d3")
 
 #### excluding fast food
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # Make the plot
 v1 <- ggplot( df_exports, aes( x = Net.exports, y = Country, fill = Color ) ) +
@@ -184,7 +190,7 @@ v1 <- ggplot( df_exports, aes( x = Net.exports, y = Country, fill = Color ) ) +
   theme_minimal() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
@@ -194,7 +200,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 #### including fast food
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # Make the plot
 v2 <- ggplot( df_fast_food, aes( x = Net.exports, y = Country, fill = Color ) ) +
@@ -218,23 +224,9 @@ v2 <- ggplot( df_fast_food, aes( x = Net.exports, y = Country, fill = Color ) ) 
   theme_minimal() +
   theme_opts
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/world-cuisine-preferences-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/world-cuisine-preferences-sm.png", plot = v1, width=4, height=2.25)
 
 ```
 

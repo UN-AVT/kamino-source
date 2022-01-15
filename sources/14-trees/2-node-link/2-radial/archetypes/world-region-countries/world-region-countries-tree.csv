@@ -1,0 +1,255 @@
+from,to,value
+World,World,5
+World,Africa,5
+World,Americas,5
+World,Asia,5
+World,Europe,5
+World,Oceania,5
+Africa,Northern Africa,5
+Africa,Sub-Saharan Africa,5
+Americas,Latin America and the Caribbean,5
+Americas,Northern America,5
+Asia,Central Asia,5
+Asia,Eastern Asia,5
+Asia,South-eastern Asia,5
+Asia,Southern Asia,5
+Asia,Western Asia,5
+Europe,Eastern Europe,5
+Europe,Northern Europe,5
+Europe,Southern Europe,5
+Europe,Western Europe,5
+Oceania,Australia and New Zealand,5
+Oceania,Melanesia,5
+Oceania,Micronesia,5
+Oceania,Polynesia,5
+Australia and New Zealand,AUS,57740.23
+Australia and New Zealand,NZL,8826.934
+Central Asia,KAZ,42944.969
+Central Asia,KGZ,19001.685
+Central Asia,TJK,43619.488
+Central Asia,TKM,17847.796
+Central Asia,UZB,60573.729
+Eastern Asia,CHN,1586270.852
+Eastern Asia,HKG,11726.199
+Eastern Asia,JPN,128566.659
+Eastern Asia,KOR,59116.46
+Eastern Asia,MAC,1447.631
+Eastern Asia,MNG,8202.826
+Eastern Asia,PRK,36554.604
+Eastern Europe,BGR,8975.291
+Eastern Europe,BLR,11648.411
+Eastern Europe,CZE,13155.132
+Eastern Europe,HUN,10754.766
+Eastern Europe,MDA,4375.313
+Eastern Europe,POL,39378.92
+Eastern Europe,ROU,23489.373
+Eastern Europe,RUS,188380.273
+Eastern Europe,SVK,5950.175
+Eastern Europe,UKR,51464.348
+Latin America and the Caribbean,ABW,147.005
+Latin America and the Caribbean,AIA,19.87
+Latin America and the Caribbean,ARG,87009.534
+Latin America and the Caribbean,ATG,189.171
+Latin America and the Caribbean,BHS,693.483
+Latin America and the Caribbean,BLZ,1246.426
+Latin America and the Caribbean,BOL,37108.491
+Latin America and the Caribbean,BRA,301360.246
+Latin America and the Caribbean,BRB,389.855
+Latin America and the Caribbean,CHL,28523.165
+Latin America and the Caribbean,COL,71358.331
+Latin America and the Caribbean,CRI,7734.282
+Latin America and the Caribbean,CUB,12648.31
+Latin America and the Caribbean,CUW,273.153
+Latin America and the Caribbean,CYM,139.553
+Latin America and the Caribbean,DMA,93.073
+Latin America and the Caribbean,DOM,22387.142
+Latin America and the Caribbean,ECU,41112.654
+Latin America and the Caribbean,FLK,3.866
+Latin America and the Caribbean,GLP,531.921
+Latin America and the Caribbean,GRD,145.19
+Latin America and the Caribbean,GTM,75213.923
+Latin America and the Caribbean,GUF,1682.987
+Latin America and the Caribbean,GUY,1167.332
+Latin America and the Caribbean,HND,25959.488
+Latin America and the Caribbean,HTI,31551.404
+Latin America and the Caribbean,JAM,3741.344
+Latin America and the Caribbean,KNA,86.61
+Latin America and the Caribbean,LCA,221.301
+Latin America and the Caribbean,MEX,238691.708
+Latin America and the Caribbean,MSR,14.629
+Latin America and the Caribbean,MTQ,437.913
+Latin America and the Caribbean,NIC,11439.129
+Latin America and the Caribbean,PAN,10639.848
+Latin America and the Caribbean,PER,67897.842
+Latin America and the Caribbean,PRI,4041.273
+Latin America and the Caribbean,PRY,15174.781
+Latin America and the Caribbean,SLV,9176.891
+Latin America and the Caribbean,SUR,950.907
+Latin America and the Caribbean,SXM,89.959
+Latin America and the Caribbean,TCA,76.611
+Latin America and the Caribbean,TTO,1596.596
+Latin America and the Caribbean,URY,5048.091
+Latin America and the Caribbean,VCT,136.248
+Latin America and the Caribbean,VEN,65932.569
+Latin America and the Caribbean,VGB,52.596
+Latin America and the Caribbean,VIR,111.179
+Melanesia,FJI,1546.186
+Melanesia,NCL,624.628
+Melanesia,PNG,45454.572
+Melanesia,SLB,3944.013
+Melanesia,VUT,1345.26
+Micronesia,FSM,287.954
+Micronesia,GUM,272.72
+Micronesia,KIR,528.975
+Micronesia,MHL,278.537
+Micronesia,MNP,69.388
+Micronesia,NRU,14.674
+Micronesia,PLW,42.096
+Northern Africa,DZA,123505.862
+Northern Africa,EGY,444120.656
+Northern Africa,ESH,2073.77
+Northern Africa,LBY,11989.972
+Northern Africa,MAR,75040.302
+Northern Africa,SDN,418879.586
+Northern Africa,TUN,20111.537
+Northern America,BMU,65.13
+Northern America,CAN,71963.108
+Northern America,GRL,70.823
+Northern America,SPM,10.585
+Northern America,USA,644259.725
+Northern Europe,DNK,9810.71
+Northern Europe,EST,1569.971
+Northern Europe,FIN,8850.459
+Northern Europe,FRO,83.397
+Northern Europe,GBR,116555.284
+Northern Europe,IMN,149.059
+Northern Europe,IRL,9130.909
+Northern Europe,ISL,559.265
+Northern Europe,JEY,257.219
+Northern Europe,LTU,3697.453
+Northern Europe,LVA,2664.432
+Northern Europe,NOR,11374.227
+Northern Europe,SWE,19004.422
+Polynesia,ASM,120.853
+Polynesia,COK,24.496
+Polynesia,NIU,5.237
+Polynesia,PYF,447.998
+Polynesia,TKL,3.67
+Polynesia,TON,373.73
+Polynesia,TUV,35.695
+Polynesia,WLF,14.651
+Polynesia,WSM,765.875
+South-eastern Asia,BRN,735.722
+South-eastern Asia,IDN,490536.592
+South-eastern Asia,KHM,42553.774
+South-eastern Asia,LAO,20671.1
+South-eastern Asia,MMR,87229.979
+South-eastern Asia,MYS,62378.848
+South-eastern Asia,PHL,344331.83
+South-eastern Asia,SGP,9279.582
+South-eastern Asia,THA,79641.753
+South-eastern Asia,TLS,19904.276
+South-eastern Asia,VNM,162987.015
+Southern Asia,AFG,493212.554
+Southern Asia,BGD,281210.377
+Southern Asia,BTN,1350.092
+Southern Asia,IND,2452764.607
+Southern Asia,IRN,115284.385
+Southern Asia,LKA,25111.204
+Southern Asia,MDV,747.014
+Southern Asia,NPL,52829.68
+Southern Asia,PAK,990281.131
+Southern Europe,ALB,3281.454
+Southern Europe,AND,100.458
+Southern Europe,BIH,4508.056
+Southern Europe,ESP,54251.16
+Southern Europe,GIB,54.11
+Southern Europe,GRC,11963.189
+Southern Europe,HRV,4780.629
+Southern Europe,ITA,69307.957
+Southern Europe,MKD,2325.365
+Southern Europe,MLT,527.235
+Southern Europe,MNE,710.323
+Southern Europe,PRT,11030.258
+Southern Europe,SMR,46.139
+Southern Europe,SRB,9884.147
+Southern Europe,SVN,2463.11
+Southern Europe,VAT,1.705
+Sub-Saharan Africa,AGO,651697.308
+Sub-Saharan Africa,BDI,191300.559
+Sub-Saharan Africa,BEN,143896.397
+Sub-Saharan Africa,BFA,326654.12
+Sub-Saharan Africa,BWA,7493.66
+Sub-Saharan Africa,CAF,54977.553
+Sub-Saharan Africa,CIV,309683.741
+Sub-Saharan Africa,CMR,305639.009
+Sub-Saharan Africa,COD,1946357.389
+Sub-Saharan Africa,COG,66421.615
+Sub-Saharan Africa,COM,6833.119
+Sub-Saharan Africa,CPV,1304.576
+Sub-Saharan Africa,DJI,2966.162
+Sub-Saharan Africa,ERI,45915.978
+Sub-Saharan Africa,ETH,1118603.761
+Sub-Saharan Africa,GAB,14266.604
+Sub-Saharan Africa,GHA,202402.298
+Sub-Saharan Africa,GIN,183009.681
+Sub-Saharan Africa,GMB,32910.586
+Sub-Saharan Africa,GNB,20636.628
+Sub-Saharan Africa,GNQ,18782.839
+Sub-Saharan Africa,KEN,406898.943
+Sub-Saharan Africa,LBR,56625.145
+Sub-Saharan Africa,LSO,9261.403
+Sub-Saharan Africa,MDG,272874.609
+Sub-Saharan Africa,MLI,439618.981
+Sub-Saharan Africa,MOZ,494449.331
+Sub-Saharan Africa,MRT,43278.215
+Sub-Saharan Africa,MUS,1516.497
+Sub-Saharan Africa,MWI,253962.591
+Sub-Saharan Africa,MYT,2172.262
+Sub-Saharan Africa,NAM,14805.545
+Sub-Saharan Africa,NER,846356.311
+Sub-Saharan Africa,NGA,2962068.638
+Sub-Saharan Africa,REU,1448.354
+Sub-Saharan Africa,RWA,94687.584
+Sub-Saharan Africa,SEN,199288.746
+Sub-Saharan Africa,SHN,5.601
+Sub-Saharan Africa,SLE,76745.119
+Sub-Saharan Africa,SOM,337843.131
+Sub-Saharan Africa,SSD,156493.829
+Sub-Saharan Africa,STP,1940.066
+Sub-Saharan Africa,SWZ,6386.183
+Sub-Saharan Africa,SYC,128.345
+Sub-Saharan Africa,TCD,341363.006
+Sub-Saharan Africa,TGO,76218.764
+Sub-Saharan Africa,TZA,932748.567
+Sub-Saharan Africa,UGA,977999.356
+Sub-Saharan Africa,ZAF,127879.827
+Sub-Saharan Africa,ZMB,258471.958
+Sub-Saharan Africa,ZWE,131166.483
+Western Asia,ARE,20122.335
+Western Asia,ARM,3538.165
+Western Asia,AZE,15189.815
+Western Asia,BHR,3209.317
+Western Asia,CYP,2017.928
+Western Asia,GEO,5412.147
+Western Asia,IRQ,389579.495
+Western Asia,ISR,28003.298
+Western Asia,JOR,46130.225
+Western Asia,KWT,9024.66
+Western Asia,LBN,8521.59
+Western Asia,OMN,13318.66
+Western Asia,PSE,44476.397
+Western Asia,QAT,5298.907
+Western Asia,SAU,82248.381
+Western Asia,SYR,85834.615
+Western Asia,TUR,131796.686
+Western Asia,YEM,239993.727
+Western Europe,AUT,11897.835
+Western Europe,BEL,18711.694
+Western Europe,CHE,14677.508
+Western Europe,DEU,103076.144
+Western Europe,FRA,107770.527
+Western Europe,LIE,65.049
+Western Europe,LUX,1381.16
+Western Europe,MCO,79.893
+Western Europe,NLD,24297.438

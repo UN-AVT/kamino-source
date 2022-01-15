@@ -1,0 +1,176 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+  
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(tidyr)
+library(circlize)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+GRAPHS  
+</div>
+
+# Chord - Two-Way Flow Among All Targets and Sources - No Central Point
+## Case: Migration flows between 2010-2015 among regions
+
+
+***
+
+## Load data [Ingest]
+### Data 1: Migration flow among global regions
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df0 = read.csv("./archetypes/migration-flows/migration-flows.csv", header = TRUE, stringsAsFactors = FALSE)  # flow file 
+df0
+
+```
+
+
+## Plotting a Chord Diagram
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=7}
+
+chordDiagram(x = df0)
+#Plot parameters
+circos.clear()
+circos.par(start.degree = 90, gap.degree = 4, track.margin = c(-0.1, 0.1), points.overflow.warning = FALSE)
+par(mar = rep(0, 4))
+
+```
+
+
+## Load data [Ingest] - Part II
+### Data 2: Meta data which contains more descriptions/attributes for the plot
+### For each region, we have an order classification, hexadecimal color code and the region name dismembered in two parts for better labelling 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df1 = read.csv("./archetypes/migration-flows/migration-flows-meta.csv", header = TRUE, stringsAsFactors = FALSE)  # metadata file 
+df1
+
+```
+
+
+## Plot a chord diagram with more details as per above metadata 
+## For example you see the  following features:
+### 1- Chords shaped like arrows clearly displaying the origin and destination
+### 2- Origin Regions are color coded with more defined/outstanding colors
+### 3- Regions are in clockwise order as per metadata order field
+### 4- Region labels are placed properly with breaking lines
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=12, fig.height=14}
+
+# The arguments are read from the data (df0) and set the colors based on the meta data (df1).
+chordDiagram(x = df0 %>% select(1:3), grid.col = df1$col, transparency = 0.25,
+             
+             # Provisioning the order of outer sectors and indicates that chords should be directional.
+             order = df1$region, directional = 1,
+             
+            # Indicating that the direction of the chords will be illustrated by both arrows and a difference in height. The height difference is negative to make the chord shorter at the end (with the arrow head).
+             direction.type = c("arrows", "diffHeight"), diffHeight  = -0.04,
+            
+             #Ensuring the annotations outside the sectors are not plotted, but provides a track measures to later add annotatinos such as labels and axis (see below).
+             annotationTrack = "grid", annotationTrackHeight = c(0.05, 0.1),
+            
+            # Indicating the plot should use big arrows, sort the chords left to right in each sector and plots the smallest chords first.
+             link.arr.type = "big.arrow", link.sort = TRUE, link.largest.ontop = TRUE)
+
+
+circos.trackPlotRegion(
+  # Indicating that first track (rather than any other that may have been created) will be used.
+  track.index = 1, 
+  
+  # Ensuring no borders are plotted on the track.
+  bg.border = NA, 
+  
+  # Adding a track.
+  panel.fun = function(x, y) {
+    # Collecting individual track meta data from plot object.
+    xlim = get.cell.meta.data("xlim")
+    sector.index = get.cell.meta.data("sector.index")
+    
+    # Collecting matching name information from plot data frame (df1).
+    reg1 = df1$reg1[df1$region == sector.index]
+    reg2 = df1$reg2[df1$region == sector.index]
+    
+    # Adding text from (reg1) either at y = 6 (if there is a second part of the name in reg2) or 5.2.
+    circos.text(x = mean(xlim), y = ifelse(test = nchar(reg2) == 0, yes = 5.2, no = 6.0), 
+                labels = reg1, facing = "bending", cex = 1.4)
+    
+    # Ading text (reg2).
+    circos.text(x = mean(xlim), y = 4.4, 
+                labels = reg2, facing = "bending", cex = 1.4)
+    
+    # Adding axis with major and minor ticks, without flipping the axis labels in the bottom half.
+    circos.axis(h = "top", 
+                major.at = seq(from = 0, to = xlim[2], by = ifelse(test = xlim[2]>10, yes = 2, no = 1)), 
+                minor.ticks = 1, major.tick.percentage = 0.5,
+                labels.niceFacing = FALSE)
+  }
+)
+
+
+
+
+```
+
+
+
+# References
+## The citations and data sources used for this case
+
+Source: <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/imre.12327" target="_blank"> Estimates of global bilateral migration flows </a> 
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/migration-flows.bib")
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+

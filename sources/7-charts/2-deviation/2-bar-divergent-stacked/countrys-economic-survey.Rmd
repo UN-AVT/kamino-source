@@ -68,8 +68,13 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load data
-df <- read.csv("archetypes/AfroBarometer.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "countrys-economic-survey/AfroBarometer.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df
+
 
 ```
 
@@ -137,22 +142,8 @@ coord_flip() +
        y="Percent",x="") +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 11, height_svg = 16,
+girafe(ggobj = v1, width_svg = 12, height_svg = 16,
        options = list(opts_sizing(rescale = TRUE, width = 0.6)))
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/world-wealth-report.png", plot = v1, width=11, height=16)
-
-# thumbnail version without annotations
-#ggsave(filename = "outputs/world-cuisine-preferences-sm.svg", plot = v1, width=4, height=2.25)
 
 ```
 

@@ -1,0 +1,248 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/kamino.css", "../../../z-assemblers/collections.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/header.html"
+      after_body: "../../../z-assemblers/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+COLLECTIONS  
+</div>
+
+# Data Models
+## What are they?
+
+> How many piano tuners are there in Chicago?\
+-- Enrico Fermi\
+
+The objective of this chapter is to enable you to critically think about analysis and what visual analysts are tasked to analyze. A second objective is to provide you with a set of analytic thinking tools to develop your skills to use critical thinking techniques to provide structure to your analytic reasoning. Lastly, you’ll explore the analytic methods by which you can organize and make sense of the data and information.
+
+# Methods of Analytic Thinking
+## Questions, systems, leverage points, and models
+
+***
+
+The goal of analysis is to make judgments about an issue which reflect our best understanding of a situation, complete with assumptions, supporting evidence, and uncertainties.x In the words of Mark Lowenthal, Former Assistant Director of Central Intelligence for Analysis and Production, “The best analytical tool remains
+a really good analyst.” In this section we’ll look at the basic patterns for developing your skills in:
+
+• critical thinking , structured argumentation, reasoning, sensemaking
+
+These skills are prerequisite to applying structured analytic methods.
+
+> Good decisions usually have systematically assembled data and analysis behind them...There is considerable evidence that decisions based on analytics are more likely to be correct than those based on intuition.\
+-- p9,13\
+
+Being a “really good analyst” requires really good thinking. We need an comprehensive framework to add structured reasoning to sound, intuitive thinking. Critical thinking provides such a framework and goes further, positively influencing the entire intelligence analysis process. Analysts who adopt critical thinking stand to improve their analyses:
+
+Critical thinking is that mode of thinking - about any subject, content or problem - in which the thinker improves the quality of his or her thinking by skillfully taking charge of the structures inherent in thinking and imposing intellectual standards upon them. (Paul, Fisher and Nosich, 1993, p.4.)
+
+Critical thinking deliberately evaluates the quality of thinking. In a seminal study on critical thinking andeducation in 1941, Edward Glaser writes that the ability to think critically involves three thingsGlaser, 1941, p.5:
+
+• An attitude of being disposed to consider in a thoughtful way the problems and subjects that come within the range of one’s experiences,
+• Knowledge of the methods of logical inquiry and reasoning,
+• Some skill in applying those methods.
+
+An overarching framework is needed to ensure reasoning relies on valid assertions, is not fallacious, and is self–consciously objective. Critical thinking provides that framework by ensuring that each form of reasoning is appropriately used. Critical thinking extends to the entire analysis process — analysts who become better critical thinkers will improve their analyses, helping to lessen the likelihood of failures. The thinker has two equally important goals: improving the way she or he reasons and coming to a correct solution.15 To accomplish these goals, the reasoner requires assisting structures. Beginning with the structures of thought and extending to the formulation of logic based argumentation, we’ll explore supporting patterns to ensure a good process is the root of analytical thinking.
+
+
+***
+
+## Elemental Structures of Thought
+
+In The Thinker’s Guide to Analytic Thinking, eight basic structures are present in all thinking. These structures and how they work will be our our thinking and elements of thought pattern. These elements lead thinkers to ask focused questions about the topic being considered and the thinking process itself. Paul and Elder assert that whenever people reason, they do so for a purpose. This reasoning exists within a point of view and is shaped by both conscious and unconscious assumptions.
+
+Reasoning involves the creation of inferences based on conceptual frameworks about reality. These inferences are generated as people consider evidence necessary to answer questions or solve problems. Further, reasoning leads to decision points with implications – things that might happen – and consequences – things that do happen once the decision has been made. Finally, Paul and Elder insist that “learning to analyze thinking requires practice in identifying the structures in use.”16
+
+## Developing Critical Thinking Skills
+
+Critical thinking calls for a persistent eff ort to examine any belief or supposed form of knowledge in the light of the evidence that supports it and the further conclusions to which it tends. It also generally requires ability to recognize problems, to fi nd workable means for meeting those problems, to gather and marshal pertinent information, to recognize unstated assumptions and values, to comprehend and use language with accuracy, clarity, and discrimination, to interpret data, to appraise evidence and evaluate arguments, to recognize the existence (or non-existence) of logical relationships between propositions, to draw warranted conclusions and generalizations, to put to test the conclusions and generalizations at which one arrives, to reconstruct one’s patterns of beliefs on the basis of wider experience, and to render accurate judgments about specific things and qualities in everyday life.
+
+The truly difficult problems of the information age are not technological; rather, they concern ourselves – what it is to think, to reason, and to engage in conversation [using] … new analytic techniques, new conceptual tools with which to analyze and understand the workings of the human mind. Keith Devlin, Goodbye Descartes: The End of Logic and the Search for a New Cosmology of the Mind, 1997
+
+## What You Need to Know
+
+Other approaches to defining critical thinking focus on the specific skills. For example, Diane Halpern considers that:
+
+[critical] thinking is the use of those cognitive skills or strategies that increase the probability of a desirable outcome. It is … thinking that is purposeful, reasoned, and goal directed – the kind of thinking involved in solving problems, formulating inferences, calculating likelihoods, and making decisions, when the thinker is using skills that are thoughtful and eff ective to the particular context and type of thinking task.24
+
+Additional advocates of skills-based critical thinking include Edward Glaser and Alec Fisher, and their sets of critical thinking skills include a number of elements common to those identifi ed by Halpern. The overlapping competencies of critical thinkers as advanced by Paul and Elder and these three other proponents are summarized in table 1
+
+* Recognize problems or questions and fi nd eff ective means of solution
+* Engage in meta-cognitive activities that identify assumptions, biases, and performance as solutions are developed
+* Interpret data, appraise evidence, and evaluate statements in order to recognize logical relationships between propositions
+* Infer warranted conclusions and generalizations from evidence
+* Test generalizations and conclusions by seeking out contradictory evidence that enables them to judge the credibility of claims
+* Convey sound, well-reasoned arguments
+* Focus on the process of reasoning with the intention of improving the process
+
+## What You Need to Do
+
+Paul and Elder also establish a set of intellectual standards that off er criteria for assessing the level and quality of thinking. Intellectual Standards
+
+* Clarity: understandable, meaning can be grasped.
+* Accuracy: free from errors or distortions, true
+* Precision: exact to the necessary level of detail
+* Relevance: relating to the matter at hand
+* Depth: containing complexities and multiple interrelationships
+* Breadth: encompassing multiple viewpoints
+* Logic: the parts make sense together, no contradictions
+* Significance: focusing on the important, no trivial
+* Fairness: justifi able, not self-serving or one-sided.
+
+While getting to the right-hand side of the spectrum on each of these standards in figure 3 is highly desirable, the standard of thinking on an issue will vary based on the skills of the thinkers and the issues under scrutiny.
+
+Assessing the resulting shortfalls in thinking reveals gaps that can be corrected. The continuum therefore provides a detailed assessment by which thinking on issues can be improved.
+
+## What You Should Do
+
+These tools and techniques also must allow analysts to look at their problem at multiple levels of abstraction and support reasoning about situations that change. Convergent thinking: assembling evidence to find an answer and Divergent thinking: thinking creatively to ensure that plausible alternatives have not been overlooked.
+
+People cannot reason eff ectively about hypotheses and scenarios that are unavailable to them [Garfinkel, 1967]. A key to good analytic discipline is early identifi cation of competing explanations and chains of reasoning for the issue under study. Awareness of the competing ideas must be maintained actively, so that they are kept “alive” as analytic possibilities. Often the most plausible explanation will be researched extensively, but a thorough check is to always revisit the key alternative ideas and ask, “If I were wrong, how would I know?”
+
+Additional analytical techniques include consideration of biases that may have precluded consideration of important alternatives, sensitivity to potential deception in evidence, and in cases of high risk, devil’s advocacy processes that assume a diff ering interpretation of data and attempt to reason in that direction, exposing potential weaknesses in the product.
+
+Magnum:
+
+I’m not really sure which kind of private investigator I am. The Holmesian-type with the constant deductive mind, or one with a Marlowe-type intuitive sense of the darker side of human nature? Hopefully a combination of both. At any rate, it doesn’t matter. Not when you have a “little voice”. I don’t know, maybe a gently nagging “little voice” is just another way of adding what you know, to what you feel... (Narration)
+
+The analyst collects and organizes information as he or she progresses toward judgment about a question. Throughout the reasoning process, the analyst identifi es or creates tangible pieces of information that contribute to reaching defensible judgments. Reaching defensible judgments is a subject of structured argumentation and analytical logic.
+
+
+***
+
+## Structured Argumentation and Analytical Logic
+
+Structured argumentation enables an analyst to connect arguments to evidence in support of a hypothesis. An argument consists of a set of inferences that captures the chain of reasoning which connects evidence with a hypothesis. Analysis results derived from argument-based analyses are more rigorous, robust, and less sensitive to analyst’s bias than results derived from ad hoc approachesX. This logic serves two benefits:
+
+> first and foremost, it ensures the “well-formedness” of the analysis process. Secondly, it is used to capture reasoning carried out by the analyst.\
+-- citation
+
+An argument ties facts and evidence to a conclusion via a logical sequence. At its most basic level, an argument consists of hypotheses, evidence, and inferences arranged in proof forms that capture the relationships among the evidence and hypotheses. Typically an argument has an internal structure, comprising of the following a set of assumptions or premises, a method of reasoning, and a conclusion or theory. The famous detective Sherlock Holmes explains to Dr. Watson his investigative method, which is founded both on evidence (observation) and on inference (deduction):
+
+> For example, observation shows me that you have been to the Wigmore Street Post-Office this morning, but deduction lets me know that when there you dispatched a telegram.\ -- A. Conan Doyle, Sign of the four, Chapter 1
+
+This “play of words” was likely referring to John Henry Wigmore, a famous evidence scholar, developed a graphical method for charting legal evidence that used an elaborate syntax and set of symbols for representing statements, propositions, evidence, and inferential links. In 1913, John Henry Wigmore proposed a chart method for analysing the mass of evidence presented in a legal case, in order to help the analyst reach a conclusion:
+
+Our object then, specifically, is in essence: “To perform the logical (or psychological) process of a conscious juxtaposition of detailed ideas for the purpose of producing rationally a single final idea.” Wigmore, 1913, 2nd Edition 1931, p. 109).
+
+He sets out the “necessary conditions” for such an “apparatus”, following what we would now recognise as a model of structured argumentation. For a given case, one must be able to express different types of evidence, relations between facts, represent and on demand see all the data, and distringuish be facts as alleged and
+facts as believed or disbelieved.
+
+“Hence, although we may not be able to demonstrate that we ought to reach that belief or disbelief, we have at least the satisfaction of having taken every precaution to reach it rationally. Our moral duty was to approximate, so far as capable, our belief to the fact. We have performed that duty, to the limits of our present rational capacity. And the scheme or method, if it has enlarged that capacity, will have achieved something worthwhile.” (p.111)
+
+Wigmore provided an excellent departure point for further development of structured argumentation approaches. In 1958, in his work The Uses of Argument, Stephen Edelston Toulmin developed a view of logic which was grounded in the study of reasoning practice. Toulmin emphasized a number of points highlighting the importance of reasoning and argument involve not only support for points of view, but also attack against them. Toulmin’s views led to the introduction of what would become The Toulmin model of argument.
+
+Toulmin model of argument provides the groundwork for the analyst to structure the evidence, supporting facts, refuting evidence and their confi dence level based on the support for proof of the hypothesis. It is based on Toulmin’s belief that a good argument can succeed in providing good justifi cation to a claim, which will stand up to criticism and earn a favorable verdict. Toulmin proposed a layout containing six interrelated components for analysing arguments as illustrated in Figure X. The Toulmin model serves as an excellent basis for credible analytical logic when addressing wicked problems. As descibed by John Tukey,
+
+The Scotland Yard detective, however, would be far from useless in the wild west or the outback. He has certain general understandings of conventional detective work that will help him anywhere. (Tukey)
+
+Structured argumentation provides the general understandings of conventional “detective work” which are applicable to any analytical task. This point was reinforced by Rittel: My recommentation would be to emphasise investigations into the understanding of designing as an argumentative process. Rittel’s work established a bridge between design and argumentation. The argumentative approach to design elevated the importance of the process of understanding a problem. Rittel and Webber hypthosized that a particularly powerful way to tackle such problems is by an “argumentative approach”
+
+# Reasoning
+
+The analysis activity is a process of reasoning. Awareness of the reasoning processes is therefore appropriate to ensure we are approaching out argument with clear thinking and lack of biases. We can upgrade the quality of our reasoning when we understand the intellectual processes that underlie reasoning. This method of thinking is based on four possible approaches: inductive, deductive, abductive, and scientific method.
+
+## Inductive
+
+The practice of inductive reasoning generally starts with an examination of known facts and progresses to the development of theory of what happened or what the issue is about. Inductive reasoning is therefore about the synthesis of importation to develop theories or hypotheses about the event of issue. In the words of Clauser and Weir:
+
+Induction is the intellectual process of drawing generalizations on the basis of observations or other evidence. Induction takes place when one learns from experience... Induction occurs when one is able to postulate causal relationships. Intelligence estimates are largely the result of inductive processes, and, of course, induction takes place in the formulation of every hypothesis.81
+
+Inductive reasoning works from specific observations to broader generalizations and theories. We begin with specific observations and measures, begin to detect patterns and regularities, formulate some tentative hypotheses that we can explore, and fi nally end up developing some general conclusions or theories.
+
+## Deductive
+
+Deductive reasoning works from the more general to the more specifi c. We might begin with thinking up a theory about our topic of interest. We then narrow that down into more specifi c hypotheses that we can test. We narrow down even further when we collect observations to address the hypotheses. This ultimately leads us to be able to test the hypotheses with specific data -- a confirmation (or not) of our original theories. Deductive reasoning is more narrow in nature and is concerned with testing or confi rming hypotheses.
+
+Analysis conducted into an issue for the purpose of proving a hypothesis is considered to be deductive reasoning. An analyst can develop a hypothesis about an event or issue and conduct research to prove or disprove the theory.
+
+## Abductive
+
+Abduction is the process of generating a novel hypothesis to explain given evidence that does not readily suggest a familiar explanation. This process differs from induction in that it adds to the set of hypotheses available to the analyst. The analyst creatively generates an hypothesis, then sets about examining whether the available evidence unequivocally leads to the new conclusion.56 Abductive reasoning may also be called intuition. It characterizes the analyst’s occasional ability to come to a conclusion spontaneously, often without a sense of having consciously taken defi nable steps to get there - creative thinking. Examples of abductive reasoning in analysis include situations in which the analyst has a nagging suspicion that something of value has happened or is about to happen, but has no immediate explanation for this conclusion.
+
+## Scientific Method
+
+The scientific method combines deductive and inductive reasoning: Induction is used to develop the hypothesis, and deduction is used to test it. In science, the analyst obtains data through direct observation of the subject and formulates an hypothesis to explain conclusions suggested by the evidence. Experiments on the subject are devised and conducted to test the validity of the hypothesis. If the experimental results match the expected outcome, then the hypothesis is validated; if not, then the analyst must develop a new hypothesis and appropriate experimental methods.
+
+The analyst typically does not have direct access to the observable subject, but gathers information indirectly. From these gathered data, the analyst may proceed with the scientifi c method by generating tentative explanations for a subject event or phenomenon. Next, each hypothesis is examined for plausibility and compared against newly acquired information, in a continual process toward reaching a conclusion.
+
+Analysts cannot usually experiment directly upon the subject matter, but must generate fictional scenarios and rigorously test them through mental processes and analysis methods.
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+1. Senge, Peter M. (1990), The Fifth Discipline, Doubleday/Currency,
+2. Ludwig von Bertalanffy (1976 - revised) General System theory: Foundations, Development, Applications.
+3. Ackoff, R. Towards A System of Systems Concepts. Originally published in Management Science, Vol. 17, No. 11, July 1971
+4. Systems thinking and practice, The Open University. http://openlearn.open.ac.uk/mod/resource/view.php?id=183686
+5. Matthias Ruth, Bruce M. Hannon, Jay W. Forrester, Modeling dynamic economic systems
+6. Meadows, D. (2008, December). Thinking in Systems: A Primer. Chelsea Green Publishing.
+7. Rothenberg, J. The Nature of Modeling. Chapter for “AI, Simulation & Modeling”
+8. Lawrence E. Widman, Kenneth A. Loparo, and Norman R. Nielsen, editors. John Wiley & Sons, Inc., August 1989, pp. 75−92. (Reprinted as N−3027−DARPA, The RAND Corporation, November 1989.)
+9. Newman, J. H. (1999, September). The Idea of a University. Gateway Editions. Page 122.
+10. Choucri, Nazli, Goldsmith, Daniel, Madnick, Stuart E., Mistree, Dinsha, Morrison, J. Bradley and Siegel, Michael, Using System Dynamics to Model and Better Understand State Stability (July 1, 2007). MIT Sloan Research Paper No. 4661-07. Available at SSRN: http://ssrn.com/abstract=1011230
+11. W. May. Information extraction and integration with FLORID: The MONDIAL case study. Technical report, Universit¨at Freiburg, Institut fur Informatik, 1999. http://dbis.informatik.uni-goettingen.de/Mondial
+12. Sweeney, Linda, and John Sterman. “Bathtub dynamics: initial results of a systems thinking inventory.” System Dynamics Review 16 (2000): 249-286.
+13. National Geographic. The Big Idea: The Carbon Bathtub. December 2009. http://ngm.nationalgeographic.com/bigidea/05/carbon-bath
+14. Sterman, John, and Linda Sweeney. “Cloudy skies: assessing public understanding of global warming.” System Dynamics Review 18 (2002): 207-240.
+15. J. D. Sterman and L. Booth Sweeney (2007) Understanding Public Complacency About Climate Change: Adults’ mental models of climate change violate conservation of matter. Climatic Change, 80, 213-238.
+16. Forrester, Jay Wright. World dynamics . Cambridge, Mass.: Wright-Allen Press, 1971.
+17. Pink, Daniel H.. A whole new mind: why right-brainers will rule the future. New York: Riverhead Books, 2006.
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+
+# echo=FALSE will exclude block from code folding
+# Example for including external html content when needed
+htmltools::includeHTML("mark-complete-button.html")
+
+```
+
+
+
+```{r, child='mark-complete-click.Rmd'}
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

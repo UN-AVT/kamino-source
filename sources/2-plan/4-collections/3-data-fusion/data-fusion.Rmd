@@ -1,0 +1,108 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+COLLECTIONS  
+</div>
+
+# Data Features
+## What are they?
+
+> It is a capital mistake to theorize before one has data...\
+--- Sherlock Holmes, A Study in Scarlett (Arthur Conan Doyle)\
+
+Data fusion patterns are employed to combine data from multiple sources to achieve the appropriate depth, detail and breadth of information required to populate the information model. By means of fusion, different sources of data are combined to increase the reality of the model. A formal defi nition of the concept is as follows:
+
+Data fusion is a formal framework in which are expressed the means and tools for the alliance of data originating from diff erent sourcesX
+
+Think of fusion as a form of mosaic where the more complementary information sources used, the more clear the picture will be. Using a fusion pattern can lead to signifi cant advantages such as detecting anomalies or inaccuracies of data and improving the confi dence in decisions through increased situational awareness.
+
+Data fusion, is generally defi ned as the use of techniques that combine data from multiple sources and gather that information in order to achieve inferences, which will be more effi cient and potentially more accurate than if they were achieved by means of a single source.
+
+This is accomplished through the use of sensors (collectors), which provide information (sources). These sources are assessed to determine the integration or fusion strategy for processing.
+
+## Sensors
+
+Multisensor fusion seeks to combine information from multiple sources to achieve inferences that cannot be obtained for a single source, or whose quality exceeds that of an inference drawn from any single source. A good example of this is found in the fusion method found in the computation of the UN’s Human Development Index (HDI).
+
+The Human Development Index (HDI) is an index used to rank countries by level of “human development”, which usually also implies to determine whether a country is a developed, developing, or underdeveloped country. The HDI combines normalized measures of life expectancy, literacy, educational attainment, and GDP per capita for countries worldwide. In this case data sources are fused, or combined, to produce a measure of human development, as described in XXX:
+
+“The indicators used to calculate the HDI are provided by the international agencies with expertise and mandate in each of the component areas: the United Nations Population
+Division for life expectancy estimates; the United Nations Educational, Scientific and Cultural Organization (UNESCO) Institute for Statistics for literacy and enrolment rates; and the World Bank for data on GDP per capita. Reliance on these sources ensures that the underlying indicators of the composite indices are in accordance with internationally agreed defi nitions and standards and thus are, as far as possible, comparable across countries.” This examples illustrates the use of multiple sensors and a fusion process to combine data inputs into a meaningful and colorful mosiac to visualize the multidimensional nature of human development.
+
+## Assessment
+
+One of the most widely used frameworks is the Joint Directors of Laboratories (JDL) Data Fusion Framework. The JDL data fusion sub-panel within the US Department of Defense originally defined this system naming a number of levels at which data fusion could be undertaken. Although this framework was originally meant for consolidating sensor information for military operations, the principles are equally relevant to general analytical purposes.
+
+The goal of the framework is to ensure the levels and processing to transform a decision makers information needs through the processes and mechanisms that will create information to satisfy those needs. Data fusion provides the guidance to reason about such data with the objective of deriving information about object, events, behaviours, and intentions that are relevant to each decision maker’s operational context. The fusion frameworkX is organized by assessment activities which involve judgements.
+Entity assessment: attempts to locate and identify objects. For this purpose a global picture of the situation is reported by fusing the attributes of an object from multiple sources. The steps included at this stage are:
+
+Data alignment, prediction of entity’s attributes, association of data to entities, and refi nement of entity’s identity.
+
+Situation assessment, attempts to construct a picture from incomplete information to relate the reconstructed entity with an observed event (e.g. aircraft fl ying over hostile territory). Situation assessment
+
+involves inferring relations among and within entities, recognizing/classifying situations basis estimates of constituents, and using inferred relationships to infer entity attributes.
+
+## Processing
+
+Fusion processes are often categorized as data, feature or decision depending on the processing stage at which fusion takes place. Three basic alternatives can be used for multisensor data: (1) direct fusion of sensor data; (2) representation of sensor data via features; or (3) processing of each sensor to achieve high-level inferences or decisions. Each of these approaches utilizes diff erent fusion techniques. Data fusion combines several sources of raw data to produce new raw data that is expected to be more informative and synthetic than the inputs. Typically, in image As this kind of fusion aims at fusing ‘relevant information’ from the diff erent images; the major problem is to defi ne what ‘relevent information’ is. Human beings, usually do not make this classifi cation on the basis of local information only; they use a lot of collateral information and rely on their global interpretation capabilities. On the other hand most of the fusion algorithms defi ne ‘relevant information’ as local variations. This might be a poor modelling of ‘relevant information’ especially when noisy spectral bands (SAR) are used.
+
+If the multisensor data is measuring the same properties then the data can be directly combined. Conversly, if the sensor data are not assuming the same properties, then the data must be fused at the feature level or decision level.
+
+Feature-level fusion involves the extraction of representative features. combines various features. Those features may come from several raw data sources or from the same raw data. In the latter case, the objective is to fi nd relevant features amongs available features that might come from several feature extraction methods. The objective is to obtain a limitted number of relevant features. Typically, in image processing, feature maps are computed as pre-processing for segmentation or detection. Features such as edges, corners, lines, texture parameters (Haralick, Wavelet coeffi cients, etc.) are computed and combined in a fused feature map that may then be used for segmentation or detection.
+
+Decision fusion combines decisions coming from several experts. By extension, one speaks of decision fusion even if the experts return a confi dence (score) and not a decision. To distinguish both cases, one speaks of hard and soft fusion. Methods of decision fusion include voting methods, statistical methods, fuzzy logic based methods, etc.
+
+
+***
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

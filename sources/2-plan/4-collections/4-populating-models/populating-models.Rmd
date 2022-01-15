@@ -1,0 +1,226 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(data.table)
+library(knitr)
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+COLLECTIONS  
+</div>
+
+# Data Features
+## What are they?
+
+> Ceci n’est pas une pipe...\
+--- Magritte\
+
+The objective of this chapter is to develop the information model into a fully populated data source for analysis. Beginning with the challenges of “wicked problems”. Use critical thinking techniques to provide structure to your analytic reasoning. What is a Visual Analyst? How can I learn to become a Visual Analyst?
+
+A famous painting by René Magritte reads “This is not a pipe” below the picture of a pipe, insisting on the fact that the painting of a pipe may be useful for several purposes, but not to smoke tobacco. Likewise, the populating of a model will weigh heavily on how real to life and useful your painting will be for sense-making purposes. As important as the selection of paints may be for an artist to create realism, the analyst canvas will require a careful collection and collation of quality data assets.
+
+In this Chapter we will examine the techniques used for painting our system-based information model with the color of data. The main purpose of this chapter is to defi ne the patterns used for creating an information rich source from which your analysis methods are applied. Our goal is to complete the Models of Information phase with an as real-to-life representation of the system as possible; a continuation of the process to transform the “wicked problem” into a petri dish from which we can analyze under the Methods of Analysis microscope in Part III.
+
+Continuing our work in Chapter 4, we’ll expand the information model through a process of fi tting data to the entities and associations. information and knowledge discovery
+
+Knowledge Discovery Roadmap
+
+The knowledge discovery roadmap provides the framework and process for achieving the goals for populating the model. The roadmap is based on patterns which have been researched, developed, and widely implemented from decades of practice. The knowledge discovery process involves several stages: selecting the target data, preprocessing the data, transforming them if necessary, performing data mining to extract patterns and relationships, and then interpreting and assessing the discovered structures. The process is interactive and iterative, involving numerous steps with many decisions made by the analyst:
+
+* Data Preparation and Preprocessing
+* Data Integration and Fusion
+* Data Shaping and Transformation
+* Data Mining and Pattern Analysis
+* Interpret and evaluate findings
+
+This Data Preparation and Preprocessing stage is concerned with selecting the data that are relevant to the analysis task. The Data integration and Fusion stage is used to describe tjhe activity of combining disparate data sources to form a . The Data Shaping and Transformation stage involves fi nding useful features to represent the data depending on the goal of the task. With dimensionality reduction or transformation methods, the eff ective number of variables under consideration can be reduced, or invariant representations for the data can be found. The Data Mining and Pattern Analysis stage is concerned with revealing patterns of interest in a particular representational form or a set of such representations, including classifi cation rules or trees, regression, and clustering.
+
+Interpretation and evaluation is interpreting mined patterns, possibly returning to any of steps for further iteration. This step can also involve visualization of the extracted patterns and models or visualization of the data given the extracted models. The fi nal stage involves the acting on the discovered knowledge:
+using the knowledge directly, incorporating the knowledge into another system for further action, or simply
+documenting it and reporting it to interested parties. This process also includes checking for and resolving
+potential conflicts with previously believed (or extracted) knowledge.
+
+Data Preparation and Preprocessing
+
+Data preparation and preprocessing is the exploration of structured and unstructured data to discover, gather and integrate information into your model. It is the sub-process for gathering source data and organizing it to suit the needs of analysis. By following the Visualytica process, we begin this activity with the advantage of fully defining our focal questions and creating a system model. The system model created in Chapter 4 will serve as our guide for collecting and fi tting data sources to the objects and relations defined in our system.
+
+The collation process is based on nine steps:
+
+* Identify Essential Elements of Information
+* Gathering source data
+* Information Extraction
+* Define entities
+* Define relations
+* Describe entities
+* Describe relations
+* Assign Metadata
+* Populate the information model
+
+These tasks are based on patterns from information architecture, database design, data mining and other information intensive disciplines. These patterns have gained widespread use ...
+
+# Essential Elements of Information
+
+Essential elements of information (EEI)X are the critical items of information required to support the realism of our system model. EEIs are the themes and data points we will focus on to populate the model objects, attributes, and relations. These are the pieces of information that are needed to successful perform our
+analytical task.
+
+Following our example, we might begin in identifying the EEIs as shown in the table.
+
+This starting point can be adjusted as needed throughout the process and it will continue to serve as the “pointer” for your data collection pursuits. These elements of information serve as the guidance for collecting source data and developing information-extraction rules.
+
+# Gathering and Working with Source Data
+
+...the world contains an unimaginably vast amount of digital information which is getting ever vaster ever more rapidly. This makes it possible to do many things that previously could not be done: spot business trends, prevent diseases, combat crime and so on. (Economist) We’re getting better and better at collecting data, but we lag in what we can do with it. Lots of data is out there, but it’s not being used to its greatest potential because it’s not being visualized as well as it could be. With all the data we’ve collected, we still don’t have many satisfactory answers to the sort of questions that we started with. This is the greatest challenge of our information rich era: how can these questions be answered quickly, if not instantaneously? We’re getting so good at measuring and recording things, why haven’t we kept up with the methods to understand and communicate this information?
+
+The quality, content and structure of source data are critical success factors to supporting analysis and the design of meaningful visuals.
+
+## Quality
+
+Data are of varying quality, and most data have levels of uncertainty associated with them. As data are combined and transformed, the uncertainties may become magnifi ed. These uncertainties may have profound eff ects on the analytical process and must be portrayed to users to inform their thinking. They will also make their own judgments of data quality, uncertainty, and reliability, based upon their expertise.
+
+Gathering relevant, timely, and accurate source data is a critical success factor to the process.
+
+* Relevance: the usefulness of the data in the context of the focal questions.
+* Clarity: the availability of a clear and shared defi nition for the data.
+* Consistency: the compatibility of the same type of data from diff erent sources.
+* Timeliness: the availability of data at the time required and how up to date that data is.
+* Accuracy: the confi dence level of how credible and close to reality the data is, for example is the data observed and factual, or is it estimated.
+* Completeness: how much of the required data is available.
+
+In a US Government prepared publication titled A Tradecraft Primer: Structured Analytic Techniques for Improving Intelligence Analysis among the many “patterns” presented is an approach called the Quality of Information Check.
+
+## Content
+
+Form, Dimension and Measure.
+
+Form In The Eyes Have It: A Task by Data Type Taxonomy for Information Visualizations, author Ben Shneiderman describes seven data types: 1-dimensional, 2-dimensional, 3-dimensional, Multidimensional, Temporal, Tree, and Network.
+
+Dimension one-dimensional (1d), two-dimensional (2d), and multi-dimensional (nD).A dimension will have a measure(s) which signifies the analytical “nature” of the variable. Measures are described in terms of quantitative or qualitative. Quantitative data are measurable and expressed as quantities which can be manipulated by arithmatic. Qualitative data is often described as nominal or ordinal type variables for which certain comparisons can be made, but can not be manipulated by arithmetic.
+
+## Structure
+
+Structured data refers to sources which are readily formatted for analysis tasks. Typically, structured data comes in the form of tables with identifi able record sets. Unstructured data refers to sources that either do not have a data model or has one that is not easily usable for analytic purposes. The term distinguishes such
+information from data stored in fi elded form in tables, databases or annotated documents. Both structured and unstructured data may require manipulation and “fi tting” to meet the requirements for the desired processing task. The process of preparing collected data for analysis is called information extraction.
+
+## Information Extraction
+
+Information Extraction is a type of information retrieval whose goal is to extract structured information from unstructured sources. Information Extraction is a process which takes raw data as input and produces fi xed-format, unambiguous data as output. Information extraction distills structured data or knowledge from unstructured text by identifying references to named entities as well as relationships between such entities. Typical subtasks of IE are Entity Extraction and Resolution and Relationship Extraction and Resolution. Entity Extraction refers to the recognition of entity names while Relationship Extraction refers to the identifi cation
+of relations between entities.
+
+## Data Types and Characteristics
+
+In conventional data model design, data types are defi ned as either entities or relations. We’ll preserve this syntax to maintain reference to the origin of the pattern, but you can think of entities as being similar, if not the same as, the objects described in Chapter 3.
+
+Entities are the data objects about which information is to be collected. Entities are usually recognizable concepts such as person, places, things, or events which have relevance to the system. There are various definitions of an entity:
+
+“A thing which can be distinctly identified” [CHEN76]
+“Any distinguishable object that is to be represented in a database” [DATE86]
+“...anything about which we store information. For each entity type, certain attributes are
+stored”. [MART89]
+
+Extending these defi nitions to our earlier example, we can make a few observations. First, countries can be distinctly identifi ed. Secondly, a country is distinguishable from another country. Lastly, each country has certain attributes such as a capital city and population.
+
+The signifi cance of the entity concept is its relation to the objects we defi ned in our system model. Recalling that country , we now have an entity mapping to this object based on a well-defi ned data typing. It is possible however, depending on the complexity of a system object, that several entities would be required to capture
+the “nature” of the object. It may also be the case that you defi ne an entity where a related object does not explicitly exist. This will become more clear when we “map” our system model to a data model.
+
+Entity attributes describe the entity of which they are associated. A particular instance of an attribute is a value. For example, “Switzerland” is one value of the attribute Name for our country entity defi ned earlier. Attributes can be classifi ed as identifi ers or descriptors. Identifi ers, more commonly called keys, uniquely
+identify an instance of an entity. A descriptor describes a non-unique characteristic of an entity instance. Countries have attributes such as total_area, population, population_growth, infant_mortality, infl ation, gdp_total, government, and capital.
+
+A relationship represents an association between two or more entities. These associations may occur in several forms such as similarity, explicit reference, value co-occurrence, parent-child relations, spatial, or temporal. The identifi cation of relationships is often accomplished by relation extraction or association analysis.
+Relation extraction is based on free text analysis... Association analysis is a pattern of data mining that is based on “rules”. Typically, a relationship is indicated by a verb connecting the entities. For example: Countries have borders to other countries
+
+Relationship attributes include concepts such as degree, connectivity, cardinality, direction, type, and existence. The degree of a relationship is the number of entities associated with the relationship. The connectivity of a relationship describes the mapping of associated entity instances in the relationship. The cardinality of a relationship is the actual number of related occurences for each of the two entities. The direction of a relationship indicates the originating entity of a binary relationship. The entity from which a relationship originates is the parent entity; the entity where the relationship terminates is the child entity.
+
+Let’s look at an example. Each year the United Nations Refugee Agency conducts a statistical survey of x.
+
+These statistics measure the flows of refugee status persons from an origin to a destination. Sudan has x degrees, meaning z countries are included in the relationship. These relations are based on (from this perspective) one-to-many. For each relation, the cardinality or weight is based on the “flow” signified by the number of refugees. The direction is from Sudan to other. The relations are independent. The existence of one entity is not dependent on the existence of others.
+
+## Entity Extraction
+
+Only 5% of the information that is created is “structured”, meaning it comes in a standard format of words or numbers that can be read by computers. (Economist) Entity extraction is a subtask of information extraction that seeks to locate and classify atomic elements in text into predefi ned categories such as the names of persons, organizations, locations, expressions of times, quantities, monetary values, percentages, etc. This process is known as named entity typing.
+
+Named entity typing refers to the task to extracting entities based on designators. A Named Entity Recognition (NER) system is a signifi cant tool in natural language processing (NLP) research since it allows identification of proper nouns in open-domain (i.e., unstructured) text. For the most part, such a system is simply recognizing instances of linguistic patterns and collating them.
+
+Entity extraction automatically locates important search terms for you based on the same contextual cues people would use. The ability to locate these entities - units of meaning - in any text is what enables discovery search to fi nd all the information that fi ts a defi nition even when you don’t know all the search terms the definition fi ts.
+
+Entity extraction recreates in a computer the process of applying and recognizing context. Linguists and computational linguists have used context for decades to create natural language processing software. REX natively supports the following entity types, as well as fundamental linguistic elements, such as sentence boundaries, parts of speech, and noun phrases. fi nds and classifi es key phrases, concepts, and relationships in unstructured text.
+
+## Relation Extraction
+
+## Declared and Derived
+
+Relationships among information objects must be explicitly captured in a computer-manipulable form. Once this is achieved, interactive graphical representations of the relationships can be generated for analytical purposes. By this, we mean that, ideally, the model will capture relationships in a form that mimics the way
+humans naturally relate information.
+
+Once relationships have been explicitly captured, specialized visual representations can be employed to
+discover the underlying relationships.
+General Similarity
+Explicit Reference
+Field/Value Co-occurrence
+Parent-Child
+Spatial-Temporal
+Entity to Entity via association, affiliation, and ownership.
+A Person or Organization relation to a Location Entity to establish physical location of a given entity
+Entity to Event
+
+As illustrated in Figure X with our 1995 Dayton Peace Accords example, the entity extractions serve as the basis for establishing the relational connections. For example,
+Slobodan Milonevic of Serbia attended the Dayton Conference on November 21, 1995.
+
+Scenario construction. Establishing a connection between entities, relations and an event in space and time.
+The intersection of the entity, relational, event and temporal elements serves as the basis for developing a scenario to support an analytic story.
+
+We’ll explore this in fuller detail with the Data Integration and Fusion Pattern
+
+
+***
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

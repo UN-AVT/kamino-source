@@ -61,8 +61,13 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-food_consumption = read.csv("archetypes/food_consumption-by-co2-emissions/food_consumption-by-co2-emissions.csv", header = TRUE, stringsAsFactors = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "food_consumption-by-co2-emissions/food_consumption-by-co2-emissions.csv"
+url <- paste0(url_root, url_file)
+
+food_consumption <- read.csv(url, header = TRUE, stringsAsFactors = TRUE)
 food_consumption
+
 
 ```
 
@@ -85,7 +90,7 @@ food_consumption
 ### Plot
 #### standard ridgeline
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -122,7 +127,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 ### Plot
 #### with density points and quantile lines
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v2 = ggplot(food_consumption, aes(x=co2_emmission, y=food_category, fill=food_category)) +
     stat_density_ridges( quantile_lines = TRUE,
@@ -139,20 +144,6 @@ v2 = ggplot(food_consumption, aes(x=co2_emmission, y=food_category, fill=food_ca
 
 girafe(ggobj = v2, width_svg = 16, height_svg = 9,
       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/food_consumption-by-co2-emissions-fs.svg", plot = v2, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/food_consumption-by-co2-emissions-sm.png", plot = v2, width=4, height=2.25)
 
 ```
 

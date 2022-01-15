@@ -64,9 +64,12 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # Load csv data file
-df <- read.csv("archetypes/countries-by-share-of-earths-surface/countries-by-share-of-earths-surface.csv", header = TRUE, stringsAsFactors = FALSE)
-df
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "countries-by-share-of-earths-surface/countries-by-share-of-earths-surface.csv"
+url <- paste0(url_root, url_file)
 
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
+df
 
 ```
 
@@ -95,7 +98,7 @@ df2 <- df %>%  ## for labelling purposes
 #### Donut Chart
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -126,25 +129,9 @@ v1 <- ggplot(df, aes(x = 2 , y = Percentage, fill = fct_inorder(Country))) +
   xlim(0.5, 2.5)+
   theme_void() + theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.75))
 )
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-# Save plot
-# as vector or raster image
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/size-of-countries-sm.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/size-of-countries-fs.png", plot = v1, width=4, height=2.25)
 
 ```
 

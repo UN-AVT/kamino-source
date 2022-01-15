@@ -1,0 +1,161 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+```
+
+<div class="activity">
+TREES
+</div>
+
+# Clean data
+## I want to fix irregularities in my dataset
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+Tree data structures based on circular and hierarchical position systems.
+
+Circular layout patterns are often useful for tree-based datasets where a maximum amount of space is needed to represent the data. Several pattern varieties are available which confi gure the layout based certain geometric parameters, such as balloon, concentric circle, parent-centered, hyperbolic, and single-cycle. For example, a Balloon layout places children nodes radially around their parents in a balloon like formation. Concentric Circle lays out subsequent depth levels of a tree on circles of progressively increasing radius. A parent-centered radial layout algorithm for interactive graph visualization and animation. These varied forms are shown in Figure X.
+
+Each option will have advantages and disadvantages depending on the data structure you are working with. Circular layouts produce the best results with tree-structures where there are not traversals across branches. Hierarchical layouts are useful to reflect the existence of an ordered structure such as an organization chart or political structure. 
+
+Hierarchical layouts are conventionally used to highlight, for example, the command structure of an organized group. These layouts are generally limited to confi gurations for orientation such as left-to-right and top-down. Similar to circular layouts, these patterns perform best with minimal branch traversals and are most appropriate with well structured tree-based data. Use of hierarchical layouts is often restricted by space limitations of the drawing canvas.
+
+Examples of hierarchical layouts are illustrated in Figure X. Popular layouts include dendrograms, icicle, and XXX. A typical dendrogram consists of a tree structure that starts with an ordered list of ‘leaves’ connected by ‘branches’ that are successively merged to show the fusions of clusters in the hierarchical clustering process. 
+
+The icicle layout takes a sunburst and transforms it from polar to cartesian coordinates. A tree layout in the form of an icicle. The first row corresponds to the root of the tree; subsequent rows correspond to each tier.
+
+Space-Filling
+- Sunburst, Icicle, Circle Packing (see protovis for examples)
+
+A sunburst is an adjacency diagram: a space-filling variant of the node-link diagram. Rather than drawing a link between parent and child in the hierarchy, nodes are drawn as solid areas (either wedges or bars), and their placement relative to adjacent nodes reveals their position in the hierarchy. Because the nodes are now space-filling, we can use an angle encoding for the size of software classes and packages. This reveals an additional dimension that would be difficult to show in a node-link diagram.
+
+An icicle is simply a sunburst transformed from polar to cartesian coordinates. 
+
+Enclosure diagrams are also space-filling, using containment rather than adjacency to represent the hierarchy.
+As with adjacency diagrams, the size of any node in the tree is quickly revealed. Although circle packing does
+not use space as efficiently as a treemap, the “wasted” space eff ectively reveals the hierarchy. At the same
+time, node sizes can be rapidly compared using area judgments.
+
+Introduced by Ben Shneiderman in 1991, a treemap recursively subdivides area into rectangles. As with adjacency diagrams, the size of any node in the tree is quickly revealed. This example uses color to encode different packages of the Flare visualization toolkit, and area to encode file size. “Squarified” treemaps use approximately square rectangles, which off er better readability and size estimation than naive “slice-and-dice” subdivision. Fancier algorithms such as Voronoi and jigsaw treemaps also exist but are less common.
+
+***
+
+# Section
+## Subsection
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Fold hide as this is not relevant to the task
+
+
+```
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+
+```
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+
+```
+
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+
+```
+
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+
+# echo=FALSE will exclude block from code folding
+# Example for including external html content when needed
+htmltools::includeHTML("mark-complete-button.html")
+
+```
+
+
+
+```{r, child='mark-complete-click.Rmd'}
+
+# JS event handler for button click
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

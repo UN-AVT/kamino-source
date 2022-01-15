@@ -1,0 +1,227 @@
+---
+pagetitle: "Tracing Sanctions"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggraph)
+library(igraph)
+library(tidygraph)
+library(graphlayouts)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+ TREES  
+</div>
+
+# Tracing Sanctions
+## Cartesian tree 
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Jr Korpa on Unsplash"}
+
+#masthead <- "assets/jr-korpa-unsplash.jpg"
+#knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> It's clear that there's a lot of human wood out there for this coronavirus forest fire to burn...\
+--- Michael Thomas Osterholm\
+
+***
+
+FUEL SMUGGLING ACTIVITY
+
+Many of the vessels sanctioned as a part of the Barqawi-Abdulkarim network were active as of May 2018, and seemed to be shipping fuel to Syria at that time. Almost all of these vessels appear to have changed their names and identifying information, and to have changed ownership to new, unsanctioned entities directly associated with the original sanctioned companies.
+
+For example, Milenyum Energy S.A., registered in Panama and operating out of Turkey, was sanctioned in August 2015 for arranging regular fuel shipments to the Syrian Government as part of the Barqawi-Abdulkarim network. Notably, a single shipment in February 2015 was valued at over $7 million.26 After Milenyum was sanctioned, two of the vessels that had also been sanctioned changed their names and switched ownership to a company based in Turkey, Arvina Trade Ltd. Arvina Trade shares two phone numbers with Milenyum Shipping, and according to Equasis data retrieved in May 2018, Arvina owns these two sanctioned vessels, one of which appeared to ship fuel to Syria as of May 2018. In addition, a phone number used by Arvina and Milenyum is registered to an individual named only as “Ufuk,” a possible reference to Ufuk Kenar, the director and secretary of Milenyum who was sanctioned by the US Department of the Treasury for his direct involvement in these fuel procurement schemes. Entities like Arvina Trade, which have ties to the original sanctioned companies owning these vessels, show how Abdulkarim and Barqawi could use new commercial organizations to obfuscate ownership and continue regular shipments of fuel to Syria.
+
+Of the seven vessels sanctioned alongside Milenyum, five maintained shipping operations after being sanctioned. Four of these vessels have transported fuel shipments into Syria within the last few months, with three operating as recently as May 2018 along the same routes for which they were originally sanctioned, according to maritime domain awareness technology.35 36 Since August 2015 (the date of the original vessel designations), the sanctioned vessels have cumulatively conducted an estimated 47 trips transporting fuel from Ukraine and Russia to Syria under new names, identifiers, and owners.37 Some of these vessels have also transported shipments from Croatia to Syria, a previously unidentified supply line within this network. Of the companies that now own these vessels, there are six unsanctioned companies, several of which are incorporated in secrecy jurisdictions such as Anguilla and St. Kitts & Nevis. Of these six unsanctioned companies, three share the exact same address in Anguilla and three share an identical address in St. Kitts & Nevis.
+
+Finally, there are an additional five vessels and three companies that match the transit patterns, owners, and managers of the original sanctioned vessels. Just one of these vessels—the MV Venice—conducted approximately 27 trips transporting fuel between Ukraine, Russia, Croatia and Syria between April 2015 and May 2018.
+
+The vessels in the Barqawi-Abdulkarim network, including those currently in operation, typically load their petroleum cargo in Kerch, Ukraine; Temryuk, Russia; and Rijeka, Croatia, before offloading at Banias, Syria. These vessels often go dark, losing their Automatic Identification Signal (AIS) while entering and exiting the port at Kerch—a pattern corroborated by local bloggers, who allege that on January 16, 2018 one of the sanctioned ships (the MV Alekse) loaded 2,400 tons of liquefied gas in Kerch while not transmitting its AIS signal.
+
+After picking up cargo, the vessels often report a draft change (a measure of how deep a vessel sits in the water, thus indicating changes in weight). Upon leaving Kerch or Temryuk, they then travel through Turkey’s straits toward Cyprus. As they approach Syria, the vessels almost always lose their AIS signals for a number of days, after which they sometimes report a negative change in draft—an indication that their fuel cargo was offloaded during the period of AIS irregularity. Multifactor analysis of each vessel’s known or estimated speed and the distance between the vessel’s location and Banias, before and after the loss of AIS signal, confirms that these vessels have adequate time to travel to Banias, offload their fuel cargo, and leave.
+
+Vessels in the network have also made suspicious voyages to other conflict zones. For example, the MV Maria, sanctioned in August 2015, arrived off the coast of Yemen in early April 2016. It then loitered for three months near the unofficial port of Sharmah in Hadramut province, a coastline notorious for illicit trafficking activity. The MV Maria subsequently lost its AIS signal for five months before reappearing in the same location for a month and then going completely offline. As shown in the image on the right, this location has a few structures and affords road access to a highway running along the southern coast.49 This road connects to Ash Shihr and Mukalla, both known fuel smuggling ports, the latter of which was under Al Qaeda control from April 2015 to April 2016. The convergence of a ship sanctioned for smuggling fuel into Syria and transit activity to a known fuel smuggling hub in Yemen may indicate that this network partakes in a more diverse range of smuggling activity than was originally known, though this is impossible to confirm without additional information.
+
+
+### Ingest
+#### the tree of mutations
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_nodes <- read.csv("archetypes/tracing-sanctions/sandcastles-nodes.csv", header = TRUE, stringsAsFactors = FALSE)
+df_nodes
+
+df_edges <- read.csv("archetypes/tracing-sanctions/sandcastles-edges.csv", header = TRUE, stringsAsFactors = FALSE)
+df_edges
+
+```
+
+
+### Wrangle
+#### create graph structure
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_graph <- graph_from_data_frame( df_edges, vertices = df_nodes )
+
+# to view results as data frame
+df_graph_view <-  get.data.frame(df_graph, what= "both" ) # as.data.frame(get.edgelist(df_graph))
+# df_graph_view
+
+```
+
+
+### Analytics
+#### compute layouts
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+
+##################
+# igraph layouts #
+##################
+
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'bipartite')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'circle')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'dh')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'drl')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'fr')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'gem')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'graphopt')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'grid')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'kk')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'lgl')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'mds')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'nicely')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'sphere')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'star')
+# layout <- create_layout(df_graph, layout = 'igraph', algorithm = 'sugiyama')
+
+##################
+# ggraph layouts #
+##################
+
+# layout <- create_layout(df_graph_undirected, layout = 'backbone')
+
+# layout <- betweenness(df_graph_directed)
+# layout <- closeness(df_graph_directed)
+# layout <- create_layout(df_graph_undirected, layout = 'centrality', centrality = centrality_bc)
+
+# layout <- create_layout(df_graph_directed, layout = 'circlepack')
+# layout <- create_layout(df_graph_directed, layout = 'dendrogram')
+# layout <- create_layout(df_graph, layout = 'eigen', type = "laplacian", eigenvector = "smallest")
+
+layout <- create_layout(df_graph, layout = 'focus', focus = 1)
+
+# layout <- create_layout(df_graph, layout = 'hive', axis = friends, sort.by = degree)
+
+# layout <- create_layout(df_graph, layout = 'linear')
+# layout <- create_layout(df_graph, layout = 'matrix')
+# layout <- create_layout(df_graph_directed, layout = 'partition')
+
+# pmds_pivots <- 2
+# layout <- create_layout(df_graph, layout = 'pmds', pivots = pmds_pivots)
+
+# layout <- create_layout(df_graph, layout = 'stress')
+# layout <- create_layout(df_graph_directed, layout = 'partition', circular = TRUE)
+# layout <- create_layout(df_graph_directed, layout = 'treemap')
+
+# df_unrooted <- df_graph_undirected %>%  activate(edges) %>%  mutate(length = runif(n()))
+# layout <- create_layout(df_graph_undirected, layout = 'unrooted' )
+
+```
+
+
+### Plot
+#### dendrogram
+
+chart showing connections between the sanctioned vessels, their past and current ownership, and other companies and vessels of interest.
+Color coded by jurisdiction
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    legend.position='none'
+  )
+
+v1 <- ggraph(df_graph, layout = layout) + 
+  # geom_edge_elbow(aes(label = LABEL), angle_calc = 'along', label_dodge = unit(2.5, 'mm')) + 
+  # geom_edge_bend(aes(label = LABEL)) +
+  geom_edge_diagonal() +
+  geom_node_point(size=4) +
+  geom_node_label( aes(label=name), repel = FALSE, vjust = 0.0, nudge_y = 0.1, size = 6, family = "inconsolata") +
+  # coord_fixed(clip = 'off') + 
+  theme_void() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+# pg <- ggplot_build(v1)
+# pg$data[[2]]
+# pg$data[[3]]
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative: 
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

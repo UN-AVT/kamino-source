@@ -15,6 +15,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen = 999) ## To disable scientific notation
 
@@ -22,10 +23,16 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
 gc() #free up memory and report the memory usage.
 
-# Load needed libraries
+
 library(tidyverse)
 library(scales)
 library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
@@ -56,7 +63,20 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load data
-df <- read_csv("archetypes/lone-parent-households/figure-2-11.csv", col_names=TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "lone-parent-households/figure-2-11.csv"
+url <- paste0(url_root, url_file)
+
+df <- read_csv(url, col_names=TRUE)
+df
+
+```
+
+
+### Wrangle
+#### Transpose, format and order
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Transpose columns
 long <- gather(df, type, Percentage, "Lone father (all ages)":"Lone mother 60+ and all children 18 and over", factor_key=FALSE)
@@ -77,12 +97,14 @@ long$type <- factor(long$type, levels=c("Lone mother 0-17 and at least one child
 
 long
 
+
 ```
+
 
 ### Plot the chart
 #### One-parent households: mostly lone mothers - Figure 2.11
 
-```{r draw-plot, message=FALSE, warning=FALSE, echo=TRUE, fig.width=10, fig.height=6, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 # Define palette
 segment_palette <- c("Lone mother 0-17 and at least one child below 18" = "#6b9e7e",
@@ -118,7 +140,7 @@ v1<-ggplot(long, aes(y = Percentage, x = Regionwrap)) +
   guides(fill = guide_legend(ncol=2)) +
   geom_text(aes(fill = type, label = Percentage), position = position_fill(vjust = 0.5), check_overlap = TRUE, color="white", size = 3)
  
-girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```

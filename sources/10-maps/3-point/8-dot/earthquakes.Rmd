@@ -1,0 +1,181 @@
+---
+pagetitle: "Earthquakes"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# Earthquakes
+## Dot Map
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by USGS Photos"}
+
+masthead <- "assets/usgs-photos-haiti.png"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> I want to remember them...\
+--- Rick Santos, Haiti earthquake survivor
+
+***
+
+
+### Ingest the data
+#### date, location, magnitude, and impact
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/earthquakes/significant-earthquakes-around-the-world.csv", header = TRUE, stringsAsFactors = FALSE)
+head(df, n=10)
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+ne_world <- filter(ne_world, iso_a3 != "ATA")
+
+```
+
+
+### Wrangle
+#### enrich base map with top 10 deadliest
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_worst <- df %>% slice_max(x_of_deaths, n = 10)
+df_worst$ISO3C <- countrycode(df_worst$location, origin = "country.name", destination = "iso3c")
+df_worst
+
+df_worst_merge <- df_worst %>% select(ISO3C, x_of_deaths)
+
+ne_world_worst <- merge(ne_world, df_worst_merge, by.x = "iso_a3", by.y = "ISO3C", all = TRUE)
+ne_world_worst <- ne_world_worst %>% dplyr::mutate(x_of_deaths = replace_na(x_of_deaths, 0))
+
+```
+
+
+### View
+#### with country highlights, points, and annotations
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "black", size = 12, family = "inconsolata"),
+  plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),
+  plot.background = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  legend.position = "none",
+  legend.title = element_blank()
+)
+
+v1 <- ggplot(data = ne_world_worst) +
+  geom_sf(aes(fill=x_of_deaths), color="#000000", stroke=0.5) +
+  geom_point( data = df, aes(x=longitude, y=latitude, color=magnitude), size=1.5, alpha = 0.8) +
+  geom_point( data = df_worst, aes(x=longitude, y=latitude, size=x_of_deaths), shape = 21, color = "black", fill = NA, stroke = 1.5, alpha = 1.0) +
+  geom_label_repel(data = df_worst, aes(x = longitude, y = latitude, label = paste0(location, ", ", locality, "\n", year, ", ", magnitude,  ", ", round(x_of_deaths/1000, digits = 0), "k")), 
+                  size = 4, hjust = 0.5, vjust = 0.5, nudge_y = -10, family = "inconsolata", fontface = "bold",
+                  seed = 42, force = 25, force_pull = 0, box.padding = 0.75, min.segment.length = 0, direction = "both", 
+                  segment.color = "black", segment.size = 1.5, segment.curvature = -0.1, segment.ncp = 3, segment.angle = 20, color = "white", fill = "#D32F2F", alpha = 0.8) +
+  scale_color_gradient(low = "#FFCDD2", high = "#C62828", na.value = NA) +
+  scale_fill_gradient(low = "#f0f0f0", high = "#888888", na.value = NA) +
+  scale_size_continuous(range = c(4, 20), guide = "none") +
+  labs(x=NULL,
+       y=NULL,
+       title = "Deadliest Earthquakes", 
+       subtitle=NULL) +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### References
+#### Citations and data sources
+
+
+* Earthquake Catalog, [GO](https://earthquake.usgs.gov/earthquakes/search/){target="_blank"}  
+* NOAA Satellite and Information Service, [GO](https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data?minDeaths=140000){target="_blank"} 
+* Our World in Data, What were the world’s deadliest earthquakes? [GO](https://ourworldindata.org/the-worlds-deadliest-earthquakes){target="_blank"} 
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

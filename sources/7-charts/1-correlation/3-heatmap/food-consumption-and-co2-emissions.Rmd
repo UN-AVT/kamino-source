@@ -65,7 +65,12 @@ Let's examine the situation.
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-food_consumption <- read.csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv')
+#Load data
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "food-consumption-and-co2-emissions/food-consumption-and-co2-emissions.csv"
+url <- paste0(url_root, url_file)
+
+food_consumption <- read.csv(url)
 food_consumption
 
 ```
@@ -129,18 +134,6 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 
 
 ```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/food-consumption-co2-emissions.svg", plot = v1, width=1280/72, height=720/72)
-
-```
-
 
 ### References
 #### Citation and data source

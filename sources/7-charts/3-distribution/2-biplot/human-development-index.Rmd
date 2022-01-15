@@ -63,8 +63,13 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df <- read.csv('archetypes/hdi/hdi-2020.csv', encoding = "UTF-8")
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "hdi/hdi-2020.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, encoding = "UTF-8")
 df
+
 
 ```
 
@@ -126,7 +131,7 @@ df_pca
 ### Plot
 #### standard output
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # fviz_pca function produces a ggplot2 graph.
 v1 <- fviz_pca(df_pca,  repel = TRUE,  labelsize = 3) + 
@@ -134,7 +139,7 @@ v1 <- fviz_pca(df_pca,  repel = TRUE,  labelsize = 3) +
   labs(title = "HDI Biplot")
 
 # Draw plot
-girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 
@@ -144,7 +149,7 @@ girafe(ggobj = v1, width_svg = 13, height_svg = 7,
 ### Plot
 #### with visual variable mapping and theme
  
-```{r, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, class.source='fold-hide', fig.width=16, fig.height=9, out.width="100%"}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE, class.source='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -189,22 +194,7 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
- 
- 
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
 
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/human-development-index-fs.svg", plot = v2, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/human-development-index-sm.png", plot = v2, width=4, height=2.25)
-
-```
-
- 
- 
 ### References
 #### The citations and data sources used for this case
 

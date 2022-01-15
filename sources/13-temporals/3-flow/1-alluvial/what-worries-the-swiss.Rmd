@@ -1,0 +1,249 @@
+---
+pagetitle: "What Worries the Swiss"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, dev='svg')
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggalluvial)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TEMPORALS
+</div>
+
+
+# What Worries the Swiss
+## alluvial
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Peter Ogilvie on Unsplash"}
+
+masthead <- "assets/peter-ogilvie-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> We are defined not by our borders but by our bonds...\
+--- Barack Obama\
+
+***
+
+### Ingest
+#### the worries
+
+
+```{r, echo=FALSE}
+
+ranks_of_worries <- read.csv("archetypes/what-worries-the-swiss/ranks-of-worries.csv", header = TRUE, stringsAsFactors = FALSE)
+ranks_of_worries <- ranks_of_worries %>% select(-color)
+ranks_of_worries
+
+```
+
+
+### Section
+#### Subsection
+
+
+```{r}
+
+worries_sorted <- ranks_of_worries %>%
+    group_by(topic) %>%
+    summarise(value = median(value, na.rm = TRUE)) %>%
+    arrange(desc(value)) %>%
+    top_n(6, wt = value)
+worries_sorted
+
+```
+
+
+### Section
+#### Subsection
+
+
+```{r}
+
+ranks_of_big_worries <- ranks_of_worries %>%
+  filter(topic %in% worries_sorted$topic) %>%
+  arrange(topic, year)
+
+
+#translate topics into English
+ranks_of_big_worries$topic_en <- recode(ranks_of_big_worries$topic,
+     "Arbeitslosigkeit" = "Unemployment",                  
+     "AHV / Altersvorsorge" = "Pensions", 
+     "Gesundheit, Krankenkassen" = "Health, Insur.", 
+     "Flüchtlinge / Asyl" = "Refugees / Asylum",
+     "AusländerInnen" = "Foreigners",
+     "EU / Bilaterale / Integration" = "EU Integration"
+)
+
+ranks_of_big_worries
+
+```
+
+
+### Section
+#### Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+  panel.grid = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  legend.position = "top",
+  legend.title = element_blank()
+)
+
+topic_palette <- c(
+  "Unemployment" = "#E53935",                  
+  "Pensions" = "#FF5722", 
+  "Health, Insur." = "#FFA726", 
+  "Refugees / Asylum" = "#26A69A",
+  "Foreigners" = "#1976D2",
+  "EU Integration" = "#43A047"
+)
+
+ranks_of_big_worries_filtered <- ranks_of_big_worries %>% filter(year %% 2 == 1)
+
+# "xspline", "linear", "cubic", "quintic", "sine", "arctangent", "sigmoid"
+
+# View using alluvium geom
+v1 <- ggplot(data = ranks_of_big_worries_filtered, aes(x = year, y = value, alluvium = topic)) +
+  geom_alluvium(aes(fill = topic_en), size=1.5, colour = "#ffffff", alpha = 0.8, curve_type = "linear", decreasing = FALSE) +
+  # for set years
+  scale_x_continuous(breaks = ranks_of_big_worries_filtered$year) +
+  # for aesthetics to show top-down
+  scale_y_reverse() +
+  # use the palette defined above
+  scale_fill_manual(values = topic_palette) +
+  # in case any marks fall outside panel
+  coord_cartesian(clip = "off") +
+  # a simple theme to modify
+  theme_minimal() +
+  # rotate years
+  theme(axis.text.x = element_text(angle = -90, hjust = 1, vjust = 0.5)) +
+  # use configured theme options
+  theme_opts +
+  labs(
+    x="",
+    y="",
+    title="What Worries the Swiss?",
+    subtitle=""
+  )
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 14,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+```
+
+
+### Section
+#### Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+min_year <- min(ranks_of_big_worries_filtered$year)
+max_year <- max(ranks_of_big_worries_filtered$year)
+
+# View using alluvium geom
+v2 <- ggplot(data = ranks_of_big_worries_filtered, aes(x = year, stratum = topic, alluvium = topic, y = value, fill = topic_en)) +
+  geom_flow(alpha = 0.8, width = 1/4, size=1.5, colour = "#ffffff") +
+  geom_stratum(alpha = 0.5, width = 1/4, size=0.5, colour = "#ffffff") +
+  geom_text_repel(
+    aes(label = ifelse(year == min_year, as.character(topic), NA)),
+    stat = "stratum", size = 4, vjust = 0.5, hjust = 1.0, direction = "x", xlim  = c(min_year-3, min_year-2), force_pull = 0, nudge_x = 0,
+    min.segment.length = 0, seed = 42, box.padding = 0.5
+  ) +
+  geom_text_repel(
+    aes(label = ifelse(year == max_year, as.character(topic_en), NA)),
+    stat = "stratum", size = 4, vjust = 0.5, hjust = 1.0, direction = "x", xlim  = c(max_year, NA), force_pull = 0, nudge_x = 2,
+    min.segment.length = 0, seed = 42, box.padding = 0.5
+  ) +
+  # for set years
+  scale_x_continuous(breaks = ranks_of_big_worries_filtered$year, expand = expansion(mult = 0.25)) +
+  # for aesthetics to show top-down
+  # scale_y_reverse() +
+  # use the palette defined above
+  scale_fill_manual(values = topic_palette) +
+  # in case any marks fall outside panel
+  coord_cartesian(clip = "off") +
+  # a simple theme to modify
+  theme_minimal() +
+  # rotate years
+  theme(axis.text.x = element_text(angle = -90, hjust = 1, vjust = 0.5)) +
+  # use configured theme options
+  theme_opts +
+  labs(
+    x="",
+    y="",
+    title="What Worries the Swiss?",
+    subtitle=""
+  )
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 14,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* https://srfdata.github.io/2019-06-worries/#worries
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

@@ -1,0 +1,21 @@
+category,rank,country,number_of_tourists,number_of_locals,locals_outnumbered_by_tourists_by
+Overtourism,1,Croatia,57587000,4170600,13.8078
+Overtourism,2,Iceland,1891000,334250,5.6574
+Overtourism,3,Hungary,52890000,9817960,5.3871
+Overtourism,4,Denmark,28692000,5731120,5.0064
+Overtourism,5,France,202930000,66896110,3.0335
+Overtourism,6,Czech Republic,30915000,10561630,2.9271
+Overtourism,7,Singapore,16404000,5607280,2.9255
+Overtourism,8,Cyprus,3286000,1170130,2.8082
+Overtourism,9,Greece,28071000,10746740,2.612
+Overtourism,10,Spain,115561000,46443960,2.4882
+Undertourism,1,Tanzania,1284000,55572200,0.0231
+Undertourism,2,Papua New Guinea,198000,8084990,0.0245
+Undertourism,3,Kenya,1340000,48461570,0.0277
+Undertourism,4,Indonesia,11519000,261115460,0.0441
+Undertourism,5,Egypt,5399000,95688680,0.0564
+Undertourism,6,Mozambique,1715000,28829480,0.0595
+Undertourism,7,Iran,4942000,80277430,0.0616
+Undertourism,8,Colombia,4048000,48653420,0.0832
+Undertourism,9,Sri Lanka,2168000,21203000,0.1022
+Undertourism,10,China,141774000,1378665000,0.1028

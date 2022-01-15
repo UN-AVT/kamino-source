@@ -1,17 +1,17 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "Meteorite Landings"
+output:
   html_document:
     theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: libs
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
@@ -23,14 +23,17 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
-library(maps)
-library(geojsonio)
+library(tidyverse)
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
-library(tidyverse)
 library(ggiraph)
-library(ggdark)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
@@ -41,9 +44,10 @@ MAPS
 # Meteorite Landings
 ## Dot Map
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Tengyart on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Tasos Mansour on Unsplash"}
 
-knitr::include_graphics("archetypes/meteorite-landings/tengyart-unsplash.jpg", dpi=300)
+masthead <- "assets/tasos-mansour-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
 
 ```
 
@@ -54,130 +58,119 @@ knitr::include_graphics("archetypes/meteorite-landings/tengyart-unsplash.jpg", d
 ***
 
 
-# Ingest the data
-## Meteorite Landings
+### Ingest
+#### meteorite landings
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/meteorite-landings/meteorite-landings.csv", header = TRUE, stringsAsFactors = FALSE)
-df
+df <- read.csv("archetypes/meteorite-landings/meteorite-landings.csv", header = TRUE, stringsAsFactors = FALSE)
+head(df, n=10)
 
 ```
 
 
-# Dot map
-## Meteor shape
+### Analyze
+#### simplify, group, and aggregate points
+
+* Before: 45,716 rows
+* After: 9,414 rows
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_simplified <- df %>% dplyr::mutate(reclat = round(reclat, digits = 2), reclong = round(reclong, digits = 2)) %>%
+  group_by(reclat, reclong) %>%
+  summarise(mass_total = sum(mass))
+
+df_simplified
+
+```
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE, fig.width=13, fig.height=8}
+### Wrangle
+#### order by mass
 
-df_sorted <- df[order(df$mass),]
 
-# PLOT NATURAL EARTH BORDERS
-ne_world <- ne_countries(scale = "medium", returnclass = "sf")
-# class(ne_world)
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
-# removes Antarctica
-# ne_world <- filter(ne_world, iso_a3 != "ATA") 
+df_sorted <- df_simplified[order(df_simplified$mass_total),]
+df_sorted <- df_sorted %>% mutate(mass_total = round(mass_total, digits = 0))
 
-# theme parameters
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+
+```
+
+
+### View
+#### using mass as a visual variable for color and alpha
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
 theme_opts <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "#8D9592", size = 14, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "#8D9592", size = 11, family = "inconsolata"),
+  plot.caption = element_text(color = "#8D9592", size = 8, family = "inconsolata"),
+  plot.background = element_rect(fill = "#0b131a", color = "#0b131a"),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="#0b131a", colour=NA),
+  panel.border = element_blank(),
   axis.text = element_blank(),
   axis.line = element_blank(),
   axis.ticks = element_blank(),
   axis.title = element_blank(),
-  panel.grid = element_blank(),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  panel.background=element_rect(fill="white", colour="white"),
-  panel.border = element_blank(),
-  plot.background = element_blank(),
+  legend.position = "bottom",
+  legend.background = element_rect(fill = "#0b131a", color = "#0b131a"),
+  legend.text = element_text(color = "#8D9592", size = 10, family = "inconsolata"),
+  legend.key.width = unit(3, 'cm'),
+  legend.title = element_blank()
 )
 
 v1 <- ggplot(data = ne_world) +
-  # map feature styling
-  geom_sf(fill="white", color="#888888", stroke=0.5) +
-  # dot parameters
-  geom_point( data = df_sorted, aes(x=reclong, y=reclat, color=mass), shape=8, size=1.5) +
-  scale_color_gradient(low = "yellow", high = "red", na.value = NA) +
-  theme_bw() +
+  geom_sf(fill="#081b2a", color="#09325b", stroke=0.5) +
+  geom_point( data = df_sorted, aes(x=reclong, y=reclat, color=mass_total, alpha=mass_total), shape = 8, size = 1.25) +
+  scale_color_gradient(low = "yellow", high = "red", na.value = NA, label = function(x) sprintf("%.0f", x)) +
+  scale_alpha_continuous( range = c(0.1, 0.7), guide = "none") +
+  xlim(-180, 180) +
+  ylim(-90, 90) +
   labs(x=NULL,
        y=NULL,
        title = "Meteorite Landings", 
-       subtitle="Color by mass") +
+       subtitle="color and alpha by mass") +
+  theme_bw() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 13, height_svg = 7,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
 
 
-# Dark theme
-## Using magnitude and alpha as a visual variable
+### References
+#### Citations and data sources
+
+* Earthquake Catalog, [GO](https://earthquake.usgs.gov/earthquakes/search/){target="_blank"}
+* NOAA Satellite and Information Service, [GO](https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data?minDeaths=140000){target="_blank"} 
+* Our World in Data, What were the world’s deadliest earthquakes? [GO](https://ourworldindata.org/the-worlds-deadliest-earthquakes){target="_blank"}
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE, fig.width=13, fig.height=10}
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-# theme parameters
-theme_dark_opts <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
-  axis.text = element_blank(),
-  axis.line = element_blank(),
-  axis.ticks = element_blank(),
-  axis.title = element_blank(),
-  panel.grid = element_blank(),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  #bpanel.background=element_rect(fill="white", colour="white"),
-  panel.border = element_blank(),
-  #plot.background = element_blank(),
-)
-
-v2 <- ggplot(data = ne_world) +
-  # map feature styling
-  geom_sf(fill="transparent", color="#444444", stroke=0.5) +
-  # dot parameters
-  geom_point( data = df_sorted, aes(x=reclong, y=reclat, color=mass, alpha=mass), shape = 8, size = 1.5) +
-  scale_color_gradient(low = "yellow", high = "red", na.value = NA) +
-  scale_alpha_binned() +
-  labs(x=NULL,
-       y=NULL,
-       title = "Meteorite Landings", 
-       subtitle="Color and alpha by mass") +
-  dark_theme_bw() +
-  theme_dark_opts
-
-girafe(ggobj = v2, width_svg = 13, height_svg = 10,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-```
-
-
-
-```{r, echo=FALSE}
-
-# ggsave(filename = "assets/meteorite-landings.svg", plot = v1, width=13, height=10)
-
-```
-
-
-# References
-## The citations and data sources used for this case
-
-Earthquake Catalog, https://earthquake.usgs.gov/earthquakes/search/  
-NOAA Satellite and Information Service, https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data?minDeaths=140000  
-Our World in Data, What were the world’s deadliest earthquakes? https://ourworldindata.org/the-worlds-deadliest-earthquakes  
-
-
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# read.bibtex(file = "./citations.bib")
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```
 

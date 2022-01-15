@@ -63,11 +63,20 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # Load csv data file
-df_vdem <- read.csv("archetypes/public-support-for-free-speech/vdem-v2x_freexp.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+
+url_file1 <- "public-support-for-free-speech/vdem-v2x_freexp.csv"
+url1 <- paste0(url_root, url_file1)
+
+df_vdem <- read.csv(url1, header = TRUE, stringsAsFactors = FALSE)
 df_vdem
 
-df_justitia <- read.csv("archetypes/public-support-for-free-speech/justitia-free-speech-index.csv", header = TRUE, stringsAsFactors = FALSE)
+url_file2 <- "public-support-for-free-speech/justitia-free-speech-index.csv"
+url2 <- paste0(url_root, url_file2)
+
+df_justitia <- read.csv(url2, header = TRUE, stringsAsFactors = FALSE)
 df_justitia
+
 
 ```
 
@@ -95,7 +104,7 @@ df_final
 #### data points with smoothing
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -137,7 +146,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 #### some narrative to help tell the story
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 v2 <- v1 +
   geom_text_repel(aes(label = country_name), direction = "y", min.segment.length = 0.0, nudge_y = 0.02, point.padding = 0.2, family = "inconsolata")
@@ -146,20 +155,6 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
   
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "outputs/public-support-for-free-speech-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/public-support-for-free-speech-sm.svg", plot = v1, width=4, height=2.25)
-
 ```
 
 

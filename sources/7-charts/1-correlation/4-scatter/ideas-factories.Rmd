@@ -63,11 +63,21 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # Load csv data file
-df_gdp <- read.csv("archetypes/ideas-factories/gdp-per-person-employed-constant-ppp.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+
+url_file1 <- "ideas-factories/gdp-per-person-employed-constant-ppp.csv"
+url1 <- paste0(url_root, url_file1)
+
+url_file2 <- "ideas-factories/global-innovation-index.csv"
+url2 <- paste0(url_root, url_file2)
+
+df_gdp<- read.csv(url1, header = TRUE, stringsAsFactors = FALSE)
 df_gdp
 
-df_gii <- read.csv("archetypes/ideas-factories/global-innovation-index.csv", header = TRUE, stringsAsFactors = FALSE)
+
+df_gii<- read.csv(url2, header = TRUE, stringsAsFactors = FALSE)
 df_gii
+
 
 ```
 
@@ -109,7 +119,7 @@ df_final
 #### data points with smoothing
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -141,7 +151,7 @@ v1 <- ggplot(df_final, aes(x = GDP, y = GII)) +
   theme_bw() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 12,
        options = list(opts_sizing(rescale = TRUE, width = 0.75))
 )
 
@@ -152,7 +162,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 #### some narrative to help tell the story
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 v2 <- v1 + 
       annotate("text", x = 200000, y = 30, 
@@ -162,23 +172,9 @@ v2 <- v1 +
                label = "African countries presented low GDP despite\nthe high Global Innovation Index",
                hjust = "left", vjust = 1, color = "#333333", size = 4, fontface = 1) 
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 12,
        options = list(opts_sizing(rescale = TRUE, width = 0.75))
 )
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/ideas-factories-fs.svg", plot = v2, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/ideas-factories-sm.png", plot = v2, width=4, height=2.25)
 
 ```
 

@@ -61,9 +61,12 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df = read.csv("archetypes/teacher-worth/oecd-teacher-salaries.csv", header = TRUE, stringsAsFactors = FALSE) # read text file
-df
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "teacher-worth/oecd-teacher-salaries.csv"
+url <- paste0(url_root, url_file)
 
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE) # read text file
+df
 ```
 
 
@@ -89,7 +92,7 @@ df_wrangle
 #### segment and points
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -128,21 +131,8 @@ v1 <- ggplot(df_wrangle) +
   theme_minimal() + 
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 1080/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = FALSE, width = 0.95)))
-
-```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/teacher-worth-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "outputs/teacher-worth-sm.svg", plot = v1, width=2.25, height=2.25)
 
 ```
 

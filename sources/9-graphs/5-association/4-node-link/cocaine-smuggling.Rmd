@@ -1,0 +1,215 @@
+---
+pagetitle: "Cocaine Smuggling"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, dev='svg')
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggraph)
+library(igraph)
+library(graphlayouts)
+library(tidygraph)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+GRAPHS
+</div>
+
+# Cocaine Smuggling
+## computed layouts
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo from Wikipedia"}
+
+masthead <- "assets/jolo-island-wikipedia.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> ...didn't pursue us...As time went on, we noticed that they never pursued us...\
+--- Gracia Burnham, ASG kidnap survivor\
+
+***
+
+Data refers to four groups involved in cocaine trafficking in Spain. Information comes from police wiretapping and meetings registered by police investigations of these criminal organisations between 2007 and 2009.
+
+Operation ACERO (N=11). This investigation started in 2007 and involved a smaller family-based group. The group was composed mainly of members of a same family and was led by a female. They distributed cocaine in Madrid (Spain) that was provided to them by other groups based in a northwest region of the country, one of the most active areas in the provision of cocaine from the countries of origin. The group also had their own procedures to launder money.
+
+Operation JAKE (N=62). In 2008, the group investigated was operating as a wholesale supplier and retail distributor of cocaine and heroin in a large distribution zone located in Madrid (Spain), where gypsy clans traditionally carry out similar activities. The group was in charge of acquiring, manipulating and selling the drugs in the gypsy quarter.
+
+Operation JUANES (N=51). In 2009, the police investigation detected a group involved in the smuggling of cocaine from Mexico to be distributed in Madrid (Spain). In this case, the group operated in close cooperation with another organization that was laundering the illegal income from drug distribution from this and other groups. The cocaine traffickers earned an estimated EUR 60 million.
+
+Operation MAMBO (N=22). The investigation started in 2006 and involved Colombian citizens that were introducing 50 kg of cocaine to be adulterated and distributed in Madrid (Spain). Ultimately, the group was involved in smuggling cocaine from Colombia through Brazil and Uruguay to be distributed in Spain. This is a typical Spanish middle cocaine group acting as wholesale supplier between a South American importer group and retailers in Madrid.
+
+
+### Ingest
+#### agent × event data
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_acero <- read.csv("archetypes/cocaine-smuggling/cocaine-smuggling-acero.csv", header=TRUE, row.names=1, check.names=FALSE, na.strings = "")
+df_acero
+
+df_jake <- read.csv("archetypes/cocaine-smuggling/cocaine-smuggling-jake.csv", header=TRUE, row.names=1, check.names=FALSE, na.strings = "")
+df_jake
+
+df_juanes <- read.csv("archetypes/cocaine-smuggling/cocaine-smuggling-juanes.csv", header=TRUE, row.names=1, check.names=FALSE, na.strings = "")
+df_juanes
+
+df_mambo <- read.csv("archetypes/cocaine-smuggling/cocaine-smuggling-mambo.csv", header=TRUE, row.names=1, check.names=FALSE, na.strings = "")
+df_mambo
+
+```
+
+
+### Wrangle
+#### convert matrix to graph, filter by degree
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_acero[is.na(df_acero)] <- 0
+matrix <- as.matrix(df_acero) 
+df_graph <- graph_from_incidence_matrix(matrix)
+df_graph
+
+# less than 3 degrees
+three_degrees <- which(degree(df_graph)<3)
+df_graph <- delete.vertices(df_graph, three_degrees)
+
+# remove isolates
+isolates <- which(degree(df_graph)==0)
+df_graph <- delete.vertices(df_graph, isolates)
+
+```
+
+
+### Analytics
+#### compute layout
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Layouts can be computationally intensive
+# Un-comment only for use
+
+# igraph
+# layout <- create_layout(df_graph, layout = 'dh')
+# layout <- create_layout(df_graph, layout = 'fr')
+# layout <- create_layout(df_graph, layout = 'gem')
+# layout <- create_layout(df_graph, layout = 'lgl')
+# layout <- create_layout(df_graph, layout = 'sugiyama')
+# layout <- create_layout(df_graph, layout = 'star')
+# layout <- create_layout(df_graph, layout = 'kk', maxiter = 100)
+# layout <- create_layout(df_graph, layout = 'drl')
+# layout <- create_layout(df_graph, layout = 'linear')
+# layout <- create_layout(df_graph, layout = 'linear' , circular = TRUE)
+
+# ggraph
+# layout <- create_layout(df_graph, layout = 'linear')
+# layout <- create_layout(df_graph, layout = 'linear', circular = TRUE)
+layout <- create_layout(df_graph, layout = 'stress')
+# layout <- create_layout(df_graph, layout = 'sparse_stress')
+# layout <- create_layout(df_graph, layout = 'backbone')
+# layout <- create_layout(df_graph, layout = 'pmds')
+# layout <- create_layout(df_graph, layout = 'eigen')
+# layout <- create_layout(df_graph, layout = 'centrality')
+# layout <- create_layout(df_graph, layout = 'focus')
+# layout <- create_layout(df_graph, layout = 'dendrogram')
+# layout <- create_layout(df_graph, layout = 'unrooted')
+# layout <- create_layout(df_graph, layout = 'matrix')
+# layout <- create_layout(df_graph, layout = 'hive')
+# layout <- create_layout(df_graph, layout = 'fabric')
+
+# graphlayouts
+# layout <- create_layout(df_graph, layout = "nicely")
+# layout <- create_layout(df_graph, layout = "stress")
+# layout <- create_layout(df_graph, layout = "focus", focus = 1)
+
+```
+
+
+### Plot
+#### nicely
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+   legend.position='none'
+)
+
+v1 <- ggraph(layout) + 
+  geom_edge_link() +
+  geom_node_point(size = 2) +
+  geom_node_label(aes(label = name), size = 4) +
+  theme_graph() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 14,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+
+* Narrative: Jimenez-Salinas Framis, A. "Illegal networks or criminal organizations: Power, roles and facilitators in four cocaine trafficking structures." In Third Annual Illicit Networks Workshop, Montreal. 2011.
+* Data: UCINET, Covert Networks, https://sites.google.com/site/ucinetsoftware/datasets/covert-networks
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+
+

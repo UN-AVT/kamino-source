@@ -31,6 +31,12 @@ library(rnaturalearthdata)
 library(tidyverse)
 library(ggiraph)
 
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
 ```
 
 <div class="activity">
@@ -43,7 +49,9 @@ MAPS
 
 ```{r, out.width = "60%", fig.align = 'center'}
 
-knitr::include_graphics("archetypes/amazon-rainforest-on-fire/brazil-fires.jpg", dpi=300)
+masthead <- "assets/brazil-fires.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
 
 ```
 
@@ -52,89 +60,149 @@ knitr::include_graphics("archetypes/amazon-rainforest-on-fire/brazil-fires.jpg",
 
 ***
 
-# Section
-## Subsection
+The Amazon Dashboard tracks individual fires in the Amazon region using a new approach to cluster and classify VIIRS active fire detections by fire type.  Based on the fire location, intensity, duration, and spread rate, each individual event is classified as a deforestation fire, understory forest fire, small clearing & agricultural fire, or savanna fire.
 
-```{r, echo=FALSE}
+### Ingest
+#### Amazon dashboard data
 
-# Load data
-df = read.csv("archetypes/global-fire-data/brazil-cities.csv", header = TRUE, stringsAsFactors = FALSE)
-df
+* fire_type:	(1) savanna and grassland, (2) small clearing and agriculture, (3) understory, and (4) deforestation fires
+* confidence:	(1) low, (2) moderate, (3) high
+* frp	Average: fire radiative power (FRP) for all fire detections within fire perimeter in megawatts (MW)
+* is_new:	New fire start within past 24 hours (1) or existing fire (0)
+* is_active:	Fire was active within the past 10 days (1) or not (0)
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/amazon-rainforest-on-fire/fire-atlas-jan-july.csv", header = TRUE, stringsAsFactors = FALSE)
+head(df, n=10)
 
 ```
 
 
-# Section
-## Subsection
+### Ingest
+#### points for reference, cities
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# PLOT NATURAL EARTH BORDERS
-ne_world <- ne_countries(scale = "medium", returnclass = "sf")
-# class(ne_world)
+cities <- read.csv("archetypes/amazon-rainforest-on-fire/brazil-cities.csv", header = TRUE, stringsAsFactors = FALSE, fileEncoding = "utf-8")
+head(cities, n=10)
 
-# removes Antarctica
-ne_world <- filter(ne_world, iso_a3 == "BRA") 
+```
 
-# theme parameters
+
+### Wrangle
+#### reduce by filter
+
+* is new
+* is active
+* high confidence
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_new <- filter(df, is_new == 1)
+df_new <- filter(df_new, is_active == 1)
+df_new <- filter(df_new, confidence == 3)
+
+# to use for manual (discrete) color scale
+df_new <- df_new %>% mutate(fire_type = as.character(fire_type))
+
+# head(df_new, n=10)
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+# ne_world <- filter(ne_world, iso_a3 == "BRA") 
+
+```
+
+
+### Map layers
+#### adm1, bosque protector, departamental, nacional, reserva florestal
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+adm1 <- st_read("archetypes/amazon-rainforest-on-fire/bra_admbnda_adm1_ibge_2020.geojson")
+# bosque_protector <- st_read("archetypes/amazon-rainforest-on-fire/bosque-protector.geojson")
+# departamental <- st_read("archetypes/amazon-rainforest-on-fire/departamental.geojson")
+# nacional <- st_read("archetypes/amazon-rainforest-on-fire/nacional.geojson")
+# reserva_florestal <- st_read("archetypes/amazon-rainforest-on-fire/reserva-florestal.geojson")
+
+```
+
+### View
+#### size by frp, color by fire_type
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
 theme_opts <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
-  axis.text = element_blank(),
-  axis.line = element_blank(),
-  axis.ticks = element_blank(),
-  axis.title = element_blank(),
-  panel.grid = element_blank(),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  panel.background=element_rect(fill="white", colour="white"),
-  panel.border = element_blank(),
+  panel.background = element_rect(fill="#b9d2df", colour="white"),
   plot.background = element_blank(),
+  legend.position = "none"
 )
 
-# color palette to use
-pal <- wes_palette("Zissou1", 10, type = "continuous")
+# to limit bounds of map view
+xmin <- min(df_new$x)
+xmax <- max(df_new$x)
+ymin <- min(df_new$y)
+ymax <- max(df_new$y)
+
+fire_types <- c(
+  "1" = "#77c3ff", # savanna and grassland
+  "2" = "#e7ac03", # small clearing and agriculture
+  "3" = "#6ba61b", # understory
+  "4" = "#8d1900" # deforestation fires
+)
 
 v1 <- ggplot(data = ne_world) +
-  # map feature styling
-  geom_sf(fill="white", color="#888888", stroke=0.5) +
-  # bubble parameters
-  geom_point( data = df, aes(x=lng, y=lat), size=2.0, color="black", alpha=0.8) +
-  # size scaling applied to bubbles
-  scale_size_continuous(range=c(1,12)) +
-  scale_fill_gradientn(colours = pal) + 
-  scale_color_gradientn(colours = pal) + 
+  geom_sf(fill="#f1efe9", color="#bbadbc", stroke=0.5) +
+  geom_sf(data = adm1, fill=NA, color="#B2DFDB", stroke=0.5, alpha = 0.2 ) +
+  # geom_sf(data = bosque_protector, fill="white", color="#B2DFDB", stroke=0.5, alpha = 0.2 ) +
+  # geom_sf(data = departamental, fill="white", color="#B2DFDB", stroke=0.5, alpha = 0.2 ) +
+  # geom_sf(data = nacional, fill="white", color="#B2DFDB", stroke=0.5, alpha = 0.2 ) +
+  # geom_sf(data = reserva_florestal, fill="white", color="#B2DFDB", stroke=0.5, alpha = 0.2 ) +
+  geom_point( data = df_new, aes(x = x, y = y, size = frp), shape = 21, color = "white", fill = "white", stroke = 3.0, alpha=0.4) +
+  geom_point( data = df_new, aes(x = x, y = y, color = fire_type, fill = fire_type, size = frp), shape = 21, alpha=0.8) +
+  geom_point( data = cities, aes(x = lng, y = lat), size = 2, color = "#333333", alpha=1.0) +
+  scale_size_continuous(range=c(2,12)) +
+  scale_color_manual ( values = fire_types ) +
+  scale_fill_manual ( values = fire_types ) +
+  coord_sf(xlim = c(xmin, xmax), ylim = c(ymin, ymax)) +
+  labs(x = NULL,
+       y = NULL,
+       title = "Amazon Rainforest Fires", 
+       subtitle="January to July, 2021") +
   theme_bw() +
-  labs(x="Longitude",
-       y="Latitude",
-       title = "Bubble Map", 
-       subtitle="Top 10000 Cities of the World") +
   theme_opts
 
-v1
-
-```
-
-# Section
-## Subsection
-
-```{r, echo=FALSE}
-
-# ggsave(filename = "world-pm25.svg", plot = v1, width=11, height=6)
+girafe(ggobj = v1, width_svg = 16, height_svg = 15,
+       options = list(opts_sizing(rescale = TRUE, width = 0.65)))
 
 ```
 
 
+### References
+#### citations for narrative and data sources
 
-# References
-## The citations and data sources used for this case
+
+* Data and Narrative: Global Fire Emissions Database, Amazon Dashboard, [GO](https://globalfiredata.org/pages/amazon-dashboard/){target="_blank"} 
 
 
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-# cleanbib()
-# read.bibtex(file = "./citations.bib")
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```
 

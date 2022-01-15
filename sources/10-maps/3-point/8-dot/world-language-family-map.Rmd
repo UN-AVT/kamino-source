@@ -1,20 +1,21 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "World Language Family Map"
+output:
   html_document:
     theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: libs
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
+
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
 options(scipen = 999) ## To disable scientific notation
@@ -23,14 +24,18 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memrory and report the memory usage.
 
-library(maps)
-library(geojsonio)
+library(tidyverse)
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
-library(tidyverse)
+library(ggrepel) 
 library(ggiraph)
-library(ggdark)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
@@ -38,146 +43,161 @@ library(ggdark)
 MAPS  
 </div>
 
-# Meteorite Landings
+# World Language Family Map
 ## Dot Map
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Tengyart on Unsplash"}
 
-knitr::include_graphics("archetypes/meteorite-landings/tengyart-unsplash.jpg", dpi=300)
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Macabe5387 on Wikimedia Commons"}
+
+masthead <- "assets/kirundi.jpg"
+knitr::include_graphics(masthead, dpi=72)
 
 ```
 
+<div class="figure-text">Burundi, main road from Bujumbura to Gitega.</br>The Kirundi text on the back of the truck warns cyclists not to hold on.</div>
 
-> Sometimes the meaning in life hits you like a meteorite...\
---- Curtis Tyrone Jones
+> Language, any language, has a dual character:\
+  it is both a means of communication and a carrier of culture...\
+--- Ngugi Wa Thiong'o\
 
 ***
 
 
-# Ingest the data
-## Meteorite Landings
+### Ingest
+#### language, coordinates, and status
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/meteorite-landings/meteorite-landings.csv", header = TRUE, stringsAsFactors = FALSE)
-df
+df_lang <- read.csv("archetypes/world-language-family-map/languoid-geo.csv", header = TRUE, stringsAsFactors = FALSE, fileEncoding = "utf-8")
+head(df_lang, n = 10)
 
 ```
 
 
-# Dot map
-## Meteor shape
+### Wrangle
+#### find Kirundi a.k.a. Rundi
 
 
-```{r, message=FALSE, warning=FALSE, echo=FALSE, fig.width=13, fig.height=8}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
-df_sorted <- df[order(df$mass),]
+df_rundi <- filter(df_lang, name == "Kirundi" | name == "Rundi")
+df_rundi
 
-# PLOT NATURAL EARTH BORDERS
-ne_world <- ne_countries(scale = "medium", returnclass = "sf")
-# class(ne_world)
+```
 
-# removes Antarctica
-# ne_world <- filter(ne_world, iso_a3 != "ATA") 
 
-# theme parameters
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+ne_world <- filter(ne_world, iso_a3 != "ATA")
+
+```
+
+
+### Context maps
+#### macro areas
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+africa <- st_read("archetypes/world-language-family-map/africa.geojson")
+australia <- st_read("archetypes/world-language-family-map/australia.geojson")
+eurasia <- st_read("archetypes/world-language-family-map/eurasia.geojson")
+north_america <- st_read("archetypes/world-language-family-map/north_america.geojson")
+papunesia <- st_read("archetypes/world-language-family-map/papunesia.geojson")
+south_america <- st_read("archetypes/world-language-family-map/south_america.geojson")
+
+```
+
+
+### View
+#### color by status
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
 theme_opts <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
-  axis.text = element_blank(),
-  axis.line = element_blank(),
-  axis.ticks = element_blank(),
-  axis.title = element_blank(),
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "black", size = 12, family = "inconsolata"),
+  plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),
+  plot.background = element_blank(),
   panel.grid = element_blank(),
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(),
   panel.background=element_rect(fill="white", colour="white"),
   panel.border = element_blank(),
-  plot.background = element_blank(),
-)
-
-v1 <- ggplot(data = ne_world) +
-  # map feature styling
-  geom_sf(fill="white", color="#888888", stroke=0.5) +
-  # dot parameters
-  geom_point( data = df_sorted, aes(x=reclong, y=reclat, color=mass), shape=8, size=1.5) +
-  scale_color_gradient(low = "yellow", high = "red", na.value = NA) +
-  theme_bw() +
-  labs(x=NULL,
-       y=NULL,
-       title = "Meteorite Landings", 
-       subtitle="Color by mass") +
-  theme_opts
-
-girafe(ggobj = v1, width_svg = 13, height_svg = 7,
-       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-```
-
-
-# Dark theme
-## Using magnitude and alpha as a visual variable
-
-
-```{r, message=FALSE, warning=FALSE, echo=FALSE, fig.width=13, fig.height=10}
-
-# theme parameters
-theme_dark_opts <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
   axis.text = element_blank(),
   axis.line = element_blank(),
   axis.ticks = element_blank(),
   axis.title = element_blank(),
-  panel.grid = element_blank(),
-  panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  #bpanel.background=element_rect(fill="white", colour="white"),
-  panel.border = element_blank(),
-  #plot.background = element_blank(),
+  legend.position = "bottom",
+  legend.title = element_blank()
 )
 
-v2 <- ggplot(data = ne_world) +
-  # map feature styling
-  geom_sf(fill="transparent", color="#444444", stroke=0.5) +
-  # dot parameters
-  geom_point( data = df_sorted, aes(x=reclong, y=reclat, color=mass, alpha=mass), shape = 8, size = 1.5) +
-  scale_color_gradient(low = "yellow", high = "red", na.value = NA) +
-  scale_alpha_binned() +
+# unique(df_lang$status)
+status_palette <- c(
+  "safe" = "#40b3ec",
+  "vulnerable" = "#ec7940",
+  "definitely endangered" = "#ec407a",
+  "severely endangered" = "#ec407a",
+  "critically endangered" = "#ec407a",
+  "extinct" = "#000000"
+)
+
+v1 <- ggplot(data = ne_world) +
+  geom_sf(fill="white", color="#888888", size=0.5) +
+  geom_sf(data = africa, fill=NA, color="#666666", size=0.5, linetype = "dotdash") +
+  geom_sf(data = australia, fill=NA, color="#666666", size=0.5, linetype = "dotdash") +
+  geom_sf(data = eurasia, fill=NA, color="#666666", size=0.5, linetype = "dotdash") +
+  geom_sf(data = north_america, fill=NA, color="#666666", size=0.5, linetype = "dotdash") +
+  geom_sf(data = papunesia, fill=NA, color="#666666", size=0.5, linetype = "dotdash") +
+  geom_sf(data = south_america, fill=NA, color="#666666", size=0.5, linetype = "dotdash") +
+  geom_point( data = df_lang, aes(x=longitude, y=latitude, color=status), shape=21, size=1.5, fill = "white", alpha = 0.7) +
+  geom_point( data = df_rundi, aes(x=longitude, y=latitude, fill=status), shape=21, size=8, color = "white", alpha = 0.7) +
+  geom_point( data = df_rundi, aes(x=longitude, y=latitude), shape=20, size=5, color = "black", alpha = 1.0) +
+  geom_text_repel(data = df_rundi, aes(x = longitude, y = latitude, label = name), 
+                  size = 4, nudge_x = 25, hjust = 1.0, vjust = 0.5, family = "inconsolata", fontface = "bold",
+                  seed = 42, force = 1.0, force_pull = 0, box.padding = 0.75, min.segment.length = 0, direction = "x", 
+                  color = "black", bg.color = "white", bg.r = 0.15) +
+  scale_color_manual(values = status_palette) +
+  scale_fill_manual(values = status_palette, guide = "none") +
   labs(x=NULL,
        y=NULL,
-       title = "Meteorite Landings", 
-       subtitle="Color and alpha by mass") +
-  dark_theme_bw() +
-  theme_dark_opts
+       title = "World Languages", 
+       subtitle="color by status") +
+  theme_bw() +
+  theme_opts
 
-girafe(ggobj = v2, width_svg = 13, height_svg = 10,
+girafe(ggobj = v1, width_svg = 16, height_svg = 8.15,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 
-
-```{r, echo=FALSE}
-
-# ggsave(filename = "assets/meteorite-landings.svg", plot = v1, width=13, height=10)
-
-```
+### References
+#### citations and data sources
 
 
-# References
-## The citations and data sources used for this case
+<pre>
+Hammarström, Harald & Haspelmath, Martin & Forkel, Robert. 2017.
+Glottolog 3.0. Jena: Max Planck Institute for the Science of Human History.
+(Available online at http://glottolog.org, Accessed on 2017-03-23.)
+</pre>
 
-Earthquake Catalog, https://earthquake.usgs.gov/earthquakes/search/  
-NOAA Satellite and Information Service, https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data?minDeaths=140000  
-Our World in Data, What were the world’s deadliest earthquakes? https://ourworldindata.org/the-worlds-deadliest-earthquakes  
 
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# read.bibtex(file = "./citations.bib")
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```
 

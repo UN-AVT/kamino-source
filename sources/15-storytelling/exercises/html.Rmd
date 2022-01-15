@@ -1,0 +1,191 @@
+---
+pagetitle: "Apples"
+output: 
+  html_document:
+    theme: lumen
+    css: ["styles/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(scales)
+library(lubridate)
+library(ggplot2)
+library(ggiraph)
+library(ggthemes)
+
+
+```
+
+# The Cost of Perfection
+## An in-depth look at apples lost and wasted
+
+```{r, out.width = "100%"}
+
+knitr::include_graphics("assets/apple-1-short.jpg", dpi=300)
+
+```
+
+***
+
+> I also frequently wonder how we can allow food to be thrown away\
+  when more than 820 million people in the world continue to go hungry every day.\
+--- FAO Director-General Qu Dongyu
+
+Imagine an apple. It grows in an apple orchard looked after by a farmer, in suitable meteorological conditions. It is farmed to be sold and reach its end use: to feed people. But it will have to overcome many obstacles during its journey towards a dining table, and it could even end up not being eaten, as happens to nearly __one third__ of food produced worldwide. It could belong to the 14 percent of food produced that – in terms of economic value – is __lost__ through on-farm activities, storage and transportation; or it could be __wasted__ at the retail and consumption levels.
+
+* neque tempus posuere id quis nunc __ligula__
+* neque tempus posuere id quis nunc __ligula__
+
+
+# From Land to Landfill
+## H2
+### H3
+#### H4
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien pellentesque habitant morbi tristique senectus et netus et. Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Sit amet porttitor eget dolor morbi non. Etiam sit amet nisl purus in. Massa massa ultricies mi quis hendrerit dolor magna eget est. Ullamcorper malesuada proin libero nunc. Dictum sit amet justo donec enim diam vulputate. Nibh praesent tristique magna sit amet. Tincidunt ornare massa eget egestas purus viverra accumsan in nisl.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+owid = read.csv("data/owid-land-area-per-crop-type.csv", header = TRUE, stringsAsFactors = FALSE)
+owid <- mutate(owid, id = rownames(owid))
+
+# Convert to date type
+owid$date <- as.Date(paste(owid$Year, 1, 1, sep = "-")) # beginning of year
+owid <- owid[complete.cases(owid), ]
+
+world <- filter(owid, Entity == "World")
+world
+
+
+```
+
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien pellentesque habitant morbi tristique senectus et netus et. Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Sit amet porttitor eget dolor morbi non. Etiam sit amet nisl purus in. Massa massa ultricies mi quis hendrerit dolor magna eget est. Ullamcorper malesuada proin libero nunc. Dictum sit amet justo donec enim diam vulputate. Nibh praesent tristique magna sit amet. Tincidunt ornare massa eget egestas purus viverra accumsan in nisl.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=13, fig.height=7, out.width = "100%"}
+
+# theme_gray(), theme_bw(), theme_linedraw(), theme_light(), theme_dark(), theme_minimal(), theme_classic(), theme_void()
+# theme_fivethirtyeight(), theme_foundation(), theme_gdocs(), theme_hc()
+# theme_igray(), theme_map(), theme_pander(), theme_par(), theme_solarized() theme_solarized_2()
+# theme_solid(), theme_stata(), theme_tufte(), theme_wsj()
+
+theme_opts <- theme_minimal() + theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.ticks = element_line(),
+    legend.position = "bottom",
+    legend.title = element_blank()
+)
+
+
+# Plot
+area <- ggplot(world, aes(x=date, y=Apples.Area.harvested.ha)) + 
+  geom_area(color = "#C7372F", fill= "#ff0800", alpha=0.7 , size=0.5) +
+  geom_point_interactive(aes(x=date, y=Apples.Area.harvested.ha,
+    tooltip = paste0('Year: ', Year, '\n', 'Harvest Area: ', Apples.Area.harvested.ha, ' ha', '\n'), data_id = id), color="#FFFFFF", fill="#C7372F", shape=21, alpha=1, size=3) + 
+  scale_x_date(date_labels = "%Y") +
+  labs(
+    title = "World Land Use, Apples",
+    subtitle = "(hectares)",
+    caption = "Source: Our World in Data",
+    tag = NULL,
+    x = NULL,
+    y = NULL
+  ) +
+  theme_opts
+
+girafe(ggobj = area, width_svg = 13, height_svg = 4,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+# H1
+## H2
+### H3
+#### H4
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien pellentesque habitant morbi tristique senectus et netus et. Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Sit amet porttitor eget dolor morbi non. Etiam sit amet nisl purus in. Massa massa ultricies mi quis hendrerit dolor magna eget est. Ullamcorper malesuada proin libero nunc. Dictum sit amet justo donec enim diam vulputate. Nibh praesent tristique magna sit amet. Tincidunt ornare massa eget egestas purus viverra accumsan in nisl.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df = read.csv("data/fao-food-loss-waste-apple-data.csv", header = TRUE, stringsAsFactors = FALSE)
+df <- mutate(df, id = rownames(df))
+df
+
+```
+
+# H1
+## H2
+### H3
+#### H4
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien pellentesque habitant morbi tristique senectus et netus et. Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Sit amet porttitor eget dolor morbi non. Etiam sit amet nisl purus in. Massa massa ultricies mi quis hendrerit dolor magna eget est. Ullamcorper malesuada proin libero nunc. Dictum sit amet justo donec enim diam vulputate. Nibh praesent tristique magna sit amet. Tincidunt ornare massa eget egestas purus viverra accumsan in nisl.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=13, fig.height=7, out.width = "100%"}
+
+scatter <- ggplot(data=df) + 
+  geom_point_interactive(aes(x=factor(timepointyears), y=loss_per_clean, color=country, fill=country,
+    tooltip = paste0('Year: ', timepointyears, '\n', 'Loss: ', as.double(loss_per_clean), '%', '\n', 'Country: ', country,'\n'), data_id = id), shape=21, alpha=1, size=3) + 
+  labs(
+    title = "Apple Loss & Waste, by Year and Country",
+    subtitle = "(2000-2017)",
+    caption = "Source: FAO",
+    tag = NULL,
+    x = NULL,
+    y = "Percentage Loss of Quantity"
+  ) +
+  theme_opts
+
+girafe(ggobj = scatter, width_svg = 13, height_svg = 6,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# H1
+## H2
+### H3
+#### H4
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sapien pellentesque habitant morbi tristique senectus et netus et. Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Sit amet porttitor eget dolor morbi non. Etiam sit amet nisl purus in. Massa massa ultricies mi quis hendrerit dolor magna eget est. Ullamcorper malesuada proin libero nunc. Dictum sit amet justo donec enim diam vulputate. Nibh praesent tristique magna sit amet. Tincidunt ornare massa eget egestas purus viverra accumsan in nisl.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=13, fig.height=7, out.width = "100%"}
+
+boxplot <- ggplot(df, aes(x=fsc_location1, y=loss_per_clean, color=country, fill=country)) + 
+  geom_boxplot(fill = "#ffffff", colour = "#111111") +
+  # geom_dotplot(binaxis='y', stackdir='center', dotsize=0.4) +
+  geom_dotplot_interactive(aes(tooltip = paste0('Year: ', timepointyears, '\n', 'Loss: ', as.double(loss_per_clean), '%', '\n', 'Country: ', country,'\n'), data_id = id), 
+                           binaxis='y', stackdir='center', dotsize=0.4) +
+  labs(
+    title = "Apple Loss & Waste by Supply Chain Point",
+    subtitle = "(2000-2017)",
+    caption = "Source: FAO",
+    tag = NULL,
+    x = NULL,
+    y = "Percentage Loss of Quantity"
+  ) +
+  theme_opts
+
+girafe(ggobj = boxplot, width_svg = 13, height_svg = 8,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+

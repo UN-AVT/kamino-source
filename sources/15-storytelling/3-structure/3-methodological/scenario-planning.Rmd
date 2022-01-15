@@ -1,0 +1,144 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MODULE  
+</div>
+
+# Scenario Planning
+## Visions of the future
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Wyron A on Unsplash"}
+
+knitr::include_graphics("assets/scenario-planning/wyron-a-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">What will the world be like in 20 years?</div>
+
+> No sensible decision can be made any longer without taking into account\
+  not only the world as it is, but the world as it will be...\
+--- Isaac Asimov\
+
+***
+
+Scenario planning is a method of constructing alternative __stories__ for analysts and decision-makers to explore __what if__ and __how__ questions about __future events__ and the __forces__ that may push the future along different paths.
+
+### When to use
+#### a structured approach 
+
+Scenario planning is a structured process of thinking about and anticipating the __unknown__ future, without pretense of being able to predict the future or influence the outcome. Instead, it navigates through the __uncertainties__ and driving forces that __impact__ the future. The main objective is to utilize the process for developing stories describing plausible future realities and using them to __proactively inform__ strategic thinking and planning.
+
+### How it works
+#### issues, forces, stories, options, and indicators
+
+Overall, scenario planning is a forward thinking approach for dealing with the events, causes, opportunities, and problems that may shape our future.  It is comprised of seven (7) steps specifically designed to promote analytic, creative, and strategic thinking with clear goals and objectives.  
+
+<mark> _Step 1: Define the focal question_ </mark>
+
+A focal question defines the __issue__ that the scenario thinking process seeks to address. Focal questions for scenario planning will generally have a __15-20 year time horizon__.
+
+<mark> _Step 2: Identify Issues and Driving Forces_ </mark>
+
+This step is based on a broad __survey__ to examine the situational factors (e.g., society, economics, environment, technology, and politics) and trends that are predicted to influence the course of events.  Identifying the issues leads to assessing the potential __forces of change__ that may shape the future dynamics in predictable and unpredictable ways.
+
+<mark> _Step 3: Prioritize Issues_ </mark>
+
+The prioritization of issues is driven by an assessment of the impact and uncertainties of driving forces for the issues identified. The scenario process illuminates potential __blind spots__ by selecting the driving forces with highest impact and uncertainty.
+
+<mark> _Step 4: Establish Scenario Logic_ </mark>
+
+The scenario logic is meant to stimulate thinking of how the future might unfold. The logic is used to consider plausible futures defined into __quadrants__.  Each quadrant represents an alternate future that may emerge as certain causes, events, and impacts are experienced.
+
+<mark> _Step 5: Create Scenario Stories_ </mark>
+
+Scenarios are stories about how the future environment or issue might unfold. Scenarios are __plausible__ alternative views about how the future may develop, but they do not seek to predict the future. Instead, scenario analysis allows us to anticipate future developments, and to evaluate strategies for __responding__ to these events or conditions as we detect their arrival.
+
+<mark> _Step 6: Assess Implications and Options_ </mark>
+
+This step is to explicitly understand the implications of each scenario for the focal issue. The goal is explore __strategic options__ and provide insight for plans and actions.
+
+<mark> _Step 7: Monitor Leading Indicators_ </mark>
+
+The outcomes of certain future events may be critical and signal movement towards a scenario trajectory. The monitoring of these __signposts__ is a major benefit of scenario planning, as an enabler for the proactive analysis of the events that are shaping the present and future, and providing clues (or warnings) that a scenario story is emerging.
+
+
+### In practice
+#### a future world
+
+Scenarios should be provocative and fulfil their purpose to engage and immerse us in the future __realities__ we may face.  They must feel real and convey the importance of key issues, driving forces, indicators and the overall impact events may have on __human development__ and __environmental sustainability__.  The following illustration provides an overview of the process while highlighting the ever-present challenges (and questions) we face in the coming 15-20 years and beyond.
+
+```{r, out.width = "100%", fig.align = 'center', fig.cap="Adapted from GRID-Arendal based on information from IPCC, 2001"}
+
+knitr::include_graphics("assets/scenario-planning/scenario-planning.svg", dpi=300)
+
+```
+
+
+<div class="figure-text">20 years later...</div>
+
+This example is adopted from scenario planning 20 years ago!  Have you seen any signals that suggest a path towards any of the stories?  Consider the example and follow the process to define your own scenarios for the next 15-20 years.
+
+### Further reading
+#### energy, food, and much more
+
+* Shell Scenarios, https://www.shell.com/energy-and-innovation/the-energy-future/scenarios.html
+* World Economic Forum, Shaping the Future of Global Food Systems: A Scenarios Analysis, http://www3.weforum.org/docs/IP/2016/NVA/WEF_FSA_FutureofGlobalFoodSystems.pdf
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

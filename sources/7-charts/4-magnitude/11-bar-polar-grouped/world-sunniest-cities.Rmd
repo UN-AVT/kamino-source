@@ -63,8 +63,13 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 # Load data
-df <- read_csv("archetypes/sunniest_cities.csv", col_names=TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "sunniest-cities/sunniest_cities.csv"
+url <- paste0(url_root, url_file)
+
+df <- read_csv(url, col_names=TRUE)
 df
+
 
 ```
 
@@ -120,7 +125,7 @@ df
 ### Plot the chart
 #### bar, segment, text, and annotations using a polar coordinate system
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 theme_opts <- theme(
   text = element_text(family = "inconsolata"), 
@@ -168,20 +173,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 16,
 
 ```
 
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/world-sunniest-cities-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/world-sunniest-cities-sm.png", plot = v1, width=4, height=2.25)
-
-```
-
+  
 
 ### References
 #### citations for narrative and data sources

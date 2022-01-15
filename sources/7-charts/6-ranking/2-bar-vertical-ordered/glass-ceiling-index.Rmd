@@ -60,7 +60,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df = read.csv("archetypes/glass-ceiling-index/glass-ceiling-index.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "glass-ceiling-index/glass-ceiling-index.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df
 
 ```
@@ -143,7 +147,7 @@ df_show_ranked
 #### by overall rank and score, with conditional fill color, and a comparative marker
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 16), 
@@ -180,7 +184,7 @@ v1 <- ggplot(df_ranked, aes(x=reorder(Country, -RANK), y=Overall.score)) +
       theme_bw() +
       theme_opts
 
-girafe(ggobj = v1, width_svg = 16, height_svg = 6,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
@@ -190,7 +194,7 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 6,
 #### using a different indicator, for comparison
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v2 <- ggplot(df_ranked, aes(x=reorder(Country, Women.in.senior.managerial.positions), y=Women.in.senior.managerial.positions)) + 
       geom_bar(aes(fill=TYPE), stat="identity") +
@@ -204,7 +208,7 @@ v2 <- ggplot(df_ranked, aes(x=reorder(Country, Women.in.senior.managerial.positi
       theme_bw() +
       theme_opts
 
-girafe(ggobj = v2, width_svg = 16, height_svg = 6,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
@@ -214,7 +218,7 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 6,
 #### another indicator
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v3 <- ggplot(df_ranked, aes(x=reorder(Country, Gender.wage.gap), y=Gender.wage.gap)) + 
       geom_bar(aes(fill=TYPE), stat="identity") +
@@ -228,24 +232,10 @@ v3 <- ggplot(df_ranked, aes(x=reorder(Country, Gender.wage.gap), y=Gender.wage.g
       theme_bw() +
       theme_opts
 
-girafe(ggobj = v3, width_svg = 16, height_svg = 6,
+girafe(ggobj = v3, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/glass-ceiling-index-fs.svg", plot = v2, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/glass-ceiling-index-sm.png", plot = v2, width=4, height=2.25)
-
-```
-
 
 ### References
 #### The citations and data sources used for this case

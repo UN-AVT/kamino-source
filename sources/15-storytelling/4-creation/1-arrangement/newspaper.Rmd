@@ -1,0 +1,263 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+
+library(ggplot2)
+library(psych)
+library(reshape2)
+library(ggthemes)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+VIEWS  
+</div>
+
+# Acuity
+## To see clearly
+
+> If you put junk food in your body, your body will turn to junk...\
+--- Goldie Hawn\
+
+By conventional definition, visual acuity is a clearness of vision. You are most likely familiar with the common measurement of this in the terms “20/20” vision --- the numerical reference to the distance from which a person can reliably distinguish objects. Typically a Snellen chart (lines of block letters) is used for visual acuity testing. Data acuity is based on a similar concept with a different purpose. Our task is to create a view that is sufficiently clear for the readers vision and comprehension. To ensure legibility, we can employ several patterns aimed at reducing clutter, noise, and distractions that may interfere with a viewers reading of the view.
+
+* Integrity
+* Clarity
+
+***
+
+# Integrity
+## Errors, lies, and distortion
+
+In the same way that words can purposely or inadvertently distort and misrepresent the facts, the same is true for visual representation.
+
+> But graphical display does not always shine a light into the dark corners of a mysterious topic.\
+Sometimes, a graphic when cleverly presented can lie to us even more effectively than words,\
+for lying words are much more easily forgotten than a deceitful picture.\
+--- Wainer\
+
+Given the uncertainty of data, the potential for inadvertent error is always present.  A best practice to account for any uncertainty or issues you are aware of, is to clearly state your assumptions and caveats to make it transparent to the reader.  Here are a practices to consider as a standard for your own work:
+
+* state clearly that the data being displayed may contain uncertainty, gaps, errors, outliers, or other artifacts that may impact the results.
+* characterize, to the fullest extent possible, the scope and scale of potential effects, especially as they interfere or influence the results.
+* provide full transparency to avoid readers from drawing incorrect conclusions, especially those that are wrongly filled from gaps in knowledge.
+
+## The Lie Factor
+
+The “Lie Factor” is a concept to describe the relation between the size of effect shown in a graphic and the size of effect shown in the data. The concept was coined by Tufte in his book “The Visual Display of Quantitative Information” in 1983.
+
+> The representation of numbers, as physically measured on the surface of the graphic itself,\
+should be directly proportional to the quantities represented.\
+--- Tufte
+
+```{r, out.width = "900px"}
+
+# ![](assets/insights-of-the-roundtable.svg){ width=900px }
+knitr::include_graphics("assets/view-integrity.svg", dpi=300)
+
+```
+
+
+# Clarity
+## Data Ink
+
+Data ink is the non-erasable core of a graphic.  Put simply, a few steps to:
+
+* Maximize the data-ink ratio
+* Erase non-data ink
+* Erase redundant data ink
+
+Tufte defines the data ink ratio as: *Data Ink Ratio = (data-ink) / (total ink in the plot)*.  If you were painting, the main goal would be to ensure that your use of paint is reserved for data points. Here are a few examples to illustrate the differences between a conventional and data ink reduced form:
+
+# Line Chart
+## Conventional
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=4, out.width = "90%" }
+
+x <- 1967:1977
+y <- c(0.5,1.8,4.6,5.3,5.3,5.7,5.4,5,5.5,6,5)
+d <- data.frame(x, y)
+
+ggplot(d, aes(x,y)) + geom_line() + geom_point(size=3) + 
+  geom_hline(yintercept = c(5,6), lty=2) + 
+  scale_y_continuous(breaks=seq(1, 6, 1), label=sprintf("$%s",seq(300,400,20))) + 
+  scale_x_continuous(breaks=x,label=x) +
+  annotate("text", x = c(1977,1977.2), y = c(1.5,5.5), adj=1,  family="serif",
+           label = c("Per capita\nbudget expandures\nin constant dollars", "5%")) +
+  theme_bw()
+
+```
+
+## Data Ink Reduced
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=4, out.width = "90%" }
+
+ggplot(d, aes(x,y)) + geom_line() + geom_point(size=3) + theme_tufte(base_size = 15) +
+  theme(axis.title=element_blank()) + geom_hline(yintercept = c(5,6), lty=2) + 
+  scale_y_continuous(breaks=seq(1, 6, 1), label=sprintf("$%s",seq(300,400,20))) + 
+  scale_x_continuous(breaks=x,label=x) +
+  annotate("text", x = c(1977,1977.2), y = c(1.5,5.5), adj=1,  family="serif",
+           label = c("Per capita\nbudget expandures\nin constant dollars", "5%"))
+
+```
+
+# Dot-dash plot
+## Conventional
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=5, out.width = "90%" }
+
+ggplot(mtcars, aes(wt, mpg)) + 
+  geom_point() + 
+  geom_rug() + 
+  xlab("Car weight (lb/1000)") + ylab("Miles per gallon of fuel") +
+  theme_bw() +
+  theme(axis.title.x = element_text(vjust=-0.5), axis.title.y = element_text(vjust=1))
+
+```
+
+
+## Data Ink Reduced
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=5, out.width = "90%"}
+
+ggplot(mtcars, aes(wt, mpg)) + geom_point() + geom_rug() + theme_tufte(ticks=F) + 
+  xlab("Car weight (lb/1000)") + ylab("Miles per gallon of fuel") + 
+  theme(axis.title.x = element_text(vjust=-0.5), axis.title.y = element_text(vjust=1))
+
+```
+
+# Boxplot
+## Conventional
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=5, out.width = "90%"}
+
+ggplot(quakes, aes(factor(mag),stations)) +
+geom_boxplot(outlier.colour="transparent") +
+annotate("text", x = 8, y = 120, adj=1,  family="serif",
+label = c("Number of stations \nreporting Richter Magnitude\nof Fiji earthquakes (n=1000)")) +
+theme_bw()
+
+```
+
+
+## Data Ink Reduced
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=5, out.width = "90%"}
+
+ggplot(quakes, aes(factor(mag),stations)) + theme_tufte() +
+geom_tufteboxplot(outlier.colour="transparent") + theme(axis.title=element_blank()) +
+annotate("text", x = 8, y = 120, adj=1,  family="serif",
+label = c("Number of stations \nreporting Richter Magnitude\nof Fiji earthquakes (n=1000)"))
+
+```
+
+# Bar
+## Conventional
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=4, out.width = "90%"}
+
+ggplot(mpg, aes(x = class)) +
+  geom_bar(fill="gray") +
+theme_bw()
+
+```
+
+
+## Data Ink Reduced
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=4, out.width = "90%"}
+
+ggplot(mpg, aes(x = class)) + theme_tufte(base_size=14, ticks=F) +
+  geom_bar(fill="gray") +  theme(axis.title=element_blank()) +
+  scale_y_continuous(breaks=seq(0, 70, 10)) + 
+  geom_hline(yintercept=seq(10, 70, 10), col="white", lwd=1)
+
+```
+
+
+## Chart Junk
+
+The term chartjunk was coined by Edward Tufte in his 1983 book The Visual Display of Quantitative Information. Tufte wrote:
+
+> The interior decoration of graphics generates a lot of ink that does not tell the viewer anything new.\
+The purpose of decoration varies — to make the graphic appear more scientific and precise,\
+to enliven the display, to give the designer an opportunity to exercise artistic skills.\
+Regardless of its cause, it is all non-data-ink or redundant data-ink,\
+and it is often chartjunk.\
+
+It seems like an obvious suggestion, but it is not uncommon to see examples that violate the principle.  This is especially true with the use of "button-click" tools that can create charts with little knowledge or skill.  A typical example is the overuse of 3D charts or styles that are purely cosmetic.
+
+For sake of self-awareness, consider the potential in your own work in cases when you might be overzealous with graphic design.
+
+```{r, out.width = "950px"}
+
+# ![](assets/insights-of-the-roundtable.svg){ width=900px }
+knitr::include_graphics("assets/chart-junk.svg", dpi=300)
+
+```
+
+# In pursuit of perfection
+## Simplicity
+
+In his book The Laws of Simplicity, graphic designer John Maeda describes his concept of the laws and keys to simplicity. A few are relevant for our purpose:
+
+* Reduce: the simplest way to achieve simplicity is through thoughtful reduction.
+* Organize: Organization makes a system of many appear fewer
+* The One: Simplicity is about subtracting the obvious, and adding the meaningful
+
+As we've learned in this section, a good deal of design is not only what you put in the view, but what you selectively take out.  Your attention and care for distilling the meaningful from the meaningless will be well rewarded with increased understanding and impact.
+
+> In anything at all, perfection is finally attained\
+not when there is no longer anything to add,\
+but when there is no longer anything to take away...
+--- de St. Exupery, Antoine
+
+When in doubt, leave it out.
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

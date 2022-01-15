@@ -1,0 +1,260 @@
+---
+pagetitle: "Drugnet"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, dev='svg')
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggraph)
+library(igraph)
+library(graphlayouts)
+library(tidygraph)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+GRAPHS
+</div>
+
+# Drugnet
+## computed layouts
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo from Wikipedia"}
+
+masthead <- "assets/jolo-island-wikipedia.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> ...didn't pursue us...As time went on, we noticed that they never pursued us...\
+--- Gracia Burnham, ASG kidnap survivor\
+
+***
+
+This is a dichotomous adjacency matrix of drug users in Hartford.  Ties are directed and represent acquaintanceship. The network is a result of two years of ethnographic observations of people's drug habits.
+
+* Ethnicity codes: 2 = African American; 3 = Puerto Rican/Latino; 1, 5, 6, 7 = white or other
+* Gender codes: 1 = male; 2 = female; 0 = unknown
+
+### Ingest
+#### agent × event data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_path <- "archetypes/drugnet/drugnet.csv"
+df_csv <- read.csv(df_path, header=TRUE, row.names=1, check.names=FALSE, na.strings = "")
+df_csv
+
+```
+
+
+### Wrangle
+#### convert matrix to graph, filter by degree
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_csv[is.na(df_csv)] <- 0
+matrix <- as.matrix(df_csv) 
+df_graph <- graph_from_incidence_matrix(matrix)
+df_graph
+
+# less than 3 degrees
+three_degrees <- which(degree(df_graph)<3)
+df_graph <- delete.vertices(df_graph, three_degrees)
+
+# remove isolates
+isolates <- which(degree(df_graph)==0)
+df_graph <- delete.vertices(df_graph, isolates)
+
+
+# df_graph_manual <- graph_from_data_frame( df_edges, vertices=df_nodes )
+
+
+```
+
+
+### Analytics
+#### compute sna measures
+
+
+```{r}
+
+# Network	PK
+# weights	weighted
+# directionality	undirected
+# connectedness	false
+# no. of nodes n	246
+# no. of isolated nodes ni	16
+# no. of edges m	2571
+# no. of components |cc|	26
+# max avg. path length 〈d〉 for cc	3.034
+# max shortest path length d	9
+# density δ	0.085
+# avg. degree 〈k	20.9
+# max degree k	78
+# avg. clustering coeff. 〈C〉	0.753
+
+```
+
+
+### Analytics
+#### compute layout
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Layouts can be computationally intensive
+# Un-comment only for use
+
+# igraph
+# layout <- create_layout(cg, layout = 'dh')
+# layout <- create_layout(cg, layout = 'fr')
+# layout <- create_layout(cg, layout = 'gem')
+# layout <- create_layout(cg, layout = 'lgl')
+# layout <- create_layout(cg, layout = 'sugiyama')
+# layout <- create_layout(cg, layout = 'star')
+# layout <- create_layout(cg, layout = 'kk', maxiter = 100)
+# layout <- create_layout(cg, layout = 'drl')
+# layout <- create_layout(cg, layout = 'linear')
+# layout <- create_layout(cg, layout = 'linear' , circular = TRUE)
+
+# ggraph
+# layout <- create_layout(cg, layout = 'linear')
+# layout <- create_layout(cg, layout = 'linear', circular = TRUE)
+layout <- create_layout(cg, layout = 'stress')
+# layout <- create_layout(cg, layout = 'sparse_stress')
+# layout <- create_layout(cg, layout = 'backbone')
+# layout <- create_layout(cg, layout = 'pmds')
+# layout <- create_layout(cg, layout = 'eigen')
+# layout <- create_layout(cg, layout = 'centrality')
+# layout <- create_layout(cg, layout = 'focus')
+# layout <- create_layout(cg, layout = 'dendrogram')
+# layout <- create_layout(cg, layout = 'unrooted')
+# layout <- create_layout(cg, layout = 'matrix')
+# layout <- create_layout(cg, layout = 'hive')
+# layout <- create_layout(cg, layout = 'fabric')
+
+# graphlayouts
+# layout <- create_layout(cg, layout = "nicely")
+# layout <- create_layout(cg, layout = "stress")
+# layout <- create_layout(cg, layout = "focus", focus = 1)
+
+```
+
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Edge Types
+# geom_edge_arc
+# geom_edge_arc0
+# geom_edge_arc2
+# geom_edge_density
+# geom_edge_diagonal
+# geom_edge_diagonal0
+# geom_edge_diagonal2
+# geom_edge_elbow
+# geom_edge_elbow0
+# geom_edge_elbow2
+# geom_edge_fan
+# geom_edge_fan0
+# geom_edge_fan2
+# geom_edge_hive
+# geom_edge_hive0
+# geom_edge_hive2
+# geom_edge_link
+# geom_edge_link0
+# geom_edge_link2
+# geom_edge_loop
+# geom_edge_loop0
+
+```
+
+
+
+### Plot
+#### nicely
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    # plot.margin = unit(c(1.5,1,1,1), "in"),
+    legend.position='none'
+)
+
+v1 <- ggraph(layout) + 
+  geom_edge_link() +
+  geom_node_point(size = 2) +
+  geom_node_label(aes(label = name), size = 4) +
+  theme_graph() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 14,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+
+* Narrative: WEEKS, M. R., CLAIR, S., BORGATTI, S. P., RADDA, K. & SCHENSUL, J. J. 2002. Social networks of drug users in high-risk sites: Finding the connections. AIDS and Behaviour, 6, 193-206.
+* Data: UCINET, Covert Networks, https://sites.google.com/site/ucinetsoftware/datasets/covert-networks
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+
+

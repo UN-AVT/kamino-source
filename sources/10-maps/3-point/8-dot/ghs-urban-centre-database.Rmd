@@ -1,0 +1,270 @@
+---
+pagetitle: "GHS Urban Centre Database"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(fpc)
+library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(paletteer) 
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# GHS Urban Centre Database
+## Dot Map
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Note Thanun on Unsplash"}
+
+masthead <- "assets/note-thanun-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> All urbanization, pushed beyond a certain point, automatically becomes suburbanization...\
+  Every great city is just a collection of suburbs.\
+  Its inhabitants do not live in their city; they merely inhabit it...\
+--- Aldous Huxley
+
+***
+
+The database represents the global status on Urban Centres in 2015 by offering cities location, their extent (surface, shape), and describing each city with a set of geographical, socio-economic and environmental attributes. The database is built upon the Degree of Urbanisation, a definition used to outline the spatial extent of cities and settlements.  The Urban Centre Database describes 13,135 Urban Centres.
+
+### Ingest
+#### urban centres
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/ghs-urban-centre-database/GHS_STAT_UCDB2015MT_GLOBE_R2019A_V1_2.csv", header = TRUE, stringsAsFactors = FALSE)
+head(df, n = 10)
+
+```
+
+
+### Analyze
+#### create point clusters (using kmeans)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+km <- kmeans(cbind(df$GCPNT_LAT, df$GCPNT_LON), centers = 30)
+km_clusters <- data.frame("LATITUDE" = km$centers[,1], "LONGITUDE" = km$centers[,2], "SIZE" = km$size)
+head(km_clusters, n = 10)
+
+```
+
+
+### Analyze
+#### create point clusters using dbscan
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+DBSCAN <- dbscan(cbind(df$GCPNT_LAT, df$GCPNT_LON), eps = 1.5, MinPts = 10)
+coors <- data.frame("LONGITUDE" = df$GCPNT_LON, "LATITUDE" = df$GCPNT_LAT, "CLUSTER" = DBSCAN$cluster)
+dist_clusters <- coors %>%
+  group_by(CLUSTER) %>%
+  summarise(
+    LONGITUDE = mean(LONGITUDE, na.rm = T),
+    LATITUDE = mean(LATITUDE, na.rm = T),
+    SIZE = n()
+  )
+head(dist_clusters, n = 10)
+
+```
+
+
+### Analyze
+#### create point clusters using hierarchical clustering
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+hclust_clusters <- data.frame("LONGITUDE" = df$GCPNT_LON, "LATITUDE" = df$GCPNT_LAT)
+hclust_clusters$CLUSTER <- cutree(hclust(dist(hclust_clusters[,1:2])), 30)
+hclust_clusters <- hclust_clusters %>%
+  group_by(CLUSTER) %>%
+  summarise(
+    LONGITUDE = mean(LONGITUDE, na.rm = T),
+    LATITUDE = mean(LATITUDE, na.rm = T),
+    SIZE = n()
+  )
+head(hclust_clusters, n = 10)
+
+```
+
+
+### Base map
+#### natural earth
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ne_world <- ne_countries(scale = "small", returnclass = "sf")
+ne_world <- filter(ne_world, iso_a3 != "ATA")
+
+```
+
+
+### View
+#### kmeans point clusters by size (count of members)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "black", size = 12, family = "inconsolata"),
+  plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),
+  plot.background = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  legend.position = "none",
+  legend.title = element_blank()
+)
+
+color_palette <- paletteer_d("MapPalettes::bruiser")
+
+v1 <- ggplot(data = ne_world) +
+  geom_sf(fill="white", color="#888888", stroke=0.5) +
+  geom_point( data = km_clusters, aes(x=LONGITUDE, y=LATITUDE, color=SIZE, size=SIZE), alpha = 1.0 ) +
+  geom_text( data = km_clusters, aes(x=LONGITUDE, y=LATITUDE, label=SIZE), color = "white", vjust = 0.5, hjust = 0.5) +
+  scale_colour_stepsn(colours = color_palette) +
+  scale_size_continuous(range = c(6, 15)) +
+  labs(x=NULL,
+       y=NULL,
+       title = "GHS Urban Centre Database", 
+       subtitle="kmeans point clustering",
+       caption="points are at cluster centers; size by cluster point members") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### View
+#### dbscan point clusters by size (count of members)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+v2 <- ggplot(data = ne_world) +
+  geom_sf(fill="white", color="#888888", stroke=0.5) +
+  geom_point( data = dist_clusters, aes(x=LONGITUDE, y=LATITUDE, color=SIZE, size=SIZE), alpha = 1.0 ) +
+  geom_text( data = dist_clusters, aes(x=LONGITUDE, y=LATITUDE, label=SIZE), color = "white", vjust = 0.5, hjust = 0.5) +
+  scale_colour_stepsn(colours = color_palette) +
+  scale_size_continuous(range = c(6, 20)) +
+  labs(x=NULL,
+       y=NULL,
+       title = "GHS Urban Centre Database", 
+       subtitle="dbscan point clustering") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### View
+#### hclust point clusters by size (count of members)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+v3 <- ggplot(data = ne_world) +
+  geom_sf(fill="white", color="#888888", stroke=0.5) +
+  geom_point( data = hclust_clusters, aes(x=LONGITUDE, y=LATITUDE, color=SIZE, size=SIZE), alpha = 1.0 ) +
+  geom_text( data = hclust_clusters, aes(x=LONGITUDE, y=LATITUDE, label=SIZE), color = "white", vjust = 0.5, hjust = 0.5) +
+  scale_colour_stepsn(colours = color_palette) +
+  scale_size_continuous(range = c(8, 20)) +
+  labs(x=NULL,
+       y=NULL,
+       title = "GHS Urban Centre Database", 
+       subtitle="hclust point clustering") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v3, width_svg = 16, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### References
+#### Citations and data sources
+
+<pre>
+Florczyk, A.J., Corbane, C., Schiavina, M., Pesaresi, M., Maffenini, L., Melchiorri, M., Politis, 
+P., Sabo, F., Freire, S., Ehrlich, D., Kemper, T., Tommasi, P., Airaghi, D. and L. Zanchetta. 2019. 
+GHS Urban Centre Database 2015, multitemporal and multidimensional attributes, R2019A. 
+European Commission, Joint Research Centre (JRC) [Dataset] 
+PID: http://data.europa.eu/89h/53473144-b88c-44bc-b4a3-4583ed1f547e
+</pre>
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

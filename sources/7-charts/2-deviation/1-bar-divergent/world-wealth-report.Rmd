@@ -60,7 +60,11 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load data
-df <- read.csv("archetypes/world-wealth-report/number-of-millionaires.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "world-wealth-report/number-of-millionaires.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df
 
 ```
@@ -109,20 +113,6 @@ v1 <- df %>% mutate(Color = ifelse(Gain.Loss > 0, "loss", "gain")) %>%
 
 girafe(ggobj = v1, width_svg = 16, height_svg = 15,
        options = list(opts_sizing(rescale = TRUE, width = 0.6)))
-
-```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-
-# full version
-ggsave(filename = "assets/world-wealth-report.svg", plot = v1, width=16, height=9)
-
-# thumbnail version without annotations
-#ggsave(filename = "outputs/world-cuisine-preferences-sm.svg", plot = v1, width=4, height=2.25)
 
 ```
 

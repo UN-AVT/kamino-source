@@ -1,0 +1,224 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MODULE  
+</div>
+
+# This is a title
+## This is a subtitle
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Abhidev Vaishnav on Unsplash"}
+
+knitr::include_graphics("archetypes/smile/abhidev-vaishnav-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">A smile from Pune, India</div>
+
+> This is a quote...\
+--- The attribution\
+
+***
+
+
+
+
+### Scenarios
+#### with custom styling
+
+A scenario is a description of an event or series of actions and events. Scenarios often take the shape of stories, where for the purposes of analysis, the task is to establish a credible, accurate, and useful story of a decision situation. The process of scenario testing is often used to help an analyst reason a complex problem.
+
+Scenarios are sequences of information constructed to explain a candidate hypothesis. Although a scenario is critically imaginative and hypothetical, the determination of plausibility should be determined through validation of proof as described earlier. A scenario is intended to provide fact-based narrative of a hypothesis which can eventually be tested.
+
+A story combines scenarios with the caveat that such are qualifi ed by evidence and supporting judgements for probability.
+
+### Stories
+#### with custom styling
+
+Stories organize events into a meaningful framework. They provide linkage and sense to a network of causes to their eff ects. Most importantly, stories can be used to extract and communicate subtle aspects. For communication purposes, stories are easier to remember - because in many ways, stories are how we remember. “Narrative imagining--story--is the fundamental instrument of thought,” writes cognitive scientist Mark Turner in his book The Literary Mind. “Rational capacities depend on it. It is our chief means of looking into the future, of predicting, of planning, and of explaining...Most of our experience, our knowledge and our thinking is organized as stories.” (101)
+
+In his book Things That Make Us Smart, Don Norman crisply summarizes Story’s value:
+
+Stories have the felicituous capacity of capturing exactly those elements that formal decision methods leave out. Logic tries to generalize, to strip the decision making from the specifi c
+context, to remove it from subjective emotions. Stories capture the context, the emotions...Stories are important cognitive events, for they encapsulate, into one compact package,
+information, knowledge, context, and emotion.”
+
+The Story Factor. Annette Simmons,
+A story weaves detail, character, and events into a whole that is greater than the sum of its
+parts. (31) In this land of complex reality, story is king. Story makes sense of chaos and gives
+people a plot.
+
+Most of the time, you won’t be present when the people you want to infl uence make the decisions...story is
+like mental software that you supply so your listener can run it again later using input specifi c to the situation.
+(41)
+
+We view the task of sensemaking as that of abducing a story whose plot explains the current data and makes verifiable predictions about the future and the past. The abduction task in general takes as input a set of data, and gives as output an explanatory hypothesis that best explains the data [Josephson and Josephson 1994]. Organize the cognitive world--the world of ideas, concepts, objects, and relationships. We link hese up into stories. The use of scenarios and stories will be a recurring theme through the book. Scenarios are a key component found in analytical techniques such as Scenario Planning. The use of the story narrative will be covered in detail in Chapter X, Visual Storytelling.
+
+
+### This is a section
+#### This is a subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# df_file_path <- "archetypes/../*.csv"
+# df = read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE)
+# df
+
+mpg
+
+```
+
+
+### This is a section
+#### This is a subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "80%"}
+
+grViz("
+digraph vv {
+
+# dot, neato, twopi, and circo
+graph [layout = dot, splines = ortho, nodesep = 0.8]
+
+# node definitions with substituted label text
+node [fontname = Inconsolata]
+vv [label = 'Visual Variables', shape = 'box', margin=0.2]
+px [label = 'Position X', shape = 'box', margin=0.2]
+py [label = 'Position Y', shape = 'box', margin=0.2]
+sh [label = 'Shape', shape = 'box', margin=0.2]
+sz [label = 'Size', shape = 'box', margin=0.2]
+c [label = 'Color', shape = 'box', margin=0.2]
+pxm [label = 'GDP', shape = 'box', margin=0.2]
+pym [label = 'Life Expectency', shape = 'box', margin=0.2]
+shm [label = 'circle\ngeom_point', shape = 'circle', margin=0.2]
+szm [label = 'Population', shape = 'box', margin=0.2]
+cm [label = 'Region', shape = 'box', margin=0.2]
+
+# edge definitions with the node IDs
+vv -> {px py sh sz c} [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+px -> pxm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+py -> pym [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+sh -> shm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+sz -> szm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+c -> cm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+}")
+
+```
+
+<div class="figure-text">Mapping of visual variables with shape parameter assigned as static.</div>
+
+### This is a section
+#### This is a subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# https://ggplot2.tidyverse.org/reference/theme.html
+# standard theme parameters
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_line(linetype = "dotted"),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_rect(fill="white", colour="white"),
+  plot.margin = unit(c(0.5,0.5,0.5,0.5), "in")
+)
+
+v1 <- ggplot(mpg, aes(displ, hwy, color = class)) + 
+  geom_point() +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Save plot
+#### as vector or raster image
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ggsave(filename = "assets/full-size.svg", plot = v1, width=1280/72, height=720/72)
+ggsave(filename = "assets/thumbnail.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

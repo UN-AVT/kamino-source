@@ -1,0 +1,107 @@
+from,to,billion_pounds,percent,contribution_per_taxpayer_per_day,color
+Budget,Incomes,752.6,1,0,4e1c12
+Incomes,Taxes on Wealth & Income,221,0.293648685,0,944b36
+Taxes on Wealth & Income,Income Tax,177.3,0.235583311,0,944b36
+Income Tax,Paye,146,0.193994154,0,944b36
+Income Tax,Self Employed,24.3,0.032288068,0,944b36
+Income Tax,Capital Gains,7,0.00930109,0,944b36
+Taxes on Wealth & Income,Corporation Tax,44.4,0.058995482,0,944b36
+Corporation Tax,Misc,4.7,0.006245017,0,944b36
+Corporation Tax,Inheritance Tax,4.6,0.006112145,0,944b36
+Incomes,Taxes on Production,242,0.321551953,0,5f0801
+Taxes on Production,VAT,131,0.174063247,0,5f0801
+Taxes on Production,Fuel Duties,27.6,0.036672867,0,5f0801
+Taxes on Production,Stamp Duty Land Tax,11.3,0.015014616,0,5f0801
+Taxes on Production,Stamp Duty on Shares,3.3,0.004384799,0,5f0801
+Taxes on Production,Vices,19.81,0.026322083,0,5f0801
+Vices,Alcohol,10.7,0.01421738,0,5f0801
+Alcohol,Wines & spirits,7.4,0.00983258,0,5f0801
+Alcohol,Beer,3.3,0.004384799,0,5f0801
+Taxes on Production,Tobacco,9.11,0.012104704,0,5f0801
+Taxes on Production,Company Cars & Vans,1.1,0.0014616,0,5f0801
+Taxes on Production,Business Rates,26.2,0.034812649,0,5f0801
+Taxes on Production,Air Passenger Duty,3,0.003986181,0,5f0801
+Taxes on Production,Insurance premium tax,3.7,0.00491629,0,5f0801
+Taxes on Production,Environmental taxes,4.6,0.006112145,0,5f0801
+Taxes on Production,Climate Change levy,1.8,0.002391709,0,5f0801
+Taxes on Production,ToP Other,8.89,0.011812384,0,5f0801
+Incomes,Public Sector Receipts,200,0.265745416,0,b37b65
+Public Sector Receipts,National Insurance,114,0.151474887,0,b37b65
+Public Sector Receipts,Operating surplus,45.3,0.060191337,0,b37b65
+Public Sector Receipts,Council Tax,28.9,0.038400213,0,b37b65
+Public Sector Receipts,Interest & Dividends,6.4,0.008503853,0,b37b65
+Public Sector Receipts,PSR Other,4.1,0.005447781,0,b37b65
+Incomes,Other Taxes,18.6,0.024714324,0,b37b65
+Other Taxes,Television Licence fee,3.1,0.004119054,0,b37b65
+Other Taxes,Bank Levy,3.4,0.004517672,0,b37b65
+Other Taxes,Vehicle Tax,4.8,0.00637789,0,b37b65
+Incomes,Budget Deficit,71,0.094339623,0,999999
+Budget,Outcomes,698.27,1,27600,e6e6e6
+Outcomes,Public services,58.71,0.084079224,1.335132012,9acdaa
+Public services,Goverment itself,10.1,0.014464319,0.229685459,9acdaa
+Public services,Foreign aid,8.17,0.011700345,0.18579507,9acdaa
+Public services,Debt interest,36.72,0.052587108,0.835054462,9acdaa
+Outcomes,Defence,44.8,0.064158563,1.01880283,46a49d
+Defence,Military defence,34,0.048691767,0.773198576,46a49d
+Military defence,Nuclear contingency,2.4,0.003437066,0.054578723,46a49d
+Military defence,Submarines,3.8,0.005442021,0.086416311,46a49d
+Military defence,Ships,2,0.002864222,0.045482269,46a49d
+Military defence,Land vehicles,1.2,0.001718533,0.027289362,46a49d
+Military defence,Aircraft,2.25,0.003222249,0.051167553,46a49d
+Military defence,Air support,1.4,0.002004955,0.031837588,46a49d
+Military defence,Weapons (missiles etc),1.25,0.001790138,0.028426418,46a49d
+Military defence,IT,1.8,0.002577799,0.040934042,46a49d
+Defence,Staff salaries,5.65,0.008091426,0.12848741,46a49d
+Defence,Pensions,2.9,0.004153121,0.06594929,46a49d
+Defence,Foreign economic aid,8.2,0.011743308,0.186477304,46a49d
+Outcomes,Public order & safety,30.18,0.043221104,0.686327442,6ab6ad
+Public order & safety,Police,16,0.022913773,0.363858154,6ab6ad
+Public order & safety,Fire brigade,2.18,0.003122002,0.049575673,6ab6ad
+Public order & safety,Courts,5.69,0.00814871,0.129397056,6ab6ad
+Public order & safety,Prisons,4,0.005728443,0.090964538,6ab6ad
+Outcomes,Social Systems (Economic affairs ),45.13,0.06463116,1.026307404,9acdaa
+Social Systems (Economic affairs ),Admin & regulation,6.03,0.008635628,0.137129042,9acdaa
+Social Systems (Economic affairs ),Agriculture,4.54,0.006501783,0.103244751,9acdaa
+Social Systems (Economic affairs ),Transport,28.06,0.040185029,0.638116237,9acdaa
+Transport,Roads,9.37,0.013418878,0.213084431,9acdaa
+Roads,National roads,3.89,0.005570911,0.088463014,9acdaa
+Roads,Local roads,5.48,0.007847967,0.124621418,9acdaa
+Transport,Public transport,3.7,0.00529881,0.084142198,9acdaa
+Public transport,Rail,13.98,0.020020909,0.317921062,9acdaa
+Transport,Research,4.79,0.006859811,0.108930035,9acdaa
+Outcomes,Environment protection,11.61,0.016626806,0.264024573,56827a
+Outcomes,Housing & community amenities,10.01,0.014335429,0.227638757,9acdaa
+Outcomes,Health,138.7,0.198633766,3.154195369,9acdaa
+Health,NHS,105.6,0.151230899,2.401463813,46a49d
+NHS,Technical & managerial staff,29.22,0.041846277,0.664495953,46a49d
+NHS,Doctors & nurses,19.48,0.027897518,0.442997302,46a49d
+NHS,Admin  ,2.4,0.003437066,0.054578723,46a49d
+NHS,Equipment & medicines,9.3,0.01331863,0.211492552,46a49d
+NHS,Prescriptions,8.5,0.012172942,0.193299644,46a49d
+NHS,Procurement,12.1,0.017328541,0.275167729,46a49d
+NHS,"GPs, pharmacies & other primary care",11.1,0.01589643,0.252426594,46a49d
+NHS,Other,10,0.014321108,0.227411346,46a49d
+NHS,Private healthcare,16.17,0.023157231,0.367724146,46a49d
+NHS,Medical research,2.14,0.003064717,0.048666028,46a49d
+Outcomes,"Recreation, culture & religion",11.42,0.016354705,0.259703757,87a38e
+"Recreation, culture & religion",Sport,3.19,0.004568433,0.072544219,87a38e
+"Recreation, culture & religion",Culture,4,0.005728443,0.090964538,87a38e
+"Recreation, culture & religion",Broadcasting,3.95,0.005656838,0.089827482,87a38e
+Outcomes,Education,84.01,0.120311627,1.910482717,9acdaa
+Education,Under fives,3.86,0.005527948,0.08778078,9acdaa
+Education,Primary,27.69,0.039655148,0.629702017,9acdaa
+Education,Secondary,38.19,0.054692311,0.86848393,9acdaa
+Education,Post-secondary,5.9,0.008449454,0.134172694,9acdaa
+Education,Education services,4.09,0.005857333,0.093011241,9acdaa
+Outcomes,Social protection,264.16,0.378306386,6.007298115,326965
+Social protection,Sickness & disability,52.96,0.075844587,1.204370488,326965
+Social protection,Pensions & old age,120.1,0.171996506,2.731210265,326965
+Social protection,Children,9.48,0.01357641,0.215585956,326965
+Social protection,Families,24.8,0.035516348,0.563980138,326965
+Social protection,Unemployment,2.7,0.003866699,0.061401063,326965
+Social protection,Housing,26.37,0.037764761,0.599683719,326965
+Social protection,The socially excluded,31.49,0.045097169,0.716118328,326965
+Outcomes,EU membership fees,7.67,0.01098429,0.174424502,7f7f7f
+Outcomes,Scotland,43.5,0.062296819,0.989239355,7f7f7f
+Outcomes,Wales,17.1,0.024489094,0.388873402,7f7f7f
+Outcomes,N. Ireland,25.1,0.035945981,0.570802478,7f7f7f

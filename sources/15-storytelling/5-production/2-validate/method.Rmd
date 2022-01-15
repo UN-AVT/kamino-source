@@ -1,0 +1,116 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+STORYTELLING  
+</div>
+
+# Validate
+## construct validity, consistency, and completeness
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Abhidev Vaishnav on Unsplash"}
+
+knitr::include_graphics("archetypes/smile/abhidev-vaishnav-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">A smile from Pune, India</div>
+
+> This is a quote...\
+--- The attribution\
+
+***
+
+Analysing complex policy fields and developing futures scenarios presents us with a number of diffi cult methodological problems. Firstly, many, if not all of the factors involved are non-quantifiable, since they contain strong social-political dimensions and conscious self-reference among actors. Secondly, the uncertainties inherent in such problem complexes are in principle non-reducible, and often cannot be fully described or delineated. Finally, the actual process by which conclusions are drawn in such studies is often difficult to trace - i.e. we seldom have an adequate “audit trail” describing the process of getting from initial problem formulation to specific solutions or conclusions. Without some form of traceability we have little possibility of scientific control over results, let alone reproducibility.
+
+<aside>
+<p>A note of reference that is set in the __side margin__ or a page usually in <u>_smaller type_</u> than the text.</p>
+</aside>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa fringilla, venenatis augue id, vulputate orci. Etiam in dictum nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque semper tristique malesuada. Sed maximus <mark>consequat</mark> est a fermentum. Nullam ex ante, pretium sit amet venenatis laoreet, iaculis non magna. Pellentesque vitae lacus sollicitudin, cursus enim a, fermentum nisl. Morbi venenatis ipsum eu ante vehicula, et faucibus risus eleifend. Nullam lobortis lectus in congue finibus.
+
+### (In)consistency
+#### with custom styling
+
+The inconsistency problem can be stated as: depending on the method selected for analysis, the dataset used, the time frame studies, one often gets confl icting results. The lack of consensus on results and their implications leads to a credibility problem where policy makers do not seem to utilize the results. Several solutions to the problem are off ered...these solutions call for a great use of sensitivity analysis through: combining multiple methods of inquiry to test theories.
+
+
+### Completeness
+#### with custom styling
+
+* What set of hypotheses was being considered?
+* Was the set comprehensive, or was there bias in the selection of hypotheses? 
+* What a priori probability was attached to each hypothesis? Again, was there bias?
+* Was there a good understanding about the observables that were expected to differentiate between the hypotheses?
+* Was intelligence collection requested on the basis of these differentially diagnostic observables?
+* Were all the available data considered? How were the data weighted? What degree of credibility was accorded the sources?
+* Was the possibility of deception considered and accounted for?
+* Was the analytic process logically correct? Was the confi dence in rendered judgments correctly estimated? If so, and if the confi dence was low, was additional collection requested?
+
+
+<div class="figure-text">Mapping of visual variables with shape parameter assigned as static.</div>
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

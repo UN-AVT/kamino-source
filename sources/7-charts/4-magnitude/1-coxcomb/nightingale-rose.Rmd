@@ -64,7 +64,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-nightingale_df <- read.csv("archetypes/nightingale/nightingale-rose.csv", header = TRUE, stringsAsFactors = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "nightingale-rose/nightingale-rose.csv"
+url <- paste0(url_root, url_file)
+
+nightingale_df <- read.csv(url, header = TRUE, stringsAsFactors = TRUE)
 nightingale_df
 
 ```
@@ -74,7 +78,7 @@ nightingale_df
 
 1854-1855
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 theme_opts <- theme(
   text = element_text(family = "inconsolata"), 
@@ -114,14 +118,14 @@ v1 <- ggplot(data = nightingale_df %>% subset(Regime == "Before"), aes(x = Month
        caption = "APRIL 1954 to MARCH 1855") +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 1855-1856
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 v2 <- ggplot(data = nightingale_df %>% subset(Regime == "After"), aes(x = Month, y = Deaths, fill = Cause, color = Cause)) +
   geom_bar(width = 1, stat = "identity", position = "stack", alpha = 0.8) +
@@ -137,14 +141,14 @@ v2 <- ggplot(data = nightingale_df %>% subset(Regime == "After"), aes(x = Month,
        caption = "APRIL 1855 to MARCH 1856") +
   theme_opts
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 combined as a facet
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 Regime_lab <- c("APRIL 1954 to MARCH 1855", "APRIL 1855 to MARCH 1856")
 names(Regime_lab) <- c("Before", "After")
@@ -164,7 +168,7 @@ v3 <- ggplot(data = nightingale_df,
        subtitle="in the ARMY in the EAST",) +
   theme_opts
 
-girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v3, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```

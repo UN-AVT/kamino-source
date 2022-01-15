@@ -1,0 +1,249 @@
+---
+pagetitle: "Open Oil"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(tidygraph)
+library(igraph)
+library(ggraph)
+library(ggiraph)
+
+
+```
+
+<div class="activity">
+GRAPHS
+</div>
+
+## Template
+
+Source:  template
+
+***
+
+### Section
+#### Subsection
+
+```{r, echo=FALSE}
+
+df_nodes_path <- "archetypes/open-oil/open-oil-nodes.csv"
+df_nodes <- read.csv(df_nodes_path, header = TRUE, stringsAsFactors = FALSE)
+df_nodes
+
+df_edges_path <- "archetypes/open-oil/open-oil-edges.csv"
+df_edges <- read.csv(df_edges_path, header = TRUE, stringsAsFactors = FALSE)
+df_edges <- df_edges %>% select(-id)
+df_edges
+
+```
+
+
+### Section
+#### Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_graph <- graph_from_data_frame( df_edges, vertices=df_nodes )
+
+```
+
+
+### Prepare data [Wrangle]
+#### Associating different attributes for your Nodes 
+
+Creating numerical fields for the Nodes set in order to attribute the nodes size and/or color  
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+## Creating centrality numerical field for the Nodes
+
+# centrality_alpha()
+# centrality_authority() 
+# centrality_betweenness() 
+# centrality_power() 
+# centrality_closeness() 
+# centrality_eigen() 
+# centrality_hub() 
+# centrality_pagerank() 
+# centrality_subgraph() 
+# centrality_degree() 
+# centrality_edge_betweenness() 
+# centrality_manual() 
+# centrality_closeness_harmonic() 
+# centrality_closeness_residual() 
+# centrality_closeness_generalised() 
+# centrality_communicability() 
+# centrality_communicability_odd() 
+# centrality_communicability_even() 
+# centrality_subgraph_odd() 
+# centrality_subgraph_even() 
+# centrality_katz() 
+# centrality_betweenness_network() 
+# centrality_betweenness_current() 
+# centrality_betweenness_communicability() 
+# centrality_betweenness_rsp_simple() 
+# centrality_betweenness_rsp_net() 
+# centrality_information() 
+# centrality_decay() 
+# centrality_random_walk() 
+# centrality_expected()
+
+cg <- df_graph %>% 
+    as_tbl_graph() %>% 
+    activate(nodes) %>% 
+  # associating random numerical value to nodes to differentiate their colors and sizes
+    mutate(centrality  = centrality_betweenness())
+
+
+
+```
+
+
+### Prepare data [Wrangle]
+#### Associating different attributes for your Nodes
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+## Creating group numerical field for the Nodes
+
+# group_components() 
+# group_edge_betweenness() 
+# group_fast_greedy() 
+# group_infomap() 
+# group_label_prop() 
+# group_leading_eigen() 
+# group_louvain() 
+# group_optimal() 
+# group_spinglass() 
+# group_walktrap() 
+# group_biconnected_component()
+
+cg <- cg %>% 
+  activate(nodes) %>%
+  # use functions to compute numerical values to attribute the edge width and/or color
+  mutate(group = group_louvain())
+
+cg
+
+```
+
+
+### Analytics
+#### compute layout
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Layouts can be computationally intensive
+# Un-comment only for use
+
+# igraph
+# layout <- create_layout(cg, layout = 'dh')
+# layout <- create_layout(cg, layout = 'fr')
+# layout <- create_layout(cg, layout = 'gem')
+# layout <- create_layout(cg, layout = 'lgl')
+# layout <- create_layout(cg, layout = 'sugiyama')
+# layout <- create_layout(cg, layout = 'star')
+# layout <- create_layout(cg, layout = 'kk', maxiter = 100)
+# layout <- create_layout(cg, layout = 'drl')
+# layout <- create_layout(cg, layout = 'linear')
+# layout <- create_layout(cg, layout = 'linear' , circular = TRUE)
+
+# ggraph
+# layout <- create_layout(cg, layout = 'linear')
+# layout <- create_layout(cg, layout = 'linear', circular = TRUE)
+layout <- create_layout(cg, layout = 'stress')
+# layout <- create_layout(cg, layout = 'sparse_stress')
+# layout <- create_layout(cg, layout = 'backbone')
+# layout <- create_layout(cg, layout = 'pmds')
+# layout <- create_layout(cg, layout = 'eigen')
+# layout <- create_layout(cg, layout = 'centrality')
+# layout <- create_layout(cg, layout = 'focus')
+# layout <- create_layout(cg, layout = 'dendrogram')
+# layout <- create_layout(cg, layout = 'unrooted')
+# layout <- create_layout(cg, layout = 'matrix')
+# layout <- create_layout(cg, layout = 'hive')
+# layout <- create_layout(cg, layout = 'fabric')
+
+# graphlayouts
+# layout <- create_layout(cg, layout = "nicely")
+# layout <- create_layout(cg, layout = "stress")
+# layout <- create_layout(cg, layout = "focus", focus = 1)
+
+```
+
+
+### Plot
+#### nicely
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    # plot.margin = unit(c(1.5,1,1,1), "in"),
+    legend.position='none'
+)
+
+v1 <- ggraph(layout) + 
+  geom_edge_link() +
+  geom_node_point(size = 2) +
+  # geom_node_label(aes(label = name), size = 2) +
+  theme_graph() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

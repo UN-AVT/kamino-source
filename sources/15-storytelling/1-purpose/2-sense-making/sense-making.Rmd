@@ -1,0 +1,142 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+STORYTELLING  
+</div>
+
+# Sense-making
+## This is a subtitle
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Abhidev Vaishnav on Unsplash"}
+
+knitr::include_graphics("archetypes/smile/abhidev-vaishnav-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">A smile from Pune, India</div>
+
+> This is a quote...\
+--- The attribution\
+
+***
+
+The sense-making process 
+
+Although presented in many academic and research-oriented forms, we define the sense-making process as the logical application of analytic methods for the purpose of revealing insight for a complex problem.
+
+<aside>
+<p>A note of reference that is set in the __side margin__ or a page usually in <u>_smaller type_</u> than the text.</p>
+</aside>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa fringilla, venenatis augue id, vulputate orci. Etiam in dictum nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque semper tristique malesuada. Sed maximus <mark>consequat</mark> est a fermentum. Nullam ex ante, pretium sit amet venenatis laoreet, iaculis non magna. Pellentesque vitae lacus sollicitudin, cursus enim a, fermentum nisl. Morbi venenatis ipsum eu ante vehicula, et faucibus risus eleifend. Nullam lobortis lectus in congue finibus.
+
+### Visualization for Understanding
+#### with custom styling
+
+Information visualization amplifi es human cognitive capabilities in six basic ways [Card et al., 1999]:
+• by increasing cognitive resources, such as by using a visual resource to expand human working
+memory,
+• by reducing search, such as by representing a large amount of data in a small space,
+• by enhancing the recognition of patterns, such as when information is organized in space by its
+time relationships,
+• by supporting the easy perceptual inference of relationships that are otherwise more diffi cult to
+induce,
+• by perceptual monitoring of a large number of potential events,
+• by providing a manipulable medium that, unlike static diagrams, enables the exploration of a space
+of parameter values.
+Factors which promote situational awareness and sensemaking. Imagine an avionics system which required
+pilots to sort through volumes of textual information. As illustrated in Figure X, many analytical reasoning
+tasks follow a process of Information gathering, Re-representation of the information in a form that aids
+analysis, Development of insight through the manipulation of this representation, and the Creation of some
+knowledge product or direct action based on the knowledge insight.
+Visual analytics could be used to facilitate any point along the sense-making cycle, such as accelerated search,
+accelerated reading, accelerated extracting and linking, schema visualization, hypothesis management and
+structured argumentation, or interactive presentation.
+
+
+### HTML tags
+#### with custom styling
+
+
+
+
+### This is a section
+#### This is a subsection
+
+
+
+### This is a section
+#### This is a subsection
+
+
+
+
+<div class="figure-text">Mapping of visual variables with shape parameter assigned as static.</div>
+
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

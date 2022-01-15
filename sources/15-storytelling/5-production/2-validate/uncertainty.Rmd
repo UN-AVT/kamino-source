@@ -1,0 +1,141 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+STORYTELLING  
+</div>
+
+# Validate
+## knowns, unknowns, and uncertainty
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Abhidev Vaishnav on Unsplash"}
+
+knitr::include_graphics("archetypes/smile/abhidev-vaishnav-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">A smile from Pune, India</div>
+
+> This is a quote...\
+--- The attribution\
+
+***
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa fringilla, venenatis augue id, vulputate orci. Etiam in dictum nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque semper tristique malesuada. Sed maximus consequat est a fermentum. Nullam ex ante, pretium sit amet venenatis laoreet, iaculis non magna. Pellentesque vitae lacus sollicitudin, cursus enim a, fermentum nisl. Morbi venenatis ipsum eu ante vehicula, et faucibus risus eleifend. Nullam lobortis lectus in congue finibus.
+
+<aside>
+<p>A note of reference that is set in the __side margin__ or a page usually in <u>_smaller type_</u> than the text.</p>
+</aside>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus eu massa fringilla, venenatis augue id, vulputate orci. Etiam in dictum nisi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque semper tristique malesuada. Sed maximus <mark>consequat</mark> est a fermentum. Nullam ex ante, pretium sit amet venenatis laoreet, iaculis non magna. Pellentesque vitae lacus sollicitudin, cursus enim a, fermentum nisl. Morbi venenatis ipsum eu ante vehicula, et faucibus risus eleifend. Nullam lobortis lectus in congue finibus.
+
+### Knowns and Unknowns
+#### with custom styling
+
+The term is used to explain that any model of the future can only be informed by information that is currently available to the observer and, as such, faces substantial limitations and unknown risk.
+
+> There are known knowns; there are things we know that we know.\
+  There are known unknowns; that is to say, there are things that we now know we don’t know.\
+  But there are also unknown unknowns; there are things we do not know we don’t know.\
+--- United States Secretary of Defense Donald Rumsfeld\
+
+KNOWN KNOWNS: Discovered and readily available information for analysis.
+
+UNKNOWN KNOWNS: This information exists, but I never looked for it, or found it. Undiscovered information which may be available for analysis.
+
+KNOWN UNKNOWNS: I need this information but cannot find it. I don’t have this information, and I’m not sure if it exists.
+
+UNKNOWN UNKNOWNS: The term unknown unknown refers to circumstances or outcomes that were not conceived of by an observer at a given point in time
+
+### Uncertainty
+#### with custom styling
+
+Causes of Uncertainty
+
+Schmitt and Klein (1996) identified four sources of uncertainty: missing information, unreliable information, ambiguous or conflicting information, and complex information.
+
+Measures of Uncertainty
+
+Variability
+Noise
+Incompleteness
+Indeterminacy
+Bias
+Error
+Accuracy
+Precision
+Reliability
+Validity
+Quality
+Integrity
+
+### Expressing Confi dence
+#### This is a subsection
+
+Possibly
+Probably
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

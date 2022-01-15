@@ -1,61 +1,189 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "1854 Broad Street cholera outbreak"
+output:
   html_document:
     theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: libs
+    lib_dir: "vendor"
 ---
 
-# Header
-## Subheader
+```{r setup, include=FALSE}
 
-```{r echo = FALSE, message = FALSE, fig.height= 15, fig.width = 30}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
 
-library(HistData)
-library(lubridate)
-library(sp)
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
 library(sf)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MAPS  
+</div>
+
+# 1854 Broad Street cholera outbreak
+## Dot Map
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Illustration from Punch (1852)."}
+
+masthead <- "assets/a-court-for-king-cholera.png"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> On proceeding to the spot,\
+  I found that nearly all the deaths had taken place within a short distance of the [Broad Street] pump...\
+--- John Snow, letter to the editor of the Medical Times and Gazette\
+
+***
+
+__John Snow__ was an English physician and is considered one of the founders of modern __epidemiology__. His work in __tracing the source__ of a 1854 cholera outbreak in Soho, London, led to his creation of a __dot map__ to illustrate the __cluster of cholera cases__ around the public water pump on Broad Street. His studies of the pattern of the disease were persuaded the local council to disable the well pump by removing its handle to prevent further use. He also used statistics to illustrate the connection between the quality of the water source and cholera cases. He showed that homes supplied by pumps taking water from __sewage-polluted sections__ had a cholera rate significantly higher than those supplied by sources from the upriver. His study of its causes and hypothesis that germ-contaminated water was the source of cholera, rather than particles in the air, __influenced public health__ and the construction of __improved sanitation facilities__.
+
+### Ingest
+#### deaths
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_deaths <- read.csv("archetypes/snow-cholera/deaths.csv", header = TRUE, stringsAsFactors = FALSE, fileEncoding = "utf-8")
+head(df_deaths, n = 10)
 
 ```
 
 
-```{r}
+### Ingest
+#### pumps
 
-deaths <- Snow.deaths
-pumps <- Snow.pumps
-streets <- Snow.streets
-polygons <- Snow.polygons
 
-deaths
-pumps
-streets
-polygons
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
-```
-
-```{r}
-
-## Plot deaths over time
-clr <- ifelse(Snow.dates$date < mdy("09/08/1854"), "red", "darkgreen")
-plot(deaths ~ date, data=Snow.dates, type="h", lwd=2, col=clr)
-points(deaths ~ date, data=Snow.dates, cex=0.5, pch=16, col=clr)
-text( mdy("09/08/1854"), 40, "Pump handle\nremoved Sept. 8", pos=4)
+df_pumps <- read.csv("archetypes/snow-cholera/pumps.csv", header = TRUE, stringsAsFactors = FALSE, fileEncoding = "utf-8")
+head(df_pumps, n = 10)
 
 ```
 
 
-```{r}
+### Ingest
+#### points of interest
 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_poi <- read.csv("archetypes/snow-cholera/poi.csv", header = TRUE, stringsAsFactors = FALSE, fileEncoding = "utf-8")
+head(df_poi, n = 10)
+
+```
+
+
+### Base maps
+#### streets and deaths (geolocated from original)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+streets <- st_read("archetypes/snow-cholera/streets.geojson")
+dwellings <- st_read("archetypes/snow-cholera/dwellings.geojson")
 
 
 ```
+
+
+### View
+#### streets, deaths, and pumps
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "black", size = 12, family = "inconsolata"),
+  plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),
+  plot.background = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  legend.position = "none",
+  legend.title = element_blank()
+)
+
+v1 <- ggplot() +
+  geom_sf(data = streets, fill="#f0f0f0", color="#111111", size = 0.5) +
+  geom_sf(data = dwellings, fill="#111111", color="#111111", size = 0.5) +
+  geom_point( data = df_deaths, aes(x=xcoord, y=ycoord, size = Count), shape = 21, color = "#E53935", fill = "#E53935", alpha = 0.8) +
+  geom_point( data = df_pumps, aes(x=xcoord, y=ycoord), shape = 21, size = 4, color = "#03A9F4", fill = "#03A9F4") +
+  geom_text_repel(data = df_poi, aes(x = xcoord, y = ycoord, label = label), 
+                  size = 4, hjust = 0.5, vjust = 0.5, family = "inconsolata", fontface = "bold",
+                  seed = 42, force = 5, force_pull = 0, box.padding = 0.75, min.segment.length = 0, direction = "y", 
+                  color = "black", bg.color = "white", bg.r = 0.15) +
+  scale_size_continuous(range = c(2, 10)) +
+  labs(x=NULL,
+       y=NULL,
+       title = "1854 Broad Street cholera outbreak", 
+       subtitle="replica of original by John Snow") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 16, height_svg = 15,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+```
+
+
+### References
+#### Citations and data sources
+
+
+<pre>
+Map of the book "On the Mode of Communication of Cholera" by John Snow, originally published in 1854 by C.F. Cheffins, Lith, Southhampton Buildings, London, England.
+</pre>
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
 
 

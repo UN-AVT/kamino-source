@@ -63,7 +63,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-df <- read.csv("archetypes/corruption-perception-index/corruption-perception-index-2020.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "corruption-perception-index/corruption-perception-index-2020.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
 df
 
 ```
@@ -84,7 +88,7 @@ df_wrangle
 ### View / Chart
 #### with stat_halfeye and stat_dotsinterval
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1280/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -130,22 +134,9 @@ v1 <- ggplot(df_wrangle, aes(fct_reorder(region, cpi_score_2020), cpi_score_2020
   theme_minimal() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1080/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 0.9))
 )
-
-```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/corruption-perception-index-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/corruption-perception-index-sm.png", plot = v1, width=4, height=2.25)
 
 ```
 

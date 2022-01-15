@@ -74,7 +74,11 @@ This example is based on summary data with the following fields, types, and defi
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df <- read.csv("archetypes/citation-rates-for-speeding-stops/citation-rates-for-speeding-stops.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "citation-rates-for-speeding-stops/citation-rates-for-speeding-stops.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 df
 
 ```
@@ -100,7 +104,7 @@ byStateAndRace
 ### Plot Scatter-Jitter
 #### facet by state, shape by race
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata", size = 10), 
@@ -133,7 +137,7 @@ v1 <- ggplot(byStateAndRace, aes(x = location, y = meanRate)) +
   theme_minimal() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
@@ -145,7 +149,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 
 When selecting a color palette there can be subtle biases that influence perception.  In this example, using race as a color variable, we have a factor of three categories: black, hispanic, and white.  This provides a natural fit for evaluating schemes based on color theory.  One option is Split Complements, the use a color and the two __adjacent__ tertiary colors of its complement.  But take notice that two of the colors are more similar than the third.
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 byStateAndRace_complete <- byStateAndRace[complete.cases(byStateAndRace), ]
 
@@ -169,7 +173,7 @@ v2 <- ggplot(byStateAndRace_complete, aes(x = location, y = meanRate)) +
   theme_minimal() +
   theme_opts
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
@@ -181,7 +185,7 @@ girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
 
 In contrast to split the split complements palette, triadic color schemes use three __evenly__ spaced colors on the color wheel.  Therefore there is no bias to any assignment of color to the race factors.
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide'}
 
 race_palette_triadic <- c(
   "Black" = "#CF1876",
@@ -203,26 +207,11 @@ v3 <- ggplot(byStateAndRace_complete, aes(x = location, y = meanRate)) +
   theme_minimal() +
   theme_opts
 
-girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v3, width_svg = 16, height_svg = 9,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
 ```
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/citation-rates-for-speeding-stops-fs.svg", plot = v3, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/citation-rates-for-speeding-stops-sm.png", plot = v3, width=4, height=2.25)
-
-```
-
 
 ### References
 #### citations for narrative and data sources

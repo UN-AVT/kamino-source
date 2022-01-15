@@ -1,0 +1,136 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/kamino.css", "../../../z-assemblers/maps.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/header.html"
+      after_body: "../../../z-assemblers/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include = FALSE}
+# install devtools
+#install.packages("devtools")
+# load devtools
+library(devtools)
+# install arcdiagram from github - not on CRAN
+install_github('gastonstat/arcdiagram')
+# load arcdiagram
+library(arcdiagram)
+library(dplyr)
+```
+
+<div class="activity">
+GRAPHS  
+</div>
+
+# Arc Diagram
+## Subsection
+
+
+
+***
+
+# Section
+## Subsection
+
+```{r message = FALSE}
+# Load data from JSON file
+library(jsonlite)
+json_file = "../archetypes/miserables-arc-diagram.json"
+graph <- jsonlite::fromJSON(txt = json_file)
+
+# Get Nodes first
+nodes <- as.data.frame(graph$nodes)
+
+# Create Colorway
+group <-seq(0,10)
+color.codes<-as.character(c("#E2CA40","#5E78A8","#D98912","#C55E53","#8DB6B3","#73A04F",
+                            "#D98912","#A37BA1","#91765D","#E6A0A4","#5E78A8"))
+df2=data.frame(group, color.codes); 
+
+# merge color specifications with data
+nodes_enriched <- merge(nodes,df2, by=("group"), all.x=TRUE, all.y=TRUE) %>% arrange(index)
+
+vlabels <- nodes_enriched$name
+vgroups <- nodes_enriched$group
+vfills <- as.character(nodes_enriched$color.codes)
+vborders <- as.character(nodes_enriched$color.codes)
+
+#Get Edges
+edges <- as.data.frame(graph$links) 
+# Calculate degree - number of in- and out grades for each node
+degree <- edges %>% group_by(target) %>% summarise( degree = n() )%>% mutate(source = target) %>% select(-target) %>% union(
+edges %>% group_by(source) %>% summarise( degree = n())) %>% ungroup() %>% group_by(source) %>% summarise(degree = sum(degree))
+degrees <- degree$degree
+
+edgelist <- as.matrix(select(edges, target, source) )
+values <- edges$value 
+```
+
+# Section
+## Subsection
+
+```{r fig.height = 8, fig.width = 20}
+# plot arc diagram
+arcplot(edgelist,  labels=vlabels, cex.labels=0.8,
+        show.nodes=TRUE,  bg.nodes=vfills, col.nodes=vborders,
+        cex.nodes = log(degrees)+0.5, pch.nodes=21,
+        lwd.nodes = 2, line=-0.5,
+        col.arcs = hsv(0, 0, 0.2, 0.25), lwd.arcs = 1.5 * values)
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+
+# echo=FALSE will exclude block from code folding
+# Example for including external html content when needed
+htmltools::includeHTML("mark-complete-button.html")
+
+```
+
+
+
+```{r, child='mark-complete-click.Rmd'}
+
+# JS event handler for button click
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

@@ -1,0 +1,95 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+COLLECTIONS  
+</div>
+
+# Taming the Wicked
+## What are they?
+
+> How many piano tuners are there in Chicago?\
+-- Enrico Fermi\
+
+Kamino is a multi-disciplinary learning program for the analysis of complex issues that draws upon fields such as art, biology, computer science, cinematography, cultural studies, graphic design, history, mathematics, marketing, political science, and psychology to name a few. Kamino is an approach for applying a process and methods to foster a deeper understanding and sensemaking of complex issues.
+
+This concept is an important premise of the program whose genesis is borne on the assumption that decades of research and advances in knowledge can fold into a sense making discipline. This program is an attempt at bridging such convergence by drawing upon the logics, reasonings and methods found in the practices of arts and sciences. The objective is to form a new methodology for sensemaking of wicked problems.
+
+Kamino is based on a form of crowdsourcing, though the participants span centuries, traverse fields, and would by conventional thought represent an unlikely team of problem solvers. The work draws upon the many great minds of near and distant history, from Descartes to Walt Disney, where their ideas are re-purposed to shape a process, define a framework, and most importantly to coordinate a critical mass of expertise to a single goal.
+
+Learning from this expertise provides the setting for a recrafting of conventional analysis tradecraft. This opportunity gives rise to a need for new skills and competencies — a next generation scientist of sensemaking and artist of information. This concept captures the profile of the special skills aimed at visual sensemaking — one who can master and skillfully apply visual analytics to a sensemaking scenario to produce a meaningful decision product. Developing this expertise is the main theme of the program. 
+
+This book will guide you through the learning process to reach the goal of putting Visualytica to practice and to become a Visual Analyst.
+
+### Taming the Wicked
+#### The Problem
+
+***
+
+If you could influence the course of human and natural events, how would you do it? No doubt you would start by studying the issues with a deep analysis of the causes and effects. an in-depth examination to develop a view of the world. How would you go about developing your view of the world? Could you explain the causes of conflict, poverty, economic development, or health? These questions are the departure point for this section which will introduce you to visual analytics and sense making for wicked problems. The goal is to equip you with the science and practice to contribute to the study of global issues with the intent to inform the decision making process — to contribute to the progress global development.
+
+Social, economic, environmental, and political challenges involve dealing with complex problems. Problems which a have been called “messes” and “wicked” when describing issues such as global climate change, illiteracy, poverty, conflict, and human development. The idea of wicked problems was originally proposed by H. W. J. Rittel and M. M. Webber, when in their 1973 article Dilemmas in a General Theory of Planning, they concluded that there is a realm of problems that cannot be successfully treated with traditional analytical approaches. Traditional analytic approaches are an inadequate way to deal with the complexity, interconnections and uncertainty often found in wicked problem scenarios.
+
+Tackling wicked problems raises the demand for specialized skills and the need to garner the required knowledge for grasping the interrelationships between the full range of causal factors underlying complex analytic issues. This point is the purpose of Kamino — to develop a practice for analyzing and making sense of the challenges we face.
+
+#### The practice
+
+Why should you learn this practice? What are the benefits of the approach? The focus on analysis is important to emphasize the need for deep knowledge of issues and the value of fostering a better understanding of today’s complex situations. This we can say is the due diligence required of any analyst whose fi ndings underpin the reasoning found in decisions taken towards the design of public policy programs; decisions which we’ve seen from history can have profound consequences or great benefits. We learn from this history that accurate, credible, and meaningful analysis is paramount to the decision making process.
+
+
+#### The application
+
+To provide meaningful analysis requires specialized practice and methodology. How can you learn this practice? To satisfy this goal, the text is constructed for an intended benefi t to you - the student, the analyst, and the decision maker and all those who contribute to shaping the world we live in. Take for example a complex subject where well informed decisions or program planning would yield a potential solution to the problem. How would you approach an analysis task to “make sense” of issues such as hunger, disease, illiteracy, or environmental sustainability? Do you know,
+
+* How to represent an issue as a system and model?
+* How to apply specialized methods of research and analysis?
+* How to visualize and represent complex subjects?
+* How to present your fi ndings with a clear story?
+
+Answering these questions is the aim of the book; to provide a resource of knowledge and technique that you can adopt, practice and improve upon.
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

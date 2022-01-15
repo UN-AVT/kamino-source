@@ -65,8 +65,8 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df_flows <- read.csv("archetypes/trans-atlantic-slave-trade/all-voyages.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
-df_points <- read.csv("archetypes/trans-atlantic-slave-trade/points.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T)
+df_flows <- read.csv("archetypes/trans-atlantic-slave-trade/all-voyages.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T, fileEncoding = "utf-8")
+df_points <- read.csv("archetypes/trans-atlantic-slave-trade/points.csv", header = TRUE, stringsAsFactors = FALSE, as.is=T, fileEncoding = "utf-8")
 
 head(df_flows)
 head(df_points)
@@ -116,7 +116,10 @@ df_dest_sum <- df_flows %>%
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
+# limits flows shown to above mean
 df_flows_wrangle <- filter(df_flows_sum, dest != origin)
+mean <- mean(df_flows_wrangle$Total)
+df_flows_wrangle <- filter(df_flows_wrangle, Total > mean)
 
 df_flows_wrangle <- merge(df_flows_wrangle, df_points, by.x="origin", by.y="id" )
 df_flows_wrangle <- df_flows_wrangle %>% rename(origin_name = name, origin_lat = lat, origin_lon = lon)
@@ -138,7 +141,6 @@ df_dest_wrangle <- df_dest_wrangle[order(df_dest_wrangle$Total, decreasing=TRUE)
 # df_dest_wrangle
 
 
-
 ```
 
 
@@ -150,7 +152,6 @@ df_dest_wrangle <- df_dest_wrangle[order(df_dest_wrangle$Total, decreasing=TRUE)
 
 # PLOT NATURAL EARTH BORDERS
 ne_world <- ne_countries(scale = "small", returnclass = "sf")
-# class(ne_world)
 # removes Antarctica
 ne_world <- filter(ne_world, iso_a3 != "ATA") 
 
@@ -167,18 +168,18 @@ ne_coastline <- ne_coastline(scale = "small", returnclass = "sf")
 
 # theme parameters
 theme_opts <- theme(
-  legend.position = "bottom",
-  legend.title = element_blank(),
-  axis.text = element_blank(),
-  axis.line = element_blank(),
-  axis.ticks = element_blank(),
-  axis.title = element_blank(),
+  plot.background = element_rect(fill = "#988373"),
   panel.grid = element_blank(),
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(),
   panel.background = element_rect(fill = "#988373"),
   panel.border = element_blank(),
-  plot.background = element_rect(fill = "#988373")
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  legend.position = "bottom",
+  legend.title = element_blank()
 )
 
 v1 <- ggplot() +
@@ -205,15 +206,6 @@ girafe(ggobj = v1, width_svg = 16, height_svg = 9,
 )
 
 ```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
-
-# eval = FALSE as default; run manually as chunk
-ggsave(filename = "outputs/trans-atlantic-slave-trade-fs.svg", plot = v1, width=16, height=9)
-
-```
-
 
 
 ### References

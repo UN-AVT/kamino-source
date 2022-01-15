@@ -1,0 +1,202 @@
+---
+pagetitle: "Cities getting energy from renewables"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggraph)
+library(igraph)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TREES  
+</div>
+
+# Cities getting energy from renewables
+## Circle packing
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Random Institute on Unsplash"}
+
+masthead <- "assets/random-institute-2-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> The future is green energy, sustainability, renewable energy...\
+--- Arnold Schwarzenegger\
+
+***
+
+
+### Ingest the data
+#### city, country, population
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_file_path <- "archetypes/cities-getting-energy-from-renewables/cities-getting-energy-from-renewables.csv"
+df = read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df
+
+
+```
+
+
+### Wrangle the data
+#### Create node and edge tables
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_wrangle <- df
+df_wrangle$region <- countrycode(df$country, origin='country.name', destination='un.region.name')
+
+# Unique edges
+df_edges_1 <- aggregate(x = df_wrangle$population,
+          by = list(df_wrangle$country, df_wrangle$region),
+          FUN = sum)
+colnames(df_edges_1) <- c("TO","FROM", "SIZE")
+df_edges_1 <- df_edges_1 %>% select(FROM, TO)
+
+df_edges_2 <- df_wrangle %>% select(country, city)
+
+# Standard edge table structure
+colnames(df_edges_2) <- c("FROM","TO")
+
+df_edges <- rbind(df_edges_1, df_edges_2)
+
+# Root nodes
+df_nodes_1 <- aggregate(x = df_wrangle$population,
+          by = list(df_wrangle$region),
+          FUN = sum)
+colnames(df_nodes_1) <- c("NODE", "SIZE")
+df_nodes_1$COLOR <- df_nodes_1$NODE
+
+df_nodes_2 <- aggregate(x = df_wrangle$population,
+          by = list(df_wrangle$country, df_wrangle$region),
+          FUN = sum)
+
+colnames(df_nodes_2) <- c("NODE", "COLOR", "SIZE")
+
+
+# Leaf nodes
+df_nodes_3 <- df_wrangle %>% select(city, population, region)
+colnames(df_nodes_3) <- c("NODE", "SIZE", "COLOR" )
+
+# Combine
+df_nodes <- rbind(df_nodes_1, df_nodes_2, df_nodes_3)
+
+# Transform to graph data structure
+df_graph <- graph_from_data_frame( df_edges, vertices = df_nodes )
+
+```
+
+
+#### edge table
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_edges
+
+```
+
+<p></p>
+#### node table
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_nodes
+
+```
+
+
+### Plot
+#### circle pack layout with size, color, and labels (at root level)
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata"), 
+    legend.position='none'
+  )
+
+phase_pal <- c("Africa" = "#E57373", 
+               "Americas" = "#80CBC4", 
+               "Asia" = "#FDD835", 
+               "Europe" = "#66BB6A",
+               "Oceania" = "#FFB300")
+
+v1 <- ggraph(df_graph, layout = 'circlepack', weight = SIZE) + 
+  geom_node_circle(aes(fill = COLOR)) + 
+  scale_fill_manual(values = phase_pal) +
+  geom_node_label( aes(label=name, filter=depth==0), size = 6, family = "inconsolata") +
+  geom_node_text( aes(label=name, filter=depth==1), size = 4, color = "#ffffff", family = "inconsolata", face="bold") +
+  coord_fixed() + 
+  theme_void() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: https://informationisbeautiful.net/beautifulnews/1118-100-cities-renewables/
+* Data sources: Carbon Disclosure Project, https://www.cdp.net/en/cities/world-renewable-energy-cities
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

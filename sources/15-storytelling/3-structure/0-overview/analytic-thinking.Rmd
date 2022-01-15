@@ -1,0 +1,231 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggiraph)
+
+library(DiagrammeR)
+
+library(knitcitations)
+library(bibtex)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+MODULE  
+</div>
+
+# This is a title
+## This is a subtitle
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Abhidev Vaishnav on Unsplash"}
+
+knitr::include_graphics("archetypes/smile/abhidev-vaishnav-unsplash.jpg", dpi=72)
+
+```
+
+<div class="figure-text">A smile from Pune, India</div>
+
+> This is a quote...\
+--- The attribution\
+
+***
+
+The objective of this chapter is to enable you to critically think about analysis and what visual analysts are tasked to analyze. A second objective is to provide you with a set of analytic thinking
+tools to develop your skills to use critical thinking techniques to provide structure to your analytic reasoning. Lastly, you’ll explore the analytic methods by which you can organize and make sense
+of the data and information.
+
+<aside>
+<p>A note of reference that is set in the __side margin__ or a page usually in <u>_smaller type_</u> than the text.</p>
+</aside>
+
+The goal of analysis is to make judgments about an issue which refl ect our best understanding of a situation, complete with assumptions, supporting evidence, and uncertainties.x In the words of Mark Lowenthal, Former Assistant Director of Central Intelligence for Analysis and Production, “The best analytical tool remains a really good analyst.” In this section we’ll look at the basic patterns for developing your skills in:
+
+* critical thinking , structured argumentation, reasoning, sensemaking These skills are prerequisite to applying structured analytic methods.
+Good decisions usually have systematically assembled data and analysis behind them...There is considerable evidence that decisions based on analytics are more likely to be correct than
+those based on intuition. (p9,13)
+
+### Are you a really good analyst?
+#### with custom styling
+
+Being a “really good analyst” requires really good thinking. We need an comprehensive framework to add structured reasoning to sound, intuitive thinking. Critical thinking provides such a framework and goes further, positively influencing the entire intelligence analysis process. Analysts who adopt critical thinking stand to improve their analyses:
+
+Critical thinking is that mode of thinking - about any subject, content or problem - in which the
+thinker improves the quality of his or her thinking by skillfully taking charge of the structures
+inherent in thinking and imposing intellectual standards upon them. (Paul, Fisher and Nosich,
+1993, p.4.)
+
+Critical thinking deliberately evaluates the quality of thinking. In a seminal study on critical thinking and education in 1941, Edward Glaser writes that the ability to think critically involves three thingsGlaser, 1941, p.5:
+
+* An attitude of being disposed to consider in a thoughtful way the problems and subjects that come within the range of one’s experiences,
+* Knowledge of the methods of logical inquiry and reasoning,
+* Some skill in applying those methods.
+
+An overarching framework is needed to ensure reasoning relies on valid assertions, is not fallacious, and isself–consciously objective. Critical thinking provides that framework by ensuring that each form of reasoning is appropriately used. Critical thinking extends to the entire analysis process — analysts who become better critical thinkers will improve their analyses, helping to lessen the likelihood of failures. The thinker has two equally important goals: improving the way she or he reasons and coming to a correct solution.15 To accomplish these goals, the reasoner requires assisting structures. Beginning with the structures of thought and extending to the formulation of logic based argumentation, we’ll explore supporting patterns to ensure a good process is the root of analytical thinking.
+
+
+### Elemental Structures of Thought
+#### with custom styling
+
+In The Thinker’s Guide to Analytic Thinking, eight basic structures are present in all thinking. These structures and how they work will be our our thinking and elements of thought pattern. These elements lead thinkers to ask focused questions about the topic being considered and the thinking process itself. Paul and Elder assert that whenever people reason, they do so for a purpose. This reasoning exists within a point of view and is shaped by both conscious and unconscious assumptions.
+
+Reasoning involves the creation of inferences based on conceptual frameworks about reality. These inferences are generated as people consider evidence necessary to answer questions or solve problems.
+Further, reasoning leads to decision points with implications – things that might happen – and consequences – things that do happen once the decision has been made. Finally, Paul and Elder insist that “learning to analyze thinking requires practice in identifying the structures in use.”16
+
+
+### This is a section
+#### This is a subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# df_file_path <- "archetypes/../*.csv"
+# df = read.csv(df_file_path, header = TRUE, stringsAsFactors = FALSE)
+# df
+
+mpg
+
+```
+
+
+### This is a section
+#### This is a subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "80%"}
+
+grViz("
+digraph vv {
+
+# dot, neato, twopi, and circo
+graph [layout = dot, splines = ortho, nodesep = 0.8]
+
+# node definitions with substituted label text
+node [fontname = Inconsolata]
+vv [label = 'Visual Variables', shape = 'box', margin=0.2]
+px [label = 'Position X', shape = 'box', margin=0.2]
+py [label = 'Position Y', shape = 'box', margin=0.2]
+sh [label = 'Shape', shape = 'box', margin=0.2]
+sz [label = 'Size', shape = 'box', margin=0.2]
+c [label = 'Color', shape = 'box', margin=0.2]
+pxm [label = 'GDP', shape = 'box', margin=0.2]
+pym [label = 'Life Expectency', shape = 'box', margin=0.2]
+shm [label = 'circle\ngeom_point', shape = 'circle', margin=0.2]
+szm [label = 'Population', shape = 'box', margin=0.2]
+cm [label = 'Region', shape = 'box', margin=0.2]
+
+# edge definitions with the node IDs
+vv -> {px py sh sz c} [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+px -> pxm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+py -> pym [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+sh -> shm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+sz -> szm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+c -> cm [dir = both, arrowsize = 0.5, arrowhead = inv, arrowtail = inv]
+}")
+
+```
+
+<div class="figure-text">Mapping of visual variables with shape parameter assigned as static.</div>
+
+### This is a section
+#### This is a subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+# https://ggplot2.tidyverse.org/reference/theme.html
+# standard theme parameters
+theme_opts <- theme(
+  text = element_text(family = "inconsolata"), 
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_line(linetype = "dotted"),
+  panel.grid.minor = element_blank(),
+  panel.background = element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_rect(fill="white", colour="white"),
+  plot.margin = unit(c(0.5,0.5,0.5,0.5), "in")
+)
+
+v1 <- ggplot(mpg, aes(displ, hwy, color = class)) + 
+  geom_point() +
+  theme_minimal() +
+  theme_opts
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### Save plot
+#### as vector or raster image
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ggsave(filename = "assets/full-size.svg", plot = v1, width=1280/72, height=720/72)
+ggsave(filename = "assets/thumbnail.png", plot = v1, width=4, height=2.25)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative sources
+* Data sources
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "citations/citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

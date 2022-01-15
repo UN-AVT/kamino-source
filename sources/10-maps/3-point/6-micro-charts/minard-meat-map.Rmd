@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: vendor
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
@@ -33,6 +33,12 @@ library(scales)
 library(scatterpie)
 library(ggiraph)
 
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
 ```
 
 <div class="activity">
@@ -40,7 +46,7 @@ MAPS
 </div>
 
 # Minard meat map
-## Point Microcharts Map
+## Point Microcharts
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Chart by Charles Joseph Minard"}
 
@@ -49,8 +55,6 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-> ...\
---- \
 
 ***
 
@@ -60,24 +64,28 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 df <- read.csv("archetypes/minard-meat-map/dpt_production.csv", header = TRUE, stringsAsFactors = TRUE)
-df
+head(df, n = 10)
 
 ```
 
+
+### Ingest
 #### Departments
+
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 dep_colormap <- read.csv("archetypes/minard-meat-map/departments-colormap.csv", header = TRUE, stringsAsFactors = TRUE)
-dep_colormap
+head(dep_colormap, n = 10)
 
 ```
 
 
-#### France, base map
+### Base map
+#### France
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 fr_map <- st_read("archetypes/minard-meat-map/shp/departements-20140306-100m.shp")
 # glimpse(fr_map)
@@ -89,7 +97,7 @@ fr_map <- st_read("archetypes/minard-meat-map/shp/departements-20140306-100m.shp
 #### Rescale and merge
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 # rescale / normalize value to size pies
 df$r <- rescale(df$prod_tot, to=c(0.1,0.25))
@@ -102,33 +110,29 @@ fr_df <- merge(fr_map, dep_colormap, by.x = "code_insee", by.y = "code_insee_c",
 
 
 ### Plot
-#### Theme
+#### symbol / chart map
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}
 
 theme_opts <- theme(
-  legend.position = "none",
-  legend.title = element_blank(),
-  axis.text = element_blank(),
-  axis.line = element_blank(),
-  axis.ticks = element_blank(),
-  axis.title = element_blank(),
+  text = element_text(family = "inconsolata"), 
+  plot.title = element_text(color = "black", size = 14, face = "bold", family = "inconsolata"),
+  plot.subtitle = element_text(color = "black", size = 12, family = "inconsolata"),
+  plot.caption = element_text(color = "#555555", size = 8, family = "inconsolata"),
+  plot.background = element_blank(),
   panel.grid = element_blank(),
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(),
   panel.background=element_rect(fill="white", colour="white"),
   panel.border = element_blank(),
-  plot.background = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  legend.position = "none",
+  legend.title = element_blank(),
 )
-
-```
-
-
-#### Symbol / Chart Map
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=13, fig.height=13, out.width = "100%"}
 
 pie_pal <- c("noir" = "#1e1e1b",
          "rouge" = "#d4315f",
@@ -150,25 +154,16 @@ v1 = ggplot() +
          fill = NULL) +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 13, height_svg = 13,
+girafe(ggobj = v1, width_svg = 16, height_svg = 14.5,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
 
 ```
 
 
-```{r, message=FALSE, eval=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
-# eval = FALSE as default; run manually as chunk
-
-ggsave(filename = "assets/minard-meat-map.svg", plot = v1, width=12, height=6)
-ggsave(filename="assets/minard-meat-map.png", plot=v1, device="png", width=12, height=6, units="in", dpi=500)
-
-```
-
 ### References
 #### citations for narrative and data sources
 
-* Narrative sources: This is a reproduction of an original plot by Charles Joseph Minard he draw in... 1858, [GO](https://commons.wikimedia.org/wiki/File:Minard-carte-viande-1858.png){target="_blank"}
-
+* Narrative sources: reproduction of original by Charles Joseph Minard, 1858, [GO](https://commons.wikimedia.org/wiki/File:Minard-carte-viande-1858.png){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

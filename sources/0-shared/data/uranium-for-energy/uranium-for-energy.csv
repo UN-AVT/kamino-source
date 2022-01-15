@@ -1,0 +1,9 @@
+﻿Energy Source,CO2-equivalent Emissions Per GWh (tonnes),Type
+Coal,820,Fossil fuel
+Oil,720,Fossil fuel
+Natural Gas,490,Fossil fuel
+Biomass,78-230*,Non-renewable
+Hydro,34,Renewable
+Solar,5,Renewable
+Wind,4,Renewable
+Nuclear,3,Non-renewable

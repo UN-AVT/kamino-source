@@ -1,0 +1,190 @@
+---
+pagetitle: "Trillions"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(treemapify)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+TREES  
+</div>
+
+# Trillions
+## The Treemap
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Marc Babin on Unsplash"}
+
+masthead <- "assets/marc-babin-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> One of the simplest ways to get an idea of one trillion dollars is to consider the amount in terms of the passage of time.\
+  One trillion seconds equals thirty-two thousand years...\
+--- Geoff Davis\
+
+***
+
+### Ingest the data
+#### trillions for what
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df = read.csv("./archetypes/trillions/trillions.csv", header = TRUE, stringsAsFactors = FALSE)  # read text file 
+df
+
+```
+
+
+### Wrangle the data
+#### factor category for color mapping
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_wrangle <- df
+df_wrangle$category <- factor(df_wrangle$category)
+df_wrangle
+
+```
+
+
+
+### The Layout
+#### squarified with size and fill
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+category_palette <- c(
+  'helping' = '#4FC3F7',
+  'hoarding' = '#00BCD4',
+  'earning' = '#26A69A',
+  'losing' = '#FF7043',
+  'fighting' = '#F44336',
+  'spending' = '#FBC02D',
+  'saving' = '#8BC34A',
+  'owing' = '#FF9800',
+  'banking' = '#66BB6A',
+  'winning' = '#5C6BC0'
+)
+
+# Layouts
+# squarified" (the default), "scol", "srow" or "fixed"
+# Simple
+v1 <- ggplot(df_wrangle, aes(area = trillion_usd, fill = category)) +
+  geom_treemap(color = "#ffffff") +
+  scale_fill_manual(values = category_palette) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+#### with labels
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Labeled
+v2 <- ggplot(df_wrangle, aes(area = trillion_usd, fill = category, label = what)) +
+  geom_treemap(color = "#ffffff") +
+  geom_treemap_text(fontface = "italic", colour = "white", place = "centre", grow = TRUE) +
+  scale_fill_manual(values = category_palette) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+#### with labels and subgroups
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+# Sub-grouping
+v3 <- ggplot(df_wrangle, aes(area = trillion_usd, fill = category, label = what,
+                subgroup = category)) +
+  geom_treemap(color = "#ffffff") +
+  geom_treemap_subgroup_border(colour = "white") +
+  geom_treemap_subgroup_text(place = "centre", grow = T, alpha = 0.5, colour =
+                               "black", fontface = "italic", min.size = 0) +
+  geom_treemap_text(colour = "white", place = "topleft", reflow = T) +
+  scale_fill_manual(values = category_palette) +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+# v3
+
+girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))
+)
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Sources: Information is Beautiful, https://www.informationisbeautiful.net/visualizations/trillions-what-is-a-trillion-dollars/
+* From multiple sources: New York Times, Bloomberg, UNESCO, World Bank, Forbes, World Health Organization, Credit Suisse, and others.
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

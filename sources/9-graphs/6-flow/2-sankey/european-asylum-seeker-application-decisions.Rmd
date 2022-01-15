@@ -1,0 +1,247 @@
+---
+pagetitle: "European Asylum-Seeker Application Decisions"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, dev='svg')
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggraph)
+library(igraph)
+library(graphlayouts)
+library(tidygraph)
+library(ggalluvial)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+GRAPHS
+</div>
+
+# European Asylum-Seeker Application Decisions
+## sankey
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Marjan Blan on Unsplash"}
+
+#masthead <- "assets/marjan-blan-unsplash.jpg"
+#knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> We are defined not by our borders but by our bonds...\
+--- Barack Obama\
+
+***
+
+### Ingest
+#### border graph
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df_path <- "archetypes/european-asylum-seeker-application-decisions/economist-european-asylum-seeker-application-decisions-2012.csv"
+df <- read.csv(df_path, header = TRUE, stringsAsFactors = FALSE)
+df <- df %>% mutate(id = row_number())
+df
+
+```
+
+
+### Prepare data [Wrangle]
+#### Filtering only a few countries of our interest
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+ggplot(data = df,
+       aes(axis1 = source, axis2 = target,
+           y = value)) +
+  scale_x_discrete(limits = c("source", "target"), expand = c(.2, .05)) +
+  xlab("Demographic") +
+  geom_alluvium(aes(fill = EDGE_COLOR)) +
+  geom_stratum() +
+  geom_text(stat = "stratum", aes(label = after_stat(stratum))) +
+  theme_minimal() +
+  ggtitle("passengers on the maiden voyage of the Titanic",
+          "stratified by demographics and survival")
+
+```
+
+
+### Prepare data [Wrangle]
+#### Format the data into a graph data frame 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+data(majors)
+majors
+majors$curriculum <- as.factor(majors$curriculum)
+
+ggplot(majors,
+       aes(x = semester, stratum = curriculum, alluvium = student,
+           fill = curriculum, label = curriculum)) +
+  scale_fill_brewer(type = "qual", palette = "Set2") +
+  geom_flow(stat = "alluvium", lode.guidance = "frontback",
+            color = "darkgray") +
+  geom_stratum() +
+  theme(legend.position = "bottom") +
+  ggtitle("student curricula across several semesters")
+
+```
+
+
+### Prepare data [Wrangle]
+#### Associating different attributes for your Nodes 
+
+Creating numerical fields for the Nodes set in order to attribute the nodes size and/or color  
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+data(vaccinations)
+vaccinations
+vaccinations <- transform(vaccinations,
+                          response = factor(response, rev(levels(response))))
+ggplot(vaccinations,
+       aes(x = survey, stratum = response, alluvium = subject,
+           y = freq,
+           fill = response, label = response)) +
+  scale_x_discrete(expand = c(.1, .1)) +
+  geom_flow() +
+  geom_stratum(alpha = .5) +
+  geom_text(stat = "stratum", size = 3) +
+  theme(legend.position = "none") +
+  ggtitle("vaccination survey responses at three points in time")
+
+```
+
+
+### Prepare data [Wrangle]
+#### Associating different attributes for your Nodes
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+
+```
+
+
+## Associating different attributes for the Edges between Nodes 
+### Creating new numerical fields (smaller values) in order to attribute the edge width and/or color  
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+
+
+```
+
+
+## Layout & Aesthetic Parameters
+### Choose the types of Edges you would like to display
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+
+```
+
+
+## Layout & Aesthetic Parameters
+### Choose the types of Edges you would like to display
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+
+```
+
+
+
+### Plot
+#### nicely
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+
+
+
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative, Visualign, Number of neighbors for world countries, https://visualign.org/2011/10/06/number-of-neighbors-for-world-countries/
+* Data: https://docs.google.com/spreadsheets/d/1agWAs620UntEQGY0yXUo5_C6zZesLEjBj1TVd3tTEDc/edit#gid=0
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+
+# ENTER METADATA
+# Use space to separate keywords or "-" for phrases
+methods <- "" # mostly used in wranglers and analytics
+keywords <- 'country borders'
+commands <- 'graph_from_data_frame create_layout'
+sources <- 'Economist Nextstrain'
+
+# CREATE METADATA
+source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+
+# RUN PRODUCTION OUTPUTS
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

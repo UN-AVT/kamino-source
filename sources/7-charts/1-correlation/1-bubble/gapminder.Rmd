@@ -66,10 +66,14 @@ The __y-axis__ shows a continium from healthy to sick, the __x-axis__ from rich 
 
 ```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# file path parameter
-gapminder_file_path <- "archetypes/gapminder/gapminder.csv"
-gapminder <- read.csv(gapminder_file_path, header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "gap-minder/gapminder.csv"
+url <- paste0(url_root, url_file)
+
+gapminder <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
+
 gapminder
+
 
 ```
 
@@ -248,18 +252,6 @@ girafe(ggobj = v6, width_svg = 16, height_svg = 9,
 
 
 ```
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
-
-# full version
-ggsave(filename = "assets/gapminder-fs.svg", plot = v6, width=16, height=9)
-
-# without annotations
-ggsave(filename = "assets/gapminder-sm.png", plot = v4, width=4, height=2.25)
-
-```
-
 
 ### References
 #### citations for narrative and data sources

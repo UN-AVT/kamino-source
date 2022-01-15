@@ -1,0 +1,69 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+COLLECTIONS  
+</div>
+
+# Preparing for the Future
+## What are they?
+
+> How many piano tuners are there in Chicago?\
+-- Enrico Fermi\
+
+Learning from the past and evolving from the centuries of progress in information visualization, current trends in Visual Analytics provide the setting for a recrafting of conventional analysis tradecraft. This opportunity gives rise to a need for new skills and competencies - a next generation scientist of sense making and artist of visual storytelling.
+
+In the words of John Tukey, “the greatest value of a picture is when it forces us to notice what we never expected to see.x” This is the task of a Visual Analyst and here is a look at a recent case highlighting the importance of such a skill. When Gapminder was founded in Stockholm during February 2005, they likely had no idea that, by coincidence, the idea of visual analytics was emerging. The non-profi t venture set way to “promoting sustainable global development and achievement of the UN Millennium Development Goalsa by increased use and understanding of statistics and other information about social, economic and environmental development at local, national and global levels.x” The initial activity was to develop Trendalyzer, a software aimed at unveiling “the beauty of statistical time series by converting boring numbers into enjoyable,
+animated and interactive graphics.x”
+
+Since its acquisition by Google in March 2007, Trendalyzer and Gapminder World continue to “produce visual representations showing major global development trends with animated statistics and colorful graphics.” The website for this endeavour, gapminder.org, is now ranked as one of the best sites in 2009x, with videos and presentations earning an audience of millionsy. Why is GapMinder so successful, you wonder? Because it makes sense of complex issues which are diffi cult to understand; it enabled us to “see” and discover facts about the world and our wicked problems.
+
+GapMinder is a simple but powerful demonstration of how certain methods can be followed to convey insight and meaning. The success is also a credit to GapMinder Director Hans Rosling’s (Professor of International Health and licensed physician) excellent profi ciency as a visual analyst. Well known for his sword swallowing theatrics and lectures using Gapminder graphics to visualise world development issues, Dr. Rosling’s lectures address questions such as: Can the population growth be stopped? Can everyone live on the same level as the rich countries? In each case, his presentations (see Figure 3) underscore the methodology and process used:
+
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+#cleanbib()
+#options("citation_format" = "pandoc")
+#read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

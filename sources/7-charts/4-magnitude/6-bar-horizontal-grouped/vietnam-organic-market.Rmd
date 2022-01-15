@@ -23,10 +23,15 @@ options(scipen = 999) ## To disable scientific notation
 rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
 gc() #free up memory and report the memory usage.
 
-# Load needed libraries
 library(tidyverse)
 library(reshape2)
 library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
 
 ```
 
@@ -59,7 +64,11 @@ List of Products
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-products <- read.csv("archetypes/organic-exports/usda-gats-product-group-organics.csv", header = TRUE, stringsAsFactors = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "vietnam-organic-market/usda-gats-product-group-organics.csv"
+url <- paste0(url_root, url_file)
+
+products <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
 products
 
 ```
@@ -99,7 +108,7 @@ df_long
 #### group by product
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Theme parameters
 theme_opts <- theme(
@@ -121,7 +130,7 @@ v1 <- ggplot(df_long, aes(x = value, y = Product, fill = variable)) +
   theme_minimal() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 9,
       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
@@ -142,7 +151,7 @@ df_long
 
 Notice the difference?
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Theme parameters
 theme_opts <- theme(
@@ -164,7 +173,7 @@ v2 <- ggplot(df_long, aes(x = value, y = Product, fill = variable)) +
   theme_minimal() +
   theme_opts
 
-girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
@@ -173,7 +182,7 @@ girafe(ggobj = v2, width_svg = 1280/72, height_svg = 720/72,
 ### Plot
 #### group by year
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Make the plot
 v3 <- ggplot(df_long, aes(x = value, y = variable, fill = Product)) +
@@ -181,14 +190,14 @@ v3 <- ggplot(df_long, aes(x = value, y = variable, fill = Product)) +
   theme_minimal() +
   theme_opts
 
-girafe(ggobj = v3, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v3, width_svg = 16, height_svg = 9,
       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
 
 Comparison against a stacked bar
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 1920/72, fig.height = 1080/72, out.width = "100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Make the plot
 v4 <- ggplot(df_long, aes(x = value, y = variable, fill = Product)) +
@@ -196,24 +205,10 @@ v4 <- ggplot(df_long, aes(x = value, y = variable, fill = Product)) +
   theme_minimal() +
   theme_opts
 
-girafe(ggobj = v4, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v4, width_svg = 16, height_svg = 9,
       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
 
 ```
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source = 'fold-hide'}
-
-# eval = FALSE as default; set to TRUE for production outputs
-
-# full version
-ggsave(filename = "assets/vietnam-organic-market-fs.svg", plot = v1, width=1280/72, height=720/72)
-
-# thumbnail version without annotations
-ggsave(filename = "assets/vietnam-organic-market-sm.png", plot = v1, width=4, height=2.25)
-
-```
-
 
 ### References
 #### The citations and data sources used for this case
