@@ -1,0 +1,132 @@
+---
+pagetitle: "Road deaths by country"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggrepel)
+library(ggiraph)
+library(dplyr)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS 
+</div>
+
+# Road deaths by country
+## Clean Data
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Yannis H on Unsplash"}
+
+masthead <- "assets/yannis-h-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Some car accidents are caused by the ignorance or disbelief of the fact\
+  that a driver’s eyes and mind can be thousands of kilometres apart...\
+--- Mokokoma Mokhonoana\
+
+***
+
+
+### Ingest the data
+#### gdp and road traffic accidents
+
+GDP
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+
+url_file1 <- "road-deaths-by-country/gdp.csv"
+url1 <- paste0(url_root, url_file1)
+
+df_gdp <- read.csv(url1, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df_gdp
+
+```
+
+
+Road deaths
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+url_file2 <- "road-deaths-by-country/road-deaths.csv"
+url2 <- paste0(url_root, url_file2)
+
+df_rd <- read.csv(url2, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df_rd
+
+
+
+```
+
+
+### Wrangle the data
+#### <kbd>replace value</kbd>
+
+Replace "NA" value with "Not Applicable" value
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df_gdp[is.na(df_gdp)] = "Not Applicable"
+df_gdp
+
+
+```
+### References
+#### citations for narrative and data sources
+
+* Narrative Inspiration: The Economist, Driving lessons
+* Data Source: World Health Organization, [GO](https://apps.who.int/gho/data/node.main.A997){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
