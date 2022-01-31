@@ -60,7 +60,7 @@ GRAPHS
 
 ***
 
-CEBU CITY, Philippines — She was dubbed as Consolacion’s drug queen when police found out that she was the source of 28 kilograms of shabu, worth P190.4 million. Jocelyn Encila, known to many as "Joy", served as a key operator at the heart of the Rustico Ygot Drug Syndicate. Encila and Ygot were ex-lovers, but their relationship endured as Encila helped Ygot run a drug syndicate from the confines of his prison cell at the New Bilibid Prison (NBP) in Muntinlupa City. But aside from Ygot, Encila allegedly also has other connections that helped the drug group in their illegal activities. Some of these individuals happened to be her alleged lovers, including policeman, another inmate from NBP, and officers from the Philippine Coast Guard (PCG) and the Philippine National Police (PNP). Encila's relationship with Jake Arglo Garces would prove deadly, as he is detained in NBP for murder charges, convicted for killing a "macho dancer" he suspected Encila was attracted to. Encila's involvement and illegal activities were discovered by authorities fter police raided her house. 
+CEBU CITY, Philippines — She was dubbed as Consolacion’s drug queen when police found out that she was the source of 28 kilograms of shabu, worth P190.4 million. Jocelyn Encila, known to many as "Joy", served as a key operator at the heart of the Rustico Ygot Drug Syndicate. Encila and Ygot were ex-lovers, but their relationship endured as Encila helped Ygot run a drug syndicate from the confines of his prison cell at the New Bilibid Prison (NBP) in Muntinlupa City. But aside from Ygot, Encila allegedly also has other connections that helped the drug group in their illegal activities. Some of these individuals happened to be her alleged lovers, including policeman, another inmate from NBP, and officers from the Philippine Coast Guard (PCG) and the Philippine National Police (PNP). Encila's relationship with Jake Arglo Garces would prove deadly, as he is detained in NBP for murder charges, convicted for killing a "macho dancer" he suspected Encila was attracted to. Encila's involvement and illegal activities were discovered by authorities after police raided her house. 
 
 ### Ingest
 #### the tree of mutations
@@ -154,7 +154,7 @@ layout <- create_layout(df_graph, layout = 'focus', focus = 1)
 
 
 ### Plot
-#### dendrogram
+#### with layout
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}

@@ -268,15 +268,6 @@ v1
 ```
 
 
-# Saving the graph as .svg file
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
-
-ggsave(filename = "./assets/movie-network.svg", plot = v1, width=12, height=6)
-# ggsave(filename="template.png", plot=v1, device="png", width=12, height=6, units="in", dpi=500)
-
-```
-
 # References
 ## The citations and data sources used for this case
 

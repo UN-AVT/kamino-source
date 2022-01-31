@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Energy Forecast"
 output:
   html_document:
     theme: lumen
@@ -17,43 +17,41 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
 
-library(dplyr)
-library(ggplot2)
 library(tidyverse)
-library(tidyr)
+library(jsonlite)
 library(plotly)
 library(networkD3)
-library(jsonlite)
+
 ```
 
 <div class="activity">
 GRAPHS  
 </div>
 
-# Sankey
-## Energy Forecast 2050
+# Energy Forecast 2050
+## Sankey
 
 ***
 
-## Load data [Ingest]
+### Load data [Ingest]
 
-```{r, message = FALSE, warning = FALSE, echo = FALSE}
 
-# Load data
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
 # Flatten for easy access to properties
-plotly_graph <- fromJSON('./archetypes/energy/sankey_energy.json', flatten = TRUE)[[1]]
-# plotly_graph
+plotly_graph <- fromJSON('archetypes/energy-forecast/sankey_energy.json', flatten = TRUE)[[1]]
+head(plotly_graph, n=10)
 
-d3_graph <- fromJSON("./archetypes/energy/energy.json")
+d3_graph <- fromJSON("archetypes/energy-forecast/energy.json")
 # d3_graph
 
 ```
 
 
-## Plotly Version
+### Plotly Version
 
 
-```{r, echo=FALSE, fig.width=11, fig.height=12}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%", fig.height=8}
 
 node_labels <- unlist(plotly_graph$node.label)
 node_color <- unlist(plotly_graph$node.color)
@@ -105,10 +103,10 @@ fig
 ```
 
 
-## Network D3 Version
+### Network D3 Version
 
 
-```{r, echo=FALSE, fig.width=11, fig.height=12}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%", fig.height=8}
 
 # Convert to data frame
 EngNodes <- d3_graph$nodes
@@ -129,19 +127,15 @@ sankey
 ```
 
 
-# Exercises and practice
-## Knime and R practice solutions
+### References
+#### citations for narrative and data sources
 
 
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-# References
-## The citations and data sources used for this case
-
-
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# read.bibtex(file = "./citations.bib")
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
 
 ```
 

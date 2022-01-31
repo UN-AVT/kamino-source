@@ -11,10 +11,10 @@
 
 
 
-<title>Kamino</title>
+<title>Energy Forecast</title>
 
-<script src="vendor/header-attrs-2.10/header-attrs.js"></script>
-<script src="vendor/jquery-3.5.1/jquery.min.js"></script>
+<script src="vendor/header-attrs-2.11/header-attrs.js"></script>
+<script src="vendor/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="vendor/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
 <script src="vendor/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -36,12 +36,12 @@
 <link href="vendor/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="vendor/pagedtable-1.1/js/pagedtable.js"></script>
 <script src="vendor/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="vendor/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="vendor/plotly-binding-4.10.0/plotly.js"></script>
 <script src="vendor/typedarray-0.1/typedarray.min.js"></script>
-<link href="vendor/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
-<script src="vendor/crosstalk-1.1.1/js/crosstalk.min.js"></script>
-<link href="vendor/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="vendor/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link href="vendor/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="vendor/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="vendor/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="vendor/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <script src="vendor/d3-4.5.0/d3.min.js"></script>
 <script src="vendor/sankey-1/sankey.js"></script>
 <script src="vendor/sankeyNetwork-binding-0.4/sankeyNetwork.js"></script>
@@ -115,7 +115,7 @@ if (window.hljs) {
 
 
 
-<link rel="stylesheet" href="D:/Didier/GitHub/kamino-source/sources/z-assemblers/assets/styles/content.css" type="text/css" />
+<link rel="stylesheet" href="../../../z-assemblers/assets/styles/content.css" type="text/css" />
 
 
 
@@ -240,36 +240,98 @@ pre code {
 <div class="activity">
 <p>GRAPHS</p>
 </div>
-<div id="sankey" class="section level1">
-<h1>Sankey</h1>
-<div id="energy-forecast-2050" class="section level2">
-<h2>Energy Forecast 2050</h2>
+<div id="energy-forecast-2050" class="section level1">
+<h1>Energy Forecast 2050</h1>
+<div id="sankey" class="section level2">
+<h2>Sankey</h2>
 <hr />
+<div id="load-data-ingest" class="section level3">
+<h3>Load data [Ingest]</h3>
+<pre class="r fold-hide"><code># Flatten for easy access to properties
+plotly_graph &lt;- fromJSON(&#39;archetypes/energy-forecast/sankey_energy.json&#39;, flatten = TRUE)[[1]]
+head(plotly_graph, n=10)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["type"],"name":[1],"type":["chr"],"align":["left"]},{"label":["orientation"],"name":[2],"type":["chr"],"align":["left"]},{"label":["valueformat"],"name":[3],"type":["chr"],"align":["left"]},{"label":["valuesuffix"],"name":[4],"type":["chr"],"align":["left"]},{"label":["domain.x"],"name":[5],"type":["list"],"align":["right"]},{"label":["domain.y"],"name":[6],"type":["list"],"align":["right"]},{"label":["node.pad"],"name":[7],"type":["int"],"align":["right"]},{"label":["node.thickness"],"name":[8],"type":["int"],"align":["right"]},{"label":["node.label"],"name":[9],"type":["list"],"align":["right"]},{"label":["node.color"],"name":[10],"type":["list"],"align":["right"]},{"label":["node.line.color"],"name":[11],"type":["chr"],"align":["left"]},{"label":["node.line.width"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["link.source"],"name":[13],"type":["list"],"align":["right"]},{"label":["link.target"],"name":[14],"type":["list"],"align":["right"]},{"label":["link.value"],"name":[15],"type":["list"],"align":["right"]},{"label":["link.color"],"name":[16],"type":["list"],"align":["right"]},{"label":["link.label"],"name":[17],"type":["list"],"align":["right"]}],"data":[{"1":"sankey","2":"h","3":".0f","4":"TWh","5":"<int [2]>","6":"<int [2]>","7":"15","8":"15","9":"<chr [48]>","10":"<chr [48]>","11":"black","12":"0.5","13":"<int [71]>","14":"<int [71]>","15":"<dbl [71]>","16":"<chr [71]>","17":"<chr [71]>","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 </div>
-<div id="load-data-ingest" class="section level2">
-<h2>Load data [Ingest]</h2>
+<pre class="r fold-hide"><code>d3_graph &lt;- fromJSON(&quot;archetypes/energy-forecast/energy.json&quot;)
+# d3_graph</code></pre>
 </div>
-<div id="plotly-version" class="section level2">
-<h2>Plotly Version</h2>
-<div id="htmlwidget-4530a33a1598bf17f022" style="width:1056px;height:1152px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4530a33a1598bf17f022">{"x":{"visdat":{"28bc5fbe24d3":["function () ","plotlyVisDat"]},"cur_data":"28bc5fbe24d3","attrs":{"28bc5fbe24d3":{"domain":{"x":[0,1],"y":[0,1]},"orientation":"h","valueformat":".0f","valuesuffix":"TWh","node":{"label":["Agricultural 'waste'","Bio-conversion","Liquid","Losses","Solid","Gas","Biofuel imports","Biomass imports","Coal imports","Coal","Coal reserves","District heating","Industry","Heating and cooling - commercial","Heating and cooling - homes","Electricity grid","Over generation / exports","H2 conversion","Road transport","Agriculture","Rail transport","Lighting & appliances - commercial","Lighting & appliances - homes","Gas imports","Ngas","Gas reserves","Thermal generation","Geothermal","H2","Hydro","International shipping","Domestic aviation","International aviation","National navigation","Marine algae","Nuclear","Oil imports","Oil","Oil reserves","Other waste","Pumped heat","Solar PV","Solar Thermal","Solar","Tidal","UK land based bioenergy","Wave","Wind"],"color":["rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","magenta","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)"],"pad":15,"thickness":15,"line":{"color":"black","width":0.5}},"link":{"source":[0,1,1,1,1,6,7,8,10,9,11,11,11,15,15,15,15,15,15,15,15,15,15,15,23,25,5,5,5,5,5,27,17,17,28,29,2,2,2,2,2,2,2,2,34,24,35,35,36,38,37,39,39,40,40,41,42,43,43,4,4,4,26,26,26,44,45,46,47,35,35],"target":[1,2,3,4,5,2,4,9,9,4,12,13,14,16,14,17,12,18,19,13,3,20,21,22,24,24,13,3,26,19,12,15,28,3,18,15,12,30,18,31,32,19,33,20,1,5,26,26,37,37,2,4,1,14,13,15,14,42,41,19,26,12,15,3,11,15,1,15,15,26,26],"value":[124.729,0.597,26.862,280.322,81.144,35,35,11.606,63.965,75.571,10.639,22.505,46.184,104.453,113.726,27.14,342.165,37.797,4.412,40.858,56.691,7.863,90.008,93.494,40.719,82.233,0.129,1.401,151.891,2.096,48.58,7.013,20.897,6.242,20.897,6.995,121.066,128.69,135.835,14.458,206.267,3.64,33.218,4.413,14.375,122.952,500,139.978,504.287,107.703,611.99,56.587,77.81,193.026,70.672,59.901,19.263,19.263,59.901,0.882,400.12,46.477,525.531,787.129,79.329,9.452,182.01,19.013,289.366,100,100],"label":["stream 1","","","","stream 1","","","","","","","","","","","","","","","","","","","","","","","","","","stream 1","","","","","","","","","","","","","","","","Old generation plant (made-up)","New generation plant (made-up)","","","","","","","","","","","","","","","","","","","","","","",""]},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Energy forecast for 2050<br>Source: Department of Energy & Climate Change, Tom Counsell via Mike Bostock","font":{"size":10},"xaxis":{"showgrid":false,"zeroline":false},"yaxis":{"showgrid":false,"zeroline":false},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"domain":{"x":[0,1],"y":[0,1]},"orientation":"h","valueformat":".0f","valuesuffix":"TWh","node":{"label":["Agricultural 'waste'","Bio-conversion","Liquid","Losses","Solid","Gas","Biofuel imports","Biomass imports","Coal imports","Coal","Coal reserves","District heating","Industry","Heating and cooling - commercial","Heating and cooling - homes","Electricity grid","Over generation / exports","H2 conversion","Road transport","Agriculture","Rail transport","Lighting & appliances - commercial","Lighting & appliances - homes","Gas imports","Ngas","Gas reserves","Thermal generation","Geothermal","H2","Hydro","International shipping","Domestic aviation","International aviation","National navigation","Marine algae","Nuclear","Oil imports","Oil","Oil reserves","Other waste","Pumped heat","Solar PV","Solar Thermal","Solar","Tidal","UK land based bioenergy","Wave","Wind"],"color":["rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","magenta","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)"],"pad":15,"thickness":15,"line":{"color":"black","width":0.5}},"link":{"source":[0,1,1,1,1,6,7,8,10,9,11,11,11,15,15,15,15,15,15,15,15,15,15,15,23,25,5,5,5,5,5,27,17,17,28,29,2,2,2,2,2,2,2,2,34,24,35,35,36,38,37,39,39,40,40,41,42,43,43,4,4,4,26,26,26,44,45,46,47,35,35],"target":[1,2,3,4,5,2,4,9,9,4,12,13,14,16,14,17,12,18,19,13,3,20,21,22,24,24,13,3,26,19,12,15,28,3,18,15,12,30,18,31,32,19,33,20,1,5,26,26,37,37,2,4,1,14,13,15,14,42,41,19,26,12,15,3,11,15,1,15,15,26,26],"value":[124.729,0.597,26.862,280.322,81.144,35,35,11.606,63.965,75.571,10.639,22.505,46.184,104.453,113.726,27.14,342.165,37.797,4.412,40.858,56.691,7.863,90.008,93.494,40.719,82.233,0.129,1.401,151.891,2.096,48.58,7.013,20.897,6.242,20.897,6.995,121.066,128.69,135.835,14.458,206.267,3.64,33.218,4.413,14.375,122.952,500,139.978,504.287,107.703,611.99,56.587,77.81,193.026,70.672,59.901,19.263,19.263,59.901,0.882,400.12,46.477,525.531,787.129,79.329,9.452,182.01,19.013,289.366,100,100],"label":["stream 1","","","","stream 1","","","","","","","","","","","","","","","","","","","","","","","","","","stream 1","","","","","","","","","","","","","","","","Old generation plant (made-up)","New generation plant (made-up)","","","","","","","","","","","","","","","","","","","","","","",""]},"type":"sankey","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="plotly-version" class="section level3">
+<h3>Plotly Version</h3>
+<pre class="r fold-hide"><code>node_labels &lt;- unlist(plotly_graph$node.label)
+node_color &lt;- unlist(plotly_graph$node.color)
+
+link_source &lt;- unlist(plotly_graph$link.source)
+link_target &lt;- unlist(plotly_graph$link.target)
+link_value &lt;- unlist(plotly_graph$link.value)
+link_label &lt;- unlist(plotly_graph$link.label)
+
+fig &lt;- plot_ly(
+  type = &quot;sankey&quot;,
+  domain = list(
+    x =  c(0,1),
+    y =  c(0,1)
+  ),
+  orientation = &quot;h&quot;,
+  valueformat = &quot;.0f&quot;,
+  valuesuffix = &quot;TWh&quot;,
+  
+  node = list(
+    label = node_labels,
+    color = node_color,
+    pad = 15,
+    thickness = 15,
+    line = list(
+      color = &quot;black&quot;,
+      width = 0.5
+    )
+  ),
+  
+  link = list(
+    source = link_source,
+    target = link_target,
+    value =  link_value,
+    label =  link_label
+  )
+) 
+fig &lt;- fig %&gt;% layout(
+  title = &quot;Energy forecast for 2050&lt;br&gt;Source: Department of Energy &amp; Climate Change, Tom Counsell via Mike Bostock&quot;,
+  font = list(
+    size = 10
+  ),
+  xaxis = list(showgrid = F, zeroline = F),
+  yaxis = list(showgrid = F, zeroline = F)
+)
+
+fig</code></pre>
+<div id="htmlwidget-8cdc8b9d857fc408c99d" style="width:100%;height:768px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8cdc8b9d857fc408c99d">{"x":{"visdat":{"c3d07e77fb1":["function () ","plotlyVisDat"]},"cur_data":"c3d07e77fb1","attrs":{"c3d07e77fb1":{"domain":{"x":[0,1],"y":[0,1]},"orientation":"h","valueformat":".0f","valuesuffix":"TWh","node":{"label":["Agricultural 'waste'","Bio-conversion","Liquid","Losses","Solid","Gas","Biofuel imports","Biomass imports","Coal imports","Coal","Coal reserves","District heating","Industry","Heating and cooling - commercial","Heating and cooling - homes","Electricity grid","Over generation / exports","H2 conversion","Road transport","Agriculture","Rail transport","Lighting & appliances - commercial","Lighting & appliances - homes","Gas imports","Ngas","Gas reserves","Thermal generation","Geothermal","H2","Hydro","International shipping","Domestic aviation","International aviation","National navigation","Marine algae","Nuclear","Oil imports","Oil","Oil reserves","Other waste","Pumped heat","Solar PV","Solar Thermal","Solar","Tidal","UK land based bioenergy","Wave","Wind"],"color":["rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","magenta","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)"],"pad":15,"thickness":15,"line":{"color":"black","width":0.5}},"link":{"source":[0,1,1,1,1,6,7,8,10,9,11,11,11,15,15,15,15,15,15,15,15,15,15,15,23,25,5,5,5,5,5,27,17,17,28,29,2,2,2,2,2,2,2,2,34,24,35,35,36,38,37,39,39,40,40,41,42,43,43,4,4,4,26,26,26,44,45,46,47,35,35],"target":[1,2,3,4,5,2,4,9,9,4,12,13,14,16,14,17,12,18,19,13,3,20,21,22,24,24,13,3,26,19,12,15,28,3,18,15,12,30,18,31,32,19,33,20,1,5,26,26,37,37,2,4,1,14,13,15,14,42,41,19,26,12,15,3,11,15,1,15,15,26,26],"value":[124.729,0.597,26.862,280.322,81.144,35,35,11.606,63.965,75.571,10.639,22.505,46.184,104.453,113.726,27.14,342.165,37.797,4.412,40.858,56.691,7.863,90.008,93.494,40.719,82.233,0.129,1.401,151.891,2.096,48.58,7.013,20.897,6.242,20.897,6.995,121.066,128.69,135.835,14.458,206.267,3.64,33.218,4.413,14.375,122.952,500,139.978,504.287,107.703,611.99,56.587,77.81,193.026,70.672,59.901,19.263,19.263,59.901,0.882,400.12,46.477,525.531,787.129,79.329,9.452,182.01,19.013,289.366,100,100],"label":["stream 1","","","","stream 1","","","","","","","","","","","","","","","","","","","","","","","","","","stream 1","","","","","","","","","","","","","","","","Old generation plant (made-up)","New generation plant (made-up)","","","","","","","","","","","","","","","","","","","","","","",""]},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Energy forecast for 2050<br>Source: Department of Energy & Climate Change, Tom Counsell via Mike Bostock","font":{"size":10},"xaxis":{"showgrid":false,"zeroline":false},"yaxis":{"showgrid":false,"zeroline":false},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"domain":{"x":[0,1],"y":[0,1]},"orientation":"h","valueformat":".0f","valuesuffix":"TWh","node":{"label":["Agricultural 'waste'","Bio-conversion","Liquid","Losses","Solid","Gas","Biofuel imports","Biomass imports","Coal imports","Coal","Coal reserves","District heating","Industry","Heating and cooling - commercial","Heating and cooling - homes","Electricity grid","Over generation / exports","H2 conversion","Road transport","Agriculture","Rail transport","Lighting & appliances - commercial","Lighting & appliances - homes","Gas imports","Ngas","Gas reserves","Thermal generation","Geothermal","H2","Hydro","International shipping","Domestic aviation","International aviation","National navigation","Marine algae","Nuclear","Oil imports","Oil","Oil reserves","Other waste","Pumped heat","Solar PV","Solar Thermal","Solar","Tidal","UK land based bioenergy","Wave","Wind"],"color":["rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","magenta","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)","rgba(188, 189, 34, 0.8)","rgba(23, 190, 207, 0.8)","rgba(31, 119, 180, 0.8)","rgba(255, 127, 14, 0.8)","rgba(44, 160, 44, 0.8)","rgba(214, 39, 40, 0.8)","rgba(148, 103, 189, 0.8)","rgba(140, 86, 75, 0.8)","rgba(227, 119, 194, 0.8)","rgba(127, 127, 127, 0.8)"],"pad":15,"thickness":15,"line":{"color":"black","width":0.5}},"link":{"source":[0,1,1,1,1,6,7,8,10,9,11,11,11,15,15,15,15,15,15,15,15,15,15,15,23,25,5,5,5,5,5,27,17,17,28,29,2,2,2,2,2,2,2,2,34,24,35,35,36,38,37,39,39,40,40,41,42,43,43,4,4,4,26,26,26,44,45,46,47,35,35],"target":[1,2,3,4,5,2,4,9,9,4,12,13,14,16,14,17,12,18,19,13,3,20,21,22,24,24,13,3,26,19,12,15,28,3,18,15,12,30,18,31,32,19,33,20,1,5,26,26,37,37,2,4,1,14,13,15,14,42,41,19,26,12,15,3,11,15,1,15,15,26,26],"value":[124.729,0.597,26.862,280.322,81.144,35,35,11.606,63.965,75.571,10.639,22.505,46.184,104.453,113.726,27.14,342.165,37.797,4.412,40.858,56.691,7.863,90.008,93.494,40.719,82.233,0.129,1.401,151.891,2.096,48.58,7.013,20.897,6.242,20.897,6.995,121.066,128.69,135.835,14.458,206.267,3.64,33.218,4.413,14.375,122.952,500,139.978,504.287,107.703,611.99,56.587,77.81,193.026,70.672,59.901,19.263,19.263,59.901,0.882,400.12,46.477,525.531,787.129,79.329,9.452,182.01,19.013,289.366,100,100],"label":["stream 1","","","","stream 1","","","","","","","","","","","","","","","","","","","","","","","","","","stream 1","","","","","","","","","","","","","","","","Old generation plant (made-up)","New generation plant (made-up)","","","","","","","","","","","","","","","","","","","","","","",""]},"type":"sankey","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="network-d3-version" class="section level2">
-<h2>Network D3 Version</h2>
-<div id="htmlwidget-7720ae6f020755a09539" style="width:1056px;height:1152px;" class="sankeyNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7720ae6f020755a09539">{"x":{"links":{"source":[0,1,1,1,1,6,7,8,10,9,11,11,11,15,15,15,15,15,15,15,15,15,15,15,23,25,5,5,5,5,5,27,17,17,28,29,2,2,2,2,2,2,2,2,34,24,35,36,38,37,39,39,40,40,41,42,43,43,4,4,4,26,26,26,44,45,46,47],"target":[1,2,3,4,5,2,4,9,9,4,12,13,14,16,14,17,12,18,19,13,3,20,21,22,24,24,13,3,26,19,12,15,28,3,18,15,12,30,18,31,32,19,33,20,1,5,26,37,37,2,4,1,14,13,15,14,42,41,19,26,12,15,3,11,15,1,15,15],"value":[124.729,0.597,26.862,280.322,81.144,35,35,11.606,63.965,75.571,10.639,22.505,46.184,104.453,113.726,27.14,342.165,37.797,4.412,40.858,56.691,7.863,90.008,93.494,40.719,82.233,0.129,1.401,151.891,2.096,48.58,7.013,20.897,6.242,20.897,6.995,121.066,128.69,135.835,14.458,206.267,3.64,33.218,4.413,4.375,122.952,839.978,504.287,107.703,611.99,56.587,77.81,193.026,70.672,59.901,19.263,19.263,59.901,0.882,400.12,46.477,525.531,787.129,79.329,9.452,182.01,19.013,289.366]},"nodes":{"name":["Agricultural 'waste'","Bio-conversion","Liquid","Losses","Solid","Gas","Biofuel imports","Biomass imports","Coal imports","Coal","Coal reserves","District heating","Industry","Heating and cooling - commercial","Heating and cooling - homes","Electricity grid","Over generation / exports","H2 conversion","Road transport","Agriculture","Rail transport","Lighting & appliances - commercial","Lighting & appliances - homes","Gas imports","Ngas","Gas reserves","Thermal generation","Geothermal","H2","Hydro","International shipping","Domestic aviation","International aviation","National navigation","Marine algae","Nuclear","Oil imports","Oil","Oil reserves","Other waste","Pumped heat","Solar PV","Solar Thermal","Solar","Tidal","UK land based bioenergy","Wave","Wind"],"group":["Agricultural 'waste'","Bio-conversion","Liquid","Losses","Solid","Gas","Biofuel imports","Biomass imports","Coal imports","Coal","Coal reserves","District heating","Industry","Heating and cooling - commercial","Heating and cooling - homes","Electricity grid","Over generation / exports","H2 conversion","Road transport","Agriculture","Rail transport","Lighting & appliances - commercial","Lighting & appliances - homes","Gas imports","Ngas","Gas reserves","Thermal generation","Geothermal","H2","Hydro","International shipping","Domestic aviation","International aviation","National navigation","Marine algae","Nuclear","Oil imports","Oil","Oil reserves","Other waste","Pumped heat","Solar PV","Solar Thermal","Solar","Tidal","UK land based bioenergy","Wave","Wind"]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":null,"colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":12,"fontFamily":null,"nodeWidth":30,"nodePadding":10,"units":"TWh","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":32,"sinksRight":true}},"evals":[],"jsHooks":[]}</script>
+<div id="network-d3-version" class="section level3">
+<h3>Network D3 Version</h3>
+<pre class="r fold-hide"><code># Convert to data frame
+EngNodes &lt;- d3_graph$nodes
+EngLinks &lt;- d3_graph$links
+
+# EngNodes
+# EngLinks
+
+# Plot
+sankey &lt;- sankeyNetwork(Links = EngLinks, Nodes = EngNodes, Source = &quot;source&quot;,
+         Target = &quot;target&quot;, Value = &quot;value&quot;, NodeID = &quot;name&quot;,
+         units = &quot;TWh&quot;, fontSize = 12, nodeWidth = 30)
+
+sankey</code></pre>
+<div id="htmlwidget-f167f76ee316d046132f" style="width:100%;height:768px;" class="sankeyNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f167f76ee316d046132f">{"x":{"links":{"source":[0,1,1,1,1,6,7,8,10,9,11,11,11,15,15,15,15,15,15,15,15,15,15,15,23,25,5,5,5,5,5,27,17,17,28,29,2,2,2,2,2,2,2,2,34,24,35,36,38,37,39,39,40,40,41,42,43,43,4,4,4,26,26,26,44,45,46,47],"target":[1,2,3,4,5,2,4,9,9,4,12,13,14,16,14,17,12,18,19,13,3,20,21,22,24,24,13,3,26,19,12,15,28,3,18,15,12,30,18,31,32,19,33,20,1,5,26,37,37,2,4,1,14,13,15,14,42,41,19,26,12,15,3,11,15,1,15,15],"value":[124.729,0.597,26.862,280.322,81.144,35,35,11.606,63.965,75.571,10.639,22.505,46.184,104.453,113.726,27.14,342.165,37.797,4.412,40.858,56.691,7.863,90.008,93.494,40.719,82.233,0.129,1.401,151.891,2.096,48.58,7.013,20.897,6.242,20.897,6.995,121.066,128.69,135.835,14.458,206.267,3.64,33.218,4.413,4.375,122.952,839.978,504.287,107.703,611.99,56.587,77.81,193.026,70.672,59.901,19.263,19.263,59.901,0.882,400.12,46.477,525.531,787.129,79.329,9.452,182.01,19.013,289.366]},"nodes":{"name":["Agricultural 'waste'","Bio-conversion","Liquid","Losses","Solid","Gas","Biofuel imports","Biomass imports","Coal imports","Coal","Coal reserves","District heating","Industry","Heating and cooling - commercial","Heating and cooling - homes","Electricity grid","Over generation / exports","H2 conversion","Road transport","Agriculture","Rail transport","Lighting & appliances - commercial","Lighting & appliances - homes","Gas imports","Ngas","Gas reserves","Thermal generation","Geothermal","H2","Hydro","International shipping","Domestic aviation","International aviation","National navigation","Marine algae","Nuclear","Oil imports","Oil","Oil reserves","Other waste","Pumped heat","Solar PV","Solar Thermal","Solar","Tidal","UK land based bioenergy","Wave","Wind"],"group":["Agricultural 'waste'","Bio-conversion","Liquid","Losses","Solid","Gas","Biofuel imports","Biomass imports","Coal imports","Coal","Coal reserves","District heating","Industry","Heating and cooling - commercial","Heating and cooling - homes","Electricity grid","Over generation / exports","H2 conversion","Road transport","Agriculture","Rail transport","Lighting & appliances - commercial","Lighting & appliances - homes","Gas imports","Ngas","Gas reserves","Thermal generation","Geothermal","H2","Hydro","International shipping","Domestic aviation","International aviation","National navigation","Marine algae","Nuclear","Oil imports","Oil","Oil reserves","Other waste","Pumped heat","Solar PV","Solar Thermal","Solar","Tidal","UK land based bioenergy","Wave","Wind"]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":null,"colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":12,"fontFamily":null,"nodeWidth":30,"nodePadding":10,"units":"TWh","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":32,"sinksRight":true}},"evals":[],"jsHooks":[]}</script>
+<pre class="r fold-hide"><code># saveNetwork(sankey, file = &quot;energy.html&quot;, selfcontained = TRUE)</code></pre>
 </div>
-</div>
-<div id="exercises-and-practice" class="section level1">
-<h1>Exercises and practice</h1>
-<div id="knime-and-r-practice-solutions" class="section level2">
-<h2>Knime and R practice solutions</h2>
-</div>
-</div>
-<div id="references" class="section level1">
-<h1>References</h1>
-<div id="the-citations-and-data-sources-used-for-this-case" class="section level2">
-<h2>The citations and data sources used for this case</h2>
+<div id="references" class="section level3">
+<h3>References</h3>
+<div id="citations-for-narrative-and-data-sources" class="section level4">
+<h4>citations for narrative and data sources</h4>
 <script type="text/javascript">
 
 // Must be included to position footer
@@ -278,6 +340,8 @@ $(function() {
 })
 
 </script>
+</div>
+</div>
 </div>
 </div>
 

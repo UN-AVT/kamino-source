@@ -146,7 +146,7 @@ df_nodes
 #### circle pack layout with size, color, and labels (at root level)
 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', out.width="100%"}
 
 theme_opts <- theme(
     text = element_text(family = "inconsolata"), 
@@ -168,7 +168,7 @@ v1 <- ggraph(df_graph, layout = 'circlepack', weight = SIZE) +
   theme_void() +
   theme_opts
 
-girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
+girafe(ggobj = v1, width_svg = 16, height_svg = 14,
        options = list(opts_sizing(rescale = TRUE, width = 1.0))
 )
 
