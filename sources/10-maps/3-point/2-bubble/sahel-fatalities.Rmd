@@ -203,9 +203,9 @@ sahel_palette <- c("yes" = "#dbdbd5","no" = "#c0c0b7", "yes_sahel" = "#cbcbc4","
 v1 <- ggplot() + 
   geom_sf(data = wa_adm0_wrangled, aes(fill=is_country_of_focus), size=2.0, color = "#FFFFFF") +
   # Add Sahel fill
-  geom_sf(data = sahel_shape_wrangled, aes(fill=is_country_of_focus), color = NA) +
+  geom_sf(data = sahel_shape_wrangled, aes(fill=is_country_of_focus), color = NA, fill = "#999999", alpha = 0.2) +
   # Add white line between countries within Sahel
-  geom_sf(data = sahel_country_lines, size=2.0, color = "#FFFFFF") +
+  # geom_sf(data = sahel_country_lines, size=2.0, color = "#FFFFFF") +
   geom_point(data = acled_sahel_cleanup,
              aes(x = longitude, y = latitude,
                  size = Deaths), color = "#d86966", alpha = 0.4) +

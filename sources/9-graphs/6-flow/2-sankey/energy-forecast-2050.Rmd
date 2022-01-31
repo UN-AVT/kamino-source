@@ -1,17 +1,17 @@
 ---
 pagetitle: "Kamino"
-output: 
+output:
   html_document:
     theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
-    #self_contained: false
-    #lib_dir: libs
+    self_contained: false
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
@@ -41,10 +41,10 @@ GRAPHS
 
 # Load data
 # Flatten for easy access to properties
-plotly_graph <- fromJSON('./archetypes/sankey_energy.json', flatten = TRUE)[[1]]
+plotly_graph <- fromJSON('./archetypes/energy/sankey_energy.json', flatten = TRUE)[[1]]
 # plotly_graph
 
-d3_graph <- fromJSON("./archetypes/energy.json")
+d3_graph <- fromJSON("./archetypes/energy/energy.json")
 # d3_graph
 
 ```
