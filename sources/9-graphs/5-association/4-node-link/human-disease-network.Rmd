@@ -111,7 +111,7 @@ df_graph
 # ggraph
 # layout <- create_layout(cg, layout = 'linear')
 # layout <- create_layout(cg, layout = 'linear', circular = TRUE)
-layout <- create_layout(cg, layout = 'stress')
+layout <- create_layout(df_graph, layout = 'stress')
 # layout <- create_layout(cg, layout = 'sparse_stress')
 # layout <- create_layout(cg, layout = 'backbone')
 # layout <- create_layout(cg, layout = 'pmds')
