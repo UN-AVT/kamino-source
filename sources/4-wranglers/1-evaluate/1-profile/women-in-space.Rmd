@@ -24,11 +24,6 @@ rm(list = ls(all.names = TRUE)) # will clear all objects including hidden object
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(ggforce)
-library(colorspace)
-library(ggiraph)
-
-
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -70,21 +65,10 @@ df <- read.csv(url, header = TRUE)
 df
 
 ```
-
-
 ### Distinct Values
-#### <kbd>check for female astronauts</kbd>
+#### Retrieving unique records of female astronauts using <kbd>distinct()</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
-
-pal <- c(
-  "#343854",
-  "#8C384D",
-  "#CF2438",
-  "#D95E31",
-  "#F0C742",
-  "#F8F0E5"
-)
 
 # Female astronauts
 hrs_mission <- df %>% 
@@ -93,22 +77,16 @@ hrs_mission <- df %>%
 
 hrs_mission
 
-hrs_mission <- hrs_mission %>%  mutate(
-    a = seq(pi/12, pi - pi/12, length.out = nrow(hrs_mission)),
-		offset = 2000,                # make space for the Earth
-		x = (total_hrs_sum + offset) * cos(a),  # convert to polar
-		y = (total_hrs_sum + offset) * sin(a)
-)
-
-hrs_mission
-
 ```
 
-#### <kbd>year of mission</kbd>
+#### Retrieving unique records from the table for the year of mission by using <kbd>distinct()</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+#Astronauts name with the year of mission in ascending order
 distinct_df <- distinct(df, name, year_of_mission) %>% arrange( year_of_mission, name)
 distinct_df
+
 ```
 ### References
 #### citations for narrative and data sources

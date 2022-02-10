@@ -25,27 +25,6 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(reshape2)
-
-# Special purpose packages
-# General profiling
-#library(Amelia)
-library(skimr)
-#library(Hmisc)
-library(pastecs)
-library(psych)
-library(summarytools)
-library(tableone)
-library(desctable)
-library(GGally)
-library(descriptr)
-library(janitor)
-
-# For frequencies
-library(epiDisplay)
-library(gmodels)
-library(questionr)
-
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -89,9 +68,6 @@ url <- paste0(url_root, url_file)
 df <- read.csv(url, header = TRUE)
 
 df
-#df <- read.csv('./archetypes/animal-bites/animal-bites.csv', header = TRUE, stringsAsFactors = FALSE)
-# View
-#df[1:100,]
 
 ```
 
@@ -119,53 +95,25 @@ The column definitions give a hint for the data we can expect, but let's use pro
 ### Value Frequency
 #### absolute and relative frequency
 
-Option 1: <kbd>__Check all columns__</kbd>
+<kbd>mutate</kbd>
+<kbd>rename</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
-# METHOD 1
-apply(df, 2, function(x) length(unique(x)))
-# var_1 var_2 var_3 
-#     1     1     3
+# Display frequency of the values of a column
+f_frequency <- function(df_frequency,column) {
+  
+  df_tmp = table(column)
+  as.data.frame(df_tmp) %>% 
+    rename(Frequency_column=column ,Freq_absolute=Freq)  %>%
+    mutate(Freq_relative=paste0(round(100*Freq_absolute/sum(Freq_absolute),digits=2),"%"))
+  
+}
 
-head(df %>% summarise_all(n_distinct), 10)
-
-```
-
-
-Option 2: <kbd>__Check a specified column__</kbd>
-
-```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
-
-# Specify column to measure
-freq_column <- "vaccination_yrs"
-
-df_na <- table(df[,freq_column], useNA = "ifany")
-#df_na
-
-#prop.table(table(df[,freq_column]))
-
-# Calculate absolute frequency
-df_1 <- table(df[,freq_column])
-df_2 <- as.data.frame(df_1) %>% rename( Freq_abs = Freq )
-
-# Calculate relative frequency
-df_2$Freq_rel <- df_2$Freq_abs / sum( df_2$Freq_abs )
-df_2
-
-#tabyl(df[,freq_column], sort = TRUE)
-
-#tab1(df[,freq_column], sort.group = "decreasing", cum.percent = TRUE)
-
-
-
-summarytools::freq(df[,freq_column], order = "freq")
-#CrossTable(df[,freq_column])
-questionr::freq(df[,freq_column], cum = TRUE, sort = "dec", total = TRUE)
-
+# Call the function with your values to the parameters
+f_frequency (df,df$bite_date)
 
 ```
-
 
 ### References
 #### citations for narrative and data sources

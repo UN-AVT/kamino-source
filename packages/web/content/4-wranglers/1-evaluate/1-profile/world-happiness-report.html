@@ -264,28 +264,21 @@ df</code></pre>
   </script>
 </div>
 </div>
-<div id="dimensions" class="section level3">
-<h3>Dimensions</h3>
-<div id="number-of-columns-and-rows" class="section level4">
-<h4><kbd>number of columns and rows</kbd></h4>
-<pre class="r fold-show"><code>dim(df)</code></pre>
-<pre><code>## [1] 1704   26</code></pre>
-<p>The output tells us that the data contains 1704 rows, and 26 columns.</p>
-</div>
-</div>
 <div id="positive-negative-and-zero-values" class="section level3">
 <h3>Positive, Negative and Zero Values</h3>
 <div id="check-for-all-the-numerical-columns" class="section level4">
-<h4><kbd>Check for all the numerical columns</kbd></h4>
-<pre class="r fold-show"><code>df1 &lt;- df[,3:ncol(df)]
+<h4>Check for all the numerical columns</h4>
+<p><kbd>sum()</kbd></p>
+<pre class="r fold-hide"><code># Check for positive, negative and zero values
+df1 &lt;- df[,3:ncol(df)]
 
 nRows &lt;- dim(df1)[1]
 
 calcStats &lt;- function(x) {
   temp &lt;- na.omit(df[, x])
-  pos &lt;- sum(temp &gt; 0)
-  is_zero &lt;- sum(temp = 0)
-  neg &lt;-  sum(temp &lt; 0)
+  pos &lt;- sum(temp &gt; 0)       # positive value
+  is_zero &lt;- sum(temp = 0)   # zero value
+  neg &lt;-  sum(temp &lt; 0)      # negative value
   c(&quot;number of positives&quot; = pos, &quot;negatives&quot; = neg, &quot;zero&quot; = is_zero)
 }
   

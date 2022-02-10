@@ -24,8 +24,6 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(ggiraph)
-
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -84,10 +82,10 @@ df
 
 ```
 
-
 ### Wrangle data
 #### number of columns and rows
 
+<kbd>dim</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -95,9 +93,12 @@ dim(df)
 
 ```
 
-#### <kbd>List keys and column types</kbd>
+#### List keys and column types
+
+<kbd>glimpse</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
 glimpse(df)
 
 ```

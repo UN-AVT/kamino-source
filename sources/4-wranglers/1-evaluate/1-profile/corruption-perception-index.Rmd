@@ -24,11 +24,6 @@ rm(list = ls(all.names = TRUE)) # will clear all objects including hidden object
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(janitor)
-library(ggtext)
-library(ggdist)
-library(ggiraph)
-
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -73,14 +68,18 @@ df
 
 ```
 ### Missing Values
-#### <kbd>check for each column</kbd>
+#### Check the missing values using <kbd>is.na()</kbd> and <kbd>gather()</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
-missing_stats <- purrr::map_df(df, ~ sum(is.na(.))) %>%
-  gather('Column name', 'Count of missing values')
+# Count missing values 
+f_missing_values <- function(df_missing_values) {
+  purrr::map_df(df_missing_values, ~ sum(is.na(.))) %>%
+    gather('Column name', 'Count of missing values')
+}
 
-missing_stats
+# Call the function with your values to the parameters
+f_missing_values(df)
 
 ```
 
