@@ -250,7 +250,8 @@ Photo by Paolo Bendandi on Unsplash
 <h3>Ingest</h3>
 <div id="age-gender-year-and-population" class="section level4">
 <h4>age, gender, year, and population</h4>
-<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+<pre class="r fold-hide"><code>#Load
+url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
 url_file &lt;- &quot;older-versus-younger/IHME_GBD_2017_POP.csv&quot;
 url &lt;- paste0(url_root, url_file)
 
@@ -265,9 +266,10 @@ df</code></pre>
 </div>
 <div id="wrangle" class="section level3">
 <h3>Wrangle</h3>
-<div id="remove-duplicates" class="section level4">
-<h4><kbd>Remove duplicates</kbd></h4>
-<pre class="r fold-hide"><code>age_levels &lt;- c(
+<div id="remove-duplicates-using-filter-and-unique" class="section level4">
+<h4>Remove duplicates using <kbd>filter()</kbd> and <kbd>unique()</kbd></h4>
+<pre class="r fold-hide"><code># Filtering the records
+age_levels &lt;- c(
      &quot;Under 5&quot;,
      &quot;5 to 9&quot;,
      &quot;10 to 14&quot;,
@@ -291,8 +293,6 @@ df</code></pre>
 
 
 # Select and filter rows
-# unique(df$age_group_name)
-# unique(df$location_name)
 df_wrangle  &lt;- df[,c(2,4,6,7,11)]%&gt;% 
    filter(str_detect(location_name, &#39;SDI&#39;))%&gt;%
    filter(sex_name!=&quot;Both&quot;)%&gt;%

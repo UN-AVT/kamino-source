@@ -24,9 +24,6 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(reshape2)
-library(ggiraph)
-
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -59,6 +56,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
+#Load
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
 url_file <- "older-versus-younger/IHME_GBD_2017_POP.csv"
 url <- paste0(url_root, url_file)
@@ -69,10 +67,12 @@ df
 ```
 
 ### Wrangle
-#### <kbd>Remove duplicates</kbd>
+#### Remove duplicates using <kbd>filter()</kbd> and <kbd>unique()</kbd>
+
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
+# Filtering the records
 age_levels <- c(
      "Under 5",
      "5 to 9",
@@ -97,8 +97,6 @@ age_levels <- c(
 
 
 # Select and filter rows
-# unique(df$age_group_name)
-# unique(df$location_name)
 df_wrangle  <- df[,c(2,4,6,7,11)]%>% 
    filter(str_detect(location_name, 'SDI'))%>%
    filter(sex_name!="Both")%>%

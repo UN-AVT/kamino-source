@@ -25,9 +25,6 @@ gc() #free up memory and report the memory usage.
 
 library(tidyverse)
 library(countrycode)
-library(ggrepel)
-library(ggiraph)
-library(dplyr)
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -59,12 +56,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 
 ### Ingest the data
-#### gdp and road traffic accidents
-
-GDP
+#### Load GDP Dataset 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
+#Load
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
 
 url_file1 <- "road-deaths-by-country/gdp.csv"
@@ -74,31 +70,12 @@ df_gdp <- read.csv(url1, header = TRUE, stringsAsFactors = FALSE, encoding = "UT
 df_gdp
 
 ```
-
-
-Road deaths
-
-
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
-
-url_file2 <- "road-deaths-by-country/road-deaths.csv"
-url2 <- paste0(url_root, url_file2)
-
-df_rd <- read.csv(url2, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
-df_rd
-
-
-
-```
-
-
 ### Wrangle the data
-#### <kbd>replace value</kbd>
-
-Replace "NA" value with "Not Applicable" value
+#### Replace value "NA" with "Not Applicable" using <kbd>is.na()</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
+#Replacing one value with another 
 df_gdp[is.na(df_gdp)] = "Not Applicable"
 df_gdp
 
@@ -107,7 +84,6 @@ df_gdp
 ### References
 #### citations for narrative and data sources
 
-* Narrative Inspiration: The Economist, Driving lessons
 * Data Source: World Health Organization, [GO](https://apps.who.int/gho/data/node.main.A997){target="_blank"}
 
 

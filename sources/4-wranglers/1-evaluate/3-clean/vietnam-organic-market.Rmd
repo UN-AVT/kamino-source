@@ -25,9 +25,8 @@ gc() #free up memory and report the memory usage.
 
 # Load needed libraries
 library(tidyverse)
-library(reshape2)
-library(ggiraph)
-library(dplyr)
+library(reshape)
+
 ```
 
 <div class="activity">
@@ -50,15 +49,16 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
-Vietnam imports a diverse number of organic food and beverage products to meet consumer demand for items that cannot be grown or produced locally, a majority of which are fresh fruits and vegetables and processed products.  A recent report of the USDA Foreign Agriculture Service analyzed export trends and foresee Vietnam as a potential growth market for imported organic food and beverage products.  Let's take a closer look at the and use a horizontal grouped bar chart to visualize the results.
+Vietnam imports a diverse number of organic food and beverage products to meet consumer demand for items that cannot be grown or produced locally, a majority of which are fresh fruits and vegetables and processed products.  A recent report of the USDA Foreign Agriculture Service analyzed export trends and foresee Vietnam as a potential growth market for imported organic food and beverage products.
 
 ### Ingest
 #### U.S. Organic Agricultural Exports to Vietnam in 2015-2020
 
-List of Products
+List of Products dataset
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
+#Load
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
 url_file <- "vietnam-organic-market/usda-gats-product-group-organics.csv"
 url <- paste0(url_root, url_file)
@@ -68,12 +68,11 @@ df
 
 ```
 
-Exports to Vietnam
+Exports to Vietnam dataset
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Load data
-
+# Load
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
 url_file <- "vietnam-organic-market/usda-gats-organics-vietnam-data.csv"
 url <- paste0(url_root, url_file)
@@ -81,30 +80,25 @@ url <- paste0(url_root, url_file)
 df <- read.csv(url, header = TRUE)
 df
 
-df$X2017 <- as.integer(df$X2017)
-df$X2019 <- as.integer(df$X2019)
-df$X2020 <- as.integer(df$X2020)
-
-df
-
 ```
 
 ### Wrangle
-#### removing zero values
-
-Let's remove the zero values.
-
+#### Converting values from wide to long format using <kbd>melt()</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Convert wide to long
+# Convert wide to long using melt()
 #The year columns become a factored column that we can use for grouping or as a visual variable.
 
 df_long <- melt(df, id.vars=c("Partner", "HS.Code", "Product"))
 df_long
 
-# Remove zero values
+```
+#### Removing zero values using <kbd>filter()</kbd>
 
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Remove zero values
 df_zero <- filter(df_long, value > 0)
 df_zero
 

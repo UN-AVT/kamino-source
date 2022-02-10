@@ -24,17 +24,6 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(rnaturalearth)
-library(rgdal)
-library(sf)
-# install.packages("remotes")
-# library(remotes)
-# install_github("rCarto/popcircle")
-#library(popcircle) # Not in CRAN (Comprehensive R Archive Network)
-library(cartography)
-library(ggthemes)
-library(ggiraph)
-
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -67,26 +56,24 @@ knitr::include_graphics(masthead, dpi=72)
 ### Ingest
 #### exporter, year, usd value
 
-
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
+#Load
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
 url_file <- "where-does-your-medicine-come-from/data/drug_medicine_exports.csv"
 url <- paste0(url_root, url_file)
 df <- read.csv(url, header = TRUE)
 df
 
-#df <- read.csv("archetypes/where-does-your-medicine-come-from/data/drug_medicine_exports.csv", header = TRUE)
-#df
-
 ```
 
-### Wrangler
-#### clean data : <kbd> remove_missing_values </kbd>
+### Wrangle data
+#### Remove missing values using <kbd>is.na()</kbd>
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
+# Remove missing record
 df_1 <- df[!is.na(df$exports_usd),]
 df_1 
 
