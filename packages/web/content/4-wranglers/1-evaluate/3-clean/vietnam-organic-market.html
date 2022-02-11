@@ -283,8 +283,8 @@ df</code></pre>
 <h3>Wrangle</h3>
 <div id="converting-values-from-wide-to-long-format-using-melt" class="section level4">
 <h4>Converting values from wide to long format using <kbd>melt()</kbd></h4>
-<pre class="r fold-hide"><code># Convert wide to long using melt()
-#The year columns become a factored column that we can use for grouping or as a visual variable.
+<pre class="r fold-hide"><code># Convert wide to long using melt(), function that efficiently reshape the data
+# function takes the dataset and column values that has to be kept constant. Further, dataframe is converted into long format and stretches the data frame.
 
 df_long &lt;- melt(df, id.vars=c(&quot;Partner&quot;, &quot;HS.Code&quot;, &quot;Product&quot;))
 df_long</code></pre>
@@ -296,7 +296,7 @@ df_long</code></pre>
 </div>
 <div id="removing-zero-values-using-filter" class="section level4">
 <h4>Removing zero values using <kbd>filter()</kbd></h4>
-<pre class="r fold-hide"><code># Remove zero values
+<pre class="r fold-hide"><code># Remove zero values by filtering based upon the condition
 df_zero &lt;- filter(df_long, value &gt; 0)
 df_zero</code></pre>
 <div data-pagedtable="false">

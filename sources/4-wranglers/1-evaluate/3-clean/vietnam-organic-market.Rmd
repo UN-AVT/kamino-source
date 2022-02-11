@@ -87,8 +87,8 @@ df
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Convert wide to long using melt()
-#The year columns become a factored column that we can use for grouping or as a visual variable.
+# Convert wide to long using melt(), function that efficiently reshape the data
+# function takes the dataset and column values that has to be kept constant. Further, dataframe is converted into long format and stretches the data frame.
 
 df_long <- melt(df, id.vars=c("Partner", "HS.Code", "Product"))
 df_long
@@ -98,7 +98,7 @@ df_long
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Remove zero values
+# Remove zero values by filtering based upon the condition
 df_zero <- filter(df_long, value > 0)
 df_zero
 

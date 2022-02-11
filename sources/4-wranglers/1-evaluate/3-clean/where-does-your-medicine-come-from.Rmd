@@ -73,11 +73,21 @@ df
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Remove missing record
+# Remove missing record using is.na(), function returns the value of true for each data point that is NA.
 df_1 <- df[!is.na(df$exports_usd),]
 df_1 
 
 ```
+#### Remove missing values using <kbd>na.omit()</kbd>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Remove missing record using na.omit(), function simply removes the rows of data containing the NA value
+df_2 <- na.omit(df)
+df_2 
+
+```
+
 ### References
 #### citations for narrative and data sources
 
