@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Sunniest cities in the world</title>
+
+<script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="../../../../vendor/knitr/navigation-1.1/tabsets.js"></script>
+<script src="../../../../vendor/knitr/navigation-1.1/codefolding.js"></script>
+<link href="../../../../vendor/knitr/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/highlightjs-9.12.0/highlight.js"></script>
+<link href="../../../../vendor/knitr/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/pagedtable-1.1/js/pagedtable.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHLBJTGCKN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GHLBJTGCKN');
+  </script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../../assets/logo/logo.svg" alt="" height="36">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../../assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../../assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>WRANGLERS</p>
+</div>
+<div id="sunniest-cities-in-the-world" class="section level1">
+<h1>Sunniest cities in the world</h1>
+<div id="clean-data" class="section level2">
+<h2>Clean Data</h2>
+<div class="figure" style="text-align: center">
+<img src="donald-giannatti-unsplash.jpg" alt="Photo by Donald Giannatti D on Unsplash" width="60%" />
+<p class="caption">
+Photo by Donald Giannatti D on Unsplash
+</p>
+</div>
+<div class="figure-text">
+Yuma, Arizona
+</div>
+<blockquote>
+<p>You are my Sunshine…<br />
+— Johnny Cash<br />
+</p>
+</blockquote>
+<hr />
+<div id="load-the-data" class="section level3">
+<h3>Load the data</h3>
+<div id="where-are-the-sunniest-cities-in-the-world" class="section level4">
+<h4>Where are the sunniest cities in the world?</h4>
+<pre class="r fold-hide"><code># Load data
+url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;sunniest-cities/sunniest_cities.csv&quot;
+url &lt;- paste0(url_root, url_file)
+
+df &lt;- read_csv(url, col_names=TRUE)
+df</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["individual"],"name":[1],"type":["chr"],"align":["left"]},{"label":["value"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["group"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Marsa Alam","2":"3958.00","3":"africa"},{"1":"Dakhla Oasis","2":"3943.40","3":"africa"},{"1":"Keetmanshoop","2":"3870.00","3":"africa"},{"1":"Khartoum","2":"3737.10","3":"africa"},{"1":"Upington","2":"3731.80","3":"africa"},{"1":"Tamanrasset","2":"3686.00","3":"africa"},{"1":"Toliara","2":"3610.00","3":"africa"},{"1":"Windhoek","2":"3605.00","3":"africa"},{"1":"Lodwar","2":"3582.00","3":"africa"},{"1":"Alexandria","2":"3579.50","3":"africa"},{"1":"NA","2":"NA","3":"africa"},{"1":"NA","2":"NA","3":"africa"},{"1":"NA","2":"NA","3":"africa"},{"1":"Yuma","2":"4015.30","3":"america"},{"1":"Calama","2":"3926.20","3":"america"},{"1":"Phoenix","2":"3871.60","3":"america"},{"1":"Las Vegas","2":"3825.30","3":"america"},{"1":"Tucson","2":"3806.00","3":"america"},{"1":"El Paso","2":"3762.50","3":"america"},{"1":"Sacramento","2":"3607.80","3":"america"},{"1":"Fresno","2":"3564.20","3":"america"},{"1":"Albuquerque","2":"3415.40","3":"america"},{"1":"Arequipa","2":"3333.30","3":"america"},{"1":"NA","2":"NA","3":"america"},{"1":"NA","2":"NA","3":"america"},{"1":"NA","2":"NA","3":"america"},{"1":"Dubai","2":"3508.70","3":"asia"},{"1":"Muscat","2":"3493.30","3":"asia"},{"1":"Isfahan","2":"3352.50","3":"asia"},{"1":"Quetta","2":"3341.25","3":"asia"},{"1":"Tel Aviv","2":"3311.00","3":"asia"},{"1":"Abha","2":"3248.20","3":"asia"},{"1":"Baghdad","2":"3240.80","3":"asia"},{"1":"Riyadh","2":"3224.80","3":"asia"},{"1":"Kabul","2":"3175.10","3":"asia"},{"1":"Bandar Abbas","2":"3090.00","3":"asia"},{"1":"NA","2":"NA","3":"asia"},{"1":"NA","2":"NA","3":"asia"},{"1":"NA","2":"NA","3":"asia"},{"1":"Nicosia","2":"3314.10","3":"europe"},{"1":"Valletta","2":"3054.00","3":"europe"},{"1":"Faro","2":"3036.00","3":"europe"},{"1":"Cádiz","2":"3024.00","3":"europe"},{"1":"Seville","2":"2921.00","3":"europe"},{"1":"Marseille","2":"2836.00","3":"europe"},{"1":"Lisbon","2":"2806.00","3":"europe"},{"1":"Athens","2":"2773.00","3":"europe"},{"1":"Madrid","2":"2769.00","3":"europe"},{"1":"Cagliari","2":"2726.00","3":"europe"},{"1":"NA","2":"NA","3":"europe"},{"1":"NA","2":"NA","3":"europe"},{"1":"NA","2":"NA","3":"europe"},{"1":"Alice Springs","2":"3499.10","3":"oceania"},{"1":"Perth","2":"3229.50","3":"oceania"},{"1":"Darwin","2":"3092.20","3":"oceania"},{"1":"Brisbane","2":"2968.40","3":"oceania"},{"1":"Canberra","2":"2813.70","3":"oceania"},{"1":"Adelaide","2":"2765.40","3":"oceania"},{"1":"Sydney","2":"2468.10","3":"oceania"},{"1":"Port Moresby","2":"2463.00","3":"oceania"},{"1":"Hobart","2":"2393.10","3":"oceania"},{"1":"Melbourne","2":"2362.60","3":"oceania"},{"1":"NA","2":"NA","3":"oceania"},{"1":"NA","2":"NA","3":"oceania"},{"1":"NA","2":"NA","3":"oceania"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="wrangle" class="section level3">
+<h3>Wrangle</h3>
+<div id="identify-the-position-of-duplicate-value-using-duplicated" class="section level4">
+<h4>Identify the position of duplicate value using <kbd>duplicated()</kbd></h4>
+<pre class="r fold-hide"><code># To locate the position of duplicate elements 
+df1 &lt;- duplicated(df)
+df1</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+## [13]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [25]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [37] FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [49] FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [61] FALSE FALSE FALSE  TRUE  TRUE</code></pre>
+</div>
+<div id="replace-the-duplicate-value-using-replace" class="section level4">
+<h4>Replace the duplicate value using <kbd>replace()</kbd></h4>
+<pre class="r fold-hide"><code># Replace duplicate records with another value
+f_replace &lt;- function(df_replace,value1,value2) {
+  replace(df_replace, df_replace==value1, value2 )
+}
+
+# Call the function with your values to the parameters
+f1 &lt;- f_replace(df,&quot;america&quot;,&quot;USA&quot;) 
+f1</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["individual"],"name":[1],"type":["chr"],"align":["left"]},{"label":["value"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["group"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Marsa Alam","2":"3958.00","3":"africa"},{"1":"Dakhla Oasis","2":"3943.40","3":"africa"},{"1":"Keetmanshoop","2":"3870.00","3":"africa"},{"1":"Khartoum","2":"3737.10","3":"africa"},{"1":"Upington","2":"3731.80","3":"africa"},{"1":"Tamanrasset","2":"3686.00","3":"africa"},{"1":"Toliara","2":"3610.00","3":"africa"},{"1":"Windhoek","2":"3605.00","3":"africa"},{"1":"Lodwar","2":"3582.00","3":"africa"},{"1":"Alexandria","2":"3579.50","3":"africa"},{"1":"NA","2":"NA","3":"africa"},{"1":"NA","2":"NA","3":"africa"},{"1":"NA","2":"NA","3":"africa"},{"1":"Yuma","2":"4015.30","3":"USA"},{"1":"Calama","2":"3926.20","3":"USA"},{"1":"Phoenix","2":"3871.60","3":"USA"},{"1":"Las Vegas","2":"3825.30","3":"USA"},{"1":"Tucson","2":"3806.00","3":"USA"},{"1":"El Paso","2":"3762.50","3":"USA"},{"1":"Sacramento","2":"3607.80","3":"USA"},{"1":"Fresno","2":"3564.20","3":"USA"},{"1":"Albuquerque","2":"3415.40","3":"USA"},{"1":"Arequipa","2":"3333.30","3":"USA"},{"1":"NA","2":"NA","3":"USA"},{"1":"NA","2":"NA","3":"USA"},{"1":"NA","2":"NA","3":"USA"},{"1":"Dubai","2":"3508.70","3":"asia"},{"1":"Muscat","2":"3493.30","3":"asia"},{"1":"Isfahan","2":"3352.50","3":"asia"},{"1":"Quetta","2":"3341.25","3":"asia"},{"1":"Tel Aviv","2":"3311.00","3":"asia"},{"1":"Abha","2":"3248.20","3":"asia"},{"1":"Baghdad","2":"3240.80","3":"asia"},{"1":"Riyadh","2":"3224.80","3":"asia"},{"1":"Kabul","2":"3175.10","3":"asia"},{"1":"Bandar Abbas","2":"3090.00","3":"asia"},{"1":"NA","2":"NA","3":"asia"},{"1":"NA","2":"NA","3":"asia"},{"1":"NA","2":"NA","3":"asia"},{"1":"Nicosia","2":"3314.10","3":"europe"},{"1":"Valletta","2":"3054.00","3":"europe"},{"1":"Faro","2":"3036.00","3":"europe"},{"1":"Cádiz","2":"3024.00","3":"europe"},{"1":"Seville","2":"2921.00","3":"europe"},{"1":"Marseille","2":"2836.00","3":"europe"},{"1":"Lisbon","2":"2806.00","3":"europe"},{"1":"Athens","2":"2773.00","3":"europe"},{"1":"Madrid","2":"2769.00","3":"europe"},{"1":"Cagliari","2":"2726.00","3":"europe"},{"1":"NA","2":"NA","3":"europe"},{"1":"NA","2":"NA","3":"europe"},{"1":"NA","2":"NA","3":"europe"},{"1":"Alice Springs","2":"3499.10","3":"oceania"},{"1":"Perth","2":"3229.50","3":"oceania"},{"1":"Darwin","2":"3092.20","3":"oceania"},{"1":"Brisbane","2":"2968.40","3":"oceania"},{"1":"Canberra","2":"2813.70","3":"oceania"},{"1":"Adelaide","2":"2765.40","3":"oceania"},{"1":"Sydney","2":"2468.10","3":"oceania"},{"1":"Port Moresby","2":"2463.00","3":"oceania"},{"1":"Hobart","2":"2393.10","3":"oceania"},{"1":"Melbourne","2":"2362.60","3":"oceania"},{"1":"NA","2":"NA","3":"oceania"},{"1":"NA","2":"NA","3":"oceania"},{"1":"NA","2":"NA","3":"oceania"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<div id="citations-for-narrative-and-data-sources" class="section level4">
+<h4>citations for narrative and data sources</h4>
+<ul>
+<li>Data sources: Wikipedia page - List of cities by sunshine duration, <a href="https://en.wikipedia.org/wiki/List_of_cities_by_sunshine_duration" target="_blank">GO</a></li>
+</ul>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>
