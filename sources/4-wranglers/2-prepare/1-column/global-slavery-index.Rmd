@@ -1,0 +1,113 @@
+---
+pagetitle: "Global Slavery Index"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, dev = "svg" )
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+ 
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Global Slavery Index
+## Rename column
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Hermes Rivera on Unsplash"}
+
+masthead <- "assets/hermes-rivera-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Those who deny freedom to others, deserve it not for themselves.\
+--- Abraham Lincoln\
+
+***
+
+### Ingest the data
+#### country, gdp per capita based on PPP, and government response score
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "global-slavery-index/data.csv"
+url <- paste0(url_root, url_file)
+
+df_slavery <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
+df_slavery
+
+```
+
+
+### Wrangle
+#### Rename all columns using <kbd>gsub()</kbd> and <kbd>regex</kbd>
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+#Renaming column names
+colnames(df_slavery) <- gsub("\\.|\\_", " ",colnames(df_slavery))
+df_slavery
+
+
+
+
+```
+
+### References
+#### Citations and data sources
+
+* Narration and data: Walk Free, [GO](https://www.globalslaveryindex.org/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+
+
+
+
+
