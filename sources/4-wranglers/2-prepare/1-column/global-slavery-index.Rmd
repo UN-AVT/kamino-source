@@ -73,13 +73,26 @@ df_slavery
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
 #Renaming column names
-colnames(df_slavery) <- gsub("\\.|\\_", " ",colnames(df_slavery))
-df_slavery
-
-
+df1 <- df_slavery
+colnames(df1) <- gsub("\\.|\\_", " ",colnames(df1))
+df1
 
 
 ```
+
+### Another method to rename using tidyverse
+#### Rename all columns using <kbd>rename_with()</kbd> and <kbd>gsub()</kbd>
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df2 <- df_slavery
+
+df2 <- df2 %>%  rename_with(~ gsub('[[:punct:]]',' ',.x))
+df2
+
+```
+
 
 ### References
 #### Citations and data sources
