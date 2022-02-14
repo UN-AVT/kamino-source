@@ -1,0 +1,113 @@
+---
+pagetitle: "UCS Satellites"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Big Mac Index
+## Validate
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Amirali Mirhashemian on Unsplash"}
+
+masthead <- "assets/amirali-mirhashemian-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Burger</div>
+
+
+> About once every three and a half weeks, I need a Big Mac, but after that I'm fine...\
+--- Sara Cox\
+
+***
+
+### Ingest Data
+
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "big-mac-by-country/big-mac-by-country.csv"
+url <- paste0(url_root, url_file)
+df <- read.csv(url, header = TRUE)
+df<-df[1:12,]
+df
+
+```
+
+### ISO_Alpha3
+
+library(countrycode) is a very useful package when we deal with country data,   <a href="https://cran.r-project.org/web/packages/countrycode/countrycode.pdf" target="_blank" rel="noopener noreferrer">[country code library]</a>
+
+This package includes a set of functions that we can apply to convert, guess and/or validate country code.
+
+For example, the second column in the dataset we loaded, called "iso_a3", seems to contain ISO-3 characters. Using the package, we can confirm that these code are all valid. If some of them are not valid, it will return NA.
+
+Let's enter "iso3c" as origin first (meaning we guess it is ISO-3). For each cell, it will return the country name if the code is recognized.
+
+```{r is.country, echo=TRUE, message=FALSE}
+
+results <- countrycode(df$iso_a3, origin = 'iso3c', destination = 'country.name')
+results
+
+```
+
+Notice that the tenth entry is NA, meaning the code was not recognized as a valid ISO3 code. 
+
+### References
+#### citations for narrative and data sources
+
+* Data sources: TidyTuesday, [GO](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-12-22/big-mac.csv){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

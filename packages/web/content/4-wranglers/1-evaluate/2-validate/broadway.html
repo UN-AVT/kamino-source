@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Broadway Grosses</title>
+
+<script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="../../../../vendor/knitr/navigation-1.1/tabsets.js"></script>
+<script src="../../../../vendor/knitr/navigation-1.1/codefolding.js"></script>
+<link href="../../../../vendor/knitr/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/highlightjs-9.12.0/highlight.js"></script>
+<link href="../../../../vendor/knitr/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="../../../../vendor/knitr/kePrint-0.0.1/kePrint.js"></script>
+<link href="../../../../vendor/knitr/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHLBJTGCKN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GHLBJTGCKN');
+  </script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../../assets/logo/logo.svg" alt="" height="36">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../../assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../../assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>WRANGLERS</p>
+</div>
+<div id="broadway-grosses" class="section level1">
+<h1>Broadway Grosses</h1>
+<div id="validate" class="section level2">
+<h2>Validate</h2>
+<div class="figure" style="text-align: center">
+<img src="kyle-head-unsplash.jpg" alt="Photo by Kyle Head on Unsplash" width="60%" />
+<p class="caption">
+Photo by Kyle Head on Unsplash
+</p>
+</div>
+<div class="figure-text">
+Broadway Play
+</div>
+<blockquote>
+<p>They say the neon lights are bright on Broadway. They say there’s always magic in the air…<br />
+— The Drifters<br />
+</p>
+</blockquote>
+<hr />
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;broadway/grosses.csv&quot;
+url &lt;- paste0(url_root, url_file)
+df &lt;- read.csv(url, header = TRUE, nrows=20)
+df</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["week_ending"],"name":[1],"type":["chr"],"align":["left"]},{"label":["week_number"],"name":[2],"type":["int"],"align":["right"]},{"label":["weekly_gross_overall"],"name":[3],"type":["int"],"align":["right"]},{"label":["show"],"name":[4],"type":["chr"],"align":["left"]},{"label":["theatre"],"name":[5],"type":["chr"],"align":["left"]},{"label":["weekly_gross"],"name":[6],"type":["int"],"align":["right"]},{"label":["potential_gross"],"name":[7],"type":["lgl"],"align":["right"]},{"label":["avg_ticket_price"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["top_ticket_price"],"name":[9],"type":["lgl"],"align":["right"]},{"label":["seats_sold"],"name":[10],"type":["int"],"align":["right"]},{"label":["seats_in_theatre"],"name":[11],"type":["int"],"align":["right"]},{"label":["pct_capacity"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["performances"],"name":[13],"type":["int"],"align":["right"]},{"label":["previews"],"name":[14],"type":["int"],"align":["right"]}],"data":[{"1":"1985-06-09","2":"1","3":"3915937","4":"42nd Street","5":"St. James Theatre","6":"282368","7":"NA","8":"30.42","9":"NA","10":"9281","11":"1655","12":"0.7010","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"A Chorus Line","5":"Sam S. Shubert Theatre","6":"222584","7":"NA","8":"27.25","9":"NA","10":"8167","11":"1472","12":"0.6935","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Aren't We All?","5":"Brooks Atkinson Theatre","6":"249272","7":"NA","8":"33.75","9":"NA","10":"7386","11":"1088","12":"0.8486","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Arms and the Man","5":"Circle in the Square Theatre","6":"95688","7":"NA","8":"20.87","9":"NA","10":"4586","11":"682","12":"0.8405","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"As Is","5":"Lyceum Theatre","6":"61059","7":"NA","8":"20.78","9":"NA","10":"2938","11":"684","12":"0.5369","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Big River","5":"Eugene O'Neill Theatre","6":"255386","7":"NA","8":"31.96","9":"NA","10":"7992","11":"1018","12":"0.9813","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Biloxi Blues","5":"Neil Simon Theatre","6":"306839","7":"NA","8":"28.33","9":"NA","10":"10831","11":"1336","12":"1.0134","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Brighton Beach Memoirs","5":"46th Street Theatre","6":"107392","7":"NA","8":"18.93","9":"NA","10":"5672","11":"1368","12":"0.5183","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Cats","5":"Winter Garden Theatre","6":"461880","7":"NA","8":"38.35","9":"NA","10":"12043","11":"1482","12":"1.0158","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Doubles","5":"Ritz Theatre","6":"47452","7":"NA","8":"17.52","9":"NA","10":"2709","11":"499","12":"0.6786","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Grind","5":"Mark Hellinger Theatre","6":"189253","7":"NA","8":"32.62","9":"NA","10":"5801","11":"1591","12":"0.4558","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"La Cage aux Folles","5":"Palace Theatre","6":"408860","7":"NA","8":"34.30","9":"NA","10":"11921","11":"1683","12":"0.8854","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Leader of the Pack","5":"Ambassador Theatre","6":"122005","7":"NA","8":"23.42","9":"NA","10":"5210","11":"1083","12":"0.6013","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Oh! Calcutta!","5":"Edison Theatre","6":"32330","7":"NA","8":"14.22","9":"NA","10":"2273","11":"499","12":"0.5061","13":"9","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Singin' in the Rain","5":"Gershwin Theatre","6":"243424","7":"NA","8":"24.05","9":"NA","10":"10120","11":"1933","12":"0.6544","13":"0","14":"8"},{"1":"1985-06-09","2":"1","3":"3915937","4":"Sunday in the Park with George","5":"Booth Theatre","6":"153364","7":"NA","8":"31.43","9":"NA","10":"4880","11":"771","12":"0.7912","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"The King and I","5":"Broadway Theatre","6":"407169","7":"NA","8":"40.84","9":"NA","10":"9969","11":"1765","12":"0.7060","13":"8","14":"0"},{"1":"1985-06-09","2":"1","3":"3915937","4":"The Odd Couple","5":"Broadhurst Theatre","6":"91056","7":"NA","8":"24.17","9":"NA","10":"3768","11":"1181","12":"0.3988","13":"0","14":"8"},{"1":"1985-06-09","2":"1","3":"3915937","4":"The Tap Dance Kid","5":"Minskoff Theatre","6":"178556","7":"NA","8":"26.78","9":"NA","10":"6667","11":"1621","12":"0.5141","13":"8","14":"0"},{"1":"1985-06-16","2":"2","3":"3685742","4":"42nd Street","5":"St. James Theatre","6":"301417","7":"NA","8":"29.46","9":"NA","10":"10231","11":"1655","12":"0.7727","13":"8","14":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div id="is-alpha" class="section level3">
+<h3>Is alpha</h3>
+<p>Checking if the cells in the first column contain letters, and only letters (a-zA-Z).</p>
+<pre class="r"><code>a &lt;- df$show
+
+df_1 &lt;- grepl(&quot;^[a-zA-Z ]*$&quot;, a, perl = T)
+df_1</code></pre>
+<pre><code>##  [1] FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [13]  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE</code></pre>
+<p>As you can see, only cell 18 contains letters, the other cells contain numbers or other characters.</p>
+<!-- FOR DISPLAY ONLY -->
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:350px; ">
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Broad_Way_Show
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+is_alpha
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: #76b5c5 !important;">
+42nd Street
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: #76b5c5 !important;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+A Chorus Line
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: #76b5c5 !important;">
+Aren’t We All?
+</td>
+<td style="text-align:left;font-weight: bold;color: white !important;background-color: #76b5c5 !important;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Arms and the Man
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+As Is
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Big River
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Biloxi Blues
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brighton Beach Memoirs
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cats
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Doubles
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Grind
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+La Cage aux Folles
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Leader of the Pack
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Oh! Calcutta!
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Singin’ in the Rain
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sunday in the Park with George
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The King and I
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Odd Couple
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Tap Dance Kid
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+42nd Street
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>As you can see, some rows contain other characters than just alphabets.</p>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<div id="citations-for-narrative-and-data-sources" class="section level4">
+<h4>citations for narrative and data sources</h4>
+<ul>
+<li>Narrative and Data sources: This case is based on a dataset by Tidy Tuesday, <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-28/readme.md%22">GO</a></li>
+</ul>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>

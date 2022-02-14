@@ -1,0 +1,129 @@
+---
+pagetitle: "Meteorite Landings"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(kableExtra)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Meteorite Landings
+## Validate
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Vincentiu Solomon on Unsplash"}
+
+masthead <- "assets/vincentiu-solomon-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Meteor</div>
+
+
+> If the Earth gets hit by an asteroid, it's game over. It's control-alt-delete for civilization...\
+--- Bill Nye\
+
+***
+
+
+
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "meteorite-landings/meteorite-landings.csv"
+url <- paste0(url_root, url_file)
+df <- read.csv(url, header = TRUE, nrows = 25)
+df
+
+```
+
+### Is alphanumeric
+
+Checking if the cells in the fourth column (Meteorite Classification) contain only letters or numbers.
+
+```{r is.alphanumeric, echo=TRUE, message=FALSE}
+
+a <- df$recclass
+df_2 <- grepl("^[0-9A-Za-z ]+$", a, perl = T)
+df_2
+
+```
+
+As you can see, cells that contain punctuation will output as FALSE.
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r, echo=FALSE}
+
+# NOT TO BE USED AS SOLUTION
+list <- list(a, df_2)
+df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(CMeteorite_Classification=V1,is_alpha=V2)
+
+
+df_tmp <-df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+row_spec(c(7, 11, 17,18,21,23), bold = T, color = "white", background = "#76b5c5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data sources: This case is based on a dataset by Nasa on Kaggle, [GO](https://www.kaggle.com/nasa/meteorite-landings{target="_blank"})
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
