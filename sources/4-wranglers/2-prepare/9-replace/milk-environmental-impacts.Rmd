@@ -42,7 +42,9 @@ WRANGLERS
 
 # Environmental Impact of Milk
 ## Replace
-
+<kbd>
+gsub
+</kbd>
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by dhanya purohit on Unsplash"}
 

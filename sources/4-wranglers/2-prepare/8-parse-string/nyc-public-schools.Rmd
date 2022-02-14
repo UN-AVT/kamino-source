@@ -42,6 +42,9 @@ WRANGLERS
 
 # Average SAT Scores for NYC Public Schools
 ## Parse Numbers
+<kbd>
+gsub
+</kbd>
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Andre Hunter on Unsplash"}
 

@@ -1,0 +1,150 @@
+---
+pagetitle: "More Money More Time"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(ggthemes)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# More Money More Time
+## Filter By String
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Annie Spratt on Unsplash"}
+
+masthead <- "assets/annie-spratt-2-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> I am issuing a call to action for countries, companies and institutions globally\
+  to step-up and become champions for paid parental leave...\
+--- UN Women Goodwill Ambassador Anne Hathaway\
+
+***
+
+Investing in __family friendly policies__ is good for families, businesses and economies. But for too many parents around the world, policies, such as __paid parental leave__, breastfeeding breaks, childcare and child grants, are not a reality. Family-friendly policies matter because they help children to get a better start in life and help parents to find the right balance between their commitments at work and at home. Yet even some of the world’s richest countries fail to offer comprehensive solutions to all families.
+
+Let's take a closer look at the situation.
+
+### Ingest the source
+#### maternity leave, payment rate
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "more-money-more-time/more-money-more-time.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
+df
+
+
+```
+
+
+### Wrangle
+#### select, clean, and factor
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Select only the needed
+df_complete <- select(df, c("Country", "Paid_maternity_leave_avg_payment_rate_percent", "Paid_maternity_leave_in_months", "difference_from_OECD_average"))
+
+# Make sure we don't factor empty strings
+df_complete <- filter(df_complete, nchar(Country) > 0)
+# Factor the string fields
+df_complete$Country <- as.factor(df_complete$Country)
+
+# Remove incomplete cases
+df_complete <- df_complete[complete.cases(df_complete), ]
+
+df_complete
+
+```
+
+#### Where equal
+
+Filter where country name equal to __Spain__ in the <span style="background: #E0ECF8; font-weight:bold">Country</span> column. 
+
+```{r method: where equal, echo=TRUE, message=FALSE}
+
+df_1 <- df_complete %>% filter(Country=="Spain")
+df_1
+
+```
+#### Where not equal
+
+Let's say we want to eliminate, for some reason, <span style="font-weight:bold">Poland</span> from <span style="background: #E0F8EC;font-weight:bold">Country</span> from this data
+
+
+```{r, message=FALSE, echo=TRUE, warning=FALSE}
+
+df_2 <- df_complete %>% filter(Country!="Poland")
+df_2
+
+```
+
+### References
+#### Citations and data sources
+
+* Inspiration: DataWrapper, [GO](https://blog.datawrapper.de/weekly37/){target="_blank"}
+* Data source: OECD, Parental Leave Systems, [GO](https://www.oecd.org/els/soc/PF2_1_Parental_leave_systems.pdf){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

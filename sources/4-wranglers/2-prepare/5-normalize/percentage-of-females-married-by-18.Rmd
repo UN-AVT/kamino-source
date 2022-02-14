@@ -172,7 +172,7 @@ Let's plot again. Notice that all measures are on similar scale.
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', out.width = "100%"}
 
-dat.m <- melt(df1,id.vars='country',  measure.vars=c('Females.Married.by.15', 'Females.Married.by.18', 'Males.Married.by.18'))
+dat.m <- melt(df1,id.vars='country',  measure.vars=c('females_married_by_15', 'females_married_by_18', 'males_married_by_18'))
 v2 <- ggplot(dat.m) +
   geom_boxplot(aes(y=value, color=variable)) +
   theme_bw() +

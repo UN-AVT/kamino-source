@@ -98,7 +98,7 @@ parsed_date
 ```
 
 
-We can also convert month to thier alphabetical format. 
+We can also convert month to their alphabetical format. 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
