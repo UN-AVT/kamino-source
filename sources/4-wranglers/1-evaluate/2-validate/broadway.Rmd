@@ -1,0 +1,136 @@
+---
+pagetitle: "Broadway Grosses"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(kableExtra)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Broadway Grosses
+## Validate
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Kyle Head on Unsplash"}
+
+masthead <- "assets/kyle-head-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Broadway Play</div>
+
+
+> They say the neon lights are bright on Broadway. They say there’s always magic in the air...\
+--- The Drifters\
+
+***
+
+
+
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "broadway/grosses.csv"
+url <- paste0(url_root, url_file)
+df <- read.csv(url, header = TRUE, nrows=20)
+df
+
+```
+
+
+### Is alpha
+
+Checking if the cells in the first column contain letters, and only letters (a-zA-Z).
+
+```{r is.alpha, echo=TRUE, message=FALSE}
+
+a <- df$show
+
+df_1 <- grepl("^[a-zA-Z ]*$", a, perl = T)
+df_1
+
+```
+
+
+As you can see, only cell 18 contains letters, the other cells contain numbers or other characters.
+
+<!-- FOR DISPLAY ONLY -->
+
+```{r, echo=FALSE}
+
+# NOT TO BE USED AS SOLUTION
+list <- list(a, df_1)
+df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(Broad_Way_Show=V1,is_alpha=V2)
+
+
+df_tmp <-df_tmp%>%
+kable(escape = FALSE)%>%
+kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
+row_spec(c(1,3), bold = T, color = "white", background = "#76b5c5")%>%
+scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
+df_tmp
+
+#NOT TO BE USED AS SOLUTION 
+
+```
+
+
+As you can see, some rows contain other characters than just alphabets.
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data sources: This case is based on a dataset by Tidy Tuesday, [GO](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-28/readme.md") 
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
