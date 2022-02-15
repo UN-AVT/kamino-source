@@ -1,5 +1,5 @@
 ---
-pagetitle: "UCS Satellites"
+pagetitle: "Big Mac by Country"
 output: 
   html_document:
     theme: lumen
@@ -38,7 +38,7 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# Big Mac Index
+# Big Mac by Country
 ## Validate
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Amirali Mirhashemian on Unsplash"}

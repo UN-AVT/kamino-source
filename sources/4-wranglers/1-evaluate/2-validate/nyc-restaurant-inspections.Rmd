@@ -1,5 +1,5 @@
 ---
-pagetitle: "Meteorite Landings"
+pagetitle: "New York Restaurant Inspection"
 output: 
   html_document:
     theme: lumen
@@ -24,9 +24,8 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(kableExtra)
-
 library(showtext)
+library(stringr)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
@@ -38,76 +37,67 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# Meteorite Landings
+# New York Restaurant Inspection
 ## Validate
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Vincentiu Solomon on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Gerrie Van Der Walt on Unsplash"}
 
-masthead <- "assets/vincentiu-solomon-unsplash.jpg"
+masthead <- "assets/gerrie-van-der-walt-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">Meteor</div>
+<div class="figure-text">Burger</div>
 
 
-> If the Earth gets hit by an asteroid, it's game over. It's control-alt-delete for civilization...\
---- Bill Nye\
+> I'm plagued with indecision in my life. I can't figure out what to order in a restaurant...\
+--- Chuck Close\
 
 ***
 
-
+### Ingest Data
 
 
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
-
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
-url_file <- "meteorite-landings/meteorite-landings.csv"
+url_file <- "new-york-restaurant-inspection/New_York_City_Restaurant_Inspection.csv"
 url <- paste0(url_root, url_file)
-df <- read.csv(url, header = TRUE, nrows = 25)
+df <- read_csv(url, header = TRUE, nrows=30)
 df
 
 ```
 
-### Is alphanumeric
+### is_length()
 
-Checking if the cells in the fourth column (Meteorite Classification) contain only letters or numbers. To do this we use regular expression with the function <kbd>grepl()</kbd>
+String Length validation is especially useful to make sure the number of characters entered into a field can be restricted. It can be used to make sure the number of characters are the same throughout the column.
 
-```{r is.alphanumeric, echo=TRUE, message=FALSE}
+For example, United States phone numbers must be 10 digits. We can use this information to validate that all the cells in the column 'Phone' are 10 digits.
 
-a <- df$recclass
-df_2 <- grepl("^[0-9A-Za-z ]+$", a, perl = T)
-df_2
+We'll validate both Phone Number(10 digits) and Postal Code (5 digits) by using <kbd>nchar()</kbd>
+
+
+```{r, echo=TRUE, message=FALSE}
+
+nchar(df$ZIPCODE)== 5
+nchar(df$PHONE)==10
+
+```
+
+We can also utilize <kbd>str_length()</kbd> from the stringr library
+
+```{r, echo=TRUE, message=FALSE}
+
+str_length(df$ZIPCODE)== 5
+str_length(df$PHONE)==10
 
 ```
 
-As you can see, cells that contain punctuation will output as FALSE.
 
-<!-- FOR DISPLAY ONLY -->
-
-```{r, echo=FALSE}
-
-# NOT TO BE USED AS SOLUTION
-list <- list(a, df_2)
-df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(CMeteorite_Classification=V1,is_alpha=V2)
-
-
-df_tmp <-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
-row_spec(c(7, 11, 17,18,21,23), bold = T, color = "white", background = "#76b5c5")%>%
-scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
-df_tmp
-
-#NOT TO BE USED AS SOLUTION 
-
-```
 
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data sources: This case is based on a dataset by Nasa on Kaggle, [GO](https://www.kaggle.com/nasa/meteorite-landings{target="_blank"})
-
+* Data sources: Kaggle, [GO](https://www.kaggle.com/new-york-city/nyc-inspections/version/1){target="_blank"}
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 

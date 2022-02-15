@@ -1,5 +1,5 @@
 ---
-pagetitle: "Meteorite Landings"
+pagetitle: "Three Star Michelin Restaurants"
 output: 
   html_document:
     theme: lumen
@@ -38,21 +38,21 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# Meteorite Landings
+# Three Star Michelin Restaurants
 ## Validate
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Vincentiu Solomon on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Rod Long on Unsplash"}
 
-masthead <- "assets/vincentiu-solomon-unsplash.jpg"
+masthead <- "assets/rod-long-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">Meteor</div>
+<div class="figure-text">Broadway Play</div>
 
 
-> If the Earth gets hit by an asteroid, it's game over. It's control-alt-delete for civilization...\
---- Bill Nye\
+> They say the neon lights are bright on Broadway. They say there’s always magic in the air...\
+--- The Drifters\
 
 ***
 
@@ -62,40 +62,42 @@ knitr::include_graphics(masthead, dpi=72)
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
-url_file <- "meteorite-landings/meteorite-landings.csv"
+url_file <- "broadway/grosses.csv"
 url <- paste0(url_root, url_file)
-df <- read.csv(url, header = TRUE, nrows = 25)
+df <- read.csv(url, header = TRUE, nrows=20)
 df
 
 ```
 
-### Is alphanumeric
 
-Checking if the cells in the fourth column (Meteorite Classification) contain only letters or numbers. To do this we use regular expression with the function <kbd>grepl()</kbd>
+### Is alpha
 
-```{r is.alphanumeric, echo=TRUE, message=FALSE}
+Checking if the cells in the first column contain letters, and only letters (a-zA-Z). We can use the function <kbd>grepl()</kbd>
 
-a <- df$recclass
-df_2 <- grepl("^[0-9A-Za-z ]+$", a, perl = T)
-df_2
+```{r is.alpha, echo=TRUE, message=FALSE}
+
+a <- df$show
+
+df_1 <- grepl("^[a-zA-Z ]*$", a, perl = T)
+df_1
 
 ```
 
-As you can see, cells that contain punctuation will output as FALSE.
+
+As you can see, only cell 18 contains letters, the other cells contain numbers or other characters.
 
 <!-- FOR DISPLAY ONLY -->
 
 ```{r, echo=FALSE}
-
 # NOT TO BE USED AS SOLUTION
-list <- list(a, df_2)
-df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(CMeteorite_Classification=V1,is_alpha=V2)
+list <- list(a, df_1)
+df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(Broad_Way_Show=V1,is_alpha=V2)
 
 
 df_tmp <-df_tmp%>%
 kable(escape = FALSE)%>%
 kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
-row_spec(c(7, 11, 17,18,21,23), bold = T, color = "white", background = "#76b5c5")%>%
+row_spec(c(1,3, 14, 15,20), bold = T, color = "white", background = "#76b5c5")%>%
 scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
 df_tmp
 
@@ -103,10 +105,14 @@ df_tmp
 
 ```
 
+
+As you can see, some rows contain other characters than just alphabets.
+
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data sources: This case is based on a dataset by Nasa on Kaggle, [GO](https://www.kaggle.com/nasa/meteorite-landings{target="_blank"})
+* Narrative and Data sources: This case is based on a dataset by Tidy Tuesday, [GO](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-28/readme.md") 
+
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

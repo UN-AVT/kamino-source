@@ -72,7 +72,7 @@ df
 
 ### Is alpha
 
-Checking if the cells in the first column contain letters, and only letters (a-zA-Z).
+Checking if the cells in the first column contain letters, and only letters (a-zA-Z). We can use the function <kbd>grepl()</kbd>
 
 ```{r is.alpha, echo=TRUE, message=FALSE}
 
@@ -89,7 +89,6 @@ As you can see, only cell 18 contains letters, the other cells contain numbers o
 <!-- FOR DISPLAY ONLY -->
 
 ```{r, echo=FALSE}
-
 # NOT TO BE USED AS SOLUTION
 list <- list(a, df_1)
 df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(Broad_Way_Show=V1,is_alpha=V2)
@@ -98,7 +97,7 @@ df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(Broad_Way_Show=V1,is_alpha=
 df_tmp <-df_tmp%>%
 kable(escape = FALSE)%>%
 kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
-row_spec(c(1,3), bold = T, color = "white", background = "#76b5c5")%>%
+row_spec(c(1,3, 14, 15,20), bold = T, color = "white", background = "#76b5c5")%>%
 scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
 df_tmp
 
