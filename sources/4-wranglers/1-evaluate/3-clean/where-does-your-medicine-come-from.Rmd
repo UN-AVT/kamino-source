@@ -68,8 +68,8 @@ df
 ```
 
 ### Wrangle data
-#### Remove missing values using <kbd>is.na()</kbd>
-
+#### Remove missing values using <kbd>is.na()</kbd> 
+Remove records which contain missing values within a particular field/column.
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
@@ -78,7 +78,8 @@ df_1 <- df[!is.na(df$exports_usd),]
 df_1 
 
 ```
-#### Remove missing values using <kbd>na.omit()</kbd>
+#### Remove missing values using <kbd>na.omit()</kbd> 
+Remove records which contain missing values within any field/column of the data set.
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
