@@ -62,7 +62,7 @@ knitr::include_graphics(masthead, dpi=72)
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
 url_file <- "new-york-restaurant-inspection/New_York_City_Restaurant_Inspection.csv"
 url <- paste0(url_root, url_file)
-df <- read_csv(url, header = TRUE, nrows=30)
+df <- read.csv(url, header = TRUE, nrows=30)
 df
 
 ```

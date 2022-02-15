@@ -76,7 +76,6 @@ Hexadecimal Color Code starts with a # folloed by six or three letters or digits
 To validate, we can use the function <kbd>grepl()</kbd>
 
 ```{r is.alpha, echo=TRUE, message=FALSE}
-df <- read.csv('D:/UN Internship/kamino-source/sources/0-shared/data/colors/colors.csv')
 a <- df$Hex_code
 
 df_1 <- grepl("^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$", a, perl = T)
@@ -87,32 +86,11 @@ df_1
 
 As you can see, every cell in column "Hex_code" are valid Hexadecimal Codes.
 
-<!-- FOR DISPLAY ONLY -->
-
-```{r, echo=FALSE}
-# NOT TO BE USED AS SOLUTION
-list <- list(a, df_1)
-df_tmp<-as.data.frame(do.call(cbind, list))%>%rename(Broad_Way_Show=V1,is_alpha=V2)
-
-
-df_tmp <-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
-row_spec(c(1,3, 14, 15,20), bold = T, color = "white", background = "#76b5c5")%>%
-scroll_box(height = "350px", width = NULL, extra_css = NULL, fixed_thead = TRUE)
-df_tmp
-
-#NOT TO BE USED AS SOLUTION 
-
-```
-
-
-As you can see, some rows contain other characters than just alphabets.
 
 ### References
 #### citations for narrative and data sources
 
-* Data sources: The complete list of colors and Hexadecimal Color Codes can be found on Wikipedia, [GO]("https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F") 
+* Data sources: The complete list of colors and Hexadecimal Color Codes can be found on Wikipedia, [GO](https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F){target="_blank"}
 
 
 
