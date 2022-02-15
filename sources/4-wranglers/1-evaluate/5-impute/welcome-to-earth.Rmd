@@ -1,0 +1,127 @@
+---
+pagetitle: "Welcome to Earth!"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS 
+</div>
+
+
+# Welcome to Earth! 
+## Imputing
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Albert Anthony on Unsplash"}
+
+masthead <- "assets/albert-antony-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> No unidentified objects in the popular sense have been seen from the International Space Station...\
+--- NASA\
+
+
+***
+
+### Ingest
+#### date and count
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+#Load Data
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "welcome-to-earth/national-ufo-reporting-database-aggregated.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE)
+df
+
+```
+
+Median is one of the three measures of central tendency. When describing a set of data, the central position of the data set is identified. Median splits the data into two halves. If the number of elements in the data set is odd then the center element is median and if it is even then the median would be the average of two central elements.
+
+The median formula of a given set of numbers, say having 'n' __odd number__ of observations, can be expressed as:
+
+* Median = [(n + 1)/2]th term
+
+The median formula of a given set of numbers say having 'n' __even number__ of observations, can be expressed as:
+
+* Median = [(n/2)th term + ((n/2) + 1)th term]/2
+
+
+### Wrangle
+#### calculating median for odd number of observations by using <kbd>median()</kbd>
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+#Apply median for the month January where n is odd
+df_jan <- filter(df, df$Month == 'January')
+df_wrangle <- median(df_jan$Count)
+df_wrangle
+
+```
+
+#### calculating median for even number of observations by using <kbd>median()</kbd>
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+#Apply median for the whole dataset where n is even
+df_wrangle <- median(df$Count)
+df_wrangle
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Sources: The National UFO Reporting Center Online Database, [GO](http://www.nuforc.org/webreports.html){target="_blank"}
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

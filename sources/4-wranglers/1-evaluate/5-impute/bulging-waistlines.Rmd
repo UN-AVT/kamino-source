@@ -1,0 +1,122 @@
+---
+pagetitle: "Bulging waistlines"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Bulging waistlines
+## Imputing
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Towfiqu Barbhuiya on Unsplash"}
+
+masthead <- "assets/towfiqu-barbhuiya-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> I'm in good shape.  That shape is round...\
+--- Jarod Kintz\
+
+***
+
+### Ingest
+#### country, year, bmi
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+#Load Data1
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+
+url_file1 <- "bulging-waistlines/mean-body-mass-index-bmi-in-adult-males.csv"
+url1 <- paste0(url_root, url_file1)
+df_males <- read.csv(url1, header = TRUE, stringsAsFactors = TRUE)
+df_males
+
+#Load Data2
+url_file2 <- "bulging-waistlines/mean-body-mass-index-bmi-in-adult-women.csv"
+url2 <- paste0(url_root, url_file2)
+df_females <- read.csv(url2, header = TRUE, stringsAsFactors = TRUE)
+df_females
+
+
+```
+
+The mean is the average or a calculated central value of a set of numbers and is used to measure the central tendency of the data. Central tendency is the statistical measure that recognizes the entire set of data or distribution through a single value. It provides an exact description of the whole data. In statistics, the mean can also be defined as the sum of all observations to the total number of observations.
+
+### Wrangle
+#### calculating mean for female BMI by using <kbd>mean()</kbd>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# calculate the mean for female BMI
+df_wrangle <- mean(df_females$Mean.BMI..female.)
+df_wrangle
+
+```
+#### calculating mean for Male BMI by using <kbd>mean()</kbd>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# calculate the mean for Male BMI
+df_wrangle <- mean(df_males$Mean.BMI..male.)
+df_wrangle
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative source: The Economist, [GO](https://www.economist.com/graphic-detail/2019/10/28/china-worries-about-its-bulging-waistlines){target="_blank"} 
+* Data Source: Our World in Data, [GO](https://ourworldindata.org/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
