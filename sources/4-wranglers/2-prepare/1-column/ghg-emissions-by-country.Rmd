@@ -1,5 +1,5 @@
 ---
-pagetitle: "Global Slavery Index"
+pagetitle: "Greenhouse Gas (GHG) emissions by country"
 output:
   html_document:
     theme: lumen
@@ -11,95 +11,101 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: vendor
+    lib_dir: "vendor"
 ---
 
 ```{r setup, include=FALSE}
 
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, dev = "svg" )
-options(scipen=999)  # turn-off scientific notation like 1e+48
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
 
 # Clear environment and memory
 rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
+
+
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
 showtext_auto()
- 
+
 ```
 
+
 <div class="activity">
-WRANGLERS  
+WRANGLERS 
 </div>
 
-# Global Slavery Index
-## Rename column
+# Greenhouse Gas (GHG) emission by country
+## Rename a column
 
-```{r, out.width="30%", fig.align="center",out.height="30%", fig.cap="Photo by Hermes Rivera on Unsplash"}
 
-masthead <- "assets/hermes-rivera-unsplash.jpg"
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Marcin Jozwiak on Unsplash"}
+
+masthead <- "assets/marcin-jozwiak-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-> Those who deny freedom to others, deserve it not for themselves.\
---- Abraham Lincoln\
+> Climate change is no longer some far-off problem; it is happening here,
+it is happening now...\
+--- Barack Obama\
 
 ***
 
-### Ingest the data
-country, gdp per capita based on PPP, and government response score
+### Ingest data 
+producing and consuming countries, GHG emissions, 
 
-```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
+#Load data
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
-url_file <- "global-slavery-index/data.csv"
+url_file <- "ghg-emissions-by-country/ghg-emissions-by-country.csv"
 url <- paste0(url_root, url_file)
 
-df_slavery <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
-df_slavery
+df <- read.csv(url, header = TRUE, stringsAsFactors = TRUE)
+df
+
 
 ```
 
-
 ### Wrangle
-Rename all columns using <kbd>gsub()</kbd> and <kbd>regex</kbd>
-
+Rename column using <kbd>Column Name</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-#Renaming column names
-df1 <- df_slavery
-colnames(df1) <- gsub("\\.|\\_", " ",colnames(df1))
+df1 <- df
+
+#remove "." from the column names
+names(df1)[names(df1) == 'Producing.countries'] <- "Producing countries"
+names(df1)[names(df1) == 'Consuming.countries'] <- "Consuming countries"
+names(df1)[names(df1) == 'GHG.emissions'] <- "GHG emissions"
 df1
 
 
 ```
 
-Another approach
-\
-Convert all columns using <kbd>rename_with()</kbd> and <kbd>gsub()</kbd>
-
+Using <kbd>Column index</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-df2 <- df_slavery
+df2 <- df
 
-#rename_with() renames columns using a function
-df2 <- df2 %>%  rename_with(~ gsub('[[:punct:]]',' ',.x))
+#rename the first column
+names(df2)[1] <- "Producing Countries"
 df2
+
 
 ```
 
 
 ### References
-#### Citations and data sources
+#### citations for narrative and data sources
 
-* Narration and data: Walk Free, [GO](https://www.globalslaveryindex.org/){target="_blank"}
+* Narrative and data sources: Engage The Chain [GO](https://engagethechain.org/investor-guide-deforestation-and-climate-change){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
@@ -119,10 +125,4 @@ $(function() {
 })
 
 ```
-
-
-
-
-
-
 

@@ -1,0 +1,141 @@
+---
+pagetitle: "Life Satisfaction vs GDP"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(data.table)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Life Satisfaction vs GDP
+## Rename multiple columns
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Peter Conlan on Unsplash"}
+
+masthead <- "assets/peter-conlan-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Happiness is a journey, not a desitnation...\
+--- Buddha\
+
+***
+
+GDP is an important indicator as higher economic output is usually associated with higher household income. Higher income mean families can spend more on the things they value. Meanwhile, it means governments have a greater capacity to provide public services. As a result, higher GDP per capita is often associated with positive outcomes in wide range of areas such as better health, more education, and even greater life satisfaction. 
+
+
+### Ingest the data
+life satisfaction, gdp, and population by country and year
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "life-satisfaction-vs-gdp/life-satisfaction-vs-gdp.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle
+Rename multiple columns using <kbd>Column index</kbd> 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df1 <- df
+
+#rename columns with "_"
+names(df1)[4:5] <- c("Life Satisfaction","GDP per Capita PPP")
+df1
+
+```
+Another approach
+\
+Rename columns using <kbd>rename()</kbd> 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df2 <- df
+
+#rename first 3 columns to uppercase
+df2 <- df2 %>% rename(ENTITY = Entity, CODE = Code, YEAR = Year)
+df2
+
+
+```
+
+Using <kbd>setnames</kbd> from <kbd>data.table</kbd> package
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df3 <- df
+
+#change all the columns to upper case and remove "_"
+setnames(df3, old = c("Entity","Code","Year","Life_Satisfaction","GDP_per_Capita_PPP","Population"), new = c("ENTITY","CODE","YEAR","LIFE SATISFACTION","GDP PER CAPITA PPP","POPULATION"))
+df3
+
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Our World in Data, Self-reported Life Satisfaction vs GDP per capita, 2020, [GO](https://ourworldindata.org/happiness-and-life-satisfaction){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
