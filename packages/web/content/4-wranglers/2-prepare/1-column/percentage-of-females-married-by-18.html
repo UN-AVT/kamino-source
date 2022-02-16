@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Percentage of Females Married by 18</title>
+
+<script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="../../../../vendor/knitr/navigation-1.1/tabsets.js"></script>
+<script src="../../../../vendor/knitr/navigation-1.1/codefolding.js"></script>
+<link href="../../../../vendor/knitr/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/highlightjs-9.12.0/highlight.js"></script>
+<link href="../../../../vendor/knitr/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/pagedtable-1.1/js/pagedtable.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHLBJTGCKN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GHLBJTGCKN');
+  </script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../../assets/logo/logo.svg" alt="" height="36">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../../assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../../assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>WRANGLERS</p>
+</div>
+<div id="percentage-of-females-married-by-18" class="section level1">
+<h1>Percentage of females married by 18</h1>
+<div id="constant-value-column" class="section level2">
+<h2>Constant value column</h2>
+<div class="figure" style="text-align: center">
+<img src="ben-waardenburg-unsplash.jpg" alt="Photo by Ben Waardenburg on Unsplash" width="60%" />
+<p class="caption">
+Photo by Ben Waardenburg on Unsplash
+</p>
+</div>
+<blockquote>
+<p>We should be respectful but we must also have the courage to stop harmful practices that impoverish girls, women and their communities…<br />
+— Graca Machel (Women and children’s right activist)<br />
+</p>
+</blockquote>
+<hr />
+<div id="ingest" class="section level3">
+<h3>Ingest</h3>
+<p>country, females married by 18, males married by 18</p>
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;child-marriage-bar-dot/Child_Marriage.csv&quot;
+url &lt;- paste0(url_root, url_file)
+
+df &lt;- read.csv(url)
+df</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Females.Married.by.15"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Females.Married.by.18"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Males.Married.by.18"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"Afghanistan","2":"0.04200000","3":"0.28300000","4":"0.0730"},{"1":"Albania","2":"0.01400000","3":"0.11800000","4":"0.0120"},{"1":"Algeria","2":"0.00400000","3":"0.02500000","4":"NA"},{"1":"Angola","2":"0.07900000","3":"0.30300000","4":"0.0600"},{"1":"Armenia","2":"0.00000000","3":"0.05300000","4":"0.0040"},{"1":"Azerbaijan","2":"0.01900000","3":"0.11000000","4":"0.0040"},{"1":"Bangladesh","2":"0.22400000","3":"0.58600000","4":"0.0440"},{"1":"Barbados","2":"0.07700000","3":"0.29200000","4":"NA"},{"1":"Belarus","2":"0.00000000","3":"0.05000000","4":"0.0090"},{"1":"Belize","2":"0.06300000","3":"0.33500000","4":"0.2220"},{"1":"Benin","2":"0.09400000","3":"0.30600000","4":"0.0480"},{"1":"Bhutan","2":"0.06200000","3":"0.25800000","4":"NA"},{"1":"Bolivia (Plurinational State of)","2":"0.03429791","3":"0.19661126","4":"0.0840"},{"1":"Bosnia and Herzegovina","2":"0.00200000","3":"0.03500000","4":"0.0010"},{"1":"Brazil","2":"0.05900000","3":"0.26200000","4":"NA"},{"1":"Burkina Faso","2":"0.10200000","3":"0.51600000","4":"0.0390"},{"1":"Burundi","2":"0.02800000","3":"0.19000000","4":"0.0140"},{"1":"Cabo Verde","2":"0.02800000","3":"0.18000000","4":"0.0300"},{"1":"Cambodia","2":"0.01900000","3":"0.18500000","4":"0.0360"},{"1":"Cameroon","2":"0.10200000","3":"0.31000000","4":"0.0380"},{"1":"Central African Republic","2":"0.29100000","3":"0.67900000","4":"0.2790"},{"1":"Chad","2":"0.29700000","3":"0.66900000","4":"0.0800"},{"1":"Colombia","2":"0.04900000","3":"0.23400000","4":"0.0670"},{"1":"Comoros","2":"0.10000000","3":"0.31600000","4":"0.1190"},{"1":"Congo","2":"0.06900000","3":"0.27300000","4":"0.0590"},{"1":"Costa Rica","2":"0.06800000","3":"0.21200000","4":"NA"},{"1":"Cote d'Ivoire","2":"0.07000000","3":"0.27000000","4":"0.0350"},{"1":"Cuba","2":"0.04700000","3":"0.26000000","4":"0.1070"},{"1":"Democratic People's Republic of Korea","2":"0.00000000","3":"0.00100000","4":"0.0000"},{"1":"Democratic Republic of the Congo","2":"0.10000000","3":"0.37300000","4":"0.0570"},{"1":"Djibouti","2":"0.01273588","3":"0.05325236","4":"NA"},{"1":"Dominican Republic","2":"0.12300000","3":"0.35900000","4":"0.0800"},{"1":"Ecuador","2":"0.02500000","3":"0.20400000","4":"NA"},{"1":"Egypt","2":"0.02000000","3":"0.17400000","4":"0.0020"},{"1":"El Salvador","2":"0.05800000","3":"0.25500000","4":"NA"},{"1":"Equatorial Guinea","2":"0.08600000","3":"0.29500000","4":"0.0350"},{"1":"Eritrea","2":"0.12900000","3":"0.40700000","4":"0.0230"},{"1":"Eswatini","2":"0.00800000","3":"0.05300000","4":"0.0100"},{"1":"Ethiopia","2":"0.14100000","3":"0.40300000","4":"0.0500"},{"1":"Gabon","2":"0.05600000","3":"0.21900000","4":"0.0470"},{"1":"Gambia","2":"0.07500000","3":"0.25700000","4":"0.0020"},{"1":"Georgia","2":"0.00300000","3":"0.13900000","4":"0.0050"},{"1":"Ghana","2":"0.04900000","3":"0.20500000","4":"0.0230"},{"1":"Guatemala","2":"0.06200000","3":"0.29500000","4":"0.0960"},{"1":"Guinea","2":"0.17000000","3":"0.46500000","4":"0.0190"},{"1":"Guinea-Bissau","2":"0.06300000","3":"0.24400000","4":"0.0200"},{"1":"Guyana","2":"0.03600000","3":"0.30200000","4":"0.0850"},{"1":"Haiti","2":"0.02100000","3":"0.14900000","4":"0.0160"},{"1":"Honduras","2":"0.07600000","3":"0.33600000","4":"0.1220"},{"1":"India","2":"0.06600000","3":"0.27300000","4":"0.0424"},{"1":"Indonesia","2":"0.02000000","3":"0.16300000","4":"0.0530"},{"1":"Iran (Islamic Republic of)","2":"0.02700000","3":"0.16700000","4":"NA"},{"1":"Iraq","2":"0.07200000","3":"0.27900000","4":"NA"},{"1":"Jamaica","2":"0.01400000","3":"0.07900000","4":"NA"},{"1":"Jordan","2":"0.01500000","3":"0.09700000","4":"0.0010"},{"1":"Kazakhstan","2":"0.00200000","3":"0.07000000","4":"0.0030"},{"1":"Kenya","2":"0.04400000","3":"0.22900000","4":"0.0250"},{"1":"Kiribati","2":"0.02800000","3":"0.20300000","4":"0.0500"},{"1":"Kyrgyzstan","2":"0.00300000","3":"0.12900000","4":"0.0040"},{"1":"Lao People's Democratic Republic","2":"0.07100000","3":"0.32700000","4":"0.1080"},{"1":"Lebanon","2":"0.01200000","3":"0.06100000","4":"NA"},{"1":"Lesotho","2":"0.01000000","3":"0.16400000","4":"0.0190"},{"1":"Liberia","2":"0.08800000","3":"0.35900000","4":"0.0470"},{"1":"Madagascar","2":"0.13000000","3":"0.40000000","4":"0.1290"},{"1":"Malawi","2":"0.09000000","3":"0.42100000","4":"0.0650"},{"1":"Maldives","2":"0.00000000","3":"0.02200000","4":"0.0220"},{"1":"Mali","2":"0.15900000","3":"0.53700000","4":"0.0210"},{"1":"Marshall Islands","2":"0.05500000","3":"0.26300000","4":"0.1180"},{"1":"Mauritania","2":"0.17800000","3":"0.37000000","4":"0.0200"},{"1":"Mexico","2":"0.03800000","3":"0.26100000","4":"NA"},{"1":"Mongolia","2":"0.00900000","3":"0.12000000","4":"0.0210"},{"1":"Montenegro","2":"0.01900000","3":"0.05800000","4":"0.0010"},{"1":"Morocco","2":"0.00500000","3":"0.13700000","4":"NA"},{"1":"Mozambique","2":"0.16800000","3":"0.52900000","4":"0.0970"},{"1":"Myanmar","2":"0.01900000","3":"0.16000000","4":"0.0500"},{"1":"Namibia","2":"0.01600000","3":"0.06900000","4":"0.0140"},{"1":"Nauru","2":"0.01900000","3":"0.26800000","4":"0.1230"},{"1":"Nepal","2":"0.07000000","3":"0.39500000","4":"0.1030"},{"1":"Nicaragua","2":"0.09700000","3":"0.35200000","4":"0.1940"},{"1":"Niger","2":"0.28000000","3":"0.76300000","4":"0.0570"},{"1":"Nigeria","2":"0.15700000","3":"0.43400000","4":"0.0320"},{"1":"North Macedonia","2":"0.00900000","3":"0.06900000","4":"NA"},{"1":"Oman","2":"0.01200000","3":"0.04000000","4":"NA"},{"1":"Pakistan","2":"0.03600000","3":"0.18300000","4":"0.0470"},{"1":"Panama","2":"0.06800000","3":"0.26400000","4":"NA"},{"1":"Papua New Guinea","2":"0.08000000","3":"0.27300000","4":"0.0370"},{"1":"Paraguay","2":"0.03600000","3":"0.21600000","4":"NA"},{"1":"Peru","2":"0.02500000","3":"0.17400000","4":"NA"},{"1":"Philippines","2":"0.02200000","3":"0.16500000","4":"0.0290"},{"1":"Qatar","2":"0.00000000","3":"0.04200000","4":"0.0060"},{"1":"Republic of Moldova","2":"0.00400000","3":"0.12200000","4":"0.0070"},{"1":"Rwanda","2":"0.00400000","3":"0.06800000","4":"0.0060"},{"1":"Saint Lucia","2":"0.03700000","3":"0.24000000","4":"NA"},{"1":"Samoa","2":"0.00700000","3":"0.10800000","4":"0.0170"},{"1":"Sao Tome and Principe","2":"0.07900000","3":"0.35400000","4":"0.0320"},{"1":"Senegal","2":"0.08400000","3":"0.28800000","4":"0.0060"},{"1":"Serbia","2":"0.00300000","3":"0.03200000","4":"0.0090"},{"1":"Sierra Leone","2":"0.12900000","3":"0.29900000","4":"0.0650"},{"1":"Singapore","2":"0.00000000","3":"0.00200000","4":"NA"},{"1":"Solomon Islands","2":"0.05600000","3":"0.21300000","4":"0.0440"},{"1":"Somalia","2":"0.08400000","3":"0.45300000","4":"NA"},{"1":"South Africa","2":"0.00900000","3":"0.03600000","4":"0.0060"},{"1":"South Sudan","2":"0.08900000","3":"0.51500000","4":"NA"},{"1":"Sri Lanka","2":"0.00900000","3":"0.09800000","4":"NA"},{"1":"Palestinian Territories","2":"0.01000000","3":"0.15300000","4":"NA"},{"1":"Sudan","2":"0.11900000","3":"0.34200000","4":"NA"},{"1":"Suriname","2":"0.08800000","3":"0.36000000","4":"0.1960"},{"1":"Syrian Arab Republic","2":"0.02500000","3":"0.13300000","4":"NA"},{"1":"Tajikistan","2":"0.00100000","3":"0.08700000","4":"NA"},{"1":"Thailand","2":"0.04400000","3":"0.22500000","4":"0.1010"},{"1":"Timor-Leste","2":"0.02600000","3":"0.14900000","4":"0.0120"},{"1":"Togo","2":"0.06400000","3":"0.24800000","4":"0.0260"},{"1":"Tonga","2":"0.00300000","3":"0.05600000","4":"0.0600"},{"1":"Trinidad and Tobago","2":"0.02700000","3":"0.11200000","4":"NA"},{"1":"Tunisia","2":"0.00000000","3":"0.01500000","4":"0.0000"},{"1":"Turkey","2":"0.02000000","3":"0.14700000","4":"NA"},{"1":"Turkmenistan","2":"0.00000000","3":"0.05700000","4":"NA"},{"1":"Tuvalu","2":"0.00000000","3":"0.09900000","4":"0.0000"},{"1":"Uganda","2":"0.07300000","3":"0.34000000","4":"0.0550"},{"1":"Ukraine","2":"0.00100000","3":"0.09100000","4":"0.0380"},{"1":"United Republic of Tanzania","2":"0.05200000","3":"0.30500000","4":"0.0390"},{"1":"Uruguay","2":"0.00700000","3":"0.24600000","4":"NA"},{"1":"Uzbekistan","2":"0.00300000","3":"0.07200000","4":"0.0050"},{"1":"Vanuatu","2":"0.02500000","3":"0.21400000","4":"0.0460"},{"1":"Viet Nam","2":"0.00900000","3":"0.10600000","4":"0.0270"},{"1":"Yemen","2":"0.09400000","3":"0.31900000","4":"NA"},{"1":"Zambia","2":"0.05200000","3":"0.29000000","4":"0.0280"},{"1":"Zimbabwe","2":"0.05400000","3":"0.33700000","4":"0.0190"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="wrangle" class="section level3">
+<h3>Wrangle</h3>
+<p>Add a constant value column using <kbd>add_column</kbd></p>
+<pre class="r fold-hide"><code>df1 &lt;- add_column(df,new_col=(&quot;Let kids be kids&quot;))
+df1</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Females.Married.by.15"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Females.Married.by.18"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Males.Married.by.18"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["new_col"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Afghanistan","2":"0.04200000","3":"0.28300000","4":"0.0730","5":"Let kids be kids"},{"1":"Albania","2":"0.01400000","3":"0.11800000","4":"0.0120","5":"Let kids be kids"},{"1":"Algeria","2":"0.00400000","3":"0.02500000","4":"NA","5":"Let kids be kids"},{"1":"Angola","2":"0.07900000","3":"0.30300000","4":"0.0600","5":"Let kids be kids"},{"1":"Armenia","2":"0.00000000","3":"0.05300000","4":"0.0040","5":"Let kids be kids"},{"1":"Azerbaijan","2":"0.01900000","3":"0.11000000","4":"0.0040","5":"Let kids be kids"},{"1":"Bangladesh","2":"0.22400000","3":"0.58600000","4":"0.0440","5":"Let kids be kids"},{"1":"Barbados","2":"0.07700000","3":"0.29200000","4":"NA","5":"Let kids be kids"},{"1":"Belarus","2":"0.00000000","3":"0.05000000","4":"0.0090","5":"Let kids be kids"},{"1":"Belize","2":"0.06300000","3":"0.33500000","4":"0.2220","5":"Let kids be kids"},{"1":"Benin","2":"0.09400000","3":"0.30600000","4":"0.0480","5":"Let kids be kids"},{"1":"Bhutan","2":"0.06200000","3":"0.25800000","4":"NA","5":"Let kids be kids"},{"1":"Bolivia (Plurinational State of)","2":"0.03429791","3":"0.19661126","4":"0.0840","5":"Let kids be kids"},{"1":"Bosnia and Herzegovina","2":"0.00200000","3":"0.03500000","4":"0.0010","5":"Let kids be kids"},{"1":"Brazil","2":"0.05900000","3":"0.26200000","4":"NA","5":"Let kids be kids"},{"1":"Burkina Faso","2":"0.10200000","3":"0.51600000","4":"0.0390","5":"Let kids be kids"},{"1":"Burundi","2":"0.02800000","3":"0.19000000","4":"0.0140","5":"Let kids be kids"},{"1":"Cabo Verde","2":"0.02800000","3":"0.18000000","4":"0.0300","5":"Let kids be kids"},{"1":"Cambodia","2":"0.01900000","3":"0.18500000","4":"0.0360","5":"Let kids be kids"},{"1":"Cameroon","2":"0.10200000","3":"0.31000000","4":"0.0380","5":"Let kids be kids"},{"1":"Central African Republic","2":"0.29100000","3":"0.67900000","4":"0.2790","5":"Let kids be kids"},{"1":"Chad","2":"0.29700000","3":"0.66900000","4":"0.0800","5":"Let kids be kids"},{"1":"Colombia","2":"0.04900000","3":"0.23400000","4":"0.0670","5":"Let kids be kids"},{"1":"Comoros","2":"0.10000000","3":"0.31600000","4":"0.1190","5":"Let kids be kids"},{"1":"Congo","2":"0.06900000","3":"0.27300000","4":"0.0590","5":"Let kids be kids"},{"1":"Costa Rica","2":"0.06800000","3":"0.21200000","4":"NA","5":"Let kids be kids"},{"1":"Cote d'Ivoire","2":"0.07000000","3":"0.27000000","4":"0.0350","5":"Let kids be kids"},{"1":"Cuba","2":"0.04700000","3":"0.26000000","4":"0.1070","5":"Let kids be kids"},{"1":"Democratic People's Republic of Korea","2":"0.00000000","3":"0.00100000","4":"0.0000","5":"Let kids be kids"},{"1":"Democratic Republic of the Congo","2":"0.10000000","3":"0.37300000","4":"0.0570","5":"Let kids be kids"},{"1":"Djibouti","2":"0.01273588","3":"0.05325236","4":"NA","5":"Let kids be kids"},{"1":"Dominican Republic","2":"0.12300000","3":"0.35900000","4":"0.0800","5":"Let kids be kids"},{"1":"Ecuador","2":"0.02500000","3":"0.20400000","4":"NA","5":"Let kids be kids"},{"1":"Egypt","2":"0.02000000","3":"0.17400000","4":"0.0020","5":"Let kids be kids"},{"1":"El Salvador","2":"0.05800000","3":"0.25500000","4":"NA","5":"Let kids be kids"},{"1":"Equatorial Guinea","2":"0.08600000","3":"0.29500000","4":"0.0350","5":"Let kids be kids"},{"1":"Eritrea","2":"0.12900000","3":"0.40700000","4":"0.0230","5":"Let kids be kids"},{"1":"Eswatini","2":"0.00800000","3":"0.05300000","4":"0.0100","5":"Let kids be kids"},{"1":"Ethiopia","2":"0.14100000","3":"0.40300000","4":"0.0500","5":"Let kids be kids"},{"1":"Gabon","2":"0.05600000","3":"0.21900000","4":"0.0470","5":"Let kids be kids"},{"1":"Gambia","2":"0.07500000","3":"0.25700000","4":"0.0020","5":"Let kids be kids"},{"1":"Georgia","2":"0.00300000","3":"0.13900000","4":"0.0050","5":"Let kids be kids"},{"1":"Ghana","2":"0.04900000","3":"0.20500000","4":"0.0230","5":"Let kids be kids"},{"1":"Guatemala","2":"0.06200000","3":"0.29500000","4":"0.0960","5":"Let kids be kids"},{"1":"Guinea","2":"0.17000000","3":"0.46500000","4":"0.0190","5":"Let kids be kids"},{"1":"Guinea-Bissau","2":"0.06300000","3":"0.24400000","4":"0.0200","5":"Let kids be kids"},{"1":"Guyana","2":"0.03600000","3":"0.30200000","4":"0.0850","5":"Let kids be kids"},{"1":"Haiti","2":"0.02100000","3":"0.14900000","4":"0.0160","5":"Let kids be kids"},{"1":"Honduras","2":"0.07600000","3":"0.33600000","4":"0.1220","5":"Let kids be kids"},{"1":"India","2":"0.06600000","3":"0.27300000","4":"0.0424","5":"Let kids be kids"},{"1":"Indonesia","2":"0.02000000","3":"0.16300000","4":"0.0530","5":"Let kids be kids"},{"1":"Iran (Islamic Republic of)","2":"0.02700000","3":"0.16700000","4":"NA","5":"Let kids be kids"},{"1":"Iraq","2":"0.07200000","3":"0.27900000","4":"NA","5":"Let kids be kids"},{"1":"Jamaica","2":"0.01400000","3":"0.07900000","4":"NA","5":"Let kids be kids"},{"1":"Jordan","2":"0.01500000","3":"0.09700000","4":"0.0010","5":"Let kids be kids"},{"1":"Kazakhstan","2":"0.00200000","3":"0.07000000","4":"0.0030","5":"Let kids be kids"},{"1":"Kenya","2":"0.04400000","3":"0.22900000","4":"0.0250","5":"Let kids be kids"},{"1":"Kiribati","2":"0.02800000","3":"0.20300000","4":"0.0500","5":"Let kids be kids"},{"1":"Kyrgyzstan","2":"0.00300000","3":"0.12900000","4":"0.0040","5":"Let kids be kids"},{"1":"Lao People's Democratic Republic","2":"0.07100000","3":"0.32700000","4":"0.1080","5":"Let kids be kids"},{"1":"Lebanon","2":"0.01200000","3":"0.06100000","4":"NA","5":"Let kids be kids"},{"1":"Lesotho","2":"0.01000000","3":"0.16400000","4":"0.0190","5":"Let kids be kids"},{"1":"Liberia","2":"0.08800000","3":"0.35900000","4":"0.0470","5":"Let kids be kids"},{"1":"Madagascar","2":"0.13000000","3":"0.40000000","4":"0.1290","5":"Let kids be kids"},{"1":"Malawi","2":"0.09000000","3":"0.42100000","4":"0.0650","5":"Let kids be kids"},{"1":"Maldives","2":"0.00000000","3":"0.02200000","4":"0.0220","5":"Let kids be kids"},{"1":"Mali","2":"0.15900000","3":"0.53700000","4":"0.0210","5":"Let kids be kids"},{"1":"Marshall Islands","2":"0.05500000","3":"0.26300000","4":"0.1180","5":"Let kids be kids"},{"1":"Mauritania","2":"0.17800000","3":"0.37000000","4":"0.0200","5":"Let kids be kids"},{"1":"Mexico","2":"0.03800000","3":"0.26100000","4":"NA","5":"Let kids be kids"},{"1":"Mongolia","2":"0.00900000","3":"0.12000000","4":"0.0210","5":"Let kids be kids"},{"1":"Montenegro","2":"0.01900000","3":"0.05800000","4":"0.0010","5":"Let kids be kids"},{"1":"Morocco","2":"0.00500000","3":"0.13700000","4":"NA","5":"Let kids be kids"},{"1":"Mozambique","2":"0.16800000","3":"0.52900000","4":"0.0970","5":"Let kids be kids"},{"1":"Myanmar","2":"0.01900000","3":"0.16000000","4":"0.0500","5":"Let kids be kids"},{"1":"Namibia","2":"0.01600000","3":"0.06900000","4":"0.0140","5":"Let kids be kids"},{"1":"Nauru","2":"0.01900000","3":"0.26800000","4":"0.1230","5":"Let kids be kids"},{"1":"Nepal","2":"0.07000000","3":"0.39500000","4":"0.1030","5":"Let kids be kids"},{"1":"Nicaragua","2":"0.09700000","3":"0.35200000","4":"0.1940","5":"Let kids be kids"},{"1":"Niger","2":"0.28000000","3":"0.76300000","4":"0.0570","5":"Let kids be kids"},{"1":"Nigeria","2":"0.15700000","3":"0.43400000","4":"0.0320","5":"Let kids be kids"},{"1":"North Macedonia","2":"0.00900000","3":"0.06900000","4":"NA","5":"Let kids be kids"},{"1":"Oman","2":"0.01200000","3":"0.04000000","4":"NA","5":"Let kids be kids"},{"1":"Pakistan","2":"0.03600000","3":"0.18300000","4":"0.0470","5":"Let kids be kids"},{"1":"Panama","2":"0.06800000","3":"0.26400000","4":"NA","5":"Let kids be kids"},{"1":"Papua New Guinea","2":"0.08000000","3":"0.27300000","4":"0.0370","5":"Let kids be kids"},{"1":"Paraguay","2":"0.03600000","3":"0.21600000","4":"NA","5":"Let kids be kids"},{"1":"Peru","2":"0.02500000","3":"0.17400000","4":"NA","5":"Let kids be kids"},{"1":"Philippines","2":"0.02200000","3":"0.16500000","4":"0.0290","5":"Let kids be kids"},{"1":"Qatar","2":"0.00000000","3":"0.04200000","4":"0.0060","5":"Let kids be kids"},{"1":"Republic of Moldova","2":"0.00400000","3":"0.12200000","4":"0.0070","5":"Let kids be kids"},{"1":"Rwanda","2":"0.00400000","3":"0.06800000","4":"0.0060","5":"Let kids be kids"},{"1":"Saint Lucia","2":"0.03700000","3":"0.24000000","4":"NA","5":"Let kids be kids"},{"1":"Samoa","2":"0.00700000","3":"0.10800000","4":"0.0170","5":"Let kids be kids"},{"1":"Sao Tome and Principe","2":"0.07900000","3":"0.35400000","4":"0.0320","5":"Let kids be kids"},{"1":"Senegal","2":"0.08400000","3":"0.28800000","4":"0.0060","5":"Let kids be kids"},{"1":"Serbia","2":"0.00300000","3":"0.03200000","4":"0.0090","5":"Let kids be kids"},{"1":"Sierra Leone","2":"0.12900000","3":"0.29900000","4":"0.0650","5":"Let kids be kids"},{"1":"Singapore","2":"0.00000000","3":"0.00200000","4":"NA","5":"Let kids be kids"},{"1":"Solomon Islands","2":"0.05600000","3":"0.21300000","4":"0.0440","5":"Let kids be kids"},{"1":"Somalia","2":"0.08400000","3":"0.45300000","4":"NA","5":"Let kids be kids"},{"1":"South Africa","2":"0.00900000","3":"0.03600000","4":"0.0060","5":"Let kids be kids"},{"1":"South Sudan","2":"0.08900000","3":"0.51500000","4":"NA","5":"Let kids be kids"},{"1":"Sri Lanka","2":"0.00900000","3":"0.09800000","4":"NA","5":"Let kids be kids"},{"1":"Palestinian Territories","2":"0.01000000","3":"0.15300000","4":"NA","5":"Let kids be kids"},{"1":"Sudan","2":"0.11900000","3":"0.34200000","4":"NA","5":"Let kids be kids"},{"1":"Suriname","2":"0.08800000","3":"0.36000000","4":"0.1960","5":"Let kids be kids"},{"1":"Syrian Arab Republic","2":"0.02500000","3":"0.13300000","4":"NA","5":"Let kids be kids"},{"1":"Tajikistan","2":"0.00100000","3":"0.08700000","4":"NA","5":"Let kids be kids"},{"1":"Thailand","2":"0.04400000","3":"0.22500000","4":"0.1010","5":"Let kids be kids"},{"1":"Timor-Leste","2":"0.02600000","3":"0.14900000","4":"0.0120","5":"Let kids be kids"},{"1":"Togo","2":"0.06400000","3":"0.24800000","4":"0.0260","5":"Let kids be kids"},{"1":"Tonga","2":"0.00300000","3":"0.05600000","4":"0.0600","5":"Let kids be kids"},{"1":"Trinidad and Tobago","2":"0.02700000","3":"0.11200000","4":"NA","5":"Let kids be kids"},{"1":"Tunisia","2":"0.00000000","3":"0.01500000","4":"0.0000","5":"Let kids be kids"},{"1":"Turkey","2":"0.02000000","3":"0.14700000","4":"NA","5":"Let kids be kids"},{"1":"Turkmenistan","2":"0.00000000","3":"0.05700000","4":"NA","5":"Let kids be kids"},{"1":"Tuvalu","2":"0.00000000","3":"0.09900000","4":"0.0000","5":"Let kids be kids"},{"1":"Uganda","2":"0.07300000","3":"0.34000000","4":"0.0550","5":"Let kids be kids"},{"1":"Ukraine","2":"0.00100000","3":"0.09100000","4":"0.0380","5":"Let kids be kids"},{"1":"United Republic of Tanzania","2":"0.05200000","3":"0.30500000","4":"0.0390","5":"Let kids be kids"},{"1":"Uruguay","2":"0.00700000","3":"0.24600000","4":"NA","5":"Let kids be kids"},{"1":"Uzbekistan","2":"0.00300000","3":"0.07200000","4":"0.0050","5":"Let kids be kids"},{"1":"Vanuatu","2":"0.02500000","3":"0.21400000","4":"0.0460","5":"Let kids be kids"},{"1":"Viet Nam","2":"0.00900000","3":"0.10600000","4":"0.0270","5":"Let kids be kids"},{"1":"Yemen","2":"0.09400000","3":"0.31900000","4":"NA","5":"Let kids be kids"},{"1":"Zambia","2":"0.05200000","3":"0.29000000","4":"0.0280","5":"Let kids be kids"},{"1":"Zimbabwe","2":"0.05400000","3":"0.33700000","4":"0.0190","5":"Let kids be kids"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Using <kbd>mutate()</kbd> from <kbd>dplyr</kbd></p>
+<pre class="r fold-hide"><code>df2 &lt;- df %&gt;%  mutate(new_col = &quot;Let kids be kids&quot;)
+df2</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Females.Married.by.15"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Females.Married.by.18"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Males.Married.by.18"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["new_col"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"Afghanistan","2":"0.04200000","3":"0.28300000","4":"0.0730","5":"Let kids be kids"},{"1":"Albania","2":"0.01400000","3":"0.11800000","4":"0.0120","5":"Let kids be kids"},{"1":"Algeria","2":"0.00400000","3":"0.02500000","4":"NA","5":"Let kids be kids"},{"1":"Angola","2":"0.07900000","3":"0.30300000","4":"0.0600","5":"Let kids be kids"},{"1":"Armenia","2":"0.00000000","3":"0.05300000","4":"0.0040","5":"Let kids be kids"},{"1":"Azerbaijan","2":"0.01900000","3":"0.11000000","4":"0.0040","5":"Let kids be kids"},{"1":"Bangladesh","2":"0.22400000","3":"0.58600000","4":"0.0440","5":"Let kids be kids"},{"1":"Barbados","2":"0.07700000","3":"0.29200000","4":"NA","5":"Let kids be kids"},{"1":"Belarus","2":"0.00000000","3":"0.05000000","4":"0.0090","5":"Let kids be kids"},{"1":"Belize","2":"0.06300000","3":"0.33500000","4":"0.2220","5":"Let kids be kids"},{"1":"Benin","2":"0.09400000","3":"0.30600000","4":"0.0480","5":"Let kids be kids"},{"1":"Bhutan","2":"0.06200000","3":"0.25800000","4":"NA","5":"Let kids be kids"},{"1":"Bolivia (Plurinational State of)","2":"0.03429791","3":"0.19661126","4":"0.0840","5":"Let kids be kids"},{"1":"Bosnia and Herzegovina","2":"0.00200000","3":"0.03500000","4":"0.0010","5":"Let kids be kids"},{"1":"Brazil","2":"0.05900000","3":"0.26200000","4":"NA","5":"Let kids be kids"},{"1":"Burkina Faso","2":"0.10200000","3":"0.51600000","4":"0.0390","5":"Let kids be kids"},{"1":"Burundi","2":"0.02800000","3":"0.19000000","4":"0.0140","5":"Let kids be kids"},{"1":"Cabo Verde","2":"0.02800000","3":"0.18000000","4":"0.0300","5":"Let kids be kids"},{"1":"Cambodia","2":"0.01900000","3":"0.18500000","4":"0.0360","5":"Let kids be kids"},{"1":"Cameroon","2":"0.10200000","3":"0.31000000","4":"0.0380","5":"Let kids be kids"},{"1":"Central African Republic","2":"0.29100000","3":"0.67900000","4":"0.2790","5":"Let kids be kids"},{"1":"Chad","2":"0.29700000","3":"0.66900000","4":"0.0800","5":"Let kids be kids"},{"1":"Colombia","2":"0.04900000","3":"0.23400000","4":"0.0670","5":"Let kids be kids"},{"1":"Comoros","2":"0.10000000","3":"0.31600000","4":"0.1190","5":"Let kids be kids"},{"1":"Congo","2":"0.06900000","3":"0.27300000","4":"0.0590","5":"Let kids be kids"},{"1":"Costa Rica","2":"0.06800000","3":"0.21200000","4":"NA","5":"Let kids be kids"},{"1":"Cote d'Ivoire","2":"0.07000000","3":"0.27000000","4":"0.0350","5":"Let kids be kids"},{"1":"Cuba","2":"0.04700000","3":"0.26000000","4":"0.1070","5":"Let kids be kids"},{"1":"Democratic People's Republic of Korea","2":"0.00000000","3":"0.00100000","4":"0.0000","5":"Let kids be kids"},{"1":"Democratic Republic of the Congo","2":"0.10000000","3":"0.37300000","4":"0.0570","5":"Let kids be kids"},{"1":"Djibouti","2":"0.01273588","3":"0.05325236","4":"NA","5":"Let kids be kids"},{"1":"Dominican Republic","2":"0.12300000","3":"0.35900000","4":"0.0800","5":"Let kids be kids"},{"1":"Ecuador","2":"0.02500000","3":"0.20400000","4":"NA","5":"Let kids be kids"},{"1":"Egypt","2":"0.02000000","3":"0.17400000","4":"0.0020","5":"Let kids be kids"},{"1":"El Salvador","2":"0.05800000","3":"0.25500000","4":"NA","5":"Let kids be kids"},{"1":"Equatorial Guinea","2":"0.08600000","3":"0.29500000","4":"0.0350","5":"Let kids be kids"},{"1":"Eritrea","2":"0.12900000","3":"0.40700000","4":"0.0230","5":"Let kids be kids"},{"1":"Eswatini","2":"0.00800000","3":"0.05300000","4":"0.0100","5":"Let kids be kids"},{"1":"Ethiopia","2":"0.14100000","3":"0.40300000","4":"0.0500","5":"Let kids be kids"},{"1":"Gabon","2":"0.05600000","3":"0.21900000","4":"0.0470","5":"Let kids be kids"},{"1":"Gambia","2":"0.07500000","3":"0.25700000","4":"0.0020","5":"Let kids be kids"},{"1":"Georgia","2":"0.00300000","3":"0.13900000","4":"0.0050","5":"Let kids be kids"},{"1":"Ghana","2":"0.04900000","3":"0.20500000","4":"0.0230","5":"Let kids be kids"},{"1":"Guatemala","2":"0.06200000","3":"0.29500000","4":"0.0960","5":"Let kids be kids"},{"1":"Guinea","2":"0.17000000","3":"0.46500000","4":"0.0190","5":"Let kids be kids"},{"1":"Guinea-Bissau","2":"0.06300000","3":"0.24400000","4":"0.0200","5":"Let kids be kids"},{"1":"Guyana","2":"0.03600000","3":"0.30200000","4":"0.0850","5":"Let kids be kids"},{"1":"Haiti","2":"0.02100000","3":"0.14900000","4":"0.0160","5":"Let kids be kids"},{"1":"Honduras","2":"0.07600000","3":"0.33600000","4":"0.1220","5":"Let kids be kids"},{"1":"India","2":"0.06600000","3":"0.27300000","4":"0.0424","5":"Let kids be kids"},{"1":"Indonesia","2":"0.02000000","3":"0.16300000","4":"0.0530","5":"Let kids be kids"},{"1":"Iran (Islamic Republic of)","2":"0.02700000","3":"0.16700000","4":"NA","5":"Let kids be kids"},{"1":"Iraq","2":"0.07200000","3":"0.27900000","4":"NA","5":"Let kids be kids"},{"1":"Jamaica","2":"0.01400000","3":"0.07900000","4":"NA","5":"Let kids be kids"},{"1":"Jordan","2":"0.01500000","3":"0.09700000","4":"0.0010","5":"Let kids be kids"},{"1":"Kazakhstan","2":"0.00200000","3":"0.07000000","4":"0.0030","5":"Let kids be kids"},{"1":"Kenya","2":"0.04400000","3":"0.22900000","4":"0.0250","5":"Let kids be kids"},{"1":"Kiribati","2":"0.02800000","3":"0.20300000","4":"0.0500","5":"Let kids be kids"},{"1":"Kyrgyzstan","2":"0.00300000","3":"0.12900000","4":"0.0040","5":"Let kids be kids"},{"1":"Lao People's Democratic Republic","2":"0.07100000","3":"0.32700000","4":"0.1080","5":"Let kids be kids"},{"1":"Lebanon","2":"0.01200000","3":"0.06100000","4":"NA","5":"Let kids be kids"},{"1":"Lesotho","2":"0.01000000","3":"0.16400000","4":"0.0190","5":"Let kids be kids"},{"1":"Liberia","2":"0.08800000","3":"0.35900000","4":"0.0470","5":"Let kids be kids"},{"1":"Madagascar","2":"0.13000000","3":"0.40000000","4":"0.1290","5":"Let kids be kids"},{"1":"Malawi","2":"0.09000000","3":"0.42100000","4":"0.0650","5":"Let kids be kids"},{"1":"Maldives","2":"0.00000000","3":"0.02200000","4":"0.0220","5":"Let kids be kids"},{"1":"Mali","2":"0.15900000","3":"0.53700000","4":"0.0210","5":"Let kids be kids"},{"1":"Marshall Islands","2":"0.05500000","3":"0.26300000","4":"0.1180","5":"Let kids be kids"},{"1":"Mauritania","2":"0.17800000","3":"0.37000000","4":"0.0200","5":"Let kids be kids"},{"1":"Mexico","2":"0.03800000","3":"0.26100000","4":"NA","5":"Let kids be kids"},{"1":"Mongolia","2":"0.00900000","3":"0.12000000","4":"0.0210","5":"Let kids be kids"},{"1":"Montenegro","2":"0.01900000","3":"0.05800000","4":"0.0010","5":"Let kids be kids"},{"1":"Morocco","2":"0.00500000","3":"0.13700000","4":"NA","5":"Let kids be kids"},{"1":"Mozambique","2":"0.16800000","3":"0.52900000","4":"0.0970","5":"Let kids be kids"},{"1":"Myanmar","2":"0.01900000","3":"0.16000000","4":"0.0500","5":"Let kids be kids"},{"1":"Namibia","2":"0.01600000","3":"0.06900000","4":"0.0140","5":"Let kids be kids"},{"1":"Nauru","2":"0.01900000","3":"0.26800000","4":"0.1230","5":"Let kids be kids"},{"1":"Nepal","2":"0.07000000","3":"0.39500000","4":"0.1030","5":"Let kids be kids"},{"1":"Nicaragua","2":"0.09700000","3":"0.35200000","4":"0.1940","5":"Let kids be kids"},{"1":"Niger","2":"0.28000000","3":"0.76300000","4":"0.0570","5":"Let kids be kids"},{"1":"Nigeria","2":"0.15700000","3":"0.43400000","4":"0.0320","5":"Let kids be kids"},{"1":"North Macedonia","2":"0.00900000","3":"0.06900000","4":"NA","5":"Let kids be kids"},{"1":"Oman","2":"0.01200000","3":"0.04000000","4":"NA","5":"Let kids be kids"},{"1":"Pakistan","2":"0.03600000","3":"0.18300000","4":"0.0470","5":"Let kids be kids"},{"1":"Panama","2":"0.06800000","3":"0.26400000","4":"NA","5":"Let kids be kids"},{"1":"Papua New Guinea","2":"0.08000000","3":"0.27300000","4":"0.0370","5":"Let kids be kids"},{"1":"Paraguay","2":"0.03600000","3":"0.21600000","4":"NA","5":"Let kids be kids"},{"1":"Peru","2":"0.02500000","3":"0.17400000","4":"NA","5":"Let kids be kids"},{"1":"Philippines","2":"0.02200000","3":"0.16500000","4":"0.0290","5":"Let kids be kids"},{"1":"Qatar","2":"0.00000000","3":"0.04200000","4":"0.0060","5":"Let kids be kids"},{"1":"Republic of Moldova","2":"0.00400000","3":"0.12200000","4":"0.0070","5":"Let kids be kids"},{"1":"Rwanda","2":"0.00400000","3":"0.06800000","4":"0.0060","5":"Let kids be kids"},{"1":"Saint Lucia","2":"0.03700000","3":"0.24000000","4":"NA","5":"Let kids be kids"},{"1":"Samoa","2":"0.00700000","3":"0.10800000","4":"0.0170","5":"Let kids be kids"},{"1":"Sao Tome and Principe","2":"0.07900000","3":"0.35400000","4":"0.0320","5":"Let kids be kids"},{"1":"Senegal","2":"0.08400000","3":"0.28800000","4":"0.0060","5":"Let kids be kids"},{"1":"Serbia","2":"0.00300000","3":"0.03200000","4":"0.0090","5":"Let kids be kids"},{"1":"Sierra Leone","2":"0.12900000","3":"0.29900000","4":"0.0650","5":"Let kids be kids"},{"1":"Singapore","2":"0.00000000","3":"0.00200000","4":"NA","5":"Let kids be kids"},{"1":"Solomon Islands","2":"0.05600000","3":"0.21300000","4":"0.0440","5":"Let kids be kids"},{"1":"Somalia","2":"0.08400000","3":"0.45300000","4":"NA","5":"Let kids be kids"},{"1":"South Africa","2":"0.00900000","3":"0.03600000","4":"0.0060","5":"Let kids be kids"},{"1":"South Sudan","2":"0.08900000","3":"0.51500000","4":"NA","5":"Let kids be kids"},{"1":"Sri Lanka","2":"0.00900000","3":"0.09800000","4":"NA","5":"Let kids be kids"},{"1":"Palestinian Territories","2":"0.01000000","3":"0.15300000","4":"NA","5":"Let kids be kids"},{"1":"Sudan","2":"0.11900000","3":"0.34200000","4":"NA","5":"Let kids be kids"},{"1":"Suriname","2":"0.08800000","3":"0.36000000","4":"0.1960","5":"Let kids be kids"},{"1":"Syrian Arab Republic","2":"0.02500000","3":"0.13300000","4":"NA","5":"Let kids be kids"},{"1":"Tajikistan","2":"0.00100000","3":"0.08700000","4":"NA","5":"Let kids be kids"},{"1":"Thailand","2":"0.04400000","3":"0.22500000","4":"0.1010","5":"Let kids be kids"},{"1":"Timor-Leste","2":"0.02600000","3":"0.14900000","4":"0.0120","5":"Let kids be kids"},{"1":"Togo","2":"0.06400000","3":"0.24800000","4":"0.0260","5":"Let kids be kids"},{"1":"Tonga","2":"0.00300000","3":"0.05600000","4":"0.0600","5":"Let kids be kids"},{"1":"Trinidad and Tobago","2":"0.02700000","3":"0.11200000","4":"NA","5":"Let kids be kids"},{"1":"Tunisia","2":"0.00000000","3":"0.01500000","4":"0.0000","5":"Let kids be kids"},{"1":"Turkey","2":"0.02000000","3":"0.14700000","4":"NA","5":"Let kids be kids"},{"1":"Turkmenistan","2":"0.00000000","3":"0.05700000","4":"NA","5":"Let kids be kids"},{"1":"Tuvalu","2":"0.00000000","3":"0.09900000","4":"0.0000","5":"Let kids be kids"},{"1":"Uganda","2":"0.07300000","3":"0.34000000","4":"0.0550","5":"Let kids be kids"},{"1":"Ukraine","2":"0.00100000","3":"0.09100000","4":"0.0380","5":"Let kids be kids"},{"1":"United Republic of Tanzania","2":"0.05200000","3":"0.30500000","4":"0.0390","5":"Let kids be kids"},{"1":"Uruguay","2":"0.00700000","3":"0.24600000","4":"NA","5":"Let kids be kids"},{"1":"Uzbekistan","2":"0.00300000","3":"0.07200000","4":"0.0050","5":"Let kids be kids"},{"1":"Vanuatu","2":"0.02500000","3":"0.21400000","4":"0.0460","5":"Let kids be kids"},{"1":"Viet Nam","2":"0.00900000","3":"0.10600000","4":"0.0270","5":"Let kids be kids"},{"1":"Yemen","2":"0.09400000","3":"0.31900000","4":"NA","5":"Let kids be kids"},{"1":"Zambia","2":"0.05200000","3":"0.29000000","4":"0.0280","5":"Let kids be kids"},{"1":"Zimbabwe","2":"0.05400000","3":"0.33700000","4":"0.0190","5":"Let kids be kids"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<div id="citations-for-narrative-and-data-sources" class="section level4">
+<h4>citations for narrative and data sources</h4>
+<ul>
+<li>Narrative sources: Visualize Gender Equality - Help us end child marriage, <a href="https://media.data.world/1o2xvmj7TLCDfJPErISo_Child%20Marriage%20Dasbboard.png" target="_blank">GO</a></li>
+</ul>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+---
+pagetitle: "Percentage of Females Married by 18"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(data.table)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+
+# Percentage of females married by 18
+## Constant value column
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Ben Waardenburg on Unsplash"}
+
+masthead <- "assets/ben-waardenburg-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> We should be respectful but we must also have the courage to stop harmful practices that impoverish girls, women and their communities...\
+--- Graca Machel (Women and children's right activist)\
+
+***
+
+### Ingest
+country, females married by 18, males married by 18
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "child-marriage-bar-dot/Child_Marriage.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url)
+df
+
+```
+
+### Wrangle
+Add a constant value column using <kbd>add_column</kbd> 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df1 <- add_column(df,new_col=("Let kids be kids"))
+df1
+
+```
+
+Using <kbd>mutate()</kbd> from <kbd>dplyr</kbd>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df2 <- df %>%  mutate(new_col = "Let kids be kids")
+df2
+
+```
+  
+  
+### References
+#### citations for narrative and data sources
+
+* Narrative sources: Visualize Gender Equality - Help us end child marriage, [GO](https://media.data.world/1o2xvmj7TLCDfJPErISo_Child%20Marriage%20Dasbboard.png){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
