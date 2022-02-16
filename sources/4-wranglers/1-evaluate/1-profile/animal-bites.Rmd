@@ -38,7 +38,7 @@ WRANGLERS
 
 
 # Animal Bites
-## Profiling
+## Value frequency (absolute and relative)
 
 ```{r, out.width="60%", fig.align="center", fig.cap= "Photo by Janko Ferlič on Unsplash"}
 
@@ -60,7 +60,7 @@ This is the principal difference between a dog and man...\
 
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Load
+# Load data
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
 url_file <- "animal-bites/animal-bites.csv"
 url <- paste0(url_root, url_file)
@@ -92,11 +92,9 @@ Based on an initial view of the data, we can see basic table structure and the c
 The column definitions give a hint for the data we can expect, but let's use profiling method to explore the features and characteristics.
 
 
-### Value Frequency
-#### absolute and relative frequency
+### Wrangle
 
-<kbd>mutate</kbd>
-<kbd>rename</kbd>
+Retrieving absolute and relative frequency using <kbd>mutate()</kbd> and <kbd>rename()</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 

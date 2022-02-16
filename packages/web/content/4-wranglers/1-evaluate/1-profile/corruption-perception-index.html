@@ -232,8 +232,8 @@ pre code {
 </div>
 <div id="corruption-perception-index" class="section level1">
 <h1>Corruption Perception Index</h1>
-<div id="profiling" class="section level2">
-<h2>Profiling</h2>
+<div id="missing-values" class="section level2">
+<h2>Missing values</h2>
 <div class="figure" style="text-align: center">
 <img src="nathaniel-tetteh-unsplash.jpg" alt="Photo by Nathaniel Tetteh on Unsplash" width="60%" />
 <p class="caption">
@@ -248,9 +248,8 @@ Photo by Nathaniel Tetteh on Unsplash
 <hr />
 <div id="ingest" class="section level3">
 <h3>Ingest</h3>
-<div id="country-region-cpi-score-standard-error" class="section level4">
-<h4>country, region, CPI score, standard error</h4>
-<pre class="r fold-hide"><code># Load
+<p>country, region, CPI score, standard error</p>
+<pre class="r fold-hide"><code># Load data
 url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
 url_file &lt;- &quot;corruption-perception-index/corruption-perception-index-2020.csv&quot;
 url &lt;- paste0(url_root, url_file)
@@ -263,11 +262,9 @@ df</code></pre>
   </script>
 </div>
 </div>
-</div>
-<div id="missing-values" class="section level3">
-<h3>Missing Values</h3>
-<div id="check-the-missing-values-using-is.na-and-gather" class="section level4">
-<h4>Check the missing values using <kbd>is.na()</kbd> and <kbd>gather()</kbd></h4>
+<div id="wrangle" class="section level3">
+<h3>Wrangle</h3>
+<p>Check the missing values using <kbd>is.na()</kbd> and <kbd>gather()</kbd></p>
 <pre class="r fold-show"><code># Count missing values 
 f_missing_values &lt;- function(df_missing_values) {
   purrr::map_df(df_missing_values, ~ sum(is.na(.))) %&gt;%
@@ -280,7 +277,6 @@ f_missing_values(df)</code></pre>
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Column name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Count of missing values"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"Country","2":"0"},{"1":"ISO3","2":"0"},{"1":"Region","2":"0"},{"1":"CPI.score.2020","2":"0"},{"1":"Rank","2":"0"},{"1":"Standard.error","2":"0"},{"1":"Number.of.sources","2":"0"},{"1":"Lower.CI","2":"0"},{"1":"Upper.CI","2":"0"},{"1":"African.Development.Bank.CPIA","2":"143"},{"1":"Bertelsmann.Foundation.Sustainable.Governance.Index","2":"139"},{"1":"Bertelsmann.Foundation.Transformation.Index","2":"43"},{"1":"Economist.Intelligence.Unit.Country.Ratings","2":"49"},{"1":"Freedom.House.Nations.in.Transit","2":"151"},{"1":"Global.Insight.Country.Risk.Ratings","2":"0"},{"1":"IMD.World.Competitiveness.Yearbook","2":"117"},{"1":"PERC.Asia.Risk.Guide","2":"165"},{"1":"PRS.International.Country.Risk.Guide","2":"40"},{"1":"Varieties.of.Democracy.Project","2":"6"},{"1":"World.Bank.CPIA","2":"111"},{"1":"World.Economic.Forum.EOS","2":"46"},{"1":"World.Justice.Project.Rule.of.Law.Index","2":"55"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
-</div>
 </div>
 </div>
 <div id="references" class="section level3">

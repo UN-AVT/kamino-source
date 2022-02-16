@@ -37,7 +37,7 @@ WRANGLERS
 </div>
 
 # Where does your medicine come from?
-## Clean Data
+## Remove missing value
 
 ```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Benjamin Lehman on Unsplash"}
 
@@ -54,7 +54,8 @@ knitr::include_graphics(masthead, dpi=72)
 
 
 ### Ingest
-#### exporter, year, usd value
+
+exporter, year, usd value
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
@@ -67,9 +68,9 @@ df
 
 ```
 
-### Wrangle data
-#### Remove missing values using <kbd>is.na()</kbd> 
-Remove records which contain missing values within a particular field/column.
+### Wrangle
+
+Remove records which contain missing values within a particular field/column using <kbd>is.na()</kbd> 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
@@ -78,8 +79,7 @@ df_1 <- df[!is.na(df$exports_usd),]
 df_1 
 
 ```
-#### Remove missing values using <kbd>na.omit()</kbd> 
-Remove records which contain missing values within any field/column of the data set.
+Remove records which contain missing values within any field/column of the data set using <kbd>na.omit()</kbd> 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 

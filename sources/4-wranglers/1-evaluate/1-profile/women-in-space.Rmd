@@ -37,7 +37,7 @@ WRANGLERS
 </div>
 
 # Women in space
-## Profiling
+## Distinct values
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Greg Rakozy on Unsplash"}
 
@@ -52,7 +52,8 @@ knitr::include_graphics(masthead, dpi=72)
 ***
 
 ### Ingest data 
-#### series, values, and dates
+
+series, values, and dates
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
@@ -65,8 +66,9 @@ df <- read.csv(url, header = TRUE)
 df
 
 ```
-### Distinct Values
-#### Retrieving unique records of female astronauts using <kbd>distinct()</kbd>
+### Wrangle
+
+Retrieving unique records of female astronauts using <kbd>distinct()</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
@@ -79,7 +81,7 @@ hrs_mission
 
 ```
 
-#### Retrieving unique records from the table for the year of mission by using <kbd>distinct()</kbd>
+Retrieving unique records from the table for the year of mission by using <kbd>distinct()</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 

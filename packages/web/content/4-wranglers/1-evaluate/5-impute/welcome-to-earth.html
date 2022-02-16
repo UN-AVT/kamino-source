@@ -232,8 +232,8 @@ pre code {
 </div>
 <div id="welcome-to-earth" class="section level1">
 <h1>Welcome to Earth!</h1>
-<div id="imputing" class="section level2">
-<h2>Imputing</h2>
+<div id="median" class="section level2">
+<h2>Median</h2>
 <div class="figure" style="text-align: center">
 <img src="albert-antony-unsplash.jpg" alt="Photo by Albert Anthony on Unsplash" width="60%" />
 <p class="caption">
@@ -248,8 +248,7 @@ Photo by Albert Anthony on Unsplash
 <hr />
 <div id="ingest" class="section level3">
 <h3>Ingest</h3>
-<div id="date-and-count" class="section level4">
-<h4>date and count</h4>
+<p>date and count</p>
 <pre class="r fold-hide"><code>#Load Data
 url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
 url_file &lt;- &quot;welcome-to-earth/national-ufo-reporting-database-aggregated.csv&quot;
@@ -272,24 +271,19 @@ df</code></pre>
 <li>Median = [(n/2)th term + ((n/2) + 1)th term]/2</li>
 </ul>
 </div>
-</div>
 <div id="wrangle" class="section level3">
 <h3>Wrangle</h3>
-<div id="calculating-median-for-odd-number-of-observations-by-using-median" class="section level4">
-<h4>calculating median for odd number of observations by using <kbd>median()</kbd></h4>
+<p>calculating median for odd number of observations by using <kbd>median()</kbd></p>
 <pre class="r fold-hide"><code>#Apply median for the month January where n is odd
 df_jan &lt;- filter(df, df$Month == &#39;January&#39;)
 df_wrangle &lt;- median(df_jan$Count)
 df_wrangle</code></pre>
 <pre><code>## [1] 165</code></pre>
-</div>
-<div id="calculating-median-for-even-number-of-observations-by-using-median" class="section level4">
-<h4>calculating median for even number of observations by using <kbd>median()</kbd></h4>
+<p>calculating median for even number of observations by using <kbd>median()</kbd></p>
 <pre class="r fold-hide"><code>#Apply median for the whole dataset where n is even
 df_wrangle &lt;- median(df$Count)
 df_wrangle</code></pre>
 <pre><code>## [1] 209.5</code></pre>
-</div>
 </div>
 <div id="references" class="section level3">
 <h3>References</h3>

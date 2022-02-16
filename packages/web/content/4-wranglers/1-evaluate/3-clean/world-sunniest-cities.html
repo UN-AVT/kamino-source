@@ -232,8 +232,8 @@ pre code {
 </div>
 <div id="sunniest-cities-in-the-world" class="section level1">
 <h1>Sunniest cities in the world</h1>
-<div id="clean-data" class="section level2">
-<h2>Clean Data</h2>
+<div id="replace-duplicates" class="section level2">
+<h2>Replace duplicates</h2>
 <div class="figure" style="text-align: center">
 <img src="donald-giannatti-unsplash.jpg" alt="Photo by Donald Giannatti D on Unsplash" width="60%" />
 <p class="caption">
@@ -251,8 +251,7 @@ Yuma, Arizona
 <hr />
 <div id="load-the-data" class="section level3">
 <h3>Load the data</h3>
-<div id="where-are-the-sunniest-cities-in-the-world" class="section level4">
-<h4>Where are the sunniest cities in the world?</h4>
+<p>Where are the sunniest cities in the world?</p>
 <pre class="r fold-hide"><code># Load data
 url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
 url_file &lt;- &quot;sunniest-cities/sunniest_cities.csv&quot;
@@ -266,11 +265,9 @@ df</code></pre>
   </script>
 </div>
 </div>
-</div>
 <div id="wrangle" class="section level3">
 <h3>Wrangle</h3>
-<div id="identify-the-position-of-duplicate-value-using-duplicated" class="section level4">
-<h4>Identify the position of duplicate value using <kbd>duplicated()</kbd></h4>
+<p>Identify the position of duplicate value using <kbd>duplicated()</kbd></p>
 <pre class="r fold-hide"><code># To locate the position of duplicate elements 
 df1 &lt;- duplicated(df)
 df1</code></pre>
@@ -280,9 +277,7 @@ df1</code></pre>
 ## [37] FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [49] FALSE FALSE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [61] FALSE FALSE FALSE  TRUE  TRUE</code></pre>
-</div>
-<div id="replace-the-duplicate-value-using-replace" class="section level4">
-<h4>Replace the duplicate value using <kbd>replace()</kbd></h4>
+<p>Replace the duplicate value using <kbd>replace()</kbd></p>
 <pre class="r fold-hide"><code># Replace duplicate records with another value
 f_replace &lt;- function(df_replace,value1,value2) {
   replace(df_replace, df_replace==value1, value2 )
@@ -295,7 +290,6 @@ f1</code></pre>
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["individual"],"name":[1],"type":["chr"],"align":["left"]},{"label":["value"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["group"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Marsa Alam","2":"3958.00","3":"africa"},{"1":"Dakhla Oasis","2":"3943.40","3":"africa"},{"1":"Keetmanshoop","2":"3870.00","3":"africa"},{"1":"Khartoum","2":"3737.10","3":"africa"},{"1":"Upington","2":"3731.80","3":"africa"},{"1":"Tamanrasset","2":"3686.00","3":"africa"},{"1":"Toliara","2":"3610.00","3":"africa"},{"1":"Windhoek","2":"3605.00","3":"africa"},{"1":"Lodwar","2":"3582.00","3":"africa"},{"1":"Alexandria","2":"3579.50","3":"africa"},{"1":"NA","2":"NA","3":"africa"},{"1":"NA","2":"NA","3":"africa"},{"1":"NA","2":"NA","3":"africa"},{"1":"Yuma","2":"4015.30","3":"USA"},{"1":"Calama","2":"3926.20","3":"USA"},{"1":"Phoenix","2":"3871.60","3":"USA"},{"1":"Las Vegas","2":"3825.30","3":"USA"},{"1":"Tucson","2":"3806.00","3":"USA"},{"1":"El Paso","2":"3762.50","3":"USA"},{"1":"Sacramento","2":"3607.80","3":"USA"},{"1":"Fresno","2":"3564.20","3":"USA"},{"1":"Albuquerque","2":"3415.40","3":"USA"},{"1":"Arequipa","2":"3333.30","3":"USA"},{"1":"NA","2":"NA","3":"USA"},{"1":"NA","2":"NA","3":"USA"},{"1":"NA","2":"NA","3":"USA"},{"1":"Dubai","2":"3508.70","3":"asia"},{"1":"Muscat","2":"3493.30","3":"asia"},{"1":"Isfahan","2":"3352.50","3":"asia"},{"1":"Quetta","2":"3341.25","3":"asia"},{"1":"Tel Aviv","2":"3311.00","3":"asia"},{"1":"Abha","2":"3248.20","3":"asia"},{"1":"Baghdad","2":"3240.80","3":"asia"},{"1":"Riyadh","2":"3224.80","3":"asia"},{"1":"Kabul","2":"3175.10","3":"asia"},{"1":"Bandar Abbas","2":"3090.00","3":"asia"},{"1":"NA","2":"NA","3":"asia"},{"1":"NA","2":"NA","3":"asia"},{"1":"NA","2":"NA","3":"asia"},{"1":"Nicosia","2":"3314.10","3":"europe"},{"1":"Valletta","2":"3054.00","3":"europe"},{"1":"Faro","2":"3036.00","3":"europe"},{"1":"Cádiz","2":"3024.00","3":"europe"},{"1":"Seville","2":"2921.00","3":"europe"},{"1":"Marseille","2":"2836.00","3":"europe"},{"1":"Lisbon","2":"2806.00","3":"europe"},{"1":"Athens","2":"2773.00","3":"europe"},{"1":"Madrid","2":"2769.00","3":"europe"},{"1":"Cagliari","2":"2726.00","3":"europe"},{"1":"NA","2":"NA","3":"europe"},{"1":"NA","2":"NA","3":"europe"},{"1":"NA","2":"NA","3":"europe"},{"1":"Alice Springs","2":"3499.10","3":"oceania"},{"1":"Perth","2":"3229.50","3":"oceania"},{"1":"Darwin","2":"3092.20","3":"oceania"},{"1":"Brisbane","2":"2968.40","3":"oceania"},{"1":"Canberra","2":"2813.70","3":"oceania"},{"1":"Adelaide","2":"2765.40","3":"oceania"},{"1":"Sydney","2":"2468.10","3":"oceania"},{"1":"Port Moresby","2":"2463.00","3":"oceania"},{"1":"Hobart","2":"2393.10","3":"oceania"},{"1":"Melbourne","2":"2362.60","3":"oceania"},{"1":"NA","2":"NA","3":"oceania"},{"1":"NA","2":"NA","3":"oceania"},{"1":"NA","2":"NA","3":"oceania"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
-</div>
 </div>
 </div>
 <div id="references" class="section level3">

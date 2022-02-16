@@ -37,7 +37,7 @@ WRANGLERS
 </div>
 
 # Citation Rates for Speeding Stops
-## Profiling
+## Column name, number and type
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nomadsoul1 on Freepik"}
 
@@ -68,11 +68,12 @@ This example is based on summary data with the following fields, types, and defi
 * inferred_threshold:	_double_,	based off the threshold test
 
 ### Ingest data 
-#### summary data
+
+summary data
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-# Load
+# Load data
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
 url_file <- "citation-rates-for-speeding-stops/citation-rates-for-speeding-stops.csv"
 url <- paste0(url_root, url_file)
@@ -83,9 +84,8 @@ df
 ```
 
 ### Wrangle data
-#### number of columns and rows
 
-<kbd>dim</kbd>
+Retrieving number of columns and rows using <kbd>dim()</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -93,9 +93,7 @@ dim(df)
 
 ```
 
-#### List keys and column types
-
-<kbd>glimpse</kbd>
+Retrieving the list keys and column types using <kbd>glimpse()</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 

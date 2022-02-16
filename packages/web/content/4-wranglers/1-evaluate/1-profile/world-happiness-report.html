@@ -232,8 +232,8 @@ pre code {
 </div>
 <div id="which-countries-are-the-happiest" class="section level1">
 <h1>Which Countries are the Happiest?</h1>
-<div id="profiling" class="section level2">
-<h2>Profiling</h2>
+<div id="positive-negative-and-zero-values" class="section level2">
+<h2>Positive, negative, and zero values</h2>
 <div class="figure" style="text-align: center">
 <img src="happypeople.jpg" alt="Photo by Alex Alvarez on Unsplash" width="60%" />
 <p class="caption">
@@ -251,7 +251,7 @@ looking to better understand what makes people happy…<br />
 <hr />
 <div id="ingest" class="section level3">
 <h3>Ingest</h3>
-<pre class="r fold-hide"><code>#Load
+<pre class="r fold-hide"><code>#Load data
 url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
 url_file &lt;- &quot;happiness-report/happiness-report-2020.csv&quot;
 url &lt;- paste0(url_root, url_file)
@@ -264,11 +264,9 @@ df</code></pre>
   </script>
 </div>
 </div>
-<div id="positive-negative-and-zero-values" class="section level3">
-<h3>Positive, Negative and Zero Values</h3>
-<div id="check-for-all-the-numerical-columns" class="section level4">
-<h4>Check for all the numerical columns</h4>
-<p><kbd>sum()</kbd></p>
+<div id="wrangle" class="section level3">
+<h3>Wrangle</h3>
+<p>Check values for all the numerical columns and retrieve records with positive, negative and zero value using <kbd>sum()</kbd></p>
 <pre class="r fold-hide"><code># Check for positive, negative and zero values
 df1 &lt;- df[,3:ncol(df)]
 
@@ -288,7 +286,6 @@ result</code></pre>
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Life.Ladder"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Log.GDP.per.capita"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Social.support"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Healthy.life.expectancy.at.birth"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Freedom.to.make.life.choices"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Generosity"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Perceptions.of.corruption"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Positive.affect"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["Negative.affect"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["Confidence.in.national.government"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["Democratic.Quality"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["Delivery.Quality"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["Standard.deviation.of.ladder.by.country.year"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["Standard.deviation.Mean.of.ladder.by.country.year"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["GINI.index..World.Bank.estimate."],"name":[15],"type":["dbl"],"align":["right"]},{"label":["GINI.index..World.Bank.estimate...average.2000.16"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["gini.of.household.income.reported.in.Gallup..by.wp5.year"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["Most.people.can.be.trusted..Gallup"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["Most.people.can.be.trusted..WVS.round.1981.1984"],"name":[19],"type":["dbl"],"align":["right"]},{"label":["Most.people.can.be.trusted..WVS.round.1989.1993"],"name":[20],"type":["dbl"],"align":["right"]},{"label":["Most.people.can.be.trusted..WVS.round.1994.1998"],"name":[21],"type":["dbl"],"align":["right"]},{"label":["Most.people.can.be.trusted..WVS.round.1999.2004"],"name":[22],"type":["dbl"],"align":["right"]},{"label":["Most.people.can.be.trusted..WVS.round.2005.2009"],"name":[23],"type":["dbl"],"align":["right"]},{"label":["Most.people.can.be.trusted..WVS.round.2010.2014"],"name":[24],"type":["dbl"],"align":["right"]}],"data":[{"1":"1704","2":"1676","3":"1691","4":"1676","5":"1675","6":"712","7":"1608","8":"1685","9":"1691","10":"1530","11":"653","12":"627","13":"1704","14":"1704","15":"643","16":"1502","17":"1335","18":"180","19":"125","20":"220","21":"618","22":"491","23":"630","24":"671","_rn_":"number of positives"},{"1":"0","2":"0","3":"0","4":"0","5":"0","6":"910","7":"0","8":"0","9":"0","10":"0","11":"905","12":"932","13":"0","14":"0","15":"0","16":"0","17":"0","18":"0","19":"0","20":"0","21":"0","22":"0","23":"0","24":"0","_rn_":"negatives"},{"1":"0","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0","11":"0","12":"0","13":"0","14":"0","15":"0","16":"0","17":"0","18":"0","19":"0","20":"0","21":"0","22":"0","23":"0","24":"0","_rn_":"zero"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
-</div>
 </div>
 </div>
 <div id="references" class="section level3">
