@@ -1,0 +1,127 @@
+---
+pagetitle: "Commonwealth War Dead"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, dev = "svg" )
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(stringr)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+ 
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Commonwealth War Dead
+## Separate a column
+
+```{r, out.width="50%", fig.align="center",out.height="50%", fig.cap="Photo by Razi Purjafarian on Unsplash"}
+
+masthead <- "assets/razi-purjafarian-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> Never think that war, no matter how necessary, nor how justified, is not a crime.\
+--- Ernest Hemingway\
+
+***
+
+### Ingest the data
+Surname, forename, DateOfDeath
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "commonwealth-war-dead/casualty-search.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle
+Separate a column into multiple columns using <kbd>separate()</kbd>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+#Selecting only certain columns
+df1 <- df %>% select(Surname,Forename,DateOfDeath)
+
+#splitting dateofdeath column into day,month, and year columns
+df2 <- df1%>%separate(DateOfDeath, c('day','month','year'),"/")
+df2
+
+```
+
+Another useful function to split a column into separate columns is <kbd>str_split_fixed()</kbd> in <kbd>stringr</kbd> package
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+#splitting Forename into First name and middle name
+df4 <- df2
+new_df <- as.data.frame(str_split_fixed(df4$Forename," ",2))
+colnames(new_df) <- c("First Name","Middle Name")
+df4 <- cbind(df4,new_df)
+df4 <- df4[,c("Surname","First Name","Middle Name")]
+df4
+
+```
+
+### References
+#### Citations and data sources
+
+* Narration and data: Walk Free, [GO](https://www.cwgc.org/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+
+
+
+
+
