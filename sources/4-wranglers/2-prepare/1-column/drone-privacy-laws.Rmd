@@ -1,0 +1,125 @@
+---
+pagetitle: "Drone Privacy Laws"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+WRANGLERS 
+</div>
+
+# Drone privacy laws
+## Combine columns
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Jason Blackeye on Unsplash"}
+
+masthead <- "assets/jason-blackeye-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> There are drones flying over the air randomly that are recording everything that's happening on what we consider our private  property. That type of technology has to stimulate us to think about what is it that we cherish in privacy, and how far we want to protect it and from whom...\
+--- Sonia Sotomayor\
+
+***
+
+### Ingest
+country, continent, legal status
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+#Load data
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "drone-privacy-laws/drone-privacy-laws.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+### Wrangle
+Combine columns country and continent using <kbd>unite()</kbd> function from <kbd>tidyr</kbd> package
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+#renaming first column
+names(df)[1] <- "Country"
+
+#combining columns
+df1 <- df %>% unite('country_region',Country,Continent, sep = "_", remove = TRUE, na.rm = FALSE )
+df1
+
+```
+
+
+Combine using <kbd>paste()</kbd> function from base <kbd>R</kbd>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+#combining columns
+df2 <- df
+df2$country_region <- paste(df$Country, df$Continent, sep="_")
+df2
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Visual Capitalist, Mapped: Drone Privacy Laws Around the World, [GO](https://www.visualcapitalist.com/mapped-drone-privacy-laws-around-the-world/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+
+

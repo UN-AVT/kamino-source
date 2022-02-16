@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Drone Privacy Laws</title>
+
+<script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="../../../../vendor/knitr/navigation-1.1/tabsets.js"></script>
+<script src="../../../../vendor/knitr/navigation-1.1/codefolding.js"></script>
+<link href="../../../../vendor/knitr/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/highlightjs-9.12.0/highlight.js"></script>
+<link href="../../../../vendor/knitr/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/pagedtable-1.1/js/pagedtable.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHLBJTGCKN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GHLBJTGCKN');
+  </script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../../assets/logo/logo.svg" alt="" height="36">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../../assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../../assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>WRANGLERS</p>
+</div>
+<div id="drone-privacy-laws" class="section level1">
+<h1>Drone privacy laws</h1>
+<div id="combine-columns" class="section level2">
+<h2>Combine columns</h2>
+<div class="figure" style="text-align: center">
+<img src="jason-blackeye-unsplash.jpg" alt="Photo by Jason Blackeye on Unsplash" width="60%" />
+<p class="caption">
+Photo by Jason Blackeye on Unsplash
+</p>
+</div>
+<blockquote>
+<p>There are drones flying over the air randomly that are recording everything that’s happening on what we consider our private property. That type of technology has to stimulate us to think about what is it that we cherish in privacy, and how far we want to protect it and from whom…<br />
+— Sonia Sotomayor<br />
+</p>
+</blockquote>
+<hr />
+<div id="ingest" class="section level3">
+<h3>Ingest</h3>
+<p>country, continent, legal status</p>
+<pre class="r fold-hide"><code>#Load data
+url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;drone-privacy-laws/drone-privacy-laws.csv&quot;
+url &lt;- paste0(url_root, url_file)
+
+df &lt;- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
+df</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Country_Territory"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Continent"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Drone_Legal_Status_as_of_Oct_2020"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Afghanistan","2":"Asia","3":"Unrestricted"},{"1":"Albania","2":"Europe","3":"No drone-related legislation"},{"1":"Algeria","2":"Africa","3":"Outright ban"},{"1":"Andorra","2":"Europe","3":"Visual line of sight required"},{"1":"Angola","2":"Africa","3":"No drone-related legislation"},{"1":"Antigua and Barbuda","2":"North America","3":"Experimental visual line of sight"},{"1":"Argentina","2":"South America","3":"Unrestricted"},{"1":"Armenia","2":"Europe","3":"No drone-related legislation"},{"1":"Aruba","2":"North America","3":"Visual line of sight required"},{"1":"Australia","2":"Oceania","3":"Experimental visual line of sight"},{"1":"Austria","2":"Europe","3":"Unrestricted"},{"1":"Azerbaijan","2":"Europe","3":"Visual line of sight required"},{"1":"Bahamas, The","2":"North America","3":"Unrestricted"},{"1":"Bahrain","2":"Asia","3":"No drone-related legislation"},{"1":"Bangladesh","2":"Asia","3":"Unrestricted"},{"1":"Barbados","2":"North America","3":"Outright ban"},{"1":"Belarus","2":"Europe","3":"No drone-related legislation"},{"1":"Belgium","2":"Europe","3":"Visual line of sight required"},{"1":"Belize","2":"North America","3":"Effective ban"},{"1":"Benin","2":"Africa","3":"No drone-related legislation"},{"1":"Bermuda","2":"North America","3":"Visual line of sight required"},{"1":"Bhutan","2":"Asia","3":"Effective ban"},{"1":"Bolivia","2":"South America","3":"No drone-related legislation"},{"1":"Bosnia and Herzegovina","2":"Europe","3":"No drone-related legislation"},{"1":"Botswana","2":"Africa","3":"Visual line of sight required"},{"1":"Brazil","2":"South America","3":"Visual line of sight required"},{"1":"Brunei Darussalam","2":"Asia","3":"Outright ban"},{"1":"Bulgaria","2":"Europe","3":"Effective ban"},{"1":"Burkina Faso","2":"Africa","3":"No drone-related legislation"},{"1":"Burundi","2":"Africa","3":"No drone-related legislation"},{"1":"Cabo Verde","2":"Africa","3":"Visual line of sight required"},{"1":"Cambodia","2":"Asia","3":"No drone-related legislation"},{"1":"Cameroon","2":"Africa","3":"Visual line of sight required"},{"1":"Canada","2":"North America","3":"Experimental visual line of sight"},{"1":"Cayman Islands","2":"North America","3":"Experimental visual line of sight"},{"1":"Central African Republic","2":"Africa","3":"No drone-related legislation"},{"1":"Chad","2":"Africa","3":"Unrestricted"},{"1":"Chile","2":"South America","3":"Visual line of sight required"},{"1":"China","2":"Asia","3":"Experimental visual line of sight"},{"1":"Colombia","2":"South America","3":"Visual line of sight required"},{"1":"Comoros","2":"Africa","3":"No drone-related legislation"},{"1":"Congo, Dem. Rep.","2":"Africa","3":"No drone-related legislation"},{"1":"Congo, Rep.","2":"Africa","3":"No drone-related legislation"},{"1":"Costa Rica","2":"North America","3":"Visual line of sight required"},{"1":"Cote d'Ivoire","2":"Africa","3":"Outright ban"},{"1":"Croatia","2":"Europe","3":"Visual line of sight required"},{"1":"Cuba","2":"North America","3":"Outright ban"},{"1":"Curacao","2":"North America","3":"Visual line of sight required"},{"1":"Cyprus","2":"Europe","3":"Visual line of sight required"},{"1":"Czech Republic","2":"Europe","3":"Experimental visual line of sight"},{"1":"Denmark","2":"Europe","3":"Experimental visual line of sight"},{"1":"Djibouti","2":"Africa","3":"No drone-related legislation"},{"1":"Dominica","2":"North America","3":"No drone-related legislation"},{"1":"Dominican Republic","2":"North America","3":"Visual line of sight required"},{"1":"Ecuador","2":"South America","3":"Visual line of sight required"},{"1":"Egypt, Arab Rep.","2":"Africa","3":"Effective ban"},{"1":"El Salvador","2":"North America","3":"No drone-related legislation"},{"1":"Equatorial Guinea","2":"Africa","3":"No drone-related legislation"},{"1":"Eritrea","2":"Africa","3":"No drone-related legislation"},{"1":"Estonia","2":"Europe","3":"Unrestricted"},{"1":"Ethiopia","2":"Africa","3":"No drone-related legislation"},{"1":"Faroe Islands","2":"Europe","3":"Unrestricted"},{"1":"Fiji","2":"Oceania","3":"Visual line of sight required"},{"1":"Finland","2":"Europe","3":"Experimental visual line of sight"},{"1":"France","2":"Europe","3":"Experimental visual line of sight"},{"1":"Gabon","2":"Africa","3":"No drone-related legislation"},{"1":"Gambia, The","2":"Africa","3":"No drone-related legislation"},{"1":"Georgia","2":"Europe","3":"Visual line of sight required"},{"1":"Germany","2":"Europe","3":"Experimental visual line of sight"},{"1":"Ghana","2":"Africa","3":"Experimental visual line of sight"},{"1":"Gibraltar","2":"Europe","3":"Effective ban"},{"1":"Greece","2":"Europe","3":"Unrestricted"},{"1":"Greenland","2":"North America","3":"Visual line of sight required"},{"1":"Grenada","2":"North America","3":"No drone-related legislation"},{"1":"Guam","2":"Oceania","3":"Unrestricted"},{"1":"Guatemala","2":"North America","3":"No drone-related legislation"},{"1":"Guinea","2":"Africa","3":"No drone-related legislation"},{"1":"Guinea-Bissau","2":"Africa","3":"No drone-related legislation"},{"1":"Guyana","2":"South America","3":"Experimental visual line of sight"},{"1":"Haiti","2":"North America","3":"No drone-related legislation"},{"1":"Honduras","2":"North America","3":"No drone-related legislation"},{"1":"Hong Kong SAR, China","2":"Asia","3":"Visual line of sight required"},{"1":"Hungary","2":"Europe","3":"Unrestricted"},{"1":"Iceland","2":"Europe","3":"Visual line of sight required"},{"1":"India","2":"Asia","3":"Visual line of sight required"},{"1":"Indonesia","2":"Asia","3":"Visual line of sight required"},{"1":"Iran, Islamic Rep.","2":"Asia","3":"Outright ban"},{"1":"Iraq","2":"Asia","3":"Outright ban"},{"1":"Ireland","2":"Europe","3":"Experimental visual line of sight"},{"1":"Israel","2":"Asia","3":"Visual line of sight required"},{"1":"Italy","2":"Europe","3":"Visual line of sight required"},{"1":"Jamaica","2":"North America","3":"Visual line of sight required"},{"1":"Japan","2":"Asia","3":"Experimental visual line of sight"},{"1":"Jordan","2":"Asia","3":"Unrestricted"},{"1":"Kazakhstan","2":"Europe","3":"No drone-related legislation"},{"1":"Kenya","2":"Africa","3":"Effective ban"},{"1":"Kiribati","2":"Oceania","3":"No drone-related legislation"},{"1":"Korea, Dem. Peopleâ\\200\\231s Rep.","2":"Asia","3":"No drone-related legislation"},{"1":"Korea, Rep.","2":"Asia","3":"Visual line of sight required"},{"1":"Kosovo","2":"Europe","3":"Visual line of sight required"},{"1":"Kuwait","2":"Asia","3":"Outright ban"},{"1":"Kyrgyz Republic","2":"Asia","3":"Outright ban"},{"1":"Lao PDR","2":"Asia","3":"Unrestricted"},{"1":"Latvia","2":"Europe","3":"Unrestricted"},{"1":"Lebanon","2":"Asia","3":"No drone-related legislation"},{"1":"Lesotho","2":"Africa","3":"No drone-related legislation"},{"1":"Liberia","2":"Africa","3":"No drone-related legislation"},{"1":"Libya","2":"Africa","3":"No drone-related legislation"},{"1":"Liechtenstein","2":"Europe","3":"Experimental visual line of sight"},{"1":"Lithuania","2":"Europe","3":"Visual line of sight required"},{"1":"Luxembourg","2":"Europe","3":"Visual line of sight required"},{"1":"Macao SAR, China","2":"Asia","3":"Visual line of sight required"},{"1":"Madagascar","2":"Africa","3":"Outright ban"},{"1":"Malawi","2":"Africa","3":"Visual line of sight required"},{"1":"Malaysia","2":"Asia","3":"Effective ban"},{"1":"Maldives","2":"Asia","3":"Effective ban"},{"1":"Mali","2":"Africa","3":"No drone-related legislation"},{"1":"Malta","2":"Europe","3":"Unrestricted"},{"1":"Marshall Islands","2":"Oceania","3":"No drone-related legislation"},{"1":"Mauritania","2":"Africa","3":"No drone-related legislation"},{"1":"Mauritius","2":"Africa","3":"Visual line of sight required"},{"1":"Mexico","2":"North America","3":"Visual line of sight required"},{"1":"Micronesia, Fed. Sts.","2":"Oceania","3":"No drone-related legislation"},{"1":"Moldova","2":"Europe","3":"No drone-related legislation"},{"1":"Monaco","2":"Europe","3":"Unrestricted"},{"1":"Mongolia","2":"Asia","3":"No drone-related legislation"},{"1":"Montenegro","2":"Europe","3":"Visual line of sight required"},{"1":"Morocco","2":"Africa","3":"Outright ban"},{"1":"Mozambique","2":"Africa","3":"No drone-related legislation"},{"1":"Myanmar","2":"Asia","3":"Effective ban"},{"1":"Namibia","2":"Africa","3":"Visual line of sight required"},{"1":"Nauru","2":"Oceania","3":"No drone-related legislation"},{"1":"Nepal","2":"Asia","3":"Visual line of sight required"},{"1":"Netherlands","2":"Europe","3":"Visual line of sight required"},{"1":"New Caledonia","2":"Oceania","3":"No drone-related legislation"},{"1":"New Zealand","2":"Oceania","3":"Experimental visual line of sight"},{"1":"Nicaragua","2":"North America","3":"Outright ban"},{"1":"Niger","2":"Africa","3":"No drone-related legislation"},{"1":"Nigeria","2":"Africa","3":"Effective ban"},{"1":"North Macedonia","2":"Europe","3":"Visual line of sight required"},{"1":"Norway","2":"Europe","3":"Visual line of sight required"},{"1":"Oman","2":"Asia","3":"Effective ban"},{"1":"Pakistan","2":"Asia","3":"No drone-related legislation"},{"1":"Palau","2":"Oceania","3":"No drone-related legislation"},{"1":"Panama","2":"North America","3":"Unrestricted"},{"1":"Papua New Guinea","2":"Oceania","3":"Visual line of sight required"},{"1":"Paraguay","2":"South America","3":"No drone-related legislation"},{"1":"Peru","2":"South America","3":"Visual line of sight required"},{"1":"Philippines","2":"Asia","3":"Visual line of sight required"},{"1":"Poland","2":"Europe","3":"Experimental visual line of sight"},{"1":"Portugal","2":"Europe","3":"Experimental visual line of sight"},{"1":"Puerto Rico","2":"North America","3":"Experimental visual line of sight"},{"1":"Qatar","2":"Asia","3":"Unrestricted"},{"1":"Romania","2":"Europe","3":"Visual line of sight required"},{"1":"Russian Federation","2":"Europe","3":"Experimental visual line of sight"},{"1":"Rwanda","2":"Africa","3":"Experimental visual line of sight"},{"1":"Samoa","2":"Oceania","3":"No drone-related legislation"},{"1":"San Marino","2":"Europe","3":"No drone-related legislation"},{"1":"Sao Tome and Principe","2":"Africa","3":"No drone-related legislation"},{"1":"Saudi Arabia","2":"Asia","3":"Experimental visual line of sight"},{"1":"Senegal","2":"Africa","3":"Outright ban"},{"1":"Serbia","2":"Europe","3":"Unrestricted"},{"1":"Seychelles","2":"Africa","3":"Visual line of sight required"},{"1":"Sierra Leone","2":"Africa","3":"No drone-related legislation"},{"1":"Singapore","2":"Asia","3":"Experimental visual line of sight"},{"1":"Sint Maarten (Dutch part)","2":"North America","3":"Experimental visual line of sight"},{"1":"Slovak Republic","2":"Europe","3":"Visual line of sight required"},{"1":"Slovenia","2":"Europe","3":"Outright ban"},{"1":"Solomon Islands","2":"Oceania","3":"Visual line of sight required"},{"1":"Somalia","2":"Africa","3":"No drone-related legislation"},{"1":"South Africa","2":"Africa","3":"Experimental visual line of sight"},{"1":"South Sudan","2":"Africa","3":"No drone-related legislation"},{"1":"Spain","2":"Europe","3":"Experimental visual line of sight"},{"1":"Sri Lanka","2":"Asia","3":"Experimental visual line of sight"},{"1":"St. Kitts and Nevis","2":"North America","3":"No drone-related legislation"},{"1":"St. Lucia","2":"North America","3":"Unrestricted"},{"1":"St. Martin (French part)","2":"North America","3":"Experimental visual line of sight"},{"1":"St. Vincent and the Grenadines","2":"North America","3":"No drone-related legislation"},{"1":"Sudan","2":"Africa","3":"No drone-related legislation"},{"1":"Suriname","2":"South America","3":"No drone-related legislation"},{"1":"Swaziland","2":"Africa","3":"Visual line of sight required"},{"1":"Sweden","2":"Europe","3":"Unrestricted"},{"1":"Switzerland","2":"Europe","3":"Unrestricted"},{"1":"Syrian Arab Republic","2":"Asia","3":"Outright ban"},{"1":"Taiwan","2":"Asia","3":"Visual line of sight required"},{"1":"Tajikistan","2":"Asia","3":"No drone-related legislation"},{"1":"Tanzania","2":"Africa","3":"Visual line of sight required"},{"1":"Thailand","2":"Asia","3":"Visual line of sight required"},{"1":"Timor-Leste","2":"Asia","3":"No drone-related legislation"},{"1":"Togo","2":"Africa","3":"No drone-related legislation"},{"1":"Tonga","2":"Oceania","3":"No drone-related legislation"},{"1":"Trinidad and Tobago","2":"North America","3":"Experimental visual line of sight"},{"1":"Tunisia","2":"Africa","3":"No drone-related legislation"},{"1":"Turkey","2":"Europe","3":"Unrestricted"},{"1":"Turkmenistan","2":"Asia","3":"No drone-related legislation"},{"1":"Turks and Caicos Islands","2":"North America","3":"Unrestricted"},{"1":"Tuvalu","2":"Oceania","3":"No drone-related legislation"},{"1":"Uganda","2":"Africa","3":"Experimental visual line of sight"},{"1":"Ukraine","2":"Europe","3":"Visual line of sight required"},{"1":"United Arab Emirates","2":"Asia","3":"Visual line of sight required"},{"1":"United Kingdom","2":"Europe","3":"Experimental visual line of sight"},{"1":"United States","2":"North America","3":"Experimental visual line of sight"},{"1":"Uruguay","2":"South America","3":"Visual line of sight required"},{"1":"Uzbekistan","2":"Asia","3":"Outright ban"},{"1":"Vanuatu","2":"Oceania","3":"Visual line of sight required"},{"1":"Venezuela, RB","2":"South America","3":"Unrestricted"},{"1":"Vietnam","2":"Asia","3":"Unrestricted"},{"1":"Yemen, Rep.","2":"Asia","3":"No drone-related legislation"},{"1":"Zambia","2":"Africa","3":"Visual line of sight required"},{"1":"Zimbabwe","2":"Africa","3":"Experimental visual line of sight"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="wrangle" class="section level3">
+<h3>Wrangle</h3>
+<p>Combine columns country and continent using <kbd>unite()</kbd> function from <kbd>tidyr</kbd> package</p>
+<pre class="r fold-hide"><code>#renaming first column
+names(df)[1] &lt;- &quot;Country&quot;
+
+#combining columns
+df1 &lt;- df %&gt;% unite(&#39;country_region&#39;,Country,Continent, sep = &quot;_&quot;, remove = TRUE, na.rm = FALSE )
+df1</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["country_region"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Drone_Legal_Status_as_of_Oct_2020"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Afghanistan_Asia","2":"Unrestricted"},{"1":"Albania_Europe","2":"No drone-related legislation"},{"1":"Algeria_Africa","2":"Outright ban"},{"1":"Andorra_Europe","2":"Visual line of sight required"},{"1":"Angola_Africa","2":"No drone-related legislation"},{"1":"Antigua and Barbuda_North America","2":"Experimental visual line of sight"},{"1":"Argentina_South America","2":"Unrestricted"},{"1":"Armenia_Europe","2":"No drone-related legislation"},{"1":"Aruba_North America","2":"Visual line of sight required"},{"1":"Australia_Oceania","2":"Experimental visual line of sight"},{"1":"Austria_Europe","2":"Unrestricted"},{"1":"Azerbaijan_Europe","2":"Visual line of sight required"},{"1":"Bahamas, The_North America","2":"Unrestricted"},{"1":"Bahrain_Asia","2":"No drone-related legislation"},{"1":"Bangladesh_Asia","2":"Unrestricted"},{"1":"Barbados_North America","2":"Outright ban"},{"1":"Belarus_Europe","2":"No drone-related legislation"},{"1":"Belgium_Europe","2":"Visual line of sight required"},{"1":"Belize_North America","2":"Effective ban"},{"1":"Benin_Africa","2":"No drone-related legislation"},{"1":"Bermuda_North America","2":"Visual line of sight required"},{"1":"Bhutan_Asia","2":"Effective ban"},{"1":"Bolivia_South America","2":"No drone-related legislation"},{"1":"Bosnia and Herzegovina_Europe","2":"No drone-related legislation"},{"1":"Botswana_Africa","2":"Visual line of sight required"},{"1":"Brazil_South America","2":"Visual line of sight required"},{"1":"Brunei Darussalam_Asia","2":"Outright ban"},{"1":"Bulgaria_Europe","2":"Effective ban"},{"1":"Burkina Faso_Africa","2":"No drone-related legislation"},{"1":"Burundi_Africa","2":"No drone-related legislation"},{"1":"Cabo Verde_Africa","2":"Visual line of sight required"},{"1":"Cambodia_Asia","2":"No drone-related legislation"},{"1":"Cameroon_Africa","2":"Visual line of sight required"},{"1":"Canada_North America","2":"Experimental visual line of sight"},{"1":"Cayman Islands_North America","2":"Experimental visual line of sight"},{"1":"Central African Republic_Africa","2":"No drone-related legislation"},{"1":"Chad_Africa","2":"Unrestricted"},{"1":"Chile_South America","2":"Visual line of sight required"},{"1":"China_Asia","2":"Experimental visual line of sight"},{"1":"Colombia_South America","2":"Visual line of sight required"},{"1":"Comoros_Africa","2":"No drone-related legislation"},{"1":"Congo, Dem. Rep._Africa","2":"No drone-related legislation"},{"1":"Congo, Rep._Africa","2":"No drone-related legislation"},{"1":"Costa Rica_North America","2":"Visual line of sight required"},{"1":"Cote d'Ivoire_Africa","2":"Outright ban"},{"1":"Croatia_Europe","2":"Visual line of sight required"},{"1":"Cuba_North America","2":"Outright ban"},{"1":"Curacao_North America","2":"Visual line of sight required"},{"1":"Cyprus_Europe","2":"Visual line of sight required"},{"1":"Czech Republic_Europe","2":"Experimental visual line of sight"},{"1":"Denmark_Europe","2":"Experimental visual line of sight"},{"1":"Djibouti_Africa","2":"No drone-related legislation"},{"1":"Dominica_North America","2":"No drone-related legislation"},{"1":"Dominican Republic_North America","2":"Visual line of sight required"},{"1":"Ecuador_South America","2":"Visual line of sight required"},{"1":"Egypt, Arab Rep._Africa","2":"Effective ban"},{"1":"El Salvador_North America","2":"No drone-related legislation"},{"1":"Equatorial Guinea_Africa","2":"No drone-related legislation"},{"1":"Eritrea_Africa","2":"No drone-related legislation"},{"1":"Estonia_Europe","2":"Unrestricted"},{"1":"Ethiopia_Africa","2":"No drone-related legislation"},{"1":"Faroe Islands_Europe","2":"Unrestricted"},{"1":"Fiji_Oceania","2":"Visual line of sight required"},{"1":"Finland_Europe","2":"Experimental visual line of sight"},{"1":"France_Europe","2":"Experimental visual line of sight"},{"1":"Gabon_Africa","2":"No drone-related legislation"},{"1":"Gambia, The_Africa","2":"No drone-related legislation"},{"1":"Georgia_Europe","2":"Visual line of sight required"},{"1":"Germany_Europe","2":"Experimental visual line of sight"},{"1":"Ghana_Africa","2":"Experimental visual line of sight"},{"1":"Gibraltar_Europe","2":"Effective ban"},{"1":"Greece_Europe","2":"Unrestricted"},{"1":"Greenland_North America","2":"Visual line of sight required"},{"1":"Grenada_North America","2":"No drone-related legislation"},{"1":"Guam_Oceania","2":"Unrestricted"},{"1":"Guatemala_North America","2":"No drone-related legislation"},{"1":"Guinea_Africa","2":"No drone-related legislation"},{"1":"Guinea-Bissau_Africa","2":"No drone-related legislation"},{"1":"Guyana_South America","2":"Experimental visual line of sight"},{"1":"Haiti_North America","2":"No drone-related legislation"},{"1":"Honduras_North America","2":"No drone-related legislation"},{"1":"Hong Kong SAR, China_Asia","2":"Visual line of sight required"},{"1":"Hungary_Europe","2":"Unrestricted"},{"1":"Iceland_Europe","2":"Visual line of sight required"},{"1":"India_Asia","2":"Visual line of sight required"},{"1":"Indonesia_Asia","2":"Visual line of sight required"},{"1":"Iran, Islamic Rep._Asia","2":"Outright ban"},{"1":"Iraq_Asia","2":"Outright ban"},{"1":"Ireland_Europe","2":"Experimental visual line of sight"},{"1":"Israel_Asia","2":"Visual line of sight required"},{"1":"Italy_Europe","2":"Visual line of sight required"},{"1":"Jamaica_North America","2":"Visual line of sight required"},{"1":"Japan_Asia","2":"Experimental visual line of sight"},{"1":"Jordan_Asia","2":"Unrestricted"},{"1":"Kazakhstan_Europe","2":"No drone-related legislation"},{"1":"Kenya_Africa","2":"Effective ban"},{"1":"Kiribati_Oceania","2":"No drone-related legislation"},{"1":"Korea, Dem. Peopleâ\\200\\231s Rep._Asia","2":"No drone-related legislation"},{"1":"Korea, Rep._Asia","2":"Visual line of sight required"},{"1":"Kosovo_Europe","2":"Visual line of sight required"},{"1":"Kuwait_Asia","2":"Outright ban"},{"1":"Kyrgyz Republic_Asia","2":"Outright ban"},{"1":"Lao PDR_Asia","2":"Unrestricted"},{"1":"Latvia_Europe","2":"Unrestricted"},{"1":"Lebanon_Asia","2":"No drone-related legislation"},{"1":"Lesotho_Africa","2":"No drone-related legislation"},{"1":"Liberia_Africa","2":"No drone-related legislation"},{"1":"Libya_Africa","2":"No drone-related legislation"},{"1":"Liechtenstein_Europe","2":"Experimental visual line of sight"},{"1":"Lithuania_Europe","2":"Visual line of sight required"},{"1":"Luxembourg_Europe","2":"Visual line of sight required"},{"1":"Macao SAR, China_Asia","2":"Visual line of sight required"},{"1":"Madagascar_Africa","2":"Outright ban"},{"1":"Malawi_Africa","2":"Visual line of sight required"},{"1":"Malaysia_Asia","2":"Effective ban"},{"1":"Maldives_Asia","2":"Effective ban"},{"1":"Mali_Africa","2":"No drone-related legislation"},{"1":"Malta_Europe","2":"Unrestricted"},{"1":"Marshall Islands_Oceania","2":"No drone-related legislation"},{"1":"Mauritania_Africa","2":"No drone-related legislation"},{"1":"Mauritius_Africa","2":"Visual line of sight required"},{"1":"Mexico_North America","2":"Visual line of sight required"},{"1":"Micronesia, Fed. Sts._Oceania","2":"No drone-related legislation"},{"1":"Moldova_Europe","2":"No drone-related legislation"},{"1":"Monaco_Europe","2":"Unrestricted"},{"1":"Mongolia_Asia","2":"No drone-related legislation"},{"1":"Montenegro_Europe","2":"Visual line of sight required"},{"1":"Morocco_Africa","2":"Outright ban"},{"1":"Mozambique_Africa","2":"No drone-related legislation"},{"1":"Myanmar_Asia","2":"Effective ban"},{"1":"Namibia_Africa","2":"Visual line of sight required"},{"1":"Nauru_Oceania","2":"No drone-related legislation"},{"1":"Nepal_Asia","2":"Visual line of sight required"},{"1":"Netherlands_Europe","2":"Visual line of sight required"},{"1":"New Caledonia_Oceania","2":"No drone-related legislation"},{"1":"New Zealand_Oceania","2":"Experimental visual line of sight"},{"1":"Nicaragua_North America","2":"Outright ban"},{"1":"Niger_Africa","2":"No drone-related legislation"},{"1":"Nigeria_Africa","2":"Effective ban"},{"1":"North Macedonia_Europe","2":"Visual line of sight required"},{"1":"Norway_Europe","2":"Visual line of sight required"},{"1":"Oman_Asia","2":"Effective ban"},{"1":"Pakistan_Asia","2":"No drone-related legislation"},{"1":"Palau_Oceania","2":"No drone-related legislation"},{"1":"Panama_North America","2":"Unrestricted"},{"1":"Papua New Guinea_Oceania","2":"Visual line of sight required"},{"1":"Paraguay_South America","2":"No drone-related legislation"},{"1":"Peru_South America","2":"Visual line of sight required"},{"1":"Philippines_Asia","2":"Visual line of sight required"},{"1":"Poland_Europe","2":"Experimental visual line of sight"},{"1":"Portugal_Europe","2":"Experimental visual line of sight"},{"1":"Puerto Rico_North America","2":"Experimental visual line of sight"},{"1":"Qatar_Asia","2":"Unrestricted"},{"1":"Romania_Europe","2":"Visual line of sight required"},{"1":"Russian Federation_Europe","2":"Experimental visual line of sight"},{"1":"Rwanda_Africa","2":"Experimental visual line of sight"},{"1":"Samoa_Oceania","2":"No drone-related legislation"},{"1":"San Marino_Europe","2":"No drone-related legislation"},{"1":"Sao Tome and Principe_Africa","2":"No drone-related legislation"},{"1":"Saudi Arabia_Asia","2":"Experimental visual line of sight"},{"1":"Senegal_Africa","2":"Outright ban"},{"1":"Serbia_Europe","2":"Unrestricted"},{"1":"Seychelles_Africa","2":"Visual line of sight required"},{"1":"Sierra Leone_Africa","2":"No drone-related legislation"},{"1":"Singapore_Asia","2":"Experimental visual line of sight"},{"1":"Sint Maarten (Dutch part)_North America","2":"Experimental visual line of sight"},{"1":"Slovak Republic_Europe","2":"Visual line of sight required"},{"1":"Slovenia_Europe","2":"Outright ban"},{"1":"Solomon Islands_Oceania","2":"Visual line of sight required"},{"1":"Somalia_Africa","2":"No drone-related legislation"},{"1":"South Africa_Africa","2":"Experimental visual line of sight"},{"1":"South Sudan_Africa","2":"No drone-related legislation"},{"1":"Spain_Europe","2":"Experimental visual line of sight"},{"1":"Sri Lanka_Asia","2":"Experimental visual line of sight"},{"1":"St. Kitts and Nevis_North America","2":"No drone-related legislation"},{"1":"St. Lucia_North America","2":"Unrestricted"},{"1":"St. Martin (French part)_North America","2":"Experimental visual line of sight"},{"1":"St. Vincent and the Grenadines_North America","2":"No drone-related legislation"},{"1":"Sudan_Africa","2":"No drone-related legislation"},{"1":"Suriname_South America","2":"No drone-related legislation"},{"1":"Swaziland_Africa","2":"Visual line of sight required"},{"1":"Sweden_Europe","2":"Unrestricted"},{"1":"Switzerland_Europe","2":"Unrestricted"},{"1":"Syrian Arab Republic_Asia","2":"Outright ban"},{"1":"Taiwan_Asia","2":"Visual line of sight required"},{"1":"Tajikistan_Asia","2":"No drone-related legislation"},{"1":"Tanzania_Africa","2":"Visual line of sight required"},{"1":"Thailand_Asia","2":"Visual line of sight required"},{"1":"Timor-Leste_Asia","2":"No drone-related legislation"},{"1":"Togo_Africa","2":"No drone-related legislation"},{"1":"Tonga_Oceania","2":"No drone-related legislation"},{"1":"Trinidad and Tobago_North America","2":"Experimental visual line of sight"},{"1":"Tunisia_Africa","2":"No drone-related legislation"},{"1":"Turkey_Europe","2":"Unrestricted"},{"1":"Turkmenistan_Asia","2":"No drone-related legislation"},{"1":"Turks and Caicos Islands_North America","2":"Unrestricted"},{"1":"Tuvalu_Oceania","2":"No drone-related legislation"},{"1":"Uganda_Africa","2":"Experimental visual line of sight"},{"1":"Ukraine_Europe","2":"Visual line of sight required"},{"1":"United Arab Emirates_Asia","2":"Visual line of sight required"},{"1":"United Kingdom_Europe","2":"Experimental visual line of sight"},{"1":"United States_North America","2":"Experimental visual line of sight"},{"1":"Uruguay_South America","2":"Visual line of sight required"},{"1":"Uzbekistan_Asia","2":"Outright ban"},{"1":"Vanuatu_Oceania","2":"Visual line of sight required"},{"1":"Venezuela, RB_South America","2":"Unrestricted"},{"1":"Vietnam_Asia","2":"Unrestricted"},{"1":"Yemen, Rep._Asia","2":"No drone-related legislation"},{"1":"Zambia_Africa","2":"Visual line of sight required"},{"1":"Zimbabwe_Africa","2":"Experimental visual line of sight"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Combine using <kbd>paste()</kbd> function from base <kbd>R</kbd></p>
+<pre class="r fold-hide"><code>#combining columns
+df2 &lt;- df
+df2$country_region &lt;- paste(df$Country, df$Continent, sep=&quot;_&quot;)
+df2</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Continent"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Drone_Legal_Status_as_of_Oct_2020"],"name":[3],"type":["chr"],"align":["left"]},{"label":["country_region"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"Afghanistan","2":"Asia","3":"Unrestricted","4":"Afghanistan_Asia"},{"1":"Albania","2":"Europe","3":"No drone-related legislation","4":"Albania_Europe"},{"1":"Algeria","2":"Africa","3":"Outright ban","4":"Algeria_Africa"},{"1":"Andorra","2":"Europe","3":"Visual line of sight required","4":"Andorra_Europe"},{"1":"Angola","2":"Africa","3":"No drone-related legislation","4":"Angola_Africa"},{"1":"Antigua and Barbuda","2":"North America","3":"Experimental visual line of sight","4":"Antigua and Barbuda_North America"},{"1":"Argentina","2":"South America","3":"Unrestricted","4":"Argentina_South America"},{"1":"Armenia","2":"Europe","3":"No drone-related legislation","4":"Armenia_Europe"},{"1":"Aruba","2":"North America","3":"Visual line of sight required","4":"Aruba_North America"},{"1":"Australia","2":"Oceania","3":"Experimental visual line of sight","4":"Australia_Oceania"},{"1":"Austria","2":"Europe","3":"Unrestricted","4":"Austria_Europe"},{"1":"Azerbaijan","2":"Europe","3":"Visual line of sight required","4":"Azerbaijan_Europe"},{"1":"Bahamas, The","2":"North America","3":"Unrestricted","4":"Bahamas, The_North America"},{"1":"Bahrain","2":"Asia","3":"No drone-related legislation","4":"Bahrain_Asia"},{"1":"Bangladesh","2":"Asia","3":"Unrestricted","4":"Bangladesh_Asia"},{"1":"Barbados","2":"North America","3":"Outright ban","4":"Barbados_North America"},{"1":"Belarus","2":"Europe","3":"No drone-related legislation","4":"Belarus_Europe"},{"1":"Belgium","2":"Europe","3":"Visual line of sight required","4":"Belgium_Europe"},{"1":"Belize","2":"North America","3":"Effective ban","4":"Belize_North America"},{"1":"Benin","2":"Africa","3":"No drone-related legislation","4":"Benin_Africa"},{"1":"Bermuda","2":"North America","3":"Visual line of sight required","4":"Bermuda_North America"},{"1":"Bhutan","2":"Asia","3":"Effective ban","4":"Bhutan_Asia"},{"1":"Bolivia","2":"South America","3":"No drone-related legislation","4":"Bolivia_South America"},{"1":"Bosnia and Herzegovina","2":"Europe","3":"No drone-related legislation","4":"Bosnia and Herzegovina_Europe"},{"1":"Botswana","2":"Africa","3":"Visual line of sight required","4":"Botswana_Africa"},{"1":"Brazil","2":"South America","3":"Visual line of sight required","4":"Brazil_South America"},{"1":"Brunei Darussalam","2":"Asia","3":"Outright ban","4":"Brunei Darussalam_Asia"},{"1":"Bulgaria","2":"Europe","3":"Effective ban","4":"Bulgaria_Europe"},{"1":"Burkina Faso","2":"Africa","3":"No drone-related legislation","4":"Burkina Faso_Africa"},{"1":"Burundi","2":"Africa","3":"No drone-related legislation","4":"Burundi_Africa"},{"1":"Cabo Verde","2":"Africa","3":"Visual line of sight required","4":"Cabo Verde_Africa"},{"1":"Cambodia","2":"Asia","3":"No drone-related legislation","4":"Cambodia_Asia"},{"1":"Cameroon","2":"Africa","3":"Visual line of sight required","4":"Cameroon_Africa"},{"1":"Canada","2":"North America","3":"Experimental visual line of sight","4":"Canada_North America"},{"1":"Cayman Islands","2":"North America","3":"Experimental visual line of sight","4":"Cayman Islands_North America"},{"1":"Central African Republic","2":"Africa","3":"No drone-related legislation","4":"Central African Republic_Africa"},{"1":"Chad","2":"Africa","3":"Unrestricted","4":"Chad_Africa"},{"1":"Chile","2":"South America","3":"Visual line of sight required","4":"Chile_South America"},{"1":"China","2":"Asia","3":"Experimental visual line of sight","4":"China_Asia"},{"1":"Colombia","2":"South America","3":"Visual line of sight required","4":"Colombia_South America"},{"1":"Comoros","2":"Africa","3":"No drone-related legislation","4":"Comoros_Africa"},{"1":"Congo, Dem. Rep.","2":"Africa","3":"No drone-related legislation","4":"Congo, Dem. Rep._Africa"},{"1":"Congo, Rep.","2":"Africa","3":"No drone-related legislation","4":"Congo, Rep._Africa"},{"1":"Costa Rica","2":"North America","3":"Visual line of sight required","4":"Costa Rica_North America"},{"1":"Cote d'Ivoire","2":"Africa","3":"Outright ban","4":"Cote d'Ivoire_Africa"},{"1":"Croatia","2":"Europe","3":"Visual line of sight required","4":"Croatia_Europe"},{"1":"Cuba","2":"North America","3":"Outright ban","4":"Cuba_North America"},{"1":"Curacao","2":"North America","3":"Visual line of sight required","4":"Curacao_North America"},{"1":"Cyprus","2":"Europe","3":"Visual line of sight required","4":"Cyprus_Europe"},{"1":"Czech Republic","2":"Europe","3":"Experimental visual line of sight","4":"Czech Republic_Europe"},{"1":"Denmark","2":"Europe","3":"Experimental visual line of sight","4":"Denmark_Europe"},{"1":"Djibouti","2":"Africa","3":"No drone-related legislation","4":"Djibouti_Africa"},{"1":"Dominica","2":"North America","3":"No drone-related legislation","4":"Dominica_North America"},{"1":"Dominican Republic","2":"North America","3":"Visual line of sight required","4":"Dominican Republic_North America"},{"1":"Ecuador","2":"South America","3":"Visual line of sight required","4":"Ecuador_South America"},{"1":"Egypt, Arab Rep.","2":"Africa","3":"Effective ban","4":"Egypt, Arab Rep._Africa"},{"1":"El Salvador","2":"North America","3":"No drone-related legislation","4":"El Salvador_North America"},{"1":"Equatorial Guinea","2":"Africa","3":"No drone-related legislation","4":"Equatorial Guinea_Africa"},{"1":"Eritrea","2":"Africa","3":"No drone-related legislation","4":"Eritrea_Africa"},{"1":"Estonia","2":"Europe","3":"Unrestricted","4":"Estonia_Europe"},{"1":"Ethiopia","2":"Africa","3":"No drone-related legislation","4":"Ethiopia_Africa"},{"1":"Faroe Islands","2":"Europe","3":"Unrestricted","4":"Faroe Islands_Europe"},{"1":"Fiji","2":"Oceania","3":"Visual line of sight required","4":"Fiji_Oceania"},{"1":"Finland","2":"Europe","3":"Experimental visual line of sight","4":"Finland_Europe"},{"1":"France","2":"Europe","3":"Experimental visual line of sight","4":"France_Europe"},{"1":"Gabon","2":"Africa","3":"No drone-related legislation","4":"Gabon_Africa"},{"1":"Gambia, The","2":"Africa","3":"No drone-related legislation","4":"Gambia, The_Africa"},{"1":"Georgia","2":"Europe","3":"Visual line of sight required","4":"Georgia_Europe"},{"1":"Germany","2":"Europe","3":"Experimental visual line of sight","4":"Germany_Europe"},{"1":"Ghana","2":"Africa","3":"Experimental visual line of sight","4":"Ghana_Africa"},{"1":"Gibraltar","2":"Europe","3":"Effective ban","4":"Gibraltar_Europe"},{"1":"Greece","2":"Europe","3":"Unrestricted","4":"Greece_Europe"},{"1":"Greenland","2":"North America","3":"Visual line of sight required","4":"Greenland_North America"},{"1":"Grenada","2":"North America","3":"No drone-related legislation","4":"Grenada_North America"},{"1":"Guam","2":"Oceania","3":"Unrestricted","4":"Guam_Oceania"},{"1":"Guatemala","2":"North America","3":"No drone-related legislation","4":"Guatemala_North America"},{"1":"Guinea","2":"Africa","3":"No drone-related legislation","4":"Guinea_Africa"},{"1":"Guinea-Bissau","2":"Africa","3":"No drone-related legislation","4":"Guinea-Bissau_Africa"},{"1":"Guyana","2":"South America","3":"Experimental visual line of sight","4":"Guyana_South America"},{"1":"Haiti","2":"North America","3":"No drone-related legislation","4":"Haiti_North America"},{"1":"Honduras","2":"North America","3":"No drone-related legislation","4":"Honduras_North America"},{"1":"Hong Kong SAR, China","2":"Asia","3":"Visual line of sight required","4":"Hong Kong SAR, China_Asia"},{"1":"Hungary","2":"Europe","3":"Unrestricted","4":"Hungary_Europe"},{"1":"Iceland","2":"Europe","3":"Visual line of sight required","4":"Iceland_Europe"},{"1":"India","2":"Asia","3":"Visual line of sight required","4":"India_Asia"},{"1":"Indonesia","2":"Asia","3":"Visual line of sight required","4":"Indonesia_Asia"},{"1":"Iran, Islamic Rep.","2":"Asia","3":"Outright ban","4":"Iran, Islamic Rep._Asia"},{"1":"Iraq","2":"Asia","3":"Outright ban","4":"Iraq_Asia"},{"1":"Ireland","2":"Europe","3":"Experimental visual line of sight","4":"Ireland_Europe"},{"1":"Israel","2":"Asia","3":"Visual line of sight required","4":"Israel_Asia"},{"1":"Italy","2":"Europe","3":"Visual line of sight required","4":"Italy_Europe"},{"1":"Jamaica","2":"North America","3":"Visual line of sight required","4":"Jamaica_North America"},{"1":"Japan","2":"Asia","3":"Experimental visual line of sight","4":"Japan_Asia"},{"1":"Jordan","2":"Asia","3":"Unrestricted","4":"Jordan_Asia"},{"1":"Kazakhstan","2":"Europe","3":"No drone-related legislation","4":"Kazakhstan_Europe"},{"1":"Kenya","2":"Africa","3":"Effective ban","4":"Kenya_Africa"},{"1":"Kiribati","2":"Oceania","3":"No drone-related legislation","4":"Kiribati_Oceania"},{"1":"Korea, Dem. Peopleâ\\200\\231s Rep.","2":"Asia","3":"No drone-related legislation","4":"Korea, Dem. Peopleâ\\200\\231s Rep._Asia"},{"1":"Korea, Rep.","2":"Asia","3":"Visual line of sight required","4":"Korea, Rep._Asia"},{"1":"Kosovo","2":"Europe","3":"Visual line of sight required","4":"Kosovo_Europe"},{"1":"Kuwait","2":"Asia","3":"Outright ban","4":"Kuwait_Asia"},{"1":"Kyrgyz Republic","2":"Asia","3":"Outright ban","4":"Kyrgyz Republic_Asia"},{"1":"Lao PDR","2":"Asia","3":"Unrestricted","4":"Lao PDR_Asia"},{"1":"Latvia","2":"Europe","3":"Unrestricted","4":"Latvia_Europe"},{"1":"Lebanon","2":"Asia","3":"No drone-related legislation","4":"Lebanon_Asia"},{"1":"Lesotho","2":"Africa","3":"No drone-related legislation","4":"Lesotho_Africa"},{"1":"Liberia","2":"Africa","3":"No drone-related legislation","4":"Liberia_Africa"},{"1":"Libya","2":"Africa","3":"No drone-related legislation","4":"Libya_Africa"},{"1":"Liechtenstein","2":"Europe","3":"Experimental visual line of sight","4":"Liechtenstein_Europe"},{"1":"Lithuania","2":"Europe","3":"Visual line of sight required","4":"Lithuania_Europe"},{"1":"Luxembourg","2":"Europe","3":"Visual line of sight required","4":"Luxembourg_Europe"},{"1":"Macao SAR, China","2":"Asia","3":"Visual line of sight required","4":"Macao SAR, China_Asia"},{"1":"Madagascar","2":"Africa","3":"Outright ban","4":"Madagascar_Africa"},{"1":"Malawi","2":"Africa","3":"Visual line of sight required","4":"Malawi_Africa"},{"1":"Malaysia","2":"Asia","3":"Effective ban","4":"Malaysia_Asia"},{"1":"Maldives","2":"Asia","3":"Effective ban","4":"Maldives_Asia"},{"1":"Mali","2":"Africa","3":"No drone-related legislation","4":"Mali_Africa"},{"1":"Malta","2":"Europe","3":"Unrestricted","4":"Malta_Europe"},{"1":"Marshall Islands","2":"Oceania","3":"No drone-related legislation","4":"Marshall Islands_Oceania"},{"1":"Mauritania","2":"Africa","3":"No drone-related legislation","4":"Mauritania_Africa"},{"1":"Mauritius","2":"Africa","3":"Visual line of sight required","4":"Mauritius_Africa"},{"1":"Mexico","2":"North America","3":"Visual line of sight required","4":"Mexico_North America"},{"1":"Micronesia, Fed. Sts.","2":"Oceania","3":"No drone-related legislation","4":"Micronesia, Fed. Sts._Oceania"},{"1":"Moldova","2":"Europe","3":"No drone-related legislation","4":"Moldova_Europe"},{"1":"Monaco","2":"Europe","3":"Unrestricted","4":"Monaco_Europe"},{"1":"Mongolia","2":"Asia","3":"No drone-related legislation","4":"Mongolia_Asia"},{"1":"Montenegro","2":"Europe","3":"Visual line of sight required","4":"Montenegro_Europe"},{"1":"Morocco","2":"Africa","3":"Outright ban","4":"Morocco_Africa"},{"1":"Mozambique","2":"Africa","3":"No drone-related legislation","4":"Mozambique_Africa"},{"1":"Myanmar","2":"Asia","3":"Effective ban","4":"Myanmar_Asia"},{"1":"Namibia","2":"Africa","3":"Visual line of sight required","4":"Namibia_Africa"},{"1":"Nauru","2":"Oceania","3":"No drone-related legislation","4":"Nauru_Oceania"},{"1":"Nepal","2":"Asia","3":"Visual line of sight required","4":"Nepal_Asia"},{"1":"Netherlands","2":"Europe","3":"Visual line of sight required","4":"Netherlands_Europe"},{"1":"New Caledonia","2":"Oceania","3":"No drone-related legislation","4":"New Caledonia_Oceania"},{"1":"New Zealand","2":"Oceania","3":"Experimental visual line of sight","4":"New Zealand_Oceania"},{"1":"Nicaragua","2":"North America","3":"Outright ban","4":"Nicaragua_North America"},{"1":"Niger","2":"Africa","3":"No drone-related legislation","4":"Niger_Africa"},{"1":"Nigeria","2":"Africa","3":"Effective ban","4":"Nigeria_Africa"},{"1":"North Macedonia","2":"Europe","3":"Visual line of sight required","4":"North Macedonia_Europe"},{"1":"Norway","2":"Europe","3":"Visual line of sight required","4":"Norway_Europe"},{"1":"Oman","2":"Asia","3":"Effective ban","4":"Oman_Asia"},{"1":"Pakistan","2":"Asia","3":"No drone-related legislation","4":"Pakistan_Asia"},{"1":"Palau","2":"Oceania","3":"No drone-related legislation","4":"Palau_Oceania"},{"1":"Panama","2":"North America","3":"Unrestricted","4":"Panama_North America"},{"1":"Papua New Guinea","2":"Oceania","3":"Visual line of sight required","4":"Papua New Guinea_Oceania"},{"1":"Paraguay","2":"South America","3":"No drone-related legislation","4":"Paraguay_South America"},{"1":"Peru","2":"South America","3":"Visual line of sight required","4":"Peru_South America"},{"1":"Philippines","2":"Asia","3":"Visual line of sight required","4":"Philippines_Asia"},{"1":"Poland","2":"Europe","3":"Experimental visual line of sight","4":"Poland_Europe"},{"1":"Portugal","2":"Europe","3":"Experimental visual line of sight","4":"Portugal_Europe"},{"1":"Puerto Rico","2":"North America","3":"Experimental visual line of sight","4":"Puerto Rico_North America"},{"1":"Qatar","2":"Asia","3":"Unrestricted","4":"Qatar_Asia"},{"1":"Romania","2":"Europe","3":"Visual line of sight required","4":"Romania_Europe"},{"1":"Russian Federation","2":"Europe","3":"Experimental visual line of sight","4":"Russian Federation_Europe"},{"1":"Rwanda","2":"Africa","3":"Experimental visual line of sight","4":"Rwanda_Africa"},{"1":"Samoa","2":"Oceania","3":"No drone-related legislation","4":"Samoa_Oceania"},{"1":"San Marino","2":"Europe","3":"No drone-related legislation","4":"San Marino_Europe"},{"1":"Sao Tome and Principe","2":"Africa","3":"No drone-related legislation","4":"Sao Tome and Principe_Africa"},{"1":"Saudi Arabia","2":"Asia","3":"Experimental visual line of sight","4":"Saudi Arabia_Asia"},{"1":"Senegal","2":"Africa","3":"Outright ban","4":"Senegal_Africa"},{"1":"Serbia","2":"Europe","3":"Unrestricted","4":"Serbia_Europe"},{"1":"Seychelles","2":"Africa","3":"Visual line of sight required","4":"Seychelles_Africa"},{"1":"Sierra Leone","2":"Africa","3":"No drone-related legislation","4":"Sierra Leone_Africa"},{"1":"Singapore","2":"Asia","3":"Experimental visual line of sight","4":"Singapore_Asia"},{"1":"Sint Maarten (Dutch part)","2":"North America","3":"Experimental visual line of sight","4":"Sint Maarten (Dutch part)_North America"},{"1":"Slovak Republic","2":"Europe","3":"Visual line of sight required","4":"Slovak Republic_Europe"},{"1":"Slovenia","2":"Europe","3":"Outright ban","4":"Slovenia_Europe"},{"1":"Solomon Islands","2":"Oceania","3":"Visual line of sight required","4":"Solomon Islands_Oceania"},{"1":"Somalia","2":"Africa","3":"No drone-related legislation","4":"Somalia_Africa"},{"1":"South Africa","2":"Africa","3":"Experimental visual line of sight","4":"South Africa_Africa"},{"1":"South Sudan","2":"Africa","3":"No drone-related legislation","4":"South Sudan_Africa"},{"1":"Spain","2":"Europe","3":"Experimental visual line of sight","4":"Spain_Europe"},{"1":"Sri Lanka","2":"Asia","3":"Experimental visual line of sight","4":"Sri Lanka_Asia"},{"1":"St. Kitts and Nevis","2":"North America","3":"No drone-related legislation","4":"St. Kitts and Nevis_North America"},{"1":"St. Lucia","2":"North America","3":"Unrestricted","4":"St. Lucia_North America"},{"1":"St. Martin (French part)","2":"North America","3":"Experimental visual line of sight","4":"St. Martin (French part)_North America"},{"1":"St. Vincent and the Grenadines","2":"North America","3":"No drone-related legislation","4":"St. Vincent and the Grenadines_North America"},{"1":"Sudan","2":"Africa","3":"No drone-related legislation","4":"Sudan_Africa"},{"1":"Suriname","2":"South America","3":"No drone-related legislation","4":"Suriname_South America"},{"1":"Swaziland","2":"Africa","3":"Visual line of sight required","4":"Swaziland_Africa"},{"1":"Sweden","2":"Europe","3":"Unrestricted","4":"Sweden_Europe"},{"1":"Switzerland","2":"Europe","3":"Unrestricted","4":"Switzerland_Europe"},{"1":"Syrian Arab Republic","2":"Asia","3":"Outright ban","4":"Syrian Arab Republic_Asia"},{"1":"Taiwan","2":"Asia","3":"Visual line of sight required","4":"Taiwan_Asia"},{"1":"Tajikistan","2":"Asia","3":"No drone-related legislation","4":"Tajikistan_Asia"},{"1":"Tanzania","2":"Africa","3":"Visual line of sight required","4":"Tanzania_Africa"},{"1":"Thailand","2":"Asia","3":"Visual line of sight required","4":"Thailand_Asia"},{"1":"Timor-Leste","2":"Asia","3":"No drone-related legislation","4":"Timor-Leste_Asia"},{"1":"Togo","2":"Africa","3":"No drone-related legislation","4":"Togo_Africa"},{"1":"Tonga","2":"Oceania","3":"No drone-related legislation","4":"Tonga_Oceania"},{"1":"Trinidad and Tobago","2":"North America","3":"Experimental visual line of sight","4":"Trinidad and Tobago_North America"},{"1":"Tunisia","2":"Africa","3":"No drone-related legislation","4":"Tunisia_Africa"},{"1":"Turkey","2":"Europe","3":"Unrestricted","4":"Turkey_Europe"},{"1":"Turkmenistan","2":"Asia","3":"No drone-related legislation","4":"Turkmenistan_Asia"},{"1":"Turks and Caicos Islands","2":"North America","3":"Unrestricted","4":"Turks and Caicos Islands_North America"},{"1":"Tuvalu","2":"Oceania","3":"No drone-related legislation","4":"Tuvalu_Oceania"},{"1":"Uganda","2":"Africa","3":"Experimental visual line of sight","4":"Uganda_Africa"},{"1":"Ukraine","2":"Europe","3":"Visual line of sight required","4":"Ukraine_Europe"},{"1":"United Arab Emirates","2":"Asia","3":"Visual line of sight required","4":"United Arab Emirates_Asia"},{"1":"United Kingdom","2":"Europe","3":"Experimental visual line of sight","4":"United Kingdom_Europe"},{"1":"United States","2":"North America","3":"Experimental visual line of sight","4":"United States_North America"},{"1":"Uruguay","2":"South America","3":"Visual line of sight required","4":"Uruguay_South America"},{"1":"Uzbekistan","2":"Asia","3":"Outright ban","4":"Uzbekistan_Asia"},{"1":"Vanuatu","2":"Oceania","3":"Visual line of sight required","4":"Vanuatu_Oceania"},{"1":"Venezuela, RB","2":"South America","3":"Unrestricted","4":"Venezuela, RB_South America"},{"1":"Vietnam","2":"Asia","3":"Unrestricted","4":"Vietnam_Asia"},{"1":"Yemen, Rep.","2":"Asia","3":"No drone-related legislation","4":"Yemen, Rep._Asia"},{"1":"Zambia","2":"Africa","3":"Visual line of sight required","4":"Zambia_Africa"},{"1":"Zimbabwe","2":"Africa","3":"Experimental visual line of sight","4":"Zimbabwe_Africa"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<div id="citations-for-narrative-and-data-sources" class="section level4">
+<h4>citations for narrative and data sources</h4>
+<ul>
+<li>Narrative and Data Source: Visual Capitalist, Mapped: Drone Privacy Laws Around the World, <a href="https://www.visualcapitalist.com/mapped-drone-privacy-laws-around-the-world/" target="_blank">GO</a></li>
+</ul>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>
