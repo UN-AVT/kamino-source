@@ -42,7 +42,7 @@ WRANGLERS
 </div>
 
 # Which Countries are the Happiest?
-## Profiling
+## Positive, negative, and zero values
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Alex Alvarez on Unsplash"}
 
@@ -63,7 +63,7 @@ looking to better understand what makes people happy...\
 
 ```{r load-data, echo=TRUE, message=FALSE, warning=FALSE, class.source= 'fold-hide'}
 
-#Load
+#Load data
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
 url_file <- "happiness-report/happiness-report-2020.csv"
 url <- paste0(url_root, url_file)
@@ -73,10 +73,9 @@ df
 
 ```
 
-### Positive, Negative and Zero Values
-#### Check for all the numerical columns
+### Wrangle
 
-<kbd>sum()</kbd>
+Check values for all the numerical columns and retrieve records with positive, negative and zero value using <kbd>sum()</kbd>
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, class.source= 'fold-hide'}
 

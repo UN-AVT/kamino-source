@@ -38,7 +38,7 @@ WRANGLERS
 </div>
 
 # Corruption Perception Index
-## Profiling
+## Missing values
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nathaniel Tetteh on Unsplash"}
 
@@ -54,11 +54,12 @@ knitr::include_graphics(masthead, dpi=72)
 ***
 
 ### Ingest
-#### country, region, CPI score, standard error
+
+country, region, CPI score, standard error
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-# Load
+# Load data
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
 url_file <- "corruption-perception-index/corruption-perception-index-2020.csv"
 url <- paste0(url_root, url_file)
@@ -67,8 +68,9 @@ df <- read.csv(url, header = TRUE)
 df
 
 ```
-### Missing Values
-#### Check the missing values using <kbd>is.na()</kbd> and <kbd>gather()</kbd>
+### Wrangle
+
+Check the missing values using <kbd>is.na()</kbd> and <kbd>gather()</kbd>
 
 ```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 

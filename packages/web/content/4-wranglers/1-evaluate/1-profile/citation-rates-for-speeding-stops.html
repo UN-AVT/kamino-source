@@ -232,8 +232,8 @@ pre code {
 </div>
 <div id="citation-rates-for-speeding-stops" class="section level1">
 <h1>Citation Rates for Speeding Stops</h1>
-<div id="profiling" class="section level2">
-<h2>Profiling</h2>
+<div id="column-name-number-and-type" class="section level2">
+<h2>Column name, number and type</h2>
 <div class="figure" style="text-align: center">
 <img src="police-citation.jpg" alt="Photo by Nomadsoul1 on Freepik" width="60%" />
 <p class="caption">
@@ -262,9 +262,8 @@ Photo by Nomadsoul1 on Freepik
 </ul>
 <div id="ingest-data" class="section level3">
 <h3>Ingest data</h3>
-<div id="summary-data" class="section level4">
-<h4>summary data</h4>
-<pre class="r fold-hide"><code># Load
+<p>summary data</p>
+<pre class="r fold-hide"><code># Load data
 url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
 url_file &lt;- &quot;citation-rates-for-speeding-stops/citation-rates-for-speeding-stops.csv&quot;
 url &lt;- paste0(url_root, url_file)
@@ -277,18 +276,12 @@ df</code></pre>
   </script>
 </div>
 </div>
-</div>
 <div id="wrangle-data" class="section level3">
 <h3>Wrangle data</h3>
-<div id="number-of-columns-and-rows" class="section level4">
-<h4>number of columns and rows</h4>
-<p><kbd>dim</kbd></p>
+<p>Retrieving number of columns and rows using <kbd>dim()</kbd></p>
 <pre class="r fold-show"><code>dim(df)</code></pre>
 <pre><code>## [1] 2688   11</code></pre>
-</div>
-<div id="list-keys-and-column-types" class="section level4">
-<h4>List keys and column types</h4>
-<p><kbd>glimpse</kbd></p>
+<p>Retrieving the list keys and column types using <kbd>glimpse()</kbd></p>
 <pre class="r fold-show"><code>glimpse(df)</code></pre>
 <pre><code>## Rows: 2,688
 ## Columns: 11
@@ -304,7 +297,6 @@ df</code></pre>
 ## $ hit_rate                     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N~
 ## $ inferred_threshold           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N~</code></pre>
 <p>The above provides a little more information. For example, we see that ‘location’, ‘state’ and ‘driver_race’ are column of characters <strong>char</strong>, and ‘stops_per_year’ is a column of integers <strong>int</strong>. Whereas all the other columns are numbers <strong>dbl</strong>. Also notice the beginning values of each column; this is useful to get familiar with the data on hand. Some columns display a lot of NA, which indicates the absence of data.</p>
-</div>
 </div>
 <div id="references" class="section level3">
 <h3>References</h3>
