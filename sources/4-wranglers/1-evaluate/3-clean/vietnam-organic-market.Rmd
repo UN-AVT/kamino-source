@@ -34,7 +34,7 @@ WRANGLERS
 </div>
 
 # Vietnam Organic Market
-## Clean Data
+## Remove value
 
 
 ```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by René DeAnda on Unsplash"}
@@ -52,7 +52,8 @@ knitr::include_graphics(masthead, dpi=72)
 Vietnam imports a diverse number of organic food and beverage products to meet consumer demand for items that cannot be grown or produced locally, a majority of which are fresh fruits and vegetables and processed products.  A recent report of the USDA Foreign Agriculture Service analyzed export trends and foresee Vietnam as a potential growth market for imported organic food and beverage products.
 
 ### Ingest
-#### U.S. Organic Agricultural Exports to Vietnam in 2015-2020
+
+U.S. Organic Agricultural Exports to Vietnam in 2015-2020
 
 List of Products dataset
 
@@ -83,7 +84,8 @@ df
 ```
 
 ### Wrangle
-#### Converting values from wide to long format using <kbd>melt()</kbd>
+
+Converting values from wide to long format using <kbd>melt()</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
@@ -94,7 +96,7 @@ df_long <- melt(df, id.vars=c("Partner", "HS.Code", "Product"))
 df_long
 
 ```
-#### Removing zero values using <kbd>filter()</kbd>
+Removing zero values using <kbd>filter()</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 

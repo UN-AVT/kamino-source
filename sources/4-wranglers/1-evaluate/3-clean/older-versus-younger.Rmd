@@ -37,7 +37,7 @@ WRANGLERS
 </div>
 
 # Older Versus Younger
-## Clean Data
+## Remove duplicates
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Paolo Bendandi on Unsplash"}
 
@@ -52,7 +52,8 @@ knitr::include_graphics(masthead, dpi=72)
 ***
 
 ### Ingest
-#### age, gender, year, and population
+
+age, gender, year, and population
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
@@ -67,7 +68,8 @@ df
 ```
 
 ### Wrangle
-#### Remove duplicates using <kbd>filter()</kbd> and <kbd>unique()</kbd>
+
+Filter records and remove duplicates using <kbd>filter()</kbd> and <kbd>unique()</kbd>
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}

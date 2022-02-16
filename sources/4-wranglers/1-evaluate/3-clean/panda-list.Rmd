@@ -37,7 +37,7 @@ WRANGLERS
 </div>
 
 # Pandas in Zoos
-## Clean Data
+## Replace missing values
 
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Michael Payne on Unsplash"}
@@ -68,7 +68,8 @@ df
 ```
 
 ### Wrangle
-#### Replace the missing value using <kbd>is.na()</kbd>
+
+Replace the missing value using <kbd>is.na()</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 

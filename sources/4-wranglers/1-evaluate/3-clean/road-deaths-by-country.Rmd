@@ -38,7 +38,7 @@ WRANGLERS
 </div>
 
 # Road deaths by country
-## Clean Data
+## Replace value
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Yannis H on Unsplash"}
 
@@ -56,7 +56,8 @@ knitr::include_graphics(masthead, dpi=72)
 
 
 ### Ingest the data
-#### Load GDP Dataset 
+
+Load GDP Dataset 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
@@ -70,8 +71,9 @@ df_gdp <- read.csv(url1, header = TRUE, stringsAsFactors = FALSE, encoding = "UT
 df_gdp
 
 ```
-### Wrangle the data
-#### Replace value "NA" with "Not Applicable" using <kbd>is.na()</kbd>
+### Wrangle
+
+Replace value "NA" with "Not Applicable" using <kbd>is.na()</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
