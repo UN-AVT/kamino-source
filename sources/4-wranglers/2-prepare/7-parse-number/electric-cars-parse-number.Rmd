@@ -75,6 +75,7 @@ Let's take a look at the datatypes we have on our dataset.
 str(df)
 
 ```
+### Wrangle 
 
 Most of our data are in Character formats where it should be numerical. Having numerical data-points will allow us to do computations as well as plot the data efficiently. It's imperative that we get rid of the strings in the data point and convert it to numerical. 
 

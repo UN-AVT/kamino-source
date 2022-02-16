@@ -26,7 +26,6 @@ gc() #free up memory and report the memory usage.
 library(tidyverse)
 library(lubridate)
 library(ggiraph)
-
 library(kableExtra)
 
 library(showtext)
@@ -72,7 +71,8 @@ class(df$date)
 
 ```
 
-We'l convert this to the date format and recheck its data type
+### Wrangle
+We'll convert this to the date format and recheck its data type
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -84,7 +84,7 @@ class(df$date)
 
 Parsing the date can help us transform the date into a format that is suitable for our use case. Lets explore a few useful things we can do. 
 
-Firstly, we can seperate the column 'Date' into three different columns for month, day and year.
+Firstly, we can separate the column 'Date' into three different columns for month, day and year by using <kbd>day</kbd>, <kbd>month</kbd> <kbd>year</kbd> methods.
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -98,7 +98,7 @@ parsed_date
 ```
 
 
-We can also convert month to their alphabetical format. 
+We can also convert month to their alphabetical format setting label=true within <kbd>month</kbd> method. 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
@@ -113,13 +113,19 @@ parsed_date2
 
 The library 'lubridate' can also help us parse dates from strings.
 
-We can also convert month to thier alphabetical format. The library will examine the entire vector of dates will help you determine what format it is by process of elimination. For example:
+We can also convert month to their alphabetical format. The library will examine the entire vector of dates and will parse according to the method in use:
+<kbd>ymd()</kbd> year, month and day
+<kbd>myd()</kbd>  month, year and day
+<kbd>dmy()</kbd> day, month and year
+<kbd>dym()</kbd>  day, year and month
+
+For example:
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 x <- "04/01/05"
 
-ymd(x) #the library will interpret the first entity as year, then month, then day
+ymd(x)
 
 myd(x)
 
@@ -131,8 +137,7 @@ dym(x)
 
 ### References
 #### citations for narrative and data sources
-* Narrative sources: Cheapest Electric Cars, [GO](https://www.kaggle.com/kkhandekar/cheapest-electric-cars){target="_blank"}
-* Data sources: Electric Vehicle Database, [GO](https://ev-database.org/){target="_blank"}
+* Narrative and Data sources: IQAir, [GO](https://www.iqair.com/us/france/ile-de-france/paris){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}

@@ -42,9 +42,6 @@ WRANGLERS
 
 # Average SAT Scores for NYC Public Schools
 ## Parse Numbers
-<kbd>
-gsub
-</kbd>
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Andre Hunter on Unsplash"}
 
@@ -67,8 +64,10 @@ knitr::include_graphics(masthead, dpi=72)
 df <- read.csv('./archetypes/scores.csv', header = TRUE, stringsAsFactors = FALSE)
 df
 ```
+### Wrangle
+<kbd> gsub </kbd>
 
-Let's take a look at the column Street.Address. Both the Street Name and Building number are in the column. Perhaps, we'll like to sepearate them. 
+Let's take a look at the column Street.Address. Both the Street Name and Building number are in the column. Perhaps, we'll like to separate them. 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 

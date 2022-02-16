@@ -42,9 +42,6 @@ WRANGLERS
 
 # Environmental Impact of Milk
 ## Replace
-<kbd>
-gsub
-</kbd>
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by dhanya purohit on Unsplash"}
 
@@ -85,6 +82,8 @@ df_tmp
 
 ```
 
+### Wrangle
+<kbd> gsub <kbd/>
 
 In MEASURE, let's replace/substitute <span style="color: #0000FF;font-weight:bold">Water User (L)</span> to <span style="color: #fc7f03;font-weight:bold">Water Use in Liter</span>. 
 

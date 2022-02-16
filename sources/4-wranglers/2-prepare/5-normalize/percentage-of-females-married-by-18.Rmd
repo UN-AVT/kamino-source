@@ -140,7 +140,7 @@ summary(df_wrangle)
 ```
 
 ### Z (statistical) Normalization
-#### <kbd> mutate_each_() </kbd>
+<kbd> mutate_each_() </kbd>
 
 This normalization subtracts the mean of the data from all values and then divides them by the standard deviation. The distribution of the data has a __mean of zero__ and __a variance of one__. This is a common and very useful normalization technique. It preserves the original distribution of the data and is less influenced by outliers.
 

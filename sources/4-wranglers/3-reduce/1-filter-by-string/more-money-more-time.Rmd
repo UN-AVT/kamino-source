@@ -98,6 +98,7 @@ df_complete <- df_complete[complete.cases(df_complete), ]
 df_complete
 
 ```
+<kbd>Filter</kbd>
 
 #### Where equal
 
@@ -109,6 +110,8 @@ df_1 <- df_complete %>% filter(Country=="Spain")
 df_1
 
 ```
+<kbd>Filter</kbd>
+
 #### Where not equal
 
 Let's say we want to eliminate, for some reason, <span style="font-weight:bold">Poland</span> from <span style="background: #E0F8EC;font-weight:bold">Country</span> from this data
