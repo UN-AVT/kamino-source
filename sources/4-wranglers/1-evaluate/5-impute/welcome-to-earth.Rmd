@@ -38,7 +38,7 @@ WRANGLERS
 
 
 # Welcome to Earth! 
-## Imputing
+## Median
 
 ```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Albert Anthony on Unsplash"}
 
@@ -54,7 +54,8 @@ knitr::include_graphics(masthead, dpi=72)
 ***
 
 ### Ingest
-#### date and count
+
+date and count
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
@@ -80,7 +81,8 @@ The median formula of a given set of numbers say having 'n' __even number__ of o
 
 
 ### Wrangle
-#### calculating median for odd number of observations by using <kbd>median()</kbd>
+
+calculating median for odd number of observations by using <kbd>median()</kbd>
 
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
@@ -92,7 +94,7 @@ df_wrangle
 
 ```
 
-#### calculating median for even number of observations by using <kbd>median()</kbd>
+calculating median for even number of observations by using <kbd>median()</kbd>
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
