@@ -1,0 +1,127 @@
+---
+pagetitle: "The Price of a Pangolin"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# The Price of a Pangolin
+## Validate
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Louis Mornaud on Unsplash"}
+
+masthead <- "assets/louis-mornaud-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">The Pangolin is the most illegally trafficked animal in the world.</div>
+
+
+> We have to stop the blood flow. We have to be relentless in our pursuit for justice; in our pursuit for humanity. Nature is the mother of us all, and within all of us is the spirit of an eco warrior. The war on poaching is a war on greed, but what stands to be lost is priceless...\
+--- National Green Party\
+
+***
+
+### Load the data
+
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "price-of-pangolin/pangolin_scales.csv"
+url <- paste0(url_root, url_file)
+df <- read.csv(url, header = TRUE)
+df
+
+```
+
+Pangolins are believed to be the world's most trafficked mammal, accounting for as much as 20% of all illegal wildlife trade. According to the International Union for Conservation of Nature (IUCN), more than a million pangolins were poached in the decade prior to 2014.
+
+The animals are trafficked mainly for their scales, which are believed to treat a variety of health conditions in traditional Chinese medicine, and as a luxury food in Vietnam and China. In Africa, pangolins are sold as a form of bushmeat, for ritual or spiritual purposes, and use in traditional African medicine. Many times the animal is trafficked just for clothing and fashion. (Source: Wikipedia)
+
+### Wrangle 
+
+Is Currency
+
+We can use regular expression to match if our cells are in the correct format. A currency might start with the $ sign and might have commas and decimals. Here we have the decimal and commas as optional. We can use the function <kbd>grepl()</kbd>
+
+```{r , echo=TRUE, message=FALSE}
+
+a <- gsub(" ", "", df$Price_per_kg)
+
+df_1 <- grepl("(?=.*?\\d)^\\$?(([1-9]\\d{0,2}(,\\d{3})*)|\\d+)?(\\.\\d{1,2})?$", a, perl = T)
+df_1
+
+```
+
+We can also validate with other rules such as the commas and decimals being mandatory. Here, we will make decimals required and commas optional.
+
+
+```{r , echo=TRUE, message=FALSE}
+
+df_2 <- grepl("^\\$?(([1-9]\\d{0,2}(,\\d{3})*)|0)?\\.\\d{1,2}$", a, perl = T)
+df_2
+
+```
+As you can see, our Price column does not follow the decimal format. We can use additional currency formatters if we wish to do so.
+
+
+### References
+#### citations for narrative and data sources
+
+* Narratives: Additional Narratives on Illegal Pangolin Trade and Pangolin Conservation,
+[GO](https://www.savepangolins.org/){target="_blank"}  
+* Data sources: This case is based on a dataset by The Pangolin Report, [GO](https://www.pangolinreports.com/){target="_blank"}  
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

@@ -55,7 +55,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
-### Ingest Data
+### Load the data
 
 
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
@@ -67,7 +67,9 @@ df
 
 ```
 
-### is_length()
+### Wrangle
+
+Is Length
 
 String Length validation is especially useful to make sure the number of characters entered into a field can be restricted. It can be used to make sure the number of characters are the same throughout the column.
 

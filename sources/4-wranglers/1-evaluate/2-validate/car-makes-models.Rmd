@@ -1,5 +1,5 @@
 ---
-pagetitle: "UCS Satellites"
+pagetitle: "Car Makes and Models"
 output: 
   html_document:
     theme: lumen
@@ -24,7 +24,6 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(kableExtra)
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -37,65 +36,68 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# UCS Satellites
+# Car Makes and Models
 ## Validate
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nasa on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Alex Suprun on Unsplash"}
 
-masthead <- "assets/photo-satellite.jpg"
+masthead <- "assets/alex-suprun-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">Satellite in Orbit</div>
+<div class="figure-text">Vintage Cars</div>
 
 
-> If I had a spreadsheet on my computer, it looked like I was busy...\
---- Nate Silver\
+> If I had asked people what they wanted, they would have said faster horses...\
+--- Henry Ford\
 
 ***
 
 ### Load the data
 
+
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
-url_file <- "ucs-satellite-database/ucs-satellite-database-original.csv"
+url_file <- "car-prices/CarPrice_Assignment.csv"
 url <- paste0(url_root, url_file)
-df <- read.csv(url, header = TRUE, nrows=25)
+df <- read.csv(url, header = TRUE)
 df
 
 ```
 
 
-### Wrangle
+### Wrangle 
 
-Is empty
+Is In List
 
-Checking if the column "Detailed.Purpose" column has any cells with length zero. To do this, we use function <kbd>nchar()</kbd> 
+We will check if a list contains a particular element or a multitude of elements. Here, we ingested a list of automobiles and their features. We'll see if a particular car is in that list. We can use the operator <kbd>%in%</kbd>
 
-```{r is.empty, echo=TRUE, message=FALSE}
+```{r, echo=TRUE, message=FALSE}
 
-df_2 <- nchar(df$Detailed_Purpose)==0
-df_2
-
-```
-
-```{r, echo=FALSE}
-
-list <- data.frame(Detailed_Purpose = df$Detailed_Purpose, is.empty = df_2)
-list
+"bmw x5" %in% df$CarName
 
 ```
 
-As you can see, there are many empty rows.
+We can see that the string 'bmw x5' is in our ingested dataset. We can also create a list of cars to check if they are in the dataset.
 
 
+```{r, echo=TRUE, message=FALSE}
+
+a <- c("nissan sentra", "honda civic", 'toyota corolla', 'hyundai elantra')
+a
+
+a %in% df$CarName
+
+```
 
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data sources: This case is based on a dataset that comes from the following report by Union of Concerned Scientists, [GO](https://www.ucsusa.org/resources/satellite-database){target="_blank"} 
+* Narrative and Data sources: This case is based on a dataset by Kaggle, [GO](https://www.kaggle.com/goyalshalini93/car-data){target="_blank"}  
+
+
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 

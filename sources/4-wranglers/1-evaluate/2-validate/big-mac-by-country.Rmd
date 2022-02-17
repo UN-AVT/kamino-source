@@ -25,7 +25,6 @@ gc() #free up memory and report the memory usage.
 
 library(tidyverse)
 library(countrycode)
-
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -48,7 +47,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">Burger</div>
+<div class="figure-text">A Good-Looking Burger</div>
 
 
 > About once every three and a half weeks, I need a Big Mac, but after that I'm fine...\
@@ -56,7 +55,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
-### Ingest Data
+### Load the data
 
 
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
@@ -69,15 +68,16 @@ df
 
 ```
 
-### ISO_Alpha3
+### Wrangle
 
-library(countrycode) is a very useful package when we deal with country data,   <a href="https://cran.r-project.org/web/packages/countrycode/countrycode.pdf" target="_blank" rel="noopener noreferrer">[country code library]</a>
 
-This package includes a set of functions that we can apply to convert, guess and/or validate country code.
+ISO_Alpha3
+
+<a href="https://cran.r-project.org/web/packages/countrycode/countrycode.pdf" target="_blank" rel="noopener noreferrer">library(countrycode)</a> is a very useful package when we deal with country data. This package includes a set of functions that we can apply to convert, guess and/or validate country code.
 
 For example, the second column in the dataset we loaded, called "iso_a3", seems to contain ISO-3 characters. Using the package, we can confirm that these code are all valid. If some of them are not valid, it will return NA.
 
-Let's enter "iso3c" as origin first (meaning we guess it is ISO-3). For each cell, it will return the country name if the code is recognized.
+Let's enter "iso3c" as origin first (meaning we guess it is ISO-3). For each cell, it will return the country name if the code is recognized. To do this, we use the function <kbd>countrycode()</kbd>
 
 ```{r is.country, echo=TRUE, message=FALSE}
 
@@ -91,7 +91,11 @@ Notice that the tenth entry is NA, meaning the code was not recognized as a vali
 ### References
 #### citations for narrative and data sources
 
-* Data sources: TidyTuesday, [GO](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-12-22/big-mac.csv){target="_blank"}
+* Narrative sources: The Economist, The Big Mac Index, [GO](https://www.economist.com/big-mac-index){target="_blank"}
+* Data sources: TidyTuesday, [GO](https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-12-22){target="_blank"}
+
+
+
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 

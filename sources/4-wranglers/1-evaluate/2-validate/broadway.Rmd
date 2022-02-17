@@ -56,7 +56,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
-
+### Load the data
 
 
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
@@ -70,7 +70,9 @@ df
 ```
 
 
-### Is alpha
+### Wrangle 
+
+Is alpha
 
 Checking if the cells in the first column contain letters, and only letters (a-zA-Z). We can use the function <kbd>grepl()</kbd>
 
@@ -111,7 +113,7 @@ As you can see, some rows contain other characters than just alphabets.
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data sources: This case is based on a dataset by Tidy Tuesday, [GO](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-04-28/readme.md") 
+* Narrative and Data sources: This case is based on a dataset by Tidy Tuesday, [GO](https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-04-28){target="_blank"}  
 
 
 

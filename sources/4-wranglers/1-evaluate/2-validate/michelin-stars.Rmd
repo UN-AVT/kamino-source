@@ -24,8 +24,6 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(kableExtra)
-
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -56,6 +54,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
+### Load the data
 
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
@@ -68,9 +67,11 @@ df
 ```
 
 
-### Is LatLong
+### Wrangle
 
-Check if the string is a valid latitude-longitude coordinate. The latitude of the location ranges from -90.0 to 90.0. The longitude of the location. May range from -180.0 to 180.0.
+Is LatLong
+
+Check if the string is a valid latitude-longitude coordinate. The latitude of the location ranges from -90.0 to 90.0. The longitude of the location ranges from -180.0 to 180.0.
 
 Let's check if "latitude" column fit the requirement. 
 

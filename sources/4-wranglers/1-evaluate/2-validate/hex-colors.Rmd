@@ -46,7 +46,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">Broadway Play</div>
+<div class="figure-text">Color Pallete</div>
 
 
 > Color! What a deep and mysterious language, the language of dreams...\
@@ -55,7 +55,7 @@ knitr::include_graphics(masthead, dpi=72)
 ***
 
 
-
+### Load the data
 
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
@@ -69,9 +69,12 @@ df
 ```
 
 
-### Is Hex Color
+### Wrangle
 
-Hexadecimal Color Code starts with a # folloed by six or three letters or digits.For example: #fff, #FFF, #000, #111111, #F000F0, #00FF00, #0000FF, #FFFFFF are all valid Hexadecimal color codes.
+
+Is Hex Color
+
+Hexadecimal Color Code starts with a # followed by six or three letters or digits.For example: #fff, #FFF, #000, #111111, #F000F0, #00FF00, #0000FF, #FFFFFF are all valid Hexadecimal color codes.
 
 To validate, we can use the function <kbd>grepl()</kbd>
 

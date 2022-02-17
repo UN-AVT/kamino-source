@@ -1,5 +1,5 @@
 ---
-pagetitle: "UCS Satellites"
+pagetitle: "Biocapacity by Country"
 output: 
   html_document:
     theme: lumen
@@ -24,7 +24,7 @@ rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
 gc() #free up memory and report the memory usage.
 
 library(tidyverse)
-library(kableExtra)
+library(countrycode)
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -37,65 +37,60 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# UCS Satellites
+# BioCapacity by Country
 ## Validate
 
-```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nasa on Unsplash"}
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Cedric VT on Unsplash"}
 
-masthead <- "assets/photo-satellite.jpg"
+masthead <- "assets/cedric-vt-unsplash.jpg"
 knitr::include_graphics(masthead, dpi=72)
 
 ```
 
-<div class="figure-text">Satellite in Orbit</div>
+<div class="figure-text">Fields and forest just before sunset, with a cloudy sky</div>
 
 
-> If I had a spreadsheet on my computer, it looked like I was busy...\
---- Nate Silver\
+> We do not inherit the Earth from our ancestors; we borrow it from our children...\
+--- Native American Proverb\
 
 ***
 
 ### Load the data
 
+
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
-url_file <- "ucs-satellite-database/ucs-satellite-database-original.csv"
+url_file <- "global-ecological-footprint/biocapacity-gha.csv"
 url <- paste0(url_root, url_file)
-df <- read.csv(url, header = TRUE, nrows=25)
+df <- read.csv(url, header = TRUE, nrows=20)
 df
 
 ```
 
 
-### Wrangle
+### Wrangle 
 
-Is empty
+ISO_Alpha2
 
-Checking if the column "Detailed.Purpose" column has any cells with length zero. To do this, we use function <kbd>nchar()</kbd> 
+ISO 3166-1 alpha-2 codes are standardized two-letter country codes. We can validate ISO2 codes by using library(countrycode). Let's enter "iso2c" as origin first (meaning we guess it is ISO-A2). For each cell, it will return the country name if the code is recognized. To do this, we use the function <kbd>countrycode()</kbd>
 
-```{r is.empty, echo=TRUE, message=FALSE}
-
-df_2 <- nchar(df$Detailed_Purpose)==0
-df_2
-
-```
-
-```{r, echo=FALSE}
-
-list <- data.frame(Detailed_Purpose = df$Detailed_Purpose, is.empty = df_2)
-list
+```{r is.alpha, echo=TRUE, message=FALSE}
+results <- countrycode(df$isoa2, origin = 'iso2c', destination = 'country.name')
+df2 <- data.frame(df$isoa2, results)
+df2
 
 ```
 
-As you can see, there are many empty rows.
 
-
+Our package successfully converted all our iso2c codes from the ingested data into Country Names. This means that our column follows the iso2c code.
 
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data sources: This case is based on a dataset that comes from the following report by Union of Concerned Scientists, [GO](https://www.ucsusa.org/resources/satellite-database){target="_blank"} 
+* Narrative and Data sources: Global Footprint Network, [GO](https://www.footprintnetwork.org/resources/data/){target="_blank"}  
+
+
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
