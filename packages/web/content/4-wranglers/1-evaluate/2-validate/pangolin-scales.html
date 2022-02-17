@@ -11,7 +11,7 @@
 
 
 
-<title>Big Mac by Country</title>
+<title>The Price of a Pangolin</title>
 
 <script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
 <script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -230,60 +230,63 @@ pre code {
 <div class="activity">
 <p>WRANGLERS</p>
 </div>
-<div id="big-mac-by-country" class="section level1">
-<h1>Big Mac by Country</h1>
+<div id="the-price-of-a-pangolin" class="section level1">
+<h1>The Price of a Pangolin</h1>
 <div id="validate" class="section level2">
 <h2>Validate</h2>
 <div class="figure" style="text-align: center">
-<img src="amirali-mirhashemian-unsplash.jpg" alt="Photo by Amirali Mirhashemian on Unsplash" width="60%" />
+<img src="louis-mornaud-unsplash.jpg" alt="Photo by Louis Mornaud on Unsplash" width="60%" />
 <p class="caption">
-Photo by Amirali Mirhashemian on Unsplash
+Photo by Louis Mornaud on Unsplash
 </p>
 </div>
 <div class="figure-text">
-A Good-Looking Burger
+The Pangolin is the most illegally trafficked animal in the world.
 </div>
 <blockquote>
-<p>About once every three and a half weeks, I need a Big Mac, but after that I’m fine…<br />
-— Sara Cox<br />
+<p>We have to stop the blood flow. We have to be relentless in our pursuit for justice; in our pursuit for humanity. Nature is the mother of us all, and within all of us is the spirit of an eco warrior. The war on poaching is a war on greed, but what stands to be lost is priceless…<br />
+— National Green Party<br />
 </p>
 </blockquote>
 <hr />
 <div id="load-the-data" class="section level3">
 <h3>Load the data</h3>
 <pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
-url_file &lt;- &quot;big-mac-by-country/big-mac-by-country.csv&quot;
+url_file &lt;- &quot;price-of-pangolin/pangolin_scales.csv&quot;
 url &lt;- paste0(url_root, url_file)
 df &lt;- read.csv(url, header = TRUE)
-df&lt;-df[1:12,]
 df</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["date"],"name":[1],"type":["chr"],"align":["left"]},{"label":["iso_a3"],"name":[2],"type":["chr"],"align":["left"]},{"label":["currency_code"],"name":[3],"type":["chr"],"align":["left"]},{"label":["name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["local_price"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["dollar_ex"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["dollar_price"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["usd_raw"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["eur_raw"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gbp_raw"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["jpy_raw"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["cny_raw"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["gdp_dollar"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["adj_price"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["usd_adjusted"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["eur_adjusted"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["gbp_adjusted"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["jpy_adjusted"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["cny_adjusted"],"name":[19],"type":["dbl"],"align":["right"]}],"data":[{"1":"2000-04-01","2":"ARG","3":"ARS","4":"Argentina","5":"2.50","6":"1.0000000","7":"2.500000","8":"-0.00398","9":"0.05007","10":"-0.16722","11":"-0.09864","12":"1.09091","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"1"},{"1":"2000-04-01","2":"AUS","3":"AUD","4":"Australia","5":"2.59","6":"1.6800000","7":"1.541667","8":"-0.38579","9":"-0.35246","10":"-0.48645","11":"-0.44416","12":"0.28939","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"2"},{"1":"2000-04-01","2":"BRA","3":"BRL","4":"Brazil","5":"2.95","6":"1.7900000","7":"1.648045","8":"-0.34341","9":"-0.30778","10":"-0.45102","11":"-0.40581","12":"0.37836","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"3"},{"1":"2000-04-01","2":"CAN","3":"CAD","4":"Canada","5":"2.85","6":"1.4700000","7":"1.938776","8":"-0.22758","9":"-0.18566","10":"-0.35417","11":"-0.30099","12":"0.62152","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"4"},{"1":"2000-04-01","2":"CHE","3":"CHF","4":"Switzerland","5":"5.90","6":"1.7000000","7":"3.470588","8":"0.38270","9":"0.45774","10":"0.15609","11":"0.25130","12":"1.90267","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"5"},{"1":"2000-04-01","2":"CHL","3":"CLP","4":"Chile","5":"1260.00","6":"514.0000000","7":"2.451362","8":"-0.02336","9":"0.02964","10":"-0.18342","11":"-0.11618","12":"1.05023","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"6"},{"1":"2000-04-01","2":"CHN","3":"CNY","4":"China","5":"9.90","6":"8.2800000","7":"1.195652","8":"-0.52364","9":"-0.49779","10":"-0.60171","11":"-0.56891","12":"0.00000","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"7"},{"1":"2000-04-01","2":"CZE","3":"CZK","4":"Czech Republic","5":"54.37","6":"39.1000000","7":"1.390537","8":"-0.44600","9":"-0.41594","10":"-0.53680","11":"-0.49865","12":"0.16299","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"8"},{"1":"2000-04-01","2":"DNK","3":"DKK","4":"Denmark","5":"24.75","6":"8.0400000","7":"3.078358","8":"0.22644","9":"0.29299","10":"0.02544","11":"0.10988","12":"1.57463","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"9"},{"1":"2000-04-01","2":"EUZ","3":"EUR","4":"Euro area","5":"2.56","6":"1.0752688","7":"2.380800","8":"-0.05147","9":"0.00000","10":"-0.20693","11":"-0.14162","12":"0.99121","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"10"},{"1":"2000-04-01","2":"GBR","3":"GBP","4":"Britain","5":"1.90","6":"0.6329114","7":"3.002000","8":"0.19602","9":"0.26092","10":"0.00000","11":"0.08235","12":"1.51076","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"11"},{"1":"2000-04-01","2":"HKG","3":"HKD","4":"Hong Kong","5":"10.20","6":"7.7900000","7":"1.309371","8":"-0.47834","9":"-0.45003","10":"-0.56383","11":"-0.52791","12":"0.09511","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"12"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["ï..Country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Price_per_kg"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"China","2":"$1,400"},{"1":"Hong Kong Sar","2":"$656"},{"1":"Vietnam","2":"$650"},{"1":"Thailand","2":"$327"},{"1":"Indonesia","2":"$300"},{"1":"Myanmar","2":"$200"},{"1":"Phillipines","2":"$130"},{"1":"Malaysia","2":"$190"},{"1":"Taiwan","2":"$130"},{"1":"Nepal","2":"$70"},{"1":"Cameroon","2":"$15"},{"1":"Nigeria","2":"$10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
+<p>Pangolins are believed to be the world’s most trafficked mammal, accounting for as much as 20% of all illegal wildlife trade. According to the International Union for Conservation of Nature (IUCN), more than a million pangolins were poached in the decade prior to 2014.</p>
+<p>The animals are trafficked mainly for their scales, which are believed to treat a variety of health conditions in traditional Chinese medicine, and as a luxury food in Vietnam and China. In Africa, pangolins are sold as a form of bushmeat, for ritual or spiritual purposes, and use in traditional African medicine. Many times the animal is trafficked just for clothing and fashion. (Source: Wikipedia)</p>
 </div>
 <div id="wrangle" class="section level3">
 <h3>Wrangle</h3>
-<p>ISO_Alpha3</p>
-<p><a href="https://cran.r-project.org/web/packages/countrycode/countrycode.pdf" target="_blank" rel="noopener noreferrer">library(countrycode)</a> is a very useful package when we deal with country data. This package includes a set of functions that we can apply to convert, guess and/or validate country code.</p>
-<p>For example, the second column in the dataset we loaded, called “iso_a3”, seems to contain ISO-3 characters. Using the package, we can confirm that these code are all valid. If some of them are not valid, it will return NA.</p>
-<p>Let’s enter “iso3c” as origin first (meaning we guess it is ISO-3). For each cell, it will return the country name if the code is recognized. To do this, we use the function <kbd>countrycode()</kbd></p>
-<pre class="r"><code>results &lt;- countrycode(df$iso_a3, origin = &#39;iso3c&#39;, destination = &#39;country.name&#39;)
-results</code></pre>
-<pre><code>##  [1] &quot;Argentina&quot;           &quot;Australia&quot;           &quot;Brazil&quot;             
-##  [4] &quot;Canada&quot;              &quot;Switzerland&quot;         &quot;Chile&quot;              
-##  [7] &quot;China&quot;               &quot;Czechia&quot;             &quot;Denmark&quot;            
-## [10] NA                    &quot;United Kingdom&quot;      &quot;Hong Kong SAR China&quot;</code></pre>
-<p>Notice that the tenth entry is NA, meaning the code was not recognized as a valid ISO3 code.</p>
+<p>Is Currency</p>
+<p>We can use regular expression to match if our cells are in the correct format. A currency might start with the $ sign and might have commas and decimals. Here we have the decimal and commas as optional. We can use the function <kbd>grepl()</kbd></p>
+<pre class="r"><code>a &lt;- gsub(&quot; &quot;, &quot;&quot;, df$Price_per_kg)
+
+df_1 &lt;- grepl(&quot;(?=.*?\\d)^\\$?(([1-9]\\d{0,2}(,\\d{3})*)|\\d+)?(\\.\\d{1,2})?$&quot;, a, perl = T)
+df_1</code></pre>
+<pre><code>##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
+<p>We can also validate with other rules such as the commas and decimals being mandatory. Here, we will make decimals required and commas optional.</p>
+<pre class="r"><code>df_2 &lt;- grepl(&quot;^\\$?(([1-9]\\d{0,2}(,\\d{3})*)|0)?\\.\\d{1,2}$&quot;, a, perl = T)
+df_2</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>As you can see, our Price column does not follow the decimal format. We can use additional currency formatters if we wish to do so.</p>
 </div>
 <div id="references" class="section level3">
 <h3>References</h3>
 <div id="citations-for-narrative-and-data-sources" class="section level4">
 <h4>citations for narrative and data sources</h4>
 <ul>
-<li>Narrative sources: The Economist, The Big Mac Index, <a href="https://www.economist.com/big-mac-index" target="_blank">GO</a></li>
-<li>Data sources: TidyTuesday, <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-12-22" target="_blank">GO</a></li>
+<li>Narratives: Additional Narratives on Illegal Pangolin Trade and Pangolin Conservation, <a href="https://www.savepangolins.org/" target="_blank">GO</a><br />
+</li>
+<li>Data sources: This case is based on a dataset by The Pangolin Report, <a href="https://www.pangolinreports.com/" target="_blank">GO</a></li>
 </ul>
 <script type="text/javascript">
 

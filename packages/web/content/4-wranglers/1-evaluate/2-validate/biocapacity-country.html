@@ -11,7 +11,7 @@
 
 
 
-<title>Big Mac by Country</title>
+<title>Biocapacity by Country</title>
 
 <script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
 <script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -230,60 +230,58 @@ pre code {
 <div class="activity">
 <p>WRANGLERS</p>
 </div>
-<div id="big-mac-by-country" class="section level1">
-<h1>Big Mac by Country</h1>
+<div id="biocapacity-by-country" class="section level1">
+<h1>BioCapacity by Country</h1>
 <div id="validate" class="section level2">
 <h2>Validate</h2>
 <div class="figure" style="text-align: center">
-<img src="amirali-mirhashemian-unsplash.jpg" alt="Photo by Amirali Mirhashemian on Unsplash" width="60%" />
+<img src="cedric-vt-unsplash.jpg" alt="Photo by Cedric VT on Unsplash" width="60%" />
 <p class="caption">
-Photo by Amirali Mirhashemian on Unsplash
+Photo by Cedric VT on Unsplash
 </p>
 </div>
 <div class="figure-text">
-A Good-Looking Burger
+Fields and forest just before sunset, with a cloudy sky
 </div>
 <blockquote>
-<p>About once every three and a half weeks, I need a Big Mac, but after that I’m fine…<br />
-— Sara Cox<br />
+<p>We do not inherit the Earth from our ancestors; we borrow it from our children…<br />
+— Native American Proverb<br />
 </p>
 </blockquote>
 <hr />
 <div id="load-the-data" class="section level3">
 <h3>Load the data</h3>
 <pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
-url_file &lt;- &quot;big-mac-by-country/big-mac-by-country.csv&quot;
+url_file &lt;- &quot;global-ecological-footprint/biocapacity-gha.csv&quot;
 url &lt;- paste0(url_root, url_file)
-df &lt;- read.csv(url, header = TRUE)
-df&lt;-df[1:12,]
+df &lt;- read.csv(url, header = TRUE, nrows=20)
 df</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["date"],"name":[1],"type":["chr"],"align":["left"]},{"label":["iso_a3"],"name":[2],"type":["chr"],"align":["left"]},{"label":["currency_code"],"name":[3],"type":["chr"],"align":["left"]},{"label":["name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["local_price"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["dollar_ex"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["dollar_price"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["usd_raw"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["eur_raw"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gbp_raw"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["jpy_raw"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["cny_raw"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["gdp_dollar"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["adj_price"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["usd_adjusted"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["eur_adjusted"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["gbp_adjusted"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["jpy_adjusted"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["cny_adjusted"],"name":[19],"type":["dbl"],"align":["right"]}],"data":[{"1":"2000-04-01","2":"ARG","3":"ARS","4":"Argentina","5":"2.50","6":"1.0000000","7":"2.500000","8":"-0.00398","9":"0.05007","10":"-0.16722","11":"-0.09864","12":"1.09091","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"1"},{"1":"2000-04-01","2":"AUS","3":"AUD","4":"Australia","5":"2.59","6":"1.6800000","7":"1.541667","8":"-0.38579","9":"-0.35246","10":"-0.48645","11":"-0.44416","12":"0.28939","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"2"},{"1":"2000-04-01","2":"BRA","3":"BRL","4":"Brazil","5":"2.95","6":"1.7900000","7":"1.648045","8":"-0.34341","9":"-0.30778","10":"-0.45102","11":"-0.40581","12":"0.37836","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"3"},{"1":"2000-04-01","2":"CAN","3":"CAD","4":"Canada","5":"2.85","6":"1.4700000","7":"1.938776","8":"-0.22758","9":"-0.18566","10":"-0.35417","11":"-0.30099","12":"0.62152","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"4"},{"1":"2000-04-01","2":"CHE","3":"CHF","4":"Switzerland","5":"5.90","6":"1.7000000","7":"3.470588","8":"0.38270","9":"0.45774","10":"0.15609","11":"0.25130","12":"1.90267","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"5"},{"1":"2000-04-01","2":"CHL","3":"CLP","4":"Chile","5":"1260.00","6":"514.0000000","7":"2.451362","8":"-0.02336","9":"0.02964","10":"-0.18342","11":"-0.11618","12":"1.05023","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"6"},{"1":"2000-04-01","2":"CHN","3":"CNY","4":"China","5":"9.90","6":"8.2800000","7":"1.195652","8":"-0.52364","9":"-0.49779","10":"-0.60171","11":"-0.56891","12":"0.00000","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"7"},{"1":"2000-04-01","2":"CZE","3":"CZK","4":"Czech Republic","5":"54.37","6":"39.1000000","7":"1.390537","8":"-0.44600","9":"-0.41594","10":"-0.53680","11":"-0.49865","12":"0.16299","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"8"},{"1":"2000-04-01","2":"DNK","3":"DKK","4":"Denmark","5":"24.75","6":"8.0400000","7":"3.078358","8":"0.22644","9":"0.29299","10":"0.02544","11":"0.10988","12":"1.57463","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"9"},{"1":"2000-04-01","2":"EUZ","3":"EUR","4":"Euro area","5":"2.56","6":"1.0752688","7":"2.380800","8":"-0.05147","9":"0.00000","10":"-0.20693","11":"-0.14162","12":"0.99121","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"10"},{"1":"2000-04-01","2":"GBR","3":"GBP","4":"Britain","5":"1.90","6":"0.6329114","7":"3.002000","8":"0.19602","9":"0.26092","10":"0.00000","11":"0.08235","12":"1.51076","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"11"},{"1":"2000-04-01","2":"HKG","3":"HKD","4":"Hong Kong","5":"10.20","6":"7.7900000","7":"1.309371","8":"-0.47834","9":"-0.45003","10":"-0.56383","11":"-0.52791","12":"0.09511","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"12"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Country.Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Short.Name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["year"],"name":[3],"type":["int"],"align":["right"]},{"label":["Record"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Built.up.Land"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Carbon"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Cropland"],"name":[7],"type":["chr"],"align":["left"]},{"label":["Fishing.Grounds"],"name":[8],"type":["chr"],"align":["left"]},{"label":["Forest.Products"],"name":[9],"type":["chr"],"align":["left"]},{"label":["Grazing.Land"],"name":[10],"type":["chr"],"align":["left"]},{"label":["Total"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["Data.Quality.Score"],"name":[12],"type":["chr"],"align":["left"]},{"label":["isoa2"],"name":[13],"type":["chr"],"align":["left"]}],"data":[{"1":"Armenia","2":"Armenia","3":"2017","4":"BiocapTotGHA","5":"108399.455518927","6":"0","7":"637246.802492597","8":"46813.5229092984","9":"279065.351424932","10":"786069.059366527","11":"1857594.192","12":"3A","13":"AM"},{"1":"Afghanistan","2":"Afghanistan","3":"2017","4":"BiocapTotGHA","5":"1133669.82948793","6":"0","7":"5616163.72861295","8":"0","9":"603509.574597311","10":"5929763.99800145","11":"13283107.131","12":"3A","13":"AF"},{"1":"Albania","2":"Albania","3":"2017","4":"BiocapTotGHA","5":"107728.053782393","6":"0","7":"1040499.53633859","8":"223418.590354707","9":"904097.941461079","10":"635566.943197455","11":"2911311.065","12":"3A","13":"AL"},{"1":"Algeria","2":"Algeria","3":"2017","4":"BiocapTotGHA","5":"1098091.67041899","6":"0","7":"7519416.54389967","8":"322059.509317613","9":"1095950.07930872","10":"10652144.4536604","11":"20687662.257","12":"2A","13":"DZ"},{"1":"Angola","2":"Angola","3":"2017","4":"BiocapTotGHA","5":"1298956.3103759","6":"0","7":"6119956.20909919","8":"5457657.85345503","9":"12932092.573297","10":"29862024.9876882","11":"55670687.934","12":"3A","13":"AO"},{"1":"Antigua and Barbuda","2":"Antigua and Barbuda","3":"2017","4":"BiocapTotGHA","5":"null","6":"null","7":"null","8":"null","9":"null","10":"null","11":"84906.697","12":"2B","13":"AG"},{"1":"Argentina","2":"Argentina","3":"2017","4":"BiocapTotGHA","5":"4766906.08000043","6":"0","7":"114096477.339129","8":"69455890.0132429","9":"25755553.4231666","10":"77227291.9308255","11":"291302118.786","12":"3A","13":"AR"},{"1":"Australia","2":"Australia","3":"2017","4":"BiocapTotGHA","5":"1402760.4282383","6":"0","7":"66908952.5494368","8":"73946093.3231216","9":"45913336.3822581","10":"120835025.851587","11":"309006168.535","12":"3A","13":"AU"},{"1":"Austria","2":"Austria","3":"2017","4":"BiocapTotGHA","5":"1010462.52261702","6":"0","7":"4534649.86416112","8":"26409.3342142036","9":"17025284.3459258","10":"1224997.50607922","11":"23821803.573","12":"3A","13":"AT"},{"1":"Bahamas","2":"Bahamas","3":"2017","4":"BiocapTotGHA","5":"16329.8989320332","6":"0","7":"18456.0332886599","8":"3112933.27816485","9":"432833.045125762","10":"916.485371975755","11":"3581468.741","12":"3A","13":"BS"},{"1":"Bahrain","2":"Bahrain","3":"2017","4":"BiocapTotGHA","5":"95677.8132480613","6":"0","7":"9947.9442275358","8":"616215.359234953","9":"1125.760848956","10":"0","11":"722966.878","12":"3A","13":"BH"},{"1":"Barbados","2":"Barbados","3":"2017","4":"BiocapTotGHA","5":"12998.0243644909","6":"0","7":"16099.6406023867","8":"12476.3235339795","9":"5294.85084328602","10":"916.485371975755","11":"47785.325","12":"3A","13":"BB"},{"1":"Bangladesh","2":"Bangladesh","3":"2017","4":"BiocapTotGHA","5":"12930572.6630104","6":"0","7":"43837509.2600982","8":"8374718.62198279","9":"634726.916682586","10":"521908.067239828","11":"66299435.529","12":"3A","13":"BD"},{"1":"Bermuda","2":"Bermuda","3":"2017","4":"BiocapTotGHA","5":"null","6":"null","7":"null","8":"null","9":"null","10":"null","11":"8599.539","12":"2B","13":"BM"},{"1":"Bhutan","2":"Bhutan","3":"2017","4":"BiocapTotGHA","5":"226123.565801214","6":"0","7":"225843.142035805","8":"9215.26041521622","9":"3232890.98590353","10":"259269.12190213","11":"3953342.076","12":"3A","13":"BT"},{"1":"Bolivia","2":"Bolivia","3":"2017","4":"BiocapTotGHA","5":"636149.836762563","6":"0","7":"6068756.5204223","8":"563236.716578015","9":"140771067.055951","10":"23110533.3944581","11":"171149743.524","12":"3A","13":"BO"},{"1":"Botswana","2":"Botswana","3":"2017","4":"BiocapTotGHA","5":"36942.902546238","6":"0","7":"77005.1352229052","8":"552915.624912973","9":"1211489.59048793","10":"5041113.72294516","11":"6919466.976","12":"3A","13":"BW"},{"1":"Brazil","2":"Brazil","3":"2017","4":"BiocapTotGHA","5":"26616781.0723556","6":"0","7":"244351637.134496","8":"34193434.9564958","9":"1323799593.35781","10":"172704376.73791","11":"1801665823.259","12":"3A","13":"BR"},{"1":"Aruba","2":"Aruba","3":"2017","4":"BiocapTotGHA","5":"null","6":"null","7":"null","8":"null","9":"null","10":"null","11":"59223.558","12":"2B","13":"AW"},{"1":"Belize","2":"Belize","3":"2017","4":"BiocapTotGHA","5":"208.906653792456","6":"0","7":"207689.463580337","8":"362616.965575702","9":"763495.492381764","10":"75251.0000495441","11":"1409261.828","12":"1A","13":"BZ"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
 <div id="wrangle" class="section level3">
 <h3>Wrangle</h3>
-<p>ISO_Alpha3</p>
-<p><a href="https://cran.r-project.org/web/packages/countrycode/countrycode.pdf" target="_blank" rel="noopener noreferrer">library(countrycode)</a> is a very useful package when we deal with country data. This package includes a set of functions that we can apply to convert, guess and/or validate country code.</p>
-<p>For example, the second column in the dataset we loaded, called “iso_a3”, seems to contain ISO-3 characters. Using the package, we can confirm that these code are all valid. If some of them are not valid, it will return NA.</p>
-<p>Let’s enter “iso3c” as origin first (meaning we guess it is ISO-3). For each cell, it will return the country name if the code is recognized. To do this, we use the function <kbd>countrycode()</kbd></p>
-<pre class="r"><code>results &lt;- countrycode(df$iso_a3, origin = &#39;iso3c&#39;, destination = &#39;country.name&#39;)
-results</code></pre>
-<pre><code>##  [1] &quot;Argentina&quot;           &quot;Australia&quot;           &quot;Brazil&quot;             
-##  [4] &quot;Canada&quot;              &quot;Switzerland&quot;         &quot;Chile&quot;              
-##  [7] &quot;China&quot;               &quot;Czechia&quot;             &quot;Denmark&quot;            
-## [10] NA                    &quot;United Kingdom&quot;      &quot;Hong Kong SAR China&quot;</code></pre>
-<p>Notice that the tenth entry is NA, meaning the code was not recognized as a valid ISO3 code.</p>
+<p>ISO_Alpha2</p>
+<p>ISO 3166-1 alpha-2 codes are standardized two-letter country codes. We can validate ISO2 codes by using library(countrycode). Let’s enter “iso2c” as origin first (meaning we guess it is ISO-A2). For each cell, it will return the country name if the code is recognized. To do this, we use the function <kbd>countrycode()</kbd></p>
+<pre class="r"><code>results &lt;- countrycode(df$isoa2, origin = &#39;iso2c&#39;, destination = &#39;country.name&#39;)
+df2 &lt;- data.frame(df$isoa2, results)
+df2</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["df.isoa2"],"name":[1],"type":["chr"],"align":["left"]},{"label":["results"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"AM","2":"Armenia"},{"1":"AF","2":"Afghanistan"},{"1":"AL","2":"Albania"},{"1":"DZ","2":"Algeria"},{"1":"AO","2":"Angola"},{"1":"AG","2":"Antigua & Barbuda"},{"1":"AR","2":"Argentina"},{"1":"AU","2":"Australia"},{"1":"AT","2":"Austria"},{"1":"BS","2":"Bahamas"},{"1":"BH","2":"Bahrain"},{"1":"BB","2":"Barbados"},{"1":"BD","2":"Bangladesh"},{"1":"BM","2":"Bermuda"},{"1":"BT","2":"Bhutan"},{"1":"BO","2":"Bolivia"},{"1":"BW","2":"Botswana"},{"1":"BR","2":"Brazil"},{"1":"AW","2":"Aruba"},{"1":"BZ","2":"Belize"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Our package successfully converted all our iso2c codes from the ingested data into Country Names. This means that our column follows the iso2c code.</p>
 </div>
 <div id="references" class="section level3">
 <h3>References</h3>
 <div id="citations-for-narrative-and-data-sources" class="section level4">
 <h4>citations for narrative and data sources</h4>
 <ul>
-<li>Narrative sources: The Economist, The Big Mac Index, <a href="https://www.economist.com/big-mac-index" target="_blank">GO</a></li>
-<li>Data sources: TidyTuesday, <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-12-22" target="_blank">GO</a></li>
+<li>Narrative and Data sources: Global Footprint Network, <a href="https://www.footprintnetwork.org/resources/data/" target="_blank">GO</a></li>
 </ul>
 <script type="text/javascript">
 

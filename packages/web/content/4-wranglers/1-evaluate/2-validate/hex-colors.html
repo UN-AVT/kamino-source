@@ -11,7 +11,7 @@
 
 
 
-<title>Big Mac by Country</title>
+<title>Hexadecimal Colors</title>
 
 <script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
 <script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -230,60 +230,58 @@ pre code {
 <div class="activity">
 <p>WRANGLERS</p>
 </div>
-<div id="big-mac-by-country" class="section level1">
-<h1>Big Mac by Country</h1>
+<div id="hexadecimal-colors" class="section level1">
+<h1>Hexadecimal Colors</h1>
 <div id="validate" class="section level2">
 <h2>Validate</h2>
 <div class="figure" style="text-align: center">
-<img src="amirali-mirhashemian-unsplash.jpg" alt="Photo by Amirali Mirhashemian on Unsplash" width="60%" />
+<img src="mario-gogh-unsplash.jpg" alt="Photo by Mario Gogh on Unsplash" width="60%" />
 <p class="caption">
-Photo by Amirali Mirhashemian on Unsplash
+Photo by Mario Gogh on Unsplash
 </p>
 </div>
 <div class="figure-text">
-A Good-Looking Burger
+Color Pallete
 </div>
 <blockquote>
-<p>About once every three and a half weeks, I need a Big Mac, but after that I’m fine…<br />
-— Sara Cox<br />
+<p>Color! What a deep and mysterious language, the language of dreams…<br />
+— Paul Gauguin<br />
 </p>
 </blockquote>
 <hr />
 <div id="load-the-data" class="section level3">
 <h3>Load the data</h3>
 <pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
-url_file &lt;- &quot;big-mac-by-country/big-mac-by-country.csv&quot;
+url_file &lt;- &quot;colors/colors.csv&quot;
 url &lt;- paste0(url_root, url_file)
-df &lt;- read.csv(url, header = TRUE)
-df&lt;-df[1:12,]
+df &lt;- read.csv(url, header = TRUE, nrows=25)
+colnames(df) &lt;- c(&#39;Color_code&#39;, &#39;Color_Name&#39;, &#39;Hex_code&#39;, &#39;R&#39;, &#39;G&#39;, &#39;B&#39;)
 df</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["date"],"name":[1],"type":["chr"],"align":["left"]},{"label":["iso_a3"],"name":[2],"type":["chr"],"align":["left"]},{"label":["currency_code"],"name":[3],"type":["chr"],"align":["left"]},{"label":["name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["local_price"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["dollar_ex"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["dollar_price"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["usd_raw"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["eur_raw"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["gbp_raw"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["jpy_raw"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["cny_raw"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["gdp_dollar"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["adj_price"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["usd_adjusted"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["eur_adjusted"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["gbp_adjusted"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["jpy_adjusted"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["cny_adjusted"],"name":[19],"type":["dbl"],"align":["right"]}],"data":[{"1":"2000-04-01","2":"ARG","3":"ARS","4":"Argentina","5":"2.50","6":"1.0000000","7":"2.500000","8":"-0.00398","9":"0.05007","10":"-0.16722","11":"-0.09864","12":"1.09091","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"1"},{"1":"2000-04-01","2":"AUS","3":"AUD","4":"Australia","5":"2.59","6":"1.6800000","7":"1.541667","8":"-0.38579","9":"-0.35246","10":"-0.48645","11":"-0.44416","12":"0.28939","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"2"},{"1":"2000-04-01","2":"BRA","3":"BRL","4":"Brazil","5":"2.95","6":"1.7900000","7":"1.648045","8":"-0.34341","9":"-0.30778","10":"-0.45102","11":"-0.40581","12":"0.37836","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"3"},{"1":"2000-04-01","2":"CAN","3":"CAD","4":"Canada","5":"2.85","6":"1.4700000","7":"1.938776","8":"-0.22758","9":"-0.18566","10":"-0.35417","11":"-0.30099","12":"0.62152","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"4"},{"1":"2000-04-01","2":"CHE","3":"CHF","4":"Switzerland","5":"5.90","6":"1.7000000","7":"3.470588","8":"0.38270","9":"0.45774","10":"0.15609","11":"0.25130","12":"1.90267","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"5"},{"1":"2000-04-01","2":"CHL","3":"CLP","4":"Chile","5":"1260.00","6":"514.0000000","7":"2.451362","8":"-0.02336","9":"0.02964","10":"-0.18342","11":"-0.11618","12":"1.05023","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"6"},{"1":"2000-04-01","2":"CHN","3":"CNY","4":"China","5":"9.90","6":"8.2800000","7":"1.195652","8":"-0.52364","9":"-0.49779","10":"-0.60171","11":"-0.56891","12":"0.00000","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"7"},{"1":"2000-04-01","2":"CZE","3":"CZK","4":"Czech Republic","5":"54.37","6":"39.1000000","7":"1.390537","8":"-0.44600","9":"-0.41594","10":"-0.53680","11":"-0.49865","12":"0.16299","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"8"},{"1":"2000-04-01","2":"DNK","3":"DKK","4":"Denmark","5":"24.75","6":"8.0400000","7":"3.078358","8":"0.22644","9":"0.29299","10":"0.02544","11":"0.10988","12":"1.57463","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"9"},{"1":"2000-04-01","2":"EUZ","3":"EUR","4":"Euro area","5":"2.56","6":"1.0752688","7":"2.380800","8":"-0.05147","9":"0.00000","10":"-0.20693","11":"-0.14162","12":"0.99121","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"10"},{"1":"2000-04-01","2":"GBR","3":"GBP","4":"Britain","5":"1.90","6":"0.6329114","7":"3.002000","8":"0.19602","9":"0.26092","10":"0.00000","11":"0.08235","12":"1.51076","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"11"},{"1":"2000-04-01","2":"HKG","3":"HKD","4":"Hong Kong","5":"10.20","6":"7.7900000","7":"1.309371","8":"-0.47834","9":"-0.45003","10":"-0.56383","11":"-0.52791","12":"0.09511","13":"NA","14":"NA","15":"NA","16":"NA","17":"NA","18":"NA","19":"NA","_rn_":"12"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Color_code"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Color_Name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Hex_code"],"name":[3],"type":["chr"],"align":["left"]},{"label":["R"],"name":[4],"type":["int"],"align":["right"]},{"label":["G"],"name":[5],"type":["int"],"align":["right"]},{"label":["B"],"name":[6],"type":["int"],"align":["right"]}],"data":[{"1":"air_force_blue_usaf","2":"Air Force Blue (Usaf)","3":"#00308f","4":"0","5":"48","6":"143"},{"1":"air_superiority_blue","2":"Air Superiority Blue","3":"#72a0c1","4":"114","5":"160","6":"193"},{"1":"alabama_crimson","2":"Alabama Crimson","3":"#a32638","4":"163","5":"38","6":"56"},{"1":"alice_blue","2":"Alice Blue","3":"#f0f8ff","4":"240","5":"248","6":"255"},{"1":"alizarin_crimson","2":"Alizarin Crimson","3":"#e32636","4":"227","5":"38","6":"54"},{"1":"alloy_orange","2":"Alloy Orange","3":"#c46210","4":"196","5":"98","6":"16"},{"1":"almond","2":"Almond","3":"#efdecd","4":"239","5":"222","6":"205"},{"1":"amaranth","2":"Amaranth","3":"#e52b50","4":"229","5":"43","6":"80"},{"1":"amber","2":"Amber","3":"#ffbf00","4":"255","5":"191","6":"0"},{"1":"amber_sae_ece","2":"Amber (Sae/Ece)","3":"#ff7e00","4":"255","5":"126","6":"0"},{"1":"american_rose","2":"American Rose","3":"#ff033e","4":"255","5":"3","6":"62"},{"1":"amethyst","2":"Amethyst","3":"#96c","4":"153","5":"102","6":"204"},{"1":"android_green","2":"Android Green","3":"#a4c639","4":"164","5":"198","6":"57"},{"1":"anti_flash_white","2":"Anti-Flash White","3":"#f2f3f4","4":"242","5":"243","6":"244"},{"1":"antique_brass","2":"Antique Brass","3":"#cd9575","4":"205","5":"149","6":"117"},{"1":"antique_fuchsia","2":"Antique Fuchsia","3":"#915c83","4":"145","5":"92","6":"131"},{"1":"antique_ruby","2":"Antique Ruby","3":"#841b2d","4":"132","5":"27","6":"45"},{"1":"antique_white","2":"Antique White","3":"#faebd7","4":"250","5":"235","6":"215"},{"1":"ao_english","2":"Ao (English)","3":"#008000","4":"0","5":"128","6":"0"},{"1":"apple_green","2":"Apple Green","3":"#8db600","4":"141","5":"182","6":"0"},{"1":"apricot","2":"Apricot","3":"#fbceb1","4":"251","5":"206","6":"177"},{"1":"aqua","2":"Aqua","3":"#0ff","4":"0","5":"255","6":"255"},{"1":"aquamarine","2":"Aquamarine","3":"#7fffd4","4":"127","5":"255","6":"212"},{"1":"army_green","2":"Army Green","3":"#4b5320","4":"75","5":"83","6":"32"},{"1":"arsenic","2":"Arsenic","3":"#3b444b","4":"59","5":"68","6":"75"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
 <div id="wrangle" class="section level3">
 <h3>Wrangle</h3>
-<p>ISO_Alpha3</p>
-<p><a href="https://cran.r-project.org/web/packages/countrycode/countrycode.pdf" target="_blank" rel="noopener noreferrer">library(countrycode)</a> is a very useful package when we deal with country data. This package includes a set of functions that we can apply to convert, guess and/or validate country code.</p>
-<p>For example, the second column in the dataset we loaded, called “iso_a3”, seems to contain ISO-3 characters. Using the package, we can confirm that these code are all valid. If some of them are not valid, it will return NA.</p>
-<p>Let’s enter “iso3c” as origin first (meaning we guess it is ISO-3). For each cell, it will return the country name if the code is recognized. To do this, we use the function <kbd>countrycode()</kbd></p>
-<pre class="r"><code>results &lt;- countrycode(df$iso_a3, origin = &#39;iso3c&#39;, destination = &#39;country.name&#39;)
-results</code></pre>
-<pre><code>##  [1] &quot;Argentina&quot;           &quot;Australia&quot;           &quot;Brazil&quot;             
-##  [4] &quot;Canada&quot;              &quot;Switzerland&quot;         &quot;Chile&quot;              
-##  [7] &quot;China&quot;               &quot;Czechia&quot;             &quot;Denmark&quot;            
-## [10] NA                    &quot;United Kingdom&quot;      &quot;Hong Kong SAR China&quot;</code></pre>
-<p>Notice that the tenth entry is NA, meaning the code was not recognized as a valid ISO3 code.</p>
+<p>Is Hex Color</p>
+<p>Hexadecimal Color Code starts with a # followed by six or three letters or digits.For example: #fff, #FFF, #000, #111111, #F000F0, #00FF00, #0000FF, #FFFFFF are all valid Hexadecimal color codes.</p>
+<p>To validate, we can use the function <kbd>grepl()</kbd></p>
+<pre class="r"><code>a &lt;- df$Hex_code
+
+df_1 &lt;- grepl(&quot;^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$&quot;, a, perl = T)
+df_1</code></pre>
+<pre><code>##  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+## [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
+<p>As you can see, every cell in column “Hex_code” are valid Hexadecimal Codes.</p>
 </div>
 <div id="references" class="section level3">
 <h3>References</h3>
 <div id="citations-for-narrative-and-data-sources" class="section level4">
 <h4>citations for narrative and data sources</h4>
 <ul>
-<li>Narrative sources: The Economist, The Big Mac Index, <a href="https://www.economist.com/big-mac-index" target="_blank">GO</a></li>
-<li>Data sources: TidyTuesday, <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2020/2020-12-22" target="_blank">GO</a></li>
+<li>Data sources: The complete list of colors and Hexadecimal Color Codes can be found on Wikipedia, <a href="https://en.wikipedia.org/wiki/List_of_colors:_A%E2%80%93F" target="_blank">GO</a></li>
 </ul>
 <script type="text/javascript">
 
