@@ -73,14 +73,13 @@ df_gdp
 ```
 ### Wrangle
 
-Replace value "NA" with "Not Applicable" using <kbd>is.na()</kbd>
+Replace value using <kbd>replace()</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 #Replacing one value with another 
-df_gdp[is.na(df_gdp)] = "Not Applicable"
+df_gdp <- replace(df_gdp, df_gdp=="GDP per capita, PPP (constant 2017 international $)", "GDP")
 df_gdp
-
 
 ```
 ### References

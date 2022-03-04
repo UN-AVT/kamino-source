@@ -73,7 +73,7 @@ df_females
 
 ```
 
-The mean is the average or a calculated central value of a set of numbers and is used to measure the central tendency of the data. Central tendency is the statistical measure that recognizes the entire set of data or distribution through a single value. It provides an exact description of the whole data. In statistics, the mean can also be defined as the sum of all observations to the total number of observations.
+The mean is the average or a calculated central value of a set of numbers and is used to measure the central tendency of the data. Central tendency is the statistical measure that recognizes the entire set of data or distribution through a single value. It provides an exact description of the whole data. In statistics, the mean can also be defined as the sum of all observations divided by the total number of observations.
 
 ### Wrangle
 

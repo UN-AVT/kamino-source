@@ -24,6 +24,7 @@ gc() #free up memory and report the memory usage.
 
 # Load needed libraries
 library(tidyverse)
+library(imputeTS)
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
 font_add_google("Inconsolata", "inconsolata")
@@ -85,13 +86,13 @@ Replace the duplicate value using <kbd>replace()</kbd>
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Replace duplicate records with another value
+# Replace duplicate records NA with another value "Not Applicable"
 f_replace <- function(df_replace,value1,value2) {
   replace(df_replace, df_replace==value1, value2 )
 }
 
-# Call the function with your values to the parameters
-f1 <- f_replace(df,"america","USA") 
+# Call the function with your values to the parameters, Check the duplicated records with the replaced value
+f1 <- na.replace(df, "Not Applicable") 
 f1
 ```
 ### References
