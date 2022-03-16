@@ -1,5 +1,5 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "World Cup Matches"
 output: 
   html_document:
     theme: lumen
@@ -8,11 +8,12 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
+
 
 ```{r setup, include=FALSE}
 
@@ -42,8 +43,8 @@ showtext_auto()
 WRANGLERS  
 </div>
 
-# World Cup!!!
-## Store
+# World Cup Matches
+## Preserve Images
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Fauzan Saari on Unsplash"}
 
@@ -61,16 +62,19 @@ knitr::include_graphics(masthead, dpi=72)
 
 ***
 
-### Load Data
-```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
-df_world_cup <- read_csv("./archetypes/WorldCupMatches.csv")
+### Load the data
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "world-cup-matches/world-cup-matches.csv"
+url <- paste0(url_root, url_file)
+df_world_cup <- read_csv(url)
 df_world_cup
-#str(df_world_cup)
-#head(df_world_cup)
-#tail(df_world_cup)
+
 ```
 
-### Prepare the data
+### Wrangle
 #### Remove Missing Value
 ```{r method: clean, message=FALSE, echo=TRUE,warning=FALSE}
 
@@ -200,12 +204,12 @@ list(opts_sizing(rescale = TRUE, width = 1.0)))
 ```
 
 ###  Preserve
-#### Storing and Saving your outputs
 
-### Updated data to a csv file
-```{r method: cgglan, message=FALSE, echo=TRUE,warning=FALSE}
+We will now save the plot by using the R function <kbd>ggsave()</kbd>
+
+```{r , message=FALSE, echo=TRUE,warning=FALSE}
 #Save the last file created
-write.csv(df_world_cup8, './output/world_cup_1930-2014.csv')
+ggsave(file="output/world-cup-matches.svg", plot=v1, width=10, height=8)
 
 ```
 
@@ -227,21 +231,10 @@ write.csv(df_world_cup8, './output/world_cup_1930-2014.csv')
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
+
 # eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "Store" # mostly used in wranglers and analytics
-keywords <- 'football world-cup'
-commands <- 'write.csv ggsave'
-sources <- 'Kaggle'
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
+# PUSH TO PRODUCTION
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
 
 ```
 

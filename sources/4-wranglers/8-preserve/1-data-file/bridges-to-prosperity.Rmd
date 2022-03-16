@@ -8,11 +8,12 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
+
 
 
 ```{r setup, include=FALSE}
@@ -68,9 +69,11 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r load raw data,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df <- read.csv('./archetypes/bridges_to_prosperity.csv', fileEncoding="UTF-8-BOM")
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "bridges-to-prosperity/bridges-to-prosperity.csv"
+url <- paste0(url_root, url_file)
+df <- read.csv(url, header = TRUE, fileEncoding="UTF-8-BOM")
 #added fileEncoding to remove any BOM in the columns names if present in the file (common for files generated from Microsoft applications: Excel, SQL server)
-
 
 df
 ```
@@ -134,7 +137,7 @@ df_5
 
 
 ### Write to a CSV file
-Let's say this final data is enough for us to do further analysis and plot a graph. For the moment, let's save all the changes made to the original data file into a new data file (.csv).
+Let's say this final data is enough for us to do further analysis and plot a graph. For the moment, let's save all the changes made to the original data file into a new csv file by using <kbd>write.csv</kbd> 
 
 
 ```{r method: store into a csv file, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
