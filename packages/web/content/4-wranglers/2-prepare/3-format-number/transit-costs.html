@@ -13,13 +13,13 @@
 
 <title>Transit Costs</title>
 
-<script src="vendor/header-attrs-2.12/header-attrs.js"></script>
-<script src="vendor/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="../../../../vendor/knitr/header-attrs-2.12/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="vendor/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
-<script src="vendor/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="vendor/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="vendor/bootstrap-3.3.5/shim/respond.min.js"></script>
+<link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/respond.min.js"></script>
 <style>h1 {font-size: 34px;}
        h1.title {font-size: 38px;}
        h2 {font-size: 30px;}
@@ -29,12 +29,12 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="vendor/navigation-1.1/tabsets.js"></script>
-<script src="vendor/navigation-1.1/codefolding.js"></script>
-<link href="vendor/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="vendor/highlightjs-9.12.0/highlight.js"></script>
-<link href="vendor/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-<script src="vendor/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="../../../../vendor/knitr/navigation-1.1/tabsets.js"></script>
+<script src="../../../../vendor/knitr/navigation-1.1/codefolding.js"></script>
+<link href="../../../../vendor/knitr/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/highlightjs-9.12.0/highlight.js"></script>
+<link href="../../../../vendor/knitr/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/pagedtable-1.1/js/pagedtable.js"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHLBJTGCKN"></script>
   <script>
@@ -48,7 +48,7 @@
   
   <div class="header">
     
-  <img src="../../../z-assemblers/assets/logo/logo.svg" alt="" height="36">
+  <img src="../../../../assets/logo/logo.svg" alt="" height="36">
 
   <div class="nav" style="float: right;">
       <a class="nav-link" 
@@ -57,7 +57,7 @@
         data-bs-toggle="tooltip" 
         data-bs-placement="bottom"
         title="Home">
-        <img src="../../../z-assemblers/assets/icons/campground-solid.svg" alt="" height="32">
+        <img src="../../../../assets/icons/campground-solid.svg" alt="" height="32">
       </a>
       <a class="nav-link" 
         style="color: #111111;" 
@@ -65,7 +65,7 @@
         data-bs-toggle="tooltip"
         data-bs-placement="bottom" 
         title="Search for content">
-        <img src="../../../z-assemblers/assets/icons/compass.svg" alt="" height="32">
+        <img src="../../../../assets/icons/compass.svg" alt="" height="32">
       </a>
       <a class="nav-link" 
         style="color: #111111;" 
@@ -73,7 +73,7 @@
         data-bs-toggle="tooltip"
         data-bs-placement="bottom"
         title="Project">
-        <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32">
+        <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32">
       </a>
     </div>
 
@@ -106,7 +106,7 @@ if (window.hljs) {
 
 
 
-<link rel="stylesheet" href="../../../z-assemblers/assets/styles/content.css" type="text/css" />
+<link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
 
 
 
@@ -239,7 +239,7 @@ pre code {
 <div id="format-numbers" class="section level2">
 <h2>Format numbers</h2>
 <div class="figure" style="text-align: center">
-<img src="assets/josh-hild-unsplash.jpg" alt="Photo by Josh Hild on Unsplash" width="40%" height="40%" />
+<img src="josh-hild-unsplash.jpg" alt="Photo by Josh Hild on Unsplash" width="40%" height="40%" />
 <p class="caption">
 Photo by Josh Hild on Unsplash
 </p>
@@ -252,8 +252,7 @@ Photo by Josh Hild on Unsplash
 <hr />
 <div id="ingest-the-data" class="section level3">
 <h3>Ingest the data</h3>
-<div id="country-city-line-start_year-end_year-time_comp-length-cost-etc." class="section level4">
-<h4>country, city, line, start_year, end_year, time_comp, length, cost, etc.</h4>
+<p>country, city, line, start_year, end_year, time_comp, length, cost, etc.</p>
 <pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
 url_file &lt;- &quot;transit-costs/transit-costs.csv&quot;
 url &lt;- paste0(url_root, url_file)
@@ -272,7 +271,6 @@ new_df</code></pre>
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["city"],"name":[1],"type":["chr"],"align":["left"]},{"label":["cost"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Seattle","2":"1756"},{"1":"Los Angeles","2":"3600"},{"1":"Los Angeles","2":"2400"},{"1":"Los Angeles","2":"2800"},{"1":"Los Angeles","2":"1756"},{"1":"San Francisco","2":"1670"},{"1":"Boston","2":"2289"},{"1":"San Jose","2":"6900"},{"1":"Santiago","2":"2900"},{"1":"Santiago","2":"3000"},{"1":"Panama City","2":"2009"},{"1":"Panama City","2":"2130"},{"1":"Panama City","2":"2507"},{"1":"Manila","2":"2500"},{"1":"Quito","2":"2010"},{"1":"New York","2":"2400"},{"1":"New York","2":"4450"},{"1":"New York","2":"6390"},{"1":"New York","2":"11000"},{"1":"New York","2":"9500"},{"1":"Kyiv","2":"2000"},{"1":"Buenos Aires","2":"2300"},{"1":"Lima","2":"5836"},{"1":"Istanbul","2":"1750"},{"1":"Istanbul","2":"1356"},{"1":"Istanbul","2":"1288"},{"1":"Istanbul","2":"145"},{"1":"Istanbul","2":"866"},{"1":"Istanbul","2":"1650"},{"1":"Istanbul","2":"1298"},{"1":"Istanbul","2":"896"},{"1":"Izmir","2":"600"},{"1":"Riyadh","2":"6561"},{"1":"Riyadh","2":"2880"},{"1":"Riyadh","2":"5002"},{"1":"Riyadh","2":"2270"},{"1":"Riyadh","2":"2220"},{"1":"Riyadh","2":"3330"},{"1":"Jeddah","2":"12000"},{"1":"Ad Dammam","2":"16000"},{"1":"Doha","2":"36000"},{"1":"Dubai","2":"4200"},{"1":"Dubai","2":"3600"},{"1":"Dubai","2":"2900"},{"1":"Cairo","2":"3600"},{"1":"Cairo","2":"4000"},{"1":"Kuwait City","2":"20000"},{"1":"Tashkent","2":"142"},{"1":"Tashkent","2":"125"},{"1":"Istanbul","2":"333"},{"1":"Istanbul","2":"635"},{"1":"Istanbul","2":"657"},{"1":"Istanbul","2":"922"},{"1":"Istanbul","2":"1130"},{"1":"Istanbul","2":"916"},{"1":"Tashkent","2":"142"},{"1":"Tashkent","2":"125"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
-</div>
 </div>
 </div>
 <div id="wrangle" class="section level3">
@@ -328,7 +326,7 @@ $(function() {
         <div class="footer-title text-uppercase mb-4">Source</div>
         <p class="footer-text text-center">
           <a href="https://github.com/UN-AVT/kamino-web" class="centered">
-          <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
           </a>
         </p>
       </div>

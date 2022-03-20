@@ -56,7 +56,7 @@ The United States is among the most expensive for mobile data. According to a st
 
 
 ### Ingest the data
-#### Rank, Country, and Avg_Price_of_1GB_USD.
+Rank, Country, and Avg_Price_of_1GB_USD.
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 

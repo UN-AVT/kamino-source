@@ -54,7 +54,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 
 ### Ingest the data
-#### country, city, line, start_year, end_year, time_comp, length, cost, etc.
+country, city, line, start_year, end_year, time_comp, length, cost, etc.
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
