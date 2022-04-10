@@ -272,6 +272,9 @@ df</code></pre>
 ##  $ NumberofSeats  : int  5 5 5 5 4 7 5 5 5 4 ...
 ##  $ PriceinGermany : chr  &quot;€42,990&quot; &quot;N/A&quot; &quot;€29,990&quot; &quot;N/A&quot; ...
 ##  $ PriceinUK      : chr  &quot;N/A&quot; &quot;£31,680&quot; &quot;£25,995&quot; &quot;£79,900&quot; ...</code></pre>
+</div>
+<div id="wrangle" class="section level3">
+<h3>Wrangle</h3>
 <p>Most of our data are in Character formats where it should be numerical. Having numerical data-points will allow us to do computations as well as plot the data efficiently. It’s imperative that we get rid of the strings in the data point and convert it to numerical.</p>
 <p>We’ll use the help of the function parse_number from library(readr)</p>
 <pre class="r fold-show"><code>df$Acceleration &lt;- readr::parse_number(df$Acceleration)

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Infectious Diseases in Context</title>
+
+<script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="../../../../vendor/knitr/navigation-1.1/tabsets.js"></script>
+<script src="../../../../vendor/knitr/navigation-1.1/codefolding.js"></script>
+<link href="../../../../vendor/knitr/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/highlightjs-9.12.0/highlight.js"></script>
+<link href="../../../../vendor/knitr/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/pagedtable-1.1/js/pagedtable.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHLBJTGCKN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GHLBJTGCKN');
+  </script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../../assets/logo/logo.svg" alt="" height="36">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../../assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../../assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>CHARTS</p>
+</div>
+<div id="infectious-diseases-in-context" class="section level1">
+<h1>Infectious Diseases in Context</h1>
+<div id="scatter-quadrant" class="section level2">
+<h2>Scatter Quadrant</h2>
+<div class="figure" style="text-align: center">
+<img src="aaron-blanco-tejedor-unsplash.jpg" alt="Photo by Aaron Blanco Tejedor on Unsplash" width="60%" />
+<p class="caption">
+Photo by Aaron Blanco Tejedor on Unsplash
+</p>
+</div>
+<blockquote>
+<p>Be safe, be smart, be kind…<br />
+— Dr. Tedros Adhanom Ghebreyesus, WHO Director General<br />
+</p>
+</blockquote>
+<hr />
+<p>Infectious diseases are diseases that are caused by germs. As we’ll see with the data, these germs can be passed on in several different ways from direct and indirect contact, insect or animal bites, or through contaminated food, water, soil, or plants. The data will also indicate the type of pathogen such as bacteria, virus, or parasite. For this case we’ll explore the many different germs and two key areas of interest: how <strong>contagious</strong> they are and the <strong>fatality</strong> rate if infected.</p>
+<div id="load-the-data" class="section level3">
+<h3>Load the data</h3>
+<p>Disease, R0, Fatality Rate, and Mode of Transmission.</p>
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;infectious-disease/infectious-disease.csv&quot;
+url &lt;- paste0(url_root, url_file)
+
+df &lt;- read.csv(url, header = TRUE, stringsAsFactors = FALSE)
+df</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["N"],"name":[1],"type":["int"],"align":["right"]},{"label":["Disease_Name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Pathogen.type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Pathogen_Name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Pathogen_Size"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Pathogen_Size_Grouped"],"name":[6],"type":["chr"],"align":["left"]},{"label":["R0"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Contagiousness.category"],"name":[8],"type":["chr"],"align":["left"]},{"label":["Case_Fatality_Rate_Percent"],"name":[9],"type":["chr"],"align":["left"]},{"label":["Primary_Mode_of_Transmission"],"name":[10],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"Anthrax (untreated)","3":"bacterium","4":"Bacillus anthracis","5":"4,000","6":"1 µm < 10 µm","7":"6.5","8":"highly","9":"20.00%","10":"airborne"},{"1":"2","2":"Bubonic plague (treated)","3":"bacterium","4":"Yersinia pestis","5":"1,500","6":"1 µm < 10 µm","7":"1.0","8":"not very","9":"15.00%","10":"bite"},{"1":"3","2":"Bubonic plague (untreated)","3":"bacterium","4":"Yersinia pestis","5":"1,500","6":"1 µm < 10 µm","7":"1.0","8":"not very","9":"60.00%","10":"bite"},{"1":"4","2":"C. difficile","3":"bacterium","4":"Clostridium difficile","5":"1,250","6":"1 µm < 10 µm","7":"1.3","8":"quite","9":"24.00%","10":"fecal-oral"},{"1":"5","2":"Campylobacter","3":"bacterium","4":"Campylobacter, various species","5":"4,000","6":"1 µm < 10 µm","7":"0.2","8":"not very","9":"1.20%","10":"food"},{"1":"6","2":"Chicken pox","3":"virus","4":"Varicella zoster","5":"175","6":"100 nm < 1 µm","7":"8.5","8":"highly","9":"0.00%","10":"airborne"},{"1":"7","2":"Chikungunya","3":"virus","4":"Chikungunya virus","5":"65","6":"<100 nm","7":"3.5","8":"very","9":"0.40%","10":"bite"},{"1":"8","2":"Cholera","3":"bacterium","4":"Vibro cholerae, some strains","5":"1,300","6":"1 µm < 10 µm","7":"2.1","8":"quite","9":"1.60%","10":""},{"1":"9","2":"Common cold","3":"virus","4":"Many viral strains. Rhinoviruses most common.","5":"30","6":"<100 nm","7":"6.0","8":"highly","9":"0.00%","10":"airborne"},{"1":"10","2":"Dengue fever","3":"virus","4":"Dengue fever virus","5":"50","6":"<100 nm","7":"3.0","8":"very","9":"0.10%","10":"bite"},{"1":"11","2":"Diphtheria","3":"bacterium","4":"Corynebacterium diphtheriae","5":"4,000","6":"1 µm < 10 µm","7":"6.5","8":"highly","9":"7.50%","10":"body fluids"},{"1":"12","2":"E. coli","3":"bacterium","4":"Escherichia coli","5":"2,000","6":"1 µm < 10 µm","7":"1.2","8":"quite","9":"4.00%","10":"fecal-oral"},{"1":"13","2":"Ebola","3":"virus","4":"Ebolavirus, various species","5":"14,000","6":"10 µm < 100 µm","7":"2.5","8":"quite","9":"50.00%","10":"body fluids"},{"1":"14","2":"Echinococcosis","3":"parasite","4":"Echinococcus granulosus and Echinococcus multilocularis (worms)","5":"4,000,000","6":"> 1 mm","7":"1.5","8":"quite","9":"","10":"parasite"},{"1":"15","2":"Guinea worm disease (untreated)","3":"parasite","4":"Dracunculus medinensis (worm)","5":"1,000,000,000","6":"> 1 mm","7":"20.0","8":"extremely","9":"","10":"waterborne"},{"1":"16","2":"Hand, foot and mouth","3":"virus","4":"Coxsackievirus A16","5":"30","6":"<100 nm","7":"3.5","8":"very","9":"0.10%","10":"body fluids"},{"1":"17","2":"Hantavirus","3":"virus","4":"Hantavirus","5":"140","6":"100 nm < 1 µm","7":"1.3","8":"quite","9":"36.00%","10":"airborne, fecal-oral"},{"1":"18","2":"Helminthiases","3":"parasite","4":"Any parasitic worm","5":"250,000,000","6":"> 1 mm","7":"2.9","8":"quite","9":"","10":"fecal-oral"},{"1":"19","2":"Hepatitis A","3":"virus","4":"Hepatitis A virus","5":"30","6":"<100 nm","7":"1.3","8":"quite","9":"","10":"fecal-oral"},{"1":"20","2":"Hepatitis B","3":"virus","4":"Hepatitis B virus","5":"42","6":"<100 nm","7":"4.0","8":"very","9":"0.80%","10":"body fluids"},{"1":"21","2":"HIV (treated)","3":"virus","4":"Human immunodeficiency virus","5":"120","6":"100 nm < 1 µm","7":"3.5","8":"very","9":"2.10%","10":"sexual contact"},{"1":"22","2":"HIV (untreated)","3":"virus","4":"Human immunodeficiency virus","5":"120","6":"100 nm < 1 µm","7":"3.5","8":"very","9":"80.00%","10":"sexual contact"},{"1":"23","2":"Influenza (bird flu)","3":"virus","4":"Influenza A virus (H5N1)","5":"100","6":"100 nm < 1 µm","7":"1.0","8":"not very","9":"60.00%","10":"airborne"},{"1":"24","2":"Influenza (seasonal flu)","3":"virus","4":"Influenza viruses, various species","5":"85","6":"<100 nm","7":"2.5","8":"quite","9":"0.10%","10":"airborne"},{"1":"25","2":"Influenza (Spanish flu)","3":"virus","4":"Influenza A virus (H1N1)","5":"100","6":"100 nm < 1 µm","7":"3.0","8":"very","9":"2.50%","10":"airborne"},{"1":"26","2":"Influenza (swine flu)","3":"virus","4":"Influenza A virus (H1N1)","5":"100","6":"100 nm < 1 µm","7":"1.5","8":"quite","9":"0.20%","10":"airborne"},{"1":"27","2":"Leishmaniasis","3":"parasite","4":"Leishmania parasites","5":"4,000","6":"1 µm < 10 µm","7":"8.5","8":"highly","9":"","10":"bite"},{"1":"28","2":"Leprosy","3":"bacterium","4":"Mycobacterium leprae or Mycobacterium lepromatosis","5":"5,000","6":"1 µm < 10 µm","7":"2.8","8":"quite","9":"","10":"body fluids"},{"1":"29","2":"Lyme disease","3":"bacterium","4":"Borrelia, various species","5":"16,500","6":"10 µm < 100 µm","7":"4.4","8":"very","9":"0.20%","10":"bite"},{"1":"30","2":"Lymphatic filariasis","3":"parasite","4":"Wuchereria bancrofti, Brugia malayi, and Brugia timori","5":"75,000,000","6":"> 1 mm","7":"16.0","8":"extremely","9":"","10":"bite"},{"1":"31","2":"Malaria (P. falciparum)","3":"parasite","4":"Plasmodium falciparum","5":"2,000","6":"1 µm < 10 µm","7":"115.0","8":"astronomically","9":"0.50%","10":"bite"},{"1":"32","2":"Malaria (P. malariae)","3":"parasite","4":"Plasmodium malariae","5":"3,800","6":"1 µm < 10 µm","7":"16.0","8":"extremely","9":"0.50%","10":"bite"},{"1":"33","2":"Marburg","3":"virus","4":"Marburg virus","5":"1,000","6":"1 µm < 10 µm","7":"1.6","8":"quite","9":"50.00%","10":"body fluids"},{"1":"34","2":"Measles","3":"virus","4":"Measles virus","5":"650","6":"100 nm < 1 µm","7":"15.0","8":"extremely","9":"0.30%","10":"airborne"},{"1":"35","2":"Meningitis (meningococcal, treated)","3":"bacterium","4":"Neisseria meningitidis","5":"7,000","6":"1 µm < 10 µm","7":"1.3","8":"quite","9":"11.50%","10":"airborne, body fluids"},{"1":"36","2":"Meningitis (meningococcal, untreated)","3":"bacterium","4":"Neisseria meningitidis","5":"7,000","6":"1 µm < 10 µm","7":"1.3","8":"quite","9":"50.00%","10":"airborne, body fluids"},{"1":"37","2":"MERS","3":"virus","4":"MERS coronavirus","5":"127","6":"100 nm < 1 µm","7":"0.5","8":"not very","9":"45.00%","10":"airborne"},{"1":"38","2":"MRSA","3":"bacterium","4":"Staphylococcus aureus","5":"1,000","6":"1 µm < 10 µm","7":"1.6","8":"quite","9":"20.00%","10":"surfaces"},{"1":"39","2":"Mumps","3":"virus","4":"Mumps rubulavirus","5":"200","6":"100 nm < 1 µm","7":"13.0","8":"extremely","9":"1.00%","10":"airborne"},{"1":"40","2":"Norovirus","3":"virus","4":"Noroviruses, various serotypes","5":"31","6":"<100 nm","7":"2.0","8":"quite","9":"0.00%","10":"fecal-oral, surfaces"},{"1":"41","2":"Pneumonia (pneumococcal)","3":"bacterium","4":"Streptococcus pneumoniae","5":"875","6":"100 nm < 1 µm","7":"2.0","8":"quite","9":"7.50%","10":"airborne, body fluids"},{"1":"42","2":"Pneumonic plague (untreated)","3":"bacterium","4":"Yersinia pestis","5":"1,500","6":"1 µm < 10 µm","7":"3.2","8":"very","9":"100.00%","10":"airborne"},{"1":"43","2":"Polio","3":"virus","4":"Poliovirus","5":"30","6":"<100 nm","7":"6.0","8":"highly","9":"22.00%","10":"fecal-oral"},{"1":"44","2":"Rabies (treated)","3":"virus","4":"Lyssaviruses, various species","5":"180","6":"100 nm < 1 µm","7":"1.6","8":"quite","9":"1.00%","10":"bite"},{"1":"45","2":"Rabies (untreated)","3":"virus","4":"Lyssaviruses, various species","5":"180","6":"100 nm < 1 µm","7":"1.6","8":"quite","9":"100.00%","10":"bite"},{"1":"46","2":"Rotavirus","3":"virus","4":"Rotaviruses, various species","5":"80","6":"<100 nm","7":"18.0","8":"extremely","9":"0.00%","10":"fecal-oral"},{"1":"47","2":"Rubella","3":"virus","4":"Rubella virus","5":"60","6":"<100 nm","7":"6.0","8":"highly","9":"0.00%","10":"airborne"},{"1":"48","2":"Salmonella","3":"bacterium","4":"Salmonella enterica","5":"3,500","6":"1 µm < 10 µm","7":"0.8","8":"not very","9":"1.00%","10":"food"},{"1":"49","2":"SARS","3":"virus","4":"SARS coronavirus","5":"115","6":"100 nm < 1 µm","7":"2.4","8":"quite","9":"9.60%","10":"airborne"},{"1":"50","2":"Scarlet fever","3":"bacterium","4":"Group A streptococcus: Streptococcus pyogenes and streptococcus dysgalactiae","5":"2,000","6":"1 µm < 10 µm","7":"2.8","8":"quite","9":"0.50%","10":"body fluids"},{"1":"51","2":"Schistosomiasis","3":"parasite","4":"Parasitic flatworms called schistosomes","5":"15,000,000","6":"> 1 mm","7":"3.1","8":"very","9":"","10":"waterborne"},{"1":"52","2":"Shigellosis","3":"bacterium","4":"Shigella, various species","5":"2,000","6":"1 µm < 10 µm","7":"1.5","8":"quite","9":"","10":""},{"1":"53","2":"Sleeping sickness","3":"parasite","4":"Trypanosoma brucei gambiense or T. brucei rhodesiense","5":"23,500","6":"10 µm < 100 µm","7":"0.8","8":"not very","9":"","10":"bite"},{"1":"54","2":"Smallpox","3":"virus","4":"Variola virus","5":"275","6":"100 nm < 1 µm","7":"6.0","8":"highly","9":"15.00%","10":"airborne"},{"1":"55","2":"Syphilis (untreated)","3":"bacterium","4":"Treponema pallidum","5":"10,500","6":"10 µm < 100 µm","7":"0.9","8":"not very","9":"33.00%","10":"sexual contact"},{"1":"56","2":"Tuberculosis (untreated)","3":"bacterium","4":"Mycobacterium tuberculosis","5":"3,000","6":"1 µm < 10 µm","7":"10.0","8":"extremely","9":"60.00%","10":"airborne"},{"1":"57","2":"Typhoid","3":"bacterium","4":"Salmonella enterica, serotype Typhi","5":"3,500","6":"1 µm < 10 µm","7":"2.8","8":"quite","9":"20.00%","10":"fecal-oral"},{"1":"58","2":"vCJD","3":"prion","4":"Misfolded PRNP (prion protein)","5":"varies","6":"varies","7":"0.7","8":"not very","9":"100.00%","10":""},{"1":"59","2":"West Nile fever","3":"virus","4":"West Nile virus","5":"50","6":"<100 nm","7":"9.0","8":"highly","9":"","10":"bite"},{"1":"60","2":"Whooping cough","3":"bacterium","4":"Bordetella pertussis","5":"800","6":"100 nm < 1 µm","7":"15.0","8":"extremely","9":"4.00%","10":"airborne"},{"1":"61","2":"Yellow fever","3":"virus","4":"Yellow fever virus","5":"50","6":"<100 nm","7":"3.0","8":"very","9":"7.50%","10":"bite"},{"1":"62","2":"Zika","3":"virus","4":"Zika virus","5":"40","6":"<100 nm","7":"4.0","8":"very","9":"","10":"bite, sexual contact"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="wrangle-data" class="section level3">
+<h3>Wrangle data</h3>
+<p>Rename, select, clean, and cast data types.</p>
+<pre class="r fold-hide"><code># Simplify the column names
+df_complete &lt;- rename(df, 
+                      DISEASE = &quot;Disease_Name&quot;, 
+                      PATHOGEN = &quot;Pathogen.type&quot;,
+                      CONTAGIOUSNESS = &quot;R0&quot;, 
+                      DEADLINESS = &quot;Case_Fatality_Rate_Percent&quot;, 
+                      TRANSMISSION = &quot;Primary_Mode_of_Transmission&quot;)
+
+# Select only the needed
+df_complete &lt;- select(df_complete, c(&quot;N&quot;, &quot;DISEASE&quot;, &quot;PATHOGEN&quot;, &quot;CONTAGIOUSNESS&quot;, &quot;DEADLINESS&quot;, &quot;TRANSMISSION&quot;))
+
+# Make sure all visual variables are proper data types
+df_complete$CONTAGIOUSNESS &lt;- as.numeric(df_complete$CONTAGIOUSNESS)
+df_complete$DEADLINESS &lt;- parse_number(df_complete$DEADLINESS)
+
+# Make sure we don&#39;t factor empty strings
+df_complete &lt;- filter(df_complete, nchar(PATHOGEN) &gt; 0)
+df_complete &lt;- filter(df_complete, nchar(TRANSMISSION) &gt; 0)
+# Factor the string fields
+df_complete$PATHOGEN &lt;- as.factor(df_complete$PATHOGEN)
+df_complete$TRANSMISSION &lt;- as.factor(df_complete$TRANSMISSION)
+
+# Remove incomplete cases
+df_complete &lt;- df_complete[complete.cases(df_complete), ]
+df_complete &lt;- filter(df_complete, is.na(DEADLINESS) == FALSE)
+
+df_complete</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["N"],"name":[1],"type":["int"],"align":["right"]},{"label":["DISEASE"],"name":[2],"type":["chr"],"align":["left"]},{"label":["PATHOGEN"],"name":[3],"type":["fct"],"align":["left"]},{"label":["CONTAGIOUSNESS"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["DEADLINESS"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["TRANSMISSION"],"name":[6],"type":["fct"],"align":["left"]}],"data":[{"1":"1","2":"Anthrax (untreated)","3":"bacterium","4":"6.5","5":"20.0","6":"airborne"},{"1":"2","2":"Bubonic plague (treated)","3":"bacterium","4":"1.0","5":"15.0","6":"bite"},{"1":"3","2":"Bubonic plague (untreated)","3":"bacterium","4":"1.0","5":"60.0","6":"bite"},{"1":"4","2":"C. difficile","3":"bacterium","4":"1.3","5":"24.0","6":"fecal-oral"},{"1":"5","2":"Campylobacter","3":"bacterium","4":"0.2","5":"1.2","6":"food"},{"1":"6","2":"Chicken pox","3":"virus","4":"8.5","5":"0.0","6":"airborne"},{"1":"7","2":"Chikungunya","3":"virus","4":"3.5","5":"0.4","6":"bite"},{"1":"9","2":"Common cold","3":"virus","4":"6.0","5":"0.0","6":"airborne"},{"1":"10","2":"Dengue fever","3":"virus","4":"3.0","5":"0.1","6":"bite"},{"1":"11","2":"Diphtheria","3":"bacterium","4":"6.5","5":"7.5","6":"body fluids"},{"1":"12","2":"E. coli","3":"bacterium","4":"1.2","5":"4.0","6":"fecal-oral"},{"1":"13","2":"Ebola","3":"virus","4":"2.5","5":"50.0","6":"body fluids"},{"1":"16","2":"Hand, foot and mouth","3":"virus","4":"3.5","5":"0.1","6":"body fluids"},{"1":"17","2":"Hantavirus","3":"virus","4":"1.3","5":"36.0","6":"airborne, fecal-oral"},{"1":"20","2":"Hepatitis B","3":"virus","4":"4.0","5":"0.8","6":"body fluids"},{"1":"21","2":"HIV (treated)","3":"virus","4":"3.5","5":"2.1","6":"sexual contact"},{"1":"22","2":"HIV (untreated)","3":"virus","4":"3.5","5":"80.0","6":"sexual contact"},{"1":"23","2":"Influenza (bird flu)","3":"virus","4":"1.0","5":"60.0","6":"airborne"},{"1":"24","2":"Influenza (seasonal flu)","3":"virus","4":"2.5","5":"0.1","6":"airborne"},{"1":"25","2":"Influenza (Spanish flu)","3":"virus","4":"3.0","5":"2.5","6":"airborne"},{"1":"26","2":"Influenza (swine flu)","3":"virus","4":"1.5","5":"0.2","6":"airborne"},{"1":"29","2":"Lyme disease","3":"bacterium","4":"4.4","5":"0.2","6":"bite"},{"1":"31","2":"Malaria (P. falciparum)","3":"parasite","4":"115.0","5":"0.5","6":"bite"},{"1":"32","2":"Malaria (P. malariae)","3":"parasite","4":"16.0","5":"0.5","6":"bite"},{"1":"33","2":"Marburg","3":"virus","4":"1.6","5":"50.0","6":"body fluids"},{"1":"34","2":"Measles","3":"virus","4":"15.0","5":"0.3","6":"airborne"},{"1":"35","2":"Meningitis (meningococcal, treated)","3":"bacterium","4":"1.3","5":"11.5","6":"airborne, body fluids"},{"1":"36","2":"Meningitis (meningococcal, untreated)","3":"bacterium","4":"1.3","5":"50.0","6":"airborne, body fluids"},{"1":"37","2":"MERS","3":"virus","4":"0.5","5":"45.0","6":"airborne"},{"1":"38","2":"MRSA","3":"bacterium","4":"1.6","5":"20.0","6":"surfaces"},{"1":"39","2":"Mumps","3":"virus","4":"13.0","5":"1.0","6":"airborne"},{"1":"40","2":"Norovirus","3":"virus","4":"2.0","5":"0.0","6":"fecal-oral, surfaces"},{"1":"41","2":"Pneumonia (pneumococcal)","3":"bacterium","4":"2.0","5":"7.5","6":"airborne, body fluids"},{"1":"42","2":"Pneumonic plague (untreated)","3":"bacterium","4":"3.2","5":"100.0","6":"airborne"},{"1":"43","2":"Polio","3":"virus","4":"6.0","5":"22.0","6":"fecal-oral"},{"1":"44","2":"Rabies (treated)","3":"virus","4":"1.6","5":"1.0","6":"bite"},{"1":"45","2":"Rabies (untreated)","3":"virus","4":"1.6","5":"100.0","6":"bite"},{"1":"46","2":"Rotavirus","3":"virus","4":"18.0","5":"0.0","6":"fecal-oral"},{"1":"47","2":"Rubella","3":"virus","4":"6.0","5":"0.0","6":"airborne"},{"1":"48","2":"Salmonella","3":"bacterium","4":"0.8","5":"1.0","6":"food"},{"1":"49","2":"SARS","3":"virus","4":"2.4","5":"9.6","6":"airborne"},{"1":"50","2":"Scarlet fever","3":"bacterium","4":"2.8","5":"0.5","6":"body fluids"},{"1":"54","2":"Smallpox","3":"virus","4":"6.0","5":"15.0","6":"airborne"},{"1":"55","2":"Syphilis (untreated)","3":"bacterium","4":"0.9","5":"33.0","6":"sexual contact"},{"1":"56","2":"Tuberculosis (untreated)","3":"bacterium","4":"10.0","5":"60.0","6":"airborne"},{"1":"57","2":"Typhoid","3":"bacterium","4":"2.8","5":"20.0","6":"fecal-oral"},{"1":"60","2":"Whooping cough","3":"bacterium","4":"15.0","5":"4.0","6":"airborne"},{"1":"61","2":"Yellow fever","3":"virus","4":"3.0","5":"7.5","6":"bite"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p><kbd>Filter</kbd></p>
+</div>
+<div id="where-greater-than" class="section level3">
+<h3>Where greater than</h3>
+<p>Filter dataset where <span style="background: #D0A9F5;font-weight:bold">CONTAGIOUSNESS</span> is greater than <span style="font-weight:bold">5.0</span>.</p>
+<pre class="r"><code>df_6 &lt;- df_complete%&gt;%  filter(CONTAGIOUSNESS &gt; 5.0)
+df_6</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["N"],"name":[1],"type":["int"],"align":["right"]},{"label":["DISEASE"],"name":[2],"type":["chr"],"align":["left"]},{"label":["PATHOGEN"],"name":[3],"type":["fct"],"align":["left"]},{"label":["CONTAGIOUSNESS"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["DEADLINESS"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["TRANSMISSION"],"name":[6],"type":["fct"],"align":["left"]}],"data":[{"1":"1","2":"Anthrax (untreated)","3":"bacterium","4":"6.5","5":"20.0","6":"airborne"},{"1":"6","2":"Chicken pox","3":"virus","4":"8.5","5":"0.0","6":"airborne"},{"1":"9","2":"Common cold","3":"virus","4":"6.0","5":"0.0","6":"airborne"},{"1":"11","2":"Diphtheria","3":"bacterium","4":"6.5","5":"7.5","6":"body fluids"},{"1":"31","2":"Malaria (P. falciparum)","3":"parasite","4":"115.0","5":"0.5","6":"bite"},{"1":"32","2":"Malaria (P. malariae)","3":"parasite","4":"16.0","5":"0.5","6":"bite"},{"1":"34","2":"Measles","3":"virus","4":"15.0","5":"0.3","6":"airborne"},{"1":"39","2":"Mumps","3":"virus","4":"13.0","5":"1.0","6":"airborne"},{"1":"43","2":"Polio","3":"virus","4":"6.0","5":"22.0","6":"fecal-oral"},{"1":"46","2":"Rotavirus","3":"virus","4":"18.0","5":"0.0","6":"fecal-oral"},{"1":"47","2":"Rubella","3":"virus","4":"6.0","5":"0.0","6":"airborne"},{"1":"54","2":"Smallpox","3":"virus","4":"6.0","5":"15.0","6":"airborne"},{"1":"56","2":"Tuberculosis (untreated)","3":"bacterium","4":"10.0","5":"60.0","6":"airborne"},{"1":"60","2":"Whooping cough","3":"bacterium","4":"15.0","5":"4.0","6":"airborne"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p><kbd>Filter</kbd></p>
+</div>
+<div id="where-less-than" class="section level3">
+<h3>Where less than</h3>
+<p>Filter dataset where <span style="background: #D0A9F5;font-weight:bold">DEADLINESS</span> is less than <span style="font-weight:bold">1.0</span>.</p>
+<pre class="r"><code>df_6 &lt;- df_complete%&gt;%  filter(DEADLINESS &lt; 1.0)
+df_6</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["N"],"name":[1],"type":["int"],"align":["right"]},{"label":["DISEASE"],"name":[2],"type":["chr"],"align":["left"]},{"label":["PATHOGEN"],"name":[3],"type":["fct"],"align":["left"]},{"label":["CONTAGIOUSNESS"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["DEADLINESS"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["TRANSMISSION"],"name":[6],"type":["fct"],"align":["left"]}],"data":[{"1":"6","2":"Chicken pox","3":"virus","4":"8.5","5":"0.0","6":"airborne"},{"1":"7","2":"Chikungunya","3":"virus","4":"3.5","5":"0.4","6":"bite"},{"1":"9","2":"Common cold","3":"virus","4":"6.0","5":"0.0","6":"airborne"},{"1":"10","2":"Dengue fever","3":"virus","4":"3.0","5":"0.1","6":"bite"},{"1":"16","2":"Hand, foot and mouth","3":"virus","4":"3.5","5":"0.1","6":"body fluids"},{"1":"20","2":"Hepatitis B","3":"virus","4":"4.0","5":"0.8","6":"body fluids"},{"1":"24","2":"Influenza (seasonal flu)","3":"virus","4":"2.5","5":"0.1","6":"airborne"},{"1":"26","2":"Influenza (swine flu)","3":"virus","4":"1.5","5":"0.2","6":"airborne"},{"1":"29","2":"Lyme disease","3":"bacterium","4":"4.4","5":"0.2","6":"bite"},{"1":"31","2":"Malaria (P. falciparum)","3":"parasite","4":"115.0","5":"0.5","6":"bite"},{"1":"32","2":"Malaria (P. malariae)","3":"parasite","4":"16.0","5":"0.5","6":"bite"},{"1":"34","2":"Measles","3":"virus","4":"15.0","5":"0.3","6":"airborne"},{"1":"40","2":"Norovirus","3":"virus","4":"2.0","5":"0.0","6":"fecal-oral, surfaces"},{"1":"46","2":"Rotavirus","3":"virus","4":"18.0","5":"0.0","6":"fecal-oral"},{"1":"47","2":"Rubella","3":"virus","4":"6.0","5":"0.0","6":"airborne"},{"1":"50","2":"Scarlet fever","3":"bacterium","4":"2.8","5":"0.5","6":"body fluids"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<div id="citations-for-narrative-and-data-sources" class="section level4">
+<h4>citations for narrative and data sources</h4>
+<ul>
+<li>Narrative inspiration and data sources: The MicrobeScope Infectious Diseases in Context, <a href="https://informationisbeautiful.net/visualizations/the-microbescope-infectious-diseases-in-context/" target="_blank">GO</a></li>
+</ul>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>

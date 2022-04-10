@@ -59,8 +59,8 @@ knitr::include_graphics(masthead, dpi=72)
 
 Infectious diseases are diseases that are caused by germs.  As we'll see with the data, these germs can be passed on in several different ways from direct and indirect contact, insect or animal bites, or through contaminated food, water, soil, or plants.  The data will also indicate the type of pathogen such as bacteria, virus, or parasite.  For this case we'll explore the many different germs and two key areas of interest: how __contagious__ they are and the __fatality__ rate if infected.
 
-### Ingest data
-#### Disease, R0, Fatality Rate, and Mode of Transmission
+### Load the data
+Disease, R0, Fatality Rate, and Mode of Transmission.
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
@@ -76,7 +76,7 @@ df
 
 
 ### Wrangle data
-#### Rename, select, clean, and cast data types
+Rename, select, clean, and cast data types.
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
@@ -113,7 +113,7 @@ df_complete
 
 <kbd>Filter</kbd>
 
-#### Where greater than 
+### Where greater than 
 
 Filter dataset where <span style="background: #D0A9F5;font-weight:bold">CONTAGIOUSNESS</span> is greater than <span style="font-weight:bold">5.0</span>.
 
@@ -125,7 +125,7 @@ df_6
 ```
 <kbd>Filter</kbd>
 
-#### Where less than  
+### Where less than  
 
 Filter dataset where <span style="background: #D0A9F5;font-weight:bold">DEADLINESS</span> is less than <span style="font-weight:bold">1.0</span>.
 
