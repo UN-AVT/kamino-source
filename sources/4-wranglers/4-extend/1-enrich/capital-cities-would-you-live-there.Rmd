@@ -1,0 +1,147 @@
+---
+pagetitle: "Capital cities would you live there"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggtext)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+WRANGLERS
+</div>
+
+# Capital cities: would you live there?
+## Concatenate
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Alisa Matthews on Unsplash"}
+
+masthead <- "assets/alisa-matthews-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Houston, TX, USA</div>
+
+> This City is what it is because our citizens are what they are...\
+--- Plato\
+
+***
+
+# Load data
+## city, country, group, measure, and population
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "capital-cities/capital-cities-would-you-live-there.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE)
+df
+
+```
+
+### Concatenate Rows
+#### Combine records of the same structure
+
+Sometimes we may need to combine two tables that we know contain the same information, basically the two tables get stacked.  
+
+
+```{r, message=FALSE, echo=TRUE}
+
+df_part1 <- df[1:100,]
+df_part2 <- df[101:189,]
+
+```
+
+Let's assume we need to combined the following two tables. The first table contains 5 rows:
+
+```{r, message=FALSE, echo=FALSE}
+
+df_part1
+
+```
+The second table contains 6 rows:
+
+```{r, message=FALSE, echo=FALSE}
+
+df_part2
+
+```
+
+Notice that both tables include the same information (same number of columns, and column names).
+
+We can now Concatenate the two tables
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
+
+df_concat <- bind_rows(df_part1, df_part2)
+
+```
+
+The output table looks like this:
+
+```{r, message=FALSE, echo=FALSE}
+
+df_concat
+
+```
+
+As expected, we got the full dataset back.
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: TBD
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

@@ -47,7 +47,7 @@ WRANGLERS
 
 
 # Life Expectancy by Gender
-## Enrich
+## Join
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Ravi Roshan on Unsplash"}
 
@@ -207,81 +207,6 @@ df_anti
 
 As expected, only <span style="color: #FE9A2E;font-weight:bold">Germany</span> is returned, since this is the only record that exists on the Left table but have no match on the Right table.
 
-### Concatenate Rows
-#### Combine records of the same structure
-
-So far, we have been joining tables together based on a common element (column “Country” in this example), and remaining Columns get glued together on the right (Male_2020, Female_2020, Pop_2020_in_million). But sometimes we may just need to combined two tables that we know contain the same information, basically the two tables get stacked.  
-
-
-```{r, message=FALSE, echo=TRUE}
-
-df_part1 <- df_full[1:5,]
-df_part2 <- df_full[6:11,]
-
-```
-
-Let's assume we need to combined the following two tables. The first table contains 5 rows:
-
-```{r, message=FALSE, echo=FALSE}
-
-df_part1
-
-```
-
-The second table contains 6 rows:
-
-```{r, message=FALSE, echo=FALSE}
-
-df_part2
-
-```
-
-Notice that both tables include the same information (same number of columns, and column names).
-
-We can now Concatenate the two tables
-
-```{r, echo=TRUE, message=FALSE, warning=FALSE}
-
-df_concat <- bind_rows(df_part1, df_part2)
-
-```
-
-The output table looks like this:
-
-```{r, message=FALSE, echo=FALSE}
-
-df_concat
-
-```
-
-As expected, we got the full dataset back
-
-### Copy Column
-#### A duplicate to be used for manipulation
-
-It may also be important to copy columns in a dataframe. We will be copying the column "Country" into the same data frame. 
-
-```{r, echo=TRUE, message=FALSE, warning=FALSE}
-
-df <- df_right_table
-df$Country_Copy <- df$Country
-row.names(df)<-NULL
-
-```
-
-
-```{r Styling dataset 8, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp<-df[1:10,]
-df_tmp <- df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = "striped")%>%
-column_spec(3, bold = TRUE, color = "#000000", background = "#CEE3F6")
-df_tmp
-
-```
 
 ### References
 #### citations for narrative and data sources
