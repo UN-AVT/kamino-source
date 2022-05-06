@@ -32,7 +32,7 @@ library(ggiraph)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
-font_add_google("Inconsolata", "inconsolata")
+# font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
 showtext_auto()
 

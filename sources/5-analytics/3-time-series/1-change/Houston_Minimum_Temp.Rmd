@@ -1,0 +1,267 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
+   dev = "svg")
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(knitcitations)
+library(bibtex)
+library(changepoint)
+library(tidyverse)
+library(rvest)
+library(ggplot2)
+library(dplyr)
+library(tabulizer)
+library(pdftools)
+library(ggiraph)
+
+```
+
+<div class="activity">
+ANALYTICS 
+</div>
+
+# Change
+# Case: Houston Monthly Minimum Temperature 
+
+## Anomaly detection is a process in Data Science that deals with identifying data points that deviate from a dataset’s usual behavior. Anomalous data can indicate critical incidents, such as financial fraud, a software issue, or potential opportunities, like a change in end-user buying patterns. 
+
+***
+
+# Load the data
+## For this case, we extract the data from a pdf file, so extra steps maybe required.
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+df <- extract_tables("./archetypes/houston temp.pdf",
+             output = "data.frame", guess = FALSE
+             )
+
+df <- reduce(df, bind_rows)
+df <- df[-c(1,56:62,118:124, 129:134),]
+
+df1 <- df[1:54,1:6]
+df2 <- df[55:113,1:13]
+
+foo <- data.frame(do.call('rbind', strsplit(as.character(df1$X.2),' ',fixed=TRUE)))
+df1 <- cbind(df1, foo)
+df1 <- df1 %>% select(-c(X.2,X.3,X.4),X.3, X.4)
+names(df1) <- df1[1,]
+df1 <- df1[-1,]
+names(df2) <- names(df1)
+
+
+df <- rbind(df1,df2)
+head(df)
+
+```
+
+# Wrangle the data
+## Our dataframe is in a wide form. We will need to pivot it to a long form.
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+temp <- df
+
+temp <- temp %>% pivot_longer(!Year, names_to = 'Month', values_to='Temperature')
+temp <- temp[1:1338,]
+
+temp$Month <- match(temp$Month, month.abb)
+temp <- within(temp, Date <- sprintf("%s-%02d-01", Year, Month))
+
+
+temp <- temp %>% select(Date, Temperature)
+temp$Date <- as.Date(temp$Date)
+temp$Temperature <- as.numeric(temp$Temperature)
+head(temp)
+```
+
+# Year 2000 - 2021
+## We will subset the data and plot it to have a clearer picture first.
+
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', fig.height=6, fig.width=12}
+
+temp00 <- temp[1081:1338,]
+
+p1 <- ggplot(temp00, aes(x=Date, y=Temperature)) +
+  geom_line() + 
+  xlab("")
+girafe(ggobj = p1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+# Anomaly Detection.
+## This Anomaly package was created by Twitter to find anomalies in timeseries.
+
+* alpha: is a parameter that is used to control the size of the bands. If we decrease alpha, it increases the bands making it more difficult to be an outlier.
+
+* max_anoms: is a parameter used to control the maximum percentage of data that can be an anomaly.
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-show'}
+
+library(AnomalyDetection) #install.packages("devtools")  # devtools::install_github("twitter/AnomalyDetection")
+
+ano <- AnomalyDetectionVec(temp00$Temperature, period = 12, max_anoms=0.1, alpha=0.05,  direction = 'both', plot = T)
+ano$anoms
+y <- ano$anoms[,1]
+
+
+for(i in y){
+  print(paste0('Anomaly Dates and Temperature :' , temp00$Date[i], '   ', temp00$Temperature[i]))
+}
+
+ano$plot
+```
+
+
+
+
+# We will use another Anomaly Detection Package which analyzes the timeseries in more details 
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-show'}
+temp0 <- as_tibble(temp00)
+
+library(anomalize)
+
+df_anomalized <- temp0 %>%
+    time_decompose(Temperature, merge = TRUE) %>%
+    anomalize(remainder, alpha = 0.05, max_anoms = 0.2) %>%
+    time_recompose() %>%
+    plot_anomalies(time_recomposed = TRUE) +
+    ggtitle("Minimum Temperature of Houston")
+
+girafe(ggobj = df_anomalized, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+## The package has a decomposition feature for further analysis.
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+temp0 %>%
+    time_decompose(Temperature, merge = TRUE) %>%
+    anomalize(remainder, alpha = 0.05, max_anoms = 0.2) %>%
+    time_recompose() %>%
+    plot_anomaly_decomposition() +
+    ggtitle("Decomposition into Trend, Season, Residual")
+temp0
+```
+
+
+
+# Year 1910 - 2021
+
+## We now move on to the entire dataset. Let's Plot the Data first to understand it better.
+
+## Notice that it gets harder to visually eye-ball the time series. 
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.height=6, fig.width=12}
+
+
+p2 <- ggplot(temp, aes(x=Date, y=Temperature)) +
+  geom_line() + 
+  xlab("")
+girafe(ggobj = p2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+# library(AnomalyDetection)
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+
+
+ano <- AnomalyDetectionVec(temp$Temperature, period = 12, max_anoms=0.4,  direction = 'both', plot = T)
+x <- ano$anoms[,1]
+
+for(i in x){
+  print(paste0('Anomaly Dates :' , temp$Date[i], temp$Temperature[i]))
+}
+
+ano$plot
+```
+
+
+# library(anomalize)
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df3 <- as_tibble(temp)
+
+
+
+df_anomalized <- df3 %>%
+    time_decompose(Temperature, merge = TRUE) %>%
+    anomalize(remainder) %>%
+    time_recompose()
+
+
+df_anomalized %>% plot_anomalies(ncol = 3, alpha_dots = 0.75)
+
+p3 <- df_anomalized %>%
+    plot_anomaly_decomposition() +
+    ggtitle("Freq/Trend = 'auto'")
+girafe(ggobj = p3, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Extracting the Anomalous Data Points
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+df3 %>% 
+  time_decompose(Temperature) %>%
+  anomalize(remainder) %>%
+  time_recompose() %>%
+  filter(anomaly == 'Yes')
+
+
+```
+
+
+
+
+
+# References
+## The data source is from [National Weather Service Forecast](https://w2.weather.gov/climate/xmacis.php?wfo=hgx)
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

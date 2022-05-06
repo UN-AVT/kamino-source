@@ -1,0 +1,445 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE,
+   dev = "svg"
+)
+library(tidyverse)  # metapackage with lots of helpful functions
+library(data.table) # table,matrix
+library(lubridate)  # date
+library(gridExtra)  # ggplot functions
+library(plotly)     # interactive graphs    
+library(scales)     # scale axis
+library(fBasics)    # for base statistics
+library(reshape)    # long and wide data
+library(ggrepel)    # ggplot label
+library(knitr)      # for html table
+library(ggfortify)  # autoplot(time series ggplot)
+library(forecast)   # forecast time series 
+library(ggiraph)
+```
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# Dynamic regression models
+## I want to predict future values based on historical data plus other informations
+
+> J'ai deux amours, mon pays et Paris...\
+--- Jaséphine Baker\
+
+To make a better prediction, it may be necessary to add external variables, which may explain some of the variations observed in the historical data.
+
+In this section, we will focus on the following steps:
+
+* Analyse __Historical data__
+* Estimate other informations, adding __external variables__ 
+* Fit __Dynamic__ Model
+* Analyse __residuals__ to estimate __model__ performance
+* __Forecast__
+
+
+***
+
+# Paris Air pollution - Determining its causes
+
+We are given times series about daily pollutant levels in Paris. Here are some further information about the potential __causes__ or sources of each pollutant level 
+
+* [EPA - O_3](https://www.epa.gov/ground-level-ozone-pollution/ground-level-ozone-basics#formation)
+
+Tropospheric, or ground level ozone, is not emitted directly into the air, but is created by chemical reactions between oxides of nitrogen (NOx) and volatile organic compounds (VOC). This happens when pollutants __emitted by cars, power plants, industrial boilers, refineries, chemical plants__, and other sources chemically react in the __presence of sunlight__.
+
+* [EPA - PM](https://www.epa.gov/pm-pollution/particulate-matter-pm-basics#PM)
+
+These particles come in many sizes and shapes and can be made up of hundreds of different chemicals.
+
+Some are emitted directly from a source, such as __construction sites, unpaved roads, fields, smokestacks or fires__.
+
+Most particles form in the atmosphere as a result of complex reactions of chemicals such as sulfur dioxide and nitrogen oxides, which are pollutants emitted from __power plants, industries and automobiles__.
+
+* [EPA - NO2](https://www.epa.gov/no2-pollution/basic-information-about-no2#What%20is%20NO2)
+
+NO2 primarily gets in the air from the burning of fuel. NO2 forms from emissions from __cars, trucks and buses, power plants, and off-road equipment__.
+
+### Loading pollutant Data
+
+```{r, message=FALSE, warning=FALSE}
+paris_pollutant <- read_csv("archetypes/paris-air-quality.csv")
+paris_pollutant_1 <- paris_pollutant %>% 
+  select(date, O_3 = o3, PM10 = pm10, NO_2 = no2, SO_2 = so2)
+
+pollutant <- paris_pollutant_1 %>% 
+  mutate(day = as_date(date)) %>%
+  dplyr::filter(day > as.Date("2015-12-31"), day < as.Date("2016-12-01")) %>% 
+  select(day, O_3, PM10, NO_2) %>%
+  arrange(day)
+
+pollutant
+
+```
+
+### Visualizing
+
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  #axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+O_3_plot <- ggplot(pollutant, aes(x=day,y=O_3)) +
+  geom_line() +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+
+PM10_plot <- ggplot(pollutant, aes(x=day,y=PM10)) +
+  geom_line() +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+
+NO_2_plot <- ggplot(pollutant, aes(x=day,y=NO_2)) +
+  geom_line() +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+
+v1<-grid.arrange(O_3_plot,PM10_plot,NO_2_plot,ncol=1,top="pollutant")
+# girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+#        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+# Adding external variables
+
+## Is vehicle traffic a determinant to observed pollutant levels in Paris?
+
+### Loading traffic Data
+
+
+```{r}
+paris_traffic <- readRDS("archetypes/paris_traffic.Rds")
+head(paris_traffic)
+
+
+```
+
+### Traffic data wrangling
+
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+df_1 <- paris_traffic %>% 
+  mutate(hour = interval / 3600) %>%
+  group_by(day, hour) %>%
+  summarize(mean = mean(flow)) %>% 
+  count(day) %>%
+  dplyr::filter(n == 24)
+
+paris_traffic_1 <- paris_traffic %>% 
+  mutate(hour = interval / 3600) %>%
+  group_by(day) %>%
+  summarize(mean = mean(flow)) %>%
+  dplyr::filter(day %in% unique(df_1$day))
+
+paris_traffic_1
+
+```
+
+### Visualize traffic Data
+
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  #axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+traffic_plot <- ggplot(paris_traffic_1, aes(x=day,y=mean)) +
+  geom_line() +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))+
+  geom_vline(xintercept = as.Date("2016-07-01"), color = "red") +
+  geom_text(aes(x=as.Date("2016-07-01"), y=100, label="July 1st"), size=4, color = "red")  +
+  geom_vline(xintercept = as.Date("2016-09-01"), color = "blue") +
+  geom_text(aes(x=as.Date("2016-09-01"), y=90, label="Sept 1st"), size=4, color = "blue") +
+  labs(y="Traffic")
+
+girafe(ggobj = traffic_plot, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+### Visualize traffic data with pollutant
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+O_3_plot <- ggplot(pollutant, aes(x=day,y=O_3)) +
+  geom_line() +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))+
+  geom_vline(xintercept = as.Date("2016-07-01"), color = "red") +
+  geom_text(aes(x=as.Date("2016-07-01"), y=100, label="July 1st"), size=4, color = "red")  +
+  geom_vline(xintercept = as.Date("2016-09-01"), color = "blue") +
+  geom_text(aes(x=as.Date("2016-09-01"), y=90, label="Sept 1st"), size=4, color = "blue")
+
+PM10_plot <- ggplot(pollutant, aes(x=day,y=PM10)) +
+  geom_line() +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))+
+  geom_vline(xintercept = as.Date("2016-07-01"), color = "red") +
+  geom_text(aes(x=as.Date("2016-07-01"), y=100, label="July 1st"), size=4, color = "red")  +
+  geom_vline(xintercept = as.Date("2016-09-01"), color = "blue") +
+  geom_text(aes(x=as.Date("2016-09-01"), y=90, label="Sept 1st"), size=4, color = "blue")
+
+NO_2_plot <- ggplot(pollutant, aes(x=day,y=NO_2)) +
+  geom_line() +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))+
+  geom_vline(xintercept = as.Date("2016-07-01"), color = "red") +
+  geom_text(aes(x=as.Date("2016-07-01"), y=100, label="July 1st"), size=4, color = "red")  +
+  geom_vline(xintercept = as.Date("2016-09-01"), color = "blue") +
+  geom_text(aes(x=as.Date("2016-09-01"), y=90, label="Sept 1st"), size=4, color = "blue")
+
+#grid.arrange(traffic_plot,O_3_plot,PM10_plot,NO_2_plot,ncol=1,top="Traffic vs pollutant")
+girafe(ggobj = traffic_plot, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = traffic_plot, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = traffic_plot, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = traffic_plot, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+## Is the weather a better determinant?
+
+### Adding temperatures
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+paris_weather <- read_csv("archetypes/2627103.csv")
+
+paris_weather_1 <- paris_weather %>%
+  select(day = DATE, precipitation = PRCP, wind = SNWD, temperature = TAVG) %>%
+  dplyr::filter(day > as.Date("2015-12-31"), day < as.Date("2016-12-31"))
+
+paris_weather_1
+
+```
+
+```{r}
+
+# Choose a pollutant, compute daily maximum 
+#O_3 PM10, NO_2, SO_2
+
+#paris_pollutant_1
+
+pollutant <- paris_pollutant_1 %>% 
+  mutate(day = as_date(date)) %>%
+  dplyr::filter(day > as.Date("2015-12-31"), day < as.Date("2016-12-31"))
+
+O_3_plot <- ggplot(pollutant, aes(x=day,y=O_3)) +
+  geom_line() +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))+
+  geom_vline(xintercept = as.Date("2016-07-01"), color = "red") +
+  geom_text(aes(x=as.Date("2016-07-01"), y=100, label="July 1st"), size=4, color = "red")  +
+  geom_vline(xintercept = as.Date("2016-09-01"), color = "blue") +
+  geom_text(aes(x=as.Date("2016-09-01"), y=90, label="Sept 1st"), size=4, color = "blue")
+
+PM10_plot <- ggplot(pollutant, aes(x=day,y=PM10)) +
+  geom_line() +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))+
+  geom_vline(xintercept = as.Date("2016-07-01"), color = "red") +
+  geom_text(aes(x=as.Date("2016-07-01"), y=100, label="July 1st"), size=4, color = "red")  +
+  geom_vline(xintercept = as.Date("2016-09-01"), color = "blue") +
+  geom_text(aes(x=as.Date("2016-09-01"), y=90, label="Sept 1st"), size=4, color = "blue")
+
+NO_2_plot <- ggplot(pollutant, aes(x=day,y=NO_2)) +
+  geom_line() +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))+
+  geom_vline(xintercept = as.Date("2016-07-01"), color = "red") +
+  geom_text(aes(x=as.Date("2016-07-01"), y=100, label="July 1st"), size=4, color = "red")  +
+  geom_vline(xintercept = as.Date("2016-09-01"), color = "blue") +
+  geom_text(aes(x=as.Date("2016-09-01"), y=90, label="Sept 1st"), size=4, color = "blue")
+
+girafe(ggobj = O_3_plot, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = PM10_plot, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+girafe(ggobj = NO_2_plot, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+### Visualize temperature data
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+weather_temp_plot <- ggplot(paris_weather_1, aes(x=day,y=temperature)) +
+  geom_line() +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))+
+  geom_vline(xintercept = as.Date("2016-07-01"), color = "red") +
+  geom_text(aes(x=as.Date("2016-07-01"), y=100, label="July 1st"), size=4, color = "red")  +
+  geom_vline(xintercept = as.Date("2016-09-01"), color = "blue") +
+  geom_text(aes(x=as.Date("2016-09-01"), y=90, label="Sept 1st"), size=4, color = "blue")
+
+
+girafe(ggobj = weather_temp_plot, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+### Visualize temperature data with pollutant
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+#grid.arrange(weather_temp_plot,O_3_plot,PM10_plot,NO_2_plot,ncol=1,top="Temperature vs pollutant")
+
+```
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+pollutant <- pollutant %>% mutate(day = as.Date(date))
+
+df_joined <- inner_join(pollutant, paris_weather_1, by=c("day" = "day")) %>%
+  dplyr::filter(!is.na(O_3))
+
+```
+
+# Fitting dynamic model
+
+### Fitting first dynamic model
+
+Using __temperature__ as additional information
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+fit <- auto.arima(df_joined[,"O_3"],
+  xreg=as.matrix(df_joined[,"temperature"]))
+
+fit
+```
+
+# Analyse rediduals
+
+### Checking residuals for this model
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+checkresiduals(fit) + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+
+```
+
+### Fitting second dynamic model and checking again residuals
+
+Using __temperature__ and __precipitation__ as additional information
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+xreg <- as.matrix(cbind(Temp = df_joined[,"temperature"],
+              Precipitation = df_joined[,"precipitation"]))
+
+fit_temp_prec <- auto.arima(df_joined[,"O_3"], xreg = xreg)
+
+fit
+```
+
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+
+checkresiduals(fit_temp_prec)
+```
+
+# Final forecast
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+# xreg <- as.matrix(cbind(Temp = df_joined[,"temperature"],
+#               Precipitation = df_joined[,"precipitation"]))
+# 
+# fit_temp_prec <- auto.arima(df_joined[,"O_3"], xreg = xreg)
+
+paris_weather_2 <- paris_weather %>%
+  select(day = DATE, precipitation = PRCP, wind = SNWD, temperature = TAVG) %>%
+  dplyr::filter(day > as.Date("2016-12-31"), day < as.Date("2017-03-01"))
+
+xreg_future <- as.matrix(cbind(Temp = paris_weather_2[,"temperature"],
+               Precipitation = paris_weather_2[,"precipitation"]))
+
+fcast <- forecast(fit_temp_prec,
+  xreg = xreg_future)
+
+
+v1<-autoplot(fcast) + ylab("Pollutant forecast") +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

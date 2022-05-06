@@ -1,0 +1,299 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE,
+   dev = "svg"
+)
+
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+library(ggiraph)
+
+library(data.table)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Ranking
+## I want to give a rank or place within a grading system...
+
+> My objective has always been to get better, no matter where my ranking is...\
+--- Luke Donald\
+
+Ranking is a task to convert a measurable value or values to establish a _score_ and order for evaluating performance or comparison.  The criterion used for ranking is an important basis of measurement, for example, when assessing if a high _score_ represents positive or negative performance.  When using different features to establish a composite ranking, each measure must be assessed for the most appropriate ranking scale. Methods to establish the system of ranking differ in the treatment of ties.  In cases of ties, a tie-breaking method can be applied such as _average_, _first_, _last_, _random_, _maximum_, _minimum_, or _dense_.
+
+Let's look at examples for each of these methods for a few cases.
+
+***
+
+# Sun and Fun
+## Ranking country alcohol consumption and sunshine duration
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# World alcohol consumption by country
+alcohol_df <- read.csv('archetypes/alcohol-consumption-by-country/total-alcohol-consumption-per-capita-litres-of-pure-alcohol-owid.csv')
+alcohol_df
+
+alcohol_df <- alcohol_df %>% 
+  rename(
+    country = Entity,
+    consumption = Total.alcohol.consumption.per.capita..liters.of.pure.alcohol..projected.estimates..15..years.of.age.
+    )
+
+# Cities by sunshine
+sunshine_df <- read.csv('archetypes/cities-by-sunshine/cities-by-sunshine-duration.csv', header = TRUE, fileEncoding = "UTF-8")
+sunshine_df
+
+sunshine_country_df <- aggregate(sunshine_df[, "year"], list(sunshine_df$country), mean)
+sunshine_country_df <- sunshine_country_df %>% rename( country = Group.1, sunshine = x )
+
+merged <- merge(alcohol_df, sunshine_country_df, by.x = 'country', by.y = 'country')
+merged
+
+```
+
+# Sun and fun?
+## or a cloudy pleasure 
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=8, fig.width=12}
+
+
+mycol <- c("navy", "blue", "cyan", "lightcyan", "yellow", "red", "red4")
+
+scatter_svg <- ggplot(data = merged) +
+  geom_point_interactive(aes(x = consumption, y = sunshine, color = sunshine, data_id = country, 
+                             tooltip = paste0("country: ",country,"\n",
+                                              "consumption: ",consumption,"\n",
+                                              "sunshine: ",round(sunshine,digits = 0),"\n")), size = 2) +
+  scale_color_gradientn(colours = mycol) +
+  # linetype="dashed", color="darkred", fill="blue"
+  geom_smooth(aes(x = consumption, y = sunshine), method=lm, se=FALSE) +
+  geom_rug(aes(x = consumption, y = sunshine), sides="l", col="black", alpha=0.2, size=0.5) +
+  theme_minimal() +
+  theme(text = element_text(size=12)) +
+  theme(legend.position = "none")
+
+girafe(ggobj = scatter_svg, width_svg = 13.0, height_svg = 7.0,
+       options = list(opts_sizing(rescale = TRUE, width = 1)))
+
+```
+
+
+# Single Column
+## Ranking alcohol consumption using average tie-breaking method
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+column_to_rank <- "consumption"
+
+# "average", "first", "last", "random", "max", "min"
+alcohol_df$computed_rank <-  rank(-alcohol_df[[column_to_rank]], na.last = NA, ties.method = "average")
+
+alcohol_df
+
+```
+
+
+# Multiple Columns
+## by common orders
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+mc_df <- sunshine_df
+
+columns_to_rank <- c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")
+
+for (row in 1:length(columns_to_rank)) {
+
+    rank_column <- columns_to_rank[row]
+    # "average", "first", "last", "random", "max", "min"
+    
+    new_rank_column <- paste0(rank_column, "_rank")
+    
+    mc_df[[new_rank_column]] <-  rank(-mc_df[[rank_column]], na.last = TRUE, ties.method = "average")
+
+}
+
+mc_df
+
+# Wide to long
+mc_df_long <- melt(mc_df, id.vars=c("continent", "country", "city", "year"))
+mc_df_long <- mc_df_long %>% filter(str_detect(variable, '_rank'))
+mc_df_long$variable <- str_remove(mc_df_long$variable, "_rank")
+mc_df_long
+
+```
+
+# Rank chart
+## by common orders
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=8, fig.width=12}
+
+plot_specs <- list(  
+  theme_bw(),
+  theme( plot.margin = unit(c(0,3,0,3), "cm") ),
+  # Format tweaks
+  # Remove the legend
+  theme(legend.position = "none"),
+  # Remove the panel border
+  theme(panel.border     = element_blank()),
+  # Remove just about everything from the y axis
+  theme(axis.title.y     = element_blank()),
+  theme(axis.text.y      = element_blank()),
+  theme(panel.grid.major.x = element_blank()),
+  theme(panel.grid.minor.x = element_blank()),
+  theme(panel.grid.major.y = element_blank()),
+  theme(panel.grid.minor.y = element_blank()),
+  # Remove a few things from the x axis and increase font size
+  theme(axis.title.x     = element_blank()),
+  theme(panel.grid.major.x = element_blank()),
+  theme(axis.text.x.top      = element_text(size=12)),
+  # Remove x & y tick marks
+  theme(axis.ticks       = element_blank()),
+  # Format title & subtitle
+  theme(plot.title       = element_text(size=14, face = "bold")),
+  theme(plot.subtitle    = element_text())
+)
+
+x_axis <- c("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec")
+
+discrete_color_palette <- c('#cccccb', '#c22800')
+
+rank_plot = ggplot(data = mc_df_long, aes(x = variable, y = value, group = city)) +
+  geom_line(aes(), color = "black", size = 0.5, alpha = 1) +
+  geom_text(data = mc_df_long %>% filter(variable == "jan"), 
+                  aes(label = paste0(value)) , 
+                  hjust = "right",
+                  nudge_x = -0.2,
+                  nudge_y = 0.05, 
+                  fontface = "bold", 
+                  size = 2.5) +
+  geom_point(data = mc_df_long %>% filter(variable == "dec"), 
+             aes(), 
+             shape = 21, color = "white", size = 2.0, stroke = 1, alpha = 1) +
+  geom_text(data = mc_df_long %>% filter(variable == "dec"), 
+                  aes(label = paste0(city)), 
+                  hjust = "left",
+                  nudge_x = 0.2,
+                  nudge_y = 0.05, 
+                  fontface = "bold", 
+                  size = 2.5) +
+  geom_point(data = mc_df_long %>% filter(variable == "dec"), 
+             aes(), 
+             shape = 21, color = "white", size = 2.0, stroke = 1, alpha = 1) +
+  scale_x_discrete(breaks = x_axis, labels = x_axis, position = "bottom") +
+  scale_y_reverse() +
+  # Important to remove clipping for long y axis labels
+  coord_cartesian(clip = "off") +
+  scale_fill_manual(values = discrete_color_palette) +
+  scale_color_manual(values = discrete_color_palette) +
+  plot_specs +
+  labs(
+    title = "The rise of the Chinese tourist",
+    subtitle = "Top 20 countries of origin for travellers coming to Canada by rank.",
+    caption = "source: Statistics Canada"
+  )
+
+girafe(ggobj = rank_plot, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+# Multiple Columns
+## by common orders
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+arranged_x <- arrange(sunshine_df, jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec) %>% mutate(rank = n():1)
+arranged_x
+
+alt <- sunshine_df[
+  with(sunshine_df, order(jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec)),
+]
+alt <- alt %>% mutate(rank = row_number())
+alt
+
+rank_ordered_df <- within(sunshine_df, rank2 <- rank(order(jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec), ties.method='first'))
+rank_ordered_df <- rank_ordered_df[order(rank_ordered_df$rank2),]
+rank_ordered_df
+
+# "average", "first", "last", "random", "max", "min", "dense"
+# ties.method:
+# "first" - increasing values that are all unique
+# "last" - decreasing values that are all unique
+# "min" - identical values equaling the minimum of their original ranks
+# "max" - identical values equaling the maximum of their original ranks
+# "average" - identical values that equal the sample mean of their original ranks. Because the average is calculated, the returned ranks may be non-integer values
+# "random" - randomly shuffled values of their original ranks.
+# "dense" - increasing values that are all unique and, contrary to "first", never contain any gaps
+frank_rank <- frank(sunshine_df, cols = "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec", na.last=NA, ties.method="dense")
+as.data.frame(frank_rank)
+
+frank_rank_df <- merge(sunshine_df, as.data.frame(frank_rank), by.x = 0, by.y = 0)
+frank_rank_df <- frank_rank_df[order(frank_rank_df$frank_rank),]
+frank_rank_df
+
+# as.data.frame(setDT(test)[ , rank := frank(test, -gold, -silver, -bronze, ties.method = "min")]; setorder(test, rank))
+# test$rank <- data.table::frank(test, -gold, -silver, -bronze, ties.method = "min")
+# setDT(test)[ , rank := frank(test, -gold, -silver, -bronze, ties.method = "min")]
+# setorder(test, rank)
+
+```
+
+
+
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

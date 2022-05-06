@@ -1,0 +1,520 @@
+---
+title: "Sentiment Analysis"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+library(ggExtra)
+library(tidytext)
+library(tm)
+library(syuzhet)
+library(SentimentAnalysis)
+library(vader)
+
+library(ggiraph)
+
+```
+
+### SURVEY QUESTION
+
+```{r, echo=FALSE, message=FALSE}
+
+focus_question <- 14
+question_language <- "en"
+
+question_list <- read.csv("list-of-questions.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+#question_list
+
+question_filter <- filter(question_list, QID == focus_question)
+question_filter$Question
+
+
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+
+## INGEST DATA
+
+data_file <- paste0("./outputs/q-", focus_question, "-lang.csv")
+
+corpus_csv <- read.csv(data_file, header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+
+# Filter english
+corpus_csv <- filter(corpus_csv, cld2 == question_language)
+#corpus_csv
+
+#print(nrow(corpus_csv))
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+
+## LOAD MODELS
+
+# From References
+afinn_165 <- read.csv("./refs/sentiment/afinn/afinn-165-en.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+#names(afinn_165)
+
+opinion_words <- read.csv("./refs/sentiment/opinion-lexicon/opinion-words.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+#names(opinion_words)
+
+pattern <- read.csv("./refs/sentiment/pattern/pattern_en.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+#names(pattern)
+
+senticon <- read.csv("./refs/sentiment/senticon/senticon.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+#names(senticon)
+
+# Tidytext
+afinn <- get_sentiments("afinn")
+bing <- get_sentiments("bing")
+nrc <- get_sentiments("nrc")
+
+#afinn
+#bing
+#nrc
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+
+## REFERENCE FILE METHOD
+
+colClasses = c("integer", "character", "character")
+col.names = c("QID", "Answer", "word")
+
+ref_df <- read.table(text = "",
+                 colClasses = colClasses,
+                 col.names = col.names)
+
+for (val in 1:nrow(corpus_csv))
+{
+  corpus_text <- corpus_csv[val,] %>% unnest_tokens(word, "Comment")
+  ref_df <- bind_rows(ref_df, corpus_text)
+}
+
+#ref_df
+
+afinn_165_sentiment <- ref_df %>% inner_join(afinn_165) %>% count(word, sentiment, sort = TRUE)
+#afinn_165_sentiment
+
+opinion_words_sentiment <- ref_df %>% inner_join(opinion_words) %>% count(word, sentiment, sort = TRUE)
+#opinion_words_sentiment
+
+pattern_sentiment <- ref_df %>% inner_join(pattern) %>% count(word, sentiment, sort = TRUE)
+#pattern_sentiment
+
+senticon_sentiment <- ref_df %>% inner_join(senticon) %>% count(word, sentiment, sort = TRUE)
+#senticon_sentiment
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+
+## TIDYTEXT METHOD
+
+colClasses = c("integer", "character", "character")
+col.names = c("QID", "Answer", "word")
+
+tidy_df <- read.table(text = "",
+                 colClasses = colClasses,
+                 col.names = col.names)
+
+for (val in 1:nrow(corpus_csv))
+{
+  corpus_text <- corpus_csv[val,] %>% unnest_tokens(word, "Comment")
+  tidy_df <- bind_rows(tidy_df, corpus_text)
+}
+
+#tidy_df
+
+afinn_sentiment <- tidy_df %>% inner_join(afinn) %>% count(word, value, sort = TRUE)
+#afinn_sentiment
+
+bing_sentiment <- tidy_df %>% inner_join(bing) %>% count(word, sentiment, sort = TRUE)
+#bing_sentiment
+
+nrc_sentiment <- tidy_df %>% inner_join(nrc) %>% count(word, sentiment, sort = TRUE)
+#nrc_sentiment
+
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+
+## syuzhet METHOD
+
+s_v <- get_sentences(corpus_csv$Comment)
+syuzhet_vector <- get_sentiment(s_v, method="syuzhet")
+
+syuzhet_sentiment <- cbind.data.frame(s_v, syuzhet_vector)
+# syuzhet_sentiment
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+
+## SentimentAnalysis METHOD
+
+# Sentiment Analysis library
+# Best if used on lemmatized data
+corpus_df_sentiment <- analyzeSentiment(corpus_csv$Comment)
+#corpus_df_sentiment
+
+corpus_df_sentiment <- dplyr::select(corpus_df_sentiment, 
+                                 SentimentGI, SentimentHE,
+                                 SentimentLM, SentimentQDAP, 
+                                 WordCount)
+#corpus_df_sentiment
+
+corpus_df_sentiment <- dplyr::mutate(corpus_df_sentiment, 
+                                 mean_sentiment = rowMeans(corpus_df_sentiment[,-5]))
+#corpus_df_sentiment
+
+corpus_df_sentiment <- dplyr::select(corpus_df_sentiment, 
+                                 WordCount, 
+                                 mean_sentiment)
+#corpus_df_sentiment
+
+corpus_df <- cbind.data.frame(corpus_df_sentiment)
+#corpus_df
+
+corpus_df_negative <- filter(corpus_df, mean_sentiment < 0)
+# nrow(corpus_df_negative)
+
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+
+## VADER METHOD
+
+vader_sentiment <- vader_df(corpus_csv$Comment, incl_nt = T, neu_set = T, rm_qm = F)
+# vader_sentiment
+
+```
+
+
+### afinn_165
+
+```{r, echo=FALSE, message=FALSE, fig.width=11, fig.height=8}
+
+afinn_165_sentiment
+
+# afinn_165
+afinn_165_sentiment_f <- filter(afinn_165_sentiment, n < 150)
+afinn_165_sentiment_f$sentiment <- factor(afinn_165_sentiment_f$sentiment)
+afinn_165_sentiment_f <- afinn_165_sentiment_f %>% mutate(id = row_number())
+
+afinn_165_v <- ggplot(data=afinn_165_sentiment_f, aes(x=sentiment, y=n, fill=sentiment)) +
+    geom_boxplot(alpha=0.5) +
+    scale_y_continuous(trans='log2') +
+    #scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    # geom_jitter(color="black", size=0.4, alpha=0.9) +
+    # geom_point(color="black", size = 0, alpha = 0) +
+    geom_jitter_interactive(aes(color=sentiment, tooltip = word, data_id = id), size=1, alpha=0.8) +
+    theme_minimal() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("AFINN 165 Sentiment") +
+    xlab("")
+
+# afinn_165_v
+# afinn_165_v <- ggMarginal(afinn_165_v, type="histogram")
+
+girafe(ggobj = afinn_165_v, width_svg = 10, height_svg = 7,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+```
+
+### Opinion Words
+
+```{r, echo=FALSE, message=FALSE, fig.width=11, fig.height=8}
+
+opinion_words_sentiment
+
+# opinion_words_sentiment
+opinion_words_sentiment_f <- filter(opinion_words_sentiment, n < 150)
+opinion_words_sentiment_f$sentiment <- factor(opinion_words_sentiment_f$sentiment)
+opinion_words_sentiment_f <- opinion_words_sentiment_f %>% mutate(id = row_number())
+
+opinion_words_sentiment_v <- ggplot(data=opinion_words_sentiment_f, aes(x=sentiment, y=n, fill=sentiment)) +
+    geom_boxplot(alpha=0.5) +
+    scale_y_continuous(trans='log2') +
+    #scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    # geom_jitter(color="black", size=0.4, alpha=0.9) +
+    geom_jitter_interactive(aes(color=sentiment, tooltip = word, data_id = id), size=1, alpha=0.8) +
+    theme_minimal() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("Opinion Words Sentiment") +
+    xlab("")
+
+# opinion_words_sentiment_v
+
+girafe(ggobj = opinion_words_sentiment_v, width_svg = 10, height_svg = 7,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+
+```
+
+
+### PATTERN
+
+```{r, echo=FALSE, message=FALSE, fig.width=11, fig.height=8}
+
+pattern_sentiment
+
+# pattern_sentiment
+pattern_sentiment_f <- filter(pattern_sentiment, n < 150)
+pattern_sentiment_f$sentiment <- factor(pattern_sentiment_f$sentiment)
+pattern_sentiment_f <- pattern_sentiment_f %>% mutate(id = row_number())
+
+pattern_sentiment_v <- ggplot(data=pattern_sentiment_f, aes(x=sentiment, y=n, fill=sentiment)) +
+    geom_boxplot(alpha=0.5) +
+    scale_y_continuous(trans='log2') +
+    #scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    # geom_jitter(color="black", size=0.4, alpha=0.9) +
+    geom_jitter_interactive(aes(color=sentiment, tooltip = word, data_id = id), size=1, alpha=0.8) +
+    theme_minimal() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("Pattern Sentiment") +
+    xlab("")
+
+# opinion_words_sentiment_v
+
+girafe(ggobj = pattern_sentiment_v, width_svg = 10, height_svg = 7,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+
+```
+
+
+### SENTICON
+
+
+```{r, echo=FALSE, message=FALSE, fig.width=11, fig.height=8}
+
+senticon_sentiment
+
+# senticon_sentiment
+senticon_sentiment_f <- filter(senticon_sentiment, n < 150)
+senticon_sentiment_f$sentiment <- factor(senticon_sentiment_f$sentiment)
+senticon_sentiment_f <- senticon_sentiment_f %>% mutate(id = row_number())
+
+senticon_sentiment_v <- ggplot(data=senticon_sentiment_f, aes(x=sentiment, y=n, fill=sentiment)) +
+    geom_boxplot(alpha=0.5) +
+    scale_y_continuous(trans='log2') +
+    #scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    # geom_jitter(color="black", size=0.4, alpha=0.9) +
+    geom_jitter_interactive(aes(color=sentiment, tooltip = word, data_id = id), size=1, alpha=0.8) +
+    theme_minimal() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("Senticon Sentiment") +
+    xlab("")
+
+# senticon_sentiment_v
+
+girafe(ggobj = senticon_sentiment_v, width_svg = 10, height_svg = 7,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+
+```
+
+
+### BING
+
+```{r, echo=FALSE, message=FALSE, fig.width=11, fig.height=8}
+
+bing_sentiment
+
+# bing_sentiment
+bing_sentiment_f <- filter(bing_sentiment, n < 150)
+bing_sentiment_f$sentiment <- factor(bing_sentiment_f$sentiment)
+bing_sentiment_f <- bing_sentiment_f %>% mutate(id = row_number())
+
+bing_sentiment_v <- ggplot(data=bing_sentiment_f, aes(x=sentiment, y=n, fill=sentiment)) +
+    geom_boxplot(alpha=0.5) +
+    scale_y_continuous(trans='log2') +
+    #scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    # geom_jitter(color="black", size=0.4, alpha=0.9) +
+    geom_jitter_interactive(aes(color=sentiment, tooltip = word, data_id = id), size=1, alpha=0.8) +
+    theme_minimal() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("Senticon Sentiment") +
+    xlab("")
+
+# bing_sentiment_v
+
+girafe(ggobj = bing_sentiment_v, width_svg = 10, height_svg = 7,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+```
+
+
+
+### NRC
+
+```{r, echo=FALSE, message=FALSE, fig.width=11, fig.height=8}
+
+nrc_sentiment
+
+# nrc
+nrc_sentiment_f <- filter(nrc_sentiment, n < 150)
+
+nrc_v <- ggplot(data=nrc_sentiment_f, aes(x=sentiment, y=n, fill=sentiment)) +
+    geom_boxplot(alpha=0.5) +
+    scale_y_continuous(trans='log2') +
+    #scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    # geom_jitter(color="black", size=0.4, alpha=0.9) +
+    geom_jitter_interactive(aes(color=sentiment, tooltip = word, data_id = word), size=1, alpha=0.8) +
+    theme_minimal() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("NRC Sentiment") +
+    xlab("")
+
+# nrc_v
+
+girafe(ggobj = nrc_v, width_svg = 10, height_svg = 7,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+```
+
+### syuzhet
+
+```{r}
+
+syuzhet_sentiment
+
+vader_sentiment <- vader_sentiment %>% mutate(id = row_number())
+syuzhet_sentiment <- syuzhet_sentiment %>% mutate(id = row_number())
+
+syuzhet_sentiment <- vader_sentiment %>% inner_join(syuzhet_sentiment, by="id")
+# syuzhet_sentiment
+
+syuzhet_v <- ggplot(syuzhet_sentiment, aes(x=syuzhet_vector, y=compound)) + 
+    geom_point_interactive(aes(color=syuzhet_vector, tooltip = s_v, data_id = id), size=1.5, alpha=0.8)
+
+
+girafe(ggobj = syuzhet_v, width_svg = 10, height_svg = 7,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 0.9) )
+)
+
+
+
+```
+
+
+### VADER
+
+```{r, echo=FALSE, message=FALSE, fig.width=11, fig.height=8}
+
+vader_sentiment
+
+vader_sentiment <- vader_sentiment %>% mutate(id = row_number())
+
+vader_v <- ggplot(vader_sentiment, aes(x=neg, y=pos)) + 
+    geom_point_interactive(aes(color=compound, tooltip = text, data_id = id), size=1.5, alpha=0.8)
+
+
+girafe(ggobj = vader_v, width_svg = 10, height_svg = 7,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 0.9) )
+)
+
+```
+
+
+
+```{r}
+
+# WRITE OUTPUTS
+
+# afinn_165_sentiment
+afinn_165_sentiment_file <- paste0("./outputs/sentiment/q-", focus_question, "-afinn-165-sentiment.csv")
+write.csv(afinn_165_sentiment, afinn_165_sentiment_file, row.names = FALSE)
+
+# opinion_words_sentiment
+opinion_words_sentiment_file <- paste0("./outputs/sentiment/q-", focus_question, "-opinion-words-sentiment.csv")
+write.csv(opinion_words_sentiment, opinion_words_sentiment_file, row.names = FALSE)
+
+# pattern_sentiment
+pattern_sentiment_file <- paste0("./outputs/sentiment/q-", focus_question, "-pattern-sentiment.csv")
+write.csv(pattern_sentiment, pattern_sentiment_file, row.names = FALSE)
+
+# senticon_sentiment
+senticon_sentiment_file <- paste0("./outputs/sentiment/q-", focus_question, "-senticon-sentiment.csv")
+write.csv(senticon_sentiment, senticon_sentiment_file, row.names = FALSE)
+
+# afinn_sentiment
+afinn_sentiment_file <- paste0("./outputs/sentiment/q-", focus_question, "-afinn-sentiment.csv")
+write.csv(afinn_sentiment, afinn_sentiment_file, row.names = FALSE)
+
+# bing_sentiment
+bing_sentiment_file <- paste0("./outputs/sentiment/q-", focus_question, "-bing-sentiment.csv")
+write.csv(bing_sentiment, bing_sentiment_file, row.names = FALSE)
+
+# nrc_sentiment
+nrc_sentiment_file <- paste0("./outputs/sentiment/q-", focus_question, "-nrc-sentiment.csv")
+write.csv(nrc_sentiment, nrc_sentiment_file, row.names = FALSE)
+
+# syuzhet_sentment
+syuzhet_sentiment_file <- paste0("./outputs/sentiment/q-", focus_question, "-syuzhet-sentiment.csv")
+write.csv(syuzhet_sentiment, syuzhet_sentiment_file, row.names = FALSE)
+
+# vader sentiment
+vader_file <- paste0("./outputs/sentiment/q-", focus_question, "-vader-sentiment.csv")
+write.csv(vader_sentiment, vader_file, row.names = FALSE)
+
+```
+
+

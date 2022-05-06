@@ -1,0 +1,431 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE,
+   dev = "svg"
+)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(knitr)
+library(timevis)
+library(patchwork)
+library(knitcitations)
+library(bibtex)
+library(ggiraph)
+
+
+
+library(psych)
+library(caret)
+library(caretEnsemble)
+library(doParallel)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+```
+
+<div class="activity">
+Qualitative Analysis and Machine Learning
+</div>
+
+
+### How is Your Heart Health?
+#### Classification
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Towfiqu barbhuiya on Unsplash"}
+
+masthead <- "assets/heart-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+<div class="figure-text">Heart Health</div>
+
+> You can make your heart younger by making changes that reduce your risk...\
+--- Center for Disease Control
+
+***
+
+
+####  According to WHO, heart diseases are one of the leading cause of death globablly, namely through heart attacks and strokes. An estimated 17.9 million people die from CVDs in 2019, which accounts to around 32% of all global deaths. These figures continue to raise every year and its implications have significant affect on public health policies and clinical practices. This makes heart disease a major concern for health professionals, and some have turned towards computer algorithmns and machine/deep learning methods to tackle the problem.
+
+
+#### According to mayoclinic, Heart disease describes a range of conditions that affect your heart. Heart diseases include:
+
+* Blood vessel disease, such as coronary artery disease
+* Heart rhythm problems (arrhythmias)
+* Heart defects you're born with (congenital heart defects)
+* Heart valve disease
+* Disease of the heart muscle
+* Heart infection
+
+#### In this case study, we will use the Heart Disease Dataset by UCI to build classificaation models to predict whether a patient is suffering from a cardivascular disease or not. The data we have is collected from 300 anonymous cardio-Patients in Cleveland the characteristics or measurements of these patients
+
+***
+
+### Load data [Ingest]. 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load csv data file
+df = read.csv("archetypes/heart.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+#### Let's look at a few of the attributes of the dataset and see what they entails:
+
+* cp: Chest Pain Type:  Angina is chest pain that happens because there isn't enough blood going to part of your heart. 
+  + 1 = typical angina
+  + 2 = atypical angina
+  + 3 = non — anginal pain
+  + 4 = asymptotic
+* trestbps: Resting Blood Pressure in mmHG
+* chol: Serum Cholestrol in mg/dl
+* fbs: Fasting Blood Sugar : If fbs>120 mg/dl --> 1, If not --> 0
+* restecg: Resting ECG
+  + 0 = normal
+  + 1 = having ST-T wave abnormality
+  + 2 = left ventricular hypertrophy
+* thalach: Maximum Heart Rate
+* exang: Exercise Induce Angina
+* oldpeak: ST depression induced by exercise
+* ca: Blood vessels colored by fluroscopy: Fluoroscopy is an imaging technique that uses X-rays to obtain real-time moving images of the interior of an object.
+* thal: Thalassemia: blood disorder caused when the body doesn't make enough of a protein called hemoglobin
+
+#### Then, let's view the summary statistics. Our dataset contains a variety of continous and discrete variables. 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+data <- df
+
+colnames(data) <- c("age", "sex", "chest_pain", "blood_pressure", "cholestoral", "blood_sugar", "ecg", "heart_rate", "angina", "ST_induced_exercise", "ST_slope", "fluroscopy", "thal", "target")
+
+summary(data)
+
+```
+
+#### As you can see, some of these features have a minimum value of 0 and a maximum value of usually 1-3. This is because they are actually categorical variables. For example, 0 in the column 'sex' represents Male, and 1 represetns Females. 
+
+#### Thus we'll factor these columns and recategorize for better visualization. The data will look clearer thereafter. 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+cat_cols <- c("sex", "chest_pain", "blood_sugar", "ecg", "angina", "ST_slope", "thal", "target")
+data[cat_cols] <- lapply(data[cat_cols], factor)
+
+levels(data$sex) <- c("Female", "Male")
+levels(data$chest_pain) <- c("Asymptomatic", "Atypical angina", "No angina", "Typical angina")
+levels(data$blood_sugar) <- c("> 120mg/dl", "< 120mg/dl")
+levels(data$ecg) <- c("Hypertrophy", "Normal", "Abnormalities")
+levels(data$angina) <- c("No", "Yes")
+levels(data$ST_slope) <- c("Descending", "Flat", "Ascending")
+levels(data$thal) <- c("Error", "Fixed defect", "Normal flow", "Reversible defect")
+levels(data$target) <- c("Yes", "No")
+
+head(data)
+
+```
+
+
+#### Let's first graph how many patients have Heart Disease 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=4, fig.height=4, fig.align='center'}
+
+v0<-ggplot(data, aes(target, fill=target)) + 
+  geom_bar() +
+  labs(x="Disease", y="Number of patients", title = "Number of Patients with Heart Diseases") +
+  guides(fill=FALSE)
+girafe(ggobj = v0, width_svg = 720/72, height_svg = 405/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+#### Now let's chart and compare the rest of the Relationships between the features and target.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+v1 <- ggplot(data, aes(age, fill=target)) + 
+  geom_histogram(binwidth=1) +
+  labs(fill="Disease", x="Age", y="Number of patients", title = "Relationship between Age and Heart Disease")
+
+v2 <- ggplot(data, aes(sex, fill=target)) + 
+  geom_bar() +
+  labs(fill="Disease", x="Sex", y="Number of patients", title = "Relationship between Sex and Heart Disease")
+
+v3 <- ggplot(data, aes(chest_pain, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Chest pain type", y="Number of patients", title = "Chest Pain and Heart Disease")
+
+v4 <- ggplot(data, aes(blood_pressure, fill=target)) +
+  geom_histogram(binwidth=3) +
+  labs(fill="Disease", x="Blood pressure (mm Hg)", y="Number of patients", title = "Blood Pressure and Heart Disease")
+
+v5 <- ggplot(data, aes(cholestoral, fill=target)) +
+  geom_histogram(binwidth=10) +
+  labs(fill="Disease", x="Cholesterol (mg/dl)", y="Number of patients", title = "Cholesterol and Heart Disease")
+
+v6 <- ggplot(data, aes(blood_sugar, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Sugar levels", y="Number of patients", title = "Blood Sugar and Heart Disease")
+
+v7 <- ggplot(data, aes(ecg, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Electrocardiogram on rest", y="Number of patients", title = "Resting ECG and Heart Disease")
+
+v8 <- ggplot(data, aes(heart_rate, fill=target)) +
+  geom_histogram(binwidth=10) +
+  labs(fill="Disease", x="Maximum heart rate during exercise", y="Number of patients", title = "Heart Rate and Heart Disease")
+
+v9 <- ggplot(data, aes(angina, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Presence of angina during exercise", y="Number of patients", title = "Angina and Heart Disease")
+
+v10 <- ggplot(data, aes(ST_slope, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Slope of the ST segment", y="Number of patients", title = "ST_slope and Heart Disease")
+
+v11 <- ggplot(data, aes(fluroscopy, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Number of main blood vessels coloured", y="Number of patients", title = "Fluroscopy and Heart Disease")
+
+v12 <- ggplot(data, aes(thal, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Results of the blood flow", y="Number of patients", title = "Blood Flow and Heart Disease")
+
+
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+patch = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11 + v12 + plot_layout(ncol=4, nrow=3)
+#patch
+
+girafe(ggobj = patch, width_svg = 1280/72, height_svg = 720/72, options =
+      list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+#### What did we discover from here?
+
+#### Looking at our results, we can make a few assumptions, for example, ... Can we use what we've discover more effectively? We can utilize our statistical knowledge and machine learning to learn the exact results and effectiveness of our attributes. We will also figure out which machine learning algorithmn works best for this particular dataset. 
+
+### Logistic Regression
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+set.seed(213)
+library(caret)
+df$target <- as.factor(df$target)
+hd_index <- createDataPartition(df$target, p = .75, list = FALSE)
+hd_train <- df[ hd_index, ]
+hd_test <- df[-hd_index, ]
+
+fitControl <- trainControl(method="cv", number=5, savePredictions = "final")
+
+set.seed(8)
+lr <- train(target ~ ., 
+              data = hd_train,
+              method = "glm",
+              family=binomial(),
+              trControl = fitControl)
+lr
+
+```
+
+### Prediction Results
+
+
+### Variable Importance
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+importance = varImp(lr)
+PlotImportance = function(importance)
+{
+  varImportance <- data.frame(Variables = row.names(importance[[1]]), 
+                              Importance = round(importance[[1]]$Overall,2))
+  
+  # Create a rank variable based on importance
+  rankImportance <- varImportance %>%
+    mutate(Rank = paste0('#',dense_rank(desc(Importance))))
+  
+  rankImportancefull = rankImportance
+  
+  ggplot(rankImportance, aes(x = reorder(Variables, Importance), 
+                             y = Importance)) +
+    geom_bar(stat='identity',colour="white", fill = "#2185DC") +
+    geom_text(aes(x = Variables, y = 1, label = Rank),
+              hjust=0, vjust=.5, size = 4, colour = 'black',
+              fontface = 'bold') +
+    labs(x = 'Variables', title = 'Relative Variable Importance') +
+    coord_flip() + 
+    theme_bw()
+  
+  
+}
+
+v20 <- PlotImportance(importance)
+
+girafe(ggobj = v20, width_svg = 1280/72, height_svg = 720/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+### Ensemble Learning
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+library(caretEnsemble)
+
+
+algorithmList <- c('rf', 'nb', 'knn', 'ada', 'svmRadial')
+
+models <- caretList(target ~ .,
+                    data=df, 
+                    trControl=fitControl,
+                    methodList=algorithmList,
+                    tuneList = NULL,
+                    preProcess = c("center","scale"))
+
+results <- resamples(models)
+#dotplot(results, metric = "Accuracy")
+#dotplot(results, metric = "Kappa")
+
+
+models$ada
+
+model_results <- data.frame(
+ Random_Forest = c(mean(models$rf$results$Accuracy),mean(models$rf$results$Kappa)) ,
+ Naive_Bayes = c(mean(models$nb$results$Accuracy),mean(models$nb$results$Kappa)),
+ KNN = c(mean(models$knn$results$Accuracy),mean(models$knn$results$Kappa)),
+ Decision_Tree = c(mean(models$ada$results$Accuracy),mean(models$ada$results$Kappa)),
+ SVM = c(mean(models$svmRadial$results$Accuracy), mean(models$svmRadial$results$Kappa)),
+ Logistic_Regress = c(mean(lr$results$Accuracy),mean(lr$results$Kappa))
+ )
+row.names(model_results) <- c("Accuracy", "Kappa")
+model_results <- as.data.frame(t(model_results))
+model_results <- cbind(methods = rownames(model_results), model_results)
+rownames(model_results)<-NULL
+model_results
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+v21 <- ggplot(model_results, aes(x=Accuracy, y=Kappa, color = methods))+
+  geom_point(size=4)
+
+girafe(ggobj = v21, width_svg = 1280/72, height_svg = 720/72, options =
+list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+pred_rf <- predict.train(models$rf, hd_test)
+pred_nb <- predict.train(models$nb, hd_test)
+pred_knn <- predict.train(models$knn, hd_test)
+pred_ada <- predict.train(models$ada, hd_test)
+pred_svm <- predict.train(models$svmRadial, hd_test)
+pred_lr <- predict(lr, hd_test)
+
+
+confusionMatrix(pred_ada, hd_test$target, mode = "prec_recall")
+
+```
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width= 1920/72, fig.height = 1080/72, out.width = "100%"}
+
+plotConfusion <- function(pred) {
+z <- confusionMatrix(pred, hd_test$target, mode = "prec_recall")$table
+True <- factor(c(0, 0, 1, 1))
+Predicted <- factor(c(0, 1, 0, 1))
+Y      <- as.numeric(z)
+conf <- data.frame(True, Predicted, Y)
+
+ggplot(data =  conf, mapping = aes(x = True, y = Predicted)) +
+  geom_tile(aes(fill = Y), colour = "white") +
+  geom_text(aes(label = sprintf("%1.0f", Y)), vjust = 1) +
+  scale_fill_gradient(low = "pink", high = "cyan") +
+  theme_bw() + theme(legend.position = "none")
+}
+
+
+
+conf_nb <- plotConfusion(pred_nb)+ggtitle('Naive Bayes')
+conf_knn <- plotConfusion(pred_knn)+ggtitle('K Nearest Neighbors')
+conf_rf <- plotConfusion(pred_rf)+ggtitle('Random Forest')
+conf_ada <- plotConfusion(pred_ada)+ggtitle('Decision Trees')
+conf_svm <- plotConfusion(pred_svm)+ggtitle('Support Vector Machines')
+conf_lr <- plotConfusion(pred_lr)+ggtitle('Logistic Regression')
+
+patch2 = conf_rf + conf_nb + conf_knn + conf_ada+ conf_svm + conf_lr + plot_layout(ncol=3, nrow=2)
+#patch
+
+girafe(ggobj = patch2, width_svg = 1280/72, height_svg = 720/72, options =
+      list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+
+```
+
+# References
+## The citations and data sources used for this case can be found here 
+
+<a href="https://archive.ics.uci.edu/ml/datasets/heart+disease" target="_blank"> UCL Machine Learning Datasets</a>
+
+
+
+
+
+
+
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

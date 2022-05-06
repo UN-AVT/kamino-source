@@ -1,0 +1,194 @@
+"CountryName","CountryCode","CountryNameInExtract","Region","LeastDevelopedCountries","LandlockedDevelopingCountries","SmallIslandDevelopingState","DevelopmentStatus","GlobalPeaceIndex","StateFragilityIndex","HDICategory","HDIScore","LifeExpectancyAtBirth","ExpectedYearsOfSchooling","MeanYearsOfSchooling","GNIperCapita"
+"Guinea-Bissau","GNB","guinea-bissau","Western Africa","Least developed country",,"Small island developing State","developing country",2.264,17,"LOW HUMAN DEVELOPMENT",0.42,55.2,9.0,2.8,1362
+"Haiti","HTI","haiti","Caribbean","Least developed country",,"Small island developing State","developing country",2.066,15,"LOW HUMAN DEVELOPMENT",0.483,62.8,8.7,4.9,1669
+"Timor-Leste","TLS","timor-leste","South-Eastern Asia","Least developed country",,"Small island developing State","developing country",1.879,7,"MEDIUM HUMAN DEVELOPMENT",0.595,68.2,11.7,4.4,5363
+"Cuba","CUB","cuba","Caribbean",,,"Small island developing State","developing country",2.057,5,"HIGH HUMAN DEVELOPMENT",0.769,79.4,13.8,11.5,7301
+"Dominican Republic","DOM","dominican_republic","Caribbean",,,"Small island developing State","developing country",2.143,4,"HIGH HUMAN DEVELOPMENT",0.715,73.5,13.1,7.6,11883
+"Guyana","GUY","guyana","South America",,,"Small island developing State","developing country",2.105,9,"MEDIUM HUMAN DEVELOPMENT",0.636,66.4,10.3,8.5,6522
+"Jamaica","JAM","jamaica","Caribbean",,,"Small island developing State","developing country",2.091,3,"HIGH HUMAN DEVELOPMENT",0.719,75.7,12.4,9.7,7415
+"Mauritius","MUS","mauritius","Eastern Africa",,,"Small island developing State","developing country",1.559,1,"HIGH HUMAN DEVELOPMENT",0.777,74.4,15.6,8.5,17470
+"Papua New Guinea","PNG","papua_new_guinea","Melanesia",,,"Small island developing State","developing country",2.143,11,"LOW HUMAN DEVELOPMENT",0.505,62.6,9.9,4.0,2463
+"Singapore","SGP","singapore","South-Eastern Asia",,,"Small island developing State","developing country",1.535,2,"VERY HIGH HUMAN DEVELOPMENT",0.912,83.0,15.4,10.6,76628
+"Trinidad and Tobago","TTO","trinidad_and_tobago","Caribbean",,,"Small island developing State","developing country",2.056,4,"HIGH HUMAN DEVELOPMENT",0.772,70.4,12.3,10.9,26090
+"Afghanistan","AFG","afghanistan","Southern Asia","Least developed country","Landlocked developing country",,"developing country",3.538,21,"LOW HUMAN DEVELOPMENT",0.465,60.4,9.3,3.2,1885
+"Bhutan","BTN","bhutan","Southern Asia","Least developed country","Landlocked developing country",,"developing country",1.445,7,"MEDIUM HUMAN DEVELOPMENT",0.605,69.5,12.6,3.0,7176
+"Burkina Faso","BFA","burkina_faso","Western Africa","Least developed country","Landlocked developing country",,"developing country",2.063,16,"LOW HUMAN DEVELOPMENT",0.402,58.7,7.8,1.4,1591
+"Burundi","BDI","burundi","Eastern Africa","Least developed country","Landlocked developing country",,"developing country",2.5,21,"LOW HUMAN DEVELOPMENT",0.4,56.7,10.1,2.7,758
+"Central African Republic","CAF","central_african_republic","Middle Africa","Least developed country","Landlocked developing country",,"developing country",3.354,24,"LOW HUMAN DEVELOPMENT",0.35,50.7,7.2,4.2,581
+"Chad","TCD","chad","Middle Africa","Least developed country","Landlocked developing country",,"developing country",2.464,19,"LOW HUMAN DEVELOPMENT",0.392,51.6,7.4,1.9,2085
+"Ethiopia","ETH","ethiopia","Eastern Africa","Least developed country","Landlocked developing country",,"developing country",2.284,19,"LOW HUMAN DEVELOPMENT",0.442,64.1,8.5,2.4,1428
+"Lao People's Democratic Republic","LAO","lao_people's_democratic_republic","South-Eastern Asia","Least developed country","Landlocked developing country",,"developing country",1.852,12,"MEDIUM HUMAN DEVELOPMENT",0.575,66.2,10.6,5.0,4680
+"Lesotho","LSO","lesotho","Southern Africa","Least developed country","Landlocked developing country",,"developing country",1.941,9,"LOW HUMAN DEVELOPMENT",0.497,49.8,11.1,5.9,3306
+"Malawi","MWI","malawi","Eastern Africa","Least developed country","Landlocked developing country",,"developing country",1.817,14,"LOW HUMAN DEVELOPMENT",0.445,62.8,10.8,4.3,747
+"Mali","MLI","mali","Western Africa","Least developed country","Landlocked developing country",,"developing country",2.489,16,"LOW HUMAN DEVELOPMENT",0.419,58.0,8.4,2.0,1583
+"Nepal","NPL","nepal","Southern Asia","Least developed country","Landlocked developing country",,"developing country",2.026,12,"LOW HUMAN DEVELOPMENT",0.548,69.6,12.4,3.3,2311
+"Niger","NER","niger","Western Africa","Least developed country","Landlocked developing country",,"developing country",2.239,18,"LOW HUMAN DEVELOPMENT",0.348,61.4,5.4,1.5,908
+"Rwanda","RWA","rwanda","Eastern Africa","Least developed country","Landlocked developing country",,"developing country",2.323,16,"LOW HUMAN DEVELOPMENT",0.483,64.2,10.3,3.7,1458
+"South Sudan","SSD","south_sudan","Eastern Africa","Least developed country","Landlocked developing country",,"developing country",3.593,22,"LOW HUMAN DEVELOPMENT",0.467,55.7,7.6,5.4,2332
+"Uganda","UGA","uganda","Eastern Africa","Least developed country","Landlocked developing country",,"developing country",2.148,17,"LOW HUMAN DEVELOPMENT",0.483,58.5,9.8,5.4,1613
+"Zambia","ZMB","zambia","Eastern Africa","Least developed country","Landlocked developing country",,"developing country",1.783,12,"MEDIUM HUMAN DEVELOPMENT",0.586,60.1,13.5,6.6,3734
+"Armenia","ARM","armenia","Western Asia",,"Landlocked developing country",,"developing country",2.218,6,"HIGH HUMAN DEVELOPMENT",0.733,74.7,12.3,10.9,8124
+"Azerbaijan","AZE","azerbaijan","Western Asia",,"Landlocked developing country",,"developing country",2.45,10,"HIGH HUMAN DEVELOPMENT",0.751,70.8,11.9,11.2,16428
+"Bolivia (Plurinational State of)","BOL","bolivia","South America",,"Landlocked developing country",,"developing country",2.038,10,"MEDIUM HUMAN DEVELOPMENT",0.662,68.3,13.2,8.2,5760
+"Botswana","BWA","botswana","Southern Africa",,"Landlocked developing country",,"developing country",1.639,3,"MEDIUM HUMAN DEVELOPMENT",0.698,64.5,12.5,8.9,16646
+"Kazakhstan","KAZ","kazakhstan","Central Asia",,"Landlocked developing country",,"developing country",2.019,9,"HIGH HUMAN DEVELOPMENT",0.788,69.4,15.0,11.4,20867
+"Kyrgyzstan","KGZ","kyrgyzstan","Central Asia",,"Landlocked developing country",,"developing country",2.297,12,"MEDIUM HUMAN DEVELOPMENT",0.655,70.6,12.5,10.6,3044
+"Mongolia","MNG","mongolia","Eastern Asia",,"Landlocked developing country",,"developing country",1.838,7,"HIGH HUMAN DEVELOPMENT",0.727,69.4,14.6,9.3,10729
+"Paraguay","PRY","paraguay","South America",,"Landlocked developing country",,"developing country",2.037,9,"MEDIUM HUMAN DEVELOPMENT",0.679,72.9,11.9,7.7,7643
+"Republic of Moldova","MDA","republic_of_moldova","Eastern Europe",,"Landlocked developing country",,"developed country",1.953,8,"MEDIUM HUMAN DEVELOPMENT",0.693,71.6,11.9,11.2,5223
+"Swaziland","SWZ","swaziland","Southern Africa",,"Landlocked developing country",,"developing country",2.074,9,"LOW HUMAN DEVELOPMENT",0.531,49.0,11.3,7.1,5542
+"Tajikistan","TJK","tajikistan","Central Asia",,"Landlocked developing country",,"developing country",2.293,12,"MEDIUM HUMAN DEVELOPMENT",0.624,69.4,11.2,10.4,2517
+"The former Yugoslav Republic of Macedonia","MKD","the_former_yugoslav_republic_of_macedonia","Southern Europe",,"Landlocked developing country",,"developed country",2.092,2,"HIGH HUMAN DEVELOPMENT",0.747,75.4,13.4,9.3,11780
+"Turkmenistan","TKM","turkmenistan","Central Asia",,"Landlocked developing country",,"developing country",2.202,9,"MEDIUM HUMAN DEVELOPMENT",0.688,65.6,10.8,9.9,13066
+"Uzbekistan","UZB","uzbekistan","Central Asia",,"Landlocked developing country",,"developing country",2.216,12,"MEDIUM HUMAN DEVELOPMENT",0.675,68.4,11.5,10.9,5567
+"Zimbabwe","ZWE","zimbabwe","Eastern Africa",,"Landlocked developing country",,"developing country",2.322,17,"LOW HUMAN DEVELOPMENT",0.509,57.5,10.9,7.3,1615
+"Angola","AGO","angola","Middle Africa","Least developed country",,,"developing country",2.14,16,"LOW HUMAN DEVELOPMENT",0.532,52.3,11.4,4.7,6822
+"Bangladesh","BGD","bangladesh","Southern Asia","Least developed country",,,"developing country",2.045,12,"MEDIUM HUMAN DEVELOPMENT",0.57,71.6,10.0,5.1,3191
+"Benin","BEN","benin","Western Africa","Least developed country",,,"developing country",1.998,10,"LOW HUMAN DEVELOPMENT",0.48,59.6,11.1,3.3,1767
+"Cambodia","KHM","cambodia","South-Eastern Asia","Least developed country",,,"developing country",2.161,11,"MEDIUM HUMAN DEVELOPMENT",0.555,68.4,10.9,4.4,2949
+"Democratic Republic of the Congo","COD","democratic_republic_of_the_congo","Middle Africa","Least developed country",,,"developing country",3.112,23,"LOW HUMAN DEVELOPMENT",0.433,58.7,9.8,6.0,680
+"Djibouti","DJI","djibouti","Eastern Africa","Least developed country",,,"developing country",2.292,13,"LOW HUMAN DEVELOPMENT",0.47,62.0,6.4,3.8,3276
+"Equatorial Guinea","GNQ","equatorial_guinea","Middle Africa","Least developed country",,,"developing country",1.94,12,"MEDIUM HUMAN DEVELOPMENT",0.587,57.6,9.0,5.5,21056
+"Eritrea","ERI","eritrea","Eastern Africa","Least developed country",,,"developing country",2.46,15,"LOW HUMAN DEVELOPMENT",0.391,63.7,4.1,3.9,1130
+"Gambia","GMB","gambia","Western Africa","Least developed country",,,"developing country",2.091,15,"LOW HUMAN DEVELOPMENT",0.441,60.2,8.8,2.8,1507
+"Guinea","GIN","guinea","Western Africa","Least developed country",,,"developing country",2.148,18,"LOW HUMAN DEVELOPMENT",0.411,58.8,8.7,2.4,1096
+"Liberia","LBR","liberia","Western Africa","Least developed country",,,"developing country",1.998,15,"LOW HUMAN DEVELOPMENT",0.43,60.9,9.5,4.1,805
+"Madagascar","MDG","madagascar","Eastern Africa","Least developed country",,,"developing country",1.763,11,"LOW HUMAN DEVELOPMENT",0.51,65.1,10.3,6.0,1328
+"Mauritania","MRT","mauritania","Western Africa","Least developed country",,,"developing country",2.295,16,"LOW HUMAN DEVELOPMENT",0.506,63.1,8.5,3.8,3560
+"Mozambique","MOZ","mozambique","Eastern Africa","Least developed country",,,"developing country",1.963,11,"LOW HUMAN DEVELOPMENT",0.416,55.1,9.3,3.2,1123
+"Myanmar","MMR","myanmar","South-Eastern Asia","Least developed country",,,"developing country",2.256,18,"LOW HUMAN DEVELOPMENT",0.536,65.9,8.6,4.1,4608
+"Senegal","SEN","senegal","Western Africa","Least developed country",,,"developing country",1.978,10,"LOW HUMAN DEVELOPMENT",0.466,66.5,7.9,2.5,2188
+"Sierra Leone","SLE","sierra_leone","Western Africa","Least developed country",,,"developing country",1.805,14,"LOW HUMAN DEVELOPMENT",0.413,50.9,8.6,3.1,1780
+"Sudan","SDN","sudan","Northern Africa","Least developed country",,,"developing country",3.269,22,"LOW HUMAN DEVELOPMENT",0.479,63.5,7.0,3.1,3809
+"Togo","TGO","togo","Western Africa","Least developed country",,,"developing country",1.954,13,"LOW HUMAN DEVELOPMENT",0.484,59.7,12.2,4.5,1228
+"United Republic of Tanzania","TZA","united_republic_of_tanzania","Eastern Africa","Least developed country",,,"developing country",1.899,11,"LOW HUMAN DEVELOPMENT",0.521,65.0,9.2,5.1,2411
+"Yemen","YEM","yemen","Western Asia","Least developed country",,,"developing country",3.399,21,"LOW HUMAN DEVELOPMENT",0.498,63.8,9.2,2.6,3519
+"Albania","ALB","albania","Southern Europe",,,,"developed country",1.867,2,"HIGH HUMAN DEVELOPMENT",0.733,77.8,11.8,9.3,9943
+"Algeria","DZA","algeria","Northern Africa",,,,"developing country",2.213,12,"HIGH HUMAN DEVELOPMENT",0.736,74.8,14.0,7.6,13054
+"Argentina","ARG","argentina","South America",,,,"developing country",1.957,2,"VERY HIGH HUMAN DEVELOPMENT",0.836,76.3,17.9,9.8,22050
+"Australia","AUS","australia","Australia and New Zealand",,,,"developed country",1.465,2,"VERY HIGH HUMAN DEVELOPMENT",0.935,82.4,20.2,13.0,42261
+"Austria","AUT","austria","Western Europe",,,,"developed country",1.278,0,"VERY HIGH HUMAN DEVELOPMENT",0.885,81.4,15.7,10.8,43869
+"Bahrain","BHR","bahrain","Western Asia",,,,"developing country",2.398,9,"VERY HIGH HUMAN DEVELOPMENT",0.824,76.6,14.4,9.4,38599
+"Belarus","BLR","belarus","Eastern Europe",,,,"developed country",2.202,3,"HIGH HUMAN DEVELOPMENT",0.798,71.3,15.7,12.0,16676
+"Belgium","BEL","belgium","Western Europe",,,,"developed country",1.528,2,"VERY HIGH HUMAN DEVELOPMENT",0.89,80.8,16.3,11.3,41187
+"Bosnia and Herzegovina","BIH","bosnia_and_herzegovina","Southern Europe",,,,"developed country",1.915,4,"HIGH HUMAN DEVELOPMENT",0.733,76.5,13.6,8.3,9638
+"Brazil","BRA","brazil","South America",,,,"developing country",2.176,5,"HIGH HUMAN DEVELOPMENT",0.755,74.5,15.2,7.7,15175
+"Bulgaria","BGR","bulgaria","Eastern Europe",,,,"developed country",1.646,2,"HIGH HUMAN DEVELOPMENT",0.782,74.2,14.4,10.6,15596
+"Cameroon","CMR","cameroon","Middle Africa",,,,"developing country",2.356,16,"LOW HUMAN DEVELOPMENT",0.512,55.5,10.4,6.0,2803
+"Canada","CAN","canada","Northern America",,,,"developed country",1.388,0,"VERY HIGH HUMAN DEVELOPMENT",0.913,82.0,15.9,13.0,42155
+"Chile","CHL","chile","South America",,,,"developing country",1.635,2,"VERY HIGH HUMAN DEVELOPMENT",0.832,81.7,15.2,9.8,21290
+"China","CHN","china","Eastern Asia",,,,"developing country",2.288,6,"HIGH HUMAN DEVELOPMENT",0.727,75.8,13.1,7.5,12547
+"Colombia","COL","colombia","South America",,,,"developing country",2.764,10,"HIGH HUMAN DEVELOPMENT",0.72,74.0,13.5,7.3,12040
+"Congo","COG","congo","Middle Africa",,,,"developing country",2.249,13,"MEDIUM HUMAN DEVELOPMENT",0.591,62.3,11.1,6.1,6012
+"Costa Rica","CRI","costa_rica","Central America",,,,"developing country",1.699,1,"HIGH HUMAN DEVELOPMENT",0.766,79.4,13.9,8.4,13413
+"Côte d'Ivoire","CIV","cote_d'ivoire","Western Africa",,,,"developing country",2.279,17,"LOW HUMAN DEVELOPMENT",0.462,51.5,8.9,4.3,3171
+"Croatia","HRV","croatia","Southern Europe",,,,"developed country",1.633,2,"VERY HIGH HUMAN DEVELOPMENT",0.818,77.3,14.8,11.0,19409
+"Cyprus","CYP","cyprus","Western Asia",,,,"developing country",1.994,3,"VERY HIGH HUMAN DEVELOPMENT",0.85,80.2,14.0,11.6,28633
+"Czechia","CZE","czech_republic","Eastern Europe",,,,"developed country",1.36,0,"VERY HIGH HUMAN DEVELOPMENT",0.87,78.6,16.4,12.3,26660
+"Denmark","DNK","denmark","Northern Europe",,,,"developed country",1.246,0,"VERY HIGH HUMAN DEVELOPMENT",0.923,80.2,18.7,12.7,44025
+"Ecuador","ECU","ecuador","South America",,,,"developing country",2.02,8,"HIGH HUMAN DEVELOPMENT",0.732,75.9,14.2,7.6,10605
+"Egypt","EGY","egypt","Northern Africa",,,,"developing country",2.574,12,"MEDIUM HUMAN DEVELOPMENT",0.69,71.1,13.5,6.6,10512
+"El Salvador","SLV","el_salvador","Central America",,,,"developing country",2.237,4,"MEDIUM HUMAN DEVELOPMENT",0.666,73.0,12.3,6.5,7349
+"Estonia","EST","estonia","Northern Europe",,,,"developed country",1.732,0,"VERY HIGH HUMAN DEVELOPMENT",0.861,76.8,16.5,12.5,25214
+"Finland","FIN","finland","Northern Europe",,,,"developed country",1.429,0,"VERY HIGH HUMAN DEVELOPMENT",0.883,80.8,17.1,10.3,38695
+"France","FRA","france","Western Europe",,,,"developed country",1.829,0,"VERY HIGH HUMAN DEVELOPMENT",0.888,82.2,16.0,11.1,38056
+"Gabon","GAB","gabon","Middle Africa",,,,"developing country",2.033,10,"MEDIUM HUMAN DEVELOPMENT",0.684,64.4,12.5,7.8,16367
+"Georgia","GEO","georgia","Western Asia",,,,"developing country",2.057,6,"HIGH HUMAN DEVELOPMENT",0.754,74.9,13.8,12.1,7164
+"Germany","DEU","germany","Western Europe",,,,"developed country",1.486,0,"VERY HIGH HUMAN DEVELOPMENT",0.916,80.9,16.5,13.1,43919
+"Ghana","GHA","ghana","Western Africa",,,,"developing country",1.809,11,"MEDIUM HUMAN DEVELOPMENT",0.579,61.4,11.5,7.0,3852
+"Greece","GRC","greece","Southern Europe",,,,"developed country",2.044,2,"VERY HIGH HUMAN DEVELOPMENT",0.865,80.9,17.6,10.3,24524
+"Guatemala","GTM","guatemala","Central America",,,,"developing country",2.27,7,"MEDIUM HUMAN DEVELOPMENT",0.627,71.8,10.7,5.6,6929
+"Honduras","HND","honduras","Central America",,,,"developing country",2.237,7,"MEDIUM HUMAN DEVELOPMENT",0.606,73.1,11.1,5.5,3938
+"Hungary","HUN","hungary","Eastern Europe",,,,"developed country",1.534,0,"VERY HIGH HUMAN DEVELOPMENT",0.828,75.2,15.4,11.6,22916
+"India","IND","india","Southern Asia",,,,"developing country",2.566,12,"MEDIUM HUMAN DEVELOPMENT",0.609,68.0,11.7,5.4,5497
+"Indonesia","IDN","indonesia","South-Eastern Asia",,,,"developing country",1.799,7,"MEDIUM HUMAN DEVELOPMENT",0.684,68.9,13.0,7.6,9788
+"Iran (Islamic Republic of)","IRN","iran_(islamic_republic_of)","Southern Asia",,,,"developing country",2.411,9,"HIGH HUMAN DEVELOPMENT",0.766,75.4,15.1,8.2,15440
+"Iraq","IRQ","iraq","Western Asia",,,,"developing country",3.57,18,"MEDIUM HUMAN DEVELOPMENT",0.654,69.4,10.1,6.4,14003
+"Ireland","IRL","ireland","Northern Europe",,,,"developed country",1.433,0,"VERY HIGH HUMAN DEVELOPMENT",0.916,80.9,18.6,12.2,39568
+"Israel","ISR","israel","Western Asia",,,,"developing country",2.656,7,"VERY HIGH HUMAN DEVELOPMENT",0.894,82.4,16.0,12.5,30676
+"Italy","ITA","italy","Southern Europe",,,,"developed country",1.774,0,"VERY HIGH HUMAN DEVELOPMENT",0.873,83.1,16.0,10.1,33030
+"Japan","JPN","japan","Eastern Asia",,,,"developed country",1.395,0,"VERY HIGH HUMAN DEVELOPMENT",0.891,83.5,15.3,11.5,36927
+"Jordan","JOR","jordan","Western Asia",,,,"developing country",2.127,6,"HIGH HUMAN DEVELOPMENT",0.748,74.0,13.5,9.9,11365
+"Kenya","KEN","kenya","Eastern Africa",,,,"developing country",2.379,10,"LOW HUMAN DEVELOPMENT",0.548,61.6,11.0,6.3,2762
+"Kuwait","KWT","kuwait","Western Asia",,,,"developing country",1.842,3,"VERY HIGH HUMAN DEVELOPMENT",0.816,74.4,14.7,7.2,83961
+"Latvia","LVA","latvia","Northern Europe",,,,"developed country",1.68,0,"VERY HIGH HUMAN DEVELOPMENT",0.819,74.2,15.2,11.5,22281
+"Lebanon","LBN","lebanon","Western Asia",,,,"developing country",2.752,5,"HIGH HUMAN DEVELOPMENT",0.769,79.3,13.8,7.9,16509
+"Libya","LBY","libya","Northern Africa",,,,"developing country",3.2,13,"HIGH HUMAN DEVELOPMENT",0.724,71.6,14.0,7.3,14911
+"Lithuania","LTU","lithuania","Northern Europe",,,,"developed country",1.735,1,"VERY HIGH HUMAN DEVELOPMENT",0.839,73.3,16.4,12.4,24500
+"Malaysia","MYS","malaysia","South-Eastern Asia",,,,"developing country",1.648,5,"HIGH HUMAN DEVELOPMENT",0.779,74.7,12.7,10.0,22762
+"Mexico","MEX","mexico","Central America",,,,"developing country",2.557,5,"HIGH HUMAN DEVELOPMENT",0.756,76.8,13.1,8.5,16056
+"Montenegro","MNE","montenegro","Southern Europe",,,,"developed country",1.884,3,"VERY HIGH HUMAN DEVELOPMENT",0.802,76.2,15.2,11.2,14558
+"Morocco","MAR","morocco","Northern Africa",,,,"developing country",2.086,6,"MEDIUM HUMAN DEVELOPMENT",0.628,74.0,11.6,4.4,6850
+"Namibia","NAM","namibia","Southern Africa",,,,"developing country",1.873,5,"MEDIUM HUMAN DEVELOPMENT",0.628,64.8,11.3,6.2,9418
+"Netherlands","NLD","netherlands","Western Europe",,,,"developed country",1.541,0,"VERY HIGH HUMAN DEVELOPMENT",0.922,81.6,17.9,11.9,45435
+"New Zealand","NZL","new_zealand","Australia and New Zealand",,,,"developed country",1.287,2,"VERY HIGH HUMAN DEVELOPMENT",0.913,81.8,19.2,12.5,32689
+"Nicaragua","NIC","nicaragua","Central America",,,,"developing country",1.975,8,"MEDIUM HUMAN DEVELOPMENT",0.631,74.9,11.5,6.0,4457
+"Nigeria","NGA","nigeria","Western Africa",,,,"developing country",2.877,18,"LOW HUMAN DEVELOPMENT",0.514,52.8,9.0,5.9,5341
+"Norway","NOR","norway","Northern Europe",,,,"developed country",1.5,2,"VERY HIGH HUMAN DEVELOPMENT",0.944,81.6,17.5,12.6,64992
+"Oman","OMN","oman","Western Asia",,,,"developing country",2.016,5,"HIGH HUMAN DEVELOPMENT",0.793,76.8,13.6,8.0,34858
+"Pakistan","PAK","pakistan","Southern Asia",,,,"developing country",3.145,16,"LOW HUMAN DEVELOPMENT",0.538,66.2,7.8,4.7,4866
+"Panama","PAN","panama","Central America",,,,"developing country",1.837,3,"HIGH HUMAN DEVELOPMENT",0.78,77.6,13.3,9.3,18192
+"Peru","PER","peru","South America",,,,"developing country",2.057,6,"HIGH HUMAN DEVELOPMENT",0.734,74.6,13.1,9.0,11015
+"Philippines","PHL","philippines","South-Eastern Asia",,,,"developing country",2.511,12,"MEDIUM HUMAN DEVELOPMENT",0.668,68.2,11.3,8.9,7915
+"Poland","POL","poland","Eastern Europe",,,,"developed country",1.557,0,"VERY HIGH HUMAN DEVELOPMENT",0.843,77.4,15.5,11.8,23177
+"Portugal","PRT","portugal","Southern Europe",,,,"developed country",1.356,0,"VERY HIGH HUMAN DEVELOPMENT",0.83,80.9,16.3,8.2,25757
+"Qatar","QAT","qatar","Western Asia",,,,"developing country",1.716,3,"VERY HIGH HUMAN DEVELOPMENT",0.85,78.2,13.8,9.1,123124
+"Republic of Korea","KOR","republic_of_korea","Eastern Asia",,,,"developing country",1.858,1,"VERY HIGH HUMAN DEVELOPMENT",0.898,81.9,16.9,11.9,33890
+"Romania","ROU","romania","Eastern Europe",,,,"developed country",1.649,4,"HIGH HUMAN DEVELOPMENT",0.793,74.7,14.2,10.8,18108
+"Russian Federation","RUS","russian_federation","Eastern Europe",,,,"developed country",3.079,9,"HIGH HUMAN DEVELOPMENT",0.798,70.1,14.7,12.0,22352
+"Saudi Arabia","SAU","saudi_arabia","Western Asia",,,,"developing country",2.338,8,"VERY HIGH HUMAN DEVELOPMENT",0.837,74.3,16.3,8.7,52821
+"Serbia","SRB","serbia","Southern Europe",,,,"developed country",1.834,4,"HIGH HUMAN DEVELOPMENT",0.771,74.9,14.4,10.5,12190
+"Slovakia","SVK","slovakia","Eastern Europe",,,,"developed country",1.603,1,"VERY HIGH HUMAN DEVELOPMENT",0.844,76.3,15.1,12.2,25845
+"Slovenia","SVN","slovenia","Southern Europe",,,,"developed country",1.408,0,"VERY HIGH HUMAN DEVELOPMENT",0.88,80.4,16.8,11.9,27852
+"South Africa","ZAF","south_africa","Southern Africa",,,,"developing country",2.316,8,"MEDIUM HUMAN DEVELOPMENT",0.666,57.4,13.6,9.9,12122
+"Spain","ESP","spain","Southern Europe",,,,"developed country",1.604,0,"VERY HIGH HUMAN DEVELOPMENT",0.876,82.6,17.3,9.6,32045
+"Sri Lanka","LKA","sri_lanka","Southern Asia",,,,"developing country",2.133,11,"HIGH HUMAN DEVELOPMENT",0.757,74.9,13.7,10.8,9779
+"Sweden","SWE","sweden","Northern Europe",,,,"developed country",1.461,0,"VERY HIGH HUMAN DEVELOPMENT",0.907,82.2,15.8,12.1,45636
+"Switzerland","CHE","switzerland","Western Europe",,,,"developed country",1.37,1,"VERY HIGH HUMAN DEVELOPMENT",0.93,83.0,15.8,12.8,56431
+"Syrian Arab Republic","SYR","syrian_arab_republic","Western Asia",,,,"developing country",3.806,16,"MEDIUM HUMAN DEVELOPMENT",0.594,69.6,12.3,6.3,2728
+"Thailand","THA","thailand","South-Eastern Asia",,,,"developing country",2.312,5,"HIGH HUMAN DEVELOPMENT",0.726,74.4,13.5,7.3,13323
+"Tunisia","TUN","tunisia","Northern Africa",,,,"developing country",1.949,4,"HIGH HUMAN DEVELOPMENT",0.721,74.8,14.6,6.8,10404
+"Turkey","TUR","turkey","Western Asia",,,,"developing country",2.71,9,"HIGH HUMAN DEVELOPMENT",0.761,75.3,14.5,7.6,18677
+"Ukraine","UKR","ukraine","Eastern Europe",,,,"developed country",3.287,9,"HIGH HUMAN DEVELOPMENT",0.747,71.0,15.1,11.3,8178
+"United Arab Emirates","ARE","united_arab_emirates","Western Asia",,,,"developing country",1.931,4,"VERY HIGH HUMAN DEVELOPMENT",0.835,77.0,13.3,9.5,60868
+"United Kingdom of Great Britain and Northern Ireland","GBR","united_kingdom","Northern Europe",,,,"developed country",1.83,0,"VERY HIGH HUMAN DEVELOPMENT",0.907,80.7,16.2,13.1,39267
+"United States of America","USA","united_states","Northern America",,,,"developed country",2.154,3,"VERY HIGH HUMAN DEVELOPMENT",0.915,79.1,16.5,12.9,52947
+"Uruguay","URY","uruguay","South America",,,,"developing country",1.726,2,"HIGH HUMAN DEVELOPMENT",0.793,77.2,15.5,8.5,19283
+"Venezuela (Bolivarian Republic of)","VEN","venezuela_(bolivarian_republic_of)","South America",,,,"developing country",2.651,11,"HIGH HUMAN DEVELOPMENT",0.762,74.2,14.2,8.9,16159
+"Viet Nam","VNM","viet_nam","South-Eastern Asia",,,,"developing country",1.906,7,"MEDIUM HUMAN DEVELOPMENT",0.666,75.8,11.9,7.5,5092
+"Comoros","COM","comoros","Eastern Africa","Least developed country",,"Small island developing State","developing country",,12,"LOW HUMAN DEVELOPMENT",0.503,63.3,11.5,4.6,1456
+"Solomon Islands","SLB","solomon_islands","Melanesia","Least developed country",,"Small island developing State","developing country",,9,"LOW HUMAN DEVELOPMENT",0.506,67.9,9.2,5.0,1540
+"Fiji","FJI","fiji","Melanesia",,,"Small island developing State","developing country",,6,"HIGH HUMAN DEVELOPMENT",0.727,70.0,15.7,9.9,7493
+"Suriname","SUR","suriname","South America",,,"Small island developing State","developing country",,6,"HIGH HUMAN DEVELOPMENT",0.714,71.1,12.7,7.7,15617
+"Luxembourg","LUX","luxembourg","Western Europe",,,,"developed country",,0,"VERY HIGH HUMAN DEVELOPMENT",0.892,81.7,13.9,11.7,58711
+"Iceland","ISL","iceland","Northern Europe",,,,"developed country",1.192,,"VERY HIGH HUMAN DEVELOPMENT",0.899,82.6,19.0,10.6,35182
+"Kiribati","KIR","kiribati","Micronesia","Least developed country",,"Small island developing State","developing country",,,"MEDIUM HUMAN DEVELOPMENT",0.59,66.0,12.3,7.8,2434
+"Sao Tome and Principe","STP","sao_tome_and_principe","Middle Africa","Least developed country",,"Small island developing State","developing country",,,"MEDIUM HUMAN DEVELOPMENT",0.555,66.5,11.3,4.7,2918
+"Vanuatu","VUT","vanuatu","Melanesia","Least developed country",,"Small island developing State","developing country",,,"MEDIUM HUMAN DEVELOPMENT",0.594,71.9,10.6,6.8,2803
+"Antigua and Barbuda","ATG","antigua_and_barbuda","Caribbean",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.783,76.1,14.0,9.2,20070
+"Bahamas","BHS","bahamas","Caribbean",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.79,75.4,12.6,10.9,21336
+"Barbados","BRB","barbados","Caribbean",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.785,75.6,15.4,10.5,12488
+"Belize","BLZ","belize","Central America",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.715,70.0,13.6,10.5,7614
+"Cabo Verde","CPV","cabo_verde","Western Africa",,,"Small island developing State","developing country",,,"MEDIUM HUMAN DEVELOPMENT",0.646,73.3,13.5,4.7,6094
+"Dominica","DMA","dominica","Caribbean",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.724,77.8,12.7,7.9,9994
+"Grenada","GRD","grenada","Caribbean",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.75,73.4,15.8,8.6,10939
+"Maldives","MDV","maldives","Southern Asia",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.706,76.8,13.0,5.8,12328
+"Micronesia (Federated States of)","FSM","micronesia_(federated_states_of)","Micronesia",,,"Small island developing State","developing country",,,"MEDIUM HUMAN DEVELOPMENT",0.64,69.1,11.7,9.7,3432
+"Palau","PLW","palau","Micronesia",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.78,72.7,13.7,12.3,13496
+"Saint Kitts and Nevis","KNA","saint_kitts_and_nevis","Caribbean",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.752,73.8,12.9,8.4,20805
+"Saint Lucia","LCA","saint_lucia","Caribbean",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.729,75.1,12.6,9.3,9765
+"Saint Vincent and the Grenadines","VCT","saint_vincent_and_the_grenadines","Caribbean",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.72,72.9,13.4,8.6,9937
+"Samoa","WSM","samoa","Polynesia",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.702,73.4,12.9,10.3,5327
+"Seychelles","SYC","seychelles","Eastern Africa",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.772,73.1,13.4,9.4,23300
+"Tonga","TON","tonga","Polynesia",,,"Small island developing State","developing country",,,"HIGH HUMAN DEVELOPMENT",0.717,72.8,14.7,10.7,5069
+"Andorra","AND","andorra","Southern Europe",,,,"developed country",,,"VERY HIGH HUMAN DEVELOPMENT",0.845,81.3,13.5,9.6,43978
+"Brunei Darussalam","BRN","brunei_darussalam","South-Eastern Asia",,,,"developing country",,,"VERY HIGH HUMAN DEVELOPMENT",0.856,78.8,14.5,8.8,72570
+"Liechtenstein","LIE","liechtenstein","Western Europe",,,,"developed country",,,"VERY HIGH HUMAN DEVELOPMENT",0.908,80.0,15.0,11.8,79851
+"Malta","MLT","malta","Southern Europe",,,,"developed country",,,"VERY HIGH HUMAN DEVELOPMENT",0.839,80.6,14.4,10.3,27930
+"Somalia","SOM","somalia","Eastern Africa","Least developed country",,,"developing country",3.414,20,,,,,,
+"Democratic People's Republic of Korea","PRK","democratic_people's_republic_of_korea","Eastern Asia",,,,"developing country",2.944,7,,,,,,
+"Tuvalu","TUV","tuvalu","Polynesia","Least developed country",,"Small island developing State","developing country",,,,,,,,
+"Marshall Islands","MHL","marshall_islands","Micronesia",,,"Small island developing State","developing country",,,,,,,,
+"Nauru","NRU","nauru","Micronesia",,,"Small island developing State","developing country",,,,,,,,
+"Monaco","MCO","monaco","Western Europe",,,,"developed country",,,,,,,,
+"San Marino","SMR","san_marino","Southern Europe",,,,"developed country",,,,,,,,

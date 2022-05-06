@@ -1,0 +1,205 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: true
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide',
+   dev = "svg")
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+
+library(knitcitations)
+library(bibtex)
+library(ggiraph)
+```
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# Cluster
+## I want to automatically identify clusters of points in the data
+
+
+Cluster analysis is a family of algorithms designed to form groups such that the group members are more similar versus non-group members.  Clustering is used for analyzing data which does not include pre-labeled classes, or even a class attribute at all. Data instances are grouped together using the concept of maximizing the intra-class similarity and minimizing the inter-class similarity.
+
+
+
+# K-means
+
+K points are randomly chosen as cluster centers, or centroids, and all training instances are plotted and added to the closest cluster. After all instances have been added to clusters, the centroids, representing the mean of the instances of each cluster are re-calculated, with these re-calculated centroids becoming the new centers of their respective clusters.  This iterative process continues until there is no change to the centroids or their membership, and the clusters are considered settled.
+
+
+
+
+***
+
+
+## Load Data
+
+### WHO Covid global dataset as of September 24th 2021 at 10.46.22 AM
+
+```{r}
+
+# Fold hide as this is not relevant to the task
+
+df<-read_csv('archetypes/WHO COVID-19 global table data September 24th 2021 at 10.46.22 AM.csv')
+df
+```
+
+
+
+## Data Wrangling
+
+### Select columns 
+```{r}
+df1 <- df%>%select(c(1,2,4,6,9,11))%>%filter(Name!='Global')
+
+df1
+```
+### Checking missing values
+
+```{r}
+missing_stats <- purrr::map_df(df1, ~ sum(is.na(.))) %>%
+  gather('Column name', 'Count of missing values')
+
+missing_stats
+df2<-na.omit(df1)
+df2
+```
+
+### Scale numeric columns
+
+```{r}
+df_scaled<-df2
+df_scaled[,3:6] <- scale(df2[,3:6])
+df_scaled
+```
+
+## Use Elbow Method to find the ideal number of clusters
+
+```{r}
+#if(!require(devtools)) install.packages("devtools")
+#devtools::install_github("kassambara/factoextra")
+
+library(factoextra)
+### Elbow method (look at the knee)
+
+v1<-fviz_nbclust(df_scaled[,3:6], kmeans, method = "wss") +
+geom_vline(xintercept = 3, linetype = 2)
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+## Run kmeans model
+
+
+```{r}
+
+library(stats)
+
+set.seed(123)
+
+clusters <- kmeans(df_scaled[,3:6], 3, iter.max = 20, nstart = 25)
+
+
+df2$cluster <- as.factor(clusters$cluster)
+
+df2
+```
+
+
+
+
+## Plot the clusters
+
+
+```{r}
+# Plot the clusters
+v2 <- fviz_cluster(clusters, geom="point", data=df2[,3:6],palette = "Set2") + 
+  ggtitle("k = 3") + 
+  theme_minimal()
+girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+
+## Which group is still in high risk of covid?
+
+
+```{r}
+
+# Calculate means for each cluster
+df_mean <- df2 %>%
+    group_by(cluster) %>%
+    summarise(n = n(),
+        `mean_Cases - cumulative total per 100000 population` = mean(`Cases - cumulative total per 100000 population`),
+        `mean_Cases - newly reported in last 7 days per 100000 population` = mean(`Cases - newly reported in last 7 days per 100000 population`),
+        `mean_Deaths - cumulative total per 100000 population` = mean(`Deaths - cumulative total per 100000 population`),
+        `mean_Deaths - newly reported in last 7 days per 100000 population` = mean(`Deaths - newly reported in last 7 days per 100000 population`),
+       )
+
+df_mean
+
+```
+
+## Group 3
+
+```{r}
+df_group3<-df2%>%filter(cluster==3)
+df_group3
+```
+
+## Group 1: safe group?
+
+```{r}
+df_group1<-df2%>%filter(cluster==1)
+df_group1
+```
+
+
+# References
+## The citations and data sources used for this case
+
+* [WHO Coronavirus (COVID-19) Dashboard](https://covid19.who.int/table)
+* [K-means Cluster Analysis](https://afit-r.github.io/kmeans_clustering)
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+
+
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

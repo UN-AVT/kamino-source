@@ -1,0 +1,154 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE,
+   dev = "svg"
+)
+library(tidyverse)
+library(tidyr)
+library(purrr)
+library(ggiraph)
+#Loading the data
+df = read.csv("archetypes/us-air-quality.csv", header = TRUE, stringsAsFactors = TRUE)
+
+```
+
+
+### Cluster Analysis - Air pollution indicators for US cities:
+The following analysis is based on an example provided in the book "Cluster Analysis 5th Edition EVERITT LANDAU LEES."
+
+
+```{r, echo=FALSE}
+
+df
+
+```
+
+The variables recorded are as follows:<br>
+- SO2 Sulphur dioxide content of air in micrograms per cubic metre;<br>
+- TEMP Average annual temperature (F);<br>
+- MANUF Number of manufacturing enterprises employing 20 or more workers;<br>
+- POP Population size (1970 census) in thousands;<br>
+- WIND Average wind speed in miles per hour;<br>
+- PRECIP Average annual precipitation in inches;<br>
+- DAYS Average number of days with precipitation per year.<br>
+
+we shall use the six climate and human ecology variables to assess whether there is any evidence that there are groups of cities with similar profiles.
+
+
+### Scatterplot Matrix
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+# Scatterplot matrix
+pairs(df[,3:8], pch = 19)
+
+```
+
+A scatterplot matrix of the data. The plot gives little convincing evidence of any group structure in the data. The most obvious feature of the data is the presence of several ‘outlier’ observations. As such observations can be a problem for some methods of cluster analysis, identification of them prior to applying these methods is often very useful.
+
+#### Preparing the data 
+First, let's normalize the data prior to running the algorithm.
+
+```{r, echo=FALSE}
+df$TEMP_s <- scale(df$TEMP)
+df$MANUF_s <- scale(df$MANUF)
+df$POP_s <- scale(df$POP)
+df$WIND_s <- scale(df$WIND)
+df$PRECIP_s <- scale(df$PRECIP)
+df$DAYS_s <- scale(df$DAYS)
+
+df[,c(1:2, 9:14)]
+```
+
+#### Parametize - Finding the best k
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+# Use purrr's map_dbl to run models with different value of k (centers)
+total_withinss <- map_dbl(1:10,  function(k){
+  model <- kmeans(x = df[,9:14], centers = k)
+  model$tot.withinss
+})
+
+# Using measure Total within-cluster sum of squares to compare model results
+elbow_df <- data.frame(
+  k = 1:10,
+  total_withinss = total_withinss
+)
+
+# Plot the elbow plot
+v1<-ggplot(elbow_df, aes(x = k, y = total_withinss)) +
+  geom_line() +
+  scale_x_continuous(breaks = 1:10)+
+  theme(
+    #plot.title = element_blank(),
+    #axis.title.x = element_blank(),
+    #axis.title.y = element_blank(),
+    #axis.text.x = element_blank(),
+    #axis.ticks.x =element_blank(),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    plot.margin = unit(c(1, 5, 1, 1), "lines")
+  ) 
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+Notice the presence of an "elbow" at k=4. It means that the model seems to have reached a peak in performance around that value. Let's use it to run the model.
+
+#### Running the model
+
+
+```{r, echo=FALSE}
+clusters <- kmeans(df[,9:14], 4)
+
+df$group <- as.factor(clusters$cluster)
+
+df[,c(1:2, 15)]
+```
+
+### Conclusion
+
+As summarized in the following table, we end up with 4 clusters of various sizes.
+
+```{r, echo=FALSE}
+results <- df %>% select("City", "group") %>%
+  group_by(group) %>% 
+  mutate(list = paste(City, collapse = ",")) %>% select("group", "list") %>% distinct() %>% arrange(group)
+
+results
+```
+
+Based on these results, we can try and label the clusters as follows:<br>
+- group (Little Rock,Wilmington,...) - Humid climate: a group of cities showing large amounts of precipitation in combination with high temperatures.<br>
+- group (Hartford,Indianapolis,...) - Wet, cold and windy climate: a group of cities characterized by a large number of days with precipitation per year in combination with low temperatures and high wind speeds.<br>
+- group (Phoenix,San Francisco,...) - Dry climate: a group of cities characterized by little precipitation (less than 21 inches of average annual precipitation and less than 90 days with precipitation per year).<br>
+- group (	Chicago,Philadelphia) - Dense population: a group of cities characterized by high values for human ecology indicators. The two group members Chicago and Philadelphia have both the largest numbers of manufacturing enterprises employing 20 or more workers and the largest population sizes.<br>
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

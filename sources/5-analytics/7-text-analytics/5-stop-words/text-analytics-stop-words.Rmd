@@ -1,0 +1,197 @@
+---
+title: "Template"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+library(dplyr)
+library(tidytext)
+library(tm)
+
+
+```
+
+## SET PARAMETERS
+
+
+```{r, echo=FALSE, message=FALSE}
+
+focus_question <- 16
+question_language <- "en"
+
+question_list <- read.csv("list-of-questions.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+question_list
+
+question_filter <- filter(question_list, QID == focus_question)
+question_filter$Question
+
+
+```
+
+
+## INGEST DATA
+
+
+```{r, echo=FALSE, message=FALSE}
+
+data_file <- paste0("./outputs/q-", focus_question, "-lang.csv")
+
+corpus_csv <- read.csv(data_file, header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+
+# Filter english
+corpus_csv <- filter(corpus_csv, cld2 == question_language)
+corpus_csv
+
+```
+
+
+## from reference
+
+
+```{r, echo=FALSE, message=FALSE}
+
+
+
+```
+
+
+
+## tm
+
+
+```{r, echo=FALSE, message=FALSE}
+
+text_corpus <- Corpus(VectorSource(corpus_csv$Comment))
+
+# Remove english common stopwords
+text_corpus <- tm_map(text_corpus, removeWords, stopwords("english"))
+
+# Remove your own stop word
+# specify your custom stopwords as a character vector
+# text_corpus <- tm_map(text_corpus, removeWords, c("s", "company", "team")) 
+
+# Convert back to data frame
+text_df <- data.frame(text_clean = get("content", text_corpus), stringsAsFactors = FALSE)
+corpus_df <- cbind.data.frame(corpus_csv, text_df)
+
+text_df
+
+
+```
+
+
+## TIDYTEXT
+
+
+```{r, echo=FALSE, message=FALSE}
+
+
+# Load list of stop words - from the tidytext package
+stop_words <- get_stopwords()
+stop_words
+# Remove stop words from your list of words
+tidy_corpus_csv <- corpus_csv %>% unnest_tokens(word, Comment)
+
+cleaned_text_corpus <- tidy_corpus_csv %>% anti_join(stop_words, by = c("word" = "word"))
+# or
+# cleaned_text_corpus <- tidy_corpus_csv %>% filter(!word %in% stop_words$word)
+
+cleaned_text_corpus
+
+
+```
+
+
+## Term Document Matrix
+
+
+```{r, echo=FALSE, message=FALSE}
+
+
+
+
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+
+
+```
+
+
+## Word Cloud
+
+
+```{r, echo=FALSE, message=FALSE}
+
+
+
+```
+
+
+## Word Association
+
+
+```{r, echo=FALSE, message=FALSE}
+
+
+
+
+```
+
+
+## Sentiment Scores
+
+```{r, echo=FALSE, message=FALSE}
+
+
+
+
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+
+
+
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+
+
+
+```
+
+
+## Emotion Classification
+
+
+```{r, echo=FALSE, message=FALSE}
+
+
+
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+
+
+
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+
+
+
+```
+

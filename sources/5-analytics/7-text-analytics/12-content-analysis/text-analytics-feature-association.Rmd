@@ -1,0 +1,87 @@
+---
+title: "Template"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+# set.seed(100)
+
+library(tidyverse)
+library(tidytext)
+library(dplyr)
+library(tm)
+library(quanteda)
+library(corpustools)
+library(igraph)
+
+library("quanteda.textplots")
+library("quanteda.textstats")
+
+library(ggpubr)
+
+
+
+```
+
+## Select a text file
+
+
+```{r}
+
+## SET PARAMETERS
+
+focus_question <- 11
+question_language <- "en"
+
+question_list <- read.csv("list-of-questions.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+#question_list
+
+question_filter <- filter(question_list, QID == focus_question)
+question_filter$Question
+
+q_keyword <- question_filter$Keyword
+
+message <- paste0("Keyword used:", q_keyword)
+message
+
+```
+
+
+## Load a csv file
+
+
+```{r}
+
+## INGEST DATA
+
+data_file <- paste0("./outputs/q-", focus_question, "-lang.csv")
+
+corpus_csv <- read.csv(data_file, header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+
+# Filter english
+corpus_csv <- filter(corpus_csv, cld2 == question_language)
+#corpus_csv
+
+```
+
+
+```{r, echo=FALSE, message=FALSE, fig.width=7, fig.height=10}
+
+## Feature Associations
+## CORPUSTOOLS
+
+# http://htmlpreview.github.io/?https://github.com/kasperwelbers/corpustools/blob/master/vignettes/corpustools.html
+
+fa <- feature_associations(tc, 'feature', query = paste0(q_keyword, '*'))
+fa
+
+plot(fa, col=c('lightblue','navyblue'))
+
+```
+

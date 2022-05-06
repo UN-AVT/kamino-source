@@ -1,0 +1,157 @@
+---
+title: "Template"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Java must be installed as a prerequisite
+library(rJava)
+
+library(tidyverse)
+library(tidytext)
+
+library(SnowballC)
+library(textstem)
+library(udpipe)
+library(tm)
+
+```
+
+## SET PARAMETERS
+
+
+```{r}
+
+focus_question <- 16
+question_language <- "en"
+
+question_list <- read.csv("list-of-questions.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+question_list
+
+question_filter <- filter(question_list, QID == focus_question)
+question_filter$Question
+
+
+```
+
+
+## INGEST DATA
+
+
+```{r}
+
+data_file <- paste0("./outputs/q-", focus_question, "-lang.csv")
+
+corpus_csv <- read.csv(data_file, header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+
+# Filter english
+corpus_csv <- filter(corpus_csv, cld2 == question_language)
+corpus_csv
+
+```
+
+
+## Snowball Stemmer
+
+
+```{r}
+
+colClasses = c("integer", "character", "character")
+col.names = c("QID", "Answer", "word")
+
+snowball_df <- read.table(text = "",
+                 colClasses = colClasses,
+                 col.names = col.names)
+
+for (val in 1:nrow(corpus_csv))
+{
+  corpus_text <- corpus_csv[val,] %>% unnest_tokens(word, "Comment")
+  # corpus_text <- wordStem(corpus_text)
+  # corpus_text <- corpus_csv[val,] %>% unnest_tokens(word, "Comment") %>% wordStem(word)
+  corpus_text$stem <- wordStem(corpus_text$word)
+  df <- bind_rows(snowball_df, corpus_text)
+}
+
+snowball_df
+
+
+```
+
+## textstem
+
+
+```{r, echo=FALSE, message=FALSE}
+
+colClasses = c("integer", "character", "character")
+col.names = c("QID", "Answer", "word")
+
+textstem_df <- read.table(text = "",
+                 colClasses = colClasses,
+                 col.names = col.names)
+
+for (val in 1:nrow(corpus_csv))
+{
+  corpus_text <- corpus_csv[val,] %>% unnest_tokens(word, "Comment")
+  corpus_text$stem <- lemmatize_words(corpus_text$word)
+  textstem_df <- bind_rows(textstem_df, corpus_text)
+}
+
+textstem_df
+
+lexicon_dictionary <- make_lemma_dictionary(corpus_csv$Comment, engine = 'lexicon')
+corpus_csv$lexicon <- lemmatize_strings(corpus_csv$Comment, dictionary = lexicon_dictionary)
+corpus_csv
+
+hunspell_dictionary <- make_lemma_dictionary(corpus_csv$Comment, engine = 'hunspell')
+corpus_csv$hunspell <- lemmatize_strings(corpus_csv$Comment, dictionary = hunspell_dictionary)
+corpus_csv
+
+## Treetagger dictionary
+# lemma_dictionary2 <- make_lemma_dictionary(corpus_csv$Comment, engine = 'treetagger', path = "./refs/tree-tagger/")
+# treetagger <- lemmatize_strings(corpus_csv$Comment, lemma_dictionary2)
+# treetagger
+
+corpus_csv$porter <- stem_strings(corpus_csv$Comment, language = "porter")
+corpus_csv
+
+
+```
+
+## udpipe
+
+```{r, echo=FALSE, message=FALSE}
+
+udmodel <- udpipe_download_model(language = "english")
+udpipe_stemmer <- udpipe(x = corpus_csv$Comment, object = udmodel)
+udpipe_stemmer <- as.data.frame(udpipe_stemmer)
+udpipe_stemmer
+
+```
+
+
+## tm
+
+```{r, echo=FALSE, message=FALSE}
+
+tm_corpus <- Corpus(VectorSource(corpus_csv$Comment))
+tm_lemmatizer <- tm_map(tm_corpus, lemmatize_strings)
+tm_stemmer <- tm_map(tm_corpus, stemDocument)
+
+tm_lemmatizer_df <- data.frame(tm_lemmatize = get("content", tm_lemmatizer), stringsAsFactors = FALSE)
+tm_stemmer_df <- data.frame(tm_stem = get("content", tm_stemmer), stringsAsFactors = FALSE)
+
+tm_df <- cbind.data.frame(corpus_csv, tm_lemmatizer_df)
+tm_df <- cbind.data.frame(tm_df, tm_stemmer_df)
+tm_df
+
+```
+
+
+

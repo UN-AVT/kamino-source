@@ -1,0 +1,1 @@
+"C:\Program Files\R\R-4.1.0\bin\x64\R.exe" CMD BATCH "C:\Users\PC\Desktop\UN Internship\Min's Development\south_sudan_analytics\run.R" "C:\Users\PC\Desktop\UN Internship\Min's Development\south_sudan_analytics\test.html"

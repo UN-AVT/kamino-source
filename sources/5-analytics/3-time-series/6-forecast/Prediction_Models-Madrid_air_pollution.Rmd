@@ -1,0 +1,531 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)  # metapackage with lots of helpful functions
+library(data.table) # table,matrix
+library(lubridate)  # date
+library(gridExtra)  # ggplot functions
+library(scales)     # scale axis
+library(fBasics)    # for base statistics
+library(reshape)    # long and wide data
+library(ggrepel)    # ggplot label
+library(knitr)      # for html table
+library(ggfortify)  # autoplot(time series ggplot)
+library(forecast)   # forecast time series 
+library(sf)
+library(geojsonio)
+library(ggiraph)
+library(rgdal)
+library(scales) # to access breaks/formatting functions
+library(ggfortify)
+library(zoo)
+library(ggiraph)
+```
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# Forecasting models
+## I want to predict future values based on historical data.
+
+> Prediction is very difficult, especially if it's about the future!...\
+--- Niels Bohr, Nobel laureate in Physics and father of the atomic model\
+
+<p> Forecasting is a well established field of statistics. We recommend this <a href="https://otexts.com/fpp2/">excellent source</a> which covers what is presented in this case, and much more. </p>
+
+# Forecasting the Air Quality in Madrid
+
+The data used for this case is courtesy of [Kaggle - Air Quality in Madrid (2001-2018)](https://www.kaggle.com/decide-soluciones/air-quality-madrid)
+
+
+## Loading Data
+
+This dataset includes  measures of the levels of pollution and other particles registered hourly from 2001 to 2018, from various stations within the city limits.
+
+We will focus on the following pollutants:  
+
+* O_3: ozone level measured in μg/m³. High levels can produce asthma, bronchytis or other chronic pulmonary diseases in sensitive groups or outdoor workers.  
+* PM10: particles smaller than 10 μm. Even though the cannot penetrate the alveolus, they can still penetrate through the lungs and affect other organs. Long term exposure can result in lung cancer and cardiovascular complications.
+* NO_2: nitrogen dioxide level measured in μg/m³. Long-term exposure is a cause of chronic lung diseases, and are harmful for the vegetation.  
+* SO_2: sulphur dioxide level measured in μg/m³. High levels of sulphur dioxide can produce irritation in the skin and membranes, and worsen asthma or heart diseases in sensitive groups.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+madrid_final <- readRDS("archetypes/madrid_final.Rds")
+head(madrid_final)
+
+```
+
+## Data wrangling
+
+* We choose one pollutant from the list: O_3, PM10, NO_2 or SO_2.  
+* First we calculate the daily maximum recorded from any station within the city limit.  
+* Then we calculate the monthly average from these daily maximum. Note that a month is identified as the first day of each month. e.g: "2001-01-01" represents January 2001.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+
+# Choose a pollutant, compute daily maximum 
+#O_3 PM10, NO_2, SO_2
+
+pollutant_daily_max <- madrid_final %>%
+  mutate(date_ymd=as.Date(date,format="%Y-%m-%d")) %>%
+  group_by(date_ymd) %>%
+  summarise(max_pol = max(O_3,na.rm=TRUE)) # Change the pollutant name here.
+
+pollutant <- pollutant_daily_max %>% 
+  mutate(y_m=paste(substr(date_ymd,1,nchar(date_ymd)+2),"-01")) %>%
+  dplyr::filter(!is.na(date_ymd)) %>%
+  group_by(y_m) %>%
+  summarise(avg_emission = mean(max_pol,na.rm=TRUE))
+
+pol_flow <- data.frame("date" = as.Date(pollutant$y_m,format="%Y - %m - %d"),
+                       "count" = pollutant$avg_emission)
+  
+pol_flow
+
+```
+
+## Creating time series
+
+When working with time series, r uses a convenient special object called "ts".
+
+Here, we choose Frequency = 12 since we deal with monthly time series. c(2001,01) means for example January 2001
+
+
+```{r, message=FALSE, warning=FALSE}
+#converting to time series    
+pol_ts <- ts(pol_flow$count,
+           frequency = 12,
+           start = c(2001,01))
+
+pol_ts
+
+```
+
+## Time to plot
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  #axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+#ggplot format of ts plot    
+v1<-autoplot(pol_ts,ts.colour ="grey") +
+  xlab('Date') +
+  ylab('Count') +
+  ggtitle('Time Series of Pollutant') +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+
+# Choosing a model
+
+## Setting up Training and test data
+
+It is important to evaluate the accuracy of the forecast. One "real life" test is by separating data before running a model, and testing the forecast result on this test data that is therefore still "unknown" to the model. This is when __Training data__ and __test data__ comes handy.
+
+In this case we will separate the two sets as per below
+
+* Training data: The range starts from Jan 2001 to Dec 2017.(204 months)
+* Test data: The forecast will be for Jan 2018 to Dec 2019(24 months)
+
+### Training data:
+```{r}
+train_ts <- ts(pol_ts,start = c(2001,01),
+               end=c(2015,12),
+               frequency = 12)
+
+train_ts
+```
+
+### Test set
+
+```{r}
+test_set <- pol_flow$count[181:204]
+
+test_set
+
+```
+
+## Setting up benchmarks - simple forecasting methods
+
+Some simple assumptions may prove in fact quite accurate. And any forecasting method used should at least beat these results in order to be of any use.
+
+### Fit average method
+
+```{r}
+mean_fit <- meanf(train_ts,h=24)
+
+mean_fit
+
+```
+
+### Fit naive method
+
+```{r}
+rwf_fit <- rwf(train_ts,h=24)
+
+rwf_fit
+
+```
+
+### Fit seasonal naive method
+
+```{r}
+snaive_fit <- snaive(train_ts,h=24)
+
+snaive_fit
+
+```
+
+### Visualizing these simple forecasts against actual points on the same graph
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+train_forecast_mean_df <- data.frame(mean_fit)
+train_forecast_rwf_df <- data.frame(rwf_fit)
+train_forecast_snaive_df <- data.frame(snaive_fit)
+
+train_forecast_mean_pt_forecast <- train_forecast_mean_df$Point.Forecast
+train_forecast_rwf_pt_forecast <- train_forecast_rwf_df$Point.Forecast
+train_forecast_snaive_pt_forecast <- train_forecast_snaive_df$Point.Forecast
+
+forecast_train_mean <- data.frame("x" = as.Date(pol_flow$date[181:204],
+                                             format="%Y - %m - %d"),
+                                   "y" = train_forecast_mean_pt_forecast)
+
+forecast_train_rwf <- data.frame("x" = as.Date(pol_flow$date[181:204],
+                                             format="%Y - %m - %d"),
+                                   "y" = train_forecast_rwf_pt_forecast)
+
+forecast_train_snaive <- data.frame("x" = as.Date(pol_flow$date[181:204],
+                                             format="%Y - %m - %d"),
+                                   "y" = train_forecast_snaive_pt_forecast)
+
+actual_train <- data.frame("x" = as.Date(pol_flow$date,format="%Y - %m - %d"),
+                                 "y"=pol_flow$count)
+
+# theme parameters
+theme_opts <- theme(
+  #legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+v2<-ggplot() +
+  geom_line(data=forecast_train_mean,aes(x=x,y=y,color="Mean")) +
+  geom_line(data=forecast_train_rwf,aes(x=x,y=y,color="Naive")) +
+  geom_line(data=forecast_train_snaive,aes(x=x,y=y,color="Seasonal")) +
+  geom_line(data = actual_train,aes(x=x, y=y, color="Actual")) +
+  xlab("Year") +
+  ylab("Count") +
+  labs(colors="Series") +
+  ggtitle("Benchmarks predictions Vs set aside test data") +
+  scale_color_manual(
+      values = c(
+           Mean="orange",
+           Naive="blue",
+          Seasonal="red",
+          Actual="black")) +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+## ARIMA model
+
+### Fit model
+
+```{r}
+train_pol_fit_arima <- auto.arima(train_ts)
+
+train_pol_fit_arima
+
+```
+
+### Forecast for the next 2 years (period January 2016 - December 2017)
+
+```{r}
+train_forecast_arima <- forecast(train_pol_fit_arima, 24)
+
+train_forecast_arima
+
+```
+
+### Visualize ARIMA forecast with actual points for the test period 
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+train_forecast_arima_df <- data.frame(train_forecast_arima)
+
+train_forecast_arima_pt_forecast <- train_forecast_arima_df$Point.Forecast
+
+forecast_train_arima <- data.frame("x" = as.Date(pol_flow$date[181:204],
+                                             format="%Y - %m - %d"),
+                                   "y" = train_forecast_arima_pt_forecast)
+
+actual_train_arima <- data.frame("x" = as.Date(pol_flow$date,format="%Y - %m - %d"),
+                                 "y"=pol_flow$count)
+
+# theme parameters
+theme_opts <- theme(
+  #legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+v3<-ggplot(forecast_train_arima,aes(x,y)) +
+  geom_line(aes(color="First line")) +
+  geom_line(data = actual_train_arima,aes(color="Second line")) +
+  xlab("Year") +
+  ylab("Count") +
+  labs(colors="Series") +
+  ggtitle("ARIMA prediction Vs set aside test data") +
+  scale_colour_manual(values = c("red","grey"), 
+                      labels=c("Forecast", "Actual")) +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v3, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+## ETS model
+
+### Fit model
+
+```{r}
+train_pol_fit_ets<-ets(train_ts) 
+train_pol_fit_ets
+```
+
+### Forecast for the next 2 years (period January 2016 - December 2017)
+
+```{r}
+train_forecast_ets<-forecast:::forecast.ets(train_pol_fit_ets,24)
+
+```
+
+### Visualize ETS forecast with actual points for the test period 
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+train_forecast_ets_df <- data.frame(train_forecast_ets)
+train_forecast_ets_pt_forecast <- train_forecast_ets_df$Point.Forecast
+
+forecast_train_ets <- data.frame("x"=as.Date(pol_flow$date[181:204],format="%Y - %m - %d"),
+                             "y"=train_forecast_ets_pt_forecast)
+
+actual_train<-data.frame("x"=as.Date(pol_flow$date,format="%Y - %m - %d"),
+                         "y"=pol_flow$count)
+
+# theme parameters
+theme_opts <- theme(
+  #legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+
+v4<-ggplot(forecast_train_ets,aes(x,y))+geom_line(aes(color="First line")) +
+  geom_line(data = actual_train,aes(color="Second line"))+xlab("Year")+ylab("Count")+
+  labs(color="Series")+ggtitle("ETS prediction Vs set aside test data")+
+  scale_colour_manual(values = c("red","grey"), 
+                      labels=c("Forecast", "Actual")) +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v4, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+## Measuring accuracy:
+
+Choose the model that minimise the following measures:
+
+* RMSE: Root Mean Squared Error
+* MAE: Mean Absolute Error
+* MAPE: Mean Absolute Percentage Error
+
+```{r}
+accuracy_mean <- data.frame(accuracy(test_set,train_forecast_mean_pt_forecast)) %>%
+  select(RMSE, MAE, MAPE) %>%
+  mutate(method = "Mean") %>% 
+  relocate(method)
+
+accuracy_naive <- data.frame(accuracy(test_set,train_forecast_rwf_pt_forecast)) %>%
+  select(RMSE, MAE, MAPE) %>%
+  mutate(method = "Naive") %>% 
+  relocate(method)
+
+accuracy_seasonal <- data.frame(accuracy(test_set,train_forecast_snaive_pt_forecast)) %>%
+  select(RMSE, MAE, MAPE) %>%
+  mutate(method = "Seasonal") %>% 
+  relocate(method)
+
+accuracy_arima <- data.frame(accuracy(test_set,train_forecast_arima_pt_forecast)) %>%
+  select(RMSE, MAE, MAPE) %>%
+  mutate(method = "ARIMA") %>% 
+  relocate(method)
+
+accuracy_ets <- data.frame(accuracy(test_set,train_forecast_ets_pt_forecast)) %>%
+  select(RMSE, MAE, MAPE) %>%
+  mutate(method = "ETS") %>% 
+  relocate(method)
+
+bind_rows(accuracy_mean,accuracy_naive,accuracy_seasonal,accuracy_arima,accuracy_ets)
+
+```
+
+# Time to forecast
+
+Now that we know that the model that performs better is the ETS model, it is time to forecast
+
+## Fit model again, using the full dataset
+
+As short term forecast are usally the most accurate, we will first run the model on the full dataset
+
+```{r}
+pol_fit_ets<-ets(pol_ts) 
+pol_fit_ets
+```
+
+### Forecast for the next 3 years (period January 2018 - December 2020)
+
+```{r}
+forecast_ets <- forecast:::forecast.ets(pol_fit_ets,36)
+
+```
+
+### Visualize ETS forecast with actual points for the test period 
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+forecast_ets_df <- data.frame(forecast_ets)
+forecast_ets_pt_forecast <- forecast_ets_df$Point.Forecast
+
+forecast_train <- data.frame("x"=as.Date(as.yearmon(rownames(forecast_ets_df), format="%b %Y")),
+                            "y"=forecast_ets_pt_forecast)
+
+forecast_train
+
+```
+
+## Time to finally plot our results
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+# theme parameters
+theme_opts <- theme(
+  #legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+v5<-ggplot(pol_flow, aes(x=date, y=count)) +
+  geom_line(color="grey") +
+  geom_line(data=forecast_train, aes(x=x,y=y), color="red") + 
+      scale_x_date(date_breaks = "year" , date_labels = "%Y") +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20)) +
+  geom_vline(xintercept = as.Date("2019-07-01"), color = "red") +
+  geom_text(aes(x=as.Date("2019-07-01"), y=100, label="July 1st"), size=4, color = "red")  +
+  geom_vline(xintercept = as.Date("2019-01-01"), color = "blue") +
+  geom_text(aes(x=as.Date("2019-01-01"), y=90, label="Jan 1st"), size=4, color = "blue")
+girafe(ggobj = v5, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+Case inspired by this post [Air Quality Madrid - ETS & ARIMA](https://www.kaggle.com/raenish/time-series-on-air-quality#data)
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

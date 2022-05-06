@@ -1,0 +1,162 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
+   dev = "svg")
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(knitcitations)
+library(bibtex)
+library(changepoint)
+library(tidyverse)
+library(rvest)
+library(ggplot2)
+library(dplyr)
+library(ggiraph)
+
+
+```
+
+<div class="activity">
+ANALYTICS 
+</div>
+
+# Change
+# Case: Bitcoin
+## Detect a single change point or multiple change points in time series data sets where trends break or abrupt shifts occur. 
+
+***
+
+# Load and wrangle the data
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+df<-read.csv('./archetypes/Bitcoin Historical Data.csv', encoding="UTF-8")
+df <- df%>% select(c(1,2))
+colnames(df) <- c("Date", "Price")
+df$Date <- as.Date(df$Date)
+df <- df[nrow(df):1,]
+df1 <- df[df$Date >= "2013-01-01", ]
+head(df1)
+
+```
+
+
+# Let's Plot the Data first to understand it better
+
+
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', fig.height=6, fig.width=12}
+
+
+p1 <- ggplot(df1, aes(x=Date, y=Price)) +
+  geom_line() + 
+  xlab("")
+girafe(ggobj = p1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Changepoint
+
+## The package library(changepoint) identifies the location of multiple change points within time series. The library specifically detects changes in mean and variance of time series.
+
+## Methods:
+
+* At Most One Change (AMOC)
+* Binary Segmentation (BinSeg)
+* Segment Neighborhood (SegNeigh)
+* Pruned Exact Linear Time (PELT)
+
+
+## Firstly we will retrieve the indexes where there is a change point.
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+library(changepoint)
+
+df1.pelt=cpt.meanvar(df1$Price, method='SegNeigh', Q=10,penalty="SIC")
+cpts(df1.pelt)
+x <- cpts(df1.pelt)
+
+for(i in x){
+  print(paste0('Change Point Dates :' ,df1$Date[i]))
+}
+
+
+
+```
+## Now we will plot these Change Points
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', fig.height=6, fig.width=12}
+
+library(changepoint)
+
+plot(df1.pelt,cpt.col='red')
+abline(v=c(1583 , 1745  ,2151  ,2282), col="blue")
+
+
+```
+
+
+## To see the statistics behind the change points
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+param.est(df1.pelt)
+print(df1.pelt)
+```
+
+# Bayeseian Changepoint
+
+## Probability of a change, based on prior knowledge of conditions that might be related to the event
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show', fig.height=6, fig.width=12}
+df2 <- df[df$Date >= "2020-07-01", ]
+
+library(bcp)
+bcp.1a <- bcp(df2$Price)
+plot(bcp.1a, return.mcmc = TRUE, main="Univariate Change Point Example")
+
+
+```
+
+
+
+
+
+# References
+## The data source is from [kaggle](https://www.kaggle.com/c/bitcoin2019/data)
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

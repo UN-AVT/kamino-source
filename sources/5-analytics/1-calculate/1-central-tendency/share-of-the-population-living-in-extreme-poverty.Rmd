@@ -1,0 +1,157 @@
+---
+pagetitle: "Population living in extreme poverty"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, class.source = 'fold-hide')
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+library(tidyverse)
+library(tidyr)
+library(ggiraph)
+
+```
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# Population living in extreme poverty
+## Central Tendency
+
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Zeyn Afuang on Unsplash"}
+
+masthead <- "assets/zeyn-afuang-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Extreme poverty anywhere is a threat to human security everywhere....\
+--- Kofi Annan\
+
+***
+
+The objective of finding the central location of an attribute is to quantify the data set with one central or most common number.
+
+
+### Ingest the data
+
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/share-of-the-population-living-in-extreme-poverty.csv")
+
+df
+
+```
+
+### Wrangle the data
+
+* Filter rows 
+* rename columns  
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df1 <- df %>% filter(Year == '2015') %>% rename("Ratio" = "Poverty.headcount.ratio.at..1.90.a.day..2011.PPP.....of.population.")%>% filter(Code != "")%>% filter(Entity!= "World")
+df1
+
+```
+
+### Mean
+
+__Mean__ : the arithmetic average of all observations in the data set. It is calculated by summing all the data points and dividing by the number of data points.
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+mean <- round(mean(df1$Ratio), digits = 2)
+print(paste0("mean: ",mean))
+
+```
+
+### Median
+
+__Median__ : the value of the central point in the distribution calculated by sorting all the observations from small to large and selecting the mid-point observation in the sorted list. If the number of data points is even, then the average of the middle two data points is used as the median.
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+median <- median(df1$Ratio)
+print(paste0("median: ",median))
+
+```
+
+### Mode
+
+__Mode__: the most frequently occurring observation. In the data set, data points may be repetitive, and the most repetitive data point is the mode of the data set.
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+mode <- df1 %>% count(Ratio) %>% arrange(n) %>% tail(1) %>% select(Ratio)
+mode <- as.numeric(mode)
+
+print(paste0("mode: ",mode))
+```
+
+
+### Plot a histogram
+
+Median is mid-point where 50% of data is "behind" and "after", where Mean is the sum of values divided by number of elements. As this graph exemplify, mean is sensitive to outliers.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 13, fig.height = 7, out.width = "100%"}
+
+v1<-ggplot(df1, aes(Ratio)) +
+  geom_histogram(bins = 100)+ 
+  geom_vline(xintercept = mean, color = "#3189a3")+ 
+  geom_text(aes( x=mean+2, y=20, label="mean"), color = "#3189a3") +
+  geom_vline(xintercept = median, color = "#24bbed") +
+  geom_text(aes( x=median+2, y=22, label="median"), color = "#24bbed") +
+  geom_vline(xintercept = mode, color = "#f26622") + 
+  geom_text(aes( x=mode+2, y=24, label="mode"), color = "#f26622") +
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank()
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank()
+  ) 
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+### References
+#### citations for narrative and data sources
+
+
+* Data sources: The World Bank, [GO](https://data.worldbank.org/indicator/SI.POV.DDAY?view=chart){target="_blank"}
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

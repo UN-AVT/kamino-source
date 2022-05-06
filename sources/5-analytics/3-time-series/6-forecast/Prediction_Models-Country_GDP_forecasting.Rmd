@@ -1,0 +1,383 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE,
+   dev = "svg"
+)
+library(eurostat)
+library(tidyverse)
+library(ggthemes)
+library(forecast)
+library(scales)
+library(xts)
+library(ggiraph)
+### Follow these steps to select a new country or refresh data.
+# Download the dataset & label the data0
+#dat <- get_eurostat("namq_10_gdp", time_format = "num")
+#dat <- label_eurostat(dat)
+
+#df_country <- filter(dat, unit == "Current prices, million euro",
+        # s_adj == "Unadjusted data (i.e. neither seasonally adjusted nor calendar adjusted data)",
+        # na_item == "Gross domestic product at market prices",
+        # geo == 'Germany (until 1990 former territory of the FRG)') %>% arrange(time)
+
+# Save an object to a file
+#saveRDS(df_country, file = "data/df_country.rds")
+# Restore the object
+
+## to save time, uploading an already saved file with Germany GDP.
+df_country <- readRDS(file = "archetypes/df_country.rds")
+
+df_country_1 <- filter(df_country, unit == "Current prices, million euro",
+         s_adj == "Unadjusted data (i.e. neither seasonally adjusted nor calendar adjusted data)",
+         na_item == "Gross domestic product at market prices",
+         geo == 'Germany (until 1990 former territory of the FRG)') %>% arrange(time)
+
+```
+
+
+### Using forecasting methods to predict Quartlery GDP
+<p>We will use two forecasting methods, ARIMA and Exponential Smoothing, to predict Germany's GDP in the next two years"</p>
+
+#### First, let's take a look at the data
+
+
+```{r, echo=FALSE}
+
+df_country_1
+
+```
+
+This data is extracted from Eurostat, the statistical office of the European Union
+
+The data is Quartely, starting from year 1991, Q1
+
+#### Time to plot this time series
+
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+v1<-ggplot(df_country_1, aes(time, values)) +
+  geom_line()+
+  xlab("Year") + ylab("In million (€)") +
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank()
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank()
+  ) + 
+  scale_y_continuous(labels = comma)
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+We want to look for the following:
+- Trend: Is there a long term increase or decrease in this time series. Here, there is a clear upward trend
+- Seasonality: Is there a pattern related to the calendar. We seem to notice a variation occuring each year, so it looks like we have seasonality here
+- Cyclicity: Do we notice a rises and falls that are not with fixed period.
+
+### Further analysis
+
+#### Seasonal plot
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+# Create the time series object
+TimeSer <- ts(df_country_1[, 6], start = c(1991, 1), frequency = 4)
+
+# Data exploration using graphs
+v2<-ggseasonplot(TimeSer, year.labels = TRUE)+
+  xlab("Year") + ylab("In million (€)") +
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank()
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank()
+  ) + 
+  scale_y_continuous(labels = comma)
+girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+A seasonal plot is a good way to explore seasonality. We see here that on a typical year, Q4 is the highest, while Q1 is lower. Also, this plot is a good way to detect outliers (2020 Q2 for example).
+
+#### Lag plot
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+lags <- window(TimeSer, start=1990)
+v3<-gglagplot(lags)+
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank()
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank()
+  ) + 
+  scale_x_continuous(labels = comma) + 
+  scale_y_continuous(labels = comma)
+girafe(ggobj = v3, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+A lag plot helps detech autocorrelation, the correlation of a point in time with a point in time in the past (lag). Each quadrant represent a plot of an observation at time t against that observation at time t - 1 (lag 1), t -2 (lag 2), etc. Here we want to detect a lag where all lines follow the same path. It seems that this occurs at lag 4. 
+
+#### Decomposition
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+v4<-TimeSer %>% decompose(type="multiplicative") %>%
+  autoplot() + xlab("Year") +
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank()
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank()
+  ) + 
+  scale_y_continuous(labels = comma)
+girafe(ggobj = v4, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+Decomposition is another method to highlight the trend and seasonality present in the data.
+
+### Time to forecast
+
+#### Setting up the benchmark
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+fit1 <- meanf(window(TimeSer, start=1990,end=c(2020,3)),h=8)
+fit2 <- rwf(window(TimeSer, start=1990,end=c(2020,3)),h=8)
+fit3 <- snaive(window(TimeSer, start=1990,end=c(2020,3)),h=8)
+v5<-autoplot(window(TimeSer, start=2015)) +
+  autolayer(fit1, series="Mean", PI=FALSE) +
+  autolayer(fit2, series="Naïve", PI=FALSE) +
+  autolayer(fit3, series="Seasonal naïve", PI=FALSE) +
+  xlab("Year") + ylab("In million (€)") +
+  guides(colour=guide_legend(title="Forecast")) +
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank()
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank()
+  ) + 
+  scale_y_continuous(labels = comma)
+girafe(ggobj = v5, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+it is usually a good idea to first consider the "naive" assumtions and use them as benchmarks for further forecasting. Here we plotted 3 methods as followed:
+- Mean method: The red line represent our 2 year forecast if we take the mean of the time series. Obviously a bad choice.
+- Naive method: Here we just take the last observation in the dataset and take it at the value moving forward for the next 2 years. Better than previous method, but obviously we miss the trend and seasonality.
+- Seasonal naive: For this last method, we assume the past year (past 4 Quarters in this case) will repeat in the next 2 years. Again, better that both methods previously stated.
+
+#### ARIMA
+
+```{r fig.height=7.5, fig.width=10.5, message=FALSE, warning=FALSE, include=FALSE}
+
+# Automated Forecasting using an ARIMA model
+fit_arima <- auto.arima(TimeSer)
+#fit_arima
+
+forecast_arima <- forecast(object=fit_arima, h=8)
+#forecast_arima
+
+#Plot forecast
+v6<-autoplot(window(TimeSer, start=2015)) +
+  autolayer(forecast_arima, series="ARIMA", PI=TRUE) +
+  xlab("Year") + ylab("In million (€)") +
+  ggtitle("Forecast") +
+  guides(colour=guide_legend(title="Forecast")) +
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank()
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank()
+  ) + 
+  scale_y_continuous(labels = comma)
+girafe(ggobj = v6, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+The above prediction seem to make sense, let's analyse how the model performed by using at the rediduals
+
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+# Plot residuals 
+checkresiduals(fit_arima)
+
+```
+
+How to make sense of the above graph:
+
+The method: We used auto.arima(), a method that estimate automatically the best paramaters given the time series provided. These parameters are listed on top
+Top graph: Remember that we are looking at the residuals, or in other word at what is left after the model was fitted. We should be looking at 'white noise', there should be no patterns (peaks, troughs, nor trend). It seems true for the most part, but notice 2 low points (at Q3 2009 and Q2 2020)
+Bottom left: the ACF graph looks at autocorrelation. Here we want all our datapoints withing the dotted blue band. Looks like we are in the clear
+Bottom right: This is basically an histogram. In the perfect world, we want to see a bell-shaped curve (indicated with the red line). It looks like for the most part we are good, but notice again some outliers.
+
+#### Exponential Smoothing
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+fit_ets <- ets(TimeSer, model="ZZZ")
+#summary(fit_ets)
+
+forecast_ets <- forecast(object=fit_ets, h=8)
+#forecast_ets
+
+v7<-autoplot(window(TimeSer, start=2015)) +
+  autolayer(forecast_ets, series="ETS", PI=TRUE) +
+  xlab("Year") + ylab("In million (€)") +
+  guides(colour=guide_legend(title="Forecast")) +
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank()
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank()
+  ) + 
+  scale_y_continuous(labels = comma)
+girafe(ggobj = v7, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+The above prediction seems to make sense as well, let's again analyse how the model performed by looking at the rediduals.
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+# Plot residuals 
+checkresiduals(fit_ets)
+
+```
+
+We went over these graphs alreaydy. But in the nutshell, it looks like this method experience the same difficulty at capturing the shocks that happened in 2009 as well as 2020, but the amplitude seems less pronounced that in the previous ARIMA method.
+
+### Results and Conclusion
+
+First, let's bring the results into one dataset. The calculated rate is the percentage change in real GDP, over previous year.
+
+```{r fig.height=7.5, fig.width=10.5, message=FALSE, include=FALSE}
+
+# Extract prediction data
+df_arima <- data.frame(rownames(summary(forecast_arima)),summary(forecast_arima)$"Point Forecast")
+colnames(df_arima) <- c("QDATE","values")
+
+df_ets <- data.frame(rownames(summary(forecast_ets)), summary(forecast_ets)$"Point Forecast")
+colnames(df_ets) <- c("QDATE","values")
+
+# Extract Time Series to dataframe - Wrangle to get to desired format ready to join
+df <- data.frame(date=index(TimeSer), coredata(TimeSer))
+df$q <- str_sub(df$date,6,8)
+df$quarter <- ifelse(df$q == "", " Q1",
+                     ifelse(df$q ==  "25", " Q2",
+                            ifelse(df$q ==  "5", " Q3"," Q4")))
+df$QDATE <- paste0(str_sub(df$date,1,4),df$quarter)
+df <- df[c("QDATE", "values")]
+
+# join with arima forecast and calcuate rate
+df_full_arima <- rbind(df, df_arima)
+
+df_full_arima <- df_full_arima %>%
+  mutate(rate_arima = round((values/lag(values, 4) - 1) * 100, digits = 2))
+
+colnames(df_full_arima) <- c("QDATE", "ARIMA_Value", "ARIMA_Rate")
+
+# join with ets forecast and calcuate rate
+
+df_full_ets <- rbind(df, df_ets)
+
+df_full_ets <- df_full_ets %>%
+  mutate(rate_ets = round((values/lag(values, 4) - 1) * 100, digits = 2))
+
+colnames(df_full_ets) <- c("QDATE", "ETS_Value", "ETS_Rate")
+
+# Merge results
+final <- inner_join(df_full_arima, df_full_ets, by = "QDATE") %>% slice_tail(n = 8)
+
+```
+
+```{r, echo=FALSE}
+
+final
+
+```
+
+### Comparing our results against a prediction from the Economist Intelligence Unit.
+
+```{r, echo=FALSE}
+
+EIU_pred <- c(-4.4,-2.0,10.2,3.8,5.8,5.7,4.9,3.2)
+
+comparison <- cbind(final, EIU_pred)
+comparison$DATE <- as.Date(as.yearqtr(comparison$QDATE, format = "%Y Q%q"))
+
+v8<-ggplot(comparison, aes(x=DATE))+
+  geom_line(aes(y=ARIMA_Rate,color="ARIMA"),size=1 )+
+  geom_line(aes(y=ETS_Rate,color="ETS"),size=1 ) +
+  geom_line(aes(y=EIU_pred,color="EIU"),size=1) + 
+  xlab("Quarters") + ylab("rates") +
+  ggtitle("Percentage change in real GDP, over previous year.") +
+  scale_colour_manual(values = c("ARIMA"="#3189a3", "ETS"="#24bbed", "EIU"="#f26622")) +
+  theme(panel.grid = element_blank(), 
+      #axis.ticks = element_blank(), 
+      #axis.text.x=element_blank(), 
+      #panel.border = element_blank(),
+      strip.background = element_blank(),
+      panel.background = element_blank()
+      #axis.title.x=element_blank(),
+      #axis.title.y=element_blank()
+)
+girafe(ggobj = v8, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+It seems that the ARIMA model is closer to the EIU prediction for the first 4 quarters, but ETS is better at predicting the next 4 quarters. Both machine predictions fail to anticipate the magniture of the anticipated surge of GDP growth.
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

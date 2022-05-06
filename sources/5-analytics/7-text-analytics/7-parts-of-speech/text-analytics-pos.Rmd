@@ -1,0 +1,244 @@
+---
+title: "Template"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Java must be installed as a prerequisite
+library(rJava)
+
+library(tidyverse)
+library(tidytext)
+
+library(NLP)
+library(openNLP)
+library(RWeka)
+
+library(udpipe)
+
+```
+
+## SET PARAMETERS
+
+
+```{r, echo=FALSE, message=FALSE}
+
+focus_question <- 11
+question_language <- "en"
+
+question_list <- read.csv("list-of-questions.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+question_list
+
+question_filter <- filter(question_list, QID == focus_question)
+question_filter$Question
+
+
+```
+
+
+## INGEST DATA
+
+
+```{r, echo=FALSE, message=FALSE}
+
+data_file <- paste0("./outputs/q-", focus_question, "-lang.csv")
+
+corpus_csv <- read.csv(data_file, header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+
+# Filter english
+corpus_csv <- filter(corpus_csv, cld2 == question_language)
+corpus_csv
+
+```
+
+## Load Models
+
+```{r, echo=FALSE, message=FALSE}
+
+# From References
+fastpos <- read.csv("./refs/pos/fastpos/fastpos.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+names(fastpos)
+
+# Used by openNLP
+# create annotators for words and sentences
+word_ann <- Maxent_Word_Token_Annotator()
+sent_ann <- Maxent_Sent_Token_Annotator()
+pos_tag_ann <- Maxent_POS_Tag_Annotator()
+
+# Used by udpipe
+udmodel <- udpipe_download_model(language = "english")
+# udmodel
+# str(udmodel)
+
+
+```
+
+
+## FASTPOS
+
+```{r}
+
+fastpos
+
+colClasses = c("integer", "character", "character")
+col.names = c("QID", "Answer", "word")
+
+df <- read.table(text = "",
+                 colClasses = colClasses,
+                 col.names = col.names)
+
+for (val in 1:nrow(corpus_csv))
+{
+  corpus_text <- corpus_csv[val,] %>% unnest_tokens(word, "Comment")
+  df <- bind_rows(df, corpus_text)
+}
+
+# df
+
+fastpos_tags <- df %>% inner_join(fastpos) %>% count(word, pos, sort = TRUE)
+fastpos_tags
+
+```
+
+
+## openNLP POS
+
+
+```{r, echo=FALSE, message=FALSE}
+
+#read text
+text <- corpus_csv$Comment
+
+#convert the character vectors into one character vector
+text <- paste(text, collapse = " ")
+# print(text)
+
+#converts variable into a string
+text <- as.String(text)
+
+
+#holds annotators in the order to be applied
+pipeline <- list(sent_ann,
+                 word_ann,
+                 pos_tag_ann)
+
+annotated_text <- annotate(as.String(text), pipeline)
+
+# POS
+# pos_sub <- subset(annotated_text, type == "word")
+pos_tags <- sapply(annotated_text$features, `[[`, "POS")
+
+noun_filter = c("NN", "NNP", "NNS", "NNPS")
+adjective_filter = c("JJ", "JJR", "JJS")
+verb_filter = c("VB", "VBD", "VBG", "VBN", "VBP", "VBZ")
+adverb_filter = c("RB", "RBR", "RBS")
+pronoun_filter = c("PRP", "PRP$", "WP", "WP$")
+
+noun_pos_res <- text[annotated_text[pos_tags %in% noun_filter]]
+noun_pos_res <- as.data.frame(noun_pos_res)
+names(noun_pos_res)[1] <- "word"
+noun_pos_res$pos_tag <- "NOUN"
+noun_pos_res
+
+adj_pos_res <- text[annotated_text[pos_tags %in% adjective_filter]]
+adj_pos_res <- as.data.frame(adj_pos_res)
+names(adj_pos_res)[1] <- "word"
+adj_pos_res$pos_tag <- "ADJECTIVE"
+adj_pos_res
+
+verb_pos_res <- text[annotated_text[pos_tags %in% verb_filter]]
+verb_pos_res <- as.data.frame(verb_pos_res)
+names(verb_pos_res)[1] <- "word"
+verb_pos_res$pos_tag <- "VERB"
+verb_pos_res
+
+adverb_pos_res <- text[annotated_text[pos_tags %in% adverb_filter]]
+adverb_pos_res <- as.data.frame(adverb_pos_res)
+names(adverb_pos_res)[1] <- "word"
+adverb_pos_res$pos_tag <- "ADVERB"
+adverb_pos_res
+
+pronoun_pos_res <- text[annotated_text[pos_tags %in% pronoun_filter]]
+pronoun_pos_res <- as.data.frame(pronoun_pos_res)
+names(pronoun_pos_res)[1] <- "word"
+pronoun_pos_res$pos_tag <- "PRONOUN"
+pronoun_pos_res
+
+pos_df <- rbind(noun_pos_res, adj_pos_res, verb_pos_res, adverb_pos_res, pronoun_pos_res)
+pos_df
+
+
+```
+
+
+## UDPIPE POS
+
+
+```{r, echo=FALSE, message=FALSE}
+
+x <- udpipe(x = corpus_csv$Comment, object = udmodel)
+x <- as.data.frame(x)
+# str(x)
+# table(x$upos)
+x
+
+# pos_tags <- unique(x$upos)
+# pos_tags
+
+# "PRON"
+# "CCONJ"
+# "DET"
+# "NOUN"
+# "ADP"
+# "ADJ"
+# "AUX"
+# "ADV"
+# "VERB"
+# "PUNCT"
+# "PART"
+# "SCONJ"
+# "INTJ"
+# "PROPN"
+# "X"
+# "NUM"
+# "SYM"
+
+## NOUNS
+nouns <- subset(x, upos %in% c("NOUN")) 
+nouns
+
+## VERB
+verb <- subset(x, upos %in% c("VERB")) 
+verb
+
+## ADJECTIVES
+adjectives <- subset(x, upos %in% c("ADJ")) 
+adjectives
+
+## ADVERB
+adverb <- subset(x, upos %in% c("ADV")) 
+adverb
+
+```
+
+## WRITE RESULTS
+
+```{r}
+
+# fastpos
+fastpos_file <- paste0("./outputs/parts-of-speech/q-", focus_question, "-fastpos-pos.csv")
+write.csv(fastpos_tags, fastpos_file, row.names = FALSE)
+
+# openNLP
+opennlp_pos_file <- paste0("./outputs/parts-of-speech/q-", focus_question, "-opennlp-pos.csv")
+write.csv(pos_df, opennlp_pos_file, row.names = FALSE)
+
+```
+

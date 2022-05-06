@@ -48,9 +48,9 @@ GRAPHS
 ## graph layouts
 
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Taylor Wilcox on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap=""}
 
-masthead <- "assets/taylor-wilcox-unsplash.jpg"
+masthead <- "assets/global-weapons-trade.png"
 knitr::include_graphics(masthead, dpi=72)
 
 ```

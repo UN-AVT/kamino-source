@@ -1,6 +1,6 @@
 ---
-pagetitle: "Kamino"
-output: 
+pagetitle: "Country Borders"
+output:
   html_document:
     theme: lumen
     css: "../../../z-assemblers/assets/styles/content.css"
@@ -8,7 +8,7 @@ output:
     mathjax: NULL
     code_folding: show
     include:
-      in_header: "../../../z-assemblers/fragments/header.html"
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
     lib_dir: "vendor"
@@ -33,7 +33,7 @@ library(ggiraph)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
-font_add_google("Inconsolata", "inconsolata")
+#font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
 showtext_auto()
 

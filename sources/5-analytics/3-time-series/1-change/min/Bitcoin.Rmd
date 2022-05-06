@@ -1,0 +1,200 @@
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(knitcitations)
+library(bibtex)
+library(changepoint)
+library(tidyverse)
+library(rvest)
+library(ggplot2)
+library(dplyr)
+
+
+```
+
+<div class="activity">
+ANALYTICS 
+</div>
+
+# Change
+# Case: Bitcoin
+
+
+***
+
+# Load the data
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+df<-read.csv('../archetypes/Bitcoin Historical Data.csv', encoding="UTF-8")
+
+
+```
+
+# Wrangler the data
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+
+df <- df%>% select(c(1,2))
+colnames(df) <- c("Date", "Price")
+df$Date <- as.Date(df$Date)
+df <- df[nrow(df):1,]
+df1 <- df[df$Date >= "2013-01-01", ]
+head(df1)
+
+```
+
+
+# Let's Plot the Data first to understand it better
+
+
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+p <- ggplot(df1, aes(x=Date, y=Price)) +
+  geom_line() + 
+  xlab("")
+p
+
+```
+# Changepoint
+
+## The package library(changepoint) identifies the location of multiple change points within time series. The library specifically detects changes in mean and variance of time series.
+
+## Firstly we will retrieve the indexes where there is a change point.
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+library(changepoint)
+
+df1.pelt=cpt.meanvar(df1$Price, method='BinSeg', Q=10,penalty="SIC")
+cpts(df1.pelt)
+x <- cpts(df1.pelt)
+
+for(i in x){
+  print(paste0('Change Point Dates :' ,df1$Date[i]))
+}
+
+
+param.est(df1.pelt)
+
+```
+## Now we will plot these Change Points
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+library(changepoint)
+
+plot(df1.pelt,cpt.width=1,cpt.col='red')
+abline(v=c(1577,1745,2323), col="blue")
+
+
+```
+
+## Compare it with another method
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+ansmean=cpt.mean(df1$Price, method = 'BinSeg')
+plot(ansmean,cpt.col='red')
+print(ansmean)
+```
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+library(bcp)
+bcp.1a <- bcp(df1$Price)
+plot(bcp.1a, return.mcmc = TRUE, main="Univariate Change Point Example")
+legacyplot(bcp.1a)
+
+```
+
+## We now move on to Anomaly Detection
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+library(AnomalyDetection)
+
+df2 <- df1
+df2$Date <- as.POSIXct(df2$Date)
+
+ano <- AnomalyDetectionTs(df2, max_anoms=0.02, direction = 'both', plot = T)
+ano$anoms
+#ano$plot
+
+AnomalyDetectionVec(df1$Price, period = 12, max_anoms=0.015,  direction = 'both', plot = T)
+
+
+
+```
+
+
+# Anomaly 2
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df3 <- as_tibble(df1)
+
+library(anomalize)
+
+df_anomalized <- df3 %>%
+    time_decompose(Price, merge = TRUE) %>%
+    anomalize(remainder) %>%
+    time_recompose()
+df_anomalized %>% glimpse()
+
+df_anomalized %>% plot_anomalies(ncol = 3, alpha_dots = 0.75)
+```
+
+# Change points in CAD to USD Historical Exchange Rates
+
+## Web scrape exchange rate and wrangler data
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+
+p1 <- df_anomalized %>%
+    plot_anomaly_decomposition() +
+    ggtitle("Freq/Trend = 'auto'")
+p1
+
+```
+
+
+
+
+
+# References
+## The data source is from [kaggle](https://www.kaggle.com/divyansh22/us-border-crossing-data)
+
+## Further self-study resources:
+
+* https://cran.r-project.org/web/packages/changepoint/changepoint.pdf
+* https://www.youtube.com/watch?v=WelmlZK5G2Y&ab_channel=NHSRCommunityNHSRCommunity
+* https://www.coursera.org/learn/machine-learning
+
+  
+
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

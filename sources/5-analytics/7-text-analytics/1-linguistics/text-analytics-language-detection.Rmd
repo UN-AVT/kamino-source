@@ -1,0 +1,137 @@
+---
+title: "Template"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+library(tidytext)
+library(dplyr)
+library(stringr)
+
+# Language Detection
+library(cld2)
+library(cld3)
+library(textcat)
+library(franc)
+
+
+```
+
+
+## Load a csv file
+
+
+```{r}
+
+focus_question <- 43
+source_file <- paste0("./sets/", focus_question, ".csv")
+
+corpus_csv <- read.csv(source_file, header = TRUE, stringsAsFactors = FALSE)
+corpus_csv
+
+
+```
+
+## Run language detection
+
+
+```{r}
+
+# Language Detection
+corpus_csv$cld2 <- cld2::detect_language(corpus_csv$Comment)
+corpus_csv$cld3 <- cld3::detect_language(corpus_csv$Comment)
+corpus_csv$textcat <- textcat(corpus_csv$Comment)
+# corpus_csv$franc <- franc(corpus_csv$text, min_length = 10)
+
+corpus_csv
+
+data_file <- paste0("./outputs/q-", focus_question, "-lang.csv")
+write.csv(corpus_csv, data_file, row.names = FALSE)
+
+
+```
+
+
+## Aggregate results for each method and language
+
+
+```{r, echo=FALSE}
+
+aggregate_cld2 <- corpus_csv %>% count(cld2)
+names(aggregate_cld2)[names(aggregate_cld2) == "cld2"] <- "language"
+aggregate_cld2$method <- "cld2" 
+
+aggregate_cld2
+
+aggregate_cld3 <- corpus_csv %>% count(cld3)
+names(aggregate_cld3)[names(aggregate_cld3) == "cld3"] <- "language"
+aggregate_cld3$method <- "cld3" 
+
+aggregate_cld3
+
+aggregate_textcat <- corpus_csv %>% count(textcat)
+names(aggregate_textcat)[names(aggregate_textcat) == "textcat"] <- "language"
+aggregate_textcat$method <- "textcat" 
+
+aggregate_textcat
+
+language_df <- rbind(aggregate_cld2, aggregate_cld3, aggregate_textcat)
+language_df
+
+data_file <- paste0("./outputs/q-", focus_question, "-lang-summary.csv")
+write.csv(language_df, data_file, row.names = FALSE)
+
+
+```
+
+## Plot result
+
+```{r, echo=FALSE, fig.width=6.5, fig.height=4}
+
+aggregate_cld2$language[is.na(aggregate_cld2$language)] <- "other"
+
+aggregate_cld2 <- filter(aggregate_cld2, aggregate_cld2$language %in% c("en", "es", "fr", "other"))
+
+palette <- c("en" = "#cc241d", 
+             "es" = "#d79921", 
+             "fr" = "#458588",
+             "other" = "#928374")
+
+v1 <- ggplot(data=aggregate_cld2, aes(x=language, y=n)) +
+  geom_bar(stat="identity", width=0.7, aes(fill=language)) +
+  scale_y_continuous(limits = c(0, max(aggregate_cld2$n + 25))) +
+  scale_fill_manual(values=palette) +
+  coord_cartesian(clip="off") +
+  # coord_flip() +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  theme(plot.margin = margin(.25, 2, .25, .25, "cm")) +
+  theme(panel.border     = element_blank()) +
+  theme(plot.background = element_blank()) +
+  theme(panel.background = element_blank()) +
+  theme(panel.grid.major.x = element_blank()) +
+  theme(panel.grid.minor.x = element_blank()) +
+  theme(panel.grid.major.y = element_blank()) +
+  theme(panel.grid.minor.y = element_blank()) +
+  xlab("") +
+  ylab("") +
+  labs(
+      title = "",
+      caption = ""
+    ) +
+  geom_text(aes(y=n+20, label=n), size=3, hjust=0.5, vjust=0 )
+
+v1
+
+```
+
+
+

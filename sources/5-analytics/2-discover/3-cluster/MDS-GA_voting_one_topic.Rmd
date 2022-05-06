@@ -1,0 +1,257 @@
+---
+pagetitle: "GA Voting"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(magrittr)
+library(tidyverse)
+library(ggpubr)
+library(ggrepel)
+library(ggiraph)
+library(ggthemes)
+
+```
+
+<div class="activity">
+Qualitative Analysis and Machine Learning
+</div>
+
+# How did they vote? - United Nations General Assembly Voting patterns
+## Multidimensional scaling
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Daryan Shamkhali on Unsplash"}
+
+masthead <- "assets/daryan-shamkhali-UIWGPEuLE4k-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> ...75 years since its founding, the General Assembly remains the global forum where all countries have a voice.\
+--- Antonio Guterres, United Nations Secretary-General, 10 January 2021
+
+<a href="https://en.wikipedia.org/wiki/Multidimensional_scaling">__Multidimensional scaling__</a> is a technique that aims to visualize the level of __similarity__ among individual points in a dataset.
+
+The resulting visual is a __scatter plot__ where data points appear to __attract__ and __repeal__ each other within the same quadrant.
+
+***
+
+### Ingest
+
+This is a dataset of member states roll-call votes in the UN General Assembly from 1946 to 2020 (sessions 1 to 75).
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+load("archetypes/un-votes.RData")
+
+completeVotes
+
+```
+
+### Understanding the data  
+
+* Resid: New roll-call vote id, number is sequential within sessions (session + 3 digit sequential number).   
+* Member: Is country a member of the United Nations at the time of the vote?   
+* Issue code  
+  * ME: Votes relating to the Palestinian conflict (19%)  
+  * NU: Votes relating to nuclear weapons and nuclear material (13%)  
+  * DI: Votes relating to arms control and disarmament (16%)  
+  * CO: Votes relating to colonialism (18%)  
+  * HR: Votes relating to human rights (17%)  
+  * EC: Votes relating to (economic) development (9%)  
+* Vote choice  
+  * 1 – Yes  
+  * 2 – Abstain  
+  * 3 – No  
+  * 8 – Absent  
+  * 9 – Not a member  
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+summary <- completeVotes %>%
+  count(unres, resid, year, session, abstain, yes, no, date, short, descr, me, nu, di, hr, co, ec)
+
+summary
+
+```
+
+### Wrangle
+
+* Tasks:  
+  * Filter for an issue (topic).  
+  * Create a digit_vote column where:  
+    * digit_vote = 2 if Member state voted __Yes__ to a resolution.  
+    * digit_vote = 0 if Member state voted __No__ to a resolution.  
+    * digit_vote = 1 otherwise (whether the Member state abstained to vote, was abscent for this vote, or was not yet a UN member).  
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df <- completeVotes %>% 
+  filter(ec == 1, !vote == 9, nchar(Country) == 3) %>%
+  select(vote, Country, Countryname, year, resid) %>%
+  mutate(digit_vote = case_when(
+    vote == 1 ~ 2,
+    #vote == 2 ~ 1,
+    vote == 3 ~ 0,
+    TRUE ~ 1
+  ))
+  
+
+```
+
+* Data cleanup. Delete records when more than one Member State vote for a single resolution was recorded.  
+* Pivot dataset to create a __Matrix__.  
+* Replace NA with 1.  
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+df_1 <- df %>%
+  group_by(Country, resid) %>%
+  filter(n()==1)
+
+df_2 <- df_1 %>%
+  select(Country, resid, digit_vote) %>%
+  pivot_wider(., names_from=resid, values_from=digit_vote) %>%
+  replace(is.na(.), 1)
+
+df_2
+
+```
+
+### Time to run Multidimentional Scaling algorithm
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+df_3 <- df_2 %>%
+  select(-`Country`)
+
+# Compute MDS
+mds <- df_3 %>%
+  dist() %>%          
+  cmdscale() %>%
+  as_tibble()
+
+mds
+
+```
+
+### Adding kmeans clustering
+
+This is not absolutelly necessary, but is a nice we to visually highlight groups,
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+# K-means clustering
+clust <- kmeans(mds, 5)$cluster %>%
+  as.factor()
+
+mds <- mds %>%
+  mutate(groups = clust)
+
+df_4 <- data.frame(country = df_3$Country, 
+                                     dim1 = mds$V1, 
+                                     dim2 = mds$V2, 
+                                     groups = mds$groups)
+
+df_4
+
+```
+
+### Final output 
+using <kbd>ggscatter</kbd> plot
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+# Plot and color by groups
+g3 <- ggscatter(df_4, x = "dim1", y = "dim2", 
+          label = df_4$country,
+          color = "groups",
+          palette = "jco",
+          size = 1, 
+          ellipse = TRUE,
+          ellipse.type = "convex",
+          repel = TRUE,
+          interactive = TRUE)
+
+girafe(ggobj = g3, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+### Interactive output - Comparing how Ethiopia voted in the GA
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, out.width="50%"}
+
+country_displayed = c("China", "France", "United States of America", 
+                      "United Kingdom of Great Britain and Northern Ireland", "Russian Federation", 
+                      "Israel", "iran_Iran (Islamic Republic of)", "India", "Pakistan", "Ethiopia")
+
+df_ref <- read_csv("archetypes/CountryRefData.csv")
+
+df_joined <- inner_join(df_4, df_ref, by=c("country" = "CountryCode")) %>%
+  mutate(groups = as_factor(groups)) %>%
+  mutate(point_size = if_else(country == "ETH", 50, 40)) %>%
+  mutate(point_alpha = if_else(country == "ETH", 1, 1))
+
+g1 <- ggplot(df_joined, aes(x = dim1, y = dim2)) +
+  geom_point_interactive(
+      aes(tooltip = paste0(CountryName,"\n", Region), 
+          color = groups, size = point_size, alpha = point_alpha))+ 
+  geom_text_repel(aes(label = CountryName), 
+                  data = df_joined[df_joined$CountryName %in% country_displayed,], size = 10) +
+  theme_tufte(base_size = 15) +
+  theme(
+        plot.title = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        axis.text=element_blank(),
+        axis.ticks=element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        legend.position="none",
+        plot.margin = unit(c(1, 5, 1, 1), "lines"),
+  )
+
+girafe(ggobj = g1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+### References
+#### citations for narrative and data sources
+
+* Data sources: Harvard Dataverse, [GO](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LEJUQZ){target="_blank"}
+
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

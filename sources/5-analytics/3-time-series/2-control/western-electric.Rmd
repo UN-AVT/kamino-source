@@ -1,0 +1,170 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+library(weco) # Western Electric implementation
+
+library(knitcitations)
+library(bibtex)
+library(ggiraph)
+
+```
+
+<div class="activity">
+ANALYTICS  
+</div>
+
+# Controls
+## Western Electric
+
+> Your telephone is made up of 201 parts...\
+--- Western Electric, 1925\
+
+Western Electric Company Rules (a.k.a. WECO Rules) are used to conduct stability analysis. Published in a quality control hand book by the Western Electric Company in 1956, the rules have been widely used for detecting causes of a process change and deviation from a stable process.
+
+The eight WECO rules for detecting abnormal patterns are:
+
+* __Rule 1__ : 1 data point is greater than 3 standard deviation from the center line. (This rule is to identify single data point that is out of the acceptable range.)
+* __Rule 2__ : 9 data points in a row on the same side of the center line. (The ideal stable process is assumed to be up and down around the center line. A large block of data points on the same side of the center line indicates a process mean is shifted.)
+* __Rule 3__ : 6 data points in a row, all increasing or decreasing. (This rule is also an indicator of possible mean shift.)
+* __Rule 4__ : 16 data points in a row, alternating up and down. (When data points are routinely alternating up and down, it shows a high negative correlation between neighboring observations, which is abnormal for a stable process. For an in-control-process, it is not expected to observe correlation between neighboring data points.)
+* __Rule 5__ : 2 out of 3 data points on the same side are greater than 2 standard deviations from the center line. (For a normally distributed in-control-process, about 95 deviation. The chance to violate this rule is 0.00306. This rule is used to detect increase in process variation.)
+* __Rule 6__ : 4 out of 5 data points on the same side are greater than 1 standard deviation from the center line. (For a normally distributed in-control-process, about 62 deviation. This chance to violate this rule is 0.00553. This rule is also used to detect increase in process variation.)
+* __Rule 7__ : 15 data points in a row within 1 standard deviation of the center line. (Too many data points are within 1 standard deviation indicates the decrease in process variation.)
+* __Rule 8__ : 8 data points in a row are greater than 1 standard deviation of the center line. (This is another rule to detect increase in process variance.)
+
+
+To illustrate the method, let's look at a specific case.
+
+***
+
+# Load Data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Fold hide as this is not relevant to the task
+df <- read.csv("./archetypes/control.csv")
+df
+
+```
+
+
+# Clean Data
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# Remove NAs; process will error otherwise
+df_complete <- na.omit(df)
+# Check number of rows to compare with original
+nrow(df_complete)
+
+# Add id to match for merge later
+df_complete <- df_complete %>% mutate(id = row_number())
+
+# The vector for analysis
+control_test <- df_complete$return
+
+# Run individual tests and all
+weco_1 <- weco.rule(1, control_test, sdx = sd(control_test), mux = mean(control_test))
+weco_2 <- weco.rule(2, control_test, sdx = sd(control_test), mux = mean(control_test))
+weco_3 <- weco.rule(3, control_test, sdx = sd(control_test), mux = mean(control_test))
+weco_4 <- weco.rule(4, control_test, sdx = sd(control_test), mux = mean(control_test))
+weco_5 <- weco.rule(5, control_test, sdx = sd(control_test), mux = mean(control_test))
+weco_6 <- weco.rule(6, control_test, sdx = sd(control_test), mux = mean(control_test))
+weco_7 <- weco.rule(7, control_test, sdx = sd(control_test), mux = mean(control_test))
+weco_8 <- weco.rule(8, control_test, sdx = sd(control_test), mux = mean(control_test))
+
+lst.rules  <- list(list(1, l=3),
+                   list(2, k=9));
+weco_all <- weco.combine(control_test, sdx = sd(control_test), mux = mean(control_test), lst.rules=lst.rules)
+
+# Provides a summary report of each test
+# summary(weco_1)
+# summary(weco_2)
+# summary(weco_3)
+# summary(weco_4)
+# summary(weco_5)
+# summary(weco_6)
+# summary(weco_7)
+# summary(weco_8)
+ summary(weco_all)
+
+```
+
+
+# Run the test
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# Combine all results into a single dataframe
+weco_result <- data.frame(
+                "x" = as.vector(weco_1$x), 
+                "weco_1" = as.vector(weco_1$weco),
+                "weco_2" =as.vector(weco_2$weco),
+                "weco_3" = as.vector(weco_3$weco),
+                "weco_4" = as.vector(weco_4$weco),
+                "weco_5" = as.vector(weco_5$weco),
+                "weco_6" = as.vector(weco_6$weco),
+                "weco_7" = as.vector(weco_7$weco),
+                "weco_8" = as.vector(weco_8$weco)
+                 )
+
+# Add an id for matching to source data
+weco_result <- weco_result %>% mutate(id = row_number())
+
+weco_result
+
+```
+
+
+
+# Combine Result
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# Combine results with source data
+df_result <- merge(df_complete, weco_result, by = "id")
+df_result
+
+# double check that return and x values are the same
+all(df_result$return == df_result$x)
+
+```
+
+
+
+# References
+## The citations and data sources used for this case
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+
+

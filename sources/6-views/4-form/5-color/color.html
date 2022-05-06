@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Visual Variables</title>
+
+<script src="vendor/header-attrs-2.11/header-attrs.js"></script>
+<script src="vendor/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="vendor/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="vendor/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="vendor/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="vendor/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="vendor/navigation-1.1/tabsets.js"></script>
+<script src="vendor/navigation-1.1/codefolding.js"></script>
+<link href="vendor/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="vendor/highlightjs-9.12.0/highlight.js"></script>
+<link href="vendor/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="vendor/pagedtable-1.1/js/pagedtable.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHLBJTGCKN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GHLBJTGCKN');
+  </script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../z-assemblers/assets/logo/logo.svg" alt="" height="36">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../z-assemblers/assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../z-assemblers/assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="../../../z-assemblers/assets/styles/content.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div class="activity">
+<p>VIEWS</p>
+</div>
+<div id="color" class="section level1">
+<h1>Color</h1>
+<div id="the-art-and-science-of-creating-palettes" class="section level2">
+<h2>the art and science of creating palettes</h2>
+<div class="figure" style="text-align: center">
+<img src="assets/frank-holleman-unsplash.jpg" alt="Photo by Frank Holleman on Unsplash" width="60%" />
+<p class="caption">
+Photo by Frank Holleman on Unsplash
+</p>
+</div>
+<blockquote>
+<p>The best color in the whole world, is the one that looks good, on you…<br />
+— COCO CHANEL<br />
+</p>
+</blockquote>
+<hr />
+<div id="color-theory" class="section level3">
+<h3>Color Theory</h3>
+<p>A set of guiding principles that be used to create harmonious color combinations using relationships between colors.</p>
+<p>Hue Lightness Saturation</p>
+<p>Contrast</p>
+</div>
+<div id="color-harmony" class="section level3">
+<h3>Color Harmony</h3>
+<ul>
+<li>Complementary</li>
+<li>Split Complementary</li>
+<li>Double Complementary</li>
+<li>Analogous</li>
+<li>Triadic</li>
+<li>Monochromatic</li>
+</ul>
+<blockquote>
+<p>All colors are the friends of their neighbors and the lovers of their opposites — Marc Chagall</p>
+</blockquote>
+</div>
+<div id="color-meaning" class="section level3">
+<h3>Color Meaning</h3>
+<p>Color is experienced on many levels with influences coming from culture, emotion, physical, and other associations. The meaning we give to color may come from our unique experiences and identity. It is important to be aware of these social and cultural connotations when selecting a palette to convey meaning.</p>
+<blockquote>
+<p>Colors are the mother tongue of the subconscious<br />
+— Carl Jung</p>
+</blockquote>
+<p>Let’s look at a few examples:</p>
+<p>Red</p>
+<p>Yellow</p>
+<p>Blue</p>
+<p>Green</p>
+<p>Purple</p>
+<p>Orange</p>
+</div>
+<div id="composition" class="section level3">
+<h3>Composition</h3>
+<p>Forms of mixing * The Transparency Effect.</p>
+<p>Figure and Ground</p>
+<p>Symmetrical Balance</p>
+<p>Radial Balance</p>
+<p>Color Systems</p>
+</div>
+<div id="designing-a-palette" class="section level3">
+<h3>Designing a Palette</h3>
+<ul>
+<li>Color Meaning
+<ul>
+<li>Association</li>
+<li>Symbolism</li>
+<li>Temperature</li>
+</ul></li>
+<li>Color Blindness</li>
+</ul>
+</div>
+<div id="characteristics" class="section level3">
+<h3>Characteristics</h3>
+<div id="subsection" class="section level4">
+<h4>Subsection</h4>
+<pre class="r fold-hide"><code>color_wheel &lt;- wheel(&quot;darkblue&quot;, num = 12)</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r fold-hide"><code>color_wheel</code></pre>
+<pre><code>##  [1] &quot;#00008B&quot; &quot;#46008B&quot; &quot;#8B008B&quot; &quot;#8B0046&quot; &quot;#8B0000&quot; &quot;#8B4500&quot; &quot;#8B8B00&quot;
+##  [8] &quot;#468B00&quot; &quot;#008B00&quot; &quot;#008B45&quot; &quot;#008B8B&quot; &quot;#00468B&quot;</code></pre>
+<pre class="r fold-hide"><code>#girafe(ggobj = color_wheel, width_svg = 1280/72, height_svg = 720/72,
+#       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+# define some colors
+some_colors = setColors(&quot;#3D6DCC&quot;, 15)
+
+# pizza plot
+pizza(some_colors)</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<pre class="r fold-hide"><code># analagous scheme for color &quot;#3D6DCC&quot;
+p_analogous &lt;- analogous(&quot;#3D6DCC&quot;, plot=FALSE)
+as.data.frame(p_analogous)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["p_analogous"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"#3D6DCC"},{"1":"#543DCC"},{"1":"#3DB5CC"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r fold-hide"><code># complementary scheme for color &quot;#3D6DCC&quot;
+complementary(&quot;#3D6DCC&quot;, plot=FALSE)</code></pre>
+<pre><code>## [1] &quot;#3D6DCC&quot; &quot;#CC9C3D&quot;</code></pre>
+<pre class="r fold-hide"><code># split complementary scheme for color &quot;#3D6DCC&quot;
+splitComp(&quot;#3D6DCC&quot;, plot=FALSE)</code></pre>
+<pre><code>## [1] &quot;#3D6DCC&quot; &quot;#CC543D&quot; &quot;#B5CC3D&quot;</code></pre>
+<pre class="r fold-hide"><code># triadic scheme for color &quot;#3D6DCC&quot;
+triadic(&quot;#3D6DCC&quot;, plot=FALSE)</code></pre>
+<pre><code>## [1] &quot;#3D6DCC&quot; &quot;#CC3D6D&quot; &quot;#6DCC3D&quot;</code></pre>
+<pre class="r fold-hide"><code># tetradic scheme for color &quot;#3D6DCC&quot;
+tetradic(&quot;#3D6DCC&quot;, plot=FALSE)</code></pre>
+<pre><code>## [1] &quot;#3D6DCC&quot; &quot;#9C3DCC&quot; &quot;#CC9C3D&quot; &quot;#6DCC3D&quot;</code></pre>
+<pre class="r fold-hide"><code># square scheme for color &quot;#3D6DCC&quot;
+square(&quot;#3D6DCC&quot;, plot=FALSE)</code></pre>
+<pre><code>## [1] &quot;#3D6DCC&quot; &quot;#CC3DB5&quot; &quot;#CC9C3D&quot; &quot;#3DCC54&quot;</code></pre>
+<pre class="r fold-hide"><code># sequential colors for &quot;#3D6DCC&quot;
+sequential(&quot;#3D6DCC&quot;, plot=FALSE)</code></pre>
+<pre><code>##  [1] &quot;#CCCCCCFF&quot; &quot;#C2C5CCFF&quot; &quot;#B8BECCFF&quot; &quot;#ADB8CCFF&quot; &quot;#A3B1CCFF&quot; &quot;#99AACCFF&quot;
+##  [7] &quot;#8FA3CCFF&quot; &quot;#859DCCFF&quot; &quot;#7A96CCFF&quot; &quot;#708FCCFF&quot; &quot;#6688CCFF&quot; &quot;#5C81CCFF&quot;
+## [13] &quot;#527BCCFF&quot; &quot;#4774CCFF&quot; &quot;#3D6DCCFF&quot; &quot;#3366CCFF&quot; &quot;#2960CCFF&quot; &quot;#1F59CCFF&quot;
+## [19] &quot;#1452CCFF&quot; &quot;#0A4BCCFF&quot; &quot;#0044CCFF&quot;</code></pre>
+<p>Hue: A “hue” is the color itself - so green, blue, red, purple, etc. Tint: A “tint” is when <em>white</em> is added to a hue, making that hue lighter. Shade: A “shade” is when you instead add <em>black</em> to a hue, making it darker. Tone: A tone is created when <em>grey</em> is added to a hue.</p>
+<p>HUE: this distinguishes one color family from another. It can also be called the parent or source color, and is interchangeably used with the word ‘color.’ VALUE: the lightness or darkness of a color. All colors can be described as being light, medium or dark in tone, such as a pale blue sky or a dark blue sea. CHROMA: refers to a color’s purity or its brightness or dullness of a color. For example, the stronger or brighter a color is, the higher its chroma. Every color can be identified by how bright/intense/saturated it is or how dull/de-saturated/less intense it is. You can alter the chroma of a color by adding white, grey, another color, its color complement or black. Chroma is also called saturation and intensity.</p>
+<p>These are hue, saturation, and intensity or brightness.</p>
+</div>
+</div>
+<div id="modifiers" class="section level3">
+<h3>Modifiers</h3>
+<div id="subsection-1" class="section level4">
+<h4>Subsection</h4>
+</div>
+</div>
+</div>
+<div id="mix" class="section level2">
+<h2>Mix</h2>
+<div id="theory" class="section level3">
+<h3>Theory</h3>
+<div id="subsection-2" class="section level4">
+<h4>Subsection</h4>
+</div>
+</div>
+</div>
+<div id="schemes" class="section level2">
+<h2>Schemes</h2>
+<p>Monochromatic : use one hue (such as blue) and then use various tints or shades of that original color.</p>
+<p>Analogous : created by choosing hues that are next to each other on the color wheel. So, for example, blue-green, green and yellow-green.</p>
+<pre class="r fold-hide"><code>analogous(&quot;darkblue&quot;)</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre><code>## [1] &quot;#00008B&quot; &quot;#46008B&quot; &quot;#00468B&quot;</code></pre>
+<p>Complementary : created by choosing two colors that are opposites on the color wheel. Because of these colors being exact opposites, they offer high contrast and have a high impact.</p>
+<pre class="r fold-hide"><code>complementary(&quot;steelblue&quot;)</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre><code>## [1] &quot;#4682B4&quot; &quot;#B47846&quot;</code></pre>
+<p>Split Complementary : created by taking one color and then taking the two colors that are either side of what would be the first colors complementary.</p>
+<pre class="r fold-hide"><code>splitComp(&quot;steelblue&quot;)</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre><code>## [1] &quot;#4682B4&quot; &quot;#B4464B&quot; &quot;#B4AF46&quot;</code></pre>
+<p>Square color scheme</p>
+<pre class="r fold-hide"><code>square(&quot;steelblue&quot;)</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<pre><code>## [1] &quot;#4682B4&quot; &quot;#AF46B4&quot; &quot;#B47846&quot; &quot;#4BB446&quot;</code></pre>
+<p>Triadic : use three colors that are evenly spaced around the color wheel, for example purple, orange and green.</p>
+<p><img src="color_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<pre><code>## [1] &quot;#FF6347&quot; &quot;#47FF63&quot; &quot;#6347FF&quot;</code></pre>
+<p>Tetradic : work by pairing up two sets of complementary color schemes. It almost works by almost creating a rectangle around the color wheel.</p>
+<pre class="r fold-hide"><code>tetradic(&quot;steelblue&quot;)</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre><code>## [1] &quot;#4682B4&quot; &quot;#7846B4&quot; &quot;#B47846&quot; &quot;#82B446&quot;</code></pre>
+<div id="functions-of-color" class="section level3">
+<h3>Functions of Color</h3>
+<div id="variable" class="section level4">
+<h4>variable</h4>
+<ul>
+<li>Distinguish between different categorical groups</li>
+<li>Distinguish between the levels of continuous values</li>
+<li>Highlight some graphical elements ( remember the pop-out effect? )</li>
+</ul>
+<p>These three functions roughly correspond to different types of color palettes.</p>
+</div>
+</div>
+<div id="palettes" class="section level3">
+<h3>Palettes</h3>
+<div id="subsection-3" class="section level4">
+<h4>Subsection</h4>
+<p>Discrete variables Use qualitative color palettes to distinguish between different kinds of a categorical variable;</p>
+<p>Tip: the chosen palette depends on the number of unique categorical variables. A dataset with more than 8 categories can create some confusion in distinguishing identities as the differences between colors becomes more difficult to easily detect.</p>
+<p>Continuous variables Use <strong>sequential</strong> or <strong>diverging</strong> color palettes to distinguish between the levels of a continuous variable;</p>
+<p>Use hybrid color palettes for conveying more complex messages. For instance, <strong>paired</strong> color palettes combine qualitative and sequential aspects. Similarly, <strong>sequential color scales with accent colors</strong> emphasize both continuity and contrasts to highlight some elements.</p>
+</div>
+</div>
+<div id="associations" class="section level3">
+<h3>Associations</h3>
+<div id="cultural-reality-emmotion-etc" class="section level4">
+<h4>Cultural, reality, emmotion, etc…</h4>
+</div>
+</div>
+<div id="design-experiments" class="section level3">
+<h3>Design Experiments</h3>
+<div id="from-image" class="section level4">
+<h4>From image</h4>
+<p><a href="http://colorlisa.com/" class="uri">http://colorlisa.com/</a></p>
+</div>
+</div>
+<div id="india" class="section level3">
+<h3>India</h3>
+<p><img src="assets/images/india-holi-festival-colors-1.png" width="50%" /><img src="assets/images/india-holi-festival-colors-1.jpg" width="50%" /></p>
+<pre class="r fold-hide"><code># Extract all colors
+india_file &lt;- &quot;assets/images/india-holi-festival-colors-1.jpg&quot;
+# india_all &lt;- get_colors(india_file)
+
+# Extract three most frequent colors
+# india_top &lt;- get_colors(india_file, top_n = 50)
+
+# Extract colors that fill over 20% of the area
+# get_colors(india_file, min_share = 0.2)
+
+# Extract all colors except white
+# get_colors(india_file, exclude_col = &quot;white&quot;)
+
+# plot_colors(india_top)
+
+# india_palette &lt;- make_palette(india_all)
+# india_palette
+
+india_image &lt;- load.image(india_file)
+india_highest &lt;- threshold(india_image,&quot;98%&quot;) %&gt;% plot(main=&quot;Determinant: 1% highest values&quot;)</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<pre class="r fold-hide"><code>display_palette(image_palette(india_image, n=10))</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
+<pre class="r fold-hide"><code>scales::show_col(image_pal(india_image)(10))</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-18-3.png" width="672" /></p>
+<pre class="r fold-hide"><code>#Discrete scale example
+p &lt;- ggplot(mtcars, aes(wt, mpg))
+p + geom_point(size=4, aes(colour = factor(cyl))) +
+scale_color_image(image = india_image) +
+theme_bw()</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-18-4.png" width="672" /></p>
+<pre class="r fold-hide"><code>#Continuous scale example
+dsub &lt;- subset(diamonds, x &gt; 5 &amp; x &lt; 6 &amp; y &gt; 5 &amp; y &lt; 6)
+dsub$diff &lt;- with(dsub, sqrt(abs(x-y))* sign(x-y))
+d &lt;- ggplot(dsub, aes(x, y, colour=diff)) + geom_point()
+d + scale_color_image(image = india_image, discrete=FALSE) + theme_bw()</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-18-5.png" width="672" /></p>
+</div>
+<div id="artist" class="section level3">
+<h3>Artist</h3>
+<pre class="r fold-hide"><code># Extract all colors
+haring_file &lt;- &quot;assets/images/artist-keith-haring.jpg&quot;
+# haring_all &lt;- get_colors(haring_file)
+
+# Extract three most frequent colors
+# haring_top &lt;- get_colors(haring_file, top_n = 10)
+
+# Extract colors that fill over 20% of the area
+# get_colors(haring_file, min_share = 0.15)
+
+# Extract all colors except white
+# get_colors(haring_file, exclude_col = &quot;black&quot;)
+
+# plot_colors(haring_top)
+
+# haring_palette &lt;- make_palette(haring_all)
+# haring_palette
+
+haring_image &lt;- load.image(haring_file)
+haring_highest &lt;- threshold(india_image,&quot;98%&quot;) %&gt;% plot(main=&quot;Determinant: 1% highest values&quot;)</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<pre class="r fold-hide"><code>haring_highest</code></pre>
+<pre><code>## Image. Width: 958 pix Height: 512 pix Depth: 1 Colour channels: 3</code></pre>
+<pre class="r fold-hide"><code>display_palette(image_palette(haring_image, n=10))</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
+<pre class="r fold-hide"><code>scales::show_col(image_pal(haring_image)(10))</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-19-3.png" width="672" /></p>
+<pre class="r fold-hide"><code>#Discrete scale example
+p &lt;- ggplot(mtcars, aes(wt, mpg))
+p + geom_point(size=4, aes(colour = factor(cyl))) +
+scale_color_image(image = haring_image) +
+theme_bw()</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-19-4.png" width="672" /></p>
+<pre class="r fold-hide"><code>#Continuous scale example
+dsub &lt;- subset(diamonds, x &gt; 5 &amp; x &lt; 6 &amp; y &gt; 5 &amp; y &lt; 6)
+dsub$diff &lt;- with(dsub, sqrt(abs(x-y))* sign(x-y))
+d &lt;- ggplot(dsub, aes(x, y, colour=diff)) + geom_point()
+d + scale_color_image(image = haring_image, discrete=FALSE) + theme_bw()</code></pre>
+<p><img src="color_files/figure-html/unnamed-chunk-19-5.png" width="672" /></p>
+</div>
+<div id="color-encoding" class="section level3">
+<h3>Color Encoding</h3>
+<div id="rgb-cmyk-hex" class="section level4">
+<h4>RGB, CMYK, Hex</h4>
+<p>RGB (red, green, blue): The default intensity scale in R ranges from 0-1; but another commonly used scale is 0- 255. This is obtained in R using maxColorValue=255. alpha is an optional argument for transparency, with the same intensity scale</p>
+<p>CMYK</p>
+<p>HSV (hue, saturation, value): values range from 0-1, with optional alpha argument</p>
+<p>HCL (hue, chroma, luminance): hue describes the color and ranges from 0-360; 0 = red, 120 = green, blue = 240, etc. Range of chroma and luminance depend on hue and each other</p>
+<p>HEX</p>
+</div>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<div id="citations-for-narrative-and-data-sources" class="section level4">
+<h4>citations for narrative and data sources</h4>
+<ul>
+<li>Narrative sources: tbd</li>
+</ul>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>

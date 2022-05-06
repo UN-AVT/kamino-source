@@ -47,16 +47,16 @@ GRAPHS
 ## link analysis 
 
 
-```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Jr Korpa on Unsplash"}
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Press Photo"}
 
-#masthead <- "assets/jr-korpa-unsplash.jpg"
-#knitr::include_graphics(masthead, dpi=72)
+masthead <- "assets/ygot.jpg"
+knitr::include_graphics(masthead, dpi=72)
 
 ```
 
 
-> It's clear that there's a lot of human wood out there for this coronavirus forest fire to burn...\
---- Michael Thomas Osterholm\
+> Complicated love life of Cebu’s ‘Shabu Queen’ includes drug lords, shady cops for lovers...\
+--- SUNSTAR\
 
 ***
 
@@ -94,6 +94,14 @@ df_graph_view <-  get.data.frame(df_graph, what = "both" ) # as.data.frame(get.e
 
 ### Analytics
 #### compute layouts
+
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Press Photo"}
+
+masthead <- "assets/ygot-link-chart.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source ='fold-hide', fig.width=1920/72, fig.height=1080/72, out.width="100%"}
@@ -155,6 +163,7 @@ layout <- create_layout(df_graph, layout = 'focus', focus = 1)
 
 ### Plot
 #### with layout
+
 
 
 ```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide', fig.align='center', out.width="100%"}

@@ -1,0 +1,305 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+<div class="activity">
+ANALYTICS
+</div>
+
+# Time series Analysis
+
+## Tools to analyse time series.
+
+> Qui vole un oeuf, vole un boeuf ...\
+--- French expression, "who steals an egg steals an ox"\
+
+__Time series analysis__ is a set of methods and techniques to extract meaninful characteristics of a time series dataset.
+
+In this section, we will focus on internal structures of time series:
+
+* __Trend__  
+* __Seasonal variation__
+* __Autocorrelation__  
+
+***
+
+# Analysing crimes in France
+
+For this case, we will be using the monthly number of crimes registered by category, from January 2000 to 
+https://www.kaggle.com/government-of-france/crimes-in-france
+
+```{r include=FALSE}
+library(forecast)
+library(tidyverse)
+require(scales)
+library(zoo)
+library(naniar)
+library(gridExtra)
+library(ggiraph)
+```
+
+## Loading data
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+
+df <- read_csv("archetypes/crime-in-france.csv")
+
+df
+
+```
+
+## Data wrangling
+
+Let's also select a category. For example:
+
+* index 28: Cambriolages de résidences secondaires (__burglary of of second homes__)
+* index 32: Vols à la tire (__pickpocketing__)
+* index 35: Vols d'automobiles (__auto theft__)
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+df_1 <- df %>% 
+  pivot_longer(!c(Index, `Libellé index`)) %>%
+  select(Index, crime_type = `Libellé index`, month = name, number = value)
+
+df_1$date = as.Date(paste0(substr(df_1$month,1,4),"-",substr(df_1$month,6,8),"-01"))
+
+df_2 <- df_1 %>%
+  filter(Index == "35")
+
+df_2
+
+```
+
+## Visualizing time series
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+# libraries: requires gglot2 and scales
+# Notice one record that registers at Value = -99. This indicates a missing element for that specific date
+# the next effort will handle this problem
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  #axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+v1<-ggplot(data=df_2, aes(x=date, y=number, group=1)) +
+  geom_line(color="grey") +
+  geom_point(color="grey") + 
+  scale_y_continuous(labels = comma) +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+# Trend
+
+In order to highlight the trend, let's use linear regression.
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  #axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+# Adding a linear regression line, we already see the trend upwards. 
+v2<-ggplot(data=df_2, aes(x=date, y=number, group=1)) +
+  geom_line(color="grey") +
+  geom_point(color="grey") + 
+  scale_y_continuous(labels = comma) + 
+  #theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  #geom_smooth(method="lm", se=FALSE) +
+  geom_smooth(method="lm") +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+## Creating time series object
+
+When working with time series, r uses a convenient special object called "ts".  
+Important parameters:  
+
+* Frequency: The “frequency” is the "number of observations before the seasonal pattern repeats", or also described as the "number of observations per unit of time". 
+  * Annual: Frequency = 1
+  * Quartely: Frequency = 4
+  * Monthly: Frequency = 12
+  * Weekly: Frequency = 52
+
+
+* Start, End: the time of the first and last observations
+  * Date format depends on Frequency: c(2000,01) means for example January 2000.
+
+Here, we choose Frequency = 12 since we deal with monthly time series.
+
+
+```{r}
+# Sort time series
+df_2 <- df_2 %>% arrange(date)
+
+# Time to create a univariate time-series
+univar <- data.frame(df_2$number)
+
+# Creating a time series
+TimeSer <- ts(univar, start=c(2000,01), frequency=12)
+TimeSer
+
+```
+
+
+# Seasonality
+
+### Seasonal plot
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+# Library: requires forecast
+
+# Data exploration using graphs
+v3<-ggseasonplot(TimeSer, year.labels = TRUE) +
+  ylab("Temperature (F)") +
+  ggtitle("Seasonal plot: Temperature per month") +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v3, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+### Polar seasonal plot
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+# Library: requires forecast
+
+v4<-ggseasonplot(TimeSer, year.labels = TRUE, polar=TRUE)+
+  ylab("Temperature (F)") +
+  ggtitle("Polar seasonal plot: Temperature per month") +
+  #=theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v4, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+### Seasonal subseries
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+# Library: requires forecast
+
+# The horizontal lines indicate the means for each month
+v5<-ggsubseriesplot(TimeSer)+
+  ylab("Temperature (F)") +
+  ggtitle("Seasonal subseries plot: Temperature per month") +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v5, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+# Autocorrelation
+
+Similar to correlation between two two variables, autocorrelation measures the relationship between lagged values of a time series.
+
+### ACF
+
+The dashed blue lines indicate whether the correlations are significantly different from zero. 
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+v6<-ggAcf(TimeSer) +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v6, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+Time series that show no autocorrelation are called __white noise__. See example below
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+set.seed(30)
+whitenoise <- ts(rnorm(50))
+v7<-autoplot(whitenoise) + ggtitle("White noise") +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v7, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+As expected, there is no obvious correlation
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+v8<-ggAcf(whitenoise) +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v8, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+### Decomposition
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+v9<-TimeSer %>% decompose(type="multiplicative") %>%
+  autoplot() + xlab("Year") +
+  ggtitle("decomposition") +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v9, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

@@ -1,0 +1,538 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+library(tidyverse)  # metapackage with lots of helpful functions
+library(data.table) # table,matrix
+library(lubridate)  # date
+library(gridExtra)  # ggplot functions
+library(scales)     # scale axis
+library(fBasics)    # for base statistics
+library(reshape)    # long and wide data
+library(ggrepel)    # ggplot label
+library(knitr)      # for html table
+library(ggfortify)  # autoplot(time series ggplot)
+library(forecast)   # forecast time series 
+library(sf)
+library(geojsonio)
+library(ggiraph)
+library(rgdal)
+library(scales) # to access breaks/formatting functions
+library(ggfortify)
+library(zoo)
+library(ggiraph)
+```
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# Forecasting models
+## I want to predict future values based on historical data.
+
+> Prediction is very difficult, especially if it's about the future!...\
+--- Niels Bohr, Nobel laureate in Physics and father of the atomic model\
+
+<p> Forecasting is a well established field of statistics. We recommend this <a href="https://otexts.com/fpp2/">excellent source</a> which covers what is presented in this case, and much more. </p>
+
+
+In this section, we will focus on steps to complete __Model Selection__
+
+* Setting up __Training and Test data__
+* __Simple forecasting models__ as benchmarks 
+  * Mean  
+  * Naive  
+  * Seasonal Naive
+* __ARIMA__ Model
+* __ETS__ Model
+* Measuring __Accuracy__
+* Final __forecast__
+
+
+***
+
+# Analysing crimes in France
+
+For this case, we will be using the monthly number of crimes registered by category, from January 2000 to 
+https://www.kaggle.com/government-of-france/crimes-in-francewe.
+
+## Loading data
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+
+df <- read_csv("archetypes/crime-in-france.csv")
+
+df
+
+```
+
+## Data wrangling
+
+Let's also select a category. For example:
+
+* index 28: Cambriolages de résidences secondaires (__burglary of of second homes__)
+* index 32: Vols à la tire (__pickpocketing__)
+* index 35: Vols d'automobiles (__auto theft__)
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+df_1 <- df %>% 
+  pivot_longer(!c(Index, `Libellé index`)) %>%
+  select(Index, crime_type = `Libellé index`, month = name, number = value)
+
+df_1$date = as.Date(paste0(substr(df_1$month,1,4),"-",substr(df_1$month,6,8),"-01"))
+
+df_2 <- df_1 %>%
+  dplyr::filter(Index == "32")
+
+df_flow <- df_2 %>%
+  select(date, number)
+
+df_2
+
+```
+
+## Creating time series
+
+When working with time series, r uses a convenient special object called "ts".
+
+Here, we choose Frequency = 12 since we deal with monthly time series. c(2001,01) means for example January 2001
+
+
+```{r, message=FALSE, warning=FALSE}
+# Sort time series
+df_flow <- df_flow %>% arrange(date)
+
+# Time to create a univariate time-series
+univar <- data.frame(df_flow$number)
+
+# Creating a time series
+ts_flow <- ts(univar, start=c(2000,01), frequency=12)
+ts_flow
+
+```
+
+## Time to plot
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  #axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+#ggplot format of ts plot    
+v1<-autoplot(ts_flow,ts.colour ="grey") +
+  xlab('Date') +
+  ylab('Count') +
+  ggtitle('Time Series of Crime') +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+# Setting up Training and test data
+
+It is important to __evaluate the accuracy__ of the forecast __before selecting a model__. 
+
+One method that can be used is to __isolate some data__ before running our models.  We can divide the dataset between a __training set__ and a __test set__.  
+
+* We use the __training dataset__ to "fit", or train the model.  
+* Then we forecast our results to match the time period found in the __test dataset__.  
+
+In this case we will separate the two sets as per below.
+
+* __Training data__: The range starts from Jan 2001 to August 2015.
+* __Test data__: We will set aside data from September 2015 to August 2017 (last 24 months of the time series)
+
+### Training data:
+
+```{r}
+train_ts <- ts(ts_flow,start = c(2000,01),
+               end=c(2015,08),
+               frequency = 12)
+
+train_ts
+```
+
+### Test data
+
+```{r}
+test_set <- df_flow %>% 
+  dplyr::filter(date > "2015-08-01")
+
+test_set
+
+```
+
+## Simple forecasting models as benchmarks
+
+Some simple assumptions may prove in fact quite accurate. And any forecasting method used should at least beat these results in order to be of any use.
+
+### Fit Mean model
+
+```{r}
+mean_fit <- meanf(train_ts,h=24)
+
+mean_fit
+
+```
+
+### Fit Naive model
+
+```{r}
+rwf_fit <- rwf(train_ts,h=24)
+
+rwf_fit
+
+```
+
+### Fit Seasonal Naive model
+
+```{r}
+snaive_fit <- snaive(train_ts,h=24)
+
+snaive_fit
+
+```
+
+### Visualizing these simple forecasts against actual points on the same graph
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+train_forecast_mean_df <- data.frame(mean_fit)
+train_forecast_naive_df <- data.frame(rwf_fit)
+train_forecast_snaive_df <- data.frame(snaive_fit)
+
+train_forecast_mean_forecast <- train_forecast_mean_df$Point.Forecast
+train_forecast_naive_forecast <- train_forecast_naive_df$Point.Forecast
+train_forecast_snaive_forecast <- train_forecast_snaive_df$Point.Forecast
+
+forecast_train_mean <- data.frame("x" = test_set$date,
+                                   "y" = train_forecast_mean_forecast)
+
+forecast_train_rwf <- data.frame("x" = test_set$date,
+                                   "y" = train_forecast_naive_forecast)
+
+forecast_train_snaive <- data.frame("x" = test_set$date,
+                                   "y" = train_forecast_snaive_forecast)
+
+actual_train <- data.frame("x" = df_flow$date,
+                                 "y"=df_flow$number)
+
+# theme parameters
+theme_opts <- theme(
+  #legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+v2<-ggplot() +
+  geom_line(data=forecast_train_mean,aes(x=x,y=y,color="Mean")) +
+  geom_line(data=forecast_train_rwf,aes(x=x,y=y,color="Naive")) +
+  geom_line(data=forecast_train_snaive,aes(x=x,y=y,color="Seasonal")) +
+  geom_line(data = actual_train,aes(x=x, y=y, color="Actual")) +
+  xlab("Year") +
+  ylab("Count") +
+  labs(colors="Series") +
+  ggtitle("Benchmarks predictions Vs set aside test data") +
+  scale_color_manual(
+      values = c(
+           Mean="orange",
+           Naive="blue",
+          Seasonal="red",
+          Actual="black")) +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+## ARIMA model
+
+AutoRegressive Integrated Moving Average
+
+
+### Fit model
+
+```{r}
+train_fit_arima <- auto.arima(train_ts)
+
+train_fit_arima
+
+```
+
+### Forecast for the next 2 years (period January 2016 - December 2017)
+
+```{r}
+train_forecast_arima <- forecast(train_fit_arima, 24)
+
+train_forecast_arima
+
+```
+
+### Visualize ARIMA forecast with actual points for the test period 
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+train_forecast_arima_df <- data.frame(train_forecast_arima)
+
+train_forecast_arima_forecast <- train_forecast_arima_df$Point.Forecast
+
+forecast_train_arima <- data.frame("x" = test_set$date,
+                                   "y" = train_forecast_arima_forecast)
+
+actual_train_arima <- data.frame("x" = df_flow$date,
+                                 "y"=df_flow$number)
+
+# theme parameters
+theme_opts <- theme(
+  #legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+v3<-ggplot(forecast_train_arima,aes(x,y)) +
+  geom_line(aes(color="First line")) +
+  geom_line(data = actual_train_arima,aes(color="Second line")) +
+  xlab("Year") +
+  ylab("Count") +
+  labs(colors="Series") +
+  ggtitle("ARIMA prediction Vs set aside test data") +
+  scale_colour_manual(values = c("red","grey"), 
+                      labels=c("Forecast", "Actual")) +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v3, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+## ETS model
+
+Error Trend and Seasonality, or exponential smoothing
+
+### Fit model
+
+```{r}
+train_fit_ets<-ets(train_ts) 
+train_fit_ets
+
+```
+
+### Forecast for the next 2 years (period January 2016 - December 2017)
+
+```{r}
+train_forecast_ets<-forecast:::forecast.ets(train_fit_ets,24)
+
+```
+
+### Visualize ETS forecast with actual points for the test period 
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+train_forecast_ets_df <- data.frame(train_forecast_ets)
+train_forecast_ets_forecast <- train_forecast_ets_df$Point.Forecast
+
+forecast_train_ets <- data.frame("x"=test_set$date,
+                             "y"=train_forecast_ets_forecast)
+
+actual_train_ets <- data.frame("x" = df_flow$date,
+                                 "y"=df_flow$number)
+
+# theme parameters
+theme_opts <- theme(
+  #legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+
+v4<-ggplot(forecast_train_ets,aes(x,y))+geom_line(aes(color="First line")) +
+  geom_line(data = actual_train,aes(color="Second line"))+xlab("Year")+ylab("Count")+
+  labs(color="Series")+ggtitle("ETS prediction Vs set aside test data")+
+  scale_colour_manual(values = c("red","grey"), 
+                      labels=c("Forecast", "Actual")) +
+  theme_opts + 
+  theme(plot.title = element_text(size=25)) + 
+  theme(text = element_text(size = 20))
+girafe(ggobj = v4, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+## Measuring accuracy:
+
+Choose the model that __MINIMISE__ the following measures:
+
+* __RMSE__: Root Mean Squared Error. Penalize single big errors, aims at the average
+* __MAE__: Mean Absolute Error. Tend to give the same importance to each error, aims at the median
+* __MAPE__: Mean Absolute Percentage Error
+
+```{r}
+accuracy_mean <- data.frame(accuracy(test_set$number,train_forecast_mean_forecast)) %>%
+  select(RMSE, MAE, MAPE) %>%
+  mutate(method = "Mean") %>% 
+  relocate(method)
+
+accuracy_naive <- data.frame(accuracy(test_set$number,train_forecast_naive_forecast)) %>%
+  select(RMSE, MAE, MAPE) %>%
+  mutate(method = "Naive") %>% 
+  relocate(method)
+
+accuracy_seasonal <- data.frame(accuracy(test_set$number,train_forecast_snaive_forecast)) %>%
+  select(RMSE, MAE, MAPE) %>%
+  mutate(method = "Seasonal") %>% 
+  relocate(method)
+
+accuracy_arima <- data.frame(accuracy(test_set$number,train_forecast_arima_forecast)) %>%
+  select(RMSE, MAE, MAPE) %>%
+  mutate(method = "ARIMA") %>% 
+  relocate(method)
+
+accuracy_ets <- data.frame(accuracy(test_set$number,train_forecast_ets_forecast)) %>%
+  select(RMSE, MAE, MAPE) %>%
+  mutate(method = "ETS") %>% 
+  relocate(method)
+
+bind_rows(accuracy_mean,accuracy_naive,accuracy_seasonal,accuracy_arima,accuracy_ets)
+
+```
+
+# Time to forecast
+
+Now that we know that the model that performs better is the ARIMA model, it is time to forecast.
+
+## Fit model again, using the full dataset
+
+As short term forecast are usally the most accurate, we will first __fit the model again__ on the __full dataset__
+
+```{r}
+fit_arima <- auto.arima(ts_flow) 
+fit_arima
+
+```
+
+### Forecast for the next 3 years (period January 2018 - December 2020)
+
+```{r}
+forecast_arima <- forecast(fit_arima,36)
+forecast_arima
+
+```
+
+### Visualize forecast with actual points for the test period 
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+forecast_arima_df <- data.frame(forecast_arima)
+forecast_arima_forecast <- forecast_arima_df$Point.Forecast
+
+forecast_train <- data.frame("x"=as.Date(as.yearmon(rownames(forecast_arima_df), format="%b %Y")),
+                           "y"=forecast_arima_forecast)
+
+forecast_train
+
+```
+
+## Time to finally plot our results
+
+```{r, message=FALSE, warning=FALSE, fig.width=16, fig.height=8}
+
+# theme parameters
+theme_opts <- theme(
+  #legend.position = "none",
+  legend.title = element_blank(),
+  #axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  #axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+v5<-ggplot(df_flow, aes(x=date, y=number)) +
+  geom_line(color="grey") +
+  geom_line(data=forecast_train, aes(x=x,y=y), color="red") +
+      scale_x_date(date_breaks = "year" , date_labels = "%Y") +
+  theme_opts +
+  theme(plot.title = element_text(size=25)) +
+  theme(text = element_text(size = 20))
+girafe(ggobj = v5, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

@@ -1,0 +1,227 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
+   dev = "svg")
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+library(zoo)
+library(ggiraph)
+library(knitcitations)
+library(bibtex)
+library(TTR)
+
+```
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# Moving Average
+## I want to fix irregularities in my dataset
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+Some __time-series__ data sets have strong short term __oscillations__ and other changes but the average over the last n days/weeks/months is more relevant for the analysis.
+
+* __Simple Moving Average (MA)__ 
+* __Dynamic Weighted Moving Average (DMA)__ 
+* __Exponential Moving Average (EMA)__ 
+* __Smoothed Moving Average (SMA)__ 
+* __Triple Exponentially Smoothed Average__ 
+* __Wilders Smoothing__ 
+* __Weighted Moving Average (WMA)__ 
+
+For example,
+https://infographics.economist.com/2020/covid-19-new-deaths-cases-indexed/states-map.html
+this infographic from The Economist uses a 14-day moving average method to show their audience the longer term of trends of covid-19 cases in various US states.
+
+***
+
+To illustrate this method, we will use a Covid-19 confirmed cases time series from the Johns Hopkins University: https://github.com/CSSEGISandData/COVID-19
+
+# Loading data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+
+# Load main dataset
+df <- read_csv("archetypes/time_series_covid19_confirmed_global.csv")
+
+df
+
+```
+
+# Data wrangling
+
+Before we can use this dataset, we need to transform it.
+
+* unpivot dataset.  
+* Filter to keep only 12 countries.  
+* Format Date  
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+df_1 <- df %>% 
+  pivot_longer(!c(`Province/State`,`Country/Region`,Lat,Long)) %>%
+  select(country = `Country/Region`, date = name, confirmed = value) %>%
+  filter(country %in% c("Belgium","Spain","France","Iceland","US","United Kingdom","Italy","Austria",
+                        "Netherlands","Sweden","Germany","Denmark"))
+
+df_2 <- df_1 %>% group_by(country, date) %>% summarise(confirmed = sum(confirmed))
+
+df_3 <- df_2 %>% mutate(date = as.Date(date, format =  "%m/%d/%y"))
+
+df_3
+
+```
+
+## Enriching dataset with population data per country (so we can compare each country using the same scale "rate per 100k")
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+
+# Enrich with total population per country
+ref_df <- read_csv("archetypes/total_population.csv")
+
+ref_df_1 <- ref_df %>% mutate(pop_per_million = total_pop/1000)
+
+df_joined <- left_join(df_3, ref_df_1, by="country") %>% arrange(country, date)
+
+df_joined_1 <- df_joined %>% mutate(daily_confirmed =(confirmed - lag(confirmed))/pop_per_million)
+
+# Sanity checks
+nb_dates_per_country <- df_joined %>% count(country)
+unique_dates <- df_joined %>% group_by(date) %>% count()
+
+```
+
+## Final dataset set
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+df_joined_1 <- df_joined_1 %>%
+  select(country, date, daily_confirmed)
+
+df_joined_1
+```
+
+# Data modeling
+
+We are using the package TTR (https://cran.r-project.org/web/packages/TTR/TTR.pdf). In order to illustrate various methods, let's consider the following methods:  
+* SMA_7: Simple moving average (window = 7)  
+* SMA_20: Simple moving average (window = 20)  
+* EMA_7: Exponential moving average (windows = 7)  
+* EMA_Wilder_7:  Exponential moving average (windows = 7, wilder setting on)  
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+
+# Calculate moving average
+df_joined_3 <- df_joined_1 %>% mutate(SMA_7 = SMA(daily_confirmed, n = 7),
+                                      SMA_20 = SMA(daily_confirmed, n = 20),
+                                      EMA_7 = EMA(daily_confirmed, n = 7),
+                                      EMA_Wilder_7 = EMA(daily_confirmed, n = 7, wilder = TRUE)
+                                      )
+
+df_joined_3
+```
+
+# Considering the case for one country: Spain
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, fig.width=12, fig.height=8}
+
+df_one_country <- df_joined_3 %>% 
+  filter(country == "Spain")
+
+sma <- ggplot(data=df_one_country, aes(x=date)) +
+  geom_line(mapping=aes(y=daily_confirmed, color = "Actual"),group = 1,size=1) + 
+  geom_line(mapping=aes(y=SMA_7, color="SMA_7"),group = 1,size=1) + 
+  geom_line(mapping=aes(y=SMA_20, color="SMA_20"),group = 1,size=1) + 
+  geom_line(mapping=aes(y=EMA_7, color="EMA_7"),group = 1,size=1) + 
+  geom_line(mapping=aes(y=EMA_Wilder_7, color="EMA_Wilder_7"),group = 1,size=1) + 
+  theme(panel.grid = element_blank(), 
+        axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank()) +
+  scale_color_manual(values = c(Actual="grey",
+                                SMA_7="red",
+                                SMA_20="green",
+                                EMA_7="orange",
+                                EMA_Wilder_7="blue"))
+
+girafe(ggobj = sma, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+# Final output. Using Simple Moving Average with a window of 7 to hightlight trends per country of Covid cases.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE, fig.width=12, fig.height=8}
+
+df_joined_3$country <- factor(df_joined_3$country, levels=c('Belgium','Spain','France','Iceland','US','United Kingdom','Italy','Austria'
+                                          ,'Netherlands','Sweden','Germany','Denmark'))
+
+p <- ggplot(data=df_joined_3, aes(x=date)) +
+  geom_line(mapping=aes(y=daily_confirmed),group = 1,size=1, color = "grey") + 
+  geom_line(mapping=aes(y=SMA_7),group = 1,size=1, color="red") + 
+  facet_wrap(~country, ncol = 4)  +
+  theme(panel.grid = element_blank(), 
+        axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(),
+        legend.position = "none")
+girafe(ggobj = p, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+```
+
+
+```{r, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+
+# echo=FALSE will exclude block from code folding
+# Example for including external html content when needed
+#htmltools::includeHTML("mark-complete-button.html")
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

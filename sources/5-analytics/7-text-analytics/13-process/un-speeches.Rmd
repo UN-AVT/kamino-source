@@ -1,0 +1,612 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(pdftools)
+library(dplyr)
+library(tidyverse)
+library(tidytext)
+
+library(SnowballC)
+library(textstem)
+library(quanteda)
+library(tm)
+library(stringr)
+library(textfeatures)
+library(qdap)
+library(skimr)
+library(tokenizers)
+
+library(rJava)
+library(NLP)
+library(openNLP)
+library(RWeka)
+
+library(syuzhet)
+library(vader)
+
+library(ggExtra)
+library(ggiraph)
+
+library(purrr)
+library(kableExtra)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+
+<div class="activity">
+TEXT ANALYSIS  
+</div>
+
+***
+
+## Ingest pdf
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+pdf_file <- "./archetypes/un-speeches/diamonds-fuelling-conflict/A_55_PV.79-EN.pdf"
+
+# Extract the text for all pages
+speech_text <- pdf_text(pdf_file) %>% strsplit(split = "\r\n")
+
+speech_text[[1]]
+
+```
+
+## Parse columns and clean
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+num_pages <- length(speech_text)
+
+pages_txt <- ""
+pages_list <- list()
+pages_df <- list()
+
+for (i in 1:num_pages) {
+
+  doc_split <- strsplit(speech_text[[i]], "  ") # Split each row whene there are 2 spaces
+  doc_split <- lapply(doc_split, function(x) {
+      # For each element, extract:
+      #    - doc1 that is the first column. 
+      #    - doc2 that is the second column.
+      doc1 <- x[1:8][x[1:8] != ""][1] # The first piece of text that's not empty
+      if (is.na(doc1)) doc1 <- ""
+      # doc2 takes the next non-empty piece of text
+      doc2 <- x[x != ""] 
+      if (doc1 != "") doc2 <- doc2[-1]
+      if (length(doc2) == 0) doc2 <- ""
+      # Sometimes there is more text needed to be extracted. 
+      # I try to give it to either doc1 or doc2 depending on the size of it.
+      while (sum(nchar(doc2)) > 65) {
+          doc1 <- paste(doc1, doc2[1], sep = " ", collapse = " ")
+          doc2 <- doc2[-1]
+      }
+      # Clean it before returning it
+      doc2 <- paste(doc2, collapse = " ")
+      doc1 <- str_trim(doc1) # stringr::str_trim trim the spaces before/after
+      doc2 <- str_trim(doc2)
+      list(doc1 = doc1, doc2 = doc2)
+  })
+  doc1 <- sapply(doc_split, `[[`, 1) # First column
+  doc2 <- sapply(doc_split, `[[`, 2) # Second column
+  
+  #doc1 <- toString(doc1, width = NULL)
+  #doc2 <- toString(doc2, width = NULL)
+  
+  doc <- c(doc1, doc2)
+  
+  # remove leading / trailing whitespace
+  doc <- trimws(doc)
+  
+  # Remove common text
+  doc <- str_remove(doc, "This record contains the text of speeches delivered in English and of the interpretation of")
+  doc <- str_remove(doc, "speeches delivered in the other languages. Corrections should be submitted to the original")
+  doc <- str_remove(doc, "languages only. They should be incorporated in a copy of the record and sent under the signature")
+  doc <- str_remove(doc, "of a member of the delegation concerned to the Chief of the Verbatim Reporting Service, room")
+  doc <- str_remove(doc, "C-178. Corrections will be issued after the end of the session in a consolidated corrigendum.")
+  doc <- gsub("00-77684 (E)", "", doc)
+  doc <- gsub("A/55/PV.79", "", doc)
+  doc <- str_remove(doc, "Official Records")
+  
+  # remove blank lines
+  doc <- doc[nchar(doc) > 0]
+  
+  # print(doc)
+  
+  pages_list <- append(pages_list, toString(doc, width = NULL))
+  pages_txt <- paste0(pages_txt, toString(doc, width = NULL), sep=" ", collapse=NULL )
+  
+}
+
+pages_df <- data.frame(pages=matrix(unlist(pages_list), nrow=num_pages, byrow=TRUE),stringsAsFactors=FALSE)
+pages_df
+
+pages_txt
+
+```
+
+## Tokenize
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# "words" (default), "characters", "character_shingles", "ngrams", "skip_ngrams", 
+# "sentences", "lines", "paragraphs", "regex", "tweets", and "ptb" (Penn Treebank)
+
+pages_df_tokenized <- pages_df %>% unnest_tokens(sentences, pages, token = "sentences")
+pages_df_tokenized
+
+
+characters_count <- count_characters(pages_df$pages) %>% sum()
+characters_count
+
+words_count <- count_words(pages_df$pages) %>% sum()
+words_count
+
+sentences_count <- count_sentences(pages_df$pages) %>% sum()
+sentences_count
+
+```
+
+## Stop Words
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load list of stop words - from the tidytext package
+stop_words <- get_stopwords()
+stop_words
+
+# Remove stop words from your list of words
+words <- pages_df %>% unnest_tokens(word, pages)
+words
+
+words_sw <- words %>% anti_join(stop_words, by = c("word" = "word"))
+words_sw
+
+```
+
+
+## Remove Punctuation and Clean-up
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+pages_dfv <- pull(pages_df, pages)
+pages_dfv
+
+text_corpus <- Corpus(VectorSource(pages_dfv))
+text_corpus
+
+# Convert the text to lower case
+text_corpus_lwr <- tm_map(text_corpus, content_transformer(tolower))
+text_corpus_lwr
+
+# Remove numbers
+text_corpus_rn <- tm_map(text_corpus_lwr, removeNumbers)
+text_corpus_rn
+
+# Remove punctuations
+text_corpus_rp <- tm_map(text_corpus_rn, removePunctuation)
+text_corpus_rp
+
+# Eliminate extra white spaces
+text_corpus_ws <- tm_map(text_corpus_rp, stripWhitespace)
+text_corpus_ws
+
+# Convert back to data frame
+text_df <- data.frame(text_clean = get("content", text_corpus_ws), stringsAsFactors = FALSE)
+text_df
+
+corpus_df <- cbind.data.frame(pages_dfv, text_df)
+corpus_df$text_clean
+
+```
+
+
+## Parts of Speech
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+fastpos <- read.csv("./refs/pos/fastpos/fastpos.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+names(fastpos)
+
+fastpos_tags <- words_sw %>% inner_join(fastpos) %>% count(word, pos, sort = TRUE)
+fastpos_tags
+
+```
+
+
+## Lemmatize and Stemming
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+lemmatize <- lemmatize_words(words_sw$word)
+as.data.frame(lemmatize)
+
+lexicon_dictionary <- make_lemma_dictionary(words_sw$word, engine = 'lexicon')
+lexicon <- lemmatize_strings(words_sw$word, dictionary = lexicon_dictionary)
+as.data.frame(lexicon)
+
+hunspell_dictionary <- make_lemma_dictionary(words_sw$word, engine = 'hunspell')
+hunspell <- lemmatize_strings(words_sw$word, dictionary = hunspell_dictionary)
+as.data.frame(hunspell)
+
+porter <- stem_strings(words_sw$word, language = "porter")
+as.data.frame(porter)
+
+stems <- wordStem(words_sw$word)
+as.data.frame(stems)
+
+
+```
+
+
+## Term Frequency
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+word_count <- words_sw %>% count(word, sort = TRUE) 
+word_count <- word_count %>%  mutate(id = "A/55/L.52")
+word_count
+
+word_count_stems <- as.data.frame(stems) %>% count(stems, sort = TRUE) 
+word_count_stems
+
+total_words <- word_count %>% summarize(total = sum(n))
+total_words
+
+# Tally Measure
+tally <- word_count %>% mutate(total = total_words$total)
+tally <- tally %>% mutate(id = "A/55/L.52")
+tally
+
+# By Rank Measure
+freq_by_rank <- tally %>% mutate(rank = row_number(), `term frequency` = n/total)
+freq_by_rank
+
+
+```
+
+
+## Sentiment Analysis
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=11, fig.height=11}
+
+## LOAD MODELS
+
+# From References
+afinn_165 <- read.csv("./refs/sentiment/afinn/afinn-165-en.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+afinn_165
+#names(afinn_165)
+
+opinion_words <- read.csv("./refs/sentiment/opinion-lexicon/opinion-words.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+#names(opinion_words)
+
+pattern <- read.csv("./refs/sentiment/pattern/pattern_en.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+#names(pattern)
+
+senticon <- read.csv("./refs/sentiment/senticon/senticon.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+#names(senticon)
+
+# Tidytext
+afinn <- get_sentiments("afinn")
+bing <- get_sentiments("bing")
+nrc <- get_sentiments("nrc")
+
+#afinn
+#bing
+
+afinn_165_sentiment <- words_sw %>% inner_join(afinn_165) %>% count(word, sentiment, sort = TRUE)
+afinn_165_sentiment
+
+opinion_words_sentiment <- words_sw %>% inner_join(opinion_words) %>% count(word, sentiment, sort = TRUE)
+opinion_words_sentiment
+
+pattern_sentiment <- words_sw %>% inner_join(pattern) %>% count(word, sentiment, sort = TRUE)
+pattern_sentiment
+
+senticon_sentiment <- words_sw %>% inner_join(senticon) %>% count(word, sentiment, sort = TRUE)
+senticon_sentiment
+
+bing_sentiment <- words_sw %>% inner_join(bing) %>% count(word, sentiment, sort = TRUE)
+bing_sentiment
+
+nrc_sentiment <- words_sw %>% inner_join(nrc) %>% count(word, sentiment, sort = TRUE)
+nrc_sentiment
+
+s_v <- get_sentences(words_sw$word)
+syuzhet_vector <- get_sentiment(s_v, method="syuzhet")
+syuzhet_sentiment <- cbind.data.frame(s_v, syuzhet_vector)
+syuzhet_sentiment
+
+vader_sentiment <- vader_df(words_sw, incl_nt = T, neu_set = T, rm_qm = F)
+vader_sentiment
+
+# afinn_165
+afinn_165_sentiment_f <- filter(afinn_165_sentiment, n < 150)
+afinn_165_sentiment_f$sentiment <- factor(afinn_165_sentiment_f$sentiment)
+afinn_165_sentiment_f <- afinn_165_sentiment_f %>% mutate(id = row_number())
+
+afinn_165_v <- ggplot(data=afinn_165_sentiment_f, aes(x=sentiment, y=n, fill=sentiment)) +
+    geom_boxplot(alpha=0.5) +
+    scale_y_continuous(trans='log2') +
+    #scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    # geom_jitter(color="black", size=0.4, alpha=0.9) +
+    # geom_point(color="black", size = 0, alpha = 0) +
+    geom_jitter_interactive(aes(color=sentiment, tooltip = word, data_id = id), size=1, alpha=0.8) +
+    theme_minimal() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("AFINN 165 Sentiment") +
+    xlab("")
+
+# afinn_165_v
+# afinn_165_v <- ggMarginal(afinn_165_v, type="histogram")
+
+girafe(ggobj = afinn_165_v, width_svg = 10, height_svg = 10,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+# opinion_words_sentiment
+opinion_words_sentiment_f <- filter(opinion_words_sentiment, n < 150)
+opinion_words_sentiment_f$sentiment <- factor(opinion_words_sentiment_f$sentiment)
+opinion_words_sentiment_f <- opinion_words_sentiment_f %>% mutate(id = row_number())
+
+opinion_words_sentiment_v <- ggplot(data=opinion_words_sentiment_f, aes(x=sentiment, y=n, fill=sentiment)) +
+    geom_boxplot(alpha=0.5) +
+    scale_y_continuous(trans='log2') +
+    #scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    # geom_jitter(color="black", size=0.4, alpha=0.9) +
+    geom_jitter_interactive(aes(color=sentiment, tooltip = word, data_id = id), size=1, alpha=0.8) +
+    theme_minimal() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("Opinion Words Sentiment") +
+    xlab("")
+
+# opinion_words_sentiment_v
+
+girafe(ggobj = opinion_words_sentiment_v, width_svg = 10, height_svg = 10,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+# pattern_sentiment
+pattern_sentiment_f <- filter(pattern_sentiment, n < 150)
+pattern_sentiment_f$sentiment <- factor(pattern_sentiment_f$sentiment)
+pattern_sentiment_f <- pattern_sentiment_f %>% mutate(id = row_number())
+
+pattern_sentiment_v <- ggplot(data=pattern_sentiment_f, aes(x=sentiment, y=n, fill=sentiment)) +
+    geom_boxplot(alpha=0.5) +
+    scale_y_continuous(trans='log2') +
+    #scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    # geom_jitter(color="black", size=0.4, alpha=0.9) +
+    geom_jitter_interactive(aes(color=sentiment, tooltip = word, data_id = id), size=1, alpha=0.8) +
+    theme_minimal() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("Pattern Sentiment") +
+    xlab("")
+
+# opinion_words_sentiment_v
+
+girafe(ggobj = pattern_sentiment_v, width_svg = 10, height_svg = 10,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+# senticon_sentiment
+senticon_sentiment_f <- filter(senticon_sentiment, n < 150)
+senticon_sentiment_f$sentiment <- factor(senticon_sentiment_f$sentiment)
+senticon_sentiment_f <- senticon_sentiment_f %>% mutate(id = row_number())
+
+senticon_sentiment_v <- ggplot(data=senticon_sentiment_f, aes(x=sentiment, y=n, fill=sentiment)) +
+    geom_boxplot(alpha=0.5) +
+    scale_y_continuous(trans='log2') +
+    #scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+    # geom_jitter(color="black", size=0.4, alpha=0.9) +
+    geom_jitter_interactive(aes(color=sentiment, tooltip = word, data_id = id), size=1, alpha=0.8) +
+    theme_minimal() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("Senticon Sentiment") +
+    xlab("")
+
+# senticon_sentiment_v
+
+girafe(ggobj = senticon_sentiment_v, width_svg = 10, height_svg = 10,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+
+```
+
+
+## nGram and Phrase Analysis
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+
+```
+
+
+## Feature Extraction
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+term <- "Angola"
+
+corpus_txt <- corpus(pages_df_tokenized$sentences)
+keyword <- paste0(term, '*')
+
+kwic_keyword <- kwic(corpus_txt, pattern = keyword, valuetype = "regex")
+#names(kwic_keyword)
+
+kwic_keyword <- data.frame(kwic_keyword, stringsAsFactors=F)
+# kwic_keyword
+
+vars <- c("pre", "keyword", "post")
+kwic_select <- kwic_keyword  %>% select(one_of(vars))
+# kwic_select
+
+kwic_select$kwic <- paste0( kwic_select$pre, " | ", kwic_select$keyword, " | ", kwic_select$post )
+kwic_print <- kwic_select  %>% select(kwic)
+
+
+kwic_print
+
+```
+
+
+## Named Entity Recognition
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+#create annotators for words and sentences
+word_ann <- Maxent_Word_Token_Annotator()
+sent_ann <- Maxent_Sent_Token_Annotator()
+pos_tag_ann <- Maxent_POS_Tag_Annotator()
+
+#creates annotators of kind person, location and organization
+organization_ann <- Maxent_Entity_Annotator(kind = "organization")
+person_ann <- Maxent_Entity_Annotator(kind = "person")
+location_ann <- Maxent_Entity_Annotator(kind = "location")
+date_ann <- Maxent_Entity_Annotator(kind = "date")
+percentage_ann <- Maxent_Entity_Annotator(kind = "percentage")
+money_ann <- Maxent_Entity_Annotator(kind = "money")
+
+#holds annotators in the order to be applied
+pipeline <- list(sent_ann,
+                 word_ann,
+                 pos_tag_ann,
+                 person_ann,
+                 location_ann,
+                 organization_ann,
+                 date_ann,
+                 percentage_ann,
+                 money_ann)
+
+#read text
+text <- pages_df$pages
+
+#convert the character vectors into one character vector
+text <- paste(text, collapse = " ")
+# print(text)
+
+#converts variable into a string
+text <- as.String(text)
+
+annotated_text <- annotate(as.String(text), pipeline)
+
+k <- sapply(annotated_text$features, `[[`, "kind")
+organizations <- text[annotated_text[k == "organization"]]
+people <- text[annotated_text[k == "person"]]
+locations <- text[annotated_text[k == "location"]]
+date <- text[annotated_text[k == "date"]]
+percentage <- text[annotated_text[k == "percentage"]]
+money <- text[annotated_text[k == "money"]]
+
+organizations <- as.data.frame(organizations)
+names(organizations)[1] <- "word"
+organizations$ner <- "ORGANIZATION"
+organizations
+
+people <- as.data.frame(people)
+names(people)[1] <- "word"
+people$ner <- "PEOPLE"
+people
+
+locations <- as.data.frame(locations)
+names(locations)[1] <- "word"
+locations$ner <- "LOCATION"
+locations
+
+date <- as.data.frame(date)
+names(date)[1] <- "word"
+date$ner <- "DATE"
+date
+
+percentage <- as.data.frame(percentage)
+names(percentage)[1] <- "word"
+percentage$ner <- "PERCENTAGE"
+percentage
+
+#money <- as.data.frame(money)
+#names(money)[1] <- "word"
+#money$ner <- "MONEY"
+#money
+
+ner_df <- rbind(organizations, people, locations, date, percentage, money)
+ner_df
+
+```
+
+
+## Semantic Graph and Relation Extraction
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# options("citation_format" = "pandoc")
+# read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

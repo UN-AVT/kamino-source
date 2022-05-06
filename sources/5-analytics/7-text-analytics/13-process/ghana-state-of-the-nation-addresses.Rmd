@@ -1,0 +1,317 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+
+library(tidytext)
+library(readtext)
+library(stringr)
+library(readr)
+library(purrr)
+library(ggplot2)
+
+library(kableExtra)
+library(knitcitations)
+library(bibtex)
+
+```
+
+
+<div class="activity">
+INGEST  
+</div>
+
+# Ingest text file
+
+## Case: Ghana's state of the nation addresses
+
+> Today is National Chocolate Day...\
+--- H. E. PRESIDENT J. A. KUFUOR\
+
+***
+
+# Reading a single text file - Unstructured narrative text
+
+## First method: Entire corpus read to one row
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+
+file_path <- './archetypes/state-of-the-nation-addresses-Ghana/sona_2008.txt'
+
+txt_1 <- readtext(file_path)
+
+df_1 <- as.data.frame(txt_1)
+
+df_1
+
+```
+
+## Alternative - Entire corpus read to one row
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+txt_2 <- read_file(file_path)
+
+df_2 <- as.data.frame(txt_2)
+#df_2
+
+str_trunc(df_2, 1000, "right")
+
+
+```
+
+
+## Alternative - Each line as a row
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+con <- file(file_path, blocking = FALSE)
+txt_3 <- readLines(con)
+close(con)
+
+df_3 <- as.data.frame(txt_3)
+str_trunc(df_3, 100, "right")
+#df_3
+
+```
+
+# Reading several text files - Unstructured narrative text
+
+## First method
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+base_url <- "./archetypes/ghana-state-of-the-nation-addresses/"
+txt_files <- list.files(base_url, pattern="^sona_.*\\.txt$", full.names=TRUE, recursive=FALSE)
+txt_files
+
+txt_set_1 <- c()
+for (f in txt_files) {
+  txt_set_1 <- c(txt_set_1, paste(readtext(f)))
+}
+
+txt_set_1_df <- as.data.frame(txt_set_1)
+
+str_trunc(txt_set_1_df, 100, "right")
+
+
+```
+
+## Alternative
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+txt_set_2 <- c()
+for (f in txt_files) {
+  txt_set_2 <- c(txt_set_2, paste(read_file(f)))
+}
+
+txt_set_2_df <- as.data.frame(txt_set_2)
+str_trunc(txt_set_2_df, 100, "right")
+```
+
+
+## Alternative - Each line as a row
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+txt_set_3 <- c()
+for (f in txt_files) {
+  txt_set_3 <- c(txt_set_3, paste(read_lines(f)))
+}
+
+txt_set_3_df <- as.data.frame(txt_set_3)
+txt_set_3_trunc <- str_trunc(txt_set_3_df, 100, "right")
+# txt_set_3_trunc <- str_trunc(txt_set_2_df, 100, "left")
+# txt_set_3_trunc <- str_trunc(txt_set_2_df, 100, "center")
+
+txt_set_3_trunc
+#txt_set_3_df
+```
+
+
+# Processing the result
+## A glimpse at text analytic methods
+
+### Once the text files are ingested, wrangler, analytic, and visualization methods can be applied. Here are a few examples of the possibilities:
+
+
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+# Tokenize to words
+text_df <- txt_set_3_df %>% unnest_tokens(word, txt_set_3)
+# text_df
+
+# Remove stop words
+data(stop_words)
+text_df <- text_df %>% anti_join(stop_words)
+
+# Word count
+text_df_word_count <- text_df %>% count(word, sort = TRUE) 
+text_df_word_count
+
+# Get top 10
+top_words <- text_df_word_count %>% top_n(25)
+top_words
+
+```
+
+## Visualize top 25 words
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=10.5}
+
+v1 <- ggplot(data = top_words, aes(reorder(word,n), n)) +
+  geom_col(fill = "#006C40") +
+  labs(y = NULL) +
+  coord_flip()
+
+v1
+
+```
+
+
+# As reusable solution
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, include=TRUE}
+####################################################################################
+# Required libraries
+library(tidyverse)
+library(readtext)
+library(readr)
+
+####################################################################################
+# Read a single text file - option#1 - readtext
+load_data_text_1 <- function(data_source){
+  txt <- readtext(paste(getwd(),data_source,sep="/"))
+  as.data.frame(txt)
+}
+#Call the function to load the data
+load_data_text_1("/archetypes/ghana-state-of-the-nation-addresses/sona_2008.txt")
+####################################################################################
+
+####################################################################################
+# Read a single text file - option#2 - read_file
+load_data_text_2 <- function(data_source){
+  txt <- read_file(paste(getwd(),data_source,sep="/"))
+  
+  as.data.frame(txt)
+}
+#Call the function to load the data
+load_data_text_2("/archetypes/ghana-state-of-the-nation-addresses/sona_2008.txt")
+####################################################################################
+
+####################################################################################
+# Read a single text file - Each line as a row - option#3
+load_data_text_3 <- function(data_source){
+ 
+  con <- file(paste(getwd(),data_source,sep="/"), blocking = FALSE)
+  txt <- readLines(con)
+  close(con)
+
+  as.data.frame(txt)
+}
+#Call the function to load the data
+load_data_text_3("/archetypes/ghana-state-of-the-nation-addresses/sona_2008.txt")
+####################################################################################
+
+####################################################################################
+# Read multiple text files - option#1 - readtext
+load_multiple_files_1 <- function(base_url){
+  
+  txt_files <- list.files(base_url, pattern="^sona_.*\\.txt$", full.names=TRUE, recursive=FALSE)
+  
+   txt_set_1 <- c()
+   for (f in txt_files) {
+      txt_set_1 <- c(txt_set_1, paste(readtext(f)))
+   }
+   as.data.frame(txt_set_1)
+}
+#Call the function to load the data
+load_multiple_files_1("./archetypes/ghana-state-of-the-nation-addresses/")
+####################################################################################
+
+####################################################################################
+# Read multiple text files - option#2 - read_file
+load_multiple_files_2 <- function(base_url){
+
+  txt_files <- list.files(base_url, pattern="^sona_.*\\.txt$", full.names=TRUE, recursive=FALSE)
+  
+  txt_set_2 <- c()
+  for (f in txt_files) {
+     txt_set_2 <- c(txt_set_2, paste(read_file(f)))
+  }
+  as.data.frame(txt_set_2)
+}
+#Call the function to load the data
+load_multiple_files_2("./archetypes/ghana-state-of-the-nation-addresses/")
+####################################################################################
+
+####################################################################################
+# Read multiple text files - Each line as a row - option#3
+load_multiple_files_3 <- function(base_url){
+ 
+  txt_files <- list.files(base_url, pattern="^sona_.*\\.txt$", full.names=TRUE, recursive=FALSE)
+  
+  txt_set_3 <- c()
+  for (f in txt_files) {
+     txt_set_3 <- c(txt_set_3, paste(read_lines(f)))
+  }
+  as.data.frame(txt_set_3)
+
+}
+#Call the function to load the data
+load_multiple_files_3("./archetypes/ghana-state-of-the-nation-addresses/")
+####################################################################################
+
+```
+
+# References
+## The citations and data sources used for the cases
+
+To illustrate the methods, this case contains several text files for Ghana's state of the nation addresses. The state of the nation address is an annual address to parliament given by the president. It typically summarizes the government's agenda and the progress made in the past year as seen by the administration in power.
+  
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "./citations/ghana-state-of-the-nation-addresses.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

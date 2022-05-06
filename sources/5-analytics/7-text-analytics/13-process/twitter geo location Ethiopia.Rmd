@@ -1,0 +1,514 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, class.source = 'fold-hide')
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+# load twitter library - the rtweet library is recommended now over twitteR
+library(rtweet)
+# plotting and pipes - tidyverse!
+library(ggplot2)
+library(dplyr)
+# text mining library
+library(tidytext)
+# plotting packages
+library(igraph)
+library(ggraph)
+library(ggiraph)
+library(wordcloud)
+
+```
+
+
+<div class="activity">
+TEXT ANALYSIS  
+</div>
+
+***
+
+## Ingest tweets
+
+```{r}
+# Search for up to 10,000 tweets containing #rstats, excluding retweets:
+
+rt <- search_tweets(
+  "lang:en", geocode = lookup_coords("Ethiopia"), n = 100
+)
+## use lat_lng to recover full information geolocation data
+rtll <- lat_lng(rt)
+## plot points
+with(rtll, plot(lng, lat))
+
+```
+
+```{r}
+## lookup users by screen_name or user_id
+users <- c("UNEthiopia","UNHCREthiopia","OCHA_Ethiopia","UNDPEthiopia","WFP_Ethiopia","UNICEFEthiopia")
+
+# extract most recent tweets data from the famous tweeters
+tw<-get_timeline(users, n = 1000)
+```
+
+
+## Clean up
+Remove URLs
+```{r}
+
+tw_text<-tw%>%select(text)
+tw_text$stripped_text <- gsub("http.*","",  tw_text$text)
+tw_text$stripped_text <- gsub("https.*","", tw_text$stripped_text)
+
+head(tw_text)
+```
+## Tokenize
+```{r}
+# remove punctuation, convert to lowercase
+tw_text_clean <- tw_text %>%
+  dplyr::select(stripped_text) %>%
+  unnest_tokens(word, stripped_text)
+tw_text_clean
+```
+
+
+
+```{r}
+
+# load list of stop words - from the tidytext package
+data("stop_words")
+# view first 6 words
+head(stop_words)
+
+
+
+
+# remove stop words from your list of words
+cleaned_tweet_words <- tw_text_clean %>%
+  anti_join(stop_words)
+
+
+cleaned_tweet_words
+
+```
+
+# Parts of Speech
+
+```{r}
+# Load reference file
+
+fastpos <- read.csv("refs/pos/fastpos/fastpos.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+
+
+
+fastpos_tags <- cleaned_tweet_words %>% inner_join(fastpos) %>% count(word, pos, sort = TRUE)
+fastpos_tags
+
+```
+
+# Lemmatize and Stemming
+
+```{r}
+
+lemmatize <- lemmatize_words(cleaned_tweet_words$word)
+as.data.frame(lemmatize)
+
+porter <- stem_strings(cleaned_tweet_words$word, language = "porter")
+as.data.frame(porter)
+
+
+```
+
+
+# Term Frequency
+
+```{r}
+
+word_count <- cleaned_tweet_words %>% count(word, sort = TRUE) 
+word_count
+
+word_count_lemmatize <- as.data.frame(lemmatize) %>% count(lemmatize, sort = TRUE) 
+word_count_lemmatize
+
+total_words <- word_count %>% summarize(total = sum(n))
+
+# Tally Measure
+tally <- word_count %>% mutate(total = total_words$total)
+tally
+
+# By Rank Measure
+freq_by_rank <- tally %>% mutate(rank = row_number(), `term frequency` = n/total)
+freq_by_rank
+```
+
+# Generate a word cloud
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+
+set.seed(1234)
+wordcloud(words = word_count_lemmatize$lemmatize, freq = word_count_lemmatize$n, min.freq = 20,
+          max.words=100, random.order=FALSE, rot.per=0.40, 
+          colors=brewer.pal(8, "Dark2"))
+
+```
+
+# Plot the most frequent 50 words
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+v1 <- ggplot(word_count_lemmatize[1:50,], aes(x=reorder(lemmatize, -n), y=n)) +
+  geom_bar(stat="identity", width=0.6, fill="darkseagreen3")  +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle=90, hjust=1, vjust=0.2),
+        plot.caption = element_text(hjust = 0),
+        panel.grid.major.x = element_blank()) +
+  xlab("Lemmatized Word") + # for the x axis label
+  ylab("Frequency") + # for the y axis label
+  coord_cartesian(ylim=c(0, 2600))
+
+# Print the plot
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+
+
+# Bigrams
+
+```{r}
+
+bigram <- tw_text %>% unnest_tokens(bigram, stripped_text, token = "ngrams", n = 2)
+
+
+# Remove NA values
+bigram <- bigram %>% drop_na()
+
+
+bigram_count <- bigram %>% count(bigram, sort = TRUE)
+bigram_count
+
+```
+
+
+### Remove stop words
+
+```{r}
+
+
+ bigrams_separated <- bigram %>% separate(bigram, c("word1", "word2"), sep = " ")
+ bigrams_filtered <- bigrams_separated %>% filter(!word1 %in% stop_words$word) %>% filter(!word2 %in% stop_words$word)
+ 
+ # new bigram counts:
+ bigram_counts <- bigrams_filtered %>% count(word1, word2, sort = TRUE)
+ 
+ bigrams_united <- bigrams_filtered %>% unite(bigram, word1, word2, sep = " ")%>% count(bigram, sort = TRUE)
+ bigrams_united
+```
+
+```{r echo=TRUE, fig.height=12, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+v2 <- ggplot(bigrams_united[1:50,], aes(x=reorder(bigram, n), y=n)) +
+  geom_bar(stat="identity", width=0.6, fill="darkseagreen2")  +
+  theme_minimal() +
+  theme(axis.text.x = element_text(hjust=1, vjust=0.2),
+        plot.caption = element_text(hjust = 0),
+        panel.grid.major.x = element_blank()) +
+  xlab("Bigram") + # for the x axis label
+  ylab("Frequency") + # for the y axis label
+  
+  coord_flip()
+
+# Print the plot
+girafe(ggobj = v2, width_svg = 13, height_svg = 13,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+
+
+
+
+# Sentiment Analysis
+
+```{r}
+
+## LOAD MODELS
+
+# From References
+afinn_165 <- read.csv("refs/sentiment/afinn/afinn-165-en.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+#names(afinn_165)
+
+# opinion_words <- read.csv("refs/sentiment/opinion-lexicon/opinion-words.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+# #names(opinion_words)
+# 
+# pattern <- read.csv("refs/sentiment/pattern/pattern_en.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+# #names(pattern)
+# 
+# senticon <- read.csv("refs/sentiment/senticon/senticon.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+# #names(senticon)
+
+```
+
+```{r}
+
+word_count<- word_count_lemmatize %>% rename(word='lemmatize')
+
+afinn_165_sentiment <- word_count %>% inner_join(afinn_165) 
+afinn_165_sentiment
+
+# opinion_words_sentiment <- word_count %>% inner_join(opinion_words) 
+# #opinion_words_sentiment
+# 
+# pattern_sentiment <- word_count %>% inner_join(pattern) 
+# #pattern_sentiment
+# 
+# senticon_sentiment <- word_count %>% inner_join(senticon) 
+# #senticon_sentiment
+
+```
+
+# Make the plot
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df<-afinn_165_sentiment
+df$sentiment <- factor(df$sentiment)
+df <- df %>% mutate(id = row_number())
+
+afinn_165_v <- ggplot(data=df, aes(x=sentiment, y=n, fill=sentiment)) +
+    geom_boxplot(alpha=0.5) +
+    scale_y_continuous(trans='log2') +
+    geom_jitter_interactive(aes(color=sentiment, tooltip = word, data_id = id), size=1, alpha=0.8) +
+    theme_minimal() +
+    theme(panel.background = element_blank()) +
+  theme(panel.grid.major.x = element_blank()) +
+  theme(panel.grid.minor.x = element_blank()) +
+  theme(panel.grid.major.y = element_blank()) +
+  theme(panel.grid.minor.y = element_blank()) +
+    theme(text = element_text(size=20),
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    xlab("")
+
+girafe(ggobj = afinn_165_v, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Positive sentiment words
+
+```{r, echo=FALSE, message=FALSE, rows.print=20, class.source='fold-hide'}
+
+pos <- afinn_165_sentiment %>% filter(sentiment > 0)
+pos
+
+
+```
+
+# Negative sentiment words
+
+```{r, echo=FALSE, message=FALSE, rows.print=20, class.source='fold-hide'}
+
+neg <- afinn_165_sentiment %>% filter(sentiment < 0)
+neg
+
+```
+
+# Bi-Gram Negation Words
+
+### NOT
+
+```{r}
+
+not <- bigrams_separated %>% filter(word1 == "not") %>% count(word1, word2, sort = TRUE)
+
+
+not_words <- not %>% inner_join(afinn_165, by = c('word2' = 'word')) %>% mutate (sentiment_updated = sentiment * (-1)) %>% unite(words, word1, word2, sep = " ")
+not_words
+
+
+```
+
+```{r echo=TRUE, fig.height=12, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+v3 <- ggplot(not_words[1:10,], aes(x=reorder(words, n), y=n)) +
+  geom_bar(stat="identity", width=0.6, fill="darkseagreen2")  +
+  theme_minimal() +
+  theme(axis.text.x = element_text(hjust=1, vjust=0.2),
+        plot.caption = element_text(hjust = 0),
+        panel.grid.major.x = element_blank()) +
+  xlab("Not words") + # for the x axis label
+  ylab("Frequency") + # for the y axis label
+  
+  coord_flip()
+
+# Print the plot
+girafe(ggobj = v3, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+### NO
+
+```{r}
+
+no <- bigrams_separated %>% filter(word1 == "no") %>% count(word1, word2, sort = TRUE)
+
+
+no_words <- no %>% inner_join(afinn_165, by = c('word2' = 'word')) %>% mutate (sentiment_updated = sentiment * (-1)) %>% unite(words, word1, word2, sep = " ")
+  
+no_words
+
+```
+
+```{r echo=TRUE, fig.height=12, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+v4 <- ggplot(no_words, aes(x=reorder(words, n), y=n)) +
+  geom_bar(stat="identity", width=0.6, fill="darkseagreen2")  +
+  theme_minimal() +
+  theme(axis.text.x = element_text(hjust=1, vjust=0.2),
+        plot.caption = element_text(hjust = 0),
+        panel.grid.major.x = element_blank()) +
+  xlab("No words") + # for the x axis label
+  ylab("Frequency") + # for the y axis label
+  
+  coord_flip()
+
+# Print the plot
+girafe(ggobj = v4, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+### NEVER
+
+```{r}
+
+never <- bigrams_separated %>% filter(word1 == "never") %>% count(word1, word2, sort = TRUE)
+
+
+ never_words <- never %>% inner_join(afinn_165, by = c('word2' = 'word')) %>% mutate (sentiment_updated = sentiment * (-1))%>% unite(words, word1, word2, sep = " ")
+
+ never_words
+
+```
+
+```{r echo=TRUE, fig.height=12, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+v4 <- ggplot(never_words, aes(x=reorder(words, n), y=n)) +
+  geom_bar(stat="identity", width=0.6, fill="darkseagreen2")  +
+  theme_minimal() +
+  theme(axis.text.x = element_text(hjust=1, vjust=0.2),
+        plot.caption = element_text(hjust = 0),
+        panel.grid.major.x = element_blank()) +
+  xlab("Never words") + # for the x axis label
+  ylab("Frequency") + # for the y axis label
+  
+  coord_flip()
+
+# Print the plot
+girafe(ggobj = v4, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+### WITHOUT
+
+```{r}
+
+without <- bigrams_separated %>% filter(word1 == "without") %>% count(word1, word2, sort = TRUE)
+#without
+
+without_words <- without %>% inner_join(afinn_165, by = c('word2' = 'word')) %>% mutate (sentiment_updated = sentiment * (-1))%>% unite(words, word1, word2, sep = " ")
+
+without_words
+
+```
+
+```{r echo=TRUE, fig.height=12, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+v5 <- ggplot(without_words, aes(x=reorder(words, n), y=n)) +
+  geom_bar(stat="identity", width=0.6, fill="darkseagreen2")  +
+  theme_minimal() +
+  theme(axis.text.x = element_text(hjust=1, vjust=0.2),
+        plot.caption = element_text(hjust = 0),
+        panel.grid.major.x = element_blank()) +
+  xlab("Without words") + # for the x axis label
+  ylab("Frequency") + # for the y axis label
+  
+  coord_flip()
+
+# Print the plot
+girafe(ggobj = v5, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+# Keyword In Context (KWIC)
+
+```{r, echo=FALSE, message=FALSE, rows.print=20, class.source='fold-hide'}
+
+
+keyword <- c('ethiopia*')
+
+kwic_keyword <- kwic(tw_text$stripped_text, pattern = keyword, valuetype = "regex")
+#names(kwic_keyword)
+
+kwic_keyword <- data.frame(kwic_keyword, stringsAsFactors=F)
+# kwic_keyword
+
+vars <- c("pre", "keyword", "post")
+kwic_select <- kwic_keyword  %>% select(one_of(vars))
+# kwic_select
+
+kwic_select$kwic <- paste0( kwic_select$pre, " | ", kwic_select$keyword, " | ", kwic_select$post )
+kwic_print <- kwic_select  %>% select(kwic)
+
+
+DT::datatable(kwic_print)
+
+
+```
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# options("citation_format" = "pandoc")
+# read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

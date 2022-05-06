@@ -1,0 +1,268 @@
+---
+title: "Term Frequency"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+library(tidytext)
+library(tokenizers)
+library(ggiraph)
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+
+## Parameters
+
+focus_question <- 14
+question_language <- "en"
+
+question_list <- read.csv("list-of-questions.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+# question_list
+
+question_filter <- filter(question_list, QID == focus_question)
+question_filter$Question
+
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+
+## Ingest Text
+
+data_file <- paste0("./outputs/q-", focus_question, "-lang.csv")
+
+corpus_csv <- read.csv(data_file, header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+
+# Filter english
+corpus_csv <- filter(corpus_csv, cld2 == question_language)
+# corpus_csv
+
+# factor answer responses to include NR
+corpus_csv$Answer <- factor(corpus_csv$Answer, levels = rev(c("Strongly Agree", "Agree", "Neither Agree Nor Disagree", "Disagree", "Strongly Disagree", "NR")))
+corpus_csv$Answer[is.na(corpus_csv$Answer)] <- "NR"
+
+# c("Strongly Agree", "Agree", "Neither Agree Nor Disagree", "Disagree", "Strongly Disagree", "NR")
+corpus_csv_strongly_agree <- filter(corpus_csv, Answer == "Strongly Agree")
+corpus_csv_agree <- filter(corpus_csv, Answer == "Agree")
+corpus_csv_neither_agree_nor_disagree <- filter(corpus_csv, Answer == "Neither Agree Nor Disagree")
+corpus_csv_disagree <- filter(corpus_csv, Answer == "Disagree")
+corpus_csv_strongly_disagree <- filter(corpus_csv, Answer == "Strongly Disagree")
+corpus_csv_no_record <- filter(corpus_csv, Answer == "NR")
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+## PARAMETERIZE DATA SET USED
+
+#odf <- corpus_csv_strongly_agree
+odf <- corpus_csv
+
+```
+
+
+
+```{r, echo=FALSE, message=FALSE}
+
+## Tidytext
+
+colClasses = c("integer", "character", "character")
+col.names = c("QID", "Answer", "word")
+
+df <- read.table(text = "",
+                 colClasses = colClasses,
+                 col.names = col.names)
+
+for (val in 1:nrow(odf))
+{
+  corpus_text <- odf[val,] %>% unnest_tokens(word, "Comment")
+  df <- bind_rows(df, corpus_text)
+}
+
+#df
+
+data(stop_words)
+df <- df %>%
+  anti_join(stop_words)
+
+q_vector <- unlist(tokenize_words(question_filter$Question))
+df <- filter(df, !(word %in% q_vector) )
+
+# Term Count
+word_count <- df %>% count(QID, Answer, word, sort = TRUE)
+#word_count
+
+word_count_head_df <- word_count %>% arrange(desc(word_count)) %>% mutate(word = factor(word, levels = rev(unique(word)))) %>%
+  group_by(Answer) %>% slice_max(order_by = n, n = 15, with_ties = FALSE) %>% ungroup
+word_count_head_df$Answer <- factor(word_count_head_df$Answer, levels = c("Strongly Agree", "Agree", "Neither Agree Nor Disagree", "Disagree", "Strongly Disagree", "NR"))
+#word_count_head_df
+
+total_words <- word_count %>% group_by(QID, Answer) %>% summarize(total = sum(n)) # , Answer
+#total_words
+
+# Tally Measure
+tally <- left_join(word_count, total_words)
+# tally
+
+# By Rank Measure
+freq_by_rank <- tally %>% group_by(Answer) %>% mutate(rank = row_number(), `term frequency` = n/total)
+#freq_by_rank
+
+freq_by_rank_head_df <- freq_by_rank %>% arrange(desc(freq_by_rank)) %>% mutate(word = factor(word, levels = rev(unique(word)))) %>%
+  group_by(Answer) %>% slice_min(order_by = rank, n = 15, with_ties = FALSE) %>% ungroup
+freq_by_rank_head_df$Answer <- factor(freq_by_rank_head_df$Answer, 
+                                      levels = c("Strongly Agree", "Agree", "Neither Agree Nor Disagree", "Disagree", "Strongly Disagree", "NR"))
+#freq_by_rank_head_df
+
+
+# TF-IDF Measure
+tf_idf <- tally %>% bind_tf_idf(word, Answer, n)
+#tf_idf
+
+tf_idf_top_df <- tf_idf %>% arrange(desc(tf_idf)) %>% mutate(word = factor(word, levels = rev(unique(word)))) %>%
+  group_by(Answer) %>% slice_head(n = 15) %>% ungroup
+
+tf_idf_top_df$Answer <- factor(tf_idf_top_df$Answer, levels = c("Strongly Agree", "Agree", "Neither Agree Nor Disagree", "Disagree", "Strongly Disagree", "NR"))
+
+
+```
+
+
+```{r, echo=FALSE, message=FALSE}
+
+# Standard theme options to use for each view
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text.x = element_blank(),
+  axis.line.x = element_blank(),
+  axis.ticks.x = element_blank(),
+  axis.title.x = element_blank(),
+  # panel.grid = element_blank(),
+  # panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.background=element_rect(fill="white", colour="white"),
+  panel.border = element_blank(),
+  plot.background = element_blank(),
+  # For facet titles
+  strip.background = element_rect(color="#ffffff", fill="#ffffff" )
+)
+
+```
+
+### BY SIMPLE WORD COUNT, TOP 15
+
+```{r, echo=FALSE, message=FALSE, fig.width=10, fig.height=7}
+
+word_count_head_df
+
+word_count_head_df <- word_count_head_df %>% mutate(id = row_number())
+
+word_count_v <- ggplot(data=word_count_head_df, aes(word, n, fill = Answer)) +
+  # geom_col(show.legend = FALSE) +
+  geom_col_interactive(aes(tooltip = n, data_id = id), size=1, alpha=0.8) +
+  labs(x = NULL, y = NULL, title = NULL, subtitle = NULL, caption = NULL ) +
+  theme_bw() +
+  theme_opts +
+  facet_wrap(~Answer, ncol = 3, scales = "free_y") + # "free_y"
+  coord_flip()
+
+# word_count_v
+
+girafe(ggobj = word_count_v, width_svg = 10, height_svg = 7,
+  options = list(opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+
+```
+
+### BY RANK, TOP 15
+
+
+```{r, echo=FALSE, message=FALSE, fig.width=10, fig.height=7}
+
+# freq_by_rank
+freq_by_rank_head_df
+
+freq_by_rank_head_df <- freq_by_rank_head_df %>% mutate(id = row_number())
+
+rank_v <- ggplot(data=freq_by_rank_head_df, aes(word, n, fill = Answer)) +
+  # geom_col(show.legend = FALSE) +
+  geom_col_interactive(aes(tooltip = n, data_id = id), size=1, alpha=0.8) +
+  labs(x = NULL, y = NULL, title = NULL, subtitle = NULL, caption = NULL ) +
+  theme_bw() +
+  theme_opts +
+  facet_wrap(~Answer, ncol = 3, scales = "free_y") + # "free_y"
+  coord_flip()
+
+# rank_v
+
+girafe(ggobj = rank_v, width_svg = 10, height_svg = 7,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+```
+
+### BY TF-IDF, TOP 15
+
+
+```{r, echo=FALSE, message=FALSE, fig.width=10, fig.height=7}
+
+# TF-IDF
+tf_idf_top_df
+
+tf_idf_top_df <- tf_idf_top_df %>% mutate(id = row_number())
+
+tf_idf_v <- ggplot(data=tf_idf_top_df, aes(word, tf_idf, fill = Answer)) +
+  # geom_col(show.legend = FALSE) +
+  geom_col_interactive(aes(tooltip = tf_idf, data_id = id), size=1, alpha=0.8) +
+  labs(x = NULL, y = NULL, title = NULL, subtitle = NULL, caption = NULL ) +
+  theme_bw() +
+  theme_opts +
+  facet_wrap(~Answer, ncol = 3, scales = "free") + # "free_y"
+  coord_flip()
+
+# tf_idf_v
+
+girafe(ggobj = tf_idf_v, width_svg = 10, height_svg = 7,
+  options = list(
+    opts_sizing(rescale = TRUE, width = 1.0) )
+)
+
+```
+
+
+
+
+```{r, echo=FALSE, message=FALSE}
+
+## SAVE PLOT
+
+word_count_v_file <- paste0("./outputs/term-frequency/q-", focus_question, "-term-frequency-wc.svg")
+ggsave(filename = word_count_v_file, plot = word_count_v, width=10, height=7)
+
+rank_v_file <- paste0("./outputs/term-frequency/q-", focus_question, "-term-frequency-rank.svg")
+ggsave(filename = rank_v_file, plot = rank_v, width=10, height=7)
+
+tf_idf_v_file <- paste0("./outputs/term-frequency/q-", focus_question, "-term-frequency-tf-idf.svg")
+ggsave(filename = tf_idf_v_file, plot = tf_idf_v, width=10, height=7)
+
+```
+
+
+

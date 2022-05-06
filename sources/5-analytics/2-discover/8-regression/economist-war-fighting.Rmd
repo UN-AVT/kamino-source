@@ -1,0 +1,180 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE,
+   dev = "svg"
+)
+
+library(ggiraph)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+
+library(tidyr)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# Regression
+## Which countries are most likely to fight wars?
+
+### This study is a reproduction of the following article published in the Economist:
+<a href="https://www.economist.com/graphic-detail/2018/11/08/which-countries-are-most-likely-to-fight-wars">Article: The Economist Nov 8th 2018 edition - Which countries are most likely to fight wars?</a>
+
+### The code and data is available here:
+<a href="https://github.com/TheEconomist/graphic-detail-data/tree/master/data/2018-11-03-war-fighting">Data Source: The Economist GitHub</a>
+
+
+#### First, let's take a look at Combat deaths by region over the past century:
+
+***
+
+```{r}
+
+df <- read.csv("archetypes/maddison_and_polity_country_years_df.csv")
+
+```
+
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+###### First Graph
+
+df1 <- df %>% group_by(country_region, year) %>% 
+  summarise(nb_combat_death = sum(country_year_conflict_deaths))
+
+df2 <- df %>% group_by(year) %>% 
+  summarise(world_population = sum(interpolated_population))
+
+df3 <- left_join(df1,df2,by=c('year'='year'))
+
+df4 <- df3 %>% mutate(combat_death_per_100k=100000*nb_combat_death/world_population)
+
+
+df5 <- df %>% group_by(year) %>% 
+  summarise(combat_death_per_100k = 100000*sum(country_year_conflict_deaths)/sum(interpolated_population))
+
+# Sort month by order
+df4$Region = factor(df4$country_region, levels=c("Europe",
+                                                      "Americas", 
+                                                      "Asia",
+                                                      "Africa",
+                                                      "Middle East"))
+
+
+v1 <- ggplot(df4, aes(fill=Region, x=year, y=combat_death_per_100k)) +
+  geom_bar(position="stack", stat="identity") + 
+  scale_fill_manual(values = c("Europe" = "#E65035", 
+                               "Americas" = "#F2BD48",
+                               "Asia" = "#00597A",
+                               "Africa" = "#6FCCDC",
+                               "Middle East" = "#9B4050")) +
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(),
+        #legend.position = "none"
+        ) + ggtitle("Combat deaths per \n100,000 people worldwide")
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+
+```
+
+## Creating logistic regressions to estimate the probability that a country would be involved in a conflict in any year, given its level of wealth.
+
+The third-order polynomial equations is selected to predict the probability of fighting a war in a given year 
+
+country_involved_in_conflict ~ wealth + wealth^2 + wealth^3).
+
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+# Create columns that log2 the GDP per capita, then square and cube those figures
+df$log2_interpolated_gdp_per_capita <-log2(df$interpolated_gdp_per_capita)
+df$log2_interpolated_gdp_per_capita_squared <- df$log2_interpolated_gdp_per_capita^2
+df$log2_interpolated_gdp_per_capita_cubed <- df$log2_interpolated_gdp_per_capita^3
+
+tologit <- glm(country_involved_in_conflict ~ log2_interpolated_gdp_per_capita + log2_interpolated_gdp_per_capita_squared + log2_interpolated_gdp_per_capita_cubed,
+               data = df, family = "binomial")
+summary(tologit)
+
+df$third_order_gdp_predicted_conflict_rate = predict(tologit, newdata = df, type = "response")
+
+```
+
+## Wealth vs chance of conflict
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=7.5}
+
+# Display results
+v2 <- ggplot(data = df, aes(x=interpolated_gdp_per_capita, y=third_order_gdp_predicted_conflict_rate))+
+  geom_point()+ scale_x_continuous(trans='log2') +
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank(),
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank(),
+        #legend.position = "none"
+        ) + ggtitle("Third-order polynomial for wealth, >100 deaths") +
+  xlab("Log2 GDP per capita") + 
+  ylab("Chance of fighting a war in a year")
+
+girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+
+# References
+## The citations and data sources used for this case
+
+The data file used in this wrangler task was retrieved from <a href="https://www.un.org/press/en/2006/org1469.doc.htm">UN Member State Admission Dates</a> source which was published by the United Nations Meetings Coverages and Press Releases website.
+
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

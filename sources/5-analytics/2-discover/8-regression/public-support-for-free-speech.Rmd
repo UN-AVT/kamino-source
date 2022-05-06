@@ -1,0 +1,205 @@
+---
+pagetitle: "Public Support for Free Speech"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+ANALYTICS  
+</div>
+
+# Public Support for Free Speech
+## Linear Regression
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Marie S on Unsplash"}
+
+masthead <- "assets/marie-s-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> What is freedom of expression? Without the freedom to offend, it ceases to exist...\
+--- Salman Rushdie\
+
+***
+
+
+### Ingest the data
+#### life satisfaction, gdp, and population by country and year
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+# Load csv data file
+url_root <- "archetypes/"
+
+url_file1 <- "vdem-v2x_freexp.csv"
+url1 <- paste0(url_root, url_file1)
+
+df_vdem <- read.csv(url1, header = TRUE, stringsAsFactors = FALSE)
+df_vdem
+
+url_file2 <- "justitia-free-speech-index.csv"
+url2 <- paste0(url_root, url_file2)
+
+df_justitia <- read.csv(url2, header = TRUE, stringsAsFactors = FALSE)
+df_justitia
+
+
+```
+
+
+### Wrangle the data
+#### country codes and join
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_justitia$ISO3 <- countrycode(df_justitia$COUNTRY_DATA, origin='country.name', destination='iso3c')
+# df_justitia
+
+df_combined <- merge(df_justitia, df_vdem, by.x='ISO3', by.y='country_text_id')
+df_combined$Region <- countrycode(df_combined$ISO3, origin='iso3c', destination='un.region.name')
+# df_combined
+
+df_final <- df_combined %>% select(c(ISO3, country_name, v2x_freexp, Free_Speech_Index, Region))
+df_final
+
+```
+#### Visualizing the possible relationship
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+theme_opts <- theme(
+  text = element_text(family = "inconsolata", size = 25), 
+  plot.title = element_text(color = "black", size = 25, face = "bold"),
+  plot.subtitle = element_text(color = "black", size = 25),
+  plot.caption = element_text(color = "#555555", size = 25)
+)
+
+g1 <- ggplot(df_final, aes(x=Free_Speech_Index, y=v2x_freexp)) +
+  geom_point(size = 3) +
+  labs( title = "You can't always get what you want",
+        subtitle = "Desired v actual freedom of speech",
+        # caption = "Source: V-Dem Institute, Justitia",
+        x = "Less <- Public support for speech, 2020 -> More",
+        y = "Amount of permitted free speech, 2020") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = g1, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8))
+)
+
+```
+
+### Linear Regression Plot
+<kbd>
+lm
+</kbd>
+
+We model the relationship between the amount of permitted free speech and its public support in 2020 using a linear regression. With the linear model, we observed a positive relation between the two variables. The public support for speech amount is directly proportional to the amount of permitted free speech. In other words, the higher is the public support for speech, the higher is the occurrence of permitted free speech.
+
+#### Fitting the model
+
+We now run a linear regression using function <kbd>lm</kbd>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# lm required parameters
+# lm(formula, data)
+
+simple_fit = lm(v2x_freexp~Free_Speech_Index, data = df_final) #Create the linear regression
+summary(simple_fit) #Review the results
+
+```
+#### Visualizing the model results
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+g2 <- g1 + 
+  geom_abline(intercept = simple_fit$coefficients[1], 
+              slope = simple_fit$coefficients[2], color = "#33abdd", size = 2, linetype = 'dashed') +
+  theme_opts
+
+girafe(ggobj = g2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8))
+)
+
+```
+
+### Plot with annotations
+#### some narrative to help tell the story
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+v2 <- g2 +
+  geom_text_repel(aes(label = country_name), direction = "y", min.segment.length = 0.0, nudge_y = 0.02, point.padding = 0.2, family = "inconsolata")
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 9,
+       options = list(opts_sizing(rescale = TRUE, width = 0.8)))
+
+  
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative Inspiration: The Economist, In some countries, people think they have too much freedom of speech.
+* Data Source: Justitia, Who Cares about Free Speech?, [GO](http://justitia-int.org/en/report-who-cares-about-free-speech-findings-from-a-global-survey-of-free-speech/){target="_blank"}
+* Data Source: V-Dem Institute, Varieties of Democracy Project, [GO](https://www.v-dem.net/en/data/data/v-dem-dataset-v111/){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

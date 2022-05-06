@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Kamino</title>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/navigation-1.1/codefolding.js"></script>
+<link href="libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/d3-5.7.0/d3.min.js"></script>
+<script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+<link href="libs/ggiraphjs-0.3.0/ggiraphjs.min.css" rel="stylesheet" />
+<script src="libs/ggiraphjs-0.3.0/ggiraphjs.min.js"></script>
+<script src="libs/girafe-binding-0.7.8/girafe.js"></script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../z-assemblers/assets/logo/logo.svg" alt="" width="42">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../z-assemblers/assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../z-assemblers/assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+<link rel="stylesheet" href="../../../z-assemblers/assets/styles/content/kamino.css" type="text/css" />
+<link rel="stylesheet" href="../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div id="cluster-analysis---air-pollution-indicators-for-us-cities" class="section level3">
+<h3>Cluster Analysis - Air pollution indicators for US cities:</h3>
+<p>The following analysis is based on an example provided in the book “Cluster Analysis 5th Edition EVERITT LANDAU LEES.”</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["City"],"name":[1],"type":["fct"],"align":["left"]},{"label":["SO2"],"name":[2],"type":["int"],"align":["right"]},{"label":["TEMP"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["MANUF"],"name":[4],"type":["int"],"align":["right"]},{"label":["POP"],"name":[5],"type":["int"],"align":["right"]},{"label":["WIND"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["PRECIP"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["DAYS"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"Phoenix","2":"10","3":"70.3","4":"213","5":"582","6":"6.0","7":"7.05","8":"36"},{"1":"Little Rock","2":"13","3":"61.0","4":"91","5":"132","6":"8.2","7":"48.52","8":"100"},{"1":"San Francisco","2":"12","3":"56.7","4":"453","5":"716","6":"8.7","7":"20.66","8":"67"},{"1":"Denver","2":"17","3":"51.9","4":"454","5":"515","6":"9.0","7":"12.95","8":"86"},{"1":"Hartford","2":"56","3":"49.1","4":"412","5":"158","6":"9.0","7":"43.37","8":"127"},{"1":"Wilmington","2":"36","3":"54.0","4":"80","5":"80","6":"9.0","7":"40.25","8":"114"},{"1":"Washington","2":"29","3":"57.3","4":"434","5":"757","6":"9.3","7":"38.89","8":"111"},{"1":"Jacksonville","2":"14","3":"68.4","4":"136","5":"529","6":"8.8","7":"54.47","8":"116"},{"1":"Miami","2":"10","3":"75.5","4":"207","5":"335","6":"9.0","7":"59.80","8":"128"},{"1":"Atlanta","2":"24","3":"61.5","4":"368","5":"497","6":"9.1","7":"48.34","8":"115"},{"1":"Chicago","2":"110","3":"50.6","4":"3344","5":"3369","6":"10.4","7":"34.44","8":"122"},{"1":"Indianapolis","2":"28","3":"52.3","4":"361","5":"746","6":"9.7","7":"38.74","8":"121"},{"1":"Des Moines","2":"17","3":"49.0","4":"104","5":"201","6":"11.2","7":"30.85","8":"103"},{"1":"Wichita","2":"8","3":"56.6","4":"125","5":"277","6":"12.7","7":"30.58","8":"82"},{"1":"Louisville","2":"30","3":"55.6","4":"291","5":"593","6":"8.3","7":"43.11","8":"123"},{"1":"New Orleans","2":"9","3":"68.3","4":"204","5":"361","6":"8.4","7":"56.77","8":"113"},{"1":"Baltimore","2":"47","3":"55.0","4":"625","5":"905","6":"9.6","7":"41.31","8":"111"},{"1":"Detroit","2":"35","3":"49.9","4":"1064","5":"1513","6":"10.1","7":"30.96","8":"129"},{"1":"Minneapolis","2":"29","3":"43.5","4":"699","5":"744","6":"10.6","7":"25.94","8":"137"},{"1":"Kansas","2":"14","3":"54.5","4":"381","5":"507","6":"10.0","7":"37.00","8":"99"},{"1":"St Louis","2":"56","3":"55.9","4":"775","5":"622","6":"9.5","7":"35.89","8":"105"},{"1":"Omaha","2":"14","3":"51.5","4":"181","5":"347","6":"10.9","7":"30.18","8":"98"},{"1":"Albuquerque","2":"11","3":"56.8","4":"46","5":"244","6":"8.9","7":"7.77","8":"58"},{"1":"Albany","2":"46","3":"47.6","4":"44","5":"116","6":"8.8","7":"33.36","8":"135"},{"1":"Buffalo","2":"11","3":"47.1","4":"391","5":"463","6":"12.4","7":"36.11","8":"166"},{"1":"Cincinnati","2":"23","3":"54.0","4":"462","5":"453","6":"7.1","7":"39.04","8":"132"},{"1":"Cleveland","2":"65","3":"49.7","4":"1007","5":"751","6":"10.9","7":"34.99","8":"155"},{"1":"Columbus","2":"26","3":"51.5","4":"266","5":"540","6":"8.6","7":"37.01","8":"134"},{"1":"Philadelphia","2":"69","3":"54.6","4":"1692","5":"1950","6":"9.6","7":"39.93","8":"115"},{"1":"Pittsburgh","2":"61","3":"50.4","4":"347","5":"520","6":"9.4","7":"36.22","8":"147"},{"1":"Providence","2":"94","3":"50.0","4":"343","5":"179","6":"10.6","7":"42.75","8":"125"},{"1":"Memphis","2":"10","3":"61.6","4":"337","5":"624","6":"9.2","7":"49.10","8":"105"},{"1":"Nashville","2":"18","3":"59.4","4":"275","5":"448","6":"7.9","7":"46.00","8":"119"},{"1":"Dallas","2":"9","3":"66.2","4":"641","5":"844","6":"10.9","7":"35.94","8":"78"},{"1":"Houston","2":"10","3":"68.9","4":"721","5":"1233","6":"10.8","7":"48.19","8":"103"},{"1":"Salt Lake City","2":"28","3":"51.0","4":"137","5":"176","6":"8.7","7":"15.17","8":"89"},{"1":"Norfolk","2":"31","3":"59.3","4":"96","5":"308","6":"10.6","7":"44.68","8":"116"},{"1":"Richmond","2":"26","3":"57.8","4":"197","5":"299","6":"7.6","7":"42.59","8":"115"},{"1":"Seattle","2":"29","3":"51.1","4":"379","5":"531","6":"9.4","7":"38.79","8":"164"},{"1":"Charleston","2":"31","3":"55.2","4":"35","5":"71","6":"6.5","7":"40.75","8":"148"},{"1":"Milwaukee","2":"16","3":"45.7","4":"569","5":"717","6":"11.8","7":"29.07","8":"123"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>The variables recorded are as follows:<br> - SO2 Sulphur dioxide content of air in micrograms per cubic metre;<br> - TEMP Average annual temperature (F);<br> - MANUF Number of manufacturing enterprises employing 20 or more workers;<br> - POP Population size (1970 census) in thousands;<br> - WIND Average wind speed in miles per hour;<br> - PRECIP Average annual precipitation in inches;<br> - DAYS Average number of days with precipitation per year.<br></p>
+<p>we shall use the six climate and human ecology variables to assess whether there is any evidence that there are groups of cities with similar profiles.</p>
+</div>
+<div id="scatterplot-matrix" class="section level3">
+<h3>Scatterplot Matrix</h3>
+<p><img src="us-cities-air-pollution_files/figure-html/unnamed-chunk-2-1.svg" width="1008" /></p>
+<p>A scatterplot matrix of the data. The plot gives little convincing evidence of any group structure in the data. The most obvious feature of the data is the presence of several ‘outlier’ observations. As such observations can be a problem for some methods of cluster analysis, identification of them prior to applying these methods is often very useful.</p>
+<div id="preparing-the-data" class="section level4">
+<h4>Preparing the data</h4>
+<p>First, let’s normalize the data prior to running the algorithm.</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["City"],"name":[1],"type":["fct"],"align":["left"]},{"label":["SO2"],"name":[2],"type":["int"],"align":["right"]},{"label":["TEMP_s"],"name":[3],"type":["dbl[,1]"],"align":["right"]},{"label":["MANUF_s"],"name":[4],"type":["dbl[,1]"],"align":["right"]},{"label":["POP_s"],"name":[5],"type":["dbl[,1]"],"align":["right"]},{"label":["WIND_s"],"name":[6],"type":["dbl[,1]"],"align":["right"]},{"label":["PRECIP_s"],"name":[7],"type":["dbl[,1]"],"align":["right"]},{"label":["DAYS_s"],"name":[8],"type":["dbl[,1]"],"align":["right"]}],"data":[{"1":"Phoenix","2":"10","3":"2.01122809","4":"-0.443849377","5":"-0.04594916","6":"-2.41060883","7":"-2.52464841","8":"-2.939002785"},{"1":"Little Rock","2":"13","3":"0.72451455","4":"-0.660363380","5":"-0.82299955","6":"-0.87068732","7":"0.99825221","8":"-0.524493296"},{"1":"San Francisco","2":"12","3":"0.12958248","4":"-0.017920191","5":"0.18543918","6":"-0.52070516","7":"-1.36847099","8":"-1.769474751"},{"1":"Denver","2":"17","3":"-0.53452773","4":"-0.016145486","5":"-0.16164333","6":"-0.31071587","7":"-2.02343998","8":"-1.052667247"},{"1":"Hartford","2":"56","3":"-0.92192536","4":"-0.090683094","5":"-0.77810330","6":"-0.31071587","7":"0.56075672","8":"0.494127895"},{"1":"Wilmington","2":"36","3":"-0.24397951","4":"-0.679885134","5":"-0.91279204","6":"-0.31071587","7":"0.29571090","8":"0.003680655"},{"1":"Washington","2":"29","3":"0.21259626","4":"-0.051639585","5":"0.25623710","6":"-0.10072657","7":"0.18017811","8":"-0.109499478"},{"1":"Jacksonville","2":"14","3":"1.74835113","4":"-0.580501658","5":"-0.13746843","6":"-0.45070873","7":"1.50370817","8":"0.079134076"},{"1":"Miami","2":"10","3":"2.73068082","4":"-0.454497607","5":"-0.47246348","6":"-0.31071587","7":"1.95649477","8":"0.531854605"},{"1":"Atlanta","2":"24","3":"0.79369270","4":"-0.168770111","5":"-0.19272534","6":"-0.24071944","7":"0.98296111","8":"0.041407365"},{"1":"Chicago","2":"110","3":"-0.71439092","4":"5.112751794","5":"4.76658292","6":"0.66923418","7":"-0.19785198","8":"0.305494341"},{"1":"Indianapolis","2":"28","3":"-0.47918522","4":"-0.181193046","5":"0.23724254","6":"0.17925916","7":"0.16743552","8":"0.267767630"},{"1":"Des Moines","2":"17","3":"-0.93576099","4":"-0.637292216","5":"-0.70385182","6":"1.22920563","7":"-0.50282456","8":"-0.411313164"},{"1":"Wichita","2":"8","3":"0.11574685","4":"-0.600023412","5":"-0.57261664","6":"2.27915211","7":"-0.52576122","8":"-1.203574090"},{"1":"Louisville","2":"30","3":"-0.02260944","4":"-0.305422392","5":"-0.02695459","6":"-0.80069089","7":"0.53866957","8":"0.343221052"},{"1":"New Orleans","2":"9","3":"1.73451550","4":"-0.459821722","5":"-0.42756724","6":"-0.73069446","7":"1.69909451","8":"-0.034046056"},{"1":"Baltimore","2":"47","3":"-0.10562322","4":"0.287329059","5":"0.51180034","6":"0.10926272","7":"0.38575852","8":"-0.109499478"},{"1":"Detroit","2":"35","3":"-0.81124032","4":"1.066424528","5":"1.56168176","6":"0.45924488","7":"-0.49348000","8":"0.569581316"},{"1":"Minneapolis","2":"29","3":"-1.69672061","4":"0.418657224","5":"0.23378898","6":"0.80922704","7":"-0.91993192","8":"0.871395002"},{"1":"Kansas","2":"14","3":"-0.17480137","4":"-0.145698947","5":"-0.17545756","6":"0.38924845","7":"0.01962151","8":"-0.562220007"},{"1":"St Louis","2":"56","3":"0.01889745","4":"0.553534800","5":"0.02312199","6":"0.03926629","7":"-0.07467363","8":"-0.335859742"},{"1":"Omaha","2":"14","3":"-0.58987025","4":"-0.500639935","5":"-0.45174214","6":"1.01921634","7":"-0.55974145","8":"-0.599946718"},{"1":"Albuquerque","2":"11","3":"0.14341811","4":"-0.740225102","5":"-0.62960034","6":"-0.38071230","7":"-2.46348399","8":"-2.109015148"},{"1":"Albany","2":"46","3":"-1.12945980","4":"-0.743774512","5":"-0.85062801","6":"-0.45070873","7":"-0.28959860","8":"0.795941581"},{"1":"Buffalo","2":"11","3":"-1.19863795","4":"-0.127951898","5":"-0.25143582","6":"2.06916282","7":"-0.05598451","8":"1.965469615"},{"1":"Cincinnati","2":"23","3":"-0.24397951","4":"-0.001947847","5":"-0.26870360","6":"-1.64064808","7":"0.19292070","8":"0.682761449"},{"1":"Cleveland","2":"65","3":"-0.83891158","4":"0.965266346","5":"0.24587643","6":"1.01921634","7":"-0.15112916","8":"1.550475796"},{"1":"Columbus","2":"26","3":"-0.58987025","4":"-0.349790015","5":"-0.11847386","6":"-0.59070160","7":"0.02047102","8":"0.758214870"},{"1":"Philadelphia","2":"69","3":"-0.16096574","4":"2.180939231","5":"2.31628402","6":"0.10926272","7":"0.26852672","8":"0.041407365"},{"1":"Pittsburgh","2":"61","3":"-0.74206218","4":"-0.206038915","5":"-0.15300943","6":"-0.03073014","7":"-0.04663994","8":"1.248662110"},{"1":"Providence","2":"94","3":"-0.79740469","4":"-0.213137735","5":"-0.74184095","6":"0.80922704","7":"0.50808736","8":"0.418674473"},{"1":"Memphis","2":"10","3":"0.80752833","4":"-0.223785965","5":"0.02657554","6":"-0.17072300","7":"1.04752355","8":"-0.335859742"},{"1":"Nashville","2":"18","3":"0.50314448","4":"-0.333817671","5":"-0.27733750","6":"-1.08067662","7":"0.78417675","8":"0.192314209"},{"1":"Dallas","2":"9","3":"1.44396728","4":"0.315724338","5":"0.40646685","6":"1.01921634","7":"-0.07042610","8":"-1.354480933"},{"1":"Houston","2":"10","3":"1.81752928","4":"0.457700733","5":"1.07818374","6":"0.94921991","7":"0.97021852","8":"-0.411313164"},{"1":"Salt Lake City","2":"28","3":"-0.65904840","4":"-0.578726953","5":"-0.74702129","6":"-0.52070516","7":"-1.83484968","8":"-0.939487114"},{"1":"Norfolk","2":"31","3":"0.48930885","4":"-0.651489855","5":"-0.51908651","6":"0.80922704","7":"0.67204198","8":"0.079134076"},{"1":"Richmond","2":"26","3":"0.28177441","4":"-0.472244656","5":"-0.53462751","6":"-1.29066592","7":"0.49449526","8":"0.041407365"},{"1":"Seattle","2":"29","3":"-0.64521277","4":"-0.149248357","5":"-0.13401487","6":"-0.03073014","7":"0.17168305","8":"1.890016193"},{"1":"Charleston","2":"31","3":"-0.07795196","4":"-0.759746857","5":"-0.92833304","6":"-2.06062667","7":"0.33818619","8":"1.286388821"},{"1":"Milwaukee","2":"16","3":"-1.39233676","4":"0.187945582","5":"0.18716596","6":"1.64918423","7":"-0.65403660","8":"0.343221052"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="parametize---finding-the-best-k" class="section level4">
+<h4>Parametize - Finding the best k</h4>
+<div id="htmlwidget-87a48602cac6eab59a23" style="width:1008px;height:720px;" class="girafe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-87a48602cac6eab59a23">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e' viewBox='0 0 936.00 504.00'>\n  <g>\n    <defs>\n      <clipPath id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_1'>\n        <rect x='0.00' y='0.00' width='936.00' height='504.00'/>\n      <\/clipPath>\n    <\/defs>\n    <rect x='0.00' y='0.00' width='936.00' height='504.00' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_1' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_1)' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round'/>\n    <defs>\n      <clipPath id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_2'>\n        <rect x='0.00' y='0.00' width='936.00' height='504.00'/>\n      <\/clipPath>\n    <\/defs>\n    <rect x='0.00' y='0.00' width='936.00' height='504.00' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_2' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_2)' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='round'/>\n    <defs>\n      <clipPath id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_3'>\n        <rect x='46.94' y='14.40' width='817.06' height='449.19'/>\n      <\/clipPath>\n    <\/defs>\n    <rect x='46.94' y='14.40' width='817.06' height='449.19' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_3' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_3)' fill='#EBEBEB' fill-opacity='1' stroke='none'/>\n    <polyline points='84.08,34.82 166.61,131.61 249.14,223.13 331.67,324.58 414.21,362.97 496.74,379.49 579.27,410.25 661.80,421.38 744.33,440.55 826.86,443.17' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_4' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_3)' fill='none' stroke='#000000' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <defs>\n      <clipPath id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4'>\n        <rect x='0.00' y='0.00' width='936.00' height='504.00'/>\n      <\/clipPath>\n    <\/defs>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='32.22' y='434.25' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_5' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>50<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='27.33' y='329.97' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_6' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>100<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='27.33' y='225.68' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_7' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>150<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='27.33' y='121.40' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_8' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>200<\/text>\n    <\/g>\n    <polyline points='44.20,431.10 46.94,431.10' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_9' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='44.20,326.82 46.94,326.82' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_10' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='44.20,222.53 46.94,222.53' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_11' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='44.20,118.25 46.94,118.25' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_12' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='84.08,466.33 84.08,463.59' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_13' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='166.61,466.33 166.61,463.59' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_14' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='249.14,466.33 249.14,463.59' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_15' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='331.67,466.33 331.67,463.59' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_16' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='414.21,466.33 414.21,463.59' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_17' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='496.74,466.33 496.74,463.59' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_18' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='579.27,466.33 579.27,463.59' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_19' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='661.80,466.33 661.80,463.59' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_20' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='744.33,466.33 744.33,463.59' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_21' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <polyline points='826.86,466.33 826.86,463.59' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_22' clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)' fill='none' stroke='#333333' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='81.63' y='474.82' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_23' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>1<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='164.17' y='474.82' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_24' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>2<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='246.70' y='474.82' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_25' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>3<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='329.23' y='474.82' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_26' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>4<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='411.76' y='474.82' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_27' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>5<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='494.29' y='474.82' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_28' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>6<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='576.82' y='474.82' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_29' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>7<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='659.35' y='474.82' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_30' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>8<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='741.88' y='474.82' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_31' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>9<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='821.97' y='474.82' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_32' font-size='6.60pt' fill='#4D4D4D' fill-opacity='1' font-family='Arial'>10<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text x='452.72' y='487.29' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_33' font-size='8.25pt' font-family='Arial'>k<\/text>\n    <\/g>\n    <g clip-path='url(#svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_cl_4)'>\n      <text transform='translate(22.27,272.01) rotate(-90.00)' id='svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e_el_34' font-size='8.25pt' font-family='Arial'>total_withinss<\/text>\n    <\/g>\n  <\/g>\n<\/svg>","js":null,"uid":"svg_5d7e80e9-a5fe-4c2b-afcb-a69da99d882e","ratio":1.85714285714286,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px 2px 2px 2px ; position:absolute;pointer-events:none;z-index:999;}\n","offx":10,"offy":0,"use_cursor_pos":true,"opacity":0.9,"usefill":false,"usestroke":false,"delay":{"over":200,"out":500}},"hover":{"css":".hover_SVGID_ { fill:orange;stroke:gray; }\n","reactive":false},"hoverkey":{"css":".hover_key_SVGID_ { stroke:red; }\n","reactive":false},"hovertheme":{"css":".hover_theme_SVGID_ { fill:green; }\n","reactive":false},"hoverinv":{"css":""},"zoom":{"min":1,"max":1},"capture":{"css":".selected_SVGID_ { fill:red;stroke:gray; }\n","type":"multiple","only_shiny":true,"selected":[]},"capturekey":{"css":".selected_key_SVGID_ { stroke:gray; }\n","type":"single","only_shiny":true,"selected":[]},"capturetheme":{"css":".selected_theme_SVGID_ { stroke:gray; }\n","type":"single","only_shiny":true,"selected":[]},"toolbar":{"position":"topright","saveaspng":true,"pngname":"diagram"},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+<p>Notice the presence of an “elbow” at k=4. It means that the model seems to have reached a peak in performance around that value. Let’s use it to run the model.</p>
+</div>
+<div id="running-the-model" class="section level4">
+<h4>Running the model</h4>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["City"],"name":[1],"type":["fct"],"align":["left"]},{"label":["SO2"],"name":[2],"type":["int"],"align":["right"]},{"label":["group"],"name":[3],"type":["fct"],"align":["left"]}],"data":[{"1":"Phoenix","2":"10","3":"4"},{"1":"Little Rock","2":"13","3":"1"},{"1":"San Francisco","2":"12","3":"4"},{"1":"Denver","2":"17","3":"4"},{"1":"Hartford","2":"56","3":"2"},{"1":"Wilmington","2":"36","3":"1"},{"1":"Washington","2":"29","3":"1"},{"1":"Jacksonville","2":"14","3":"1"},{"1":"Miami","2":"10","3":"1"},{"1":"Atlanta","2":"24","3":"1"},{"1":"Chicago","2":"110","3":"3"},{"1":"Indianapolis","2":"28","3":"2"},{"1":"Des Moines","2":"17","3":"2"},{"1":"Wichita","2":"8","3":"2"},{"1":"Louisville","2":"30","3":"1"},{"1":"New Orleans","2":"9","3":"1"},{"1":"Baltimore","2":"47","3":"2"},{"1":"Detroit","2":"35","3":"2"},{"1":"Minneapolis","2":"29","3":"2"},{"1":"Kansas","2":"14","3":"2"},{"1":"St Louis","2":"56","3":"2"},{"1":"Omaha","2":"14","3":"2"},{"1":"Albuquerque","2":"11","3":"4"},{"1":"Albany","2":"46","3":"2"},{"1":"Buffalo","2":"11","3":"2"},{"1":"Cincinnati","2":"23","3":"1"},{"1":"Cleveland","2":"65","3":"2"},{"1":"Columbus","2":"26","3":"2"},{"1":"Philadelphia","2":"69","3":"3"},{"1":"Pittsburgh","2":"61","3":"2"},{"1":"Providence","2":"94","3":"2"},{"1":"Memphis","2":"10","3":"1"},{"1":"Nashville","2":"18","3":"1"},{"1":"Dallas","2":"9","3":"1"},{"1":"Houston","2":"10","3":"1"},{"1":"Salt Lake City","2":"28","3":"4"},{"1":"Norfolk","2":"31","3":"1"},{"1":"Richmond","2":"26","3":"1"},{"1":"Seattle","2":"29","3":"2"},{"1":"Charleston","2":"31","3":"1"},{"1":"Milwaukee","2":"16","3":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="conclusion" class="section level3">
+<h3>Conclusion</h3>
+<p>As summarized in the following table, we end up with 4 clusters of various sizes.</p>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["group"],"name":[1],"type":["fct"],"align":["left"]},{"label":["list"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"Little Rock,Wilmington,Washington,Jacksonville,Miami,Atlanta,Louisville,New Orleans,Cincinnati,Memphis,Nashville,Dallas,Houston,Norfolk,Richmond,Charleston"},{"1":"2","2":"Hartford,Indianapolis,Des Moines,Wichita,Baltimore,Detroit,Minneapolis,Kansas,St Louis,Omaha,Albany,Buffalo,Cleveland,Columbus,Pittsburgh,Providence,Seattle,Milwaukee"},{"1":"3","2":"Chicago,Philadelphia"},{"1":"4","2":"Phoenix,San Francisco,Denver,Albuquerque,Salt Lake City"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Based on these results, we can try and label the clusters as follows:<br> - group (Little Rock,Wilmington,…) - Humid climate: a group of cities showing large amounts of precipitation in combination with high temperatures.<br> - group (Hartford,Indianapolis,…) - Wet, cold and windy climate: a group of cities characterized by a large number of days with precipitation per year in combination with low temperatures and high wind speeds.<br> - group (Phoenix,San Francisco,…) - Dry climate: a group of cities characterized by little precipitation (less than 21 inches of average annual precipitation and less than 90 days with precipitation per year).<br> - group ( Chicago,Philadelphia) - Dense population: a group of cities characterized by high values for human ecology indicators. The two group members Chicago and Philadelphia have both the largest numbers of manufacturing enterprises employing 20 or more workers and the largest population sizes.<br></p>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>

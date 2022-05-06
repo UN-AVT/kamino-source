@@ -1,0 +1,252 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+    echo = FALSE,
+    message = FALSE,
+    warning = FALSE,
+   dev = "svg"
+)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(knitr)
+library(timevis)
+library(patchwork)
+library(knitcitations)
+library(bibtex)
+library(ggiraph)
+```
+
+<div class="activity">
+Qualitative Analysis and Machine Learning
+</div>
+
+
+# Descriptive Analysis
+## Case: Heart Disease Analytics
+#### Descriptive analytics or exploratory analysis is an integral part of the machine-learning process. Descriptive data analysis is the process of interpreting datasets while summarizing their various characteristics with the help of data visualization methods. We need to understand how our variables behave before we feed it into a machine learning model. 
+
+
+***
+
+## Load data [Ingest]. 
+The data we have is collected from cardio-Patients in Cleveland and the features(predictors) represent the characteristics of these patients. The labels (prediction) is represented by the column Target.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load csv data file
+df = read.csv("archetypes/heart.csv", header = TRUE, stringsAsFactors = FALSE)
+df
+
+```
+
+
+
+#### Usually, the next step in descriptive analysis is to remove NA values. Let's find out how many NAs are there and remove them.
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+numbers_of_NA = count(df[!complete.cases(df),])
+colnames(numbers_of_NA) <- "numbers_of_NA"
+numbers_of_NA
+df[!complete.cases(df),]
+data <- na.omit(df)
+
+```
+
+
+#### Now that we've removed the NAs. Let's rename the columns so that it is more readilty understandable. More information is usually found on the documentations of the dataset. 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+colnames(data) <- c("age", "sex", "chest_pain", "blood_pressure", "cholestoral", "blood_sugar", "ecg", "heart_rate", "angina", "ST_induced_exercise", "ST_slope", "fluroscopy", "thal", "target")
+
+```
+
+
+
+
+
+Let's review the datatypes of the data as well as summary statistics of the data. 
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+str(data) #to see datatypes 
+summary(data)
+
+```
+
+
+#### As you can see, some of these features have a minimum value of 0 and a maximum value of usually 1-3. This is because they are actually categorical variables. For example, 0 in the column 'sex' represents Male, and 1 represetns Females. 
+
+#### Thus we'll factor these columns and recategorize for better understanding. The data will look clearer thereafter. 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+
+#sample <- rep(1, 8)
+#test <- data.frame(matrix(nrow = 1,data = sample))
+#colnames(test) <- cat_cols
+
+cat_cols <- c("sex", "chest_pain", "blood_sugar", "ecg", "angina", "ST_slope", "thal", "target")
+data[cat_cols] <- lapply(data[cat_cols], factor)
+str(data)
+
+#cat_levels <- list(c("Female", "Male"), c("Asymptomatic", "Atypical angina", "No angina", "Typical angina"), c("No", "Yes"), #c("Hypertrophy", "Normal", "Abnormalities"), c("No", "Yes"), c("Descending", "Flat", "Ascending"), c("Unknown", "Fixed defect", #"Normal flow", "Reversible defect"),  c("Yes", "No") )
+
+#data[cat_cols] <- lapply(data[cat_cols], function(x) {levels(x) = cat_levels; x })
+
+
+levels(data$sex) <- c("Female", "Male")
+levels(data$chest_pain) <- c("Asymptomatic", "Atypical angina", "No angina", "Typical angina")
+levels(data$blood_sugar) <- c("> 120mg/dl", "< 120mg/dl")
+levels(data$ecg) <- c("Hypertrophy", "Normal", "Abnormalities")
+levels(data$angina) <- c("No", "Yes")
+levels(data$ST_slope) <- c("Descending", "Flat", "Ascending")
+levels(data$thal) <- c("Error", "Fixed defect", "Normal flow", "Reversible defect")
+levels(data$target) <- c("Yes", "No")
+
+head(data)
+
+```
+
+
+## Let's first graph how many patients have Heart Disease 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=4, fig.height=4, fig.align='center'}
+
+v0<-ggplot(data, aes(target, fill=target)) + 
+  geom_bar() +
+  labs(x="Disease", y="Number of patients", title = "Number of Patients with Heart Diseases") +
+  guides(fill=FALSE)
+girafe(ggobj = v0, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+## Now let's chart and compare the rest of the Relationships between the features and target.
+
+
+```{r, echo=FALSE, fig.width=4, fig.height=4}
+
+v1 <- ggplot(data, aes(age, fill=target)) + 
+  geom_histogram(binwidth=1) +
+  labs(fill="Disease", x="Age", y="Number of patients", title = "Relationship between Age and Heart Disease")
+
+v2 <- ggplot(data, aes(sex, fill=target)) + 
+  geom_bar() +
+  labs(fill="Disease", x="Sex", y="Number of patients", title = "Relationship between Sex and Heart Disease")
+
+v3 <- ggplot(data, aes(chest_pain, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Chest pain type", y="Number of patients", title = "Chest Pain and Heart Disease")
+
+v4 <- ggplot(data, aes(blood_pressure, fill=target)) +
+  geom_histogram(binwidth=3) +
+  labs(fill="Disease", x="Blood pressure (mm Hg)", y="Number of patients", title = "Blood Pressure and Heart Disease")
+
+v5 <- ggplot(data, aes(cholestoral, fill=target)) +
+  geom_histogram(binwidth=10) +
+  labs(fill="Disease", x="Cholesterol (mg/dl)", y="Number of patients", title = "Cholesterol and Heart Disease")
+
+v6 <- ggplot(data, aes(blood_sugar, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Sugar levels", y="Number of patients", title = "Blood Sugar and Heart Disease")
+
+v7 <- ggplot(data, aes(ecg, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Electrocardiogram on rest", y="Number of patients", title = "Resting ECG and Heart Disease")
+
+v8 <- ggplot(data, aes(heart_rate, fill=target)) +
+  geom_histogram(binwidth=10) +
+  labs(fill="Disease", x="Maximum heart rate during exercise", y="Number of patients", title = "Heart Rate and Heart Disease")
+
+v9 <- ggplot(data, aes(angina, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Presence of angina during exercise", y="Number of patients", title = "Angina and Heart Disease")
+
+v10 <- ggplot(data, aes(ST_slope, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Slope of the ST segment", y="Number of patients", title = "ST_slope and Heart Disease")
+
+v11 <- ggplot(data, aes(fluroscopy, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Number of main blood vessels coloured", y="Number of patients", title = "Fluroscopy and Heart Disease")
+
+v12 <- ggplot(data, aes(thal, fill=target)) +
+  geom_bar() +
+  labs(fill="Disease", x="Results of the blood flow", y="Number of patients", title = "Blood Flow and Heart Disease")
+
+
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=16, fig.height=16, fig.align='center', out.width="100%"}
+
+patch = v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11 + v12 + plot_layout(ncol=3, nrow=4)
+#patch
+
+girafe(ggobj = patch, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+
+
+
+
+# References
+## The citations and data sources used for this case can be found here 
+
+<a href="https://archive.ics.uci.edu/ml/datasets/heart+disease" target="_blank"> UCL Machine Learning Datasets</a>
+
+
+
+
+
+
+
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

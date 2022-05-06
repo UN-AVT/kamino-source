@@ -1,0 +1,270 @@
+---
+pagetitle: "Road deaths by country"
+output:
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: "vendor"
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(countrycode)
+library(ggrepel)
+library(ggiraph)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+ANALYTICS  
+</div>
+
+# Road deaths by country
+## Linear Regression
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Yannis H on Unsplash"}
+
+masthead <- "assets/yannis-h-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> Some car accidents are caused by the ignorance or disbelief of the fact\
+  that a driver’s eyes and mind can be thousands of kilometres apart...\
+--- Mokokoma Mokhonoana\
+
+***
+
+
+### Ingest the data
+#### gdp and road traffic accidents
+
+GDP
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+url_root <- "archetypes/"
+
+url_file1 <- "gdp.csv"
+url1 <- paste0(url_root, url_file1)
+
+df_gdp <- read.csv(url1, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df_gdp
+
+```
+
+
+Road deaths
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+url_file2 <- "road-deaths.csv"
+url2 <- paste0(url_root, url_file2)
+
+df_rd <- read.csv(url2, header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+df_rd
+
+
+
+```
+
+
+### Wrangle the data
+#### bracket removal, merge, rename, and filter
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+df_rd_wrangle <- df_rd %>% mutate(road_deaths = as.integer(str_replace(est_road_traffic_death_rate_per_100k_population_both_sexes, "\\[.+?\\]", "")))
+df_rd_wrangle <- df_rd_wrangle %>% filter(year == 2017)
+df_rd_wrangle <- df_rd_wrangle %>% select(c(country, road_deaths))
+df_rd_wrangle$iso3 <- countrycode(df_rd_wrangle$country, origin='country.name', destination='iso3c')
+# df_rd_wrangle
+
+df_combined <- merge(df_rd_wrangle, df_gdp, by.x='iso3', by.y='Country_Code')
+df_combined$region <- countrycode(df_combined$iso3, origin='iso3c', destination='un.region.name')
+df_combined <- df_combined %>% select(c(iso3, country, road_deaths, X2017, region))
+df_combined <- df_combined[complete.cases(df_combined), ]
+# df_combined
+
+df_final <- df_combined %>% rename(gdp = X2017)
+df_final <- df_final %>% rename_with(toupper)
+df_final <- df_final %>% filter(ROAD_DEATHS > 0)
+df_final
+
+```
+#### Visualizing the possible relationship
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+theme_opts <- theme(
+    text = element_text(family = "inconsolata", size = 16), 
+    plot.title = element_text(color = "black", size = 16, face = "bold"),
+    plot.subtitle = element_text(color = "black", size = 12),
+    plot.caption = element_text(color = "#555555", size = 10),
+    # axis.title.x = element_blank(),
+    # axis.title.y = element_blank(),
+    # axis.text.x = element_text(vjust = 12),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    # panel.grid.minor = element_blank(),
+    # panel.grid.major = element_blank(),
+    legend.position='top'
+  )
+
+region_palette <- c(
+  "Africa" = "#F57C00",
+  "Americas" = "#00ACC1",
+  "Asia" = "#90A4AE",
+  "Europe" = "#E53935",
+  "Oceania" = "#8BC34A"
+)
+
+g1 <- ggplot(df_final, aes(x = GDP, y = ROAD_DEATHS)) + 
+  geom_point(aes( fill = REGION, color = REGION), size = 4, shape = 21) +
+  # geom_text_repel(aes(label = COUNTRY)) + 
+  scale_color_manual(values = region_palette) +
+  scale_fill_manual(values = region_palette) +
+  labs( title = "Driving lessons",
+        subtitle = NULL,
+        #caption = "Source: World Bank, IHME",
+        x = "GDP per capita, PPP (constant 2017 international $)",
+        y = "Est road traffic death rate per 100k population both sexes, 2017") +
+  theme_bw() +
+  theme_opts
+
+girafe(ggobj = g1, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+### Linear Regression Plot
+<kbd>
+geom_smooth
+</kbd>
+
+We plot the relationship between the estimated road traffic death per 100k people and GDP per capita in 2017 using a linear regression model. With the linear model, we observed a negative relation between the two variables. The GDP per capita is inversely proportional to the road traffic death rate. In other words, the higher is the GDP per capita, the lower is the road traffic rate per 100k population.
+
+#### Fitting the model
+
+We now run a linear regression using function <kbd>lm</kbd>
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# lm required parameters
+# lm(formula, data)
+
+simple_fit = lm(ROAD_DEATHS~GDP, data = df_final) #Create the linear regression
+summary(simple_fit) #Review the results
+
+```
+#### Visualizing the model results
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+g2 <- g1 + 
+  geom_abline(intercept = simple_fit$coefficients[1], 
+              slope = simple_fit$coefficients[2], color = "#33abdd", size = 2, linetype = 'dashed') +
+  theme_opts
+
+girafe(ggobj = g2, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75))
+)
+
+```
+
+### Wrangle
+#### create a label subset
+
+
+```{r,  message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+label_list <- c(
+  "Burundi",
+  "Liberia",
+  "Haiti",
+  "India",
+  "Dominican Republic",
+  "Thailand",
+  "China",
+  "Saudi Arabia",
+  "Oman",
+  "United States of America",
+  "Sweden",
+  "Ireland",
+  "Singapore",
+  "Qatar"
+)
+
+df_labels <- filter(df_final, COUNTRY %in% label_list)
+df_labels
+
+```
+
+
+### Plot with annotations
+#### adding labels and annotations
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+v2 <- g2 +
+  geom_text_repel(data=df_labels, aes(label = COUNTRY), box.padding = 0.75, min.segment.length = 0.0, nudge_y = 0.75, point.padding = 0.5, family = "inconsolata") + 
+  geom_hline(yintercept = mean(df_final$ROAD_DEATHS), linetype = 'dashed', size = 1.5, color = '#E53935')
+
+girafe(ggobj = v2, width_svg = 16, height_svg = 12,
+       options = list(opts_sizing(rescale = TRUE, width = 0.75)))
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative Inspiration: The Economist, Driving lession
+* Data Source: World Health Organization, [GO](https://apps.who.int/gho/data/node.main.A997){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

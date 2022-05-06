@@ -1,0 +1,128 @@
+---
+title: "Quoted Text"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+#options(max.print = 25)
+
+library(tidyverse)
+library(tidytext)
+library(qdapRegex)
+library(ggpubr)
+
+```
+
+
+
+
+```{r}
+
+## Parameters
+
+focus_question <- 14
+question_language <- "en"
+
+question_list <- read.csv("list-of-questions.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+#question_list
+
+question_filter <- filter(question_list, QID == focus_question)
+question_filter$Question
+
+
+```
+
+
+
+
+
+```{r}
+
+## Ingest Text
+
+data_file <- paste0("./outputs/q-", focus_question, "-lang.csv")
+
+corpus_csv <- read.csv(data_file, header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+
+# Filter english
+corpus_csv <- filter(corpus_csv, cld2 == question_language)
+# corpus_csv
+
+# factor answer responses to include NR
+corpus_csv$Answer <- factor(corpus_csv$Answer, levels = rev(c("Strongly Agree", "Agree", "Neither Agree Nor Disagree", "Disagree", "Strongly Disagree", "NR")))
+corpus_csv$Answer[is.na(corpus_csv$Answer)] <- "NR"
+
+# c("Strongly Agree", "Agree", "Neither Agree Nor Disagree", "Disagree", "Strongly Disagree", "NR")
+corpus_csv_strongly_agree <- filter(corpus_csv, Answer == "Strongly Agree")
+corpus_csv_agree <- filter(corpus_csv, Answer == "Agree")
+corpus_csv_neither_agree_nor_disagree <- filter(corpus_csv, Answer == "Neither Agree Nor Disagree")
+corpus_csv_disagree <- filter(corpus_csv, Answer == "Disagree")
+corpus_csv_strongly_disagree <- filter(corpus_csv, Answer == "Strongly Disagree")
+corpus_csv_no_record <- filter(corpus_csv, Answer == "NR")
+
+```
+
+
+
+```{r}
+
+## PARAMETERIZE DATA SET USED
+
+#odf <- corpus_csv_strongly_agree
+odf <- corpus_csv
+
+```
+
+### EXTRACTED QUOTES FROM TEXT
+
+```{r, rows.print=20}
+
+quoted_text <- rm_between(odf$Comment, '"', '"', extract=TRUE)
+
+df <- as.data.frame(do.call(rbind, lapply(quoted_text, as.data.frame)))
+colnames(df) <- c("quotes")
+#df
+quoted_df <- filter(df, quotes != "NA")
+#quoted_df
+
+quoted_df$n <- sapply(strsplit(quoted_df$quotes, " "), length)
+#quoted_df
+
+quoted_df$n <- sapply(strsplit(quoted_df$quotes, " "), length)
+#quoted_df
+
+quoted_df <- quoted_df[order(-quoted_df$n),]
+
+names(quoted_df)[names(quoted_df) == 'n'] <- 'word_count'
+
+quoted_df
+
+
+```
+
+
+
+```{r}
+
+## SAVE and PRINT
+
+quoted_file <- paste0("./outputs/quoted-text/q-", focus_question, "-quoted-text.csv")
+write.csv(quoted_df, quoted_file, row.names = FALSE)
+
+for_print <- quoted_df %>% slice_head(n = 25)
+
+# Table theme
+quoted_tbl <- paste0("./outputs/quoted-text/q-", focus_question, "-quoted-text.svg")
+quoted_tab <- ggtexttable(for_print, theme = ttheme( base_style = "classic", base_size = 6, base_colour = "black"), rows = NULL )
+# Save plot to svg file
+ggsave(filename = quoted_tbl, plot = quoted_tab, width=10, height=7)
+
+```
+
+

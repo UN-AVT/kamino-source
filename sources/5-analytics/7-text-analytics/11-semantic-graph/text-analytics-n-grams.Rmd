@@ -1,0 +1,179 @@
+---
+title: "Template"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+options(max.print = 25)
+
+library(tidyverse)
+library(tidytext)
+library(tokenizers)
+library(igraph)
+library(ggraph)
+
+```
+
+## Parameters
+
+
+```{r, echo=FALSE, message=FALSE}
+
+focus_question <- 11
+question_language <- "en"
+
+question_list <- read.csv("list-of-questions.csv", header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+question_list
+
+question_filter <- filter(question_list, QID == focus_question)
+question_filter$Question
+
+
+```
+
+
+## Ingest Text
+
+
+```{r, echo=FALSE, message=FALSE}
+
+data_file <- paste0("./outputs/q-", focus_question, "-lang.csv")
+
+corpus_csv <- read.csv(data_file, header = TRUE, stringsAsFactors = FALSE, encoding="UTF-8")
+
+# Filter english
+corpus_csv <- filter(corpus_csv, cld2 == question_language)
+corpus_csv
+
+```
+
+
+## Tidytext
+
+
+```{r, echo=FALSE, message=FALSE, fig.width=6.5, fig.height=5}
+
+colClasses = c("integer", "character", "character")
+col.names = c("QID", "Answer", "bigram")
+
+ngram_df <- read.table(text = "",
+                 colClasses = colClasses,
+                 col.names = col.names)
+
+for (val in 1:nrow(corpus_csv))
+{
+  corpus_text <- corpus_csv[val,] %>% unnest_tokens(bigram, Comment, token = "ngrams", n = 2)
+  ngram_df <- bind_rows(ngram_df, corpus_text)
+}
+
+ngram_df
+
+ngram_count <- ngram_df %>% count(bigram, sort = TRUE)
+ngram_count
+
+bigrams_separated <- ngram_df %>% separate(bigram, c("word1", "word2"), sep = " ")
+bigrams_filtered <- bigrams_separated %>% filter(!word1 %in% stop_words$word) %>% filter(!word2 %in% stop_words$word)
+
+# new bigram counts:
+bigram_counts <- bigrams_filtered %>% count(word1, word2, sort = TRUE)
+bigram_counts
+
+bigrams_united <- bigrams_filtered %>% unite(bigram, word1, word2, sep = " ")
+bigrams_united
+
+bigram_tf_idf <- bigrams_united %>% count(Answer, bigram) %>%
+bind_tf_idf(bigram, Answer, n) %>% arrange(desc(tf_idf))
+bigram_tf_idf
+
+bigrams_separated %>% filter(word1 == "not") %>% count(word1, word2, sort = TRUE)
+
+
+```
+
+## Not words
+
+```{r, fig.width=7, fig.height=10}
+
+afinn <- get_sentiments("afinn")
+
+not_words <- bigrams_separated %>% filter(word1 == "not") %>% inner_join(afinn, by = c(word2 = "word")) %>% 
+  count(word2, value, sort = TRUE) %>%
+  ungroup()
+
+not_words %>% mutate(contribution = n * value) %>% arrange(desc(abs(contribution))) %>%
+head(20) %>% mutate(word2 = reorder(word2, contribution)) %>%
+ggplot(aes(word2, n * value, fill = n * value > 0)) +
+geom_col(show.legend = FALSE) +
+xlab("Words preceded by \"not\"") +
+ylab("Sentiment score * number of occurrences") +
+coord_flip()
+
+
+```
+
+
+## Negation words
+
+```{r, fig.width=7, fig.height=10}
+
+negation_words <- c("not", "no", "never", "without")
+negated_words <- bigrams_separated %>% filter(word1 %in% negation_words) %>%
+inner_join(afinn, by = c(word2 = "word")) %>% count(word1, word2, value, sort = TRUE) %>%
+ungroup()
+
+negated_words
+
+ggplot(data=negated_words, aes(word2, n * value, fill = n * value > 0)) +
+geom_col(show.legend = FALSE) +
+xlab(paste0("Words preceded by: ", paste(negation_words, collapse = ', '))) +
+ylab("Sentiment score * number of occurrences") +
+facet_wrap(~word1, ncol = 2, scales = "free") +
+coord_flip()
+
+```
+
+
+## Bigram Graph
+
+```{r, fig.width=7, fig.height=10}
+
+bigram_graph <- bigram_counts %>% filter(n > 3) %>% graph_from_data_frame()
+bigram_graph
+
+set.seed(2017)
+ggraph(bigram_graph, layout = "fr") +
+geom_edge_link() +
+geom_node_point() +
+geom_node_text(aes(label = name), vjust = 1, hjust = 1)
+
+set.seed(2016)
+a <- grid::arrow(type = "closed", length = unit(.15, "inches"))
+ggraph(bigram_graph, layout = "fr") +
+geom_edge_link(aes(edge_alpha = n), show.legend = FALSE,
+arrow = a, end_cap = circle(.07, 'inches')) +
+geom_node_point(color = "lightblue", size = 5) +
+geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+theme_void()
+
+```
+
+
+## tokenizers
+
+```{r}
+
+tokenize_ngrams(corpus_csv$Comment, n = 5, n_min = 2, stopwords = stopwords::stopwords("en"))
+
+tokenize_skip_ngrams(corpus_csv$Comment, n = 5, n_min = 2, k = 2, stopwords = stopwords::stopwords("en"))
+
+```
+
+
+
+

@@ -1,0 +1,171 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
+   dev = "svg")
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(knitcitations)
+library(bibtex)
+library(changepoint)
+library(tidyverse)
+library(rvest)
+library(ggiraph)
+
+```
+
+<div class="activity">
+ANALYTICS 
+</div>
+
+# Change
+# Case: US Border Crossing Entry
+
+
+***
+
+# Load the data
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+df<-read_csv('archetypes/Border_Crossing_Entry_Data.csv')
+df
+```
+
+# Wrangler the data
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+# Format date
+df$newDate <- strptime(as.character(df$Date), "%m/%d/%Y")
+df$newDate<-format(df$newDate, "%Y-%m-%d")
+
+# Filter port and measure
+df1<-df%>%
+  filter(`Port Name` == "Buffalo-Niagara Falls" & 
+           Measure == 'Personal Vehicle Passengers')%>%
+  select( newDate, Value)%>%
+  arrange(newDate)
+
+df1
+
+
+```
+
+
+
+# Multiple Changes in Mean and Variance
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+
+df1.pelt=cpt.meanvar(df1$Value,
+      method='BinSeg',Q=20,penalty="SIC")
+cpts(df1.pelt) # 82 224
+
+paste0('Change Point 1: ',df1$newDate[82])
+paste0('Change Point 2: ',df1$newDate[224])
+
+
+
+param.est(df1.pelt)
+plot(df1.pelt,cpt.width=1,cpt.col='red')
+abline(v=82, col="blue")
+abline(v=224, col="blue")
+
+```
+
+# Change points in CAD to USD Historical Exchange Rates
+
+## Web scrape exchange rate and wrangler data
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+
+url <- 'https://www.ofx.com/en-us/forex-news/historical-exchange-rates/cad/usd/'
+ex_rate <- url %>% 
+  read_html() %>%
+  html_node(xpath = '//*[@id="#main"]/div[3]/div[2]/div[2]/div/div/div[1]/div[2]/table') %>%
+  html_table(fill = TRUE)
+
+```
+
+
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df_x<-ex_rate[3:33,]
+
+slist<-str_split(string = df_x$X1,pattern = "[,]")
+
+Code<-data.frame((Reduce(rbind,slist)))
+
+df_x<-cbind(df_x,Code)
+rownames(df_x) <- NULL
+
+df_x <-df_x[,c(2,4)] %>% rename(Exchange_rate='X2', Year='X2.1')
+df_x
+
+```
+
+## Change in mean and variance
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+x=cpt.meanvar(as.numeric(df_x$Exchange_rate),
+      method='BinSeg',Q=10,penalty="SIC")
+cpts(x) 
+plot(x,cpt.width=1,cpt.col='red')
+abline(v=25, col="blue")
+
+
+paste0('Change Point 1: ',df_x$Year[3])
+paste0('Change Point 2: ',df_x$Year[16])
+paste0('Change Point 3: ',df_x$Year[25])
+```
+
+
+# References
+## The data source is from [kaggle](https://www.kaggle.com/divyansh22/us-border-crossing-data)
+
+## Further self-study resources:
+
+* https://cran.r-project.org/web/packages/changepoint/changepoint.pdf
+* https://www.youtube.com/watch?v=WelmlZK5G2Y&ab_channel=NHSRCommunityNHSRCommunity
+* https://www.coursera.org/learn/machine-learning
+
+  
+
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

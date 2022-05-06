@@ -1,0 +1,331 @@
+---
+title: "Automated Web Scraper"
+author: "Kamino"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=TRUE, class.source= 'fold-hide', dev = "svg")
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+
+library(ggiraph)
+
+```
+
+### Text Analysis
+### Case: Ethiopia Business & Tech News
+### Source: https://ethiopianmonitor.com/category/business/
+
+```{r }
+
+## Task 1: Scrape the website for the latest news articles for text analysis.
+## Task 2: Perform text analytics methods. 
+## Task 3: Automate the above two tasks to get the latest analytics/updates
+
+
+## Methods:
+## 1. Web Scrape using rvest and chrome extension. In our case, headlines, date, articles, links.
+## 2. Save the scraped data into csv for further use
+## 3. KEYWORD CATCHER: capture keywords such as "Breaking News"
+## 4. Send an email whenever a keyword is triggered.
+## 5. Perform Word-Frequency Analysis and Save Plots 
+## 6. Perform Sentiment Analysis and Save Plots
+## 7. Create a Batch File so that we can knit html file, save csv/plots
+## 8. Use Windows Task Scheduler to automate the R-script
+
+```
+
+***
+
+
+###  Web Scraping: various methods used to collect information from across the Internet
+
+### Scrape ethiopiamonitor.com for the headlines, links, date, summary and body using a library called "rvest"
+
+
+
+```{r , echo=FALSE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+print(paste0("Date:", as.character(Sys.Date())))
+
+
+
+library(rvest)
+library(dplyr)
+
+#Here is how the basics works
+#read_html("https://ethiopianmonitor.com/category/business/") 
+
+#here we are reading the nodes on the above webpage
+# We need to select what nodes we want to utilize
+
+#read_html("https://ethiopianmonitor.com/category/business/") %>%
+# html_nodes("#content .entry-title a") %>%
+ #html_text()
+#html_attr("href")
+# And if you want to retrieve the embedded URLs use  html_attr("href")
+
+
+headlines <- lapply(paste0('https://ethiopianmonitor.com/category/business/page/', 1:4),
+                function(url){
+                    url %>% read_html() %>% 
+                        html_nodes("#content .entry-title a") %>% 
+                        html_text()
+                })
+
+links <- lapply(paste0('https://ethiopianmonitor.com/category/business/page/', 1:4),
+                function(url){
+                    url %>% read_html() %>% 
+                        html_nodes("#content .entry-title a") %>% 
+                        html_attr("href")
+                })
+
+
+headlines <- unlist(headlines)
+links <- unlist(links)
+ethiopia_monitor <- data.frame(headlines,links)
+
+
+summary <- list()
+timearticle <- list()
+body <- list()
+
+for (i in ethiopia_monitor$links){
+  url1 <- read_html(i)
+ 
+   summ <- url1 %>%
+    html_node("p:nth-child(1) strong") %>%
+    html_text()
+  summary <- append(summary, summ)
+  
+  datar <- url1 %>%
+    html_node(".published") %>%
+    html_text()
+  timearticle <- append(timearticle, datar)
+  
+  bodies <- url1 %>%
+    html_nodes("#content p")%>%
+    html_text2(preserve_nbsp = TRUE)
+  bodies <- paste (bodies, collapse = " ")
+  body <- append(body, bodies)
+  
+}
+
+
+ethiopia_monitor$summary <- as.character(summary)
+ethiopia_monitor$body <- as.character(body)
+ethiopia_monitor$date <- as.character(timearticle)
+
+od <- "C:/Users/PC/Desktop/UN Internship/Min's Development/Online News Text Analytics/output/"
+csvname <- as.character(Sys.Date())
+csvname2 <- paste0(od,csvname, "ethiopia_monitor.csv")
+write.csv(ethiopia_monitor, csvname2)
+```
+
+
+### Headings of Ethiopia Monitor
+
+```{r , echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+head(ethiopia_monitor$headlines)
+
+
+```
+
+### News Articles of Ethiopia Monitor
+
+```{r , echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+
+ethiopia_monitor$body[1]
+
+```
+
+### Keyword Catcher and Email Notice
+
+### We will catch any article that contains the word "coffee"
+
+```{r , echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+
+test <- ethiopia_monitor
+test$body <- tolower(test$body)
+
+x <- grep("coffee", test$body)
+email <- ethiopia_monitor[x,]
+email
+
+
+# library(mailR)
+# 
+# if (nrow(email)>0){
+# 
+# 
+# from <- "<minthihamyo@gmail.com>"
+# to <- "<minthihamyo@gmail.com>"
+# subject <- "Ethiopia Monitor Keyword Notification"
+# body <- email
+# 
+# send.mail(from=from,to=to, subject=subject, body= body, control=mailControl,
+# smtp = list(host.name = "smtp.gmail.com", port = 587, user.name = "youremail", passwd =    "password", tls = TRUE),
+# authenticate = TRUE,
+# send = TRUE)
+# }
+
+```
+
+### We will start implementing text analytics on the Headlines
+
+### We use library(tm) to remove stopwords, punctuation and custom words
+
+### Then we will draw a word frequncy plot
+
+```{r , echo=FALSE, message=FALSE, warning=FALSE,class.source = 'fold-hide', fig.width=13, fig.height=11}
+
+library(tm)
+
+TextDoc <- VCorpus(VectorSource(ethiopia_monitor$body))
+
+# Convert the text to lower case
+TextDoc <- tm_map(TextDoc, content_transformer(tolower))
+# Remove numbers
+TextDoc <- tm_map(TextDoc, removeNumbers)
+# Remove english common stopwords
+TextDoc <- tm_map(TextDoc, removeWords, stopwords("english"))
+# Remove punctuations
+TextDoc <- tm_map(TextDoc, removePunctuation)
+# Remove your own stop word ("South" and "sudan")
+TextDoc <- tm_map(TextDoc, removeWords, c("ethiopia", "ethiopian", "year", "ababa", "addis", "breaking", "us", "united states", "says", "said", "adsbygoogle", "windowadsbygoogle", "also", "will", "two")) 
+
+# Build a term-document matrix
+TextDoc_dtm <- TermDocumentMatrix(TextDoc)
+dtm_m <- as.matrix(TextDoc_dtm)
+# Sort by descearing value of frequency
+dtm_v <- sort(rowSums(dtm_m),decreasing=TRUE)
+dtm_d <- data.frame(word = names(dtm_v),freq=dtm_v)
+# Display the top 5 most frequent words
+head(dtm_d, 5)
+
+
+# Plot the most frequent words
+
+jpegname <- paste0(od,csvname, "headlines_word_frequency.jpeg") # Code to save a jpeg file with the date
+jpeg(jpegname, width = 800, height = 600, quality = 100)
+plot1 <- barplot(dtm_d[1:15,]$freq, las = 2, names.arg = dtm_d[1:15,]$word,
+        col ="steelblue", main ="Top 15 most frequent words",
+        ylab = "Word frequencies")
+dev.off()
+
+
+
+barplot(dtm_d[1:15,]$freq, las = 2, names.arg = dtm_d[1:15,]$word, # embedded graph in html file
+   col ="steelblue", main ="Top 15 most frequent words",
+   ylab = "Word frequencies")
+
+
+```
+
+### Another way of plotting the Word Frequency is Word Clouds
+
+```{r , echo=FALSE, message=FALSE, warning=FALSE,class.source = 'fold-hide', fig.width=13, fig.height=11}
+
+library(wordcloud)
+
+set.seed(1234)
+wordcloud(words = dtm_d$word, freq = dtm_d$freq, min.freq = 8,
+          random.order=FALSE, rot.per=0.40, 
+          colors=brewer.pal(8, "Dark2"))
+
+
+```
+
+
+### Bi-Gram Analysis
+
+
+```{r , echo=FALSE, message=FALSE, warning=FALSE,class.source = 'fold-hide', fig.width=13, fig.height=11}
+library(tidytext)
+doc_co <- Corpus(VectorSource(ethiopia_monitor$body))
+
+doc_co <- tm_map(doc_co, removePunctuation)
+doc_co <- tm_map(doc_co, content_transformer(tolower))
+doc_co  <- tm_map(doc_co , removeWords, stopwords("english"))
+doc_co  <- tm_map(doc_co , removePunctuation)
+
+doc_co  <- tm_map(doc_co , removeWords, c("ethiopia", "ethiopian", "year", "ababa", "addis", "breaking", "us", "united states", "says", "said", "adsbygoogle", "windowadsbygoogle", "also", "will", "two", "image")) 
+text_df <- data.frame(text_clean = get("content", doc_co), stringsAsFactors = FALSE)
+
+
+bigram <- text_df %>% unnest_tokens(bigram, text_clean, token = "ngrams", n = 2)
+
+bigram_count <- bigram  %>% count(bigram, sort = TRUE)
+
+
+par(mar=c(11,4,4,4))
+barplot(bigram_count[1:15,]$n, las=2, names.arg = bigram_count[1:15,]$bigram,
+        col ="steelblue", main ="Bi-Gram Word Analysis",
+        ylab = "Bi-Gram Word frequencies")
+
+dev.off()
+
+
+```
+
+
+### We will now do some sentiment analysis
+
+
+```{r , echo=FALSE, message=FALSE, warning=FALSE,class.source = 'fold-hide', fig.width=13, fig.height=11}
+library("syuzhet")
+
+ss <- ethiopia_monitor$body
+
+syuzhet_vector <- get_sentiment(ss, method="syuzhet")
+
+# see summary statistics of the vector
+sahead <- summary(syuzhet_vector)
+sahead
+
+d<-get_nrc_sentiment(ss)
+library(ggplot2)
+td<-data.frame(t(d))
+#The function rowSums computes column sums across rows for each level of a grouping variable.
+td_new <- data.frame(rowSums(td))
+#Transformation and cleaning
+names(td_new)[1] <- "count"
+td_new <- cbind("sentiment" = rownames(td_new), td_new)
+rownames(td_new) <- NULL
+td_new3<-td_new[1:8,]
+#Plot One - count of words associated with each sentiment
+
+jpegname2 <- paste0(od,csvname, "sentiment_headlines.jpeg")
+jpeg(jpegname2, width = 800, height = 600, quality = 100)
+
+quickplot(sentiment, data=td_new3, weight=count, geom="bar", fill=sentiment, ylab="count")+ggtitle("Emotion sentiments of Headlines")
+dev.off()
+
+quickplot(sentiment, data=td_new3, weight=count, geom="bar", fill=sentiment, ylab="count")+ggtitle("Emotion sentiments of Headlines")
+
+
+textname <- paste0(od,csvname, "sentiment.txt")
+sink(textname)
+cat("Sentiment Analysis of Body")
+cat("\n")
+cat("Min. 1st Qu.  Median    Mean 3rd Qu.    Max. ")
+cat("\n")
+sink()
+
+```
+
+
+
+
+
+
+

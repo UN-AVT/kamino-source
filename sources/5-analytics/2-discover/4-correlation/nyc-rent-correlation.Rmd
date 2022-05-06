@@ -1,0 +1,162 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE,
+   dev = "svg")
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
+
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(stringr)
+library(lubridate)
+library(DT)
+library(caret)
+library(leaflet)
+library(corrplot)
+library(boot)
+library(knitcitations)
+library(bibtex)
+library(ggiraph)
+```
+
+
+<div class="activity">
+Qualitative Analysis and Machine Learning
+</div>
+
+
+# Correlation
+## Manhattan Rent by StreetEasy
+#### A correlation matrix is a table showing correlation coefficients between variables.Correlation coefficients are used to measure how strong a relationship is between two variables. The most popular correlation methodology is the Pearson Correlation Coefficient. It is the ratio between the covariance of two variables and the product of their standard deviations.
+
+***
+
+## Ingest the Data. 
+### Plotting a correlation matrix requires all our variables to be numeric. You'll notice that some of our variables are in a character format. We'll somehow need to convert this into a numerical variable.  
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load csv data file
+df = read.csv("archetypes/manhattan.csv", header = TRUE, stringsAsFactors = FALSE)
+str(df)
+
+```
+
+### One way to tackle this by Dummy-Coding or using Dummy Variables. Dummy coding converts non-numerical categorical variables to 1s and 0s. 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+dum_cod <- data.frame(x = c(1, 2, 3, 4, 5), has_patio=c("Yes", "No", "No", "Yes", "No"))
+dum_cod$has_patio
+
+library('fastDummies')
+
+dum_cod <- dummy_cols(dum_cod, select_columns = 'has_patio')
+dum_cod$has_patio_Yes
+
+
+```
+
+### However, our categoirical variable "Neighborhood" have 32 categories. Dummy coding is not feasible in this case. Thus we will convert it to our median value. 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10, fig.height=18, fig.align='center'}
+
+df2 <- df %>%
+  group_by(neighborhood) %>%
+  summarise(PriceMedian = median(rent))  %>%
+  arrange(desc(PriceMedian))
+
+df<- merge(df, df2)
+colnames(df)[19] <- "Neighborhood_price"
+
+df <- df %>% select(-neighborhood, -rental_id, -borough)
+
+head(sample(df$Neighborhood_price))
+
+
+```
+
+
+
+
+
+#### Now that we have all numericala values, we can now draw a correlation matrix. Each cell in the table shows the correlation between two variables. A correlation coefficient of 1 indicates a strong positive relationship . -1 indicates a strong negative relationship. A result of zero indicates no relationship at all. A correlation coefficient of 1 means that for every positive increase in one variable, there is a positive increase of a fixed proportion in the other.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=8, fig.height=8, fig.align='center'}
+
+library(corrplot)
+
+corr <- cor(df)
+corrplot(corr)
+
+```
+
+
+### Let's explore other styles.
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=8, fig.height=8, fig.align='center'}
+
+corrplot(corr, method = 'number')
+
+corrplot(corr, method = 'color', order = 'alphabet') 
+
+corrplot(corr, method = 'square', order = 'FPC', type = 'lower', diag = FALSE)
+
+corrplot.mixed(corr, order = 'AOE')
+
+corrplot(corr, order = 'hclust', addrect = 2)
+```
+
+
+# References
+## The citations and data sources used for this case can be found here 
+
+<a href="https://www.kaggle.com/zohaib30/streeteasy-dataset" target="_blank"> Kaggle StreetEasy DataSet</a>
+
+
+
+
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

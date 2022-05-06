@@ -1,0 +1,175 @@
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(knitcitations)
+library(bibtex)
+library(changepoint)
+library(tidyverse)
+library(rvest)
+library(ggplot2)
+library(dplyr)
+library(tabulizer)
+library(pdftools)
+
+```
+
+<div class="activity">
+ANALYTICS 
+</div>
+
+# Change
+# Case: Bitcoin
+
+
+***
+
+# Load the data
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+df <- extract_tables("../archetypes/houston min temperature.pdf",
+             output = "data.frame", guess = FALSE
+             )
+
+df <- reduce(df, bind_rows)
+df  <- df[2:24,1:6]
+foo <- data.frame(do.call('rbind', strsplit(as.character(df$X.2),' ',fixed=TRUE)))
+
+df <- cbind(df, foo)
+df <- df %>% select(-c(X.2,X.3,X.4),X.3, X.4)
+
+names(df) <- df[1,]
+df <- df[-1,]
+
+
+```
+
+# Wrangler the data
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+temp <- df
+
+temp <- temp %>% pivot_longer(!Year, names_to = 'Month', values_to='Temperature')
+temp <- temp[1:258,]
+
+temp$Month <- match(temp$Month, month.abb)
+temp <- within(temp, Date <- sprintf("%s-%02d-01", Year, Month))
+
+
+temp <- temp %>% select(Date, Temperature)
+temp$Date <- as.Date(temp$Date)
+temp$Temperature <- as.numeric(temp$Temperature)
+temp
+```
+
+
+# Let's Plot the Data first to understand it better
+
+
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+p <- ggplot(temp, aes(x=Date, y=Temperature)) +
+  geom_line() + 
+  xlab("")
+p
+
+```
+
+
+
+```{r message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+library(bcp)
+bcp.1a <- bcp(temp$Temperature)
+plot(bcp.1a, return.mcmc = TRUE, main="Univariate Change Point Example")
+legacyplot(bcp.1a)
+
+```
+
+## We now move on to Anomaly Detection
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+library(AnomalyDetection)
+
+ano <- AnomalyDetectionVec(temp$Temperature, period = 12, max_anoms=0.1,  direction = 'both', plot = T)
+ano$anoms
+
+paste0('Anomaly 1 :' ,temp$Date[27])
+paste0('Anomaly 2 :' ,temp$Date[161])
+paste0('Anomaly 3 :' ,temp$Date[254])
+
+ano$plot
+```
+
+
+# Anomaly 2
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df3 <- as_tibble(temp)
+
+library(anomalize)
+
+df_anomalized <- df3 %>%
+    time_decompose(Temperature, merge = TRUE) %>%
+    anomalize(remainder) %>%
+    time_recompose()
+df_anomalized %>% glimpse()
+
+df_anomalized %>% plot_anomalies(ncol = 3, alpha_dots = 0.75)
+```
+
+# Change points in CAD to USD Historical Exchange Rates
+
+## Web scrape exchange rate and wrangler data
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+
+p1 <- df_anomalized %>%
+    plot_anomaly_decomposition() +
+    ggtitle("Freq/Trend = 'auto'")
+p1
+
+```
+
+
+
+
+
+# References
+## The data source is from [kaggle](https://www.kaggle.com/divyansh22/us-border-crossing-data)
+
+## Further self-study resources:
+
+* https://cran.r-project.org/web/packages/changepoint/changepoint.pdf
+* https://www.youtube.com/watch?v=WelmlZK5G2Y&ab_channel=NHSRCommunityNHSRCommunity
+* https://www.coursera.org/learn/machine-learning
+
+  
+
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

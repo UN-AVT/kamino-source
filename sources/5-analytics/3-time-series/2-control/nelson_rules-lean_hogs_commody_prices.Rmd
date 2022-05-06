@@ -1,0 +1,271 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+library(tidyverse)
+library(Rspc)
+library(scales)
+
+library(htmltools) # needed to include html snippets
+library(knitcitations)
+library(bibtex)
+library(ggiraph)
+
+```
+
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# Controls
+## Nelson Rules
+
+> If you pull one pig by the tail all the rest will squeal...\
+--- Dutch Proverb\
+
+<p> <a href="https://en.wikipedia.org/wiki/Nelson_rules">Nelson rules</a> are a set of rules that help measure "out-of-control" conditions. </p>
+
+* __Rule 1__: One point is grossly __out of control__.  
+* __Rule 2__: Some prolonged __bias__ exists.  
+* __Rule 3__: A __trend__ exists.  
+* __Rule 4__: __Oscillation__ is beyond noise..  
+* __Rule 5__: __Medium tendency__ for points to be mediumly out of control.  
+* __Rule 6__: __Strong tendency__ for points to be slightly out of control.  
+* __Rule 7__: __Greater variation__ would be expected  
+* __Rule 8__: __Jumping from above to below__ while missing the first standard deviation band is rarely random.  
+
+***
+
+## In 2019, the African swine fever devastated farming in China:
+<a href="https://www.economist.com/china/2019/05/25/aporkalypse-now">Article: The Economist May 25th 2019 edition - Aporkalypse now. African swine fever hits the home of half the world’s pigs</a>
+
+<p>According to this article, "Prices of the meat are about 40% higher than a year ago. Last month they rose by more than 14%"</p>
+
+## Could we have used the Nelson controls as an early warning system?
+
+<p>in the example below, we want to see if the Nelson's rules could have been used to alert us when the price of this commodity rose, signaling a disruption in this market.</p>
+
+***
+
+# Data loading
+
+```{r echo=TRUE}
+
+df <- read.csv("archetypes/lean-hogs-commodity-prices_Nasdaq.csv")
+
+df
+
+```
+
+# Data wrangling
+
+## Calculating returns
+
+```{r echo=TRUE}
+
+df_1 <- df %>% 
+  arrange(Date) %>% 
+  mutate(return =(Close - lag(Close))/lag(Close))%>% 
+  select(Date, Close, return)
+
+df_1$Date <- as.Date(df_1$Date, format="%Y-%m-%d")
+
+df_1
+
+```
+
+
+# Let's plot the time series 
+
+Note that we are plotting here the 'Closing price' but the Nelson Rules will be calculated on the 'Returns'. However, 'Closing price' is better to highlight the magnitude of the changes on a timeline:
+
+
+```{r, message=FALSE, echo=TRUE, fig.width=10.5, fig.height=7.5}
+
+v1 <- ggplot(df_1, aes(x=Date, y=Close)) +
+  geom_line(color = "grey") + 
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank()
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank()
+  )  + 
+  scale_x_date(breaks = breaks_pretty(15)) +
+  geom_vline(xintercept = as.Date("2019-05-24"), color = "red") +
+  geom_text(aes(x=as.Date("2019-05-24"), y=100, label="article is published"), size=4, color = "red")  +
+  geom_vline(xintercept = as.Date("2018-05-24"), color = "blue") +
+  geom_text(aes(x=as.Date("2018-05-24"), y=90, label="one year prior"), size=4, color = "blue")
+
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+We notice the large jump in price in the first quarter of 2019. let's see if we could have detected these events based on the time-series pattern.
+
+# Data modeling
+
+We will use the R library Rspc (https://cran.r-project.org/web/packages/Rspc/readme/README.html)
+
+The R function used conveniently calculates the 8 Nelson Rules that exists.
+
+```{r echo=TRUE}
+
+df_2 <- EvaluateRules(x = df_1$return, type = 'i', whichRules = 1:8, lcl = NA, cl = NA, ucl = NA)
+
+df_binded <- bind_cols(df_1,df_2)
+
+df_binded$Date <- as.Date(df_binded$Date, format="%Y-%m-%d")
+
+df_binded
+
+```
+
+## Further data wrangling
+
+```{r echo=TRUE}
+
+df_binded_1 <- df_binded %>% mutate(R1 = ifelse(Rule1 == 1, "R1", "")) %>% 
+  mutate(R2 = ifelse(Rule2 == 1, "R2", "")) %>%
+  mutate(R3 = ifelse(Rule3 == 1, "R3", "")) %>%
+  mutate(R4 = ifelse(Rule4 == 1, "R4", "")) %>%
+  mutate(R5 = ifelse(Rule5 == 1, "R5", "")) %>%
+  mutate(R6 = ifelse(Rule6 == 1, "R6", "")) %>%
+  mutate(R7 = ifelse(Rule7 == 1, "R7", "")) %>%
+  mutate(R8 = ifelse(Rule8 == 1, "R8", ""))
+
+df_binded_2 <- df_binded_1 %>% 
+  gather(key = "key", value = "label",
+                                      Rule1, Rule2, Rule3, Rule4, Rule5, Rule6, Rule7, Rule8) %>%
+  select(Date,Close,return,key,label)
+  
+
+df_binded_2
+
+```
+
+# Plotting the Nelson's rules.
+
+We calculated the 8 Nelson rules for every data point in this time-series. Let's see what there rules were able to flag. Note that the two lines from prior graph were kept. The area of concern is between the blue and red line
+
+
+```{r, message=FALSE, echo=TRUE, fig.width=10.5, fig.height=7.5}
+
+v2 <- ggplot(df_binded_2, aes(x=Date, y=Close)) +
+  geom_line(color = "grey") +
+  geom_point(data=df_binded_2[df_binded_2$label == 1,],color="red",size=1) +
+  #geom_text(aes(label=label), color = 'red') +
+  facet_grid(rows = vars(key)) + 
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank()
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank()
+  )  + 
+  scale_x_date(breaks = breaks_pretty(7)) +
+  geom_vline(xintercept = as.Date("2019-05-24"), color = "red")  +
+  geom_vline(xintercept = as.Date("2018-05-24"), color = "blue")
+
+girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+From the above graph, it seems like Rule 1, Rule 3 and Rule 6 would have been able to signal the choc we are trying to detect. Let's take a closer look
+
+# Same plot as above, but centered on May 25th 2018 to May 25th 2019, only including Rule 1, Rule 3 and Rule 6
+
+```{r, message=FALSE, echo=TRUE, fig.width=10.5, fig.height=7.5}
+
+df_binded_3 <- df_binded_2 %>% 
+  filter(Date > '2018/05/25' & Date < '2019/05/25') %>% 
+  filter(key == 'Rule1' | key == 'Rule3' | key == 'Rule6')
+
+v3 <- ggplot(df_binded_3, aes(x=Date, y=Close)) +
+  geom_line(color = "grey") +
+  geom_point(data=df_binded_3[df_binded_3$label == 1,],color="red",size=2) +
+  geom_text(data=df_binded_3[df_binded_3$label == 1,],aes(label=Date), color = 'red') +
+  facet_grid(rows = vars(key)) + 
+  theme(panel.grid = element_blank(), 
+        #axis.ticks = element_blank(), 
+        #axis.text.x=element_blank(), 
+        #panel.border = element_blank(),
+        strip.background = element_blank(),
+        panel.background = element_blank()
+        #axis.title.x=element_blank(),
+        #axis.title.y=element_blank()
+  )
+girafe(ggobj = v3, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+
+```
+
+# Conclusion
+
+* Rule 1 was the first rule to flag an annomaly (actually on March 13th 2019). Howerver, this flag is being triggered quite frequently (21 occurences in the span of 5 years).  
+* Rule 6 came second, and flagged an unusual activity in this market on March 14th and March 15th. This rule is less verbose than Rule 1 and was only triggered 9 times.
+* Finally, R3 was triggered last, on March 29th 2019. What is remarkable however is that it was the only time it got triggered in 5 years.
+
+As a reminder, the rules indicate the following 'out-of-control' event in a time series:  
+* __Rule 1__: One point is grossly __out of control__.  
+* __Rule 3__: A __trend__ exists.  
+* __Rule 6__: __Strong tendency__ for points to be slightly out of control.  
+
+
+# References
+## The citations and data sources used for this case
+
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+
+# echo=FALSE will exclude block from code folding
+# Example for including external html content when needed
+#htmltools::includeHTML("mark-complete-button.html")
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

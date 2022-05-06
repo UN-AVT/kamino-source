@@ -1,0 +1,329 @@
+---
+title: "Template"
+output: 
+  html_document:
+    theme: flatly
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Java must be installed as a prerequisite
+library(rJava)
+
+library(tidyverse)
+library(tidytext)
+library(dplyr)
+library(stringr)
+library(lubridate)
+library(gutenbergr)
+library(janeaustenr)
+library(NLP)
+library(openNLP)
+library(NLP)
+library(tm)
+library(topicmodels)
+library(quanteda)
+library(text2vec)
+library(spacyr)
+library(RWeka)
+# library(RcmdrPlugin.temis)
+library(tm)
+library(languageR)
+library(koRpus)
+library(RKEA)
+#library(maxent)
+library(lsa)
+library(wordcloud)
+library(syuzhet)
+library(SnowballC)
+library(textfeatures)
+library(SentimentAnalysis)
+library(crfsuite)
+
+```
+
+## Select a text file
+
+
+```{r}
+
+# Read the text file from local machine , choose file interactively
+#text <- readLines(file.choose())
+# Load the data as a corpus
+#text_corpus <- Corpus(VectorSource(text))
+
+
+```
+
+
+## Load a csv file
+
+
+```{r}
+
+corpus_csv <- read.csv("./sets/15.csv", header = TRUE, stringsAsFactors = FALSE)
+corpus_csv$text <- corpus_csv$Comment
+corpus_csv
+
+text_corpus <- Corpus(VectorSource(corpus_csv$text))
+text_corpus
+
+```
+
+
+## Cleaning Data as Dataframe Column
+
+
+```{r}
+
+#corpus_csv$text <-  gsub("https\\S*", "", corpus_csv$text)
+#corpus_csv$text <-  gsub("@\\S*", "", corpus_csv$text) 
+#corpus_csv$text  <-  gsub("amp", "", corpus_csv$text) 
+#corpus_csv$text  <-  gsub("[\r\n]", "", corpus_csv$text)
+#corpus_csv$text  <-  gsub("[[:punct:]]", "", corpus_csv$text)
+
+```
+
+
+
+## Clean Data as Vector
+
+
+```{r, echo=FALSE}
+
+# Data Cleaning
+# Delete Links in the Tweets
+#text_corpus <- gsub("http.*", "", text_corpus)
+#text_corpus <- gsub("https.*", "", text_corpus)
+#text_corpus <- gsub("&", "&", text_corpus)
+
+# Replacing "/", "@" and "|" with space
+toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
+#text_corpus <- tm_map(text_corpus, toSpace, "/")
+#text_corpus <- tm_map(text_corpus, toSpace, "@")
+#text_corpus <- tm_map(text_corpus, toSpace, "\\|")
+
+# Convert the text to lower case
+text_corpus <- tm_map(text_corpus, content_transformer(tolower))
+
+# Remove numbers
+text_corpus <- tm_map(text_corpus, removeNumbers)
+
+# Remove english common stopwords
+text_corpus <- tm_map(text_corpus, removeWords, stopwords("english"))
+
+# Remove your own stop word
+# specify your custom stopwords as a character vector
+# text_corpus <- tm_map(text_corpus, removeWords, c("s", "company", "team")) 
+
+# Remove punctuations
+text_corpus <- tm_map(text_corpus, removePunctuation)
+
+# Eliminate extra white spaces
+text_corpus <- tm_map(text_corpus, stripWhitespace)
+
+# Text stemming - which reduces words to their root form
+text_corpus <- tm_map(text_corpus, stemDocument)
+
+# Convert back to data frame
+text_df <- data.frame(text_clean = get("content", text_corpus), stringsAsFactors = FALSE)
+corpus_df <- cbind.data.frame(corpus_csv, text_df)
+
+
+```
+
+
+## Remove Stop Words
+
+```{r}
+
+text_corpus
+corpus_df
+
+# Load list of stop words - from the tidytext package
+data("stop_words")
+# Remove stop words from your list of words
+cleaned_text_corpus <- text_corpus %>% anti_join(stop_words)
+
+```
+
+
+## Term Document Matrix
+
+
+```{r}
+
+# Build a term-document matrix
+text_corpus_dtm <- TermDocumentMatrix(text_corpus)
+dtm_m <- as.matrix(text_corpus_dtm)
+# Sort by descearing value of frequency
+dtm_v <- sort(rowSums(dtm_m),decreasing=TRUE)
+dtm_d <- data.frame(word = names(dtm_v),freq=dtm_v)
+# Display the top 5 most frequent words
+head(dtm_d, 50)
+
+
+# quanteda library
+davis_tokenized_list <- tokens(davis_df_negative$text_clean)
+
+
+```
+
+
+```{r}
+
+# Plot the most frequent words
+barplot(dtm_d[1:5,]$freq, las = 2, names.arg = dtm_d[1:5,]$word,
+        col ="lightgreen", main ="Top 5 most frequent words",
+        ylab = "Word frequencies")
+
+```
+
+
+## Word Cloud
+
+
+```{r, echo=FALSE, fig.width=12, fig.height=6}
+
+#generate word cloud
+set.seed(1234)
+wordcloud(words = dtm_d$word, freq = dtm_d$freq, min.freq = 5,
+          max.words=100, random.order=FALSE, rot.per=0.40, 
+          colors=brewer.pal(8, "Dark2"))
+
+```
+
+
+## Word Association
+
+
+```{r}
+
+# Find associations 
+findAssocs(text_corpus_dtm, terms = c("racism","black","white"), corlimit = 0.25)		
+
+# Find associations for words that occur at least 50 times
+findAssocs(text_corpus_dtm, terms = findFreqTerms(text_corpus_dtm, lowfreq = 50), corlimit = 0.25)
+
+
+```
+
+
+## Sentiment Scores
+
+```{r}
+
+# regular sentiment score using get_sentiment() function and method of your choice
+# please note that different methods may have different scales
+syuzhet_vector <- get_sentiment(text, method="syuzhet")
+# see the first row of the vector
+head(syuzhet_vector)
+# see summary statistics of the vector
+summary(syuzhet_vector)
+
+
+# Sentiment Analysis library
+corpus_df_sentiment <- analyzeSentiment(corpus_df$text_clean)
+corpus_df_sentiment <- dplyr::select(corpus_df_sentiment, 
+                                 SentimentGI, SentimentHE,
+                                 SentimentLM, SentimentQDAP, 
+                                 WordCount)
+
+corpus_df_sentiment <- dplyr::mutate(corpus_df_sentiment, 
+                                 mean_sentiment = rowMeans(corpus_df_sentiment[,-5]))
+
+
+corpus_df_sentiment <- dplyr::select(corpus_df_sentiment, 
+                                 WordCount, 
+                                 mean_sentiment)
+
+corpus_df <- cbind.data.frame(corpus_df, corpus_df_sentiment)
+
+corpus_df_negative <- filter(corpus_df, mean_sentiment < 0)
+
+nrow(corpus_df_negative)
+
+
+```
+
+
+```{r}
+
+# bing
+bing_vector <- get_sentiment(text, method="bing")
+head(bing_vector)
+summary(bing_vector)
+#affin
+afinn_vector <- get_sentiment(text, method="afinn")
+head(afinn_vector)
+summary(afinn_vector)
+
+```
+
+
+```{r}
+
+#compare the first row of each vector using sign function
+rbind(
+  sign(head(syuzhet_vector)),
+  sign(head(bing_vector)),
+  sign(head(afinn_vector))
+)
+
+```
+
+
+## Emotion Classification
+
+
+```{r}
+
+# run nrc sentiment analysis to return data frame with each row classified as one of the following
+# emotions, rather than a score: 
+# anger, anticipation, disgust, fear, joy, sadness, surprise, trust 
+# It also counts the number of positive and negative emotions found in each row
+d<-get_nrc_sentiment(text)
+# head(d,10) - to see top 10 lines of the get_nrc_sentiment dataframe
+head (d,10)
+
+```
+
+
+```{r}
+
+#transpose
+td<-data.frame(t(d))
+
+td
+
+#The function rowSums computes column sums across rows for each level of a grouping variable.
+td_new <- data.frame(rowSums(td[2:49]))
+#Transformation and cleaning
+names(td_new)[1] <- "count"
+td_new <- cbind("sentiment" = rownames(td_new), td_new)
+rownames(td_new) <- NULL
+td_new2<-td_new[1:8,]
+#Plot One - count of words associated with each sentiment
+quickplot(sentiment, data=td_new2, weight=count, geom="bar", fill=sentiment, ylab="count")+ggtitle("Survey sentiments")
+
+
+```
+
+
+```{r}
+
+#Plot two - count of words associated with each sentiment, expressed as a percentage
+barplot(
+  sort(colSums(prop.table(d[, 1:8]))), 
+  horiz = TRUE, 
+  cex.names = 0.7, 
+  las = 1, 
+  main = "Emotions in Text", xlab="Percentage"
+)
+
+```
+

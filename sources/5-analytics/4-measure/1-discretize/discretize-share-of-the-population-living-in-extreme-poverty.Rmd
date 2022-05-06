@@ -1,0 +1,110 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+library(classInt)
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# Discretize
+## I want to reduce a continuous variable to bins of similar values
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+Discretizing is a method to smooth a sorted data value by consulting its neighborhood of values around it. The sorted values are distributed into a number of neighborhood bins. This method enables you to reduce a continuous variable to a fixed number of discrete observations.
+
+These are the methods that can be applied, each with their own pros and cons depending on the profile of the data:
+
+* __Equal-width__ : divides the range into 𝑁 intervals of equal size.
+* __Equal-frequency__ : divides the range into 𝑁 intervals, each containing approximately the same number of samples
+  
+***
+
+# Discretize
+## Case:  SDG INDICATOR 1.1.1 - Share of the population living in extreme poverty, by country
+
+## Load Data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+df <- read.csv("archetypes/share-of-the-population-living-in-extreme-poverty.csv")
+
+df
+
+
+```
+
+
+
+
+## Clean Data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+df1 <- df  %>% rename("Ratio" = "Poverty.headcount.ratio.at..1.90.a.day..2011.PPP.....of.population.")%>% filter(Code != "")%>% filter(Entity!= "World")
+df1
+
+df2 <- df1 %>% filter(Year == '2015') 
+df2
+```
+
+
+## Equal Width
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+equal_width <- classIntervals(df2$Ratio, 10, style = 'equal')
+equal_width
+```
+
+
+## Equal frequency
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+equal_fre <- classIntervals(df1$Year, 3, style = 'quantile')
+equal_fre
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+

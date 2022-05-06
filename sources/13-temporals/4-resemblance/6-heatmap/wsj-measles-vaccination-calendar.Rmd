@@ -1,17 +1,17 @@
 ---
-pagetitle: "Kamino"
+pagetitle: "Measles Vaccination"
 output: 
   html_document:
     theme: lumen
-    # css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    css: "../../../z-assemblers/assets/styles/content.css"
     df_print: paged
     mathjax: NULL
     code_folding: show
     include:
-      # in_header: "../../../z-assemblers/fragments/header.html"
-      # after_body: "../../../z-assemblers/fragments/footer.html"
-    #self_contained: false
-    #lib_dir: libs
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
 ---
 
 ```{r setup, include=FALSE}
