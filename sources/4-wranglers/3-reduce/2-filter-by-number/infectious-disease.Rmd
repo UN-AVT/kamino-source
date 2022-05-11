@@ -38,11 +38,11 @@ showtext_auto()
 ```
 
 <div class="activity">
-CHARTS  
+WRANGLERS 
 </div>
 
 # Infectious Diseases in Context
-## Scatter Quadrant
+## Filter by Number
 
 
 ```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Aaron Blanco Tejedor on Unsplash"}
