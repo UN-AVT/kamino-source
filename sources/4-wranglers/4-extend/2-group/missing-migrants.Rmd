@@ -43,7 +43,7 @@ WRANGLERS
 </div>
 
 # Missing Migrants
-## Group
+## Group by Columns
 
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo by Nikko Macaspac on Unsplash"}
 
@@ -144,37 +144,6 @@ v1 <- ggplot(df_2,aes(x=`Reported Month`, y=sum_number, fill=`Reported Year`)) +
 
 girafe(ggobj = v1, width_svg = 16, height_svg = 9, options =
 list(opts_sizing(rescale = TRUE, width = 1.0)))
-
-```
-
-Although the "Long format" is needed to use with visual library, it is not really user friendly. Let's use the "Wide format" to make it easier for users to review the data. We can do this by 
-
-### Pivot
-
-The above "Long data format" may be good for running a chart, but it is not the most human-friendly presentation. Let's see how we can transform this.
-
-
-```{r method: one cal, message=FALSE, echo=TRUE,warning=FALSE}
-
-df_3 <- df_2 %>% 
-  pivot_wider(names_from = `Reported Month`, values_from = sum_number) %>% 
-  relocate(`Reported Year`,Jan , Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
-
-df_3
-
-```
-
-
-### Unpivot
-
-Let's unpivot this data to return to "Long data format".
-
-
-```{r, message=FALSE, echo=TRUE,warning=FALSE}
-
-df_4 <- df_3  %>%
-  pivot_longer(!`Reported Year`,names_to = "MONTH", values_to = "TOTAL_DEAD")
-df_4
 
 ```
 
