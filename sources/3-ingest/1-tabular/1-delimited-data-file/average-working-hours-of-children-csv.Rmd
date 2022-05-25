@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
 
 ```{r setup, include=FALSE}
@@ -55,10 +55,18 @@ knitr::include_graphics(masthead, dpi=72)
 ### Ingest
 #### comma-separated-values
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load csv data file
-df <- read.csv("archetypes/child-labor/average-working-hours-of-children.csv", header = TRUE, stringsAsFactors = FALSE)
+# df <- read.csv("archetypes/child-labor/average-working-hours-of-children.csv", header = TRUE, stringsAsFactors = FALSE)
+# df
+# Load data
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "child-labor/average-working-hours-of-children.csv"
+url <- paste0(url_root, url_file)
+
+df <- read.csv(url, header = TRUE)
+
 df
 
 ```
@@ -67,7 +75,7 @@ df
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data Source: Child Labor, Our World in Data, https://ourworldindata.org/child-labor
+* Narrative and Data Source: Child Labor, Our World in Data,[GO](https://ourworldindata.org/child-labor){target="_blank"} 
 
 <pre>
 @misc{ortizospina_2013_child,

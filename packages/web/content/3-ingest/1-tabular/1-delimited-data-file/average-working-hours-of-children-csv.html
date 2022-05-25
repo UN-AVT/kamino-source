@@ -13,8 +13,8 @@
 
 <title>Child labor</title>
 
-<script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
-<script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="../../../../vendor/knitr/header-attrs-2.9/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
 <script src="../../../../vendor/knitr/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -105,7 +105,7 @@ if (window.hljs) {
 
 
 
-<link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
+<link rel="stylesheet" href="C:/Users/Karine.Louly/Documents/GitHub/kamino-source/sources/z-assemblers/assets/styles/content.css" type="text/css" />
 
 
 
@@ -250,8 +250,16 @@ Photo by Zeyn Afuang on Unsplash
 <h3>Ingest</h3>
 <div id="comma-separated-values" class="section level4">
 <h4>comma-separated-values</h4>
-<pre class="r fold-show"><code># Load csv data file
-df &lt;- read.csv(&quot;archetypes/child-labor/average-working-hours-of-children.csv&quot;, header = TRUE, stringsAsFactors = FALSE)
+<pre class="r fold-hide"><code># Load csv data file
+# df &lt;- read.csv(&quot;archetypes/child-labor/average-working-hours-of-children.csv&quot;, header = TRUE, stringsAsFactors = FALSE)
+# df
+# Load data
+url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;child-labor/average-working-hours-of-children.csv&quot;
+url &lt;- paste0(url_root, url_file)
+
+df &lt;- read.csv(url, header = TRUE)
+
 df</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -265,7 +273,7 @@ df</code></pre>
 <div id="citations-for-narrative-and-data-sources" class="section level4">
 <h4>citations for narrative and data sources</h4>
 <ul>
-<li>Narrative and Data Source: Child Labor, Our World in Data, <a href="https://ourworldindata.org/child-labor" class="uri">https://ourworldindata.org/child-labor</a></li>
+<li>Narrative and Data Source: Child Labor, Our World in Data,<a href="https://ourworldindata.org/child-labor" target="_blank">GO</a></li>
 </ul>
 <pre>
 @misc{ortizospina_2013_child,
