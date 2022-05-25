@@ -57,10 +57,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-# Load csv data file
-# df <- read.csv("archetypes/child-labor/average-working-hours-of-children.csv", header = TRUE, stringsAsFactors = FALSE)
-# df
-# Load data
+
 url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
 url_file <- "child-labor/average-working-hours-of-children.csv"
 url <- paste0(url_root, url_file)
