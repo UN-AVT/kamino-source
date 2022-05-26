@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
 
 ```{r setup, include=FALSE}
@@ -57,13 +57,22 @@ The first character is a magical character, invisible to the human eye, but read
 ### Ingest
 #### without considering BOM
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_no_bom <- read.csv("archetypes/world-electricity-production/world-electricity-production-bom.csv", header = TRUE, stringsAsFactors = FALSE)
+#df_no_bom <- read.csv("archetypes/world-electricity-production/world-electricity-production-bom.csv", header = TRUE, stringsAsFactors = FALSE)
+#df_no_bom
+
+#names(df_no_bom)
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "world-electricity-production/world-electricity-production-bom.csv"
+url <- paste0(url_root, url_file)
+
+df_no_bom <- read.csv(url, header = TRUE)
+
 df_no_bom
 
 names(df_no_bom)
-
 ```
 
 
@@ -71,9 +80,19 @@ names(df_no_bom)
 #### recognizing BOM encoding
 
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-df_bom <- read.csv("archetypes/world-electricity-production/world-electricity-production-bom.csv", header = TRUE, stringsAsFactors = FALSE, fileEncoding = 'UTF-8-BOM')
+#df_bom <- read.csv("archetypes/world-electricity-production/world-electricity-production-bom.csv", header = TRUE, stringsAsFactors = FALSE, fileEncoding = 'UTF-8-BOM')
+#df_bom
+
+#names(df_bom)
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "world-electricity-production/world-electricity-production-bom.csv"
+url <- paste0(url_root, url_file)
+
+df_bom <- read.csv(url, header = TRUE, fileEncoding = 'UTF-8-BOM')
+
 df_bom
 
 names(df_bom)
