@@ -13,7 +13,7 @@
 
 <title>Alcohol Comsumption by Country</title>
 
-<script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/header-attrs-2.14/header-attrs.js"></script>
 <script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
@@ -105,6 +105,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
 
 
@@ -129,6 +130,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -214,7 +218,7 @@ pre code {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -250,7 +254,15 @@ Photo by Brendan Church on Unsplash
 <h3>Ingest</h3>
 <div id="sheet-one" class="section level4">
 <h4>sheet one</h4>
-<pre class="r fold-hide"><code>df1 &lt;- read_excel(&#39;archetypes/alcohol-consumption-by-country/alcohol-consumption-by-country.xlsx&#39;, sheet=1)
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;alcohol-consumption-by-country/alcohol-consumption-by-country.xlsx&quot;
+url &lt;- paste0(url_root, url_file)
+
+
+p1f &lt;- tempfile()
+download.file(url, p1f, mode=&quot;wb&quot;)
+df1&lt;-read_excel(path = p1f, sheet = 1)
+
 df1</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -263,13 +275,23 @@ df1</code></pre>
 <h3>Ingest</h3>
 <div id="sheet-two" class="section level4">
 <h4>sheet two</h4>
-<pre class="r fold-hide"><code>df2 &lt;- read_excel(&#39;archetypes/alcohol-consumption-by-country/alcohol-consumption-by-country.xlsx&#39;, sheet=2)
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;alcohol-consumption-by-country/alcohol-consumption-by-country.xlsx&quot;
+url &lt;- paste0(url_root, url_file)
+
+
+p1f &lt;- tempfile()
+download.file(url, p1f, mode=&quot;wb&quot;)
+df2&lt;-read_excel(path = p1f, sheet = 2)
+
 df2</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Rank"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Liters of pure alcohol consumed per capita"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"11","2":"Portugal","3":"12.9"},{"1":"12","2":"Serbia","3":"12.6"},{"1":"13","2":"Grenada","3":"12.5"},{"1":"14","2":"Poland","3":"12.5"},{"1":"15","2":"Latvia","3":"12.3"},{"1":"16","2":"Finland","3":"12.3"},{"1":"17","2":"South Korea","3":"12.3"},{"1":"18","2":"France","3":"12.2"},{"1":"19","2":"Australia","3":"12.2"},{"1":"20","2":"Croatia","3":"12.2"},{"1":"21","2":"Ireland","3":"11.9"},{"1":"22","2":"Luxembourg","3":"11.9"},{"1":"23","2":"Germany","3":"11.8"},{"1":"24","2":"Slovenia","3":"11.6"},{"1":"25","2":"United Kingdom","3":"11.6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
+<pre class="r fold-hide"><code>#df2 &lt;- read_excel(&#39;archetypes/alcohol-consumption-by-country/alcohol-consumption-by-country.xlsx&#39;, sheet=2)
+#df2</code></pre>
 </div>
 </div>
 <div id="references" class="section level3">

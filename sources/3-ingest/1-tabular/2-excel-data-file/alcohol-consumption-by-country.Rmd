@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
 
 ```{r setup, include=FALSE}
@@ -59,8 +59,18 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```{r load-data sh1, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
 
-df1 <- read_excel('archetypes/alcohol-consumption-by-country/alcohol-consumption-by-country.xlsx', sheet=1)
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "alcohol-consumption-by-country/alcohol-consumption-by-country.xlsx"
+url <- paste0(url_root, url_file)
+
+
+p1f <- tempfile()
+download.file(url, p1f, mode="wb")
+df1<-read_excel(path = p1f, sheet = 1)
+
 df1
+
 
 ```
 
@@ -69,10 +79,21 @@ df1
 #### sheet two
 
 
-```{r load-data sh2, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
 
-df2 <- read_excel('archetypes/alcohol-consumption-by-country/alcohol-consumption-by-country.xlsx', sheet=2)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "alcohol-consumption-by-country/alcohol-consumption-by-country.xlsx"
+url <- paste0(url_root, url_file)
+
+
+p1f <- tempfile()
+download.file(url, p1f, mode="wb")
+df2<-read_excel(path = p1f, sheet = 2)
+
 df2
+
+#df2 <- read_excel('archetypes/alcohol-consumption-by-country/alcohol-consumption-by-country.xlsx', sheet=2)
+#df2
 
 ```
 
