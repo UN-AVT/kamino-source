@@ -13,7 +13,7 @@
 
 <title>Managed Sanitation Services</title>
 
-<script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/header-attrs-2.14/header-attrs.js"></script>
 <script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
@@ -105,6 +105,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
 
 
@@ -129,6 +130,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -214,7 +218,7 @@ pre code {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -254,7 +258,12 @@ is the supreme goal of medicine its foundation and its crown…<br />
 <h3>Ingest</h3>
 <div id="nested-version" class="section level4">
 <h4>nested version</h4>
-<pre class="r fold-hide"><code>json_nested &lt;- fromJSON(&quot;archetypes/managed-sanitation-services/managed-sanitation-services-namibia.json&quot;, flatten = FALSE)
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;managed-sanitation-services/managed-sanitation-services-namibia.json&quot;
+url &lt;- paste0(url_root, url_file)
+
+json_nested &lt;- fromJSON(url, flatten = FALSE)
+
 df_nested &lt;- as.data.frame(json_nested)
 df_nested</code></pre>
 <div data-pagedtable="false">
@@ -282,7 +291,16 @@ df_nested_fact_dim</code></pre>
 <div id="flattened-version" class="section level4">
 <h4>flattened version</h4>
 <p>Same result, different approach.</p>
-<pre class="r fold-hide"><code>json_flat &lt;- fromJSON(&quot;archetypes/managed-sanitation-services/managed-sanitation-services-namibia.json&quot;, flatten = TRUE)
+<pre class="r fold-hide"><code>#json_flat &lt;- fromJSON(&quot;archetypes/managed-sanitation-services/managed-sanitation-services-namibia.json&quot;, flatten = TRUE)
+#df_flat &lt;- as.data.frame(json_flat)
+#df_flat
+
+url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;managed-sanitation-services/managed-sanitation-services-namibia.json&quot;
+url &lt;- paste0(url_root, url_file)
+
+json_flat &lt;- fromJSON(url, flatten = TRUE)
+
 df_flat &lt;- as.data.frame(json_flat)
 df_flat</code></pre>
 <div data-pagedtable="false">
@@ -301,7 +319,7 @@ df_flat</code></pre>
 <ul>
 <li>World Health Organization</li>
 <li>Basic and safely managed sanitation services</li>
-<li><a href="https://apps.who.int/gho/data/node.main.WSHSANITATION?lang=en" class="uri">https://apps.who.int/gho/data/node.main.WSHSANITATION?lang=en</a></li>
+<li><a href="https://apps.who.int/gho/data/node.main.WSHSANITATION?lang=en" target="_blank">GO</a></li>
 </ul></li>
 </ul>
 <script type="text/javascript">

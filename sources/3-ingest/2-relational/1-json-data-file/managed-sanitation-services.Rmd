@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
 
 ```{r setup, include=FALSE}
@@ -65,9 +65,15 @@ knitr::include_graphics(masthead, dpi=72)
 ### Ingest
 #### nested version
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-json_nested <- fromJSON("archetypes/managed-sanitation-services/managed-sanitation-services-namibia.json", flatten = FALSE)
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "managed-sanitation-services/managed-sanitation-services-namibia.json"
+url <- paste0(url_root, url_file)
+
+json_nested <- fromJSON(url, flatten = FALSE)
+
 df_nested <- as.data.frame(json_nested)
 df_nested
 
@@ -91,9 +97,14 @@ df_nested_fact_dim
 
 Same result, different approach.
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-json_flat <- fromJSON("archetypes/managed-sanitation-services/managed-sanitation-services-namibia.json", flatten = TRUE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "managed-sanitation-services/managed-sanitation-services-namibia.json"
+url <- paste0(url_root, url_file)
+
+json_flat <- fromJSON(url, flatten = TRUE)
+
 df_flat <- as.data.frame(json_flat)
 df_flat
 
@@ -106,7 +117,7 @@ df_flat
 * Data Source:
   * World Health Organization
   * Basic and safely managed sanitation services
-  * https://apps.who.int/gho/data/node.main.WSHSANITATION?lang=en
+  * [GO](https://apps.who.int/gho/data/node.main.WSHSANITATION?lang=en){target="_blank"}
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
