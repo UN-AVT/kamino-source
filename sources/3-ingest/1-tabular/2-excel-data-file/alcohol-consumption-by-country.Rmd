@@ -92,8 +92,6 @@ df2<-read_excel(path = p1f, sheet = 2)
 
 df2
 
-#df2 <- read_excel('archetypes/alcohol-consumption-by-country/alcohol-consumption-by-country.xlsx', sheet=2)
-#df2
 
 ```
 
@@ -101,8 +99,9 @@ df2
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data Source: Global Health Data Repository, World Health Organization, [GO](https://apps.who.int/gho/data/node.main-euro.A1039?lang=en&showonly=GISAH){target="_blank"}
+* Narrative: Global Health Data Repository, World Health Organization, [GO](https://apps.who.int/gho/data/node.main-euro.A1039?lang=en&showonly=GISAH){target="_blank"}
 
+* Data Source: Week 26: Alcohol Consumption by Country, MakeoverMonday, [GO](https://www.makeovermonday.co.uk/week-26-2019/){target="_blank"}
 
 <pre>
 @misc{murray_2019_week,
