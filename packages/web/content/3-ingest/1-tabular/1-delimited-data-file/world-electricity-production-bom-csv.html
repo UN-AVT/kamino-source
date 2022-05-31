@@ -255,12 +255,7 @@ Photo by Michael Dziedzic on Unsplash
 <h3>Ingest</h3>
 <div id="without-considering-bom" class="section level4">
 <h4>without considering BOM</h4>
-<pre class="r fold-hide"><code>#df_no_bom &lt;- read.csv(&quot;archetypes/world-electricity-production/world-electricity-production-bom.csv&quot;, header = TRUE, stringsAsFactors = FALSE)
-#df_no_bom
-
-#names(df_no_bom)
-
-url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
 url_file &lt;- &quot;world-electricity-production/world-electricity-production-bom.csv&quot;
 url &lt;- paste0(url_root, url_file)
 
@@ -281,12 +276,7 @@ df_no_bom</code></pre>
 <h3>Ingest</h3>
 <div id="recognizing-bom-encoding" class="section level4">
 <h4>recognizing BOM encoding</h4>
-<pre class="r fold-hide"><code>#df_bom &lt;- read.csv(&quot;archetypes/world-electricity-production/world-electricity-production-bom.csv&quot;, header = TRUE, stringsAsFactors = FALSE, fileEncoding = &#39;UTF-8-BOM&#39;)
-#df_bom
-
-#names(df_bom)
-
-url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
 url_file &lt;- &quot;world-electricity-production/world-electricity-production-bom.csv&quot;
 url &lt;- paste0(url_root, url_file)
 
