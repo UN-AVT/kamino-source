@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
 
 ```{r setup, include=FALSE}
@@ -84,11 +84,18 @@ Let's take a closer look at a few to understand the specific parameters needed t
 
 This is the full dataset without attention to encoding.  Take notice of how the characters are represented for the various languages.
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source = 'fold-show'}
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
 # Load csv data file
-df_no_encoding <- read.csv("archetypes/ne-countries/ne-countries.csv", header = TRUE, stringsAsFactors = FALSE)
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "ne-countries/ne-countries.csv"
+url <- paste0(url_root, url_file)
+
+df_no_encoding <- read.csv(url, header = TRUE)
+
 df_no_encoding
+
 
 ```
 
@@ -97,13 +104,19 @@ df_no_encoding
 #### UTF-8, Big5, GB18030, windows-1252
 
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # your current session encoding
 getOption("encoding")
 
 # encoding detected in data file
-guess_encoding("archetypes/ne-countries/ne-countries.csv", n_max = 1000)
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "ne-countries/ne-countries.csv"
+url <- paste0(url_root, url_file)
+
+guess_encoding(url, n_max = 1000)
+
 
 ```
 
@@ -112,13 +125,20 @@ guess_encoding("archetypes/ne-countries/ne-countries.csv", n_max = 1000)
 #### with UTF-8 encoding
 
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 Sys.setlocale(category="LC_ALL", locale = "UTF-8")
 Sys.getlocale(category="LC_ALL")
 
-df_utf8_encoding <- read.csv("archetypes/ne-countries/ne-countries.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "ne-countries/ne-countries.csv"
+url <- paste0(url_root, url_file)
+
+df_utf8_encoding <- read.csv(url, header = TRUE, encoding = "UTF-8")
 df_utf8_encoding <- df_utf8_encoding%>% select(FORMAL_EN, NAME_ES, NAME_FR, NAME_AR, NAME_ZH, NAME_RU)
+
+
 df_utf8_encoding
 
 ```
@@ -128,7 +148,7 @@ df_utf8_encoding
 #### for UTF-8 languages
 
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 data.frame(FRENCH = df_no_encoding$NAME_FR)
 Encoding(df_no_encoding$NAME_FR) <- "UTF-8"
@@ -139,13 +159,20 @@ data.frame(FRENCH_ENC = df_no_encoding$NAME_FR)
 ### Non-Latin Scripts
 #### Arabic
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 # en_US.UTF-8
 Sys.setlocale("LC_CTYPE", "arabic")
 Sys.getlocale(category="LC_ALL")
 
-df_utf8_ar <- read.csv("archetypes/ne-countries/ne-countries.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "ne-countries/ne-countries.csv"
+url <- paste0(url_root, url_file)
+
+df_utf8_ar <- read.csv(url, header = TRUE, encoding = "UTF-8")
+
+
 df_utf8_ar <- df_utf8_ar %>% select(FORMAL_EN, NAME_AR)
 df_utf8_ar
 
@@ -155,12 +182,18 @@ df_utf8_ar
 #### Chinese
 
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 Sys.setlocale("LC_CTYPE", "chinese")
 Sys.getlocale(category="LC_ALL")
 
-df_utf8_zh <- read.csv("archetypes/ne-countries/ne-countries.csv", header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "ne-countries/ne-countries.csv"
+url <- paste0(url_root, url_file)
+
+df_utf8_zh <- read.csv(url, header = TRUE, encoding = "UTF-8")
+
 df_utf8_zh <- df_utf8_zh %>% select(FORMAL_EN, NAME_ZH)
 df_utf8_zh
 
@@ -169,12 +202,18 @@ df_utf8_zh
 ### Non-Latin Scripts
 #### Russian
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 Sys.setlocale("LC_CTYPE", "russian")
 Sys.getlocale(category="LC_ALL")
 
-df_utf8_encoding_ru <- read_csv("archetypes/ne-countries/ne-countries-ru.csv")
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "ne-countries/ne-countries.csv"
+url <- paste0(url_root, url_file)
+
+df_utf8_encoding_ru <- read.csv(url, header = TRUE, encoding = "UTF-8")
+
 df_utf8_encoding_ru <- df_utf8_encoding_ru %>% select(FORMAL_EN, NAME_RU)
 df_utf8_encoding_ru
 

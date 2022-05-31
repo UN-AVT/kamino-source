@@ -13,7 +13,7 @@
 
 <title>Country names</title>
 
-<script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/header-attrs-2.14/header-attrs.js"></script>
 <script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
@@ -105,6 +105,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
 
 
@@ -129,6 +130,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -214,7 +218,7 @@ pre code {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -276,8 +280,14 @@ Photo by Marjan Blan on Unsplash
 <div id="without-encoding" class="section level4">
 <h4>without encoding</h4>
 <p>This is the full dataset without attention to encoding. Take notice of how the characters are represented for the various languages.</p>
-<pre class="r fold-show"><code># Load csv data file
-df_no_encoding &lt;- read.csv(&quot;archetypes/ne-countries/ne-countries.csv&quot;, header = TRUE, stringsAsFactors = FALSE)
+<pre class="r fold-hide"><code># Load csv data file
+
+url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;ne-countries/ne-countries.csv&quot;
+url &lt;- paste0(url_root, url_file)
+
+df_no_encoding &lt;- read.csv(url, header = TRUE)
+
 df_no_encoding</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -290,11 +300,16 @@ df_no_encoding</code></pre>
 <h3>Detect encoding</h3>
 <div id="utf-8-big5-gb18030-windows-1252" class="section level4">
 <h4>UTF-8, Big5, GB18030, windows-1252</h4>
-<pre class="r fold-show"><code># your current session encoding
+<pre class="r fold-hide"><code># your current session encoding
 getOption(&quot;encoding&quot;)</code></pre>
 <pre><code>## [1] &quot;native.enc&quot;</code></pre>
-<pre class="r fold-show"><code># encoding detected in data file
-guess_encoding(&quot;archetypes/ne-countries/ne-countries.csv&quot;, n_max = 1000)</code></pre>
+<pre class="r fold-hide"><code># encoding detected in data file
+
+url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;ne-countries/ne-countries.csv&quot;
+url &lt;- paste0(url_root, url_file)
+
+guess_encoding(url, n_max = 1000)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["encoding"],"name":[1],"type":["chr"],"align":["left"]},{"label":["confidence"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"UTF-8","2":"1.00"},{"1":"Big5","2":"0.67"},{"1":"GB18030","2":"0.36"},{"1":"windows-1252","2":"0.27"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -306,12 +321,18 @@ guess_encoding(&quot;archetypes/ne-countries/ne-countries.csv&quot;, n_max = 100
 <h3>Set Locale</h3>
 <div id="with-utf-8-encoding" class="section level4">
 <h4>with UTF-8 encoding</h4>
-<pre class="r fold-show"><code>Sys.setlocale(category=&quot;LC_ALL&quot;, locale = &quot;UTF-8&quot;)</code></pre>
+<pre class="r fold-hide"><code>Sys.setlocale(category=&quot;LC_ALL&quot;, locale = &quot;UTF-8&quot;)</code></pre>
 <pre><code>## [1] &quot;&quot;</code></pre>
-<pre class="r fold-show"><code>Sys.getlocale(category=&quot;LC_ALL&quot;)</code></pre>
+<pre class="r fold-hide"><code>Sys.getlocale(category=&quot;LC_ALL&quot;)</code></pre>
 <pre><code>## [1] &quot;LC_COLLATE=English_United States.1252;LC_CTYPE=English_United States.1252;LC_MONETARY=English_United States.1252;LC_NUMERIC=C;LC_TIME=English_United States.1252&quot;</code></pre>
-<pre class="r fold-show"><code>df_utf8_encoding &lt;- read.csv(&quot;archetypes/ne-countries/ne-countries.csv&quot;, header = TRUE, stringsAsFactors = FALSE, encoding = &quot;UTF-8&quot;)
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;ne-countries/ne-countries.csv&quot;
+url &lt;- paste0(url_root, url_file)
+
+df_utf8_encoding &lt;- read.csv(url, header = TRUE, encoding = &quot;UTF-8&quot;)
 df_utf8_encoding &lt;- df_utf8_encoding%&gt;% select(FORMAL_EN, NAME_ES, NAME_FR, NAME_AR, NAME_ZH, NAME_RU)
+
+
 df_utf8_encoding</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -324,13 +345,13 @@ df_utf8_encoding</code></pre>
 <h3>Encoding by column</h3>
 <div id="for-utf-8-languages" class="section level4">
 <h4>for UTF-8 languages</h4>
-<pre class="r fold-show"><code>data.frame(FRENCH = df_no_encoding$NAME_FR)</code></pre>
+<pre class="r fold-hide"><code>data.frame(FRENCH = df_no_encoding$NAME_FR)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["FRENCH"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Fidji"},{"1":"Tanzanie"},{"1":"Sahara occidental"},{"1":"Canada"},{"1":"Ã‰tats-Unis"},{"1":"Kazakhstan"},{"1":"OuzbÃ©kistan"},{"1":"Papouasie-Nouvelle-GuinÃ©e"},{"1":"IndonÃ©sie"},{"1":"Argentine"},{"1":"Chili"},{"1":"RÃ©publique dÃ©mocratique du Congo"},{"1":"Somalie"},{"1":"Kenya"},{"1":"Soudan"},{"1":"Tchad"},{"1":"HaÃ¯ti"},{"1":"RÃ©publique dominicaine"},{"1":"Russie"},{"1":"Bahamas"},{"1":"Ã®les Malouines"},{"1":"NorvÃ¨ge"},{"1":"Groenland"},{"1":"Terres australes et antarctiques franÃ§aises"},{"1":"Timor oriental"},{"1":"Afrique du Sud"},{"1":"Lesotho"},{"1":"Mexique"},{"1":"Uruguay"},{"1":"BrÃ©sil"},{"1":"Bolivie"},{"1":"PÃ©rou"},{"1":"Colombie"},{"1":"Panama"},{"1":"Costa Rica"},{"1":"Nicaragua"},{"1":"Honduras"},{"1":"Salvador"},{"1":"Guatemala"},{"1":"Belize"},{"1":"Venezuela"},{"1":"Guyana"},{"1":"Suriname"},{"1":"France"},{"1":"Ã‰quateur"},{"1":"Porto Rico"},{"1":"JamaÃ¯que"},{"1":"Cuba"},{"1":"Zimbabwe"},{"1":"Botswana"},{"1":"Namibie"},{"1":"SÃ©nÃ©gal"},{"1":"Mali"},{"1":"Mauritanie"},{"1":"BÃ©nin"},{"1":"Niger"},{"1":"Nigeria"},{"1":"Cameroun"},{"1":"Togo"},{"1":"Ghana"},{"1":"CÃ´te d'Ivoire"},{"1":"GuinÃ©e"},{"1":"GuinÃ©e-Bissau"},{"1":"Liberia"},{"1":"Sierra Leone"},{"1":"Burkina Faso"},{"1":"RÃ©publique centrafricaine"},{"1":"RÃ©publique du Congo"},{"1":"Gabon"},{"1":"GuinÃ©e Ã©quatoriale"},{"1":"Zambie"},{"1":"Malawi"},{"1":"Mozambique"},{"1":"Swaziland"},{"1":"Angola"},{"1":"Burundi"},{"1":"IsraÃ«l"},{"1":"Liban"},{"1":"Madagascar"},{"1":"Palestine"},{"1":"Gambie"},{"1":"Tunisie"},{"1":"AlgÃ©rie"},{"1":"Jordanie"},{"1":"Ã‰mirats arabes unis"},{"1":"Qatar"},{"1":"KoweÃ¯t"},{"1":"Irak"},{"1":"Oman"},{"1":"Vanuatu"},{"1":"Cambodge"},{"1":"ThaÃ¯lande"},{"1":"Laos"},{"1":"Birmanie"},{"1":"ViÃªt Nam"},{"1":"CorÃ©e du Nord"},{"1":"CorÃ©e du Sud"},{"1":"Mongolie"},{"1":"Inde"},{"1":"Bangladesh"},{"1":"Bhoutan"},{"1":"NÃ©pal"},{"1":"Pakistan"},{"1":"Afghanistan"},{"1":"Tadjikistan"},{"1":"Kirghizistan"},{"1":"TurkmÃ©nistan"},{"1":"Iran"},{"1":"Syrie"},{"1":"ArmÃ©nie"},{"1":"SuÃ¨de"},{"1":"BiÃ©lorussie"},{"1":"Ukraine"},{"1":"Pologne"},{"1":"Autriche"},{"1":"Hongrie"},{"1":"Moldavie"},{"1":"Roumanie"},{"1":"Lituanie"},{"1":"Lettonie"},{"1":"Estonie"},{"1":"Allemagne"},{"1":"Bulgarie"},{"1":"GrÃ¨ce"},{"1":"Turquie"},{"1":"Albanie"},{"1":"Croatie"},{"1":"Suisse"},{"1":"Luxembourg"},{"1":"Belgique"},{"1":"Pays-Bas"},{"1":"Portugal"},{"1":"Espagne"},{"1":"Irlande"},{"1":"Nouvelle-CalÃ©donie"},{"1":"ÃŽles Salomon"},{"1":"Nouvelle-ZÃ©lande"},{"1":"Australie"},{"1":"Sri Lanka"},{"1":"RÃ©publique populaire de Chine"},{"1":"TaÃ¯wan"},{"1":"Italie"},{"1":"Danemark"},{"1":"Royaume-Uni"},{"1":"Islande"},{"1":"AzerbaÃ¯djan"},{"1":"GÃ©orgie"},{"1":"Philippines"},{"1":"Malaisie"},{"1":"Brunei"},{"1":"SlovÃ©nie"},{"1":"Finlande"},{"1":"Slovaquie"},{"1":"RÃ©publique tchÃ¨que"},{"1":"Ã‰rythrÃ©e"},{"1":"Japon"},{"1":"Paraguay"},{"1":"YÃ©men"},{"1":"Arabie saoudite"},{"1":"Antarctique"},{"1":"Chypre du Nord"},{"1":"Chypre"},{"1":"Maroc"},{"1":"Ã‰gypte"},{"1":"Libye"},{"1":"Ã‰thiopie"},{"1":"Djibouti"},{"1":"Somaliland"},{"1":"Ouganda"},{"1":"Rwanda"},{"1":"Bosnie-HerzÃ©govine"},{"1":"RÃ©publique de MacÃ©doine"},{"1":"Serbie"},{"1":"MontÃ©nÃ©gro"},{"1":"Kosovo"},{"1":"TrinitÃ©-et-Tobago"},{"1":"Soudan du Sud"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<pre class="r fold-show"><code>Encoding(df_no_encoding$NAME_FR) &lt;- &quot;UTF-8&quot;
+<pre class="r fold-hide"><code>Encoding(df_no_encoding$NAME_FR) &lt;- &quot;UTF-8&quot;
 data.frame(FRENCH_ENC = df_no_encoding$NAME_FR)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -343,12 +364,18 @@ data.frame(FRENCH_ENC = df_no_encoding$NAME_FR)</code></pre>
 <h3>Non-Latin Scripts</h3>
 <div id="arabic" class="section level4">
 <h4>Arabic</h4>
-<pre class="r fold-show"><code># en_US.UTF-8
+<pre class="r fold-hide"><code># en_US.UTF-8
 Sys.setlocale(&quot;LC_CTYPE&quot;, &quot;arabic&quot;)</code></pre>
 <pre><code>## [1] &quot;Arabic_Saudi Arabia.1256&quot;</code></pre>
-<pre class="r fold-show"><code>Sys.getlocale(category=&quot;LC_ALL&quot;)</code></pre>
+<pre class="r fold-hide"><code>Sys.getlocale(category=&quot;LC_ALL&quot;)</code></pre>
 <pre><code>## [1] &quot;LC_COLLATE=English_United States.1252;LC_CTYPE=Arabic_Saudi Arabia.1256;LC_MONETARY=English_United States.1252;LC_NUMERIC=C;LC_TIME=English_United States.1252&quot;</code></pre>
-<pre class="r fold-show"><code>df_utf8_ar &lt;- read.csv(&quot;archetypes/ne-countries/ne-countries.csv&quot;, header = TRUE, stringsAsFactors = FALSE, encoding = &quot;UTF-8&quot;)
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;ne-countries/ne-countries.csv&quot;
+url &lt;- paste0(url_root, url_file)
+
+df_utf8_ar &lt;- read.csv(url, header = TRUE, encoding = &quot;UTF-8&quot;)
+
+
 df_utf8_ar &lt;- df_utf8_ar %&gt;% select(FORMAL_EN, NAME_AR)
 df_utf8_ar</code></pre>
 <div data-pagedtable="false">
@@ -362,11 +389,16 @@ df_utf8_ar</code></pre>
 <h3>Non-Latin Scripts</h3>
 <div id="chinese" class="section level4">
 <h4>Chinese</h4>
-<pre class="r fold-show"><code>Sys.setlocale(&quot;LC_CTYPE&quot;, &quot;chinese&quot;)</code></pre>
+<pre class="r fold-hide"><code>Sys.setlocale(&quot;LC_CTYPE&quot;, &quot;chinese&quot;)</code></pre>
 <pre><code>## [1] &quot;Chinese (Simplified)_China.936&quot;</code></pre>
-<pre class="r fold-show"><code>Sys.getlocale(category=&quot;LC_ALL&quot;)</code></pre>
+<pre class="r fold-hide"><code>Sys.getlocale(category=&quot;LC_ALL&quot;)</code></pre>
 <pre><code>## [1] &quot;LC_COLLATE=English_United States.1252;LC_CTYPE=Chinese (Simplified)_China.936;LC_MONETARY=English_United States.1252;LC_NUMERIC=C;LC_TIME=English_United States.1252&quot;</code></pre>
-<pre class="r fold-show"><code>df_utf8_zh &lt;- read.csv(&quot;archetypes/ne-countries/ne-countries.csv&quot;, header = TRUE, stringsAsFactors = FALSE, encoding = &quot;UTF-8&quot;)
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;ne-countries/ne-countries.csv&quot;
+url &lt;- paste0(url_root, url_file)
+
+df_utf8_zh &lt;- read.csv(url, header = TRUE, encoding = &quot;UTF-8&quot;)
+
 df_utf8_zh &lt;- df_utf8_zh %&gt;% select(FORMAL_EN, NAME_ZH)
 df_utf8_zh</code></pre>
 <div data-pagedtable="false">
@@ -380,16 +412,21 @@ df_utf8_zh</code></pre>
 <h3>Non-Latin Scripts</h3>
 <div id="russian" class="section level4">
 <h4>Russian</h4>
-<pre class="r fold-show"><code>Sys.setlocale(&quot;LC_CTYPE&quot;, &quot;russian&quot;)</code></pre>
+<pre class="r fold-hide"><code>Sys.setlocale(&quot;LC_CTYPE&quot;, &quot;russian&quot;)</code></pre>
 <pre><code>## [1] &quot;Russian_Russia.1251&quot;</code></pre>
-<pre class="r fold-show"><code>Sys.getlocale(category=&quot;LC_ALL&quot;)</code></pre>
+<pre class="r fold-hide"><code>Sys.getlocale(category=&quot;LC_ALL&quot;)</code></pre>
 <pre><code>## [1] &quot;LC_COLLATE=English_United States.1252;LC_CTYPE=Russian_Russia.1251;LC_MONETARY=English_United States.1252;LC_NUMERIC=C;LC_TIME=English_United States.1252&quot;</code></pre>
-<pre class="r fold-show"><code>df_utf8_encoding_ru &lt;- read_csv(&quot;archetypes/ne-countries/ne-countries-ru.csv&quot;)
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;ne-countries/ne-countries.csv&quot;
+url &lt;- paste0(url_root, url_file)
+
+df_utf8_encoding_ru &lt;- read.csv(url, header = TRUE, encoding = &quot;UTF-8&quot;)
+
 df_utf8_encoding_ru &lt;- df_utf8_encoding_ru %&gt;% select(FORMAL_EN, NAME_RU)
 df_utf8_encoding_ru</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["FORMAL_EN"],"name":[1],"type":["chr"],"align":["left"]},{"label":["NAME_RU"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Republic of Fiji","2":"Фиджи"},{"1":"United Republic of Tanzania","2":"Танзания"},{"1":"Sahrawi Arab Democratic Republic","2":"Западная Сахара"},{"1":"Canada","2":"Канада"},{"1":"United States of America","2":"Соединённые Штаты Америки"},{"1":"Republic of Kazakhstan","2":"Казахстан"},{"1":"Republic of Uzbekistan","2":"Узбекистан"},{"1":"Independent State of Papua New Guinea","2":"Папуа-Новая Гвинея"},{"1":"Republic of Indonesia","2":"Индонезия"},{"1":"Argentine Republic","2":"Аргентина"},{"1":"Republic of Chile","2":"Чили"},{"1":"Democratic Republic of the Congo","2":"Демократическая Республика Конго"},{"1":"Federal Republic of Somalia","2":"Сомали"},{"1":"Republic of Kenya","2":"Кения"},{"1":"Republic of the Sudan","2":"Судан"},{"1":"Republic of Chad","2":"Чад"},{"1":"Republic of Haiti","2":"Республика Гаити"},{"1":"Dominican Republic","2":"Доминиканская Республика"},{"1":"Russian Federation","2":"Россия"},{"1":"Commonwealth of the Bahamas","2":"Багамские Острова"},{"1":"Falkland Islands","2":"Фолклендские острова"},{"1":"Kingdom of Norway","2":"Норвегия"},{"1":"Greenland","2":"Гренландия"},{"1":"Territory of the French Southern and Antarctic Lands","2":"Французские Южные и Антарктические территории"},{"1":"Democratic Republic of Timor-Leste","2":"Восточный Тимор"},{"1":"Republic of South Africa","2":"Южно-Африканская Республика"},{"1":"Kingdom of Lesotho","2":"Лесото"},{"1":"United Mexican States","2":"Мексика"},{"1":"Oriental Republic of Uruguay","2":"Уругвай"},{"1":"Federative Republic of Brazil","2":"Бразилия"},{"1":"Plurinational State of Bolivia","2":"Боливия"},{"1":"Republic of Peru","2":"Перу"},{"1":"Republic of Colombia","2":"Колумбия"},{"1":"Republic of Panama","2":"Панама"},{"1":"Republic of Costa Rica","2":"Коста-Рика"},{"1":"Republic of Nicaragua","2":"Никарагуа"},{"1":"Republic of Honduras","2":"Гондурас"},{"1":"Republic of El Salvador","2":"Сальвадор"},{"1":"Republic of Guatemala","2":"Гватемала"},{"1":"Belize","2":"Белиз"},{"1":"Bolivarian Republic of Venezuela","2":"Венесуэла"},{"1":"Co-operative Republic of Guyana","2":"Гайана"},{"1":"Republic of Suriname","2":"Суринам"},{"1":"French Republic","2":"Франция"},{"1":"Republic of Ecuador","2":"Эквадор"},{"1":"Commonwealth of Puerto Rico","2":"Пуэрто-Рико"},{"1":"Jamaica","2":"Ямайка"},{"1":"Republic of Cuba","2":"Куба"},{"1":"Republic of Zimbabwe","2":"Зимбабве"},{"1":"Republic of Botswana","2":"Ботсвана"},{"1":"Republic of Namibia","2":"Намибия"},{"1":"Republic of Senegal","2":"Сенегал"},{"1":"Republic of Mali","2":"Мали"},{"1":"Islamic Republic of Mauritania","2":"Мавритания"},{"1":"Republic of Benin","2":"Бенин"},{"1":"Republic of Niger","2":"Нигер"},{"1":"Federal Republic of Nigeria","2":"Нигерия"},{"1":"Republic of Cameroon","2":"Камерун"},{"1":"Togolese Republic","2":"Того"},{"1":"Republic of Ghana","2":"Гана"},{"1":"Republic of Ivory Coast","2":"Кот-д’Ивуар"},{"1":"Republic of Guinea","2":"Гвинея"},{"1":"Republic of Guinea-Bissau","2":"Гвинея-Бисау"},{"1":"Republic of Liberia","2":"Либерия"},{"1":"Republic of Sierra Leone","2":"Сьерра-Леоне"},{"1":"Burkina Faso","2":"Буркина-Фасо"},{"1":"Central African Republic","2":"Центральноафриканская Республика"},{"1":"Republic of the Congo","2":"Республика Конго"},{"1":"Gabonese Republic","2":"Габон"},{"1":"Republic of Equatorial Guinea","2":"Экваториальная Гвинея"},{"1":"Republic of Zambia","2":"Замбия"},{"1":"Republic of Malawi","2":"Малави"},{"1":"Republic of Mozambique","2":"Мозамбик"},{"1":"Kingdom of eSwatini","2":"Свазиленд"},{"1":"People's Republic of Angola","2":"Ангола"},{"1":"Republic of Burundi","2":"Бурунди"},{"1":"State of Israel","2":"Израиль"},{"1":"Lebanese Republic","2":"Ливан"},{"1":"Republic of Madagascar","2":"Мадагаскар"},{"1":"West Bank and Gaza","2":"Палестина"},{"1":"Republic of the Gambia","2":"Гамбия"},{"1":"Republic of Tunisia","2":"Тунис"},{"1":"People's Democratic Republic of Algeria","2":"Алжир"},{"1":"Hashemite Kingdom of Jordan","2":"Иордания"},{"1":"United Arab Emirates","2":"Объединённые Арабские Эмираты"},{"1":"State of Qatar","2":"Катар"},{"1":"State of Kuwait","2":"Кувейт"},{"1":"Republic of Iraq","2":"Ирак"},{"1":"Sultanate of Oman","2":"Оман"},{"1":"Republic of Vanuatu","2":"Вануату"},{"1":"Kingdom of Cambodia","2":"Камбоджа"},{"1":"Kingdom of Thailand","2":"Таиланд"},{"1":"Lao People's Democratic Republic","2":"Лаос"},{"1":"Republic of the Union of Myanmar","2":"Мьянма"},{"1":"Socialist Republic of Vietnam","2":"Вьетнам"},{"1":"Democratic People's Republic of Korea","2":"Корейская Народно-Демократическая Республика"},{"1":"Republic of Korea","2":"Республика Корея"},{"1":"Mongolia","2":"Монголия"},{"1":"Republic of India","2":"Индия"},{"1":"People's Republic of Bangladesh","2":"Бангладеш"},{"1":"Kingdom of Bhutan","2":"Бутан"},{"1":"Nepal","2":"Непал"},{"1":"Islamic Republic of Pakistan","2":"Пакистан"},{"1":"Islamic State of Afghanistan","2":"Афганистан"},{"1":"Republic of Tajikistan","2":"Таджикистан"},{"1":"Kyrgyz Republic","2":"Киргизия"},{"1":"Turkmenistan","2":"Туркмения"},{"1":"Islamic Republic of Iran","2":"Иран"},{"1":"Syrian Arab Republic","2":"Сирия"},{"1":"Republic of Armenia","2":"Армения"},{"1":"Kingdom of Sweden","2":"Швеция"},{"1":"Republic of Belarus","2":"Белоруссия"},{"1":"Ukraine","2":"Украина"},{"1":"Republic of Poland","2":"Польша"},{"1":"Republic of Austria","2":"Австрия"},{"1":"Republic of Hungary","2":"Венгрия"},{"1":"Republic of Moldova","2":"Молдавия"},{"1":"Romania","2":"Румыния"},{"1":"Republic of Lithuania","2":"Литва"},{"1":"Republic of Latvia","2":"Латвия"},{"1":"Republic of Estonia","2":"Эстония"},{"1":"Federal Republic of Germany","2":"Германия"},{"1":"Republic of Bulgaria","2":"Болгария"},{"1":"Hellenic Republic","2":"Греция"},{"1":"Republic of Turkey","2":"Турция"},{"1":"Republic of Albania","2":"Албания"},{"1":"Republic of Croatia","2":"Хорватия"},{"1":"Swiss Confederation","2":"Швейцария"},{"1":"Grand Duchy of Luxembourg","2":"Люксембург"},{"1":"Kingdom of Belgium","2":"Бельгия"},{"1":"Kingdom of the Netherlands","2":"Нидерланды"},{"1":"Portuguese Republic","2":"Португалия"},{"1":"Kingdom of Spain","2":"Испания"},{"1":"Ireland","2":"Ирландия"},{"1":"New Caledonia","2":"Новая Каледония"},{"1":"NA","2":"Соломоновы Острова"},{"1":"New Zealand","2":"Новая Зеландия"},{"1":"Commonwealth of Australia","2":"Австралия"},{"1":"Democratic Socialist Republic of Sri Lanka","2":"Шри-Ланка"},{"1":"People's Republic of China","2":"Китайская Народная Республика"},{"1":"NA","2":"Китайская Республика"},{"1":"Italian Republic","2":"Италия"},{"1":"Kingdom of Denmark","2":"Дания"},{"1":"United Kingdom of Great Britain and Northern Ireland","2":"Великобритания"},{"1":"Republic of Iceland","2":"Исландия"},{"1":"Republic of Azerbaijan","2":"Азербайджан"},{"1":"Georgia","2":"Грузия"},{"1":"Republic of the Philippines","2":"Филиппины"},{"1":"Malaysia","2":"Малайзия"},{"1":"Negara Brunei Darussalam","2":"Бруней"},{"1":"Republic of Slovenia","2":"Словения"},{"1":"Republic of Finland","2":"Финляндия"},{"1":"Slovak Republic","2":"Словакия"},{"1":"Czech Republic","2":"Чехия"},{"1":"State of Eritrea","2":"Эритрея"},{"1":"Japan","2":"Япония"},{"1":"Republic of Paraguay","2":"Парагвай"},{"1":"Republic of Yemen","2":"Йемен"},{"1":"Kingdom of Saudi Arabia","2":"Саудовская Аравия"},{"1":"NA","2":"Антарктида"},{"1":"Turkish Republic of Northern Cyprus","2":"Турецкая Республика Северного Кипра"},{"1":"Republic of Cyprus","2":"Кипр"},{"1":"Kingdom of Morocco","2":"Марокко"},{"1":"Arab Republic of Egypt","2":"Египет"},{"1":"Libya","2":"Ливия"},{"1":"Federal Democratic Republic of Ethiopia","2":"Эфиопия"},{"1":"Republic of Djibouti","2":"Джибути"},{"1":"Republic of Somaliland","2":"Сомалиленд"},{"1":"Republic of Uganda","2":"Уганда"},{"1":"Republic of Rwanda","2":"Руанда"},{"1":"Bosnia and Herzegovina","2":"Босния и Герцеговина"},{"1":"Former Yugoslav Republic of Macedonia","2":"Республика Македония"},{"1":"Republic of Serbia","2":"Сербия"},{"1":"Montenegro","2":"Черногория"},{"1":"Republic of Kosovo","2":"Республика Косово"},{"1":"Republic of Trinidad and Tobago","2":"Тринидад и Тобаго"},{"1":"Republic of South Sudan","2":"Южный Судан"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["FORMAL_EN"],"name":[1],"type":["chr"],"align":["left"]},{"label":["NAME_RU"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Republic of Fiji","2":"Фиджи"},{"1":"United Republic of Tanzania","2":"Танзания"},{"1":"Sahrawi Arab Democratic Republic","2":"Западная Сахара"},{"1":"Canada","2":"Канада"},{"1":"United States of America","2":"Соединённые Штаты Америки"},{"1":"Republic of Kazakhstan","2":"Казахстан"},{"1":"Republic of Uzbekistan","2":"Узбекистан"},{"1":"Independent State of Papua New Guinea","2":"Папуа-Новая Гвинея"},{"1":"Republic of Indonesia","2":"Индонезия"},{"1":"Argentine Republic","2":"Аргентина"},{"1":"Republic of Chile","2":"Чили"},{"1":"Democratic Republic of the Congo","2":"Демократическая Республика Конго"},{"1":"Federal Republic of Somalia","2":"Сомали"},{"1":"Republic of Kenya","2":"Кения"},{"1":"Republic of the Sudan","2":"Судан"},{"1":"Republic of Chad","2":"Чад"},{"1":"Republic of Haiti","2":"Республика Гаити"},{"1":"Dominican Republic","2":"Доминиканская Республика"},{"1":"Russian Federation","2":"Россия"},{"1":"Commonwealth of the Bahamas","2":"Багамские Острова"},{"1":"Falkland Islands","2":"Фолклендские острова"},{"1":"Kingdom of Norway","2":"Норвегия"},{"1":"Greenland","2":"Гренландия"},{"1":"Territory of the French Southern and Antarctic Lands","2":"Французские Южные и Антарктические территории"},{"1":"Democratic Republic of Timor-Leste","2":"Восточный Тимор"},{"1":"Republic of South Africa","2":"Южно-Африканская Республика"},{"1":"Kingdom of Lesotho","2":"Лесото"},{"1":"United Mexican States","2":"Мексика"},{"1":"Oriental Republic of Uruguay","2":"Уругвай"},{"1":"Federative Republic of Brazil","2":"Бразилия"},{"1":"Plurinational State of Bolivia","2":"Боливия"},{"1":"Republic of Peru","2":"Перу"},{"1":"Republic of Colombia","2":"Колумбия"},{"1":"Republic of Panama","2":"Панама"},{"1":"Republic of Costa Rica","2":"Коста-Рика"},{"1":"Republic of Nicaragua","2":"Никарагуа"},{"1":"Republic of Honduras","2":"Гондурас"},{"1":"Republic of El Salvador","2":"Сальвадор"},{"1":"Republic of Guatemala","2":"Гватемала"},{"1":"Belize","2":"Белиз"},{"1":"Bolivarian Republic of Venezuela","2":"Венесуэла"},{"1":"Co-operative Republic of Guyana","2":"Гайана"},{"1":"Republic of Suriname","2":"Суринам"},{"1":"French Republic","2":"Франция"},{"1":"Republic of Ecuador","2":"Эквадор"},{"1":"Commonwealth of Puerto Rico","2":"Пуэрто-Рико"},{"1":"Jamaica","2":"Ямайка"},{"1":"Republic of Cuba","2":"Куба"},{"1":"Republic of Zimbabwe","2":"Зимбабве"},{"1":"Republic of Botswana","2":"Ботсвана"},{"1":"Republic of Namibia","2":"Намибия"},{"1":"Republic of Senegal","2":"Сенегал"},{"1":"Republic of Mali","2":"Мали"},{"1":"Islamic Republic of Mauritania","2":"Мавритания"},{"1":"Republic of Benin","2":"Бенин"},{"1":"Republic of Niger","2":"Нигер"},{"1":"Federal Republic of Nigeria","2":"Нигерия"},{"1":"Republic of Cameroon","2":"Камерун"},{"1":"Togolese Republic","2":"Того"},{"1":"Republic of Ghana","2":"Гана"},{"1":"Republic of Ivory Coast","2":"Кот-д’Ивуар"},{"1":"Republic of Guinea","2":"Гвинея"},{"1":"Republic of Guinea-Bissau","2":"Гвинея-Бисау"},{"1":"Republic of Liberia","2":"Либерия"},{"1":"Republic of Sierra Leone","2":"Сьерра-Леоне"},{"1":"Burkina Faso","2":"Буркина-Фасо"},{"1":"Central African Republic","2":"Центральноафриканская Республика"},{"1":"Republic of the Congo","2":"Республика Конго"},{"1":"Gabonese Republic","2":"Габон"},{"1":"Republic of Equatorial Guinea","2":"Экваториальная Гвинея"},{"1":"Republic of Zambia","2":"Замбия"},{"1":"Republic of Malawi","2":"Малави"},{"1":"Republic of Mozambique","2":"Мозамбик"},{"1":"Kingdom of eSwatini","2":"Свазиленд"},{"1":"People's Republic of Angola","2":"Ангола"},{"1":"Republic of Burundi","2":"Бурунди"},{"1":"State of Israel","2":"Израиль"},{"1":"Lebanese Republic","2":"Ливан"},{"1":"Republic of Madagascar","2":"Мадагаскар"},{"1":"West Bank and Gaza","2":"Палестина"},{"1":"Republic of the Gambia","2":"Гамбия"},{"1":"Republic of Tunisia","2":"Тунис"},{"1":"People's Democratic Republic of Algeria","2":"Алжир"},{"1":"Hashemite Kingdom of Jordan","2":"Иордания"},{"1":"United Arab Emirates","2":"Объединённые Арабские Эмираты"},{"1":"State of Qatar","2":"Катар"},{"1":"State of Kuwait","2":"Кувейт"},{"1":"Republic of Iraq","2":"Ирак"},{"1":"Sultanate of Oman","2":"Оман"},{"1":"Republic of Vanuatu","2":"Вануату"},{"1":"Kingdom of Cambodia","2":"Камбоджа"},{"1":"Kingdom of Thailand","2":"Таиланд"},{"1":"Lao People's Democratic Republic","2":"Лаос"},{"1":"Republic of the Union of Myanmar","2":"Мьянма"},{"1":"Socialist Republic of Vietnam","2":"Вьетнам"},{"1":"Democratic People's Republic of Korea","2":"Корейская Народно-Демократическая Республика"},{"1":"Republic of Korea","2":"Республика Корея"},{"1":"Mongolia","2":"Монголия"},{"1":"Republic of India","2":"Индия"},{"1":"People's Republic of Bangladesh","2":"Бангладеш"},{"1":"Kingdom of Bhutan","2":"Бутан"},{"1":"Nepal","2":"Непал"},{"1":"Islamic Republic of Pakistan","2":"Пакистан"},{"1":"Islamic State of Afghanistan","2":"Афганистан"},{"1":"Republic of Tajikistan","2":"Таджикистан"},{"1":"Kyrgyz Republic","2":"Киргизия"},{"1":"Turkmenistan","2":"Туркмения"},{"1":"Islamic Republic of Iran","2":"Иран"},{"1":"Syrian Arab Republic","2":"Сирия"},{"1":"Republic of Armenia","2":"Армения"},{"1":"Kingdom of Sweden","2":"Швеция"},{"1":"Republic of Belarus","2":"Белоруссия"},{"1":"Ukraine","2":"Украина"},{"1":"Republic of Poland","2":"Польша"},{"1":"Republic of Austria","2":"Австрия"},{"1":"Republic of Hungary","2":"Венгрия"},{"1":"Republic of Moldova","2":"Молдавия"},{"1":"Romania","2":"Румыния"},{"1":"Republic of Lithuania","2":"Литва"},{"1":"Republic of Latvia","2":"Латвия"},{"1":"Republic of Estonia","2":"Эстония"},{"1":"Federal Republic of Germany","2":"Германия"},{"1":"Republic of Bulgaria","2":"Болгария"},{"1":"Hellenic Republic","2":"Греция"},{"1":"Republic of Turkey","2":"Турция"},{"1":"Republic of Albania","2":"Албания"},{"1":"Republic of Croatia","2":"Хорватия"},{"1":"Swiss Confederation","2":"Швейцария"},{"1":"Grand Duchy of Luxembourg","2":"Люксембург"},{"1":"Kingdom of Belgium","2":"Бельгия"},{"1":"Kingdom of the Netherlands","2":"Нидерланды"},{"1":"Portuguese Republic","2":"Португалия"},{"1":"Kingdom of Spain","2":"Испания"},{"1":"Ireland","2":"Ирландия"},{"1":"New Caledonia","2":"Новая Каледония"},{"1":"","2":"Соломоновы Острова"},{"1":"New Zealand","2":"Новая Зеландия"},{"1":"Commonwealth of Australia","2":"Австралия"},{"1":"Democratic Socialist Republic of Sri Lanka","2":"Шри-Ланка"},{"1":"People's Republic of China","2":"Китайская Народная Республика"},{"1":"","2":"Китайская Республика"},{"1":"Italian Republic","2":"Италия"},{"1":"Kingdom of Denmark","2":"Дания"},{"1":"United Kingdom of Great Britain and Northern Ireland","2":"Великобритания"},{"1":"Republic of Iceland","2":"Исландия"},{"1":"Republic of Azerbaijan","2":"Азербайджан"},{"1":"Georgia","2":"Грузия"},{"1":"Republic of the Philippines","2":"Филиппины"},{"1":"Malaysia","2":"Малайзия"},{"1":"Negara Brunei Darussalam","2":"Бруней"},{"1":"Republic of Slovenia","2":"Словения"},{"1":"Republic of Finland","2":"Финляндия"},{"1":"Slovak Republic","2":"Словакия"},{"1":"Czech Republic","2":"Чехия"},{"1":"State of Eritrea","2":"Эритрея"},{"1":"Japan","2":"Япония"},{"1":"Republic of Paraguay","2":"Парагвай"},{"1":"Republic of Yemen","2":"Йемен"},{"1":"Kingdom of Saudi Arabia","2":"Саудовская Аравия"},{"1":"","2":"Антарктида"},{"1":"Turkish Republic of Northern Cyprus","2":"Турецкая Республика Северного Кипра"},{"1":"Republic of Cyprus","2":"Кипр"},{"1":"Kingdom of Morocco","2":"Марокко"},{"1":"Arab Republic of Egypt","2":"Египет"},{"1":"Libya","2":"Ливия"},{"1":"Federal Democratic Republic of Ethiopia","2":"Эфиопия"},{"1":"Republic of Djibouti","2":"Джибути"},{"1":"Republic of Somaliland","2":"Сомалиленд"},{"1":"Republic of Uganda","2":"Уганда"},{"1":"Republic of Rwanda","2":"Руанда"},{"1":"Bosnia and Herzegovina","2":"Босния и Герцеговина"},{"1":"Former Yugoslav Republic of Macedonia","2":"Республика Македония"},{"1":"Republic of Serbia","2":"Сербия"},{"1":"Montenegro","2":"Черногория"},{"1":"Republic of Kosovo","2":"Республика Косово"},{"1":"Republic of Trinidad and Tobago","2":"Тринидад и Тобаго"},{"1":"Republic of South Sudan","2":"Южный Судан"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
