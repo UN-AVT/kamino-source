@@ -291,11 +291,7 @@ df_nested_fact_dim</code></pre>
 <div id="flattened-version" class="section level4">
 <h4>flattened version</h4>
 <p>Same result, different approach.</p>
-<pre class="r fold-hide"><code>#json_flat &lt;- fromJSON(&quot;archetypes/managed-sanitation-services/managed-sanitation-services-namibia.json&quot;, flatten = TRUE)
-#df_flat &lt;- as.data.frame(json_flat)
-#df_flat
-
-url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
 url_file &lt;- &quot;managed-sanitation-services/managed-sanitation-services-namibia.json&quot;
 url &lt;- paste0(url_root, url_file)
 
