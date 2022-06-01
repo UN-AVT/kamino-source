@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
 
 ```{r setup, include=FALSE}
@@ -61,9 +61,13 @@ knitr::include_graphics(masthead, dpi=72)
 ### Accessing a JSON file
 #### Nobel Prizes' information
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
 
-js1 <- fromJSON("archetypes/nobel-prizes/nobel-prizes.json", flatten = FALSE)
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "nobel-prizes/nobel-prizes.json"
+url <- paste0(url_root, url_file)
+
+js1 <- fromJSON(url, flatten = FALSE)
 
 df <- as.data.frame(js1)
 df
@@ -94,7 +98,8 @@ df2
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data Source: Nobel Prizes information published by the Nobel Prize official website, https://www.nobelprize.org/
+* Narrative and Data Source: Nobel Prizes information published by the Nobel Prize official website, [GO](https://www.nobelprize.org/){target="_blank"}
+
 
 <pre>
 @misc{thenobelprize_2018_nobelprizeorg,

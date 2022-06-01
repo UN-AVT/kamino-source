@@ -13,7 +13,7 @@
 
 <title>Nobel Prizes</title>
 
-<script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/header-attrs-2.14/header-attrs.js"></script>
 <script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
@@ -105,6 +105,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
 
 
@@ -129,6 +130,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -214,7 +218,7 @@ pre code {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -253,7 +257,11 @@ Nobel Prize diploma in Chemistry awarded to Fritz Haber in 1918
 <h3>Accessing a JSON file</h3>
 <div id="nobel-prizes-information" class="section level4">
 <h4>Nobel Prizes’ information</h4>
-<pre class="r fold-hide"><code>js1 &lt;- fromJSON(&quot;archetypes/nobel-prizes/nobel-prizes.json&quot;, flatten = FALSE)
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;nobel-prizes/nobel-prizes.json&quot;
+url &lt;- paste0(url_root, url_file)
+
+js1 &lt;- fromJSON(url, flatten = FALSE)
 
 df &lt;- as.data.frame(js1)
 df</code></pre>
@@ -286,7 +294,7 @@ df2</code></pre>
 <div id="citations-for-narrative-and-data-sources" class="section level4">
 <h4>citations for narrative and data sources</h4>
 <ul>
-<li>Narrative and Data Source: Nobel Prizes information published by the Nobel Prize official website, <a href="https://www.nobelprize.org/" class="uri">https://www.nobelprize.org/</a></li>
+<li>Narrative and Data Source: Nobel Prizes information published by the Nobel Prize official website, <a href="https://www.nobelprize.org/" target="_blank">GO</a></li>
 </ul>
 <pre>
 @misc{thenobelprize_2018_nobelprizeorg,
