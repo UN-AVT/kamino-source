@@ -67,13 +67,7 @@ knitr::include_graphics(masthead, dpi=72)
 
 db <- dbDriver("SQLite")
 
-url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
-url_file <- "world-pm25/world-pm25.db"
-url <- paste0(url_root, url_file)
-
-conn <- dbConnect(db, url)
-
-#conn <- dbConnect(db,'archetypes/world-pm25/world-pm25.db')
+conn <- dbConnect(db,'archetypes/world-pm25/world-pm25.db')
 
 df <- as.data.frame(dbListTables(conn))
 df
