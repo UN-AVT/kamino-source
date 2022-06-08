@@ -13,7 +13,7 @@
 
 <title>World PM25 Levels</title>
 
-<script src="../../../../vendor/knitr/header-attrs-2.11/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/header-attrs-2.14/header-attrs.js"></script>
 <script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
@@ -105,6 +105,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
 
 
@@ -129,6 +130,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -214,7 +218,7 @@ pre code {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -250,7 +254,9 @@ Photo by Dominik Dancs on Unsplash
 <h3>Accessing the database</h3>
 <div id="via-db_connection" class="section level4">
 <h4>via db_connection</h4>
-<pre class="r fold-show"><code>db &lt;- dbDriver(&quot;SQLite&quot;)
+<pre class="r fold-hide"><code>db &lt;- dbDriver(&quot;SQLite&quot;)
+
+
 conn &lt;- dbConnect(db,&#39;archetypes/world-pm25/world-pm25.db&#39;)
 
 df &lt;- as.data.frame(dbListTables(conn))

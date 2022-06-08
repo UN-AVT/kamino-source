@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
 
 ```{r setup, include=FALSE}
@@ -26,6 +26,8 @@ gc() #free up memory and report the memory usage.
 library(tidyverse)
 library(DBI)
 library(RSQLite)
+
+library(sqldf)
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -60,13 +62,24 @@ knitr::include_graphics(masthead, dpi=72)
 #### via db_connection
 
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
 
 db <- dbDriver("SQLite")
-conn <- dbConnect(db,'archetypes/world-pm25/world-pm25.db')
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "world-pm25/world-pm25.db"
+url <- paste0(url_root, url_file)
+
+conn <- dbConnect(db, url)
+
+#conn <- dbConnect(db,'archetypes/world-pm25/world-pm25.db')
 
 df <- as.data.frame(dbListTables(conn))
 df
+
+
+
 
 ```
 
@@ -75,7 +88,7 @@ df
 #### the pm25 table
 
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-show'}
+```{r, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
 df_table <- dbReadTable(conn, 'pm25')
 df_table
@@ -100,7 +113,8 @@ dbDisconnect(conn)
 * Data Source:
   * World Health Organization, 
   * SDG Indicator 11.6.2 Concentrations of fine particulate matter (PM2.5)
-  * https://www.who.int/data/gho/data/indicators/indicator-details/GHO/concentrations-of-fine-particulate-matter-(pm2-5)
+  * [GO](https://www.who.int/data/gho/data/indicators/indicator-details/GHO/concentrations-of-fine-particulate-matter-(pm2-5)){target="_blank"}
+
 
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
