@@ -66,7 +66,7 @@ knitr::include_graphics(masthead, dpi=72)
 ***
 
 ### Ingest
-#### ingest a pdf into r all pages
+#### ingest a pdf for all pages (look at code) and also specific ones (page 2)
 
 ```{r load-data, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
@@ -81,10 +81,12 @@ pdf_file <- url
 speech_text <- pdf_text(pdf_file) %>% strsplit(split = "\r\n")
 
 #Extract for page 2
-speech_text
+speech_text[[2]]
 
 
 ```
+### Ingest
+#### now for page three 
 
 ```{r , echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
@@ -98,7 +100,7 @@ pdf_file <- url
 # Extract the text for all pages
 speech_text <- pdf_text(pdf_file) %>% strsplit(split = "\r\n")
 
-#Extract for page 2
+#Extract for page 3
 speech_text[[3]]
 
 ```
