@@ -26,18 +26,6 @@ library(pdftools)
 library(tidyverse)
 library(tidytext)
 
-# library(SnowballC)
-# library(textstem)
-# library(quanteda)
-# library(tm)
-# library(stringr)
-# 
-# library(rJava)
-# library(NLP)
-# library(openNLP)
-# library(RWeka)
-# library(textdata)
-
 library(syuzhet)
 library(vader)
 
