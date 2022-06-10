@@ -11,7 +11,7 @@ output:
       in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
       after_body: "../../../z-assemblers/fragments/footer.html"
     self_contained: false
-    lib_dir: "vendor"
+    lib_dir: vendor
 ---
 
 
@@ -63,9 +63,13 @@ knitr::include_graphics(masthead, dpi=72)
 ### Reading a single text file - Unstructured narrative text
 #### First method: Entire corpus read to one row
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+```{r load-data, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
 
-file_path <- './archetypes/ghana-state-of-the-nation-addresses/sona_2008.txt'
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "ghana-state-of-the-nation-addresses/sona_2008.txt"
+url <- paste0(url_root, url_file)
+
+file_path <- url
 
 txt_1 <- readtext(file_path)
 
@@ -112,7 +116,7 @@ str_trunc(df_3, 100, "right")
 #### First method
 
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
+```{r load data, echo=TRUE, message=FALSE, warning=FALSE,class.source = 'fold-hide'}
 
 base_url <- "./archetypes/ghana-state-of-the-nation-addresses/"
 txt_files <- list.files(base_url, pattern="^sona_.*\\.txt$", full.names=TRUE, recursive=FALSE)
@@ -215,7 +219,7 @@ girafe(ggobj = v1, width_svg = 1280/72, height_svg = 720/72,
 ### References
 #### The citations and data sources used for the cases
 
-To illustrate the methods, this case contains several text files for Ghana's state of the nation addresses. The state of the nation address is an annual address to parliament given by the president. It typically summarizes the government's agenda and the progress made in the past year as seen by the administration in power.
+To illustrate the methods, this case contains several text files for Ghana's state of the nation addresses. The state of the nation address is an annual address to parliament given by the president. It typically summarizes the government's agenda and the progress made in the past year as seen by the administration in power. [GO](https://home.gis.gov.gh/2021/03/12/state-of-the-nation-address-sona-2021/){target="_blank"}
   
 
 <pre>
