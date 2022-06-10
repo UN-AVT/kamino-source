@@ -1,0 +1,109 @@
+---
+pagetitle: "Illegal Logging"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(officer)
+library(textreadr)
+
+library(janitor)
+library(ggtext)
+
+library(knitcitations)
+library(bibtex)
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+INGEST  
+</div>
+
+# Illegal Logging
+## ingest a word document
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Ivar Utinans on Unsplash"}
+
+masthead <- "assets/ivars-utinans-vkQgb1lZZPQ-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+>Forests are the world's air-conditioning system – the lungs of the planet – and we are on the verge of switching it off \
+--- Prince Charles of Wales\
+
+
+***
+
+### Ingest
+#### ingest a word document into r
+
+```{r load-data, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "illegal-logging/G0422822.doc"
+url <- paste0(url_root, url_file)
+
+
+word <- read_doc(url)
+word
+
+```
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: United Nations, Economic Commission for Europe | Timber Committee
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+
