@@ -1,0 +1,123 @@
+---
+pagetitle: "Aljazeera Lebanon News"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+
+library(rvest)
+library(tidyverse)
+library(RSelenium)
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+
+```
+
+
+<div class="activity">
+INGEST  
+</div>
+
+# Aljazeera, Lebanon headlines
+## ingest a news feed
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Piotr Chrobot on Unsplash"}
+
+masthead <- "assets/piotr-chrobot-KqEYj1VHA_o-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+# Text Analytics
+## Aljazeera Lebanon
+
+First thing to check is if scraping is permitted.
+* __Robots.txt__ : a way to kindly ask webbots, spiders, crawlers, wanderers and the like to access or not access certain parts of a webpage.If the output is true, it means that the bots are allowed to access this path.
+
+```{r,message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+library(robotstxt)
+paths_allowed(
+  path="/where/lebanon/",
+  domain = "https://www.aljazeera.com/")
+get_robotstxt(domain = "https://www.aljazeera.com/")
+```
+### Ingestion - Webscraping
+Now we can scrape the headlines and links.
+
+```{r,message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+
+rd <- rsDriver(browser = "firefox", port = 8033L)
+ffd <- rd$client
+
+
+ffd$navigate("https://www.aljazeera.com/where/lebanon/")
+for (i in 1:6){
+load_btn <- ffd$findElement(using = "css selector", "button.show-more-button.big-margin") 
+load_btn$clickElement() 
+Sys.sleep(2)
+}
+  
+#button.show-more-button.big-margin
+url = ffd$getPageSource()[[1]]
+page = read_html(url)
+headlines <- page %>%
+  html_nodes("h3.gc__title") %>%
+  html_text()
+links <- page %>%
+  html_nodes("h3.gc__title a") %>%
+  html_attr("href") %>%
+  paste("https://www.aljazeera.com", .,sep="")
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Aljazeera,[GO](https://www.aljazeera.com/){target="_blank"} 
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
