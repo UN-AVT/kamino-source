@@ -30,9 +30,6 @@ library(textreadr)
 library(janitor)
 library(ggtext)
 
-library(knitcitations)
-library(bibtex)
-
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -83,7 +80,7 @@ word
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data Source: United Nations, Economic Commission for Europe | Timber Committee
+* Narrative and Data Source: United Nations, Economic Commission for Europe | Timber Committee [GO](https://unece.org/fileadmin/DAM/timber/docs/sem/2004-1/sem-2004-1.htm){target="_blank"}
 
 
 
