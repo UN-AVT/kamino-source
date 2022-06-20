@@ -32,9 +32,6 @@ library(tidytext)
 library(ggtext)
 library(pdftools)
 
-library(knitcitations)
-library(bibtex)
-
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -66,7 +63,7 @@ knitr::include_graphics(masthead, dpi=72)
 ***
 
 ### Ingest
-#### ingest a pdf for all pages (look at code) and also specific ones (page 2)
+Ingest a pdf for all pages 
 
 ```{r load-data, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
@@ -78,30 +75,26 @@ url <- paste0(url_root, url_file)
 pdf_file <- url
 
 # Extract the text for all pages
-speech_text <- pdf_text(pdf_file) %>% strsplit(split = "\r\n")
+report_text <- pdf_text(pdf_file) %>% strsplit(split = "\r\n")
 
-#Extract for page 2
-speech_text[[2]]
+temp_report <- as.data.frame(report_text[])
+
+temp_report
 
 
 ```
-### Ingest
-#### now for page three 
+
+
+now for page three 
 
 ```{r , echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
-
-url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
-url_file <- "ecological-threat-register/ecological-threat-register-2020.pdf"
-url <- paste0(url_root, url_file)
-
-pdf_file <- url
-
-# Extract the text for all pages
-speech_text <- pdf_text(pdf_file) %>% strsplit(split = "\r\n")
-
 #Extract for page 3
-speech_text[[3]]
+
+temp_report2 <- as.data.frame(report_text[[3]])
+
+temp_report2
+
 
 ```
 
@@ -110,7 +103,7 @@ speech_text[[3]]
 ### References
 #### citations for narrative and data sources
 
-* Narrative and Data Source: Insitute for Economics and Peace
+* Narrative and Data Source: Insitute for Economics and Peace [GO](https://reliefweb.int/report/world/ecological-threat-register-2020){target="_blank"}
 
 
 
