@@ -1,0 +1,98 @@
+---
+pagetitle: "Boda Bodas"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+library(rtweet)
+library(ggmap)
+
+library(tidygeocoder)
+# register_google(key = gmaps, write = TRUE)
+# register_google(key = gmaps)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+INGEST  
+</div>
+
+# Ingest a social media feed
+## Twitter
+
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo on Unsplash"}
+
+masthead <- "assets/boda-boda.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+```{r, echo=TRUE, message=FALSE}
+
+# whatever name you assigned to your created app
+appname <- ""
+
+## twitter api key
+key <- ""
+
+## twitter api secret
+secret <- ""
+
+## google maps api
+gmaps <- ""
+
+twitter_token <- create_token(
+  app = appname,
+  consumer_key = key,
+  consumer_secret = secret,
+  set_renv = TRUE)
+
+# Number of tweets to return
+n <- 10000
+
+```
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
