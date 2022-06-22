@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Great Apes</title>
+
+<script src="../../../../vendor/knitr/header-attrs-2.14/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="../../../../vendor/knitr/navigation-1.1/tabsets.js"></script>
+<script src="../../../../vendor/knitr/navigation-1.1/codefolding.js"></script>
+<link href="../../../../vendor/knitr/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/highlightjs-9.12.0/highlight.js"></script>
+<link href="../../../../vendor/knitr/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/pagedtable-1.1/js/pagedtable.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHLBJTGCKN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GHLBJTGCKN');
+  </script>
+<div class="border-bottom">
+  
+  <div class="header">
+    
+  <img src="../../../../assets/logo/logo.svg" alt="" height="36">
+
+  <div class="nav" style="float: right;">
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="home.html" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="bottom"
+        title="Home">
+        <img src="../../../../assets/icons/campground-solid.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="explorer.html" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom" 
+        title="Search for content">
+        <img src="../../../../assets/icons/compass.svg" alt="" height="32">
+      </a>
+      <a class="nav-link" 
+        style="color: #111111;" 
+        href="https://github.com/UN-AVT" 
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Project">
+        <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32">
+      </a>
+    </div>
+
+</div>
+</div>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Great Apes</h1>
+
+</div>
+
+
+<div class="activity">
+<p>INGEST</p>
+</div>
+<div id="great-apes" class="section level1">
+<h1>Great Apes</h1>
+<div id="ingesting-multiple-word-documents" class="section level2">
+<h2>ingesting multiple word documents</h2>
+<div class="figure" style="text-align: center">
+<img src="kelly-sikkema-r077pfFsdaU-unsplash.jpg" alt="Photo by Kelly Sikkema on Unsplash" width="60%" />
+<p class="caption">
+Photo by Kelly Sikkema on Unsplash
+</p>
+</div>
+<blockquote>
+<p>When it comes to global warming, coal is the gorilla in the room.<br />
+—Jeff Goodell<br />
+</p>
+</blockquote>
+<p>The following code read the documents from a folder then binds them into one output in R</p>
+<pre class="r fold-hide"><code>url_root &lt;- &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/&quot;
+url_file &lt;- &quot;great-apes&quot;
+url &lt;- paste0(url_root, url_file)
+
+
+(f &lt;- file.path(url, c(&quot;K0581915.doc&quot;,
+    &quot;K0582038.doc&quot;, &quot;K0651932.doc&quot;, &quot;K0651934.doc&quot;)))</code></pre>
+<pre><code>## [1] &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/great-apes/K0581915.doc&quot;
+## [2] &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/great-apes/K0582038.doc&quot;
+## [3] &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/great-apes/K0651932.doc&quot;
+## [4] &quot;https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/great-apes/K0651934.doc&quot;</code></pre>
+<pre class="r fold-hide"><code>word_documents &lt;- lapply(f, read_doc)
+word_documents</code></pre>
+<pre><code>## [[1]]
+##   [1] &quot;|UNITED                                                          |[pic]           |&quot;
+##   [2] &quot;|NATIONS                                                         |                |&quot;
+##   [3] &quot;|[pic][pic]|                                       |                              |&quot;
+##   [4] &quot;|[pic]     |                                       |Distr.: General               |&quot;
+##   [5] &quot;|          |                                       |                              |&quot;
+##   [6] &quot;|          |United Nations                         |UNEP/UNESCO/GRASP/IGM.1/2     |&quot;
+##   [7] &quot;|          |Environment Programme                  |UNEP/UNESCO/GRASP/COUNCIL.1/2 |&quot;
+##   [8] &quot;|          |                                       |9 June 2005                   |&quot;
+##   [9] &quot;|          |United Nations Educational, Scientific |                              |&quot;
+##  [10] &quot;|          |and Cultural Organization              |Original:  English            |&quot;
+##  [11] &quot;Intergovernmental Meeting on Great Apes and&quot;                                        
+##  [12] &quot;the Great Apes Survival Project (GRASP)&quot;                                            
+##  [13] &quot;Kinshasa, 5-6 and 9 September 2005&quot;                                                 
+##  [14] &quot;Item 5 (a) of the provisional agenda*&quot;                                              
+##  [15] &quot;Council of the Great Apes Survival Project&quot;                                         
+##  [16] &quot;First Meeting&quot;                                                                      
+##  [17] &quot;Kinshasa, 6-7 September 2005&quot;                                                       
+##  [18] &quot;Item 8 (a) of the provisional agenda+&quot;                                              
+##  [19] &quot;Draft rules for the organization and management of the Great Apes&quot;                  
+##  [20] &quot;Survival Project (GRASP) Partnership&quot;                                               
+##  [21] &quot;I. Introduction&quot;                                                                    
+##  [22] &quot;1. Throughout their ranges, the great apes of equatorial Africa and&quot;                
+##  [23] &quot;South-East Asia, specifically the gorilla, chimpanzee, bonobo&quot;                      
+##  [24] &quot;(pygmy chimpanzee) and orangutan, are under increasing threat.&quot;                     
+##  [25] &quot;Hunting for bush meat, trade in infant primates, war and&quot;                           
+##  [26] &quot;conflicts, diseases such as Ebola and the destruction of forest&quot;                    
+##  [27] &quot;ecosystems as a result, among other things, of unsustainable&quot;                       
+##  [28] &quot;agriculture, logging and mining practices are causing a dramatic&quot;                   
+##  [29] &quot;decline in ape populations and the loss and fragmentation of ape&quot;                   
+##  [30] &quot;habitats, leaving scattered and increasingly vulnerable pockets&quot;                    
+##  [31] &quot;harbouring small populations of apes.&quot;                                              
+##  [32] &quot;2. Great ape habitats are rich in biodiversity and are vital for&quot;                   
+##  [33] &quot;providing ecological security and life support systems, including&quot;                  
+##  [34] &quot;food, fuel and medicine, to local people and indigenous&quot;                            
+##  [35] &quot;communities. If managed in a sustainable way, these mainly forest&quot;                  
+##  [36] &quot;ecosystems can provide huge benefits for dependent human&quot;                           
+##  [37] &quot;communities, great apes and other wildlife.&quot;                                        
+##  [38] &quot;3. Although great ape conservation activities are taking place&quot;                     
+##  [39] &quot;throughout great ape range States, conservation efforts would have&quot;                 
+##  [40] &quot;a greater impact if they formed part of a systematic and&quot;                           
+##  [41] &quot;prioritized approach. Furthermore, in order to ensure their&quot;                        
+##  [42] &quot;sustainability, conservation efforts need to be complemented at&quot;                    
+##  [43] &quot;the national and regional levels by policy actions and commitment&quot;                  
+##  [44] &quot;by range State Governments, with the support of the international&quot;                  
+##  [45] &quot;community.&quot;                                                                         
+##  [46] &quot;4. The Great Apes Survival Project (GRASP) was launched by the&quot;                     
+##  [47] &quot;Executive Director of the United Nations Environment Programme&quot;                     
+##  [48] &quot;(UNEP) in September 2001, in response to the critical threats&quot;                      
+##  [49] &quot;facing the great apes and the mainly forest ecosystems on which&quot;                    
+##  [50] &quot;they depend for survival. When the project was launched, GRASP had&quot;                 
+##  [51] &quot;a dozen partners, including three biodiversity-related conventions&quot;                 
+##  [52] &quot;and nine non-governmental organizations. By the time of its launch&quot;                 
+##  [53] &quot;as a partnership for sustainable development in September 2002 at&quot;                  
+##  [54] &quot;the World Summit on Sustainable Development in Johannesburg, South&quot;                 
+##  [55] &quot;Africa, this number had grown to a total of 21 partners, including&quot;                 
+##  [56] &quot;the United Nations Educational, Scientific and Cultural&quot;                            
+##  [57] &quot;Organization (UNESCO) and virtually all the non-governmental&quot;                       
+##  [58] &quot;organizations with major programmes in Africa or Asia dealing with&quot;                 
+##  [59] &quot;ape conservation. The number of its partners continues to grow.&quot;                    
+##  [60] &quot;5. GRASP works in cooperation with other United Nations bodies,&quot;                    
+##  [61] &quot;international and regional financial institutions, regional&quot;                        
+##  [62] &quot;bodies, foundations, donors, the academic community, the private&quot;                   
+##  [63] &quot;sector and other interested parties so that, through regular&quot;                       
+##  [64] &quot;communication and coordinated activities, the serious threats to&quot;                   
+##  [65] &quot;great apes and their habitats can be eliminated.&quot;                                   
+##  [66] &quot;II. Key principles&quot;                                                                 
+##  [67] &quot;6. The key principles underlying GRASP are as follows:&quot;                             
+##  [68] &quot;a) Becoming a GRASP partner is voluntary, on the basis of supporting&quot;               
+##  [69] &quot;the GRASP mission, goal and objectives;&quot;                                            
+##  [70] &quot;b) GRASP seeks to include all the main actors involved, either&quot;                     
+##  [71] &quot;directly or indirectly, in the field of great ape conservation;&quot;                    
+##  [72] &quot;c) GRASP does not seek to be prescriptive; GRASP actions should be&quot;                 
+##  [73] &quot;supportive of and complementary to existing initiatives;&quot;                           
+##  [74] &quot;d) At the level of the range States, key GRASP partners will be&quot;                    
+##  [75] &quot;Governments, working closely wherever possible with non-&quot;                           
+##  [76] &quot;governmental organizations, the academic community and the private&quot;                 
+##  [77] &quot;sector;&quot;                                                                            
+##  [78] &quot;e) GRASP should monitor progress towards its goals, at both the&quot;                    
+##  [79] &quot;international and national levels.&quot;                                                 
+##  [80] &quot;7. It is recognized that a wide range of skills and experience&quot;                     
+##  [81] &quot;relevant to the conservation of great apes exists in both the&quot;                      
+##  [82] &quot;government and non-government sectors. GRASP will seek to mobilize&quot;                 
+##  [83] &quot;all available expertise for the conservation of great apes and&quot;                     
+##  [84] &quot;their habitat.&quot;                                                                     
+##  [85] &quot;8. In particular, GRASP will use its direct political links with the&quot;               
+##  [86] &quot;Governments of range and non-range States and with international&quot;                   
+##  [87] &quot;bodies, in order:&quot;                                                                  
+##  [88] &quot;a) To support the development of national, regional and international&quot;              
+##  [89] &quot;planning and monitoring processes;&quot;                                                 
+##  [90] &quot;b) To explore ways of obtaining new and additional funding through its&quot;             
+##  [91] &quot;partners for the implementation of such processes;&quot;                                 
+##  [92] &quot;c) To engage in high-level political dialogue on issues relating to&quot;                
+##  [93] &quot;great ape conservation.&quot;                                                            
+##  [94] &quot;III. Mission&quot;                                                                       
+##  [95] &quot;9. The GRASP Partnership has, as an immediate challenge, to lift the&quot;               
+##  [96] &quot;threat of imminent extinction facing most populations of great&quot;                     
+##  [97] &quot;apes. Its mission is to work as a coherent partnership to conserve&quot;                 
+##  [98] &quot;in their natural habitats wherever they exist viable, wild&quot;                         
+##  [99] &quot;populations of every kind of great ape and to make sure that where&quot;                 
+## [100] &quot;apes and people interact, their interactions are mutually positive&quot;                 
+## [101] &quot;and sustainable. GRASP also seeks to exemplify and relieve the&quot;                     
+## [102] &quot;threats faced by other kinds of animals, birds and plants sharing&quot;                  
+## [103] &quot;the forests where apes survive and to illustrate what can be&quot;                       
+## [104] &quot;achieved through a genuine partnership between all stakeholders in&quot;                 
+## [105] &quot;fragile ecosystems.&quot;                                                                
+## [106] &quot;IV. Goal&quot;                                                                           
+## [107] &quot;10. The GRASP Partnership will have as its goal to conserve viable&quot;                 
+## [108] &quot;populations of all species and subspecies of great apes in their&quot;                   
+## [109] &quot;natural habitats wherever they exist.&quot;                                              
+## [110] &quot;V. Objectives&quot;                                                                      
+## [111] &quot;11. To achieve its mission and goal, the GRASP Partnership will have&quot;               
+## [112] &quot;the following objectives, based on the Global Strategy for the&quot;                     
+## [113] &quot;Survival of Great Apes[1], which was adopted at the preparatory&quot;                    
+## [114] &quot;experts meeting for an intergovernmental meeting on great apes and&quot;                 
+## [115] &quot;the Great Apes Survival Project (GRASP), held in Paris from 26 to&quot;                  
+## [116] &quot;28 November 2003:&quot;                                                                  
+## [117] &quot;A. Immediate objectives&quot;                                                            
+## [118] &quot;a) To promote the Global Strategy for the Survival of Great&quot;                        
+## [119] &quot;Apes;&quot;                                                                              
+## [120] &quot;b) To monitor populations of great apes and establish a database of&quot;                
+## [121] &quot;great ape population information;&quot;                                                  
+## [122] &quot;c) To collate and analyse existing projects and initiatives at&quot;                     
+## [123] &quot;different levels, in order to identify gaps and set priorities in&quot;                  
+## [124] &quot;action and to encourage coordination and cooperation;&quot;                              
+## [125] &quot;d) To encourage range States to prepare and implement national action&quot;              
+## [126] &quot;plans for the survival of great ape populations and their habitat&quot;                  
+## [127] &quot;and ensure that they have the necessary resources to do so;&quot;                        
+## [128] &quot;e) To prioritize the use of resources for optimum effectiveness and&quot;                
+## [129] &quot;identify funding areas that are currently neglected;&quot;                               
+## [130] &quot;f) To promote a legal framework for the survival of great apes and&quot;                 
+## [131] &quot;their habitat in the countries concerned;&quot;                                          
+## [132] &quot;g) To support income-generating initiatives for the benefit of&quot;                     
+## [133] &quot;communities living in and around great ape habitat and protected&quot;                   
+## [134] &quot;areas, with due consideration for indigenous communities;&quot;                          
+## [135] &quot;h) To help generate new and additional funds for the survival of&quot;                   
+## [136] &quot;great apes and their habitat and to ensure that the international&quot;                  
+## [137] &quot;community in the widest sense (donor States, international&quot;                         
+## [138] &quot;organizations and institutions, non-governmental organizations and&quot;                 
+## [139] &quot;representatives of private business and industry) provides&quot;                         
+## [140] &quot;effective and coherent support to the efforts being made by the&quot;                    
+## [141] &quot;great ape range States;&quot;                                                            
+## [142] &quot;B. Longer-term objectives&quot;                                                          
+## [143] &quot;a) To carry out scientific research to generate information necessary&quot;              
+## [144] &quot;for the survival of great apes and their habitat and to&quot;                            
+## [145] &quot;disseminate such information in an easy and accessible manner;&quot;                     
+## [146] &quot;b) To urge countries to enter into or enforce relevant conventions&quot;                 
+## [147] &quot;and agreements for the conservation of great apes and elimination&quot;                  
+## [148] &quot;of their illegal trade;&quot;                                                            
+## [149] &quot;c) To promote the development and transfer among range States,&quot;                     
+## [150] &quot;partners and other interested parties of appropriate technologies,&quot;                 
+## [151] &quot;training programmes and best practices for planning, finance,&quot;                      
+## [152] &quot;monitoring and delivery of outcomes;&quot;                                               
+## [153] &quot;d) To promote the inclusion of information highlighting the&quot;                        
+## [154] &quot;importance of great apes and their habitats in national education&quot;                  
+## [155] &quot;curricula and the dissemination of such information through the&quot;                    
+## [156] &quot;media.&quot;                                                                             
+## [157] &quot;VI. Partners&quot;                                                                       
+## [158] &quot;A.   Categories of partners&quot;                                                        
+## [159] &quot;12. The GRASP Partnership will comprise full partners and supporting&quot;               
+## [160] &quot;partners.&quot;                                                                          
+## [161] &quot;13. Full partners will fall into the following categories:&quot;                         
+## [162] &quot;(a)  Category A: Great ape range States;&quot;                                           
+## [163] &quot;(b)  Category B: Non-great ape range States that directly or&quot;                       
+## [164] &quot;indirectly support or participate significantly in programmes for&quot;                  
+## [165] &quot;the conservation of great apes and their habitat;&quot;                                  
+## [166] &quot;(c)  Category C: UNEP and UNESCO, which together are the&quot;                           
+## [167] &quot;sponsoring agencies;&quot;                                                               
+## [168] &quot;(d)  Category D: Relevant biodiversity and conservation-&quot;                           
+## [169] &quot;related multilateral environmental agreements and relevant&quot;                         
+## [170] &quot;international organizations and institutions;&quot;                                      
+## [171] &quot;(e)  Category E: Non-governmental organizations with a&quot;                             
+## [172] &quot;significant involvement in great ape conservation.&quot;                                 
+## [173] &quot;14. For the purposes of category D, \&quot;relevant multilateral&quot;                        
+## [174] &quot;environmental agreements\&quot; will be those biodiversity and&quot;                          
+## [175] &quot;conservation-related global and regional conventions and protocols&quot;                 
+## [176] &quot;which are established under the auspices of the United Nations or&quot;                  
+## [177] &quot;any of its specialized agencies; relevant international&quot;                            
+## [178] &quot;organizations and institutions will be those organizations&quot;                         
+## [179] &quot;(including international financial institutions) which have a&quot;                      
+## [180] &quot;substantial record of activities directly or indirectly related to&quot;                 
+## [181] &quot;the conservation of great apes and their habitat.&quot;                                  
+## [182] &quot;15. For the purposes of category E, \&quot;non-governmental organizations&quot;               
+## [183] &quot;with a significant involvement in great ape conservation\&quot; will be&quot;                 
+## [184] &quot;institutions and associations admitted to the GRASP Partnership in&quot;                 
+## [185] &quot;accordance with the following conditions:&quot;                                          
+## [186] &quot;a) The institutions and associations must have as members or&quot;                       
+## [187] &quot;supporters properly constituted organizations or individuals and&quot;                   
+## [188] &quot;must have appropriate rules of governance;&quot;                                         
+## [189] &quot;b) The institutions and associations must have a substantial record&quot;                
+## [190] &quot;of activities in the field of conservation of great apes and their&quot;                 
+## [191] &quot;habitat, which can include policy development, research, protected&quot;                 
+## [192] &quot;area management, community conservation and education activities.&quot;                  
+## [193] &quot;16. Supporting partners will fall into the following categories:&quot;                   
+## [194] &quot;f) Category F: Non-range States, other than those who are eligible to&quot;              
+## [195] &quot;be full partners under category B above;&quot;                                           
+## [196] &quot;g) Category G: Individuals, including GRASP patrons;&quot;                               
+## [197] &quot;h) Category H: Appropriate private businesses, representatives of&quot;                  
+## [198] &quot;industry and scientific, academic and other organizations with an&quot;                  
+## [199] &quot;interest in supporting or participating in great ape conservation&quot;                  
+## [200] &quot;programmes through GRASP.&quot;                                                          
+## [201] &quot;17. The GRASP Executive Committee (see chapter IX below) may confer&quot;                
+## [202] &quot;supporting partner status on any individual who has rendered or is&quot;                 
+## [203] &quot;rendering outstanding service in the field of conservation of&quot;                      
+## [204] &quot;great apes and their habitat.&quot;                                                      
+## [205] &quot;B.   Admission and withdrawal of partners&quot;                                          
+## [206] &quot;18. Great ape range States will become full partners as soon as they&quot;               
+## [207] &quot;declare in writing to the Executive Committee their support of the&quot;                 
+## [208] &quot;GRASP mission, goal and objectives.&quot;                                                
+## [209] &quot;19. Donor States will become full partners on the same basis.&quot;                      
+## [210] &quot;20. Non-governmental organizations which are currently GRASP partners&quot;              
+## [211] &quot;will continue as full partners when these rules are adopted and&quot;                    
+## [212] &quot;when they have reconfirmed their support of the GRASP mission,&quot;                     
+## [213] &quot;goal and objectives.&quot;                                                               
+## [214] &quot;21. Admission of other full partners or supporting partners will be&quot;                
+## [215] &quot;decided by the Executive Committee. The Executive Committee will&quot;                   
+## [216] &quot;only admit those candidates that it determines will make a clear&quot;                   
+## [217] &quot;contribution to GRASP and be a positive asset to the GRASP&quot;                         
+## [218] &quot;Partnership.&quot;                                                                       
+## [219] &quot;22. A document containing the GRASP Partnership admission criteria is&quot;              
+## [220] &quot;attached as an annex to the present rules.&quot;                                         
+## [221] &quot;C.   Suspension&quot;                                                                    
+## [222] &quot;23. The GRASP Executive Committee may rescind or suspend the partner&quot;               
+## [223] &quot;status or may otherwise limit the rights of any partner that&quot;                       
+## [224] &quot;seriously or persistently violates the present rules.&quot;                              
+## [225] &quot;D.   Withdrawal&quot;                                                                    
+## [226] &quot;24. Any full or supporting partner may withdraw from the GRASP&quot;                     
+## [227] &quot;Partnership at any time by giving notice in writing to the&quot;                         
+## [228] &quot;Executive Committee to that effect. Such notice will be effective&quot;                  
+## [229] &quot;upon the date of receipt of the notice by the Executive Committee.&quot;                 
+## [230] &quot;E.   Readmission&quot;                                                                   
+## [231] &quot;25. Applications for readmission to the GRASP Partnership may be&quot;                   
+## [232] &quot;submitted at any time and will be treated in the same way as first-&quot;                
+## [233] &quot;time applications for admission.&quot;                                                   
+## [234] &quot;F.   Voting rights&quot;                                                                 
+## [235] &quot;26. All full partners will have one vote in the GRASP Council.&quot;                     
+## [236] &quot;Supporting partners will participate in the work of the Council in&quot;                 
+## [237] &quot;a non-voting capacity.&quot;                                                             
+## [238] &quot;VII. GRASP Council&quot;                                                                 
+## [239] &quot;A.   Composition&quot;                                                                   
+## [240] &quot;27. The GRASP Partnership will have a Council (the GRASP Council),&quot;                 
+## [241] &quot;which will guide the work of the Partnership. The Council will&quot;                     
+## [242] &quot;assist the Executive Committee and the secretariat (see chapter X&quot;                  
+## [243] &quot;below) with matters such as fundraising strategy and great ape&quot;                     
+## [244] &quot;conservation priorities. Each full partner will have one seat on&quot;                   
+## [245] &quot;the GRASP Council. Each supporting partner may participate in the&quot;                  
+## [246] &quot;work of the Council as an observer.&quot;                                                
+## [247] &quot;28. GRASP Council decisions will be made by consensus wherever&quot;                     
+## [248] &quot;possible. If consensus cannot be reached, decisions may be reached&quot;                 
+## [249] &quot;by simple majority vote, provided that such a majority includes a&quot;                  
+## [250] &quot;majority of category A partners present and voting and a majority&quot;                  
+## [251] &quot;of category B partners present and voting.&quot;                                         
+## [252] &quot;B.   Functions&quot;                                                                     
+## [253] &quot;29. The functions of the GRASP Council will be:&quot;                                    
+## [254] &quot;a) To elect the Chairperson of the Council, who will hold office for two&quot;           
+## [255] &quot;years with the possibility of re-election for two further periods of&quot;               
+## [256] &quot;two years each;&quot;                                                                    
+## [257] &quot;b) To elect the members of the Executive Committee;&quot;                                
+## [258] &quot;c) To determine the general policy and strategy of the GRASP&quot;                       
+## [259] &quot;Partnership;&quot;                                                                       
+## [260] &quot;d) To identify priorities and receive reports of income and&quot;                        
+## [261] &quot;expenditures;&quot;                                                                      
+## [262] &quot;e) If resources permit, to provide appropriate financial guidance for&quot;              
+## [263] &quot;the preparation of the budget by the secretariat.&quot;                                  
+## [264] &quot;30. The GRASP Council will meet every two years. An inter-sessional&quot;                
+## [265] &quot;meeting may be convened if requested by more than one third of the&quot;                 
+## [266] &quot;GRASP partners.&quot;                                                                    
+## [267] &quot;31. The Council will decide the time and location of its meetings. The&quot;             
+## [268] &quot;draft agenda for each meeting will be circulated at least one&quot;                      
+## [269] &quot;month in advance of the meeting. Meeting locations will, as far as&quot;                 
+## [270] &quot;practical, be rotated among the geographic regions. Partners will&quot;                  
+## [271] &quot;be encouraged to host meetings.&quot;                                                    
+## [272] &quot;VIII. Executive Committee&quot;                                                          
+## [273] &quot;A.   Composition&quot;                                                                   
+## [274] &quot;32. GRASP will have an Executive Committee which will consist of:&quot;                  
+## [275] &quot;a) Four members from among category A partners, to be elected on a&quot;                 
+## [276] &quot;subregional basis (three from Africa and one from South-East Asia);&quot;                
+## [277] &quot;b) One member from among category B partners;&quot;                                      
+## [278] &quot;c) From among category C partners, one member nominated by UNESCO and&quot;              
+## [279] &quot;one nominated by UNEP;&quot;                                                             
+## [280] &quot;d) One member from among category D partners;&quot;                                      
+## [281] &quot;e) Two members from among category E partners.&quot;                                     
+## [282] &quot;33. The full partners in each category mentioned in the preceding&quot;                  
+## [283] &quot;paragraph will elect by simple majority vote the member(s) for&quot;                     
+## [284] &quot;that category.&quot;                                                                     
+## [285] &quot;34. The term of Executive Committee membership will be two years.&quot;                  
+## [286] &quot;35. The members of the Executive Committee will elect a Chairperson,&quot;               
+## [287] &quot;who will hold office for two years with the possibility of re-&quot;                     
+## [288] &quot;election for two further periods of two years each.&quot;                                
+## [289] &quot;36. The Executive Committee will be responsible to the GRASP Council&quot;               
+## [290] &quot;and will act on its behalf in ensuring the effective&quot;                               
+## [291] &quot;implementation of the policies of the GRASP Partnership. It will&quot;                   
+## [292] &quot;be assisted by the secretariat in handling the routine activities&quot;                  
+## [293] &quot;of the GRASP Partnership.&quot;                                                          
+## [294] &quot;37. Executive Committee decisions will be made by consensus wherever&quot;               
+## [295] &quot;possible. If consensus cannot be reached, decisions may be reached&quot;                 
+## [296] &quot;by simple majority vote.&quot;                                                           
+## [297] &quot;B.   Functions&quot;                                                                     
+## [298] &quot;38. The functions of the Executive Committee shall be:&quot;                             
+## [299] &quot;a) To monitor the implementation of GRASP Partnership policies;&quot;                    
+## [300] &quot;b) To identify and oversee attainment of GRASP Partnership objectives&quot;              
+## [301] &quot;and to decide on the funding of GRASP Partnership projects;&quot;                        
+## [302] &quot;c) To commission and oversee implementation of the GRASP&quot;                           
+## [303] &quot;Partnership&#39;s role in the Global Strategy for the Survival of&quot;                      
+## [304] &quot;Great Apes;&quot;                                                                        
+## [305] &quot;d) To decide on the admission, suspension, expulsion, or limitation&quot;                
+## [306] &quot;of the rights of full partners and supporting partners;&quot;                            
+## [307] &quot;e) To seek the advice of the Scientific Commission on any issues&quot;                   
+## [308] &quot;included in the Commission&#39;s terms of reference;&quot;                                   
+## [309] &quot;f) To approve the annual work plans of the secretariat, Scientific&quot;                 
+## [310] &quot;Commission and the technical support team;&quot;                                         
+## [311] &quot;g) To oversee the activities of GRASP patrons and to approve&quot;                       
+## [312] &quot;secretariat recommendations regarding appointments;&quot;                                
+## [313] &quot;h) To assume such other functions as are deemed necessary by the&quot;                   
+## [314] &quot;GRASP Council;&quot;                                                                     
+## [315] &quot;39. The Executive Committee will meet at least every three months via&quot;              
+## [316] &quot;teleconference or electronic mail, or more frequently if required&quot;                  
+## [317] &quot;to ensure the efficient functioning of the GRASP Partnership.&quot;                      
+## [318] &quot;40. The Executive Committee will act on behalf of the GRASP Council in&quot;             
+## [319] &quot;relation to all crucial decisions and matters relating to the&quot;                      
+## [320] &quot;GRASP Partnership and its great ape conservation activities&quot;                        
+## [321] &quot;between meetings of the GRASP Council.&quot;                                             
+## [322] &quot;41. A summary of the minutes of Executive Committee meetings will be&quot;               
+## [323] &quot;submitted by the secretariat to all GRASP partners as soon as&quot;                      
+## [324] &quot;possible after each meeting.&quot;                                                       
+## [325] &quot;IX. Secretariat&quot;                                                                    
+## [326] &quot;A.   Composition&quot;                                                                   
+## [327] &quot;42. GRASP will have a secretariat, for which the sponsoring agencies&quot;               
+## [328] &quot;will provide the staff. The practical arrangements, including the&quot;                  
+## [329] &quot;appointment of staff, will be made by common accord between the&quot;                    
+## [330] &quot;sponsoring agencies.&quot;                                                               
+## [331] &quot;43. In certain circumstances and under conditions to be agreed by the&quot;              
+## [332] &quot;sponsoring agencies, the secretariat may employ staff seconded to&quot;                  
+## [333] &quot;it by full partners or supporting partners.&quot;                                        
+## [334] &quot;44. Staff of UNEP or UNESCO who are discharging secretariat functions&quot;              
+## [335] &quot;on behalf of the GRASP Partnership as a whole should clearly&quot;                       
+## [336] &quot;differentiate between the actions they carry out in that capacity&quot;                  
+## [337] &quot;and other actions which they may take in their capacity as staff&quot;                   
+## [338] &quot;of category C partners. The same principle should apply in the&quot;                     
+## [339] &quot;case of staff seconded to the GRASP secretariat in accordance with&quot;                 
+## [340] &quot;the preceding paragraph.&quot;                                                           
+## [341] &quot;B.   Functions&quot;                                                                     
+## [342] &quot;45. The functions of the GRASP secretariat will be:&quot;                                
+## [343] &quot;a) To promote the work of the GRASP Partnership;&quot;                                   
+## [344] &quot;b) To monitor the performance of GRASP Partnership-funded activities;&quot;              
+## [345] &quot;c) To solicit and if necessary help prepare projects for funding;&quot;                  
+## [346] &quot;d) To request advice from the Scientific Commission on project&quot;                     
+## [347] &quot;priorities and other issues included in the Commission&#39;s terms of&quot;                  
+## [348] &quot;reference;&quot;                                                                         
+## [349] &quot;e) To provide information on GRASP to interested parties;&quot;                          
+## [350] &quot;f) To determine the composition and activities of the technical&quot;                    
+## [351] &quot;support teams (see chapter XII below) including the development of&quot;                 
+## [352] &quot;their terms of reference, taking into consideration the advice of&quot;                  
+## [353] &quot;the Scientific Commission, and oversee the work of those teams;&quot;                    
+## [354] &quot;g) To appoint GRASP patrons, with the approval of the Executive&quot;                    
+## [355] &quot;Committee.&quot;                                                                         
+## [356] &quot;h) To raise funds for GRASP activities;&quot;                                            
+## [357] &quot;i) To facilitate communication between GRASP partners and the&quot;                      
+## [358] &quot;Executive Committee;&quot;                                                               
+## [359] &quot;j) To liaise with existing donors and keep them regularly updated;&quot;                 
+## [360] &quot;k) To be responsible for the finances and accounting of GRASP and to&quot;               
+## [361] &quot;report to the GRASP Council on such matters;&quot;                                       
+## [362] &quot;l) To be responsible for the day-to-day functioning of the GRASP&quot;                   
+## [363] &quot;Partnership.&quot;                                                                       
+## [364] &quot;46. At the end of each calendar year, the secretariat will submit for&quot;              
+## [365] &quot;approval by the GRASP Executive Committee an annual work plan and&quot;                  
+## [366] &quot;budget for the following year, which will include the activities&quot;                   
+## [367] &quot;of the secretariat, the Scientific Commission and any technical&quot;                    
+## [368] &quot;support teams.&quot;                                                                     
+## [369] &quot;47. In the performance of their duties, staff members of the GRASP&quot;                 
+## [370] &quot;secretariat will not seek or receive instructions from any&quot;                         
+## [371] &quot;authority external to the GRASP Partnership and the sponsoring&quot;                     
+## [372] &quot;agencies.&quot;                                                                          
+## [373] &quot;48. The secretariat will submit to the GRASP Executive Committee each&quot;              
+## [374] &quot;year a report on the activities of GRASP during the previous&quot;                       
+## [375] &quot;calendar year, together with an account of receipts and&quot;                            
+## [376] &quot;expenditures and a balance sheet as at the end of the calendar&quot;                     
+## [377] &quot;year. When approved by the Executive Committee, this report will&quot;                   
+## [378] &quot;be sent to GRASP partners.&quot;                                                         
+## [379] &quot;X. Scientific Commission&quot;                                                           
+## [380] &quot;A.   Composition&quot;                                                                   
+## [381] &quot;49. A Scientific Commission will be established under the auspices of&quot;              
+## [382] &quot;the GRASP Council with the following eleven members:&quot;                               
+## [383] &quot;a) Six members selected by the Species Survival Commission of the&quot;                  
+## [384] &quot;World Conservation Union (IUCN);&quot;                                                   
+## [385] &quot;b) The current president of the International Primatological Society&quot;               
+## [386] &quot;(IPS) or his/her representative;&quot;                                                   
+## [387] &quot;c) Four members, one from each subregion, chosen by the Executive&quot;                  
+## [388] &quot;Committee in consultation with the IPS president from two nominees&quot;                 
+## [389] &quot;submitted by each of the four subregions. All members must have&quot;                    
+## [390] &quot;relevant qualifications or substantial experience in the science&quot;                   
+## [391] &quot;or conservation of great apes.&quot;                                                     
+## [392] &quot;B.   Functions&quot;                                                                     
+## [393] &quot;50. The functions of the GRASP Scientific Commission will be:&quot;                      
+## [394] &quot;a) To provide independent and scientifically sound advice to the&quot;                   
+## [395] &quot;GRASP Partnership, including to the technical support teams;&quot;                       
+## [396] &quot;b) To advise the secretariat on the composition and activities of the&quot;              
+## [397] &quot;technical support teams;&quot;                                                           
+## [398] &quot;c) To provide advice relating to the development of the GRASP&quot;                      
+## [399] &quot;Partnership&#39;s strategic goals and objectives and activities to&quot;                     
+## [400] &quot;achieve them;&quot;                                                                      
+## [401] &quot;d) To monitor the status of great ape populations and evaluate the&quot;                 
+## [402] &quot;status and trajectory of populations relative to the GRASP&quot;                         
+## [403] &quot;Partnership goal and overall objectives;&quot;                                           
+## [404] &quot;e) To conduct studies of alternative conservation strategies and&quot;                   
+## [405] &quot;investments, make recommendations to improve the effectiveness of&quot;                  
+## [406] &quot;conservation funding and efforts and provide advice on measures&quot;                    
+## [407] &quot;significant to regional and international great ape conservation;&quot;                  
+## [408] &quot;f) To provide advice on great ape conservation issues within range&quot;                 
+## [409] &quot;States, liaise with other experts within those States and advise&quot;                   
+## [410] &quot;on national plans for great ape conservation;&quot;                                      
+## [411] &quot;g) Where there are donor funds available, to review and provide&quot;                    
+## [412] &quot;advice on the funding of project proposals submitted to the GRASP&quot;                  
+## [413] &quot;Partnership and referred by the secretariat. A conflict of&quot;                         
+## [414] &quot;interest may arise if a Commission member seeks funding from the&quot;                   
+## [415] &quot;GRASP Partnership. In such a case, the Commission member will not&quot;                  
+## [416] &quot;participate in the Commission&#39;s discussions about the funding&quot;                      
+## [417] &quot;request;&quot;                                                                           
+## [418] &quot;h) To provide advice and comment on official GRASP Partnership&quot;                     
+## [419] &quot;literature, reports and other documents;&quot;                                           
+## [420] &quot;i) To provide advice on the design and programming of GRASP&quot;                        
+## [421] &quot;Partnership thematic workshops focusing on industry and the&quot;                        
+## [422] &quot;conservation of great apes (e.g., timber, eco-tourism, mineral&quot;                     
+## [423] &quot;extraction, etc).&quot;                                                                  
+## [424] &quot;51. The Scientific Commission will be independent of all organs of the&quot;             
+## [425] &quot;GRASP Partnership. The secretariat will participate in the&quot;                         
+## [426] &quot;deliberations of the Commission as an observer.&quot;                                    
+## [427] &quot;52. The Scientific Commission will conduct its work mainly by&quot;                      
+## [428] &quot;electronic mail, with teleconferences when necessary. However, the&quot;                 
+## [429] &quot;Commission may appoint special working groups or panels,&quot;                           
+## [430] &quot;comprising additional experts when necessary, to conduct&quot;                           
+## [431] &quot;scientific investigations, field visits and other information-&quot;                     
+## [432] &quot;gathering activities in order to achieve its mandate. The&quot;                          
+## [433] &quot;Commission will meet on an occasional basis when a majority of its&quot;                 
+## [434] &quot;members calls for such a meeting and when finances permit.&quot;                         
+## [435] &quot;53. The Scientific Commission will submit to the Executive Committee a&quot;             
+## [436] &quot;detailed plan of action for discussion.&quot;                                            
+## [437] &quot;XI. Technical support teams&quot;                                                        
+## [438] &quot;A.   Composition&quot;                                                                   
+## [439] &quot;54. The GRASP Partnership may use technical support teams formed on an&quot;             
+## [440] &quot;ad hoc basis at the request of the GRASP secretariat, the&quot;                          
+## [441] &quot;Executive Committee or the Scientific Commission. The      terms&quot;                   
+## [442] &quot;of reference for technical support teams will be developed by the&quot;                  
+## [443] &quot;secretariat in consultation with the Scientific Commission.&quot;                        
+## [444] &quot;B.   Functions&quot;                                                                     
+## [445] &quot;55. The functions of the GRASP technical support teams will be:&quot;                    
+## [446] &quot;a) To promote and assist the development and implementation of&quot;                     
+## [447] &quot;national action plans for the survival of great ape populations&quot;                    
+## [448] &quot;and their habitat, including the organization and coordination of&quot;                  
+## [449] &quot;workshops on the issue, as requested;&quot;                                              
+## [450] &quot;b) To provide technical capacity or information to the GRASP Council,&quot;              
+## [451] &quot;Executive Committee and range States on specific range State great&quot;                 
+## [452] &quot;ape conservation issues, including assistance with the preparation&quot;                 
+## [453] &quot;of project proposals;&quot;                                                              
+## [454] &quot;c) To assist, as requested, in the evaluation of great ape&quot;                         
+## [455] &quot;conservation activities;&quot;                                                           
+## [456] &quot;d) To undertake other tasks as deemed necessary by the Executive&quot;                   
+## [457] &quot;Committee.&quot;                                                                         
+## [458] &quot;56. When a representative of a partner organization is seconded to a&quot;               
+## [459] &quot;technical support team for a specific activity, that individual&quot;                    
+## [460] &quot;will be deemed to represent GRASP officially.&quot;                                      
+## [461] &quot;57. It is foreseen that in the majority of cases, the work of the&quot;                  
+## [462] &quot;technical support teams will be undertaken at the partners&#39;&quot;                        
+## [463] &quot;expense. However, in certain circumstances, expenses may be&quot;                        
+## [464] &quot;covered by the GRASP budget resources.&quot;                                             
+## [465] &quot;58. In certain cases, the secretariat may contract the services of&quot;                 
+## [466] &quot;individuals or organizations who are not partners to render&quot;                        
+## [467] &quot;specific services to the GRASP Partnership.&quot;                                        
+## [468] &quot;59. The technical support team will prepare an annual work plan for&quot;                
+## [469] &quot;submission through the secretariat, for approval by the Executive&quot;                  
+## [470] &quot;Committee\&quot;&quot;                                                                        
+## [471] &quot;XII. GRASP patrons&quot;                                                                 
+## [472] &quot;60. The secretariat, with the approval of the Executive Committee,&quot;                 
+## [473] &quot;will appoint a limited number of GRASP patrons for a fixed period&quot;                  
+## [474] &quot;of three years. Patrons will be individuals well recognized for&quot;                    
+## [475] &quot;their contribution to great ape conservation or related&quot;                            
+## [476] &quot;activities.&quot;                                                                        
+## [477] &quot;61. The role of GRASP patrons will be an honorary one. The Executive&quot;               
+## [478] &quot;Committee may request the patrons:&quot;                                                 
+## [479] &quot;(a)  To promote the GRASP Partnership at the political level;&quot;                      
+## [480] &quot;(b)  To promote the GRASP Partnership to the general public&quot;                        
+## [481] &quot;at international meetings, conventions and symposiums;&quot;                             
+## [482] &quot;(c)  To seek opportunities to raise funds for the GRASP&quot;                            
+## [483] &quot;Partnership.&quot;                                                                       
+## [484] &quot;XIII. GRASP at the national level&quot;                                                  
+## [485] &quot;62. The elaboration and implementation of national action plans for&quot;                
+## [486] &quot;the survival of great ape populations and their habitat lies at&quot;                    
+## [487] &quot;the heart of the Global Strategy for the Survival of Great Apes.&quot;                   
+## [488] &quot;Full partners and supporting partners may wish to make appropriate&quot;                 
+## [489] &quot;arrangements regarding:&quot;                                                            
+## [490] &quot;(a)  The provisions needed for the organization of GRASP at&quot;                        
+## [491] &quot;the national level, including the role of GRASP focal points;&quot;                      
+## [492] &quot;(b)  A GRASP structure in range States which encourages&quot;                            
+## [493] &quot;engagement with other relevant bodies, e.g., community groups and&quot;                  
+## [494] &quot;smaller non-governmental organizations, as local partners;&quot;                         
+## [495] &quot;(c)  Parallel provisions for GRASP supporting organizations&quot;                        
+## [496] &quot;in non-range donor States.&quot;                                                         
+## [497] &quot;XIV. Finance&quot;                                                                       
+## [498] &quot;63. The income of the GRASP Partnership may be derived from grants,&quot;                
+## [499] &quot;donations and payments in support of Partnership activities from&quot;                   
+## [500] &quot;governmental, intergovernmental, foundation and other non-&quot;                         
+## [501] &quot;governmental, business and private donors.&quot;                                         
+## [502] &quot;64. The secretariat will submit to each ordinary session of the GRASP&quot;              
+## [503] &quot;Council for approval a budget for the succeeding biennium,&quot;                         
+## [504] &quot;including estimates of income and expenditure.&quot;                                     
+## [505] &quot;65. The secretariat will cause true and accurate accounts to be kept&quot;               
+## [506] &quot;of all monies received and expended by the secretariat on behalf&quot;                   
+## [507] &quot;of the GRASP Partnership and will be responsible for the control&quot;                   
+## [508] &quot;of all such income and expenditure in accordance with the budget.&quot;                  
+## [509] &quot;66. The accounts of the GRASP Partnership will be examined every two&quot;               
+## [510] &quot;years by auditors appointed jointly by the sponsoring agencies.&quot;                    
+## [511] &quot;67. The secretariat will have the power to accept grants, donations&quot;                
+## [512] &quot;and other payments on behalf of the GRASP Partnership, subject to&quot;                  
+## [513] &quot;any instructions and guidelines by the GRASP Council.&quot;                              
+## [514] &quot;68. The sponsoring agencies, on behalf of the GRASP Partnership, will&quot;              
+## [515] &quot;have the right to refuse donations from entities they consider&quot;                     
+## [516] &quot;unsuitable and will provide an explanation to the GRASP Council of&quot;                 
+## [517] &quot;any such refusal.&quot;                                                                  
+## [518] &quot;XV. Amendments&quot;                                                                     
+## [519] &quot;69. The GRASP Council will have the authority to amend the present&quot;                 
+## [520] &quot;rules on the proposal of the Executive Committee or any full or&quot;                    
+## [521] &quot;supporting partner.&quot;                                                                
+## [522] &quot;70. The secretariat shall notify any such proposals to all full and&quot;                
+## [523] &quot;supporting partners.&quot;                                                               
+## [524] &quot;71. The GRASP Council will consider any such proposal at its next&quot;                  
+## [525] &quot;meeting that commences on a date that is not less than six weeks&quot;                   
+## [526] &quot;after the date on which the proposal is notified.&quot;                                  
+## [527] &quot;72. Proposed amendments considered by the GRASP Council will become&quot;                
+## [528] &quot;effective immediately upon approval by a two thirds majority of&quot;                    
+## [529] &quot;the GRASP Council, provided that such a majority includes a&quot;                        
+## [530] &quot;majority of category A partners present and voting and a majority&quot;                  
+## [531] &quot;of category B partners present and voting.&quot;                                         
+## [532] &quot;XVI. Miscellaneous&quot;                                                                 
+## [533] &quot;73. The official work of the GRASP Partnership will be carried out in&quot;              
+## [534] &quot;either English or French, or both. Where possible and appropriate,&quot;                 
+## [535] &quot;and depending on budgetary constraints, documents and reports will&quot;                 
+## [536] &quot;be made available in both languages.&quot;                                               
+## [537] &quot;Annex&quot;                                                                              
+## [538] &quot;Great Apes Survival Project Partnership admission criteria&quot;                         
+## [539] &quot;Introduction&quot;                                                                       
+## [540] &quot;The aim of the present document is to provide workable&quot;                             
+## [541] &quot;criteria to guide the admittance of new partners into the GRASP&quot;                    
+## [542] &quot;Partnership. It was prepared by the secretariat of the Great Apes&quot;                  
+## [543] &quot;Survival Project (GRASP) Partnership in response to a request by&quot;                   
+## [544] &quot;the GRASP interim Executive Committee during a teleconference on&quot;                   
+## [545] &quot;12 March 2004. The admission criteria contained in the present&quot;                     
+## [546] &quot;document were approved by the interim Executive Committee on 3&quot;                     
+## [547] &quot;September 2004.&quot;                                                                    
+## [548] &quot;It is hoped that these criteria will help the Executive&quot;                            
+## [549] &quot;Committee in assessing the suitability of each applicant on its&quot;                    
+## [550] &quot;own merit and ensuring a clear and transparent admission process.&quot;                  
+## [551] &quot;The categories of partners for which the admission criteria&quot;                        
+## [552] &quot;have been prepared are set out below. For a complete list of&quot;                       
+## [553] &quot;categories, please see chapter VII, section A, of the draft rules&quot;                  
+## [554] &quot;for the organization and management of the Great Apes Survival&quot;                     
+## [555] &quot;Project (GRASP) Partnership.&quot;                                                       
+## [556] &quot;|Category E: Non-governmental organizations with a significant     |&quot;               
+## [557] &quot;|involvement in great ape conservation                             |&quot;               
+## [558] &quot;Applicants for admittance into category E (non-governmental&quot;                        
+## [559] &quot;organizations) shall be required to meet the criteria set out&quot;                      
+## [560] &quot;below, at the discretion of the Executive Committee.&quot;                               
+## [561] &quot;Non-governmental organization partnership criteria&quot;                                 
+## [562] &quot;Non-governmental organization partners must:&quot;                                       
+## [563] &quot;. Share and support the objectives of GRASP;&quot;                                       
+## [564] &quot;. Not pursue activities conflicting with the mission of&quot;                            
+## [565] &quot;GRASP;&quot;                                                                             
+## [566] &quot;. Be actively engaged in or support the conservation of&quot;                            
+## [567] &quot;great apes and their habitat;&quot;                                                      
+## [568] &quot;. Aim to ensure that any use of natural resources is&quot;                               
+## [569] &quot;equitable and ecologically sustainable;&quot;                                            
+## [570] &quot;. Show dedication to influencing, encouraging and assisting&quot;                        
+## [571] &quot;local communities and society at large in formulating and&quot;                          
+## [572] &quot;adopting conservation and natural resource policies that&quot;                           
+## [573] &quot;are great ape-friendly;&quot;                                                            
+## [574] &quot;. Demonstrate a substantial record of activity in the&quot;                              
+## [575] &quot;support or conservation of great apes and their habitat&quot;                            
+## [576] &quot;for at least two years or have within their ranks&quot;                                  
+## [577] &quot;personnel with substantial experience in the conservation&quot;                          
+## [578] &quot;of endangered species;&quot;                                                             
+## [579] &quot;. Present for review annual reports for the previous two&quot;                           
+## [580] &quot;years or equivalent documentation or a website containing&quot;                          
+## [581] &quot;such information;&quot;                                                                  
+## [582] &quot;. Submit with their application a letter of recommendation&quot;                         
+## [583] &quot;from an existing GRASP partner.&quot;                                                    
+## [584] &quot;Non-governmental organizations that are based in range States&quot;                      
+## [585] &quot;and that do not meet the above requirements shall be encouraged to&quot;                 
+## [586] &quot;support GRASP activities through national focal points or by&quot;                       
+## [587] &quot;working closely with international non-governmental organization&quot;                   
+## [588] &quot;partners. They will be at liberty to apply for admission once they&quot;                 
+## [589] &quot;have met the stated requirements.&quot;                                                  
+## [590] &quot;Roles and responsibilities of non-governmental organization&quot;                        
+## [591] &quot;partners&quot;                                                                           
+## [592] &quot;Non-governmental organization partners must:&quot;                                       
+## [593] &quot;. Support the formulation of GRASP policy;&quot;                                         
+## [594] &quot;. Help develop and implement the GRASP strategy and work&quot;                           
+## [595] &quot;plan;&quot;                                                                              
+## [596] &quot;. Form part of the GRASP Council and nominate a&quot;                                    
+## [597] &quot;representative to the Executive Committee;&quot;                                         
+## [598] &quot;. Share their knowledge, experience and expertise with the&quot;                         
+## [599] &quot;GRASP Partnership;&quot;                                                                 
+## [600] &quot;. Assist with the preparation of national great ape survival&quot;                       
+## [601] &quot;plans and the organization of priority-setting workshops&quot;                           
+## [602] &quot;in range States;&quot;                                                                   
+## [603] &quot;. Coordinate their activities to address the national&quot;                              
+## [604] &quot;priorities identified in national great ape survival&quot;                               
+## [605] &quot;plans;&quot;                                                                             
+## [606] &quot;. Participate in the activities of the GRASP technical&quot;                             
+## [607] &quot;support team;&quot;                                                                      
+## [608] &quot;. Help GRASP gain support in range and donor States;&quot;                               
+## [609] &quot;. Establish a GRASP hyperlink on their websites;&quot;                                   
+## [610] &quot;. Acknowledge GRASP and use the GRASP logo in all partner&quot;                          
+## [611] &quot;activities that are wholly or partly funded by GRASP&quot;                               
+## [612] &quot;funds, where appropriate.&quot;                                                          
+## [613] &quot;|Category H: Appropriate private businesses, representatives of    |&quot;               
+## [614] &quot;|industry and scientific, academic and other organizations with an |&quot;               
+## [615] &quot;|interest in supporting or participating in great ape conservation |&quot;               
+## [616] &quot;|programmes through GRASP                                          |&quot;               
+## [617] &quot;Applicants for admittance into category H will be required to&quot;                      
+## [618] &quot;meet the majority of the following criteria, depending on their&quot;                    
+## [619] &quot;applicability as determined by the Executive Committee.&quot;                            
+## [620] &quot;Private sector partner criteria&quot;                                                    
+## [621] &quot;74.  Private sector partners must:&quot;                                                 
+## [622] &quot;75. Show commitment to furthering GRASP objectives;&quot;                                
+## [623] &quot;76. Ensure conformity to, or willingness to conform to, principles of&quot;              
+## [624] &quot;sustainability as set out in relevant guidelines such as those&quot;                     
+## [625] &quot;established by the United Nations Environment Programme, the World&quot;                 
+## [626] &quot;Business Council for Sustainable Development and the Forest&quot;                        
+## [627] &quot;Stewardship Council, as well as to sustainable business standards&quot;                  
+## [628] &quot;and other international guidelines;&quot;                                                
+## [629] &quot;77. Adopt targets, where appropriate, for initiating best practices in&quot;             
+## [630] &quot;their operations and monitor progress towards those targets and&quot;                    
+## [631] &quot;share lessons learned;&quot;                                                             
+## [632] &quot;78. Demonstrate commitment to ensuring that any use of natural&quot;                     
+## [633] &quot;resources is ecologically sustainable and that all stakeholders,&quot;                   
+## [634] &quot;including local communities, benefit appropriately;&quot;                                
+## [635] &quot;79. Participate in or provide substantial funding for programmes for&quot;               
+## [636] &quot;the conservation of great apes and their habitat.&quot;                                  
+## [637] &quot;Academic institutions and research bodies partnership criteria&quot;                     
+## [638] &quot;80. Academic institutions and research body partners must:&quot;                         
+## [639] &quot;81. Be engaged in efforts to increase and share scientific knowledge&quot;               
+## [640] &quot;on great apes and related great ape ecosystems that is applicable&quot;                  
+## [641] &quot;to the conservation of apes in the wild;&quot;                                           
+## [642] &quot;82. Demonstrate an institutional focus on applied field research or&quot;                
+## [643] &quot;conservation-related educational activities;&quot;                                       
+## [644] &quot;83. Ensure and promote great ape welfare where applicable in their&quot;                 
+## [645] &quot;research.&quot;                                                                          
+## [646] &quot;Other partners&quot;                                                                     
+## [647] &quot;Other partners may include, under special circumstances and&quot;                        
+## [648] &quot;for reasons to be made explicit by the Executive Committee, any&quot;                    
+## [649] &quot;individual, organization or body not covered above that is&quot;                         
+## [650] &quot;committed to the GRASP mission and to the conservation of great&quot;                    
+## [651] &quot;apes and their habitat.&quot;                                                            
+## [652] &quot;Parties interested in joining the GRASP Partnership are asked&quot;                      
+## [653] &quot;to send a brief letter, clearly indicating their great ape-related&quot;                 
+## [654] &quot;activities and their commitment to GRASP, to:&quot;                                      
+## [655] &quot;Melanie Virtue&quot;                                                                     
+## [656] &quot;Great Apes Survival Project (GRASP)&quot;                                                
+## [657] &quot;Division of Environmental Policy Implementation&quot;                                    
+## [658] &quot;United Nations Environment Programme&quot;                                               
+## [659] &quot;P.O. Box 30552&quot;                                                                     
+## [660] &quot;Nairobi, Kenya&quot;                                                                     
+## [661] &quot;Tel.: (+254 20) 62 4163&quot;                                                            
+## [662] &quot;Fax: (+254 20) 62 4300&quot;                                                             
+## [663] &quot;Email: grasp@unep.org&quot;                                                              
+## [664] &quot;The final decision on the eligibility and admittance of any&quot;                        
+## [665] &quot;applicant shall be made at the discretion of the Executive&quot;                         
+## [666] &quot;Committee. The Committee will provide a written explanation for&quot;                    
+## [667] &quot;its decision in the event of a declined request.&quot;                                   
+## [668] &quot;________________&quot;                                                                   
+## [669] &quot;-----------------------&quot;                                                            
+## [670] &quot;*    UNEP/UNESCO/GRASP/IGM.1/1.&quot;                                                    
+## [671] &quot;+    UNEP/UNESCO/GRASP/COUNCIL.1/1.&quot;                                                
+## [672] &quot;1    UNEP/UNESCO/GRASP/Prep.Com.1/2/Rev.2.&quot;                                         
+## 
+## [[2]]
+##   [1] &quot;UNITED&quot;                                                                           
+##   [2] &quot;NATIONS |[pic] | |&quot;                                                               
+##   [3] &quot;|[pic][pic]|                                       |                            |&quot;
+##   [4] &quot;|[pic]     |                                       |Distr.: General             |&quot;
+##   [5] &quot;|          |                                       |                            |&quot;
+##   [6] &quot;|          |United Nations                         |UNEP/UNESCO/GRASP/IGM.1/3   |&quot;
+##   [7] &quot;|          |Environment Programme                  |23 June 2005                |&quot;
+##   [8] &quot;|          |                                       |                            |&quot;
+##   [9] &quot;|          |United Nations Educational, Scientific |Original:  English          |&quot;
+##  [10] &quot;|          |and Cultural Organization              |                            |&quot;
+##  [11] &quot;Intergovernmental Meeting on Great Apes and&quot;                                      
+##  [12] &quot;the Great Apes Survival Project (GRASP)&quot;                                          
+##  [13] &quot;First session&quot;                                                                    
+##  [14] &quot;Kinshasa, 5-9 September 2005&quot;                                                     
+##  [15] &quot;Item 7 (b) of the provisional agenda*&quot;                                            
+##  [16] &quot;Discussion and adoption of:&quot;                                                      
+##  [17] &quot;Draft declaration on great apes&quot;                                                  
+##  [18] &quot;Draft declaration on great apes&quot;                                                  
+##  [19] &quot;We, the representatives of the great ape range States, donor&quot;                     
+##  [20] &quot;and other States, the academic and scientific communities, non-&quot;                  
+##  [21] &quot;governmental organizations, industry and the private sector,&quot;                     
+##  [22] &quot;meeting at Kinshasa, Democratic Republic of the Congo, on [date],&quot;                
+##  [23] &quot;Aware that there is a high risk of extinction for all great&quot;                      
+##  [24] &quot;ape species either in the immediate future or, at best, within 50&quot;                
+##  [25] &quot;years, due largely to threats from human activities, including&quot;                   
+##  [26] &quot;increasing encroachments by human populations on their habitat;&quot;                  
+##  [27] &quot;civil disturbances and wars; poaching for meat or the live animal&quot;                
+##  [28] &quot;trade; diseases such as Ebola which can decimate ape populations;&quot;                
+##  [29] &quot;and the destruction of forests and other habitat,&quot;                                
+##  [30] &quot;Recognizing that great apes are key indicator species for&quot;                        
+##  [31] &quot;forest and woodland areas within range States and thus for&quot;                       
+##  [32] &quot;endangered ecosystems,&quot;                                                           
+##  [33] &quot;Also recognizing that great apes play a key role in&quot;                              
+##  [34] &quot;maintaining the health and diversity of tropical forests, as well&quot;                
+##  [35] &quot;as having their own intrinsic value, and that their decline and&quot;                  
+##  [36] &quot;potential extinction may precede the decline of other species&quot;                    
+##  [37] &quot;which may themselves be culturally, economically or ecologically&quot;                 
+##  [38] &quot;important,&quot;                                                                       
+##  [39] &quot;Noting that great ape populations and their habitats can&quot;                         
+##  [40] &quot;provide direct and indirect benefits to local communities and help&quot;               
+##  [41] &quot;alleviate poverty through the sustainable development of tourism&quot;                 
+##  [42] &quot;and other non-destructive enterprises and through the&quot;                            
+##  [43] &quot;environmental services that forests provide,&quot;                                     
+##  [44] &quot;Recalling the World Charter for Nature, adopted by the United&quot;                    
+##  [45] &quot;Nations General Assembly by its resolution 37/7 of 28 October&quot;                    
+##  [46] &quot;1982, which underscores the importance of not compromising the&quot;                   
+##  [47] &quot;genetic viability on the earth,&quot;                                                  
+##  [48] &quot;Also recalling the Millennium Development Goals which, among&quot;                     
+##  [49] &quot;other things, aim to reverse the loss of environmental resources&quot;                 
+##  [50] &quot;by 2015,&quot;                                                                         
+##  [51] &quot;Further recalling the Plan of Implementation of the World&quot;                        
+##  [52] &quot;Summit on Sustainable Development, which included the agreement to&quot;               
+##  [53] &quot;achieve a significant reduction in the current rate of loss of&quot;                   
+##  [54] &quot;biodiversity by 2010,&quot;                                                            
+##  [55] &quot;Believing that global partnership, collective action and the&quot;                     
+##  [56] &quot;acceptance of shared responsibility can help to halt and reverse&quot;                 
+##  [57] &quot;the decline of great ape populations,&quot;                                            
+##  [58] &quot;Also believing that peoples and States are, and should be,&quot;                       
+##  [59] &quot;the best protectors of their own fauna and flora,&quot;                                
+##  [60] &quot;Recognizing that donor States, international institutions and&quot;                    
+##  [61] &quot;non-governmental organizations have already allocated substantial&quot;                
+##  [62] &quot;funds towards great ape conservation, but that further resources&quot;                 
+##  [63] &quot;must be raised urgently so as to allow essential conservation work&quot;               
+##  [64] &quot;to be undertaken to secure the future of those species and their&quot;                 
+##  [65] &quot;ecosystems,&quot;                                                                      
+##  [66] &quot;Welcoming the present and future role of the Great Apes&quot;                          
+##  [67] &quot;Survival Project Partnership as an exemplary cooperative&quot;                         
+##  [68] &quot;enterprise that harnesses the skills, resources and commitment of&quot;                
+##  [69] &quot;range States, donor States, environmental agreements and other&quot;                   
+##  [70] &quot;international bodies, non-governmental and commercial&quot;                            
+##  [71] &quot;organizations,&quot;                                                                   
+##  [72] &quot;Expressing gratitude to the President, Government and people&quot;                     
+##  [73] &quot;of the Democratic Republic of the Congo for their generosity and&quot;                 
+##  [74] &quot;far-sightedness in hosting the present intergovernmental meeting,&quot;                
+##  [75] &quot;Convinced of the urgent need to take appropriate measures,&quot;                       
+##  [76] &quot;1. Reaffirm our commitment to the Global Strategy for the&quot;                        
+##  [77] &quot;Survival of Great Apes;[1]&quot;                                                       
+##  [78] &quot;2. Affirm our commitment to implement, as a matter of urgency,&quot;                   
+##  [79] &quot;effective measures to counter the threats facing great apes;&quot;                     
+##  [80] &quot;3. Emphasize the need to enhance cooperation among range States and&quot;              
+##  [81] &quot;their neighbours to ensure the coordination of efforts to halt&quot;                   
+##  [82] &quot;activities that have a detrimental effect upon the populations of&quot;                
+##  [83] &quot;great apes;&quot;                                                                      
+##  [84] &quot;4.   Also emphasize the important role of appropriate&quot;                            
+##  [85] &quot;national and international legal measures in providing a framework&quot;               
+##  [86] &quot;for the conservation of great apes;&quot;                                              
+##  [87] &quot;5.  Urge the development and implementation of national&quot;                          
+##  [88] &quot;great apes survival plans and other appropriate actions by range&quot;                 
+##  [89] &quot;States, other interested States and other partners, in order to&quot;                  
+##  [90] &quot;conserve great apes and their habitats and to halt and reverse the&quot;               
+##  [91] &quot;decline of great ape populations;&quot;                                                
+##  [92] &quot;6.  Encourage the provision of direct and indirect economic&quot;                      
+##  [93] &quot;benefits to local communities, for example, through the&quot;                          
+##  [94] &quot;introduction or extension of sustainable ecotourism enterprises in&quot;               
+##  [95] &quot;areas of great ape habitat, or the creation of long-term research&quot;                
+##  [96] &quot;projects operating in or near these areas;&quot;                                       
+##  [97] &quot;7.  Call upon all relevant international institutions,&quot;                           
+##  [98] &quot;including the World Bank, the International Monetary Fund, the&quot;                   
+##  [99] &quot;regional development banks, the United Nations Development&quot;                       
+## [100] &quot;Programme, the Global Environment Facility, the European&quot;                         
+## [101] &quot;Commission, and national aid and development agencies of all&quot;                     
+## [102] &quot;countries, to develop and implement policies which prevent actions&quot;               
+## [103] &quot;and activities that are detrimental to the survival of great ape&quot;                 
+## [104] &quot;populations;&quot;                                                                     
+## [105] &quot;8.  Reaffirm our commitment to work together to ensure that&quot;                      
+## [106] &quot;the Great Apes Survival Project Partnership realizes its full&quot;                    
+## [107] &quot;potential as a key component of the international effort to save&quot;                 
+## [108] &quot;great apes by:&quot;                                                                   
+## [109] &quot;(a) Encouraging all 23 great ape range States to become full&quot;                     
+## [110] &quot;partners of the Great Apes Survival Project Partnership;&quot;                         
+## [111] &quot;(b)  Also encouraging States that are not great ape range&quot;                        
+## [112] &quot;States but which support or participate to a significant extent in&quot;               
+## [113] &quot;programmes for the conservation of great apes and their habitat to&quot;               
+## [114] &quot;become full partners of the Great Apes Survival Project&quot;                          
+## [115] &quot;Partnership;&quot;                                                                     
+## [116] &quot;(c)  Encouraging other international organizations, in&quot;                           
+## [117] &quot;addition to the United Nations Environment Programme, the United&quot;                 
+## [118] &quot;Nations Educational, Scientific and Cultural Organization and the&quot;                
+## [119] &quot;biodiversity-related conventions, to become or remain active&quot;                     
+## [120] &quot;partners of the Great Apes Survival Project Partnership;&quot;                         
+## [121] &quot;(d)  Encouraging non-governmental organizations that&quot;                             
+## [122] &quot;historically have played an important role in efforts to conserve&quot;                
+## [123] &quot;the great apes, whether at the national or international level, to&quot;               
+## [124] &quot;redouble their efforts in that regard and to become or remain&quot;                    
+## [125] &quot;partners of the Great Apes Survival Project Partnership;&quot;                         
+## [126] &quot;(e)  Working closely with the academic and business&quot;                              
+## [127] &quot;communities, industry and the private sector;&quot;                                    
+## [128] &quot;9.    [Resolve to set ourselves and all concerned the target,&quot;                    
+## [129] &quot;by the year 2010, of securing the future of all species and&quot;                      
+## [130] &quot;subspecies of great apes by:&quot;                                                     
+## [131] &quot;(a) Designating for special protected or multiple-use status&quot;                     
+## [132] &quot;those areas supporting the key 100 or more wild populations that&quot;                 
+## [133] &quot;would conserve the genetic and ecological diversity of all great&quot;                 
+## [134] &quot;apes for all time;&quot;                                                               
+## [135] &quot;(b) Protecting those sites from further loss of habitat and&quot;                      
+## [136] &quot;guaranteeing that any human use of habitats is consistent with&quot;                   
+## [137] &quot;maintaining healthy, viable great ape populations;&quot;                               
+## [138] &quot;(c) Stabilizing population size at each site or taking&quot;                           
+## [139] &quot;measures to increase those populations at risk; and&quot;                              
+## [140] &quot;(d) Improving the protection of individual great apes and&quot;                        
+## [141] &quot;their habitats everywhere by demonstrably improving the&quot;                          
+## [142] &quot;enforcement of relevant laws;]&quot;                                                   
+## [143] &quot;10.  Pledge to generate new and additional funds for the survival&quot;                
+## [144] &quot;of great apes and their habitats and ensure that the international&quot;               
+## [145] &quot;community in the widest sense, including donor States,&quot;                           
+## [146] &quot;international institutions, non-governmental organizations and&quot;                   
+## [147] &quot;private industry, provides effective and coherent support to&quot;                     
+## [148] &quot;assist efforts made by the great ape range States.&quot;                               
+## [149] &quot;__________________&quot;                                                               
+## [150] &quot;-----------------------&quot;                                                          
+## [151] &quot;*    UNEP/UNESCO/GRASP/IGM.1/1.&quot;                                                  
+## [152] &quot;[1]  Adopted by experts at the preparatory meeting for an&quot;                        
+## [153] &quot;intergovernmental meeting on great apes and the Great Apes&quot;                       
+## [154] &quot;Survival Project (GRASP), held in Paris from 26 to 28 November&quot;                   
+## [155] &quot;2003 (UNEP/UNESCO/GRASP/Prep.Com.1/2/Rev.2).&quot;                                     
+## 
+## [[3]]
+##   [1] &quot;UNITED&quot;                                                                        
+##   [2] &quot;NATIONS |[pic] | |&quot;                                                            
+##   [3] &quot;|[pic][pic]|                                     |                           |&quot;
+##   [4] &quot;|[pic]     |                                     |Distr.: General            |&quot;
+##   [5] &quot;|          |                                     |                           |&quot;
+##   [6] &quot;|          |United Nations                       |UNEP/UNESCO/GRASP/EXCOM.2/2|&quot;
+##   [7] &quot;|          |Environment Programme                |                           |&quot;
+##   [8] &quot;|          |                                     |9 June 2006                |&quot;
+##   [9] &quot;|          |United Nations Educational,          |                           |&quot;
+##  [10] &quot;|          |Scientific                           |Original: English          |&quot;
+##  [11] &quot;|          |and Cultural Organization            |                           |&quot;
+##  [12] &quot;Executive Committee of the Great&quot;                                              
+##  [13] &quot;Apes Survival Project&quot;                                                         
+##  [14] &quot;Second meeting&quot;                                                                
+##  [15] &quot;Paris, 20-21 July 2006&quot;                                                        
+##  [16] &quot;Item 2 of the provisional agenda&quot;                                              
+##  [17] &quot;Next meeting of the GRASP Council and&quot;                                         
+##  [18] &quot;session of the Intergovernmental Meeting&quot;                                      
+##  [19] &quot;2 Points for discussion&quot;                                                       
+##  [20] &quot;1. The rules for the organization and management of the Partnership&quot;           
+##  [21] &quot;of the Great Apes Survival Project (GRASP) state that: \&quot;the GRASP&quot;            
+##  [22] &quot;Council will meet every two years\&quot; and that \&quot;the Council will&quot;               
+##  [23] &quot;decide the time and location of its meetings\&quot;. Representing the&quot;              
+##  [24] &quot;GRASP Council in the interim, the Executive Committee is thus&quot;                 
+##  [25] &quot;tasked with deciding on the timing of the next meeting. As the&quot;                
+##  [26] &quot;first session of the Intergovernmental Meeting on Great Apes and&quot;              
+##  [27] &quot;GRASP and the first meeting of the GRASP Council were held in&quot;                 
+##  [28] &quot;Kinshasa in September 2005, it is time for the Executive Committee&quot;            
+##  [29] &quot;to make plans for the next round of meetings.&quot;                                 
+##  [30] &quot;2. The secretariat has identified the following main issues to&quot;                
+##  [31] &quot;consider:&quot;                                                                     
+##  [32] &quot;a) Whether to organize either a second session of the&quot;                         
+##  [33] &quot;Intergovernmental Meeting or a second meeting of the GRASP&quot;                    
+##  [34] &quot;Council or both;&quot;                                                              
+##  [35] &quot;b) Specific timing of such meetings, bearing in mind the&quot;                      
+##  [36] &quot;interval since the last meetings;&quot;                                             
+##  [37] &quot;c) Location of the meetings;&quot;                                                  
+##  [38] &quot;d) Focus and expected outcomes of the meetings;&quot;                               
+##  [39] &quot;e) Funding.&quot;                                                                   
+##  [40] &quot;3 Nature of the meeting&quot;                                                       
+##  [41] &quot;3. The GRASP rules state the need for a meeting of the GRASP Council&quot;          
+##  [42] &quot;every two years. Whether or not to hold a session of the&quot;                      
+##  [43] &quot;Intergovernmental Meeting concurrently is a matter for the&quot;                    
+##  [44] &quot;Executive Committee to decide.&quot;                                                
+##  [45] &quot;4 Dates&quot;                                                                       
+##  [46] &quot;4. While the GRASP rules do indicate that \&quot;the GRASP Council will&quot;            
+##  [47] &quot;meet every two years,\&quot; the Executive Committee may wish to&quot;                   
+##  [48] &quot;consider whether or not a meeting of the GRASP Council or a&quot;                   
+##  [49] &quot;session of the Intergovernmental Meeting in 2007 are indeed&quot;                   
+##  [50] &quot;priorities for the GRASP Partnership, given the amount of human&quot;               
+##  [51] &quot;and financial resources required to organize and convene major&quot;                
+##  [52] &quot;meetings. The Executive Committee may also wish to discuss the&quot;                
+##  [53] &quot;number of days necessary for a successful major meeting (i.e.,&quot;                
+##  [54] &quot;five or less). The secretariat notes that the Conference of the&quot;               
+##  [55] &quot;Parties to the Convention on International Trade in Endangered&quot;                
+##  [56] &quot;Species decided to extend the interval between its sessions from&quot;              
+##  [57] &quot;two years to three years.&quot;                                                     
+##  [58] &quot;5. If Executive Committee members are aware of other major&quot;                    
+##  [59] &quot;environmental forums with which the next meeting of the GRASP&quot;                 
+##  [60] &quot;Council and session of the Intergovernmental Meeting should avoid&quot;             
+##  [61] &quot;conflicting, the secretariat would appreciate being informed.&quot;                 
+##  [62] &quot;5 Location&quot;                                                                    
+##  [63] &quot;6. The only guidance that the GRASP rules provide in this regard is&quot;           
+##  [64] &quot;to stipulate that \&quot;meeting locations will, as far as practical, be&quot;           
+##  [65] &quot;rotated among the geographic regions\&quot; and that \&quot;the Council will&quot;            
+##  [66] &quot;decide the time and location of its meetings\&quot;.&quot;                               
+##  [67] &quot;7. As Cameroon was elected chair of the GRASP Council in Kinshasa in&quot;          
+##  [68] &quot;September 2005, a venue in Cameroon may seem to be the most&quot;                   
+##  [69] &quot;logical place for the next meeting of the GRASP Council and&quot;                   
+##  [70] &quot;session of the Intergovernmental Meeting. The GRASP rules do not,&quot;             
+##  [71] &quot;however, provide that the chair of the GRASP Council should&quot;                   
+##  [72] &quot;necessarily host GRASP Council meetings.&quot;                                      
+##  [73] &quot;8. To date, the secretariat has received no formal offers from GRASP&quot;          
+##  [74] &quot;Partners to host the next meeting of the GRASP Council and session&quot;            
+##  [75] &quot;of the Intergovernmental Meeting, although Uganda (formally) and&quot;              
+##  [76] &quot;Nigeria (informally) did offer to host the 2005 meetings. In&quot;                  
+##  [77] &quot;addition, there is no precedent to assist the Executive Committee&quot;             
+##  [78] &quot;in selecting the location of the next meeting.&quot;                                
+##  [79] &quot;9. It is therefore the opinion of the secretariat that the Executive&quot;          
+##  [80] &quot;Committee may deliberate freely regarding a potential host&quot;                    
+##  [81] &quot;country, and that consideration should be given to potential&quot;                  
+##  [82] &quot;venues that are not in the Central Africa subregion. As a first&quot;               
+##  [83] &quot;step, the secretariat could be asked to approach all range and&quot;                
+##  [84] &quot;donor states to solicit offers to host the next meeting.&quot;                      
+##  [85] &quot;6 Focus and expected outcome of the meetings&quot;                                  
+##  [86] &quot;10. The first session of the Intergovernmental Meeting and first&quot;              
+##  [87] &quot;meeting of the GRASP Council were primarily concerned with&quot;                    
+##  [88] &quot;bringing together a number of relevant high level delegations and&quot;             
+##  [89] &quot;GRASP partner organizations to adopt key GRASP documents,&quot;                     
+##  [90] &quot;including the Kinshasa Declaration, generate political will and&quot;               
+##  [91] &quot;support for great ape conservation, strengthen the Partnership and&quot;            
+##  [92] &quot;pave a way forward for GRASP activities. The meetings in large&quot;                
+##  [93] &quot;part achieved those goals.&quot;                                                    
+##  [94] &quot;11. The second session of the Intergovernmental Meeting and second&quot;            
+##  [95] &quot;meeting of the GRASP Council must build upon these successes but&quot;              
+##  [96] &quot;also discuss important great ape conservation issues and generate&quot;             
+##  [97] &quot;outcomes with an impact at the field level. The secretariat&quot;                   
+##  [98] &quot;proposes in this regard that the meeting focus on one or two key&quot;              
+##  [99] &quot;themes of high relevance to the great apes, their conservation and&quot;            
+## [100] &quot;sustainable development for local peoples.&quot;                                    
+## [101] &quot;12. Possible themes:&quot;                                                          
+## [102] &quot;a) Major threats to great apes:&quot;                                               
+## [103] &quot;(i)    deforestation;&quot;                                                         
+## [104] &quot;(ii)   climate change;&quot;                                                        
+## [105] &quot;(iii)  bushmeat.&quot;                                                              
+## [106] &quot;b) Great ape conservation needs:&quot;                                              
+## [107] &quot;(i)    sustainable financing;&quot;                                                 
+## [108] &quot;(ii)   political will.&quot;                                                        
+## [109] &quot;13. The Executive Committee may also wish to consider designing the&quot;           
+## [110] &quot;meetings to reach a specific, ambitious objective, such as donor&quot;              
+## [111] &quot;commitments or an international tax for great apes, which might&quot;               
+## [112] &quot;mean inviting individuals who have not played a major role in&quot;                 
+## [113] &quot;GRASP to date, such as finance ministries and industry&quot;                        
+## [114] &quot;representatives. It may not be possible, however, to arrange a&quot;                
+## [115] &quot;meeting to discuss more ambitious objectives within the time frame&quot;            
+## [116] &quot;of one year.&quot;                                                                  
+## [117] &quot;7 Fundraising for the meeting&quot;                                                 
+## [118] &quot;14. Once again, depending in part on the venue chosen for the meeting&quot;         
+## [119] &quot;and its duration, the secretariat expects that the cost of the&quot;                
+## [120] &quot;next session of the Intergovernmental Meeting and GRASP Council&quot;               
+## [121] &quot;meeting will be similar to that of the previous meetings held in&quot;              
+## [122] &quot;Kinshasa, which cost $300,000&quot;                                                 
+## [123] &quot;15. It should be noted that in 2005, funding from the European&quot;                
+## [124] &quot;Commission came though at virtually the last minute before the&quot;                
+## [125] &quot;first session of the Intergovernmental Meeting. That funding&quot;                  
+## [126] &quot;proposal was submitted 18 months before the first session.&quot;                    
+## [127] &quot;Currently, we do not have any funding proposals in the pipeline.&quot;              
+## [128] &quot;16. Raising the resources necessary to convene the next meeting&quot;               
+## [129] &quot;successfully is a task that should obviously be initiated as soon&quot;             
+## [130] &quot;as possible. While the secretariat has a number of potentially&quot;                
+## [131] &quot;interested donor countries and institutions that it can approach,&quot;             
+## [132] &quot;the support and commitment of all GRASP Partners will be needed.&quot;              
+## [133] &quot;In particular, employing the GRASP Patrons and other renowned&quot;                 
+## [134] &quot;personalities earlier and more effectively than was done prior to&quot;             
+## [135] &quot;the first session of the Intergovernmental Meeting may be a key&quot;               
+## [136] &quot;strategy. In addition, any suggestions or specific contacts and&quot;               
+## [137] &quot;ideas that Executive Committee members may have would be most&quot;                 
+## [138] &quot;welcome.&quot;                                                                      
+## [139] &quot;_____________________&quot;                                                         
+## 
+## [[4]]
+##   [1] &quot;UNITED&quot;                                                                        
+##   [2] &quot;NATIONS |[pic] | |&quot;                                                            
+##   [3] &quot;|[pic][pic]|                                      |                          |&quot;
+##   [4] &quot;|[pic]     |                                      |Distr.: General           |&quot;
+##   [5] &quot;|          |                                      |                          |&quot;
+##   [6] &quot;|          |United Nations                        |UNEP/UNESCO/GRASP/EXCOM.2/|&quot;
+##   [7] &quot;|          |Environment Programme                 |3                         |&quot;
+##   [8] &quot;|          |                                      |29 June 2006              |&quot;
+##   [9] &quot;|          |United Nations Educational, Scientific|                          |&quot;
+##  [10] &quot;|          |                                      |Original:  English        |&quot;
+##  [11] &quot;|          |and Cultural Organization             |                          |&quot;
+##  [12] &quot;Executive Committee of the Great&quot;                                              
+##  [13] &quot;Apes Survival Project&quot;                                                         
+##  [14] &quot;Second meeting&quot;                                                                
+##  [15] &quot;Paris, 20-21 July 2006&quot;                                                        
+##  [16] &quot;Item 6(a) of the provisional agenda&quot;                                           
+##  [17] &quot;Update and plans from the secretariat&quot;                                         
+##  [18] &quot;Secretariat update&quot;                                                            
+##  [19] &quot;I. Missions&quot;                                                                   
+##  [20] &quot;A. Malaysia&quot;                                                                   
+##  [21] &quot;1. A mission to Malaysia was undertaken on 9-16 February 2006 by the&quot;          
+##  [22] &quot;United Nations Educational, Scientific and Cultural Organization&quot;              
+##  [23] &quot;(UNESCO) and the GRASP Scientific Commission.&quot;                                 
+##  [24] &quot;2. The mission discussed the future implementation of GRASP in&quot;                
+##  [25] &quot;Malaysia as well as addressing the threats that ill-planned palm&quot;              
+##  [26] &quot;oil plantations bring to the wild orang-utan of Southeast Asia.&quot;               
+##  [27] &quot;3. The Sabah Wildlife Department and Sabah Forestry Department showed&quot;         
+##  [28] &quot;willingness to work more closely with GRASP. The two departments&quot;              
+##  [29] &quot;can provide the GRASP Partnership with conservation and ecotourism&quot;            
+##  [30] &quot;models which may be replicated in other great ape range states.&quot;               
+##  [31] &quot;B. Japan&quot;                                                                      
+##  [32] &quot;4. A mission to Japan was undertaken on 22 May 2006 by UNESCO to meet&quot;         
+##  [33] &quot;Mr. Toshisada Nishida, GRASP patron and head of the GRASP Japan&quot;               
+##  [34] &quot;Committee and Mr. Noriaki Sakaguchi, Ministry of Environment of&quot;               
+##  [35] &quot;Japan.&quot;                                                                        
+##  [36] &quot;5. Discussions focussed on taxon-specific workshops and further&quot;               
+##  [37] &quot;involvement of the Japanese Government and private sector in the&quot;              
+##  [38] &quot;GRASP Partnership following the successful fundraising activities&quot;             
+##  [39] &quot;with the GRASP secretariat, outlined in section IV below.&quot;                     
+##  [40] &quot;C. Joint technical mission&quot;                                                    
+##  [41] &quot;6. Joint technical missions by representatives of the Convention on&quot;           
+##  [42] &quot;International Trade in Endangered Species of Wild Flora and Fauna&quot;             
+##  [43] &quot;(CITES) and of the United Nations Environment Programme (UNEP) to&quot;             
+##  [44] &quot;great ape range and consumer states of Africa and Southeast Asia&quot;              
+##  [45] &quot;are planned as part of the implementation of the resolution on the&quot;            
+##  [46] &quot;conservation of and trade in great apes, adopted by the Conference&quot;            
+##  [47] &quot;of the Parties to CITES at its thirteenth meeting, held in Bangkok&quot;            
+##  [48] &quot;in October 2004 (CITES Res. Conf. 13.4).&quot;                                      
+##  [49] &quot;7. The first such mission to Indonesia was undertaken on 8-12 May&quot;             
+##  [50] &quot;2006 by the GRASP team at UNEP (UNEP-GRASP) and CITES&quot;                         
+##  [51] &quot;representatives to investigate illegal trade in orang-utans.&quot;                  
+##  [52] &quot;8. The mission was facilitated by the Ministry of Forestry and the&quot;            
+##  [53] &quot;CITES Management Authority in Indonesia.&quot;                                      
+##  [54] &quot;9. Joint missions to Malaysia, Thailand and Cambodia are planned.&quot;             
+##  [55] &quot;II. Workshops and other meetings:&quot;                                             
+##  [56] &quot;A.    UNESCO 60th anniversary medal for Jane Goodall&quot;                          
+##  [57] &quot;10. UNESCO facilitated a UNESCO 60th anniversary ceremony for GRASP&quot;           
+##  [58] &quot;patron, Ms. Jane Goodall, at the UNESCO headquarters in Paris on&quot;              
+##  [59] &quot;17 January 2006. UNESCO Director-General, Mr. Koichiro Matsuura&quot;               
+##  [60] &quot;presented the anniversary medal to the iconic personality from the&quot;            
+##  [61] &quot;global nature conservation arena. UNESCO also discussed some&quot;                  
+##  [62] &quot;possibilities about further joint activities with the recently&quot;                
+##  [63] &quot;established French office of the Jane Goodall Institute for&quot;                   
+##  [64] &quot;Wildlife Research, Education and Conservation.&quot;                                
+##  [65] &quot;B.    Carbon sequestration workshop&quot;                                           
+##  [66] &quot;11. The workshop took place at the UNESCO headquarters in Paris on 13-&quot;        
+##  [67] &quot;15 March 2006.&quot;                                                                
+##  [68] &quot;12. It was attended by representatives of UNESCO and the GRASP&quot;                
+##  [69] &quot;Scientific Commission.&quot;                                                        
+##  [70] &quot;C.    Great ape priority populations and habitats scientific workshop&quot;         
+##  [71] &quot;13. The workshop was held on 17-20 April 2006 at UNESCO headquarters.&quot;         
+##  [72] &quot;14. It reviewed the scientific criteria used in determining the&quot;               
+##  [73] &quot;preliminary priority populations and sites presented at the&quot;                   
+##  [74] &quot;Kinshasa meeting in September 2005.&quot;                                           
+##  [75] &quot;15. Follow-up debriefing events were held in London on 24 April 2006&quot;          
+##  [76] &quot;and in Washington on 16 May and were attended by partners and&quot;                 
+##  [77] &quot;interested parties based in the United Kingdom and United States,&quot;             
+##  [78] &quot;respectively.&quot;                                                                 
+##  [79] &quot;D.    Species as humanity&#39;s common heritage&quot;                                   
+##  [80] &quot;16. UNESCO and the National Museum of Natural History of Paris held a&quot;         
+##  [81] &quot;one day seminar addressing the question \&quot;Can species be humanity&#39;s&quot;           
+##  [82] &quot;common heritage?\&quot; on 21 April 2006 at the National Museum.&quot;                   
+##  [83] &quot;Following several presentations, there were discussions on the&quot;                
+##  [84] &quot;question.&quot;                                                                     
+##  [85] &quot;E.    Congo Basin Forest Partnership meeting&quot;                                  
+##  [86] &quot;17. The meeting was held on 21-23 June 2006 in Paris.&quot;                         
+##  [87] &quot;18. UNESCO representatives and the GRASP Chief Consultant were invited&quot;        
+##  [88] &quot;by the French Government facilitators of the Congo Basin Forest&quot;               
+##  [89] &quot;Partnership to present an update on GRASP activities and discuss&quot;              
+##  [90] &quot;synergies between the two World Summit on Sustainable Development&quot;             
+##  [91] &quot;type II partnerships.&quot;                                                         
+##  [92] &quot;F.    UNEP meeting with south Sudan non-governmental organizations&quot;            
+##  [93] &quot;19. At the meeting, held on April 4 2006, south Sudanese non-&quot;                 
+##  [94] &quot;governmental organizations provided a briefing on frequent&quot;                    
+##  [95] &quot;incidences of the sale of infant chimpanzees to United Nations&quot;                
+##  [96] &quot;representatives and aid workers.&quot;                                              
+##  [97] &quot;20. Information was distributed to the staff of United Nations&quot;                
+##  [98] &quot;agencies and non-governmental organizations working in south Sudan&quot;            
+##  [99] &quot;on what to do when offered infant chimpanzees.&quot;                                
+## [100] &quot;G.    Other meetings&quot;                                                          
+## [101] &quot;21. UNEP met with the regional director for Africa of the World&quot;               
+## [102] &quot;Society for the Protection of Animals on 19 April 2006. The World&quot;             
+## [103] &quot;Society for the Protection of Animals is interested in identifying&quot;            
+## [104] &quot;gaps in great ape conservation activities in francophone Africa&quot;               
+## [105] &quot;and supporting necessary interventions, especially in the area of&quot;             
+## [106] &quot;animal welfare.&quot;                                                               
+## [107] &quot;22. UNEP met with representatives of the Government of south Sudan on&quot;         
+## [108] &quot;9 May 2006 to discuss the political and environmental situation in&quot;            
+## [109] &quot;the south, priority needs of the Juba administration and UNEP Post-&quot;           
+## [110] &quot;Conflict Branch support for a wildlife inventory.&quot;                             
+## [111] &quot;23. UNEP met with Ms. Noeline Rakotoarisoa, UNESCO Regional Office for&quot;        
+## [112] &quot;Education in Africa, at UNEP headquarters on 11 May to discuss a&quot;              
+## [113] &quot;possible joint project between the World Heritage Centre, GRASP,&quot;              
+## [114] &quot;the United Nations Development Programme and the World&quot;                        
+## [115] &quot;Conservation Union in West Africa (Guinea, Guinea-Bissau, Mali,&quot;               
+## [116] &quot;Senegal) to identify and secure viable habitat corridors for&quot;                  
+## [117] &quot;chimpanzee and other wildlife migration between existing World&quot;                
+## [118] &quot;Heritage sites and biosphere reserves.&quot;                                        
+## [119] &quot;24. UNESCO met Mr. Sakaguchi, Ministry of Environment of Japan, in&quot;            
+## [120] &quot;Paris on 19 April 2006 to be updated on the Japanese Government&#39;s&quot;             
+## [121] &quot;involvement with the GRASP Partnership and to discuss further&quot;                 
+## [122] &quot;joint activities.&quot;                                                             
+## [123] &quot;H.    GRASP side events&quot;                                                       
+## [124] &quot;1. UNEP/UNESCO Great Apes Survival Project - Can the United Nations&quot;           
+## [125] &quot;save the great apes and their biodiverse habitats?&quot;                            
+## [126] &quot;25. The event was held on 30 March at the eighth session of the&quot;               
+## [127] &quot;Conference of the Parties to the Convention on Biological&quot;                     
+## [128] &quot;Diversity, in Curitiba, Brazil. Speakers included GRASP Chief&quot;                 
+## [129] &quot;Consultant, Mr. Ian Redmond, who organized the event, Mr. Achilles&quot;            
+## [130] &quot;Byanhanga (Uganda), a representative from Cameroon, Mr. John&quot;                  
+## [131] &quot;Robinson of the Wildlife Conservation Society and Mr. Nigel Sizer&quot;             
+## [132] &quot;of the Global Environment Facility.&quot;                                           
+## [133] &quot;2. African Ministerial Conference on the Environment (AMCEN),&quot;                 
+## [134] &quot;26. A GRASP side event, organized by Mr. Redmond, was held during the&quot;         
+## [135] &quot;eleventh regular session of AMCEN in Brazzaville on 25 May.&quot;                   
+## [136] &quot;27. The event was attended by UNEP acting Executive Director, Mr.&quot;             
+## [137] &quot;Shafqat Kakakhel, UNEP Director of Regional Cooperation, Ms.&quot;                  
+## [138] &quot;Cristina Boelcke, and the acting Director of the UNEP Global&quot;                  
+## [139] &quot;Environment Facility Division, Mr. Olivier Deleuze. Speakers&quot;                  
+## [140] &quot;included Mr. Robert Hepworth, Executive Secretary of the&quot;                      
+## [141] &quot;Convention on Migratory Species, and Mr. Samy Mankoto from UNESCO.&quot;            
+## [142] &quot;28. Mr. Mankoto reiterated that the Kinshasa Declaration is a&quot;                 
+## [143] &quot;testimony to the political commitment to ensuring the survival of&quot;             
+## [144] &quot;the great apes. He added that the Declaration would also provide a&quot;            
+## [145] &quot;platform for developing synergies between AMCEN and GRASP.&quot;                    
+## [146] &quot;3. How can GRASP better support Great Ape Conservation?&quot;                       
+## [147] &quot;29. The event was held at the International Primatological Society&quot;            
+## [148] &quot;congress in Entebbe, Uganda, on 29 June 2006.&quot;                                 
+## [149] &quot;III. Kinshasa Declaration:&quot;                                                    
+## [150] &quot;30. Sierra Leone and Sudan signed the Declaration at the eighth&quot;               
+## [151] &quot;session of the Conference of the Parties to the Conference on&quot;                 
+## [152] &quot;Biological Diversity, held in Curitiba, Brazil, on 20-31 March&quot;                
+## [153] &quot;2006.&quot;                                                                         
+## [154] &quot;31. Rwanda and Gabon signed the Declaration during the eleventh&quot;               
+## [155] &quot;regular session of AMCEN.&quot;                                                     
+## [156] &quot;32. Equatorial Guinea signed at the Congo Basin Forest Partnership&quot;            
+## [157] &quot;meeting, held in Paris in June 2006.&quot;                                          
+## [158] &quot;33. Nine additional non-governmental organizations have signed the&quot;            
+## [159] &quot;Declaration since its initial adoption, seven from the Democratic&quot;             
+## [160] &quot;Republic of the Congo and two from the United States of America,&quot;              
+## [161] &quot;bringing the total number of non-governmental organization&quot;                    
+## [162] &quot;signatories to 52.&quot;                                                            
+## [163] &quot;34. Of the 23 range states, only Liberia and Malaysia have not signed.&quot;        
+## [164] &quot;IV. Funding:&quot;                                                                  
+## [165] &quot;35. The Government of the United Kingdom (Department for Environment,&quot;         
+## [166] &quot;Food and Rural Affairs) has confirmed that it will make an annual&quot;             
+## [167] &quot;contribution of £50,000 to the GRASP team at UNEP. The secretariat&quot;            
+## [168] &quot;is preparing a list of mutually agreed activities for the use of&quot;              
+## [169] &quot;this funding.&quot;                                                                 
+## [170] &quot;36. UNEP provided $30,000 in funding from Irish funds to GRASP&quot;                
+## [171] &quot;Partner, the Tayna Centre for Conservation Biology, a local non-&quot;              
+## [172] &quot;governmental organization based in eastern Democratic Republic of&quot;             
+## [173] &quot;the Congo, to help increase the Centre&#39;s capacity to train future&quot;             
+## [174] &quot;Congolese scientists and raise awareness of great ape and habitat&quot;             
+## [175] &quot;conservation issues in the region.&quot;                                            
+## [176] &quot;37. In April, the Japanese Government announced its financial&quot;                 
+## [177] &quot;contribution of $2.25 million to the GRASP Japan Committee.&quot;                   
+## [178] &quot;Government representatives visited the GRASP secretariat at UNESCO&quot;            
+## [179] &quot;to thank the joint secretariat for its efforts to invite them and&quot;             
+## [180] &quot;representatives of the GRASP Japan Committee to the GRASP&quot;                     
+## [181] &quot;exhibition at the 2005 World Exposition, held in Aichi, Japan in&quot;              
+## [182] &quot;August 2005 and to the first session of the GRASP&quot;                             
+## [183] &quot;Intergovernmental Meeting in Kinshasa in September 2005.&quot;                      
+## [184] &quot;V. Publicity and awareness:&quot;                                                   
+## [185] &quot;38. The 5th edition of the GRASP newsletter in English and French was&quot;         
+## [186] &quot;produced and distributed in March.&quot;                                            
+## [187] &quot;39. An interactive touring exhibition, entitled \&quot;Great Apes - How&quot;            
+## [188] &quot;Great Are You?\&quot;, created by @Bristol in conjunction with GRASP,&quot;              
+## [189] &quot;was launched in Bristol, United Kingdom, on 8 December 2005. It is&quot;            
+## [190] &quot;now at the National Museum of Scotland in Edinburgh, where it will&quot;            
+## [191] &quot;stay until August.&quot;                                                            
+## [192] &quot;40. A GRASP exhibition, organized by the Regional Office for North&quot;            
+## [193] &quot;America at UNEP, was held at the Woodley Park Zoo in Washington DC&quot;            
+## [194] &quot;on 17 April 2006, during the Earth Day celebrations to promote&quot;                
+## [195] &quot;great ape conservation and the efforts of the GRASP Partnership.&quot;              
+## [196] &quot;The exhibition was visited by a large number of people, who were&quot;              
+## [197] &quot;briefed on the activities of GRASP and the various ways in which&quot;              
+## [198] &quot;they can help in saving the great apes from extinction. Over 450&quot;              
+## [199] &quot;GRASP brochures and posters were distributed.&quot;                                 
+## [200] &quot;41. A GRASP publicity event, organized by the Regional Office for&quot;             
+## [201] &quot;North America at UNEP, took place in San Francisco on 10 June 2006&quot;            
+## [202] &quot;at a charity event named \&quot;Walk the Talk\&quot;, held to celebrate the&quot;             
+## [203] &quot;World Environment Day.&quot;                                                        
+## [204] &quot;42. GRASP publicity materials are being distributed continuously in&quot;           
+## [205] &quot;Europe, North America and Africa in response to institutional&quot;                 
+## [206] &quot;requests.&quot;                                                                     
+## [207] &quot;43. The GRASP website is continuously being updated.&quot;                          
+## [208] &quot;VI. Staff news:&quot;                                                               
+## [209] &quot;44. New staff member, Mr. Johannes Refisch, joins UNEP from 1 August&quot;          
+## [210] &quot;as the project manager for the European Union funded grant on the&quot;             
+## [211] &quot;preservation of forest resources and improved livelihoods of&quot;                  
+## [212] &quot;forest peoples through conservation of great apes as flagship&quot;                 
+## [213] &quot;species. His duties will incorporate managing this grant, as well&quot;             
+## [214] &quot;as writing proposals and securing additional funding for GRASP.&quot;               
+## [215] &quot;45. A programme assistant will be hired shortly.&quot;                              
+## [216] &quot;___________________&quot;</code></pre>
+<div id="references" class="section level3">
+<h3>References</h3>
+<div id="citations-for-narrative-and-data-sources" class="section level4">
+<h4>citations for narrative and data sources</h4>
+<ul>
+<li>Narrative and Data Source: United Nations, UNESCO| Council of the Great Apes Survival Project <a href="https://atom.archives.unesco.org/zd6rl" target="_blank">GO</a></li>
+</ul>
+<script type="text/javascript">
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Footer-->
+<div class="footer text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Use</div>
+        <p class="footer-text text-center">This work is licensed under<br>Attribution 4.0 International<br><strong>CC BY 4.0</strong></p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Source</div>
+        <p class="footer-text text-center">
+          <a href="https://github.com/UN-AVT/kamino-web" class="centered">
+          <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          </a>
+        </p>
+      </div>
+      <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="footer-title text-uppercase mb-4">Creation</div>
+        <p class="footer-text text-center">Hand crafted with ♥ by<br>the <strong>Kamino Crew</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+</body>
+</html>

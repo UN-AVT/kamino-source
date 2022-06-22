@@ -1,0 +1,106 @@
+---
+title: "Great Apes"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(officer)
+library(textreadr)
+
+library(janitor)
+library(ggtext)
+
+library(readr)
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+
+<div class="activity">
+INGEST  
+</div>
+
+# Great Apes
+## ingesting multiple word documents
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Kelly Sikkema on Unsplash"}
+
+masthead <- "assets/kelly-sikkema-r077pfFsdaU-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+>When it comes to global warming, coal is the gorilla in the room.\
+---Jeff Goodell\
+
+
+
+The following code read the documents from a folder then binds them into one output in R
+```{r load-data, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "great-apes"
+url <- paste0(url_root, url_file)
+
+
+(f <- file.path(url, c("K0581915.doc",
+    "K0582038.doc", "K0651932.doc", "K0651934.doc")))
+
+word_documents <- lapply(f, read_doc)
+word_documents
+
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: United Nations, UNESCO| Council of the Great Apes Survival Project [GO](https://atom.archives.unesco.org/zd6rl){target="_blank"}
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
