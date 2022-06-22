@@ -30,40 +30,32 @@ showtext_auto()
 
 ```
 
+# Ingest an unstructured document
 
-<div class="activity">
-INGEST  
-</div>
-
-# Ingest a delimited data file
-## Comma, tabs, and other
-
-```{r, out.width="40%", fig.align="center", fig.cap="Photo by JunGSa, ID"}
+```{r, out.width="40%", fig.align="center", fig.cap="Photo by Soni Sokell, ID"}
 # image of an icon to represent the activity or any method (visit for icon https://thenounproject.com/search/?q=attribute&i=4326168)
-masthead <- "assets/csv.png"
+masthead <- "assets/document.svg"
 knitr::include_graphics(masthead, dpi=72)
 ```
 
-Delimiter-separated data files are widely supported for data exchange between databases and most data analysis applications. Any character may be used to separate the values, but the most common delimiters are the comma (\*.csv) and tab (.tsv).
 
-* A delimited file stores __tabular__ data (numbers and strings) in plain text
-* Column __headers__ are often included as the first line
-* Each subsequent line is a __row__ or record of data
-* Each record consists of one or more __fields__, separated by the delimiter
-* Each line will have the same __number__ of fields and __order__ as indicated by the column headers
-* A double quote is often used to __"escape"__ a field entry that contains the delimiter, e.g. a comma
-* Character __encoding__ may have an impact on the representation of international characters.
 
-### Example cases and code
-#### Standard ingest
+This task refers to the ingest of an _unstructured document_. An unstructured document Unstructured documents are documents that can be free-form and don’t have a set structure but are still able to be scanned, captured, and imported.
 
-* Average working hours of children (csv)
-* Teacher salaries (tsv)
+Some examples are:
 
-#### Special character ingest
+* Contracts
+* Letters
+* Articles
+* Memos
 
-* ne-countries (cvs)
-* world-electricity-production-bom (cvs)
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: OPTIFORM, [GO](https://www.optiform.com/news/structured-unstructured-documents/#:~:text=Unstructured%20documents%20are%20just%20that,Articles){target="_blank"} 
+
+
 
 ```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
 
@@ -71,13 +63,13 @@ Delimiter-separated data files are widely supported for data exchange between da
 
 # ENTER METADATA
 # Use space to separate keywords or "-" for phrases
-methods <- "CSV TSV" # mostly used in wranglers and analytics
-keywords <- 'comma tab separated delimited'
-commands <- 'read.csv read.table'
+methods <- "DOC DOCX"
+keywords <- 'free-form scanned created unstructured'
+commands <- 'read_doc'
 sources <- ''
 
 # CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
+#source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
 
 # RUN PRODUCTION OUTPUTS
 source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
@@ -92,4 +84,7 @@ $(function() {
 })
 
 ```
+
+
+
 
