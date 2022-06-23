@@ -13,13 +13,13 @@
 
 <title>Aljazeera Lebanon News</title>
 
-<script src="vendor/header-attrs-2.14/header-attrs.js"></script>
-<script src="vendor/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="../../../../vendor/knitr/header-attrs-2.14/header-attrs.js"></script>
+<script src="../../../../vendor/knitr/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="vendor/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
-<script src="vendor/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="vendor/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="vendor/bootstrap-3.3.5/shim/respond.min.js"></script>
+<link href="../../../../vendor/knitr/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="../../../../vendor/knitr/bootstrap-3.3.5/shim/respond.min.js"></script>
 <style>h1 {font-size: 34px;}
        h1.title {font-size: 38px;}
        h2 {font-size: 30px;}
@@ -29,12 +29,12 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="vendor/navigation-1.1/tabsets.js"></script>
-<script src="vendor/navigation-1.1/codefolding.js"></script>
-<link href="vendor/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="vendor/highlightjs-9.12.0/highlight.js"></script>
-<link href="vendor/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-<script src="vendor/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="../../../../vendor/knitr/navigation-1.1/tabsets.js"></script>
+<script src="../../../../vendor/knitr/navigation-1.1/codefolding.js"></script>
+<link href="../../../../vendor/knitr/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/highlightjs-9.12.0/highlight.js"></script>
+<link href="../../../../vendor/knitr/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="../../../../vendor/knitr/pagedtable-1.1/js/pagedtable.js"></script>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHLBJTGCKN"></script>
   <script>
@@ -48,7 +48,7 @@
   
   <div class="header">
     
-  <img src="../../../z-assemblers/assets/logo/logo.svg" alt="" height="36">
+  <img src="../../../../assets/logo/logo.svg" alt="" height="36">
 
   <div class="nav" style="float: right;">
       <a class="nav-link" 
@@ -57,7 +57,7 @@
         data-bs-toggle="tooltip" 
         data-bs-placement="bottom"
         title="Home">
-        <img src="../../../z-assemblers/assets/icons/campground-solid.svg" alt="" height="32">
+        <img src="../../../../assets/icons/campground-solid.svg" alt="" height="32">
       </a>
       <a class="nav-link" 
         style="color: #111111;" 
@@ -65,7 +65,7 @@
         data-bs-toggle="tooltip"
         data-bs-placement="bottom" 
         title="Search for content">
-        <img src="../../../z-assemblers/assets/icons/compass.svg" alt="" height="32">
+        <img src="../../../../assets/icons/compass.svg" alt="" height="32">
       </a>
       <a class="nav-link" 
         style="color: #111111;" 
@@ -73,7 +73,7 @@
         data-bs-toggle="tooltip"
         data-bs-placement="bottom"
         title="Project">
-        <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32">
+        <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32">
       </a>
     </div>
 
@@ -106,7 +106,7 @@ if (window.hljs) {
 
 
 
-<link rel="stylesheet" href="../../../z-assemblers/assets/styles/content.css" type="text/css" />
+<link rel="stylesheet" href="../../../../assets/styles/content.css" type="text/css" />
 
 
 
@@ -239,7 +239,7 @@ pre code {
 <div id="ingest-a-news-feed" class="section level2">
 <h2>ingest a news feed</h2>
 <div class="figure" style="text-align: center">
-<img src="assets/piotr-chrobot-KqEYj1VHA_o-unsplash.jpg" alt="Photo by Piotr Chrobot on Unsplash" width="60%" />
+<img src="piotr-chrobot-KqEYj1VHA_o-unsplash.jpg" alt="Photo by Piotr Chrobot on Unsplash" width="60%" />
 <p class="caption">
 Photo by Piotr Chrobot on Unsplash
 </p>
@@ -264,6 +264,141 @@ paths_allowed(
 ## Sitemap: https://www.aljazeera.com/sitemap.xml
 ## Disallow: /api
 ## Disallow: /asset-manifest.json</code></pre>
+<div id="ingestion---webscraping" class="section level3">
+<h3>Ingestion - Webscraping</h3>
+<p>Now we can scrape the headlines and links.</p>
+<pre class="r fold-hide"><code>rd &lt;- rsDriver(browser = &quot;firefox&quot;, port = 8253L)</code></pre>
+<pre><code>## [1] &quot;Connecting to remote server&quot;
+## $acceptInsecureCerts
+## [1] FALSE
+## 
+## $browserName
+## [1] &quot;firefox&quot;
+## 
+## $browserVersion
+## [1] &quot;101.0.1&quot;
+## 
+## $`moz:accessibilityChecks`
+## [1] FALSE
+## 
+## $`moz:buildID`
+## [1] &quot;20220608170832&quot;
+## 
+## $`moz:geckodriverVersion`
+## [1] &quot;0.31.0&quot;
+## 
+## $`moz:headless`
+## [1] FALSE
+## 
+## $`moz:processID`
+## [1] 124860
+## 
+## $`moz:profile`
+## [1] &quot;C:\\Users\\rodol\\AppData\\Local\\Temp\\rust_mozprofilej82EEa&quot;
+## 
+## $`moz:shutdownTimeout`
+## [1] 60000
+## 
+## $`moz:useNonSpecCompliantPointerOrigin`
+## [1] FALSE
+## 
+## $`moz:webdriverClick`
+## [1] TRUE
+## 
+## $pageLoadStrategy
+## [1] &quot;normal&quot;
+## 
+## $platformName
+## [1] &quot;windows&quot;
+## 
+## $platformVersion
+## [1] &quot;10.0&quot;
+## 
+## $proxy
+## named list()
+## 
+## $setWindowRect
+## [1] TRUE
+## 
+## $strictFileInteractability
+## [1] FALSE
+## 
+## $timeouts
+## $timeouts$implicit
+## [1] 0
+## 
+## $timeouts$pageLoad
+## [1] 300000
+## 
+## $timeouts$script
+## [1] 30000
+## 
+## 
+## $unhandledPromptBehavior
+## [1] &quot;dismiss and notify&quot;
+## 
+## $webdriver.remote.sessionid
+## [1] &quot;6efe4ec1-0cd9-4525-929f-e8525432c795&quot;
+## 
+## $id
+## [1] &quot;6efe4ec1-0cd9-4525-929f-e8525432c795&quot;</code></pre>
+<pre class="r fold-hide"><code>ffd &lt;- rd$client
+
+
+ffd$navigate(&quot;https://www.aljazeera.com/where/lebanon/&quot;)
+for (i in 1:6){
+load_btn &lt;- ffd$findElement(using = &quot;css selector&quot;, &quot;button.show-more-button.big-margin&quot;) 
+load_btn$clickElement() 
+Sys.sleep(2)
+}
+  
+#button.show-more-button.big-margin
+url = ffd$getPageSource()[[1]]
+page = read_html(url)
+headlines &lt;- page %&gt;%
+  html_nodes(&quot;h3.gc__title&quot;) %&gt;%
+  html_text()
+links &lt;- page %&gt;%
+  html_nodes(&quot;h3.gc__title a&quot;) %&gt;%
+  html_attr(&quot;href&quot;) %&gt;%
+  paste(&quot;https://www.aljazeera.com&quot;, .,sep=&quot;&quot;)</code></pre>
+</div>
+<div id="creating-a-data-frame" class="section level3">
+<h3>Creating a data frame</h3>
+<pre class="r fold-hide"><code>aljazeera_online &lt;- data.frame(headlines,links)
+summary &lt;- list()
+timearticle &lt;- list()
+body &lt;- list()
+for (i in aljazeera_online$links){
+  url1 &lt;- read_html(i)
+  
+  summ &lt;- url1 %&gt;%
+    html_node(&quot;#main-content-area &gt; header &gt; p &gt; em&quot;) %&gt;%
+    html_text()
+  summary &lt;- append(summary, summ)
+  
+  datar &lt;- url1 %&gt;%
+    html_node(&quot;#main-content-area &gt; div.article-info-block.css-ti04u9 &gt; div.article-b-l &gt; div.article-dates &gt; 
+               div &gt;  span.screen-reader-text&quot;) %&gt;%                
+    html_text()
+    timearticle &lt;- append(timearticle, datar)
+  bodies &lt;- url1 %&gt;%
+    html_nodes(&quot;#main-content-area &gt; div.wysiwyg.wysiwyg--all-content.css-1ck9wyi&quot;)%&gt;%
+    html_text()
+  bodies &lt;- paste (bodies, collapse = &quot; &quot;)
+  body &lt;- append(body, bodies)
+  
+}
+aljazeera_online$summary &lt;- as.character(summary)
+aljazeera_online$body &lt;- as.character(body)
+aljazeera_online$date &lt;- as.character(timearticle)
+aljazeera_online</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["headlines"],"name":[1],"type":["chr"],"align":["left"]},{"label":["links"],"name":[2],"type":["chr"],"align":["left"]},{"label":["summary"],"name":[3],"type":["chr"],"align":["left"]},{"label":["body"],"name":[4],"type":["chr"],"align":["left"]},{"label":["date"],"name":[5],"type":["chr"],"align":["left"]}],"data":[{"1":"In Ama­line’s kitchen, the mag­ic of Lebanon’s mouneh lives on","2":"https://www.aljazeera.com/features/2022/6/20/aunt-amalines-mouneh-living-off-the-land-in-lebanon","3":"In Mazraat al-Toufah, the author’s aunts and cousins carry on the age-old tradition of preserving what the land gives.","4":"","5":"Published On 20 Jun 2022"},{"1":"US en­voy meets Lebanon pres­i­dent over Is­rael mar­itime dis­pute","2":"https://www.aljazeera.com/news/2022/6/14/us-envoy-meets-lebanon-president-over-israel-maritime-dispute","3":"Both Lebanon and Israel seek to exploit the gas fields that lie underneath the disputed maritime border.","4":"","5":"Published On 14 Jun 2022"},{"1":"Lebanese army ar­rests 64 peo­ple try­ing to sail to Eu­rope","2":"https://www.aljazeera.com/news/2022/6/7/lebanese-army-arrests-people-trying-to-sail-to-europe","3":"Lebanon’s deteriorating economy is pushing people to risk their lives sailing to Europe for a better life.","4":"","5":"Published On 7 Jun 2022"},{"1":"Lebanon to in­vite US to me­di­ate Is­rael mar­itime bor­der talks","2":"https://www.aljazeera.com/news/2022/6/6/lebanon-agrees-to-call-on-us-to-mediate-maritime-border-talks","3":"Lebanese officials agree to invite US senior energy adviser Amos Hochstein to Beirut to mediate dispute with Israel.","4":"","5":"Published On 6 Jun 2022"},{"1":"Lebanon warns against any Is­raeli ‘ag­gres­sion’ in dis­put­ed wa­ters","2":"https://www.aljazeera.com/news/2022/6/5/lebanon-warns-against-any-israeli-aggression-in-disputed-waters","3":"President Michel Aoun said any activity in the disputed area would amount to an act of aggression and a provocation.","4":"","5":"Published On 5 Jun 2022"},{"1":"A ‘cos­mic stink’: Is­rael’s in­va­sion of Lebanon, 40 years on","2":"https://www.aljazeera.com/opinions/2022/6/4/a-cosmic-stink-israels-invasion-of-lebanon-40-years-on","3":"Forty years after the 1982 invasion of Lebanon, Israel persists with its lunatic urges to kill in Palestine and beyond.","4":"","5":"Published On 4 Jun 2022"},{"1":"Lebanese par­lia­ment re-elects long­time speak­er in first ses­sion","2":"https://www.aljazeera.com/news/2022/5/31/lebanese-parliament-reelects-longtime-speaker-in-first-session","3":"Newly elected reformist MPs said they would not compromise in their efforts to change the way Lebanon is run.","4":"","5":"Published On 31 May 2022"},{"1":"Val­ue of Lebanese pound drops to all-time low","2":"https://www.aljazeera.com/news/2022/5/26/lebanese-pound-value-drops-to-lowest-level","3":"The black market rate, widely used across the country, now sits at 35,600 to the US dollar.","4":"","5":"Published On 26 May 2022"},{"1":"Post-elec­tion calm pre­vails in Beirut’s di­vid­ed neigh­bour­hoods","2":"https://www.aljazeera.com/news/2022/5/20/hezbollah-tensions-soar-in-beiruts-contentious-neighborhood","3":"A fragile calm persists in Beirut’s Ain el-Remmaneh area, home to longtime rival parties that are now key players in the Parliament of Lebanon.","4":"","5":"Published On 20 May 2022"},{"1":"US sanc­tions Lebanese busi­ness­man over al­leged Hezbol­lah links","2":"https://www.aljazeera.com/news/2022/5/19/us-sanctions-lebanese-businessman-over-alleged-hezbollah-links","3":"US Treasury Department imposes sanctions on alleged ‘financial facilitator’ for Lebanese group Hezbollah.","4":"","5":"Published On 19 May 2022"},{"1":"Af­ter elec­tions in Lebanon, does po­lit­i­cal change stand a chance?","2":"https://www.aljazeera.com/news/2022/5/19/what-stands-next-for-lebanon-after-key-elections","3":"Al Jazeera discusses with analysts what lies ahead as power has shifted in Lebanon’s sectarian power-sharing system.","4":"","5":"Published On 19 May 2022"},{"1":"Lebanon elec­tion mon­i­tors com­plain of vi­o­la­tions, at­tacks","2":"https://www.aljazeera.com/news/2022/5/18/lebanon-election-monitors-complain-of-violations-attacks","3":"Sunday’s parliamentary elections were “marred by intimidation” and violence, according to local and foreign observers.","4":"","5":"Published On 18 May 2022"},{"1":"Lebanon’s pro-Hezbol­lah bloc los­es par­lia­men­tary ma­jor­i­ty","2":"https://www.aljazeera.com/news/2022/5/17/pro-hezbollah-bloc-loses-lebanese-parliamentary-majority","3":"Hezbollah allies lose seats in parliamentary elections to rivals, as independent candidates make inroads.","4":"","5":"Published On 17 May 2022"},{"1":"Hezbol­lah al­lies pro­ject­ed to suf­fer loss­es in Lebanon elec­tions","2":"https://www.aljazeera.com/news/2022/5/16/hezbollah-allies-projected-to-lose-seats-lebanese-parliamentary-elections","3":"Partial results show change in the balance of power in Parliament where Hezbollah and allies once held a majority.","4":"","5":"Published On 16 May 2022"},{"1":"Lebanon votes with cau­tious hope elec­tion can bring change","2":"https://www.aljazeera.com/news/2022/5/15/lebanon-holds-parliamentary-elections","3":"Voter participation was expected to be higher on Sunday following an increase in diaspora voting last week.","4":"","5":"Published On 15 May 2022"},{"1":"Lebanon’s elec­tions will only re-le­git­imise the failed sys­tem","2":"https://www.aljazeera.com/opinions/2022/5/14/lebanons-elections-will-only-re-legitimise-the-failed-system","3":"It is unlikely that Sunday’s parliamentary election will bring any structural change.","4":"","5":"Published On 14 May 2022"},{"1":"How Lebanon’s in­de­pen­dent hope­fuls seek to by­pass me­dia bar­ri­ers","2":"https://www.aljazeera.com/news/2022/5/13/how-lebanon-independent-hopefuls-seek-bypass-media-barriers","3":"Contenders running against traditional sectarian parties are turning to podcasts and social media in the face of expensive traditional media packages.","4":"","5":"Published On 13 May 2022"},{"1":"Donors pledge $6.7bn in aid for Syr­i­ans","2":"https://www.aljazeera.com/news/2022/5/10/4-3-billion-pledged-for-syrians-in-2022-at-brussels-conference","3":"International donors pledge $4.3bn for this year and $2.4bn ‘for 2023 and beyond’ to support war-wracked Syrians.","4":"","5":"Published On 10 May 2022"},{"1":"Lebanese ex­pats vote in elec­tion over­shad­owed by eco­nom­ic cri­sis","2":"https://www.aljazeera.com/news/2022/5/6/lebanon-expatriates-vote-parliamentary-elections","3":"Opposition parties hope for significant diaspora votes amid the economic crisis, but analysts say status quo likely to be upheld.","4":"","5":"Published On 6 May 2022"},{"1":"Hariri’s ab­sence leaves Sun­ni vot­ers un­sure ahead of Lebanon poll","2":"https://www.aljazeera.com/news/2022/5/4/lebanon-sunni-vote","3":"Experts say Saad Hariri’s decision not to take part in the upcoming Lebanese election created a ‘political void’ for the Sunni community.","4":"","5":"Published On 4 May 2022"},{"1":"FIFA hands one-match sta­di­um bans to Sene­gal and Nige­ria","2":"https://www.aljazeera.com/sports/2022/5/2/fifa-imposes-one-match-stadium-bans-on-senegal-and-nigeria","3":"FIFA issued a raft of sanctions worldwide after studying dozens of cases from qualifying games for the forthcoming World Cup in Qatar.","4":"","5":"Published On 2 May 2022"},{"1":"Thou­sands stuck as Lebanese au­thor­i­ties sus­pend pass­port re­newals","2":"https://www.aljazeera.com/news/2022/4/29/thousands-stuck-lebanese-authorities-suspend-passport-renewals","3":"Lebanon’s General Security Organisation says that it has run out of passports, government has not paid for more.","4":"","5":"Published On 29 Apr 2022"},{"1":"Par­lia­ment push­es for cap­i­tal con­trols law as Lebanese protest","2":"https://www.aljazeera.com/news/2022/4/27/parliament-pushes-capital-controls-law-lebanese-protest","3":"Protesters gather in front of the Lebanese parliament on a weekly basis as it moves to pass a capital controls law.","4":"","5":"Published On 27 Apr 2022"},{"1":"Sau­di Ara­bia, France launch hu­man­i­tar­i­an projects in Lebanon","2":"https://www.aljazeera.com/news/2022/4/26/saudi-arabia-france-launching-humanitarian-projects-in-lebanon","3":"Agreement will provide about $32m for projects focusing on food security and the battered healthcare system.","4":"","5":"Published On 26 Apr 2022"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
 <div id="references" class="section level3">
 <h3>References</h3>
 <div id="citations-for-narrative-and-data-sources" class="section level4">
@@ -296,7 +431,7 @@ $(function() {
         <div class="footer-title text-uppercase mb-4">Source</div>
         <p class="footer-text text-center">
           <a href="https://github.com/UN-AVT/kamino-web" class="centered">
-          <img src="../../../z-assemblers/assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
+          <img src="../../../../assets/icons/github-alt-brands.svg" alt="" height="32" style="margin-top: 0px;">
           </a>
         </p>
       </div>

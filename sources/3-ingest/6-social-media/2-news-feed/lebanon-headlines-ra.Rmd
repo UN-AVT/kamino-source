@@ -71,7 +71,7 @@ Now we can scrape the headlines and links.
 
 ```{r,message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
 
-rd <- rsDriver(browser = "firefox", port = 8033L)
+rd <- rsDriver(browser = "firefox", port = 8253L)
 ffd <- rd$client
 
 
@@ -94,7 +94,37 @@ links <- page %>%
   paste("https://www.aljazeera.com", .,sep="")
 ```
 
-
+### Creating a data frame
+```{r,message=FALSE, warning=FALSE, echo=TRUE, class.source='fold-hide'}
+aljazeera_online <- data.frame(headlines,links)
+summary <- list()
+timearticle <- list()
+body <- list()
+for (i in aljazeera_online$links){
+  url1 <- read_html(i)
+  
+  summ <- url1 %>%
+    html_node("#main-content-area > header > p > em") %>%
+    html_text()
+  summary <- append(summary, summ)
+  
+  datar <- url1 %>%
+    html_node("#main-content-area > div.article-info-block.css-ti04u9 > div.article-b-l > div.article-dates > 
+               div >  span.screen-reader-text") %>%                
+    html_text()
+    timearticle <- append(timearticle, datar)
+  bodies <- url1 %>%
+    html_nodes("#main-content-area > div.wysiwyg.wysiwyg--all-content.css-1ck9wyi")%>%
+    html_text()
+  bodies <- paste (bodies, collapse = " ")
+  body <- append(body, bodies)
+  
+}
+aljazeera_online$summary <- as.character(summary)
+aljazeera_online$body <- as.character(body)
+aljazeera_online$date <- as.character(timearticle)
+aljazeera_online
+```
 
 ### References
 #### citations for narrative and data sources
