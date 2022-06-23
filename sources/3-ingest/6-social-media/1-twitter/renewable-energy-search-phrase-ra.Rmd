@@ -1,5 +1,5 @@
 ---
-pagetitle: "Boda Bodas"
+pagetitle: "Renewable Energy"
 output: 
   html_document:
     theme: lumen
@@ -40,6 +40,7 @@ INGEST
 ## Twitter
 
 
+
 ```{r, out.width="60%", fig.align="center", fig.cap="Photo on Unsplash"}
 
 masthead <- "assets/boda-boda.jpg"
@@ -47,10 +48,13 @@ knitr::include_graphics(masthead, dpi=72)
 
 ```
 
+We will search for the phrase 'renewable energy' on twitter and ask the code to return 10,000 tweets. 
+
+* Note that this code will not be able to run unless you have access to a twitter account, twitter api and api secret. The following code will be commented out with (#) for this reason.
 
 ```{r, echo=TRUE, message=FALSE}
 
-# whatever name you assigned to your created app
+## whatever name you assigned to your created app
 appname <- ""
 
 ## twitter api key
@@ -62,11 +66,11 @@ secret <- ""
 ## google maps api
 gmaps <- ""
 
-twitter_token <- create_token(
-  app = appname,
-  consumer_key = key,
-  consumer_secret = secret,
-  set_renv = TRUE)
+#twitter_token <- create_token(
+  #app = appname,
+  #consumer_key = key,
+  #consumer_secret = secret,
+  #set_renv = TRUE)
 
 # Number of tweets to return
 n <- 10000
