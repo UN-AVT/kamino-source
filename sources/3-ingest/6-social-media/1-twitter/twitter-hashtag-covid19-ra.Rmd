@@ -88,6 +88,15 @@ A browser window will pop up to request for authorization
 * Reference [GO](https://cran.r-project.org/web/packages/rtweet/vignettes/intro.html){target="_blank"}
 
 
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+
 ```{js, message=FALSE, warning=FALSE, echo=FALSE}
 
 // Must be included to position footer
