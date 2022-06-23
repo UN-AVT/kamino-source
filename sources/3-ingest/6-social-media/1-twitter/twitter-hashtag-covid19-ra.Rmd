@@ -1,0 +1,99 @@
+---
+pagetitle: "Twitter hashtag covid 19"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide',
+   dev = "svg")
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memory and report the memory usage.
+
+# load twitter library - the rtweet library is recommended now over twitteR
+library(rtweet)
+# plotting and pipes - tidyverse!
+library(dplyr)
+# text mining library
+library(tidytext)
+# plotting packages
+library(igraph)
+library(ggraph)
+library(ggiraph)
+library(wordcloud)
+library(tidyverse)
+library(textstem)
+library(quanteda)
+library(openNLP)
+library(NLP)
+library(rJava)
+```
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# TEXT ANALYTICS
+## Twitter hashtag covid 19
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Jeremy Bezanger on Unsplash"}
+
+masthead <- "assets/jeremy-bezanger-Jm1YUfYjpHI-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+> This pandemic has magnified every existing inequality in our society – like systemic racism, gender inequality, and poverty...\
+--- Melinda Gates\
+
+***
+
+### Ingest tweets
+
+Search for up to 10,000 tweets containing #covid19, excluding re-tweets:
+A browser window will pop up to request for authorization
+
+* Note that this function can only be used if you own a twitter account and have access to a twitter api. For this reason, the code will be commented out using (#). Erase the (#) if you would like to run the code
+
+
+```{r load-data, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+#covid_tweets <- search_tweets(q = "#covid19", n = 10000,
+                                     #lang = "en",
+                                     #include_rts = FALSE)
+
+#head(covid_tweets)
+
+```
+
+
+
+### References
+#### citations for narrative and data sources
+
+
+* Reference [GO](https://cran.r-project.org/web/packages/rtweet/vignettes/intro.html){target="_blank"}
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
