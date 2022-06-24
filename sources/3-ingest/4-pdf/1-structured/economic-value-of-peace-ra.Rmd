@@ -1,0 +1,118 @@
+---
+title: "Economic Value of Peace"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
+gc() #free up memory and report the memory usage.
+
+library(tidyverse)
+library(textreadr)
+library(readr)
+
+library(tidytext)
+library(ggtext)
+library(pdftools)
+
+
+library(showtext)
+## Loading Google fonts (https://fonts.google.com/)
+font_add_google("Inconsolata", "inconsolata")
+# turn on showtext
+showtext_auto()
+
+```
+
+<div class="activity">
+INGEST  
+</div>
+
+# Economic value of peace, 2021
+## ingest a pdf document
+
+```{r, out.width="60%", fig.align="center", fig.cap="Photo by Kyle Glenn on Unsplash"}
+
+masthead <- "assets/kyle-glenn-nXt5HtLmlgE-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+>The first lesson of economics is scarcity: there is never enough of anything to fully satisfy all those who want it. The first lesson of politics is to disregard the first lesson of economics.\
+---Thomas Sowell\
+
+
+***
+
+### Ingest a pdf
+
+Ingest for all pages (click right hand arrow to see text)
+
+
+```{r load-data, echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+
+url_root <- "https://raw.githubusercontent.com/UN-AVT/kamino-source/main/sources/0-shared/data/"
+url_file <- "economic-value-of-peace/economic-value-of-peace-2021.pdf"
+url <- paste0(url_root, url_file)
+
+pdf_file <- url
+
+readpdf <- 	read_pdf(url)
+readpdf
+
+
+```
+
+now let's skip the first 10 lines
+```{r , echo=TRUE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+
+readpdf10 <- 	read_pdf(url, skip =10)
+
+readpdf10
+
+```
+
+### References
+#### citations for narrative and data sources
+
+* Narrative and Data Source: Institute for Economics and Peace (IEP) |    [GO](https://reliefweb.int/report/world/economic-value-peace-2021-measuring-global-economic-impact-violence-and-conflict){target="_blank"}
+
+
+
+```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+# eval = FALSE as default; run manually as chunk
+# PUSH TO PRODUCTION
+source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
+
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
