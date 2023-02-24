@@ -1,22 +1,23 @@
 ---
 pagetitle: "Kamino"
-output: 
-  html_document:
-    theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: "../../../z-assemblers/fragments/header.html"
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: libs
-
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
-<div class="activity">
+
+```{r include=FALSE}
+library(forecast)
+library(tidyverse)
+require(scales)
+library(zoo)
+library(naniar)
+library(gridExtra)
+library(ggiraph)
+```
+
 ANALYTICS
-</div>
+
 
 # Time series Analysis
 
@@ -40,15 +41,7 @@ In this section, we will focus on internal structures of time series:
 For this case, we will be using the monthly number of crimes registered by category, from January 2000 to 
 https://www.kaggle.com/government-of-france/crimes-in-france
 
-```{r include=FALSE}
-library(forecast)
-library(tidyverse)
-require(scales)
-library(zoo)
-library(naniar)
-library(gridExtra)
-library(ggiraph)
-```
+
 
 ## Loading data
 
@@ -293,13 +286,4 @@ v9<-TimeSer %>% decompose(type="multiplicative") %>%
   theme(text = element_text(size = 20))
 girafe(ggobj = v9, width_svg = 13, height_svg = 7,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
-```
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
 ```

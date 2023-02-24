@@ -205,24 +205,3 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 12,
 * Inspiration: DataWrapper, [GO](https://blog.datawrapper.de/weekly37/){target="_blank"}
 * Data source: OECD, Parental Leave Systems, [GO](https://www.oecd.org/els/soc/PF2_1_Parental_leave_systems.pdf){target="_blank"}
 
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-# PUSH TO PRODUCTION
-source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
-```
-
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-

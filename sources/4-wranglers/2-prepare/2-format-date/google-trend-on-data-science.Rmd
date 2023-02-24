@@ -1,31 +1,18 @@
 ---
 pagetitle: "Google Trending Searches on Data Science"
-output: 
-  html_document:
-    theme: lumen
-    css: "../../../z-assemblers/assets/styles/content.css"
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: "vendor"
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen=999)  # turn-off scientific notation like 1e+48
 
-# Clear environment and memory
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memrory and report the memory usage.
-
 library(tidyverse)
 library(ggiraph)
-
 library(kableExtra)
 
 library(showtext)
@@ -36,9 +23,7 @@ showtext_auto()
 
 ```
 
-<div class="activity">
 WRANGLERS  
-</div>
 
 # Google Trending Searches on "Data Science"
 ## Format Date
@@ -67,21 +52,6 @@ df <- read.csv('archetypes/google-trend-on-data-science.csv')
 
 ```
 
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION
-
-```
 
 
 ### Convert character format into date format 
@@ -97,25 +67,6 @@ df_1$date <- as.Date(df$Time)
 
 ```
 
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set1, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_1
-
-names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#8000FF")
-      
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-column_spec(3, bold = TRUE, color = "#000000", background = "#E3CEF6")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION 
-
-```
 
 #### On the other hand, if __time__ is important to us, then add the time into the date format as <span style="font-weight:bold">%Y-%m-%dT%H:%M:%S</span>. You may set the default system time zone to convert the date and time. In our case, it only records in hours.
 
@@ -123,26 +74,6 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 
 df_2 <- df
 df_2$Time <-as.POSIXct(df_2$Time, format = "%Y-%m-%dT%H",tz=Sys.timezone())
-
-```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set2, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_2
-
-names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
-      
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-column_spec(1, bold = TRUE, color = "#000000", background = "#E3CEF6")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION
 
 ```
 
@@ -158,26 +89,6 @@ df_3$Quarter <-quarters(df_2$Time)
 
 ```
 
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set3, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_3
-names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
-names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#2E2EFE")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-column_spec(3, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION 
-
-```
-
 ### Year
 #### Use this method to create a <span style="color: #2E2EFE;font-weight:bold">Year</span> column which captures the year of <span style="color: #8000FF;font-weight:bold">Time</span>.
 
@@ -189,28 +100,6 @@ df_4$Year <- format(df_2$Time,format="%Y")
 
 ```
 
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set4, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_4
-
-names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
-names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#2E2EFE")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-column_spec(3, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION 
-
-```
-
-
 ### Year_Month
 
 #### Use this method to create a <span style="color: #2E2EFE;font-weight:bold">Year_Month</span> column which captures only the combination year and month of <span style="color: #8000FF;font-weight:bold">Time</span>.
@@ -221,28 +110,6 @@ df_5 <- df_2
 df_5$Year_Month <-format(df_2$Time,format="%Y-%m")
 
 ```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set5, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_5
-
-names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
-names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#2E2EFE")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-column_spec(3, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION 
-
-```
-
 
 
 ### Month
@@ -257,29 +124,6 @@ df_6$Month_ABR <-format(df_2$Time,format="%b")
 
 ```
 
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set6, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_6
-
-names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
-names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#2E2EFE")
-names(df_tmp)[4] <- cell_spec(names(df_tmp)[4], color = "#2E2EFE")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-column_spec(3:4, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION 
-
-```
-
-
 ### Month_Day
 #### Likewise, use this method to create a <span style="color: #2E2EFE;font-weight:bold">Month_Day</span> column (Numeric or Name format) which captures the month-and-day (or day-and-month) combination of <span style="color: #8000FF;font-weight:bold">Time</span>.
 
@@ -291,29 +135,6 @@ df_7$MM_DD_Num <- format(df_2$Time,format="%m-%d")
 df_7$DD_MM_Name <- format(df_2$Time,format="%d %B")
 
 ```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set7, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_7
-
-names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#8000FF")
-names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#2E2EFE")
-names(df_tmp)[4] <- cell_spec(names(df_tmp)[4], color = "#2E2EFE")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-column_spec(3:4, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION
-
-```
-
 
 ### Plot an example
 
@@ -369,23 +190,3 @@ The data source was from <a href="https://trends.google.com/trends/trendingsearc
   organization = {Google Trends}
 }
 </pre>
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-# PUSH TO PRODUCTION
-source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
-```
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-

@@ -1,32 +1,19 @@
 ---
 pagetitle: "Netflix Titles"
-output: 
-  html_document:
-    theme: lumen
-    css: "../../../z-assemblers/assets/styles/content.css"
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: "vendor"
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen=999)  # turn-off scientific notation like 1e+48
 
-# Clear environment and memory
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memrory and report the memory usage.
-
 library(tidyverse)
 library(stringi)
 library(ggiraph)
-
 library(kableExtra)
 
 library(showtext)
@@ -37,10 +24,7 @@ showtext_auto()
 
 ```
 
-<div class="activity">
 WRANGLERS  
-</div>
-
 
 # TV Shows and Movies listed on Netflix
 ## Format String
@@ -74,23 +58,6 @@ row.names(df)<-NULL
 
 ```
 
-
-```{r Styling Data Set, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(full_width = FALSE, bootstrap_options = "striped")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION 
-```
-
-
-
-
-
 ### Convert Case
 
 #### Uppercase
@@ -104,20 +71,6 @@ df_1$type<-str_to_upper(df_1$type, locale = "en")
 
 ```
 
-```{r Styling Data Set1, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_1
-names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color = "#01DF01")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE,  bootstrap_options = c("striped", "hover"))%>%
-column_spec(2, bold = TRUE, color = "#000000", background = "#CEF6CE")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-
-#NOT TO BE USED AS SOLUTION 
-```
 ### Lowercase
 
 #### Change <span style="color: #0000FF;font-weight:bold"> listed_in </span> data to __lowercase__.
@@ -130,21 +83,6 @@ df_4$listed_in<-str_to_lower(df_4$listed_in, locale = "en")
 
 ```
 
-```{r Styling Data Set4, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_4
-names(df_tmp)[11] <- cell_spec(names(df_tmp)[11], color = "#0080FF")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE,  bootstrap_options = c("striped", "hover"))%>%
-column_spec(11, bold = TRUE, color = "#000000", background = "#CEECF5")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-
-#NOT TO BE USED AS SOLUTION 
-```
-
 ### Sentence
 #### OR change <span style="color: #01DF01;font-weight:bold"> description </span> to __sentence__ where only the first character is uppercase.
 ```{r method: convert2, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
@@ -152,22 +90,6 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 df_2<-df
 df_2$description<-str_to_sentence(df_2$description, locale = "en")
 
-```
-
-```{r Styling Data Set2, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_2
-names(df_tmp)[12] <- cell_spec(names(df_tmp)[12], color = "#01DF01")
-
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE,  bootstrap_options = c("striped", "hover"))%>%
-column_spec(12, bold = TRUE, color = "#000000", background = "#CEF6D8")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-
-#NOT TO BE USED AS SOLUTION 
 ```
 
 ### Title 
@@ -181,25 +103,6 @@ df_3$title<-str_to_title(df_3$title, locale = "en")
 
 ```
 
-```{r Styling Data Set3, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_3
-names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#FE9A2E")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE,  bootstrap_options = c("striped", "hover"))%>%
-column_spec(3, bold = TRUE, color = "#000000", background = "#F6E3CE")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-
-#NOT TO BE USED AS SOLUTION 
-```
-
-
-
-
-
 ### Combine
 #### Combine <span style="color: #01DF01;font-weight:bold"> country </span> with <span style="color: #01DF01;font-weight:bold"> release_year </span> by adding pattern " - " in between two strings.
 
@@ -210,22 +113,6 @@ df_5<-df
 df_5$country_release_year<-paste(df_5$country,df_5$release_year, sep=" - ")
 
 
-```
-
-```{r Styling Data Set5, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_5
-names(df_tmp)[13] <- cell_spec(names(df_tmp)[13], color = "#01DF01")
-
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center",  full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-column_spec(13, bold = TRUE, color = "#000000", background = "#CEF6D8")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-
-#NOT TO BE USED AS SOLUTION 
 ```
 
 ### Split OR Truncate 
@@ -243,23 +130,6 @@ rownames(df_6) <- NULL
 
 ```
 
-```{r Styling Data Set6, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_6
-names(df_tmp)[11] <- cell_spec(names(df_tmp)[11], color = "#0080FF")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-column_spec(13:15, bold = TRUE, color = "#000000", background = "#CEE3F6")%>%
-column_spec(11, bold = TRUE, background = "#A9D0F5")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-
-#NOT TO BE USED AS SOLUTION 
-```
- 
-
 
 #### Or Truncate <span style="color: #0080FF;font-weight:bold"> show_id </span>  in a way that only the numbers are displayed. Note that all records have the same __"sxx"__ structure and length.
 
@@ -276,22 +146,6 @@ df_7<-df_7%>%rename(id=X.Reduce.rbind..list..)
 
 ```
 
-```{r Styling Data Set7, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_7
-names(df_tmp)[13] <- cell_spec(names(df_tmp)[13], color = "#0080FF")
-
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE,  bootstrap_options = c("striped", "hover"))%>%
-column_spec(13, bold = TRUE, background = "#A9D0F5")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-
-#NOT TO BE USED AS SOLUTION 
-```
-
 ### Remove non-numeric characters
 #### Remove __s__ from <span style="color: #9A2EFE;font-weight:bold"> show_id </span>.
 ```{r method: non numeric, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
@@ -301,22 +155,6 @@ df_11$show_id<- gsub("[^0-9]", "", df_11$show_id)
 
 ```
 
-
-```{r Styling Data Set11, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_11
-names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#9A2EFE")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE,  bootstrap_options = c("striped", "hover"))%>%
-column_spec(1, bold = TRUE, color = "#000000", background = "#D8CEF6")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-
-#NOT TO BE USED AS SOLUTION 
-```
-
 ### Remove non-alpha-numeric characters
 #### Remove non-alpha-numeric characters from <span style="color: #01DF01;font-weight:bold"> title </span>.
 ```{r method: non alpha numeric, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
@@ -324,28 +162,7 @@ scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRU
 df_10<-df_4
 df_10$title_New<-str_replace_all(df_10$title, "[^[:alnum:]]", " ") 
 
-
-
 ```
-
-```{r Styling Data Set10, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_10
-names(df_tmp)[13] <- cell_spec(names(df_tmp)[13], color = "#01DF01")
-
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE,  bootstrap_options = c("striped", "hover"))%>%
-column_spec(13, bold = TRUE, color = "#000000", background = "#CEF6D8")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION 
-```
-
-
-
-
 
 ### Detect
 
@@ -361,20 +178,6 @@ rownames(df_8) <- NULL
 
 ```
 
-```{r Styling Data Set8, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_8
-names(df_tmp)[4] <- cell_spec(names(df_tmp)[4], color = "#FE9A2E")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE,  bootstrap_options = c("striped", "hover"))%>%
-column_spec(4, bold = TRUE, color = "#000000", background = "#F6E3CE")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-#NOT TO BE USED AS SOLUTION 
-```
-
 #### Detect all <span style="color: #01DF01;font-weight:bold"> cast </span> that contains special character __" - "__. 
 
 ```{r method: detect2, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
@@ -385,72 +188,18 @@ rownames(df_9) <- NULL
 
 ```
 
-
-```{r Styling Data Set9, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_9
-names(df_tmp)[5] <- cell_spec(names(df_tmp)[5], color = "#01DF01")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE,  bootstrap_options = c("striped", "hover"))%>%
-column_spec(5, bold = TRUE, color = "#000000", background = "#CEF6D8")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-
-#NOT TO BE USED AS SOLUTION 
-```
-
-
 ## Normalize
 
      
 #### For a better understanding, take a closer look at how <span style="color: #FE9A2E;font-weight:bold"> cast </span> are presented.
-```{r Styling Data SetA, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_9
-
-names(df_tmp)[5] <- cell_spec(names(df_tmp)[5], color = "#FE9A2E")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE,  bootstrap_options = c("striped", "hover"))%>%
-
-column_spec(5, bold = TRUE, color = "#000000", background = "#F6E3CE")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-
-#NOT TO BE USED AS SOLUTION 
-
-```
-
 
 ```{r method: normalize, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'} 
 df_10<-df_9
 df_10$cast<-stri_trans_nfd(df_9$cast)
 
-
 ```
 
 #### After we normalize this data, the characters are decomposed in a way that makes further data manipulation more feasible.
-```{r Styling Data SetB, echo=FALSE}
-#NOT TO BE USED AS SOLUTION
-df_tmp <- df_10
-
-names(df_tmp)[5] <- cell_spec(names(df_tmp)[5], color = "#FE9A2E")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE,  bootstrap_options = c("striped", "hover"))%>%
-
-column_spec(5, bold = TRUE, color = "#000000", background = "#F6E3CE")%>%
-scroll_box(height = "350px", width = "NULL", extra_css = NULL, fixed_thead = TRUE)
-
-
-
-#NOT TO BE USED AS SOLUTION 
-```
-
 
 # References
 ## The citations and data sources used for this case
@@ -475,24 +224,3 @@ The original data file used in this wrangler task was captured from the <a href=
   organization = {Flixable.com}
 }
 </pre>
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-# PUSH TO PRODUCTION
-source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
-```
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-

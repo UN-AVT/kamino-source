@@ -1,35 +1,22 @@
 ---
 pagetitle: "Worldwide covid19 summary"
-output: 
-  html_document:
-    theme: lumen
-    css: "../../../z-assemblers/assets/styles/content.css"
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: vendor
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, class.source = 'fold-hide')
 options(scipen=999)  # turn-off scientific notation like 1e+48
 
-# Clear environment and memory
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memory and report the memory usage.
 library(tidyverse)
 library(tidyr)
 library(ggiraph)
 
 ```
 
-<div class="activity">
 ANALYTICS
-</div>
 
 # Worldwide covid19 summary 
 ## Descriptive
@@ -130,14 +117,3 @@ girafe(ggobj = v3, width_svg = 13, height_svg = 7,
 
 
 * Data sources: Kaggle, this file contains summary covid-19 related data for each of the 218 countries, as of 2022-01-05. [GO](https://www.kaggle.com/josephassaker/covid19-global-dataset?select=worldometer_coronavirus_summary_data.csv){target="_blank"}
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-

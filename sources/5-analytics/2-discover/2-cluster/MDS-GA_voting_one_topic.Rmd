@@ -1,26 +1,14 @@
 ---
 pagetitle: "GA Voting"
-output: 
-  html_document:
-    theme: lumen
-    css: "../../../z-assemblers/assets/styles/content.css"
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: vendor
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo = FALSE)
 options(scipen = 999) ## To disable scientific notation
-
-# Clear environment and memory
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memory and report the memory usage.
 
 library(magrittr)
 library(tidyverse)
@@ -31,9 +19,7 @@ library(ggthemes)
 
 ```
 
-<div class="activity">
 Qualitative Analysis and Machine Learning
-</div>
 
 # How did they vote? - United Nations General Assembly Voting patterns
 ## Multidimensional scaling
@@ -234,24 +220,3 @@ girafe(ggobj = g1, width_svg = 13, height_svg = 7,
 #### citations for narrative and data sources
 
 * Data sources: Harvard Dataverse, [GO](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/LEJUQZ){target="_blank"}
-
-
-
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# read.bibtex(file = "./citations.bib")
-
-```
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-

@@ -1,21 +1,12 @@
 ---
 pagetitle: "Kamino"
-output: 
-  html_document:
-    theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: "../../../z-assemblers/fragments/header.html"
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: libs
-
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(
     echo = FALSE,
@@ -30,6 +21,11 @@ library(forecast)
 library(scales)
 library(xts)
 library(ggiraph)
+
+
+```
+
+```{r}
 ### Follow these steps to select a new country or refresh data.
 # Download the dataset & label the data0
 #dat <- get_eurostat("namq_10_gdp", time_format = "num")
@@ -53,7 +49,6 @@ df_country_1 <- filter(df_country, unit == "Current prices, million euro",
          geo == 'Germany (until 1990 former territory of the FRG)') %>% arrange(time)
 
 ```
-
 
 ### Using forecasting methods to predict Quartlery GDP
 <p>We will use two forecasting methods, ARIMA and Exponential Smoothing, to predict Germany's GDP in the next two years"</p>
@@ -372,12 +367,3 @@ girafe(ggobj = v8, width_svg = 13, height_svg = 7,
 ```
 
 It seems that the ARIMA model is closer to the EIU prediction for the first 4 quarters, but ETS is better at predicting the next 4 quarters. Both machine predictions fail to anticipate the magniture of the anticipated surge of GDP growth.
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```

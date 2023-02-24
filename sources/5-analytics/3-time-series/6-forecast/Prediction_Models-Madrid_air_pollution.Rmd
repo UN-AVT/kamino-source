@@ -1,18 +1,9 @@
 ---
 pagetitle: "Kamino"
-output: 
-  html_document:
-    theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: "../../../z-assemblers/fragments/header.html"
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: libs
-
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
 ```{r, message=FALSE, warning=FALSE, include=FALSE}
@@ -37,9 +28,8 @@ library(zoo)
 library(ggiraph)
 ```
 
-<div class="activity">
 ANALYTICS
-</div>
+
 
 # Forecasting models
 ## I want to predict future values based on historical data.
@@ -520,12 +510,3 @@ girafe(ggobj = v5, width_svg = 13, height_svg = 7,
 
 
 Case inspired by this post [Air Quality Madrid - ETS & ARIMA](https://www.kaggle.com/raenish/time-series-on-air-quality#data)
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```

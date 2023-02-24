@@ -1,21 +1,13 @@
 ---
 pagetitle: "Kamino"
-output: 
-  html_document:
-    theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: "../../../z-assemblers/fragments/header.html"
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: libs
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
@@ -25,12 +17,11 @@ library(data.table)
 library(knitr)
 
 
-
 ```
 
-<div class="activity">
+
 ANALYTICS
-</div>
+
 
 # Correlation
 
@@ -127,14 +118,3 @@ df
 ```
 
 Do you know there are two other correlation methods? try exploring them!
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```

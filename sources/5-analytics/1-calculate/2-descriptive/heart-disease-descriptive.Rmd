@@ -1,20 +1,12 @@
 ---
 pagetitle: "Kamino"
-output: 
-  html_document:
-    theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: "../../../z-assemblers/fragments/header.html"
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: libs
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(
     echo = FALSE,
@@ -23,10 +15,6 @@ knitr::opts_chunk$set(
    dev = "svg"
 )
 options(scipen = 999) ## To disable scientific notation
-
-# Clear environment and memory
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
 library(ggplot2)
@@ -38,9 +26,7 @@ library(bibtex)
 library(ggiraph)
 ```
 
-<div class="activity">
 Qualitative Analysis and Machine Learning
-</div>
 
 
 # Descriptive Analysis
@@ -225,28 +211,3 @@ girafe(ggobj = patch, width_svg = 13, height_svg = 7,
 
 <a href="https://archive.ics.uci.edu/ml/datasets/heart+disease" target="_blank"> UCL Machine Learning Datasets</a>
 
-
-
-
-
-
-
-
-
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# read.bibtex(file = "./citations.bib")
-
-```
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```

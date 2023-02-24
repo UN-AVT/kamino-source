@@ -1,17 +1,9 @@
 ---
 pagetitle: "Kamino"
-output: 
-  html_document:
-    theme: lumen
-    css: "../../../z-assemblers/assets/styles/content.css"
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: "vendor"
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
 ```{r setup, include=FALSE}
@@ -24,9 +16,9 @@ library(magick)
 
 ```
 
-<div class="activity">
+
 WRANGLERS  
-</div>
+
 
 # Normalize
 ## Pick a number from x to y
@@ -220,18 +212,4 @@ p <- ggplot(dat.m) +
   )
 p
 ```
-
-
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-
 

@@ -1,27 +1,15 @@
 ---
 pagetitle: "Public Support for Free Speech"
 output:
-  html_document:
-    theme: lumen
-    css: "../../../z-assemblers/assets/styles/content.css"
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: "vendor"
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen = 999) ## To disable scientific notation
-
-# Clear environment and memory
-rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
-gc() #free up memory and report the memory usage.
 
 library(tidyverse)
 library(countrycode)
@@ -36,9 +24,7 @@ showtext_auto()
 
 ```
 
-<div class="activity">
 ANALYTICS  
-</div>
 
 # Public Support for Free Speech
 ## Linear Regression
@@ -182,24 +168,3 @@ girafe(ggobj = v2, width_svg = 16, height_svg = 9,
 * Narrative Inspiration: The Economist, In some countries, people think they have too much freedom of speech.
 * Data Source: Justitia, Who Cares about Free Speech?, [GO](http://justitia-int.org/en/report-who-cares-about-free-speech-findings-from-a-global-survey-of-free-speech/){target="_blank"}
 * Data Source: V-Dem Institute, Varieties of Democracy Project, [GO](https://www.v-dem.net/en/data/data/v-dem-dataset-v111/){target="_blank"}
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-# PUSH TO PRODUCTION
-source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
-```
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-

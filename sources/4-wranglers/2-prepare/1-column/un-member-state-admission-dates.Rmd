@@ -1,17 +1,9 @@
 ---
 pagetitle: "UN Member State admission dates"
-output: 
-  html_document:
-    theme: lumen
-    css: "../../../z-assemblers/assets/styles/content.css"
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: "vendor"
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
 ```{r setup, include=FALSE}
@@ -19,12 +11,7 @@ output:
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen=999)  # turn-off scientific notation like 1e+48
 
-# Clear environment and memory
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memory and report the memory usage.
-
 library(tidyverse)
-
 library(kableExtra)
 
 library(showtext)
@@ -35,9 +22,7 @@ showtext_auto()
 
 ```
 
-<div class="activity">
 WRANGLERS  
-</div>
 
 # UN Member State admission dates
 ## Manage Column
@@ -75,31 +60,6 @@ df_1 <- df %>% rename(MEMBER_STATE='Member', ADMISSION_DATE='StateDate of Admiss
 
 ```
 
-
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set 2, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_1
-
-names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#0000FF")
-names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color = "#FE9A2E")
-col_tmp <- cell_spec(substr(names(df_tmp)[3],1,3), color = "#40FF00")
-names(df_tmp)[3] <- paste(col_tmp, substr(names(df_tmp)[3],4,1000000L), sep = " ", collapse=NULL)
-names(df_tmp)[4] <- paste(col_tmp, substr(names(df_tmp)[4],4,1000000L), sep = " ", collapse=NULL)
-names(df_tmp)[5] <- paste(col_tmp, substr(names(df_tmp)[5],4,1000000L), sep = " ", collapse=NULL)
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))
-
-#NOT TO BE USED AS SOLUTION 
-
-```
-
 ### Rename Multiple Columns
 #### Based on a rule remove <span style="color: #40FF00;font-weight:bold">UN_</span> prefix from columns names
 
@@ -109,25 +69,6 @@ df_2 <- df_1 %>% set_names(~stringr::str_replace_all(., "UN_", ""))
  
 ```
 
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set 3, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_2
-
-names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#40FF00")
-names(df_tmp)[4] <- cell_spec(names(df_tmp)[4], color = "#40FF00")
-names(df_tmp)[5] <- cell_spec(names(df_tmp)[5], color = "#40FF00")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))
-
-#NOT TO BE USED AS SOLUTION 
-
-```
 
 ### Rename All
 #### convert all column names to <span style="background: #E3CEF6;font-weight:bold">lowercase</span>
@@ -136,23 +77,6 @@ kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("st
 
 df_3 <- df_2
 names(df_3) <- tolower(names(df_2))
-
-```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set 4, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_3
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-row_spec(0, background  = "#E3CEF6")
-
-#NOT TO BE USED AS SOLUTION 
 
 ```
 
@@ -168,24 +92,6 @@ df_4 <- add_column(df_3,new_col=('I am new'))
 
 ```
 
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set 5, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_4
-
-names(df_tmp)[6] <- cell_spec(names(df_tmp)[6], color = "#FF00BF")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-column_spec(6, bold = TRUE, color = "#000000", background = "#F5A9E1")
-
-#NOT TO BE USED AS SOLUTION 
-
-```
 
 #### Filter/Select First <span style="background: #CEE3F6;font-weight:bold">3 columns</span> 
 
@@ -195,24 +101,6 @@ df_5 <- df_4 %>% select(member_state,admission_date,region_name)
 
 ```
 
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set 6, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_5
-
-names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color = "#CC2EFA")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))%>%
-row_spec(0, background  = "#CEE3F6")
-
-#NOT TO BE USED AS SOLUTION 
-
-```
 
 ### Separate a Column
 #### <span style="color: #CC2EFA;font-weight:bold">admission_date</span> into <span style="color: #3104B4;font-weight:bold">day, month, year</span>
@@ -221,28 +109,6 @@ row_spec(0, background  = "#CEE3F6")
 ```{r , message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
 
 df_6 <- df_5%>%separate(admission_date, c('day','month','year'),"/")
-
-```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set 7, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_6
-
-names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#FF0040")
-names(df_tmp)[2] <- cell_spec(names(df_tmp)[2], color = "#3104B4")
-names(df_tmp)[3] <- cell_spec(names(df_tmp)[3], color = "#3104B4")
-names(df_tmp)[4] <- cell_spec(names(df_tmp)[4], color = "#3104B4")
-names(df_tmp)[5] <- cell_spec(names(df_tmp)[5], color = "#FF0040")
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))
-
-#NOT TO BE USED AS SOLUTION
 
 ```
 
@@ -255,26 +121,6 @@ kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("st
 df_7 <- df_6 %>% unite('member_region',member_state, region_name, sep = "_", remove = TRUE, na.rm = FALSE)
 
 ```
-
-<!-- FOR DISPLAY ONLY -->
-
-```{r Styling Data Set 8, echo=FALSE}
-
-#NOT TO BE USED AS SOLUTION
-
-df_tmp <- df_7
-
-names(df_tmp)[1] <- cell_spec(names(df_tmp)[1], color = "#FFBF00")
-
-
-df_tmp%>%
-kable(escape = FALSE)%>%
-kable_styling(position = "center", full_width = FALSE, bootstrap_options = c("striped", "hover"))
-
-#NOT TO BE USED AS SOLUTION 
-
-```
-
 
 ### References
 #### The citations and data sources used for this case
@@ -291,23 +137,3 @@ The data file used in this wrangler task was retrieved from <a href="https://www
   organization = {Un.org}
 }
 </pre>
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-# PUSH TO PRODUCTION
-source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
-```
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-

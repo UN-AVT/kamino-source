@@ -1,27 +1,15 @@
 ---
 pagetitle: "Kamino"
-output: 
-  html_document:
-    theme: lumen
-    css: "../../../z-assemblers/assets/styles/content.css"
-    df_print: paged
-    mathjax: NULL
-    #code_folding: show
-    include:
-      in_header: "../../../z-assemblers/fragments/header.html"
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: "vendor"
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen=999)  # turn-off scientific notation like 1e+48
-
-# Clear environment and memory
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memory and report the memory usage
 
 library(showtext)
 ## Loading Google fonts (https://fonts.google.com/)
@@ -31,9 +19,7 @@ showtext_auto()
 
 ```
 
-<div class="activity">
 WRANGLERS  
-</div>
 
 # Enrich
 ## a dataset with additional features or record insertion
@@ -52,38 +38,3 @@ knitr::include_graphics(masthead, dpi=72)
 * __left__ __outer__ __join__ : will fill up the columns that come from the bottom table with missing values if no matching row exists in the bottom table.
 * __right__ __outer__ __join__ : will fill up the columns from the top table with missing values if no matching row in the top table exists.
 * __full__ __outer__ __join__ : will fill up columns from both the top and bottom table with missing values if a row cannot be joined.
-
-
-
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-
-# ENTER METADATA
-# Use space to separate keywords or "-" for phrases
-methods <- "enrich anti-join concantenate inner-join left-join outer-join right-join" # mostly used in wranglers and analytics
-keywords <- ''
-commands <- ''
-sources <- ''
-
-# CREATE METADATA
-source("../../../z-scripts/create_metadata.R", local = knitr::knit_global())
-
-# RUN PRODUCTION OUTPUTS
-source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
-
-```
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-

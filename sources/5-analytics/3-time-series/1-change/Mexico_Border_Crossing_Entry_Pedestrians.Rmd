@@ -1,30 +1,17 @@
 ---
 pagetitle: "Kamino"
-output: 
-  html_document:
-    theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: "../../../z-assemblers/fragments/header.html"
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: libs
-
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE,
    dev = "svg")
 options(scipen=999)  # turn-off scientific notation like 1e+48
-
-# Clear environment and memory
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memory and report the memory usage.
 
 library(knitcitations)
 library(bibtex)
@@ -35,9 +22,8 @@ library(ggiraph)
 
 ```
 
-<div class="activity">
 ANALYTICS 
-</div>
+
 
 # Change
 # Case: US Border Crossing Entry
@@ -148,17 +134,3 @@ abline(v=69, col="blue")
 * https://www.youtube.com/watch?v=WelmlZK5G2Y&ab_channel=NHSRCommunityNHSRCommunity
 * https://www.coursera.org/learn/machine-learning
 
-  
-
-
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
