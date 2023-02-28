@@ -45,7 +45,7 @@ TEMPORALS
 
 ```{r}
 
-df = read.csv("../archetypes/MORTGAGE30US.csv", header = TRUE, stringsAsFactors = FALSE)  # read text file 
+df = read.csv("./archetypes/mortgage-rates/mortgage-rates-30-year-us.csv", header = TRUE, stringsAsFactors = FALSE)  # read text file 
 df <- df %>% mutate(yearf=factor(year))
 df <- filter(df,year>2009)
 df

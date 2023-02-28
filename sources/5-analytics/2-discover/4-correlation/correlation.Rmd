@@ -1,0 +1,140 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(ggrepel)
+library(ggiraph)
+library(data.table)
+library(knitr)
+
+
+
+```
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# Correlation
+
+Correlation measures the statistical relationship between two attributes, particularly dependence of one attribute on another attribute. When two attributes are highly correlated with each other, they both vary at the same rate with each other either in the same or in opposite directions.
+
+However, correlation between two attributes does not imply causation, that is, one doesn’t necessarily cause the other.
+
+Correlation between two attributes is commonly measured by the Pearson correlation coefficient.
+
+
+To identify values in a data set that move with each other. E.g. healthcare spending and life expectancy could be values that are correlated. Healthcare spending and GDP of a country are typically very closely correlated. Examining the correlation can facilitate further analytics e.g.~to calculate summary values, reduce the number of variables that are relevant or in general can help pick a good prediction model for new data.
+
+### Correlation Between Life Expectancy and Health Expenditure
+
+Load [data](https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure?stackMode=absolute&minPopulationFilter=1000000&time=earliest..2015) from Our World in Data. Note: _"Health financing is reported as the annual per capita health expenditure and is adjusted for inflation and price level differences between countries (measured in 2010 international dollars)."_
+
+
+
+```{r, message=FALSE, echo=FALSE}
+#Loading the data
+
+df <- read.csv('archetypes/life-expectancy-vs-health-expenditure.csv')
+
+df
+
+```
+
+
+Let's process the data first by renaming some columns, removing missing data, and selecting columns we need for plotting later.
+
+```{r, message=FALSE, echo=FALSE}
+#Loading the data
+
+df_clean <-df %>% rename(lifeExpectancy='Life.expectancy.at.birth..total..years.',healthExpense='Health.Expenditure.and.Financing..per.capita...OECDstat..2017..')%>%
+                      select(Entity,Year,lifeExpectancy,healthExpense,Continent) %>%
+                      filter(lifeExpectancy!='NA' & healthExpense!='' & healthExpense!='..')
+df_clean$healthExpense<-as.numeric(as.character(df_clean$healthExpense))
+
+df_sort <- df_clean[order(df_clean$Entity, - df_clean$Year),]
+
+df_sort$Continent <- df_sort$Continent[match(df_sort$Entity, df_sort$Entity)]
+rownames(df_sort) <- NULL
+df_sort
+
+
+```
+
+
+Now we are ready to plot the data, let's use the same line chart as __Our World in Data__ to see the life expectancy and health expenditure trends for different countries from 1970 to 2015.
+
+
+
+```{r, message=FALSE, echo=FALSE, fig.width=10.5, fig.height=8, warning=FALSE}
+df_sort$dataID=paste0(df_sort$Enity,df_sort$Year)
+p1<-ggplot(data=df_sort, mapping=aes(x=healthExpense,y=lifeExpectancy,group=Entity, color=Continent,data_id = dataID,tooltip = paste0(Entity," ",Year)))+
+  geom_line()+
+  geom_point_interactive()+
+  scale_y_continuous(limits = c(65, 85))+
+  scale_x_continuous(labels=scales::dollar_format())+
+  theme(panel.background = element_rect(fill = "white",colour = "grey50"),axis.title.x=element_blank(),axis.title.y=element_blank(),legend.position = "none")
+
+
+girafe(ggobj = p1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+Overall the money spent on health is positively correlated with life expectancy for most countries, but it doesn't imply causation. Which country has the strongest correlation? let's find out.
+
+Using the default _pearson_ correlation method, we will run a loop to calculate the correlation between life expectancy and health expense for each country and rank them from the highest to the lowest.
+
+```{r, message=FALSE, echo=FALSE, warning=FALSE}
+
+
+countries <- unique(df_sort$Entity)
+datalist = list()
+for (country in countries){
+  
+  countryCor <- df_sort %>% filter(Entity==country)%>% select(Entity,Year,lifeExpectancy,healthExpense,Continent)
+  data=data.frame(country,cor(countryCor$lifeExpectancy,countryCor$healthExpense))
+ datalist[[country]]<-data
+}
+
+
+df_cor <- dplyr::bind_rows(datalist)
+
+df_cor<-df_cor %>% rename('correlation'='cor.countryCor.lifeExpectancy..countryCor.healthExpense.')
+
+# Sort from highest
+
+df<-df_cor[order(-df_cor$correlation),]
+rownames(df) <- NULL
+df
+```
+
+Do you know there are two other correlation methods? try exploring them!
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```

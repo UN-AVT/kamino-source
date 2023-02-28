@@ -1,15 +1,22 @@
 ---
 pagetitle: "Kamino"
-output:
-  bookdown::gitbook: default
-documentclass: book
-date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: lumen
+    css: ["styles/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: hide
 ---
 
-```{r, include = FALSE, results = "hide"}
+```{r setup, include = FALSE, results = "hide"}
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
 library(sf)
@@ -18,3 +25,125 @@ library(ggplot2)
 library(ggiraph)
 
 ```
+
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, results = "hide"}
+
+# Load map sources
+# Shape files and data
+# ++++++++++++++++++++
+# borders, adm0
+# borders, adm1
+# borders, adm2
+# ++++++++++++++++++++
+
+# Borders
+adm0 <- st_read("map-sources/borders/ssd_admbnda_adm0_imwg_nbs_20180817/ssd_admbnda_adm0_imwg_nbs_20180817.shp")
+adm1 <- st_read("map-sources/borders/ssd_admbnda_adm1_imwg_nbs_20180817/ssd_admbnda_adm1_imwg_nbs_20180817.shp")
+adm2 <- st_read("map-sources/borders/ssd_admbnda_adm2_imwg_nbs_20180817/ssd_admbnda_adm2_imwg_nbs_20180817.shp")
+
+intl_boundaries <- st_read("map-sources/geojson/ss-intl-boundaries.geojson")
+state_boundaries <- st_read("map-sources/geojson/ss-state.geojson")
+county <- st_read("map-sources/geojson/ss-county.geojson")
+abeyi <- st_read("map-sources/geojson/ss-abeyi.geojson")
+
+head(as.data.frame(adm0))
+head(as.data.frame(adm1))
+head(as.data.frame(adm2))
+
+as.data.frame(intl_boundaries)
+head(as.data.frame(state_boundaries))
+head(as.data.frame(county))
+head(as.data.frame(abeyi))
+
+```
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.width = 12, fig.height = 12, out.width = "100%"}
+
+intl_boundaries_surround <- filter(intl_boundaries, NAM %in% c("CAR", "CHAD", "DRC", "ETHIOPIA", "KENYA", "UGANDA", "SUDAN"))
+
+# theme parameters
+theme_opts <- theme(
+  legend.position = "none",
+  legend.title = element_blank(),
+  axis.text = element_blank(),
+  axis.line = element_blank(),
+  axis.ticks = element_blank(),
+  axis.title = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  # panel.background = element_blank(),
+  panel.background = element_rect(fill = "#ffffff"),
+  panel.border = element_blank(),
+  # plot.background = element_blank(),
+  plot.background = element_rect(fill = "#ffffff")
+)
+
+transparent_fill <- rgb(0, 0, 0, max = 255, alpha = 0, names = "transparent")
+
+# In order of layer placement top -> down
+v1 = ggplot() +
+  geom_sf(data = intl_boundaries, color="#666666", fill = transparent_fill, size = 0.5) +
+  geom_sf(data = intl_boundaries_surround, color="#333333", fill = "#F0F0F0", size = 0.5) +
+  geom_sf(data = adm0, color="#333333", fill = "#DDDDDD", size = 0.75) +
+  geom_sf(data = abeyi, color="#333333", fill = "#CCCCCC", size = 0.75) +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+       y = NULL, # Latitude
+       title = NULL, 
+       subtitle = NULL) +
+  theme_opts
+
+# v1
+
+girafe( ggobj = v1, width_svg = 12, height_svg = 8, options = list( opts_sizing(rescale = TRUE, width = 0.9) ))
+
+```
+
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, fig.width = 12, fig.height = 12, out.width = "100%"}
+
+# In order of layer placement top -> down
+v2 = ggplot() +
+  #geom_sf(data = adm0, color="#333333", fill = transparent_fill, size=2.0) +
+  #geom_sf(data = adm1, color="#333333", fill = transparent_fill, size=1.0) +
+  #geom_sf(data = adm2, color="#333333", fill = transparent_fill, size=0.5) +
+  #geom_sf(data = intl_boundaries, color="#333333", fill = transparent_fill, size=2.0) +
+  geom_sf(data = state_boundaries, color="#333333", fill = transparent_fill, size=1.0) +
+  geom_sf(data = county, color="#333333", fill = transparent_fill, size=0.5) +
+  geom_sf(data = abeyi, color="#333333", fill = transparent_fill, size=0.5, linetype = "dashed") +
+  scale_x_continuous() +
+  scale_y_continuous() +
+  coord_sf() +
+  theme_bw() +
+  labs(x = NULL, # Longitude
+       y = NULL, # Latitude
+       title = NULL, 
+       subtitle = NULL) +
+  theme_opts
+
+# v2
+
+girafe( ggobj = v2, width_svg = 12, height_svg = 8, options = list( opts_sizing(rescale = TRUE, width = 0.9) ))
+
+```
+
+
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE, include = FALSE }
+
+# Save output to file
+
+ggsave(filename = "assets/1-ssd-base-1.svg", plot = v1, width=10.5, height=8)
+ggsave(filename = "assets/1-ssd-base-2.svg", plot = v2, width=10.5, height=8)
+
+```
+
+

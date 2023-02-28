@@ -1,27 +1,15 @@
 ---
 pagetitle: "Nightingale's Rose Diagram"
 output:
-  html_document:
-    theme: lumen
-    css: "../../../z-assemblers/assets/styles/content.css"
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: "vendor"
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen = 999) ## To disable scientific notation
-
-# Clear environment and memory
-rm(list = ls(all.names = TRUE)) # will clear all objects including hidden objects.
-gc() #free up memory and report the memory usage.
 
 # Load needed libraries
 library(tidyverse)
@@ -38,9 +26,6 @@ showtext_auto()
 
 ```
 
-<div class="activity">
-CHARTS
-</div>
 
 # Florence Nightingale's Rose Diagram
 ## Coxcomb
@@ -185,22 +170,3 @@ Founded Chiefly on the Experience of the Late War.
 Presented by Request to the Secretary of State for War. 
 Privately printed for Miss Nightingale, Harrison and Sons, 1858.
 </pre>
-
-```{r, echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE, class.source='fold-hide'}
-
-# eval = FALSE as default; run manually as chunk
-# PUSH TO PRODUCTION
-source("../../../z-scripts/create_production_output.R", local = knitr::knit_global())
-
-```
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-

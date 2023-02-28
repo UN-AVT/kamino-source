@@ -1,24 +1,22 @@
 ---
 pagetitle: "Kamino"
-output:
-  bookdown::gitbook: default
-documentclass: book
-date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: libs
+
 ---
-
-```{r include=FALSE}
-library(forecast)
-library(tidyverse)
-require(scales)
-library(zoo)
-library(naniar)
-library(gridExtra)
-library(ggiraph)
-```
-
-
+<div class="activity">
 ANALYTICS
-
+</div>
 
 # Time series Analysis
 
@@ -31,6 +29,15 @@ ANALYTICS
 
 In this report, we put Time Series analysis into practice. We choose a simple measure, the __monthly average__ temperature (In fahrenheit) measured in Central Park, New York.
 
+```{r include=FALSE}
+library(forecast)
+library(tidyverse)
+require(scales)
+library(zoo)
+library(naniar)
+library(gridExtra)
+library(ggiraph)
+```
 
 ## Loading data
 
@@ -332,4 +339,13 @@ v10<-TimeSer %>% decompose(type="multiplicative") %>%
   theme(text = element_text(size = 20))
 girafe(ggobj = v10, width_svg = 13, height_svg = 7,
        options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
 ```

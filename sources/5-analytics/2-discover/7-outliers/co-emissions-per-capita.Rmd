@@ -1,0 +1,247 @@
+---
+pagetitle: "Kamino"
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
+---
+
+```{r, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+
+library(outliers)
+library(EnvStats)
+library(tsoutliers)
+library(forecast)
+library(TSA)
+library(car)
+library(DMwR2)
+library(rstatix)
+library(performance)
+library(MASS)
+library(ggiraph)
+library(dbscan)
+library(factoextra)
+
+
+```
+
+<div class="activity">
+ANALYTICS 
+</div>
+
+# Outlier Detection
+## I want to fix irregularities in my dataset
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+
+
+***
+
+# Case: Air Pollution
+## Load the data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+df = read.csv("archetypes/co-emissions-per-capita.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# Keep data where co2_per_capit is not zero
+df1 <- filter(df, co2_per_capita != 0)
+df1
+
+```
+
+
+# Additive
+
+## An exogenous change of a single observation of the time series
+
+* The United Kingdom
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df2<-df1 %>% filter(country == "United Kingdom")
+
+p1<-ggplot(data = df2) + 
+  geom_line(aes(x = year, y = co2_per_capita), color="#4007fc", size =1, alpha = 0.5) +
+  scale_color_discrete(name = " ", labels = c("co2_per_capita"))+ 
+  theme_minimal() +
+  theme(text = element_text(size=10),
+      legend.position="none",
+      plot.title = element_text(size=10)
+    ) +
+  labs(y = "CO2", title = "United Kingdom")
+girafe(ggobj = p1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+uk <-tsoutliers(df2$co2_per_capita)
+uk
+df2[uk$index,]
+
+```
+
+## Find the replacements and make a new plot
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+rep_UK <- ts(df1[df1$country == "United Kingdom", "co2_per_capita"], start = df1[df1$country == "United Kingdom", "year"][1])
+
+rep_UK[uk$index] <- uk$replacements
+
+uk_out <- data.frame(
+  UK = ts(df1[df1$country == "United Kingdom", "co2_per_capita"], 
+    start = df1[df1$country == "United Kingdom", "year"][1]),
+  rep_UK, Year = df1[df1$country == "United Kingdom", "year"])
+uk_out
+
+p2<-ggplot(data = uk_out) + 
+  theme_minimal() +
+  geom_line(aes(x = Year, y = UK),  color="#4007fc", size =1, alpha = 0.5) +
+  geom_line(aes(x = Year, y = rep_UK), color="#E7B800") +
+  geom_point(aes(x = Year, y = rep_UK), color="#E7B800",size=1) +
+  scale_color_discrete(name = " ", labels = c("Replaced", "UK CO2"))+
+  labs(y = "CO2", title = "Replacing the outliers")+
+  annotate("text", x = 1893, y = 8, label = "outlier")+
+  annotate("text", x = 1921, y = 7, label = "outlier")+
+  annotate("text", x = 1926, y = 5, label = "outlier")+
+  geom_point(x = 1893, y = 8.96, color="#4007fc",size=2) +
+  geom_point(x = 1921, y = 7.25, color="#4007fc",size=2) +
+  geom_point(x = 1926, y = 5.44, color="#4007fc",size=2) 
+girafe(ggobj = p2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0))) 
+```
+
+
+# Innovational Outlier
+
+## An endogenous change of a single innovation of the time series and is usually associated with isolated incidents such as an impulse
+
+* United Arab Emirates
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df3<-df1 %>% filter(country == "United Arab Emirates")
+
+p4<-ggplot(data = df3) + 
+  geom_line(aes(x = year, y = co2_per_capita), color="#E7B800", size =1, alpha = 0.5) +
+  scale_color_discrete(name = " ", labels = c("co2_per_capita"))+ 
+  theme_minimal() +
+  theme(text = element_text(size=10),
+      legend.position="none",
+      plot.title = element_text(size=10)
+    ) +
+  labs(y = "CO2", title = "United Arab Emirates")
+girafe(ggobj = p4, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+g <-tsoutliers::tso(ts(df1[df1$country == "United Arab Emirates", "co2_per_capita"], 
+  start = df1[df1$country == "United Arab Emirates", "year"][1]), types = c("IO","LS"))
+
+g$outliers
+
+
+```
+
+## Find the replacements and make a new plot
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+repbhs <- tsclean(ts(df1[df1$country == "United Arab Emirates", "co2_per_capita"], 
+ start = df1[df1$country == "United Arab Emirates", "year"][1]))
+
+
+uae_out <- data.frame(
+  UAE = ts(df1[df1$country == "United Arab Emirates", "co2_per_capita"], 
+    start = df1[df1$country == "United Arab Emirates", "year"][1]),
+  repbhs, Year = df1[df1$country == "United Arab Emirates", "year"])
+uae_out
+
+p5<-ggplot(data = uae_out) + 
+  geom_line(aes(x = Year, y = UAE), color="#4007fc", size =1, alpha = 0.5) +
+  geom_line(aes(x = Year, y = repbhs), color="#E7B800") +  
+  geom_point(aes(x = Year, y = repbhs), color="#E7B800") +
+  scale_color_discrete(name = " ", labels = c("Replaced", "UAE CO2"))+
+  theme_minimal() +
+  labs(y = "CO2", title = "Replacing the outliers")+
+   annotate("text", x = 1969, y = 104, label = "outlier")+
+  annotate("text", x = 1998, y = 30, label = "outlier")+
+  geom_point(x = 1969, y = 100.6, color="#4007fc",size=2) +
+  geom_point(x = 1998, y = 28.4, color="#4007fc",size=2) 
+girafe(ggobj = p5, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+# Level Shift Outlier
+
+## An abrupt change in the mean level and may or may not be seasonal (Seasonal Level Shift)
+
+* Bahamas
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+
+df4<-df1 %>% filter(country == "Bahamas")
+
+p6<-ggplot(data = df4) + 
+  geom_line(aes(x = year, y = co2_per_capita), color="#E7B800", size =1, alpha = 0.5) +
+  scale_color_discrete(name = " ", labels = c("co2_per_capita"))+ 
+  theme_minimal() +
+  theme(text = element_text(size=10),
+      legend.position="none",
+      plot.title = element_text(size=10)
+    ) +
+  labs(y = "CO2", title = "Bahamas")
+girafe(ggobj = p6, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+bhs<-tsoutliers::tso(ts(df1[df1$country == "Bahamas", "co2_per_capita"], 
+  start = df1[df1$country == "Bahamas", "year"][1]), types = c("LS"))
+
+bhs$outliers
+
+
+```
+
+```{r echo=TRUE, fig.height=6, fig.width=12, message=FALSE, warning=FALSE, class.source='fold-hide'}
+repbhs <- tsclean(ts(df1[df1$country == "Bahamas", "co2_per_capita"], 
+ start = df1[df1$country == "Bahamas", "year"][1]))
+
+
+bhs_out <- data.frame(
+  BHS = ts(df1[df1$country == "Bahamas", "co2_per_capita"], 
+    start = df1[df1$country == "Bahamas", "year"][1]),
+  repbhs, Year = df1[df1$country == "Bahamas", "year"])
+bhs_out
+
+p7<-ggplot(data = bhs_out) + 
+  geom_line(aes(x = Year, y = BHS), color="#4007fc", size =1, alpha = 0.5) +
+  geom_line(aes(x = Year, y = repbhs), color="#E7B800") +
+    geom_point(aes(x = Year, y = repbhs), color="#E7B800") +
+   theme_minimal() +
+  scale_color_discrete(name = " ", labels = c("Replaced", "UAE CO2"))+ 
+  labs(y = "CO2", title = "Replacing the outliers")+
+   annotate("text", x = 1971, y = 40, label = "outlier")+
+  annotate("text", x = 1981, y = 11, label = "outlier")+
+  geom_point(x = 1971, y = 38.7, color="#4007fc",size=2) +
+  geom_point(x = 1981, y = 13, color="#4007fc",size=2) 
+girafe(ggobj = p7, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+
+# References
+## The citations and data sources used for this case
+
+* [Reference](https://datamotus.com/2019/11/15/Outlier-Detection.html)
+
+* [Data Source](https://ourworldindata.org/co2-and-other-greenhouse-gas-emissions)

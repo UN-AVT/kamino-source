@@ -1,17 +1,9 @@
 ---
-pagetitle: "Kamino"
-output: 
-  html_document:
-    theme: lumen
-    css: "../../../z-assemblers/assets/styles/content.css"
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: "vendor"
+title: "Kamino"
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
 ```{r setup, include=FALSE}
@@ -32,9 +24,7 @@ library(bibtex)
 
 ```
 
-<div class="activity">
 INGEST  
-</div>
 
 # Ingest a social media feed
 ## Twitter
@@ -274,25 +264,3 @@ plot(mat)
 
 # References
 ## The citations and data sources used for this case
-
-
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
-
-# cleanbib()
-# options("citation_format" = "pandoc")
-# read.bibtex(file = "../archetypes/mental_health.bib")
-
-```
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-
-

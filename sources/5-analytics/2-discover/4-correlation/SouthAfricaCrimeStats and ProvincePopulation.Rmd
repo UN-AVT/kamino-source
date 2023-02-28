@@ -1,0 +1,202 @@
+---
+pagetitle: "South Africa Crime Stats and Province Population"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE, class.source = 'fold-hide')
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(tidyverse)
+library(dplyr)
+library(ggrepel)
+library(ggiraph)
+library(data.table)
+library(corrplot)
+library(wesanderson)
+library(reshape2)
+library(extrafont)
+library(gganimate)
+library(animation)
+library(grid)
+library(ggpubr)
+```
+
+<div class="activity">
+ANALYTICS
+</div>
+
+# Correlation
+## South Africa Crime Stats and Province Population
+
+Correlation measures the statistical relationship between two attributes, particularly dependence of one attribute on another attribute. When two attributes are highly correlated with each other, they both vary at the same rate with each other either in the same or in opposite directions.
+
+However, correlation between two attributes does not imply causation, that is, one doesn’t necessarily cause the other.
+
+```{r, out.width = "60%", fig.align = 'center', fig.cap="Photo by Tingey Injury Law Firm  on Unsplash"}
+
+masthead <- "assets/tingey-injury-law-firm-unsplash.jpg"
+knitr::include_graphics(masthead, dpi=72)
+
+```
+
+
+> A good act does not wash out the bad, nor a bad act the good. Each should have its own reward...\
+--- George R.R. Martin\
+
+### Load Datasets
+
+* South Africa crime stats
+* province population
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+
+df_crime <- read.csv('archetypes/SouthAfricaCrimeStats.csv')
+df_pop<-read.csv('archetypes/ProvincePopulation.csv')
+df_crime
+df_pop
+
+```
+
+### Wrangler Data
+
+* Clean
+* Wide to long
+* Groupby
+* Join
+
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+# Rename year column names
+
+df_crime_clean <-df_crime %>% rename("2005"='X2005.2006','2006'='X2006.2007','2007'='X2007.2008','2008'='X2008.2009','2009'='X2009.2010','2010'='X2010.2011','2011'='X2011.2012','2012'='X2012.2013','2013'='X2013.2014', '2014'='X2014.2015','2015'='X2015.2016')
+
+# Tranform wide to long
+df_crime_long<-df_crime_clean %>%gather( year, crime, '2005':'2015', factor_key=FALSE)
+
+# Group by Province and Year
+df_crime_group_year<-df_crime_long%>%group_by(Province,year)%>%summarise(crime=sum(crime)) 
+df_crime_group_year
+
+# Group by Category and Year
+df_crime_group_year2<-df_crime_long%>%group_by(Province,Category,year)%>%summarise(crime=sum(crime)) 
+df_crime_group_year2
+
+# Group by Province 
+df_crime_group<-df_crime_long%>%group_by(Province)%>%summarise(crime=sum(crime))
+
+
+# full join with population data on "Province"
+df_join<-full_join(df_crime_group,df_pop,by=c('Province'='Province'))
+df_join
+```
+### Plot Data 
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=8, fig.height=6, fig.align='center', out.width="100%"}
+
+
+v1 <- ggplot(df_crime_group_year, aes(y=Province, x=year, fill=crime)) + 
+  geom_tile(colour="white",
+            width=.9, height=.9) + theme_minimal() +
+  scale_fill_gradientn(colours=wes_palette("Zissou1", 10, type = "continuous"))
+
+v1 <- v1 +
+  labs(x="", y="", fill="") +
+  ggtitle("South Africa Crime Stats by province and year")
+
+v1 <- v1 +
+  theme(legend.position=c(-.05, 1),
+        legend.direction="vertical",
+        legend.text=element_text(colour="grey20"),
+        plot.margin=grid::unit(c(.5,.5,1.5,.5), "cm"),
+        axis.text.y=element_text(size=8,
+                                 hjust=1),
+        axis.text.x=element_text(size=6),
+        axis.ticks.y=element_blank(),
+        panel.grid=element_blank(),
+        title=element_text(hjust=-.07, vjust=1,size=12),
+        text=element_text()) 
+
+girafe(ggobj = v1, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=8, fig.height=12, fig.align='center', out.width="100%"}
+
+
+v2 <- ggplot(df_crime_group_year2, aes(y=Category, x=year, fill=crime)) + 
+  geom_tile(colour="white",
+            width=.9, height=.9) + theme_minimal() +
+  scale_fill_gradientn(colours=wes_palette("Zissou1", 10, type = "continuous"))
+
+v2 <- v2 +
+  labs(x="", y="", fill="") +
+  ggtitle("South Africa Crime Stats by Category and year")
+
+v2 <- v2 +
+  theme(legend.position=c(-.5, 1),
+        legend.direction="vertical",
+        legend.text=element_text(colour="grey20"),
+        plot.margin=grid::unit(c(.5,.5,1.5,.5), "cm"),
+        axis.text.y=element_text(size=8,
+                                 hjust=1),
+        axis.text.x=element_text(size=6),
+        axis.ticks.y=element_blank(),
+        panel.grid=element_blank(),
+        title=element_text(hjust=-.07, vjust=1,size=12),
+        text=element_text()) 
+
+girafe(ggobj = v2, width_svg = 13, height_svg = 7,
+       options = list(opts_sizing(rescale = TRUE, width = 1.0)))
+```
+
+### Check correlation
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width = 13, fig.height = 7, out.width = "100%"}
+
+corr <- cor(df_join[2:5])
+corrplot(corr)
+corrplot(corr, method = 'number')
+```
+
+### References
+#### citations for narrative and data sources
+
+
+* Data sources: Kaggle, [GO](https://www.kaggle.com/slwessels/crime-statistics-for-south-africa?select=SouthAfricaCrimeStats_v2.csv){target="_blank"}
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
+
+
+
+
+
+
+

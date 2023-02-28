@@ -1,22 +1,34 @@
 ---
 pagetitle: "Kamino"
-output:
-  bookdown::gitbook: default
-documentclass: book
-date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/kamino.css", "../../../z-assemblers/wranglers.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/header.html"
+      after_body: "../../../z-assemblers/footer.html"
+    #self_contained: false
+    #lib_dir: libs
 ---
 
-```{r, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen=999)  # turn-off scientific notation like 1e+48
 
+library(htmltools) # needed to include html snippets
 library(tidyverse)
 
+library(knitcitations)
+library(bibtex)
 
 ```
 
+<div class="activity">
 WRANGLERS  
-
+</div>
 
 # Date Math
 ## I want to fix irregularities in my dataset
@@ -92,3 +104,39 @@ Date Math is a collection of patterns to perform mathematical operations like da
 
 # References
 ## The citations and data sources used for this case
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+
+# echo=FALSE will exclude block from code folding
+# Example for including external html content when needed
+htmltools::includeHTML("mark-complete-button.html")
+
+```
+
+
+
+```{r, child='mark-complete-click.Rmd'}
+
+# JS event handler for button click
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

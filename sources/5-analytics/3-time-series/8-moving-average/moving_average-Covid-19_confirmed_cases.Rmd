@@ -21,8 +21,9 @@ library(TTR)
 
 ```
 
+<div class="activity">
 ANALYTICS
-
+</div>
 
 # Moving Average
 ## I want to fix irregularities in my dataset

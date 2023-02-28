@@ -20,10 +20,10 @@ font_add_google("Inconsolata", "inconsolata")
 # turn on showtext
 showtext_auto()
 
-
 ```
 
 WRANGLERS  
+
 
 # Percentage of females married by 18
 ## Constant value column

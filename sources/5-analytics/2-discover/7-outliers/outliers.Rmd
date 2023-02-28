@@ -1,0 +1,323 @@
+---
+pagetitle: "Kamino"
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
+---
+
+```{r, include=FALSE}
+
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(outliers)
+library(EnvStats)
+library(tsoutliers)
+library(forecast)
+library(TSA)
+library(car)
+library(DMwR2)
+library(rstatix)
+library(performance)
+library(MASS)
+library(dbscan)
+library(factoextra)
+
+
+```
+
+<div class="activity">
+ANALYTICS 
+</div>
+
+# Outlier Detection
+## I want to fix irregularities in my dataset
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+
+
+***
+
+# Section
+## Subsection
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Fold hide as this is not relevant to the task
+dfo = read.csv("archetypes/co-emissions-per-capita.csv", header = TRUE, stringsAsFactors = FALSE)
+dfo
+
+dfs <- dfo 
+dfs
+
+dff <- filter(dfs, co2_per_capita != 0)
+dff <- filter(dfs, year > 1969)
+
+```
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+AO <- dff[dff$country %in% c("Brunei", "Mauritania", "Togo", "United Kingdom", "Venezuela", "Yemen"), ]
+
+tso_df <- tsoutliers::tso(ts(AO[AO$country == "Venezuela", "co2_per_capita"],
+  start = AO[AO$country == "Venezuela", "year"][1]), types = "AO")
+
+tso_df
+
+AO[AO$country == "Venezuela",][36,]
+
+```
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+detectAO(arima(ts(AO[AO$country == "Venezuela", "co2_per_capita"]),
+  order = c(0, 0, 0)), alpha = 0.05, robust = TRUE)
+
+tsoutliers::tso(ts(AO[AO$country == "United Kingdom", "co2_per_capita"],
+  start = AO[AO$country == "United Kingdom", "year"][1]), types = c("AO","LS", "IO"))
+
+AO[AO$country == "United Kingdom", ][c(172,177),]
+
+dff %>% filter(country %in% c("Venezuela", "United Arab Emirates", "Bahamas")) %>%
+ggplot() + geom_line(aes(x = year, y = co2_per_capita, color = country)) +
+  theme(legend.position="None") + 
+  facet_grid(.~country, scales = "fixed") +
+  ggtitle("The emissions of CO2 per capita")
+
+```
+
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+for (row in 1:nrow(hcl)) {
+    
+    country_name <- country_list[row,"country"]
+    # country_name
+    
+    country_df <- filter(dff, country == country_name)
+    
+    grubbs_highest <- grubbs.test(country_df$co2_per_capita)
+    print(grubbs_highest)
+    
+    grubbs_lowest <- grubbs.test(country_df$co2_per_capita, opposite = TRUE)
+    print(grubbs_lowest)
+    
+}
+
+
+```
+
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+#ggplot(data = LS) + geom_line(aes(x = year, y = co2_per_capita, color = country)) +
+#  theme(legend.position="None") + facet_wrap(~country,scales = "free") +
+#  ggtitle("The emissions of CO2 per capita")
+
+ice <- tsoutliers::tso(ts(LS[LS$country == "Iceland", "co2_per_capita"], 
+  start = LS[LS$country == "Iceland", "year"][1]), types = c("LS", "AO"))
+
+#typeof(print(ice))
+#test <- do.call(rbind.data.frame, print(ice))
+#test
+
+#tsoutliers::tso(ts(LS[LS$country == "Bahamas", "co2_per_capita"],
+#  start = LS[LS$country == "Bahamas", "year"][1]),types = "LS")
+
+country_list <- unique(dff[c("country")])
+#country_list
+
+hcl <- head(country_list)
+#hcl
+#nrow(hcl)
+
+for (row in 1:nrow(hcl)) {
+    
+    country_name <- country_list[row,"country"]
+    # country_name
+    
+    country_df <- dff[dff$country %in% c(country_name), ]
+    # print(head(country_df))
+    
+    # "IO", "AO", "LS", "TC", "SLS"
+    # "AO" additive outliers
+    # "LS" level shifts
+    # "TC" temporary changes
+    # "IO" innovative outliers
+    # "SLS" seasonal level shifts
+    res <- tsoutliers::tso(ts(country_df[country_df$country == country_name,"co2_per_capita"], 
+                          start = country_df[country_df$country == country_name, "year"][1]),
+                          types = c("IO", "AO", "LS", "TC", "SLS"))
+    # res <- print(res)
+    # typeof(res)
+    # print(res)
+    
+    print(res$index)
+    
+    df_out <- dff[res$ind, ]
+    print(df_out)
+}
+
+
+```
+
+
+```{r}
+
+for (row in 1:nrow(hcl)) {
+
+    country_name <- country_list[row,"country"]
+    # country_name
+
+    country_df <- filter(dff, country == country_name)
+    
+    # Apply the Interquartile Range, IQR(), function on the Gestation Days column
+    country_df.IQR <- 272 - 260
+    country_df.IQR <-IQR(country_df$co2_per_capita)
+    print(country_df.IQR)
+
+}
+
+for (row in 1:nrow(hcl)) {
+    
+    country_name <- country_list[row,"country"]
+    # country_name
+    
+    country_df <- filter(dff, country == country_name)
+    
+    rosner_res <- rosnerTest(country_df$co2_per_capita)
+    print(rosner_res$all.stats)
+
+}
+
+for (row in 1:nrow(hcl)) {
+    
+    country_name <- country_list[row,"country"]
+    # country_name
+    
+    country_df <- filter(dff, country == country_name)
+    
+    num_records <- nrow(country_df)
+    print(num_records)
+    
+    if (num_records > 25) country_df <- country_df[1:25, ]
+    
+    dixon_highest <- dixon.test(country_df$co2_per_capita)
+    print(dixon_highest)
+    
+    dixon_lowest <- dixon.test(country_df$co2_per_capita, opposite = TRUE)
+    print(dixon_lowest)
+
+}
+
+for (row in 1:nrow(hcl)) {
+    
+    country_name <- country_list[row,"country"]
+    # country_name
+    
+    country_df <- filter(dff, country == country_name)
+    
+    lower_bound <- median(country_df$co2_per_capita) - 3 * mad(country_df$co2_per_capita)
+    print(lower_bound)
+
+    upper_bound <- median(country_df$co2_per_capita) + 3 * mad(country_df$co2_per_capita)
+    print(upper_bound)
+
+    outlier_ind <- which(country_df$co2_per_capita < lower_bound | country_df$co2_per_capita > upper_bound)
+    print(outlier_ind)
+    
+}
+
+detectIO(arima(ts(IO[IO$country == "Armenia", "co2_per_capita"]), order = c(0, 1, 0)), alpha = 0.05, robust = TRUE)
+
+tsoutliers::tso(ts(IO[IO$country == "Armenia", "co2_per_capita"], start = IO[IO$country == "Armenia", "year"][1]), types = c("IO", "AO"))
+
+IO[IO$country == "United Arab Emirates",][c(5,8,10,33),]
+
+tsoutliers::tso(ts(IO[IO$country == "United Arab Emirates", "co2_per_capita"], start = IO[IO$country == "United Arab Emirates", "year"][1]),types = c("LS","IO"))
+
+
+IO <- dff[dff$country %in% c("Cape Verde", "Iran", "Germany", "Armenia", "United Arab Emirates", "Mauritania"), ]
+
+ggplot(data = IO) +
+  geom_line(aes(x = year, y = co2_per_capita, color = country)) +
+  theme(legend.position = "None") +
+  facet_wrap(~country,scales = "free") +
+  ggtitle("The emissions of CO2 per capita")
+
+
+```
+
+
+
+```{r}
+
+LS <- dff[dff$country %in% c("Iceland", "North Korea", "Yemen", "Bahamas", "Lithuania"), ]
+LS
+
+model <- lm(co2_per_capita ~ year, data = LS)
+
+check_outliers(LS$co2_per_capita)
+
+# Can be "all" or some of c("cook", "pareto", "zscore", "iqr", "mahalanobis", "robust", "mcd", "ics", "optics", "lof")
+
+check_outliers(model, method = "cook")
+check_outliers(model, method = "pareto")
+check_outliers(LS, method = "zscore")
+check_outliers(LS, method = "iqr")
+check_outliers(LS, method = "mahalanobis")
+check_outliers(LS, method = "robust")
+check_outliers(LS, method = "mcd")
+check_outliers(LS, method = "ics")
+check_outliers(LS, method = "optics")
+# check_outliers(LS, method = ""iforest"")"
+
+
+```
+
+
+```{r}
+
+# knn distance plot to determine eps. minPts = 3 based on visual assessment.
+kNNdistplot(as.matrix(LS$co2_per_capita), k = 3)
+
+df_matrix <- as.matrix(LS[,3:4]) # ["co2_per_capita","year"]
+df_matrix
+
+clustering <- dbscan(df_matrix, eps = 0.25, minPts = 3)
+fviz_cluster(clustering, df_matrix, outlier.color = "red", geom = "point")
+
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case

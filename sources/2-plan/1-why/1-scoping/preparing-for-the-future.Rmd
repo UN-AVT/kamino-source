@@ -1,29 +1,12 @@
 ---
-pagetitle: "Kamino"
-output: 
-  html_document:
-    theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css"]
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: "../../../z-assemblers/fragments/header.html"
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    self_contained: false
-    lib_dir: libs
+ptitle: "Kamino"
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "2023-02-09"
 ---
 
-```{r setup, include=FALSE}
-
-library(knitcitations)
-library(bibtex)
-
-```
-
-<div class="activity">
 COLLECTIONS  
-</div>
 
 # Preparing for the Future
 ## What are they?
@@ -40,30 +23,5 @@ Since its acquisition by Google in March 2007, Trendalyzer and Gapminder World c
 
 GapMinder is a simple but powerful demonstration of how certain methods can be followed to convey insight and meaning. The success is also a credit to GapMinder Director Hans Rosling’s (Professor of International Health and licensed physician) excellent profi ciency as a visual analyst. Well known for his sword swallowing theatrics and lectures using Gapminder graphics to visualise world development issues, Dr. Rosling’s lectures address questions such as: Can the population growth be stopped? Can everyone live on the same level as the rich countries? In each case, his presentations (see Figure 3) underscore the methodology and process used:
 
-
-
-
 # References
 ## The citations and data sources used for this case
-
-
-
-```{r generateBibliography, echo=FALSE, message=FALSE, warning=FALSE}
-
-#cleanbib()
-#options("citation_format" = "pandoc")
-#read.bibtex(file = "../archetypes/average-working-hours-of-children.bib")
-
-```
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-

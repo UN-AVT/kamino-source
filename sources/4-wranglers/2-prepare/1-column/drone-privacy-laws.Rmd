@@ -22,6 +22,7 @@ showtext_auto()
 
 WRANGLERS 
 
+
 # Drone privacy laws
 ## Combine columns
 
@@ -85,3 +86,4 @@ df2
 #### citations for narrative and data sources
 
 * Narrative and Data Source: Visual Capitalist, Mapped: Drone Privacy Laws Around the World, [GO](https://www.visualcapitalist.com/mapped-drone-privacy-laws-around-the-world/){target="_blank"}
+

@@ -1,15 +1,22 @@
 ---
 pagetitle: "Kamino"
-output:
-  bookdown::gitbook: default
-documentclass: book
-date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: lumen
+    css: ["styles/kamino.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: hide
 ---
 
-```{r, include = FALSE, results = "hide"}
+```{r setup, include = FALSE, results = "hide"}
 
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen = 999) ## To disable scientific notation
+
+# Clear environment and memory
+rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
+gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
 library(sf)

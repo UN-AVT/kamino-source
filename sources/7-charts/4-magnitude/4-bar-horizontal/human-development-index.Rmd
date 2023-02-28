@@ -1,26 +1,15 @@
 ---
 pagetitle: "Kamino"
-output: 
-  html_document:
-    theme: lumen
-    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
-    df_print: paged
-    mathjax: NULL
-    code_folding: show
-    include:
-      in_header: "../../../z-assemblers/fragments/header.html"
-      after_body: "../../../z-assemblers/fragments/footer.html"
-    #self_contained: false
-    #lib_dir: libs
+output:
+  bookdown::gitbook: default
+documentclass: book
+date: "`r Sys.Date()`"
 ---
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
+
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen = 999) # turn-off scientific notation like 1e+48
-
-# Clear environment and memory
-rm(list = ls(all.names = TRUE)) #will clear all objects includes hidden objects.
-gc() #free up memrory and report the memory usage.
 
 library(tidyverse)
 
@@ -30,9 +19,6 @@ library(bibtex)
 
 ```
 
-<div class="activity">
-CHARTS
-</div>
 
 # Bar Horizontal Stacked
 ## Real-life case: Progress of The World's Women 2019-2020 Report - With whom do women and girls live?
@@ -79,31 +65,7 @@ gg
 
 ```
 
-# Exercises and practice
-## Knime and R practice solutions
-
-
 # References
 ## The citations and data sources used for this case
 
 Source: <a href="https://www.unwomen.org/-/media/headquarters/attachments/sections/library/publications/2019/progress-of-the-worlds-women-2019-2020-en.pdf?la=en&vs=3512">Progress of The World's Women 2019-2020 Report - Figure 2.10</a>
-
-```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
-
-cleanbib()
-options("citation_format" = "pandoc")
-read.bibtex(file = "../archetypes/figure-2-10.bib")
-
-```
-
-
-
-```{js, message=FALSE, warning=FALSE, echo=FALSE}
-
-// Must be included to position footer
-$(function() {
-  $('.main-container').after($('.footer'));
-})
-
-```
-

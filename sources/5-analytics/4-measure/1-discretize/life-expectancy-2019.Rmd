@@ -1,22 +1,34 @@
 ---
 pagetitle: "Life Expectancy"
-output:
-  bookdown::gitbook: default
-documentclass: book
-date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: lumen
+    css: "../../../z-assemblers/assets/styles/content.css"
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: ["../../../z-assemblers/fragments/google-analytics.html", "../../../z-assemblers/fragments/header.html"]
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    self_contained: false
+    lib_dir: vendor
+
 ---
 
-```{r, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
 options(scipen=999)  # turn-off scientific notation like 1e+48
+
 
 library(tidyverse)
 library(classInt)
 
+
 ```
 
+<div class="activity">
 ANALYTICS
-
+</div>
 
 # Discretize
 ## Life Expectancy in 2019
@@ -97,4 +109,14 @@ equal_fre
 
 
 * Data sources: The World Bank, [GO](https://data.worldbank.org/indicator/SP.DYN.LE00.IN){target="_blank"}
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
 

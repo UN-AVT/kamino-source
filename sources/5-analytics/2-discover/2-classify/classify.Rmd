@@ -1,0 +1,168 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/kamino.css", "../../../z-assemblers/wranglers.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/header.html"
+      after_body: "../../../z-assemblers/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen=999)  # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity">
+WRANGLERS  
+</div>
+
+# Classify
+## I want to fix irregularities in my dataset
+
+> Don't call the world dirty because you forgot to clean your glasses...\
+--- Aaron Hill\
+
+You want to automatically classify data observations. We use the variables in the numerical or categorical columns to run different algorithms to classify. A scorer is typically used to assess the quality of the classifier. These types of algorithms are supervised, i.e.~they require labels to build a model. An example for this is a classifier for low vs. high life expectancy - is it possible to predict high/low life expectancy based on a number of variables such as GDP, a health index and fertility?
+
+A classifier is a tool in data mining that takes a bunch of data representing things we want to classify and attempts to predict which class the new data belongs to.  Classification is concerned with building models that separate data into distinct classes. These models are built by inputting a set of training data for which the classes are pre-labelled in order for the algorithm to learn from. The model is then used by inputting a different dataset for which the classes are withheld, allowing the model to predict their class membership based on what it has learned from the training set.
+
+Decision Boundary and margin.  A margin is a way to determine how confident we are in our classification. If a data point has a large margin, and hence is very far away from the decision boundary we can be pretty confident about our prediction. However, if a data point has a very small margin, and is hence very close to the decision boundary then we probably aren’t as sure of our classification.
+
+* __Jenks Natural Breaks__ : temp
+* __Natural Breaks__ : temp
+* __Quantile__ : temp
+* __Equal Interval__ : temp
+* __Standard Deviation__ : temp
+* __Pretty Breaks__ : temp
+
+***
+
+# Section
+## Subsection
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Fold hide as this is not relevant to the task
+
+
+```
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+classify_column <- ""
+
+min = min(population$CENSUS2010POP)
+max = max(population$CENSUS2010POP)
+diff <- max - min
+std = sd(population$CENSUS2010POP)
+
+equal.interval = seq(min, max, by = diff/6)
+quantile.interval = quantile(population$CENSUS2010POP, probs=seq(0, 1, by = 1/6))
+std.interval = c(seq(min, max, by=std), max)
+natural.interval = classIntervals(population$CENSUS2010PO, n = 6, style = 'jenks')$brks
+
+population$population.equal = cut(population$CENSUS2010POP, breaks=equal.interval, include.lowest = TRUE)
+population$population.quantile = cut(population$CENSUS2010POP, breaks=quantile.interval, include.lowest = TRUE)
+population$population.std = cut(population$CENSUS2010POP, breaks=std.interval, include.lowest = TRUE)
+population$population.natural = cut(population$CENSUS2010POP, breaks=natural.interval, include.lowest = TRUE)
+
+```
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+
+```
+
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+
+```
+
+
+
+# Section
+## Subsection
+
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-show'}
+
+
+
+```
+
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+
+# References
+## The citations and data sources used for this case
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+# cleanbib()
+# read.bibtex(file = "./citations.bib")
+
+```
+
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+
+# echo=FALSE will exclude block from code folding
+# Example for including external html content when needed
+htmltools::includeHTML("mark-complete-button.html")
+
+```
+
+
+
+```{r, child='mark-complete-click.Rmd'}
+
+# JS event handler for button click
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+

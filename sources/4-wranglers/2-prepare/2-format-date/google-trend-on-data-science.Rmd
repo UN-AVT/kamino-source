@@ -23,7 +23,9 @@ showtext_auto()
 
 ```
 
+
 WRANGLERS  
+
 
 # Google Trending Searches on "Data Science"
 ## Format Date
@@ -53,7 +55,6 @@ df <- read.csv('archetypes/google-trend-on-data-science.csv')
 ```
 
 
-
 ### Convert character format into date format 
 
 #### Let's focus on the <span style="color: #8000FF;font-weight:bold">Time</span> column. 
@@ -66,6 +67,7 @@ df_1 <- df
 df_1$date <- as.Date(df$Time)
 
 ```
+
 
 
 #### On the other hand, if __time__ is important to us, then add the time into the date format as <span style="font-weight:bold">%Y-%m-%dT%H:%M:%S</span>. You may set the default system time zone to convert the date and time. In our case, it only records in hours.
@@ -89,6 +91,7 @@ df_3$Quarter <-quarters(df_2$Time)
 
 ```
 
+
 ### Year
 #### Use this method to create a <span style="color: #2E2EFE;font-weight:bold">Year</span> column which captures the year of <span style="color: #8000FF;font-weight:bold">Time</span>.
 
@@ -99,6 +102,7 @@ df_4 <- df_2
 df_4$Year <- format(df_2$Time,format="%Y")
 
 ```
+
 
 ### Year_Month
 
@@ -135,6 +139,7 @@ df_7$MM_DD_Num <- format(df_2$Time,format="%m-%d")
 df_7$DD_MM_Name <- format(df_2$Time,format="%d %B")
 
 ```
+
 
 ### Plot an example
 

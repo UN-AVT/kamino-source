@@ -19,7 +19,9 @@ library(ggiraph)
 ```
 
 
+<div class="activity">
 ANALYTICS
+</div>
 
 # Controls
 ## Nelson Rules
@@ -225,4 +227,3 @@ As a reminder, the rules indicate the following 'out-of-control' event in a time
 
 # References
 ## The citations and data sources used for this case
-

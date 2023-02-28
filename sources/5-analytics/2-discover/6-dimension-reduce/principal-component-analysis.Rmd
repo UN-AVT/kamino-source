@@ -1,0 +1,248 @@
+---
+pagetitle: "Kamino"
+output: 
+  html_document:
+    theme: lumen
+    css: ["../../../z-assemblers/assets/styles/content/kamino.css", "../../../z-assemblers/assets/icons/line-awesome/css/line-awesome.css"]
+    df_print: paged
+    mathjax: NULL
+    code_folding: show
+    include:
+      in_header: "../../../z-assemblers/fragments/header.html"
+      after_body: "../../../z-assemblers/fragments/footer.html"
+    #self_contained: false
+    #lib_dir: libs
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, echo=FALSE)
+options(scipen = 999) # turn-off scientific notation like 1e+48
+
+library(htmltools) # needed to include html snippets
+library(tidyverse)
+library(scales)
+
+# needed to include bib references
+library(knitcitations)
+library(bibtex)
+
+```
+
+<div class="activity bg-red">
+CHARTS
+</div>
+
+# Bar Divergent
+## Case: Which countries dominate the world’s dinner tables?
+
+> If your mother cooks Italian food, why should you go to a restaurant?\
+--- Martin Scorsese, Director\
+
+A study published in the the Journal of Cultural Economics, *Dining out as cultural trade*, used data from TripAdvisor to examine restaurant cuisines, combined with Euromonitor data on overall and fast-food expenditure. The paper calculated the implicit trade patterns in global cuisines for 52 destination countries.  The research was presented in a Daily Chart segment of the Economist using a bar chart with divergent values.  The chart is designed to reveal how domestic and foreign food consumption profiles can identify which countries have the greatest influence on the world’s cuisine preferences.
+
+* Domestic consumption of foreign cuisine is treated as an __import__
+* Foreign consumption of domestic cuisine is treated as an __export__
+
+Here's what we'll be making:
+
+```{r, out.width = "800px"}
+
+knitr::include_graphics("assets/economist-unbalanced-diets.png", dpi=300)
+
+```
+
+***
+
+# PART I - Cuisine Net Exports Excluding Fast Food
+## Load the data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df = read.csv("archetypes/economist-unbalanced-diets/table-6-cuisine-net-exports-excluding-fast-food.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# Cast column type
+df$Exports<-as.numeric(df$Exports)
+df$Imports<-as.numeric(df$Imports)
+
+# Calculate the net exports and fill in the fourth column
+df$Net.exports<-df$Exports-df$Imports
+
+# Remove 'NA'
+df <-df%>%filter(Net.exports!='NA')
+
+df
+
+```
+
+# Plot the chart
+## Cuisine Net Exports Excluding Fast Food
+
+## Create a shared theme
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Common theme for both charts
+theme_opts <- theme(
+    legend.position='none', 
+    panel.background = element_rect(fill = "white", colour = "white"), 
+    #axis.text.x=element_blank(), 
+    #axis.ticks.x=element_blank(), 
+    axis.title.x = element_blank(),
+    axis.text.y=element_blank(), 
+    axis.ticks.y=element_blank(),   
+    axis.title.y = element_blank(),
+    # panel.grid.major.x = element_blank(),
+    panel.grid.major.x = element_line(size = 0.5, linetype = 'solid', colour = "#b0bfc8"),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank()
+    )
+
+color_palette <- c("Exporter" = "#076fa1", "Importer" = "#2fc1d3")
+
+```
+
+## Plot
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=8.5, out.width = "85%"}
+
+# Change order of factors to sort from highest to lowest
+df <- df %>% mutate(Country = factor(Country))
+df$Country <- fct_reorder(df$Country, df$Net.exports, max)
+
+# Make colors based on value threshold
+df$Color <- ifelse(df$Net.exports > 0, "Exporter", "Importer")
+df <- df %>% mutate(Color = factor(Color))
+
+# Filter df into two parts for labels later
+df_l <-df %>% filter( df$Net.exports > 0 )
+df_r <-df %>% filter( df$Net.exports < 0 )
+
+# Make the plot
+v1 <- ggplot( df, aes( x = Net.exports, y = Country, fill = Color ) ) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = color_palette) +
+  # Country Label
+  geom_text( data = df_l, size = 4, label = df_l$Country, x = -110, hjust = 1, color = 'gray30' ) +
+  geom_text( data = df_r, size = 4, label = df_r$Country, x = 200, hjust = 0, color= 'gray30' ) +
+  # Value Label
+  geom_text( data = df_l, size = 4, label = df_l$Net.exports, hjust = 0, position = position_nudge(x = 125), color = 'gray30') +
+  geom_text( data = df_r, size = 4, label = df_r$Net.exports, hjust = 1, position = position_nudge(x = -125), color = 'gray30') +
+  # Manual Annotations
+  annotate( geom = "text", x = 5000, y = 20, label = 'Net\n"exporters"', color = "#076fa1", size = 6) +
+  annotate( geom = "text", x = -5000, y = 10 , label = 'Net\n"importers"', color = "#2fc1d3", size = 6) +
+  # Red Line
+  geom_vline( xintercept = 0, colour = "red", linetype = "solid", size = 1.1 ) +
+  # Top Axis
+  expand_limits(x = c(-8000, 8000)) +
+  scale_x_continuous(breaks = breaks_extended(9), sec.axis = dup_axis()) +
+  # Title and Caption
+  labs(title = "Unbalanced diets", subtitle = "Cuisine Net Exports Excluding Fast Food ($bn)",
+       caption = 'Source: "Dining out as cultural trade" by Joel Waldfogel, Journal of Cultural Economics (2019)'
+       ) +
+  theme_minimal() +
+  theme_opts
+
+# Print the plot
+v1
+
+```
+
+# PART II - Cuisine Net Exports Including Fast Food
+## View the data
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide'}
+
+# Load data
+df1 = read.csv("archetypes/economist-unbalanced-diets/table-6-cuisine-net-exports-including-fast-food.csv", header = TRUE, stringsAsFactors = FALSE)
+
+# Cast column type
+df1$Exports<-as.numeric(df1$Exports)
+df1$Imports<-as.numeric(df1$Imports)
+
+# Calculate the net exports and fill in the fourth column
+df1$Net.exports <- df1$Exports-df$Imports
+
+# Remove NAs
+df1 <-df1%>%filter(Net.exports!='NA')
+
+df1
+
+```
+
+# Plot the chart
+## Cuisine Net Exports Including Fast Food
+
+```{r, message=FALSE, warning=FALSE, echo=TRUE, class.source = 'fold-hide', fig.width=10.5, fig.height=8.5, out.width = "85%"}
+
+# Change order of factors to sort from highest to lowest
+df1 <- df1 %>% mutate(Country = factor(Country))
+df1$Country <- fct_reorder(df1$Country, df1$Net.exports, max)
+
+# Make colors based on value threshold
+df1$Color <- ifelse(df1$Net.exports > 0, "Exporter", "Importer")
+df1 <- df1 %>% mutate(Color = factor(Color))
+
+# Filter df into two parts for labels later
+df1_l <-df1 %>% filter( df1$Net.exports > 0 )
+df1_r <-df1 %>% filter( df1$Net.exports < 0 )
+
+# Make the plot
+v2 <- ggplot( df1, aes( x = Net.exports, y = Country, fill = Color ) ) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = color_palette) +
+  # Country Label
+  geom_text( data = df1_l, size = 4, label = df1_l$Country, x = -110, hjust = 1, color = 'gray30' ) +
+  geom_text( data = df1_r, size = 4, label = df1_r$Country, x = 200, hjust = 0, color= 'gray30' ) +
+  # Value Label
+  geom_text( data = df1_l, size = 4, label = df1_l$Net.exports, hjust = 0, position = position_nudge(x = 125), color = 'gray30') +
+  geom_text( data = df1_r, size = 4, label = df1_r$Net.exports, hjust = 1, position = position_nudge(x = -125), color = 'gray30') +
+  # Manual Annotations
+  annotate( geom = "text", x = 5000, y = 20, label = 'Net\n"exporters"', color = "#076fa1", size = 6) +
+  annotate( geom = "text", x = -5000, y = 10 , label = 'Net\n"importers"', color = "#2fc1d3", size = 6) +
+  # Red Line
+  geom_vline( xintercept = 0, colour = "red", linetype = "solid", size = 1.1 ) +
+  # Top Axis
+  expand_limits(x = c(-8000, 8000)) +
+  scale_x_continuous(breaks = breaks_extended(9), sec.axis = dup_axis()) +
+  # Title and Caption
+  labs(title = "Unbalanced diets", subtitle = "Cuisine Net Exports Excluding Fast Food ($bn)",
+       caption = 'Source: "Dining out as cultural trade" by Joel Waldfogel, Journal of Cultural Economics (2019)'
+       ) +
+  theme_minimal() +
+  theme_opts
+
+# Print the plot
+v2
+
+```
+
+# Exercises and practice
+## Knime and R practice solutions
+
+
+# References
+## The citations and data sources used for this case
+
+Source: <a href="https://www.economist.com/graphic-detail/2019/08/23/which-countries-dominate-the-worlds-dinner-tables">Which countries dominate the world’s dinner tables?</a>
+
+```{r generateBibliography, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+
+cleanbib()
+options("citation_format" = "pandoc")
+read.bibtex(file = "citations/economist-unbalanced-diets.bib")
+
+```
+
+
+
+```{js, message=FALSE, warning=FALSE, echo=FALSE}
+
+// Must be included to position footer
+$(function() {
+  $('.main-container').after($('.footer'));
+})
+
+```
+
